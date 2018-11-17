@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "KonradHinsen 11/17/2018 18:00",
+	"super" : "Object",
+	"category" : "Leibniz",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"symbol"
+	],
+	"name" : "LeibnizSort",
+	"type" : "normal"
+}
