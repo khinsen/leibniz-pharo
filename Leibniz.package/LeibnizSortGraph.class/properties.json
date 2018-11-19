@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Leibniz",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"kinds",
+		"supersorts",
+		"subsorts"
+	],
+	"name" : "LeibnizSortGraph",
+	"type" : "normal"
+}

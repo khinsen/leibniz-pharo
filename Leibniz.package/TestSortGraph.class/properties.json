@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Leibniz",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"sortGraph1",
+		"sortGraph2",
+		"sortGraph3"
+	],
+	"name" : "TestSortGraph",
+	"type" : "normal"
+}
