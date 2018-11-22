@@ -14,4 +14,3 @@ setUp
 				  add: #Y;
 				  make: #A subsortOf: #X;
 				  make: #X subsortOf: #Y.
-	sortGraph3 := LeibnizSortGraph new.
