@@ -7,7 +7,8 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"sortGraph1",
-		"sortGraph2"
+		"sortGraph2",
+		"sortGraph3"
 	],
 	"name" : "LeibnizSortGraphTest",
 	"type" : "normal"
