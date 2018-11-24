@@ -14,3 +14,7 @@ setUp
 				  add: #Y;
 				  make: #A subsortOf: #X;
 				  make: #X subsortOf: #Y.
+	sortGraph3 := sortGraph1 copy.
+	sortGraph3 add: #V;
+				  add: #W;
+				  make: #V subsortOf: #W.

@@ -6,6 +6,6 @@ make: aSort subsortOf: anotherSort
 		ifTrue: [ self error: 'cycle in subsort relation: ',
 			                   (anotherSort printString), '<', (aSort printString ) ].
 	new_kind := (kinds at: aSort) union: (kinds at: anotherSort).
-	(kinds).
+	new_kind do: [ :sort | kinds at: sort put: new_kind].
 	(supersorts at: aSort) add: anotherSort.
 	(subsorts at: anotherSort) add: aSort.
