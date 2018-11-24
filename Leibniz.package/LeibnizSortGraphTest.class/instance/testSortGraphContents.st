@@ -5,11 +5,11 @@ testSortGraphContents
 	self assert: (sortGraph1 includes: #B).
 	self assert: (sortGraph1 includes: #C).
 	self assert: (sortGraph1 includes: #D).
-	self assert: (sortGraph1 includes: #E) not.
+	self deny: (sortGraph1 includes: #E).
 	self assert: (sortGraph1 is: #A subsortOf: #A).
 	self assert: (sortGraph1 is: #A subsortOf: #B).
 	self assert: (sortGraph1 is: #B subsortOf: #C).
 	self assert: (sortGraph1 is: #A subsortOf: #D).
 	self assert: (sortGraph1 is: #A subsortOf: #C).
-	self assert: (sortGraph1 is: #C subsortOf: #A) not.
-	self assert: (sortGraph1 is: #B subsortOf: #D) not.
+	self deny: (sortGraph1 is: #C subsortOf: #A).
+	self deny: (sortGraph1 is: #B subsortOf: #D).

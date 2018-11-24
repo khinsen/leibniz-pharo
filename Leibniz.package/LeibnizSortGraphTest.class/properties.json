@@ -9,6 +9,6 @@
 		"sortGraph1",
 		"sortGraph2"
 	],
-	"name" : "TestSortGraph",
+	"name" : "LeibnizSortGraphTest",
 	"type" : "normal"
 }
