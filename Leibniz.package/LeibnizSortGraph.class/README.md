@@ -1,1 +1,0 @@
-I represent a sort graph in a Leibniz context.
