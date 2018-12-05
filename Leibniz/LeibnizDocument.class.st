@@ -5,6 +5,9 @@ I represent a Leibniz document containing named contexts and references to other
 Class {
 	#name : #LeibnizDocument,
 	#superclass : #Object,
+	#instVars : [
+		'contexts'
+	],
 	#category : #Leibniz
 }
 
@@ -20,13 +23,41 @@ LeibnizDocument class >> fromDocHash: aString [
 
 { #category : #'instance creation' }
 LeibnizDocument class >> fromStream: aStream [
-	| dom docElement |
+	| dom docElements docElement |
 	dom := XMLDOMParser parse: aStream.
-	docElement := dom root descendantElementsNamed: 'leibniz-document'.
+	docElements := dom root descendantElementsNamed: 'leibniz-document'.
+	self assert: docElements size equals: 1.
+	docElement := docElements at: 1.
 	^ self fromXML: docElement
 ]
 
 { #category : #'instance creation' }
 LeibnizDocument class >> fromXML: anXMLElement [ 
-	self shouldBeImplemented.
+	^ self new fromXML: anXMLElement.
+]
+
+{ #category : #adding }
+LeibnizDocument >> addContext: aContext [
+	contexts at: aContext name put: aContext.
+
+]
+
+{ #category : #'XML-import' }
+LeibnizDocument >> addContextFromXML: anXMLElement [
+  	| context |
+	context := LeibnizContext new fromXML: anXMLElement.
+	self addContext: context.
+
+]
+
+{ #category : #'XML-import' }
+LeibnizDocument >> fromXML: anXMLElement [
+	anXMLElement descendantElementsNamed: 'context' do: [ :c | self addContextFromXML: c ].
+
+]
+
+{ #category : #initializing }
+LeibnizDocument >> initialize [
+	contexts := Dictionary new.
+
 ]
