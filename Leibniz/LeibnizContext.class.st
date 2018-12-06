@@ -32,3 +32,8 @@ LeibnizContext >> initialize [
 LeibnizContext >> name [
 	^ name
 ]
+
+{ #category : #accessing }
+LeibnizContext >> sortGraph [
+	^ sortGraph
+]

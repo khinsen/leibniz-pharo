@@ -38,6 +38,15 @@ LeibnizSortGraph >> directSubsortsOf: aSymbol [
 	^ subsorts at: aSymbol.
 ]
 
+{ #category : #viewing }
+LeibnizSortGraph >> gtInspectorViewIn: composite [
+	<gtInspectorPresentationOrder: -10>
+	composite roassal2
+		title: 'View';
+		initializeView: self view.
+
+]
+
 { #category : #comparing }
 LeibnizSortGraph >> hash [
 	^ kinds hash
@@ -120,6 +129,21 @@ LeibnizSortGraph >> union: aSortGraph [
 	aSortGraph asSet do: [ :each | sg add: each ].
 	aSortGraph withSubsortRelationsDo: [ :s1 :s2 | sg make: s1 subsortOf: s2 ].
 	^ sg
+
+]
+
+{ #category : #viewing }
+LeibnizSortGraph >> view [
+	| b |
+	b := RTMondrian new.
+	b shape label fontName: 'Arial Unicode MS'.
+	b nodes: (self asSet collect: [:s | s asString ]).
+	b shape arrowedLine withShorterDistanceAttachPoint.
+	self withSubsortRelationsDo:
+		[ :s1 :s2 | b edges connectFrom: (s1 asString) to: (s2 asString) ].
+	b layout forceWithCharge: -500.
+	b build.
+	^ b view
 
 ]
 
