@@ -141,7 +141,7 @@ LeibnizSortGraph >> view [
 	b shape arrowedLine withShorterDistanceAttachPoint.
 	self withSubsortRelationsDo:
 		[ :s1 :s2 | b edges connectFrom: (s1 asString) to: (s2 asString) ].
-	b layout forceWithCharge: -500.
+	b layout forceWithCharge: -2000.
 	b build.
 	^ b view
 
