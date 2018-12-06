@@ -50,6 +50,17 @@ LeibnizDocument >> addContextFromXML: anXMLElement [
 
 ]
 
+{ #category : #accessing }
+LeibnizDocument >> contextNamed: aString [
+	^ contexts at: aString.
+
+]
+
+{ #category : #accessing }
+LeibnizDocument >> contexts [
+	^ contexts.
+]
+
 { #category : #'XML-import' }
 LeibnizDocument >> fromXML: anXMLElement [
 	anXMLElement descendantElementsNamed: 'context' do: [ :c | self addContextFromXML: c ].

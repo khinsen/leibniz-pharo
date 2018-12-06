@@ -5,7 +5,8 @@ Class {
 	#name : #LeibnizContext,
 	#superclass : #Object,
 	#instVars : [
-		'name'
+		'name',
+		'sortGraph'
 	],
 	#category : #Leibniz
 }
@@ -13,6 +14,17 @@ Class {
 { #category : #'XML-import' }
 LeibnizContext >> fromXML: anXMLElement [
 	name := anXMLElement attributeAt: 'id'.
+	anXMLElement descendantElementsNamed: 'sort' do:
+		[ :sort | sortGraph add: (sort attributeAt: 'id') asSymbol].
+	anXMLElement descendantElementsNamed: 'subsort' do:
+		[ :ss | sortGraph make: (ss attributeAt: 'subsort') asSymbol
+		                  subsortOf: (ss attributeAt: 'supersort') asSymbol].
+
+]
+
+{ #category : #initializing }
+LeibnizContext >> initialize [
+	sortGraph := LeibnizSortGraph new.
 
 ]
 
