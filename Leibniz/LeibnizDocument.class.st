@@ -42,6 +42,12 @@ LeibnizDocument >> addContext: aContext [
 
 ]
 
+{ #category : #adding }
+LeibnizDocument >> addContext: aContext named: aString [
+	contexts at: aString put: aContext.
+
+]
+
 { #category : #'XML-import' }
 LeibnizDocument >> addContextFromXML: anXMLElement [
   	| context |

@@ -11,6 +11,12 @@ Class {
 	#category : #Leibniz
 }
 
+{ #category : #defining }
+LeibnizContext >> addSort: aSymbol [
+	sortGraph add: aSymbol.
+
+]
+
 { #category : #'XML-import' }
 LeibnizContext >> fromXML: anXMLElement [
 	name := anXMLElement attributeAt: 'id'.
@@ -26,6 +32,11 @@ LeibnizContext >> fromXML: anXMLElement [
 LeibnizContext >> initialize [
 	sortGraph := LeibnizSortGraph new.
 
+]
+
+{ #category : #defining }
+LeibnizContext >> make: aSort subsortOf: anotherSort [
+	sortGraph make: aSort subsortOf: anotherSort.
 ]
 
 { #category : #accessing }
