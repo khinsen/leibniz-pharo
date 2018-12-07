@@ -19,6 +19,7 @@ LeibnizBuiltins class >> uniqueInstance [
 LeibnizBuiltins >> createIntegerContext [
 	| context |
 	context  := LeibnizContext new.
+	context include: 'truth' inMode: 'use'.
 	"Natural numbers"
 	context addSort: #ℕ.
 	context addSort: #zero.
@@ -36,6 +37,27 @@ LeibnizBuiltins >> createIntegerContext [
 ]
 
 { #category : #initializing }
+LeibnizBuiltins >> createRationalContext [
+	| context |
+	context := LeibnizContext new.
+	context include: 'integers' inMode: 'extend'.
+	context addSort: #'ℚ'.
+	context make: #'ℤ' subsortOf: 'ℚ'.
+	context addSort: #'ℚ.nz'.
+	context make: #'ℚ.nz'subsortOf: #'ℚ'.
+	context make: #'ℤ.nz'subsortOf: #'ℚ.nz'.
+	context addSort: #'ℚ.p'.
+	context make: #'ℚ.p'subsortOf: #'ℚ.nz'.
+	context make: #'ℕ.nz'subsortOf: #'ℚ.p'.
+	context addSort: #'ℚ.nn'.
+	context make: #'ℚ.nn'subsortOf: #'ℚ'.
+	context make: #'ℚ.p'subsortOf: #'ℚ.nn'.
+	context make: #'ℕ'subsortOf: #'ℚ.nn'.
+	self addContext: context named: 'rational-numbers'.
+
+]
+
+{ #category : #initializing }
 LeibnizBuiltins >> createTruthContext [
 	| truth |
 	truth := LeibnizContext new.
@@ -47,6 +69,9 @@ LeibnizBuiltins >> createTruthContext [
 { #category : #initializing }
 LeibnizBuiltins >> initialize [
 	super initialize.
+	self docHash: (SHA256 hashMessage: 'builtins') hex.
 	self createTruthContext.
 	self createIntegerContext.
+	self createRationalContext.
+	
 ]
