@@ -6,6 +6,7 @@ Class {
 	#name : #LeibnizDocument,
 	#superclass : #Object,
 	#instVars : [
+		'docHash',
 		'contexts'
 	],
 	#category : #Leibniz
@@ -13,12 +14,14 @@ Class {
 
 { #category : #'instance creation' }
 LeibnizDocument class >> fromDocHash: aString [ 
-	| file |
+	| file doc |
 	"TODO: implement a more complete lookup scheme."
 	file := FileLocator home / '.leibniz' / (aString , '.html').
 	"Check that the document's hash is equal to the requested one."
 	self assert: (SHA256 hashStream: file binaryReadStream) hex equals: aString.
-	^ self fromStream: file readStream.
+	doc := self fromStream: file readStream.
+	doc docHash: aString.
+	^ doc
 ]
 
 { #category : #'instance creation' }
@@ -65,6 +68,16 @@ LeibnizDocument >> contextNamed: aString [
 { #category : #accessing }
 LeibnizDocument >> contexts [
 	^ contexts.
+]
+
+{ #category : #accessing }
+LeibnizDocument >> docHash [
+	^ docHash
+]
+
+{ #category : #accessing }
+LeibnizDocument >> docHash: anObject [
+	docHash := anObject
 ]
 
 { #category : #'XML-import' }
