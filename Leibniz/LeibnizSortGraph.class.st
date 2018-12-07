@@ -116,6 +116,12 @@ LeibnizSortGraph >> privateEqualityTestWith: otherKinds and: otherSupersorts and
 ]
 
 { #category : #accessing }
+LeibnizSortGraph >> size [
+	^ self asSet size.
+
+]
+
+{ #category : #accessing }
 LeibnizSortGraph >> subsortsOf: aSymbol [
 	| ss |
 	ss := (subsorts at: aSymbol) deepCopy.
