@@ -66,12 +66,13 @@ LeibnizBuiltins >> createTruthContext [
 	
 ]
 
-{ #category : #initializing }
+{ #category : #initialization }
 LeibnizBuiltins >> initialize [
 	super initialize.
 	self docHash: (SHA256 hashMessage: 'builtins') hex.
 	self createTruthContext.
 	self createIntegerContext.
 	self createRationalContext.
-	
+	library add: self.
+
 ]

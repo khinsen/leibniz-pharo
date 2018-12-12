@@ -21,18 +21,22 @@ LeibnizContext >> addSort: aSymbol [
 ]
 
 { #category : #'XML-import' }
-LeibnizContext >> fromXML: anXMLElement [
+LeibnizContext >> fromXML: anXMLElement inDocument: aDocument [
 	name := anXMLElement attributeAt: 'id'.
-	anXMLElement descendantElementsNamed: 'sort' do:
-		[ :sort | sortGraph add: (sort attributeAt: 'id') asSymbol].
-	anXMLElement descendantElementsNamed: 'subsort' do:
-		[ :ss | sortGraph make: (ss attributeAt: 'subsort') asSymbol
-		                  subsortOf: (ss attributeAt: 'supersort') asSymbol].
 	anXMLElement descendantElementsNamed: 'include' do:
-		[ :i | includes add: (Dictionary
-					with: #mode -> (i attributeAt: 'mode')
-					with: #context -> (i attributeAt: 'context')
-					with: #document -> (i attributeAt: 'document')) ].
+		[ :i | | attrs |
+				 attrs := i attributes.
+				 (attrs includesKey: 'document')
+				 ifTrue: [ self include: (attrs at: 'context')
+									 fromDocument: (attrs at: 'document')
+									 inMode: (attrs at: 'mode') ]
+				 ifFalse: [ self include: (attrs at: 'context')
+									  inMode: (attrs at: 'mode') ] ].
+	anXMLElement descendantElementsNamed: 'sort' do:
+		[ :sort | self addSort: (sort attributeAt: 'id') asSymbol].
+	anXMLElement descendantElementsNamed: 'subsort' do:
+		[ :ss | self make: (ss attributeAt: 'subsort') asSymbol
+		             subsortOf: (ss attributeAt: 'supersort') asSymbol].
 
 ]
 
@@ -87,7 +91,8 @@ LeibnizContext >> phase: aSymbol [
 	phaseLabels := #(#initialization #includes #sortGraph #operators #rules #assets).
 	current := phaseLabels indexOf: phase.
 	new := phaseLabels indexOf: aSymbol.
-	self assert: new >= current description: 'context definition phase out of order'.
+	(new ~= current) ifTrue:
+		[ self assert: new >= current description: 'context definition phase out of order' ].
 	phase := aSymbol.
 
 ]

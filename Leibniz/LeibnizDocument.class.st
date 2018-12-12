@@ -7,7 +7,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'docHash',
-		'contexts'
+		'contexts',
+		'library'
 	],
 	#category : #Leibniz
 }
@@ -32,11 +33,13 @@ LeibnizDocument class >> fromStream: aStream [
 	self assert: docElements size equals: 1.
 	docElement := docElements at: 1.
 	^ self fromXML: docElement
+
 ]
 
 { #category : #'instance creation' }
 LeibnizDocument class >> fromXML: anXMLElement [ 
-	^ self new fromXML: anXMLElement.
+	anXMLElement inspect.
+	^ self new fromXML: anXMLElement
 ]
 
 { #category : #adding }
@@ -54,7 +57,7 @@ LeibnizDocument >> addContext: aContext named: aString [
 { #category : #'XML-import' }
 LeibnizDocument >> addContextFromXML: anXMLElement [
   	| context |
-	context := LeibnizContext new fromXML: anXMLElement.
+	context := LeibnizContext new fromXML: anXMLElement inDocument: self.
 	self addContext: context.
 
 ]
@@ -86,8 +89,19 @@ LeibnizDocument >> fromXML: anXMLElement [
 
 ]
 
-{ #category : #initializing }
+{ #category : #initialization }
 LeibnizDocument >> initialize [
+	library := LeibnizLibrary uniqueInstance.
 	contexts := Dictionary new.
+
+]
+
+{ #category : #accessing }
+LeibnizDocument >> resolveContextReference: aDictionary [
+	| doc |
+	doc := (aDictionary includesKey: #document)
+				ifTrue: [ library documentWithHash: (aDictionary at: #document) ]
+				ifFalse: [ self ].
+	^ doc contextNamed: (aDictionary at: #context)
 
 ]

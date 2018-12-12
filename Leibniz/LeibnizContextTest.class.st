@@ -17,3 +17,15 @@ LeibnizContextTest >> testGoodDefinition [
 	self assert: context sortGraph size equals: 2.
 
 ]
+
+{ #category : #testing }
+LeibnizContextTest >> testPhaseError [
+	| context |
+	context := LeibnizContext new.
+	context name: 'foo'.
+	context addSort: #A.
+	self should: [context include: 'bar' inMode: 'use'.]
+		  raise: Exception.
+
+
+]
