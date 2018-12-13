@@ -1,5 +1,5 @@
 Class {
 	#name : #LeibnizDocumentTest,
 	#superclass : #TestCase,
-	#category : #Leibniz
+	#category : #'Leibniz-Tests'
 }

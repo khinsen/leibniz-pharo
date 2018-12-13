@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'symbol'
 	],
-	#category : 'Leibniz'
+	#category : #'Leibniz-Core'
 }
 
 { #category : #printing }

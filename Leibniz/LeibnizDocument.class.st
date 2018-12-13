@@ -10,7 +10,7 @@ Class {
 		'contexts',
 		'library'
 	],
-	#category : #Leibniz
+	#category : #'Leibniz-Core'
 }
 
 { #category : #'instance creation' }

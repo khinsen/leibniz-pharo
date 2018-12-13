@@ -9,7 +9,7 @@ Class {
 		'supersorts',
 		'subsorts'
 	],
-	#category : 'Leibniz'
+	#category : #'Leibniz-Core'
 }
 
 { #category : #comparing }

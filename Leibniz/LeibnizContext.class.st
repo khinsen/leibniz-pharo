@@ -10,7 +10,7 @@ Class {
 		'includes',
 		'sortGraph'
 	],
-	#category : #Leibniz
+	#category : #'Leibniz-Core'
 }
 
 { #category : #defining }

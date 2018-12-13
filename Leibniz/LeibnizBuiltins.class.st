@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #Leibniz
+	#category : #'Leibniz-Core'
 }
 
 { #category : #accessing }
