@@ -20,6 +20,12 @@ LeibnizContext >> addSort: aSymbol [
 
 ]
 
+{ #category : #defining }
+LeibnizContext >> endIncludes [
+	includes do: [ :i | i ]
+
+]
+
 { #category : #'XML-import' }
 LeibnizContext >> fromXML: anXMLElement inDocument: aDocument [
 	name := anXMLElement attributeAt: 'id'.
@@ -87,12 +93,16 @@ LeibnizContext >> name: aString [
 
 { #category : #defining }
 LeibnizContext >> phase: aSymbol [
-	| phaseLabels current new |
+	| phaseLabels current new phaseEndMethod phaseStartMethod |
 	phaseLabels := #(#initialization #includes #sortGraph #operators #rules #assets).
 	current := phaseLabels indexOf: phase.
 	new := phaseLabels indexOf: aSymbol.
 	(new ~= current) ifTrue:
-		[ self assert: new >= current description: 'context definition phase out of order' ].
+		[ self assert: new >= current description: 'context definition phase out of order'.
+		  phaseEndMethod := ('end', (phase asString capitalized)) asSymbol.
+		  (self respondsTo: phaseEndMethod) ifTrue: [ self perform: phaseEndMethod ].
+		  phaseStartMethod := ('start', (aSymbol asString capitalized)) asSymbol.
+		  (self respondsTo: phaseStartMethod) ifTrue: [ self perform: phaseStartMethod ] ].
 	phase := aSymbol.
 
 ]
@@ -106,5 +116,13 @@ LeibnizContext >> sortGraph [
 LeibnizContext >> validateIncludeMode: useOrExtend [
 	self assert: (#('use' 'extend') includes: useOrExtend)
 	     description: 'include mode must be "use" or "extend"'.
+
+]
+
+{ #category : #defining }
+LeibnizContext >> withIncludesDo: aBlock [
+	includes do: [ :i | aBlock value: (i at: #document ifAbsent: nil)
+										value: (i at: #context)
+										value: (i at: #mode) ]
 
 ]
