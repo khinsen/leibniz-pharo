@@ -15,7 +15,7 @@ LeibnizBuiltins class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
-{ #category : #initializing }
+{ #category : #initialization }
 LeibnizBuiltins >> createIntegerContext [
 	| context |
 	context := self newContextNamed: 'integers'.
@@ -35,7 +35,7 @@ LeibnizBuiltins >> createIntegerContext [
 
 ]
 
-{ #category : #initializing }
+{ #category : #initialization }
 LeibnizBuiltins >> createRationalContext [
 	| context |
 	context := self newContextNamed: 'rational-numbers'.
@@ -55,7 +55,7 @@ LeibnizBuiltins >> createRationalContext [
 
 ]
 
-{ #category : #initializing }
+{ #category : #initialization }
 LeibnizBuiltins >> createTruthContext [
 	| truth |
 	truth := self newContextNamed: 'truth'.
@@ -70,6 +70,6 @@ LeibnizBuiltins >> initialize [
 	self createTruthContext.
 	self createIntegerContext.
 	self createRationalContext.
-	library add: self.
+	library addDocument: self.
 
 ]

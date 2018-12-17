@@ -14,6 +14,15 @@ LeibnizLibraryTest >> setUp [
 ]
 
 { #category : #testing }
+LeibnizLibraryTest >> testContextNamedInDocumentWithHash [
+	| docHash context |
+	docHash := 'deef8e5ff0d061e9524af0694049a0ae0cd62e3008bd00f3a741d5df0e8d5781'.
+	context := library contextNamed: 'quantities' inDocumentWithHash: docHash.
+	self assert: context name equals: 'quantities'.
+
+]
+
+{ #category : #testing }
 LeibnizLibraryTest >> testDocumentWithHash [
 	| docHash doc |
 	docHash := 'deef8e5ff0d061e9524af0694049a0ae0cd62e3008bd00f3a741d5df0e8d5781'.

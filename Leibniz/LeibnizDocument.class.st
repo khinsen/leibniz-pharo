@@ -78,13 +78,3 @@ LeibnizDocument >> newContextNamed: aString [
 	contexts at: aString put: context.
 	^ context.
 ]
-
-{ #category : #accessing }
-LeibnizDocument >> resolveContextReference: aDictionary [
-	| doc |
-	doc := (aDictionary includesKey: #document)
-				ifTrue: [ library documentWithHash: (aDictionary at: #document) ]
-				ifFalse: [ self ].
-	^ doc contextNamed: (aDictionary at: #context)
-
-]

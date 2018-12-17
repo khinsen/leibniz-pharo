@@ -25,7 +25,7 @@ LeibnizLibrary class >> uniqueInstance [
 ]
 
 { #category : #accessing }
-LeibnizLibrary >> add: aDocument [
+LeibnizLibrary >> addDocument: aDocument [
 	documents at: aDocument docHash put: aDocument
 
 ]
