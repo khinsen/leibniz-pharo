@@ -5,6 +5,7 @@ Class {
 	#name : #LeibnizContext,
 	#superclass : #Object,
 	#instVars : [
+		'document',
 		'name',
 		'phase',
 		'includes',
@@ -12,6 +13,12 @@ Class {
 	],
 	#category : #'Leibniz-Core'
 }
+
+{ #category : #'instance creation' }
+LeibnizContext class >> withName: aString inDocument: aDocument [
+	^ self new withName: aString inDocument: aDocument.
+
+]
 
 { #category : #defining }
 LeibnizContext >> addSort: aSymbol [
@@ -22,7 +29,7 @@ LeibnizContext >> addSort: aSymbol [
 
 { #category : #defining }
 LeibnizContext >> endIncludes [
-	includes do: [ :i | i ]
+	sortGraph := includes inject: (LeibnizSortGraph new) into: [ :sg :i | sg union: (i at: #context) sortGraph ].
 
 ]
 
@@ -34,7 +41,7 @@ LeibnizContext >> fromXML: anXMLElement inDocument: aDocument [
 				 attrs := i attributes.
 				 (attrs includesKey: 'document')
 				 ifTrue: [ self include: (attrs at: 'context')
-									 fromDocument: (attrs at: 'document')
+									 fromDocumentWithHash: (attrs at: 'document')
 									 inMode: (attrs at: 'mode') ]
 				 ifFalse: [ self include: (attrs at: 'context')
 									  inMode: (attrs at: 'mode') ] ].
@@ -47,21 +54,28 @@ LeibnizContext >> fromXML: anXMLElement inDocument: aDocument [
 ]
 
 { #category : #defining }
-LeibnizContext >> include: aContextName fromDocument: aDocHash inMode: useOrExtend [
+LeibnizContext >> include: aContextName fromDocumentWithHash: aDocHash inMode: useOrExtend [
+	| context |
 	self phase: #includes.
 	self validateIncludeMode: useOrExtend.
-	includes add: (Dictionary with: #context -> aContextName
+	context := LeibnizLibrary uniqueInstance contextNamed: aContextName inDocumentWithHash: aDocHash.
+	includes add: (Dictionary with: #contextName -> aContextName
 									  with: #document -> aDocHash
+									  with: #context -> context
 									  with: #mode -> useOrExtend).
 
 ]
 
 { #category : #defining }
 LeibnizContext >> include: aContextName inMode: useOrExtend [
+	| context |
 	self phase: #includes.
 	self validateIncludeMode: useOrExtend.
-	includes add: (Dictionary with: #context -> aContextName
-									  with: #mode -> useOrExtend).
+	context := document contextNamed: aContextName.
+	includes add: (Dictionary with: #contextName -> aContextName
+									  with: #mode -> useOrExtend
+									  with: #context -> context).
+
 
 ]
 
@@ -124,5 +138,12 @@ LeibnizContext >> withIncludesDo: aBlock [
 	includes do: [ :i | aBlock value: (i at: #document ifAbsent: nil)
 										value: (i at: #context)
 										value: (i at: #mode) ]
+
+]
+
+{ #category : #defining }
+LeibnizContext >> withName: aString inDocument: aDocument [
+	name := aString.
+	document := aDocument.
 
 ]

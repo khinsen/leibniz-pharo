@@ -31,6 +31,14 @@ LeibnizLibrary >> add: aDocument [
 ]
 
 { #category : #accessing }
+LeibnizLibrary >> contextNamed: aContextName inDocumentWithHash: aDocHash [
+	| doc |
+	doc := self documentWithHash: aDocHash.
+	^ doc contextNamed: aContextName.
+
+]
+
+{ #category : #accessing }
 LeibnizLibrary >> documentWithHash: aString [ 
 	| file doc |
 	^ documents

@@ -14,18 +14,6 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizDocument class >> fromDocHash: aString [ 
-	| file doc |
-	"TODO: implement a more complete lookup scheme."
-	file := FileLocator home / '.leibniz' / (aString , '.html').
-	"Check that the document's hash is equal to the requested one."
-	self assert: (SHA256 hashStream: file binaryReadStream) hex equals: aString.
-	doc := self fromStream: file readStream.
-	doc docHash: aString.
-	^ doc
-]
-
-{ #category : #'instance creation' }
 LeibnizDocument class >> fromStream: aStream [
 	| dom docElements docElement |
 	dom := XMLDOMParser parse: aStream.
@@ -38,27 +26,14 @@ LeibnizDocument class >> fromStream: aStream [
 
 { #category : #'instance creation' }
 LeibnizDocument class >> fromXML: anXMLElement [ 
-	anXMLElement inspect.
 	^ self new fromXML: anXMLElement
-]
-
-{ #category : #adding }
-LeibnizDocument >> addContext: aContext [
-	contexts at: aContext name put: aContext.
-
-]
-
-{ #category : #adding }
-LeibnizDocument >> addContext: aContext named: aString [
-	contexts at: aString put: aContext.
-
 ]
 
 { #category : #'XML-import' }
 LeibnizDocument >> addContextFromXML: anXMLElement [
   	| context |
 	context := LeibnizContext new fromXML: anXMLElement inDocument: self.
-	self addContext: context.
+	contexts at: context name put: context.
 
 ]
 
@@ -94,6 +69,14 @@ LeibnizDocument >> initialize [
 	library := LeibnizLibrary uniqueInstance.
 	contexts := Dictionary new.
 
+]
+
+{ #category : #adding }
+LeibnizDocument >> newContextNamed: aString [
+	| context |
+	context := LeibnizContext withName: aString inDocument: self.
+	contexts at: aString put: context.
+	^ context.
 ]
 
 { #category : #accessing }
