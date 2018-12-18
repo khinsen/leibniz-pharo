@@ -36,6 +36,7 @@ LeibnizContext >> endIncludes [
 { #category : #'XML-import' }
 LeibnizContext >> fromXML: anXMLElement inDocument: aDocument [
 	name := anXMLElement attributeAt: 'id'.
+	document := aDocument.
 	anXMLElement descendantElementsNamed: 'include' do:
 		[ :i | | attrs |
 				 attrs := i attributes.
