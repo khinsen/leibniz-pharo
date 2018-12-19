@@ -27,6 +27,18 @@ LeibnizSortGraph >> add: aSymbol [
 
 ]
 
+{ #category : #viewing }
+LeibnizSortGraph >> addGraphToBuilder: aBuilder [
+	aBuilder shape label
+		fontName: 'Arial Unicode MS';
+		color: (Color black).
+	aBuilder nodes: (self asSet collect: [:s | s asString ]).
+	aBuilder shape arrowedLine withShorterDistanceAttachPoint.
+	self withSubsortRelationsDo:
+		[ :s1 :s2 | aBuilder edges connectFrom: (s1 asString) to: (s2 asString) ].
+
+]
+
 { #category : #converting }
 LeibnizSortGraph >> asSet [
    ^ sameKindSortsOf keys asSet 
@@ -165,6 +177,20 @@ LeibnizSortGraph >> subsortsOf: aSymbol [
 	^ ss inject: ss into: [ :total :sort | total union: (self subsortsOf: sort) ]
 ]
 
+{ #category : #viewing }
+LeibnizSortGraph >> treeView [
+	| b |
+	b := RTMondrian new.
+	self addGraphToBuilder: b.
+	b layout dominanceTree
+		verticallyReverse;
+		horizontalGap: 20;
+		verticalGap: 50.
+	b build.
+	^ b view
+
+]
+
 { #category : #adding }
 LeibnizSortGraph >> union: aSortGraph [ 
 	| sg |
@@ -179,11 +205,7 @@ LeibnizSortGraph >> union: aSortGraph [
 LeibnizSortGraph >> view [
 	| b |
 	b := RTMondrian new.
-	b shape label fontName: 'Arial Unicode MS'.
-	b nodes: (self asSet collect: [:s | s asString ]).
-	b shape arrowedLine withShorterDistanceAttachPoint.
-	self withSubsortRelationsDo:
-		[ :s1 :s2 | b edges connectFrom: (s1 asString) to: (s2 asString) ].
+	self addGraphToBuilder: b.
 	b layout forceWithCharge: -2000.
 	b build.
 	^ b view
