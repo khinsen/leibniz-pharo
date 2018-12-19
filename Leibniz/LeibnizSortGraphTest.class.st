@@ -41,18 +41,18 @@ LeibnizSortGraphTest >> testCyclesForbidden [
 LeibnizSortGraphTest >> testKinds [
 	| set1 |
 	set1 := sortGraph1 asSet.
-	set1 do: [ :sort | self assert: (sortGraph1 kindOf: sort) equals: set1 ].
+	set1 do: [ :sort | self assert: (sortGraph1 kindOf: sort) equals: sortGraph1 ].
 	self assert: sortGraph1 kinds size equals: 1.
-	self assert: (sortGraph3 kindOf: #A) equals: #(#A #B #C #D) asSet.
-	self assert: (sortGraph3 kindOf: #V) equals: #(#V #W) asSet.
+	self assert: (sortGraph3 kindOf: #A) asSet equals: #(#A #B #C #D) asSet.
+	self assert: (sortGraph3 kindOf: #V) asSet equals: #(#V #W) asSet.
 	self assert: sortGraph3 kinds size equals: 2.
 
 ]
 
 { #category : #testing }
 LeibnizSortGraphTest >> testMaximalSorts [
-	self assert: (sortGraph1 maximalSorts: sortGraph1 asSet) equals: #(#C #D) asSet.
-	self assert: (sortGraph3 maximalSorts: sortGraph3 asSet) equals: #(#C #D #W) asSet.
+	self assert: (sortGraph1 selectMaximalSortsFrom: sortGraph1 asSet) equals: #(#C #D) asSet.
+	self assert: (sortGraph3 selectMaximalSortsFrom: sortGraph3 asSet) equals: #(#C #D #W) asSet.
 
 ]
 
