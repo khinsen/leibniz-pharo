@@ -94,10 +94,18 @@ LeibnizSortGraphTest >> testSortGraphUnion [
 LeibnizSortGraphTest >> testSubsortQueries [
 	self assert: (sortGraph1 directSubsortsOf: #A) equals: Set new.
 	self assert: (sortGraph1 subsortsOf: #B) equals: (Set with: #A).
+
+	self assert: (sortGraph1 is: #A directSubsortOf: #B).
+	self deny:   (sortGraph1 is: #B directSubsortOf: #A).
 	self assert: (sortGraph1 directSubsortsOf: #B) equals: (Set with: #A).
 	self assert: (sortGraph1 subsortsOf: #B) equals: (Set with: #A).
+
+	self assert: (sortGraph1 is: #B directSubsortOf: #C).
+	self deny:   (sortGraph1 is: #A directSubsortOf: #C).
 	self assert: (sortGraph1 directSubsortsOf: #C) equals: (Set with: #B).
 	self assert: (sortGraph1 subsortsOf: #C) equals: #(#A #B) asSet.
+
+	self assert: (sortGraph1 is: #A directSubsortOf: #D).
 	self assert: (sortGraph1 directSubsortsOf: #D) equals: (Set with: #A).
 	self assert: (sortGraph1 subsortsOf: #D) equals: (Set with: #A).
 

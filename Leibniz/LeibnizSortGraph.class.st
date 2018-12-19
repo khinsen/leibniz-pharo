@@ -5,24 +5,24 @@ Class {
 	#name : #LeibnizSortGraph,
 	#superclass : #Object,
 	#instVars : [
-		'subsortsOf',
-		'supersortsOf',
-		'sameKindSortsOf'
+		'sameKindSortsOf',
+		'directSubsortsOf',
+		'directSupersortsOf'
 	],
 	#category : #'Leibniz-Core'
 }
 
 { #category : #comparing }
 LeibnizSortGraph >> = aSortGraph [
-	^ aSortGraph privateEqualityTestWith: sameKindSortsOf and: supersortsOf and: subsortsOf
+	^ aSortGraph privateEqualityTestWith: sameKindSortsOf and: directSupersortsOf and: directSubsortsOf
 ]
 
 { #category : #adding }
 LeibnizSortGraph >> add: aSymbol [
    (self includes: aSymbol)
      ifFalse: [ sameKindSortsOf at: aSymbol put: (Set with: aSymbol).
-                supersortsOf at: aSymbol put: Set new.
-                subsortsOf at: aSymbol put: Set new. ].
+                directSupersortsOf at: aSymbol put: Set new.
+                directSubsortsOf at: aSymbol put: Set new. ].
    ^ aSymbol
 
 ]
@@ -47,7 +47,7 @@ LeibnizSortGraph >> asSet [
 
 { #category : #accessing }
 LeibnizSortGraph >> directSubsortsOf: aSymbol [
-	^ subsortsOf at: aSymbol.
+	^ directSubsortsOf at: aSymbol.
 ]
 
 { #category : #viewing }
@@ -74,15 +74,21 @@ LeibnizSortGraph >> includes: aSort [
 { #category : #initializing }
 LeibnizSortGraph >> initialize [
    sameKindSortsOf := Dictionary new.
-	subsortsOf := Dictionary new.
-	supersortsOf := Dictionary new
+	directSubsortsOf := Dictionary new.
+	directSupersortsOf := Dictionary new
+]
+
+{ #category : #testing }
+LeibnizSortGraph >> is: aSort directSubsortOf: anotherSort [
+	^ (directSubsortsOf at: anotherSort) includes: aSort
+
 ]
 
 { #category : #testing }
 LeibnizSortGraph >> is: aSort subsortOf: anotherSort [
 	| ss |
 	^ (aSort = anotherSort)
-		or: [ ss := subsortsOf at: anotherSort.
+		or: [ ss := directSubsortsOf at: anotherSort.
 				(ss includes: aSort)
 				or: [ ss anySatisfy: [:each | self is: aSort subsortOf: each ]]]
 
@@ -111,8 +117,8 @@ LeibnizSortGraph >> make: aSort subsortOf: anotherSort [
 			                   (anotherSort printString), '<', (aSort printString ) ].
 	new_kind := (sameKindSortsOf at: aSort) union: (sameKindSortsOf at: anotherSort).
 	new_kind do: [ :sort | sameKindSortsOf at: sort put: new_kind].
-	(supersortsOf at: aSort) add: anotherSort.
-	(subsortsOf at: anotherSort) add: aSort.
+	(directSupersortsOf at: aSort) add: anotherSort.
+	(directSubsortsOf at: anotherSort) add: aSort.
 ]
 
 { #category : #accessing }
@@ -124,8 +130,8 @@ LeibnizSortGraph >> maximalSorts [
 LeibnizSortGraph >> postCopy [
 	super postCopy.
 	sameKindSortsOf := sameKindSortsOf deepCopy.
-	supersortsOf := supersortsOf deepCopy.
-	subsortsOf := subsortsOf deepCopy.
+	directSupersortsOf := directSupersortsOf deepCopy.
+	directSubsortsOf := directSubsortsOf deepCopy.
 ]
 
 { #category : #printing }
@@ -140,14 +146,14 @@ LeibnizSortGraph >> printOn: aStream [
 { #category : #private }
 LeibnizSortGraph >> privateEqualityTestWith: otherKinds and: otherSupersorts and: otherSubsorts [ 
 	^ (sameKindSortsOf = otherKinds)
-	  and: [ (supersortsOf = otherSupersorts)
-			and: [ subsortsOf = otherSubsorts  ]]
+	  and: [ (directSupersortsOf = otherSupersorts)
+			and: [ directSubsortsOf = otherSubsorts  ]]
 
 ]
 
 { #category : #accessing }
 LeibnizSortGraph >> selectMaximalSortsFrom: aCollection [ 
-	^ aCollection select: [ :sort | (supersortsOf at: sort) size = 0 ]
+	^ aCollection select: [ :sort | (directSupersortsOf at: sort) size = 0 ]
 ]
 
 { #category : #accessing }
@@ -161,7 +167,7 @@ LeibnizSortGraph >> subGraphForSorts: aSet [
 	| sg |
 	sg := self class new.
 	aSet do: [ :sort | sg add: sort ].
-	subsortsOf associationsDo:
+	directSubsortsOf associationsDo:
 		[ :a | (aSet includes: (a key))
 					ifTrue: [ a value do:
 								[ :sort | (aSet includes: sort)
@@ -173,7 +179,7 @@ LeibnizSortGraph >> subGraphForSorts: aSet [
 { #category : #accessing }
 LeibnizSortGraph >> subsortsOf: aSymbol [
 	| ss |
-	ss := (subsortsOf at: aSymbol) deepCopy.
+	ss := (directSubsortsOf at: aSymbol) deepCopy.
 	^ ss inject: ss into: [ :total :sort | total union: (self subsortsOf: sort) ]
 ]
 
@@ -191,7 +197,7 @@ LeibnizSortGraph >> treeView [
 
 ]
 
-{ #category : #adding }
+{ #category : #enumerating }
 LeibnizSortGraph >> union: aSortGraph [ 
 	| sg |
 	sg := self copy.
@@ -214,7 +220,7 @@ LeibnizSortGraph >> view [
 
 { #category : #enumerating }
 LeibnizSortGraph >> withSubsortRelationsDo: aBlockClosure [ 
-	supersortsOf associationsDo:
+	directSupersortsOf associationsDo:
 		[ :assoc | assoc value do:
 					[ :sort | aBlockClosure value: (assoc key) value: sort ]]
 
