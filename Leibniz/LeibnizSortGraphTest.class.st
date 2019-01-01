@@ -2,6 +2,8 @@ Class {
 	#name : #LeibnizSortGraphTest,
 	#superclass : #TestCase,
 	#instVars : [
+		'builder1',
+		'builder2',
 		'sortGraph1',
 		'sortGraph2',
 		'sortGraph3'
@@ -11,37 +13,43 @@ Class {
 
 { #category : #running }
 LeibnizSortGraphTest >> setUp [
-   sortGraph1 := LeibnizSortGraph new.
-	sortGraph1 add: #A;
-              add: #B;
-              add: #C;
-              add: #D;
-				  make: #A subsortOf: #B;
-				  make: #B subsortOf: #C;
-				  make: #A subsortOf: #D.
-	sortGraph2 := LeibnizSortGraph new.
-	sortGraph2 add: #A;
-				  add: #X;
-				  add: #Y;
-				  make: #A subsortOf: #X;
-				  make: #X subsortOf: #Y.
-	sortGraph3 := sortGraph1 copy.
-	sortGraph3 add: #V;
-				  add: #W;
-				  make: #V subsortOf: #W.
+	super setUp.
+
+   builder1 := LeibnizSortGraphBuilder new.
+	builder1 add: #A;
+         		add: #B;
+         		add: #C;
+  				add: #D;
+				make: #A subsortOf: #B;
+				make: #B subsortOf: #C;
+				make: #A subsortOf: #D.
+	sortGraph1 := builder1 sortGraph.
+
+	builder2 := LeibnizSortGraphBuilder new.
+	builder2 add: #A;
+				add: #X;
+				add: #Y;
+				make: #A subsortOf: #X;
+				make: #X subsortOf: #Y.
+	sortGraph2 := builder2 sortGraph.
+
+	builder1 add: #V;
+				add: #W;
+				make: #V subsortOf: #W.
+	sortGraph3 := builder1 sortGraph.
 
 ]
 
 { #category : #testing }
 LeibnizSortGraphTest >> testCyclesForbidden [
-	self should: [ sortGraph1 make: #D subsortOf: #A ] raise: Error.
+	self should: [ builder1 make: #D subsortOf: #A ] raise: Error.
 ]
 
 { #category : #testing }
 LeibnizSortGraphTest >> testKinds [
 	| set1 |
 	set1 := sortGraph1 asSet.
-	set1 do: [ :sort | self assert: (sortGraph1 kindOf: sort) equals: sortGraph1 ].
+	set1 do: [ :sort | self assert: (sortGraph1 kindOf: sort) equals: set1 ].
 	self assert: sortGraph1 kinds size equals: 1.
 	self assert: (sortGraph3 kindOf: #A) asSet equals: #(#A #B #C #D) asSet.
 	self assert: (sortGraph3 kindOf: #V) asSet equals: #(#V #W) asSet.
@@ -51,8 +59,8 @@ LeibnizSortGraphTest >> testKinds [
 
 { #category : #testing }
 LeibnizSortGraphTest >> testMaximalSorts [
-	self assert: (sortGraph1 selectMaximalSortsFrom: sortGraph1 asSet) equals: #(#C #D) asSet.
-	self assert: (sortGraph3 selectMaximalSortsFrom: sortGraph3 asSet) equals: #(#C #D #W) asSet.
+	self assert: sortGraph1 maximalSorts equals: #(#C #D) asSet.
+	self assert: sortGraph3 maximalSorts equals: #(#C #D #W) asSet.
 
 ]
 
@@ -86,27 +94,29 @@ LeibnizSortGraphTest >> testSortGraphUnion [
 	self assert: (union1 is: #A subsortOf: #C).
 	self assert: (union1 is: #A subsortOf: #X).
 	self assert: (sortGraph1 union: sortGraph1) equals: sortGraph1.
-	self assert: (sortGraph1 union: sortGraph1 class new) equals: sortGraph1.
+	self assert: (sortGraph1 union: LeibnizSortGraphBuilder new sortGraph) equals: sortGraph1.
 
 ]
 
 { #category : #testing }
 LeibnizSortGraphTest >> testSubsortQueries [
-	self assert: (sortGraph1 directSubsortsOf: #A) equals: Set new.
-	self assert: (sortGraph1 subsortsOf: #B) equals: (Set with: #A).
-
 	self assert: (sortGraph1 is: #A directSubsortOf: #B).
+	self assert: (sortGraph1 is: #A subsortOf: #B).
 	self deny:   (sortGraph1 is: #B directSubsortOf: #A).
+	self deny:   (sortGraph1 is: #B subsortOf: #A).
+	self assert: (sortGraph1 is: #B subsortOf: #B).
+	self deny:   (sortGraph1 is: #B directSubsortOf: #B).
+	self assert: (sortGraph1 directSubsortsOf: #A) equals: Set new.
 	self assert: (sortGraph1 directSubsortsOf: #B) equals: (Set with: #A).
-	self assert: (sortGraph1 subsortsOf: #B) equals: (Set with: #A).
+	self assert: (sortGraph1 subsortsOf: #B) equals: #(#A #B) asSet.
 
 	self assert: (sortGraph1 is: #B directSubsortOf: #C).
 	self deny:   (sortGraph1 is: #A directSubsortOf: #C).
 	self assert: (sortGraph1 directSubsortsOf: #C) equals: (Set with: #B).
-	self assert: (sortGraph1 subsortsOf: #C) equals: #(#A #B) asSet.
+	self assert: (sortGraph1 subsortsOf: #C) equals: #(#A #B #C) asSet.
 
 	self assert: (sortGraph1 is: #A directSubsortOf: #D).
 	self assert: (sortGraph1 directSubsortsOf: #D) equals: (Set with: #A).
-	self assert: (sortGraph1 subsortsOf: #D) equals: (Set with: #A).
+	self assert: (sortGraph1 subsortsOf: #D) equals: #(#A #D) asSet.
 
 ]

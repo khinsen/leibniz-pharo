@@ -5,26 +5,20 @@ Class {
 	#name : #LeibnizSortGraph,
 	#superclass : #Object,
 	#instVars : [
-		'sameKindSortsOf',
+		'kinds',
+		'maximalSorts',
 		'directSubsortsOf',
-		'directSupersortsOf'
+		'subsortsOf',
+		'kindsOf'
 	],
 	#category : #'Leibniz-Core'
 }
 
 { #category : #comparing }
 LeibnizSortGraph >> = aSortGraph [
-	^ aSortGraph privateEqualityTestWith: sameKindSortsOf and: directSupersortsOf and: directSubsortsOf
-]
-
-{ #category : #adding }
-LeibnizSortGraph >> add: aSymbol [
-   (self includes: aSymbol)
-     ifFalse: [ sameKindSortsOf at: aSymbol put: (Set with: aSymbol).
-                directSupersortsOf at: aSymbol put: Set new.
-                directSubsortsOf at: aSymbol put: Set new. ].
-   ^ aSymbol
-
+	"Equality test. Only one instance variable needs to be compared because
+	 the values of the remaining ones are computed from this one."
+	^ aSortGraph equalityTestWith: directSubsortsOf.
 ]
 
 { #category : #viewing }
@@ -41,13 +35,29 @@ LeibnizSortGraph >> addGraphToBuilder: aBuilder [
 
 { #category : #converting }
 LeibnizSortGraph >> asSet [
-   ^ sameKindSortsOf keys asSet 
+   ^ directSubsortsOf keys asSet 
+
+]
+
+{ #category : #converting }
+LeibnizSortGraph >> asSortGraphBuilder [
+	| b |
+	b := LeibnizSortGraphBuilder new.
+	self asSet do: [ :each | b add: each ].
+	self withSubsortRelationsDo: [ :s1 :s2 | b make: s1 subsortOf: s2 ].
+	^ b
 
 ]
 
 { #category : #accessing }
 LeibnizSortGraph >> directSubsortsOf: aSymbol [
 	^ directSubsortsOf at: aSymbol.
+]
+
+{ #category : #private }
+LeibnizSortGraph >> equalityTestWith: otherSubsorts [ 
+	^ directSubsortsOf = otherSubsorts
+
 ]
 
 { #category : #viewing }
@@ -61,21 +71,69 @@ LeibnizSortGraph >> gtInspectorViewIn: composite [
 
 { #category : #comparing }
 LeibnizSortGraph >> hash [
-	^ sameKindSortsOf hash
-	
+	^ directSubsortsOf hash
 ]
 
 { #category : #testing }
 LeibnizSortGraph >> includes: aSort [
-	^ sameKindSortsOf keys includes: aSort
+	^ directSubsortsOf keys includes: aSort
 
 ]
 
 { #category : #initializing }
-LeibnizSortGraph >> initialize [
-   sameKindSortsOf := Dictionary new.
-	directSubsortsOf := Dictionary new.
-	directSupersortsOf := Dictionary new
+LeibnizSortGraph >> initializeKinds [
+	| kindCandidates kind hasCommonSorts |
+	kindCandidates := maximalSorts asOrderedCollection collect: [ :sort | subsortsOf at: sort ].
+	"A kind can have multiple maximal sorts. In that case, kindCandidates contains multiple sets
+	 that have a non-empty intersection, and which must be merged to obtain the kind."
+	kinds := Set new.
+	[ kindCandidates isEmpty ] whileFalse: [ 
+		kind := kindCandidates first.
+		hasCommonSorts := kindCandidates allButFirst groupedBy:
+									[ :c | (kind intersection: c) isNotEmpty ].
+		#(true false) do: [ :b | hasCommonSorts at: b ifAbsentPut: OrderedCollection new. ].
+		kinds add: ((hasCommonSorts at: true) inject: kind into: [ :k :c | k union: c ]).
+		kindCandidates := hasCommonSorts at: false. ].
+
+	kindsOf := Dictionary new.
+	kinds do: [ :k | k do: [ :s | kindsOf at: s put: k ] ].
+
+]
+
+{ #category : #initializing }
+LeibnizSortGraph >> initializeMaximalSorts [
+	maximalSorts := (directSubsortsOf values)
+							inject: directSubsortsOf keys asSet
+							into: [ :ms :ss | ms difference: ss ].
+]
+
+{ #category : #initializing }
+LeibnizSortGraph >> initializeSubsortsOf [
+	subsortsOf := Dictionary new.
+	directSubsortsOf keysDo: [ :sort | self initializeSubsortsOfAt: sort ].
+	
+]
+
+{ #category : #initializing }
+LeibnizSortGraph >> initializeSubsortsOfAt: aSort [
+	| ss |
+	(subsortsOf includes: aSort) ifTrue: [ ^ self ].
+	ss := (directSubsortsOf at: aSort) copy.
+	ss add: aSort.
+	(directSubsortsOf at: aSort) do:
+		[ :sort | self initializeSubsortsOfAt: sort.
+					 ss := ss union: (subsortsOf at: sort) ].
+	subsortsOf at: aSort put: ss.
+]
+
+{ #category : #initializing }
+LeibnizSortGraph >> initializeWithSubsortRelations: subsortRelations [
+	directSubsortsOf := subsortRelations.
+	self initializeSubsortsOf.
+	self initializeMaximalSorts.
+	self initializeKinds.
+	self setIsReadOnlyObject: true.
+
 ]
 
 { #category : #testing }
@@ -96,42 +154,18 @@ LeibnizSortGraph >> is: aSort subsortOf: anotherSort [
 
 { #category : #accessing }
 LeibnizSortGraph >> kindOf: aSymbol [
-	^ self subGraphForSorts: (sameKindSortsOf at: aSymbol)
+	^ kindsOf at: aSymbol
 ]
 
 { #category : #accessing }
 LeibnizSortGraph >> kinds [
-	| k |
-	k := Set new.
-	sameKindSortsOf values asSet do:
-		[ :sorts | k add: (self subGraphForSorts: sorts) ].
-	^ k
-]
+	^ kinds
 
-{ #category : #adding }
-LeibnizSortGraph >> make: aSort subsortOf: anotherSort [
-	| new_kind |
-	(aSort = anotherSort) ifTrue: [ ^ self ].
-	(self is: anotherSort subsortOf: aSort)
-		ifTrue: [ self error: 'cycle in subsort relation: ',
-			                   (anotherSort printString), '<', (aSort printString ) ].
-	new_kind := (sameKindSortsOf at: aSort) union: (sameKindSortsOf at: anotherSort).
-	new_kind do: [ :sort | sameKindSortsOf at: sort put: new_kind].
-	(directSupersortsOf at: aSort) add: anotherSort.
-	(directSubsortsOf at: anotherSort) add: aSort.
 ]
 
 { #category : #accessing }
 LeibnizSortGraph >> maximalSorts [
-	^  self selectMaximalSortsFrom: self asSet.
-]
-
-{ #category : #copying }
-LeibnizSortGraph >> postCopy [
-	super postCopy.
-	sameKindSortsOf := sameKindSortsOf deepCopy.
-	directSupersortsOf := directSupersortsOf deepCopy.
-	directSubsortsOf := directSubsortsOf deepCopy.
+	^  maximalSorts
 ]
 
 { #category : #printing }
@@ -143,19 +177,6 @@ LeibnizSortGraph >> printOn: aStream [
 
 ]
 
-{ #category : #private }
-LeibnizSortGraph >> privateEqualityTestWith: otherKinds and: otherSupersorts and: otherSubsorts [ 
-	^ (sameKindSortsOf = otherKinds)
-	  and: [ (directSupersortsOf = otherSupersorts)
-			and: [ directSubsortsOf = otherSubsorts  ]]
-
-]
-
-{ #category : #accessing }
-LeibnizSortGraph >> selectMaximalSortsFrom: aCollection [ 
-	^ aCollection select: [ :sort | (directSupersortsOf at: sort) size = 0 ]
-]
-
 { #category : #accessing }
 LeibnizSortGraph >> size [
 	^ self asSet size.
@@ -163,24 +184,8 @@ LeibnizSortGraph >> size [
 ]
 
 { #category : #accessing }
-LeibnizSortGraph >> subGraphForSorts: aSet [
-	| sg |
-	sg := self class new.
-	aSet do: [ :sort | sg add: sort ].
-	directSubsortsOf associationsDo:
-		[ :a | (aSet includes: (a key))
-					ifTrue: [ a value do:
-								[ :sort | (aSet includes: sort)
-												ifTrue: [ sg make: sort subsortOf: (a key) ] ] ] ].
-	^ sg
-
-]
-
-{ #category : #accessing }
 LeibnizSortGraph >> subsortsOf: aSymbol [
-	| ss |
-	ss := (directSubsortsOf at: aSymbol) deepCopy.
-	^ ss inject: ss into: [ :total :sort | total union: (self subsortsOf: sort) ]
+	^ subsortsOf at: aSymbol.
 ]
 
 { #category : #viewing }
@@ -199,11 +204,11 @@ LeibnizSortGraph >> treeView [
 
 { #category : #enumerating }
 LeibnizSortGraph >> union: aSortGraph [ 
-	| sg |
-	sg := self copy.
-	aSortGraph asSet do: [ :each | sg add: each ].
-	aSortGraph withSubsortRelationsDo: [ :s1 :s2 | sg make: s1 subsortOf: s2 ].
-	^ sg
+	| b |
+	b := self asSortGraphBuilder.
+	aSortGraph asSet do: [ :each | b add: each ].
+	aSortGraph withSubsortRelationsDo: [ :s1 :s2 | b make: s1 subsortOf: s2 ].
+	^ b sortGraph
 
 ]
 
@@ -220,8 +225,8 @@ LeibnizSortGraph >> view [
 
 { #category : #enumerating }
 LeibnizSortGraph >> withSubsortRelationsDo: aBlockClosure [ 
-	directSupersortsOf associationsDo:
+	directSubsortsOf associationsDo:
 		[ :assoc | assoc value do:
-					[ :sort | aBlockClosure value: (assoc key) value: sort ]]
+					[ :sort | aBlockClosure value: sort value: (assoc key) ]]
 
 ]
