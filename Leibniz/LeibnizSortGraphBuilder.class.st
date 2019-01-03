@@ -20,6 +20,13 @@ LeibnizSortGraphBuilder >> add: aSymbol [
 
 ]
 
+{ #category : #adding }
+LeibnizSortGraphBuilder >> addSortGraph: aSortGraph [ 
+	aSortGraph asSet do: [ :each | self add: each ].
+	aSortGraph withSubsortRelationsDo: [ :s1 :s2 | self make: s1 subsortOf: s2 ].
+
+]
+
 { #category : #testing }
 LeibnizSortGraphBuilder >> includes: aSort [
 	^ sameKindSortsOf keys includes: aSort

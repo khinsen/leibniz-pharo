@@ -41,11 +41,7 @@ LeibnizSortGraph >> asSet [
 
 { #category : #converting }
 LeibnizSortGraph >> asSortGraphBuilder [
-	| b |
-	b := LeibnizSortGraphBuilder new.
-	self asSet do: [ :each | b add: each ].
-	self withSubsortRelationsDo: [ :s1 :s2 | b make: s1 subsortOf: s2 ].
-	^ b
+	^ LeibnizSortGraphBuilder new addSortGraph: self.
 
 ]
 
@@ -206,8 +202,7 @@ LeibnizSortGraph >> treeView [
 LeibnizSortGraph >> union: aSortGraph [ 
 	| b |
 	b := self asSortGraphBuilder.
-	aSortGraph asSet do: [ :each | b add: each ].
-	aSortGraph withSubsortRelationsDo: [ :s1 :s2 | b make: s1 subsortOf: s2 ].
+	b addSortGraph: aSortGraph.
 	^ b sortGraph
 
 ]
