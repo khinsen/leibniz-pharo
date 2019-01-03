@@ -10,7 +10,14 @@ Class {
 	#category : #'Leibniz-Core'
 }
 
-{ #category : #accessing }
+{ #category : #'instance creation' }
+LeibnizBuiltins class >> reset [
+	<script>
+	uniqueInstance := nil.
+
+]
+
+{ #category : #'instance creation' }
 LeibnizBuiltins class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]

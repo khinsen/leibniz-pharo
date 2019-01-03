@@ -10,6 +10,8 @@ BaselineOfLeibniz >> baseline: spec [
 	
 	spec for: #common do: [
 
+		spec postLoadDoIt: #'postload:package:'.
+
 		spec
 			baseline: 'Roassal2' 
 			with: [ spec repository: 'github://ObjectProfile/Roassal2:master/src' ].
@@ -25,5 +27,11 @@ BaselineOfLeibniz >> baseline: spec [
 			package: 'BaselineOfLeibniz'.
 
 ].
+
+]
+
+{ #category : #baseline }
+BaselineOfLeibniz >> postload: loader package: packageSpec [
+	LeibnizBuiltins reset
 
 ]
