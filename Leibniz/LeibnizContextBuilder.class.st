@@ -28,24 +28,23 @@ LeibnizContextBuilder >> addDeclarationsFrom: aContext inMode: useOrExtend [
 
 ]
 
-{ #category : #defining }
+{ #category : #'defining - sort graph' }
 LeibnizContextBuilder >> addSort: aSymbol [
 	self phase: #sortGraph.
 	sortGraphBuilder add: aSymbol.
 
 ]
 
-{ #category : #defining }
+{ #category : #accessing }
 LeibnizContextBuilder >> build [
-	document addContext: self context.
+	document replaceBuilderByContextNamed: name.
 
 ]
 
 { #category : #accessing }
 LeibnizContextBuilder >> context [
-	"Temporary kludge"
 	self phase: #finished.
-	^ self
+	^ LeibnizContext withName: name withSortGraph: sortGraph.
 ]
 
 { #category : #'defining - private' }
@@ -75,7 +74,7 @@ LeibnizContextBuilder >> fromXML: anXMLElement inDocument: aDocument [
 
 ]
 
-{ #category : #defining }
+{ #category : #'defining - includes' }
 LeibnizContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash inMode: useOrExtend [
 	| context |
 	self phase: #includes.
@@ -89,7 +88,7 @@ LeibnizContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash in
 
 ]
 
-{ #category : #defining }
+{ #category : #'defining - includes' }
 LeibnizContextBuilder >> include: aContextName inMode: useOrExtend [
 	| context |
 	self validateIncludeMode: useOrExtend.
@@ -108,7 +107,7 @@ LeibnizContextBuilder >> initialize [
 
 ]
 
-{ #category : #defining }
+{ #category : #'defining - sort graph' }
 LeibnizContextBuilder >> make: aSort subsortOf: anotherSort [
 	self phase:#sortGraph.
 	sortGraphBuilder make: aSort subsortOf: anotherSort.
@@ -119,13 +118,7 @@ LeibnizContextBuilder >> name [
 	^ name
 ]
 
-{ #category : #defining }
-LeibnizContextBuilder >> name: aString [
-	name := aString.
-
-]
-
-{ #category : #defining }
+{ #category : #'defining - private' }
 LeibnizContextBuilder >> phase: aSymbol [
 	| phaseLabels current new phaseEndMethod phaseStartMethod |
 	phaseLabels := #(#initialization #includes #sortGraph #operators #rules #assets #finished).
@@ -153,7 +146,7 @@ LeibnizContextBuilder >> validateIncludeMode: useOrExtend [
 
 ]
 
-{ #category : #defining }
+{ #category : #initializing }
 LeibnizContextBuilder >> withName: aString inDocument: aDocument [
 	name := aString.
 	document := aDocument.

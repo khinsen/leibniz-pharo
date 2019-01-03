@@ -18,7 +18,7 @@ LeibnizBuiltins class >> uniqueInstance [
 { #category : #initialization }
 LeibnizBuiltins >> createContextContext [
 	| contextsBuilder |
-	contextsBuilder := self contextBuilderNamed: 'contexts'.
+	contextsBuilder := self newContextBuilderNamed: 'contexts'.
 	contextsBuilder include: 'strings' inMode: 'use'.
 	contextsBuilder addSort: #context.
 	contextsBuilder build.
@@ -27,7 +27,7 @@ LeibnizBuiltins >> createContextContext [
 { #category : #initialization }
 LeibnizBuiltins >> createFPContext [
 	| fpNumbers |
-	fpNumbers := self contextBuilderNamed: 'IEEE-floating-point'.
+	fpNumbers := self newContextBuilderNamed: 'IEEE-floating-point'.
 	fpNumbers include: 'integers' inMode: 'use'.
 
 	fpNumbers addSort: #FP.
@@ -67,7 +67,7 @@ LeibnizBuiltins >> createFPContext [
 { #category : #initialization }
 LeibnizBuiltins >> createIntegerContext [
 	| integers |
-	integers := self contextBuilderNamed: 'integers'.
+	integers := self newContextBuilderNamed: 'integers'.
 	integers include: 'truth' inMode: 'use'.
 	"Natural numbers"
 	integers addSort: #ℕ.
@@ -87,7 +87,7 @@ LeibnizBuiltins >> createIntegerContext [
 { #category : #initialization }
 LeibnizBuiltins >> createRationalContext [
 	| rationalNumbers |
-	rationalNumbers := self contextBuilderNamed: 'rational-numbers'.
+	rationalNumbers := self newContextBuilderNamed: 'rational-numbers'.
 	rationalNumbers include: 'integers' inMode: 'extend'.
 	rationalNumbers addSort: #'ℚ'.
 	rationalNumbers make: #'ℤ' subsortOf: 'ℚ'.
@@ -107,7 +107,7 @@ LeibnizBuiltins >> createRationalContext [
 { #category : #initialization }
 LeibnizBuiltins >> createRealNumberContext [
 	| realNumbers |
-	realNumbers := self contextBuilderNamed: 'real-numbers'.
+	realNumbers := self newContextBuilderNamed: 'real-numbers'.
 	realNumbers include: 'rational-numbers' inMode: 'extend'.
 	realNumbers addSort: #'ℝ'.
 	realNumbers make: #'ℚ' subsortOf: #'ℝ'.
@@ -127,7 +127,7 @@ LeibnizBuiltins >> createRealNumberContext [
 { #category : #initialization }
 LeibnizBuiltins >> createStringContext [
 	| string |
-	string := self contextBuilderNamed: 'strings'.
+	string := self newContextBuilderNamed: 'strings'.
 	string addSort: #string.
 	string build.
 
@@ -136,11 +136,10 @@ LeibnizBuiltins >> createStringContext [
 { #category : #initialization }
 LeibnizBuiltins >> createTruthContext [
 	| truth |
-	truth := self contextBuilderNamed: 'truth'.
+	truth := self newContextBuilderNamed: 'truth'.
 	truth addSort: #boolean.
 	truth build.
 
-	
 ]
 
 { #category : #initialization }

@@ -9,10 +9,10 @@ LeibnizDocumentTest >> testGoodContextDefinition [
 	| doc builder |
 	doc := LeibnizDocument new.
 	"bar"
-	builder := doc contextBuilderNamed: 'bar'.
+	builder := doc newContextBuilderNamed: 'bar'.
 	builder build.
 	"foo"
-	builder := doc contextBuilderNamed: 'foo'.
+	builder := doc newContextBuilderNamed: 'foo'.
 	builder addSort: #A.
 	builder addSort: #B.
 	builder make: #A subsortOf: #B.
@@ -26,7 +26,7 @@ LeibnizDocumentTest >> testGoodContextDefinition [
 LeibnizDocumentTest >> testPhaseErrorInCOntextDefinition [
 	| doc builder |
 	doc := LeibnizDocument new.
-	builder := doc contextBuilderNamed: 'foo'.
+	builder := doc newContextBuilderNamed: 'foo'.
 	builder addSort: #A.
 	self should: [builder include: 'bar' inMode: 'use'.]
 		  raise: Exception.

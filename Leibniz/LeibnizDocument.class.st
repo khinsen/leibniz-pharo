@@ -29,12 +29,6 @@ LeibnizDocument class >> fromXML: anXMLElement [
 	^ self new fromXML: anXMLElement
 ]
 
-{ #category : #adding }
-LeibnizDocument >> addContext: aContext [
-	contexts at: aContext name put: aContext.
-	^ aContext.
-]
-
 { #category : #'XML-import' }
 LeibnizDocument >> addContextFromXML: anXMLElement [
   	| builder context |
@@ -42,14 +36,6 @@ LeibnizDocument >> addContextFromXML: anXMLElement [
 	context := builder context.
 	contexts at: context name put: context.
 
-]
-
-{ #category : #adding }
-LeibnizDocument >> contextBuilderNamed: aString [
-	| builder |
-	builder := LeibnizContextBuilder withName: aString inDocument: self.
-	contexts at: aString put: builder.
-	^ builder.
 ]
 
 { #category : #accessing }
@@ -83,5 +69,21 @@ LeibnizDocument >> fromXML: anXMLElement [
 LeibnizDocument >> initialize [
 	library := LeibnizLibrary uniqueInstance.
 	contexts := Dictionary new.
+
+]
+
+{ #category : #adding }
+LeibnizDocument >> newContextBuilderNamed: aString [
+	| builder |
+	builder := LeibnizContextBuilder withName: aString inDocument: self.
+	contexts at: aString put: builder.
+	^ builder.
+]
+
+{ #category : #adding }
+LeibnizDocument >> replaceBuilderByContextNamed: aString [
+	| builder |
+	builder := contexts at: aString.
+	contexts at: aString put: builder context.
 
 ]
