@@ -32,6 +32,7 @@ BaselineOfLeibniz >> baseline: spec [
 
 { #category : #baseline }
 BaselineOfLeibniz >> postload: loader package: packageSpec [
-	LeibnizBuiltins reset
+	LeibnizBuiltins reset.
+	Transcript crLog: 'LeibnizBuiltins reset.'
 
 ]
