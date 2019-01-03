@@ -17,125 +17,129 @@ LeibnizBuiltins class >> uniqueInstance [
 
 { #category : #initialization }
 LeibnizBuiltins >> createContextContext [
-	| context |
-	context := self newContextNamed: 'contexts'.
-	context include: 'strings' inMode: 'use'.
-	context addSort: #context.
-
+	| contextsBuilder |
+	contextsBuilder := self contextBuilderNamed: 'contexts'.
+	contextsBuilder include: 'strings' inMode: 'use'.
+	contextsBuilder addSort: #context.
+	contextsBuilder build.
 ]
 
 { #category : #initialization }
 LeibnizBuiltins >> createFPContext [
-	| context |
-	context := self newContextNamed: 'IEEE-floating-point'.
-	context include: 'integers' inMode: 'use'.
+	| fpNumbers |
+	fpNumbers := self contextBuilderNamed: 'IEEE-floating-point'.
+	fpNumbers include: 'integers' inMode: 'use'.
 
-	context addSort: #FP.
-	context addSort: #'FP.number'.
-	context addSort: #'FP.NaN'.
-	context addSort: #'FP.inf'.
-	context make: #'FP.number' subsortOf: #'FP'.
-	context make: #'FP.NaN' subsortOf: #'FP'.
-	context make: #'FP.inf' subsortOf: #'FP'.
+	fpNumbers addSort: #FP.
+	fpNumbers addSort: #'FP.number'.
+	fpNumbers addSort: #'FP.NaN'.
+	fpNumbers addSort: #'FP.inf'.
+	fpNumbers make: #'FP.number' subsortOf: #'FP'.
+	fpNumbers make: #'FP.NaN' subsortOf: #'FP'.
+	fpNumbers make: #'FP.inf' subsortOf: #'FP'.
 
-	context addSort: #FP32.
-	context addSort: #'FP32-number'.
-	context addSort: #'FP32-NaN'.
-	context addSort: #'FP32-inf'.
-	context make: #'FP32' subsortOf: #'FP'.
-	context make: #'FP32-number' subsortOf: #'FP32'.
-	context make: #'FP32-number' subsortOf: #'FP.number'.
-	context make: #'FP32-NaN' subsortOf: #'FP32'.
-	context make: #'FP32-NaN' subsortOf: #'FP.NaN'.
-	context make: #'FP32-inf' subsortOf: #'FP32'.
-	context make: #'FP32-inf' subsortOf: #'FP.inf'.
+	fpNumbers addSort: #FP32.
+	fpNumbers addSort: #'FP32-number'.
+	fpNumbers addSort: #'FP32-NaN'.
+	fpNumbers addSort: #'FP32-inf'.
+	fpNumbers make: #'FP32' subsortOf: #'FP'.
+	fpNumbers make: #'FP32-number' subsortOf: #'FP32'.
+	fpNumbers make: #'FP32-number' subsortOf: #'FP.number'.
+	fpNumbers make: #'FP32-NaN' subsortOf: #'FP32'.
+	fpNumbers make: #'FP32-NaN' subsortOf: #'FP.NaN'.
+	fpNumbers make: #'FP32-inf' subsortOf: #'FP32'.
+	fpNumbers make: #'FP32-inf' subsortOf: #'FP.inf'.
 
-	context addSort: #FP64.
-	context addSort: #'FP64-number'.
-	context addSort: #'FP64-NaN'.
-	context addSort: #'FP64-inf'.
-	context make: #'FP64' subsortOf: #'FP'.
-	context make: #'FP64-number' subsortOf: #'FP64'.
-	context make: #'FP64-number' subsortOf: #'FP.number'.
-	context make: #'FP64-NaN' subsortOf: #'FP64'.
-	context make: #'FP64-NaN' subsortOf: #'FP.NaN'.
-	context make: #'FP64-inf' subsortOf: #'FP64'.
-	context make: #'FP64-inf' subsortOf: #'FP.inf'.
+	fpNumbers addSort: #FP64.
+	fpNumbers addSort: #'FP64-number'.
+	fpNumbers addSort: #'FP64-NaN'.
+	fpNumbers addSort: #'FP64-inf'.
+	fpNumbers make: #'FP64' subsortOf: #'FP'.
+	fpNumbers make: #'FP64-number' subsortOf: #'FP64'.
+	fpNumbers make: #'FP64-number' subsortOf: #'FP.number'.
+	fpNumbers make: #'FP64-NaN' subsortOf: #'FP64'.
+	fpNumbers make: #'FP64-NaN' subsortOf: #'FP.NaN'.
+	fpNumbers make: #'FP64-inf' subsortOf: #'FP64'.
+	fpNumbers make: #'FP64-inf' subsortOf: #'FP.inf'.
+	fpNumbers build.
 ]
 
 { #category : #initialization }
 LeibnizBuiltins >> createIntegerContext [
-	| context |
-	context := self newContextNamed: 'integers'.
-	context include: 'truth' inMode: 'use'.
+	| integers |
+	integers := self contextBuilderNamed: 'integers'.
+	integers include: 'truth' inMode: 'use'.
 	"Natural numbers"
-	context addSort: #ℕ.
-	context addSort: #zero.
-	context addSort: #'ℕ.nz'.
-	context make: #zero subsortOf: #ℕ.
-	context make: #'ℕ.nz' subsortOf: #ℕ.
+	integers addSort: #ℕ.
+	integers addSort: #zero.
+	integers addSort: #'ℕ.nz'.
+	integers make: #zero subsortOf: #ℕ.
+	integers make: #'ℕ.nz' subsortOf: #ℕ.
 	"Integers"
-	context addSort: #ℤ.
-	context addSort: #'ℤ.nz'.
-	context make: #ℕ subsortOf: #ℤ.
-	context make: #'ℤ.nz' subsortOf: #ℤ.
-	context make: #'ℕ.nz' subsortOf: #'ℤ.nz'.
-
+	integers addSort: #ℤ.
+	integers addSort: #'ℤ.nz'.
+	integers make: #ℕ subsortOf: #ℤ.
+	integers make: #'ℤ.nz' subsortOf: #ℤ.
+	integers make: #'ℕ.nz' subsortOf: #'ℤ.nz'.
+	integers build.
 ]
 
 { #category : #initialization }
 LeibnizBuiltins >> createRationalContext [
-	| context |
-	context := self newContextNamed: 'rational-numbers'.
-	context include: 'integers' inMode: 'extend'.
-	context addSort: #'ℚ'.
-	context make: #'ℤ' subsortOf: 'ℚ'.
-	context addSort: #'ℚ.nz'.
-	context make: #'ℚ.nz'subsortOf: #'ℚ'.
-	context make: #'ℤ.nz'subsortOf: #'ℚ.nz'.
-	context addSort: #'ℚ.p'.
-	context make: #'ℚ.p'subsortOf: #'ℚ.nz'.
-	context make: #'ℕ.nz'subsortOf: #'ℚ.p'.
-	context addSort: #'ℚ.nn'.
-	context make: #'ℚ.nn'subsortOf: #'ℚ'.
-	context make: #'ℚ.p'subsortOf: #'ℚ.nn'.
-	context make: #'ℕ'subsortOf: #'ℚ.nn'.
-
+	| rationalNumbers |
+	rationalNumbers := self contextBuilderNamed: 'rational-numbers'.
+	rationalNumbers include: 'integers' inMode: 'extend'.
+	rationalNumbers addSort: #'ℚ'.
+	rationalNumbers make: #'ℤ' subsortOf: 'ℚ'.
+	rationalNumbers addSort: #'ℚ.nz'.
+	rationalNumbers make: #'ℚ.nz'subsortOf: #'ℚ'.
+	rationalNumbers make: #'ℤ.nz'subsortOf: #'ℚ.nz'.
+	rationalNumbers addSort: #'ℚ.p'.
+	rationalNumbers make: #'ℚ.p'subsortOf: #'ℚ.nz'.
+	rationalNumbers make: #'ℕ.nz'subsortOf: #'ℚ.p'.
+	rationalNumbers addSort: #'ℚ.nn'.
+	rationalNumbers make: #'ℚ.nn'subsortOf: #'ℚ'.
+	rationalNumbers make: #'ℚ.p'subsortOf: #'ℚ.nn'.
+	rationalNumbers make: #'ℕ'subsortOf: #'ℚ.nn'.
+	rationalNumbers build.
 ]
 
 { #category : #initialization }
 LeibnizBuiltins >> createRealNumberContext [
-	| context |
-	context := self newContextNamed: 'real-numbers'.
-	context include: 'rational-numbers' inMode: 'extend'.
-	context addSort: #'ℝ'.
-	context make: #'ℚ' subsortOf: #'ℝ'.
-	context addSort: #'ℝ.nz'.
-	context make: #'ℝ.nz' subsortOf: #'ℝ'.
-	context make: #'ℚ.nz' subsortOf: #'ℝ.nz'.
-	context addSort: #'ℝ.p'.
-	context make: #'ℝ.p' subsortOf: #'ℝ.nz'.
-	context make: #'ℚ.p' subsortOf: #'ℝ.p'.
-	context addSort: #'ℝ.nn'.
-	context make: #'ℝ.nn' subsortOf: #'ℝ'.
-	context make: #'ℝ.p' subsortOf: #'ℝ.nn'.
-	context make: #'ℚ.nn' subsortOf: #'ℝ.nn'.
-
+	| realNumbers |
+	realNumbers := self contextBuilderNamed: 'real-numbers'.
+	realNumbers include: 'rational-numbers' inMode: 'extend'.
+	realNumbers addSort: #'ℝ'.
+	realNumbers make: #'ℚ' subsortOf: #'ℝ'.
+	realNumbers addSort: #'ℝ.nz'.
+	realNumbers make: #'ℝ.nz' subsortOf: #'ℝ'.
+	realNumbers make: #'ℚ.nz' subsortOf: #'ℝ.nz'.
+	realNumbers addSort: #'ℝ.p'.
+	realNumbers make: #'ℝ.p' subsortOf: #'ℝ.nz'.
+	realNumbers make: #'ℚ.p' subsortOf: #'ℝ.p'.
+	realNumbers addSort: #'ℝ.nn'.
+	realNumbers make: #'ℝ.nn' subsortOf: #'ℝ'.
+	realNumbers make: #'ℝ.p' subsortOf: #'ℝ.nn'.
+	realNumbers make: #'ℚ.nn' subsortOf: #'ℝ.nn'.
+	realNumbers build.
 ]
 
 { #category : #initialization }
 LeibnizBuiltins >> createStringContext [
 	| string |
-	string := self newContextNamed: 'strings'.
+	string := self contextBuilderNamed: 'strings'.
 	string addSort: #string.
+	string build.
 
 ]
 
 { #category : #initialization }
 LeibnizBuiltins >> createTruthContext [
 	| truth |
-	truth := self newContextNamed: 'truth'.
+	truth := self contextBuilderNamed: 'truth'.
 	truth addSort: #boolean.
+	truth build.
+
 	
 ]
 

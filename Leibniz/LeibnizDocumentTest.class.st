@@ -6,28 +6,29 @@ Class {
 
 { #category : #testing }
 LeibnizDocumentTest >> testGoodContextDefinition [
-	| doc context |
+	| doc builder |
 	doc := LeibnizDocument new.
 	"bar"
-	context := doc newContextNamed: 'bar'.
+	builder := doc contextBuilderNamed: 'bar'.
+	builder build.
 	"foo"
-	context := doc newContextNamed: 'foo'.
-	context include: 'bar' inMode: 'use'.
-	context addSort: #A.
-	context addSort: #B.
-	context make: #A subsortOf: #B.
-	self assert: context name equals: 'foo'.
-	self assert: context sortGraph size equals: 2.
+	builder := doc contextBuilderNamed: 'foo'.
+	builder addSort: #A.
+	builder addSort: #B.
+	builder make: #A subsortOf: #B.
+	self assert: builder name equals: 'foo'.
+	self assert: builder context sortGraph size equals: 2.
+	builder build.
 
 ]
 
 { #category : #testing }
 LeibnizDocumentTest >> testPhaseErrorInCOntextDefinition [
-	| doc context |
+	| doc builder |
 	doc := LeibnizDocument new.
-	context := doc newContextNamed: 'foo'.
-	context addSort: #A.
-	self should: [context include: 'bar' inMode: 'use'.]
+	builder := doc contextBuilderNamed: 'foo'.
+	builder addSort: #A.
+	self should: [builder include: 'bar' inMode: 'use'.]
 		  raise: Exception.
 
 
