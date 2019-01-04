@@ -27,7 +27,7 @@ BaselineOfLeibniz >> baseline: spec [
 			with: [ spec repository: 'github://khinsen/RecursiveWriteBarrier:master/src' ].
 
 		spec
-			package: 'Leibniz' with: [ spec requires: #('Roassal2')];
+			package: 'Leibniz' with: [ spec requires: #('Roassal2' 'RecursiveWriteBarrier')];
 			package: 'BaselineOfLeibniz'.
 
 ].
