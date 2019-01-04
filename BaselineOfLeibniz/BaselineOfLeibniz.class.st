@@ -23,6 +23,10 @@ BaselineOfLeibniz >> baseline: spec [
 						repository: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main' ].
 
 		spec
+			baseline: 'RecursiveWriteBarrier' 
+			with: [ spec repository: 'github://khinsen/RecursiveWriteBarrier:master/src' ].
+
+		spec
 			package: 'Leibniz' with: [ spec requires: #('Roassal2')];
 			package: 'BaselineOfLeibniz'.
 

@@ -128,7 +128,7 @@ LeibnizSortGraph >> initializeWithSubsortRelations: subsortRelations [
 	self initializeSubsortsOf.
 	self initializeMaximalSorts.
 	self initializeKinds.
-	self setIsReadOnlyObject: true.
+	self beRecursivelyReadOnlyObject.
 
 ]
 

@@ -31,6 +31,5 @@ LeibnizContext >> sortGraph [
 LeibnizContext >> withName: aString withSortGraph: aSortGraph [
 	name := aString.
 	sortGraph := aSortGraph.
-	self beReadOnlyObject.
-
+	self beRecursivelyReadOnlyObject.
 ]
