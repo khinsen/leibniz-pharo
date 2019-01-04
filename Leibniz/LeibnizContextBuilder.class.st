@@ -26,8 +26,16 @@ LeibnizContextBuilder class >> name: aString document: aDocument [
 { #category : #'defining - private' }
 LeibnizContextBuilder >> addDeclarationsFrom: aContext inMode: useOrExtend [
 	self phase: #includes.
+	self assert: (#('use' 'extend') includes: useOrExtend)
+	     description: 'include mode must be "use" or "extend"'.
 	sortGraphBuilder addSortGraph: aContext sortGraph.
 
+]
+
+{ #category : #'defining - signature' }
+LeibnizContextBuilder >> addOp: anOpSymbol ofSort: aSortSymbol [
+	self phase: #signature.
+	signatureBuilder addOp: anOpSymbol ofSort: aSortSymbol.
 ]
 
 { #category : #'defining - sort graph' }
@@ -50,8 +58,15 @@ LeibnizContextBuilder >> context [
 ]
 
 { #category : #'defining - private' }
+LeibnizContextBuilder >> endSignature [
+	signature := signatureBuilder signature.
+
+]
+
+{ #category : #'defining - private' }
 LeibnizContextBuilder >> endSortGraph [
 	sortGraph := sortGraphBuilder sortGraph.
+	signatureBuilder := LeibnizSignatureBuilder sortGraph: sortGraph.
 
 ]
 
@@ -77,8 +92,6 @@ LeibnizContextBuilder >> fromXML: anXMLElement [
 { #category : #'defining - includes' }
 LeibnizContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash inMode: useOrExtend [
 	| context |
-	self phase: #includes.
-	self validateIncludeMode: useOrExtend.
 	context := LeibnizLibrary uniqueInstance contextNamed: aContextName inDocumentWithHash: aDocHash.
 	includes add: (Dictionary with: #contextName -> aContextName
 									  with: #document -> aDocHash
@@ -91,7 +104,6 @@ LeibnizContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash in
 { #category : #'defining - includes' }
 LeibnizContextBuilder >> include: aContextName inMode: useOrExtend [
 	| context |
-	self validateIncludeMode: useOrExtend.
 	context := document contextNamed: aContextName.
 	includes add: (Dictionary with: #contextName -> aContextName
 									  with: #mode -> useOrExtend
@@ -131,7 +143,7 @@ LeibnizContextBuilder >> initializeWithXML: anXMLElement document: aDocument [
 
 { #category : #'defining - sort graph' }
 LeibnizContextBuilder >> make: aSort subsortOf: anotherSort [
-	self phase:#sortGraph.
+	self phase: #sortGraph.
 	sortGraphBuilder make: aSort subsortOf: anotherSort.
 ]
 
@@ -143,7 +155,7 @@ LeibnizContextBuilder >> name [
 { #category : #'defining - private' }
 LeibnizContextBuilder >> phase: aSymbol [
 	| phaseLabels current new phaseEndMethod phaseStartMethod |
-	phaseLabels := #(#initialization #includes #sortGraph #operators #rules #assets #finished).
+	phaseLabels := #(#initialization #includes #sortGraph #signature #rules #assets #finished).
 	current := phaseLabels indexOf: phase.
 	new := phaseLabels indexOf: aSymbol.
 	(new ~= current) ifTrue:
@@ -159,18 +171,4 @@ LeibnizContextBuilder >> phase: aSymbol [
 { #category : #accessing }
 LeibnizContextBuilder >> sortGraph [
 	^ sortGraph
-]
-
-{ #category : #'defining - private' }
-LeibnizContextBuilder >> validateIncludeMode: useOrExtend [
-	self assert: (#('use' 'extend') includes: useOrExtend)
-	     description: 'include mode must be "use" or "extend"'.
-
-]
-
-{ #category : #initializing }
-LeibnizContextBuilder >> withName: aString inDocument: aDocument [
-	name := aString.
-	document := aDocument.
-
 ]
