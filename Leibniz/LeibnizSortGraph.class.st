@@ -14,6 +14,14 @@ Class {
 	#category : #'Leibniz-Core'
 }
 
+{ #category : #'instance creation' }
+LeibnizSortGraph class >> subsortRelations: aDictionary [
+	^self basicNew
+			initializeWithSubsortRelations: aDictionary;
+			yourself
+
+]
+
 { #category : #comparing }
 LeibnizSortGraph >> = aSortGraph [
 	"Equality test. Only one instance variable needs to be compared because
@@ -97,57 +105,11 @@ LeibnizSortGraph >> includes: aSort [
 ]
 
 { #category : #initializing }
-LeibnizSortGraph >> initializeKinds [
-	| kindCandidates kind hasCommonSorts |
-	kindCandidates := maximalSorts asOrderedCollection collect: [ :sort | subsortsOf at: sort ].
-	"A kind can have multiple maximal sorts. In that case, kindCandidates contains multiple sets
-	 that have a non-empty intersection, and which must be merged to obtain the kind."
-	kinds := Set new.
-	[ kindCandidates isEmpty ] whileFalse: [ 
-		kind := kindCandidates first.
-		hasCommonSorts := kindCandidates allButFirst groupedBy:
-									[ :c | (kind intersection: c) isNotEmpty ].
-		#(true false) do: [ :b | hasCommonSorts at: b ifAbsentPut: OrderedCollection new. ].
-		kinds add: ((hasCommonSorts at: true) inject: kind into: [ :k :c | k union: c ]).
-		kindCandidates := hasCommonSorts at: false. ].
-
-	kindsOf := Dictionary new.
-	kinds do: [ :k | k do: [ :s | kindsOf at: s put: k ] ].
-
-]
-
-{ #category : #initializing }
-LeibnizSortGraph >> initializeMaximalSorts [
-	maximalSorts := (directSubsortsOf values)
-							inject: directSubsortsOf keys asSet
-							into: [ :ms :ss | ms difference: ss ].
-]
-
-{ #category : #initializing }
-LeibnizSortGraph >> initializeSubsortsOf [
-	subsortsOf := Dictionary new.
-	directSubsortsOf keysDo: [ :sort | self initializeSubsortsOfAt: sort ].
-	
-]
-
-{ #category : #initializing }
-LeibnizSortGraph >> initializeSubsortsOfAt: aSort [
-	| ss |
-	(subsortsOf includes: aSort) ifTrue: [ ^ self ].
-	ss := (directSubsortsOf at: aSort) copy.
-	ss add: aSort.
-	(directSubsortsOf at: aSort) do:
-		[ :sort | self initializeSubsortsOfAt: sort.
-					 ss := ss union: (subsortsOf at: sort) ].
-	subsortsOf at: aSort put: ss.
-]
-
-{ #category : #initializing }
 LeibnizSortGraph >> initializeWithSubsortRelations: subsortRelations [
 	directSubsortsOf := subsortRelations.
-	self initializeSubsortsOf.
-	self initializeMaximalSorts.
-	self initializeKinds.
+	self setSubsortsOf.
+	self setMaximalSorts.
+	self setKinds.
 	self beRecursivelyReadOnlyObject.
 
 ]
@@ -191,6 +153,52 @@ LeibnizSortGraph >> printOn: aStream [
 	aStream nextPutAll: (', ' join: (self maximalSorts collect: [ : sort | sort asString ])).
 	aStream nextPut: $).
 
+]
+
+{ #category : #initializing }
+LeibnizSortGraph >> setKinds [
+	| kindCandidates kind hasCommonSorts |
+	kindCandidates := maximalSorts asOrderedCollection collect: [ :sort | subsortsOf at: sort ].
+	"A kind can have multiple maximal sorts. In that case, kindCandidates contains multiple sets
+	 that have a non-empty intersection, and which must be merged to obtain the kind."
+	kinds := Set new.
+	[ kindCandidates isEmpty ] whileFalse: [ 
+		kind := kindCandidates first.
+		hasCommonSorts := kindCandidates allButFirst groupedBy:
+									[ :c | (kind intersection: c) isNotEmpty ].
+		#(true false) do: [ :b | hasCommonSorts at: b ifAbsentPut: OrderedCollection new. ].
+		kinds add: ((hasCommonSorts at: true) inject: kind into: [ :k :c | k union: c ]).
+		kindCandidates := hasCommonSorts at: false. ].
+
+	kindsOf := Dictionary new.
+	kinds do: [ :k | k do: [ :s | kindsOf at: s put: k ] ].
+
+]
+
+{ #category : #initializing }
+LeibnizSortGraph >> setMaximalSorts [
+	maximalSorts := (directSubsortsOf values)
+							inject: directSubsortsOf keys asSet
+							into: [ :ms :ss | ms difference: ss ].
+]
+
+{ #category : #initializing }
+LeibnizSortGraph >> setSubsortsOf [
+	subsortsOf := Dictionary new.
+	directSubsortsOf keysDo: [ :sort | self setSubsortsOfAt: sort ].
+	
+]
+
+{ #category : #initializing }
+LeibnizSortGraph >> setSubsortsOfAt: aSort [
+	| ss |
+	(subsortsOf includes: aSort) ifTrue: [ ^ self ].
+	ss := (directSubsortsOf at: aSort) copy.
+	ss add: aSort.
+	(directSubsortsOf at: aSort) do:
+		[ :sort | self setSubsortsOfAt: sort.
+					 ss := ss union: (subsortsOf at: sort) ].
+	subsortsOf at: aSort put: ss.
 ]
 
 { #category : #accessing }

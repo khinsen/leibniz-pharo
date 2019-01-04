@@ -12,9 +12,18 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizContext class >> withName: aString withSortGraph: aSortGraph [
-	^ self new withName: aString withSortGraph: aSortGraph.
+LeibnizContext class >> name: aString sortGraph: aSortGraph [
+	^ self basicNew
+			 initializeWithName: aString sortGraph: aSortGraph;
+			 yourself.
 
+]
+
+{ #category : #initializing }
+LeibnizContext >> initializeWithName: aString sortGraph: aSortGraph [
+	name := aString.
+	sortGraph := aSortGraph.
+	self beRecursivelyReadOnlyObject.
 ]
 
 { #category : #accessing }
@@ -36,11 +45,4 @@ LeibnizContext >> printOn: aStream [
 { #category : #accessing }
 LeibnizContext >> sortGraph [
 	^ sortGraph
-]
-
-{ #category : #initializing }
-LeibnizContext >> withName: aString withSortGraph: aSortGraph [
-	name := aString.
-	sortGraph := aSortGraph.
-	self beRecursivelyReadOnlyObject.
 ]

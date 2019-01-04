@@ -9,15 +9,17 @@ Class {
 		'name',
 		'phase',
 		'includes',
+		'sortGraphBuilder',
 		'sortGraph',
-		'sortGraphBuilder'
+		'signatureBuilder',
+		'signature'
 	],
 	#category : #'Leibniz-Core'
 }
 
 { #category : #'instance creation' }
-LeibnizContextBuilder class >> withName: aString inDocument: aDocument [
-	^ self new withName: aString inDocument: aDocument.
+LeibnizContextBuilder class >> name: aString document: aDocument [
+	^ self basicNew initializeWithName: aString document: aDocument.
 
 ]
 
@@ -44,7 +46,7 @@ LeibnizContextBuilder >> build [
 { #category : #accessing }
 LeibnizContextBuilder >> context [
 	self phase: #finished.
-	^ LeibnizContext withName: name withSortGraph: sortGraph.
+	^ LeibnizContext name: name sortGraph: sortGraph.
 ]
 
 { #category : #'defining - private' }
@@ -53,10 +55,8 @@ LeibnizContextBuilder >> endSortGraph [
 
 ]
 
-{ #category : #'XML-import' }
-LeibnizContextBuilder >> fromXML: anXMLElement inDocument: aDocument [
-	name := anXMLElement attributeAt: 'id'.
-	document := aDocument.
+{ #category : #'XML import' }
+LeibnizContextBuilder >> fromXML: anXMLElement [
 	anXMLElement descendantElementsNamed: 'include' do:
 		[ :i | | attrs |
 				 attrs := i attributes.
@@ -100,10 +100,32 @@ LeibnizContextBuilder >> include: aContextName inMode: useOrExtend [
 ]
 
 { #category : #initializing }
-LeibnizContextBuilder >> initialize [
+LeibnizContextBuilder >> initializeWithName: aString document: aDocument [
+	name := aString.
+	document := aDocument.
 	phase := #initialization.
 	includes := OrderedCollection new.
 	sortGraphBuilder := LeibnizSortGraphBuilder new.
+
+]
+
+{ #category : #initializing }
+LeibnizContextBuilder >> initializeWithXML: anXMLElement document: aDocument [
+	self initializeWithName: (anXMLElement attributeAt: 'id') document: aDocument.
+	anXMLElement descendantElementsNamed: 'include' do:
+		[ :i | | attrs |
+				 attrs := i attributes.
+				 (attrs includesKey: 'document')
+				 ifTrue: [ self include: (attrs at: 'context')
+									 fromDocumentWithHash: (attrs at: 'document')
+									 inMode: (attrs at: 'mode') ]
+				 ifFalse: [ self include: (attrs at: 'context')
+									  inMode: (attrs at: 'mode') ] ].
+	anXMLElement descendantElementsNamed: 'sort' do:
+		[ :sort | self addSort: (sort attributeAt: 'id') asSymbol].
+	anXMLElement descendantElementsNamed: 'subsort' do:
+		[ :ss | self make: (ss attributeAt: 'subsort') asSymbol
+		             subsortOf: (ss attributeAt: 'supersort') asSymbol].
 
 ]
 

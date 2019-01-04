@@ -65,6 +65,6 @@ LeibnizSortGraphBuilder >> make: aSort subsortOf: anotherSort [
 
 { #category : #accessing }
 LeibnizSortGraphBuilder >> sortGraph [
-	^ LeibnizSortGraph new initializeWithSubsortRelations: directSubsortsOf deepCopy.
+	^ LeibnizSortGraph subsortRelations: directSubsortsOf deepCopy.
 
 ]

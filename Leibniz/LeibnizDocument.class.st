@@ -29,10 +29,12 @@ LeibnizDocument class >> fromXML: anXMLElement [
 	^ self new fromXML: anXMLElement
 ]
 
-{ #category : #'XML-import' }
+{ #category : #'XML import' }
 LeibnizDocument >> addContextFromXML: anXMLElement [
-  	| builder context |
-	builder := LeibnizContextBuilder new fromXML: anXMLElement inDocument: self.
+  	| name builder context |
+	name := anXMLElement attributeAt: 'id'.
+	builder := LeibnizContextBuilder name: name document: self.
+	builder fromXML: anXMLElement.
 	context := builder context.
 	contexts at: context name put: context.
 
@@ -59,7 +61,7 @@ LeibnizDocument >> docHash: anObject [
 	docHash := anObject
 ]
 
-{ #category : #'XML-import' }
+{ #category : #'XML import' }
 LeibnizDocument >> fromXML: anXMLElement [
 	anXMLElement descendantElementsNamed: 'context' do: [ :c | self addContextFromXML: c ].
 
@@ -75,7 +77,7 @@ LeibnizDocument >> initialize [
 { #category : #adding }
 LeibnizDocument >> newContextBuilderNamed: aString [
 	| builder |
-	builder := LeibnizContextBuilder withName: aString inDocument: self.
+	builder := LeibnizContextBuilder name: aString document: self.
 	contexts at: aString put: builder.
 	^ builder.
 ]
