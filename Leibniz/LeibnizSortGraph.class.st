@@ -57,11 +57,31 @@ LeibnizSortGraph >> equalityTestWith: otherSubsorts [
 ]
 
 { #category : #viewing }
-LeibnizSortGraph >> gtInspectorViewIn: composite [
+LeibnizSortGraph >> graphView [
+	| b |
+	b := RTMondrian new.
+	self addGraphToBuilder: b.
+	b layout forceWithCharge: -2000.
+	b build.
+	^ b view
+
+]
+
+{ #category : #viewing }
+LeibnizSortGraph >> gtInspectorGraphViewIn: composite [
 	<gtInspectorPresentationOrder: -10>
 	composite roassal2
-		title: 'View';
-		initializeView: self view.
+		title: 'Graph View';
+		initializeView: self graphView.
+
+]
+
+{ #category : #viewing }
+LeibnizSortGraph >> gtInspectorTreeViewIn: composite [
+	<gtInspectorPresentationOrder: -11>
+	composite roassal2
+		title: 'Tree View';
+		initializeView: self treeView.
 
 ]
 
@@ -204,17 +224,6 @@ LeibnizSortGraph >> union: aSortGraph [
 	b := self asSortGraphBuilder.
 	b addSortGraph: aSortGraph.
 	^ b sortGraph
-
-]
-
-{ #category : #viewing }
-LeibnizSortGraph >> view [
-	| b |
-	b := RTMondrian new.
-	self addGraphToBuilder: b.
-	b layout forceWithCharge: -2000.
-	b build.
-	^ b view
 
 ]
 
