@@ -22,6 +22,17 @@ LeibnizContext >> name [
 	^ name
 ]
 
+{ #category : #printing }
+LeibnizContext >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	aStream nextPut: $'.
+	aStream nextPutAll: name.
+	aStream nextPut: $'.
+	aStream nextPut: $).
+
+]
+
 { #category : #accessing }
 LeibnizContext >> sortGraph [
 	^ sortGraph
