@@ -167,11 +167,14 @@ LeibnizSortGraph >> setKinds [
 		hasCommonSorts := kindCandidates allButFirst groupedBy:
 									[ :c | (kind intersection: c) isNotEmpty ].
 		#(true false) do: [ :b | hasCommonSorts at: b ifAbsentPut: OrderedCollection new. ].
-		kinds add: ((hasCommonSorts at: true) inject: kind into: [ :k :c | k union: c ]).
+		kind := ((hasCommonSorts at: true) inject: kind into: [ :k :c | k union: c ]).
+		kinds add: (LeibnizKind sortGraph: self
+		 								sorts: kind
+										maximalSorts: (maximalSorts select: [ :s | kind includes: s ])).
 		kindCandidates := hasCommonSorts at: false. ].
 
 	kindsOf := Dictionary new.
-	kinds do: [ :k | k do: [ :s | kindsOf at: s put: k ] ].
+	kinds do: [ :k | k asSet do: [ :s | kindsOf at: s put: k ] ].
 
 ]
 

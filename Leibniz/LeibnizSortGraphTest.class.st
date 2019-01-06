@@ -49,7 +49,7 @@ LeibnizSortGraphTest >> testCyclesForbidden [
 LeibnizSortGraphTest >> testKinds [
 	| set1 |
 	set1 := sortGraph1 asSet.
-	set1 do: [ :sort | self assert: (sortGraph1 kindOf: sort) equals: set1 ].
+	set1 do: [ :sort | self assert: (sortGraph1 kindOf: sort) asSet equals: set1 ].
 	self assert: sortGraph1 kinds size equals: 1.
 	self assert: (sortGraph3 kindOf: #A) asSet equals: #(#A #B #C #D) asSet.
 	self assert: (sortGraph3 kindOf: #V) asSet equals: #(#V #W) asSet.
