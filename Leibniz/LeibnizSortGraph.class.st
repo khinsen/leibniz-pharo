@@ -4,6 +4,8 @@ I represent a sort graph in a Leibniz context.
 Class {
 	#name : #LeibnizSortGraph,
 	#superclass : #Object,
+	#traits : 'EqualityThroughVariables',
+	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'kinds',
 		'maximalSorts',
@@ -20,13 +22,6 @@ LeibnizSortGraph class >> subsortRelations: aDictionary [
 			initializeWithSubsortRelations: aDictionary;
 			yourself
 
-]
-
-{ #category : #comparing }
-LeibnizSortGraph >> = aSortGraph [
-	"Equality test. Only one instance variable needs to be compared because
-	 the values of the remaining ones are computed from this one."
-	^ aSortGraph equalityTestWith: directSubsortsOf.
 ]
 
 { #category : #viewing }
@@ -99,11 +94,6 @@ LeibnizSortGraph >> gtInspectorTreeViewIn: composite [
 
 ]
 
-{ #category : #comparing }
-LeibnizSortGraph >> hash [
-	^ directSubsortsOf hash
-]
-
 { #category : #testing }
 LeibnizSortGraph >> includes: aSort [
 	^ directSubsortsOf keys includes: aSort
@@ -117,6 +107,14 @@ LeibnizSortGraph >> initializeWithSubsortRelations: subsortRelations [
 	self setMaximalSorts.
 	self setKinds.
 	self beRecursivelyReadOnlyObject.
+
+]
+
+{ #category : #comparing }
+LeibnizSortGraph >> instVarsExcludedFromEquality [
+	"The only instance variable used in comparison is directSubsortsOf,
+	 since all others are derived from it"
+	^#(#kinds #maximalSorts #subsortsOf #kindsOf)
 
 ]
 

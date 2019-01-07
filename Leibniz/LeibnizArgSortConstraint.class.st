@@ -5,6 +5,8 @@ I represent a constraint that defines which sorts are permissible for an argumen
 Class {
 	#name : #LeibnizArgSortConstraint,
 	#superclass : #Object,
+	#traits : 'EqualityThroughVariables',
+	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'sortGraph'
 	],

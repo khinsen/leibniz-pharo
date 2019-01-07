@@ -4,6 +4,8 @@ I represent a kind, which is a connected component of a sort graph.
 Class {
 	#name : #LeibnizKind,
 	#superclass : #Object,
+	#traits : 'EqualityThroughVariables',
+	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'sortGraph',
 		'sorts',
@@ -20,13 +22,6 @@ LeibnizKind class >> sortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOf
 
 ]
 
-{ #category : #comparing }
-LeibnizKind >> = aKind [
-	"Equality test. Only one instance variable needs to be compared because
-	 the values of the remaining ones are computed from this one."
-	^ (aKind isKindOf: LeibnizKind) and: [aKind equalityTestWith: sorts].
-]
-
 { #category : #converting }
 LeibnizKind >> asSet [
    ^ sorts
@@ -37,11 +32,6 @@ LeibnizKind >> asSet [
 LeibnizKind >> equalityTestWith: otherSorts [ 
 	^ sorts = otherSorts
 
-]
-
-{ #category : #comparing }
-LeibnizKind >> hash [
-	^ sorts hash
 ]
 
 { #category : #testing }
@@ -55,6 +45,12 @@ LeibnizKind >> initializeWithSortGraph: aSortGraph sorts: setOfSorts maximalSort
 	sortGraph := aSortGraph.
 	sorts := setOfSorts.
 	maximalSorts := setOfMaximalSorts.
+
+]
+
+{ #category : #comparing }
+LeibnizKind >> instVarsExcludedFromEquality [
+	^#(#sortGraph #maximalSorts)
 
 ]
 

@@ -27,7 +27,14 @@ BaselineOfLeibniz >> baseline: spec [
 			with: [ spec repository: 'github://khinsen/RecursiveWriteBarrier:master/src' ].
 
 		spec
-			package: 'Leibniz' with: [ spec requires: #('Roassal2' 'RecursiveWriteBarrier')];
+			baseline: 'EqualityThroughVariablesTrait' 
+			with: [ spec repository: 'github://khinsen/EqualityThroughVariablesTrait:master/src' ].
+
+		spec
+			package: 'Leibniz'
+			with: [ spec requires: #('Roassal2'
+											'RecursiveWriteBarrier'
+											'EqualityThroughVariablesTrait')];
 			package: 'BaselineOfLeibniz'.
 
 ].

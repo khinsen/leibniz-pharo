@@ -18,21 +18,9 @@ LeibnizSortOrSubsortConstraint class >> sortGraph: aSortGraph sort: aSort [
 
 ]
 
-{ #category : #comparing }
-LeibnizSortOrSubsortConstraint >> = aSortConstraint [
-	^ sort = aSortConstraint sort
-
-]
-
 { #category : #enumerating }
 LeibnizSortOrSubsortConstraint >> conformingSorts [
 	^ sortGraph allSubsortsOf: sort
-
-]
-
-{ #category : #comparing }
-LeibnizSortOrSubsortConstraint >> hash [
-	^sort hash
 
 ]
 
