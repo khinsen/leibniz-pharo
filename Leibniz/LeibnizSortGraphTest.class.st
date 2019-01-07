@@ -46,6 +46,13 @@ LeibnizSortGraphTest >> testCyclesForbidden [
 ]
 
 { #category : #testing }
+LeibnizSortGraphTest >> testEquality [
+	self assert: sortGraph3 equals: builder1 sortGraph.
+	self deny: sortGraph1 equals: 42.
+	self deny: sortGraph1 equals: sortGraph2.
+]
+
+{ #category : #testing }
 LeibnizSortGraphTest >> testKinds [
 	| set1 |
 	set1 := sortGraph1 asSet.
@@ -54,7 +61,7 @@ LeibnizSortGraphTest >> testKinds [
 	self assert: (sortGraph3 kindOf: #A) asSet equals: #(#A #B #C #D) asSet.
 	self assert: (sortGraph3 kindOf: #V) asSet equals: #(#V #W) asSet.
 	self assert: sortGraph3 kinds size equals: 2.
-
+	self assert: (sortGraph1 kinds includes: (sortGraph1 kindOf: #A))
 ]
 
 { #category : #testing }

@@ -65,7 +65,7 @@ LeibnizSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 
 { #category : #accessing }
 LeibnizSignatureBuilder >> signature [
-	^ LeibnizSignature sortGraph: sortGraph operators: operators deepCopy variables: variables deepCopy.
+	^ LeibnizSignature sortGraph: sortGraph operators: operators variables: variables.
 
 
 ]
