@@ -28,15 +28,21 @@ LeibnizSignatureBuilder >> addOp: anOpSymbol ofSort: aSortSymbol [
 
 { #category : #adding }
 LeibnizSignatureBuilder >> addOp: anOpSymbol withArgs: anArgList ofSort: aSortSymbol [
-	| sort argKinds operator |
+	| sort argSortConstraints argKindConstraints operator |
 	anArgList ifEmpty:
 		[ sort := variables at: anOpSymbol ifAbsent: nil.
 		  self assert: sort isNil
 				 description: 'conflicting earlier variable definition with sort ', sort asString. ].
-	argKinds := anArgList collect: [ :s | sortGraph kindOf: s ].
-	operator := (operators at: anOpSymbol ifAbsentPut: Dictionary new) at: argKinds
-					ifAbsentPut: (LeibnizOperator symbol: anOpSymbol argKinds: argKinds).
-	operator addArgs: anArgList ofSort: aSortSymbol.
+	argSortConstraints := anArgList collect:
+		[ :s | LeibnizSortOrSubsortConstraint sortGraph: sortGraph sort: s ].
+	argKindConstraints := argSortConstraints collect: [ :c | c kindConstraint ].
+	operator := (operators at: anOpSymbol
+								  ifAbsentPut: [ Dictionary new ])
+						at: argKindConstraints
+						ifAbsentPut: [ LeibnizOperator symbol: anOpSymbol
+																argKindConstraints: argKindConstraints
+																kind: (sortGraph kindOf: aSortSymbol) ].
+	operator addArity: argSortConstraints withSort: aSortSymbol.
 
 
 ]

@@ -23,9 +23,21 @@ LeibnizKindConstraint class >> sortGraph: aSortGraph sort: aSort [
 
 ]
 
+{ #category : #comparing }
+LeibnizKindConstraint >> = aKindConstraint [
+	^ kind = aKindConstraint kind
+
+]
+
 { #category : #enumerating }
 LeibnizKindConstraint >> conformingSorts [
 	^kind asSet
+
+]
+
+{ #category : #comparing }
+LeibnizKindConstraint >> hash [
+	^ kind hash
 
 ]
 
@@ -63,6 +75,12 @@ LeibnizKindConstraint >> isConformingSortConstraint: aSortConstraint [
 { #category : #accessing }
 LeibnizKindConstraint >> kind [
 	^ kind
+
+]
+
+{ #category : #converting }
+LeibnizKindConstraint >> kindConstraint [
+	^ self
 
 ]
 

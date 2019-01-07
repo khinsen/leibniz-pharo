@@ -6,33 +6,38 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'opSymbol',
-		'argKinds',
-		'ranks'
+		'ranks',
+		'argKindConstraints',
+		'kind'
 	],
 	#category : #'Leibniz-Core'
 }
 
 { #category : #'instance creation' }
-LeibnizOperator class >> symbol: aSymbol argKinds: aKindArray [
+LeibnizOperator class >> symbol: aSymbol argKindConstraints: aKindConstraintArray kind: aKind [
 	^ self basicNew
-			 initializeWithSymbol: aSymbol argKinds: aKindArray;
+			 initializeWithSymbol: aSymbol argKindConstraints: aKindConstraintArray kind: aKind;
 			 yourself.
 
 ]
 
 { #category : #adding }
-LeibnizOperator >> addArgs: anArgList ofSort: aSortSymbol [
+LeibnizOperator >> addArity: anArgSortConstraintList withSort: aSortSymbol [
 	| sort |
-	sort := ranks at: anArgList ifAbsentPut: aSortSymbol.
+	self assert: (kind includes: aSortSymbol)
+		  description: 'new rank', anArgSortConstraintList printString,
+							'->', aSortSymbol asString,'makes operator non-monotonic'.
+	sort := ranks at: anArgSortConstraintList ifAbsentPut: [ aSortSymbol ].
 	self assert: sort = aSortSymbol
 		  description: 'conflicting earlier operator definition with sort ', sort asString.
 
 ]
 
 { #category : #initializing }
-LeibnizOperator >> initializeWithSymbol: aSymbol argKinds: aKindArray [
+LeibnizOperator >> initializeWithSymbol: aSymbol argKindConstraints: aKindConstraintArray kind: aKind [
 	opSymbol := aSymbol.
-	argKinds := aKindArray.
+	argKindConstraints := aKindConstraintArray.
+	kind := aKind.
 	ranks := Dictionary new.
 
 ]

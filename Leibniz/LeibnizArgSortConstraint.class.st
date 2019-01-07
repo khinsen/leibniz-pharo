@@ -39,6 +39,12 @@ LeibnizArgSortConstraint >> isConformingSortConstraint: aSortConstraint [
 
 ]
 
+{ #category : #converting }
+LeibnizArgSortConstraint >> kindConstraint [
+	self subclassResponsibility
+
+]
+
 { #category : #printing }
 LeibnizArgSortConstraint >> printAsLeibnizSyntaxOn: aStream [
 	self subclassResponsibility
