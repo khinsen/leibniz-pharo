@@ -2,10 +2,23 @@ Class {
 	#name : #LeibnizArgSortConstraintTests,
 	#superclass : #TestCase,
 	#instVars : [
-		'sortGraph'
+		'sortGraph',
+		'a',
+		'b',
+		'v',
+		'w',
+		'ka',
+		'kb',
+		'kw'
 	],
 	#category : #'Leibniz-Tests'
 }
+
+{ #category : #printing }
+LeibnizArgSortConstraintTests >> leibnizSyntaxFor: anObject [
+	^ String streamContents: [ :s | anObject printAsLeibnizSyntaxOn: s ]
+
+]
 
 { #category : #running }
 LeibnizArgSortConstraintTests >> setUp [
@@ -25,11 +38,6 @@ LeibnizArgSortConstraintTests >> setUp [
 			  make: #V subsortOf: #W.
 	sortGraph := builder sortGraph.
 
-]
-
-{ #category : #testing }
-LeibnizArgSortConstraintTests >> testConstraintConformity [
-	| a b v w ka kb kw |
 	a := LeibnizSortOrSubsortConstraint sortGraph: sortGraph sort: #A.
 	b := LeibnizSortOrSubsortConstraint sortGraph: sortGraph sort: #B.
 	v := LeibnizSortOrSubsortConstraint sortGraph: sortGraph sort: #V.
@@ -37,6 +45,19 @@ LeibnizArgSortConstraintTests >> testConstraintConformity [
 	ka := LeibnizKindConstraint sortGraph: sortGraph kind: (sortGraph kindOf: #A).
 	kb := LeibnizKindConstraint sortGraph: sortGraph kind: (sortGraph kindOf: #B).
 	kw := LeibnizKindConstraint sortGraph: sortGraph kind: (sortGraph kindOf: #W).
+
+]
+
+{ #category : #testing }
+LeibnizArgSortConstraintTests >> testConformingSorts [
+	self assert: b conformingSorts equals: #(#A #B) asSet.
+	self assert: kb conformingSorts equals: #(#A #B #C #D) asSet.
+	self assert: kw conformingSorts equals: #(#V #W) asSet.
+
+]
+
+{ #category : #testing }
+LeibnizArgSortConstraintTests >> testConstraintConformity [
 	self assert: (b isConformingSortConstraint: a).
 	self assert: (w isConformingSortConstraint: w).
 	self assert: (kb isConformingSortConstraint: a).
@@ -45,5 +66,18 @@ LeibnizArgSortConstraintTests >> testConstraintConformity [
 	self deny:   (a isConformingSortConstraint: v).
 	self assert: (kb isConformingSortConstraint: ka).
 	self deny:   (kw isConformingSortConstraint: ka).
+
+]
+
+{ #category : #testing }
+LeibnizArgSortConstraintTests >> testPrinting [
+	self assert: (self leibnizSyntaxFor: a)
+		  equals: 'A'.
+	self assert: (self leibnizSyntaxFor: w)
+		  equals: 'W'.
+	self assert: (self leibnizSyntaxFor: ka)
+		  equals: '[C, D]'.
+	self assert: (self leibnizSyntaxFor: kw)
+		  equals: '[W]'.
 
 ]

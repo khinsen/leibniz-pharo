@@ -23,6 +23,12 @@ LeibnizKindConstraint class >> sortGraph: aSortGraph sort: aSort [
 
 ]
 
+{ #category : #enumerating }
+LeibnizKindConstraint >> conformingSorts [
+	^kind asSet
+
+]
+
 { #category : #initialization }
 LeibnizKindConstraint >> initializeWithSortGraph: aSortGraph kind: aKind [
 	self assert: (aSortGraph kinds includes: aKind)
@@ -57,5 +63,13 @@ LeibnizKindConstraint >> isConformingSortConstraint: aSortConstraint [
 { #category : #accessing }
 LeibnizKindConstraint >> kind [
 	^ kind
+
+]
+
+{ #category : #printing }
+LeibnizKindConstraint >> printAsLeibnizSyntaxOn: aStream [
+	aStream nextPut: $[.
+	aStream nextPutAll: (', ' join: (kind maximalSorts collect: [ : sort | sort asString ])).
+	aStream nextPut: $].
 
 ]

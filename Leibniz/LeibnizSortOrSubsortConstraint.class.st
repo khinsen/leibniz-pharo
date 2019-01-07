@@ -18,6 +18,12 @@ LeibnizSortOrSubsortConstraint class >> sortGraph: aSortGraph sort: aSort [
 
 ]
 
+{ #category : #enumerating }
+LeibnizSortOrSubsortConstraint >> conformingSorts [
+	^ sortGraph allSubsortsOf: sort
+
+]
+
 { #category : #initialization }
 LeibnizSortOrSubsortConstraint >> initializeWithSortGraph: aSortGraph sort: aSort [
 	self assert: (aSortGraph includes: aSort)
@@ -48,6 +54,12 @@ LeibnizSortOrSubsortConstraint >> isConformingSort: aSort [
 { #category : #testing }
 LeibnizSortOrSubsortConstraint >> isConformingSortConstraint: aSortConstraint [
 	^ aSortConstraint isAtLeastAsStrictAsSubsortsOf: self
+
+]
+
+{ #category : #printing }
+LeibnizSortOrSubsortConstraint >> printAsLeibnizSyntaxOn: aStream [
+	aStream nextPutAll: sort asString
 
 ]
 

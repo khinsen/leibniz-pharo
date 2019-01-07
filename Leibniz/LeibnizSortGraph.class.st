@@ -41,6 +41,12 @@ LeibnizSortGraph >> addGraphToBuilder: aBuilder [
 
 ]
 
+{ #category : #enumerating }
+LeibnizSortGraph >> allSubsortsOf: aSort [
+	^ subsortsOf at: aSort
+
+]
+
 { #category : #converting }
 LeibnizSortGraph >> asSet [
    ^ directSubsortsOf keys asSet 

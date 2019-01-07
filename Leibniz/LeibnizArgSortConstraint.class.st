@@ -11,6 +11,12 @@ Class {
 	#category : #'Leibniz-Core'
 }
 
+{ #category : #enumerating }
+LeibnizArgSortConstraint >> conformingSorts [
+	self subclassResponsibility
+
+]
+
 { #category : #private }
 LeibnizArgSortConstraint >> isAtLeastAsStrictAsKind: aKindConstraint [
 	self subclassResponsibility
@@ -30,5 +36,19 @@ LeibnizArgSortConstraint >> isConformingSort: aSort [
 { #category : #testing }
 LeibnizArgSortConstraint >> isConformingSortConstraint: aSortConstraint [
 	self subclassResponsibility.
+
+]
+
+{ #category : #printing }
+LeibnizArgSortConstraint >> printAsLeibnizSyntaxOn: aStream [
+	self subclassResponsibility
+]
+
+{ #category : #printing }
+LeibnizArgSortConstraint >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	self printAsLeibnizSyntaxOn: aStream.
+	aStream nextPut: $).
 
 ]
