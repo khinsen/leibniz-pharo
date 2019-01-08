@@ -23,9 +23,27 @@ LeibnizKindConstraint class >> sortGraph: aSortGraph sort: aSort [
 
 ]
 
+{ #category : #comparing }
+LeibnizKindConstraint >> <= aSortConstraint [
+	^aSortConstraint equalOrWiderThanKind: self
+
+]
+
 { #category : #enumerating }
 LeibnizKindConstraint >> conformingSorts [
 	^kind asSet
+
+]
+
+{ #category : #private }
+LeibnizKindConstraint >> equalOrWiderThanKind: aKindConstraint [
+	^aKindConstraint kind = kind
+
+]
+
+{ #category : #private }
+LeibnizKindConstraint >> equalOrWiderThanSort: aSubsortConstraint [
+	^kind includes: aSubsortConstraint sort
 
 ]
 
@@ -37,26 +55,9 @@ LeibnizKindConstraint >> initializeWithSortGraph: aSortGraph kind: aKind [
 	kind := aKind.
 ]
 
-{ #category : #private }
-LeibnizKindConstraint >> isAtLeastAsStrictAsKind: aKindConstraint [
-	^ self kind = aKindConstraint kind
-
-]
-
-{ #category : #private }
-LeibnizKindConstraint >> isAtLeastAsStrictAsSubsortsOf: aSubsortConstraint [
-	^ (self size = 1) and: [ kind includes: aSubsortConstraint sort ]
-]
-
 { #category : #testing }
 LeibnizKindConstraint >> isConformingSort: aSort [
 	^ kind includes: aSort
-
-]
-
-{ #category : #testing }
-LeibnizKindConstraint >> isConformingSortConstraint: aSortConstraint [
-	^ aSortConstraint isAtLeastAsStrictAsKind: self
 
 ]
 

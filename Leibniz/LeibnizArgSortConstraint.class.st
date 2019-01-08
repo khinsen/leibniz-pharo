@@ -13,30 +13,32 @@ Class {
 	#category : #'Leibniz-Core'
 }
 
+{ #category : #comparing }
+LeibnizArgSortConstraint >> <= aSortConstraint [
+	self subclassResponsibility.
+
+]
+
 { #category : #enumerating }
 LeibnizArgSortConstraint >> conformingSorts [
 	self subclassResponsibility
 
 ]
 
-{ #category : #private }
-LeibnizArgSortConstraint >> isAtLeastAsStrictAsKind: aKindConstraint [
-	self subclassResponsibility
+{ #category : #comparing }
+LeibnizArgSortConstraint >> equalOrWiderThanKind: aKindConstraint [
+	self subclassResponsibility.
+
 ]
 
-{ #category : #private }
-LeibnizArgSortConstraint >> isAtLeastAsStrictAsSubsortsOf: aSubsortConstraint [
-	self subclassResponsibility
-]
-
-{ #category : #testing }
-LeibnizArgSortConstraint >> isConformingSort: aSort [
+{ #category : #comparing }
+LeibnizArgSortConstraint >> equalOrWiderThanSort: aSubsortConstraint [
 	self subclassResponsibility.
 
 ]
 
 { #category : #testing }
-LeibnizArgSortConstraint >> isConformingSortConstraint: aSortConstraint [
+LeibnizArgSortConstraint >> isConformingSort: aSort [
 	self subclassResponsibility.
 
 ]

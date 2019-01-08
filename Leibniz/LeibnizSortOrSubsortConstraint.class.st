@@ -18,9 +18,28 @@ LeibnizSortOrSubsortConstraint class >> sortGraph: aSortGraph sort: aSort [
 
 ]
 
+{ #category : #comparing }
+LeibnizSortOrSubsortConstraint >> <= aSortConstraint [
+	^aSortConstraint equalOrWiderThanSort: self
+
+]
+
 { #category : #enumerating }
 LeibnizSortOrSubsortConstraint >> conformingSorts [
 	^ sortGraph allSubsortsOf: sort
+
+]
+
+{ #category : #private }
+LeibnizSortOrSubsortConstraint >> equalOrWiderThanKind: aKindConstraint [
+	^aKindConstraint kind size = 1
+		and: [ aKindConstraint kind includes: sort ]
+
+]
+
+{ #category : #private }
+LeibnizSortOrSubsortConstraint >> equalOrWiderThanSort: aSubsortConstraint [
+	^ sortGraph is: aSubsortConstraint sort subsortOf: sort
 
 ]
 
@@ -33,27 +52,9 @@ LeibnizSortOrSubsortConstraint >> initializeWithSortGraph: aSortGraph sort: aSor
 
 ]
 
-{ #category : #private }
-LeibnizSortOrSubsortConstraint >> isAtLeastAsStrictAsKind: aKindConstraint [
-	^ aKindConstraint kind includes: sort
-
-]
-
-{ #category : #private }
-LeibnizSortOrSubsortConstraint >> isAtLeastAsStrictAsSubsortsOf: aSubsortConstraint [
-	^ sortGraph is: sort subsortOf: aSubsortConstraint sort
-
-]
-
 { #category : #testing }
 LeibnizSortOrSubsortConstraint >> isConformingSort: aSort [
 	^ sortGraph is: aSort subsortOf: sort.
-
-]
-
-{ #category : #testing }
-LeibnizSortOrSubsortConstraint >> isConformingSortConstraint: aSortConstraint [
-	^ aSortConstraint isAtLeastAsStrictAsSubsortsOf: self
 
 ]
 

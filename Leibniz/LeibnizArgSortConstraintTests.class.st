@@ -58,17 +58,19 @@ LeibnizArgSortConstraintTests >> testConformingSorts [
 
 { #category : #testing }
 LeibnizArgSortConstraintTests >> testConstraintConformity [
-	self assert: (a isConformingSortConstraint: b).
-	self deny:   (b isConformingSortConstraint: a).
-	self assert: (w isConformingSortConstraint: w).
-	self assert: (kb isConformingSortConstraint: a).
-	self assert: (kb isConformingSortConstraint: b).
-	self assert: (kw isConformingSortConstraint: v).
-	self deny:   (ka isConformingSortConstraint: v).
-	self deny:   (a isConformingSortConstraint: v).
-	self assert: (kb isConformingSortConstraint: ka).
-	self deny:   (kw isConformingSortConstraint: ka).
-
+	self assert: a <= a.
+	self assert: a <= b.
+	self deny:   b <= a.
+	self assert: w <= w.
+	self assert: v <= w.
+	self assert: a <= kb.
+	self assert: b <= kb.
+	self assert: v <= kw.
+	self deny:   v <= ka.
+	self deny:   v <= a.
+	self assert: ka <= kb.
+	self assert: ka equals: kb.
+	self deny:   ka <= kw.
 ]
 
 { #category : #testing }
