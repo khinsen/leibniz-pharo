@@ -28,21 +28,20 @@ LeibnizSignatureBuilder >> addOp: anOpSymbol ofSort: aSortSymbol [
 
 { #category : #adding }
 LeibnizSignatureBuilder >> addOp: anOpSymbol withArgs: anArgList ofSort: aSortSymbol [
-	| sort argSortConstraints argKindConstraints operator |
+	| sort arity kindArity operator |
 	anArgList ifEmpty:
 		[ sort := variables at: anOpSymbol ifAbsent: nil.
 		  self assert: sort isNil
 				 description: 'conflicting earlier variable definition with sort ', sort asString. ].
-	argSortConstraints := anArgList collect:
-		[ :s | LeibnizSortOrSubsortConstraint sortGraph: sortGraph sort: s ].
-	argKindConstraints := argSortConstraints collect: [ :c | c kindConstraint ].
+	arity := self arityFor: anArgList.
+	kindArity := arity liftToKindLevel.
 	operator := (operators at: anOpSymbol
 								  ifAbsentPut: [ Dictionary new ])
-						at: argKindConstraints
+						at: kindArity
 						ifAbsentPut: [ LeibnizOperator symbol: anOpSymbol
-																argKindConstraints: argKindConstraints
+																argKindConstraints: kindArity
 																kind: (sortGraph kindOf: aSortSymbol) ].
-	operator addArity: argSortConstraints withSort: aSortSymbol.
+	operator addArity: arity withSort: aSortSymbol.
 
 
 ]
@@ -52,12 +51,23 @@ LeibnizSignatureBuilder >> addVar: aVarSymbol ofSort: aSortSymbol [
 	| op sort |
 	op := operators at: aVarSymbol ifAbsent: nil.
 	op ifNotNil:
-		[ sort := (operators at: aVarSymbol) at: #() ifAbsent: nil.
+		[ sort := op at: (self arityFor: #()) ifAbsent: nil.
 		  self assert: sort isNil
 				 description: 'conflicting earlier operator definition with sort', sort asString ].
 	sort := variables at: aVarSymbol ifAbsentPut: aSortSymbol.
 	self assert: sort = aSortSymbol
 		  description: 'conflicting earlier variable definition with sort ', sort asString.
+
+]
+
+{ #category : #private }
+LeibnizSignatureBuilder >> arityFor: anArgList [
+	| arity |
+	arity := LeibnizArity sortGraph: sortGraph size: anArgList size.
+	anArgList collect: [ :s | LeibnizSortOrSubsortConstraint sortGraph: sortGraph sort: s ]
+				 into: arity.
+	arity beRecursivelyReadOnlyObject.
+	^arity
 
 ]
 

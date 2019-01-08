@@ -50,7 +50,7 @@ LeibnizKind >> initializeWithSortGraph: aSortGraph sorts: setOfSorts maximalSort
 
 { #category : #comparing }
 LeibnizKind >> instVarsExcludedFromEquality [
-	^#(#sortGraph #maximalSorts)
+	^#(#maximalSorts)
 
 ]
 
@@ -60,10 +60,24 @@ LeibnizKind >> maximalSorts [
 ]
 
 { #category : #printing }
+LeibnizKind >> printAsLeibnizSyntaxOn: aStream [
+	aStream nextPut: $[.
+	aStream nextPutAll: (', ' join: (maximalSorts collect: [ : sort | sort asString ])).
+	aStream nextPut: $].
+
+]
+
+{ #category : #printing }
 LeibnizKind >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	aStream nextPutAll: (', ' join: (self maximalSorts collect: [ : sort | sort asString ])).
 	aStream nextPut: $).
+
+]
+
+{ #category : #accessing }
+LeibnizKind >> sortGraph [
+	^sortGraph
 
 ]

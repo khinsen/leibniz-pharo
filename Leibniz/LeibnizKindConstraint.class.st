@@ -74,8 +74,6 @@ LeibnizKindConstraint >> kindConstraint [
 
 { #category : #printing }
 LeibnizKindConstraint >> printAsLeibnizSyntaxOn: aStream [
-	aStream nextPut: $[.
-	aStream nextPutAll: (', ' join: (kind maximalSorts collect: [ : sort | sort asString ])).
-	aStream nextPut: $].
+	kind printAsLeibnizSyntaxOn: aStream.
 
 ]

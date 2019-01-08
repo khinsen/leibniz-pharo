@@ -6,9 +6,10 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'opSymbol',
+		'kindArity',
+		'kind',
 		'ranks',
-		'argKindConstraints',
-		'kind'
+		'sortGraph'
 	],
 	#category : #'Leibniz-Core'
 }
@@ -22,22 +23,71 @@ LeibnizOperator class >> symbol: aSymbol argKindConstraints: aKindConstraintArra
 ]
 
 { #category : #adding }
-LeibnizOperator >> addArity: anArgSortConstraintList withSort: aSortSymbol [
-	| sort |
-	self assert: (kind includes: aSortSymbol)
-		  description: 'new rank', anArgSortConstraintList printString,
-							'->', aSortSymbol asString,'makes operator non-monotonic'.
-	sort := ranks at: anArgSortConstraintList ifAbsentPut: [ aSortSymbol ].
-	self assert: sort = aSortSymbol
-		  description: 'conflicting earlier operator definition with sort ', sort asString.
+LeibnizOperator >> addArity: newArity withSort: newSort [
+	| index |
 
+	self assertMonotonicity: [ kind includes: newSort ]
+		  forArity: newArity andSort: newSort.
+
+	ranks ifEmpty:
+		[ ranks add: newArity -> newSort.
+		  ^self  ].
+
+	index := 1.
+	[ index <= ranks size ]
+		whileTrue:
+		[ | r a s |
+			r := ranks at: index.
+			a := r key.
+			s := r value.
+
+			a = newArity
+				ifTrue:
+					[ self assert: [ s = newSort ]
+							 description: [ 'conflicting earlier operator definition with sort ', s asString ].
+					  ^self ].
+
+			(newArity isSubArityOf: a)
+				ifTrue: [ self assertMonotonicity: [ sortGraph is: newSort subsortOf: s ]
+									forArity: newArity andSort: newSort.
+							 ranks add: newArity -> newSort beforeIndex: index.
+							 ^self ].
+
+			(a isSubArityOf: newArity)
+				ifTrue: [ self assertMonotonicity: [ sortGraph is: s subsortOf: newSort ]
+									forArity: newArity andSort: newSort] ].
+
+]
+
+{ #category : #'error signalling' }
+LeibnizOperator >> assertMonotonicity: aBlock forArity: anArity andSort: aSort [
+	self assert: aBlock
+		  description: 'new rank ', anArity printString,
+							' -> ', aSort asString, ' makes operator non-monotonic'.
 ]
 
 { #category : #initializing }
 LeibnizOperator >> initializeWithSymbol: aSymbol argKindConstraints: aKindConstraintArray kind: aKind [
 	opSymbol := aSymbol.
-	argKindConstraints := aKindConstraintArray.
+	kindArity := aKindConstraintArray.
 	kind := aKind.
-	ranks := Dictionary new.
+	sortGraph := kind sortGraph.
+	ranks := OrderedCollection new.
+
+
+]
+
+{ #category : #printing }
+LeibnizOperator >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	aStream nextPutAll: opSymbol.
+	aStream nextPutAll: ': '.
+	kindArity printAsLeibnizSyntaxOn: aStream.
+	aStream nextPutAll: ' -> '.
+	kind printAsLeibnizSyntaxOn: aStream.
+	aStream nextPutAll: ', '.
+	ranks size printOn: aStream.
+	aStream nextPutAll: ' ranks)'.
 
 ]
