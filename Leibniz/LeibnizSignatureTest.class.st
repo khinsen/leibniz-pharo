@@ -27,7 +27,11 @@ LeibnizSignatureTest >> setUp [
 
 { #category : #testing }
 LeibnizSignatureTest >> testArities [
-	self assert: ((builder arityFor: #(#B)) isSubArityOf: (builder arityFor: #(#A))).
+	self assert: ((builder arityFor: #(#B)) <= (builder arityFor: #(#A))).
+	self deny:   ((builder arityFor: #(#A)) <= (builder arityFor: #(#B))).
+	self assert: ((builder arityFor: #(#B #Y)) <= (builder arityFor: #(#A #X))).
+	self deny: 	 ((builder arityFor: #(#B #X)) <= (builder arityFor: #(#A #Y))).
+	self deny: 	 ((builder arityFor: #(#B)) <= (builder arityFor: #(#X))).
 
 ]
 

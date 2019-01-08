@@ -22,18 +22,18 @@ LeibnizArity class >> sortGraph: aSortGraph size: anInteger [
 
 ]
 
-{ #category : #initializing }
-LeibnizArity >> initializeWithSortGraph: aSortGraph [
-	sortGraph := aSortGraph.
+{ #category : #comparing }
+LeibnizArity >> <= anArity [
+	self size = anArity size ifFalse: [ ^false ].
+	self with: anArity do:
+		[ :s1 :s2 | s1 <= s2 ifFalse: [ ^false ] ].
+	^true
 
 ]
 
-{ #category : #comparing }
-LeibnizArity >> isSubArityOf: anArity [
-	self size = anArity size ifFalse: [ ^false ].
-	self with: anArity do:
-		[ :s1 :s2 | (s1 isConformingSortConstraint: s2) ifFalse: [ ^false ] ].
-	^true
+{ #category : #initializing }
+LeibnizArity >> initializeWithSortGraph: aSortGraph [
+	sortGraph := aSortGraph.
 
 ]
 

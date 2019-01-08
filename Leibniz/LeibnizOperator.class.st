@@ -47,13 +47,13 @@ LeibnizOperator >> addArity: newArity withSort: newSort [
 							 description: [ 'conflicting earlier operator definition with sort ', s asString ].
 					  ^self ].
 
-			(newArity isSubArityOf: a)
+			(newArity <= a)
 				ifTrue: [ self assertMonotonicity: [ sortGraph is: newSort subsortOf: s ]
 									forArity: newArity andSort: newSort.
 							 ranks add: newArity -> newSort beforeIndex: index.
 							 ^self ].
 
-			(a isSubArityOf: newArity)
+			(a <= newArity)
 				ifTrue: [ self assertMonotonicity: [ sortGraph is: s subsortOf: newSort ]
 									forArity: newArity andSort: newSort] ].
 
