@@ -2,6 +2,7 @@ Class {
 	#name : #LeibnizSignatureTest,
 	#superclass : #TestCase,
 	#instVars : [
+		'builder',
 		'sortGraph'
 	],
 	#category : #'Leibniz-Tests'
@@ -19,6 +20,14 @@ LeibnizSignatureTest >> setUp [
 	  add: #Y;
 	  make: #Y subsortOf: #X.
 	sortGraph := b sortGraph.
+
+	builder := LeibnizSignatureBuilder sortGraph: sortGraph.
+
+]
+
+{ #category : #testing }
+LeibnizSignatureTest >> testArities [
+	self assert: ((builder arityFor: #(#B)) isSubArityOf: (builder arityFor: #(#A))).
 
 ]
 
@@ -38,8 +47,10 @@ LeibnizSignatureTest >> testConflictingSorts [
 	| b |
 	b := LeibnizSignatureBuilder sortGraph: sortGraph.
 	b addOp: #foo withArgs: #(#A) ofSort: #A.
+	b addVar: #bar ofSort: #A.
 	self should: [ b addOp: #foo withArgs: #(#A) ofSort: #B ] raise: Error.
-	
+	self should: [ b addVar: #bar ofSort: #B ] raise: Error.
+
 ]
 
 { #category : #testing }
