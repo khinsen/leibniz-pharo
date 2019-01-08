@@ -47,3 +47,10 @@ BaselineOfLeibniz >> postload: loader package: packageSpec [
 	Transcript crLog: 'LeibnizBuiltins reset.'
 
 ]
+
+{ #category : #baseline }
+BaselineOfLeibniz >> projectClass [
+	Smalltalk at: #'MetacelloCypressBaselineProject' ifPresent: [ :cl | ^ cl ].
+	^ super projectClass
+
+]
