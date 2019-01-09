@@ -47,10 +47,7 @@ LeibnizSignatureBuilder >> addOp: anOpSymbol withArgs: anArgList ofSort: aSortSy
 ]
 
 { #category : #adding }
-LeibnizSignatureBuilder >> addSignature: aSignature [
-	aSignature withVariablesDo:
-		[ :symbol :sort |
-		  self addVar: symbol ofSort:  sort ].
+LeibnizSignatureBuilder >> addOpsFromSignature: aSignature [
 	aSignature withOperatorsDo:
 		[ :symbol :args :sort |
 		  self addOp: symbol withArgs: args ofSort: sort ].
@@ -68,6 +65,14 @@ LeibnizSignatureBuilder >> addVar: aVarSymbol ofSort: aSortSymbol [
 	sort := variables at: aVarSymbol ifAbsentPut: aSortSymbol.
 	self assert: sort = aSortSymbol
 		  description: 'conflicting earlier variable definition with sort ', sort asString.
+
+]
+
+{ #category : #adding }
+LeibnizSignatureBuilder >> addVarsFromSignature: aSignature [
+	aSignature withVariablesDo:
+		[ :symbol :sort |
+		  self addVar: symbol ofSort:  sort ].
 
 ]
 

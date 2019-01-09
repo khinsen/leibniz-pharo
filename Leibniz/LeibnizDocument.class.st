@@ -13,22 +13,6 @@ Class {
 	#category : #'Leibniz-Core'
 }
 
-{ #category : #'instance creation' }
-LeibnizDocument class >> fromStream: aStream [
-	| dom docElements docElement |
-	dom := XMLDOMParser parse: aStream.
-	docElements := dom root descendantElementsNamed: 'leibniz-document'.
-	self assert: docElements size equals: 1.
-	docElement := docElements at: 1.
-	^ self fromXML: docElement
-
-]
-
-{ #category : #'instance creation' }
-LeibnizDocument class >> fromXML: anXMLElement [ 
-	^ self new fromXML: anXMLElement
-]
-
 { #category : #'XML import' }
 LeibnizDocument >> addContextFromXML: anXMLElement [
   	| name builder context |

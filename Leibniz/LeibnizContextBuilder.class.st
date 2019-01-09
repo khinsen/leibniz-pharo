@@ -81,27 +81,52 @@ LeibnizContextBuilder >> endSignature [
 { #category : #'defining - private' }
 LeibnizContextBuilder >> endSortGraph [
 	sortGraph := sortGraphBuilder sortGraph.
-	signatureBuilder := LeibnizSignatureBuilder sortGraph: sortGraph.
-	includes do: [ :i | signatureBuilder addSignature: (i at: #context) signature ].
 
+]
+
+{ #category : #'defining - private' }
+LeibnizContextBuilder >> ensureSignature [
+	self ensureSortGraph.
+	signatureBuilder ifNil: [ signatureBuilder := LeibnizSignatureBuilder sortGraph: sortGraph. ].
+	signature ifNil: [ signature := signatureBuilder signature ]
+]
+
+{ #category : #'defining - private' }
+LeibnizContextBuilder >> ensureSortGraph [
+	sortGraph ifNil: [ sortGraph := sortGraphBuilder sortGraph ]
 ]
 
 { #category : #'XML import' }
 LeibnizContextBuilder >> fromXML: anXMLElement [
-	anXMLElement descendantElementsNamed: 'include' do:
-		[ :i | | attrs |
-				 attrs := i attributes.
-				 (attrs includesKey: 'document')
-				 ifTrue: [ self include: (attrs at: 'context')
-									 fromDocumentWithHash: (attrs at: 'document')
-									 inMode: (attrs at: 'mode') ]
-				 ifFalse: [ self include: (attrs at: 'context')
-									  inMode: (attrs at: 'mode') ] ].
-	anXMLElement descendantElementsNamed: 'sort' do:
-		[ :sort | self addSort: (sort attributeAt: 'id') asSymbol].
-	anXMLElement descendantElementsNamed: 'subsort' do:
-		[ :ss | self make: (ss attributeAt: 'subsort') asSymbol
-		             subsortOf: (ss attributeAt: 'supersort') asSymbol].
+	(anXMLElement elementsDetect: [:each | each isNamed: 'includes'])
+		descendantElementsNamed: 'include' do:
+			[ :i | | attrs |
+					 attrs := i attributes.
+					 (attrs includesKey: 'document')
+					 ifTrue: [ self include: (attrs at: 'context')
+										 fromDocumentWithHash: (attrs at: 'document')
+										 inMode: (attrs at: 'mode') ]
+					 ifFalse: [ self include: (attrs at: 'context')
+										  inMode: (attrs at: 'mode') ] ].
+	(anXMLElement elementsDetect: [:each | each isNamed: 'sorts'])
+		descendantElementsNamed: 'sort' do:
+			[ :sort | self addSort: (sort attributeAt: 'id') asSymbol ].
+	(anXMLElement elementsDetect: [:each | each isNamed: 'subsorts'])
+		descendantElementsNamed: 'subsort' do:
+			[ :ss | self make: (ss attributeAt: 'subsort') asSymbol
+			             subsortOf: (ss attributeAt: 'supersort') asSymbol ].
+	(anXMLElement elementsDetect: [:each | each isNamed: 'vars'])
+		descendantElementsNamed: 'var' do:
+			[ :var | self addVar: (var attributeAt: 'id') asSymbol
+							  ofSort: (var attributeAt: 'sort') asSymbol ].
+	(anXMLElement elementsDetect: [:each | each isNamed: 'ops'])
+		descendantElementsNamed: 'op' do:
+			[ :op | self addOp: (op attributeAt: 'id') asSymbol
+							 withArgs: (((op elementsDetect: [ :each | each isNamed: 'arity' ])
+											descendantElementsNamed: 'sort')
+											collect: [ :s | (s attributeAt: 'id') asSymbol ]) asArray
+							 ofSort: ((op elementsDetect: [ :each | each isNamed: 'sort' ])
+											attributeAt: 'id') asSymbol].
 
 ]
 
@@ -187,6 +212,18 @@ LeibnizContextBuilder >> phase: aSymbol [
 { #category : #accessing }
 LeibnizContextBuilder >> sortGraph [
 	^ sortGraph
+]
+
+{ #category : #'defining - private' }
+LeibnizContextBuilder >> startSignature [
+	self ensureSortGraph.
+	signatureBuilder := LeibnizSignatureBuilder sortGraph: sortGraph.
+	includes do:
+		[ :i |
+		  signatureBuilder addOpsFromSignature: (i at: #context) signature.
+		  (i at: #mode) = 'extend' ifTrue:
+				[ signatureBuilder addVarsFromSignature: (i at: #context) signature ] ].
+
 ]
 
 { #category : #'defining - private' }
