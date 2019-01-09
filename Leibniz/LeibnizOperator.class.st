@@ -88,3 +88,8 @@ LeibnizOperator >> printOn: aStream [
 	aStream nextPutAll: ' ranks)'.
 
 ]
+
+{ #category : #enumerating }
+LeibnizOperator >> withRanksDo: aBlock [
+	ranks do: [ :r |  aBlock value: r key value: r value ]
+]

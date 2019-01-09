@@ -25,9 +25,6 @@ LeibnizContextBuilder class >> name: aString document: aDocument [
 
 { #category : #'defining - private' }
 LeibnizContextBuilder >> addDeclarationsFrom: aContext inMode: useOrExtend [
-	self phase: #includes.
-	self assert: (#('use' 'extend') includes: useOrExtend)
-	     description: 'include mode must be "use" or "extend"'.
 	sortGraphBuilder addSortGraph: aContext sortGraph.
 
 ]
@@ -70,6 +67,12 @@ LeibnizContextBuilder >> context [
 ]
 
 { #category : #'defining - private' }
+LeibnizContextBuilder >> endIncludes [
+	includes do: [ :i | sortGraphBuilder addSortGraph: (i at: #context) sortGraph ].
+
+]
+
+{ #category : #'defining - private' }
 LeibnizContextBuilder >> endSignature [
 	signature := signatureBuilder signature.
 
@@ -79,6 +82,7 @@ LeibnizContextBuilder >> endSignature [
 LeibnizContextBuilder >> endSortGraph [
 	sortGraph := sortGraphBuilder sortGraph.
 	signatureBuilder := LeibnizSignatureBuilder sortGraph: sortGraph.
+	includes do: [ :i | signatureBuilder addSignature: (i at: #context) signature ].
 
 ]
 
@@ -109,7 +113,7 @@ LeibnizContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash in
 									  with: #document -> aDocHash
 									  with: #context -> context
 									  with: #mode -> useOrExtend).
-	self addDeclarationsFrom: context inMode: useOrExtend.
+	self validateIncludeWithMode: useOrExtend
 
 ]
 
@@ -120,7 +124,7 @@ LeibnizContextBuilder >> include: aContextName inMode: useOrExtend [
 	includes add: (Dictionary with: #contextName -> aContextName
 									  with: #mode -> useOrExtend
 									  with: #context -> context).
-	self addDeclarationsFrom: context inMode: useOrExtend.
+	self validateIncludeWithMode: useOrExtend
 ]
 
 { #category : #initializing }
@@ -183,4 +187,12 @@ LeibnizContextBuilder >> phase: aSymbol [
 { #category : #accessing }
 LeibnizContextBuilder >> sortGraph [
 	^ sortGraph
+]
+
+{ #category : #'defining - private' }
+LeibnizContextBuilder >> validateIncludeWithMode: useOrExtend [
+	self phase: #includes.
+	self assert: (#('use' 'extend') includes: useOrExtend)
+	     description: 'include mode must be "use" or "extend"'.
+
 ]

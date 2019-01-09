@@ -29,6 +29,13 @@ LeibnizKindConstraint >> <= aSortConstraint [
 
 ]
 
+{ #category : #converting }
+LeibnizKindConstraint >> asArgSort [
+	self assert: kind maximalSorts size == 1
+		  description: 'Kind has more than one maximal sort'.
+	^kind maximalSorts anyOne
+]
+
 { #category : #enumerating }
 LeibnizKindConstraint >> conformingSorts [
 	^kind asSet

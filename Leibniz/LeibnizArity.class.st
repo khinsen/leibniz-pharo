@@ -31,6 +31,15 @@ LeibnizArity >> <= anArity [
 
 ]
 
+{ #category : #converting }
+LeibnizArity >> asArgSorts [
+	| argSorts |
+	argSorts := Array new: self size.
+	self collect: [ :sc | sc asArgSort ] into: argSorts.
+	^argSorts
+
+]
+
 { #category : #initializing }
 LeibnizArity >> initializeWithSortGraph: aSortGraph [
 	sortGraph := aSortGraph.

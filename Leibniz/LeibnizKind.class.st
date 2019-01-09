@@ -77,6 +77,11 @@ LeibnizKind >> printOn: aStream [
 ]
 
 { #category : #accessing }
+LeibnizKind >> size [
+	^sorts size
+]
+
+{ #category : #accessing }
 LeibnizKind >> sortGraph [
 	^sortGraph
 

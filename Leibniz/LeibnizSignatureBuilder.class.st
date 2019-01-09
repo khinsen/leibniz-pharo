@@ -47,6 +47,17 @@ LeibnizSignatureBuilder >> addOp: anOpSymbol withArgs: anArgList ofSort: aSortSy
 ]
 
 { #category : #adding }
+LeibnizSignatureBuilder >> addSignature: aSignature [
+	aSignature withVariablesDo:
+		[ :symbol :sort |
+		  self addVar: symbol ofSort:  sort ].
+	aSignature withOperatorsDo:
+		[ :symbol :args :sort |
+		  self addOp: symbol withArgs: args ofSort: sort ].
+
+]
+
+{ #category : #adding }
 LeibnizSignatureBuilder >> addVar: aVarSymbol ofSort: aSortSymbol [
 	| op sort |
 	op := operators at: aVarSymbol ifAbsent: nil.

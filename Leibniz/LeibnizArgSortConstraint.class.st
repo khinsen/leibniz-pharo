@@ -19,6 +19,11 @@ LeibnizArgSortConstraint >> <= aSortConstraint [
 
 ]
 
+{ #category : #converting }
+LeibnizArgSortConstraint >> asArgSort [
+	self subclassResponsibility
+]
+
 { #category : #enumerating }
 LeibnizArgSortConstraint >> conformingSorts [
 	self subclassResponsibility

@@ -19,8 +19,8 @@ LeibnizBuiltinsTest >> testContexts [
 	context := builtins contextNamed: 'contexts'.
 	self assert: context sortGraph size equals: 2.
 	self assert: context sortGraph kinds size equals: 2.
-	self assert: context signature operators size equals: 5.
-	self assert: context signature variables size equals: 0.
+	self assert: context signature numberOfOperators equals: 6.
+	self assert: context signature numberOfVariables equals: 0.
 
 ]
 
@@ -30,8 +30,8 @@ LeibnizBuiltinsTest >> testFloats [
 	context := builtins contextNamed: 'IEEE-floating-point'.
 	self assert: context sortGraph size equals: 18.
 	self assert: context sortGraph kinds size equals: 3.
-	self assert: context signature operators size equals: 13.
-	self assert: context signature variables size equals: 0.
+	self assert: context signature numberOfOperators equals: 17.
+	self assert: context signature numberOfVariables equals: 0.
 
 ]
 
@@ -41,8 +41,8 @@ LeibnizBuiltinsTest >> testIntegers [
 	context := builtins contextNamed: 'integers'.
 	self assert: context sortGraph size equals: 6.
 	self assert: context sortGraph kinds size equals: 2.
-	self assert: context signature operators size equals: 13.
-	self assert: context signature variables size equals: 0.
+	self assert: context signature numberOfOperators equals: 15.
+	self assert: context signature numberOfVariables equals: 0.
 
 ]
 
@@ -52,8 +52,8 @@ LeibnizBuiltinsTest >> testRationalNumbers [
 	context := builtins contextNamed: 'rational-numbers'.
 	self assert: context sortGraph size equals: 10.
 	self assert: context sortGraph kinds size equals: 2.
-	self assert: context signature operators size equals: 12.
-	self assert: context signature variables size equals: 0.
+	self assert: context signature numberOfOperators equals: 16.
+	self assert: context signature numberOfVariables equals: 0.
 
 ]
 
@@ -63,8 +63,8 @@ LeibnizBuiltinsTest >> testRealNumbers [
 	context := builtins contextNamed: 'real-numbers'.
 	self assert: context sortGraph size equals: 14.
 	self assert: context sortGraph kinds size equals: 2.
-	self assert: context signature operators size equals: 13.
-	self assert: context signature variables size equals: 0.
+	self assert: context signature numberOfOperators equals: 17.
+	self assert: context signature numberOfVariables equals: 0.
 
 ]
 
@@ -75,11 +75,8 @@ LeibnizBuiltinsTest >> testStrings [
 
 	self assert: context sortGraph size equals: 1.
 	self assert: context sortGraph kinds size equals: 1.
-	self assert: context signature operators size equals: 1.
-	self assert: context signature variables size equals: 0.
-
-	self assert: context sortGraph asSet equals: (Set with: #string).
-	self assert: context signature operators keys asSet equals: #(#'_+') asSet.
+	self assert: context signature numberOfOperators equals: 1.
+	self assert: context signature numberOfVariables equals: 0.
 
 ]
 
@@ -90,10 +87,7 @@ LeibnizBuiltinsTest >> testTruth [
 
 	self assert: context sortGraph size equals: 1.
 	self assert: context sortGraph kinds size equals: 1.
-	self assert: context signature operators size equals: 2.
-	self assert: context signature variables size equals: 0.
-
-	self assert: context sortGraph asSet equals: (Set with: #boolean).
-	self assert: context signature operators keys asSet equals: #(#true #false) asSet.
+	self assert: context signature numberOfOperators equals: 2.
+	self assert: context signature numberOfVariables equals: 0.
 
 ]

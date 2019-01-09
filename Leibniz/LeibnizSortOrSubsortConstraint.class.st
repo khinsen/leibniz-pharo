@@ -24,6 +24,11 @@ LeibnizSortOrSubsortConstraint >> <= aSortConstraint [
 
 ]
 
+{ #category : #converting }
+LeibnizSortOrSubsortConstraint >> asArgSort [
+	^sort
+]
+
 { #category : #enumerating }
 LeibnizSortOrSubsortConstraint >> conformingSorts [
 	^ sortGraph allSubsortsOf: sort
