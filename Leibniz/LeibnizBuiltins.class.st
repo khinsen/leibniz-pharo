@@ -28,6 +28,12 @@ LeibnizBuiltins >> createContextContext [
 	contextsBuilder := self newContextBuilderNamed: 'contexts'.
 	contextsBuilder include: 'strings' inMode: 'use'.
 	contextsBuilder addSort: #context.
+	contextsBuilder addOp: #context withArgs: #(#string) ofSort: #context.
+	contextsBuilder addOp: #context withArgs: #(#string #string) ofSort: #context.
+	contextsBuilder addOp: #'replace-sort' withArgs: #(#context #string #string) ofSort: #context.
+	contextsBuilder addOp: #'replace-sort-prefix' withArgs: #(#context #string #string) ofSort: #context.
+	contextsBuilder addOp: #'replace-include' withArgs: #(#context #context #context) ofSort: #context.
+	contextsBuilder addOp: #'remove-vars' withArgs: #(#context) ofSort: #context.
 	contextsBuilder build.
 ]
 
@@ -36,7 +42,7 @@ LeibnizBuiltins >> createFPContext [
 	| fpNumbers |
 	fpNumbers := self newContextBuilderNamed: 'IEEE-floating-point'.
 	fpNumbers include: 'integers' inMode: 'use'.
-
+	"Generic FP Sorts"
 	fpNumbers addSort: #FP.
 	fpNumbers addSort: #'FP.number'.
 	fpNumbers addSort: #'FP.NaN'.
@@ -44,7 +50,7 @@ LeibnizBuiltins >> createFPContext [
 	fpNumbers make: #'FP.number' subsortOf: #'FP'.
 	fpNumbers make: #'FP.NaN' subsortOf: #'FP'.
 	fpNumbers make: #'FP.inf' subsortOf: #'FP'.
-
+	"Single-precision FP sorts"
 	fpNumbers addSort: #FP32.
 	fpNumbers addSort: #'FP32-number'.
 	fpNumbers addSort: #'FP32-NaN'.
@@ -56,7 +62,7 @@ LeibnizBuiltins >> createFPContext [
 	fpNumbers make: #'FP32-NaN' subsortOf: #'FP.NaN'.
 	fpNumbers make: #'FP32-inf' subsortOf: #'FP32'.
 	fpNumbers make: #'FP32-inf' subsortOf: #'FP.inf'.
-
+	"Double-precision FP sorts"
 	fpNumbers addSort: #FP64.
 	fpNumbers addSort: #'FP64-number'.
 	fpNumbers addSort: #'FP64-NaN'.
@@ -68,6 +74,39 @@ LeibnizBuiltins >> createFPContext [
 	fpNumbers make: #'FP64-NaN' subsortOf: #'FP.NaN'.
 	fpNumbers make: #'FP64-inf' subsortOf: #'FP64'.
 	fpNumbers make: #'FP64-inf' subsortOf: #'FP.inf'.
+	"Arithmetic operators, single precision"
+	fpNumbers addOp: #'_+' withArgs: #(#FP32 #FP32) ofSort: #FP32.
+	fpNumbers addOp: #'_-' withArgs: #(#FP32 #FP32) ofSort: #FP32.
+	fpNumbers addOp: #'-' withArgs: #(#FP32) ofSort: #FP32.
+	fpNumbers addOp: #'_×' withArgs: #(#FP32 #FP32) ofSort: #FP32.
+	fpNumbers addOp: #'_÷' withArgs: #(#FP32 #FP32) ofSort: #FP32.
+	fpNumbers addOp: #'^' withArgs: #(#FP32 #FP32) ofSort: #FP32.
+	fpNumbers addOp: #'^' withArgs: #(#FP32 #'ℤ') ofSort: #FP32.
+	fpNumbers addOp: #'abs' withArgs: #(#FP32) ofSort: #FP32.
+	fpNumbers addOp: #'√' withArgs: #(#FP32) ofSort: #FP32.
+	"Arithmetic operators, double precision"
+	fpNumbers addOp: #'_+' withArgs: #(#FP64 #FP64) ofSort: #FP64.
+	fpNumbers addOp: #'_-' withArgs: #(#FP64 #FP64) ofSort: #FP64.
+	fpNumbers addOp: #'-' withArgs: #(#FP64) ofSort: #FP64.
+	fpNumbers addOp: #'_×' withArgs: #(#FP64 #FP64) ofSort: #FP64.
+	fpNumbers addOp: #'_÷' withArgs: #(#FP64 #FP64) ofSort: #FP64.
+	fpNumbers addOp: #'^' withArgs: #(#FP64 #FP64) ofSort: #FP64.
+	fpNumbers addOp: #'^' withArgs: #(#FP64 #'ℤ') ofSort: #FP64.
+	fpNumbers addOp: #'abs' withArgs: #(#FP64) ofSort: #FP64.
+	fpNumbers addOp: #'√' withArgs: #(#FP64) ofSort: #FP64.
+	"Comparison operators, single precision"
+	fpNumbers addOp: #'_=' withArgs: #(#FP32 #FP32) ofSort: #boolean.
+	fpNumbers addOp: #'_<' withArgs: #(#FP32 #FP32) ofSort: #boolean.
+	fpNumbers addOp: #'_>' withArgs: #(#FP32 #FP32) ofSort: #boolean.
+	fpNumbers addOp: #'_≤' withArgs: #(#FP32 #FP32) ofSort: #boolean.
+	fpNumbers addOp: #'_≥' withArgs: #(#FP32 #FP32) ofSort: #boolean.
+	"Comparison operators, double precision"
+	fpNumbers addOp: #'_=' withArgs: #(#FP64 #FP64) ofSort: #boolean.
+	fpNumbers addOp: #'_<' withArgs: #(#FP64 #FP64) ofSort: #boolean.
+	fpNumbers addOp: #'_>' withArgs: #(#FP64 #FP64) ofSort: #boolean.
+	fpNumbers addOp: #'_≤' withArgs: #(#FP64 #FP64) ofSort: #boolean.
+	fpNumbers addOp: #'_≥' withArgs: #(#FP64 #FP64) ofSort: #boolean.
+	"Build the context"
 	fpNumbers build.
 ]
 
@@ -138,6 +177,32 @@ LeibnizBuiltins >> createRationalContext [
 	rationalNumbers make: #'ℚ.nn'subsortOf: #'ℚ'.
 	rationalNumbers make: #'ℚ.p'subsortOf: #'ℚ.nn'.
 	rationalNumbers make: #'ℕ'subsortOf: #'ℚ.nn'.
+	"Arithmetic operators"
+	rationalNumbers addOp: #'_+' withArgs: #(#'ℚ' #'ℚ') ofSort: #'ℚ'.
+	rationalNumbers addOp: #'_+' withArgs: #(#'ℚ.p' #'ℚ.p') ofSort: #'ℚ.p'.
+	rationalNumbers addOp: #'_+' withArgs: #(#'ℚ.nn' #'ℚ.nn') ofSort: #'ℚ.nn'.
+	rationalNumbers addOp: #'_-' withArgs: #(#'ℚ' #'ℚ') ofSort: #'ℚ'.
+	rationalNumbers addOp: #'-' withArgs: #(#'ℚ') ofSort: #'ℚ'.
+	rationalNumbers addOp: #'_×' withArgs: #(#'ℚ' #'ℚ') ofSort: #'ℚ'.
+	rationalNumbers addOp: #'_×' withArgs: #(#'ℚ.p' #'ℚ.p') ofSort: #'ℚ.p'.
+	rationalNumbers addOp: #'_×' withArgs: #(#'ℚ.nn' #'ℚ.nn') ofSort: #'ℚ.nn'.
+	rationalNumbers addOp: #'_×' withArgs: #(#'ℚ.nz' #'ℚ.nz') ofSort: #'ℚ.nz'.
+	rationalNumbers addOp: #'_÷' withArgs: #(#'ℚ' #'ℚ.nz') ofSort: #'ℚ'.
+	rationalNumbers addOp: #'_÷' withArgs: #(#'ℚ.nz' #'ℚ.nz') ofSort: #'ℚ.nz'.
+	rationalNumbers addOp: #'_÷' withArgs: #(#'ℚ.nn' #'ℚ.p') ofSort: #'ℚ.nn'.
+	rationalNumbers addOp: #'_÷' withArgs: #(#'ℚ.p' #'ℚ.p') ofSort: #'ℚ.p'.
+	rationalNumbers addOp: #'^' withArgs: #(#'ℚ.nz' #'ℤ.nz') ofSort: #'ℚ.nz'.
+	rationalNumbers addOp: #'^' withArgs: #(#'ℚ.p' #'ℤ.nz') ofSort: #'ℚ.p'.
+	rationalNumbers addOp: #'^' withArgs: #(#'ℚ.nz' #'zero') ofSort: #'ℕ.nz'.
+	rationalNumbers addOp: #'abs' withArgs: #(#'ℚ') ofSort: #'ℚ.nn'.
+	rationalNumbers addOp: #'abs' withArgs: #(#'ℚ.nz') ofSort: #'ℚ.p'.
+	"Comparison operators"
+	rationalNumbers addOp: #'_=' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
+	rationalNumbers addOp: #'_<' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
+	rationalNumbers addOp: #'_>' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
+	rationalNumbers addOp: #'_≤' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
+	rationalNumbers addOp: #'_≥' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
+	"Build context"
 	rationalNumbers build.
 ]
 
@@ -146,6 +211,7 @@ LeibnizBuiltins >> createRealNumberContext [
 	| realNumbers |
 	realNumbers := self newContextBuilderNamed: 'real-numbers'.
 	realNumbers include: 'rational-numbers' inMode: 'extend'.
+	"Sorts"
 	realNumbers addSort: #'ℝ'.
 	realNumbers make: #'ℚ' subsortOf: #'ℝ'.
 	realNumbers addSort: #'ℝ.nz'.
@@ -158,6 +224,34 @@ LeibnizBuiltins >> createRealNumberContext [
 	realNumbers make: #'ℝ.nn' subsortOf: #'ℝ'.
 	realNumbers make: #'ℝ.p' subsortOf: #'ℝ.nn'.
 	realNumbers make: #'ℚ.nn' subsortOf: #'ℝ.nn'.
+	"Arithmetic operators"
+	realNumbers addOp: #'_+' withArgs: #(#'ℝ' #'ℝ') ofSort: #'ℝ'.
+	realNumbers addOp: #'_+' withArgs: #(#'ℝ.p' #'ℝ.p') ofSort: #'ℝ.p'.
+	realNumbers addOp: #'_+' withArgs: #(#'ℝ.nn' #'ℝ.nn') ofSort: #'ℝ.nn'.
+	realNumbers addOp: #'_-' withArgs: #(#'ℝ' #'ℝ') ofSort: #'ℝ'.
+	realNumbers addOp: #'-' withArgs: #(#'ℝ') ofSort: #'ℝ'.
+	realNumbers addOp: #'_×' withArgs: #(#'ℝ' #'ℝ') ofSort: #'ℝ'.
+	realNumbers addOp: #'_×' withArgs: #(#'ℝ.p' #'ℝ.p') ofSort: #'ℝ.p'.
+	realNumbers addOp: #'_×' withArgs: #(#'ℝ.nn' #'ℝ.nn') ofSort: #'ℝ.nn'.
+	realNumbers addOp: #'_÷' withArgs: #(#'ℝ' #'ℝ.nz') ofSort: #'ℝ'.
+	realNumbers addOp: #'_÷' withArgs: #(#'ℝ.nz' #'ℝ.nz') ofSort: #'ℝ.nz'.
+	realNumbers addOp: #'_÷' withArgs: #(#'ℝ.p' #'ℝ.p') ofSort: #'ℝ.p'.
+	realNumbers addOp: #'_÷' withArgs: #(#'ℝ.nn' #'ℝ.p') ofSort: #'ℝ.nn'.
+	realNumbers addOp: #'^' withArgs: #(#'ℝ.p' #'ℝ.nz') ofSort: #'ℝ.p'.
+	realNumbers addOp: #'^' withArgs: #(#'ℝ.nz' #'ℤ.nz') ofSort: #'ℝ.nz'.
+	realNumbers addOp: #'^' withArgs: #(#'ℝ' #'ℕ.nz') ofSort: #'ℝ'.
+	"Various functions"
+	realNumbers addOp: #'abs' withArgs: #(#'ℝ') ofSort: #'ℝ.nn'.
+	realNumbers addOp: #'abs' withArgs: #(#'ℝ.nz') ofSort: #'ℝ.p'.
+	realNumbers addOp: #'√' withArgs: #(#'ℝ.nn') ofSort: #'ℝ.nn'.
+	realNumbers addOp: #'√' withArgs: #(#'ℝ.p') ofSort: #'ℝ.p'.
+	"Comparison operators"
+	realNumbers addOp: #'_=' withArgs: #(#'ℝ' #'ℝ') ofSort: #boolean.
+	realNumbers addOp: #'_<' withArgs: #(#'ℝ' #'ℝ') ofSort: #boolean.
+	realNumbers addOp: #'_>' withArgs: #(#'ℝ' #'ℝ') ofSort: #boolean.
+	realNumbers addOp: #'_≤' withArgs: #(#'ℝ' #'ℝ') ofSort: #boolean.
+	realNumbers addOp: #'_≥' withArgs: #(#'ℝ' #'ℝ') ofSort: #boolean.
+	"Build the context"
 	realNumbers build.
 ]
 
