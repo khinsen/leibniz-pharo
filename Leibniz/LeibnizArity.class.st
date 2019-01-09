@@ -52,3 +52,12 @@ LeibnizArity >> printAsLeibnizSyntaxOn: aStream [
 		  separatedBy: [ aStream nextPutAll: ', ' ]
 
 ]
+
+{ #category : #printing }
+LeibnizArity >> printOn: aStream [
+	self printNameOn: aStream.
+	aStream nextPut: $(.
+	self printAsLeibnizSyntaxOn: aStream.
+	aStream nextPut: $).
+
+]

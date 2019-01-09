@@ -24,8 +24,6 @@ LeibnizOperator class >> symbol: aSymbol argKindConstraints: aKindConstraintArra
 
 { #category : #adding }
 LeibnizOperator >> addArity: newArity withSort: newSort [
-	| index |
-
 	self assertMonotonicity: [ kind includes: newSort ]
 		  forArity: newArity andSort: newSort.
 
@@ -33,10 +31,9 @@ LeibnizOperator >> addArity: newArity withSort: newSort [
 		[ ranks add: newArity -> newSort.
 		  ^self  ].
 
-	index := 1.
-	[ index <= ranks size ]
-		whileTrue:
-		[ | r a s |
+	1 to: ranks size do:
+		[	:index |
+		 	| r a s |
 			r := ranks at: index.
 			a := r key.
 			s := r value.
@@ -55,7 +52,7 @@ LeibnizOperator >> addArity: newArity withSort: newSort [
 
 			(a <= newArity)
 				ifTrue: [ self assertMonotonicity: [ sortGraph is: s subsortOf: newSort ]
-									forArity: newArity andSort: newSort] ].
+									forArity: newArity andSort: newSort]. ].
 
 ]
 
