@@ -6,23 +6,25 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'name',
-		'sortGraph'
+		'sortGraph',
+		'signature'
 	],
 	#category : #'Leibniz-Core'
 }
 
 { #category : #'instance creation' }
-LeibnizContext class >> name: aString sortGraph: aSortGraph [
+LeibnizContext class >> name: aString sortGraph: aSortGraph signature: aSignature [
 	^ self basicNew
-			 initializeWithName: aString sortGraph: aSortGraph;
+			 initializeWithName: aString sortGraph: aSortGraph signature: aSignature;
 			 yourself.
 
 ]
 
 { #category : #initializing }
-LeibnizContext >> initializeWithName: aString sortGraph: aSortGraph [
+LeibnizContext >> initializeWithName: aString sortGraph: aSortGraph signature: aSignature [
 	name := aString.
 	sortGraph := aSortGraph.
+	signature := aSignature.
 	self beRecursivelyReadOnlyObject.
 ]
 
@@ -39,6 +41,12 @@ LeibnizContext >> printOn: aStream [
 	aStream nextPutAll: name.
 	aStream nextPut: $'.
 	aStream nextPut: $).
+
+]
+
+{ #category : #accessing }
+LeibnizContext >> signature [
+	^signature
 
 ]
 

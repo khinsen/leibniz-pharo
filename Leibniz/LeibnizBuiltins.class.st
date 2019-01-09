@@ -88,7 +88,37 @@ LeibnizBuiltins >> createIntegerContext [
 	integers make: #ℕ subsortOf: #ℤ.
 	integers make: #'ℤ.nz' subsortOf: #ℤ.
 	integers make: #'ℕ.nz' subsortOf: #'ℤ.nz'.
+	"Arithmetic operators"
+	integers addOp: #'_+' withArgs: #(#'ℤ' #'ℤ') ofSort: #'ℤ'.
+	integers addOp: #'_+' withArgs: #(#'ℕ' #'ℕ') ofSort: #'ℕ'.
+	integers addOp: #'_+' withArgs: #(#'ℕ.nz' #'ℕ') ofSort: #'ℕ.nz'.
+	integers addOp: #'_+' withArgs: #(#'ℕ' #'ℕ.nz') ofSort: #'ℕ.nz'.
+	integers addOp: #'_-' withArgs: #(#'ℤ' #'ℤ') ofSort: #'ℤ'.
+	integers addOp: #'-' withArgs: #(#'ℤ') ofSort: #'ℤ'.
+	integers addOp: #'_×' withArgs: #(#'ℤ' #'ℤ') ofSort: #'ℤ'.
+	integers addOp: #'_×' withArgs: #(#'ℕ' #'ℕ') ofSort: #'ℕ'.
+	integers addOp: #'_×' withArgs: #(#'ℕ.nz' #'ℕ.nz') ofSort: #'ℕ.nz'.
+	integers addOp: #'_×' withArgs: #(#'ℤ.nz' #'ℤ.nz') ofSort: #'ℤ.nz'.
+	integers addOp: #'_div' withArgs: #(#'ℤ' #'ℤ.nz') ofSort: #'ℤ'.
+	integers addOp: #'_div' withArgs: #(#'ℕ' #'ℕ.nz') ofSort: #'ℕ'.
+	integers addOp: #'_rem' withArgs: #(#'ℤ' #'ℤ.nz') ofSort: #'ℤ'.
+	integers addOp: #'_rem' withArgs: #(#'ℕ' #'ℕ.nz') ofSort: #'ℕ'.
+	integers addOp: #'^' withArgs: #(#'ℤ' #'ℕ.nz') ofSort: #'ℤ'.
+	integers addOp: #'^' withArgs: #(#'ℕ' #'ℕ.nz') ofSort: #'ℕ'.
+	integers addOp: #'^' withArgs: #(#'ℕ.nz' #'ℕ.nz') ofSort: #'ℕ.nz'.
+	integers addOp: #'^' withArgs: #(#'ℤ.nz' #'ℕ.nz') ofSort: #'ℤ.nz'.
+	integers addOp: #'^' withArgs: #(#'ℤ.nz' #zero) ofSort: #'ℕ.nz'.
+	integers addOp: #abs withArgs: #(#'ℤ') ofSort: #'ℕ'.
+	integers addOp: #abs withArgs: #(#'ℤ.nz') ofSort: #'ℕ.nz'.
+	"Comparison operators"
+	integers addOp: #'_=' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
+	integers addOp: #'_<' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
+	integers addOp: #'_>' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
+	integers addOp: #'_≤' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
+	integers addOp: #'_≥' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
+	"Build context"
 	integers build.
+
 ]
 
 { #category : #initialization }
@@ -136,6 +166,7 @@ LeibnizBuiltins >> createStringContext [
 	| string |
 	string := self newContextBuilderNamed: 'strings'.
 	string addSort: #string.
+	string addOp: #'_+' withArgs: #(#string #string) ofSort: #string.
 	string build.
 
 ]
@@ -145,6 +176,8 @@ LeibnizBuiltins >> createTruthContext [
 	| truth |
 	truth := self newContextBuilderNamed: 'truth'.
 	truth addSort: #boolean.
+	truth addOp: #true ofSort: #boolean.
+	truth addOp: #false ofSort: #boolean.
 	truth build.
 
 ]

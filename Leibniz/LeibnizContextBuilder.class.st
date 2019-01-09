@@ -38,11 +38,23 @@ LeibnizContextBuilder >> addOp: anOpSymbol ofSort: aSortSymbol [
 	signatureBuilder addOp: anOpSymbol ofSort: aSortSymbol.
 ]
 
+{ #category : #'defining - signature' }
+LeibnizContextBuilder >> addOp: anOpSymbol withArgs: anArgList ofSort: aSortSymbol [
+	self phase: #signature.
+	signatureBuilder addOp: anOpSymbol withArgs: anArgList ofSort: aSortSymbol.
+]
+
 { #category : #'defining - sort graph' }
 LeibnizContextBuilder >> addSort: aSymbol [
 	self phase: #sortGraph.
 	sortGraphBuilder add: aSymbol.
 
+]
+
+{ #category : #'defining - signature' }
+LeibnizContextBuilder >> addVar: aVarSymbol ofSort: aSortSymbol [
+	self phase: #signature.
+	signatureBuilder addVar: aVarSymbol ofSort: aSortSymbol.
 ]
 
 { #category : #accessing }
@@ -54,7 +66,7 @@ LeibnizContextBuilder >> build [
 { #category : #accessing }
 LeibnizContextBuilder >> context [
 	self phase: #finished.
-	^ LeibnizContext name: name sortGraph: sortGraph.
+	^ LeibnizContext name: name sortGraph: sortGraph signature: signature.
 ]
 
 { #category : #'defining - private' }

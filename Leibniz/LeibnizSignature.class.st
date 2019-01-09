@@ -22,6 +22,16 @@ LeibnizSignature class >> sortGraph: aSortGraph operators: anOperatorDictionary 
 
 ]
 
+{ #category : #copying }
+LeibnizSignature >> copy [
+	^self
+]
+
+{ #category : #copying }
+LeibnizSignature >> deepCopy [
+	^self
+]
+
 { #category : #initializing }
 LeibnizSignature >> initializeWithSortGraph: aSortGraph operators: anOperatorDictionary variables: aVariableDictionary [
 	sortGraph := aSortGraph.
@@ -29,4 +39,14 @@ LeibnizSignature >> initializeWithSortGraph: aSortGraph operators: anOperatorDic
 	variables := aVariableDictionary.
 	self beRecursivelyReadOnlyObject.
 
+]
+
+{ #category : #accessing }
+LeibnizSignature >> operators [
+	^operators
+]
+
+{ #category : #accessing }
+LeibnizSignature >> variables [
+	^variables
 ]

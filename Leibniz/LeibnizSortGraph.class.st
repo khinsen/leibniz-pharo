@@ -54,6 +54,18 @@ LeibnizSortGraph >> asSortGraphBuilder [
 
 ]
 
+{ #category : #copying }
+LeibnizSortGraph >> copy [
+	^self
+
+]
+
+{ #category : #copying }
+LeibnizSortGraph >> deepCopy [
+	^self
+
+]
+
 { #category : #accessing }
 LeibnizSortGraph >> directSubsortsOf: aSymbol [
 	^ directSubsortsOf at: aSymbol.

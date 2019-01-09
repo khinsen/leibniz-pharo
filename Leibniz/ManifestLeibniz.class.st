@@ -13,6 +13,11 @@ ManifestLeibniz class >> ruleRBCollectionMessagesToExternalObjectRuleV1FalsePosi
 ]
 
 { #category : #'code-critics' }
+ManifestLeibniz class >> ruleRBLiteralArrayContainsSuspiciousTrueFalseOrNilRuleV1FalsePositive [
+	^ #(#(#(#RGMethodDefinition #(#LeibnizBuiltinsTest #testTruth #false)) #'2019-01-09T11:47:27.30381+01:00') )
+]
+
+{ #category : #'code-critics' }
 ManifestLeibniz class >> ruleRBModifiesCollectionRuleV1FalsePositive [
 	^ #(#(#(#RGMethodDefinition #(#LeibnizSortGraph #make:subsortOf: #false)) #'2018-12-06T17:14:01.072463+01:00') )
 ]
