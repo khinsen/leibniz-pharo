@@ -20,6 +20,17 @@ LeibnizContext class >> name: aString sortGraph: aSortGraph signature: aSignatur
 
 ]
 
+{ #category : #inspecting }
+LeibnizContext >> gtInspectorComponentsIn: composite [
+	"Show a list of all components of a context"
+
+	<gtInspectorPresentationOrder: 0>
+	composite list 
+		title: 'Components';
+		display: { sortGraph . signature };
+		format: #title
+]
+
 { #category : #initializing }
 LeibnizContext >> initializeWithName: aString sortGraph: aSortGraph signature: aSignature [
 	name := aString.

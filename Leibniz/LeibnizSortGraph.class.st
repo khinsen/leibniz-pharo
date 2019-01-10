@@ -232,6 +232,12 @@ LeibnizSortGraph >> subsortsOf: aSymbol [
 ]
 
 { #category : #viewing }
+LeibnizSortGraph >> title [
+	^'sort graph'
+
+]
+
+{ #category : #viewing }
 LeibnizSortGraph >> treeView [
 	| b |
 	b := RTMondrian new.

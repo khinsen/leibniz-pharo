@@ -51,6 +51,12 @@ LeibnizSignature >> numberOfVariables [
 	^variables size
 ]
 
+{ #category : #viewing }
+LeibnizSignature >> title [
+	^'signature'
+
+]
+
 { #category : #enumerating }
 LeibnizSignature >> withOperatorsDo: aBlock [
 	operators keysAndValuesDo:
