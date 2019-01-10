@@ -74,6 +74,57 @@ LeibnizOperator >> initializeWithSymbol: aSymbol argKindConstraints: aKindConstr
 
 ]
 
+{ #category : #accessing }
+LeibnizOperator >> kind [
+	^kind
+]
+
+{ #category : #accessing }
+LeibnizOperator >> kindArity [
+	^kindArity
+]
+
+{ #category : #accessing }
+LeibnizOperator >> opSymbol [
+	^opSymbol
+]
+
+{ #category : #printing }
+LeibnizOperator >> printForArity: anArity On: aStream [
+	"Note: this is a first quick-and-dirty implementation. It will be replaced
+	 by an output formatter that also handles terms."
+	| opString |
+	opString := opSymbol asString.
+	"If the symbol starts with an underscore, it's an infix operator"
+	opString first = $_
+		ifTrue:
+			[ self assert: anArity size equals: 2.
+			  anArity first printAsLeibnizSyntaxOn: aStream.
+			  aStream nextPutAll: ' '.
+			  aStream nextPutAll: opString allButFirst.
+			  aStream nextPutAll: ' '.
+			  anArity second printAsLeibnizSyntaxOn: aStream. ]
+		ifFalse: "No support for the three special operators for now - see comment above!"
+			[ aStream nextPutAll: opString.
+			  anArity ifNotEmpty:
+			  	[ aStream nextPut: $(.
+				  anArity allButLastDo:
+					[ :each |
+						each printAsLeibnizSyntaxOn: aStream.
+						aStream nextPutAll: ', ' ].
+				  anArity last printAsLeibnizSyntaxOn: aStream.
+				  aStream nextPut: $) ]. ].
+
+]
+
+{ #category : #printing }
+LeibnizOperator >> printForArity: anArity withSort: aSort On: aStream [
+	self printForArity: anArity On: aStream.
+	aStream nextPutAll: ' : '.
+	aStream nextPutAll: aSort asString.
+
+]
+
 { #category : #printing }
 LeibnizOperator >> printOn: aStream [
 	super printOn: aStream.
@@ -87,6 +138,13 @@ LeibnizOperator >> printOn: aStream [
 	ranks size printOn: aStream.
 	aStream nextPutAll: ' ranks)'.
 
+]
+
+{ #category : #inspecting }
+LeibnizOperator >> title [
+	^String streamContents:
+		[ :stream |
+			self printForArity: kindArity On: stream. ]
 ]
 
 { #category : #enumerating }

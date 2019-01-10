@@ -32,6 +32,33 @@ LeibnizSignature >> deepCopy [
 	^self
 ]
 
+{ #category : #inspecting }
+LeibnizSignature >> gtInspectorOperatorsIn: composite [
+	"Show a list of all variables"
+
+	<gtInspectorPresentationOrder: 0>
+	composite fastTable 
+		title: 'Operators';
+		display: [ operators flatCollect: [ :each | each values ] ];
+		column: 'Name' evaluated: #title;
+		column: 'Kind' evaluated:
+			[ :each | String streamContents: [ :s | (each kind printAsLeibnizSyntaxOn: s) ] ];
+		when: [ operators isNotEmpty ]
+]
+
+{ #category : #inspecting }
+LeibnizSignature >> gtInspectorVariablesIn: composite [
+	"Show a list of all variables"
+
+	<gtInspectorPresentationOrder: 1>
+	composite fastTable 
+		title: 'Variables';
+		display: [ variables associations sorted: [ :v1 :v2 | v1 key < v2 key ] ] ;
+		column: 'Name' evaluated: [ :each | each key asString ];
+		column: 'Sort' evaluated: [ :each | each value asString ];
+		when: [ variables isNotEmpty ]
+]
+
 { #category : #initializing }
 LeibnizSignature >> initializeWithSortGraph: aSortGraph operators: anOperatorDictionary variables: aVariableDictionary [
 	sortGraph := aSortGraph.
@@ -51,7 +78,7 @@ LeibnizSignature >> numberOfVariables [
 	^variables size
 ]
 
-{ #category : #viewing }
+{ #category : #inspecting }
 LeibnizSignature >> title [
 	^'signature'
 

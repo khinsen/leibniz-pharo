@@ -231,7 +231,7 @@ LeibnizSortGraph >> subsortsOf: aSymbol [
 	^ subsortsOf at: aSymbol.
 ]
 
-{ #category : #viewing }
+{ #category : #inspecting }
 LeibnizSortGraph >> title [
 	^'sort graph'
 
