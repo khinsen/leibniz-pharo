@@ -25,9 +25,10 @@ LeibnizContext >> gtInspectorComponentsIn: composite [
 	"Show a list of all components of a context"
 
 	<gtInspectorPresentationOrder: 0>
-	composite list 
+	composite fastTree 
 		title: 'Components';
 		display: { sortGraph . signature };
+		children: [ :each | each childrenInInspector ] ;
 		format: #title
 ]
 

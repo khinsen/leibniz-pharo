@@ -28,9 +28,33 @@ LeibnizKind >> asSet [
 
 ]
 
+{ #category : #inspecting }
+LeibnizKind >> childrenInInspector [
+	^Array new
+]
+
 { #category : #private }
 LeibnizKind >> equalityTestWith: otherSorts [ 
 	^ sorts = otherSorts
+
+]
+
+{ #category : #inspecting }
+LeibnizKind >> gtInspectorNetworkViewIn: composite [
+	<gtInspectorPresentationOrder: -10>
+	composite roassal2
+		title: 'Network View';
+		initializeView: (sortGraph networkViewForSubset: sorts)
+
+
+]
+
+{ #category : #inspecting }
+LeibnizKind >> gtInspectorTreeViewIn: composite [
+	<gtInspectorPresentationOrder: -11>
+	composite roassal2
+		title: 'Tree View';
+		initializeView: (sortGraph treeViewForSubset: sorts)
 
 ]
 
@@ -85,4 +109,9 @@ LeibnizKind >> size [
 LeibnizKind >> sortGraph [
 	^sortGraph
 
+]
+
+{ #category : #inspecting }
+LeibnizKind >> title [
+	^', ' join: (self maximalSorts collect: [ : sort | sort asString ])
 ]

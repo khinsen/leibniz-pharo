@@ -25,14 +25,15 @@ LeibnizSortGraph class >> subsortRelations: aDictionary [
 ]
 
 { #category : #viewing }
-LeibnizSortGraph >> addGraphToBuilder: aBuilder [
+LeibnizSortGraph >> addGraphForSubset: aSet toBuilder: aBuilder [
 	aBuilder shape label
 		fontName: 'Arial Unicode MS';
 		color: (Color black).
-	aBuilder nodes: (self asSet collect: [:s | s asString ]).
+	aBuilder nodes: (aSet collect: [:s | s asString ]).
 	aBuilder shape arrowedLine withShorterDistanceAttachPoint.
 	self withSubsortRelationsDo:
-		[ :s1 :s2 | aBuilder edges connectFrom: (s1 asString) to: (s2 asString) ].
+		[ :s1 :s2 | ((aSet includes: s1) and: [aSet includes: s2])
+						ifTrue: [aBuilder edges connectFrom: (s1 asString) to: (s2 asString)] ].
 
 ]
 
@@ -51,6 +52,12 @@ LeibnizSortGraph >> asSet [
 { #category : #converting }
 LeibnizSortGraph >> asSortGraphBuilder [
 	^ LeibnizSortGraphBuilder new addSortGraph: self.
+
+]
+
+{ #category : #inspecting }
+LeibnizSortGraph >> childrenInInspector [
+	^kinds asArray
 
 ]
 
@@ -153,9 +160,14 @@ LeibnizSortGraph >> maximalSorts [
 
 { #category : #viewing }
 LeibnizSortGraph >> networkView [
+	self networkViewForSubset: self asSet
+]
+
+{ #category : #viewing }
+LeibnizSortGraph >> networkViewForSubset: aSet [
 	| b |
 	b := RTMondrian new.
-	self addGraphToBuilder: b.
+	self addGraphForSubset: aSet toBuilder: b.
 	b layout forceWithCharge: -2000.
 	b build.
 	^ b view
@@ -239,9 +251,14 @@ LeibnizSortGraph >> title [
 
 { #category : #viewing }
 LeibnizSortGraph >> treeView [
+	self treeViewForSubset: self asSet
+]
+
+{ #category : #viewing }
+LeibnizSortGraph >> treeViewForSubset: aSet [
 	| b |
 	b := RTMondrian new.
-	self addGraphToBuilder: b.
+	self addGraphForSubset: aSet toBuilder: b.
 	b layout dominanceTree
 		verticallyReverse;
 		horizontalGap: 20;

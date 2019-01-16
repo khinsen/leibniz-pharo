@@ -22,6 +22,11 @@ LeibnizSignature class >> sortGraph: aSortGraph operators: anOperatorDictionary 
 
 ]
 
+{ #category : #inspecting }
+LeibnizSignature >> childrenInInspector [
+	^Array new.
+]
+
 { #category : #copying }
 LeibnizSignature >> copy [
 	^self
