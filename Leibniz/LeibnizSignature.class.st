@@ -45,9 +45,10 @@ LeibnizSignature >> gtInspectorOperatorsIn: composite [
 	composite fastTable 
 		title: 'Operators';
 		display: [ operators flatCollect: [ :each | each values ] ];
-		column: 'Name' evaluated: #title;
+		column: 'Operator' evaluated: #title;
 		column: 'Kind' evaluated:
 			[ :each | String streamContents: [ :s | (each kind printAsLeibnizSyntaxOn: s) ] ];
+		column: 'Ranks' evaluated: [ :each | each size asString ];
 		when: [ operators isNotEmpty ]
 ]
 

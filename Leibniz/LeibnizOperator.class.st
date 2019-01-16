@@ -56,11 +56,46 @@ LeibnizOperator >> addArity: newArity withSort: newSort [
 
 ]
 
+{ #category : #viewing }
+LeibnizOperator >> addGraphToBuilder: aBuilder [
+	| saGraph |
+	aBuilder shape label
+		text: [ :r | (String streamContents:
+							[ :s | self printForArity: r key withSort: r value On: s ])];
+		fontName: 'Arial Unicode MS';
+		color: (Color black).
+	aBuilder nodes: ranks.
+	aBuilder shape arrowedLine withShorterDistanceAttachPoint.
+	saGraph := self minimalSubArityGraph.
+	saGraph withIndicesDo:
+		[ :edge :i :j |
+		  edge =1 ifTrue:
+				[ aBuilder edges connectFrom: (ranks at: i) to: (ranks at: j) ] ].
+]
+
 { #category : #'error signalling' }
 LeibnizOperator >> assertMonotonicity: aBlock forArity: anArity andSort: aSort [
 	self assert: aBlock
 		  description: 'new rank ', anArity printString,
 							' -> ', aSort asString, ' makes operator non-monotonic'.
+]
+
+{ #category : #inspecting }
+LeibnizOperator >> gtInspectorNetworkViewIn: composite [
+	<gtInspectorPresentationOrder: -10>
+	composite roassal2
+		title: 'Network View';
+		initializeView: self networkView.
+
+]
+
+{ #category : #inspecting }
+LeibnizOperator >> gtInspectorTreeViewIn: composite [
+	<gtInspectorPresentationOrder: -11>
+	composite roassal2
+		title: 'Tree View';
+		initializeView: self treeView.
+
 ]
 
 { #category : #initializing }
@@ -82,6 +117,36 @@ LeibnizOperator >> kind [
 { #category : #accessing }
 LeibnizOperator >> kindArity [
 	^kindArity
+]
+
+{ #category : #viewing }
+LeibnizOperator >> minimalSubArityGraph [
+	"Answer the adjacency matrix for the minimal sub-arity graph that has the
+	same connected components as the full one. This minimal graph is constructed
+	from the full one by removing all edges that are equivalent to multi-edge
+	paths."
+	| m mPower |
+	m := self subArityGraph.
+	mPower := m.
+	ranks size - 2 timesRepeat:
+		[ mPower := mPower +* m.
+		  m := m with: mPower collect: [ :a :b | b > 0 ifTrue: [ 0 ] ifFalse: [ a ] ] ].
+	"Since the graph is acyclic, the next power must be all zeros."
+	mPower := mPower +* m.
+	self assert: mPower equals: (Array2D zeros: ranks size).
+	^m
+
+]
+
+{ #category : #viewing }
+LeibnizOperator >> networkView [
+	| b |
+	b := RTMondrian new.
+	self addGraphToBuilder: b.
+	b layout forceWithCharge: -2000.
+	b build.
+	^ b view
+
 ]
 
 { #category : #accessing }
@@ -140,11 +205,41 @@ LeibnizOperator >> printOn: aStream [
 
 ]
 
+{ #category : #accessing }
+LeibnizOperator >> size [
+	^ranks size
+]
+
+{ #category : #viewing }
+LeibnizOperator >> subArityGraph [
+	| g |
+	g := Array2D new: ranks size tabulate:
+			[ :i :j | (i ~= j and: [ (ranks at: i) value < (ranks at: j) value ])
+							ifTrue: [ 1 ] ifFalse: [ 0 ] ].
+	^g
+]
+
 { #category : #inspecting }
 LeibnizOperator >> title [
 	^String streamContents:
 		[ :stream |
-			self printForArity: kindArity On: stream. ]
+			self printForArity: kindArity On: stream.
+			stream nextPutAll: ' : '.
+			self kind printAsLeibnizSyntaxOn: stream. ]
+]
+
+{ #category : #viewing }
+LeibnizOperator >> treeView [
+	| b |
+	b := RTMondrian new.
+	self addGraphToBuilder: b.
+	b layout dominanceTree
+		verticallyReverse;
+		horizontalGap: 20;
+		verticalGap: 50.
+	b build.
+	^ b view
+
 ]
 
 { #category : #enumerating }
