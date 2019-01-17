@@ -89,7 +89,7 @@ LeibnizSortGraph >> gtInspectorNetworkViewIn: composite [
 	<gtInspectorPresentationOrder: -10>
 	composite roassal2
 		title: 'Network View';
-		initializeView: self networkView.
+		initializeView: [ self networkViewForSubset: self asSet ].
 
 ]
 
@@ -98,7 +98,7 @@ LeibnizSortGraph >> gtInspectorTreeViewIn: composite [
 	<gtInspectorPresentationOrder: -11>
 	composite roassal2
 		title: 'Tree View';
-		initializeView: self treeView.
+		initializeView: [ self treeViewForSubset: self asSet ].
 
 ]
 
@@ -156,11 +156,6 @@ LeibnizSortGraph >> kinds [
 { #category : #accessing }
 LeibnizSortGraph >> maximalSorts [
 	^  maximalSorts
-]
-
-{ #category : #viewing }
-LeibnizSortGraph >> networkView [
-	self networkViewForSubset: self asSet
 ]
 
 { #category : #viewing }
@@ -247,11 +242,6 @@ LeibnizSortGraph >> subsortsOf: aSymbol [
 LeibnizSortGraph >> title [
 	^'sort graph'
 
-]
-
-{ #category : #viewing }
-LeibnizSortGraph >> treeView [
-	self treeViewForSubset: self asSet
 ]
 
 { #category : #viewing }
