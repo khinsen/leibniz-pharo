@@ -7,8 +7,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'docHash',
-		'contexts',
-		'library'
+		'contexts'
 	],
 	#category : #'Leibniz-Core'
 }
@@ -53,7 +52,6 @@ LeibnizDocument >> fromXML: anXMLElement [
 
 { #category : #initialization }
 LeibnizDocument >> initialize [
-	library := LeibnizLibrary uniqueInstance.
 	contexts := Dictionary new.
 
 ]

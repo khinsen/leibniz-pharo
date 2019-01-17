@@ -4,23 +4,8 @@ My unique instance is a special document that contains the built-in contexts of 
 Class {
 	#name : #LeibnizBuiltins,
 	#superclass : #LeibnizDocument,
-	#classInstVars : [
-		'uniqueInstance'
-	],
 	#category : #'Leibniz-Core'
 }
-
-{ #category : #'instance creation' }
-LeibnizBuiltins class >> reset [
-	<script>
-	uniqueInstance := nil.
-
-]
-
-{ #category : #'instance creation' }
-LeibnizBuiltins class >> uniqueInstance [
-	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
-]
 
 { #category : #initialization }
 LeibnizBuiltins >> createContextContext [
@@ -287,6 +272,5 @@ LeibnizBuiltins >> initialize [
 	self createStringContext.
 	self createContextContext.
 	self createFPContext.
-	library addDocument: self.
 
 ]

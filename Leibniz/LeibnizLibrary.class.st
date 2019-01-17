@@ -49,6 +49,11 @@ LeibnizLibrary >> addDocument: aDocument [
 ]
 
 { #category : #accessing }
+LeibnizLibrary >> builtins [
+	^self documentWithHash: (SHA256 hashMessage: 'builtins') hex
+]
+
+{ #category : #accessing }
 LeibnizLibrary >> contextNamed: aContextName inDocumentWithHash: aDocHash [
 	| doc |
 	doc := self documentWithHash: aDocHash.
@@ -82,5 +87,5 @@ LeibnizLibrary >> fileWithHash: aString [
 { #category : #initialization }
 LeibnizLibrary >> initialize [
 	documents := Dictionary new.
-
+	self addDocument: LeibnizBuiltins new.
 ]
