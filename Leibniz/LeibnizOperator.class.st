@@ -69,7 +69,7 @@ LeibnizOperator >> addGraphToBuilder: aBuilder [
 	saGraph := self minimalSubArityGraph.
 	saGraph withIndicesDo:
 		[ :edge :i :j |
-		  edge =1 ifTrue:
+		  edge = 1 ifTrue:
 				[ aBuilder edges connectFrom: (ranks at: i) to: (ranks at: j) ] ].
 ]
 
@@ -143,7 +143,7 @@ LeibnizOperator >> networkView [
 	| b |
 	b := RTMondrian new.
 	self addGraphToBuilder: b.
-	b layout forceWithCharge: -2000.
+	b layout forceWithCharge: (ranks size * 1000 - 15000 min: -2000).
 	b build.
 	^ b view
 
@@ -212,11 +212,11 @@ LeibnizOperator >> size [
 
 { #category : #viewing }
 LeibnizOperator >> subArityGraph [
-	| g |
-	g := Array2D new: ranks size tabulate:
-			[ :i :j | (i ~= j and: [ (ranks at: i) value < (ranks at: j) value ])
-							ifTrue: [ 1 ] ifFalse: [ 0 ] ].
-	^g
+	^Array2D new: ranks size tabulate:
+		[ :i :j |
+			(i ~= j and: [ (ranks at: i) key <= (ranks at: j) key ])
+				ifTrue: [ 1 ] ifFalse: [ 0 ] ]
+
 ]
 
 { #category : #inspecting }
