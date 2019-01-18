@@ -10,7 +10,7 @@ Class {
 	#instVars : [
 		'sortGraph'
 	],
-	#category : #'Leibniz-2-Signature'
+	#category : #'Leibniz-2-Signatures'
 }
 
 { #category : #comparing }

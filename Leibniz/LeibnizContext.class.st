@@ -9,7 +9,7 @@ Class {
 		'sortGraph',
 		'signature'
 	],
-	#category : #'Leibniz-5-Context'
+	#category : #'Leibniz-5-Contexts'
 }
 
 { #category : #'instance creation' }

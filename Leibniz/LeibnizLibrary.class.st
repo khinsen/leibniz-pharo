@@ -11,7 +11,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Leibniz-6-Document'
+	#category : #'Leibniz-6-Documents'
 }
 
 { #category : #'instance creation' }
