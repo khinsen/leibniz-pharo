@@ -8,7 +8,7 @@ Class {
 		'sameKindSortsOf',
 		'directSubsortsOf'
 	],
-	#category : #'Leibniz-Core'
+	#category : #'Leibniz-1-SortGraph'
 }
 
 { #category : #adding }

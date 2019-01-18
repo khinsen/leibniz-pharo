@@ -14,7 +14,7 @@ Class {
 		'signatureBuilder',
 		'signature'
 	],
-	#category : #'Leibniz-Core'
+	#category : #'Leibniz-5-Context'
 }
 
 { #category : #'instance creation' }

@@ -11,7 +11,7 @@ Class {
 		'sorts',
 		'maximalSorts'
 	],
-	#category : #'Leibniz-Core'
+	#category : #'Leibniz-1-SortGraph'
 }
 
 { #category : #'instance creation' }

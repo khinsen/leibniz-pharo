@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'kind'
 	],
-	#category : #'Leibniz-Core'
+	#category : #'Leibniz-2-Signature'
 }
 
 { #category : #'instance creation' }

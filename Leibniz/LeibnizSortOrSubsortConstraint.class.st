@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'sort'
 	],
-	#category : #'Leibniz-Core'
+	#category : #'Leibniz-2-Signature'
 }
 
 { #category : #'instance creation' }

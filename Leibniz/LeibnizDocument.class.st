@@ -9,7 +9,7 @@ Class {
 		'docHash',
 		'contexts'
 	],
-	#category : #'Leibniz-Core'
+	#category : #'Leibniz-6-Document'
 }
 
 { #category : #'XML import' }

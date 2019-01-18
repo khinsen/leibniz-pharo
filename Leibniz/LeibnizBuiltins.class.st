@@ -4,7 +4,7 @@ My unique instance is a special document that contains the built-in contexts of 
 Class {
 	#name : #LeibnizBuiltins,
 	#superclass : #LeibnizDocument,
-	#category : #'Leibniz-Core'
+	#category : #'Leibniz-6-Document'
 }
 
 { #category : #initialization }
