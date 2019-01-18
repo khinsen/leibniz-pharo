@@ -10,6 +10,15 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
+{ #category : #printing }
+LeibnizRationalNumberTerm >> printAsLeibnizSyntaxOn: aStream [
+	"Remove the parentheses that Pharo adds around fractions."
+	value isInteger
+		ifTrue: [ value printOn: aStream ]
+		ifFalse: [ aStream nextPutAll: value asString allButFirst allButLast ]
+
+]
+
 { #category : #accessing }
 LeibnizRationalNumberTerm >> sort [
 	value = 0 ifTrue: [ ^#zero ].

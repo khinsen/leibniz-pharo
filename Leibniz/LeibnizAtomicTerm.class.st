@@ -35,7 +35,7 @@ LeibnizAtomicTerm >> printAsLeibnizSyntaxOn: aStream [
 LeibnizAtomicTerm >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
-	value printOn: aStream.
+	self printAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: $).
 
 ]
