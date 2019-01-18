@@ -15,6 +15,15 @@ LeibnizTermTest >> setUp [
 ]
 
 { #category : #testing }
+LeibnizTermTest >> testContexts [
+	| c t |
+	c := builtins contextNamed: 'contexts'.
+	t := LeibnizContextTerm value: c inContext: c.
+	self assert: t sort equals: #context.
+
+]
+
+{ #category : #testing }
 LeibnizTermTest >> testFPNumbers [
 	| c t |
 	c := builtins contextNamed: 'IEEE-floating-point'.
