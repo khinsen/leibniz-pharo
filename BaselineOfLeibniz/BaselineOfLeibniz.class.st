@@ -17,6 +17,10 @@ BaselineOfLeibniz >> baseline: spec [
 			with: [ spec repository: 'github://ObjectProfile/Roassal2:master/src' ].
 
 		spec
+			baseline: 'PetitParser' 
+			with: [ spec repository: 'github://moosetechnology/PetitParser:master/src' ].
+
+		spec
 			project: 'XMLParser'
 			with: [ spec
 						className: #ConfigurationOfXMLParser;
