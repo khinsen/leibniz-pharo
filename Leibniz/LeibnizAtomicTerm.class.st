@@ -11,16 +11,16 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizAtomicTerm class >> value: aString inContext: aContext [
+LeibnizAtomicTerm class >> value: aString forSignature: aSignature [
 	^self basicNew
-			initializeWithValue: aString inContext: aContext;
+			initializeWithValue: aString forSignature: aSignature;
 			yourself
 
 ]
 
 { #category : #initialization }
-LeibnizAtomicTerm >> initializeWithValue: aString inContext: aContext [
-	context := aContext.
+LeibnizAtomicTerm >> initializeWithValue: aString forSignature: aSignature [
+	context := aSignature.
 	value := aString.
 
 ]

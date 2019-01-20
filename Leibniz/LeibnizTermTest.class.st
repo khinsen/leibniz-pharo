@@ -18,7 +18,7 @@ LeibnizTermTest >> setUp [
 LeibnizTermTest >> testContexts [
 	| c t |
 	c := builtins contextNamed: 'contexts'.
-	t := LeibnizContextTerm value: c inContext: c.
+	t := LeibnizContextTerm value: c forSignature: c signature.
 	self assert: t sort equals: #context.
 
 ]
@@ -27,7 +27,7 @@ LeibnizTermTest >> testContexts [
 LeibnizTermTest >> testFPNumbers [
 	| c t |
 	c := builtins contextNamed: 'IEEE-floating-point'.
-	t := [ :x | LeibnizFPNumberTerm value: x inContext: c ].
+	t := [ :x | LeibnizFPNumberTerm value: x forSignature: c signature ].
 	self assert: (t value: 0.0) sort equals: #'FP64-number'.
 	self assert: (t value: 2.0) sort equals: #'FP64-number'.
 	self assert: (t value: -2.0) sort equals: #'FP64-number'.
@@ -41,7 +41,7 @@ LeibnizTermTest >> testFPNumbers [
 LeibnizTermTest >> testIntegers [
 	| c t |
 	c := builtins contextNamed: 'integers'.
-	t := [ :x | LeibnizIntegerTerm value: x inContext: c ].
+	t := [ :x | LeibnizIntegerTerm value: x forSignature: c signature ].
 	self assert: (t value: 2) sort equals: #'ℕ.nz'.
 	self assert: (t value: -2) sort equals: #'ℤ.nz'.
 	self assert: (t value: 0) sort equals: #zero.
@@ -52,7 +52,7 @@ LeibnizTermTest >> testIntegers [
 LeibnizTermTest >> testRationalNumbers [
 	| c t |
 	c := builtins contextNamed: 'rational-numbers'.
-	t := [ :x | LeibnizRationalNumberTerm value: x inContext: c ].
+	t := [ :x | LeibnizRationalNumberTerm value: x forSignature: c signature ].
 	self assert: (t value: 0) sort equals: #zero.
 	self assert: (t value: 2) sort equals: #'ℕ.nz'.
 	self assert: (t value: -2) sort equals: #'ℤ.nz'.
@@ -65,7 +65,7 @@ LeibnizTermTest >> testRationalNumbers [
 LeibnizTermTest >> testStrings [
 	| c t |
 	c := builtins contextNamed: 'strings'.
-	t := LeibnizStringTerm value: 'abc' inContext: c.
+	t := LeibnizStringTerm value: 'abc' forSignature: c signature.
 	self assert: t sort equals: #string.
 
 ]
