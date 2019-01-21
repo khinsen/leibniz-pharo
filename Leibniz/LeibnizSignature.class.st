@@ -84,6 +84,19 @@ LeibnizSignature >> numberOfVariables [
 	^variables size
 ]
 
+{ #category : #accessing }
+LeibnizSignature >> sortOfOp: aSymbol withArgs: aSortArray [
+	| kindArity |
+	kindArity := LeibnizArity sortGraph: sortGraph
+									  argSortConstraints: (aSortArray collect: [ :s | sortGraph kindOf: s]).
+	operators at: aSymbol
+		ifPresent: [ :ops | ops at: kindArity
+									ifPresent: [ :op | ^ op sortForArgSorts: aSortArray ]
+									ifAbsent: [ ^ nil ]]
+		ifAbsent: [ ^ nil ].
+
+]
+
 { #category : #inspecting }
 LeibnizSignature >> title [
 	^'signature'
@@ -112,12 +125,11 @@ LeibnizSignature >> withVariablesDo: aBlock [
 LeibnizSignature >> zeroArgTermNamed: aSymbol [
 	variables at: aSymbol
 		ifPresent: [ :sort | ^ LeibnizVarTerm symbol: aSymbol sort: sort forSignature: self ].
-	operators at: aSymbol
-		ifPresent: [ :ops | ops at: (LeibnizArity sortGraph: sortGraph size: 0)
-									ifPresent: [ :op | ^ LeibnizOpTerm symbol: aSymbol args: #()
-																				 sort: (op sortForArity: #())
-																				 forSignature: self ]
-									ifAbsent: [ ^ nil ] ]
-		ifAbsent: [ ^ nil ].
+	(self sortOfOp: aSymbol withArgs: #())
+		ifNil: [ ^ nil ]
+		ifNotNil: [ :sort | ^ LeibnizOpTerm symbol: aSymbol
+													  args: #()
+													  sort: sort
+													  forSignature: self ].
 
 ]

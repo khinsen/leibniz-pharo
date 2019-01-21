@@ -206,9 +206,10 @@ LeibnizOperator >> printOn: aStream [
 ]
 
 { #category : #accessing }
-LeibnizOperator >> rankForArity: anArity [
+LeibnizOperator >> rankForArgSorts: aSortArray [
 	"TODO"
-	anArity ifEmpty: [ ^ ranks first ].
+	aSortArray ifEmpty: [ self assert: ranks size equals: 1 .
+								 ^ ranks first ].
 	self notYetImplemented
 ]
 
@@ -218,8 +219,8 @@ LeibnizOperator >> size [
 ]
 
 { #category : #accessing }
-LeibnizOperator >> sortForArity: anArity [
-	^ (self rankForArity: anArity) value
+LeibnizOperator >> sortForArgSorts: aSortArray [
+	^ (self rankForArgSorts: aSortArray) value
 ]
 
 { #category : #viewing }

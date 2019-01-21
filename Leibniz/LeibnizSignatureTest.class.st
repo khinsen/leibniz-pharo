@@ -27,12 +27,14 @@ LeibnizSignatureTest >> setUp [
 
 { #category : #testing }
 LeibnizSignatureTest >> testArities [
-	self assert: ((builder arityFor: #(#B)) <= (builder arityFor: #(#A))).
-	self deny:   ((builder arityFor: #(#A)) <= (builder arityFor: #(#B))).
-	self assert: ((builder arityFor: #(#B #Y)) <= (builder arityFor: #(#A #X))).
-	self deny: 	 ((builder arityFor: #(#B #X)) <= (builder arityFor: #(#A #Y))).
-	self deny: 	 ((builder arityFor: #(#B)) <= (builder arityFor: #(#X))).
-	self deny: 	 ((builder arityFor: #(#A #B)) <= (builder arityFor: #(#X))).
+	| arityFor |
+	arityFor := [ :args | LeibnizArity sortGraph: sortGraph argSorts: args ].
+	self assert: ((arityFor value: #(#B)) <= (arityFor value: #(#A))).
+	self deny:   ((arityFor value: #(#A)) <= (arityFor value: #(#B))).
+	self assert: ((arityFor value: #(#B #Y)) <= (arityFor value: #(#A #X))).
+	self deny: 	 ((arityFor value: #(#B #X)) <= (arityFor value: #(#A #Y))).
+	self deny: 	 ((arityFor value: #(#B)) <= (arityFor value: #(#X))).
+	self deny: 	 ((arityFor value: #(#A #B)) <= (arityFor value: #(#X))).
 
 ]
 

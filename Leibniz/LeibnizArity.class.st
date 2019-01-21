@@ -15,9 +15,17 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizArity class >> sortGraph: aSortGraph size: anInteger [
-	^(self basicNew: anInteger)
-			initializeWithSortGraph: aSortGraph;
+LeibnizArity class >> sortGraph: aSortGraph argSortConstraints: aConstraintArray [
+	^(self basicNew: aConstraintArray size)
+			initializeWithSortGraph: aSortGraph argSortConstraints: aConstraintArray;
+			yourself
+
+]
+
+{ #category : #'instance creation' }
+LeibnizArity class >> sortGraph: aSortGraph argSorts: aSortArray [
+	^(self basicNew: aSortArray size)
+			initializeWithSortGraph: aSortGraph argSorts: aSortArray;
 			yourself
 
 ]
@@ -41,17 +49,28 @@ LeibnizArity >> asArgSorts [
 ]
 
 { #category : #initializing }
-LeibnizArity >> initializeWithSortGraph: aSortGraph [
+LeibnizArity >> initializeWithSortGraph: aSortGraph argSortConstraints: aConstraintArray [
 	sortGraph := aSortGraph.
+	self fillFrom: aConstraintArray with: [ :x | x ].
+	self beRecursivelyReadOnlyObject.
+	^self
+
+]
+
+{ #category : #initializing }
+LeibnizArity >> initializeWithSortGraph: aSortGraph argSorts: aSortArray [
+	sortGraph := aSortGraph.
+	aSortArray collect: [ :s | LeibnizSortOrSubsortConstraint sortGraph: sortGraph sort: s ]
+				  into: self.
+	self beRecursivelyReadOnlyObject.
+	^self
 
 ]
 
 { #category : #operating }
 LeibnizArity >> liftToKindLevel [
-	| kindArity |
-	kindArity := self class sortGraph: sortGraph size: self size.
-	self collect: [ :sc | sc kindConstraint ] into: kindArity.
-	^kindArity.
+	^ self class sortGraph: sortGraph
+					 argSortConstraints: (self collect: [ :sc | sc kindConstraint ]).
 
 ]
 

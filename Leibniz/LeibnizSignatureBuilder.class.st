@@ -33,7 +33,7 @@ LeibnizSignatureBuilder >> addOp: anOpSymbol withArgs: anArgList ofSort: aSortSy
 		[ sort := variables at: anOpSymbol ifAbsent: nil.
 		  self assert: sort isNil
 				 description: 'conflicting earlier variable definition with sort ', sort asString. ].
-	arity := self arityFor: anArgList.
+	arity := LeibnizArity sortGraph: sortGraph argSorts: anArgList.
 	kindArity := arity liftToKindLevel.
 	operator := (operators at: anOpSymbol
 								  ifAbsentPut: [ Dictionary new ])
@@ -59,7 +59,7 @@ LeibnizSignatureBuilder >> addVar: aVarSymbol ofSort: aSortSymbol [
 	| op sort |
 	op := operators at: aVarSymbol ifAbsent: nil.
 	op ifNotNil:
-		[ sort := op at: (self arityFor: #()) ifAbsent: nil.
+		[ sort := op at: (LeibnizArity sortGraph: sortGraph argSorts: #()) ifAbsent: nil.
 		  self assert: sort isNil
 				 description: 'conflicting earlier operator definition with sort', sort asString ].
 	sort := variables at: aVarSymbol ifAbsentPut: aSortSymbol.
@@ -73,17 +73,6 @@ LeibnizSignatureBuilder >> addVarsFromSignature: aSignature [
 	aSignature withVariablesDo:
 		[ :symbol :sort |
 		  self addVar: symbol ofSort:  sort ].
-
-]
-
-{ #category : #private }
-LeibnizSignatureBuilder >> arityFor: anArgList [
-	| arity |
-	arity := LeibnizArity sortGraph: sortGraph size: anArgList size.
-	anArgList collect: [ :s | LeibnizSortOrSubsortConstraint sortGraph: sortGraph sort: s ]
-				 into: arity.
-	arity beRecursivelyReadOnlyObject.
-	^arity
 
 ]
 
