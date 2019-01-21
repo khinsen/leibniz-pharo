@@ -5,12 +5,21 @@ Class {
 	#name : #LeibnizTermParser,
 	#superclass : #PPCompositeParser,
 	#instVars : [
-		'context',
 		'integer',
 		'rationalNumber',
 		'atomic',
 		'string',
-		'fpNumber'
+		'fpNumber',
+		'parenthesized',
+		'simpleOperator',
+		'term',
+		'simple',
+		'identifier',
+		'identifierCharacter',
+		'signature',
+		'fpIntegerPart',
+		'fpFractionalPart',
+		'fpExponentPart'
 	],
 	#category : #'Leibniz-3-Terms'
 }
@@ -35,12 +44,36 @@ LeibnizTermParser >> atomic [
 ]
 
 { #category : #productions }
+LeibnizTermParser >> fpExponentPart [
+	^ $e asParser , fpIntegerPart
+]
+
+{ #category : #productions }
+LeibnizTermParser >> fpFractionalPart [
+	^ $. asParser , #digit asParser plus optional
+
+]
+
+{ #category : #productions }
+LeibnizTermParser >> fpIntegerPart [
+	^ $- asParser optional , #digit asParser plus
+
+]
+
+{ #category : #productions }
 LeibnizTermParser >> fpNumber [
-	^ ($- asParser optional , #digit asParser plus ,
-			($. asParser , (#digit asParser plus) ,
-				($e asParser , $- asParser optional , #digit asParser plus) optional) optional)
-		flatten trim 
-		==> [ :value | LeibnizFPNumberTerm value: value asNumber inContext: context ]
+	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
+			/ (fpIntegerPart , fpExponentPart))
+		flatten trim
+		"Converting the string to a float requires some trickery:
+		 - Pharo doesn't allow a dot followed by an exponent without any fractional part.
+			Workaround: replace '.e' by '.0e'
+		 - In Pharo, a number with an exponent but without a fractional part is an integer, not a float.
+			Workaround: convert the converted string explicitly to a float."
+		==> [ :value |
+				LeibnizFPNumberTerm value: (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat
+										 forSignature: signature ]
+
 ]
 
 { #category : #productions }
