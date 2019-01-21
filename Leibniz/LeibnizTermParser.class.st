@@ -101,7 +101,9 @@ LeibnizTermParser >> parenthesized [
 
 { #category : #productions }
 LeibnizTermParser >> rationalNumber [
-	^ ($- asParser optional , #digit asParser plus , $/ asParser , #digit asParser plus) flatten trim 
+	^ ($- asParser optional , #digit asParser plus ,
+			$/ asParser ,
+			$0 asParser not , #digit asParser star) flatten trim 
 		==> [ :value | LeibnizRationalNumberTerm value: (Fraction readFromString: value)
 															 forSignature: signature ]
 ]
@@ -114,12 +116,6 @@ LeibnizTermParser >> setSignature: aSignature [
 { #category : #productions }
 LeibnizTermParser >> simple [
 	^ atomic / parenthesized / zeroArgTerm
-]
-
-{ #category : #productions }
-LeibnizTermParser >> simpleOperator [
-	^ identifier flatten trim
-		==> [ :name | signature zeroArgOpOrVarNamed: name asSymbol ]
 ]
 
 { #category : #accessing }
@@ -137,4 +133,10 @@ LeibnizTermParser >> string [
 { #category : #productions }
 LeibnizTermParser >> term [
 	^ simple
+]
+
+{ #category : #productions }
+LeibnizTermParser >> zeroArgTerm [
+	^ identifier flatten trim
+		==> [ :name | signature zeroArgOpOrVarNamed: name asSymbol ]
 ]
