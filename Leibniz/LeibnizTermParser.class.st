@@ -24,17 +24,17 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
-{ #category : #'instance creation' }
-LeibnizTermParser class >> context: aContext [
-	^self new
-			setContext: aContext;
-			yourself
+{ #category : #accessing }
+LeibnizTermParser class >> ignoredNames [
+	^ super ignoredNames copyWith: #signature
 
 ]
 
-{ #category : #accessing }
-LeibnizTermParser class >> ignoredNames [
-	^ super ignoredNames copyWith: #context
+{ #category : #'instance creation' }
+LeibnizTermParser class >> signature: aSignature [
+	^self new
+			setSignature: aSignature;
+			yourself
 
 ]
 
@@ -77,31 +77,64 @@ LeibnizTermParser >> fpNumber [
 ]
 
 { #category : #productions }
+LeibnizTermParser >> identifier [
+	^ (identifierCharacter , (identifierCharacter / #digit asParser / $. asParser) plus) flatten
+
+]
+
+{ #category : #productions }
+LeibnizTermParser >> identifierCharacter [
+	^ #letter asParser
+]
+
+{ #category : #productions }
 LeibnizTermParser >> integer [
 	^ ($- asParser optional , #digit asParser plus) flatten trim 
-		==> [ :value | LeibnizIntegerTerm value: value asNumber inContext: context ]
+		==> [ :value | LeibnizIntegerTerm value: value asNumber forSignature: signature ]
+]
+
+{ #category : #productions }
+LeibnizTermParser >> parenthesized [
+	^ $( asParser , term, $) asParser trim
+		==> [ :nodes | nodes at: 2 ]
 ]
 
 { #category : #productions }
 LeibnizTermParser >> rationalNumber [
 	^ ($- asParser optional , #digit asParser plus , $/ asParser , #digit asParser plus) flatten trim 
 		==> [ :value | LeibnizRationalNumberTerm value: (Fraction readFromString: value)
-															 inContext: context ]
+															 forSignature: signature ]
 ]
 
 { #category : #initialization }
-LeibnizTermParser >> setContext: aContext [
-	context := aContext
+LeibnizTermParser >> setSignature: aSignature [
+	signature := aSignature
+]
+
+{ #category : #productions }
+LeibnizTermParser >> simple [
+	^ atomic / parenthesized / simpleOperator
+]
+
+{ #category : #productions }
+LeibnizTermParser >> simpleOperator [
+	^ identifier flatten trim
+		==> [ :name | signature zeroArgOpOrVarNamed: name asSymbol ]
 ]
 
 { #category : #accessing }
 LeibnizTermParser >> start [
-	^ atomic end
+	^ term end
 ]
 
 { #category : #productions }
 LeibnizTermParser >> string [
 	^ ($" asParser , $" asParser negate plus , $" asParser) flatten trim 
 		==> [ :value | LeibnizStringTerm value: (value copyFrom: 2 to: value size - 1)
-													inContext: context ]
+													forSignature: signature ]
+]
+
+{ #category : #productions }
+LeibnizTermParser >> term [
+	^ simple
 ]

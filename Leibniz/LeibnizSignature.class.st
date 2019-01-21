@@ -107,3 +107,15 @@ LeibnizSignature >> withVariablesDo: aBlock [
 	variables associationsDo: [ :v | aBlock value: v key value: v value ]
 
 ]
+
+{ #category : #accessing }
+LeibnizSignature >> zeroArgOpOrVarNamed: aSymbol [
+	variables at: aSymbol
+		ifPresent: [ :sort | ^ { #variable . sort } ].
+	operators at: aSymbol
+		ifPresent: [ :ops | ops at: (LeibnizArity sortGraph: sortGraph size: 0)
+									ifPresent: [ :op | ^ { #operator . op sortForArity: #() } ]
+									ifAbsent: [ ^ nil ] ]
+		ifAbsent: [ ^ nil ].
+
+]

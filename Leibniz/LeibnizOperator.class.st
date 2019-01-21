@@ -206,8 +206,20 @@ LeibnizOperator >> printOn: aStream [
 ]
 
 { #category : #accessing }
+LeibnizOperator >> rankForArity: anArity [
+	"TODO"
+	anArity ifEmpty: [ ^ ranks first ].
+	self notYetImplemented
+]
+
+{ #category : #accessing }
 LeibnizOperator >> size [
 	^ranks size
+]
+
+{ #category : #accessing }
+LeibnizOperator >> sortForArity: anArity [
+	^ (self rankForArity: anArity) value
 ]
 
 { #category : #viewing }
