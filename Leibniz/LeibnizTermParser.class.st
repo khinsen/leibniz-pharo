@@ -125,7 +125,7 @@ LeibnizTermParser >> start [
 
 { #category : #productions }
 LeibnizTermParser >> string [
-	^ ($" asParser , $" asParser negate plus , $" asParser) flatten trim 
+	^ ($" asParser , $" asParser negate star , $" asParser) flatten trim 
 		==> [ :value | LeibnizStringTerm value: (value copyFrom: 2 to: value size - 1)
 													forSignature: signature ]
 ]

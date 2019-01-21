@@ -24,6 +24,11 @@ LeibnizTermParserTest >> rationalNumberTerm: aFraction [
 	^ LeibnizRationalNumberTerm value: aFraction forSignature: nil
 ]
 
+{ #category : #'term construction' }
+LeibnizTermParserTest >> stringTerm: aString [
+	^ LeibnizStringTerm value: aString forSignature: nil
+]
+
 { #category : #testing }
 LeibnizTermParserTest >> testNumbers [
 	#(#integer #atomic #simple #term) do:
@@ -70,5 +75,21 @@ LeibnizTermParserTest >> testNumbers [
 
 	self fail: '123' rule: #fpNumber.
 	self fail: 'abc' rule: #fpNumber.
+
+]
+
+{ #category : #testing }
+LeibnizTermParserTest >> testStrings [
+	self parse: '"abc"' rule: #string.
+	self assert: result equals: (self stringTerm: 'abc').
+	self parse: '"123"' rule: #string.
+	self assert: result equals: (self stringTerm: '123').
+	self parse: '"äéα"' rule: #string.
+	self assert: result equals: (self stringTerm: 'äéα').
+	self parse: '""' rule: #string.
+	self assert: result equals: (self stringTerm: '').
+
+	self fail: 'abc' rule: #string.
+	self fail: '123' rule: #string.
 
 ]
