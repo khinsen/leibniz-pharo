@@ -74,6 +74,19 @@ LeibnizSignature >> initializeWithSortGraph: aSortGraph operators: anOperatorDic
 
 ]
 
+{ #category : #'term construction' }
+LeibnizSignature >> nonZeroArgTermNamed: aSymbol withArgs: aTermArray [
+	| argSorts |
+	argSorts := aTermArray collect: [ :t | t sort ].
+	(self sortOfOp: aSymbol withArgSorts: argSorts)
+		ifNil: [ ^ nil ]
+		ifNotNil: [ :sort | ^ LeibnizOpTerm symbol: aSymbol
+													  args: aTermArray
+													  sort: sort
+													  forSignature: self ].
+
+]
+
 { #category : #accessing }
 LeibnizSignature >> numberOfOperators [
 	^operators size
@@ -111,7 +124,7 @@ LeibnizSignature >> sortGraph [
 ]
 
 { #category : #accessing }
-LeibnizSignature >> sortOfOp: aSymbol withArgs: aSortArray [
+LeibnizSignature >> sortOfOp: aSymbol withArgSorts: aSortArray [
 	(self opNamed: aSymbol withArgs: aSortArray)
 		ifNil: [ ^ nil ]
 		ifNotNil: [ :op | ^ op sortForArgSorts: aSortArray ]
@@ -146,7 +159,7 @@ LeibnizSignature >> withVariablesDo: aBlock [
 LeibnizSignature >> zeroArgTermNamed: aSymbol [
 	variables at: aSymbol
 		ifPresent: [ :sort | ^ LeibnizVarTerm symbol: aSymbol sort: sort forSignature: self ].
-	(self sortOfOp: aSymbol withArgs: #())
+	(self sortOfOp: aSymbol withArgSorts: #())
 		ifNil: [ ^ nil ]
 		ifNotNil: [ :sort | ^ LeibnizOpTerm symbol: aSymbol
 													  args: #()

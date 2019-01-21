@@ -38,6 +38,22 @@ LeibnizTermTest >> testFPNumbers [
 ]
 
 { #category : #testing }
+LeibnizTermTest >> testIntegerArithmetic [
+	| c i t |
+	c := builtins contextNamed: 'integers'.
+	i := [ :x | LeibnizIntegerTerm value: x forSignature: c signature ].
+	t := c signature nonZeroArgTermNamed: #abs withArgs: { (i value: 2) }.
+	self assert: t sort equals: #'ℕ.nz'.
+	t := c signature nonZeroArgTermNamed: #abs withArgs: { (i value: 0) }.
+	self assert: t sort equals: #'ℕ'.
+	t := c signature nonZeroArgTermNamed: #'_+' withArgs: { (i value: 0) . (i value: 2)}.
+	self assert: t sort equals: #'ℕ.nz'.
+	t := c signature nonZeroArgTermNamed: #'_+' withArgs: { (i value: -2) . (i value: 2)}.
+	self assert: t sort equals: #'ℤ'.
+
+]
+
+{ #category : #testing }
 LeibnizTermTest >> testIntegers [
 	| c t |
 	c := builtins contextNamed: 'integers'.
@@ -67,5 +83,16 @@ LeibnizTermTest >> testStrings [
 	c := builtins contextNamed: 'strings'.
 	t := LeibnizStringTerm value: 'abc' forSignature: c signature.
 	self assert: t sort equals: #string.
+
+]
+
+{ #category : #testing }
+LeibnizTermTest >> testTruth [
+	| c t |
+	c := builtins contextNamed: 'truth'.
+	t := c signature zeroArgTermNamed: #true.
+	self assert: t sort equals: #boolean.
+	t := c signature zeroArgTermNamed: #false.
+	self assert: t sort equals: #boolean.
 
 ]

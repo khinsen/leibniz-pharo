@@ -38,6 +38,9 @@ LeibnizTermParserTest >> setUp [
 	b := LeibnizSignatureBuilder sortGraph: sg.
 	b addVar: #aVar ofSort: #A.
 	b addOp: #aZeroArgOp ofSort: #B.
+	b addOp: #aOneArgOp withArgs: #(#A) ofSort: #A.
+	b addOp: #aOneArgOp withArgs: #(#B) ofSort: #B.
+	b addOp: #aTwoArgOp withArgs: #(#A #A) ofSort: #A.
 	parser setSignature: b signature.
 
 ]
@@ -93,6 +96,29 @@ LeibnizTermParserTest >> testNumbers [
 
 	self fail: '123' rule: #fpNumber.
 	self fail: 'abc' rule: #fpNumber.
+
+]
+
+{ #category : #testing }
+LeibnizTermParserTest >> testPrefixTerms [
+	self parse: 'aOneArgOp(aZeroArgOp)' rule: #prefixOpTerm.
+	self assert: result
+		  equals: (parser signature nonZeroArgTermNamed: #aOneArgOp
+											withArgs: { parser signature zeroArgTermNamed: #aZeroArgOp }).
+	self assert: result sort equals: #B.
+
+	self parse: 'aOneArgOp(aVar)' rule: #prefixOpTerm.
+	self assert: result
+		  equals: (parser signature nonZeroArgTermNamed: #aOneArgOp
+											withArgs: { parser signature zeroArgTermNamed: #aVar }).
+	self assert: result sort equals: #A.
+
+	self parse: 'aTwoArgOp(aZeroArgOp, aZeroArgOp)' rule: #prefixOpTerm.
+	self assert: result
+		  equals: (parser signature nonZeroArgTermNamed: #aTwoArgOp
+											withArgs: { (parser signature zeroArgTermNamed: #aZeroArgOp) .
+															(parser signature zeroArgTermNamed: #aZeroArgOp) }).
+	self assert: result sort equals: #A.
 
 ]
 

@@ -55,10 +55,10 @@ LeibnizSignatureTest >> testBasics [
 	self assert: (s ranksMatchingfOp: #foo withArgs: #(#X)) size equals: 1.
 	self assert: (s ranksMatchingfOp: #foo withArgs: #(#Y)) size equals: 1.
 	self assert: (s ranksMatchingfOp: #foo withArgs: #(#V)) size equals: 0.
-	self assert: (s sortOfOp: #foo withArgs: #(#A)) equals: #A.
-	self assert: (s sortOfOp: #foo withArgs: #(#B)) equals: #B.
-	self assert: (s sortOfOp: #foo withArgs: #(#Y)) equals: #X.
-	self assert: (s sortOfOp: #foo withArgs: #(#V)) equals: (s sortGraph kindOf: #V).
+	self assert: (s sortOfOp: #foo withArgSorts: #(#A)) equals: #A.
+	self assert: (s sortOfOp: #foo withArgSorts: #(#B)) equals: #B.
+	self assert: (s sortOfOp: #foo withArgSorts: #(#Y)) equals: #X.
+	self assert: (s sortOfOp: #foo withArgSorts: #(#V)) equals: (s sortGraph kindOf: #V).
 
 ]
 

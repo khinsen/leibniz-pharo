@@ -19,7 +19,8 @@ Class {
 		'signature',
 		'fpIntegerPart',
 		'fpFractionalPart',
-		'fpExponentPart'
+		'fpExponentPart',
+		'prefixOpTerm'
 	],
 	#category : #'Leibniz-3-Terms'
 }
@@ -78,7 +79,7 @@ LeibnizTermParser >> fpNumber [
 
 { #category : #productions }
 LeibnizTermParser >> identifier [
-	^ (identifierCharacter , (identifierCharacter / #digit asParser / $. asParser) plus) flatten
+	^ (identifierCharacter , (identifierCharacter / #digit asParser / $. asParser) plus)
 
 ]
 
@@ -97,6 +98,20 @@ LeibnizTermParser >> integer [
 LeibnizTermParser >> parenthesized [
 	^ $( asParser , term, $) asParser trim
 		==> [ :nodes | nodes at: 2 ]
+]
+
+{ #category : #grammar }
+LeibnizTermParser >> prefixOpTerm [
+	^ identifier , $( asParser ,
+	 (term separatedBy: $, asParser trim) optional ,
+	 $) asParser
+	==> [ :nodes |
+			| symbol args |
+			symbol := (String streamContents:
+							[ :s | nodes first flattenOn: s]) asSymbol.
+			args := (nodes at: 3) reject: [ :element | element = $,].
+			signature nonZeroArgTermNamed: symbol withArgs: args ]
+
 ]
 
 { #category : #productions }
@@ -120,7 +135,7 @@ LeibnizTermParser >> signature [
 
 { #category : #productions }
 LeibnizTermParser >> simple [
-	^ atomic / parenthesized / zeroArgTerm
+	^ atomic / parenthesized / prefixOpTerm / zeroArgTerm
 ]
 
 { #category : #accessing }
