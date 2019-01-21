@@ -108,13 +108,15 @@ LeibnizSignature >> withVariablesDo: aBlock [
 
 ]
 
-{ #category : #accessing }
-LeibnizSignature >> zeroArgOpOrVarNamed: aSymbol [
+{ #category : #'term construction' }
+LeibnizSignature >> zeroArgTermNamed: aSymbol [
 	variables at: aSymbol
-		ifPresent: [ :sort | ^ { #variable . sort } ].
+		ifPresent: [ :sort | ^ LeibnizVarTerm symbol: aSymbol sort: sort forSignature: self ].
 	operators at: aSymbol
 		ifPresent: [ :ops | ops at: (LeibnizArity sortGraph: sortGraph size: 0)
-									ifPresent: [ :op | ^ { #operator . op sortForArity: #() } ]
+									ifPresent: [ :op | ^ LeibnizOpTerm symbol: aSymbol args: #()
+																				 sort: (op sortForArity: #())
+																				 forSignature: self ]
 									ifAbsent: [ ^ nil ] ]
 		ifAbsent: [ ^ nil ].
 

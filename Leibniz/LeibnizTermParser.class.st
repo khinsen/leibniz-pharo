@@ -113,6 +113,11 @@ LeibnizTermParser >> setSignature: aSignature [
 	signature := aSignature
 ]
 
+{ #category : #accessing }
+LeibnizTermParser >> signature [
+	^ signature
+]
+
 { #category : #productions }
 LeibnizTermParser >> simple [
 	^ atomic / parenthesized / zeroArgTerm
@@ -138,5 +143,5 @@ LeibnizTermParser >> term [
 { #category : #productions }
 LeibnizTermParser >> zeroArgTerm [
 	^ identifier flatten trim
-		==> [ :name | signature zeroArgOpOrVarNamed: name asSymbol ]
+		==> [ :name | signature zeroArgTermNamed: name asSymbol ]
 ]

@@ -43,7 +43,7 @@ LeibnizSignatureTest >> testBasics [
 	b addOp: #foo withArgs: #(#A) ofSort: #A.
 	b addOp: #foo withArgs: #(#B) ofSort: #B.
 	b addOp: #foo withArgs: #(#Y) ofSort: #Y.
-	"s := b signature."
+	s := b signature.
 	
 ]
 

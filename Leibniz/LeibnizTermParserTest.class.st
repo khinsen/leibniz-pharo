@@ -6,12 +6,12 @@ Class {
 
 { #category : #'term construction' }
 LeibnizTermParserTest >> fpNumberTerm: aFloat [
-	^ LeibnizFPNumberTerm value: aFloat forSignature: nil
+	^ LeibnizFPNumberTerm value: aFloat forSignature: parser signature
 ]
 
 { #category : #'term construction' }
 LeibnizTermParserTest >> integerTerm: anInteger [
-	^ LeibnizIntegerTerm value: anInteger forSignature: nil
+	^ LeibnizIntegerTerm value: anInteger forSignature: parser signature
 ]
 
 { #category : #accessing }
@@ -21,12 +21,30 @@ LeibnizTermParserTest >> parserClass [
 
 { #category : #'term construction' }
 LeibnizTermParserTest >> rationalNumberTerm: aFraction [
-	^ LeibnizRationalNumberTerm value: aFraction forSignature: nil
+	^ LeibnizRationalNumberTerm value: aFraction forSignature: parser signature
+]
+
+{ #category : #running }
+LeibnizTermParserTest >> setUp [
+	| b sg |
+	super setUp.
+
+	b := LeibnizSortGraphBuilder new.
+	b add: #A;
+	  add: #B;
+	  make: #B subsortOf: #A.
+	sg := b sortGraph.
+
+	b := LeibnizSignatureBuilder sortGraph: sg.
+	b addVar: #aVar ofSort: #A.
+	b addOp: #aZeroArgOp ofSort: #B.
+	parser setSignature: b signature.
+
 ]
 
 { #category : #'term construction' }
 LeibnizTermParserTest >> stringTerm: aString [
-	^ LeibnizStringTerm value: aString forSignature: nil
+	^ LeibnizStringTerm value: aString forSignature: parser signature
 ]
 
 { #category : #testing }
@@ -91,5 +109,18 @@ LeibnizTermParserTest >> testStrings [
 
 	self fail: 'abc' rule: #string.
 	self fail: '123' rule: #string.
+
+]
+
+{ #category : #testing }
+LeibnizTermParserTest >> testZeroArgTerms [
+	self parse: 'aVar' rule: #zeroArgTerm.
+	self assert: result equals: (parser signature zeroArgTermNamed: #aVar).
+	self parse: 'aZeroArgOp' rule: #zeroArgTerm.
+	self assert: result equals: (parser signature zeroArgTermNamed: #aZeroArgOp).
+
+	self fail: '123' rule: #zeroArgTerm.
+	self fail: '"abc"' rule: #zeroArgTerm.
+	self fail: '3/4' rule: #zeroArgTerm.
 
 ]
