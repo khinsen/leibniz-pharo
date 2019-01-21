@@ -20,7 +20,7 @@ LeibnizAtomicTerm class >> value: aString forSignature: aSignature [
 
 { #category : #initialization }
 LeibnizAtomicTerm >> initializeWithValue: aString forSignature: aSignature [
-	context := aSignature.
+	signature := aSignature.
 	value := aString.
 
 ]

@@ -11,7 +11,7 @@ Class {
 		'string',
 		'fpNumber',
 		'parenthesized',
-		'simpleOperator',
+		'zeroArgTerm',
 		'term',
 		'simple',
 		'identifier',
@@ -113,7 +113,7 @@ LeibnizTermParser >> setSignature: aSignature [
 
 { #category : #productions }
 LeibnizTermParser >> simple [
-	^ atomic / parenthesized / simpleOperator
+	^ atomic / parenthesized / zeroArgTerm
 ]
 
 { #category : #productions }

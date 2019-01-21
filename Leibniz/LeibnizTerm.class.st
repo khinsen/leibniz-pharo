@@ -4,15 +4,17 @@ I represent an abstract Leibniz term. My subclasses represent concrete terms.
 Class {
 	#name : #LeibnizTerm,
 	#superclass : #Object,
+	#traits : 'EqualityThroughVariables',
+	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
-		'context'
+		'signature'
 	],
 	#category : #'Leibniz-3-Terms'
 }
 
 { #category : #accessing }
-LeibnizTerm >> context [
-	^context
+LeibnizTerm >> signature [
+	^signature
 ]
 
 { #category : #accessing }
