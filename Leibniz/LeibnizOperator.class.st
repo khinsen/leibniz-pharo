@@ -119,6 +119,16 @@ LeibnizOperator >> kindArity [
 	^kindArity
 ]
 
+{ #category : #accessing }
+LeibnizOperator >> leastRankForArgSorts: aSortArray [
+	| arity |
+	aSortArray ifEmpty: [ self assert: ranks size equals: 1 .
+								 ^ ranks first ].
+	arity := LeibnizArity sortGraph: sortGraph argSorts: aSortArray.
+	^ ranks detect: [ :r | arity <= r key ]
+			  ifNone: [ kindArity -> kind ].
+]
+
 { #category : #viewing }
 LeibnizOperator >> minimalSubArityGraph [
 	"Answer the adjacency matrix for the minimal sub-arity graph that has the
@@ -206,11 +216,10 @@ LeibnizOperator >> printOn: aStream [
 ]
 
 { #category : #accessing }
-LeibnizOperator >> rankForArgSorts: aSortArray [
-	"TODO"
-	aSortArray ifEmpty: [ self assert: ranks size equals: 1 .
-								 ^ ranks first ].
-	self notYetImplemented
+LeibnizOperator >> ranksMatchingArgSorts: aSortArray [
+	| arity |
+	arity := LeibnizArity sortGraph: sortGraph argSorts: aSortArray.
+	^ ranks select: [ :r | arity <= r key ]
 ]
 
 { #category : #accessing }
@@ -220,7 +229,7 @@ LeibnizOperator >> size [
 
 { #category : #accessing }
 LeibnizOperator >> sortForArgSorts: aSortArray [
-	^ (self rankForArgSorts: aSortArray) value
+	^ (self leastRankForArgSorts: aSortArray) value
 ]
 
 { #category : #viewing }

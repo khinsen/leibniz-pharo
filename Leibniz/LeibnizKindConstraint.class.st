@@ -15,14 +15,6 @@ LeibnizKindConstraint class >> sortGraph: aSortGraph kind: aKind [
 
 ]
 
-{ #category : #'instance creation' }
-LeibnizKindConstraint class >> sortGraph: aSortGraph sort: aSort [
-	^self basicNew
-			initializeWithSortGraph: aSortGraph sort: aSort;
-			yourself
-
-]
-
 { #category : #comparing }
 LeibnizKindConstraint >> <= aSortConstraint [
 	^aSortConstraint equalOrWiderThanKind: self

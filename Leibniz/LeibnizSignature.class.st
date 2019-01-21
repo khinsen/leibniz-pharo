@@ -85,15 +85,36 @@ LeibnizSignature >> numberOfVariables [
 ]
 
 { #category : #accessing }
-LeibnizSignature >> sortOfOp: aSymbol withArgs: aSortArray [
+LeibnizSignature >> opNamed: aSymbol withArgs: aSortArray [
 	| kindArity |
 	kindArity := LeibnizArity sortGraph: sortGraph
-									  argSortConstraints: (aSortArray collect: [ :s | sortGraph kindOf: s]).
+									  argSortConstraints: (aSortArray collect:
+																	[ :s | LeibnizKindConstraint sortGraph: sortGraph kind: (sortGraph kindOf: s)]).
 	operators at: aSymbol
 		ifPresent: [ :ops | ops at: kindArity
-									ifPresent: [ :op | ^ op sortForArgSorts: aSortArray ]
+									ifPresent: [ :op | ^ op ]
 									ifAbsent: [ ^ nil ]]
 		ifAbsent: [ ^ nil ].
+
+]
+
+{ #category : #accessing }
+LeibnizSignature >> ranksMatchingfOp: aSymbol withArgs: aSortArray [
+	(self opNamed: aSymbol withArgs: aSortArray)
+		ifNil: [ ^ OrderedCollection new. ]
+		ifNotNil: [ :op | ^ op ranksMatchingArgSorts: aSortArray]
+]
+
+{ #category : #accessing }
+LeibnizSignature >> sortGraph [
+	^sortGraph
+]
+
+{ #category : #accessing }
+LeibnizSignature >> sortOfOp: aSymbol withArgs: aSortArray [
+	(self opNamed: aSymbol withArgs: aSortArray)
+		ifNil: [ ^ nil ]
+		ifNotNil: [ :op | ^ op sortForArgSorts: aSortArray ]
 
 ]
 

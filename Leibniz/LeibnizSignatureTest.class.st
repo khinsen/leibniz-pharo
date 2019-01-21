@@ -16,6 +16,9 @@ LeibnizSignatureTest >> setUp [
 	b add: #A;
 	  add: #B;
 	  make: #B subsortOf: #A;
+	  add: #V;
+	  add: #W;
+	  make: #W subsortOf: #V;
 	  add: #X;
 	  add: #Y;
 	  make: #Y subsortOf: #X.
@@ -44,9 +47,19 @@ LeibnizSignatureTest >> testBasics [
 	b := LeibnizSignatureBuilder sortGraph: sortGraph.
 	b addOp: #foo withArgs: #(#A) ofSort: #A.
 	b addOp: #foo withArgs: #(#B) ofSort: #B.
-	b addOp: #foo withArgs: #(#Y) ofSort: #Y.
+	b addOp: #foo withArgs: #(#W) ofSort: #W.
+	b addOp: #foo withArgs: #(#X) ofSort: #X.
 	s := b signature.
-	
+	self assert: (s ranksMatchingfOp: #foo withArgs: #(#A)) size equals: 1.
+	self assert: (s ranksMatchingfOp: #foo withArgs: #(#B)) size equals: 2.
+	self assert: (s ranksMatchingfOp: #foo withArgs: #(#X)) size equals: 1.
+	self assert: (s ranksMatchingfOp: #foo withArgs: #(#Y)) size equals: 1.
+	self assert: (s ranksMatchingfOp: #foo withArgs: #(#V)) size equals: 0.
+	self assert: (s sortOfOp: #foo withArgs: #(#A)) equals: #A.
+	self assert: (s sortOfOp: #foo withArgs: #(#B)) equals: #B.
+	self assert: (s sortOfOp: #foo withArgs: #(#Y)) equals: #X.
+	self assert: (s sortOfOp: #foo withArgs: #(#V)) equals: (s sortGraph kindOf: #V).
+
 ]
 
 { #category : #testing }
@@ -68,5 +81,15 @@ LeibnizSignatureTest >> testNameConflict [
 	b addVar: #bar ofSort: #A.
 	self should: [ b addVar: #foo ofSort: #A ] raise: Error.
 	self should: [ b addOp: #bar ofSort: #A ] raise: Error.
+
+]
+
+{ #category : #testing }
+LeibnizSignatureTest >> testNonMonotonicOp [
+	| b |
+	b := LeibnizSignatureBuilder sortGraph: sortGraph.
+	b addOp: #foo withArgs: #(#A) ofSort: #B.
+	self should: [ b addOp: #foo withArgs: #(#B) ofSort: #A ]
+		  raise: Error.
 
 ]
