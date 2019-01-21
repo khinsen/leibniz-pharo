@@ -4,9 +4,6 @@ I represent a rational number in context 'rational-numbers'.
 Class {
 	#name : #LeibnizRationalNumberTerm,
 	#superclass : #LeibnizAtomicTerm,
-	#instVars : [
-		'value'
-	],
 	#category : #'Leibniz-3-Terms'
 }
 

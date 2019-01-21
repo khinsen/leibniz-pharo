@@ -4,9 +4,6 @@ I represent a double-precision float in context 'IEEE-floating-point'.
 Class {
 	#name : #LeibnizFPNumberTerm,
 	#superclass : #LeibnizAtomicTerm,
-	#instVars : [
-		'value'
-	],
 	#category : #'Leibniz-3-Terms'
 }
 
