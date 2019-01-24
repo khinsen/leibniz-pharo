@@ -14,10 +14,7 @@ Class {
 		'fpFractionalPart',
 		'fpExponentPart',
 		'prefixOpTerm',
-		'bracketSuffix',
 		'nonInfixTerm',
-		'superscriptSuffix',
-		'subscriptSuffix',
 		'simpleTerm',
 		'atomicTerm',
 		'parenthesizedTerm',
@@ -46,12 +43,6 @@ LeibnizTermParser class >> signature: aSignature [
 { #category : #productions }
 LeibnizTermParser >> atomicTerm [
 	^ rationalNumberTerm / fpNumberTerm / integerTerm / stringTerm
-]
-
-{ #category : #productions }
-LeibnizTermParser >> bracketSuffix [
-	^ $[ asParser , term , $] asParser
-		==> [ :nodes | { #'[]' . nodes at: 2 } ]
 ]
 
 { #category : #productions }
@@ -107,14 +98,17 @@ LeibnizTermParser >> integerTerm [
 
 { #category : #productions }
 LeibnizTermParser >> nonInfixTerm [
-	^ simpleTerm , (bracketSuffix / superscriptSuffix / subscriptSuffix) optional
+	^ simpleTerm ,
+		((self suffixBetween: $[ asParser and: $] asParser withSymbol: #'[]')
+		 / (self suffixBetween: '^{' asParser and: $} asParser withSymbol: #'^')
+		 / (self suffixBetween: '_{' asParser and: $} asParser withSymbol: #'_')) optional
 		==> [ :nodes | nodes second
 							ifNil: [ nodes first ]
-							ifNotNil: [ | symbol arg |
+							ifNotNil: [ | symbol args |
 											symbol := nodes second first.
-											arg := nodes second second.
+											args := nodes second second.
 											signature nonZeroArgTermNamed: symbol
-														 withArgs: { nodes first . arg }] ]
+														 withArgs: (args copyWithFirst: nodes first) ] ]
 
 ]
 
@@ -127,7 +121,7 @@ LeibnizTermParser >> parenthesizedTerm [
 { #category : #grammar }
 LeibnizTermParser >> prefixOpTerm [
 	^ identifier , $( asParser ,
-	 (term separatedBy: $, asParser trim) optional ,
+	 (term separatedBy: $, asParser trim) ,
 	 $) asParser
 	==> [ :nodes |
 			| symbol args |
@@ -175,15 +169,9 @@ LeibnizTermParser >> stringTerm [
 ]
 
 { #category : #productions }
-LeibnizTermParser >> subscriptSuffix [
-	^ '_{' asParser , term , $} asParser
-		==> [ :nodes | { #'_' . nodes at: 2 } ]
-]
-
-{ #category : #productions }
-LeibnizTermParser >> superscriptSuffix [
-	^ '^{' asParser , term , $} asParser
-		==> [ :nodes | { #'^' . nodes at: 2 } ]
+LeibnizTermParser >> suffixBetween: leftDelimiter and: rightDelimiter withSymbol: opSymbol [
+	^ leftDelimiter , (term separatedBy: $, asParser trim) , rightDelimiter
+		==> [ :nodes | { opSymbol . (nodes second reject: [ :element | element = $,]) } ]
 ]
 
 { #category : #productions }

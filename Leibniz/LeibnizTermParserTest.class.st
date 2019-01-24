@@ -42,8 +42,11 @@ LeibnizTermParserTest >> setUp [
 	b addOp: #aOneArgOp withArgs: #(#B) ofSort: #B.
 	b addOp: #aTwoArgOp withArgs: #(#A #A) ofSort: #A.
 	b addOp: #'[]' withArgs: #(#A #A) ofSort: #A.
+	b addOp: #'[]' withArgs: #(#A #A #A) ofSort: #A.
 	b addOp: #'^' withArgs: #(#A #A) ofSort: #A.
+	b addOp: #'^' withArgs: #(#A #A #A) ofSort: #A.
 	b addOp: #'_' withArgs: #(#A #A) ofSort: #A.
+	b addOp: #'_' withArgs: #(#A #A #A) ofSort: #A.
 	parser setSignature: b signature.
 
 ]
@@ -54,26 +57,25 @@ LeibnizTermParserTest >> stringTerm: aString [
 ]
 
 { #category : #testing }
-LeibnizTermParserTest >> testNonInfixTerms [
-	| t |
-	t := (parser signature zeroArgTermNamed: #aZeroArgOp).
+LeibnizTermParserTest >> testFpNumberTerms [
+	#(#fpNumberTerm #atomicTerm #simpleTerm #nonInfixTerm #term) do:
+	[ :production |
+		self parse: '2.5' rule: production.
+		self assert: result equals: (self fpNumberTerm: 2.5).
+		self parse: '-2.5' rule: production.
+		self assert: result equals: (self fpNumberTerm: -2.5).
+		self parse: '-2.5e2' rule: production.
+		self assert: result equals: (self fpNumberTerm: -250.0).
+		self parse: '2.e2' rule: production.
+		self assert: result equals: (self fpNumberTerm: 200.0). ].
 
-	self parse: 'aZeroArgOp[aZeroArgOp]' rule: #nonInfixTerm.
-	self assert: result equals:
-		(parser signature nonZeroArgTermNamed: #'[]' withArgs: { t . t }).
-
-	self parse: 'aZeroArgOp^{aZeroArgOp}' rule: #nonInfixTerm.
-	self assert: result equals:
-		(parser signature nonZeroArgTermNamed: #'^' withArgs: { t . t }).
-
-	self parse: 'aZeroArgOp_{aZeroArgOp}' rule: #nonInfixTerm.
-	self assert: result equals:
-		(parser signature nonZeroArgTermNamed: #'_' withArgs: { t . t }).
+	self fail: '123' rule: #fpNumberTerm.
+	self fail: 'abc' rule: #fpNumberTerm.
 
 ]
 
 { #category : #testing }
-LeibnizTermParserTest >> testNumbers [
+LeibnizTermParserTest >> testIntegerTerms [
 	#(#integerTerm #atomicTerm #simpleTerm #nonInfixTerm #term) do:
 	[ :production |
 		self parse: '0' rule: production.
@@ -93,36 +95,43 @@ LeibnizTermParserTest >> testNumbers [
 	self fail: '2e2' rule: #integerTerm.
 	self fail: '2.5e2' rule: #integerTerm.
 
-	#(#rationalNumberTerm #atomicTerm #simpleTerm #nonInfixTerm #term) do:
-	[ :production |
-		self parse: '2/3' rule: production.
-		self assert: result equals: (self rationalNumberTerm: 2/3).
-		self parse: '-2/3' rule: production.
-		self assert: result equals: (self rationalNumberTerm: -2/3). ].
+]
 
-	self fail: '2/0' rule: #rationalNumberTerm.
-	self fail: 'abc' rule: #rationalNumberTerm.
-	self fail: '-2.5' rule: #rationalNumberTerm.
-	self fail: '-2.5e-1' rule: #rationalNumberTerm.
+{ #category : #testing }
+LeibnizTermParserTest >> testNonInfixTerms [
+	| t |
+	t := (parser signature zeroArgTermNamed: #aZeroArgOp).
 
-	#(#fpNumberTerm #atomicTerm #simpleTerm #nonInfixTerm #term) do:
-	[ :production |
-		self parse: '2.5' rule: production.
-		self assert: result equals: (self fpNumberTerm: 2.5).
-		self parse: '-2.5' rule: production.
-		self assert: result equals: (self fpNumberTerm: -2.5).
-		self parse: '-2.5e2' rule: production.
-		self assert: result equals: (self fpNumberTerm: -250.0).
-		self parse: '2.e2' rule: production.
-		self assert: result equals: (self fpNumberTerm: 200.0). ].
+	self parse: 'aZeroArgOp[aZeroArgOp]' rule: #nonInfixTerm.
+	self assert: result equals:
+		(parser signature nonZeroArgTermNamed: #'[]' withArgs: { t . t }).
 
-	self fail: '123' rule: #fpNumberTerm.
-	self fail: 'abc' rule: #fpNumberTerm.
+	self parse: 'aZeroArgOp[aZeroArgOp, aZeroArgOp]' rule: #nonInfixTerm.
+	self assert: result equals:
+		(parser signature nonZeroArgTermNamed: #'[]' withArgs: { t . t . t }).
+
+	self parse: 'aZeroArgOp^{aZeroArgOp}' rule: #nonInfixTerm.
+	self assert: result equals:
+		(parser signature nonZeroArgTermNamed: #'^' withArgs: { t . t }).
+
+	self parse: 'aZeroArgOp^{aZeroArgOp, aZeroArgOp}' rule: #nonInfixTerm.
+	self assert: result equals:
+		(parser signature nonZeroArgTermNamed: #'^' withArgs: { t . t . t }).
+
+	self parse: 'aZeroArgOp_{aZeroArgOp}' rule: #nonInfixTerm.
+	self assert: result equals:
+		(parser signature nonZeroArgTermNamed: #'_' withArgs: { t . t }).
+
+	self parse: 'aZeroArgOp_{aZeroArgOp, aZeroArgOp}' rule: #nonInfixTerm.
+	self assert: result equals:
+		(parser signature nonZeroArgTermNamed: #'_' withArgs: { t . t . t }).
 
 ]
 
 { #category : #testing }
 LeibnizTermParserTest >> testPrefixTerms [
+	self fail: 'aZeroArgTerm()' rule: #prefixOpTerm.
+
 	self parse: 'aOneArgOp(aZeroArgOp)' rule: #prefixOpTerm.
 	self assert: result
 		  equals: (parser signature nonZeroArgTermNamed: #aOneArgOp
@@ -145,7 +154,23 @@ LeibnizTermParserTest >> testPrefixTerms [
 ]
 
 { #category : #testing }
-LeibnizTermParserTest >> testStrings [
+LeibnizTermParserTest >> testRationalNumberTerms [
+	#(#rationalNumberTerm #atomicTerm #simpleTerm #nonInfixTerm #term) do:
+	[ :production |
+		self parse: '2/3' rule: production.
+		self assert: result equals: (self rationalNumberTerm: 2/3).
+		self parse: '-2/3' rule: production.
+		self assert: result equals: (self rationalNumberTerm: -2/3). ].
+
+	self fail: '2/0' rule: #rationalNumberTerm.
+	self fail: 'abc' rule: #rationalNumberTerm.
+	self fail: '-2.5' rule: #rationalNumberTerm.
+	self fail: '-2.5e-1' rule: #rationalNumberTerm.
+
+]
+
+{ #category : #testing }
+LeibnizTermParserTest >> testStringTerms [
 	self parse: '"abc"' rule: #stringTerm.
 	self assert: result equals: (self stringTerm: 'abc').
 	self parse: '"123"' rule: #stringTerm.
