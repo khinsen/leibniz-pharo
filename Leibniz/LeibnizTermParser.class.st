@@ -5,15 +5,8 @@ Class {
 	#name : #LeibnizTermParser,
 	#superclass : #PPCompositeParser,
 	#instVars : [
-		'integer',
-		'rationalNumber',
-		'atomic',
-		'string',
-		'fpNumber',
-		'parenthesized',
 		'zeroArgTerm',
 		'term',
-		'simple',
 		'identifier',
 		'identifierCharacter',
 		'signature',
@@ -24,7 +17,14 @@ Class {
 		'bracketSuffix',
 		'nonInfixTerm',
 		'superscriptSuffix',
-		'subscriptSuffix'
+		'subscriptSuffix',
+		'simpleTerm',
+		'atomicTerm',
+		'parenthesizedTerm',
+		'rationalNumberTerm',
+		'fpNumberTerm',
+		'integerTerm',
+		'stringTerm'
 	],
 	#category : #'Leibniz-3-Terms'
 }
@@ -44,8 +44,8 @@ LeibnizTermParser class >> signature: aSignature [
 ]
 
 { #category : #productions }
-LeibnizTermParser >> atomic [
-	^ rationalNumber / fpNumber / integer / string
+LeibnizTermParser >> atomicTerm [
+	^ rationalNumberTerm / fpNumberTerm / integerTerm / stringTerm
 ]
 
 { #category : #productions }
@@ -72,10 +72,10 @@ LeibnizTermParser >> fpIntegerPart [
 ]
 
 { #category : #productions }
-LeibnizTermParser >> fpNumber [
+LeibnizTermParser >> fpNumberTerm [
 	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
 			/ (fpIntegerPart , fpExponentPart))
-		flatten trim
+		flatten
 		"Converting the string to a float requires some trickery:
 		 - Pharo doesn't allow a dot followed by an exponent without any fractional part.
 			Workaround: replace '.e' by '.0e'
@@ -89,24 +89,25 @@ LeibnizTermParser >> fpNumber [
 
 { #category : #productions }
 LeibnizTermParser >> identifier [
-	^ (identifierCharacter , (identifierCharacter / #digit asParser / $. asParser) plus)
+	^ identifierCharacter , (identifierCharacter / #digit asParser / $. asParser) plus
 
 ]
 
 { #category : #productions }
 LeibnizTermParser >> identifierCharacter [
+	"TODO"
 	^ #letter asParser
 ]
 
 { #category : #productions }
-LeibnizTermParser >> integer [
-	^ ($- asParser optional , #digit asParser plus) flatten trim 
+LeibnizTermParser >> integerTerm [
+	^ ($- asParser optional , #digit asParser plus) flatten 
 		==> [ :value | LeibnizIntegerTerm value: value asNumber forSignature: signature ]
 ]
 
 { #category : #productions }
 LeibnizTermParser >> nonInfixTerm [
-	^ simple , (bracketSuffix / superscriptSuffix / subscriptSuffix) optional
+	^ simpleTerm , (bracketSuffix / superscriptSuffix / subscriptSuffix) optional
 		==> [ :nodes | nodes second
 							ifNil: [ nodes first ]
 							ifNotNil: [ | symbol arg |
@@ -118,15 +119,15 @@ LeibnizTermParser >> nonInfixTerm [
 ]
 
 { #category : #productions }
-LeibnizTermParser >> parenthesized [
-	^ $( asParser , term, $) asParser trim
+LeibnizTermParser >> parenthesizedTerm [
+	^ $( asParser , term, $) asParser
 		==> [ :nodes | nodes at: 2 ]
 ]
 
 { #category : #grammar }
 LeibnizTermParser >> prefixOpTerm [
 	^ identifier , $( asParser ,
-	 (term separatedBy: $, asParser) optional ,
+	 (term separatedBy: $, asParser trim) optional ,
 	 $) asParser
 	==> [ :nodes |
 			| symbol args |
@@ -138,10 +139,10 @@ LeibnizTermParser >> prefixOpTerm [
 ]
 
 { #category : #productions }
-LeibnizTermParser >> rationalNumber [
+LeibnizTermParser >> rationalNumberTerm [
 	^ ($- asParser optional , #digit asParser plus ,
 			$/ asParser ,
-			$0 asParser not , #digit asParser star) flatten trim 
+			$0 asParser not , #digit asParser star) flatten 
 		==> [ :value | LeibnizRationalNumberTerm value: (Fraction readFromString: value)
 															 forSignature: signature ]
 ]
@@ -157,8 +158,8 @@ LeibnizTermParser >> signature [
 ]
 
 { #category : #productions }
-LeibnizTermParser >> simple [
-	^ atomic / parenthesized / prefixOpTerm / zeroArgTerm
+LeibnizTermParser >> simpleTerm [
+	^ atomicTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm
 ]
 
 { #category : #accessing }
@@ -167,8 +168,8 @@ LeibnizTermParser >> start [
 ]
 
 { #category : #productions }
-LeibnizTermParser >> string [
-	^ ($" asParser , $" asParser negate star , $" asParser) flatten trim 
+LeibnizTermParser >> stringTerm [
+	^ ($" asParser , $" asParser negate star , $" asParser) flatten 
 		==> [ :value | LeibnizStringTerm value: (value copyFrom: 2 to: value size - 1)
 													forSignature: signature ]
 ]
@@ -192,6 +193,6 @@ LeibnizTermParser >> term [
 
 { #category : #productions }
 LeibnizTermParser >> zeroArgTerm [
-	^ identifier flatten trim
+	^ identifier flatten
 		==> [ :name | signature zeroArgTermNamed: name asSymbol ]
 ]

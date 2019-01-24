@@ -74,7 +74,7 @@ LeibnizTermParserTest >> testNonInfixTerms [
 
 { #category : #testing }
 LeibnizTermParserTest >> testNumbers [
-	#(#integer #atomic #simple #nonInfixTerm #term) do:
+	#(#integerTerm #atomicTerm #simpleTerm #nonInfixTerm #term) do:
 	[ :production |
 		self parse: '0' rule: production.
 		self assert: result equals: (self integerTerm: 0).
@@ -85,27 +85,27 @@ LeibnizTermParserTest >> testNumbers [
 		self parse: '-123' rule: production.
 		self assert: result equals: (self integerTerm: -123). ].
 
-	self fail: 'abc' rule: #integer.
-	self fail: '0abc' rule: #integer.
-	self fail: '2/3' rule: #integer.
-	self fail: '-2/3' rule: #integer.
-	self fail: '2.5' rule: #integer.
-	self fail: '2e2' rule: #integer.
-	self fail: '2.5e2' rule: #integer.
+	self fail: 'abc' rule: #integerTerm.
+	self fail: '0abc' rule: #integerTerm.
+	self fail: '2/3' rule: #integerTerm.
+	self fail: '-2/3' rule: #integerTerm.
+	self fail: '2.5' rule: #integerTerm.
+	self fail: '2e2' rule: #integerTerm.
+	self fail: '2.5e2' rule: #integerTerm.
 
-	#(#rationalNumber #atomic #simple #nonInfixTerm #term) do:
+	#(#rationalNumberTerm #atomicTerm #simpleTerm #nonInfixTerm #term) do:
 	[ :production |
 		self parse: '2/3' rule: production.
 		self assert: result equals: (self rationalNumberTerm: 2/3).
 		self parse: '-2/3' rule: production.
 		self assert: result equals: (self rationalNumberTerm: -2/3). ].
 
-	self fail: '2/0' rule: #rationalNumber.
-	self fail: 'abc' rule: #rationalNumber.
-	self fail: '-2.5' rule: #rationalNumber.
-	self fail: '-2.5e-1' rule: #rationalNumber.
+	self fail: '2/0' rule: #rationalNumberTerm.
+	self fail: 'abc' rule: #rationalNumberTerm.
+	self fail: '-2.5' rule: #rationalNumberTerm.
+	self fail: '-2.5e-1' rule: #rationalNumberTerm.
 
-	#(#fpNumber #atomic #simple #nonInfixTerm #term) do:
+	#(#fpNumberTerm #atomicTerm #simpleTerm #nonInfixTerm #term) do:
 	[ :production |
 		self parse: '2.5' rule: production.
 		self assert: result equals: (self fpNumberTerm: 2.5).
@@ -116,8 +116,8 @@ LeibnizTermParserTest >> testNumbers [
 		self parse: '2.e2' rule: production.
 		self assert: result equals: (self fpNumberTerm: 200.0). ].
 
-	self fail: '123' rule: #fpNumber.
-	self fail: 'abc' rule: #fpNumber.
+	self fail: '123' rule: #fpNumberTerm.
+	self fail: 'abc' rule: #fpNumberTerm.
 
 ]
 
@@ -146,17 +146,17 @@ LeibnizTermParserTest >> testPrefixTerms [
 
 { #category : #testing }
 LeibnizTermParserTest >> testStrings [
-	self parse: '"abc"' rule: #string.
+	self parse: '"abc"' rule: #stringTerm.
 	self assert: result equals: (self stringTerm: 'abc').
-	self parse: '"123"' rule: #string.
+	self parse: '"123"' rule: #stringTerm.
 	self assert: result equals: (self stringTerm: '123').
-	self parse: '"äéα"' rule: #string.
+	self parse: '"äéα"' rule: #stringTerm.
 	self assert: result equals: (self stringTerm: 'äéα').
-	self parse: '""' rule: #string.
+	self parse: '""' rule: #stringTerm.
 	self assert: result equals: (self stringTerm: '').
 
-	self fail: 'abc' rule: #string.
-	self fail: '123' rule: #string.
+	self fail: 'abc' rule: #stringTerm.
+	self fail: '123' rule: #stringTerm.
 
 ]
 
