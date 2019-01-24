@@ -20,7 +20,11 @@ Class {
 		'fpIntegerPart',
 		'fpFractionalPart',
 		'fpExponentPart',
-		'prefixOpTerm'
+		'prefixOpTerm',
+		'bracketSuffix',
+		'nonInfixTerm',
+		'superscriptSuffix',
+		'subscriptSuffix'
 	],
 	#category : #'Leibniz-3-Terms'
 }
@@ -42,6 +46,12 @@ LeibnizTermParser class >> signature: aSignature [
 { #category : #productions }
 LeibnizTermParser >> atomic [
 	^ rationalNumber / fpNumber / integer / string
+]
+
+{ #category : #productions }
+LeibnizTermParser >> bracketSuffix [
+	^ $[ asParser , term , $] asParser
+		==> [ :nodes | { #'[]' . nodes at: 2 } ]
 ]
 
 { #category : #productions }
@@ -95,6 +105,19 @@ LeibnizTermParser >> integer [
 ]
 
 { #category : #productions }
+LeibnizTermParser >> nonInfixTerm [
+	^ simple , (bracketSuffix / superscriptSuffix / subscriptSuffix) optional
+		==> [ :nodes | nodes second
+							ifNil: [ nodes first ]
+							ifNotNil: [ | symbol arg |
+											symbol := nodes second first.
+											arg := nodes second second.
+											signature nonZeroArgTermNamed: symbol
+														 withArgs: { nodes first . arg }] ]
+
+]
+
+{ #category : #productions }
 LeibnizTermParser >> parenthesized [
 	^ $( asParser , term, $) asParser trim
 		==> [ :nodes | nodes at: 2 ]
@@ -103,7 +126,7 @@ LeibnizTermParser >> parenthesized [
 { #category : #grammar }
 LeibnizTermParser >> prefixOpTerm [
 	^ identifier , $( asParser ,
-	 (term separatedBy: $, asParser trim) optional ,
+	 (term separatedBy: $, asParser) optional ,
 	 $) asParser
 	==> [ :nodes |
 			| symbol args |
@@ -151,8 +174,20 @@ LeibnizTermParser >> string [
 ]
 
 { #category : #productions }
+LeibnizTermParser >> subscriptSuffix [
+	^ '_{' asParser , term , $} asParser
+		==> [ :nodes | { #'_' . nodes at: 2 } ]
+]
+
+{ #category : #productions }
+LeibnizTermParser >> superscriptSuffix [
+	^ '^{' asParser , term , $} asParser
+		==> [ :nodes | { #'^' . nodes at: 2 } ]
+]
+
+{ #category : #productions }
 LeibnizTermParser >> term [
-	^ simple
+	^ nonInfixTerm
 ]
 
 { #category : #productions }

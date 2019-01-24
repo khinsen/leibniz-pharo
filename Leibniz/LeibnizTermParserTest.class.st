@@ -41,6 +41,9 @@ LeibnizTermParserTest >> setUp [
 	b addOp: #aOneArgOp withArgs: #(#A) ofSort: #A.
 	b addOp: #aOneArgOp withArgs: #(#B) ofSort: #B.
 	b addOp: #aTwoArgOp withArgs: #(#A #A) ofSort: #A.
+	b addOp: #'[]' withArgs: #(#A #A) ofSort: #A.
+	b addOp: #'^' withArgs: #(#A #A) ofSort: #A.
+	b addOp: #'_' withArgs: #(#A #A) ofSort: #A.
 	parser setSignature: b signature.
 
 ]
@@ -51,8 +54,27 @@ LeibnizTermParserTest >> stringTerm: aString [
 ]
 
 { #category : #testing }
+LeibnizTermParserTest >> testNonInfixTerms [
+	| t |
+	t := (parser signature zeroArgTermNamed: #aZeroArgOp).
+
+	self parse: 'aZeroArgOp[aZeroArgOp]' rule: #nonInfixTerm.
+	self assert: result equals:
+		(parser signature nonZeroArgTermNamed: #'[]' withArgs: { t . t }).
+
+	self parse: 'aZeroArgOp^{aZeroArgOp}' rule: #nonInfixTerm.
+	self assert: result equals:
+		(parser signature nonZeroArgTermNamed: #'^' withArgs: { t . t }).
+
+	self parse: 'aZeroArgOp_{aZeroArgOp}' rule: #nonInfixTerm.
+	self assert: result equals:
+		(parser signature nonZeroArgTermNamed: #'_' withArgs: { t . t }).
+
+]
+
+{ #category : #testing }
 LeibnizTermParserTest >> testNumbers [
-	#(#integer #atomic #simple #term) do:
+	#(#integer #atomic #simple #nonInfixTerm #term) do:
 	[ :production |
 		self parse: '0' rule: production.
 		self assert: result equals: (self integerTerm: 0).
@@ -71,7 +93,7 @@ LeibnizTermParserTest >> testNumbers [
 	self fail: '2e2' rule: #integer.
 	self fail: '2.5e2' rule: #integer.
 
-	#(#rationalNumber #atomic #simple #term) do:
+	#(#rationalNumber #atomic #simple #nonInfixTerm #term) do:
 	[ :production |
 		self parse: '2/3' rule: production.
 		self assert: result equals: (self rationalNumberTerm: 2/3).
@@ -83,7 +105,7 @@ LeibnizTermParserTest >> testNumbers [
 	self fail: '-2.5' rule: #rationalNumber.
 	self fail: '-2.5e-1' rule: #rationalNumber.
 
-	#(#fpNumber #atomic #simple #term) do:
+	#(#fpNumber #atomic #simple #nonInfixTerm #term) do:
 	[ :production |
 		self parse: '2.5' rule: production.
 		self assert: result equals: (self fpNumberTerm: 2.5).
