@@ -58,7 +58,7 @@ LeibnizTermParserTest >> stringTerm: aString [
 
 { #category : #testing }
 LeibnizTermParserTest >> testFpNumberTerms [
-	#(#fpNumberTerm #atomicTerm #simpleTerm #nonInfixTerm #term) do:
+	#(#fpNumberTerm #literalTerm #simpleTerm #nonInfixTerm #term) do:
 	[ :production |
 		self parse: '2.5' rule: production.
 		self assert: result equals: (self fpNumberTerm: 2.5).
@@ -76,7 +76,7 @@ LeibnizTermParserTest >> testFpNumberTerms [
 
 { #category : #testing }
 LeibnizTermParserTest >> testIntegerTerms [
-	#(#integerTerm #atomicTerm #simpleTerm #nonInfixTerm #term) do:
+	#(#integerTerm #literalTerm #simpleTerm #nonInfixTerm #term) do:
 	[ :production |
 		self parse: '0' rule: production.
 		self assert: result equals: (self integerTerm: 0).
@@ -155,7 +155,7 @@ LeibnizTermParserTest >> testPrefixTerms [
 
 { #category : #testing }
 LeibnizTermParserTest >> testRationalNumberTerms [
-	#(#rationalNumberTerm #atomicTerm #simpleTerm #nonInfixTerm #term) do:
+	#(#rationalNumberTerm #literalTerm #simpleTerm #nonInfixTerm #term) do:
 	[ :production |
 		self parse: '2/3' rule: production.
 		self assert: result equals: (self rationalNumberTerm: 2/3).

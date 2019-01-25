@@ -1,5 +1,24 @@
 "
-I am a parser for Leibniz terms.
+!A parser for the Leibniz term syntax
+
+The overall goal of the Leibniz term syntax is to resemble both traditional mathematical notation and common programming languages while at the same time leaving a lot of freedom to context authors for designing suitable notation for their needs. The link to mathematical notation is mainly made by the liberal use of the mathematical symbols in Unicode.
+
+A parser stores a reference to a ${class:name=LeibnizSignature}$. It returns an object from the ${class:name=LeibnizTerm}$ hierarchy corresponding to the input string, or a ${class:name=PPFailure}$ object in case of failure.
+
+!!Literal terms
+
+Leibniz has a few built-in term types whose values are represented by literals, i.e. numbers and strings.
+
+!!!Integers
+
+Integer syntax is perfectly standard: an optional minus sign followed by a string of digits.
+
+${method:name=LeibnizTermParser>>#integerTerm|expanded=}$
+
+${method:name:LeibnizTermParserTest>>#testIntegerTerms}$
+
+
+
 "
 Class {
 	#name : #LeibnizTermParser,
@@ -16,12 +35,12 @@ Class {
 		'prefixOpTerm',
 		'nonInfixTerm',
 		'simpleTerm',
-		'atomicTerm',
 		'parenthesizedTerm',
 		'rationalNumberTerm',
 		'fpNumberTerm',
 		'integerTerm',
-		'stringTerm'
+		'stringTerm',
+		'literalTerm'
 	],
 	#category : #'Leibniz-3-Terms'
 }
@@ -38,11 +57,6 @@ LeibnizTermParser class >> signature: aSignature [
 			setSignature: aSignature;
 			yourself
 
-]
-
-{ #category : #productions }
-LeibnizTermParser >> atomicTerm [
-	^ rationalNumberTerm / fpNumberTerm / integerTerm / stringTerm
 ]
 
 { #category : #productions }
@@ -94,6 +108,11 @@ LeibnizTermParser >> identifierCharacter [
 LeibnizTermParser >> integerTerm [
 	^ ($- asParser optional , #digit asParser plus) flatten 
 		==> [ :value | LeibnizIntegerTerm value: value asNumber forSignature: signature ]
+]
+
+{ #category : #productions }
+LeibnizTermParser >> literalTerm [
+	^ rationalNumberTerm / fpNumberTerm / integerTerm / stringTerm
 ]
 
 { #category : #productions }
@@ -153,7 +172,7 @@ LeibnizTermParser >> signature [
 
 { #category : #productions }
 LeibnizTermParser >> simpleTerm [
-	^ atomicTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm
+	^ literalTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm
 ]
 
 { #category : #accessing }
