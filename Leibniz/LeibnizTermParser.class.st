@@ -9,14 +9,39 @@ A parser stores a reference to a ${class:name=LeibnizSignature}$. It returns an 
 
 Leibniz has a few built-in term types whose values are represented by literals, i.e. numbers and strings.
 
+${method:name=LeibnizTermParser>>#literalTerm|expanded=}$
+
+
 !!!Integers
 
 Integer syntax is perfectly standard: an optional minus sign followed by a string of digits.
 
 ${method:name=LeibnizTermParser>>#integerTerm|expanded=}$
 
-${method:name:LeibnizTermParserTest>>#testIntegerTerms}$
 
+!!!Rational numbers
+
+Fractions follow the same syntax as in Pharo: an integer followed by a slash following by a strictly positive integer.
+
+${method:name=LeibnizTermParser>>#rationalNumberTerm|expanded=}$
+
+!!!Floating-point numbers
+
+Floating-point numbers require more care because their syntax differs from Pharo's. In Leibniz, a number is floating-point if it has a fractional part, an exponent, or both. In Pharo, it's the fractional part that matters, an integer with an exponent remains an integer. Moreover, in Leibniz, but not in Pharo, the fractional part can be reduced to just a dot.
+
+${method:name=LeibnizTermParser>>#fpNumberTerm|expanded=}$
+
+${method:name=LeibnizTermParser>>#fpIntegerPart|expanded=}$
+
+${method:name=LeibnizTermParser>>#fpFractionalPart|expanded=}$
+
+${method:name=LeibnizTermParser>>#fpExponentPart|expanded=}$
+
+!!!Strings
+
+Strings are delimited by double quotes. There is no mechanism for having a double quote inside a string yet.
+
+${method:name=LeibnizTermParser>>#stringTerm|expanded=}$
 
 
 "
