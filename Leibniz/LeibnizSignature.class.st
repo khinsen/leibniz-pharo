@@ -7,15 +7,17 @@ Class {
 	#instVars : [
 		'sortGraph',
 		'operators',
-		'variables'
+		'variables',
+		'builtins'
 	],
 	#category : #'Leibniz-2-Signatures'
 }
 
 { #category : #'instance creation' }
-LeibnizSignature class >> sortGraph: aSortGraph operators: anOperatorDictionary variables: aVariableDictionary [
+LeibnizSignature class >> sortGraph: aSortGraph builtins: aSet operators: anOperatorDictionary variables: aVariableDictionary [
 	^ self basicNew
 			 initializeWithSortGraph: aSortGraph
+								builtins: aSet
 								operators: anOperatorDictionary
 								variables: aVariableDictionary;
 			 yourself.
@@ -65,9 +67,15 @@ LeibnizSignature >> gtInspectorVariablesIn: composite [
 		when: [ variables isNotEmpty ]
 ]
 
+{ #category : #testing }
+LeibnizSignature >> hasBuiltin: aSymbol [
+	^builtins includes: aSymbol
+]
+
 { #category : #initializing }
-LeibnizSignature >> initializeWithSortGraph: aSortGraph operators: anOperatorDictionary variables: aVariableDictionary [
+LeibnizSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: anOperatorDictionary variables: aVariableDictionary [
 	sortGraph := aSortGraph.
+	builtins := aSet.
 	operators := anOperatorDictionary.
 	variables := aVariableDictionary.
 	self beRecursivelyReadOnlyObject.
@@ -135,6 +143,11 @@ LeibnizSignature >> sortOfOp: aSymbol withArgSorts: aSortArray [
 LeibnizSignature >> title [
 	^'signature'
 
+]
+
+{ #category : #enumerating }
+LeibnizSignature >> withBuiltinsDo: aBlock [
+	builtins do: aBlock
 ]
 
 { #category : #enumerating }

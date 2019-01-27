@@ -59,6 +59,8 @@ LeibnizBuiltins >> createFPContext [
 	fpNumbers make: #'FP64-NaN' subsortOf: #'FP.NaN'.
 	fpNumbers make: #'FP64-inf' subsortOf: #'FP64'.
 	fpNumbers make: #'FP64-inf' subsortOf: #'FP.inf'.
+	"Floating-point literals"
+	fpNumbers addBuiltin: #fpNumbers.
 	"Arithmetic operators, single precision"
 	fpNumbers addOp: #'_+' withArgs: #(#FP32 #FP32) ofSort: #FP32.
 	fpNumbers addOp: #'_-' withArgs: #(#FP32 #FP32) ofSort: #FP32.
@@ -112,6 +114,8 @@ LeibnizBuiltins >> createIntegerContext [
 	integers make: #ℕ subsortOf: #ℤ.
 	integers make: #'ℤ.nz' subsortOf: #ℤ.
 	integers make: #'ℕ.nz' subsortOf: #'ℤ.nz'.
+	"Integer literals"
+	integers addBuiltin: #integers.
 	"Arithmetic operators"
 	integers addOp: #'_+' withArgs: #(#'ℤ' #'ℤ') ofSort: #'ℤ'.
 	integers addOp: #'_+' withArgs: #(#'ℕ' #'ℕ') ofSort: #'ℕ'.
@@ -162,6 +166,8 @@ LeibnizBuiltins >> createRationalContext [
 	rationalNumbers make: #'ℚ.nn'subsortOf: #'ℚ'.
 	rationalNumbers make: #'ℚ.p'subsortOf: #'ℚ.nn'.
 	rationalNumbers make: #'ℕ'subsortOf: #'ℚ.nn'.
+	"Rational number literals"
+	rationalNumbers addBuiltin: #rationalNumbers.
 	"Arithmetic operators"
 	rationalNumbers addOp: #'_+' withArgs: #(#'ℚ' #'ℚ') ofSort: #'ℚ'.
 	rationalNumbers addOp: #'_+' withArgs: #(#'ℚ.p' #'ℚ.p') ofSort: #'ℚ.p'.
@@ -245,6 +251,7 @@ LeibnizBuiltins >> createStringContext [
 	| string |
 	string := self newContextBuilderNamed: 'strings'.
 	string addSort: #string.
+	string addBuiltin: #strings.
 	string addOp: #'_+' withArgs: #(#string #string) ofSort: #string.
 	string build.
 

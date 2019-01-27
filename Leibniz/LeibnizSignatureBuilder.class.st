@@ -6,6 +6,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'sortGraph',
+		'builtins',
 		'operators',
 		'variables'
 	],
@@ -18,6 +19,19 @@ LeibnizSignatureBuilder class >> sortGraph: aSortGraph [
 			initializeWithSortGraph: aSortGraph;
 			yourself.
 
+
+]
+
+{ #category : #adding }
+LeibnizSignatureBuilder >> addBuiltin: aSymbol [
+	builtins add: aSymbol
+]
+
+{ #category : #adding }
+LeibnizSignatureBuilder >> addBuiltinsFromSignature: aSignature [
+	aSignature withBuiltinsDo:
+		[ :symbol |
+		  self addBuiltin: symbol ].
 
 ]
 
@@ -79,6 +93,7 @@ LeibnizSignatureBuilder >> addVarsFromSignature: aSignature [
 { #category : #initializing }
 LeibnizSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 	sortGraph := aSortGraph.
+	builtins := Set new.
 	operators := Dictionary new.
 	variables := Dictionary new.
 
@@ -86,7 +101,7 @@ LeibnizSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 
 { #category : #accessing }
 LeibnizSignatureBuilder >> signature [
-	^ LeibnizSignature sortGraph: sortGraph operators: operators deepCopy variables: variables deepCopy.
+	^ LeibnizSignature sortGraph: sortGraph builtins: builtins operators: operators deepCopy variables: variables deepCopy.
 
 
 ]

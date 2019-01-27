@@ -33,6 +33,11 @@ LeibnizBuiltinsTest >> testFloats [
 	self assert: context signature numberOfOperators equals: 17.
 	self assert: context signature numberOfVariables equals: 0.
 
+	self deny: (context signature hasBuiltin: #strings).
+	self assert: (context signature hasBuiltin: #integers).
+	self deny: (context signature hasBuiltin: #rationalNumbers).
+	self assert: (context signature hasBuiltin: #fpNumbers).
+
 ]
 
 { #category : #testing }
@@ -43,6 +48,11 @@ LeibnizBuiltinsTest >> testIntegers [
 	self assert: context sortGraph kinds size equals: 2.
 	self assert: context signature numberOfOperators equals: 15.
 	self assert: context signature numberOfVariables equals: 0.
+
+	self deny: (context signature hasBuiltin: #strings).
+	self assert: (context signature hasBuiltin: #integers).
+	self deny: (context signature hasBuiltin: #rationalNumbers).
+	self deny: (context signature hasBuiltin: #fpNumbers).
 
 ]
 
@@ -55,6 +65,11 @@ LeibnizBuiltinsTest >> testRationalNumbers [
 	self assert: context signature numberOfOperators equals: 16.
 	self assert: context signature numberOfVariables equals: 0.
 
+	self deny: (context signature hasBuiltin: #strings).
+	self assert: (context signature hasBuiltin: #integers).
+	self assert: (context signature hasBuiltin: #rationalNumbers).
+	self deny: (context signature hasBuiltin: #fpNumbers).
+
 ]
 
 { #category : #testing }
@@ -65,6 +80,11 @@ LeibnizBuiltinsTest >> testRealNumbers [
 	self assert: context sortGraph kinds size equals: 2.
 	self assert: context signature numberOfOperators equals: 17.
 	self assert: context signature numberOfVariables equals: 0.
+
+	self deny: (context signature hasBuiltin: #strings).
+	self assert: (context signature hasBuiltin: #integers).
+	self assert: (context signature hasBuiltin: #rationalNumbers).
+	self deny: (context signature hasBuiltin: #fpNumbers).
 
 ]
 
@@ -77,6 +97,10 @@ LeibnizBuiltinsTest >> testStrings [
 	self assert: context sortGraph kinds size equals: 1.
 	self assert: context signature numberOfOperators equals: 1.
 	self assert: context signature numberOfVariables equals: 0.
+	self assert: (context signature hasBuiltin: #strings).
+	self deny: (context signature hasBuiltin: #integers).
+	self deny: (context signature hasBuiltin: #rationalNumbers).
+	self deny: (context signature hasBuiltin: #fpNumbers).
 
 ]
 
@@ -89,5 +113,10 @@ LeibnizBuiltinsTest >> testTruth [
 	self assert: context sortGraph kinds size equals: 1.
 	self assert: context signature numberOfOperators equals: 2.
 	self assert: context signature numberOfVariables equals: 0.
+
+	self deny: (context signature hasBuiltin: #strings).
+	self deny: (context signature hasBuiltin: #integers).
+	self deny: (context signature hasBuiltin: #rationalNumbers).
+	self deny: (context signature hasBuiltin: #fpNumbers).
 
 ]
