@@ -127,10 +127,19 @@ LeibnizContextBuilder >> fromXML: anXMLElement [
 							  ofSort: (var attributeAt: 'sort') asSymbol ].
 	(anXMLElement elementsDetect: [:each | each isNamed: 'ops'])
 		descendantElementsNamed: 'op' do:
-			[ :op | self addOp: (op attributeAt: 'id') asSymbol
-							 withArgs: (((op elementsDetect: [ :each | each isNamed: 'arity' ])
-											descendantElementsNamed: 'sort')
-											collect: [ :s | (s attributeAt: 'id') asSymbol ]) asArray
+			[ :op |
+				| arityEl arity |
+				arityEl := op elementsDetect: [ :each | each isNamed: 'arity' ].
+				arityEl descendantElementsNamed: 'var' do:
+					[ :var | self addVar: (var attributeAt: 'id') asSymbol
+									  ofSort: (var attributeAt: 'sort') asSymbol ].
+				arity := arityEl descendantElementsCollect:
+					[ :el | el name = 'var'
+								ifTrue: [ (el attributeAt: 'sort') asSymbol ]
+								ifFalse: [ self assert: el name equals: 'sort'.
+											  (el attributeAt: 'id') asSymbol ] ].
+				self addOp: (op attributeAt: 'id') asSymbol
+							 withArgs: arity asArray
 							 ofSort: ((op elementsDetect: [ :each | each isNamed: 'sort' ])
 											attributeAt: 'id') asSymbol].
 
