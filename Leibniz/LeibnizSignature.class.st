@@ -95,6 +95,16 @@ LeibnizSignature >> nonZeroArgTermNamed: aSymbol withArgs: aTermArray [
 
 ]
 
+{ #category : #'term construction' }
+LeibnizSignature >> nonZeroArgTermNamed: aSymbol withArgs: aTermArray onError: aBlock [
+	| result |
+	result := self nonZeroArgTermNamed: aSymbol withArgs: aTermArray.
+	result
+		ifNil: [ ^ aBlock value: aSymbol value: (aTermArray collect: [ :t | t sort ]) ]
+		ifNotNil: [ ^ result ]
+
+]
+
 { #category : #accessing }
 LeibnizSignature >> numberOfOperators [
 	^operators size
@@ -178,5 +188,13 @@ LeibnizSignature >> zeroArgTermNamed: aSymbol [
 													  args: #()
 													  sort: sort
 													  forSignature: self ].
+
+]
+
+{ #category : #'term construction' }
+LeibnizSignature >> zeroArgTermNamed: aSymbol onError: aBlock [
+	| result |
+	result := self zeroArgTermNamed: aSymbol.
+	result ifNil: [ ^ aBlock value: aSymbol ] ifNotNil: [ ^ result ]
 
 ]

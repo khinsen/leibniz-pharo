@@ -112,8 +112,10 @@ LeibnizTermParser >> fpNumberTerm [
 		 - In Pharo, a number with an exponent but without a fractional part is an integer, not a float.
 			Workaround: convert the converted string explicitly to a float."
 		==> [ :value |
-				LeibnizFPNumberTerm value: (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat
-										 forSignature: signature ]
+				(signature hasBuiltin: #fpNumbers)
+					ifTrue: [ LeibnizFPNumberTerm value: (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat
+											 			  forSignature: signature ]
+					ifFalse: [ PPFailure message: 'Floating-point literals not allowd by signature' ] ]
 
 ]
 
@@ -132,7 +134,10 @@ LeibnizTermParser >> identifierCharacter [
 { #category : #productions }
 LeibnizTermParser >> integerTerm [
 	^ ($- asParser optional , #digit asParser plus) flatten 
-		==> [ :value | LeibnizIntegerTerm value: value asNumber forSignature: signature ]
+		==> [ :value |
+				(signature hasBuiltin: #integers)
+					ifTrue: [ LeibnizIntegerTerm value: value asNumber forSignature: signature ]
+					ifFalse: [ PPFailure message: 'Integer literals not allowd by signature' ] ]
 ]
 
 { #category : #productions }
@@ -172,7 +177,11 @@ LeibnizTermParser >> prefixOpTerm [
 			symbol := (String streamContents:
 							[ :s | nodes first flattenOn: s]) asSymbol.
 			args := (nodes at: 3) reject: [ :element | element = $,].
-			signature nonZeroArgTermNamed: symbol withArgs: args ]
+			signature nonZeroArgTermNamed: symbol
+						 withArgs: args
+						 onError: [ :opSymbol :arity |
+										PPFailure message: symbol asString , '(' , arity asString ,
+																	') not defined in signature' ] ]
 
 ]
 
@@ -181,8 +190,11 @@ LeibnizTermParser >> rationalNumberTerm [
 	^ ($- asParser optional , #digit asParser plus ,
 			$/ asParser ,
 			$0 asParser not , #digit asParser star) flatten 
-		==> [ :value | LeibnizRationalNumberTerm value: (Fraction readFromString: value)
-															 forSignature: signature ]
+		==> [ :value |
+				(signature hasBuiltin: #rationalNumbers)
+					ifTrue: [ LeibnizRationalNumberTerm value: (Fraction readFromString: value)
+																  forSignature: signature ]
+					ifFalse: [ PPFailure message: 'Rational number literals not allowd by signature' ] ]
 ]
 
 { #category : #initialization }
@@ -208,8 +220,11 @@ LeibnizTermParser >> start [
 { #category : #productions }
 LeibnizTermParser >> stringTerm [
 	^ ($" asParser , $" asParser negate star , $" asParser) flatten 
-		==> [ :value | LeibnizStringTerm value: (value copyFrom: 2 to: value size - 1)
-													forSignature: signature ]
+		==> [ :value |
+				(signature hasBuiltin: #strings)
+					ifTrue: [ LeibnizStringTerm value: (value copyFrom: 2 to: value size - 1)
+														 forSignature: signature ]
+					ifFalse: [ PPFailure message: 'String literals not allowd by signature' ] ]
 ]
 
 { #category : #productions }
@@ -226,5 +241,6 @@ LeibnizTermParser >> term [
 { #category : #productions }
 LeibnizTermParser >> zeroArgTerm [
 	^ identifier flatten
-		==> [ :name | signature zeroArgTermNamed: name asSymbol ]
+		==> [ :name | signature zeroArgTermNamed: name asSymbol
+										onError: [ :symbol | PPFailure message: symbol asString , ' undefined in signature' ] ]
 ]

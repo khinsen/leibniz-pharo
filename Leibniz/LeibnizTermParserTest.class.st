@@ -36,6 +36,10 @@ LeibnizTermParserTest >> setUp [
 	sg := b sortGraph.
 
 	b := LeibnizSignatureBuilder sortGraph: sg.
+	b addBuiltin: #integers.
+	b addBuiltin: #rationalNumbers.
+	b addBuiltin: #fpNumbers.
+	b addBuiltin: #strings.
 	b addVar: #aVar ofSort: #A.
 	b addOp: #aZeroArgOp ofSort: #B.
 	b addOp: #aOneArgOp withArgs: #(#A) ofSort: #A.
@@ -151,6 +155,10 @@ LeibnizTermParserTest >> testPrefixTerms [
 															(parser signature zeroArgTermNamed: #aZeroArgOp) }).
 	self assert: result sort equals: #A.
 
+	self fail: 'aOneArgOp(aVar, aVar)' rule: #prefixOpTerm.
+	self fail: 'aTwoArgOp(aZeroArgOp)' rule: #prefixOpTerm.
+
+
 ]
 
 { #category : #testing }
@@ -191,7 +199,7 @@ LeibnizTermParserTest >> testZeroArgTerms [
 	self assert: result equals: (parser signature zeroArgTermNamed: #aVar).
 	self parse: 'aZeroArgOp' rule: #zeroArgTerm.
 	self assert: result equals: (parser signature zeroArgTermNamed: #aZeroArgOp).
-
+	
 	self fail: '123' rule: #zeroArgTerm.
 	self fail: '"abc"' rule: #zeroArgTerm.
 	self fail: '3/4' rule: #zeroArgTerm.
