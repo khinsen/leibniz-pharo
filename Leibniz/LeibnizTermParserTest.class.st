@@ -16,7 +16,7 @@ LeibnizTermParserTest >> integerTerm: anInteger [
 
 { #category : #accessing }
 LeibnizTermParserTest >> parserClass [
-	^ LeibnizTermParser
+	^ LeibnizTermConstructor
 ]
 
 { #category : #'term construction' }
@@ -51,6 +51,8 @@ LeibnizTermParserTest >> setUp [
 	b addOp: #'^' withArgs: #(#A #A #A) ofSort: #A.
 	b addOp: #'_' withArgs: #(#A #A) ofSort: #A.
 	b addOp: #'_' withArgs: #(#A #A #A) ofSort: #A.
+	b addOp: #'_infixOp1' withArgs: #(#A #A) ofSort: #A.
+	b addOp: #'_infixOp2' withArgs: #(#A #A) ofSort: #A.
 	parser setSignature: b signature.
 
 ]
@@ -75,6 +77,29 @@ LeibnizTermParserTest >> testFpNumberTerms [
 
 	self fail: '123' rule: #fpNumberTerm.
 	self fail: 'abc' rule: #fpNumberTerm.
+
+]
+
+{ #category : #testing }
+LeibnizTermParserTest >> testInfixTerms [
+	| t |
+	t := (parser signature zeroArgTermNamed: #aZeroArgOp).
+
+	self parse: 'aZeroArgOp infixOp1 aZeroArgOp' rule: #term.
+	self assert: result equals:
+		(parser signature nonZeroArgTermNamed: #'_infixOp1' withArgs: { t . t }).
+
+	self parse: 'aZeroArgOp infixOp2 aZeroArgOp' rule: #term.
+	self assert: result equals:
+		(parser signature nonZeroArgTermNamed: #'_infixOp2' withArgs: { t . t }).
+
+	self parse: 'aZeroArgOp infixOp2 aZeroArgOp infixOp2 aZeroArgOp' rule: #term.
+	self assert: result equals:
+		(parser signature nonZeroArgTermNamed: #'_infixOp2'
+								withArgs: { (parser signature nonZeroArgTermNamed: #'_infixOp2'
+																		withArgs: { t . t }) . t }).
+
+	self fail: 'aZeroArgOp infixOp1 aZeroArgOp infixOp2 aZeroArgOp' rule: #term.
 
 ]
 

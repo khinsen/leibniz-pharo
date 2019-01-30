@@ -53,7 +53,6 @@ Class {
 		'term',
 		'identifier',
 		'identifierCharacter',
-		'signature',
 		'fpIntegerPart',
 		'fpFractionalPart',
 		'fpExponentPart',
@@ -69,20 +68,6 @@ Class {
 	],
 	#category : #'Leibniz-3-Terms'
 }
-
-{ #category : #accessing }
-LeibnizTermParser class >> ignoredNames [
-	^ super ignoredNames copyWith: #signature
-
-]
-
-{ #category : #'instance creation' }
-LeibnizTermParser class >> signature: aSignature [
-	^self new
-			setSignature: aSignature;
-			yourself
-
-]
 
 { #category : #productions }
 LeibnizTermParser >> fpExponentPart [
@@ -106,22 +91,11 @@ LeibnizTermParser >> fpNumberTerm [
 	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
 			/ (fpIntegerPart , fpExponentPart))
 		flatten
-		"Converting the string to a float requires some trickery:
-		 - Pharo doesn't allow a dot followed by an exponent without any fractional part.
-			Workaround: replace '.e' by '.0e'
-		 - In Pharo, a number with an exponent but without a fractional part is an integer, not a float.
-			Workaround: convert the converted string explicitly to a float."
-		==> [ :value |
-				(signature hasBuiltin: #fpNumbers)
-					ifTrue: [ LeibnizFPNumberTerm value: (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat
-											 			  forSignature: signature ]
-					ifFalse: [ PPFailure message: 'Floating-point literals not allowd by signature' ] ]
-
 ]
 
 { #category : #productions }
 LeibnizTermParser >> identifier [
-	^ identifierCharacter , (identifierCharacter / #digit asParser / $. asParser) plus
+	^ (identifierCharacter , (#digit asParser / $. asParser / identifierCharacter) star) flatten
 
 ]
 
@@ -144,11 +118,7 @@ LeibnizTermParser >> identifierCharacter [
 
 { #category : #productions }
 LeibnizTermParser >> integerTerm [
-	^ ($- asParser optional , #digit asParser plus) flatten 
-		==> [ :value |
-				(signature hasBuiltin: #integers)
-					ifTrue: [ LeibnizIntegerTerm value: value asNumber forSignature: signature ]
-					ifFalse: [ PPFailure message: 'Integer literals not allowd by signature' ] ]
+	^ ($- asParser optional , #digit asParser plus) flatten
 ]
 
 { #category : #productions }
@@ -162,13 +132,6 @@ LeibnizTermParser >> nonInfixTerm [
 		((self suffixBetween: $[ asParser and: $] asParser withSymbol: #'[]')
 		 / (self suffixBetween: '^{' asParser and: $} asParser withSymbol: #'^')
 		 / (self suffixBetween: '_{' asParser and: $} asParser withSymbol: #'_')) optional
-		==> [ :nodes | nodes second
-							ifNil: [ nodes first ]
-							ifNotNil: [ | symbol args |
-											symbol := nodes second first.
-											args := nodes second second.
-											signature nonZeroArgTermNamed: symbol
-														 withArgs: (args copyWithFirst: nodes first) ] ]
 
 ]
 
@@ -181,18 +144,8 @@ LeibnizTermParser >> parenthesizedTerm [
 { #category : #grammar }
 LeibnizTermParser >> prefixOpTerm [
 	^ identifier , $( asParser ,
-	 (term separatedBy: $, asParser trim) ,
-	 $) asParser
-	==> [ :nodes |
-			| symbol args |
-			symbol := (String streamContents:
-							[ :s | nodes first flattenOn: s]) asSymbol.
-			args := (nodes at: 3) reject: [ :element | element = $,].
-			signature nonZeroArgTermNamed: symbol
-						 withArgs: args
-						 onError: [ :opSymbol :arity |
-										PPFailure message: symbol asString , '(' , arity asString ,
-																	') not defined in signature' ] ]
+		 (term separatedBy: $, asParser trim) ,
+		 $) asParser
 
 ]
 
@@ -201,21 +154,7 @@ LeibnizTermParser >> rationalNumberTerm [
 	^ ($- asParser optional , #digit asParser plus ,
 			$/ asParser ,
 			$0 asParser not , #digit asParser star) flatten 
-		==> [ :value |
-				(signature hasBuiltin: #rationalNumbers)
-					ifTrue: [ LeibnizRationalNumberTerm value: (Fraction readFromString: value)
-																  forSignature: signature ]
-					ifFalse: [ PPFailure message: 'Rational number literals not allowd by signature' ] ]
-]
 
-{ #category : #initialization }
-LeibnizTermParser >> setSignature: aSignature [
-	signature := aSignature
-]
-
-{ #category : #accessing }
-LeibnizTermParser >> signature [
-	^ signature
 ]
 
 { #category : #productions }
@@ -231,11 +170,7 @@ LeibnizTermParser >> start [
 { #category : #productions }
 LeibnizTermParser >> stringTerm [
 	^ ($" asParser , $" asParser negate star , $" asParser) flatten 
-		==> [ :value |
-				(signature hasBuiltin: #strings)
-					ifTrue: [ LeibnizStringTerm value: (value copyFrom: 2 to: value size - 1)
-														 forSignature: signature ]
-					ifFalse: [ PPFailure message: 'String literals not allowd by signature' ] ]
+
 ]
 
 { #category : #productions }
@@ -244,14 +179,25 @@ LeibnizTermParser >> suffixBetween: leftDelimiter and: rightDelimiter withSymbol
 		==> [ :nodes | { opSymbol . (nodes second reject: [ :element | element = $,]) } ]
 ]
 
-{ #category : #productions }
+{ #category : #grammar }
 LeibnizTermParser >> term [
-	^ nonInfixTerm
+	^ (nonInfixTerm separatedBy: (identifier trim))
+		==> [ :nodes |
+				| result |
+				result := OrderedCollection new.
+				nodes size > 1
+					ifTrue: [ result add: (nodes at: 2) ].
+				1 to: nodes size by: 2 do: [ :index | result add: (nodes at: index) ].
+				2 to: nodes size - 1 by: 2 do:
+					[ :index |
+						(nodes at: index) = (nodes at: 2)
+							ifFalse: [ result := PPFailure message: 'expected ', (nodes at: 2) asString, ' but got ', (nodes at: index) asString ] ].
+				result ]
+
 ]
 
 { #category : #productions }
 LeibnizTermParser >> zeroArgTerm [
-	^ identifier flatten
-		==> [ :name | signature zeroArgTermNamed: name asSymbol
-										onError: [ :symbol | PPFailure message: symbol asString , ' undefined in signature' ] ]
+	^ identifier
+
 ]
