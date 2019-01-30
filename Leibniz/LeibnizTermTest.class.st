@@ -9,6 +9,16 @@ Class {
 }
 
 { #category : #running }
+LeibnizTermTest >> checkSyntaxRoundTrip: aString withSignature: aSignature [
+	| p t |
+	p := LeibnizTermConstructor new.
+	p setSignature: aSignature.
+	t := p parse: aString.
+	self assert: aString equals: t asLeibnizSyntaxString.
+
+]
+
+{ #category : #running }
 LeibnizTermTest >> setUp [
 	library := LeibnizLibrary uniqueInstance.
 	builtins := library builtins.
@@ -34,6 +44,12 @@ LeibnizTermTest >> testFPNumbers [
 	self assert: (t value: Float nan) sort equals: #'FP64-NaN'.
 	self assert: (t value: Float infinity) sort equals: #'FP64-inf'.
 	self assert: (t value: Float negativeInfinity) sort equals: #'FP64-inf'.
+
+	self checkSyntaxRoundTrip: '2.5' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'abs(-2.5)' withSignature: c signature.
+	self checkSyntaxRoundTrip: '√(2.5)' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2.3 + 3.4' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2.3^{3.2}' withSignature: c signature.
 
 ]
 
@@ -62,6 +78,11 @@ LeibnizTermTest >> testIntegers [
 	self assert: (t value: -2) sort equals: #'ℤ.nz'.
 	self assert: (t value: 0) sort equals: #zero.
 
+	self checkSyntaxRoundTrip: '2' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'abs(-2)' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2^{3}' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2 + 3 + 4 + 5' withSignature: c signature.
+
 ]
 
 { #category : #testing }
@@ -74,6 +95,11 @@ LeibnizTermTest >> testRationalNumbers [
 	self assert: (t value: -2) sort equals: #'ℤ.nz'.
 	self assert: (t value: 2/3) sort equals: #'ℚ.p'.
 	self assert: (t value: -2/3) sort equals: #'ℚ.nz'.
+
+	self checkSyntaxRoundTrip: '2/3' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'abs(-2/3)' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2/3^{3}' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2/3 + 3/4 + 1/7' withSignature: c signature.
 
 ]
 

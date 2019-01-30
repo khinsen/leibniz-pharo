@@ -31,15 +31,6 @@ LeibnizAtomicTerm >> printAsLeibnizSyntaxOn: aStream [
 
 ]
 
-{ #category : #printing }
-LeibnizAtomicTerm >> printOn: aStream [
-	super printOn: aStream.
-	aStream nextPut: $(.
-	self printAsLeibnizSyntaxOn: aStream.
-	aStream nextPut: $).
-
-]
-
 { #category : #accessing }
 LeibnizAtomicTerm >> sort [
 	^self subclassResponsibility

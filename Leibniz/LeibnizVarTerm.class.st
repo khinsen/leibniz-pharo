@@ -27,6 +27,11 @@ LeibnizVarTerm >> initializeWithSymbol: aSymbol sort: aSort forSignature: aSigna
 
 ]
 
+{ #category : #printing }
+LeibnizVarTerm >> printAsLeibnizSyntaxOn: aStream [
+	aStream nextPutAll: varSymbol asString
+]
+
 { #category : #accessing }
 LeibnizVarTerm >> sort [
 	^sort
