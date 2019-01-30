@@ -127,8 +127,19 @@ LeibnizTermParser >> identifier [
 
 { #category : #productions }
 LeibnizTermParser >> identifierCharacter [
-	"TODO"
-	^ #letter asParser
+	| predicate |
+	predicate := PPCharSetPredicate on:
+		[ :char |
+		char isLetter "Unicode categories Ll Lm Lo Lt Lu"
+			or: [ char isLetterNumber "Unicode category Nl"
+			or: [ ('-*/?' includes: char)
+			or: [ (char isMathSymbol "Unicode category Sm"
+						or: [ char isCurrencySymbol "Unicode category Sc"
+						or: [ char isModifierSymbol "Unicode category Sk"
+						or: [ char isOtherSymbol "Unicode category So" ] ] ])
+					and: [ char ~= $^ ] ] ] ] ].
+	^ PPPredicateObjectParser on: predicate message: 'Leibniz identifier character expected'
+
 ]
 
 { #category : #productions }
