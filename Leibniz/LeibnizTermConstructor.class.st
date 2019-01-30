@@ -1,3 +1,8 @@
+"
+!A term parser subclass that generates terms
+
+This is a subclass of ${class:name=LeibnizTermParser}$ that adds conversion of the parsed data to Leibniz terms for a given ${class:name=LeibnizSignature}$. It returns an object from the ${class:name=LeibnizTerm}$ hierarchy corresponding to the input string, or a ${class:name=PP2Failure}$ object in case of failure.
+"
 Class {
 	#name : #LeibnizTermConstructor,
 	#superclass : #LeibnizTermParser,

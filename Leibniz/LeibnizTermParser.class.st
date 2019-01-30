@@ -3,8 +3,6 @@
 
 The overall goal of the Leibniz term syntax is to resemble both traditional mathematical notation and common programming languages while at the same time leaving a lot of freedom to context authors for designing suitable notation for their needs. The link to mathematical notation is mainly made by the liberal use of the mathematical symbols in Unicode.
 
-A parser stores a reference to a ${class:name=LeibnizSignature}$. It returns an object from the ${class:name=LeibnizTerm}$ hierarchy corresponding to the input string, or a ${class:name=PPFailure}$ object in case of failure.
-
 !!Literal terms
 
 Leibniz has a few built-in term types whose values are represented by literals, i.e. numbers and strings.
@@ -43,6 +41,48 @@ Strings are delimited by double quotes. There is no mechanism for having a doubl
 
 ${method:name=LeibnizTermParser>>#stringTerm|expanded=}$
 
+!!Non-literal terms without arguments
+
+These terms are plain identifiers, which can be resolved either to argument-free operators or to variables (this happens in ${class:name=LeibnizTermConstructor}$).
+
+${method:name=LeibnizTermParser>>#zeroArgTerm|expanded=}$
+
+${method:name=LeibnizTermParser>>#identifier|expanded=}$
+
+The rules for allowed characters in an identifiers are complex and may well change in the future. The overall idea is to be permissive but still avoid conflicts with other syntactical elements.
+
+${method:name=LeibnizTermParser>>#identifierCharacter|expanded=}$
+
+!!Prefix operators
+
+These operators implement the standard function syntax used both in mathematics and in programming languages.
+
+${method:name=LeibnizTermParser>>#prefixOpTerm|expanded=}$
+
+
+!!Parenthesized expressions
+
+Any valid expression in parenthesis is a valid term.
+
+${method:name=LeibnizTermParser>>#parenthesizedTerm|expanded=}$
+
+!!Simple and non-infix terms
+
+All terms listed up to here are so-called ""simple"" terms that can receive one of three suffixes to form the most general non-infix term.
+
+${method:name=LeibnizTermParser>>#simpleTerm|expanded=}$
+
+${method:name=LeibnizTermParser>>#nonInfixTerm|expanded=}$
+
+The three suffixes are square brackets, superscript, and subscript.
+
+${method:name=LeibnizTermParser>>#suffixBetween:and:withSymbol:|expanded=}$
+
+!!Infix operators
+
+The most general term is a chain of infix operators combining non-infix terms. Leibniz has no precedence rules for infix operators, because there can be potentially many of them. A chain of infix operators is therefore allowed only if all the infix operators are the same. When mixing infix operators, parentheses must be used.
+
+${method:name=LeibnizTermParser>>#term|expanded=}$
 
 "
 Class {
