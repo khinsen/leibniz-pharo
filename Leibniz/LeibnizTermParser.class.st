@@ -47,7 +47,7 @@ ${method:name=LeibnizTermParser>>#stringTerm|expanded=}$
 "
 Class {
 	#name : #LeibnizTermParser,
-	#superclass : #PPCompositeParser,
+	#superclass : #PP2CompositeNode,
 	#instVars : [
 		'zeroArgTerm',
 		'term',
@@ -71,18 +71,18 @@ Class {
 
 { #category : #productions }
 LeibnizTermParser >> fpExponentPart [
-	^ $e asParser , fpIntegerPart
+	^ $e asPParser , fpIntegerPart
 ]
 
 { #category : #productions }
 LeibnizTermParser >> fpFractionalPart [
-	^ $. asParser , #digit asParser plus optional
+	^ $. asPParser , #digit asPParser plus optional
 
 ]
 
 { #category : #productions }
 LeibnizTermParser >> fpIntegerPart [
-	^ $- asParser optional , #digit asParser plus
+	^ $- asPParser optional , #digit asPParser plus
 
 ]
 
@@ -95,14 +95,14 @@ LeibnizTermParser >> fpNumberTerm [
 
 { #category : #productions }
 LeibnizTermParser >> identifier [
-	^ (identifierCharacter , (#digit asParser / $. asParser / identifierCharacter) star) flatten
+	^ (identifierCharacter , (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
 
 ]
 
 { #category : #productions }
 LeibnizTermParser >> identifierCharacter [
 	| predicate |
-	predicate := PPCharSetPredicate on:
+	predicate := PP2CharSetPredicate on:
 		[ :char |
 		char isLetter "Unicode categories Ll Lm Lo Lt Lu"
 			or: [ char isLetterNumber "Unicode category Nl"
@@ -112,13 +112,16 @@ LeibnizTermParser >> identifierCharacter [
 						or: [ char isModifierSymbol "Unicode category Sk"
 						or: [ char isOtherSymbol "Unicode category So" ] ] ])
 					and: [ char ~= $^ ] ] ] ] ].
-	^ PPPredicateObjectParser on: predicate message: 'Leibniz identifier character expected'
+	^ PP2PredicateObjectNode new
+		predicate: predicate;
+		predicateMessage: 'Leibniz identifier character expected';
+		yourself.
 
 ]
 
 { #category : #productions }
 LeibnizTermParser >> integerTerm [
-	^ ($- asParser optional , #digit asParser plus) flatten
+	^ ($- asPParser optional , #digit asPParser plus) flatten
 ]
 
 { #category : #productions }
@@ -129,31 +132,31 @@ LeibnizTermParser >> literalTerm [
 { #category : #productions }
 LeibnizTermParser >> nonInfixTerm [
 	^ simpleTerm ,
-		((self suffixBetween: $[ asParser and: $] asParser withSymbol: #'[]')
-		 / (self suffixBetween: '^{' asParser and: $} asParser withSymbol: #'^')
-		 / (self suffixBetween: '_{' asParser and: $} asParser withSymbol: #'_')) optional
+		((self suffixBetween: $[ asPParser and: $] asPParser withSymbol: #'[]')
+		 / (self suffixBetween: '^{' asPParser and: $} asPParser withSymbol: #'^')
+		 / (self suffixBetween: '_{' asPParser and: $} asPParser withSymbol: #'_')) optional
 
 ]
 
 { #category : #productions }
 LeibnizTermParser >> parenthesizedTerm [
-	^ $( asParser , term, $) asParser
+	^ $( asPParser , term, $) asPParser
 		==> [ :nodes | nodes at: 2 ]
 ]
 
-{ #category : #grammar }
+{ #category : #productions }
 LeibnizTermParser >> prefixOpTerm [
-	^ identifier , $( asParser ,
-		 (term separatedBy: $, asParser trim) ,
-		 $) asParser
+	^ identifier , $( asPParser ,
+		 (term separatedBy: $, asPParser trim) ,
+		 $) asPParser
 
 ]
 
 { #category : #productions }
 LeibnizTermParser >> rationalNumberTerm [
-	^ ($- asParser optional , #digit asParser plus ,
-			$/ asParser ,
-			$0 asParser not , #digit asParser star) flatten 
+	^ ($- asPParser optional , #digit asPParser plus ,
+			$/ asPParser ,
+			$0 asPParser not , #digit asPParser star) flatten 
 
 ]
 
@@ -169,17 +172,17 @@ LeibnizTermParser >> start [
 
 { #category : #productions }
 LeibnizTermParser >> stringTerm [
-	^ ($" asParser , $" asParser negate star , $" asParser) flatten 
+	^ ($" asPParser , $" asPParser negate star , $" asPParser) flatten 
 
 ]
 
 { #category : #productions }
 LeibnizTermParser >> suffixBetween: leftDelimiter and: rightDelimiter withSymbol: opSymbol [
-	^ leftDelimiter , (term separatedBy: $, asParser trim) , rightDelimiter
+	^ leftDelimiter , (term separatedBy: $, asPParser trim) , rightDelimiter
 		==> [ :nodes | { opSymbol . (nodes second reject: [ :element | element = $,]) } ]
 ]
 
-{ #category : #grammar }
+{ #category : #productions }
 LeibnizTermParser >> term [
 	^ (nonInfixTerm separatedBy: (identifier trim))
 		==> [ :nodes |
@@ -191,7 +194,7 @@ LeibnizTermParser >> term [
 				2 to: nodes size - 1 by: 2 do:
 					[ :index |
 						(nodes at: index) = (nodes at: 2)
-							ifFalse: [ result := PPFailure message: 'expected ', (nodes at: 2) asString, ' but got ', (nodes at: index) asString ] ].
+							ifFalse: [ result := PP2Failure message: 'expected ', (nodes at: 2) asString, ' but got ', (nodes at: index) asString ] ].
 				result ]
 
 ]

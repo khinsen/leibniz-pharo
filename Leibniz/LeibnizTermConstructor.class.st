@@ -18,8 +18,10 @@ LeibnizTermConstructor >> errorForOp: aSymbol withArity: anArity [
 	| expr |
 	anArity
 		ifEmpty: [ expr := aSymbol asString ]
-		ifNotEmpty: [ expr := aSymbol asString , '(' , anArity asString , ')' ].
-	^ PPFailure message: expr , ' not defined in signature'
+		ifNotEmpty: [ expr := aSymbol asString , '(' ,
+										(', ' join: (anArity collect: [ :each | each asString ])) ,
+										')' ].
+	^ PP2Failure message: expr , ' not defined in signature'
 ]
 
 { #category : #productions }
@@ -34,7 +36,7 @@ LeibnizTermConstructor >> fpNumberTerm [
 				(signature hasBuiltin: #fpNumbers)
 					ifTrue: [ LeibnizFPNumberTerm value: (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat
 											 			  forSignature: signature ]
-					ifFalse: [ PPFailure message: 'Floating-point literals not allowd by signature' ] ]
+					ifFalse: [ PP2Failure message: 'Floating-point literals not allowd by signature' ] ]
 
 ]
 
@@ -44,7 +46,7 @@ LeibnizTermConstructor >> integerTerm [
 		==> [ :value |
 				(signature hasBuiltin: #integers)
 					ifTrue: [ LeibnizIntegerTerm value: value asNumber forSignature: signature ]
-					ifFalse: [ PPFailure message: 'Integer literals not allowd by signature' ] ]
+					ifFalse: [ PP2Failure message: 'Integer literals not allowd by signature' ] ]
 ]
 
 { #category : #productions }
@@ -81,7 +83,7 @@ LeibnizTermConstructor >> rationalNumberTerm [
 				(signature hasBuiltin: #rationalNumbers)
 					ifTrue: [ LeibnizRationalNumberTerm value: (Fraction readFromString: value)
 																  forSignature: signature ]
-					ifFalse: [ PPFailure message: 'Rational number literals not allowd by signature' ] ]
+					ifFalse: [ PP2Failure message: 'Rational number literals not allowd by signature' ] ]
 ]
 
 { #category : #initialization }
@@ -101,7 +103,7 @@ LeibnizTermConstructor >> stringTerm [
 				(signature hasBuiltin: #strings)
 					ifTrue: [ LeibnizStringTerm value: (value copyFrom: 2 to: value size - 1)
 														 forSignature: signature ]
-					ifFalse: [ PPFailure message: 'String literals not allowd by signature' ] ]
+					ifFalse: [ PP2Failure message: 'String literals not allowd by signature' ] ]
 ]
 
 { #category : #productions }

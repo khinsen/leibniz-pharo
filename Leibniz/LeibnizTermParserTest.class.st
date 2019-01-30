@@ -1,6 +1,6 @@
 Class {
 	#name : #LeibnizTermParserTest,
-	#superclass : #PPCompositeParserTest,
+	#superclass : #PP2CompositeNodeTest,
 	#category : #'Leibniz-Tests'
 }
 
