@@ -82,13 +82,11 @@ LeibnizBuiltins >> createFPContext [
 	fpNumbers addOp: #'abs' withArgs: #(#FP64) ofSort: #FP64.
 	fpNumbers addOp: #'√' withArgs: #(#FP64) ofSort: #FP64.
 	"Comparison operators, single precision"
-	fpNumbers addOp: #'_=' withArgs: #(#FP32 #FP32) ofSort: #boolean.
 	fpNumbers addOp: #'_<' withArgs: #(#FP32 #FP32) ofSort: #boolean.
 	fpNumbers addOp: #'_>' withArgs: #(#FP32 #FP32) ofSort: #boolean.
 	fpNumbers addOp: #'_≤' withArgs: #(#FP32 #FP32) ofSort: #boolean.
 	fpNumbers addOp: #'_≥' withArgs: #(#FP32 #FP32) ofSort: #boolean.
 	"Comparison operators, double precision"
-	fpNumbers addOp: #'_=' withArgs: #(#FP64 #FP64) ofSort: #boolean.
 	fpNumbers addOp: #'_<' withArgs: #(#FP64 #FP64) ofSort: #boolean.
 	fpNumbers addOp: #'_>' withArgs: #(#FP64 #FP64) ofSort: #boolean.
 	fpNumbers addOp: #'_≤' withArgs: #(#FP64 #FP64) ofSort: #boolean.
@@ -139,7 +137,6 @@ LeibnizBuiltins >> createIntegerContext [
 	integers addOp: #abs withArgs: #(#'ℤ') ofSort: #'ℕ'.
 	integers addOp: #abs withArgs: #(#'ℤ.nz') ofSort: #'ℕ.nz'.
 	"Comparison operators"
-	integers addOp: #'_=' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
 	integers addOp: #'_<' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
 	integers addOp: #'_>' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
 	integers addOp: #'_≤' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
@@ -188,7 +185,6 @@ LeibnizBuiltins >> createRationalContext [
 	rationalNumbers addOp: #'abs' withArgs: #(#'ℚ') ofSort: #'ℚ.nn'.
 	rationalNumbers addOp: #'abs' withArgs: #(#'ℚ.nz') ofSort: #'ℚ.p'.
 	"Comparison operators"
-	rationalNumbers addOp: #'_=' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
 	rationalNumbers addOp: #'_<' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
 	rationalNumbers addOp: #'_>' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
 	rationalNumbers addOp: #'_≤' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
@@ -237,7 +233,6 @@ LeibnizBuiltins >> createRealNumberContext [
 	realNumbers addOp: #'√' withArgs: #(#'ℝ.nn') ofSort: #'ℝ.nn'.
 	realNumbers addOp: #'√' withArgs: #(#'ℝ.p') ofSort: #'ℝ.p'.
 	"Comparison operators"
-	realNumbers addOp: #'_=' withArgs: #(#'ℝ' #'ℝ') ofSort: #boolean.
 	realNumbers addOp: #'_<' withArgs: #(#'ℝ' #'ℝ') ofSort: #boolean.
 	realNumbers addOp: #'_>' withArgs: #(#'ℝ' #'ℝ') ofSort: #boolean.
 	realNumbers addOp: #'_≤' withArgs: #(#'ℝ' #'ℝ') ofSort: #boolean.
