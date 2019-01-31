@@ -54,6 +54,7 @@ LeibnizOperator >> addArity: newArity withSort: newSort [
 				ifTrue: [ self assertMonotonicity: [ sortGraph is: s subsortOf: newSort ]
 									forArity: newArity andSort: newSort]. ].
 
+	ranks add: newArity -> newSort.
 ]
 
 { #category : #viewing }
