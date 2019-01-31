@@ -80,8 +80,13 @@ LeibnizTermTest >> testIntegers [
 
 	self checkSyntaxRoundTrip: '2' withSignature: c signature.
 	self checkSyntaxRoundTrip: 'abs(-2)' withSignature: c signature.
-	self checkSyntaxRoundTrip: '2^{3}' withSignature: c signature.
 	self checkSyntaxRoundTrip: '2 + 3 + 4 + 5' withSignature: c signature.
+	self checkSyntaxRoundTrip: '(2 + 3) × (2 - 7)' withSignature: c signature.
+	self checkSyntaxRoundTrip: '(3 - -4) div (-2 × 1)' withSignature: c signature.
+	self checkSyntaxRoundTrip: '(2 + 3 + 4) rem 5' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2^{3}' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2^{2^{3}}' withSignature: c signature.
+	self checkSyntaxRoundTrip: '(2 - 4)^{3}' withSignature: c signature.
 
 ]
 
@@ -100,6 +105,8 @@ LeibnizTermTest >> testRationalNumbers [
 	self checkSyntaxRoundTrip: 'abs(-2/3)' withSignature: c signature.
 	self checkSyntaxRoundTrip: '2/3^{3}' withSignature: c signature.
 	self checkSyntaxRoundTrip: '2/3 + 3/4 + 1/7' withSignature: c signature.
+	self checkSyntaxRoundTrip: '(2/3 + 3/4 + 1/7) ÷ -3/4' withSignature: c signature.
+	self checkSyntaxRoundTrip: '1/7 < 3/4' withSignature: c signature.
 
 ]
 
@@ -120,5 +127,8 @@ LeibnizTermTest >> testTruth [
 	self assert: t sort equals: #boolean.
 	t := c signature zeroArgTermNamed: #false.
 	self assert: t sort equals: #boolean.
+
+	self checkSyntaxRoundTrip: 'true' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'false' withSignature: c signature.
 
 ]
