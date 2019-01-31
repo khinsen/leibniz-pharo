@@ -203,6 +203,19 @@ LeibnizTermParserTest >> testRationalNumberTerms [
 ]
 
 { #category : #testing }
+LeibnizTermParserTest >> testReservedIdentifiers [
+	self fail: '⇒' rule: #identifier.
+	self fail: '→' rule: #identifier.
+	self fail: '∀' rule: #identifier.
+	self fail: 'if' rule: #identifier.
+	
+	self parse: '⇒⇒' rule: #identifier.
+	self parse: '?⇒?' rule: #identifier.
+	self parse: 'iff' rule: #identifier.
+
+]
+
+{ #category : #testing }
 LeibnizTermParserTest >> testStringTerms [
 	self parse: '"abc"' rule: #stringTerm.
 	self assert: result equals: (self stringTerm: 'abc').
@@ -228,5 +241,5 @@ LeibnizTermParserTest >> testZeroArgTerms [
 	self fail: '123' rule: #zeroArgTerm.
 	self fail: '"abc"' rule: #zeroArgTerm.
 	self fail: '3/4' rule: #zeroArgTerm.
-
+	
 ]

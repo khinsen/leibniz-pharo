@@ -136,7 +136,9 @@ LeibnizTermParser >> fpNumberTerm [
 { #category : #productions }
 LeibnizTermParser >> identifier [
 	^ (identifierCharacter , (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
-
+		==> [ :id | (#('⇒' '→' '∀' 'if') includes: id)
+							ifFalse: [ id ]
+							ifTrue: [ PP2Failure message: 'reserved identifier: ', id ] ]
 ]
 
 { #category : #productions }
