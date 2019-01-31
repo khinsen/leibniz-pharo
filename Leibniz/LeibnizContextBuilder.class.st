@@ -29,12 +29,6 @@ LeibnizContextBuilder >> addBuiltin: aSymbol [
 	signatureBuilder addBuiltin: aSymbol
 ]
 
-{ #category : #'defining - private' }
-LeibnizContextBuilder >> addDeclarationsFrom: aContext inMode: useOrExtend [
-	sortGraphBuilder addSortGraph: aContext sortGraph.
-
-]
-
 { #category : #'defining - signature' }
 LeibnizContextBuilder >> addOp: anOpSymbol ofSort: aSortSymbol [
 	self phase: #signature.
@@ -233,14 +227,8 @@ LeibnizContextBuilder >> sortGraph [
 LeibnizContextBuilder >> startSignature [
 	self ensureSortGraph.
 	signatureBuilder := LeibnizSignatureBuilder sortGraph: sortGraph.
-	includes do:
-		[ :i |
-		  | s |
-		  s := (i at: #context) signature.
-		  signatureBuilder addBuiltinsFromSignature: s.
-		  signatureBuilder addOpsFromSignature: s.
-		  (i at: #mode) = 'extend' ifTrue:
-				[ signatureBuilder addVarsFromSignature: s ] ].
+	includes do: [ :i | signatureBuilder addSignature: (i at: #context) signature
+													includeVars: (i at: #mode) = 'extend' ].
 
 ]
 

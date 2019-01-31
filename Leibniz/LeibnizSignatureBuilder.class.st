@@ -69,6 +69,14 @@ LeibnizSignatureBuilder >> addOpsFromSignature: aSignature [
 ]
 
 { #category : #adding }
+LeibnizSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
+	self addBuiltinsFromSignature: aSignature.
+	self addOpsFromSignature: aSignature.
+	aBoolean ifTrue: [ self addVarsFromSignature: aSignature ]
+
+]
+
+{ #category : #adding }
 LeibnizSignatureBuilder >> addVar: aVarSymbol ofSort: aSortSymbol [
 	| op sort |
 	op := operators at: aVarSymbol ifAbsent: nil.
