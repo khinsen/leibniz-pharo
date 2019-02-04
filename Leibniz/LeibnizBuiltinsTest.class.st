@@ -30,7 +30,7 @@ LeibnizBuiltinsTest >> testFloats [
 	context := builtins contextNamed: 'IEEE-floating-point'.
 	self assert: context sortGraph size equals: 18.
 	self assert: context sortGraph kinds size equals: 3.
-	self assert: context signature numberOfOperators equals: 17.
+	self assert: context signature numberOfOperators equals: 16.
 	self assert: context signature numberOfVariables equals: 0.
 
 	self deny: (context signature hasBuiltin: #strings).
@@ -46,7 +46,7 @@ LeibnizBuiltinsTest >> testIntegers [
 	context := builtins contextNamed: 'integers'.
 	self assert: context sortGraph size equals: 6.
 	self assert: context sortGraph kinds size equals: 2.
-	self assert: context signature numberOfOperators equals: 15.
+	self assert: context signature numberOfOperators equals: 14.
 	self assert: context signature numberOfVariables equals: 0.
 
 	self deny: (context signature hasBuiltin: #strings).
@@ -62,7 +62,7 @@ LeibnizBuiltinsTest >> testRationalNumbers [
 	context := builtins contextNamed: 'rational-numbers'.
 	self assert: context sortGraph size equals: 10.
 	self assert: context sortGraph kinds size equals: 2.
-	self assert: context signature numberOfOperators equals: 16.
+	self assert: context signature numberOfOperators equals: 15.
 	self assert: context signature numberOfVariables equals: 0.
 
 	self deny: (context signature hasBuiltin: #strings).
@@ -78,7 +78,7 @@ LeibnizBuiltinsTest >> testRealNumbers [
 	context := builtins contextNamed: 'real-numbers'.
 	self assert: context sortGraph size equals: 14.
 	self assert: context sortGraph kinds size equals: 2.
-	self assert: context signature numberOfOperators equals: 17.
+	self assert: context signature numberOfOperators equals: 16.
 	self assert: context signature numberOfVariables equals: 0.
 
 	self deny: (context signature hasBuiltin: #strings).
