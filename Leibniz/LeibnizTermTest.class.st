@@ -3,7 +3,8 @@ Class {
 	#superclass : #TestCase,
 	#instVars : [
 		'library',
-		'builtins'
+		'builtins',
+		'examples'
 	],
 	#category : #'Leibniz-Tests'
 }
@@ -14,7 +15,9 @@ LeibnizTermTest >> checkSyntaxRoundTrip: aString withSignature: aSignature [
 	p := LeibnizTermConstructor new.
 	p setSignature: aSignature.
 	t := p parse: aString.
-	self assert: aString equals: t asLeibnizSyntaxString.
+	(t isKindOf: PP2Failure)
+		ifTrue: [ Error signal: 'failed to parse ', aString ].
+	self assert: t asLeibnizSyntaxString equals: aString.
 
 ]
 
@@ -22,6 +25,19 @@ LeibnizTermTest >> checkSyntaxRoundTrip: aString withSignature: aSignature [
 LeibnizTermTest >> setUp [
 	library := LeibnizLibrary uniqueInstance.
 	builtins := library builtins.
+	examples := LeibnizExamples new.
+]
+
+{ #category : #testing }
+LeibnizTermTest >> testBoolean [
+	| c |
+	c := examples contextNamed: 'boolean'.
+
+	self checkSyntaxRoundTrip: 'true' withSignature: c signature.
+	self checkSyntaxRoundTrip: '¬(false)' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'X ⊻ Y ⊻ (X ∧ Y)' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'true ⊻ false ⊻ X ⊻ Y' withSignature: c signature.
+
 ]
 
 { #category : #testing }
@@ -50,6 +66,19 @@ LeibnizTermTest >> testFPNumbers [
 	self checkSyntaxRoundTrip: '√(2.5)' withSignature: c signature.
 	self checkSyntaxRoundTrip: '2.3 + 3.4' withSignature: c signature.
 	self checkSyntaxRoundTrip: '2.3^{3.2}' withSignature: c signature.
+
+]
+
+{ #category : #testing }
+LeibnizTermTest >> testFunctions [
+	| c |
+	c := examples contextNamed: 'ℝ→ℝ'.
+
+	self checkSyntaxRoundTrip: '(f + g)[X]' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'f[X] + g[X]' withSignature: c signature.
+	self checkSyntaxRoundTrip: '(s × g)[X]' withSignature: c signature.
+	self checkSyntaxRoundTrip: 's × g[X]' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'f[g[X]]' withSignature: c signature.
 
 ]
 

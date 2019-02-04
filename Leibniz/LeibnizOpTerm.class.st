@@ -21,8 +21,14 @@ LeibnizOpTerm class >> symbol: aSymbol args: anArgList sort: aSort forSignature:
 ]
 
 { #category : #private }
-LeibnizOpTerm >> hasOtherOpThan: aSymbol [
-	^ aSymbol ~= opSymbol.
+LeibnizOpTerm >> hasInfixOpOtherThan: aSymbol [
+	"Not the same op."
+	aSymbol = opSymbol
+		ifTrue: [ ^ false ].
+	"Not an infix op."
+	opSymbol asString first = $_
+		ifFalse: [ ^ false ].
+	^ true
 ]
 
 { #category : #initialization }
@@ -83,7 +89,7 @@ LeibnizOpTerm >> printAsLeibnizSyntaxOn: aStream [
 LeibnizOpTerm >> printInfixAsLeibnizSyntaxOn: aStream [
 	self assert: argList size equals: 2.
 	argList first printAsLeibnizSyntaxOn: aStream
-					  parenthesized: (argList first hasOtherOpThan: opSymbol).
+					  parenthesized: (argList first hasInfixOpOtherThan: opSymbol).
 	aStream nextPutAll: ' '.
 	aStream nextPutAll: opSymbol asString allButFirst.
 	aStream nextPutAll: ' '.
@@ -109,7 +115,7 @@ LeibnizOpTerm >> printSpecialAsLeibnizSyntaxOn: aStream [
 	rightDelimiter := Dictionary with: #'[]' -> ']' with: #'^' -> '}' with: #'_' -> '}'.
 	self assert: argList size > 1.
 	argList first printAsLeibnizSyntaxOn: aStream
-					  parenthesized: (argList first hasOtherOpThan: opSymbol).
+					  parenthesized: (argList first hasInfixOpOtherThan: opSymbol).
 	aStream nextPutAll: (leftDelimiter at: opSymbol).
 	argList second printAsLeibnizSyntaxOn: aStream.
 	(argList allButFirst: 2) do:

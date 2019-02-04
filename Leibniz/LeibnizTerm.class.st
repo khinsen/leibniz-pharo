@@ -23,7 +23,7 @@ LeibnizTerm >> assertNotAVariable [
 ]
 
 { #category : #private }
-LeibnizTerm >> hasOtherOpThan: aSymbol [
+LeibnizTerm >> hasInfixOpOtherThan: aSymbol [
 	^ false
 ]
 
