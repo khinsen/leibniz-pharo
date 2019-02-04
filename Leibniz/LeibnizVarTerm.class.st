@@ -19,11 +19,25 @@ LeibnizVarTerm class >> symbol: aSymbol sort: aSort forSignature: aSignature [
 
 ]
 
+{ #category : #matching }
+LeibnizVarTerm >> assertNotAVariable [
+	Error signal: 'No variables allowed in matching terms'
+]
+
 { #category : #initialization }
 LeibnizVarTerm >> initializeWithSymbol: aSymbol sort: aSort forSignature: aSignature [
 	varSymbol := aSymbol.
 	sort := aSort.
 	signature := aSignature.
+
+]
+
+{ #category : #matching }
+LeibnizVarTerm >> match: otherTerm [
+	otherTerm assertNotAVariable.
+	(signature sortGraph is: otherTerm sort subsortOf: sort)
+		ifTrue: [ ^ LeibnizMatch new var: varSymbol value: otherTerm ]
+		ifFalse: [ ^ nil ]
 
 ]
 

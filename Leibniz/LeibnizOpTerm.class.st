@@ -41,6 +41,30 @@ LeibnizOpTerm >> isInfix [
 	^ opString size > 1 and: [ opString first = $_ ]
 ]
 
+{ #category : #matching }
+LeibnizOpTerm >> match: otherTerm [
+	otherTerm matchOp: opSymbol andArgs: argList
+
+]
+
+{ #category : #matching }
+LeibnizOpTerm >> matchOp: aSymbol andArgs: anArgList [
+	| match |
+	opSymbol = aSymbol
+		ifFalse: [ ^ nil ].
+	argList size = anArgList size
+		ifFalse: [ ^ nil ].
+	match := LeibnizMatch new.
+	anArgList with: argList do:
+		[ :patternArg :valueArg |
+		  | argMatch |
+			argMatch := patternArg match: valueArg.
+			argMatch ifNil: [ ^ nil ].
+			match := match combineWith: argMatch.
+			match ifNil: [ ^ nil ] ].
+	^ match
+]
+
 { #category : #printing }
 LeibnizOpTerm >> printAsLeibnizSyntaxOn: aStream [
 	| opString |

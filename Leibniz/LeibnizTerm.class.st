@@ -17,6 +17,11 @@ LeibnizTerm >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
+{ #category : #matching }
+LeibnizTerm >> assertNotAVariable [
+	^ self
+]
+
 { #category : #private }
 LeibnizTerm >> hasOtherOpThan: aSymbol [
 	^ false
@@ -26,6 +31,18 @@ LeibnizTerm >> hasOtherOpThan: aSymbol [
 LeibnizTerm >> isInfix [
 	"Answer true if the term is printed in infix notation."
 	^ false.
+]
+
+{ #category : #matching }
+LeibnizTerm >> match: otherTerm [
+	self = otherTerm
+		ifTrue: [ ^ LeibnizMatch new ]
+		ifFalse: [ ^ nil ]
+]
+
+{ #category : #matching }
+LeibnizTerm >> matchOp: opSymbol andArgs: argList [
+	^ nil
 ]
 
 { #category : #printing }
