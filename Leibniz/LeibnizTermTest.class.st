@@ -10,13 +10,36 @@ Class {
 }
 
 { #category : #running }
+LeibnizTermTest >> check: aTerm doesNotMatch: aPattern withSignature: aSignature [
+	| p parse pattern term |
+	p := LeibnizTermConstructor new.
+	p setSignature: aSignature.
+	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
+	pattern := parse value: aPattern.
+	term := parse value: aTerm.
+	self assert: (pattern match: term) equals: nil.
+
+]
+
+{ #category : #running }
+LeibnizTermTest >> check: aTerm matches: aPattern withSubstitution: aDictionary inSignature: aSignature [
+	| p parse pattern term substitutions |
+	p := LeibnizTermConstructor new.
+	p setSignature: aSignature.
+	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
+	pattern := parse value: aPattern.
+	term := parse value: aTerm.
+	substitutions := aDictionary collect: [ :each | parse value: each ].
+	self assert: (pattern match: term) substitutions equals: substitutions.
+
+]
+
+{ #category : #running }
 LeibnizTermTest >> checkSyntaxRoundTrip: aString withSignature: aSignature [
 	| p t |
 	p := LeibnizTermConstructor new.
 	p setSignature: aSignature.
-	t := p parse: aString.
-	(t isKindOf: PP2Failure)
-		ifTrue: [ Error signal: 'failed to parse ', aString ].
+	t := p parse: aString onError: [ Error signal: 'failed to parse ', aString ].
 	self assert: t asLeibnizSyntaxString equals: aString.
 
 ]
@@ -37,6 +60,25 @@ LeibnizTermTest >> testBoolean [
 	self checkSyntaxRoundTrip: '¬(false)' withSignature: c signature.
 	self checkSyntaxRoundTrip: 'X ⊻ Y ⊻ (X ∧ Y)' withSignature: c signature.
 	self checkSyntaxRoundTrip: 'true ⊻ false ⊻ X ⊻ Y' withSignature: c signature.
+
+	self check: 'true' matches: 'X'
+		  withSubstitution: (Dictionary with: #X -> 'true')
+		  inSignature: c signature.
+	self check: '¬(true)' matches: '¬(X)'
+		  withSubstitution: (Dictionary with: #X -> 'true')
+		  inSignature: c signature.
+	self check: '¬(true)' matches: 'X'
+		  withSubstitution: (Dictionary with: #X -> '¬(true)')
+		  inSignature: c signature.
+	self check: 'true ⊻ false ⊻ true ⊻ ¬(true)' matches: 'true ⊻ false ⊻ X ⊻ Y'
+		  withSubstitution: (Dictionary with: #X -> 'true' with: #Y -> '¬(true)')
+		  inSignature: c signature.
+	self check: 'true ⊻ true' matches: 'X ⊻ X'
+		  withSubstitution: (Dictionary with: #X -> 'true')
+		  inSignature: c signature.
+
+	self check: 'true' doesNotMatch: 'false' withSignature: c signature.
+	self check: 'true ⊻ false' doesNotMatch: 'X ⊻ X' withSignature: c signature.
 
 ]
 

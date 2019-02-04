@@ -49,7 +49,7 @@ LeibnizOpTerm >> isInfix [
 
 { #category : #matching }
 LeibnizOpTerm >> match: otherTerm [
-	otherTerm matchOp: opSymbol andArgs: argList
+	^otherTerm matchOp: opSymbol andArgs: argList
 
 ]
 

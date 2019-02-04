@@ -36,7 +36,7 @@ LeibnizVarTerm >> initializeWithSymbol: aSymbol sort: aSort forSignature: aSigna
 LeibnizVarTerm >> match: otherTerm [
 	otherTerm assertNotAVariable.
 	(signature sortGraph is: otherTerm sort subsortOf: sort)
-		ifTrue: [ ^ LeibnizMatch new var: varSymbol value: otherTerm ]
+		ifTrue: [ ^ LeibnizMatch variable: varSymbol value: otherTerm ]
 		ifFalse: [ ^ nil ]
 
 ]
