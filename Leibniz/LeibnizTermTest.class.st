@@ -30,7 +30,7 @@ LeibnizTermTest >> check: aTerm matches: aPattern withSubstitution: aDictionary 
 	pattern := parse value: aPattern.
 	term := parse value: aTerm.
 	substitutions := aDictionary collect: [ :each | parse value: each ].
-	self assert: (pattern match: term) substitutions equals: substitutions.
+	self assert: (pattern match: term) variables equals: substitutions.
 
 ]
 
@@ -49,37 +49,6 @@ LeibnizTermTest >> setUp [
 	library := LeibnizLibrary uniqueInstance.
 	builtins := library builtins.
 	examples := LeibnizExamples new.
-]
-
-{ #category : #testing }
-LeibnizTermTest >> testBoolean [
-	| c |
-	c := examples contextNamed: 'boolean'.
-
-	self checkSyntaxRoundTrip: 'true' withSignature: c signature.
-	self checkSyntaxRoundTrip: '¬(false)' withSignature: c signature.
-	self checkSyntaxRoundTrip: 'X ⊻ Y ⊻ (X ∧ Y)' withSignature: c signature.
-	self checkSyntaxRoundTrip: 'true ⊻ false ⊻ X ⊻ Y' withSignature: c signature.
-
-	self check: 'true' matches: 'X'
-		  withSubstitution: (Dictionary with: #X -> 'true')
-		  inSignature: c signature.
-	self check: '¬(true)' matches: '¬(X)'
-		  withSubstitution: (Dictionary with: #X -> 'true')
-		  inSignature: c signature.
-	self check: '¬(true)' matches: 'X'
-		  withSubstitution: (Dictionary with: #X -> '¬(true)')
-		  inSignature: c signature.
-	self check: 'true ⊻ false ⊻ true ⊻ ¬(true)' matches: 'true ⊻ false ⊻ X ⊻ Y'
-		  withSubstitution: (Dictionary with: #X -> 'true' with: #Y -> '¬(true)')
-		  inSignature: c signature.
-	self check: 'true ⊻ true' matches: 'X ⊻ X'
-		  withSubstitution: (Dictionary with: #X -> 'true')
-		  inSignature: c signature.
-
-	self check: 'true' doesNotMatch: 'false' withSignature: c signature.
-	self check: 'true ⊻ false' doesNotMatch: 'X ⊻ X' withSignature: c signature.
-
 ]
 
 { #category : #testing }
@@ -103,32 +72,18 @@ LeibnizTermTest >> testFPNumbers [
 	self assert: (t value: Float infinity) sort equals: #'FP64-inf'.
 	self assert: (t value: Float negativeInfinity) sort equals: #'FP64-inf'.
 
-	self checkSyntaxRoundTrip: '2.5' withSignature: c signature.
-	self checkSyntaxRoundTrip: 'abs(-2.5)' withSignature: c signature.
-	self checkSyntaxRoundTrip: '√(2.5)' withSignature: c signature.
-	self checkSyntaxRoundTrip: '2.3 + 3.4' withSignature: c signature.
-	self checkSyntaxRoundTrip: '2.3^{3.2}' withSignature: c signature.
-
 ]
 
 { #category : #testing }
-LeibnizTermTest >> testFunctions [
-	| c |
-	c := examples contextNamed: 'ℝ→ℝ'.
-
-	self checkSyntaxRoundTrip: '(f + g)[X]' withSignature: c signature.
-	self checkSyntaxRoundTrip: 'f[X] + g[X]' withSignature: c signature.
-	self checkSyntaxRoundTrip: '(s × g)[X]' withSignature: c signature.
-	self checkSyntaxRoundTrip: 's × g[X]' withSignature: c signature.
-	self checkSyntaxRoundTrip: 'f[g[X]]' withSignature: c signature.
-
-]
-
-{ #category : #testing }
-LeibnizTermTest >> testIntegerArithmetic [
+LeibnizTermTest >> testIntegers [
 	| c i t |
 	c := builtins contextNamed: 'integers'.
 	i := [ :x | LeibnizIntegerTerm value: x forSignature: c signature ].
+
+	self assert: (i value: 2) sort equals: #'ℕ.nz'.
+	self assert: (i value: -2) sort equals: #'ℤ.nz'.
+	self assert: (i value: 0) sort equals: #zero.
+
 	t := c signature nonZeroArgTermNamed: #abs withArgs: { (i value: 2) }.
 	self assert: t sort equals: #'ℕ.nz'.
 	t := c signature nonZeroArgTermNamed: #abs withArgs: { (i value: 0) }.
@@ -137,27 +92,31 @@ LeibnizTermTest >> testIntegerArithmetic [
 	self assert: t sort equals: #'ℕ.nz'.
 	t := c signature nonZeroArgTermNamed: #'_+' withArgs: { (i value: -2) . (i value: 2)}.
 	self assert: t sort equals: #'ℤ'.
-
 ]
 
 { #category : #testing }
-LeibnizTermTest >> testIntegers [
-	| c t |
-	c := builtins contextNamed: 'integers'.
-	t := [ :x | LeibnizIntegerTerm value: x forSignature: c signature ].
-	self assert: (t value: 2) sort equals: #'ℕ.nz'.
-	self assert: (t value: -2) sort equals: #'ℤ.nz'.
-	self assert: (t value: 0) sort equals: #zero.
+LeibnizTermTest >> testMatching [
+	| c |
+	c := examples contextNamed: 'boolean'.
 
-	self checkSyntaxRoundTrip: '2' withSignature: c signature.
-	self checkSyntaxRoundTrip: 'abs(-2)' withSignature: c signature.
-	self checkSyntaxRoundTrip: '2 + 3 + 4 + 5' withSignature: c signature.
-	self checkSyntaxRoundTrip: '(2 + 3) × (2 - 7)' withSignature: c signature.
-	self checkSyntaxRoundTrip: '(3 - -4) div (-2 × 1)' withSignature: c signature.
-	self checkSyntaxRoundTrip: '(2 + 3 + 4) rem 5' withSignature: c signature.
-	self checkSyntaxRoundTrip: '2^{3}' withSignature: c signature.
-	self checkSyntaxRoundTrip: '2^{2^{3}}' withSignature: c signature.
-	self checkSyntaxRoundTrip: '(2 - 4)^{3}' withSignature: c signature.
+	self check: 'true' matches: 'X'
+		  withSubstitution: (Dictionary with: #X -> 'true')
+		  inSignature: c signature.
+	self check: '¬(true)' matches: '¬(X)'
+		  withSubstitution: (Dictionary with: #X -> 'true')
+		  inSignature: c signature.
+	self check: '¬(true)' matches: 'X'
+		  withSubstitution: (Dictionary with: #X -> '¬(true)')
+		  inSignature: c signature.
+	self check: 'true ⊻ false ⊻ true ⊻ ¬(true)' matches: 'true ⊻ false ⊻ X ⊻ Y'
+		  withSubstitution: (Dictionary with: #X -> 'true' with: #Y -> '¬(true)')
+		  inSignature: c signature.
+	self check: 'true ⊻ true' matches: 'X ⊻ X'
+		  withSubstitution: (Dictionary with: #X -> 'true')
+		  inSignature: c signature.
+
+	self check: 'true' doesNotMatch: 'false' withSignature: c signature.
+	self check: 'true ⊻ false' doesNotMatch: 'X ⊻ X' withSignature: c signature.
 
 ]
 
@@ -172,13 +131,6 @@ LeibnizTermTest >> testRationalNumbers [
 	self assert: (t value: 2/3) sort equals: #'ℚ.p'.
 	self assert: (t value: -2/3) sort equals: #'ℚ.nz'.
 
-	self checkSyntaxRoundTrip: '2/3' withSignature: c signature.
-	self checkSyntaxRoundTrip: 'abs(-2/3)' withSignature: c signature.
-	self checkSyntaxRoundTrip: '2/3^{3}' withSignature: c signature.
-	self checkSyntaxRoundTrip: '2/3 + 3/4 + 1/7' withSignature: c signature.
-	self checkSyntaxRoundTrip: '(2/3 + 3/4 + 1/7) ÷ -3/4' withSignature: c signature.
-	self checkSyntaxRoundTrip: '1/7 < 3/4' withSignature: c signature.
-
 ]
 
 { #category : #testing }
@@ -191,6 +143,54 @@ LeibnizTermTest >> testStrings [
 ]
 
 { #category : #testing }
+LeibnizTermTest >> testSyntax [
+	| c |
+	c := builtins contextNamed: 'truth'.
+	self checkSyntaxRoundTrip: 'true' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'false' withSignature: c signature.
+
+	c := builtins contextNamed: 'integers'.
+	self checkSyntaxRoundTrip: '2' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'abs(-2)' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2 + 3 + 4 + 5' withSignature: c signature.
+	self checkSyntaxRoundTrip: '(2 + 3) × (2 - 7)' withSignature: c signature.
+	self checkSyntaxRoundTrip: '(3 - -4) div (-2 × 1)' withSignature: c signature.
+	self checkSyntaxRoundTrip: '(2 + 3 + 4) rem 5' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2^{3}' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2^{2^{3}}' withSignature: c signature.
+	self checkSyntaxRoundTrip: '(2 - 4)^{3}' withSignature: c signature.
+
+	c := builtins contextNamed: 'rational-numbers'.
+	self checkSyntaxRoundTrip: '2/3' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'abs(-2/3)' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2/3^{3}' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2/3 + 3/4 + 1/7' withSignature: c signature.
+	self checkSyntaxRoundTrip: '(2/3 + 3/4 + 1/7) ÷ -3/4' withSignature: c signature.
+	self checkSyntaxRoundTrip: '1/7 < 3/4' withSignature: c signature.
+
+	c := builtins contextNamed: 'IEEE-floating-point'.
+	self checkSyntaxRoundTrip: '2.5' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'abs(-2.5)' withSignature: c signature.
+	self checkSyntaxRoundTrip: '√(2.5)' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2.3 + 3.4' withSignature: c signature.
+	self checkSyntaxRoundTrip: '2.3^{3.2}' withSignature: c signature.
+
+	c := examples contextNamed: 'boolean'.
+	self checkSyntaxRoundTrip: 'true' withSignature: c signature.
+	self checkSyntaxRoundTrip: '¬(false)' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'X ⊻ Y ⊻ (X ∧ Y)' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'true ⊻ false ⊻ X ⊻ Y' withSignature: c signature.
+
+	c := examples contextNamed: 'ℝ→ℝ'.
+	self checkSyntaxRoundTrip: '(f + g)[X]' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'f[X] + g[X]' withSignature: c signature.
+	self checkSyntaxRoundTrip: '(s × g)[X]' withSignature: c signature.
+	self checkSyntaxRoundTrip: 's × g[X]' withSignature: c signature.
+	self checkSyntaxRoundTrip: 'f[g[X]]' withSignature: c signature.
+
+]
+
+{ #category : #testing }
 LeibnizTermTest >> testTruth [
 	| c t |
 	c := builtins contextNamed: 'truth'.
@@ -198,8 +198,5 @@ LeibnizTermTest >> testTruth [
 	self assert: t sort equals: #boolean.
 	t := c signature zeroArgTermNamed: #false.
 	self assert: t sort equals: #boolean.
-
-	self checkSyntaxRoundTrip: 'true' withSignature: c signature.
-	self checkSyntaxRoundTrip: 'false' withSignature: c signature.
 
 ]
