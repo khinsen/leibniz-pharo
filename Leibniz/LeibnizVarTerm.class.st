@@ -36,7 +36,7 @@ LeibnizVarTerm >> initializeWithSymbol: aSymbol sort: aSort forSignature: aSigna
 LeibnizVarTerm >> match: otherTerm [
 	otherTerm assertNotAVariable.
 	(signature sortGraph is: otherTerm sort subsortOf: sort)
-		ifTrue: [ ^ LeibnizMatch variable: varSymbol value: otherTerm ]
+		ifTrue: [ ^ LeibnizSubstitution variable: varSymbol value: otherTerm ]
 		ifFalse: [ ^ nil ]
 
 ]
@@ -49,4 +49,16 @@ LeibnizVarTerm >> printAsLeibnizSyntaxOn: aStream [
 { #category : #accessing }
 LeibnizVarTerm >> sort [
 	^sort
+]
+
+{ #category : #substituting }
+LeibnizVarTerm >> substitute: aSubstitution [
+	aSubstitution variables at: varSymbol ifPresent: [ :value | ^ value ].
+	^ self
+
+]
+
+{ #category : #accessing }
+LeibnizVarTerm >> variables [
+	^ Set with: varSymbol
 ]

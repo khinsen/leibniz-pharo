@@ -35,3 +35,13 @@ LeibnizAtomicTerm >> printAsLeibnizSyntaxOn: aStream [
 LeibnizAtomicTerm >> sort [
 	^self subclassResponsibility
 ]
+
+{ #category : #substituting }
+LeibnizAtomicTerm >> substitute: aSubstitution [
+	^self
+]
+
+{ #category : #accessing }
+LeibnizAtomicTerm >> variables [
+	^ Set new
+]

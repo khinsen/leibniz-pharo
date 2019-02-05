@@ -60,7 +60,7 @@ LeibnizOpTerm >> matchOp: aSymbol andArgs: anArgList [
 		ifFalse: [ ^ nil ].
 	argList size = anArgList size
 		ifFalse: [ ^ nil ].
-	match := LeibnizMatch new.
+	match := LeibnizSubstitution new.
 	anArgList with: argList do:
 		[ :patternArg :valueArg |
 		  | argMatch |
@@ -127,4 +127,17 @@ LeibnizOpTerm >> printSpecialAsLeibnizSyntaxOn: aStream [
 { #category : #accessing }
 LeibnizOpTerm >> sort [
 	^sort
+]
+
+{ #category : #substituting }
+LeibnizOpTerm >> substitute: aSubstitution [
+	| substitutedArgList |
+	substitutedArgList := argList collect: [ :arg | arg substitute: aSubstitution ].
+	^ signature nonZeroArgTermNamed: opSymbol withArgs: substitutedArgList
+
+]
+
+{ #category : #accessing }
+LeibnizOpTerm >> variables [
+	^ argList inject: Set new into: [ :total :each | total union: each variables ]
 ]

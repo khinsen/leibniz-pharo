@@ -36,7 +36,7 @@ LeibnizTerm >> isInfix [
 { #category : #matching }
 LeibnizTerm >> match: otherTerm [
 	self = otherTerm
-		ifTrue: [ ^ LeibnizMatch new ]
+		ifTrue: [ ^ LeibnizSubstitution new ]
 		ifFalse: [ ^ nil ]
 ]
 
@@ -75,4 +75,14 @@ LeibnizTerm >> signature [
 { #category : #accessing }
 LeibnizTerm >> sort [
 	^self subclassResponsibility
+]
+
+{ #category : #substituting }
+LeibnizTerm >> substitute: aSubstitution [
+	self subclassResponsibility
+]
+
+{ #category : #accessing }
+LeibnizTerm >> variables [
+	self subclassResponsibility
 ]
