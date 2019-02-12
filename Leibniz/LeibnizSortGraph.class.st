@@ -37,6 +37,37 @@ LeibnizSortGraph >> addGraphForSubset: aSet toBuilder: aBuilder [
 
 ]
 
+{ #category : #viewing }
+LeibnizSortGraph >> addGraphForSubset: aSet toView: aView [
+	| edges |
+	aView nodes
+		shape:
+			[ :x |
+				BlTextElement new
+					text: x asString asRopedText;
+					padding:
+						(BlInsets
+							top: 5
+							right: 5
+							bottom: 5
+							left: 5) ];
+		with: (aSet collect: [:s | s asString ]).
+	edges := OrderedCollection new.
+	self withSubsortRelationsDo:
+		[ :s1 :s2 | ((aSet includes: s1) and: [aSet includes: s2])
+						ifTrue: [ edges add: s1 asString -> s2 asString ] ].
+	aView edges
+		shape: [ :x | 
+			BlLineElement new
+				toHead: (BlArrowheadSimpleArrow new
+							border: (BlBorder paint: Color gray width: 1));
+				border: (BlBorder paint: Color gray width: 1) ];
+		fromCenterBottom;
+		toCenterTop;
+		connect: edges from: #key to: #value.
+
+]
+
 { #category : #enumerating }
 LeibnizSortGraph >> allSubsortsOf: aSort [
 	^ subsortsOf at: aSort
@@ -100,6 +131,24 @@ LeibnizSortGraph >> gtInspectorTreeViewIn: composite [
 		title: 'Tree View';
 		initializeView: [ self treeViewForSubset: self asSet ].
 
+]
+
+{ #category : #inspecting }
+LeibnizSortGraph >> gtNetworkViewFor: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Network view';
+		priority: 0;
+		painting: [ :view | self networkViewForSubset: self asSet view: view ]
+]
+
+{ #category : #inspecting }
+LeibnizSortGraph >> gtTreeViewFor: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Tree view';
+		priority: 0;
+		painting: [ :view | self treeViewForSubset: self asSet view: view ]
 ]
 
 { #category : #testing }
@@ -167,6 +216,12 @@ LeibnizSortGraph >> networkViewForSubset: aSet [
 	b build.
 	^ b view
 
+]
+
+{ #category : #viewing }
+LeibnizSortGraph >> networkViewForSubset: aSet view: aView [
+	self addGraphForSubset: aSet toView: aView. 
+	aView layout custom: (GtGradKamadaKawaiLayout new).
 ]
 
 { #category : #printing }
@@ -256,6 +311,12 @@ LeibnizSortGraph >> treeViewForSubset: aSet [
 	b build.
 	^ b view
 
+]
+
+{ #category : #viewing }
+LeibnizSortGraph >> treeViewForSubset: aSet view: aView [
+	self addGraphForSubset: aSet toView: aView. 
+	aView layout custom: (GtGradVerticalDominanceTreeLayout new).
 ]
 
 { #category : #enumerating }
