@@ -1,5 +1,22 @@
 "
-I represent a sort graph in a Leibniz context.
+!!Sorts, sort graphs, and kinds
+
+Sorts are names given to sets of values. They are similar to types in programming languages. In the Pharo implementation, sorts are plain symbols.
+
+A sort can be declared to be a subsort of another sort, meaning that its values are in a subset of the set rof values epresented by the supersort. A graph formed by subsort relations is called a sort graph.
+
+The connected components of a sort graph are called kinds. Sorts that are in different kinds are completely unrelated.
+
+As an example, let's look at the sort graph of the built-in context 'real-numbers':
+[[[
+builtins := LeibnizLibrary uniqueInstance builtins.
+(builtins contextNamed: 'real-numbers') sortGraph
+]]]
+
+It consists of two kinds, one of which contains a single sort, ==#boolean==. The second kind groups together all the number sorts built into Leibniz. The suffix ==.nz== stands for non-zero, ==.p== stands for positive, and ==.nn== stands for non-negative.
+
+Sort graphs are immutable objects. They are constructed by a ${class:name=LeibnizSortGraphBuilder}$.
+
 "
 Class {
 	#name : #LeibnizSortGraph,

@@ -1,5 +1,11 @@
 "
-I build LeibnizSortGraphs from a sequence of sort and subsort declarations.
+!! Sort graph builders
+
+Sort graphs (${class:name=LeibnizSortGraph}$) being immutable, they cannot be constructed by adding sorts and subsort relations one by one. However, such a step by step construction can be used to make a sort graph builder, which in the end is used to build an immutable sort graph.
+
+An example:
+${method:LeibnizSortGraphTest>>#setUp|expanded=}$
+
 "
 Class {
 	#name : #LeibnizSortGraphBuilder,
