@@ -1,5 +1,5 @@
 "
-This is a LeibnizDocument holding a few example contexts.
+This is a ${class:name=LeibnizDocument}$ holding a few example contexts.
 "
 Class {
 	#name : #LeibnizExamples,

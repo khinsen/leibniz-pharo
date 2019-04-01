@@ -1,5 +1,7 @@
 "
-I represent a kind, which is a connected component of a sort graph.
+!! Kinds
+
+Kinds are the connected components in a ${class:name=LeibnizSortGraph}$. They are not explicitly declared, but are the result of an analysis of subsort relations.
 "
 Class {
 	#name : #LeibnizKind,
