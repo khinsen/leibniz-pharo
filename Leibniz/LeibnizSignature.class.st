@@ -1,5 +1,24 @@
 "
-I represent the signature of a Leibniz context.
+!!Operators, variables, and signatures
+
+Operators and variables are the building blocks of terms (see ${class:name=LeibnizTerm}$). A signature is the collection of all operators and variables declared in a ${class:name=LeibnizContext}$.
+
+!!!Operators
+
+Operators are used to construct terms that represent specific values. An operator is defined by its ''name'', its ''arity'', and its ''sort''. The arity is a list of sorts, possibly empty, that defines which sorts valid ''arguments'' must have. The combination of arity and sort is called the operator's ''rank''.
+
+From a syntactical point of view, Leibniz has ''prefix'', ''infix'', and ''special'' operators. Infix operators must have exactly two arguments. There are no operator precedence rules, therefore parentheses are obligatory everywhere to make the order of application unambiguous. The only exception is repeated use of the same operator.
+
+Example:
+[[[
+boolean := LeibnizExamples new contextNamed: 'boolean'.
+boolean signature
+]]]
+
+!!!Variables
+
+Variables are used in patterns that match different terms. A variable is defined by its ''name'' and its ''sort''. In pattern matching, a variable matches any term that is compatible with its sort.
+
 "
 Class {
 	#name : #LeibnizSignature,

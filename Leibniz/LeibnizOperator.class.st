@@ -1,5 +1,7 @@
 "
-I represent an operator with given symbol and kind-arity in a LeibnizSignature.
+See ${class:name=LeibnizSignature}$.
+
+
 "
 Class {
 	#name : #LeibnizOperator,
