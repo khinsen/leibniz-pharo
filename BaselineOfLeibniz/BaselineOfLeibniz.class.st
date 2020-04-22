@@ -48,7 +48,6 @@ BaselineOfLeibniz >> baseline: spec [
 { #category : #baseline }
 BaselineOfLeibniz >> postload: loader package: packageSpec [
 	LeibnizLibrary reset.
-	Transcript crLog: 'LeibnizLibrary reset.'
 
 ]
 
@@ -58,7 +57,7 @@ BaselineOfLeibniz >> preload: loader package: packageSpec [
 		ifFalse: [ ^ self ].
 	LeibnizLibrary reset.
 	Smalltalk garbageCollect.
-	Transcript crLog: 'Leibniz objects cleaned up.'
+
 ]
 
 { #category : #baseline }
