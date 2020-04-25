@@ -1,65 +1,12 @@
 Class {
 	#name : #LeibnizTermParserTest,
-	#superclass : #PP2CompositeNodeTest,
+	#superclass : #LeibnizParserTest,
 	#category : #'Leibniz-Tests'
 }
-
-{ #category : #'term construction' }
-LeibnizTermParserTest >> fpNumberTerm: aFloat [
-	^ LeibnizFPNumberTerm value: aFloat forSignature: parser signature
-]
-
-{ #category : #'term construction' }
-LeibnizTermParserTest >> integerTerm: anInteger [
-	^ LeibnizIntegerTerm value: anInteger forSignature: parser signature
-]
 
 { #category : #accessing }
 LeibnizTermParserTest >> parserClass [
 	^ LeibnizTermConstructor
-]
-
-{ #category : #'term construction' }
-LeibnizTermParserTest >> rationalNumberTerm: aFraction [
-	^ LeibnizRationalNumberTerm value: aFraction forSignature: parser signature
-]
-
-{ #category : #running }
-LeibnizTermParserTest >> setUp [
-	| b sg |
-	super setUp.
-
-	b := LeibnizSortGraphBuilder new.
-	b add: #A;
-	  add: #B;
-	  make: #B subsortOf: #A.
-	sg := b sortGraph.
-
-	b := LeibnizSignatureBuilder sortGraph: sg.
-	b addBuiltin: #integers.
-	b addBuiltin: #rationalNumbers.
-	b addBuiltin: #fpNumbers.
-	b addBuiltin: #strings.
-	b addVar: #aVar ofSort: #A.
-	b addOp: #aZeroArgOp ofSort: #B.
-	b addOp: #aOneArgOp withArgs: #(#A) ofSort: #A.
-	b addOp: #aOneArgOp withArgs: #(#B) ofSort: #B.
-	b addOp: #aTwoArgOp withArgs: #(#A #A) ofSort: #A.
-	b addOp: #'[]' withArgs: #(#A #A) ofSort: #A.
-	b addOp: #'[]' withArgs: #(#A #A #A) ofSort: #A.
-	b addOp: #'^' withArgs: #(#A #A) ofSort: #A.
-	b addOp: #'^' withArgs: #(#A #A #A) ofSort: #A.
-	b addOp: #'_' withArgs: #(#A #A) ofSort: #A.
-	b addOp: #'_' withArgs: #(#A #A #A) ofSort: #A.
-	b addOp: #'_infixOp1' withArgs: #(#A #A) ofSort: #A.
-	b addOp: #'_infixOp2' withArgs: #(#A #A) ofSort: #A.
-	parser setSignature: b signature.
-
-]
-
-{ #category : #'term construction' }
-LeibnizTermParserTest >> stringTerm: aString [
-	^ LeibnizStringTerm value: aString forSignature: parser signature
 ]
 
 { #category : #testing }
@@ -207,11 +154,12 @@ LeibnizTermParserTest >> testReservedIdentifiers [
 	self fail: '⇒' rule: #identifier.
 	self fail: '→' rule: #identifier.
 	self fail: '∀' rule: #identifier.
-	self fail: 'if' rule: #identifier.
+	self fail: '|' rule: #identifier.
 	
 	self parse: '⇒⇒' rule: #identifier.
 	self parse: '?⇒?' rule: #identifier.
-	self parse: 'iff' rule: #identifier.
+	self parse: '|+|' rule: #identifier.
+	self parse: '→|→' rule: #identifier.
 
 ]
 
@@ -228,6 +176,15 @@ LeibnizTermParserTest >> testStringTerms [
 
 	self fail: 'abc' rule: #stringTerm.
 	self fail: '123' rule: #stringTerm.
+
+]
+
+{ #category : #testing }
+LeibnizTermParserTest >> testTruthTerms [
+	self parse: 'true' rule: #zeroArgTerm.
+	self assert: result equals: (parser signature zeroArgTermNamed: #true ).
+	self parse: 'false' rule: #zeroArgTerm.
+	self assert: result equals: (parser signature zeroArgTermNamed: #false ).
 
 ]
 

@@ -136,7 +136,7 @@ LeibnizTermParser >> fpNumberTerm [
 { #category : #productions }
 LeibnizTermParser >> identifier [
 	^ (identifierCharacter , (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
-		==> [ :id | (#('⇒' '→' '∀' 'if') includes: id)
+		==> [ :id | (#('⇒' '→' '∀' '|' '⊆') includes: id)
 							ifFalse: [ id ]
 							ifTrue: [ PP2Failure message: 'reserved identifier: ', id ] ]
 ]
@@ -153,7 +153,7 @@ LeibnizTermParser >> identifierCharacter [
 						or: [ char isCurrencySymbol "Unicode category Sc"
 						or: [ char isModifierSymbol "Unicode category Sk"
 						or: [ char isOtherSymbol "Unicode category So" ] ] ])
-					and: [ char ~= $^ ] ] ] ] ].
+					and: [ ('^' includes: char) not ] ] ] ] ].
 	^ PP2PredicateObjectNode new
 		predicate: predicate;
 		predicateMessage: 'Leibniz identifier character expected';

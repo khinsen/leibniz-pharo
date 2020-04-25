@@ -4,6 +4,8 @@ I represent a rewrite rule in a Leibniz context.
 Class {
 	#name : #LeibnizRule,
 	#superclass : #Object,
+	#traits : 'EqualityThroughVariables',
+	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'pattern',
 		'variables',
