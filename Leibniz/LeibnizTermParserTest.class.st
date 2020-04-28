@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 LeibnizTermParserTest >> parserClass [
-	^ LeibnizTermConstructor
+	^ LeibnizTermParser
 ]
 
 { #category : #testing }

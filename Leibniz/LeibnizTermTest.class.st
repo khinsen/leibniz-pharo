@@ -13,7 +13,7 @@ Class {
 { #category : #running }
 LeibnizTermTest >> check: aTerm doesNotMatch: aPattern [
 	| p parse pattern term |
-	p := LeibnizTermConstructor new.
+	p := LeibnizTermParser new.
 	p setSignature: currentSignature.
 	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
@@ -25,7 +25,7 @@ LeibnizTermTest >> check: aTerm doesNotMatch: aPattern [
 { #category : #running }
 LeibnizTermTest >> check: aTerm matches: aPattern withSubstitution: aDictionary [
 	| p parse pattern term substitutions |
-	p := LeibnizTermConstructor new.
+	p := LeibnizTermParser new.
 	p setSignature: currentSignature.
 	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
@@ -38,7 +38,7 @@ LeibnizTermTest >> check: aTerm matches: aPattern withSubstitution: aDictionary 
 { #category : #running }
 LeibnizTermTest >> check: aPattern withSubstitution: aDictionary equals: aTerm [
 	| p parse pattern term substitution result |
-	p := LeibnizTermConstructor new.
+	p := LeibnizTermParser new.
 	p setSignature: currentSignature.
 	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
@@ -56,7 +56,7 @@ LeibnizTermTest >> check: aPattern withSubstitution: aDictionary equals: aTerm [
 { #category : #running }
 LeibnizTermTest >> checkSyntaxRoundTrip: aString [
 	| p t |
-	p := LeibnizTermConstructor new.
+	p := LeibnizTermParser new.
 	p setSignature: currentSignature.
 	t := p parse: aString onError: [ Error signal: 'failed to parse ', aString ].
 	self assert: t asLeibnizSyntaxString equals: aString.

@@ -211,6 +211,21 @@ LeibnizSignature >> zeroArgTermNamed: aSymbol [
 ]
 
 { #category : #'term construction' }
+LeibnizSignature >> zeroArgTermNamed: aSymbol extraVariables: aDictionary [
+	aDictionary at: aSymbol
+		ifPresent: [ :sort | ^ LeibnizVarTerm symbol: aSymbol sort: sort forSignature: self ].
+	^ self zeroArgTermNamed: aSymbol
+]
+
+{ #category : #'term construction' }
+LeibnizSignature >> zeroArgTermNamed: aSymbol extraVariables: aDictionary onError: aBlock [
+	| result |
+	result := self zeroArgTermNamed: aSymbol extraVariables: aDictionary.
+	result ifNil: [ ^ aBlock value: aSymbol ] ifNotNil: [ ^ result ]
+
+]
+
+{ #category : #'term construction' }
 LeibnizSignature >> zeroArgTermNamed: aSymbol onError: aBlock [
 	| result |
 	result := self zeroArgTermNamed: aSymbol.

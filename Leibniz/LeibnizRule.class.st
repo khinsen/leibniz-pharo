@@ -7,8 +7,9 @@ Class {
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
-		'pattern',
+		'signature',
 		'variables',
+		'pattern',
 		'condition',
 		'replacement'
 	],
@@ -50,4 +51,9 @@ LeibnizRule >> initializeWithPattern: aPattern localVariables: aDictionary condi
 	variables := aDictionary.
 	condition := aBooleanTerm.
 	replacement := aTerm.
+	signature := pattern signature.
+	self assert: replacement signature equals: signature.
+	condition ifNotNil:
+		[ self assert: condition signature equals: signature ].
+
 ]
