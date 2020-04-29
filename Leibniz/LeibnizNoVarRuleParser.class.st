@@ -28,6 +28,7 @@ LeibnizNoVarRuleParser >> noVarRule [
 	^ term, rewriteArrow trim, term, conditionClause optional
 		==> [ :nodes |
 				LeibnizRule pattern: (nodes at: 1)
+								localVariables: extraVariables
 							   condition: (nodes at: 4)
 								replacement: (nodes at: 3)]
 ]

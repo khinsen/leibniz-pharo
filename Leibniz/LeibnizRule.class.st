@@ -45,6 +45,11 @@ LeibnizRule class >> pattern: aPattern replacement: aTerm [
 
 ]
 
+{ #category : #converting }
+LeibnizRule >> asLeibnizSyntaxString [
+	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
+]
+
 { #category : #initializing }
 LeibnizRule >> initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm replacement: aTerm [
 	pattern := aPattern.
@@ -55,5 +60,30 @@ LeibnizRule >> initializeWithPattern: aPattern localVariables: aDictionary condi
 	self assert: replacement signature equals: signature.
 	condition ifNotNil:
 		[ self assert: condition signature equals: signature ].
+
+]
+
+{ #category : #printing }
+LeibnizRule >> printAsLeibnizSyntaxOn: aStream [
+	variables keysAndValuesDo:
+		[ :var :sort |
+			aStream nextPutAll: '∀ '.
+			aStream nextPutAll: var.
+			aStream nextPut: $:.
+			aStream nextPutAll: sort.
+			aStream nextPutAll: ' '].
+	pattern printAsLeibnizSyntaxOn: aStream.
+	aStream nextPutAll: ' ⇒ '.
+	replacement printAsLeibnizSyntaxOn: aStream.
+	condition ifNotNil:
+		[ aStream nextPutAll: ' | '. condition printAsLeibnizSyntaxOn: aStream ].
+]
+
+{ #category : #printing }
+LeibnizRule >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	self printAsLeibnizSyntaxOn: aStream.
+	aStream nextPut: $).
 
 ]
