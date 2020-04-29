@@ -1,3 +1,9 @@
+"
+!A term parser subclass that parses rules without variables
+
+This subclass of ${class:name=LeibnizTermParser}$ adds a few straightforward productions for parsing Leibniz rules that contain no variables, i.e. no for-all clauses. The full rule parser is ${class:name=LeibnizRuleParser}$.
+
+"
 Class {
 	#name : #LeibnizNoVarRuleParser,
 	#superclass : #LeibnizTermParser,

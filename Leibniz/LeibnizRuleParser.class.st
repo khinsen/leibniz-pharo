@@ -1,3 +1,8 @@
+"
+!A term parser subclass that parses rules
+
+Rules are parsed in two steps. The first step is parsing the for-all clauses. The variables declared in these clauses are passed to the second step (implemented in ${class:name=LeibnizNoVarRuleParser}$), together with the signatures. These two items together define which terms are valid inside the rule. 
+"
 Class {
 	#name : #LeibnizRuleParser,
 	#superclass : #LeibnizTermParser,
