@@ -1,0 +1,54 @@
+Class {
+	#name : #LeibnizRewriteSystem,
+	#superclass : #Object,
+	#traits : 'EqualityThroughVariables',
+	#classTraits : 'EqualityThroughVariables classTrait',
+	#instVars : [
+		'signature',
+		'rules'
+	],
+	#category : #'Leibniz-4-Rules'
+}
+
+{ #category : #'instance creation' }
+LeibnizRewriteSystem class >> signature: aSignature rules: anOrderedCollection [
+	^ self basicNew
+			 initializeWithSignature: aSignature
+								rules: anOrderedCollection;
+			 yourself.
+
+]
+
+{ #category : #initialization }
+LeibnizRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedCollection [
+	signature := aSignature.
+	rules := anOrderedCollection.
+	self beRecursivelyReadOnlyObject.
+
+]
+
+{ #category : #rewriting }
+LeibnizRewriteSystem >> reduce: aTerm [
+	self flag: #todo.
+	^ aTerm
+]
+
+{ #category : #rewriting }
+LeibnizRewriteSystem >> rewriteHeadOnce: aTerm [
+	rules do:
+		[ :each |
+			| s |
+			s := each pattern match: aTerm.
+			s ifNotNil:
+				[ (self testCondition: each condition substituting: s)
+						ifTrue: [ ^ each replacement substitute: s ] ] ].
+	^ aTerm
+
+]
+
+{ #category : #rewriting }
+LeibnizRewriteSystem >> testCondition: aTermOrNil substituting: aSubstitution [
+	^ aTermOrNil
+		ifNil: [ true ]
+		ifNotNil: [ (self reduce: (aTermOrNil substitute: aSubstitution)) isTrue ]
+]

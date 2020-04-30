@@ -12,6 +12,7 @@ Class {
 
 { #category : #running }
 LeibnizRuleTest >> setUp [
+	super setUp.
 	library := LeibnizLibrary uniqueInstance.
 	builtins := library builtins.
 	examples := LeibnizExamples new.

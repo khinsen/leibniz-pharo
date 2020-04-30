@@ -47,6 +47,13 @@ LeibnizOpTerm >> isInfix [
 	^ opString size > 1 and: [ opString first = $_ ]
 ]
 
+{ #category : #testing }
+LeibnizOpTerm >> isTrue [
+	^ (sort = #boolean)
+		and: [ (opSymbol = #true)
+		and: [ argList isEmpty ] ]
+]
+
 { #category : #matching }
 LeibnizOpTerm >> match: otherTerm [
 	^otherTerm matchOp: opSymbol andArgs: argList

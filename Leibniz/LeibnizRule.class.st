@@ -50,6 +50,11 @@ LeibnizRule >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
+{ #category : #accessing }
+LeibnizRule >> condition [
+	^ condition
+]
+
 { #category : #initializing }
 LeibnizRule >> initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm replacement: aTerm [
 	pattern := aPattern.
@@ -61,6 +66,11 @@ LeibnizRule >> initializeWithPattern: aPattern localVariables: aDictionary condi
 	condition ifNotNil:
 		[ self assert: condition signature equals: signature ].
 
+]
+
+{ #category : #accessing }
+LeibnizRule >> pattern [
+	^ pattern
 ]
 
 { #category : #printing }
@@ -86,4 +96,28 @@ LeibnizRule >> printOn: aStream [
 	self printAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: $).
 
+]
+
+{ #category : #accessing }
+LeibnizRule >> replacement [
+	^ replacement
+]
+
+{ #category : #rewriting }
+LeibnizRule >> rewrite: aTerm [
+	| substitution |
+	substitution := pattern match: aTerm.
+	substitution ifNil: [ ^ aTerm ].
+	condition ifNotNil: [ self error: 'Condition must be evaluated in a context' ].
+	^ replacement substitute: substitution
+]
+
+{ #category : #accessing }
+LeibnizRule >> signature [
+	^ signature
+]
+
+{ #category : #accessing }
+LeibnizRule >> variables [
+	^ variables
 ]

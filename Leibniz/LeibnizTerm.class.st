@@ -33,6 +33,12 @@ LeibnizTerm >> isInfix [
 	^ false.
 ]
 
+{ #category : #testing }
+LeibnizTerm >> isTrue [
+	"Answer true if the term the truth value 'true'."
+	^ false.
+]
+
 { #category : #matching }
 LeibnizTerm >> match: otherTerm [
 	self = otherTerm
