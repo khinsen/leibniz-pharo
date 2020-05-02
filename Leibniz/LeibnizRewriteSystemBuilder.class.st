@@ -34,7 +34,9 @@ LeibnizRewriteSystemBuilder >> initializeWithSignature: aSignature [
 { #category : #adding }
 LeibnizRewriteSystemBuilder >> parseAndAddRule: aString [
 	| rule |
-	rule := (LeibnizRuleParser forSignature: signature) parse: aString.
+	rule := (LeibnizRuleParser forSignature: signature)
+				parse: aString
+				onError: [ self error: 'Failed to parse ', aString].
 	rules add: rule
 ]
 

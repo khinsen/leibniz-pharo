@@ -92,3 +92,8 @@ LeibnizTerm >> substitute: aSubstitution [
 LeibnizTerm >> variables [
 	self subclassResponsibility
 ]
+
+{ #category : #transforming }
+LeibnizTerm >> withTransformedArgs: transformer [
+	^ self
+]

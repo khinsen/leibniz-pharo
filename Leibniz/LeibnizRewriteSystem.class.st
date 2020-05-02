@@ -30,7 +30,7 @@ LeibnizRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedColl
 { #category : #rewriting }
 LeibnizRewriteSystem >> reduce: aTerm [
 	self flag: #todo.
-	^ aTerm
+	^ self rewriteLeftmostInnermost: aTerm
 ]
 
 { #category : #rewriting }
@@ -44,6 +44,19 @@ LeibnizRewriteSystem >> rewriteHeadOnce: aTerm [
 						ifTrue: [ ^ each replacement substitute: s ] ] ].
 	^ aTerm
 
+]
+
+{ #category : #rewriting }
+LeibnizRewriteSystem >> rewriteLeftmostInnermost: aTerm [
+	| reducer |
+	reducer := [ :each | self reduce: each ].
+	^ self rewriteHeadOnce: (aTerm withTransformedArgs: reducer)
+
+]
+
+{ #category : #accessing }
+LeibnizRewriteSystem >> signature [
+	^ signature
 ]
 
 { #category : #rewriting }

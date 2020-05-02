@@ -148,3 +148,8 @@ LeibnizOpTerm >> substitute: aSubstitution [
 LeibnizOpTerm >> variables [
 	^ argList inject: Set new into: [ :total :each | total union: each variables ]
 ]
+
+{ #category : #transforming }
+LeibnizOpTerm >> withTransformedArgs: transformer [
+	^ signature nonZeroArgTermNamed: opSymbol withArgs: (argList collect: transformer)
+]
