@@ -39,6 +39,24 @@ LeibnizRewriteSystemTest >> setUp [
 ]
 
 { #category : #tests }
+LeibnizRewriteSystemTest >> testReduce [
+	| rws tp |
+
+	rws := self booleanRewriteSystem.	
+	tp := LeibnizTermParser forSignature: rws signature.
+
+	self assert: (rws reduce: (tp parse: '¬(true)'))
+		  equals: (tp parse: 'false').
+	self assert: (rws reduce: (tp parse: '¬(false)'))
+		  equals: (tp parse: 'true').
+	self assert: (rws reduce: (tp parse: 'foo'))
+		  equals: (tp parse: 'true').
+	self assert: (rws reduce: (tp parse: '¬(¬(false))'))
+		  equals: (tp parse: 'false').
+
+]
+
+{ #category : #tests }
 LeibnizRewriteSystemTest >> testRewriteHeadOnce [
 	| rws tp |
 

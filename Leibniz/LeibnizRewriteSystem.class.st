@@ -29,8 +29,13 @@ LeibnizRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedColl
 
 { #category : #rewriting }
 LeibnizRewriteSystem >> reduce: aTerm [
-	self flag: #todo.
-	^ self rewriteLeftmostInnermost: aTerm
+	| lastValue newValue |
+	newValue := aTerm.
+	lastValue := nil.
+	[ lastValue = newValue ] whileFalse:
+		[	lastValue := newValue.
+			newValue :=  self rewriteLeftmostInnermost: lastValue ].
+	^ newValue
 ]
 
 { #category : #rewriting }
