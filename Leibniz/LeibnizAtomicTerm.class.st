@@ -43,5 +43,5 @@ LeibnizAtomicTerm >> substitute: aSubstitution [
 
 { #category : #accessing }
 LeibnizAtomicTerm >> variables [
-	^ Set new
+	^ Dictionary new
 ]

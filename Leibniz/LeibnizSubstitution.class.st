@@ -1,3 +1,6 @@
+"
+I represent the mapping from variables to values that results from matching a term to a pattern.
+"
 Class {
 	#name : #LeibnizSubstitution,
 	#superclass : #Object,

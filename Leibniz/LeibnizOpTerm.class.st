@@ -146,7 +146,7 @@ LeibnizOpTerm >> substitute: aSubstitution [
 
 { #category : #accessing }
 LeibnizOpTerm >> variables [
-	^ argList inject: Set new into: [ :total :each | total union: each variables ]
+	^ argList inject: Dictionary new into: [ :total :each | total union: each variables ]
 ]
 
 { #category : #transforming }

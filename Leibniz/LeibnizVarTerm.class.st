@@ -60,5 +60,6 @@ LeibnizVarTerm >> substitute: aSubstitution [
 
 { #category : #accessing }
 LeibnizVarTerm >> variables [
-	^ Set with: varSymbol
+	^ Dictionary with: varSymbol -> sort
+
 ]

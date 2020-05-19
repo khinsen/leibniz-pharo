@@ -57,14 +57,25 @@ LeibnizRule >> condition [
 
 { #category : #initializing }
 LeibnizRule >> initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm replacement: aTerm [
+	| patternVariables |
 	pattern := aPattern.
 	variables := aDictionary.
 	condition := aBooleanTerm.
 	replacement := aTerm.
 	signature := pattern signature.
+
 	self assert: replacement signature equals: signature.
 	condition ifNotNil:
 		[ self assert: condition signature equals: signature ].
+
+	patternVariables := pattern variables.
+	replacement variables associationsDo:
+		[ :each | self assert: (patternVariables includesAssociation: each)
+							description: 'Variable ', each key, ' in replacement but not in pattern'  ].
+	condition ifNotNil: [
+		condition variables associationsDo:
+			[ :each | self assert: (patternVariables includesAssociation: each)
+								description: 'Variable ', each key, ' in condition but not in pattern'  ] ].
 
 ]
 
