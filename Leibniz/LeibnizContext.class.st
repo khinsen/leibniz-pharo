@@ -7,15 +7,16 @@ Class {
 	#instVars : [
 		'name',
 		'sortGraph',
-		'signature'
+		'signature',
+		'rewriteSystem'
 	],
 	#category : #'Leibniz-6-Contexts'
 }
 
 { #category : #'instance creation' }
-LeibnizContext class >> name: aString sortGraph: aSortGraph signature: aSignature [
+LeibnizContext class >> name: aString sortGraph: aSortGraph signature: aSignature rewriteSystem: aRewriteSystem [
 	^ self basicNew
-			 initializeWithName: aString sortGraph: aSortGraph signature: aSignature;
+			 initializeWithName: aString sortGraph: aSortGraph signature: aSignature rewriteSystem: aRewriteSystem;
 			 yourself.
 
 ]
@@ -33,10 +34,11 @@ LeibnizContext >> gtInspectorComponentsIn: composite [
 ]
 
 { #category : #initializing }
-LeibnizContext >> initializeWithName: aString sortGraph: aSortGraph signature: aSignature [
+LeibnizContext >> initializeWithName: aString sortGraph: aSortGraph signature: aSignature rewriteSystem: aRewriteSystem [
 	name := aString.
 	sortGraph := aSortGraph.
 	signature := aSignature.
+	rewriteSystem := aRewriteSystem.
 	self beRecursivelyReadOnlyObject.
 ]
 
@@ -54,6 +56,11 @@ LeibnizContext >> printOn: aStream [
 	aStream nextPut: $'.
 	aStream nextPut: $).
 
+]
+
+{ #category : #accessing }
+LeibnizContext >> rewriteSystem [
+	^ rewriteSystem
 ]
 
 { #category : #accessing }

@@ -20,6 +20,12 @@ LeibnizRewriteSystemBuilder class >> signature: aSignature [
 ]
 
 { #category : #adding }
+LeibnizRewriteSystemBuilder >> addRewriteSystem: aRewriteSystem [
+	self flag: #todo.
+	self notYetImplemented
+]
+
+{ #category : #adding }
 LeibnizRewriteSystemBuilder >> addRule: aRule [
 	self assert: aRule signature equals: signature.
 	rules add: aRule

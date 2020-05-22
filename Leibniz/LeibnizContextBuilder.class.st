@@ -12,7 +12,9 @@ Class {
 		'sortGraphBuilder',
 		'sortGraph',
 		'signatureBuilder',
-		'signature'
+		'signature',
+		'rewriteSystemBuilder',
+		'rewriteSystem'
 	],
 	#category : #'Leibniz-6-Contexts'
 }
@@ -41,6 +43,12 @@ LeibnizContextBuilder >> addOp: anOpSymbol withArgs: anArgList ofSort: aSortSymb
 	signatureBuilder addOp: anOpSymbol withArgs: anArgList ofSort: aSortSymbol.
 ]
 
+{ #category : #'defining - rules' }
+LeibnizContextBuilder >> addRule: aRule [
+	self phase: #rules.
+	rewriteSystemBuilder addRule: aRule
+]
+
 { #category : #'defining - sort graph' }
 LeibnizContextBuilder >> addSort: aSymbol [
 	self phase: #sortGraph.
@@ -63,13 +71,18 @@ LeibnizContextBuilder >> build [
 { #category : #accessing }
 LeibnizContextBuilder >> context [
 	self phase: #finished.
-	^ LeibnizContext name: name sortGraph: sortGraph signature: signature.
+	^ LeibnizContext name: name sortGraph: sortGraph signature: signature rewriteSystem: rewriteSystem
 ]
 
 { #category : #'defining - private' }
 LeibnizContextBuilder >> endIncludes [
 	includes do: [ :i | sortGraphBuilder addSortGraph: (i at: #context) sortGraph ].
 
+]
+
+{ #category : #'defining - private' }
+LeibnizContextBuilder >> endRules [
+	rewriteSystem := rewriteSystemBuilder rewriteSystem
 ]
 
 { #category : #'defining - private' }
@@ -82,6 +95,14 @@ LeibnizContextBuilder >> endSignature [
 LeibnizContextBuilder >> endSortGraph [
 	sortGraph := sortGraphBuilder sortGraph.
 
+]
+
+{ #category : #'defining - private' }
+LeibnizContextBuilder >> ensureRules [
+	self ensureSignature.
+	rewriteSystemBuilder  ifNil:
+		[ rewriteSystemBuilder := LeibnizRewriteSystemBuilder signature: signature ].
+	rewriteSystem ifNil: [ rewriteSystem := rewriteSystemBuilder rewriteSystem ].
 ]
 
 { #category : #'defining - private' }
@@ -98,6 +119,35 @@ LeibnizContextBuilder >> ensureSortGraph [
 
 { #category : #'XML import' }
 LeibnizContextBuilder >> fromXML: anXMLElement [
+	self includesFromXML: anXMLElement.
+	self signatureFromXML: anXMLElement.
+	self rulesFromXML: anXMLElement.
+]
+
+{ #category : #'defining - includes' }
+LeibnizContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash inMode: useOrExtend [
+	| context |
+	context := LeibnizLibrary uniqueInstance contextNamed: aContextName inDocumentWithHash: aDocHash.
+	includes add: (Dictionary with: #contextName -> aContextName
+									  with: #document -> aDocHash
+									  with: #context -> context
+									  with: #mode -> useOrExtend).
+	self validateIncludeWithMode: useOrExtend
+
+]
+
+{ #category : #'defining - includes' }
+LeibnizContextBuilder >> include: aContextName inMode: useOrExtend [
+	| context |
+	context := document contextNamed: aContextName.
+	includes add: (Dictionary with: #contextName -> aContextName
+									  with: #mode -> useOrExtend
+									  with: #context -> context).
+	self validateIncludeWithMode: useOrExtend
+]
+
+{ #category : #'XML import' }
+LeibnizContextBuilder >> includesFromXML: anXMLElement [
 	(anXMLElement elementsDetect: [:each | each isNamed: 'includes'])
 		descendantElementsNamed: 'include' do:
 			[ :i | | attrs |
@@ -107,7 +157,87 @@ LeibnizContextBuilder >> fromXML: anXMLElement [
 										 fromDocumentWithHash: (attrs at: 'document')
 										 inMode: (attrs at: 'mode') ]
 					 ifFalse: [ self include: (attrs at: 'context')
-										  inMode: (attrs at: 'mode') ] ].
+										  inMode: (attrs at: 'mode') ] ]
+]
+
+{ #category : #initializing }
+LeibnizContextBuilder >> initializeWithName: aString document: aDocument [
+	name := aString.
+	document := aDocument.
+	phase := #initialization.
+	includes := OrderedCollection new.
+	sortGraphBuilder := LeibnizSortGraphBuilder new.
+
+]
+
+{ #category : #'defining - sort graph' }
+LeibnizContextBuilder >> make: aSort subsortOf: anotherSort [
+	self phase: #sortGraph.
+	sortGraphBuilder make: aSort subsortOf: anotherSort.
+]
+
+{ #category : #accessing }
+LeibnizContextBuilder >> name [
+	^ name
+]
+
+{ #category : #'defining - rules' }
+LeibnizContextBuilder >> parseAndAddRule: aString [
+	self phase: #rules.
+	rewriteSystemBuilder parseAndAddRule: aString
+]
+
+{ #category : #'defining - private' }
+LeibnizContextBuilder >> phase: aSymbol [
+	| phaseLabels current new phaseEndMethod phaseStartMethod |
+	phaseLabels := #(#initialization #includes #sortGraph #signature #rules #assets #finished).
+	current := phaseLabels indexOf: phase.
+	new := phaseLabels indexOf: aSymbol.
+	(new ~= current) ifTrue:
+		[ self assert: new >= current description: 'context definition phase out of order'.
+		  phaseEndMethod := ('end', (phase asString capitalized)) asSymbol.
+		  (self respondsTo: phaseEndMethod) ifTrue: [ self perform: phaseEndMethod ].
+		  phaseStartMethod := ('start', (aSymbol asString capitalized)) asSymbol.
+		  (self respondsTo: phaseStartMethod) ifTrue: [ self perform: phaseStartMethod ] ].
+	phase := aSymbol.
+
+]
+
+{ #category : #'XML import' }
+LeibnizContextBuilder >> ruleFromXML: anXMLElement [
+	| vars pattern conditionElements condition replacement |
+
+	vars := Dictionary new.
+	(anXMLElement elementsDetect: [:each | each isNamed: 'vars'])
+		descendantElementsNamed: 'var' do:
+			[ :var | vars at: (var attributeAt: 'id') asSymbol
+							  put: (var attributeAt: 'sort') asSymbol ].
+
+	pattern := self termFromXML: (anXMLElement elementsDetect: [:each | each isNamed: 'pattern'])
+											descendantElements first
+						 extraVariables: vars.
+	conditionElements := (anXMLElement elementsDetect: [:each | each isNamed: 'condition'])
+									descendantElements.
+	condition := conditionElements ifEmpty: [ nil ]
+										  	ifNotEmpty: [ self termFromXML: conditionElements first
+																	extraVariables: vars ].
+	replacement := self termFromXML: (anXMLElement elementsDetect: [:each | each isNamed: 'replacement'])
+													descendantElements first
+							  extraVariables: vars.
+
+	^ LeibnizRule pattern: pattern localVariables: vars condition: condition replacement: replacement.
+]
+
+{ #category : #'XML import' }
+LeibnizContextBuilder >> rulesFromXML: anXMLElement [
+	self phase: #rules.
+	(anXMLElement elementsDetect: [:each | each isNamed: 'rules'])
+		descendantElementsNamed: 'rule' do:
+			[ :rule | self addRule: (self ruleFromXML: rule) ]
+]
+
+{ #category : #'XML import' }
+LeibnizContextBuilder >> signatureFromXML: anXMLElement [
 	(anXMLElement elementsDetect: [:each | each isNamed: 'sorts'])
 		descendantElementsNamed: 'sort' do:
 			[ :sort | self addSort: (sort attributeAt: 'id') asSymbol ].
@@ -139,88 +269,21 @@ LeibnizContextBuilder >> fromXML: anXMLElement [
 
 ]
 
-{ #category : #'defining - includes' }
-LeibnizContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash inMode: useOrExtend [
-	| context |
-	context := LeibnizLibrary uniqueInstance contextNamed: aContextName inDocumentWithHash: aDocHash.
-	includes add: (Dictionary with: #contextName -> aContextName
-									  with: #document -> aDocHash
-									  with: #context -> context
-									  with: #mode -> useOrExtend).
-	self validateIncludeWithMode: useOrExtend
-
-]
-
-{ #category : #'defining - includes' }
-LeibnizContextBuilder >> include: aContextName inMode: useOrExtend [
-	| context |
-	context := document contextNamed: aContextName.
-	includes add: (Dictionary with: #contextName -> aContextName
-									  with: #mode -> useOrExtend
-									  with: #context -> context).
-	self validateIncludeWithMode: useOrExtend
-]
-
-{ #category : #initializing }
-LeibnizContextBuilder >> initializeWithName: aString document: aDocument [
-	name := aString.
-	document := aDocument.
-	phase := #initialization.
-	includes := OrderedCollection new.
-	sortGraphBuilder := LeibnizSortGraphBuilder new.
-
-]
-
-{ #category : #initializing }
-LeibnizContextBuilder >> initializeWithXML: anXMLElement document: aDocument [
-	self initializeWithName: (anXMLElement attributeAt: 'id') document: aDocument.
-	anXMLElement descendantElementsNamed: 'include' do:
-		[ :i | | attrs |
-				 attrs := i attributes.
-				 (attrs includesKey: 'document')
-				 ifTrue: [ self include: (attrs at: 'context')
-									 fromDocumentWithHash: (attrs at: 'document')
-									 inMode: (attrs at: 'mode') ]
-				 ifFalse: [ self include: (attrs at: 'context')
-									  inMode: (attrs at: 'mode') ] ].
-	anXMLElement descendantElementsNamed: 'sort' do:
-		[ :sort | self addSort: (sort attributeAt: 'id') asSymbol].
-	anXMLElement descendantElementsNamed: 'subsort' do:
-		[ :ss | self make: (ss attributeAt: 'subsort') asSymbol
-		             subsortOf: (ss attributeAt: 'supersort') asSymbol].
-
-]
-
-{ #category : #'defining - sort graph' }
-LeibnizContextBuilder >> make: aSort subsortOf: anotherSort [
-	self phase: #sortGraph.
-	sortGraphBuilder make: aSort subsortOf: anotherSort.
-]
-
-{ #category : #accessing }
-LeibnizContextBuilder >> name [
-	^ name
-]
-
-{ #category : #'defining - private' }
-LeibnizContextBuilder >> phase: aSymbol [
-	| phaseLabels current new phaseEndMethod phaseStartMethod |
-	phaseLabels := #(#initialization #includes #sortGraph #signature #rules #assets #finished).
-	current := phaseLabels indexOf: phase.
-	new := phaseLabels indexOf: aSymbol.
-	(new ~= current) ifTrue:
-		[ self assert: new >= current description: 'context definition phase out of order'.
-		  phaseEndMethod := ('end', (phase asString capitalized)) asSymbol.
-		  (self respondsTo: phaseEndMethod) ifTrue: [ self perform: phaseEndMethod ].
-		  phaseStartMethod := ('start', (aSymbol asString capitalized)) asSymbol.
-		  (self respondsTo: phaseStartMethod) ifTrue: [ self perform: phaseStartMethod ] ].
-	phase := aSymbol.
-
-]
-
 { #category : #accessing }
 LeibnizContextBuilder >> sortGraph [
 	^ sortGraph
+]
+
+{ #category : #'defining - private' }
+LeibnizContextBuilder >> startFinished [
+	self ensureRules
+]
+
+{ #category : #'defining - private' }
+LeibnizContextBuilder >> startRules [
+	self ensureSignature.
+	rewriteSystemBuilder := LeibnizRewriteSystemBuilder signature: signature.
+	includes do: [ :i | rewriteSystemBuilder addRewriteSystem: (i at: #context) rewriteSystem ].
 ]
 
 { #category : #'defining - private' }
@@ -230,6 +293,26 @@ LeibnizContextBuilder >> startSignature [
 	includes do: [ :i | signatureBuilder addSignature: (i at: #context) signature
 													includeVars: (i at: #mode) = 'extend' ].
 
+]
+
+{ #category : #'XML import' }
+LeibnizContextBuilder >> termFromXML: anXMLElement [
+	^ self termFromXML: anXMLElement extraVariables: Dictionary new
+]
+
+{ #category : #'XML import' }
+LeibnizContextBuilder >> termFromXML: anXMLElement extraVariables: aDictionary [
+	anXMLElement name = 'term'
+		ifTrue: [ | op args |
+			op := (anXMLElement attributes at: #op) asSymbol.
+			args := anXMLElement elements collect:
+						[ :each | self termFromXML: each extraVariables: aDictionary ].
+			^ signature nonZeroArgTermNamed: op withArgs: args ].
+	anXMLElement name = 'term-or-var'
+		ifTrue: [ ^ signature
+							zeroArgTermNamed: (anXMLElement attributes at: #name) asSymbol
+							extraVariables: aDictionary ].
+	self error: anXMLElement name.
 ]
 
 { #category : #'defining - private' }
