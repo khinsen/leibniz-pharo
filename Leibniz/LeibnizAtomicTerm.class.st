@@ -18,6 +18,11 @@ LeibnizAtomicTerm class >> value: aString forSignature: aSignature [
 
 ]
 
+{ #category : #converting }
+LeibnizAtomicTerm >> convertToSignature: aSignature extraVariables: aDictionary [
+	^ self class value: value forSignature: aSignature
+]
+
 { #category : #initialization }
 LeibnizAtomicTerm >> initializeWithValue: aString forSignature: aSignature [
 	signature := aSignature.

@@ -24,6 +24,11 @@ LeibnizVarTerm >> assertNotAVariable [
 	Error signal: 'No variables allowed in matching terms'
 ]
 
+{ #category : #converting }
+LeibnizVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
+	^ aSignature zeroArgTermNamed: varSymbol extraVariables: aDictionary
+]
+
 { #category : #initialization }
 LeibnizVarTerm >> initializeWithSymbol: aSymbol sort: aSort forSignature: aSignature [
 	varSymbol := aSymbol.

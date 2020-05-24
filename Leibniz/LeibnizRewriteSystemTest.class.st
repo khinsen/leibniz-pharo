@@ -39,6 +39,37 @@ LeibnizRewriteSystemTest >> setUp [
 ]
 
 { #category : #tests }
+LeibnizRewriteSystemTest >> testBooleanExample [
+	| rws tp test |
+
+	rws := (LeibnizExamples new contextNamed: #boolean) rewriteSystem.
+	tp := LeibnizTermParser forSignature: rws signature.
+	test := [ :in :out | self assert: (rws reduce: (tp parse: in)) equals: (tp parse: out) ].
+	
+	"Note: the truth tabels may seem like trivial tests for rewriting,
+	but the actual rules in the boolean context are in fact quite sophisticated."
+
+	test value: '¬(true)' value: 'false'.
+	test value: '¬(false)' value: 'true'.
+
+	test value: 'false ∧ false' value: 'false'.
+	test value: 'false ∧ true' value: 'false'.
+	test value: 'true ∧ false' value: 'false'.
+	test value: 'true ∧ true' value: 'true'.
+
+	test value: 'false ∨ false' value: 'false'.
+	test value: 'false ∨ true' value: 'true'.
+	test value: 'true ∨ false' value: 'true'.
+	test value: 'true ∨ true' value: 'true'.
+
+	test value: 'false ⊻ false' value: 'false'.
+	test value: 'false ⊻ true' value: 'true'.
+	test value: 'true ⊻ false' value: 'true'.
+	test value: 'true ⊻ true' value: 'false'.
+
+]
+
+{ #category : #tests }
 LeibnizRewriteSystemTest >> testReduce [
 	| rws tp |
 

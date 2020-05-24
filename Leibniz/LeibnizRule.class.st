@@ -55,6 +55,18 @@ LeibnizRule >> condition [
 	^ condition
 ]
 
+{ #category : #converting }
+LeibnizRule >> convertToSignature: aSignature [
+	| convertTerm |
+	convertTerm := [ :term | term convertToSignature: aSignature extraVariables: variables ].
+	^ self class
+		pattern: (convertTerm value: pattern)
+	 	localVariables: variables
+		condition: (condition ifNotNil: [ convertTerm value: condition ])
+		replacement: (convertTerm value: replacement)
+
+]
+
 { #category : #initializing }
 LeibnizRule >> initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm replacement: aTerm [
 	| patternVariables |

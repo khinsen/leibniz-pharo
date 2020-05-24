@@ -22,6 +22,16 @@ LeibnizTerm >> assertNotAVariable [
 	^ self
 ]
 
+{ #category : #converting }
+LeibnizTerm >> convertToSignature: aSignature [
+	^ self convertToSignature: aSignature extraVariables: Dictionary new.
+]
+
+{ #category : #converting }
+LeibnizTerm >> convertToSignature: aSignature extraVariables: aDictionary [
+	self subclassResponsibility
+]
+
 { #category : #private }
 LeibnizTerm >> hasInfixOpOtherThan: aSymbol [
 	^ false

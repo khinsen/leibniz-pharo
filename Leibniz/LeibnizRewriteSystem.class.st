@@ -60,6 +60,11 @@ LeibnizRewriteSystem >> rewriteLeftmostInnermost: aTerm [
 ]
 
 { #category : #accessing }
+LeibnizRewriteSystem >> rules [
+	^ rules
+]
+
+{ #category : #accessing }
 LeibnizRewriteSystem >> signature [
 	^ signature
 ]

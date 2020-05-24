@@ -20,6 +20,18 @@ LeibnizOpTerm class >> symbol: aSymbol args: anArgList sort: aSort forSignature:
 
 ]
 
+{ #category : #converting }
+LeibnizOpTerm >> convertToSignature: aSignature extraVariables: aDictionary [
+	^ argList
+		ifEmpty:
+			[ aSignature zeroArgTermNamed: opSymbol extraVariables: aDictionary ]
+		ifNotEmpty:
+			[ aSignature nonZeroArgTermNamed: opSymbol
+							 withArgs: (argList collect:
+								[ :each | each convertToSignature: aSignature  extraVariables: aDictionary]) ]
+
+]
+
 { #category : #private }
 LeibnizOpTerm >> hasInfixOpOtherThan: aSymbol [
 	"Not the same op."

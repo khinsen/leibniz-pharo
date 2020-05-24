@@ -21,8 +21,8 @@ LeibnizRewriteSystemBuilder class >> signature: aSignature [
 
 { #category : #adding }
 LeibnizRewriteSystemBuilder >> addRewriteSystem: aRewriteSystem [
-	self flag: #todo.
-	self notYetImplemented
+	aRewriteSystem rules do:
+		[ :each | self addRule: (each convertToSignature: signature) ]
 ]
 
 { #category : #adding }
