@@ -93,3 +93,20 @@ LeibnizSignatureTest >> testNonMonotonicOp [
 		  raise: Error.
 
 ]
+
+{ #category : #testing }
+LeibnizSignatureTest >> testSignatureParser [
+	| b s st |
+	b := LeibnizSignatureBuilder sortGraph: sortGraph.
+	b addOp: #foo ofSort: #A.
+	b addVar: #bar ofSort: #A.
+	b addOp: #foo withArgs: #(#A) ofSort: #A.
+	b addOp: #'_+' withArgs:#(#A #A)  ofSort: #A.
+	s := b signature.
+	b := LeibnizSignatureBuilder sortGraph: sortGraph.
+	b parseAndAddOp: 'foo : A'.
+	b parseAndAddOp: 'foo(bar:A) : A'.
+	b parseAndAddOp: 'A + A : A'.
+	st := b signature.
+	self assert: b signature equals: s
+]

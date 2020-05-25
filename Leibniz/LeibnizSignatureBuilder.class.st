@@ -107,6 +107,27 @@ LeibnizSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 
 ]
 
+{ #category : #adding }
+LeibnizSignatureBuilder >> parseAndAddOp: aString [
+	| opSpec op args sort argSorts |
+	opSpec := LeibnizSignatureParser parse: aString.
+	op := opSpec first first.
+	args := opSpec first second.
+	sort := opSpec second.
+	argSorts := args collect: [ :each | each last ].
+	args select: [ :each | each size = 2 ]
+		  thenDo: [ :each | self addVar: each first ofSort:  each second ].
+	args ifEmpty: [ self addOp: op ofSort: sort ]
+		  ifNotEmpty: [ self addOp: op withArgs: argSorts ofSort: sort ]
+]
+
+{ #category : #adding }
+LeibnizSignatureBuilder >> parseAndAddVar: aString [
+	| var |
+	var := LeibnizSignatureParser parse: aString startingAt: #var.
+	self addVar: var first ofSort: var second.
+]
+
 { #category : #accessing }
 LeibnizSignatureBuilder >> signature [
 	^ LeibnizSignature sortGraph: sortGraph builtins: builtins operators: operators deepCopy variables: variables deepCopy.

@@ -13,11 +13,11 @@ Class {
 { #category : #productions }
 LeibnizSortParser >> sort [
 	^ super sort
-		==> [ :idString | { idString asSymbol } ]
+		==> [ :id | { id } ]
 ]
 
 { #category : #productions }
 LeibnizSortParser >> subsort [
 	^ super subsort
-		==> [ :nodes | { nodes first asSymbol. nodes third asSymbol } ]
+		==> [ :nodes | { nodes first. nodes third } ]
 ]

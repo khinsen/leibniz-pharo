@@ -19,7 +19,7 @@ Class {
 LeibnizGrammar >> identifier [
 	^ (identifierCharacter , (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
 		==> [ :id | (#('⇒' '→' '∀' '|' '⊆') includes: id)
-							ifFalse: [ id ]
+							ifFalse: [ id asSymbol ]
 							ifTrue: [ PP2Failure message: 'reserved identifier: ', id ] ]
 ]
 

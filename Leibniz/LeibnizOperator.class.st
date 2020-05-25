@@ -6,6 +6,8 @@ See ${class:name=LeibnizSignature}$.
 Class {
 	#name : #LeibnizOperator,
 	#superclass : #Object,
+	#traits : 'EqualityThroughVariables',
+	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'opSymbol',
 		'kindArity',

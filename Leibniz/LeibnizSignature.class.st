@@ -23,6 +23,8 @@ Variables are used in patterns that match different terms. A variable is defined
 Class {
 	#name : #LeibnizSignature,
 	#superclass : #Object,
+	#traits : 'EqualityThroughVariables',
+	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'sortGraph',
 		'operators',

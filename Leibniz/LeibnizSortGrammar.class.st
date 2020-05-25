@@ -28,7 +28,7 @@ LeibnizSortGrammar >> sort [
 
 { #category : #accessing }
 LeibnizSortGrammar >> start [
-	^ subsort / sort
+	^ (subsort / sort) end
 ]
 
 { #category : #productions }

@@ -93,7 +93,7 @@ LeibnizTermParser >> prefixOpTerm [
 	^ super prefixOpTerm
 		==> [ :nodes |
 				| symbol args |
-				symbol := nodes first asSymbol.
+				symbol := nodes first.
 				args := (nodes at: 3) reject: [ :element | element = $,].
 				signature nonZeroArgTermNamed: symbol
 							 withArgs: args
