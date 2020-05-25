@@ -69,6 +69,19 @@ LeibnizSortGraphBuilder >> make: aSort subsortOf: anotherSort [
 	^ aSort
 ]
 
+{ #category : #adding }
+LeibnizSortGraphBuilder >> parseAndAdd: aString [
+	| declaration |
+	declaration := LeibnizSortParser parse: aString.
+	declaration size = 1 ifTrue:
+		[	self add: declaration first ].
+	declaration size = 2 ifTrue:
+		[	self add: declaration first.
+			self add: declaration second.
+			self make: declaration first subsortOf: declaration second ].
+
+]
+
 { #category : #accessing }
 LeibnizSortGraphBuilder >> sortGraph [
 	^ LeibnizSortGraph subsortRelations: directSubsortsOf deepCopy.

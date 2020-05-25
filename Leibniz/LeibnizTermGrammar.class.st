@@ -87,12 +87,10 @@ ${method:name=LeibnizTermGrammar>>#term|expanded=}$
 "
 Class {
 	#name : #LeibnizTermGrammar,
-	#superclass : #PP2CompositeNode,
+	#superclass : #LeibnizGrammar,
 	#instVars : [
 		'zeroArgTerm',
 		'term',
-		'identifier',
-		'identifierCharacter',
 		'fpIntegerPart',
 		'fpFractionalPart',
 		'fpExponentPart',
@@ -131,34 +129,6 @@ LeibnizTermGrammar >> fpNumberTerm [
 	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
 			/ (fpIntegerPart , fpExponentPart))
 		flatten
-]
-
-{ #category : #productions }
-LeibnizTermGrammar >> identifier [
-	^ (identifierCharacter , (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
-		==> [ :id | (#('⇒' '→' '∀' '|' '⊆') includes: id)
-							ifFalse: [ id ]
-							ifTrue: [ PP2Failure message: 'reserved identifier: ', id ] ]
-]
-
-{ #category : #productions }
-LeibnizTermGrammar >> identifierCharacter [
-	| predicate |
-	predicate := PP2CharSetPredicate on:
-		[ :char |
-		char isLetter "Unicode categories Ll Lm Lo Lt Lu"
-			or: [ char isLetterNumber "Unicode category Nl"
-			or: [ ('-*/?' includes: char)
-			or: [ (char isMathSymbol "Unicode category Sm"
-						or: [ char isCurrencySymbol "Unicode category Sc"
-						or: [ char isModifierSymbol "Unicode category Sk"
-						or: [ char isOtherSymbol "Unicode category So" ] ] ])
-					and: [ ('^' includes: char) not ] ] ] ] ].
-	^ PP2PredicateObjectNode new
-		predicate: predicate;
-		predicateMessage: 'Leibniz identifier character expected';
-		yourself.
-
 ]
 
 { #category : #productions }

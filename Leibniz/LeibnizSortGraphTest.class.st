@@ -106,6 +106,16 @@ LeibnizSortGraphTest >> testSortGraphUnion [
 ]
 
 { #category : #testing }
+LeibnizSortGraphTest >> testSortParser [
+   | builder |
+	builder := LeibnizSortGraphBuilder new.
+	builder parseAndAdd: 'A ⊆ B';
+			  parseAndAdd: 'B ⊆ C';
+			  parseAndAdd: 'A ⊆ D'.
+	self assert: builder sortGraph equals: sortGraph1
+]
+
+{ #category : #testing }
 LeibnizSortGraphTest >> testSubsortQueries [
 	self assert: (sortGraph1 is: #A directSubsortOf: #B).
 	self assert: (sortGraph1 is: #A subsortOf: #B).
