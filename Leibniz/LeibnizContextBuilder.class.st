@@ -181,10 +181,29 @@ LeibnizContextBuilder >> name [
 	^ name
 ]
 
+{ #category : #'defining - signature' }
+LeibnizContextBuilder >> parseAndAddOp: aString [
+	self phase: #signature.
+	signatureBuilder parseAndAddOp: aString.
+]
+
 { #category : #'defining - rules' }
 LeibnizContextBuilder >> parseAndAddRule: aString [
 	self phase: #rules.
 	rewriteSystemBuilder parseAndAddRule: aString
+]
+
+{ #category : #'defining - sort graph' }
+LeibnizContextBuilder >> parseAndAddSort: aString [
+	self phase: #sortGraph.
+	sortGraphBuilder parseAndAdd: aString.
+
+]
+
+{ #category : #'defining - signature' }
+LeibnizContextBuilder >> parseAndAddVar: aString [
+	self phase: #signature.
+	signatureBuilder parseAndAddVar: aString.
 ]
 
 { #category : #'defining - private' }
