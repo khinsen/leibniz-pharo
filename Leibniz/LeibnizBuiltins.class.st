@@ -257,6 +257,7 @@ LeibnizBuiltins >> createTruthContext [
 	| truth |
 	truth := self newContextBuilderNamed: 'truth'.
 	truth addSort: #boolean.
+	truth addBuiltin: #truth.
 	truth addOp: #true ofSort: #boolean.
 	truth addOp: #false ofSort: #boolean.
 	truth build.

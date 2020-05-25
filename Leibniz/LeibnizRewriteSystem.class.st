@@ -47,8 +47,10 @@ LeibnizRewriteSystem >> rewriteHeadOnce: aTerm [
 			s ifNotNil:
 				[ (self testCondition: each condition substituting: s)
 						ifTrue: [ ^ each replacement substitute: s ] ] ].
-	^ aTerm
-
+	"Special rule for term equality"
+	aTerm isEqualityTerm
+		ifNil: [ ^ aTerm ]
+		ifNotNil: [ :v | ^ aTerm signature zeroArgTermNamed: (v ifTrue: #true ifFalse: #false) ]
 ]
 
 { #category : #rewriting }

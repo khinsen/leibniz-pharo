@@ -165,8 +165,14 @@ LeibnizSignature >> sortGraph [
 { #category : #accessing }
 LeibnizSignature >> sortOfOp: aSymbol withArgSorts: aSortArray [
 	(self opNamed: aSymbol withArgs: aSortArray)
-		ifNil: [ ^ nil ]
-		ifNotNil: [ :op | ^ op sortForArgSorts: aSortArray ]
+		ifNotNil: [ :op | ^ op sortForArgSorts: aSortArray ].
+	"A somewhat hacky special case: if the signature includes the
+    #truth builtin, it includes == for equality of arbitrary terms."
+	((builtins includes: #truth) 
+		and: [ aSymbol = #'_=='
+				and: [ aSortArray size = 2 ] ])
+		ifTrue: [ ^ #boolean ].
+	^ nil
 
 ]
 

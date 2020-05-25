@@ -38,6 +38,11 @@ LeibnizTerm >> hasInfixOpOtherThan: aSymbol [
 ]
 
 { #category : #testing }
+LeibnizTerm >> isEqualityTerm [
+	^ nil
+]
+
+{ #category : #testing }
 LeibnizTerm >> isInfix [
 	"Answer true if the term is printed in infix notation."
 	^ false.

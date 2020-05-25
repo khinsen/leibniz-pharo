@@ -70,6 +70,24 @@ LeibnizRewriteSystemTest >> testBooleanExample [
 ]
 
 { #category : #tests }
+LeibnizRewriteSystemTest >> testEqualityTerm [
+	| rws tp |
+
+	rws := self booleanRewriteSystem.	
+	tp := LeibnizTermParser forSignature: rws signature.
+
+	self assert: (rws rewriteHeadOnce: (tp parse: 'true == true'))
+		  equals: (tp parse: 'true').
+	self assert: (rws rewriteHeadOnce: (tp parse: 'true == false'))
+		  equals: (tp parse: 'false').
+	self assert: (rws rewriteHeadOnce: (tp parse: '¬(true) == false'))
+		  equals: (tp parse: 'false').
+	self assert: (rws reduce: (tp parse: '¬(true) == false'))
+		  equals: (tp parse: 'true').
+
+]
+
+{ #category : #tests }
 LeibnizRewriteSystemTest >> testReduce [
 	| rws tp |
 

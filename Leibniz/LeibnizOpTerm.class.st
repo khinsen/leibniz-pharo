@@ -52,6 +52,14 @@ LeibnizOpTerm >> initializeWithSymbol: aSymbol args: anArgList sort: aSort forSi
 ]
 
 { #category : #testing }
+LeibnizOpTerm >> isEqualityTerm [
+	opSymbol = #'_==' ifFalse: [ ^ nil ].
+	argList size == 2 ifFalse: [ ^ nil ].
+	sort = #boolean ifFalse: [ ^ nil ].
+	^ argList first = argList second
+]
+
+{ #category : #testing }
 LeibnizOpTerm >> isInfix [
 	"Answer true if the term is printed in infix notation."
 	| opString |
