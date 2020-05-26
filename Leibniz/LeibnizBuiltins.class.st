@@ -101,49 +101,44 @@ LeibnizBuiltins >> createIntegerContext [
 	integers := self newContextBuilderNamed: 'integers'.
 	integers include: 'truth' inMode: 'use'.
 	"Natural numbers"
-	integers addSort: #ℕ.
-	integers addSort: #zero.
-	integers addSort: #'ℕ.nz'.
-	integers make: #zero subsortOf: #ℕ.
-	integers make: #'ℕ.nz' subsortOf: #ℕ.
+	integers parseAndAddSort: 'ℕ'.
+	integers parseAndAddSort: 'zero ⊆ ℕ'.
+	integers parseAndAddSort: 'ℕ.nz ⊆ ℕ'.
 	"Integers"
-	integers addSort: #ℤ.
-	integers addSort: #'ℤ.nz'.
-	integers make: #ℕ subsortOf: #ℤ.
-	integers make: #'ℤ.nz' subsortOf: #ℤ.
-	integers make: #'ℕ.nz' subsortOf: #'ℤ.nz'.
+	integers parseAndAddSort: 'ℤ'.
+	integers parseAndAddSort: 'ℤ.nz ⊆ ℤ'.
+	integers parseAndAddSort: 'ℕ.nz ⊆ ℤ.nz'.
 	"Integer literals"
 	integers addBuiltin: #integers.
 	"Arithmetic operators"
-	integers addOp: #'_+' withArgs: #(#'ℤ' #'ℤ') ofSort: #'ℤ'.
-	integers addOp: #'_+' withArgs: #(#'ℕ' #'ℕ') ofSort: #'ℕ'.
-	integers addOp: #'_+' withArgs: #(#'ℕ.nz' #'ℕ') ofSort: #'ℕ.nz'.
-	integers addOp: #'_+' withArgs: #(#'ℕ' #'ℕ.nz') ofSort: #'ℕ.nz'.
-	integers addOp: #'_-' withArgs: #(#'ℤ' #'ℤ') ofSort: #'ℤ'.
-	integers addOp: #'-' withArgs: #(#'ℤ') ofSort: #'ℤ'.
-	integers addOp: #'_×' withArgs: #(#'ℤ' #'ℤ') ofSort: #'ℤ'.
-	integers addOp: #'_×' withArgs: #(#'ℕ' #'ℕ') ofSort: #'ℕ'.
-	integers addOp: #'_×' withArgs: #(#'ℕ.nz' #'ℕ.nz') ofSort: #'ℕ.nz'.
-	integers addOp: #'_×' withArgs: #(#'ℤ.nz' #'ℤ.nz') ofSort: #'ℤ.nz'.
-	integers addOp: #'_div' withArgs: #(#'ℤ' #'ℤ.nz') ofSort: #'ℤ'.
-	integers addOp: #'_div' withArgs: #(#'ℕ' #'ℕ.nz') ofSort: #'ℕ'.
-	integers addOp: #'_rem' withArgs: #(#'ℤ' #'ℤ.nz') ofSort: #'ℤ'.
-	integers addOp: #'_rem' withArgs: #(#'ℕ' #'ℕ.nz') ofSort: #'ℕ'.
-	integers addOp: #'^' withArgs: #(#'ℤ' #'ℕ.nz') ofSort: #'ℤ'.
-	integers addOp: #'^' withArgs: #(#'ℕ' #'ℕ.nz') ofSort: #'ℕ'.
-	integers addOp: #'^' withArgs: #(#'ℕ.nz' #'ℕ.nz') ofSort: #'ℕ.nz'.
-	integers addOp: #'^' withArgs: #(#'ℤ.nz' #'ℕ.nz') ofSort: #'ℤ.nz'.
-	integers addOp: #'^' withArgs: #(#'ℤ.nz' #zero) ofSort: #'ℕ.nz'.
-	integers addOp: #abs withArgs: #(#'ℤ') ofSort: #'ℕ'.
-	integers addOp: #abs withArgs: #(#'ℤ.nz') ofSort: #'ℕ.nz'.
+	integers parseAndAddOp: 'ℤ + ℤ : ℤ'.
+	integers parseAndAddOp: 'ℕ + ℕ : ℕ'.
+	integers parseAndAddOp: 'ℕ.nz + ℕ : ℕ.nz'.
+	integers parseAndAddOp: 'ℕ + ℕ.nz : ℕ.nz'.
+	integers parseAndAddOp: 'ℤ - ℤ : ℤ'.
+	integers parseAndAddOp: '-(ℤ) : ℤ'.
+	integers parseAndAddOp: 'ℤ × ℤ : ℤ'.
+	integers parseAndAddOp: 'ℕ × ℕ : ℕ'.
+	integers parseAndAddOp: 'ℕ.nz × ℕ.nz : ℕ.nz'.
+	integers parseAndAddOp: 'ℤ.nz × ℤ.nz : ℤ.nz'.
+	integers parseAndAddOp: 'ℤ div ℤ.nz : ℤ'.
+	integers parseAndAddOp: 'ℕ div ℕ.nz : ℕ'.
+	integers parseAndAddOp: 'ℤ rem ℤ.nz : ℤ'.
+	integers parseAndAddOp: 'ℕ rem ℕ.nz : ℕ'.
+	integers parseAndAddOp: 'ℤ^{ℕ.nz} : ℤ'.
+	integers parseAndAddOp: 'ℕ^{ℕ.nz} : ℕ'.
+	integers parseAndAddOp: 'ℕ.nz^{ℕ.nz} : ℕ.nz'.
+	integers parseAndAddOp: 'ℤ.nz^{ℕ.nz} : ℤ.nz'.
+	integers parseAndAddOp: 'ℤ.nz^{zero} : ℕ.nz'.
+	integers parseAndAddOp: 'abs(ℤ) : ℕ'.
+	integers parseAndAddOp: 'abs(ℤ.nz) : ℕ.nz'.
 	"Comparison operators"
-	integers addOp: #'_<' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
-	integers addOp: #'_>' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
-	integers addOp: #'_≤' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
-	integers addOp: #'_≥' withArgs: #(#'ℤ' #'ℤ') ofSort: #boolean.
+	integers parseAndAddOp: 'ℤ < ℤ : boolean'.
+	integers parseAndAddOp: 'ℤ > ℤ : boolean'.
+	integers parseAndAddOp: 'ℤ ≤ ℤ : boolean'.
+	integers parseAndAddOp: 'ℤ ≥ ℤ : boolean'.
 	"Build context"
 	integers build.
-
 ]
 
 { #category : #initialization }
