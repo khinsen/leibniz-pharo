@@ -28,6 +28,22 @@ LeibnizRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedColl
 ]
 
 { #category : #rewriting }
+LeibnizRewriteSystem >> matchRulesFor: aTerm [
+	^ rules collect:
+		[ :each |
+			| s c r |
+			s := each pattern match: aTerm.
+			s ifNotNil:
+			  [ c := self testCondition: each condition substituting: s.
+			    r := (c ifTrue: (each replacement substitute: s) ifFalse: nil).
+				 Dictionary with: #rule -> each
+								with: #substitution -> s
+								with: #condition -> c
+								with: #replacement -> r ] ]
+		thenReject: [ :each | each isNil ]
+]
+
+{ #category : #rewriting }
 LeibnizRewriteSystem >> reduce: aTerm [
 	| lastValue newValue |
 	newValue := aTerm.

@@ -42,9 +42,26 @@ LeibnizContext >> initializeWithName: aString sortGraph: aSortGraph signature: a
 	self beRecursivelyReadOnlyObject.
 ]
 
+{ #category : #rewriting }
+LeibnizContext >> matchRulesFor: aTerm [
+	^ rewriteSystem matchRulesFor: aTerm
+]
+
 { #category : #accessing }
 LeibnizContext >> name [
 	^ name
+]
+
+{ #category : #operations }
+LeibnizContext >> parseTerm: aString [
+	^ (LeibnizTermParser forSignature: signature) parse: aString
+]
+
+{ #category : #rewriting }
+LeibnizContext >> parseTermAndReduce: aString [
+	| term |
+	term := (LeibnizTermParser forSignature: signature) parse: aString.
+	^ rewriteSystem reduce: term
 ]
 
 { #category : #printing }
