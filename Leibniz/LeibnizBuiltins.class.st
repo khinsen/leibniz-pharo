@@ -97,7 +97,7 @@ LeibnizBuiltins >> createFPContext [
 
 { #category : #initialization }
 LeibnizBuiltins >> createIntegerContext [
-	| integers varsXY |
+	| integers |
 	integers := self newContextBuilderNamed: 'integers'.
 	integers include: 'truth' inMode: 'use'.
 	"Natural numbers"
@@ -140,14 +140,30 @@ LeibnizBuiltins >> createIntegerContext [
 	"Rules"
 	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero X + Zero ⇒ X'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero Zero + X ⇒ X'.
-	varsXY := Dictionary with: #X -> #ℤ with: #Y -> #ℤ.
-	integers addRule:
-		(LeibnizFunctionRule pattern: (integers parseTerm: 'X + Y' extraVariables: varsXY)
-	 							 	localVariables: varsXY
-									condition: nil
-									function: [:signature :arguments |
-													LeibnizIntegerTerm value: (arguments at: #X) value + (arguments at: #Y) value
-																			forSignature: signature]).
+	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X + Y → ''X + Y'':LeibnizIntegerTerm'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero X - Zero ⇒ X'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X - Y → ''X - Y'':LeibnizIntegerTerm'.
+	integers parseAndAddRule: '∀ Zero:zero -(Zero) ⇒ 0'.
+	integers parseAndAddRule: '∀ X:ℤ -(X) → ''X negated'':LeibnizIntegerTerm'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero X × Zero ⇒ 0'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero Zero × X ⇒ 0'.
+	integers parseAndAddRule: '∀ X:ℤ 1 × X ⇒ X'.
+	integers parseAndAddRule: '∀ X:ℤ X × 1 ⇒ X'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X × Y → ''X * Y'':LeibnizIntegerTerm'.
+	integers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero div X ⇒ 0'.
+	integers parseAndAddRule: '∀ X:ℤ X div 1 ⇒ X'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X div Y → ''X // Y'':LeibnizIntegerTerm'.
+	integers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero rem X ⇒ 0'.
+	integers parseAndAddRule: '∀ X:ℤ X rem 1 ⇒ 0'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X rem Y → ''X % Y'':LeibnizIntegerTerm'.
+	integers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero X^{Zero} ⇒ 1'.
+	integers parseAndAddRule: '∀ X:ℕ.nz ∀ Zero:zero Zero^{X} ⇒ 0'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℕ.nz X^{Y} → ''X raisedTo: Y'':LeibnizIntegerTerm'.
+	integers parseAndAddRule: '∀ X:ℤ abs(X) → ''X abs'':LeibnizIntegerTerm'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X < Y → ''X < Y'':LeibnizBooleanTerm'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X > Y → ''X > Y'':LeibnizBooleanTerm'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X ≤ Y → ''X <= Y'':LeibnizBooleanTerm'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X ≥ Y → ''X >= Y'':LeibnizBooleanTerm'.
 	"Build context"
 	integers build.
 ]
