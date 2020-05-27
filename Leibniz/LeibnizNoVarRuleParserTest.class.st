@@ -19,6 +19,12 @@ LeibnizNoVarRuleParserTest >> testNoVarRule [
 	self assert: result
 		  equals: (LeibnizRewriteRule pattern: pattern replacement: replacement).
 
+	pattern := parser signature nonZeroArgTermNamed: #aOneArgOp
+										 withArgs: { parser signature zeroArgTermNamed: #aVar }.
+	self parse: 'aOneArgOp(aVar) → ''aVar'''.
+	self assert: result
+		  equals: (LeibnizFunctionRule pattern: pattern function: 'aVar').
+
 ]
 
 { #category : #tests }
@@ -31,5 +37,13 @@ LeibnizNoVarRuleParserTest >> testNoVarRuleWithCondition [
 	self parse: 'aOneArgOp(aZeroArgOp) ⇒ aZeroArgOp | true'.
 	self assert: result
 		  equals: (LeibnizRewriteRule pattern: pattern condition: trueTerm replacement: replacement).
+
+]
+
+{ #category : #tests }
+LeibnizNoVarRuleParserTest >> testSyntaxRoundTrip [
+	#(	'aOneArgOp(aZeroArgOp) ⇒ aZeroArgOp'
+		'aOneArgOp(aVar) → ''aVar'':LeibnizStringTerm' ) do:
+		[ :rule | self parse: rule. self assert: result asLeibnizSyntaxString equals: rule ]
 
 ]

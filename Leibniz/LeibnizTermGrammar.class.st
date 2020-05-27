@@ -102,7 +102,8 @@ Class {
 		'fpNumberTerm',
 		'integerTerm',
 		'stringTerm',
-		'literalTerm'
+		'literalTerm',
+		'suffix'
 	],
 	#category : #'Leibniz-3-Terms'
 }
@@ -143,10 +144,7 @@ LeibnizTermGrammar >> literalTerm [
 
 { #category : #productions }
 LeibnizTermGrammar >> nonInfixTerm [
-	^ simpleTerm ,
-		((self suffixBetween: $[ asPParser and: $] asPParser withSymbol: #'[]')
-		 / (self suffixBetween: '^{' asPParser and: $} asPParser withSymbol: #'^')
-		 / (self suffixBetween: '_{' asPParser and: $} asPParser withSymbol: #'_')) optional
+	^ simpleTerm, suffix optional
 
 ]
 
@@ -185,6 +183,14 @@ LeibnizTermGrammar >> start [
 { #category : #productions }
 LeibnizTermGrammar >> stringTerm [
 	^ ($" asPParser , $" asPParser negate star , $" asPParser) flatten 
+
+]
+
+{ #category : #productions }
+LeibnizTermGrammar >> suffix [
+	^ (self suffixBetween: $[ asPParser and: $] asPParser withSymbol: #'[]')
+		 / (self suffixBetween: '^{' asPParser and: $} asPParser withSymbol: #'^')
+		 / (self suffixBetween: '_{' asPParser and: $} asPParser withSymbol: #'_')
 
 ]
 

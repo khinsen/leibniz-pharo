@@ -44,14 +44,14 @@ LeibnizSignatureParser >> sort [
 { #category : #productions }
 LeibnizSignatureParser >> subscriptOp [
 	^ super subscriptOp
-		==> [ :nodes | { $_. { nodes first. nodes fourth } } ]
+		==> [ :nodes | { #'_'. { nodes first. nodes fourth } } ]
 
 ]
 
 { #category : #productions }
 LeibnizSignatureParser >> superscriptOp [
 	^ super superscriptOp
-		==> [ :nodes | { $^. { nodes first. nodes fourth } } ]
+		==> [ :nodes | { #'^'. { nodes first. nodes fourth } } ]
 
 ]
 

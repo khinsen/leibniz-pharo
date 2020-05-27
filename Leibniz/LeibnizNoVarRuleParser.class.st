@@ -8,13 +8,24 @@ Class {
 	#name : #LeibnizNoVarRuleParser,
 	#superclass : #LeibnizTermParser,
 	#instVars : [
+		'code',
+		'noVarRewriteRule',
+		'noVarFnRule',
 		'noVarRule',
 		'conditionClause',
 		'rewriteArrow',
+		'fnArrow',
 		'underCondition'
 	],
 	#category : #'Leibniz-4-Rules'
 }
+
+{ #category : #productions }
+LeibnizNoVarRuleParser >> code [
+	^ $' asPParser , $' asPParser negate star flatten, $' asPParser, $: asPParser, identifier
+		==> [ :nodes | { nodes second. nodes fifth } ]
+
+]
 
 { #category : #productions }
 LeibnizNoVarRuleParser >> conditionClause [
@@ -23,14 +34,34 @@ LeibnizNoVarRuleParser >> conditionClause [
 
 ]
 
+{ #category : #tokens }
+LeibnizNoVarRuleParser >> fnArrow [
+	^ $→ asPParser
+]
+
 { #category : #productions }
-LeibnizNoVarRuleParser >> noVarRule [
+LeibnizNoVarRuleParser >> noVarFnRule [
+	^ term, fnArrow trim, code, conditionClause optional
+		==> [ :nodes |
+				LeibnizFunctionRule pattern: nodes first
+										  localVariables: extraVariables
+									 	  condition: nodes fourth 
+										  function: nodes third ]
+]
+
+{ #category : #productions }
+LeibnizNoVarRuleParser >> noVarRewriteRule [
 	^ term, rewriteArrow trim, term, conditionClause optional
 		==> [ :nodes |
-				LeibnizRewriteRule pattern: (nodes at: 1)
+				LeibnizRewriteRule pattern: nodes first
 								localVariables: extraVariables
-							   condition: (nodes at: 4)
-								replacement: (nodes at: 3)]
+							   condition: nodes fourth 
+								replacement: nodes third ]
+]
+
+{ #category : #productions }
+LeibnizNoVarRuleParser >> noVarRule [
+	^ noVarRewriteRule / noVarFnRule
 ]
 
 { #category : #tokens }
