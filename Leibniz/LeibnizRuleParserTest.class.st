@@ -50,7 +50,7 @@ LeibnizRuleParserTest >> testRuleWithVariable [
 	pattern := signature nonZeroArgTermNamed: #aOneArgOp
 							   withArgs: { signature zeroArgTermNamed: #X extraVariables: extraVariables }.
 	replacement := signature zeroArgTermNamed: #aZeroArgOp.
-	referenceRule := LeibnizRule pattern: pattern localVariables: extraVariables replacement: replacement.
+	referenceRule := LeibnizRewriteRule pattern: pattern localVariables: extraVariables replacement: replacement.
 	parsedRule := (LeibnizRuleParser forSignature: signature)
 						parse: '∀ X:A aOneArgOp(X) ⇒ aZeroArgOp'.
 	self assert: parsedRule equals: referenceRule.
@@ -65,7 +65,7 @@ LeibnizRuleParserTest >> testRuleWithVariableAndCondition [
 							   withArgs: { signature zeroArgTermNamed: #X extraVariables: extraVariables }.
 	trueTerm := signature zeroArgTermNamed: #true.
 	replacement := signature zeroArgTermNamed: #aZeroArgOp.
-	referenceRule := LeibnizRule pattern: pattern localVariables: extraVariables condition: trueTerm replacement: replacement.
+	referenceRule := LeibnizRewriteRule pattern: pattern localVariables: extraVariables condition: trueTerm replacement: replacement.
 	parsedRule := (LeibnizRuleParser forSignature: signature)
 						parse: '∀ X:A aOneArgOp(X) ⇒ aZeroArgOp | true'.
 	self assert: parsedRule equals: referenceRule.

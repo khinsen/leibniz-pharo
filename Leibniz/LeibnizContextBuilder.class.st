@@ -206,6 +206,21 @@ LeibnizContextBuilder >> parseAndAddVar: aString [
 	signatureBuilder parseAndAddVar: aString.
 ]
 
+{ #category : #'defining - rules' }
+LeibnizContextBuilder >> parseTerm: aString [
+	^ self parseTerm: aString extraVariables: Dictionary new
+]
+
+{ #category : #'defining - rules' }
+LeibnizContextBuilder >> parseTerm: aString extraVariables: aDictionary [
+	| parser |
+	self phase: #rules.
+	parser := LeibnizTermParser forSignature: signature.
+	parser setExtraVariables: aDictionary.
+	^ parser parse: aString
+				onError: [ self error: 'Failed to parse ', aString ]
+]
+
 { #category : #'defining - private' }
 LeibnizContextBuilder >> phase: aSymbol [
 	| phaseLabels current new phaseEndMethod phaseStartMethod |
@@ -244,7 +259,7 @@ LeibnizContextBuilder >> ruleFromXML: anXMLElement [
 													descendantElements first
 							  extraVariables: vars.
 
-	^ LeibnizRule pattern: pattern localVariables: vars condition: condition replacement: replacement.
+	^ LeibnizRewriteRule pattern: pattern localVariables: vars condition: condition replacement: replacement.
 ]
 
 { #category : #'XML import' }

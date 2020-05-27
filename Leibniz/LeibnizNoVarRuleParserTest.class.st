@@ -17,7 +17,7 @@ LeibnizNoVarRuleParserTest >> testNoVarRule [
 	replacement := parser signature zeroArgTermNamed: #aZeroArgOp.
 	self parse: 'aOneArgOp(aZeroArgOp) ⇒ aZeroArgOp'.
 	self assert: result
-		  equals: (LeibnizRule pattern: pattern replacement: replacement).
+		  equals: (LeibnizRewriteRule pattern: pattern replacement: replacement).
 
 ]
 
@@ -30,6 +30,6 @@ LeibnizNoVarRuleParserTest >> testNoVarRuleWithCondition [
 	trueTerm := parser signature zeroArgTermNamed: #true.
 	self parse: 'aOneArgOp(aZeroArgOp) ⇒ aZeroArgOp | true'.
 	self assert: result
-		  equals: (LeibnizRule pattern: pattern condition: trueTerm replacement: replacement).
+		  equals: (LeibnizRewriteRule pattern: pattern condition: trueTerm replacement: replacement).
 
 ]

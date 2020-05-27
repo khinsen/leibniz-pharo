@@ -41,6 +41,16 @@ LeibnizBuiltinsTest >> testFloats [
 ]
 
 { #category : #testing }
+LeibnizBuiltinsTest >> testIntegerArithmetic [
+	| context |
+	context := builtins contextNamed: 'integers'.
+	self assert: (context parseTermAndReduce: '2 + 0') equals: (context parseTerm: '2').
+	self assert: (context parseTermAndReduce: '0 + 3') equals: (context parseTerm: '3').
+	self assert: (context parseTermAndReduce: '2 + 3') equals: (context parseTerm: '5').
+
+]
+
+{ #category : #testing }
 LeibnizBuiltinsTest >> testIntegers [
 	| context |
 	context := builtins contextNamed: 'integers'.

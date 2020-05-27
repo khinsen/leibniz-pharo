@@ -97,7 +97,7 @@ LeibnizBuiltins >> createFPContext [
 
 { #category : #initialization }
 LeibnizBuiltins >> createIntegerContext [
-	| integers |
+	| integers varsXY |
 	integers := self newContextBuilderNamed: 'integers'.
 	integers include: 'truth' inMode: 'use'.
 	"Natural numbers"
@@ -137,6 +137,17 @@ LeibnizBuiltins >> createIntegerContext [
 	integers parseAndAddOp: 'ℤ > ℤ : boolean'.
 	integers parseAndAddOp: 'ℤ ≤ ℤ : boolean'.
 	integers parseAndAddOp: 'ℤ ≥ ℤ : boolean'.
+	"Rules"
+	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero X + Zero ⇒ X'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero Zero + X ⇒ X'.
+	varsXY := Dictionary with: #X -> #ℤ with: #Y -> #ℤ.
+	integers addRule:
+		(LeibnizFunctionRule pattern: (integers parseTerm: 'X + Y' extraVariables: varsXY)
+	 							 	localVariables: varsXY
+									condition: nil
+									function: [:signature :arguments |
+													LeibnizIntegerTerm value: (arguments at: #X) value + (arguments at: #Y) value
+																			forSignature: signature]).
 	"Build context"
 	integers build.
 ]

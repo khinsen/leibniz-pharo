@@ -35,11 +35,11 @@ LeibnizRewriteSystem >> matchRulesFor: aTerm [
 			s := each pattern match: aTerm.
 			s ifNotNil:
 			  [ c := self testCondition: each condition substituting: s.
-			    r := (c ifTrue: (each replacement substitute: s) ifFalse: nil).
+			    r := (c ifTrue: (each apply: s) ifFalse: nil).
 				 Dictionary with: #rule -> each
 								with: #substitution -> s
 								with: #condition -> c
-								with: #replacement -> r ] ]
+								with: #result -> r ] ]
 		thenReject: [ :each | each isNil ]
 ]
 
@@ -59,10 +59,10 @@ LeibnizRewriteSystem >> rewriteHeadOnce: aTerm [
 	rules do:
 		[ :each |
 			| s |
-			s := each pattern match: aTerm.
+			s := each match: aTerm.
 			s ifNotNil:
 				[ (self testCondition: each condition substituting: s)
-						ifTrue: [ ^ each replacement substitute: s ] ] ].
+						ifTrue: [ ^ each apply: s ] ] ].
 	"Special rule for term equality"
 	aTerm isEqualityTerm
 		ifNil: [ ^ aTerm ]
