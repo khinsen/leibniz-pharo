@@ -152,10 +152,10 @@ LeibnizBuiltins >> createIntegerContext [
 	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X × Y → ''X * Y'':LeibnizIntegerTerm'.
 	integers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero div X ⇒ 0'.
 	integers parseAndAddRule: '∀ X:ℤ X div 1 ⇒ X'.
-	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X div Y → ''X // Y'':LeibnizIntegerTerm'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X div Y → ''(X abs // Y abs) * X sign * Y sign'':LeibnizIntegerTerm'.
 	integers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero rem X ⇒ 0'.
 	integers parseAndAddRule: '∀ X:ℤ X rem 1 ⇒ 0'.
-	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X rem Y → ''X % Y'':LeibnizIntegerTerm'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X rem Y → ''(X abs % Y abs) * X sign * Y sign'':LeibnizIntegerTerm'.
 	integers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero X^{Zero} ⇒ 1'.
 	integers parseAndAddRule: '∀ X:ℕ.nz ∀ Zero:zero Zero^{X} ⇒ 0'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℕ.nz X^{Y} → ''X raisedTo: Y'':LeibnizIntegerTerm'.

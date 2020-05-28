@@ -105,6 +105,19 @@ LeibnizTermParserTest >> testNonInfixTerms [
 ]
 
 { #category : #testing }
+LeibnizTermParserTest >> testPrecedenceRules [
+	| context |
+	context := LeibnizBuiltins new contextNamed: #integers.
+	self assert: (context parseTerm: '2 + 3 + 4')
+		  equals: (context parseTerm: '(2 + 3) + 4').
+	self deny: (context parseTerm: '2 + 3 + 4')
+		  equals: (context parseTerm: '2 + (3 + 4)').
+	self assert: (context parseTerm: '2 + 3 + 4 + 5 + 6')
+		  equals: (context parseTerm: '(((2 + 3) + 4) + 5) + 6').
+	self assert: (context parseTerm: '2 + 3 - 4') isPetit2Failure.
+]
+
+{ #category : #testing }
 LeibnizTermParserTest >> testPrefixTerms [
 	self fail: 'aZeroArgTerm()' rule: #prefixOpTerm.
 

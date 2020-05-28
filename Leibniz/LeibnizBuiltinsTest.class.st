@@ -57,24 +57,32 @@ LeibnizBuiltinsTest >> testIntegerArithmetic [
 	self assert: (context parseTermAndReduce: '0 × 3') equals: (context parseTerm: '0').
 	self assert: (context parseTermAndReduce: '0 div 3') equals: (context parseTerm: '0').
 	self assert: (context parseTermAndReduce: '0 div 0') equals: (context parseTerm: '0 div 0').
-	self assert: (context parseTermAndReduce: '4 div 3') equals: (context parseTerm: '1').
-	self assert: (context parseTermAndReduce: '4 div 0') equals: (context parseTerm: '4 div 0').
+	self assert: (context parseTermAndReduce: '17 div 5') equals: (context parseTerm: '3').
+	self assert: (context parseTermAndReduce: '-17 div 5') equals: (context parseTerm: '-3').
+	self assert: (context parseTermAndReduce: '17 div -5') equals: (context parseTerm: '-3').
+	self assert: (context parseTermAndReduce: '-17 div -5') equals: (context parseTerm: '3').
+	self assert: (context parseTermAndReduce: '17 div 0') equals: (context parseTerm: '17 div 0').
 	self assert: (context parseTermAndReduce: '0 rem 3') equals: (context parseTerm: '0').
 	self assert: (context parseTermAndReduce: '0 rem 0') equals: (context parseTerm: '0 rem 0').
-	self assert: (context parseTermAndReduce: '4 rem 3') equals: (context parseTerm: '1').
-	self assert: (context parseTermAndReduce: '4 rem 0') equals: (context parseTerm: '4 rem 0').
+	self assert: (context parseTermAndReduce: '17 rem 5') equals: (context parseTerm: '2').
+	self assert: (context parseTermAndReduce: '-17 rem 5') equals: (context parseTerm: '-2').
+	self assert: (context parseTermAndReduce: '17 rem -5') equals: (context parseTerm: '-2').
+	self assert: (context parseTermAndReduce: '-17 rem -5') equals: (context parseTerm: '2').
+	self assert: (context parseTermAndReduce: '17 rem 0') equals: (context parseTerm: '17 rem 0').
 	self assert: (context parseTermAndReduce: '0^{2}') equals: (context parseTerm: '0').
 	self assert: (context parseTermAndReduce: '0^{0}') equals: (context parseTerm: '0^{0}').
 	self assert: (context parseTermAndReduce: '3^{2}') equals: (context parseTerm: '9').
 	self assert: (context parseTermAndReduce: '3^{-2}') equals: (context parseTerm: '3^{-2}').
+	self assert: (context parseTermAndReduce: 'abs(2)') equals: (context parseTerm: '2').
+	self assert: (context parseTermAndReduce: 'abs(-2)') equals: (context parseTerm: '2').
 
 	self assert: (context parseTermAndReduce: '3 < 2') equals: (context parseTerm: 'false').
 	self assert: (context parseTermAndReduce: '3 > 2') equals: (context parseTerm: 'true').
 	self assert: (context parseTermAndReduce: '2 ≤ 2') equals: (context parseTerm: 'true').
 	self assert: (context parseTermAndReduce: '2 ≥ 2') equals: (context parseTerm: 'true').
 
-"	self assert: (context parseTermAndReduce: '(2 + 3) ≥ (42-41)') equals: (context parseTerm: 'true').
-"
+	self assert: (context parseTermAndReduce: '(2 + 3) ≥ (42 - 41)') equals: (context parseTerm: 'true').
+	self assert: (context parseTermAndReduce: '(2 + 3) == (3 + 2)') equals: (context parseTerm: 'true').
 
 ]
 

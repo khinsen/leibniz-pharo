@@ -61,6 +61,7 @@ LeibnizContext >> parseTerm: aString [
 LeibnizContext >> parseTermAndReduce: aString [
 	| term |
 	term := (LeibnizTermParser forSignature: signature) parse: aString.
+	term isPetit2Failure ifTrue: [ self error: term message ].
 	^ rewriteSystem reduce: term
 ]
 
