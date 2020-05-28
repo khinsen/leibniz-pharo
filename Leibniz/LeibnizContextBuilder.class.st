@@ -75,12 +75,6 @@ LeibnizContextBuilder >> context [
 ]
 
 { #category : #'defining - private' }
-LeibnizContextBuilder >> endIncludes [
-	includes do: [ :i | sortGraphBuilder addSortGraph: (i at: #context) sortGraph ].
-
-]
-
-{ #category : #'defining - private' }
 LeibnizContextBuilder >> endRules [
 	rewriteSystem := rewriteSystemBuilder rewriteSystem
 ]
@@ -95,26 +89,6 @@ LeibnizContextBuilder >> endSignature [
 LeibnizContextBuilder >> endSortGraph [
 	sortGraph := sortGraphBuilder sortGraph.
 
-]
-
-{ #category : #'defining - private' }
-LeibnizContextBuilder >> ensureRules [
-	self ensureSignature.
-	rewriteSystemBuilder  ifNil:
-		[ rewriteSystemBuilder := LeibnizRewriteSystemBuilder signature: signature ].
-	rewriteSystem ifNil: [ rewriteSystem := rewriteSystemBuilder rewriteSystem ].
-]
-
-{ #category : #'defining - private' }
-LeibnizContextBuilder >> ensureSignature [
-	self ensureSortGraph.
-	signatureBuilder ifNil: [ signatureBuilder := LeibnizSignatureBuilder sortGraph: sortGraph. ].
-	signature ifNil: [ signature := signatureBuilder signature ]
-]
-
-{ #category : #'defining - private' }
-LeibnizContextBuilder >> ensureSortGraph [
-	sortGraph ifNil: [ sortGraph := sortGraphBuilder sortGraph ]
 ]
 
 { #category : #'XML import' }
@@ -166,7 +140,6 @@ LeibnizContextBuilder >> initializeWithName: aString document: aDocument [
 	document := aDocument.
 	phase := #initialization.
 	includes := OrderedCollection new.
-	sortGraphBuilder := LeibnizSortGraphBuilder new.
 
 ]
 
@@ -224,15 +197,23 @@ LeibnizContextBuilder >> parseTerm: aString extraVariables: aDictionary [
 { #category : #'defining - private' }
 LeibnizContextBuilder >> phase: aSymbol [
 	| phaseLabels current new phaseEndMethod phaseStartMethod |
+
+	(aSymbol = phase) ifTrue:
+		[ ^ self ].
+
 	phaseLabels := #(#initialization #includes #sortGraph #signature #rules #assets #finished).
 	current := phaseLabels indexOf: phase.
 	new := phaseLabels indexOf: aSymbol.
-	(new ~= current) ifTrue:
-		[ self assert: new >= current description: 'context definition phase out of order'.
-		  phaseEndMethod := ('end', (phase asString capitalized)) asSymbol.
-		  (self respondsTo: phaseEndMethod) ifTrue: [ self perform: phaseEndMethod ].
-		  phaseStartMethod := ('start', (aSymbol asString capitalized)) asSymbol.
-		  (self respondsTo: phaseStartMethod) ifTrue: [ self perform: phaseStartMethod ] ].
+	self assert: new >= current description: 'context definition phase out of order'.
+	current to: new - 1 do:
+		[ :each |
+			| p |
+			p := (phaseLabels at: each) asString capitalized.
+			phaseEndMethod := ('end', p) asSymbol.
+			(self respondsTo: phaseEndMethod) ifTrue: [ self perform: phaseEndMethod ].
+			p := (phaseLabels at: each + 1) asString capitalized.
+			phaseStartMethod := ('start', p) asSymbol.
+			(self respondsTo: phaseStartMethod) ifTrue: [ self perform: phaseStartMethod ] ].
 	phase := aSymbol.
 
 ]
@@ -309,23 +290,23 @@ LeibnizContextBuilder >> sortGraph [
 ]
 
 { #category : #'defining - private' }
-LeibnizContextBuilder >> startFinished [
-	self ensureRules
-]
-
-{ #category : #'defining - private' }
 LeibnizContextBuilder >> startRules [
-	self ensureSignature.
 	rewriteSystemBuilder := LeibnizRewriteSystemBuilder signature: signature.
 	includes do: [ :i | rewriteSystemBuilder addRewriteSystem: (i at: #context) rewriteSystem ].
 ]
 
 { #category : #'defining - private' }
 LeibnizContextBuilder >> startSignature [
-	self ensureSortGraph.
 	signatureBuilder := LeibnizSignatureBuilder sortGraph: sortGraph.
 	includes do: [ :i | signatureBuilder addSignature: (i at: #context) signature
 													includeVars: (i at: #mode) = 'extend' ].
+
+]
+
+{ #category : #'defining - private' }
+LeibnizContextBuilder >> startSortGraph [
+	sortGraphBuilder := LeibnizSortGraphBuilder new.
+	includes do: [ :i | sortGraphBuilder addSortGraph: (i at: #context) sortGraph ].
 
 ]
 

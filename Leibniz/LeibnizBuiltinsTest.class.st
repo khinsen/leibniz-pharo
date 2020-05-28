@@ -89,6 +89,17 @@ LeibnizBuiltinsTest >> testIntegerArithmetic [
 { #category : #testing }
 LeibnizBuiltinsTest >> testIntegers [
 	| context |
+	context := builtins contextNamed: 'integers-without-rules'.
+	self assert: context sortGraph size equals: 6.
+	self assert: context sortGraph kinds size equals: 2.
+	self assert: context signature numberOfOperators equals: 14.
+	self assert: context signature numberOfVariables equals: 0.
+
+	self deny: (context signature hasBuiltin: #strings).
+	self assert: (context signature hasBuiltin: #integers).
+	self deny: (context signature hasBuiltin: #rationalNumbers).
+	self deny: (context signature hasBuiltin: #fpNumbers).
+
 	context := builtins contextNamed: 'integers'.
 	self assert: context sortGraph size equals: 6.
 	self assert: context sortGraph kinds size equals: 2.

@@ -98,45 +98,9 @@ LeibnizBuiltins >> createFPContext [
 { #category : #initialization }
 LeibnizBuiltins >> createIntegerContext [
 	| integers |
+	self createIntegerContextWithoutRules.
 	integers := self newContextBuilderNamed: 'integers'.
-	integers include: 'truth' inMode: 'use'.
-	"Natural numbers"
-	integers parseAndAddSort: 'ℕ'.
-	integers parseAndAddSort: 'zero ⊆ ℕ'.
-	integers parseAndAddSort: 'ℕ.nz ⊆ ℕ'.
-	"Integers"
-	integers parseAndAddSort: 'ℤ'.
-	integers parseAndAddSort: 'ℤ.nz ⊆ ℤ'.
-	integers parseAndAddSort: 'ℕ.nz ⊆ ℤ.nz'.
-	"Integer literals"
-	integers addBuiltin: #integers.
-	"Arithmetic operators"
-	integers parseAndAddOp: 'ℤ + ℤ : ℤ'.
-	integers parseAndAddOp: 'ℕ + ℕ : ℕ'.
-	integers parseAndAddOp: 'ℕ.nz + ℕ : ℕ.nz'.
-	integers parseAndAddOp: 'ℕ + ℕ.nz : ℕ.nz'.
-	integers parseAndAddOp: 'ℤ - ℤ : ℤ'.
-	integers parseAndAddOp: '-(ℤ) : ℤ'.
-	integers parseAndAddOp: 'ℤ × ℤ : ℤ'.
-	integers parseAndAddOp: 'ℕ × ℕ : ℕ'.
-	integers parseAndAddOp: 'ℕ.nz × ℕ.nz : ℕ.nz'.
-	integers parseAndAddOp: 'ℤ.nz × ℤ.nz : ℤ.nz'.
-	integers parseAndAddOp: 'ℤ div ℤ.nz : ℤ'.
-	integers parseAndAddOp: 'ℕ div ℕ.nz : ℕ'.
-	integers parseAndAddOp: 'ℤ rem ℤ.nz : ℤ'.
-	integers parseAndAddOp: 'ℕ rem ℕ.nz : ℕ'.
-	integers parseAndAddOp: 'ℤ^{ℕ.nz} : ℤ'.
-	integers parseAndAddOp: 'ℕ^{ℕ.nz} : ℕ'.
-	integers parseAndAddOp: 'ℕ.nz^{ℕ.nz} : ℕ.nz'.
-	integers parseAndAddOp: 'ℤ.nz^{ℕ.nz} : ℤ.nz'.
-	integers parseAndAddOp: 'ℤ.nz^{zero} : ℕ.nz'.
-	integers parseAndAddOp: 'abs(ℤ) : ℕ'.
-	integers parseAndAddOp: 'abs(ℤ.nz) : ℕ.nz'.
-	"Comparison operators"
-	integers parseAndAddOp: 'ℤ < ℤ : boolean'.
-	integers parseAndAddOp: 'ℤ > ℤ : boolean'.
-	integers parseAndAddOp: 'ℤ ≤ ℤ : boolean'.
-	integers parseAndAddOp: 'ℤ ≥ ℤ : boolean'.
+	integers include: 'integers-without-rules' inMode: 'extend'.
 	"Rules"
 	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero X + Zero ⇒ X'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero Zero + X ⇒ X'.
@@ -169,10 +133,57 @@ LeibnizBuiltins >> createIntegerContext [
 ]
 
 { #category : #initialization }
+LeibnizBuiltins >> createIntegerContextWithoutRules [
+	| integers |
+	integers := self newContextBuilderNamed: 'integers-without-rules'.
+	integers include: 'truth' inMode: 'use'.
+	"Natural numbers"
+	integers parseAndAddSort: 'ℕ'.
+	integers parseAndAddSort: 'zero ⊆ ℕ'.
+	integers parseAndAddSort: 'ℕ.nz ⊆ ℕ'.
+	"Integers"
+	integers parseAndAddSort: 'ℤ'.
+	integers parseAndAddSort: 'ℕ ⊆ ℤ'.
+	integers parseAndAddSort: 'ℤ.nz ⊆ ℤ'.
+	integers parseAndAddSort: 'ℕ.nz ⊆ ℤ.nz'.
+	"Integer literals"
+	integers addBuiltin: #integers.
+	"Arithmetic operators"
+	integers parseAndAddOp: 'ℤ + ℤ : ℤ'.
+	integers parseAndAddOp: 'ℕ + ℕ : ℕ'.
+	integers parseAndAddOp: 'ℕ.nz + ℕ : ℕ.nz'.
+	integers parseAndAddOp: 'ℕ + ℕ.nz : ℕ.nz'.
+	integers parseAndAddOp: 'ℤ - ℤ : ℤ'.
+	integers parseAndAddOp: '-(ℤ) : ℤ'.
+	integers parseAndAddOp: 'ℤ × ℤ : ℤ'.
+	integers parseAndAddOp: 'ℕ × ℕ : ℕ'.
+	integers parseAndAddOp: 'ℕ.nz × ℕ.nz : ℕ.nz'.
+	integers parseAndAddOp: 'ℤ.nz × ℤ.nz : ℤ.nz'.
+	integers parseAndAddOp: 'ℤ div ℤ.nz : ℤ'.
+	integers parseAndAddOp: 'ℕ div ℕ.nz : ℕ'.
+	integers parseAndAddOp: 'ℤ rem ℤ.nz : ℤ'.
+	integers parseAndAddOp: 'ℕ rem ℕ.nz : ℕ'.
+	integers parseAndAddOp: 'ℤ^{ℕ.nz} : ℤ'.
+	integers parseAndAddOp: 'ℕ^{ℕ.nz} : ℕ'.
+	integers parseAndAddOp: 'ℕ.nz^{ℕ.nz} : ℕ.nz'.
+	integers parseAndAddOp: 'ℤ.nz^{ℕ.nz} : ℤ.nz'.
+	integers parseAndAddOp: 'ℤ.nz^{zero} : ℕ.nz'.
+	integers parseAndAddOp: 'abs(ℤ) : ℕ'.
+	integers parseAndAddOp: 'abs(ℤ.nz) : ℕ.nz'.
+	"Comparison operators"
+	integers parseAndAddOp: 'ℤ < ℤ : boolean'.
+	integers parseAndAddOp: 'ℤ > ℤ : boolean'.
+	integers parseAndAddOp: 'ℤ ≤ ℤ : boolean'.
+	integers parseAndAddOp: 'ℤ ≥ ℤ : boolean'.
+	"Build context"
+	integers build.
+]
+
+{ #category : #initialization }
 LeibnizBuiltins >> createRationalContext [
 	| rationalNumbers |
 	rationalNumbers := self newContextBuilderNamed: 'rational-numbers'.
-	rationalNumbers include: 'integers' inMode: 'extend'.
+	rationalNumbers include: 'integers-without-rules' inMode: 'extend'.
 	rationalNumbers addSort: #'ℚ'.
 	rationalNumbers make: #'ℤ' subsortOf: 'ℚ'.
 	rationalNumbers addSort: #'ℚ.nz'.

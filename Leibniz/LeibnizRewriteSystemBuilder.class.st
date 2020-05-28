@@ -42,7 +42,7 @@ LeibnizRewriteSystemBuilder >> parseAndAddRule: aString [
 	| rule |
 	rule := (LeibnizRuleParser forSignature: signature)
 				parse: aString
-				onError: [ self error: 'Failed to parse ', aString].
+				onError: [ :message :position | self error: 'Parse error for: ', aString, ' (', message, ')'].
 	rules add: rule
 ]
 
