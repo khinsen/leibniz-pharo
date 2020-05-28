@@ -222,6 +222,44 @@ LeibnizBuiltins >> createRationalContext [
 	rationalNumbers addOp: #'_>' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
 	rationalNumbers addOp: #'_≤' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
 	rationalNumbers addOp: #'_≥' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
+	"addition rules"
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Zero:zero X + Zero ⇒ X'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Zero:zero Zero + X ⇒ X'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X + Y → ''X + Y'':LeibnizRationalNumberTerm'.
+	"Subtraction rules"
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Zero:zero X - Zero ⇒ X'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X - Y → ''X - Y'':LeibnizRationalNumberTerm'.
+	"Negation rules"
+	rationalNumbers parseAndAddRule: '∀ Zero:zero -(Zero) ⇒ 0'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ -(X) → ''X negated'':LeibnizRationalNumberTerm'.
+	"Multiplication rules"
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Zero:zero X × Zero ⇒ 0'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Zero:zero Zero × X ⇒ 0'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ 1 × X ⇒ X'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ X × 1 ⇒ X'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X × Y → ''X * Y'':LeibnizRationalNumberTerm'.
+	"Division rules"
+	rationalNumbers parseAndAddRule: '∀ X:ℚ.nz ∀ Zero:zero Zero ÷ X ⇒ 0'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ X ÷ 1 ⇒ X'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ.nz X ÷ Y → ''X / Y'':LeibnizRationalNumberTerm'.
+	"Integer div and rem rules"
+	rationalNumbers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero div X ⇒ 0'.
+	rationalNumbers parseAndAddRule: '∀ X:ℤ X div 1 ⇒ X'.
+	rationalNumbers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X div Y → ''(X abs // Y abs) * X sign * Y sign'':LeibnizIntegerTerm'.
+	rationalNumbers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero rem X ⇒ 0'.
+	rationalNumbers parseAndAddRule: '∀ X:ℤ X rem 1 ⇒ 0'.
+	rationalNumbers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X rem Y → ''(X abs % Y abs) * X sign * Y sign'':LeibnizIntegerTerm'.
+	"Exponentiation rules"
+	rationalNumbers parseAndAddRule: '∀ X:ℚ.nz ∀ Zero:zero X^{Zero} ⇒ 1'.
+	rationalNumbers parseAndAddRule: '∀ X:ℕ.nz ∀ Zero:zero Zero^{X} ⇒ 0'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ.nz ∀ Y:ℤ.nz X^{Y} → ''X raisedTo: Y'':LeibnizRationalNumberTerm'.
+	"Abs rules"
+	rationalNumbers parseAndAddRule: '∀ X:ℚ abs(X) → ''X abs'':LeibnizRationalNumberTerm'.
+	"Comparison rules"
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X < Y → ''X < Y'':LeibnizBooleanTerm'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X > Y → ''X > Y'':LeibnizBooleanTerm'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X ≤ Y → ''X <= Y'':LeibnizBooleanTerm'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X ≥ Y → ''X >= Y'':LeibnizBooleanTerm'.
 	"Build context"
 	rationalNumbers build.
 ]

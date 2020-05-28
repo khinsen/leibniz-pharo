@@ -7,6 +7,15 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
+{ #category : #'instance creation' }
+LeibnizRationalNumberTerm class >> value: aNumber forSignature: aSignature [
+	aNumber isInteger
+		ifTrue: [ ^ LeibnizIntegerTerm value: aNumber forSignature: aSignature ]
+		ifFalse: [ ^self basicNew
+						initializeWithValue: aNumber forSignature: aSignature;
+						yourself ]
+]
+
 { #category : #printing }
 LeibnizRationalNumberTerm >> printAsLeibnizSyntaxOn: aStream [
 	"Remove the parentheses that Pharo adds around fractions."
