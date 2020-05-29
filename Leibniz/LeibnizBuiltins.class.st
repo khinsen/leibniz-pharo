@@ -182,46 +182,9 @@ LeibnizBuiltins >> createIntegerContextWithoutRules [
 { #category : #initialization }
 LeibnizBuiltins >> createRationalContext [
 	| rationalNumbers |
+	self createRationalContextWithoutRules.
 	rationalNumbers := self newContextBuilderNamed: 'rational-numbers'.
-	rationalNumbers include: 'integers-without-rules' inMode: 'extend'.
-	rationalNumbers addSort: #'ℚ'.
-	rationalNumbers make: #'ℤ' subsortOf: 'ℚ'.
-	rationalNumbers addSort: #'ℚ.nz'.
-	rationalNumbers make: #'ℚ.nz'subsortOf: #'ℚ'.
-	rationalNumbers make: #'ℤ.nz'subsortOf: #'ℚ.nz'.
-	rationalNumbers addSort: #'ℚ.p'.
-	rationalNumbers make: #'ℚ.p'subsortOf: #'ℚ.nz'.
-	rationalNumbers make: #'ℕ.nz'subsortOf: #'ℚ.p'.
-	rationalNumbers addSort: #'ℚ.nn'.
-	rationalNumbers make: #'ℚ.nn'subsortOf: #'ℚ'.
-	rationalNumbers make: #'ℚ.p'subsortOf: #'ℚ.nn'.
-	rationalNumbers make: #'ℕ'subsortOf: #'ℚ.nn'.
-	"Rational number literals"
-	rationalNumbers addBuiltin: #rationalNumbers.
-	"Arithmetic operators"
-	rationalNumbers addOp: #'_+' withArgs: #(#'ℚ' #'ℚ') ofSort: #'ℚ'.
-	rationalNumbers addOp: #'_+' withArgs: #(#'ℚ.p' #'ℚ.p') ofSort: #'ℚ.p'.
-	rationalNumbers addOp: #'_+' withArgs: #(#'ℚ.nn' #'ℚ.nn') ofSort: #'ℚ.nn'.
-	rationalNumbers addOp: #'_-' withArgs: #(#'ℚ' #'ℚ') ofSort: #'ℚ'.
-	rationalNumbers addOp: #'-' withArgs: #(#'ℚ') ofSort: #'ℚ'.
-	rationalNumbers addOp: #'_×' withArgs: #(#'ℚ' #'ℚ') ofSort: #'ℚ'.
-	rationalNumbers addOp: #'_×' withArgs: #(#'ℚ.p' #'ℚ.p') ofSort: #'ℚ.p'.
-	rationalNumbers addOp: #'_×' withArgs: #(#'ℚ.nn' #'ℚ.nn') ofSort: #'ℚ.nn'.
-	rationalNumbers addOp: #'_×' withArgs: #(#'ℚ.nz' #'ℚ.nz') ofSort: #'ℚ.nz'.
-	rationalNumbers addOp: #'_÷' withArgs: #(#'ℚ' #'ℚ.nz') ofSort: #'ℚ'.
-	rationalNumbers addOp: #'_÷' withArgs: #(#'ℚ.nz' #'ℚ.nz') ofSort: #'ℚ.nz'.
-	rationalNumbers addOp: #'_÷' withArgs: #(#'ℚ.nn' #'ℚ.p') ofSort: #'ℚ.nn'.
-	rationalNumbers addOp: #'_÷' withArgs: #(#'ℚ.p' #'ℚ.p') ofSort: #'ℚ.p'.
-	rationalNumbers addOp: #'^' withArgs: #(#'ℚ.nz' #'ℤ.nz') ofSort: #'ℚ.nz'.
-	rationalNumbers addOp: #'^' withArgs: #(#'ℚ.p' #'ℤ.nz') ofSort: #'ℚ.p'.
-	rationalNumbers addOp: #'^' withArgs: #(#'ℚ.nz' #'zero') ofSort: #'ℕ.nz'.
-	rationalNumbers addOp: #'abs' withArgs: #(#'ℚ') ofSort: #'ℚ.nn'.
-	rationalNumbers addOp: #'abs' withArgs: #(#'ℚ.nz') ofSort: #'ℚ.p'.
-	"Comparison operators"
-	rationalNumbers addOp: #'_<' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
-	rationalNumbers addOp: #'_>' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
-	rationalNumbers addOp: #'_≤' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
-	rationalNumbers addOp: #'_≥' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
+	rationalNumbers include: 'rational-numbers-without-rules' inMode: 'extend'.
 	"addition rules"
 	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Zero:zero X + Zero ⇒ X'.
 	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Zero:zero Zero + X ⇒ X'.
@@ -265,10 +228,105 @@ LeibnizBuiltins >> createRationalContext [
 ]
 
 { #category : #initialization }
+LeibnizBuiltins >> createRationalContextWithoutRules [
+	| rationalNumbers |
+	rationalNumbers := self newContextBuilderNamed: 'rational-numbers-without-rules'.
+	rationalNumbers include: 'integers-without-rules' inMode: 'extend'.
+	rationalNumbers addSort: #'ℚ'.
+	rationalNumbers make: #'ℤ' subsortOf: 'ℚ'.
+	rationalNumbers addSort: #'ℚ.nz'.
+	rationalNumbers make: #'ℚ.nz'subsortOf: #'ℚ'.
+	rationalNumbers make: #'ℤ.nz'subsortOf: #'ℚ.nz'.
+	rationalNumbers addSort: #'ℚ.p'.
+	rationalNumbers make: #'ℚ.p'subsortOf: #'ℚ.nz'.
+	rationalNumbers make: #'ℕ.nz'subsortOf: #'ℚ.p'.
+	rationalNumbers addSort: #'ℚ.nn'.
+	rationalNumbers make: #'ℚ.nn'subsortOf: #'ℚ'.
+	rationalNumbers make: #'ℚ.p'subsortOf: #'ℚ.nn'.
+	rationalNumbers make: #'ℕ'subsortOf: #'ℚ.nn'.
+	"Rational number literals"
+	rationalNumbers addBuiltin: #rationalNumbers.
+	"Arithmetic operators"
+	rationalNumbers addOp: #'_+' withArgs: #(#'ℚ' #'ℚ') ofSort: #'ℚ'.
+	rationalNumbers addOp: #'_+' withArgs: #(#'ℚ.p' #'ℚ.p') ofSort: #'ℚ.p'.
+	rationalNumbers addOp: #'_+' withArgs: #(#'ℚ.nn' #'ℚ.nn') ofSort: #'ℚ.nn'.
+	rationalNumbers addOp: #'_-' withArgs: #(#'ℚ' #'ℚ') ofSort: #'ℚ'.
+	rationalNumbers addOp: #'-' withArgs: #(#'ℚ') ofSort: #'ℚ'.
+	rationalNumbers addOp: #'_×' withArgs: #(#'ℚ' #'ℚ') ofSort: #'ℚ'.
+	rationalNumbers addOp: #'_×' withArgs: #(#'ℚ.p' #'ℚ.p') ofSort: #'ℚ.p'.
+	rationalNumbers addOp: #'_×' withArgs: #(#'ℚ.nn' #'ℚ.nn') ofSort: #'ℚ.nn'.
+	rationalNumbers addOp: #'_×' withArgs: #(#'ℚ.nz' #'ℚ.nz') ofSort: #'ℚ.nz'.
+	rationalNumbers addOp: #'_÷' withArgs: #(#'ℚ' #'ℚ.nz') ofSort: #'ℚ'.
+	rationalNumbers addOp: #'_÷' withArgs: #(#'ℚ.nz' #'ℚ.nz') ofSort: #'ℚ.nz'.
+	rationalNumbers addOp: #'_÷' withArgs: #(#'ℚ.nn' #'ℚ.p') ofSort: #'ℚ.nn'.
+	rationalNumbers addOp: #'_÷' withArgs: #(#'ℚ.p' #'ℚ.p') ofSort: #'ℚ.p'.
+	rationalNumbers addOp: #'^' withArgs: #(#'ℚ.nz' #'ℤ.nz') ofSort: #'ℚ.nz'.
+	rationalNumbers addOp: #'^' withArgs: #(#'ℚ.p' #'ℤ.nz') ofSort: #'ℚ.p'.
+	rationalNumbers addOp: #'^' withArgs: #(#'ℚ.nz' #'zero') ofSort: #'ℕ.nz'.
+	rationalNumbers addOp: #'abs' withArgs: #(#'ℚ') ofSort: #'ℚ.nn'.
+	rationalNumbers addOp: #'abs' withArgs: #(#'ℚ.nz') ofSort: #'ℚ.p'.
+	"Comparison operators"
+	rationalNumbers addOp: #'_<' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
+	rationalNumbers addOp: #'_>' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
+	rationalNumbers addOp: #'_≤' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
+	rationalNumbers addOp: #'_≥' withArgs: #(#'ℚ' #'ℚ') ofSort: #boolean.
+	"Build context"
+	rationalNumbers build.
+]
+
+{ #category : #initialization }
 LeibnizBuiltins >> createRealNumberContext [
 	| realNumbers |
+	self createRealNumberContextWithoutRules.
 	realNumbers := self newContextBuilderNamed: 'real-numbers'.
-	realNumbers include: 'rational-numbers' inMode: 'extend'.
+	realNumbers include: 'real-numbers-without-rules' inMode: 'extend'.
+	"addition rules"
+	realNumbers parseAndAddRule: '∀ X:ℝ ∀ Zero:zero X + Zero ⇒ X'.
+	realNumbers parseAndAddRule: '∀ X:ℝ ∀ Zero:zero Zero + X ⇒ X'.
+	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X + Y → ''X + Y'':LeibnizRationalNumberTerm'.
+	"Subtraction rules"
+	realNumbers parseAndAddRule: '∀ X:ℝ ∀ Zero:zero X - Zero ⇒ X'.
+	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X - Y → ''X - Y'':LeibnizRationalNumberTerm'.
+	"Negation rules"
+	realNumbers parseAndAddRule: '∀ Zero:zero -(Zero) ⇒ 0'.
+	realNumbers parseAndAddRule: '∀ X:ℚ -(X) → ''X negated'':LeibnizRationalNumberTerm'.
+	"Multiplication rules"
+	realNumbers parseAndAddRule: '∀ X:ℝ ∀ Zero:zero X × Zero ⇒ 0'.
+	realNumbers parseAndAddRule: '∀ X:ℝ ∀ Zero:zero Zero × X ⇒ 0'.
+	realNumbers parseAndAddRule: '∀ X:ℝ 1 × X ⇒ X'.
+	realNumbers parseAndAddRule: '∀ X:ℝ X × 1 ⇒ X'.
+	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X × Y → ''X * Y'':LeibnizRationalNumberTerm'.
+	"Division rules"
+	realNumbers parseAndAddRule: '∀ X:ℝ.nz ∀ Zero:zero Zero ÷ X ⇒ 0'.
+	realNumbers parseAndAddRule: '∀ X:ℝ X ÷ 1 ⇒ X'.
+	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ.nz X ÷ Y → ''X / Y'':LeibnizRationalNumberTerm'.
+	"Integer div and rem rules"
+	realNumbers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero div X ⇒ 0'.
+	realNumbers parseAndAddRule: '∀ X:ℤ X div 1 ⇒ X'.
+	realNumbers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X div Y → ''(X abs // Y abs) * X sign * Y sign'':LeibnizIntegerTerm'.
+	realNumbers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero rem X ⇒ 0'.
+	realNumbers parseAndAddRule: '∀ X:ℤ X rem 1 ⇒ 0'.
+	realNumbers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X rem Y → ''(X abs % Y abs) * X sign * Y sign'':LeibnizIntegerTerm'.
+	"Exponentiation rules"
+	realNumbers parseAndAddRule: '∀ X:ℝ.nz ∀ Zero:zero X^{Zero} ⇒ 1'.
+	realNumbers parseAndAddRule: '∀ X:ℕ.nz ∀ Zero:zero Zero^{X} ⇒ 0'.
+	realNumbers parseAndAddRule: '∀ X:ℚ.nz ∀ Y:ℤ.nz X^{Y} → ''X raisedTo: Y'':LeibnizRationalNumberTerm'.
+	"Abs rules"
+	realNumbers parseAndAddRule: '∀ X:ℚ abs(X) → ''X abs'':LeibnizRationalNumberTerm'.
+	"Comparison rules"
+	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X < Y → ''X < Y'':LeibnizBooleanTerm'.
+	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X > Y → ''X > Y'':LeibnizBooleanTerm'.
+	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X ≤ Y → ''X <= Y'':LeibnizBooleanTerm'.
+	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y: X ≥ Y → ''X >= Y'':LeibnizBooleanTerm'.
+	"Build the context"
+	realNumbers build.
+]
+
+{ #category : #initialization }
+LeibnizBuiltins >> createRealNumberContextWithoutRules [
+	| realNumbers |
+	realNumbers := self newContextBuilderNamed: 'real-numbers-without-rules'.
+	realNumbers include: 'rational-numbers-without-rules' inMode: 'extend'.
 	"Sorts"
 	realNumbers addSort: #'ℝ'.
 	realNumbers make: #'ℚ' subsortOf: #'ℝ'.

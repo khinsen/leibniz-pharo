@@ -43,7 +43,7 @@ LeibnizBuiltinsTest >> testFloats [
 { #category : #testing }
 LeibnizBuiltinsTest >> testIntegerArithmetic [
 	| context |
-	#('integers' 'rational-numbers') do:
+	#('integers' 'rational-numbers' 'real-numbers') do:
 		[ :name |
 			context := builtins contextNamed: name.
 			self assert: (context parseTermAndReduce: '2 + 0') equals: (context parseTerm: '2').
@@ -119,38 +119,40 @@ LeibnizBuiltinsTest >> testIntegers [
 { #category : #testing }
 LeibnizBuiltinsTest >> testRationalNumberArithmetic [
 	| context |
-	context := builtins contextNamed: 'rational-numbers'.
-	self assert: (context parseTermAndReduce: '1/2 + 0') equals: (context parseTerm: '1/2').
-	self assert: (context parseTermAndReduce: '0 + 1/3') equals: (context parseTerm: '1/3').
-	self assert: (context parseTermAndReduce: '2/3 + 1/3') equals: (context parseTerm: '1').
-	self assert: (context parseTermAndReduce: '1/2 - 0') equals: (context parseTerm: '1/2').
-	self assert: (context parseTermAndReduce: '1/2 - 3/2') equals: (context parseTerm: '-1').
-	self assert: (context parseTermAndReduce: '-(1/2)') equals: (context parseTerm: '-1/2').
-	self assert: (context parseTermAndReduce: '1/2 × 0') equals: (context parseTerm: '0').
-	self assert: (context parseTermAndReduce: '1/2 × 1') equals: (context parseTerm: '1/2').
-	self assert: (context parseTermAndReduce: '1/2 × 1/3') equals: (context parseTerm: '1/6').
-	self assert: (context parseTermAndReduce: '1 × 1/3') equals: (context parseTerm: '1/3').
-	self assert: (context parseTermAndReduce: '0 × 1/3') equals: (context parseTerm: '0').
-	self assert: (context parseTermAndReduce: '0 ÷ 3') equals: (context parseTerm: '0').
-	self assert: (context parseTermAndReduce: '0 ÷ 1/3') equals: (context parseTerm: '0').
-	self assert: (context parseTermAndReduce: '0 ÷ 0') equals: (context parseTerm: '0 ÷ 0').
-	self assert: (context parseTermAndReduce: '17 ÷ 5') equals: (context parseTerm: '17/5').
-	self assert: (context parseTermAndReduce: '1 ÷ 1/3') equals: (context parseTerm: '3').
-	self assert: (context parseTermAndReduce: '0^{2}') equals: (context parseTerm: '0').
-	self assert: (context parseTermAndReduce: '0^{0}') equals: (context parseTerm: '0^{0}').
-	self assert: (context parseTermAndReduce: '0^{-2}') equals: (context parseTerm: '0^{-2}').
-	self assert: (context parseTermAndReduce: '3^{2}') equals: (context parseTerm: '9').
-	self assert: (context parseTermAndReduce: '3^{-2}') equals: (context parseTerm: '1/9').
-	self assert: (context parseTermAndReduce: '1/3^{-2}') equals: (context parseTerm: '9').
-	self assert: (context parseTermAndReduce: 'abs(2/3)') equals: (context parseTerm: '2/3').
-	self assert: (context parseTermAndReduce: 'abs(-2/3)') equals: (context parseTerm: '2/3').
+	#('rational-numbers' 'real-numbers') do:
+		[ :name |
+			context := builtins contextNamed: name.
+			self assert: (context parseTermAndReduce: '1/2 + 0') equals: (context parseTerm: '1/2').
+			self assert: (context parseTermAndReduce: '0 + 1/3') equals: (context parseTerm: '1/3').
+			self assert: (context parseTermAndReduce: '2/3 + 1/3') equals: (context parseTerm: '1').
+			self assert: (context parseTermAndReduce: '1/2 - 0') equals: (context parseTerm: '1/2').
+			self assert: (context parseTermAndReduce: '1/2 - 3/2') equals: (context parseTerm: '-1').
+			self assert: (context parseTermAndReduce: '-(1/2)') equals: (context parseTerm: '-1/2').
+			self assert: (context parseTermAndReduce: '1/2 × 0') equals: (context parseTerm: '0').
+			self assert: (context parseTermAndReduce: '1/2 × 1') equals: (context parseTerm: '1/2').
+			self assert: (context parseTermAndReduce: '1/2 × 1/3') equals: (context parseTerm: '1/6').
+			self assert: (context parseTermAndReduce: '1 × 1/3') equals: (context parseTerm: '1/3').
+			self assert: (context parseTermAndReduce: '0 × 1/3') equals: (context parseTerm: '0').
+			self assert: (context parseTermAndReduce: '0 ÷ 3') equals: (context parseTerm: '0').
+			self assert: (context parseTermAndReduce: '0 ÷ 1/3') equals: (context parseTerm: '0').
+			self assert: (context parseTermAndReduce: '0 ÷ 0') equals: (context parseTerm: '0 ÷ 0').
+			self assert: (context parseTermAndReduce: '17 ÷ 5') equals: (context parseTerm: '17/5').
+			self assert: (context parseTermAndReduce: '1 ÷ 1/3') equals: (context parseTerm: '3').
+			self assert: (context parseTermAndReduce: '0^{2}') equals: (context parseTerm: '0').
+			self assert: (context parseTermAndReduce: '0^{0}') equals: (context parseTerm: '0^{0}').
+			self assert: (context parseTermAndReduce: '0^{-2}') equals: (context parseTerm: '0^{-2}').
+			self assert: (context parseTermAndReduce: '3^{2}') equals: (context parseTerm: '9').
+			self assert: (context parseTermAndReduce: '3^{-2}') equals: (context parseTerm: '1/9').
+			self assert: (context parseTermAndReduce: '1/3^{-2}') equals: (context parseTerm: '9').
+			self assert: (context parseTermAndReduce: 'abs(2/3)') equals: (context parseTerm: '2/3').
+			self assert: (context parseTermAndReduce: 'abs(-2/3)') equals: (context parseTerm: '2/3').
 
-	self assert: (context parseTermAndReduce: '3/5 < 2/5') equals: (context parseTerm: 'false').
-	self assert: (context parseTermAndReduce: '3/5 > 2/5') equals: (context parseTerm: 'true').
-	self assert: (context parseTermAndReduce: '2/5 ≤ 2/5') equals: (context parseTerm: 'true').
-	self assert: (context parseTermAndReduce: '2/5 ≥ 2/5') equals: (context parseTerm: 'true').
-	self assert: (context parseTermAndReduce: '(2/5 + 4/5) ≥ 1/5') equals: (context parseTerm: 'true').
-	self assert: (context parseTermAndReduce: '(2/3 + 1) == (1 + 2/3)') equals: (context parseTerm: 'true').
+			self assert: (context parseTermAndReduce: '3/5 < 2/5') equals: (context parseTerm: 'false').
+			self assert: (context parseTermAndReduce: '3/5 > 2/5') equals: (context parseTerm: 'true').
+			self assert: (context parseTermAndReduce: '2/5 ≤ 2/5') equals: (context parseTerm: 'true').
+			self assert: (context parseTermAndReduce: '2/5 ≥ 2/5') equals: (context parseTerm: 'true').
+			self assert: (context parseTermAndReduce: '(2/5 + 4/5) ≥ 1/5') equals: (context parseTerm: 'true').
+			self assert: (context parseTermAndReduce: '(2/3 + 1) == (1 + 2/3)') equals: (context parseTerm: 'true') ].
 ]
 
 { #category : #testing }
