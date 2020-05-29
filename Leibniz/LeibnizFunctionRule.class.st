@@ -48,6 +48,11 @@ LeibnizFunctionRule >> convertToSignature: aSignature [
 
 ]
 
+{ #category : #accessing }
+LeibnizFunctionRule >> function [
+	^ function
+]
+
 { #category : #initializing }
 LeibnizFunctionRule >> initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm function: anArray [
 	| code tempClass |
@@ -71,6 +76,12 @@ LeibnizFunctionRule >> initializeWithPattern: aPattern localVariables: aDictiona
 	tempClass compile: code.
 	block := tempClass new block.
 	self beRecursivelyReadOnlyObject.
+
+]
+
+{ #category : #comparing }
+LeibnizFunctionRule >> instVarsExcludedFromEquality [
+	^#(#block #function)
 
 ]
 

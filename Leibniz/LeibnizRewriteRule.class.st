@@ -87,3 +87,8 @@ LeibnizRewriteRule >> printAsLeibnizSyntaxOn: aStream [
 	condition ifNotNil:
 		[ aStream nextPutAll: ' | '. condition printAsLeibnizSyntaxOn: aStream ].
 ]
+
+{ #category : #accessing }
+LeibnizRewriteRule >> replacement [
+	^ replacement
+]

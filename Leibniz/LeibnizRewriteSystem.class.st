@@ -56,6 +56,7 @@ LeibnizRewriteSystem >> reduce: aTerm [
 
 { #category : #rewriting }
 LeibnizRewriteSystem >> rewriteHeadOnce: aTerm [
+	self flag: #todo.
 	rules do:
 		[ :each |
 			| s |
@@ -65,8 +66,8 @@ LeibnizRewriteSystem >> rewriteHeadOnce: aTerm [
 						ifTrue: [ ^ each apply: s ] ] ].
 	"Special rule for term equality"
 	aTerm isEqualityTerm
-		ifNil: [ ^ aTerm ]
-		ifNotNil: [ :v | ^ aTerm signature zeroArgTermNamed: (v ifTrue: #true ifFalse: #false) ]
+		ifNotNil: [ :v | ^ aTerm signature zeroArgTermNamed: (v ifTrue: #true ifFalse: #false) ].
+	^ aTerm
 ]
 
 { #category : #rewriting }

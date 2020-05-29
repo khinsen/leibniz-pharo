@@ -164,6 +164,7 @@ LeibnizSignature >> sortGraph [
 
 { #category : #accessing }
 LeibnizSignature >> sortOfOp: aSymbol withArgSorts: aSortArray [
+	self flag: #todo.
 	(self opNamed: aSymbol withArgs: aSortArray)
 		ifNotNil: [ :op | ^ op sortForArgSorts: aSortArray ].
 	"A somewhat hacky special case: if the signature includes the

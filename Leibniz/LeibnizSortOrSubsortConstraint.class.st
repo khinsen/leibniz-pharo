@@ -51,7 +51,7 @@ LeibnizSortOrSubsortConstraint >> equalOrWiderThanSort: aSubsortConstraint [
 { #category : #initialization }
 LeibnizSortOrSubsortConstraint >> initializeWithSortGraph: aSortGraph sort: aSort [
 	self assert: (aSortGraph includes: aSort)
-		  description: 'sort ', aSort asString , 'is not defined in the sort graph'.
+		  description: 'sort ', aSort asString , ' is not defined in the sort graph'.
 	sortGraph := aSortGraph.
 	sort := aSort.
 

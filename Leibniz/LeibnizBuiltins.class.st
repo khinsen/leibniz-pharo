@@ -325,13 +325,22 @@ LeibnizBuiltins >> createStringContext [
 
 { #category : #initialization }
 LeibnizBuiltins >> createTruthContext [
-	| truth |
+	| truth uvar1 uvar2 equalityPattern |
+	self flag: #todo.
 	truth := self newContextBuilderNamed: 'truth'.
 	truth addSort: #boolean.
 	truth addBuiltin: #truth.
 	truth addOp: #true ofSort: #boolean.
 	truth addOp: #false ofSort: #boolean.
-	truth build.
+	"The special equality operator"
+"	truth addOp: #'_==' withArgs: #(nil nil) ofSort: #boolean.
+"	"The special rule for term equality a == b"
+"	uvar1 := LeibnizUniversalVarTerm symbol: #X forSignature: truth signature.
+	uvar2 := LeibnizUniversalVarTerm symbol: #Y forSignature: truth signature.
+	equalityPattern := LeibnizOpTerm symbol: #'_==' args: { uvar1. uvar2 } sort: #boolean
+											  forSignature: truth signature.
+	truth addRule: (LeibnizFunctionRule pattern: equalityPattern function: #('X = Y' #LeibnizBooleanTerm)).
+"	truth build.
 
 ]
 

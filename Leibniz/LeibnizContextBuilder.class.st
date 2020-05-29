@@ -251,6 +251,12 @@ LeibnizContextBuilder >> rulesFromXML: anXMLElement [
 			[ :rule | self addRule: (self ruleFromXML: rule) ]
 ]
 
+{ #category : #accessing }
+LeibnizContextBuilder >> signature [
+	self phase: #rules.
+	^ signature
+]
+
 { #category : #'XML import' }
 LeibnizContextBuilder >> signatureFromXML: anXMLElement [
 	(anXMLElement elementsDetect: [:each | each isNamed: 'sorts'])
@@ -286,6 +292,7 @@ LeibnizContextBuilder >> signatureFromXML: anXMLElement [
 
 { #category : #accessing }
 LeibnizContextBuilder >> sortGraph [
+	self phase: #signature.
 	^ sortGraph
 ]
 

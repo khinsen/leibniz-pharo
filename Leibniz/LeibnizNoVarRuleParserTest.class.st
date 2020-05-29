@@ -11,20 +11,19 @@ LeibnizNoVarRuleParserTest >> parserClass [
 
 { #category : #tests }
 LeibnizNoVarRuleParserTest >> testNoVarRule [
-	| pattern replacement |
+	| pattern replacement expected |
 	pattern := parser signature nonZeroArgTermNamed: #aOneArgOp
 										 withArgs: { parser signature zeroArgTermNamed: #aZeroArgOp }.
 	replacement := parser signature zeroArgTermNamed: #aZeroArgOp.
 	self parse: 'aOneArgOp(aZeroArgOp) ⇒ aZeroArgOp'.
-	self assert: result
-		  equals: (LeibnizRewriteRule pattern: pattern replacement: replacement).
+	expected := LeibnizRewriteRule pattern: pattern replacement: replacement.
+	self assert: result equals: expected.
 
 	pattern := parser signature nonZeroArgTermNamed: #aOneArgOp
 										 withArgs: { parser signature zeroArgTermNamed: #aVar }.
-	self parse: 'aOneArgOp(aVar) → ''aVar'''.
-	self assert: result
-		  equals: (LeibnizFunctionRule pattern: pattern function: 'aVar').
-
+	self parse: 'aOneArgOp(aVar) → ''aVar'':LeibnizAtomicTerm'.
+	expected := LeibnizFunctionRule pattern: pattern function: #('aVar' #LeibnizAtomicTerm).
+	self assert: result equals: expected.
 ]
 
 { #category : #tests }
