@@ -30,6 +30,11 @@ LeibnizAtomicTerm >> initializeWithValue: aString forSignature: aSignature [
 
 ]
 
+{ #category : #accessing }
+LeibnizAtomicTerm >> leibnizAtomicTermValue [
+	^ value
+]
+
 { #category : #printing }
 LeibnizAtomicTerm >> printAsLeibnizSyntaxOn: aStream [
 	value printOn: aStream

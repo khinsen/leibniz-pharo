@@ -90,6 +90,21 @@ LeibnizBuiltinsTest >> testIntegerArithmetic [
 ]
 
 { #category : #testing }
+LeibnizBuiltinsTest >> testIntegerArithmeticWithSymbolicValues [
+	| b context |
+	b := LeibnizContextBuilder name: 'test' document: LeibnizDocument new.
+	b include: 'integers' fromDocumentWithHash: 'e513fb1f0504a951919688029321eaa02b4e2ad014c0979c4b602b946f9cafc8' inMode: 'extend'.
+	b parseAndAddOp: 'a : ℤ'.
+	b parseAndAddOp: 'b : ℤ'.
+	context := b context.
+	self assert: (context parseTermAndReduce: 'a + 0') equals: (context parseTerm: 'a').
+	self assert: (context parseTermAndReduce: 'a - 0') equals: (context parseTerm: 'a').
+	self assert: (context parseTermAndReduce: '0 + b') equals: (context parseTerm: 'b').
+	self assert: (context parseTermAndReduce: '0 - b') equals: (context parseTerm: '-(b)').
+
+]
+
+{ #category : #testing }
 LeibnizBuiltinsTest >> testIntegers [
 	| context |
 	context := builtins contextNamed: 'integers-without-rules'.

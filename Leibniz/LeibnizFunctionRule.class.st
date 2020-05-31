@@ -67,7 +67,7 @@ LeibnizFunctionRule >> initializeWithPattern: aPattern localVariables: aDictiona
 										s nextPutAll: each.
 										s nextPutAll: ' := (args at: '.
 										each printOn: s.
-										s nextPutAll: ') value. ' ].
+										s nextPutAll: ') leibnizAtomicTermValue. ' ].
 			s nextPutAll: function second.
 			s nextPutAll: ' value: ('.
 			s nextPutAll: function first.

@@ -101,29 +101,36 @@ LeibnizBuiltins >> createIntegerContext [
 	self createIntegerContextWithoutRules.
 	integers := self newContextBuilderNamed: 'integers'.
 	integers include: 'integers-without-rules' inMode: 'extend'.
-	"Rules"
+	"addition rules"
 	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero X + Zero ⇒ X'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero Zero + X ⇒ X'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X + Y → ''X + Y'':LeibnizIntegerTerm'.
+	"subtraction rules"
 	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero X - Zero ⇒ X'.
+	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero Zero - X ⇒ -(X)'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X - Y → ''X - Y'':LeibnizIntegerTerm'.
 	integers parseAndAddRule: '∀ Zero:zero -(Zero) ⇒ 0'.
 	integers parseAndAddRule: '∀ X:ℤ -(X) → ''X negated'':LeibnizIntegerTerm'.
+	"multiplication rules"
 	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero X × Zero ⇒ 0'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Zero:zero Zero × X ⇒ 0'.
 	integers parseAndAddRule: '∀ X:ℤ 1 × X ⇒ X'.
 	integers parseAndAddRule: '∀ X:ℤ X × 1 ⇒ X'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X × Y → ''X * Y'':LeibnizIntegerTerm'.
+	"division rules"
 	integers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero div X ⇒ 0'.
 	integers parseAndAddRule: '∀ X:ℤ X div 1 ⇒ X'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X div Y → ''(X abs // Y abs) * X sign * Y sign'':LeibnizIntegerTerm'.
 	integers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero rem X ⇒ 0'.
 	integers parseAndAddRule: '∀ X:ℤ X rem 1 ⇒ 0'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X rem Y → ''(X abs % Y abs) * X sign * Y sign'':LeibnizIntegerTerm'.
+	"exponentiation rules"
 	integers parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero X^{Zero} ⇒ 1'.
 	integers parseAndAddRule: '∀ X:ℕ.nz ∀ Zero:zero Zero^{X} ⇒ 0'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℕ.nz X^{Y} → ''X raisedTo: Y'':LeibnizIntegerTerm'.
+	"abs rules"
 	integers parseAndAddRule: '∀ X:ℤ abs(X) → ''X abs'':LeibnizIntegerTerm'.
+	"comparison rules"
 	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X < Y → ''X < Y'':LeibnizBooleanTerm'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X > Y → ''X > Y'':LeibnizBooleanTerm'.
 	integers parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X ≤ Y → ''X <= Y'':LeibnizBooleanTerm'.
@@ -191,6 +198,7 @@ LeibnizBuiltins >> createRationalContext [
 	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X + Y → ''X + Y'':LeibnizRationalNumberTerm'.
 	"Subtraction rules"
 	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Zero:zero X - Zero ⇒ X'.
+	rationalNumbers parseAndAddRule: '∀ X:ℝ ∀ Zero:zero Zero - X ⇒ -(X)'.
 	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X - Y → ''X - Y'':LeibnizRationalNumberTerm'.
 	"Negation rules"
 	rationalNumbers parseAndAddRule: '∀ Zero:zero -(Zero) ⇒ 0'.
@@ -286,6 +294,7 @@ LeibnizBuiltins >> createRealNumberContext [
 	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X + Y → ''X + Y'':LeibnizRationalNumberTerm'.
 	"Subtraction rules"
 	realNumbers parseAndAddRule: '∀ X:ℝ ∀ Zero:zero X - Zero ⇒ X'.
+	realNumbers parseAndAddRule: '∀ X:ℝ ∀ Zero:zero Zero - X ⇒ -(X)'.
 	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X - Y → ''X - Y'':LeibnizRationalNumberTerm'.
 	"Negation rules"
 	realNumbers parseAndAddRule: '∀ Zero:zero -(Zero) ⇒ 0'.
@@ -317,7 +326,7 @@ LeibnizBuiltins >> createRealNumberContext [
 	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X < Y → ''X < Y'':LeibnizBooleanTerm'.
 	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X > Y → ''X > Y'':LeibnizBooleanTerm'.
 	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X ≤ Y → ''X <= Y'':LeibnizBooleanTerm'.
-	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y: X ≥ Y → ''X >= Y'':LeibnizBooleanTerm'.
+	realNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X ≥ Y → ''X >= Y'':LeibnizBooleanTerm'.
 	"Build the context"
 	realNumbers build.
 ]
