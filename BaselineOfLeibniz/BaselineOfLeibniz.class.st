@@ -22,9 +22,7 @@ BaselineOfLeibniz >> baseline: spec [
 
 		spec
 			project: 'XMLParser'
-			with: [ spec
-						className: #ConfigurationOfXMLParser;
-						repository: 'http://smalltalkhub.com/mc/PharoExtras/XMLParser/main' ].
+			with: [ spec repository: 'github://pharo-contributions/XML-XMLParser/src' ].
 
 		spec
 			baseline: 'RecursiveWriteBarrier' 
