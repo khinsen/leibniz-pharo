@@ -198,7 +198,7 @@ LeibnizBuiltins >> createRationalContext [
 	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X + Y → ''X + Y'':LeibnizRationalNumberTerm'.
 	"Subtraction rules"
 	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Zero:zero X - Zero ⇒ X'.
-	rationalNumbers parseAndAddRule: '∀ X:ℝ ∀ Zero:zero Zero - X ⇒ -(X)'.
+	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Zero:zero Zero - X ⇒ -(X)'.
 	rationalNumbers parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X - Y → ''X - Y'':LeibnizRationalNumberTerm'.
 	"Negation rules"
 	rationalNumbers parseAndAddRule: '∀ Zero:zero -(Zero) ⇒ 0'.
