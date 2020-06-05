@@ -21,7 +21,7 @@ BaselineOfLeibniz >> baseline: spec [
 			with: [ spec repository: 'github://kursjan/petitparser2:master/src' ].
 
 		spec
-			project: 'XMLParser'
+			baseline: 'XMLParser'
 			with: [ spec repository: 'github://pharo-contributions/XML-XMLParser/src' ].
 
 		spec
