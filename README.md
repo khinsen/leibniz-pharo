@@ -1,8 +1,8 @@
 # leibniz-pharo
 
-[Leibniz](http://github.com/khinsen/leibniz) runtime library for Pharo. Work in progress, not usable yet!
+[Leibniz](http://github.com/khinsen/leibniz) runtime library for Pharo. Work in progress, not very usable yet!
 
-To install in Pharo 7, execute the following lines in a playground:
+To install in Pharo 8, execute the following lines in a playground:
 ```
 Metacello new
     baseline: 'Leibniz';
@@ -17,7 +17,7 @@ Note that Leibniz makes generous use of Unicode glyphs that are not contained in
 The following list is provided for information. All the dependencies will be installed automatically in the procedure explained above.
 
 - [Roassal](https://github.com/ObjectProfile/Roassal2/) is a powerful graphics engine used for visualizing Leibniz contexts.
-- [XMLParser](http://smalltalkhub.com/#!/~PharoExtras/XMLParser) is used to read Leibniz documents.
+- [XMLParser](https://github.com/pharo-contributions/XML-XMLParser/) is used to read Leibniz documents.
 - [RecursiveWriteBarrier](https://github.com//khinsen/RecursiveWriteBarrier) is used to make some objects fully immutable.
 - [EqualityThroughVariablesTrait](https://github.com/khinsen/EqualityThroughVariablesTrait) is a trait that implements object equality in terms of equality of instance and indexed variables.
 
