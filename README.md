@@ -2,6 +2,14 @@
 
 [Leibniz](http://github.com/khinsen/leibniz) runtime library for Pharo. Work in progress, not very usable yet!
 
+To install in a pre-built GToolkit distribution, execute the following lines in a playground:
+```
+Metacello new
+    baseline: 'LeibnizForGToolkit';
+    repository: 'github://khinsen/leibniz-pharo/src';
+    load.
+```
+
 To install in Pharo 8, execute the following lines in a playground:
 ```
 Metacello new
