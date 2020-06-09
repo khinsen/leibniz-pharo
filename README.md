@@ -2,7 +2,7 @@
 
 [Leibniz](http://github.com/khinsen/leibniz) runtime library for Pharo. Work in progress, not very usable yet!
 
-## Installation in a pre-built GToolkit distribution
+## Installation in a [pre-built GToolkit](https://gtoolkit.com/) distribution
 
 Execute the following lines in a playground:
 ```
@@ -11,6 +11,10 @@ Metacello new
     repository: 'github://khinsen/leibniz-pharo/src';
     load.
 ```
+
+Note that Leibniz makes generous use of Unicode glyphs that are not contained in the default fonts used by GToolkit. The only suitable free font I have found to replace them is [Arial Unicode MS](https://docs.microsoft.com/en-us/typography/font-list/arial-unicode-ms). To replace the default fonts, paste the following script into a playground and click "Inspect". In the inspector for the resulting `RBCompositeRefactoringChange` (see screenshot below), accept the changes.
+![screenshot](https://github.com/khinsen/leibniz-pharo/raw/master/Screenshot%202020-06-09%20at%2014.55.37.png)
+(thanks to [@girba](https://github.com/girba) for the refactoring magic in this script!)
 
 ## Installation in a Pharo 8 image
 
