@@ -1,14 +1,14 @@
 "
 !! Sort graph builders
 
-Sort graphs (${class:name=LeibnizSortGraph}$) being immutable, they cannot be constructed by adding sorts and subsort relations one by one. However, such a step by step construction can be used to make a sort graph builder, which in the end is used to build an immutable sort graph.
+Sort graphs (${class:name=LbSortGraph}$) being immutable, they cannot be constructed by adding sorts and subsort relations one by one. However, such a step by step construction can be used to make a sort graph builder, which in the end is used to build an immutable sort graph.
 
 An example:
 ${method:LeibnizSortGraphTest>>#setUp|expanded=}$
 
 "
 Class {
-	#name : #LeibnizSortGraphBuilder,
+	#name : #LbSortGraphBuilder,
 	#superclass : #Object,
 	#instVars : [
 		'sameKindSortsOf',
@@ -18,7 +18,7 @@ Class {
 }
 
 { #category : #adding }
-LeibnizSortGraphBuilder >> add: aSymbol [
+LbSortGraphBuilder >> add: aSymbol [
    (self includes: aSymbol)
      ifFalse: [ sameKindSortsOf at: aSymbol put: (Set with: aSymbol).
                 directSubsortsOf at: aSymbol put: Set new. ].
@@ -27,27 +27,27 @@ LeibnizSortGraphBuilder >> add: aSymbol [
 ]
 
 { #category : #adding }
-LeibnizSortGraphBuilder >> addSortGraph: aSortGraph [ 
+LbSortGraphBuilder >> addSortGraph: aSortGraph [ 
 	aSortGraph asSet do: [ :each | self add: each ].
 	aSortGraph withSubsortRelationsDo: [ :s1 :s2 | self make: s1 subsortOf: s2 ].
 
 ]
 
 { #category : #testing }
-LeibnizSortGraphBuilder >> includes: aSort [
+LbSortGraphBuilder >> includes: aSort [
 	^ sameKindSortsOf keys includes: aSort
 
 ]
 
 { #category : #initializing }
-LeibnizSortGraphBuilder >> initialize [
+LbSortGraphBuilder >> initialize [
    sameKindSortsOf := Dictionary new.
 	directSubsortsOf := Dictionary new.
 
 ]
 
 { #category : #testing }
-LeibnizSortGraphBuilder >> is: aSort subsortOf: anotherSort [
+LbSortGraphBuilder >> is: aSort subsortOf: anotherSort [
 	| ss |
 	^ (aSort = anotherSort)
 		or: [ ss := directSubsortsOf at: anotherSort.
@@ -57,7 +57,7 @@ LeibnizSortGraphBuilder >> is: aSort subsortOf: anotherSort [
 ]
 
 { #category : #adding }
-LeibnizSortGraphBuilder >> make: aSort subsortOf: anotherSort [
+LbSortGraphBuilder >> make: aSort subsortOf: anotherSort [
 	| new_kind |
 	(aSort = anotherSort) ifTrue: [ ^ aSort ].
 	(self is: anotherSort subsortOf: aSort)
@@ -70,9 +70,9 @@ LeibnizSortGraphBuilder >> make: aSort subsortOf: anotherSort [
 ]
 
 { #category : #adding }
-LeibnizSortGraphBuilder >> parseAndAdd: aString [
+LbSortGraphBuilder >> parseAndAdd: aString [
 	| declaration |
-	declaration := LeibnizSortParser parse: aString.
+	declaration := LbSortParser parse: aString.
 	declaration size = 1 ifTrue:
 		[	self add: declaration first ].
 	declaration size = 2 ifTrue:
@@ -83,7 +83,7 @@ LeibnizSortGraphBuilder >> parseAndAdd: aString [
 ]
 
 { #category : #accessing }
-LeibnizSortGraphBuilder >> sortGraph [
-	^ LeibnizSortGraph subsortRelations: directSubsortsOf deepCopy.
+LbSortGraphBuilder >> sortGraph [
+	^ LbSortGraph subsortRelations: directSubsortsOf deepCopy.
 
 ]

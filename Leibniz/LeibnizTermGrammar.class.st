@@ -87,7 +87,7 @@ ${method:name=LeibnizTermGrammar>>#term|expanded=}$
 "
 Class {
 	#name : #LeibnizTermGrammar,
-	#superclass : #LeibnizGrammar,
+	#superclass : #LbGrammar,
 	#instVars : [
 		'zeroArgTerm',
 		'term',

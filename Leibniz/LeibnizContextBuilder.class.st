@@ -312,7 +312,7 @@ LeibnizContextBuilder >> startSignature [
 
 { #category : #'defining - private' }
 LeibnizContextBuilder >> startSortGraph [
-	sortGraphBuilder := LeibnizSortGraphBuilder new.
+	sortGraphBuilder := LbSortGraphBuilder new.
 	includes do: [ :i | sortGraphBuilder addSortGraph: (i at: #context) sortGraph ].
 
 ]

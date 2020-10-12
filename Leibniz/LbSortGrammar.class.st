@@ -7,11 +7,11 @@ Sort names are plain identifiers.
 
 !!Subsorts
 
-Subsort relations are defined by ${method:name=LeibnizSortGrammar>>#subsort|expanded=}$.
+Subsort relations are defined by ${method:name=LbSortGrammar>>#subsort|expanded=}$.
 "
 Class {
-	#name : #LeibnizSortGrammar,
-	#superclass : #LeibnizGrammar,
+	#name : #LbSortGrammar,
+	#superclass : #LbGrammar,
 	#instVars : [
 		'subsortSymbol',
 		'subsort',
@@ -21,24 +21,24 @@ Class {
 }
 
 { #category : #productions }
-LeibnizSortGrammar >> sort [
+LbSortGrammar >> sort [
 	^ identifier
 
 ]
 
 { #category : #accessing }
-LeibnizSortGrammar >> start [
+LbSortGrammar >> start [
 	^ (subsort / sort) end
 ]
 
 { #category : #productions }
-LeibnizSortGrammar >> subsort [
+LbSortGrammar >> subsort [
 	^ identifier trim, subsortSymbol, identifier trim
 
 ]
 
 { #category : #productions }
-LeibnizSortGrammar >> subsortSymbol [
+LbSortGrammar >> subsortSymbol [
 	^ $⊆ asPParser
 
 ]

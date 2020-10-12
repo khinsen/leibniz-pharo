@@ -3,10 +3,10 @@
 
 !!Identifiers
 
-The identifiers for sorts and operators live in separate namespaces but follow the same rules. The admissible characters are defined in ${method:name=LeibnizGrammar>>#identifierCharacter|expanded=}$. All but the first character can also be digits or a dot. A small number of identifiers ('⇒' '→' '∀' '|' '⊆') are explicitly forbidden to avoid conflicts with other elements of Leibniz syntax.
+The identifiers for sorts and operators live in separate namespaces but follow the same rules. The admissible characters are defined in ${method:name=LbGrammar>>#identifierCharacter|expanded=}$. All but the first character can also be digits or a dot. A small number of identifiers ('⇒' '→' '∀' '|' '⊆') are explicitly forbidden to avoid conflicts with other elements of Leibniz syntax.
 "
 Class {
-	#name : #LeibnizGrammar,
+	#name : #LbGrammar,
 	#superclass : #PP2CompositeNode,
 	#instVars : [
 		'identifier',
@@ -16,7 +16,7 @@ Class {
 }
 
 { #category : #productions }
-LeibnizGrammar >> identifier [
+LbGrammar >> identifier [
 	^ (identifierCharacter , (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
 		==> [ :id | (#('⇒' '→' '∀' '|' '⊆') includes: id)
 							ifFalse: [ id asSymbol ]
@@ -24,7 +24,7 @@ LeibnizGrammar >> identifier [
 ]
 
 { #category : #productions }
-LeibnizGrammar >> identifierCharacter [
+LbGrammar >> identifierCharacter [
 	| predicate |
 	predicate := PP2CharSetPredicate on:
 		[ :char |

@@ -1,10 +1,10 @@
 "
 !! Kinds
 
-Kinds are the connected components in a ${class:name=LeibnizSortGraph}$. They are not explicitly declared, but are the result of an analysis of subsort relations.
+Kinds are the connected components in a ${class:name=LbSortGraph}$. They are not explicitly declared, but are the result of an analysis of subsort relations.
 "
 Class {
-	#name : #LeibnizKind,
+	#name : #LbKind,
 	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -17,7 +17,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizKind class >> sortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOfMaximalSorts [
+LbKind class >> sortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOfMaximalSorts [
 	^self basicNew
 			initializeWithSortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOfMaximalSorts;
 			yourself
@@ -25,24 +25,24 @@ LeibnizKind class >> sortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOf
 ]
 
 { #category : #converting }
-LeibnizKind >> asSet [
+LbKind >> asSet [
    ^ sorts
 
 ]
 
 { #category : #inspecting }
-LeibnizKind >> childrenInInspector [
+LbKind >> childrenInInspector [
 	^Array new
 ]
 
 { #category : #private }
-LeibnizKind >> equalityTestWith: otherSorts [ 
+LbKind >> equalityTestWith: otherSorts [ 
 	^ sorts = otherSorts
 
 ]
 
 { #category : #inspecting }
-LeibnizKind >> gtInspectorNetworkViewIn: composite [
+LbKind >> gtInspectorNetworkViewIn: composite [
 	<gtInspectorPresentationOrder: -10>
 	composite roassal2
 		title: 'Network View';
@@ -52,7 +52,7 @@ LeibnizKind >> gtInspectorNetworkViewIn: composite [
 ]
 
 { #category : #inspecting }
-LeibnizKind >> gtInspectorTreeViewIn: composite [
+LbKind >> gtInspectorTreeViewIn: composite [
 	<gtInspectorPresentationOrder: -11>
 	composite roassal2
 		title: 'Tree View';
@@ -61,13 +61,13 @@ LeibnizKind >> gtInspectorTreeViewIn: composite [
 ]
 
 { #category : #testing }
-LeibnizKind >> includes: aSort [
+LbKind >> includes: aSort [
 	^ sorts includes: aSort
 
 ]
 
 { #category : #initialization }
-LeibnizKind >> initializeWithSortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOfMaximalSorts [
+LbKind >> initializeWithSortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOfMaximalSorts [
 	sortGraph := aSortGraph.
 	sorts := setOfSorts.
 	maximalSorts := setOfMaximalSorts.
@@ -75,18 +75,18 @@ LeibnizKind >> initializeWithSortGraph: aSortGraph sorts: setOfSorts maximalSort
 ]
 
 { #category : #comparing }
-LeibnizKind >> instVarsExcludedFromEquality [
+LbKind >> instVarsExcludedFromEquality [
 	^#(#maximalSorts)
 
 ]
 
 { #category : #accessing }
-LeibnizKind >> maximalSorts [
+LbKind >> maximalSorts [
 	^  maximalSorts
 ]
 
 { #category : #printing }
-LeibnizKind >> printAsLeibnizSyntaxOn: aStream [
+LbKind >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPut: $[.
 	aStream nextPutAll: (', ' join: (maximalSorts collect: [ : sort | sort asString ])).
 	aStream nextPut: $].
@@ -94,7 +94,7 @@ LeibnizKind >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #printing }
-LeibnizKind >> printOn: aStream [
+LbKind >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	aStream nextPutAll: (', ' join: (self maximalSorts collect: [ : sort | sort asString ])).
@@ -103,17 +103,17 @@ LeibnizKind >> printOn: aStream [
 ]
 
 { #category : #accessing }
-LeibnizKind >> size [
+LbKind >> size [
 	^sorts size
 ]
 
 { #category : #accessing }
-LeibnizKind >> sortGraph [
+LbKind >> sortGraph [
 	^sortGraph
 
 ]
 
 { #category : #inspecting }
-LeibnizKind >> title [
+LbKind >> title [
 	^', ' join: (self maximalSorts collect: [ : sort | sort asString ])
 ]

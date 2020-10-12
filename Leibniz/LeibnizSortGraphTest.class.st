@@ -15,7 +15,7 @@ Class {
 LeibnizSortGraphTest >> setUp [
 	super setUp.
 
-   builder1 := LeibnizSortGraphBuilder new.
+   builder1 := LbSortGraphBuilder new.
 	builder1 add: #A;
          		add: #B;
          		add: #C;
@@ -25,7 +25,7 @@ LeibnizSortGraphTest >> setUp [
 				make: #A subsortOf: #D.
 	sortGraph1 := builder1 sortGraph.
 
-	builder2 := LeibnizSortGraphBuilder new.
+	builder2 := LbSortGraphBuilder new.
 	builder2 add: #A;
 				add: #X;
 				add: #Y;
@@ -101,14 +101,14 @@ LeibnizSortGraphTest >> testSortGraphUnion [
 	self assert: (union1 is: #A subsortOf: #C).
 	self assert: (union1 is: #A subsortOf: #X).
 	self assert: (sortGraph1 union: sortGraph1) equals: sortGraph1.
-	self assert: (sortGraph1 union: LeibnizSortGraphBuilder new sortGraph) equals: sortGraph1.
+	self assert: (sortGraph1 union: LbSortGraphBuilder new sortGraph) equals: sortGraph1.
 
 ]
 
 { #category : #testing }
 LeibnizSortGraphTest >> testSortParser [
    | builder |
-	builder := LeibnizSortGraphBuilder new.
+	builder := LbSortGraphBuilder new.
 	builder parseAndAdd: 'A ⊆ B';
 			  parseAndAdd: 'B ⊆ C';
 			  parseAndAdd: 'A ⊆ D'.

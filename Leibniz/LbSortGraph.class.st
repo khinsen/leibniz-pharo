@@ -15,11 +15,11 @@ builtins := LeibnizLibrary uniqueInstance builtins.
 
 It consists of two kinds, one of which contains a single sort, ==#boolean==. The second kind groups together all the number sorts built into Leibniz. The suffix ==.nz== stands for non-zero, ==.p== stands for positive, and ==.nn== stands for non-negative.
 
-Sort graphs are immutable objects. They are constructed by a ${class:name=LeibnizSortGraphBuilder}$.
+Sort graphs are immutable objects. They are constructed by a ${class:name=LbSortGraphBuilder}$.
 
 "
 Class {
-	#name : #LeibnizSortGraph,
+	#name : #LbSortGraph,
 	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -34,7 +34,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizSortGraph class >> subsortRelations: aDictionary [
+LbSortGraph class >> subsortRelations: aDictionary [
 	^self basicNew
 			initializeWithSubsortRelations: aDictionary;
 			yourself
@@ -42,7 +42,7 @@ LeibnizSortGraph class >> subsortRelations: aDictionary [
 ]
 
 { #category : #viewing }
-LeibnizSortGraph >> addGraphForSubset: aSet toBuilder: aBuilder [
+LbSortGraph >> addGraphForSubset: aSet toBuilder: aBuilder [
 	aBuilder shape label
 		fontName: 'Arial Unicode MS';
 		color: (Color black).
@@ -55,7 +55,7 @@ LeibnizSortGraph >> addGraphForSubset: aSet toBuilder: aBuilder [
 ]
 
 { #category : #viewing }
-LeibnizSortGraph >> addGraphForSubset: aSet toView: aView [
+LbSortGraph >> addGraphForSubset: aSet toView: aView [
 	| edges |
 	aView nodes
 		shape:
@@ -86,54 +86,54 @@ LeibnizSortGraph >> addGraphForSubset: aSet toView: aView [
 ]
 
 { #category : #enumerating }
-LeibnizSortGraph >> allSubsortsOf: aSort [
+LbSortGraph >> allSubsortsOf: aSort [
 	^ subsortsOf at: aSort
 
 ]
 
 { #category : #converting }
-LeibnizSortGraph >> asSet [
+LbSortGraph >> asSet [
    ^ directSubsortsOf keys asSet 
 
 ]
 
 { #category : #converting }
-LeibnizSortGraph >> asSortGraphBuilder [
-	^ LeibnizSortGraphBuilder new addSortGraph: self.
+LbSortGraph >> asSortGraphBuilder [
+	^ LbSortGraphBuilder new addSortGraph: self.
 
 ]
 
 { #category : #inspecting }
-LeibnizSortGraph >> childrenInInspector [
+LbSortGraph >> childrenInInspector [
 	^kinds asArray
 
 ]
 
 { #category : #copying }
-LeibnizSortGraph >> copy [
+LbSortGraph >> copy [
 	^self
 
 ]
 
 { #category : #copying }
-LeibnizSortGraph >> deepCopy [
+LbSortGraph >> deepCopy [
 	^self
 
 ]
 
 { #category : #accessing }
-LeibnizSortGraph >> directSubsortsOf: aSymbol [
+LbSortGraph >> directSubsortsOf: aSymbol [
 	^ directSubsortsOf at: aSymbol.
 ]
 
 { #category : #private }
-LeibnizSortGraph >> equalityTestWith: otherSubsorts [ 
+LbSortGraph >> equalityTestWith: otherSubsorts [ 
 	^ directSubsortsOf = otherSubsorts
 
 ]
 
 { #category : #inspecting }
-LeibnizSortGraph >> gtInspectorNetworkViewIn: composite [
+LbSortGraph >> gtInspectorNetworkViewIn: composite [
 	<gtInspectorPresentationOrder: -10>
 	composite roassal2
 		title: 'Network View';
@@ -142,7 +142,7 @@ LeibnizSortGraph >> gtInspectorNetworkViewIn: composite [
 ]
 
 { #category : #inspecting }
-LeibnizSortGraph >> gtInspectorTreeViewIn: composite [
+LbSortGraph >> gtInspectorTreeViewIn: composite [
 	<gtInspectorPresentationOrder: -11>
 	composite roassal2
 		title: 'Tree View';
@@ -151,7 +151,7 @@ LeibnizSortGraph >> gtInspectorTreeViewIn: composite [
 ]
 
 { #category : #inspecting }
-LeibnizSortGraph >> gtNetworkViewFor: aView [
+LbSortGraph >> gtNetworkViewFor: aView [
 	<gtView>
 	^ aView mondrian
 		title: 'Network view';
@@ -160,7 +160,7 @@ LeibnizSortGraph >> gtNetworkViewFor: aView [
 ]
 
 { #category : #inspecting }
-LeibnizSortGraph >> gtTreeViewFor: aView [
+LbSortGraph >> gtTreeViewFor: aView [
 	<gtView>
 	^ aView mondrian
 		title: 'Tree view';
@@ -169,13 +169,13 @@ LeibnizSortGraph >> gtTreeViewFor: aView [
 ]
 
 { #category : #testing }
-LeibnizSortGraph >> includes: aSort [
+LbSortGraph >> includes: aSort [
 	^ directSubsortsOf keys includes: aSort
 
 ]
 
 { #category : #initializing }
-LeibnizSortGraph >> initializeWithSubsortRelations: subsortRelations [
+LbSortGraph >> initializeWithSubsortRelations: subsortRelations [
 	directSubsortsOf := subsortRelations.
 	self setSubsortsOf.
 	self setMaximalSorts.
@@ -185,7 +185,7 @@ LeibnizSortGraph >> initializeWithSubsortRelations: subsortRelations [
 ]
 
 { #category : #comparing }
-LeibnizSortGraph >> instVarsExcludedFromEquality [
+LbSortGraph >> instVarsExcludedFromEquality [
 	"The only instance variable used in comparison is directSubsortsOf,
 	 since all others are derived from it"
 	^#(#kinds #maximalSorts #subsortsOf #kindsOf)
@@ -193,13 +193,13 @@ LeibnizSortGraph >> instVarsExcludedFromEquality [
 ]
 
 { #category : #testing }
-LeibnizSortGraph >> is: aSort directSubsortOf: anotherSort [
+LbSortGraph >> is: aSort directSubsortOf: anotherSort [
 	^ (directSubsortsOf at: anotherSort) includes: aSort
 
 ]
 
 { #category : #testing }
-LeibnizSortGraph >> is: aSort subsortOf: anotherSort [
+LbSortGraph >> is: aSort subsortOf: anotherSort [
 	| ss |
 	^ (aSort = anotherSort)
 		or: [ ss := directSubsortsOf at: anotherSort.
@@ -209,23 +209,23 @@ LeibnizSortGraph >> is: aSort subsortOf: anotherSort [
 ]
 
 { #category : #accessing }
-LeibnizSortGraph >> kindOf: aSymbol [
+LbSortGraph >> kindOf: aSymbol [
 	^ kindsOf at: aSymbol
 ]
 
 { #category : #accessing }
-LeibnizSortGraph >> kinds [
+LbSortGraph >> kinds [
 	^ kinds
 
 ]
 
 { #category : #accessing }
-LeibnizSortGraph >> maximalSorts [
+LbSortGraph >> maximalSorts [
 	^  maximalSorts
 ]
 
 { #category : #viewing }
-LeibnizSortGraph >> networkViewForSubset: aSet [
+LbSortGraph >> networkViewForSubset: aSet [
 	| b |
 	b := RTMondrian new.
 	self addGraphForSubset: aSet toBuilder: b.
@@ -236,13 +236,13 @@ LeibnizSortGraph >> networkViewForSubset: aSet [
 ]
 
 { #category : #viewing }
-LeibnizSortGraph >> networkViewForSubset: aSet view: aView [
+LbSortGraph >> networkViewForSubset: aSet view: aView [
 	self addGraphForSubset: aSet toView: aView. 
 	aView layout custom: (GtGradKamadaKawaiLayout new).
 ]
 
 { #category : #printing }
-LeibnizSortGraph >> printOn: aStream [
+LbSortGraph >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	aStream nextPutAll: (', ' join: (self maximalSorts collect: [ : sort | sort asString ])).
@@ -251,7 +251,7 @@ LeibnizSortGraph >> printOn: aStream [
 ]
 
 { #category : #initializing }
-LeibnizSortGraph >> setKinds [
+LbSortGraph >> setKinds [
 	| kindCandidates kind hasCommonSorts |
 	kindCandidates := maximalSorts asOrderedCollection collect: [ :sort | subsortsOf at: sort ].
 	"A kind can have multiple maximal sorts. In that case, kindCandidates contains multiple sets
@@ -263,7 +263,7 @@ LeibnizSortGraph >> setKinds [
 									[ :c | (kind intersection: c) isNotEmpty ].
 		#(true false) do: [ :b | hasCommonSorts at: b ifAbsentPut: OrderedCollection new. ].
 		kind := ((hasCommonSorts at: true) inject: kind into: [ :k :c | k union: c ]).
-		kinds add: (LeibnizKind sortGraph: self
+		kinds add: (LbKind sortGraph: self
 		 								sorts: kind
 										maximalSorts: (maximalSorts select: [ :s | kind includes: s ])).
 		kindCandidates := hasCommonSorts at: false. ].
@@ -274,21 +274,21 @@ LeibnizSortGraph >> setKinds [
 ]
 
 { #category : #initializing }
-LeibnizSortGraph >> setMaximalSorts [
+LbSortGraph >> setMaximalSorts [
 	maximalSorts := (directSubsortsOf values)
 							inject: directSubsortsOf keys asSet
 							into: [ :ms :ss | ms difference: ss ].
 ]
 
 { #category : #initializing }
-LeibnizSortGraph >> setSubsortsOf [
+LbSortGraph >> setSubsortsOf [
 	subsortsOf := Dictionary new.
 	directSubsortsOf keysDo: [ :sort | self setSubsortsOfAt: sort ].
 	
 ]
 
 { #category : #initializing }
-LeibnizSortGraph >> setSubsortsOfAt: aSort [
+LbSortGraph >> setSubsortsOfAt: aSort [
 	| ss |
 	(subsortsOf includes: aSort) ifTrue: [ ^ self ].
 	ss := (directSubsortsOf at: aSort) copy.
@@ -300,24 +300,24 @@ LeibnizSortGraph >> setSubsortsOfAt: aSort [
 ]
 
 { #category : #accessing }
-LeibnizSortGraph >> size [
+LbSortGraph >> size [
 	^ self asSet size.
 
 ]
 
 { #category : #accessing }
-LeibnizSortGraph >> subsortsOf: aSymbol [
+LbSortGraph >> subsortsOf: aSymbol [
 	^ subsortsOf at: aSymbol.
 ]
 
 { #category : #inspecting }
-LeibnizSortGraph >> title [
+LbSortGraph >> title [
 	^'sort graph'
 
 ]
 
 { #category : #viewing }
-LeibnizSortGraph >> treeViewForSubset: aSet [
+LbSortGraph >> treeViewForSubset: aSet [
 	| b |
 	b := RTMondrian new.
 	self addGraphForSubset: aSet toBuilder: b.
@@ -331,13 +331,13 @@ LeibnizSortGraph >> treeViewForSubset: aSet [
 ]
 
 { #category : #viewing }
-LeibnizSortGraph >> treeViewForSubset: aSet view: aView [
+LbSortGraph >> treeViewForSubset: aSet view: aView [
 	self addGraphForSubset: aSet toView: aView. 
 	aView layout custom: (GtGradVerticalDominanceTreeLayout new).
 ]
 
 { #category : #enumerating }
-LeibnizSortGraph >> union: aSortGraph [ 
+LbSortGraph >> union: aSortGraph [ 
 	| b |
 	b := self asSortGraphBuilder.
 	b addSortGraph: aSortGraph.
@@ -346,7 +346,7 @@ LeibnizSortGraph >> union: aSortGraph [
 ]
 
 { #category : #enumerating }
-LeibnizSortGraph >> withSubsortRelationsDo: aBlockClosure [ 
+LbSortGraph >> withSubsortRelationsDo: aBlockClosure [ 
 	directSubsortsOf associationsDo:
 		[ :assoc | assoc value do:
 					[ :sort | aBlockClosure value: sort value: (assoc key) ]]

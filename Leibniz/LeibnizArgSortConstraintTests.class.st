@@ -25,7 +25,7 @@ LeibnizArgSortConstraintTests >> setUp [
 	|  builder |
 	super setUp.
 
-   builder := LeibnizSortGraphBuilder new.
+   builder := LbSortGraphBuilder new.
 	builder add: #A;
         	  add: #B;
          	  add: #C;

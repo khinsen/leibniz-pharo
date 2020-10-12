@@ -1,5 +1,5 @@
 "
-!! Leibniz overview
+! Leibniz overview
 
 Note: this class contains no code, it's just this page of documentation!
 
@@ -10,12 +10,12 @@ The theoretical foundations for Leibniz are *term rewriting systems>https://en.w
 The central object in Leibniz is the  ${class:name=LeibnizContext}$,  which describes a partial or complete scientific model. Like many of its constituent objects, a  ${class:name=LeibnizContext}$ is a read-only object (see ${method:Object>>#beRecursivelyReadOnlyObject}$). Its construction via a sequence of declarations is performed using a  ${class:name=LeibnizContextBuilder}$.
 
 Scientific objects and their relations are described in Leibniz by several layers of declarations:
-# A sort defines a specific kind of object or quantity, or equivalently a set of possible values. Examples of sorts are integers, positions, masses, molecules, etc. Relations between sorts are described by a ${class:name=LeibnizSortGraph}$.
+# A sort defines a specific kind of object or quantity, or equivalently a set of possible values. Examples of sorts are integers, positions, masses, molecules, etc. Relations between sorts are described by a ${class:name=LbSortGraph}$.
 # A ${class:name=LeibnizOperator}$ defines concrete values with the sort they belong to. These values can be constants or functions of other values. The collection of all operators used in a context is a ${class:name=LeibnizSignature}$.
 # A ${class:name=LeibnizTerm}$ is a specific value, made up from a combination of operators and built-in values such as numbers.
 # A ${class:name=LeibnizRule}$ defines how terms are transformed. Rules have two roles in Leibniz: they serve to express algorithms in scientific models, but also to perform simple computations.
 # ''Assets'' are used to express scientific objects, quantities, and relations between them. They are built up from terms. A ${class:name=LeibnizTerm}$ can by itself be an asset, as can a ${class:name=LeibnizRule}$. A ${class:name=LeibnizEquation}$ is the third type of asset.
-# A ${class:name=LeibnizContext}$ is a package consisting of a ${class:name=LeibnizSortGraph}$, a ${class:name=LeibnizSignature}$, and optionally any number of ${class:name=LeibnizRule}$ and assets.
+# A ${class:name=LeibnizContext}$ is a package consisting of a ${class:name=LbSortGraph}$, a ${class:name=LeibnizSignature}$, and optionally any number of ${class:name=LeibnizRule}$ and assets.
 # A ${class:name=LeibnizDocument}$ combines several related contexts. It is the unit of Leibniz definitions that can be published and references. A special document, ${class:name=LeibnizBuiltins}$, contains contexts that are built into Leibniz because they cannot be defined using standard Leibniz elements, in particular numbers.
 
 For examples, see

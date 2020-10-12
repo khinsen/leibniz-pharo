@@ -24,7 +24,7 @@ LeibnizParserTest >> setUp [
 	| b sg |
 	super setUp.
 
-	b := LeibnizSortGraphBuilder new.
+	b := LbSortGraphBuilder new.
 	b add: #A;
 	  add: #B;
 	  make: #B subsortOf: #A.

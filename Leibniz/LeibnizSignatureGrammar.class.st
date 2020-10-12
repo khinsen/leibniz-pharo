@@ -1,6 +1,6 @@
 Class {
 	#name : #LeibnizSignatureGrammar,
-	#superclass : #LeibnizSortGrammar,
+	#superclass : #LbSortGrammar,
 	#instVars : [
 		'colon',
 		'openParenthesis',
