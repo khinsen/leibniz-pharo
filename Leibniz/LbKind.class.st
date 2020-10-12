@@ -41,25 +41,6 @@ LbKind >> equalityTestWith: otherSorts [
 
 ]
 
-{ #category : #inspecting }
-LbKind >> gtInspectorNetworkViewIn: composite [
-	<gtInspectorPresentationOrder: -10>
-	composite roassal2
-		title: 'Network View';
-		initializeView: (sortGraph networkViewForSubset: sorts)
-
-
-]
-
-{ #category : #inspecting }
-LbKind >> gtInspectorTreeViewIn: composite [
-	<gtInspectorPresentationOrder: -11>
-	composite roassal2
-		title: 'Tree View';
-		initializeView: (sortGraph treeViewForSubset: sorts)
-
-]
-
 { #category : #testing }
 LbKind >> includes: aSort [
 	^ sorts includes: aSort

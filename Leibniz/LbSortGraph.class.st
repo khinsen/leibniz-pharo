@@ -54,37 +54,6 @@ LbSortGraph >> addGraphForSubset: aSet toBuilder: aBuilder [
 
 ]
 
-{ #category : #viewing }
-LbSortGraph >> addGraphForSubset: aSet toView: aView [
-	| edges |
-	aView nodes
-		shape:
-			[ :x |
-				BlTextElement new
-					text: x asString asRopedText;
-					padding:
-						(BlInsets
-							top: 5
-							right: 5
-							bottom: 5
-							left: 5) ];
-		with: (aSet collect: [:s | s asString ]).
-	edges := OrderedCollection new.
-	self withSubsortRelationsDo:
-		[ :s1 :s2 | ((aSet includes: s1) and: [aSet includes: s2])
-						ifTrue: [ edges add: s1 asString -> s2 asString ] ].
-	aView edges
-		shape: [ :x | 
-			BlLineElement new
-				toHead: (BlArrowheadSimpleArrow new
-							border: (BlBorder paint: Color gray width: 1));
-				border: (BlBorder paint: Color gray width: 1) ];
-		fromCenterBottom;
-		toCenterTop;
-		connect: edges from: #key to: #value.
-
-]
-
 { #category : #enumerating }
 LbSortGraph >> allSubsortsOf: aSort [
 	^ subsortsOf at: aSort
@@ -132,22 +101,22 @@ LbSortGraph >> equalityTestWith: otherSubsorts [
 
 ]
 
-{ #category : #inspecting }
-LbSortGraph >> gtInspectorNetworkViewIn: composite [
-	<gtInspectorPresentationOrder: -10>
-	composite roassal2
-		title: 'Network View';
-		initializeView: [ self networkViewForSubset: self asSet ].
-
+{ #category : #accessing }
+LbSortGraph >> graphEdgesForSubset: aSet [
+	| edges |
+	edges := OrderedCollection new.
+	self withSubsortRelationsDo:
+		[ :s1 :s2 | ((aSet includes: s1) and: [aSet includes: s2])
+						ifTrue: [ edges add: s1 asString -> s2 asString ] ].
+	^ edges
 ]
 
-{ #category : #inspecting }
-LbSortGraph >> gtInspectorTreeViewIn: composite [
-	<gtInspectorPresentationOrder: -11>
-	composite roassal2
-		title: 'Tree View';
-		initializeView: [ self treeViewForSubset: self asSet ].
-
+{ #category : #viewing }
+LbSortGraph >> grayArrow [
+	^ BlLineElement new
+		toHead: (BlArrowheadSimpleArrow new
+					border: (BlBorder paint: Color gray width: 1));
+		border: (BlBorder paint: Color gray width: 1)
 ]
 
 { #category : #inspecting }
@@ -156,7 +125,7 @@ LbSortGraph >> gtNetworkViewFor: aView [
 	^ aView mondrian
 		title: 'Network view';
 		priority: 0;
-		painting: [ :view | self networkViewForSubset: self asSet view: view ]
+		painting: [ :view | self networkViewOfSubset: self asSet for: view ]
 ]
 
 { #category : #inspecting }
@@ -165,7 +134,7 @@ LbSortGraph >> gtTreeViewFor: aView [
 	^ aView mondrian
 		title: 'Tree view';
 		priority: 0;
-		painting: [ :view | self treeViewForSubset: self asSet view: view ]
+		painting: [ :view | self treeViewOfSubset: self asSet for: view ]
 ]
 
 { #category : #testing }
@@ -225,20 +194,27 @@ LbSortGraph >> maximalSorts [
 ]
 
 { #category : #viewing }
-LbSortGraph >> networkViewForSubset: aSet [
-	| b |
-	b := RTMondrian new.
-	self addGraphForSubset: aSet toBuilder: b.
-	b layout forceWithCharge: -2000.
-	b build.
-	^ b view
-
+LbSortGraph >> networkViewOfSubset: aSet for: aView [
+	| edges |
+	aView nodes
+		shape: [ :x | self nodeForSort: x ];
+		with: aSet.
+	aView edges
+		shape: [ :x | self grayArrow ];
+		connect: ((self graphEdgesForSubset: aSet)) from: #key to: #value.
+	aView layout custom: (GtGradKamadaKawaiLayout new).
 ]
 
 { #category : #viewing }
-LbSortGraph >> networkViewForSubset: aSet view: aView [
-	self addGraphForSubset: aSet toView: aView. 
-	aView layout custom: (GtGradKamadaKawaiLayout new).
+LbSortGraph >> nodeForSort: aSort [
+	^ BlTextElement new
+		text: aSort asString asRopedText;
+		padding:
+			(BlInsets
+				top: 5
+				right: 5
+				bottom: 5
+				left: 5)
 ]
 
 { #category : #printing }
@@ -317,23 +293,17 @@ LbSortGraph >> title [
 ]
 
 { #category : #viewing }
-LbSortGraph >> treeViewForSubset: aSet [
-	| b |
-	b := RTMondrian new.
-	self addGraphForSubset: aSet toBuilder: b.
-	b layout dominanceTree
-		verticallyReverse;
-		horizontalGap: 20;
-		verticalGap: 50.
-	b build.
-	^ b view
-
-]
-
-{ #category : #viewing }
-LbSortGraph >> treeViewForSubset: aSet view: aView [
-	self addGraphForSubset: aSet toView: aView. 
-	aView layout custom: (GtGradVerticalDominanceTreeLayout new).
+LbSortGraph >> treeViewOfSubset: aSet for: aView [
+	| edges |
+	aView nodes
+		shape: [ :x | self nodeForSort: x ];
+		with: aSet.
+	aView edges
+		shape: [ :x | self grayArrow ];
+		fromCenterTop;
+		toCenterBottom;
+		connect: ((self graphEdgesForSubset: aSet)) from: #key to: #value.
+	aView layout custom: (GtGradVerticalDominanceTreeLayout new reverse: true).
 ]
 
 { #category : #enumerating }
