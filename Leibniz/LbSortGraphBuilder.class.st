@@ -84,6 +84,6 @@ LbSortGraphBuilder >> parseAndAdd: aString [
 
 { #category : #accessing }
 LbSortGraphBuilder >> sortGraph [
-	^ LbSortGraph subsortRelations: directSubsortsOf deepCopy.
+	^ LbSortGraph fromSubsortRelations: directSubsortsOf deepCopy.
 
 ]

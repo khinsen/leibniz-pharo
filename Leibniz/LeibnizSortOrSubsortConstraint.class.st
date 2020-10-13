@@ -31,7 +31,7 @@ LeibnizSortOrSubsortConstraint >> asArgSort [
 
 { #category : #enumerating }
 LeibnizSortOrSubsortConstraint >> conformingSorts [
-	^ sortGraph allSubsortsOf: sort
+	^ sortGraph subsortsOf: sort
 
 ]
 

@@ -117,23 +117,16 @@ LeibnizSortGraphTest >> testSortParser [
 
 { #category : #testing }
 LeibnizSortGraphTest >> testSubsortQueries [
-	self assert: (sortGraph1 is: #A directSubsortOf: #B).
 	self assert: (sortGraph1 is: #A subsortOf: #B).
-	self deny:   (sortGraph1 is: #B directSubsortOf: #A).
 	self deny:   (sortGraph1 is: #B subsortOf: #A).
 	self assert: (sortGraph1 is: #B subsortOf: #B).
-	self deny:   (sortGraph1 is: #B directSubsortOf: #B).
 	self assert: (sortGraph1 directSubsortsOf: #A) equals: Set new.
 	self assert: (sortGraph1 directSubsortsOf: #B) equals: (Set with: #A).
 	self assert: (sortGraph1 subsortsOf: #B) equals: #(#A #B) asSet.
 
-	self assert: (sortGraph1 is: #B directSubsortOf: #C).
-	self deny:   (sortGraph1 is: #A directSubsortOf: #C).
 	self assert: (sortGraph1 directSubsortsOf: #C) equals: (Set with: #B).
 	self assert: (sortGraph1 subsortsOf: #C) equals: #(#A #B #C) asSet.
 
-	self assert: (sortGraph1 is: #A directSubsortOf: #D).
 	self assert: (sortGraph1 directSubsortsOf: #D) equals: (Set with: #A).
 	self assert: (sortGraph1 subsortsOf: #D) equals: #(#A #D) asSet.
-
 ]

@@ -5,11 +5,10 @@ Kinds are the connected components in a ${class:name=LbSortGraph}$. They are not
 "
 Class {
 	#name : #LbKind,
-	#superclass : #Object,
+	#superclass : #LbSortSubGraph,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
-		'sortGraph',
 		'sorts',
 		'maximalSorts'
 	],
@@ -27,18 +26,11 @@ LbKind class >> sortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOfMaxim
 { #category : #converting }
 LbKind >> asSet [
    ^ sorts
-
-]
-
-{ #category : #inspecting }
-LbKind >> childrenInInspector [
-	^Array new
 ]
 
 { #category : #private }
 LbKind >> equalityTestWith: otherSorts [ 
 	^ sorts = otherSorts
-
 ]
 
 { #category : #testing }
@@ -80,17 +72,6 @@ LbKind >> printOn: aStream [
 	aStream nextPut: $(.
 	aStream nextPutAll: (', ' join: (self maximalSorts collect: [ : sort | sort asString ])).
 	aStream nextPut: $).
-
-]
-
-{ #category : #accessing }
-LbKind >> size [
-	^sorts size
-]
-
-{ #category : #accessing }
-LbKind >> sortGraph [
-	^sortGraph
 
 ]
 

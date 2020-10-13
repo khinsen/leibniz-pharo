@@ -45,11 +45,6 @@ LeibnizSignature class >> sortGraph: aSortGraph builtins: aSet operators: anOper
 
 ]
 
-{ #category : #inspecting }
-LeibnizSignature >> childrenInInspector [
-	^Array new.
-]
-
 { #category : #copying }
 LeibnizSignature >> copy [
 	^self

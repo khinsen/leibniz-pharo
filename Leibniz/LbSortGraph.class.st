@@ -34,29 +34,10 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbSortGraph class >> subsortRelations: aDictionary [
+LbSortGraph class >> fromSubsortRelations: aDictionary [
 	^self basicNew
 			initializeWithSubsortRelations: aDictionary;
 			yourself
-
-]
-
-{ #category : #viewing }
-LbSortGraph >> addGraphForSubset: aSet toBuilder: aBuilder [
-	aBuilder shape label
-		fontName: 'Arial Unicode MS';
-		color: (Color black).
-	aBuilder nodes: (aSet collect: [:s | s asString ]).
-	aBuilder shape arrowedLine withShorterDistanceAttachPoint.
-	self withSubsortRelationsDo:
-		[ :s1 :s2 | ((aSet includes: s1) and: [aSet includes: s2])
-						ifTrue: [aBuilder edges connectFrom: (s1 asString) to: (s2 asString)] ].
-
-]
-
-{ #category : #enumerating }
-LbSortGraph >> allSubsortsOf: aSort [
-	^ subsortsOf at: aSort
 
 ]
 
@@ -69,12 +50,6 @@ LbSortGraph >> asSet [
 { #category : #converting }
 LbSortGraph >> asSortGraphBuilder [
 	^ LbSortGraphBuilder new addSortGraph: self.
-
-]
-
-{ #category : #inspecting }
-LbSortGraph >> childrenInInspector [
-	^kinds asArray
 
 ]
 
@@ -120,35 +95,82 @@ LbSortGraph >> grayArrow [
 ]
 
 { #category : #inspecting }
-LbSortGraph >> gtNetworkViewFor: aView [
-	<gtView>
-	^ aView mondrian
-		title: 'Network view';
-		priority: 0;
-		painting: [ :view | self networkViewOfSubset: self asSet for: view ]
-]
-
-{ #category : #inspecting }
 LbSortGraph >> gtTreeViewFor: aView [
 	<gtView>
 	^ aView mondrian
 		title: 'Tree view';
 		priority: 0;
-		painting: [ :view | self treeViewOfSubset: self asSet for: view ]
+		painting: [ :view | 
+			| edges |
+			view nodes
+				shape: [ :x | self nodeForSort: x ];
+				with: self asSet.
+			view edges
+				shape: [ :x | self grayArrow ];
+				fromCenterTop;
+				toCenterBottom;
+				connect: (self graphEdgesForSubset: self asSet)
+					from: #key
+					to: #value.
+			view layout
+				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
-{ #category : #testing }
-LbSortGraph >> includes: aSort [
-	^ directSubsortsOf keys includes: aSort
+{ #category : #initializing }
+LbSortGraph >> initializeKinds [
+	| kindCandidates kind hasCommonSorts |
+	kindCandidates := maximalSorts asOrderedCollection collect: [ :sort | subsortsOf at: sort ].
+	"A kind can have multiple maximal sorts. In that case, kindCandidates contains multiple sets
+	 that have a non-empty intersection, and which must be merged to obtain the kind."
+	kinds := Set new.
+	[ kindCandidates isEmpty ] whileFalse: [ 
+		kind := kindCandidates first.
+		hasCommonSorts := kindCandidates allButFirst groupedBy:
+									[ :c | (kind intersection: c) isNotEmpty ].
+		#(true false) do: [ :b | hasCommonSorts at: b ifAbsentPut: OrderedCollection new. ].
+		kind := ((hasCommonSorts at: true) inject: kind into: [ :k :c | k union: c ]).
+		kinds add: (LbKind sortGraph: self
+		 								sorts: kind
+										maximalSorts: (maximalSorts select: [ :s | kind includes: s ])).
+		kindCandidates := hasCommonSorts at: false. ].
 
+	kindsOf := Dictionary new.
+	kinds do: [ :k | k asSet do: [ :s | kindsOf at: s put: k ] ].
+
+]
+
+{ #category : #initializing }
+LbSortGraph >> initializeMaximalSorts [
+	maximalSorts := (directSubsortsOf values)
+							inject: directSubsortsOf keys asSet
+							into: [ :ms :ss | ms difference: ss ].
+]
+
+{ #category : #initializing }
+LbSortGraph >> initializeSubsortsOf [
+	subsortsOf := Dictionary new.
+	directSubsortsOf keysDo: [ :sort | self initializeSubsortsOfAt: sort ].
+	
+]
+
+{ #category : #initializing }
+LbSortGraph >> initializeSubsortsOfAt: aSort [
+	| ss |
+	(subsortsOf includes: aSort) ifTrue: [ ^ self ].
+	ss := (directSubsortsOf at: aSort) copy.
+	ss add: aSort.
+	(directSubsortsOf at: aSort) do:
+		[ :sort | self initializeSubsortsOfAt: sort.
+					 ss := ss union: (subsortsOf at: sort) ].
+	subsortsOf at: aSort put: ss.
 ]
 
 { #category : #initializing }
 LbSortGraph >> initializeWithSubsortRelations: subsortRelations [
 	directSubsortsOf := subsortRelations.
-	self setSubsortsOf.
-	self setMaximalSorts.
-	self setKinds.
+	self initializeSubsortsOf.
+	self initializeMaximalSorts.
+	self initializeKinds.
 	self beRecursivelyReadOnlyObject.
 
 ]
@@ -161,13 +183,7 @@ LbSortGraph >> instVarsExcludedFromEquality [
 
 ]
 
-{ #category : #testing }
-LbSortGraph >> is: aSort directSubsortOf: anotherSort [
-	^ (directSubsortsOf at: anotherSort) includes: aSort
-
-]
-
-{ #category : #testing }
+{ #category : #private }
 LbSortGraph >> is: aSort subsortOf: anotherSort [
 	| ss |
 	^ (aSort = anotherSort)
@@ -177,7 +193,7 @@ LbSortGraph >> is: aSort subsortOf: anotherSort [
 
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 LbSortGraph >> kindOf: aSymbol [
 	^ kindsOf at: aSymbol
 ]
@@ -191,18 +207,6 @@ LbSortGraph >> kinds [
 { #category : #accessing }
 LbSortGraph >> maximalSorts [
 	^  maximalSorts
-]
-
-{ #category : #viewing }
-LbSortGraph >> networkViewOfSubset: aSet for: aView [
-	| edges |
-	aView nodes
-		shape: [ :x | self nodeForSort: x ];
-		with: aSet.
-	aView edges
-		shape: [ :x | self grayArrow ];
-		connect: ((self graphEdgesForSubset: aSet)) from: #key to: #value.
-	aView layout custom: (GtGradKamadaKawaiLayout new).
 ]
 
 { #category : #viewing }
@@ -226,59 +230,16 @@ LbSortGraph >> printOn: aStream [
 
 ]
 
-{ #category : #initializing }
-LbSortGraph >> setKinds [
-	| kindCandidates kind hasCommonSorts |
-	kindCandidates := maximalSorts asOrderedCollection collect: [ :sort | subsortsOf at: sort ].
-	"A kind can have multiple maximal sorts. In that case, kindCandidates contains multiple sets
-	 that have a non-empty intersection, and which must be merged to obtain the kind."
-	kinds := Set new.
-	[ kindCandidates isEmpty ] whileFalse: [ 
-		kind := kindCandidates first.
-		hasCommonSorts := kindCandidates allButFirst groupedBy:
-									[ :c | (kind intersection: c) isNotEmpty ].
-		#(true false) do: [ :b | hasCommonSorts at: b ifAbsentPut: OrderedCollection new. ].
-		kind := ((hasCommonSorts at: true) inject: kind into: [ :k :c | k union: c ]).
-		kinds add: (LbKind sortGraph: self
-		 								sorts: kind
-										maximalSorts: (maximalSorts select: [ :s | kind includes: s ])).
-		kindCandidates := hasCommonSorts at: false. ].
-
-	kindsOf := Dictionary new.
-	kinds do: [ :k | k asSet do: [ :s | kindsOf at: s put: k ] ].
-
-]
-
-{ #category : #initializing }
-LbSortGraph >> setMaximalSorts [
-	maximalSorts := (directSubsortsOf values)
-							inject: directSubsortsOf keys asSet
-							into: [ :ms :ss | ms difference: ss ].
-]
-
-{ #category : #initializing }
-LbSortGraph >> setSubsortsOf [
-	subsortsOf := Dictionary new.
-	directSubsortsOf keysDo: [ :sort | self setSubsortsOfAt: sort ].
-	
-]
-
-{ #category : #initializing }
-LbSortGraph >> setSubsortsOfAt: aSort [
-	| ss |
-	(subsortsOf includes: aSort) ifTrue: [ ^ self ].
-	ss := (directSubsortsOf at: aSort) copy.
-	ss add: aSort.
-	(directSubsortsOf at: aSort) do:
-		[ :sort | self setSubsortsOfAt: sort.
-					 ss := ss union: (subsortsOf at: sort) ].
-	subsortsOf at: aSort put: ss.
-]
-
 { #category : #accessing }
 LbSortGraph >> size [
 	^ self asSet size.
 
+]
+
+{ #category : #accessing }
+LbSortGraph >> sortNamed: aSymbol [
+	self assert: (directSubsortsOf includesKey: aSymbol) description: 'No sort named ', aSymbol.
+	^ LbSort named: aSymbol in: self
 ]
 
 { #category : #accessing }
@@ -290,20 +251,6 @@ LbSortGraph >> subsortsOf: aSymbol [
 LbSortGraph >> title [
 	^'sort graph'
 
-]
-
-{ #category : #viewing }
-LbSortGraph >> treeViewOfSubset: aSet for: aView [
-	| edges |
-	aView nodes
-		shape: [ :x | self nodeForSort: x ];
-		with: aSet.
-	aView edges
-		shape: [ :x | self grayArrow ];
-		fromCenterTop;
-		toCenterBottom;
-		connect: ((self graphEdgesForSubset: aSet)) from: #key to: #value.
-	aView layout custom: (GtGradVerticalDominanceTreeLayout new reverse: true).
 ]
 
 { #category : #enumerating }

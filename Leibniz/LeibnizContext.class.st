@@ -21,18 +21,6 @@ LeibnizContext class >> name: aString sortGraph: aSortGraph signature: aSignatur
 
 ]
 
-{ #category : #inspecting }
-LeibnizContext >> gtInspectorComponentsIn: composite [
-	"Show a list of all components of a context"
-
-	<gtInspectorPresentationOrder: 0>
-	composite fastTree 
-		title: 'Components';
-		display: { sortGraph . signature };
-		children: [ :each | each childrenInInspector ] ;
-		format: #title
-]
-
 { #category : #initializing }
 LeibnizContext >> initializeWithName: aString sortGraph: aSortGraph signature: aSignature rewriteSystem: aRewriteSystem [
 	name := aString.
