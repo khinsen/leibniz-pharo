@@ -23,14 +23,12 @@ LbSortGraphBuilder >> add: aSymbol [
      ifFalse: [ sameKindSortsOf at: aSymbol put: (Set with: aSymbol).
                 directSubsortsOf at: aSymbol put: Set new. ].
    ^ aSymbol
-
 ]
 
 { #category : #adding }
 LbSortGraphBuilder >> addSortGraph: aSortGraph [ 
-	aSortGraph asSet do: [ :each | self add: each ].
-	aSortGraph withSubsortRelationsDo: [ :s1 :s2 | self make: s1 subsortOf: s2 ].
-
+	aSortGraph asSet do: [ :each | self add: each name ].
+	aSortGraph withSubsortRelationsDo: [ :s1 :s2 | self make: s1 name subsortOf: s2 name ].
 ]
 
 { #category : #testing }
@@ -85,5 +83,4 @@ LbSortGraphBuilder >> parseAndAdd: aString [
 { #category : #accessing }
 LbSortGraphBuilder >> sortGraph [
 	^ LbSortGraph fromSubsortRelations: directSubsortsOf deepCopy.
-
 ]

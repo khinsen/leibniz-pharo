@@ -6,7 +6,7 @@ Class {
 	#category : #'Leibniz-1-SortGraphs'
 }
 
-{ #category : #accessing }
+{ #category : #example }
 LbSortGraphExamples >> emptySortGraph [
 	<gtExample>
 	^ LbSortGraphBuilder new sortGraph
@@ -19,11 +19,20 @@ LbSortGraphExamples >> kindOfA [
 ]
 
 { #category : #example }
-LbSortGraphExamples >> maximalSorts [
+LbSortGraphExamples >> maximalSortsABCDVW [
 	<gtExample>
 	| maximalSorts |
 	maximalSorts := self sortGraphABCDVW maximalSorts.
-	self assert: maximalSorts equals: #(#C #D #W) asSet.
+	self assert: (maximalSorts collect: [ :each | each name ]) equals: #(#C #D #W) asSet.
+	^ maximalSorts
+]
+
+{ #category : #example }
+LbSortGraphExamples >> maximalSortsKindOfA [
+	<gtExample>
+	| maximalSorts |
+	maximalSorts := self kindOfA maximalSorts.
+	self assert: (maximalSorts collect: [ :each | each name ]) equals: #(#C #D) asSet.
 	^ maximalSorts
 ]
 
@@ -39,7 +48,8 @@ LbSortGraphExamples >> sortGraphABCD [
 	| sortGraph |
 	sortGraph := self sortGraphBuilderABCD sortGraph.
     self assert: sortGraph equals: (self sortGraphABCDExplicit).
-    self assert: sortGraph asSet equals: #(#A #B #C #D) asSet.
+    self assert: sortGraph asSet
+    	 equals: (#(#A #B #C #D) asSet collect: [ :each | sortGraph sortNamed: each ]).
     self shouldnt: [ sortGraph sortNamed: #A ] raise: Error.
     self shouldnt: [ sortGraph sortNamed: #B ] raise: Error.
     self shouldnt: [ sortGraph sortNamed: #C ] raise: Error.
@@ -100,7 +110,7 @@ LbSortGraphExamples >> sortGraphAXYExplicit [
 		sortGraph
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LbSortGraphExamples >> sortGraphBuilderABCD [
 	<gtExample>
 	| builder |
@@ -112,7 +122,7 @@ LbSortGraphExamples >> sortGraphBuilderABCD [
 	^ builder
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LbSortGraphExamples >> sortGraphUnion [
 	<gtExample>
 	| sg1 sg2 union |

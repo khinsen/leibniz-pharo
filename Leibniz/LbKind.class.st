@@ -25,7 +25,7 @@ LbKind class >> sortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOfMaxim
 
 { #category : #converting }
 LbKind >> asSet [
-   ^ sorts
+   ^ sorts collect: [ :each | sortGraph sortNamed: each ]
 ]
 
 { #category : #private }
@@ -55,7 +55,7 @@ LbKind >> instVarsExcludedFromEquality [
 
 { #category : #accessing }
 LbKind >> maximalSorts [
-	^  maximalSorts
+	^  maximalSorts collect: [ :each | sortGraph sortNamed: each ]
 ]
 
 { #category : #printing }
@@ -70,9 +70,8 @@ LbKind >> printAsLeibnizSyntaxOn: aStream [
 LbKind >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
-	aStream nextPutAll: (', ' join: (self maximalSorts collect: [ : sort | sort asString ])).
+	aStream nextPutAll: (', ' join: (self maximalSorts collect: [ : sort | sort name asString ])).
 	aStream nextPut: $).
-
 ]
 
 { #category : #inspecting }

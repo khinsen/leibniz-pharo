@@ -35,34 +35,29 @@ Class {
 
 { #category : #'instance creation' }
 LbSortGraph class >> fromSubsortRelations: aDictionary [
-	^self basicNew
+	^ self basicNew
 			initializeWithSubsortRelations: aDictionary;
 			yourself
-
 ]
 
 { #category : #converting }
 LbSortGraph >> asSet [
-   ^ directSubsortsOf keys asSet 
-
+   ^ directSubsortsOf keys asSet collect: [ :each | self sortNamed: each ]
 ]
 
 { #category : #converting }
 LbSortGraph >> asSortGraphBuilder [
-	^ LbSortGraphBuilder new addSortGraph: self.
-
+	^ LbSortGraphBuilder new addSortGraph: self
 ]
 
 { #category : #copying }
 LbSortGraph >> copy [
 	^self
-
 ]
 
 { #category : #copying }
 LbSortGraph >> deepCopy [
 	^self
-
 ]
 
 { #category : #accessing }
@@ -82,7 +77,7 @@ LbSortGraph >> graphEdgesForSubset: aSet [
 	edges := OrderedCollection new.
 	self withSubsortRelationsDo:
 		[ :s1 :s2 | ((aSet includes: s1) and: [aSet includes: s2])
-						ifTrue: [ edges add: s1 asString -> s2 asString ] ].
+						ifTrue: [ edges add: s1 -> s2 ] ].
 	^ edges
 ]
 
@@ -135,8 +130,7 @@ LbSortGraph >> initializeKinds [
 		kindCandidates := hasCommonSorts at: false. ].
 
 	kindsOf := Dictionary new.
-	kinds do: [ :k | k asSet do: [ :s | kindsOf at: s put: k ] ].
-
+	kinds do: [ :k | k asSet do: [ :s | kindsOf at: s name put: k ] ]
 ]
 
 { #category : #initializing }
@@ -190,7 +184,6 @@ LbSortGraph >> is: aSort subsortOf: anotherSort [
 		or: [ ss := directSubsortsOf at: anotherSort.
 				(ss includes: aSort)
 				or: [ ss anySatisfy: [:each | self is: aSort subsortOf: each ]]]
-
 ]
 
 { #category : #private }
@@ -201,18 +194,17 @@ LbSortGraph >> kindOf: aSymbol [
 { #category : #accessing }
 LbSortGraph >> kinds [
 	^ kinds
-
 ]
 
 { #category : #accessing }
 LbSortGraph >> maximalSorts [
-	^  maximalSorts
+	^  maximalSorts collect: [ :aSymbol | self sortNamed: aSymbol ]
 ]
 
 { #category : #viewing }
 LbSortGraph >> nodeForSort: aSort [
 	^ BlTextElement new
-		text: aSort asString asRopedText;
+		text: aSort name asString asRopedText;
 		padding:
 			(BlInsets
 				top: 5
@@ -225,7 +217,7 @@ LbSortGraph >> nodeForSort: aSort [
 LbSortGraph >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
-	aStream nextPutAll: (', ' join: (self maximalSorts collect: [ : sort | sort asString ])).
+	aStream nextPutAll: (', ' join: (self maximalSorts collect: [ : sort | sort name asString ])).
 	aStream nextPut: $).
 
 ]
@@ -242,15 +234,9 @@ LbSortGraph >> sortNamed: aSymbol [
 	^ LbSort named: aSymbol in: self
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 LbSortGraph >> subsortsOf: aSymbol [
-	^ subsortsOf at: aSymbol.
-]
-
-{ #category : #inspecting }
-LbSortGraph >> title [
-	^'sort graph'
-
+	^ (subsortsOf at: aSymbol) collect: [ : each | self sortNamed: each ]
 ]
 
 { #category : #enumerating }
@@ -259,13 +245,11 @@ LbSortGraph >> union: aSortGraph [
 	b := self asSortGraphBuilder.
 	b addSortGraph: aSortGraph.
 	^ b sortGraph
-
 ]
 
-{ #category : #enumerating }
+{ #category : #private }
 LbSortGraph >> withSubsortRelationsDo: aBlockClosure [ 
 	directSubsortsOf associationsDo:
 		[ :assoc | assoc value do:
-					[ :sort | aBlockClosure value: sort value: (assoc key) ]]
-
+					[ :sortName | aBlockClosure value: (self sortNamed: sortName) value: (self sortNamed: assoc key) ]]
 ]
