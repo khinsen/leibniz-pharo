@@ -205,7 +205,7 @@ LbSortGraph >> maximalSorts [
 LbSortGraph >> nodeForSort: aSort [
 	| text |
 	text := aSort name asString asRopedText.
-	text fontName: 'JuliaMono'.
+	text fontName: (LbCodeFont defaultFamily).
 	^ BlTextElement new
 		text: text;
 		padding:

@@ -12,7 +12,7 @@ Class {
 		'identifier',
 		'identifierCharacter'
 	],
-	#category : #'Leibniz-1-SortGraphs'
+	#category : #'Leibniz-0-Infrastructure'
 }
 
 { #category : #productions }

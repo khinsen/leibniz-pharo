@@ -33,7 +33,7 @@ BaselineOfLeibnizForGToolkit >> baseline: spec [
 { #category : #baseline }
 BaselineOfLeibnizForGToolkit >> postload: loader package: packageSpec [
 	LeibnizLibrary reset.
-
+	LbCodeFont chooseDefaultFamily.
 ]
 
 { #category : #baseline }

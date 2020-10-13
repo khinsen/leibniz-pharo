@@ -27,5 +27,5 @@ LeibnizExamples new contexts
 Class {
 	#name : #LeibnizOverview,
 	#superclass : #Object,
-	#category : #'Leibniz-0-Overview'
+	#category : #'Leibniz-0-Infrastructure'
 }
