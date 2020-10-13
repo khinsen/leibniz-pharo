@@ -12,7 +12,9 @@ Metacello new
     load.
 ```
 
-Note that Leibniz makes generous use of Unicode glyphs that are not contained in the default fonts used by GToolkit. The only suitable free font I have found to replace them is [Arial Unicode MS](https://docs.microsoft.com/en-us/typography/font-list/arial-unicode-ms). To replace the default fonts, paste the following script into a playground and click "Inspect". In the inspector for the resulting `RBCompositeRefactoringChange` (see screenshot below), accept the changes.
+Note that Leibniz makes generous use of Unicode glyphs that are not contained in the default fonts used by GToolkit. The only suitable free fonts I have found to replace them are [JuliaMono](https://juliamono.netlify.app/) and [Arial Unicode MS](https://docs.microsoft.com/en-us/typography/font-list/arial-unicode-ms). Leibniz will automatically select one of them, if available, for use in graphical displays.
+
+If you want to correctly display these Unicode glyphs in Pharo code (in strings and symbols used by Leibniz), you have to replace the GToolkit default fonts. Paste the following script into a playground and click "Inspect". In the inspector for the resulting `RBCompositeRefactoringChange` (see screenshot below), accept the changes.
 ![screenshot](https://github.com/khinsen/leibniz-pharo/raw/master/Screenshot%202020-06-09%20at%2014.55.37.png)
 (thanks to [@girba](https://github.com/girba) for the refactoring magic in this script!)
 
