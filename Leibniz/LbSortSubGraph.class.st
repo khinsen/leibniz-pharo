@@ -1,3 +1,8 @@
+"
+!Subgraphs of sort graphs
+
+Sort graphs  (${class:name=LbSortGraph}$) have two important types of subgraphs: sorts (representing themselves and their subsorts) and kinds (the connected components of a sort graph.)
+"
 Class {
 	#name : #LbSortSubGraph,
 	#superclass : #Object,

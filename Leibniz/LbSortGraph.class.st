@@ -1,11 +1,11 @@
 "
 !!Sorts, sort graphs, and kinds
 
-Sorts are names given to sets of values. They are similar to types in programming languages. In the Pharo implementation, sorts are plain symbols.
+Sorts are names given to sets of values. They are similar to types in programming languages. Sorts are instances of ${class:name=LbSort}$.
 
-A sort can be declared to be a subsort of another sort, meaning that its values are in a subset of the set rof values epresented by the supersort. A graph formed by subsort relations is called a sort graph.
+A sort can be declared to be a subsort of another sort, meaning that its values are in a subset of the set rof values epresented by the supersort. A graph formed by subsort relations is called a sort graph, represented by this class.
 
-The connected components of a sort graph are called kinds. Sorts that are in different kinds are completely unrelated.
+The connected components of a sort graph are called kinds (see ${class:name=LbKind}$). Sorts that are in different kinds are completely unrelated.
 
 As an example, let's look at the sort graph of the built-in context 'real-numbers':
 [[[
@@ -203,8 +203,11 @@ LbSortGraph >> maximalSorts [
 
 { #category : #viewing }
 LbSortGraph >> nodeForSort: aSort [
+	| text |
+	text := aSort name asString asRopedText.
+	text fontName: 'JuliaMono'.
 	^ BlTextElement new
-		text: aSort name asString asRopedText;
+		text: text;
 		padding:
 			(BlInsets
 				top: 5
