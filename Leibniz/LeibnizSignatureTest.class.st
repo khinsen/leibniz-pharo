@@ -5,7 +5,7 @@ Class {
 		'builder',
 		'sortGraph'
 	],
-	#category : #'Leibniz-Tests'
+	#category : #'Leibniz-2-Signatures'
 }
 
 { #category : #running }
@@ -24,14 +24,14 @@ LeibnizSignatureTest >> setUp [
 	  make: #Y subsortOf: #X.
 	sortGraph := b sortGraph.
 
-	builder := LeibnizSignatureBuilder sortGraph: sortGraph.
+	builder := LbSignatureBuilder sortGraph: sortGraph.
 
 ]
 
 { #category : #testing }
 LeibnizSignatureTest >> testArities [
 	| arityFor |
-	arityFor := [ :args | LeibnizArity sortGraph: sortGraph argSorts: args ].
+	arityFor := [ :args | LbArity sortGraph: sortGraph argSorts: args ].
 	self assert: ((arityFor value: #(#B)) <= (arityFor value: #(#A))).
 	self deny:   ((arityFor value: #(#A)) <= (arityFor value: #(#B))).
 	self assert: ((arityFor value: #(#B #Y)) <= (arityFor value: #(#A #X))).
@@ -44,7 +44,7 @@ LeibnizSignatureTest >> testArities [
 { #category : #testing }
 LeibnizSignatureTest >> testBasics [
 	| b s |
-	b := LeibnizSignatureBuilder sortGraph: sortGraph.
+	b := LbSignatureBuilder sortGraph: sortGraph.
 	b addOp: #foo withArgs: #(#A) ofSort: #A.
 	b addOp: #foo withArgs: #(#B) ofSort: #B.
 	b addOp: #foo withArgs: #(#W) ofSort: #W.
@@ -65,7 +65,7 @@ LeibnizSignatureTest >> testBasics [
 { #category : #testing }
 LeibnizSignatureTest >> testConflictingSorts [
 	| b |
-	b := LeibnizSignatureBuilder sortGraph: sortGraph.
+	b := LbSignatureBuilder sortGraph: sortGraph.
 	b addOp: #foo withArgs: #(#A) ofSort: #A.
 	b addVar: #bar ofSort: #A.
 	self should: [ b addOp: #foo withArgs: #(#A) ofSort: #B ] raise: Error.
@@ -76,7 +76,7 @@ LeibnizSignatureTest >> testConflictingSorts [
 { #category : #testing }
 LeibnizSignatureTest >> testNameConflict [
 	| b |
-	b := LeibnizSignatureBuilder sortGraph: sortGraph.
+	b := LbSignatureBuilder sortGraph: sortGraph.
 	b addOp: #foo ofSort: #A.
 	b addVar: #bar ofSort: #A.
 	self should: [ b addVar: #foo ofSort: #A ] raise: Error.
@@ -87,7 +87,7 @@ LeibnizSignatureTest >> testNameConflict [
 { #category : #testing }
 LeibnizSignatureTest >> testNonMonotonicOp [
 	| b |
-	b := LeibnizSignatureBuilder sortGraph: sortGraph.
+	b := LbSignatureBuilder sortGraph: sortGraph.
 	b addOp: #foo withArgs: #(#A) ofSort: #B.
 	self should: [ b addOp: #foo withArgs: #(#B) ofSort: #A ]
 		  raise: Error.
@@ -97,13 +97,13 @@ LeibnizSignatureTest >> testNonMonotonicOp [
 { #category : #testing }
 LeibnizSignatureTest >> testSignatureParser [
 	| b s st |
-	b := LeibnizSignatureBuilder sortGraph: sortGraph.
+	b := LbSignatureBuilder sortGraph: sortGraph.
 	b addOp: #foo ofSort: #A.
 	b addVar: #bar ofSort: #A.
 	b addOp: #foo withArgs: #(#A) ofSort: #A.
 	b addOp: #'_+' withArgs:#(#A #A)  ofSort: #A.
 	s := b signature.
-	b := LeibnizSignatureBuilder sortGraph: sortGraph.
+	b := LbSignatureBuilder sortGraph: sortGraph.
 	b parseAndAddOp: 'foo : A'.
 	b parseAndAddOp: 'foo(bar:A) : A'.
 	b parseAndAddOp: 'A + A : A'.

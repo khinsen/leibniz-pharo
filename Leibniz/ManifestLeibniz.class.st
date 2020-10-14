@@ -24,5 +24,5 @@ ManifestLeibniz class >> ruleRBModifiesCollectionRuleV1FalsePositive [
 
 { #category : #'code-critics' }
 ManifestLeibniz class >> ruleRBToDoRuleV1FalsePositive [
-	^ #(#(#(#RGMethodDefinition #(#LeibnizOperator #addArity:withSort: #false)) #'2019-01-09T13:50:59.272035+01:00') )
+	^ #(#(#(#RGMethodDefinition #(#LbOperator #addArity:withSort: #false)) #'2019-01-09T13:50:59.272035+01:00') )
 ]

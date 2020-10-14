@@ -8,7 +8,7 @@ Class {
 		'sortGraph2',
 		'sortGraph3'
 	],
-	#category : #'Leibniz-Tests'
+	#category : #'Leibniz-1-SortGraphs'
 }
 
 { #category : #running }

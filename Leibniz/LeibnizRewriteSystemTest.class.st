@@ -14,7 +14,7 @@ LeibnizRewriteSystemTest >> booleanRewriteSystem [
 	| booleanContext sb signature rb |
 
 	booleanContext := examples contextNamed: 'boolean'.
-	sb := LeibnizSignatureBuilder sortGraph: booleanContext sortGraph.
+	sb := LbSignatureBuilder sortGraph: booleanContext sortGraph.
 	sb addSignature: booleanContext signature includeVars: false.
 	sb addOp: #foo ofSort: #boolean.
 	sb addOp: #bar ofSort: #boolean.

@@ -28,6 +28,11 @@ LbKind >> asSet [
    ^ sorts collect: [ :each | sortGraph sortNamed: each ]
 ]
 
+{ #category : #enumerating }
+LbKind >> conformingSorts [
+	^ self asSet
+]
+
 { #category : #private }
 LbKind >> equalityTestWith: otherSorts [ 
 	^ sorts = otherSorts
@@ -35,8 +40,7 @@ LbKind >> equalityTestWith: otherSorts [
 
 { #category : #testing }
 LbKind >> includes: aSort [
-	^ sorts includes: aSort
-
+	^ sorts includes: aSort name
 ]
 
 { #category : #initialization }
@@ -51,6 +55,11 @@ LbKind >> initializeWithSortGraph: aSortGraph sorts: setOfSorts maximalSorts: se
 LbKind >> instVarsExcludedFromEquality [
 	^#(#maximalSorts)
 
+]
+
+{ #category : #testing }
+LbKind >> isConformingSort: aSort [
+	^ self includes: aSort
 ]
 
 { #category : #accessing }

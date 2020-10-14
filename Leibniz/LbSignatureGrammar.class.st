@@ -1,5 +1,5 @@
 Class {
-	#name : #LeibnizSignatureGrammar,
+	#name : #LbSignatureGrammar,
 	#superclass : #LbSortGrammar,
 	#instVars : [
 		'colon',
@@ -27,115 +27,115 @@ Class {
 }
 
 { #category : #productions }
-LeibnizSignatureGrammar >> arg [
+LbSignatureGrammar >> arg [
 	^ var / sort
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> bracketOp [
+LbSignatureGrammar >> bracketOp [
 	^ arg, openBracket, (arg separatedBy: comma trim), closeBracket
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> closeBrace [
+LbSignatureGrammar >> closeBrace [
 	^ $} asPParser
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> closeBracket [
+LbSignatureGrammar >> closeBracket [
 	^ $] asPParser
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> closeParenthesis [
+LbSignatureGrammar >> closeParenthesis [
 	^ $) asPParser
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> colon [
+LbSignatureGrammar >> colon [
 	^ $: asPParser
 
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> comma [
+LbSignatureGrammar >> comma [
 	^ $, asPParser
 
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> hat [
+LbSignatureGrammar >> hat [
 	^ $^ asPParser
 
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> infixOp [
+LbSignatureGrammar >> infixOp [
 	^ arg trim, identifier trim, arg trim
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> op [
+LbSignatureGrammar >> op [
 	^ opAndArgs trim, colon, sort trim
 
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> opAndArgs [
+LbSignatureGrammar >> opAndArgs [
 	^ prefixOp / bracketOp / infixOp / subscriptOp / superscriptOp / zeroArgOp
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> openBrace [
+LbSignatureGrammar >> openBrace [
 	^ ${ asPParser
 
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> openBracket [
+LbSignatureGrammar >> openBracket [
 	^ $[ asPParser
 
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> openParenthesis [
+LbSignatureGrammar >> openParenthesis [
 	^ $( asPParser
 
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> prefixOp [
+LbSignatureGrammar >> prefixOp [
 	^ identifier trim, openParenthesis, (arg separatedBy: comma trim), closeParenthesis
 ]
 
 { #category : #accessing }
-LeibnizSignatureGrammar >> start [
+LbSignatureGrammar >> start [
 	^ op end
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> subscriptOp [
+LbSignatureGrammar >> subscriptOp [
 	^ arg, underscore, openBrace, arg, closeBrace
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> superscriptOp [
+LbSignatureGrammar >> superscriptOp [
 	^ arg, hat, openBrace, arg, closeBrace
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> underscore [
+LbSignatureGrammar >> underscore [
 	^ $_ asPParser
 
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> var [
+LbSignatureGrammar >> var [
 	^ identifier, colon, identifier
 
 ]
 
 { #category : #productions }
-LeibnizSignatureGrammar >> zeroArgOp [
+LbSignatureGrammar >> zeroArgOp [
 	^ identifier
 ]

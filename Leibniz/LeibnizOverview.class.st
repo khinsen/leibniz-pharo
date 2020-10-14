@@ -11,7 +11,7 @@ The central object in Leibniz is the  ${class:name=LeibnizContext}$,  which desc
 
 Scientific objects and their relations are described in Leibniz by several layers of declarations:
 # A sort defines a specific kind of object or quantity, or equivalently a set of possible values. Examples of sorts are integers, positions, masses, molecules, etc. Relations between sorts are described by a ${class:name=LbSortGraph}$.
-# A ${class:name=LeibnizOperator}$ defines concrete values with the sort they belong to. These values can be constants or functions of other values. The collection of all operators used in a context is a ${class:name=LeibnizSignature}$.
+# A ${class:name=LbOperator}$ defines concrete values with the sort they belong to. These values can be constants or functions of other values. The collection of all operators used in a context is a ${class:name=LeibnizSignature}$.
 # A ${class:name=LeibnizTerm}$ is a specific value, made up from a combination of operators and built-in values such as numbers.
 # A ${class:name=LeibnizRule}$ defines how terms are transformed. Rules have two roles in Leibniz: they serve to express algorithms in scientific models, but also to perform simple computations.
 # ''Assets'' are used to express scientific objects, quantities, and relations between them. They are built up from terms. A ${class:name=LeibnizTerm}$ can by itself be an asset, as can a ${class:name=LeibnizRule}$. A ${class:name=LeibnizEquation}$ is the third type of asset.

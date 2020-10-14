@@ -4,7 +4,7 @@ See ${class:name=LeibnizSignature}$.
 
 "
 Class {
-	#name : #LeibnizOperator,
+	#name : #LbOperator,
 	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -19,15 +19,14 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizOperator class >> symbol: aSymbol argKindConstraints: aKindConstraintArray kind: aKind [
+LbOperator class >> symbol: aSymbol argKinds: aKindArray kind: aKind [
 	^ self basicNew
-			 initializeWithSymbol: aSymbol argKindConstraints: aKindConstraintArray kind: aKind;
-			 yourself.
-
+			 initializeWithSymbol: aSymbol argKinds: aKindArray kind: aKind;
+			 yourself
 ]
 
 { #category : #adding }
-LeibnizOperator >> addArity: newArity withSort: newSort [
+LbOperator >> addArity: newArity withSort: newSort [
 	self assertMonotonicity: [ kind includes: newSort ]
 		  forArity: newArity andSort: newSort.
 
@@ -62,7 +61,7 @@ LeibnizOperator >> addArity: newArity withSort: newSort [
 ]
 
 { #category : #viewing }
-LeibnizOperator >> addGraphToBuilder: aBuilder [
+LbOperator >> addGraphToBuilder: aBuilder [
 	| saGraph |
 	aBuilder shape label
 		text: [ :r | (String streamContents:
@@ -79,14 +78,14 @@ LeibnizOperator >> addGraphToBuilder: aBuilder [
 ]
 
 { #category : #'error signalling' }
-LeibnizOperator >> assertMonotonicity: aBlock forArity: anArity andSort: aSort [
+LbOperator >> assertMonotonicity: aBlock forArity: anArity andSort: aSort [
 	self assert: aBlock
 		  description: 'new rank ', anArity printString,
 							' -> ', aSort asString, ' makes operator non-monotonic'.
 ]
 
 { #category : #inspecting }
-LeibnizOperator >> gtInspectorNetworkViewIn: composite [
+LbOperator >> gtInspectorNetworkViewIn: composite [
 	<gtInspectorPresentationOrder: -10>
 	composite roassal2
 		title: 'Network View';
@@ -95,7 +94,7 @@ LeibnizOperator >> gtInspectorNetworkViewIn: composite [
 ]
 
 { #category : #inspecting }
-LeibnizOperator >> gtInspectorTreeViewIn: composite [
+LbOperator >> gtInspectorTreeViewIn: composite [
 	<gtInspectorPresentationOrder: -11>
 	composite roassal2
 		title: 'Tree View';
@@ -104,38 +103,36 @@ LeibnizOperator >> gtInspectorTreeViewIn: composite [
 ]
 
 { #category : #initializing }
-LeibnizOperator >> initializeWithSymbol: aSymbol argKindConstraints: aKindConstraintArray kind: aKind [
+LbOperator >> initializeWithSymbol: aSymbol argKinds: aKindArray kind: aKind [
 	opSymbol := aSymbol.
-	kindArity := aKindConstraintArray.
+	kindArity := aKindArray.
 	kind := aKind.
 	sortGraph := kind sortGraph.
-	ranks := OrderedCollection new.
-
-
+	ranks := OrderedCollection new
 ]
 
 { #category : #accessing }
-LeibnizOperator >> kind [
+LbOperator >> kind [
 	^kind
 ]
 
 { #category : #accessing }
-LeibnizOperator >> kindArity [
+LbOperator >> kindArity [
 	^kindArity
 ]
 
 { #category : #accessing }
-LeibnizOperator >> leastRankForArgSorts: aSortArray [
+LbOperator >> leastRankForArgSorts: aSortArray [
 	| arity |
 	aSortArray ifEmpty: [ self assert: ranks size equals: 1 .
 								 ^ ranks first ].
-	arity := LeibnizArity sortGraph: sortGraph argSorts: aSortArray.
+	arity := LbArity sortGraph: sortGraph argSorts: aSortArray.
 	^ ranks detect: [ :r | arity <= r key ]
 			  ifNone: [ kindArity -> kind ].
 ]
 
 { #category : #viewing }
-LeibnizOperator >> minimalSubArityGraph [
+LbOperator >> minimalSubArityGraph [
 	"Answer the adjacency matrix for the minimal sub-arity graph that has the
 	same connected components as the full one. This minimal graph is constructed
 	from the full one by removing all edges that are equivalent to multi-edge
@@ -154,7 +151,7 @@ LeibnizOperator >> minimalSubArityGraph [
 ]
 
 { #category : #viewing }
-LeibnizOperator >> networkView [
+LbOperator >> networkView [
 	| b |
 	b := RTMondrian new.
 	self addGraphToBuilder: b.
@@ -165,12 +162,12 @@ LeibnizOperator >> networkView [
 ]
 
 { #category : #accessing }
-LeibnizOperator >> opSymbol [
+LbOperator >> opSymbol [
 	^opSymbol
 ]
 
 { #category : #printing }
-LeibnizOperator >> printForArity: anArity On: aStream [
+LbOperator >> printForArity: anArity On: aStream [
 	"Note: this is a first quick-and-dirty implementation. It will be replaced
 	 by an output formatter that also handles terms."
 	| opString |
@@ -198,7 +195,7 @@ LeibnizOperator >> printForArity: anArity On: aStream [
 ]
 
 { #category : #printing }
-LeibnizOperator >> printForArity: anArity withSort: aSort On: aStream [
+LbOperator >> printForArity: anArity withSort: aSort On: aStream [
 	self printForArity: anArity On: aStream.
 	aStream nextPutAll: ' : '.
 	aStream nextPutAll: aSort asString.
@@ -206,7 +203,7 @@ LeibnizOperator >> printForArity: anArity withSort: aSort On: aStream [
 ]
 
 { #category : #printing }
-LeibnizOperator >> printOn: aStream [
+LbOperator >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	aStream nextPutAll: opSymbol.
@@ -221,24 +218,24 @@ LeibnizOperator >> printOn: aStream [
 ]
 
 { #category : #accessing }
-LeibnizOperator >> ranksMatchingArgSorts: aSortArray [
+LbOperator >> ranksMatchingArgSorts: aSortArray [
 	| arity |
-	arity := LeibnizArity sortGraph: sortGraph argSorts: aSortArray.
+	arity := LbArity sortGraph: sortGraph argSorts: aSortArray.
 	^ ranks select: [ :r | arity <= r key ]
 ]
 
 { #category : #accessing }
-LeibnizOperator >> size [
+LbOperator >> size [
 	^ranks size
 ]
 
 { #category : #accessing }
-LeibnizOperator >> sortForArgSorts: aSortArray [
+LbOperator >> sortForArgSorts: aSortArray [
 	^ (self leastRankForArgSorts: aSortArray) value
 ]
 
 { #category : #viewing }
-LeibnizOperator >> subArityGraph [
+LbOperator >> subArityGraph [
 	^Array2D new: ranks size tabulate:
 		[ :i :j |
 			(i ~= j and: [ (ranks at: i) key <= (ranks at: j) key ])
@@ -247,7 +244,7 @@ LeibnizOperator >> subArityGraph [
 ]
 
 { #category : #inspecting }
-LeibnizOperator >> title [
+LbOperator >> title [
 	^String streamContents:
 		[ :stream |
 			self printForArity: kindArity On: stream.
@@ -256,7 +253,7 @@ LeibnizOperator >> title [
 ]
 
 { #category : #viewing }
-LeibnizOperator >> treeView [
+LbOperator >> treeView [
 	| b |
 	b := RTMondrian new.
 	self addGraphToBuilder: b.
@@ -270,6 +267,6 @@ LeibnizOperator >> treeView [
 ]
 
 { #category : #enumerating }
-LeibnizOperator >> withRanksDo: aBlock [
+LbOperator >> withRanksDo: aBlock [
 	ranks do: [ :r |  aBlock value: r key value: r value ]
 ]

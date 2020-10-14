@@ -134,7 +134,7 @@ LeibnizSignature >> numberOfVariables [
 { #category : #accessing }
 LeibnizSignature >> opNamed: aSymbol withArgs: aSortArray [
 	| kindArity |
-	kindArity := LeibnizArity sortGraph: sortGraph
+	kindArity := LbArity sortGraph: sortGraph
 									  argSortConstraints: (aSortArray collect:
 																	[ :s | LeibnizKindConstraint sortGraph: sortGraph kind: (sortGraph kindOf: s)]).
 	operators at: aSymbol

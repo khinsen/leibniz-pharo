@@ -1,11 +1,11 @@
 Class {
-	#name : #LeibnizSignatureParser,
-	#superclass : #LeibnizSignatureGrammar,
+	#name : #LbSignatureParser,
+	#superclass : #LbSignatureGrammar,
 	#category : #'Leibniz-2-Signatures'
 }
 
 { #category : #productions }
-LeibnizSignatureParser >> bracketOp [
+LbSignatureParser >> bracketOp [
 	^ super bracketOp
 		==> [ :nodes |
 				| args |
@@ -15,55 +15,55 @@ LeibnizSignatureParser >> bracketOp [
 ]
 
 { #category : #productions }
-LeibnizSignatureParser >> infixOp [
+LbSignatureParser >> infixOp [
 	^ super infixOp
 		==> [ :nodes | { ('_', nodes second) asSymbol. { nodes first. nodes third } } ]
 
 ]
 
 { #category : #productions }
-LeibnizSignatureParser >> op [
+LbSignatureParser >> op [
 	^ super op
 		==> [ :nodes | { nodes first. nodes third first } ]
 
 ]
 
 { #category : #productions }
-LeibnizSignatureParser >> prefixOp [
+LbSignatureParser >> prefixOp [
 	^ super prefixOp
 		==> [ :nodes | { nodes first asSymbol. nodes third reject: [ :element | element = $,] } ]
 ]
 
 { #category : #productions }
-LeibnizSignatureParser >> sort [
+LbSignatureParser >> sort [
 	^ super sort
 		==> [ :id | { id } ]
 
 ]
 
 { #category : #productions }
-LeibnizSignatureParser >> subscriptOp [
+LbSignatureParser >> subscriptOp [
 	^ super subscriptOp
 		==> [ :nodes | { #'_'. { nodes first. nodes fourth } } ]
 
 ]
 
 { #category : #productions }
-LeibnizSignatureParser >> superscriptOp [
+LbSignatureParser >> superscriptOp [
 	^ super superscriptOp
 		==> [ :nodes | { #'^'. { nodes first. nodes fourth } } ]
 
 ]
 
 { #category : #productions }
-LeibnizSignatureParser >> var [
+LbSignatureParser >> var [
 	^ super var
 		==> [ :nodes | { nodes first. nodes third } ]
 
 ]
 
 { #category : #productions }
-LeibnizSignatureParser >> zeroArgOp [
+LbSignatureParser >> zeroArgOp [
 	^ super zeroArgOp
 		==> [ :idString | { idString asSymbol. #() } ]
 ]

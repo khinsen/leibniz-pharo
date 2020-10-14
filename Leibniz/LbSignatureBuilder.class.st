@@ -2,7 +2,7 @@
 I build LeibnizSignatures from a sequence of operator and variable declarations.
 "
 Class {
-	#name : #LeibnizSignatureBuilder,
+	#name : #LbSignatureBuilder,
 	#superclass : #Object,
 	#instVars : [
 		'sortGraph',
@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizSignatureBuilder class >> sortGraph: aSortGraph [
+LbSignatureBuilder class >> sortGraph: aSortGraph [
 	^self basicNew
 			initializeWithSortGraph: aSortGraph;
 			yourself.
@@ -23,12 +23,12 @@ LeibnizSignatureBuilder class >> sortGraph: aSortGraph [
 ]
 
 { #category : #adding }
-LeibnizSignatureBuilder >> addBuiltin: aSymbol [
+LbSignatureBuilder >> addBuiltin: aSymbol [
 	builtins add: aSymbol
 ]
 
 { #category : #adding }
-LeibnizSignatureBuilder >> addBuiltinsFromSignature: aSignature [
+LbSignatureBuilder >> addBuiltinsFromSignature: aSignature [
 	aSignature withBuiltinsDo:
 		[ :symbol |
 		  self addBuiltin: symbol ].
@@ -36,32 +36,32 @@ LeibnizSignatureBuilder >> addBuiltinsFromSignature: aSignature [
 ]
 
 { #category : #adding }
-LeibnizSignatureBuilder >> addOp: anOpSymbol ofSort: aSortSymbol [
+LbSignatureBuilder >> addOp: anOpSymbol ofSort: aSortSymbol [
 	self addOp: anOpSymbol withArgs: #() ofSort: aSortSymbol
 ]
 
 { #category : #adding }
-LeibnizSignatureBuilder >> addOp: anOpSymbol withArgs: anArgList ofSort: aSortSymbol [
+LbSignatureBuilder >> addOp: anOpSymbol withArgs: aSortNameArray ofSort: aSortName [
 	| sort arity kindArity operator |
-	anArgList ifEmpty:
-		[ sort := variables at: anOpSymbol ifAbsent: nil.
-		  self assert: sort isNil
-				 description: 'conflicting earlier variable definition with sort ', sort asString. ].
-	arity := LeibnizArity sortGraph: sortGraph argSorts: anArgList.
+	aSortNameArray ifEmpty: [
+		sort := variables at: anOpSymbol ifAbsent: nil.
+		self assert: sort isNil
+			 description: [ 'conflicting earlier variable definition with sort ', sort name asString ] ].
+	arity := LbArity sortGraph: sortGraph
+					 argSorts: (aSortNameArray collect: [ :name | sortGraph sortNamed: name ]).
 	kindArity := arity liftToKindLevel.
+	sort := sortGraph sortNamed: aSortName.
 	operator := (operators at: anOpSymbol
-								  ifAbsentPut: [ Dictionary new ])
-						at: kindArity
-						ifAbsentPut: [ LeibnizOperator symbol: anOpSymbol
-																argKindConstraints: kindArity
-																kind: (sortGraph kindOf: aSortSymbol) ].
-	operator addArity: arity withSort: aSortSymbol.
-
-
+						   ifAbsentPut: [ Dictionary new ])
+					at: kindArity
+					ifAbsentPut: [ LbOperator symbol: anOpSymbol
+											  argKinds: kindArity
+											  kind: sort kind ].
+	operator addArity: arity withSort: sort.
 ]
 
 { #category : #adding }
-LeibnizSignatureBuilder >> addOpsFromSignature: aSignature [
+LbSignatureBuilder >> addOpsFromSignature: aSignature [
 	aSignature withOperatorsDo:
 		[ :symbol :args :sort |
 		  self addOp: symbol withArgs: args ofSort: sort ].
@@ -69,7 +69,7 @@ LeibnizSignatureBuilder >> addOpsFromSignature: aSignature [
 ]
 
 { #category : #adding }
-LeibnizSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
+LbSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
 	self addBuiltinsFromSignature: aSignature.
 	self addOpsFromSignature: aSignature.
 	aBoolean ifTrue: [ self addVarsFromSignature: aSignature ]
@@ -77,11 +77,11 @@ LeibnizSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
 ]
 
 { #category : #adding }
-LeibnizSignatureBuilder >> addVar: aVarSymbol ofSort: aSortSymbol [
+LbSignatureBuilder >> addVar: aVarSymbol ofSort: aSortSymbol [
 	| op sort |
 	op := operators at: aVarSymbol ifAbsent: nil.
 	op ifNotNil:
-		[ sort := op at: (LeibnizArity sortGraph: sortGraph argSorts: #()) ifAbsent: nil.
+		[ sort := op at: (LbArity sortGraph: sortGraph argSorts: #()) ifAbsent: nil.
 		  self assert: sort isNil
 				 description: 'conflicting earlier operator definition with sort', sort asString ].
 	sort := variables at: aVarSymbol ifAbsentPut: aSortSymbol.
@@ -91,7 +91,7 @@ LeibnizSignatureBuilder >> addVar: aVarSymbol ofSort: aSortSymbol [
 ]
 
 { #category : #adding }
-LeibnizSignatureBuilder >> addVarsFromSignature: aSignature [
+LbSignatureBuilder >> addVarsFromSignature: aSignature [
 	aSignature withVariablesDo:
 		[ :symbol :sort |
 		  self addVar: symbol ofSort:  sort ].
@@ -99,18 +99,17 @@ LeibnizSignatureBuilder >> addVarsFromSignature: aSignature [
 ]
 
 { #category : #initializing }
-LeibnizSignatureBuilder >> initializeWithSortGraph: aSortGraph [
+LbSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 	sortGraph := aSortGraph.
 	builtins := Set new.
 	operators := Dictionary new.
 	variables := Dictionary new.
-
 ]
 
 { #category : #adding }
-LeibnizSignatureBuilder >> parseAndAddOp: aString [
+LbSignatureBuilder >> parseAndAddOp: aString [
 	| opSpec op args sort argSorts |
-	opSpec := LeibnizSignatureParser parse: aString.
+	opSpec := LbSignatureParser parse: aString.
 	op := opSpec first first.
 	args := opSpec first second.
 	sort := opSpec second.
@@ -122,21 +121,21 @@ LeibnizSignatureBuilder >> parseAndAddOp: aString [
 ]
 
 { #category : #adding }
-LeibnizSignatureBuilder >> parseAndAddVar: aString [
+LbSignatureBuilder >> parseAndAddVar: aString [
 	| var |
-	var := LeibnizSignatureParser parse: aString startingAt: #var.
+	var := LbSignatureParser parse: aString startingAt: #var.
 	self addVar: var first ofSort: var second.
 ]
 
 { #category : #accessing }
-LeibnizSignatureBuilder >> signature [
+LbSignatureBuilder >> signature [
 	^ LeibnizSignature sortGraph: sortGraph builtins: builtins operators: operators deepCopy variables: variables deepCopy.
 
 
 ]
 
 { #category : #private }
-LeibnizSignatureBuilder >> sortGraph: aSortGraph [
+LbSignatureBuilder >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
 
 ]

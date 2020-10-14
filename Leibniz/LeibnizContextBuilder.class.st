@@ -304,7 +304,7 @@ LeibnizContextBuilder >> startRules [
 
 { #category : #'defining - private' }
 LeibnizContextBuilder >> startSignature [
-	signatureBuilder := LeibnizSignatureBuilder sortGraph: sortGraph.
+	signatureBuilder := LbSignatureBuilder sortGraph: sortGraph.
 	includes do: [ :i | signatureBuilder addSignature: (i at: #context) signature
 													includeVars: (i at: #mode) = 'extend' ].
 

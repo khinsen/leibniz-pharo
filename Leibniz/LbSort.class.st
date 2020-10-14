@@ -31,10 +31,20 @@ LbSort >> asSet [
 	^ self subsorts
 ]
 
+{ #category : #enumerating }
+LbSort >> conformingSorts [
+	^ self subsorts
+]
+
 { #category : #initialization }
 LbSort >> initializeWithName: aSymbol sortGraph: aSortGraph [
 	sortGraph := aSortGraph.
 	name := aSymbol
+]
+
+{ #category : #testing }
+LbSort >> isConformingSort: aSort [
+	^ aSort <= self
 ]
 
 { #category : #accessing }
@@ -60,7 +70,7 @@ LbSort >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : #accessing }
+{ #category : #enumerating }
 LbSort >> subsorts [
 	^ sortGraph subsortsOf: name
 ]

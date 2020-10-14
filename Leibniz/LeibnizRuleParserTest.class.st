@@ -19,7 +19,7 @@ LeibnizRuleParserTest >> setUp [
 	b add: #boolean.
 	sg := b sortGraph.
 
-	b := LeibnizSignatureBuilder sortGraph: sg.
+	b := LbSignatureBuilder sortGraph: sg.
 	b addBuiltin: #integers.
 	b addBuiltin: #rationalNumbers.
 	b addBuiltin: #fpNumbers.
