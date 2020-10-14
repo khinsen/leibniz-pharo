@@ -216,6 +216,32 @@ LbSortGraph >> nodeForSort: aSort [
 				left: 5)
 ]
 
+{ #category : #viewing }
+LbSortGraph >> nodeForSort: aSort highlight: aBoolean [
+	| text label rectangle |
+	text := aSort name asString asRopedText.
+	text fontName: (LbCodeFont defaultFamily).
+	label := BlTextElement new text: text.
+
+	aBoolean ifFalse:
+		[ ^ label
+			padding:
+				(BlInsets top: 3 right: 3 bottom: 3 left: 3);
+			yourself ].
+
+	rectangle := BlElement new
+		background: (Color r: 63 g: 81 b: 181 range: 255);
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
+		padding: (BlInsets top: 3 right: 3 bottom: 3 left: 3);
+		layout: BlLinearLayout horizontal;
+		constraintsDo: [ :c |
+			c horizontal fitContent.
+			c vertical fitContent ].
+	text foreground: Color white.
+	rectangle addChild: label.
+	^ rectangle
+]
+
 { #category : #printing }
 LbSortGraph >> printOn: aStream [
 	super printOn: aStream.

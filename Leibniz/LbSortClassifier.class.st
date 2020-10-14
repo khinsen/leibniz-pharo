@@ -1,10 +1,10 @@
 "
-!Subgraphs of sort graphs
+!Sorts and kinds
 
 Sort graphs  (${class:name=LbSortGraph}$) have two important types of subgraphs: sorts (representing themselves and their subsorts) and kinds (the connected components of a sort graph.)
 "
 Class {
-	#name : #LbSortSubGraph,
+	#name : #LbSortClassifier,
 	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : #inspecting }
-LbSortSubGraph >> gtTreeViewFor: aView [
+LbSortClassifier >> gtTreeViewFor: aView [
 	<gtView>
 	^ aView mondrian
 		title: 'Tree view';
@@ -23,13 +23,13 @@ LbSortSubGraph >> gtTreeViewFor: aView [
 		painting: [ :view | 
 			| edges |
 			view nodes
-				shape: [ :x | sortGraph nodeForSort: x ];
-				with: self asSet.
+				shape: [ :x | sortGraph nodeForSort: x highlight: x = self ];
+				with: self kind asSet.
 			view edges
 				shape: [ :x | sortGraph grayArrow ];
 				fromCenterTop;
 				toCenterBottom;
-				connect: (sortGraph graphEdgesForSubset: self asSet)
+				connect: (sortGraph graphEdgesForSubset: self kind asSet)
 					from: #key
 					to: #value.
 			view layout
@@ -37,11 +37,16 @@ LbSortSubGraph >> gtTreeViewFor: aView [
 ]
 
 { #category : #accessing }
-LbSortSubGraph >> size [
+LbSortClassifier >> kind [
+	self subclassResponsibility
+]
+
+{ #category : #accessing }
+LbSortClassifier >> size [
 	^ self asSet size
 ]
 
 { #category : #accessing }
-LbSortSubGraph >> sortGraph [
+LbSortClassifier >> sortGraph [
 	^sortGraph
 ]

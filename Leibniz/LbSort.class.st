@@ -6,7 +6,7 @@ See ${class:name=LbSortGraph}$.
 "
 Class {
 	#name : #LbSort,
-	#superclass : #LbSortSubGraph,
+	#superclass : #LbSortClassifier,
 	#instVars : [
 		'name'
 	],

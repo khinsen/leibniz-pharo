@@ -5,7 +5,7 @@ Kinds are the connected components in a ${class:name=LbSortGraph}$. They are not
 "
 Class {
 	#name : #LbKind,
-	#superclass : #LbSortSubGraph,
+	#superclass : #LbSortClassifier,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -51,6 +51,11 @@ LbKind >> initializeWithSortGraph: aSortGraph sorts: setOfSorts maximalSorts: se
 LbKind >> instVarsExcludedFromEquality [
 	^#(#maximalSorts)
 
+]
+
+{ #category : #accessing }
+LbKind >> kind [
+	^ self
 ]
 
 { #category : #accessing }
