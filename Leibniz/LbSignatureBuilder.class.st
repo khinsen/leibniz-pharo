@@ -36,25 +36,25 @@ LbSignatureBuilder >> addBuiltinsFromSignature: aSignature [
 ]
 
 { #category : #adding }
-LbSignatureBuilder >> addOp: anOpSymbol ofSort: aSortSymbol [
-	self addOp: anOpSymbol withArgs: #() ofSort: aSortSymbol
+LbSignatureBuilder >> addOp: anOpName ofSort: aSortSymbol [
+	self addOp: anOpName withArgs: #() ofSort: aSortSymbol
 ]
 
 { #category : #adding }
-LbSignatureBuilder >> addOp: anOpSymbol withArgs: aSortNameArray ofSort: aSortName [
+LbSignatureBuilder >> addOp: anOpName withArgs: aSortNameArray ofSort: aSortName [
 	| sort arity kindArity operator |
 	aSortNameArray ifEmpty: [
-		sort := variables at: anOpSymbol ifAbsent: nil.
+		sort := variables at: anOpName asSymbol ifAbsent: nil.
 		self assert: sort isNil
 			 description: [ 'conflicting earlier variable definition with sort ', sort name asString ] ].
 	arity := LbArity sortGraph: sortGraph
 					 argSorts: (aSortNameArray collect: [ :name | sortGraph sortNamed: name ]).
 	kindArity := arity liftToKindLevel.
 	sort := sortGraph sortNamed: aSortName.
-	operator := (operators at: anOpSymbol
+	operator := (operators at: anOpName
 						   ifAbsentPut: [ Dictionary new ])
 					at: kindArity
-					ifAbsentPut: [ LbOperator symbol: anOpSymbol
+					ifAbsentPut: [ LbOperator name: anOpName
 											  argKinds: kindArity
 											  kind: sort kind ].
 	operator addArity: arity withSort: sort.
@@ -77,17 +77,17 @@ LbSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
 ]
 
 { #category : #adding }
-LbSignatureBuilder >> addVar: aVarSymbol ofSort: aSortSymbol [
-	| op sort |
-	op := operators at: aVarSymbol ifAbsent: nil.
+LbSignatureBuilder >> addVar: aSymbolOrOperatorName ofSort: aSortSymbol [
+	| symbol op sort |
+	symbol := aSymbolOrOperatorName asSymbol.
+	op := operators at: symbol ifAbsent: nil.
 	op ifNotNil:
 		[ sort := op at: (LbArity sortGraph: sortGraph argSorts: #()) ifAbsent: nil.
 		  self assert: sort isNil
 				 description: 'conflicting earlier operator definition with sort', sort asString ].
-	sort := variables at: aVarSymbol ifAbsentPut: aSortSymbol.
+	sort := variables at: symbol ifAbsentPut: aSortSymbol.
 	self assert: sort = aSortSymbol
 		  description: 'conflicting earlier variable definition with sort ', sort asString.
-
 ]
 
 { #category : #adding }

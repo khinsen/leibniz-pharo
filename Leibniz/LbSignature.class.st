@@ -56,59 +56,31 @@ LbSignature >> deepCopy [
 ]
 
 { #category : #inspecting }
-LbSignature >> gtInspectorOperatorsIn: composite [
-	"Show a list of all variables"
-
-	<gtInspectorPresentationOrder: 0>
-	composite fastTable 
-		title: 'Operators';
-		display: [ operators flatCollect: [ :each | each values ] ];
-		column: 'Operator' evaluated: #title;
-		column: 'Kind' evaluated:
-			[ :each | String streamContents: [ :s | (each kind printAsLeibnizSyntaxOn: s) ] ];
-		column: 'Ranks' evaluated: [ :each | each size asString ];
-		when: [ operators isNotEmpty ]
-]
-
-{ #category : #inspecting }
-LbSignature >> gtInspectorVariablesIn: composite [
-	"Show a list of all variables"
-
-	<gtInspectorPresentationOrder: 1>
-	composite fastTable 
-		title: 'Variables';
-		display: [ variables associations sorted: [ :v1 :v2 | v1 key < v2 key ] ] ;
-		column: 'Name' evaluated: [ :each | each key asString ];
-		column: 'Sort' evaluated: [ :each | each value asString ];
-		when: [ variables isNotEmpty ]
-]
-
-{ #category : #inspecting }
-LbSignature >> gtViewOperatorsOn: aView [
+LbSignature >> gtOperatorsFor: aView [
 	<gtView>
 	operators isEmpty ifTrue: [ ^ aView empty ].
 	^ aView columnedTree
 		title: 'Operators' translated;
 		priority: 0;
-		items: [operators keys];
+		items: [ operators keys sorted ];
 		column: 'Kind arity' item: [ :each |
-			(each isSymbol)
-				ifTrue: [ each ]
-				ifFalse: [ each kindArity asLeibnizSyntaxString ] ];
+			(each isKindOf: LbOperatorName)
+				ifTrue: [ each synopsis ]
+				ifFalse: [ each name printStringForArity: each kindArity ] ];
 		column: 'Kind' item: [:each |
-			(each isSymbol)
+			(each isKindOf: LbOperatorName)
 				ifTrue: [ '' asRopedText ]
 				ifFalse: [ each kind asLeibnizSyntaxString  ] ];
 		children: [ :each |
-			(each isSymbol)
+			(each isKindOf: LbOperatorName)
 				ifTrue: [ (operators at: each) values sorted: [:a :b | a kindArity size < b kindArity size] ]
 				ifFalse: [ #() ] ];
 		expandOneLevel;
 		yourself
 ]
 
-{ #category : #accessing }
-LbSignature >> gtViewVariablesOn: aView [
+{ #category : #inspecting }
+LbSignature >> gtVariablesFor: aView [
 	<gtView>
 	variables isEmpty ifTrue: [ ^ aView empty ].
 	^ aView columnedList

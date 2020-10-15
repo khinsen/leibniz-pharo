@@ -11,7 +11,7 @@ LbSignatureParser >> bracketOp [
 				| args |
 				args := OrderedCollection with: nodes first.
 				args addAll: (nodes third reject: [ :element | element = $,]).
-				{ #'[]'. args asArray } ]
+				{ LbBracketOperatorName new. args asArray } ]
 ]
 
 { #category : #productions }

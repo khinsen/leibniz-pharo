@@ -9,20 +9,20 @@ Class {
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
-		'opSymbol',
 		'kindArity',
 		'kind',
 		'ranks',
-		'sortGraph'
+		'sortGraph',
+		'name'
 	],
 	#category : #'Leibniz-2-Signatures'
 }
 
 { #category : #'instance creation' }
-LbOperator class >> symbol: aSymbol argKinds: aKindArray kind: aKind [
+LbOperator class >> name: anOpName argKinds: aKindArray kind: aKind [
 	^ self basicNew
-			 initializeWithSymbol: aSymbol argKinds: aKindArray kind: aKind;
-			 yourself
+			initializeWithName: anOpName argKinds: aKindArray kind: aKind;
+			yourself
 ]
 
 { #category : #adding }
@@ -65,8 +65,8 @@ LbOperator >> addGraphToBuilder: aBuilder [
 	| saGraph |
 	aBuilder shape label
 		text: [ :r | (String streamContents:
-							[ :s | self printForArity: r key withSort: r value On: s ])];
-		fontName: 'Arial Unicode MS';
+							[ :s | self name printForArity: r key withSort: r value On: s ])];
+		fontName: (LbCodeFont defaultFamily);
 		color: (Color black).
 	aBuilder nodes: ranks.
 	aBuilder shape arrowedLine withShorterDistanceAttachPoint.
@@ -103,8 +103,8 @@ LbOperator >> gtInspectorTreeViewIn: composite [
 ]
 
 { #category : #initializing }
-LbOperator >> initializeWithSymbol: aSymbol argKinds: aKindArray kind: aKind [
-	opSymbol := aSymbol.
+LbOperator >> initializeWithName: anOpName argKinds: aKindArray kind: aKind [
+	name := anOpName.
 	kindArity := aKindArray.
 	kind := aKind.
 	sortGraph := kind sortGraph.
@@ -150,6 +150,11 @@ LbOperator >> minimalSubArityGraph [
 
 ]
 
+{ #category : #accessing }
+LbOperator >> name [
+	^ name
+]
+
 { #category : #viewing }
 LbOperator >> networkView [
 	| b |
@@ -161,52 +166,11 @@ LbOperator >> networkView [
 
 ]
 
-{ #category : #accessing }
-LbOperator >> opSymbol [
-	^opSymbol
-]
-
-{ #category : #printing }
-LbOperator >> printForArity: anArity On: aStream [
-	"Note: this is a first quick-and-dirty implementation. It will be replaced
-	 by an output formatter that also handles terms."
-	| opString |
-	opString := opSymbol asString.
-	"If the symbol starts with an underscore, it's an infix operator"
-	opString first = $_
-		ifTrue:
-			[ self assert: anArity size equals: 2.
-			  anArity first printAsLeibnizSyntaxOn: aStream.
-			  aStream nextPutAll: ' '.
-			  aStream nextPutAll: opString allButFirst.
-			  aStream nextPutAll: ' '.
-			  anArity second printAsLeibnizSyntaxOn: aStream. ]
-		ifFalse: "No support for the three special operators for now - see comment above!"
-			[ aStream nextPutAll: opString.
-			  anArity ifNotEmpty:
-			  	[ aStream nextPut: $(.
-				  anArity allButLastDo:
-					[ :each |
-						each printAsLeibnizSyntaxOn: aStream.
-						aStream nextPutAll: ', ' ].
-				  anArity last printAsLeibnizSyntaxOn: aStream.
-				  aStream nextPut: $) ]. ].
-
-]
-
-{ #category : #printing }
-LbOperator >> printForArity: anArity withSort: aSort On: aStream [
-	self printForArity: anArity On: aStream.
-	aStream nextPutAll: ' : '.
-	aStream nextPutAll: aSort asString.
-
-]
-
 { #category : #printing }
 LbOperator >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
-	aStream nextPutAll: opSymbol.
+	aStream nextPutAll: name asSymbol.
 	aStream nextPutAll: ': '.
 	kindArity printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' -> '.
@@ -247,7 +211,7 @@ LbOperator >> subArityGraph [
 LbOperator >> title [
 	^String streamContents:
 		[ :stream |
-			self printForArity: kindArity On: stream.
+			self name printForArity: kindArity On: stream.
 			stream nextPutAll: ' : '.
 			self kind printAsLeibnizSyntaxOn: stream. ]
 ]

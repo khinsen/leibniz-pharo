@@ -38,6 +38,9 @@ LbSignatureExamples >> signatureFooBar [
 	builder parseAndAddOp: 'foo : A'.
 	builder parseAndAddOp: 'foo(bar:A) : A'.
 	builder parseAndAddOp: 'A + A : A'.
+	builder parseAndAddOp: 'A[A, A] : A'.
+	builder parseAndAddOp: 'A_{A} : A'.
+	builder parseAndAddOp: 'A^{A} : A'.
 	signature := builder signature.
 	self assert: signature equals: (self signatureFooBarExplicit).
 	^ signature
@@ -51,6 +54,13 @@ LbSignatureExamples >> signatureFooBarExplicit [
 	builder addOp: #foo asLbOperatorName ofSort: #A.
 	builder addVar: #bar asLbOperatorName ofSort: #A.
 	builder addOp: #foo asLbOperatorName withArgs: #(#A) ofSort: #A.
-	builder addOp: #'_+' asLbOperatorName withArgs:#(#A #A)  ofSort: #A.
-	^ builder signature.
+	builder addOp: (LbInfixOperatorName for: '+')
+			withArgs: #(#A #A)  ofSort: #A.
+	builder addOp: (LbBracketOperatorName new)
+			withArgs: #(#A #A #A)  ofSort: #A.
+	builder addOp: (LbSubscriptOperatorName new)
+			withArgs: #(#A #A)  ofSort: #A.
+	builder addOp: (LbSuperscriptOperatorName new)
+			withArgs: #(#A #A)  ofSort: #A.
+	^ builder signature
 ]
