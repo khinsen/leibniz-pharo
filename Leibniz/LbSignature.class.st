@@ -21,7 +21,7 @@ Variables are used in patterns that match different terms. A variable is defined
 
 "
 Class {
-	#name : #LeibnizSignature,
+	#name : #LbSignature,
 	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -35,7 +35,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizSignature class >> sortGraph: aSortGraph builtins: aSet operators: anOperatorDictionary variables: aVariableDictionary [
+LbSignature class >> sortGraph: aSortGraph builtins: aSet operators: anOperatorDictionary variables: aVariableDictionary [
 	^ self basicNew
 			 initializeWithSortGraph: aSortGraph
 								builtins: aSet
@@ -46,17 +46,17 @@ LeibnizSignature class >> sortGraph: aSortGraph builtins: aSet operators: anOper
 ]
 
 { #category : #copying }
-LeibnizSignature >> copy [
+LbSignature >> copy [
 	^self
 ]
 
 { #category : #copying }
-LeibnizSignature >> deepCopy [
+LbSignature >> deepCopy [
 	^self
 ]
 
 { #category : #inspecting }
-LeibnizSignature >> gtInspectorOperatorsIn: composite [
+LbSignature >> gtInspectorOperatorsIn: composite [
 	"Show a list of all variables"
 
 	<gtInspectorPresentationOrder: 0>
@@ -71,7 +71,7 @@ LeibnizSignature >> gtInspectorOperatorsIn: composite [
 ]
 
 { #category : #inspecting }
-LeibnizSignature >> gtInspectorVariablesIn: composite [
+LbSignature >> gtInspectorVariablesIn: composite [
 	"Show a list of all variables"
 
 	<gtInspectorPresentationOrder: 1>
@@ -83,13 +83,37 @@ LeibnizSignature >> gtInspectorVariablesIn: composite [
 		when: [ variables isNotEmpty ]
 ]
 
+{ #category : #inspecting }
+LbSignature >> gtViewOperatorListOn: aView [
+	<gtView>
+	operators isEmpty ifTrue: [ ^ aView empty ].
+	^ aView columnedTree
+		title: 'Operators' translated;
+		priority: 0;
+		items: [operators keys];
+		column: 'Kind arity' item: [ :each |
+			(each isSymbol)
+				ifTrue: [ each ]
+				ifFalse: [ each kindArity asLeibnizSyntaxString ] ];
+		column: 'Kind' item: [:each |
+			(each isSymbol)
+				ifTrue: [ '' asRopedText ]
+				ifFalse: [ each kind asLeibnizSyntaxString  ] ];
+		children: [ :each |
+			(each isSymbol)
+				ifTrue: [ (operators at: each) values sorted: [:a :b | a kindArity size < b kindArity size] ]
+				ifFalse: [ #() ] ];
+		expandOneLevel;
+		yourself
+]
+
 { #category : #testing }
-LeibnizSignature >> hasBuiltin: aSymbol [
+LbSignature >> hasBuiltin: aSymbol [
 	^builtins includes: aSymbol
 ]
 
 { #category : #initializing }
-LeibnizSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: anOperatorDictionary variables: aVariableDictionary [
+LbSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: anOperatorDictionary variables: aVariableDictionary [
 	sortGraph := aSortGraph.
 	builtins := aSet.
 	operators := anOperatorDictionary.
@@ -99,7 +123,7 @@ LeibnizSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators
 ]
 
 { #category : #'term construction' }
-LeibnizSignature >> nonZeroArgTermNamed: aSymbol withArgs: aTermArray [
+LbSignature >> nonZeroArgTermNamed: aSymbol withArgs: aTermArray [
 	| argSorts |
 	argSorts := aTermArray collect: [ :t | t sort ].
 	(self sortOfOp: aSymbol withArgSorts: argSorts)
@@ -112,7 +136,7 @@ LeibnizSignature >> nonZeroArgTermNamed: aSymbol withArgs: aTermArray [
 ]
 
 { #category : #'term construction' }
-LeibnizSignature >> nonZeroArgTermNamed: aSymbol withArgs: aTermArray onError: aBlock [
+LbSignature >> nonZeroArgTermNamed: aSymbol withArgs: aTermArray onError: aBlock [
 	| result |
 	result := self nonZeroArgTermNamed: aSymbol withArgs: aTermArray.
 	result
@@ -122,17 +146,17 @@ LeibnizSignature >> nonZeroArgTermNamed: aSymbol withArgs: aTermArray onError: a
 ]
 
 { #category : #accessing }
-LeibnizSignature >> numberOfOperators [
+LbSignature >> numberOfOperators [
 	^operators size
 ]
 
 { #category : #accessing }
-LeibnizSignature >> numberOfVariables [
+LbSignature >> numberOfVariables [
 	^variables size
 ]
 
 { #category : #accessing }
-LeibnizSignature >> opNamed: aSymbol withArgs: aSortArray [
+LbSignature >> opNamed: aSymbol withArgs: aSortArray [
 	| kindArity |
 	kindArity := LbArity sortGraph: sortGraph
 									  argSortConstraints: (aSortArray collect:
@@ -146,19 +170,19 @@ LeibnizSignature >> opNamed: aSymbol withArgs: aSortArray [
 ]
 
 { #category : #accessing }
-LeibnizSignature >> ranksMatchingfOp: aSymbol withArgs: aSortArray [
+LbSignature >> ranksMatchingfOp: aSymbol withArgs: aSortArray [
 	(self opNamed: aSymbol withArgs: aSortArray)
 		ifNil: [ ^ OrderedCollection new. ]
 		ifNotNil: [ :op | ^ op ranksMatchingArgSorts: aSortArray]
 ]
 
 { #category : #accessing }
-LeibnizSignature >> sortGraph [
+LbSignature >> sortGraph [
 	^sortGraph
 ]
 
 { #category : #accessing }
-LeibnizSignature >> sortOfOp: aSymbol withArgSorts: aSortArray [
+LbSignature >> sortOfOp: aSymbol withArgSorts: aSortArray [
 	self flag: #todo.
 	(self opNamed: aSymbol withArgs: aSortArray)
 		ifNotNil: [ :op | ^ op sortForArgSorts: aSortArray ].
@@ -173,18 +197,18 @@ LeibnizSignature >> sortOfOp: aSymbol withArgSorts: aSortArray [
 ]
 
 { #category : #inspecting }
-LeibnizSignature >> title [
+LbSignature >> title [
 	^'signature'
 
 ]
 
 { #category : #enumerating }
-LeibnizSignature >> withBuiltinsDo: aBlock [
+LbSignature >> withBuiltinsDo: aBlock [
 	builtins do: aBlock
 ]
 
 { #category : #enumerating }
-LeibnizSignature >> withOperatorsDo: aBlock [
+LbSignature >> withOperatorsDo: aBlock [
 	operators keysAndValuesDo:
 		[ :symbol :byKindArity |
 		  byKindArity keysAndValuesDo:
@@ -196,13 +220,13 @@ LeibnizSignature >> withOperatorsDo: aBlock [
 ]
 
 { #category : #enumerating }
-LeibnizSignature >> withVariablesDo: aBlock [
+LbSignature >> withVariablesDo: aBlock [
 	variables associationsDo: [ :v | aBlock value: v key value: v value ]
 
 ]
 
 { #category : #'term construction' }
-LeibnizSignature >> zeroArgTermNamed: aSymbol [
+LbSignature >> zeroArgTermNamed: aSymbol [
 	variables at: aSymbol
 		ifPresent: [ :sort | ^ LeibnizVarTerm symbol: aSymbol sort: sort forSignature: self ].
 	(self sortOfOp: aSymbol withArgSorts: #())
@@ -215,14 +239,14 @@ LeibnizSignature >> zeroArgTermNamed: aSymbol [
 ]
 
 { #category : #'term construction' }
-LeibnizSignature >> zeroArgTermNamed: aSymbol extraVariables: aDictionary [
+LbSignature >> zeroArgTermNamed: aSymbol extraVariables: aDictionary [
 	aDictionary at: aSymbol
 		ifPresent: [ :sort | ^ LeibnizVarTerm symbol: aSymbol sort: sort forSignature: self ].
 	^ self zeroArgTermNamed: aSymbol
 ]
 
 { #category : #'term construction' }
-LeibnizSignature >> zeroArgTermNamed: aSymbol extraVariables: aDictionary onError: aBlock [
+LbSignature >> zeroArgTermNamed: aSymbol extraVariables: aDictionary onError: aBlock [
 	| result |
 	result := self zeroArgTermNamed: aSymbol extraVariables: aDictionary.
 	result ifNil: [ ^ aBlock value: aSymbol ] ifNotNil: [ ^ result ]
@@ -230,7 +254,7 @@ LeibnizSignature >> zeroArgTermNamed: aSymbol extraVariables: aDictionary onErro
 ]
 
 { #category : #'term construction' }
-LeibnizSignature >> zeroArgTermNamed: aSymbol onError: aBlock [
+LbSignature >> zeroArgTermNamed: aSymbol onError: aBlock [
 	| result |
 	result := self zeroArgTermNamed: aSymbol.
 	result ifNil: [ ^ aBlock value: aSymbol ] ifNotNil: [ ^ result ]

@@ -48,6 +48,11 @@ LbArity >> asArgSorts [
 
 ]
 
+{ #category : #printing }
+LbArity >> asLeibnizSyntaxString [
+	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
+]
+
 { #category : #initializing }
 LbArity >> initializeWithSortGraph: aSortGraph argSortConstraints: aConstraintArray [
 	sortGraph := aSortGraph.
@@ -76,7 +81,6 @@ LbArity >> liftToKindLevel [
 LbArity >> printAsLeibnizSyntaxOn: aStream [
 	self do: [ :sc | sc printAsLeibnizSyntaxOn: aStream ]
 		  separatedBy: [ aStream nextPutAll: ', ' ]
-
 ]
 
 { #category : #printing }
@@ -84,6 +88,5 @@ LbArity >> printOn: aStream [
 	self printNameOn: aStream.
 	aStream nextPut: $(.
 	self printAsLeibnizSyntaxOn: aStream.
-	aStream nextPut: $).
-
+	aStream nextPut: $)
 ]

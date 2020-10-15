@@ -1,7 +1,7 @@
 "
 !A term grammar subclass that generates terms
 
-This is a subclass of ${class:name=LeibnizTermGrammar}$ that adds conversion of the parsed data to Leibniz terms for a given ${class:name=LeibnizSignature}$ and optional additional variables as defined in rules (see ${class:name=LeibnizRuleParser}$). It returns an object from the ${class:name=LeibnizTerm}$ hierarchy corresponding to the input string, or a ${class:name=PP2Failure}$ object in case of failure.
+This is a subclass of ${class:name=LeibnizTermGrammar}$ that adds conversion of the parsed data to Leibniz terms for a given ${class:name=LbSignature}$ and optional additional variables as defined in rules (see ${class:name=LeibnizRuleParser}$). It returns an object from the ${class:name=LeibnizTerm}$ hierarchy corresponding to the input string, or a ${class:name=PP2Failure}$ object in case of failure.
 "
 Class {
 	#name : #LeibnizTermParser,

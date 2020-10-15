@@ -23,6 +23,11 @@ LbKind class >> sortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOfMaxim
 
 ]
 
+{ #category : #printing }
+LbKind >> asLeibnizSyntaxString [
+	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
+]
+
 { #category : #converting }
 LbKind >> asSet [
    ^ sorts collect: [ :each | sortGraph sortNamed: each ]

@@ -1,5 +1,5 @@
 "
-See ${class:name=LeibnizSignature}$.
+See ${class:name=LbSignature}$.
 
 
 "

@@ -129,7 +129,7 @@ LbSignatureBuilder >> parseAndAddVar: aString [
 
 { #category : #accessing }
 LbSignatureBuilder >> signature [
-	^ LeibnizSignature sortGraph: sortGraph builtins: builtins operators: operators deepCopy variables: variables deepCopy.
+	^ LbSignature sortGraph: sortGraph builtins: builtins operators: operators deepCopy variables: variables deepCopy.
 
 
 ]
