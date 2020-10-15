@@ -17,7 +17,7 @@ LbSignatureParser >> bracketOp [
 { #category : #productions }
 LbSignatureParser >> infixOp [
 	^ super infixOp
-		==> [ :nodes | { ('_', nodes second) asSymbol. { nodes first. nodes third } } ]
+		==> [ :nodes | { LbInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
 
 ]
 
@@ -31,7 +31,7 @@ LbSignatureParser >> op [
 { #category : #productions }
 LbSignatureParser >> prefixOp [
 	^ super prefixOp
-		==> [ :nodes | { nodes first asSymbol. nodes third reject: [ :element | element = $,] } ]
+		==> [ :nodes | { LbPrefixOperatorName for: nodes first. nodes third reject: [ :element | element = $,] } ]
 ]
 
 { #category : #productions }
@@ -44,14 +44,14 @@ LbSignatureParser >> sort [
 { #category : #productions }
 LbSignatureParser >> subscriptOp [
 	^ super subscriptOp
-		==> [ :nodes | { #'_'. { nodes first. nodes fourth } } ]
+		==> [ :nodes | { LbSubscriptOperatorName new. { nodes first. nodes fourth } } ]
 
 ]
 
 { #category : #productions }
 LbSignatureParser >> superscriptOp [
 	^ super superscriptOp
-		==> [ :nodes | { #'^'. { nodes first. nodes fourth } } ]
+		==> [ :nodes | { LbSuperscriptOperatorName new. { nodes first. nodes fourth } } ]
 
 ]
 
@@ -65,5 +65,5 @@ LbSignatureParser >> var [
 { #category : #productions }
 LbSignatureParser >> zeroArgOp [
 	^ super zeroArgOp
-		==> [ :idString | { idString asSymbol. #() } ]
+		==> [ :idString | { LbPrefixOperatorName for: idString. #() } ]
 ]
