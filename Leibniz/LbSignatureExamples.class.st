@@ -48,9 +48,9 @@ LbSignatureExamples >> signatureFooBarExplicit [
 	<gtExample>
 	| builder |
 	builder := LbSignatureBuilder sortGraph: self sortGraphABCD.
-	builder addOp: #foo ofSort: #A.
-	builder addVar: #bar ofSort: #A.
-	builder addOp: #foo withArgs: #(#A) ofSort: #A.
-	builder addOp: #'_+' withArgs:#(#A #A)  ofSort: #A.
+	builder addOp: #foo asLbOperatorName ofSort: #A.
+	builder addVar: #bar asLbOperatorName ofSort: #A.
+	builder addOp: #foo asLbOperatorName withArgs: #(#A) ofSort: #A.
+	builder addOp: #'_+' asLbOperatorName withArgs:#(#A #A)  ofSort: #A.
 	^ builder signature.
 ]
