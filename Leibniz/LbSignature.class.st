@@ -84,7 +84,7 @@ LbSignature >> gtInspectorVariablesIn: composite [
 ]
 
 { #category : #inspecting }
-LbSignature >> gtViewOperatorListOn: aView [
+LbSignature >> gtViewOperatorsOn: aView [
 	<gtView>
 	operators isEmpty ifTrue: [ ^ aView empty ].
 	^ aView columnedTree
@@ -107,6 +107,19 @@ LbSignature >> gtViewOperatorListOn: aView [
 		yourself
 ]
 
+{ #category : #accessing }
+LbSignature >> gtViewVariablesOn: aView [
+	<gtView>
+	variables isEmpty ifTrue: [ ^ aView empty ].
+	^ aView columnedList
+		title: 'Variables' translated;
+		priority: 1;
+		items: [ variables associations sorted: [ :a :b | a key < b key ]];
+		column: 'Name' item: [ :each | each key ];
+		column: 'Sort' item: [ :each | each value ];
+		yourself
+]
+
 { #category : #testing }
 LbSignature >> hasBuiltin: aSymbol [
 	^builtins includes: aSymbol
@@ -119,7 +132,6 @@ LbSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: anO
 	operators := anOperatorDictionary.
 	variables := aVariableDictionary.
 	self beRecursivelyReadOnlyObject.
-
 ]
 
 { #category : #'term construction' }
@@ -193,12 +205,6 @@ LbSignature >> sortOfOp: aSymbol withArgSorts: aSortArray [
 				and: [ aSortArray size = 2 ] ])
 		ifTrue: [ ^ #boolean ].
 	^ nil
-
-]
-
-{ #category : #inspecting }
-LbSignature >> title [
-	^'signature'
 
 ]
 
