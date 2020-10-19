@@ -37,6 +37,9 @@ LbSignatureExamples >> signatureFooBar [
 	builder := LbSignatureBuilder sortGraph: self sortGraphABCD.
 	builder parseAndAddOp: 'foo : A'.
 	builder parseAndAddOp: 'foo(bar:A) : A'.
+	builder parseAndAddOp: 'foo(B) : B'.
+	builder parseAndAddOp: 'foo(C) : C'.
+	builder parseAndAddOp: 'foo(D) : D'.
 	builder parseAndAddOp: 'A + A : A'.
 	builder parseAndAddOp: 'A[A, A] : A'.
 	builder parseAndAddOp: 'A_{A} : A'.
@@ -54,6 +57,9 @@ LbSignatureExamples >> signatureFooBarExplicit [
 	builder addOp: #foo asLbOperatorName ofSort: #A.
 	builder addVar: #bar asLbOperatorName ofSort: #A.
 	builder addOp: #foo asLbOperatorName withArgs: #(#A) ofSort: #A.
+	builder addOp: #foo asLbOperatorName withArgs: #(#B) ofSort: #B.
+	builder addOp: #foo asLbOperatorName withArgs: #(#C) ofSort: #C.
+	builder addOp: #foo asLbOperatorName withArgs: #(#D) ofSort: #D.
 	builder addOp: (LbInfixOperatorName for: '+')
 			withArgs: #(#A #A)  ofSort: #A.
 	builder addOp: (LbBracketOperatorName new)

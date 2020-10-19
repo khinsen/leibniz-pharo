@@ -82,6 +82,16 @@ LbSortGraph >> graphEdgesForSubset: aSet [
 ]
 
 { #category : #viewing }
+LbSortGraph >> graphNodeForSort: aSort [
+	| text |
+	text := aSort name asString asRopedText.
+	text fontName: (LbCodeFont defaultFamily).
+	^ BlTextElement new
+		text: text;
+		padding: (BlInsets all: 5)
+]
+
+{ #category : #viewing }
 LbSortGraph >> grayArrow [
 	^ BlLineElement new
 		toHead: (BlArrowheadSimpleArrow new
@@ -90,15 +100,15 @@ LbSortGraph >> grayArrow [
 ]
 
 { #category : #inspecting }
-LbSortGraph >> gtTreeViewFor: aView [
+LbSortGraph >> gtGraphFor: aView [
 	<gtView>
 	^ aView mondrian
-		title: 'Tree view';
+		title: 'Graph';
 		priority: 0;
 		painting: [ :view | 
 			| edges |
 			view nodes
-				shape: [ :x | self nodeForSort: x ];
+				shape: [ :x | self graphNodeForSort: x ];
 				with: self asSet.
 			view edges
 				shape: [ :x | self grayArrow ];
@@ -199,21 +209,6 @@ LbSortGraph >> kinds [
 { #category : #accessing }
 LbSortGraph >> maximalSorts [
 	^  maximalSorts collect: [ :aSymbol | self sortNamed: aSymbol ]
-]
-
-{ #category : #viewing }
-LbSortGraph >> nodeForSort: aSort [
-	| text |
-	text := aSort name asString asRopedText.
-	text fontName: (LbCodeFont defaultFamily).
-	^ BlTextElement new
-		text: text;
-		padding:
-			(BlInsets
-				top: 5
-				right: 5
-				bottom: 5
-				left: 5)
 ]
 
 { #category : #viewing }

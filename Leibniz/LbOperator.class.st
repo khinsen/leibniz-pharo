@@ -54,8 +54,8 @@ LbOperator >> addArity: newArity withSort: newSort [
 							 ^self ].
 
 			(a <= newArity)
-				ifTrue: [ self assertMonotonicity: [ sortGraph is: s subsortOf: newSort ]
-									forArity: newArity andSort: newSort]. ].
+				ifTrue: [ self assertMonotonicity: [ s <= newSort ]
+							   forArity: newArity andSort: newSort]. ].
 
 	ranks add: newArity -> newSort.
 ]
@@ -77,11 +77,68 @@ LbOperator >> addGraphToBuilder: aBuilder [
 				[ aBuilder edges connectFrom: (ranks at: i) to: (ranks at: j) ] ].
 ]
 
+{ #category : #inspecting }
+LbOperator >> arrowInGraph [
+	^ BlLineElement new
+		toHead: (BlArrowheadSimpleArrow new
+					border: (BlBorder paint: Color gray width: 1));
+		border: (BlBorder paint: Color gray width: 1)
+]
+
 { #category : #'error signalling' }
 LbOperator >> assertMonotonicity: aBlock forArity: anArity andSort: aSort [
 	self assert: aBlock
 		  description: 'new rank ', anArity printString,
 							' -> ', aSort asString, ' makes operator non-monotonic'.
+]
+
+{ #category : #inspecting }
+LbOperator >> graphEdges [
+	| saGraph edges |
+	saGraph := self minimalSubArityGraph.
+	edges := OrderedCollection new.
+	saGraph withIndicesDo:
+		[ :edge :i :j |
+		  edge = 1 ifTrue:
+				[ edges add: (ranks at: i) -> (ranks at: j) ] ].
+	^ edges
+]
+
+{ #category : #inspecting }
+LbOperator >> graphNodeForRank: anAssociation [
+	| arity sort text |
+	arity := anAssociation key.
+	sort := anAssociation value.
+	text := (String streamContents:
+				[ :s | self name printForArity: arity withSort: sort On: s ] )
+			asRopedText.
+	text fontName: (LbCodeFont defaultFamily).
+	^ BlTextElement new
+		text: text;
+		padding: (BlInsets all: 3);
+		border: (BlBorder paint: Color gray)
+]
+
+{ #category : #inspecting }
+LbOperator >> gtGraphFor: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Graph';
+		priority: 0;
+		painting: [ :view | 
+			| edges |
+			view nodes
+				shape: [ :r | self graphNodeForRank: r ];
+				with: ranks.
+			view edges
+				shape: [ :x | self arrowInGraph ];
+				fromCenterTop;
+				toCenterBottom;
+				connect: (self graphEdges)
+					from: #key
+					to: #value.
+			view layout
+				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
 { #category : #inspecting }
@@ -171,14 +228,13 @@ LbOperator >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	aStream nextPutAll: name asSymbol.
-	aStream nextPutAll: ': '.
+	aStream nextPutAll: ': ('.
 	kindArity printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: ' -> '.
+	aStream nextPutAll: ') -> '.
 	kind printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ', '.
 	ranks size printOn: aStream.
-	aStream nextPutAll: ' ranks)'.
-
+	aStream nextPutAll: ' rank(s)'.
 ]
 
 { #category : #accessing }
@@ -198,13 +254,17 @@ LbOperator >> sortForArgSorts: aSortArray [
 	^ (self leastRankForArgSorts: aSortArray) value
 ]
 
+{ #category : #accessing }
+LbOperator >> sortGraph [
+	^ sortGraph
+]
+
 { #category : #viewing }
 LbOperator >> subArityGraph [
-	^Array2D new: ranks size tabulate:
+	^ Array2D new: ranks size tabulate:
 		[ :i :j |
 			(i ~= j and: [ (ranks at: i) key <= (ranks at: j) key ])
 				ifTrue: [ 1 ] ifFalse: [ 0 ] ]
-
 ]
 
 { #category : #inspecting }

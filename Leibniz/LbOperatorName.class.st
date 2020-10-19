@@ -49,7 +49,7 @@ LbOperatorName >> printForArity: anArity On: aStream [
 LbOperatorName >> printForArity: anArity withSort: aSort On: aStream [
 	self printForArity: anArity On: aStream.
 	aStream nextPutAll: ' : '.
-	aStream nextPutAll: aSort asString.
+	aStream nextPutAll: aSort asLeibnizSyntaxString.
 ]
 
 { #category : #accessing }

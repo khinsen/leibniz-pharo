@@ -53,6 +53,16 @@ LbArity >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
+{ #category : #inspecting }
+LbArity >> gtArgumentsFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Arguments' translated;
+		priority: 0;
+		items: [ self ];
+		itemText: [ :each | each asLeibnizSyntaxString ]
+]
+
 { #category : #initializing }
 LbArity >> initializeWithSortGraph: aSortGraph argSortConstraints: aConstraintArray [
 	sortGraph := aSortGraph.

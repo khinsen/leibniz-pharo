@@ -14,8 +14,13 @@ Class {
 	#category : #'Leibniz-1-SortGraphs'
 }
 
+{ #category : #printing }
+LbSortClassifier >> asLeibnizSyntaxString [
+	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
+]
+
 { #category : #inspecting }
-LbSortClassifier >> gtTreeViewFor: aView [
+LbSortClassifier >> gtGraphFor: aView [
 	<gtView>
 	^ aView mondrian
 		title: 'Tree view';

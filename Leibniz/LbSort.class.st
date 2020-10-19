@@ -26,11 +26,6 @@ LbSort >> <= aSort [
 	^ self sortGraph is: self name subsortOf: aSort name
 ]
 
-{ #category : #printing }
-LbSort >> asLeibnizSyntaxString [
-	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
-]
-
 { #category : #accessing }
 LbSort >> asSet [
 	^ self subsorts
