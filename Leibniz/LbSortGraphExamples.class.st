@@ -15,7 +15,12 @@ LbSortGraphExamples >> emptySortGraph [
 { #category : #example }
 LbSortGraphExamples >> kindOfA [
 	<gtExample>
-	^ self sortA kind
+	| kind |
+	kind := self sortA kind.
+	kind asSet do: [ :each | self assert: each kind = kind ].
+	self assert: kind size = 4.
+	self assert: (kind sortGraph kinds includes: kind).
+	^ kind
 ]
 
 { #category : #example }
@@ -43,11 +48,18 @@ LbSortGraphExamples >> sortA [
 ]
 
 { #category : #example }
+LbSortGraphExamples >> sortB [
+	<gtExample>
+	^ self sortGraphABCDVW sortNamed: #B
+]
+
+{ #category : #example }
 LbSortGraphExamples >> sortGraphABCD [
 	<gtExample>
 	| sortGraph |
 	sortGraph := self sortGraphBuilderABCD sortGraph.
     self assert: sortGraph equals: (self sortGraphABCDExplicit).
+    self assert: (sortGraph = self emptySortGraph) not.
     self assert: sortGraph asSet
     	 equals: (#(#A #B #C #D) asSet collect: [ :each | sortGraph sortNamed: each ]).
     self shouldnt: [ sortGraph sortNamed: #A ] raise: Error.
@@ -138,4 +150,14 @@ LbSortGraphExamples >> sortGraphUnion [
 	self assert: (union union: self emptySortGraph) equals: union.
 	self assert: (self emptySortGraph union: union) equals: union.
 	^ union
+]
+
+{ #category : #example }
+LbSortGraphExamples >> subsortsOfB [
+	<gtExample>
+	| subsorts |
+	subsorts := self sortB subsorts.
+	subsorts do: [ :each | each <= self sortB ].
+	self assert: subsorts = (Set with:self sortA with: self sortB).
+	^ subsorts
 ]

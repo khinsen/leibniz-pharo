@@ -140,22 +140,20 @@ LbSignature >> numberOfVariables [
 ]
 
 { #category : #accessing }
-LbSignature >> opNamed: aSymbol withArgs: aSortArray [
+LbSignature >> opNamed: anOpName withArgs: aSortArray [
 	| kindArity |
-	kindArity := LbArity sortGraph: sortGraph
-									  argSortConstraints: (aSortArray collect:
-																	[ :s | LeibnizKindConstraint sortGraph: sortGraph kind: (sortGraph kindOf: s)]).
-	operators at: aSymbol
+	kindArity := (LbArity sortGraph: sortGraph
+						  argSorts: aSortArray)
+					liftToKindLevel.
+	^ operators at: anOpName
 		ifPresent: [ :ops | ops at: kindArity
-									ifPresent: [ :op | ^ op ]
-									ifAbsent: [ ^ nil ]]
-		ifAbsent: [ ^ nil ].
-
+								ifAbsent: [ nil ]]
+		ifAbsent: [ nil ].
 ]
 
 { #category : #accessing }
-LbSignature >> ranksMatchingfOp: aSymbol withArgs: aSortArray [
-	(self opNamed: aSymbol withArgs: aSortArray)
+LbSignature >> ranksMatchingfOp: anOpName withArgs: aSortArray [
+	(self opNamed: anOpName withArgs: aSortArray)
 		ifNil: [ ^ OrderedCollection new. ]
 		ifNotNil: [ :op | ^ op ranksMatchingArgSorts: aSortArray]
 ]

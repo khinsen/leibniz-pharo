@@ -36,6 +36,11 @@ LbOperatorName >> asSymbol [
 ]
 
 { #category : #accessing }
+LbOperatorName >> internalSymbol [
+	^ internalSymbol
+]
+
+{ #category : #accessing }
 LbOperatorName >> internalSymbol: aSymbolOrString [
 	internalSymbol := aSymbolOrString asSymbol
 ]
