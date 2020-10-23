@@ -48,33 +48,16 @@ LbOperator >> addArity: newArity withSort: newSort [
 					  ^self ].
 
 			(newArity <= a)
-				ifTrue: [ self assertMonotonicity: [ sortGraph is: newSort subsortOf: s ]
-									forArity: newArity andSort: newSort.
-							 ranks add: newArity -> newSort beforeIndex: index.
-							 ^self ].
+				ifTrue: [ self assertMonotonicity: [ newSort <= s ]
+							   forArity: newArity andSort: newSort.
+						  ranks add: newArity -> newSort beforeIndex: index.
+						  ^ self ].
 
 			(a <= newArity)
 				ifTrue: [ self assertMonotonicity: [ s <= newSort ]
 							   forArity: newArity andSort: newSort]. ].
 
 	ranks add: newArity -> newSort.
-]
-
-{ #category : #viewing }
-LbOperator >> addGraphToBuilder: aBuilder [
-	| saGraph |
-	aBuilder shape label
-		text: [ :r | (String streamContents:
-							[ :s | self name printForArity: r key withSort: r value on: s ])];
-		fontName: (LbCodeFont defaultFamily);
-		color: (Color black).
-	aBuilder nodes: ranks.
-	aBuilder shape arrowedLine withShorterDistanceAttachPoint.
-	saGraph := self minimalSubArityGraph.
-	saGraph withIndicesDo:
-		[ :edge :i :j |
-		  edge = 1 ifTrue:
-				[ aBuilder edges connectFrom: (ranks at: i) to: (ranks at: j) ] ].
 ]
 
 { #category : #inspecting }
@@ -150,15 +133,6 @@ LbOperator >> gtInspectorNetworkViewIn: composite [
 
 ]
 
-{ #category : #inspecting }
-LbOperator >> gtInspectorTreeViewIn: composite [
-	<gtInspectorPresentationOrder: -11>
-	composite roassal2
-		title: 'Tree View';
-		initializeView: self treeView.
-
-]
-
 { #category : #initializing }
 LbOperator >> initializeWithName: anOpName argKinds: aKindArray kind: aKind [
 	name := anOpName.
@@ -212,17 +186,6 @@ LbOperator >> name [
 	^ name
 ]
 
-{ #category : #viewing }
-LbOperator >> networkView [
-	| b |
-	b := RTMondrian new.
-	self addGraphToBuilder: b.
-	b layout forceWithCharge: (ranks size * 1000 - 15000 min: -2000).
-	b build.
-	^ b view
-
-]
-
 { #category : #printing }
 LbOperator >> printOn: aStream [
 	super printOn: aStream.
@@ -274,20 +237,6 @@ LbOperator >> title [
 			self name printForArity: kindArity on: stream.
 			stream nextPutAll: ' : '.
 			self kind printAsLeibnizSyntaxOn: stream. ]
-]
-
-{ #category : #viewing }
-LbOperator >> treeView [
-	| b |
-	b := RTMondrian new.
-	self addGraphToBuilder: b.
-	b layout dominanceTree
-		verticallyReverse;
-		horizontalGap: 20;
-		verticalGap: 50.
-	b build.
-	^ b view
-
 ]
 
 { #category : #enumerating }

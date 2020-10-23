@@ -4,6 +4,13 @@ Class {
 	#category : #'Leibniz-0-Infrastructure'
 }
 
+{ #category : #inspecting }
+LbCodeFont class >> brLabelCellStencil [
+	^ [ BrLabel new
+			look: (BrGlamorousLabelLook new
+                fontName: self defaultFamily) ]
+]
+
 { #category : #selecting }
 LbCodeFont class >> chooseDefaultFamily [
 	| availableFamilies |
@@ -15,11 +22,17 @@ LbCodeFont class >> chooseDefaultFamily [
 	self error: 'No suitable Unicode font for Leibniz code'
 ]
 
+{ #category : #inspecting }
+LbCodeFont class >> columnDoBlock [
+	^ [ :aColumn | aColumn
+        cellStencil: [
+            BrLabel new
+                look: (BrGlamorousLabelLook new
+                			fontName: self defaultFamily) ];
+        dataBinder: [ :eachLabel :eachText |  eachLabel text: eachText ] ]
+]
+
 { #category : #accessing }
 LbCodeFont class >> defaultFamily [
 	^ 'Arial Unicode MS'
-]
-
-{ #category : #'as yet unclassified' }
-LbCodeFont >> defaultFamily [ ^ 'Arial Unicode MS'
 ]

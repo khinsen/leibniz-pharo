@@ -36,36 +36,36 @@ LbSignatureBuilder >> addBuiltinsFromSignature: aSignature [
 ]
 
 { #category : #adding }
-LbSignatureBuilder >> addOp: anOpName ofSort: aSortSymbol [
-	self addOp: anOpName withArgs: #() ofSort: aSortSymbol
+LbSignatureBuilder >> addOp: anOpName ofSort: aSort [
+	self addOp: anOpName withArgs: #() ofSort: aSort
 ]
 
 { #category : #adding }
-LbSignatureBuilder >> addOp: anOpName withArgs: aSortNameArray ofSort: aSortName [
-	| sort arity kindArity operator |
-	aSortNameArray ifEmpty: [
+LbSignatureBuilder >> addOp: anOpName withArgs: aSortArray ofSort: aSort [
+	| arity kindArity operator |
+	aSortArray ifEmpty: [
+		| sort |
 		sort := variables at: anOpName asSymbol ifAbsent: nil.
 		self assert: sort isNil
 			 description: [ 'conflicting earlier variable definition with sort ', sort name asString ] ].
-	arity := LbArity sortGraph: sortGraph
-					 argSorts: (aSortNameArray collect: [ :name | sortGraph sortNamed: name ]).
+	arity := LbArity sortGraph: sortGraph argSorts: aSortArray.
 	kindArity := arity liftToKindLevel.
-	sort := sortGraph sortNamed: aSortName.
 	operator := (operators at: anOpName
 						   ifAbsentPut: [ Dictionary new ])
 					at: kindArity
 					ifAbsentPut: [ LbOperator name: anOpName
 											  argKinds: kindArity
-											  kind: sort kind ].
-	operator addArity: arity withSort: sort.
+											  kind: aSort kind ].
+	operator addArity: arity withSort: aSort.
 ]
 
 { #category : #adding }
 LbSignatureBuilder >> addOpsFromSignature: aSignature [
 	aSignature withOperatorsDo:
-		[ :symbol :args :sort |
-		  self addOp: symbol withArgs: args ofSort: sort ].
-
+		[ :name :args :sort |
+		  | adoptedArgs |
+		  adoptedArgs := args collect: [ :each | self adoptSort: each ].
+		  self addOp: name withArgs: adoptedArgs ofSort: (self adoptSort: sort) ]
 ]
 
 { #category : #adding }
@@ -73,7 +73,6 @@ LbSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
 	self addBuiltinsFromSignature: aSignature.
 	self addOpsFromSignature: aSignature.
 	aBoolean ifTrue: [ self addVarsFromSignature: aSignature ]
-
 ]
 
 { #category : #adding }
@@ -98,6 +97,12 @@ LbSignatureBuilder >> addVarsFromSignature: aSignature [
 
 ]
 
+{ #category : #converting }
+LbSignatureBuilder >> adoptSort: aSort [
+	"Adopt a sort from a foreign sort graph, by name"
+	^ sortGraph sortNamed: aSort name
+]
+
 { #category : #initializing }
 LbSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 	sortGraph := aSortGraph.
@@ -112,8 +117,8 @@ LbSignatureBuilder >> parseAndAddOp: aString [
 	opSpec := LbSignatureParser parse: aString.
 	op := opSpec first first.
 	args := opSpec first second.
-	sort := opSpec second.
-	argSorts := args collect: [ :each | each last ].
+	sort := sortGraph sortNamed: opSpec second.
+	argSorts := args collect: [ :each | sortGraph sortNamed: each last ].
 	args select: [ :each | each size = 2 ]
 		  thenDo: [ :each | self addVar: each first ofSort:  each second ].
 	args ifEmpty: [ self addOp: op ofSort: sort ]
@@ -124,7 +129,7 @@ LbSignatureBuilder >> parseAndAddOp: aString [
 LbSignatureBuilder >> parseAndAddVar: aString [
 	| var |
 	var := LbSignatureParser parse: aString startingAt: #var.
-	self addVar: var first ofSort: var second.
+	self addVar: var first ofSort: (sortGraph sortNamed: var second).
 ]
 
 { #category : #accessing }

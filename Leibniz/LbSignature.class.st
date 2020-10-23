@@ -63,14 +63,24 @@ LbSignature >> gtOperatorsFor: aView [
 		title: 'Operators' translated;
 		priority: 0;
 		items: [ operators keys sorted ];
-		column: 'Kind arity' item: [ :each |
-			(each isKindOf: LbOperatorName)
-				ifTrue: [ each synopsis ]
-				ifFalse: [ each name printStringForArity: each kindArity ] ];
-		column: 'Kind' item: [:each |
+		column: 'Kind arity' do: [ :aColumn |
+			aColumn cellStencil: LbCodeFont brLabelCellStencil;
+			dataBinder: [ :eachLabel :eachItem |
+				eachLabel text:
+					((eachItem isKindOf: LbOperatorName)
+						ifTrue: [ eachItem synopsis ]
+						ifFalse: [ eachItem name printStringForArity: eachItem kindArity ]) ] ];
+		column: 'Kind' do: [ :aColumn |
+			aColumn cellStencil: LbCodeFont brLabelCellStencil;
+			dataBinder: [ :eachLabel :eachItem |
+				eachLabel text:
+					((eachItem isKindOf: LbOperatorName)
+						ifTrue: [ '' ]
+						ifFalse: [ eachItem kind asLeibnizSyntaxString ]) ] ];
+"		column: 'Kind' item: [:each |
 			(each isKindOf: LbOperatorName)
 				ifTrue: [ '' asRopedText ]
-				ifFalse: [ each kind asLeibnizSyntaxString  ] ];
+				ifFalse: [ each kind asLeibnizSyntaxString asRopedText fontName: (LbCodeFont defaultFamily) ] ];"
 		children: [ :each |
 			(each isKindOf: LbOperatorName)
 				ifTrue: [ (operators at: each) values sorted: [:a :b | a kindArity size < b kindArity size] ]
@@ -191,7 +201,7 @@ LbSignature >> withOperatorsDo: aBlock [
 			[ :kindArity :operator |
 			  operator withRanksDo:
 				[ :args :sort |
-				  aBlock value: symbol value: args asArgSorts value: sort ]]]
+				  aBlock value: symbol value: args value: sort ]]]
 
 ]
 

@@ -265,10 +265,9 @@ LbSortGraph >> subsortsOf: aSymbol [
 
 { #category : #enumerating }
 LbSortGraph >> union: aSortGraph [ 
-	| b |
-	b := self asSortGraphBuilder.
-	b addSortGraph: aSortGraph.
-	^ b sortGraph
+	^ self asSortGraphBuilder
+		addSortGraph: aSortGraph;
+		sortGraph
 ]
 
 { #category : #private }
