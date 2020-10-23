@@ -36,22 +36,6 @@ LbOpTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 
 ]
 
-{ #category : #inspecting }
-LbOpTerm >> gtTreeFor: aView [
-	<gtView>
-	^ aView columnedTree
-		title: 'Tree' translated;
-		priority: 0;
-		items: [ { self } ];
-		column: 'Term' item: [ :each |
-			each opName synopsis ];
-		column: 'Sort' item: [ :each |
-			each sort asLeibnizSyntaxString ];
-		children: #arguments;
-		expandAll;
-		yourself
-]
-
 { #category : #private }
 LbOpTerm >> hasInfixOpOtherThan: aSymbol [
 	"Not the same op."
@@ -139,6 +123,11 @@ LbOpTerm >> substitute: aSubstitution [
 	substitutedArgList := arguments collect: [ :arg | arg substitute: aSubstitution ].
 	^ signature nonZeroArgTermNamed: opName withArgs: substitutedArgList
 
+]
+
+{ #category : #inspecting }
+LbOpTerm >> synopsis [
+	^ self opName synopsis
 ]
 
 { #category : #accessing }

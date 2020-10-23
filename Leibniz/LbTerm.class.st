@@ -12,6 +12,11 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
+{ #category : #accessing }
+LbTerm >> arguments [
+	^ #()
+]
+
 { #category : #converting }
 LbTerm >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
@@ -30,6 +35,22 @@ LbTerm >> convertToSignature: aSignature [
 { #category : #converting }
 LbTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	self subclassResponsibility
+]
+
+{ #category : #accessing }
+LbTerm >> gtTreeFor: aView [
+	<gtView>
+	^ aView columnedTree
+		title: 'Tree' translated;
+		priority: 0;
+		items: [ { self } ];
+		column: 'Term' item: [ :each |
+			each synopsis ];
+		column: 'Sort' item: [ :each |
+			each sort asLeibnizSyntaxString ];
+		children: #arguments;
+		expandAll;
+		yourself
 ]
 
 { #category : #private }
@@ -101,6 +122,12 @@ LbTerm >> sort [
 { #category : #substituting }
 LbTerm >> substitute: aSubstitution [
 	self subclassResponsibility
+]
+
+{ #category : #inspecting }
+LbTerm >> synopsis [
+	"The text shown in a tree view. This is the full term except for LbOpTerms"
+	^ self asLeibnizSyntaxString
 ]
 
 { #category : #accessing }
