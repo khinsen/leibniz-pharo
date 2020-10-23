@@ -402,11 +402,11 @@ LeibnizBuiltins >> createTruthContext [
 	"The special equality operator"
 "	truth addOp: #'_==' withArgs: #(nil nil) ofSort: #boolean.
 "	"The special rule for term equality a == b"
-"	uvar1 := LeibnizUniversalVarTerm symbol: #X forSignature: truth signature.
-	uvar2 := LeibnizUniversalVarTerm symbol: #Y forSignature: truth signature.
-	equalityPattern := LeibnizOpTerm symbol: #'_==' args: { uvar1. uvar2 } sort: #boolean
+"	uvar1 := LbUniversalVarTerm symbol: #X forSignature: truth signature.
+	uvar2 := LbUniversalVarTerm symbol: #Y forSignature: truth signature.
+	equalityPattern := LbOpTerm symbol: #'_==' args: { uvar1. uvar2 } sort: #boolean
 											  forSignature: truth signature.
-	truth addRule: (LeibnizFunctionRule pattern: equalityPattern function: #('X = Y' #LeibnizBooleanTerm)).
+	truth addRule: (LeibnizFunctionRule pattern: equalityPattern function: #('X = Y' #LbBooleanTerm)).
 "	truth build.
 
 ]

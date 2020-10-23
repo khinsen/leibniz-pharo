@@ -10,7 +10,7 @@ LbPrefixOperatorName class >> for: aStringOrSymbol [
 ]
 
 { #category : #printing }
-LbPrefixOperatorName >> printForArity: anArity On: aStream [
+LbPrefixOperatorName >> printForArity: anArity on: aStream [
 	aStream nextPutAll: internalSymbol.
 	anArity ifNotEmpty: [
 		aStream nextPut: $(.

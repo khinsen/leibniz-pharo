@@ -10,7 +10,7 @@ LbSubscriptOperatorName >> initialize [
 ]
 
 { #category : #printing }
-LbSubscriptOperatorName >> printForArity: anArity On: aStream [
+LbSubscriptOperatorName >> printForArity: anArity on: aStream [
 	self assert: anArity size equals: 2.
 	anArity first printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: '_{'.

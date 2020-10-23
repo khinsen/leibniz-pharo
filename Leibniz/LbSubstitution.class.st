@@ -2,7 +2,7 @@
 I represent the mapping from variables to values that results from matching a term to a pattern.
 "
 Class {
-	#name : #LeibnizSubstitution,
+	#name : #LbSubstitution,
 	#superclass : #Object,
 	#instVars : [
 		'variables'
@@ -11,14 +11,14 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizSubstitution class >> variable: aSymbol value: aTerm [
+LbSubstitution class >> variable: aSymbol value: aTerm [
 	^self basicNew
 			initializeWithVariable: aSymbol value: aTerm;
 			yourself.
 ]
 
 { #category : #accessing }
-LeibnizSubstitution >> combineWith: anotherMatch [
+LbSubstitution >> combineWith: anotherMatch [
 	anotherMatch variables keysAndValuesDo:
 		[ :name :value |
 		  variables at: name
@@ -27,18 +27,18 @@ LeibnizSubstitution >> combineWith: anotherMatch [
 ]
 
 { #category : #initialization }
-LeibnizSubstitution >> initialize [
+LbSubstitution >> initialize [
 	variables := Dictionary new
 ]
 
 { #category : #initialization }
-LeibnizSubstitution >> initializeWithVariable: aSymbol value: aTerm [
+LbSubstitution >> initializeWithVariable: aSymbol value: aTerm [
 	self initialize.
 	variables at: aSymbol put: aTerm.
 
 ]
 
 { #category : #accessing }
-LeibnizSubstitution >> variables [
+LbSubstitution >> variables [
 	^ variables
 ]

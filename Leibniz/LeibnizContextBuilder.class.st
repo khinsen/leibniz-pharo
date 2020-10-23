@@ -188,7 +188,7 @@ LeibnizContextBuilder >> parseTerm: aString [
 LeibnizContextBuilder >> parseTerm: aString extraVariables: aDictionary [
 	| parser |
 	self phase: #rules.
-	parser := LeibnizTermParser forSignature: signature.
+	parser := LbTermParser forSignature: signature.
 	parser setExtraVariables: aDictionary.
 	^ parser parse: aString
 				onError: [ self error: 'Failed to parse ', aString ]

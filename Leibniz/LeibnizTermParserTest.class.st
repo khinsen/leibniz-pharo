@@ -1,12 +1,12 @@
 Class {
 	#name : #LeibnizTermParserTest,
 	#superclass : #LeibnizParserTest,
-	#category : #'Leibniz-Tests'
+	#category : #'Leibniz-3-Terms'
 }
 
 { #category : #accessing }
 LeibnizTermParserTest >> parserClass [
-	^ LeibnizTermParser
+	^ LbTermParser
 ]
 
 { #category : #testing }

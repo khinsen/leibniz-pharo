@@ -46,13 +46,13 @@ LbOperatorName >> internalSymbol: aSymbolOrString [
 ]
 
 { #category : #printing }
-LbOperatorName >> printForArity: anArity On: aStream [
+LbOperatorName >> printForArity: anArity on: aStream [
 	self subclassResponsibility
 ]
 
 { #category : #printing }
-LbOperatorName >> printForArity: anArity withSort: aSort On: aStream [
-	self printForArity: anArity On: aStream.
+LbOperatorName >> printForArity: anArity withSort: aSort on: aStream [
+	self printForArity: anArity on: aStream.
 	aStream nextPutAll: ' : '.
 	aStream nextPutAll: aSort asLeibnizSyntaxString.
 ]
@@ -67,7 +67,7 @@ LbOperatorName >> printOn: aStream [
 
 { #category : #accessing }
 LbOperatorName >> printStringForArity: anArity [
-	^ String streamContents: [ :s | self printForArity: anArity On: s ]
+	^ String streamContents: [ :s | self printForArity: anArity on: s ]
 ]
 
 { #category : #printing }

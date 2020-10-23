@@ -43,7 +43,7 @@ LeibnizRewriteSystemTest >> testBooleanExample [
 	| rws tp test |
 
 	rws := (LeibnizExamples new contextNamed: #boolean) rewriteSystem.
-	tp := LeibnizTermParser forSignature: rws signature.
+	tp := LbTermParser forSignature: rws signature.
 	test := [ :in :out | self assert: (rws reduce: (tp parse: in)) equals: (tp parse: out) ].
 	
 	"Note: the truth tabels may seem like trivial tests for rewriting,
@@ -74,7 +74,7 @@ LeibnizRewriteSystemTest >> testEqualityTerm [
 	| rws tp |
 
 	rws := self booleanRewriteSystem.	
-	tp := LeibnizTermParser forSignature: rws signature.
+	tp := LbTermParser forSignature: rws signature.
 
 	self assert: (rws rewriteHeadOnce: (tp parse: 'true == true'))
 		  equals: (tp parse: 'true').
@@ -92,7 +92,7 @@ LeibnizRewriteSystemTest >> testMassExample [
 	| rws tp test |
 
 	rws := (LeibnizExamples new contextNamed: 'mass-units') rewriteSystem.
-	tp := LeibnizTermParser forSignature: rws signature.
+	tp := LbTermParser forSignature: rws signature.
 	test := [ :in :out | self assert: (rws reduce: (tp parse: in)) equals: (tp parse: out) ].
 	
 	test value: '2 × 3 × kg' value: '6 × kg'.
@@ -104,7 +104,7 @@ LeibnizRewriteSystemTest >> testReduce [
 	| rws tp |
 
 	rws := self booleanRewriteSystem.	
-	tp := LeibnizTermParser forSignature: rws signature.
+	tp := LbTermParser forSignature: rws signature.
 
 	self assert: (rws reduce: (tp parse: '¬(true)'))
 		  equals: (tp parse: 'false').
@@ -122,7 +122,7 @@ LeibnizRewriteSystemTest >> testRewriteHeadOnce [
 	| rws tp |
 
 	rws := self booleanRewriteSystem.	
-	tp := LeibnizTermParser forSignature: rws signature.
+	tp := LbTermParser forSignature: rws signature.
 
 	self assert: (rws rewriteHeadOnce: (tp parse: '¬(true)'))
 		  equals: (tp parse: 'false').
@@ -140,7 +140,7 @@ LeibnizRewriteSystemTest >> testRewriteLeftMostInntermost [
 	| rws tp |
 
 	rws := self booleanRewriteSystem.	
-	tp := LeibnizTermParser forSignature: rws signature.
+	tp := LbTermParser forSignature: rws signature.
 
 	self assert: (rws rewriteLeftmostInnermost: (tp parse: '¬(true)'))
 		  equals: (tp parse: 'false').

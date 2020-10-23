@@ -2,8 +2,8 @@
 I represent atomic terms, such as numbers and strings.
 "
 Class {
-	#name : #LeibnizAtomicTerm,
-	#superclass : #LeibnizTerm,
+	#name : #LbAtomicTerm,
+	#superclass : #LbTerm,
 	#instVars : [
 		'value'
 	],
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizAtomicTerm class >> value: aString forSignature: aSignature [
+LbAtomicTerm class >> value: aString forSignature: aSignature [
 	^self basicNew
 			initializeWithValue: aString forSignature: aSignature;
 			yourself
@@ -19,44 +19,44 @@ LeibnizAtomicTerm class >> value: aString forSignature: aSignature [
 ]
 
 { #category : #converting }
-LeibnizAtomicTerm >> convertToSignature: aSignature extraVariables: aDictionary [
+LbAtomicTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	^ self class value: value forSignature: aSignature
 ]
 
 { #category : #initialization }
-LeibnizAtomicTerm >> initializeWithValue: aString forSignature: aSignature [
+LbAtomicTerm >> initializeWithValue: aString forSignature: aSignature [
 	signature := aSignature.
 	value := aString.
 
 ]
 
 { #category : #accessing }
-LeibnizAtomicTerm >> leibnizAtomicTermValue [
+LbAtomicTerm >> leibnizAtomicTermValue [
 	^ value
 ]
 
 { #category : #printing }
-LeibnizAtomicTerm >> printAsLeibnizSyntaxOn: aStream [
+LbAtomicTerm >> printAsLeibnizSyntaxOn: aStream [
 	value printOn: aStream
 
 ]
 
 { #category : #accessing }
-LeibnizAtomicTerm >> sort [
+LbAtomicTerm >> sort [
 	^self subclassResponsibility
 ]
 
 { #category : #substituting }
-LeibnizAtomicTerm >> substitute: aSubstitution [
+LbAtomicTerm >> substitute: aSubstitution [
 	^self
 ]
 
 { #category : #accessing }
-LeibnizAtomicTerm >> value [
+LbAtomicTerm >> value [
 	^ value
 ]
 
 { #category : #accessing }
-LeibnizAtomicTerm >> variables [
+LbAtomicTerm >> variables [
 	^ Dictionary new
 ]

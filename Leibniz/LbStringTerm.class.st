@@ -2,13 +2,13 @@
 I represent a string in context 'strings'.
 "
 Class {
-	#name : #LeibnizStringTerm,
-	#superclass : #LeibnizAtomicTerm,
+	#name : #LbStringTerm,
+	#superclass : #LbAtomicTerm,
 	#category : #'Leibniz-3-Terms'
 }
 
 { #category : #printing }
-LeibnizStringTerm >> printAsLeibnizSyntaxOn: aStream [
+LbStringTerm >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPut: $".
 	aStream nextPutAll: value.
 	aStream nextPut: $".
@@ -16,6 +16,6 @@ LeibnizStringTerm >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LeibnizStringTerm >> sort [
+LbStringTerm >> sort [
 	^#string
 ]

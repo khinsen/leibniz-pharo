@@ -10,7 +10,7 @@ LbInfixOperatorName class >> for: aStringOrSymbol [
 ]
 
 { #category : #printing }
-LbInfixOperatorName >> printForArity: anArity On: aStream [
+LbInfixOperatorName >> printForArity: anArity on: aStream [
 	self assert: anArity size equals: 2.
 	anArity first printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' '.

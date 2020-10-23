@@ -10,7 +10,7 @@ LbBracketOperatorName >> initialize [
 ]
 
 { #category : #printing }
-LbBracketOperatorName >> printForArity: anArity On: aStream [
+LbBracketOperatorName >> printForArity: anArity on: aStream [
 	self assert: anArity size > 1.
 	anArity first printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: '['.

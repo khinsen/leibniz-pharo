@@ -5,7 +5,7 @@ Rules are parsed in two steps. The first step is parsing the for-all clauses. Th
 "
 Class {
 	#name : #LeibnizRuleParser,
-	#superclass : #LeibnizTermParser,
+	#superclass : #LbTermParser,
 	#instVars : [
 		'rule',
 		'forAllClause',

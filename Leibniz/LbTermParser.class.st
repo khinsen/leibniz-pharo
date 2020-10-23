@@ -1,11 +1,11 @@
 "
 !A term grammar subclass that generates terms
 
-This is a subclass of ${class:name=LeibnizTermGrammar}$ that adds conversion of the parsed data to Leibniz terms for a given ${class:name=LbSignature}$ and optional additional variables as defined in rules (see ${class:name=LeibnizRuleParser}$). It returns an object from the ${class:name=LeibnizTerm}$ hierarchy corresponding to the input string, or a ${class:name=PP2Failure}$ object in case of failure.
+This is a subclass of ${class:name=LbTermGrammar}$ that adds conversion of the parsed data to Leibniz terms for a given ${class:name=LbSignature}$ and optional additional variables as defined in rules (see ${class:name=LeibnizRuleParser}$). It returns an object from the ${class:name=LbTerm}$ hierarchy corresponding to the input string, or a ${class:name=PP2Failure}$ object in case of failure.
 "
 Class {
-	#name : #LeibnizTermParser,
-	#superclass : #LeibnizTermGrammar,
+	#name : #LbTermParser,
+	#superclass : #LbTermGrammar,
 	#instVars : [
 		'signature',
 		'extraVariables'
@@ -14,13 +14,13 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizTermParser class >> forSignature: aSignature [
+LbTermParser class >> forSignature: aSignature [
 	^ self forSignature: aSignature extraVariables: Dictionary new.
 
 ]
 
 { #category : #'instance creation' }
-LeibnizTermParser class >> forSignature: aSignature extraVariables: aDictionary [
+LbTermParser class >> forSignature: aSignature extraVariables: aDictionary [
 	| parser |
 	parser := self newStartingAt: self startSymbol.
 	parser setSignature: aSignature.
@@ -29,13 +29,13 @@ LeibnizTermParser class >> forSignature: aSignature extraVariables: aDictionary 
 ]
 
 { #category : #accessing }
-LeibnizTermParser class >> ignoredNames [
+LbTermParser class >> ignoredNames [
 	^ (super ignoredNames copyWith: #signature)
 								 copyWith: #extraVariables
 ]
 
 { #category : #'error handling' }
-LeibnizTermParser >> errorForOp: aSymbol withArity: anArity [
+LbTermParser >> errorForOp: aSymbol withArity: anArity [
 	| expr |
 	anArity
 		ifEmpty: [ expr := aSymbol asString ]
@@ -46,12 +46,12 @@ LeibnizTermParser >> errorForOp: aSymbol withArity: anArity [
 ]
 
 { #category : #accessing }
-LeibnizTermParser >> extraVariables [
+LbTermParser >> extraVariables [
 	^ extraVariables
 ]
 
 { #category : #productions }
-LeibnizTermParser >> fpNumberTerm [
+LbTermParser >> fpNumberTerm [
 	^ super fpNumberTerm
 		"Converting the string to a float requires some trickery:
 		 - Pharo doesn't allow a dot followed by an exponent without any fractional part.
@@ -60,23 +60,23 @@ LeibnizTermParser >> fpNumberTerm [
 			Workaround: convert the converted string explicitly to a float."
 		==> [ :value |
 				(signature hasBuiltin: #fpNumbers)
-					ifTrue: [ LeibnizFPNumberTerm value: (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat
+					ifTrue: [ LbFPNumberTerm value: (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat
 											 			  forSignature: signature ]
 					ifFalse: [ PP2Failure message: 'Floating-point literals not allowd by signature' ] ]
 
 ]
 
 { #category : #productions }
-LeibnizTermParser >> integerTerm [
+LbTermParser >> integerTerm [
 	^ super integerTerm
 		==> [ :value |
 				(signature hasBuiltin: #integers)
-					ifTrue: [ LeibnizIntegerTerm value: value asNumber forSignature: signature ]
+					ifTrue: [ LbIntegerTerm value: value asNumber forSignature: signature ]
 					ifFalse: [ PP2Failure message: 'Integer literals not allowd by signature' ] ]
 ]
 
 { #category : #productions }
-LeibnizTermParser >> nonInfixTerm [
+LbTermParser >> nonInfixTerm [
 	^ super nonInfixTerm
 		==> [ :nodes | nodes second
 							ifNil: [ nodes first ]
@@ -89,7 +89,7 @@ LeibnizTermParser >> nonInfixTerm [
 ]
 
 { #category : #productions }
-LeibnizTermParser >> prefixOpTerm [
+LbTermParser >> prefixOpTerm [
 	^ super prefixOpTerm
 		==> [ :nodes |
 				| symbol args |
@@ -103,43 +103,43 @@ LeibnizTermParser >> prefixOpTerm [
 ]
 
 { #category : #productions }
-LeibnizTermParser >> rationalNumberTerm [
+LbTermParser >> rationalNumberTerm [
 	^ super rationalNumberTerm
 		==> [ :value |
 				(signature hasBuiltin: #rationalNumbers)
-					ifTrue: [ LeibnizRationalNumberTerm value: (Fraction readFromString: value)
+					ifTrue: [ LbRationalNumberTerm value: (Fraction readFromString: value)
 																  forSignature: signature ]
 					ifFalse: [ PP2Failure message: 'Rational number literals not allowd by signature' ] ]
 ]
 
 { #category : #initialization }
-LeibnizTermParser >> setExtraVariables: aDictionary [
+LbTermParser >> setExtraVariables: aDictionary [
 	extraVariables := aDictionary
 ]
 
 { #category : #initialization }
-LeibnizTermParser >> setSignature: aSignature [
+LbTermParser >> setSignature: aSignature [
 	signature := aSignature.
 	extraVariables := Dictionary new
 ]
 
 { #category : #accessing }
-LeibnizTermParser >> signature [
+LbTermParser >> signature [
 	^ signature
 ]
 
 { #category : #productions }
-LeibnizTermParser >> stringTerm [
+LbTermParser >> stringTerm [
 	^ super stringTerm
 		==> [ :value |
 				(signature hasBuiltin: #strings)
-					ifTrue: [ LeibnizStringTerm value: (value copyFrom: 2 to: value size - 1)
+					ifTrue: [ LbStringTerm value: (value copyFrom: 2 to: value size - 1)
 														 forSignature: signature ]
 					ifFalse: [ PP2Failure message: 'String literals not allowd by signature' ] ]
 ]
 
 { #category : #productions }
-LeibnizTermParser >> term [
+LbTermParser >> term [
 	^ super term
 		==> [ :nodes |
 				nodes size = 1
@@ -158,7 +158,7 @@ LeibnizTermParser >> term [
 ]
 
 { #category : #productions }
-LeibnizTermParser >> zeroArgTerm [
+LbTermParser >> zeroArgTerm [
 	^ super zeroArgTerm
 		==> [ :name | signature zeroArgTermNamed: name asSymbol extraVariables: extraVariables
 										onError: [ :symbol | self errorForOp: symbol withArity: #() ] ]

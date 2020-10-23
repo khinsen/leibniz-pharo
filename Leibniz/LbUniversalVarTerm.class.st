@@ -2,13 +2,13 @@
 I represent a special Leibniz variable that matches terms of any sort.
 "
 Class {
-	#name : #LeibnizUniversalVarTerm,
-	#superclass : #LeibnizVarTerm,
+	#name : #LbUniversalVarTerm,
+	#superclass : #LbVarTerm,
 	#category : #'Leibniz-3-Terms'
 }
 
 { #category : #'instance creation' }
-LeibnizUniversalVarTerm class >> symbol: aSymbol forSignature: aSignature [
+LbUniversalVarTerm class >> symbol: aSymbol forSignature: aSignature [
 	^self basicNew
 			initializeWithSymbol: aSymbol forSignature: aSignature;
 			yourself.
@@ -16,20 +16,20 @@ LeibnizUniversalVarTerm class >> symbol: aSymbol forSignature: aSignature [
 ]
 
 { #category : #converting }
-LeibnizUniversalVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
+LbUniversalVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	^ self class symbol: varSymbol forSignature: aSignature
 
 ]
 
 { #category : #initialization }
-LeibnizUniversalVarTerm >> initializeWithSymbol: aSymbol forSignature: aSignature [
+LbUniversalVarTerm >> initializeWithSymbol: aSymbol forSignature: aSignature [
 	varSymbol := aSymbol.
 	signature := aSignature.
 	sort := #boolean.
 ]
 
 { #category : #matching }
-LeibnizUniversalVarTerm >> match: otherTerm [
+LbUniversalVarTerm >> match: otherTerm [
 	otherTerm assertNotAVariable.
-	^ LeibnizSubstitution variable: varSymbol value: otherTerm
+	^ LbSubstitution variable: varSymbol value: otherTerm
 ]

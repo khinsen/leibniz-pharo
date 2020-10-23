@@ -1,7 +1,7 @@
 "
 !!Operators, variables, and signatures
 
-Operators and variables are the building blocks of terms (see ${class:name=LeibnizTerm}$). A signature is the collection of all operators and variables declared in a ${class:name=LeibnizContext}$.
+Operators and variables are the building blocks of terms (see ${class:name=LbTerm}$). A signature is the collection of all operators and variables declared in a ${class:name=LeibnizContext}$.
 
 !!!Operators
 
@@ -112,7 +112,7 @@ LbSignature >> nonZeroArgTermNamed: aSymbol withArgs: aTermArray [
 	argSorts := aTermArray collect: [ :t | t sort ].
 	(self sortOfOp: aSymbol withArgSorts: argSorts)
 		ifNil: [ ^ nil ]
-		ifNotNil: [ :sort | ^ LeibnizOpTerm symbol: aSymbol
+		ifNotNil: [ :sort | ^ LbOpTerm symbol: aSymbol
 													  args: aTermArray
 													  sort: sort
 													  forSignature: self ].
@@ -204,10 +204,10 @@ LbSignature >> withVariablesDo: aBlock [
 { #category : #'term construction' }
 LbSignature >> zeroArgTermNamed: aSymbol [
 	variables at: aSymbol
-		ifPresent: [ :sort | ^ LeibnizVarTerm symbol: aSymbol sort: sort forSignature: self ].
+		ifPresent: [ :sort | ^ LbVarTerm symbol: aSymbol sort: sort forSignature: self ].
 	(self sortOfOp: aSymbol withArgSorts: #())
 		ifNil: [ ^ nil ]
-		ifNotNil: [ :sort | ^ LeibnizOpTerm symbol: aSymbol
+		ifNotNil: [ :sort | ^ LbOpTerm symbol: aSymbol
 													  args: #()
 													  sort: sort
 													  forSignature: self ].
@@ -217,7 +217,7 @@ LbSignature >> zeroArgTermNamed: aSymbol [
 { #category : #'term construction' }
 LbSignature >> zeroArgTermNamed: aSymbol extraVariables: aDictionary [
 	aDictionary at: aSymbol
-		ifPresent: [ :sort | ^ LeibnizVarTerm symbol: aSymbol sort: sort forSignature: self ].
+		ifPresent: [ :sort | ^ LbVarTerm symbol: aSymbol sort: sort forSignature: self ].
 	^ self zeroArgTermNamed: aSymbol
 ]
 

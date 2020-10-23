@@ -7,13 +7,13 @@ Class {
 		'examples',
 		'currentSignature'
 	],
-	#category : #'Leibniz-Tests'
+	#category : #'Leibniz-3-Terms'
 }
 
 { #category : #running }
 LeibnizTermTest >> check: aTerm doesNotMatch: aPattern [
 	| p parse pattern term |
-	p := LeibnizTermParser forSignature: currentSignature.
+	p := LbTermParser forSignature: currentSignature.
 	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
 	term := parse value: aTerm.
@@ -24,7 +24,7 @@ LeibnizTermTest >> check: aTerm doesNotMatch: aPattern [
 { #category : #running }
 LeibnizTermTest >> check: aTerm matches: aPattern withSubstitution: aDictionary [
 	| p parse pattern term substitutions |
-	p := LeibnizTermParser forSignature: currentSignature.
+	p := LbTermParser forSignature: currentSignature.
 	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
 	term := parse value: aTerm.
@@ -36,14 +36,14 @@ LeibnizTermTest >> check: aTerm matches: aPattern withSubstitution: aDictionary 
 { #category : #running }
 LeibnizTermTest >> check: aPattern withSubstitution: aDictionary equals: aTerm [
 	| p parse pattern term substitution result |
-	p := LeibnizTermParser forSignature: currentSignature.
+	p := LbTermParser forSignature: currentSignature.
 	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
 	term := parse value: aTerm.
-	substitution := LeibnizSubstitution new.
+	substitution := LbSubstitution new.
 	aDictionary keysAndValuesDo:
 		[ :name :value | substitution combineWith:
-									(LeibnizSubstitution variable: name
+									(LbSubstitution variable: name
 																value: (parse value: value)) ].
 	result := pattern substitute: substitution.
 	self assert: result equals: term.
@@ -53,7 +53,7 @@ LeibnizTermTest >> check: aPattern withSubstitution: aDictionary equals: aTerm [
 { #category : #running }
 LeibnizTermTest >> checkSyntaxRoundTrip: aString [
 	| p t |
-	p := LeibnizTermParser forSignature: currentSignature.
+	p := LbTermParser forSignature: currentSignature.
 	t := p parse: aString onError: [ Error signal: 'failed to parse ', aString ].
 	self assert: t asLeibnizSyntaxString equals: aString.
 
@@ -70,7 +70,7 @@ LeibnizTermTest >> setUp [
 LeibnizTermTest >> testContexts [
 	| c t |
 	c := builtins contextNamed: 'contexts'.
-	t := LeibnizContextTerm value: c forSignature: c signature.
+	t := LbContextTerm value: c forSignature: c signature.
 	self assert: t sort equals: #context.
 
 ]
@@ -79,7 +79,7 @@ LeibnizTermTest >> testContexts [
 LeibnizTermTest >> testFPNumbers [
 	| c t |
 	c := builtins contextNamed: 'IEEE-floating-point'.
-	t := [ :x | LeibnizFPNumberTerm value: x forSignature: c signature ].
+	t := [ :x | LbFPNumberTerm value: x forSignature: c signature ].
 	self assert: (t value: 0.0) sort equals: #'FP64-number'.
 	self assert: (t value: 2.0) sort equals: #'FP64-number'.
 	self assert: (t value: -2.0) sort equals: #'FP64-number'.
@@ -93,7 +93,7 @@ LeibnizTermTest >> testFPNumbers [
 LeibnizTermTest >> testIntegers [
 	| c i t |
 	c := builtins contextNamed: 'integers'.
-	i := [ :x | LeibnizIntegerTerm value: x forSignature: c signature ].
+	i := [ :x | LbIntegerTerm value: x forSignature: c signature ].
 
 	self assert: (i value: 2) sort equals: #'ℕ.nz'.
 	self assert: (i value: -2) sort equals: #'ℤ.nz'.
@@ -133,7 +133,7 @@ LeibnizTermTest >> testMatching [
 LeibnizTermTest >> testRationalNumbers [
 	| c t |
 	c := builtins contextNamed: 'rational-numbers'.
-	t := [ :x | LeibnizRationalNumberTerm value: x forSignature: c signature ].
+	t := [ :x | LbRationalNumberTerm value: x forSignature: c signature ].
 	self assert: (t value: 0) sort equals: #zero.
 	self assert: (t value: 2) sort equals: #'ℕ.nz'.
 	self assert: (t value: -2) sort equals: #'ℤ.nz'.
@@ -146,7 +146,7 @@ LeibnizTermTest >> testRationalNumbers [
 LeibnizTermTest >> testStrings [
 	| c t |
 	c := builtins contextNamed: 'strings'.
-	t := LeibnizStringTerm value: 'abc' forSignature: c signature.
+	t := LbStringTerm value: 'abc' forSignature: c signature.
 	self assert: t sort equals: #string.
 
 ]

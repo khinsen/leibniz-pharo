@@ -2,7 +2,7 @@
 I represent an abstract Leibniz term. My subclasses represent concrete terms. 
 "
 Class {
-	#name : #LeibnizTerm,
+	#name : #LbTerm,
 	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -13,66 +13,66 @@ Class {
 }
 
 { #category : #converting }
-LeibnizTerm >> asLeibnizSyntaxString [
+LbTerm >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
 { #category : #matching }
-LeibnizTerm >> assertNotAVariable [
+LbTerm >> assertNotAVariable [
 	^ self
 ]
 
 { #category : #converting }
-LeibnizTerm >> convertToSignature: aSignature [
+LbTerm >> convertToSignature: aSignature [
 	^ self convertToSignature: aSignature extraVariables: Dictionary new.
 ]
 
 { #category : #converting }
-LeibnizTerm >> convertToSignature: aSignature extraVariables: aDictionary [
+LbTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	self subclassResponsibility
 ]
 
 { #category : #private }
-LeibnizTerm >> hasInfixOpOtherThan: aSymbol [
+LbTerm >> hasInfixOpOtherThan: aSymbol [
 	^ false
 ]
 
 { #category : #testing }
-LeibnizTerm >> isEqualityTerm [
+LbTerm >> isEqualityTerm [
 	^ nil
 ]
 
 { #category : #testing }
-LeibnizTerm >> isInfix [
+LbTerm >> isInfix [
 	"Answer true if the term is printed in infix notation."
 	^ false.
 ]
 
 { #category : #testing }
-LeibnizTerm >> isTrue [
+LbTerm >> isTrue [
 	"Answer true if the term the truth value 'true'."
 	^ false.
 ]
 
 { #category : #matching }
-LeibnizTerm >> match: otherTerm [
+LbTerm >> match: otherTerm [
 	self = otherTerm
-		ifTrue: [ ^ LeibnizSubstitution new ]
+		ifTrue: [ ^ LbSubstitution new ]
 		ifFalse: [ ^ nil ]
 ]
 
 { #category : #matching }
-LeibnizTerm >> matchOp: opSymbol andArgs: argList [
+LbTerm >> matchOp: opSymbol andArgs: argList [
 	^ nil
 ]
 
 { #category : #printing }
-LeibnizTerm >> printAsLeibnizSyntaxOn: aStream [
+LbTerm >> printAsLeibnizSyntaxOn: aStream [
 	self subclassResponsibility
 ]
 
 { #category : #printing }
-LeibnizTerm >> printAsLeibnizSyntaxOn: aStream parenthesized: aBoolean [
+LbTerm >> printAsLeibnizSyntaxOn: aStream parenthesized: aBoolean [
 	aBoolean ifTrue: [ aStream nextPut: $(. ].
 	self printAsLeibnizSyntaxOn: aStream.
 	aBoolean ifTrue: [ aStream nextPut: $). ].
@@ -80,7 +80,7 @@ LeibnizTerm >> printAsLeibnizSyntaxOn: aStream parenthesized: aBoolean [
 ]
 
 { #category : #printing }
-LeibnizTerm >> printOn: aStream [
+LbTerm >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	self printAsLeibnizSyntaxOn: aStream.
@@ -89,26 +89,26 @@ LeibnizTerm >> printOn: aStream [
 ]
 
 { #category : #accessing }
-LeibnizTerm >> signature [
+LbTerm >> signature [
 	^signature
 ]
 
 { #category : #accessing }
-LeibnizTerm >> sort [
+LbTerm >> sort [
 	^self subclassResponsibility
 ]
 
 { #category : #substituting }
-LeibnizTerm >> substitute: aSubstitution [
+LbTerm >> substitute: aSubstitution [
 	self subclassResponsibility
 ]
 
 { #category : #accessing }
-LeibnizTerm >> variables [
+LbTerm >> variables [
 	self subclassResponsibility
 ]
 
 { #category : #transforming }
-LeibnizTerm >> withTransformedArgs: transformer [
+LbTerm >> withTransformedArgs: transformer [
 	^ self
 ]

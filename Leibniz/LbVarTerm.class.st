@@ -2,8 +2,8 @@
 I represent a Leibniz variable.
 "
 Class {
-	#name : #LeibnizVarTerm,
-	#superclass : #LeibnizTerm,
+	#name : #LbVarTerm,
+	#superclass : #LbTerm,
 	#instVars : [
 		'varSymbol',
 		'sort'
@@ -12,7 +12,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizVarTerm class >> symbol: aSymbol sort: aSort forSignature: aSignature [
+LbVarTerm class >> symbol: aSymbol sort: aSort forSignature: aSignature [
 	^self basicNew
 			initializeWithSymbol: aSymbol sort: aSort forSignature: aSignature;
 			yourself.
@@ -20,17 +20,17 @@ LeibnizVarTerm class >> symbol: aSymbol sort: aSort forSignature: aSignature [
 ]
 
 { #category : #matching }
-LeibnizVarTerm >> assertNotAVariable [
+LbVarTerm >> assertNotAVariable [
 	Error signal: 'No variables allowed in matching terms'
 ]
 
 { #category : #converting }
-LeibnizVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
+LbVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	^ aSignature zeroArgTermNamed: varSymbol extraVariables: aDictionary
 ]
 
 { #category : #initialization }
-LeibnizVarTerm >> initializeWithSymbol: aSymbol sort: aSort forSignature: aSignature [
+LbVarTerm >> initializeWithSymbol: aSymbol sort: aSort forSignature: aSignature [
 	varSymbol := aSymbol.
 	sort := aSort.
 	signature := aSignature.
@@ -38,33 +38,33 @@ LeibnizVarTerm >> initializeWithSymbol: aSymbol sort: aSort forSignature: aSigna
 ]
 
 { #category : #matching }
-LeibnizVarTerm >> match: otherTerm [
+LbVarTerm >> match: otherTerm [
 	otherTerm assertNotAVariable.
 	(signature sortGraph is: otherTerm sort subsortOf: sort)
-		ifTrue: [ ^ LeibnizSubstitution variable: varSymbol value: otherTerm ]
+		ifTrue: [ ^ LbSubstitution variable: varSymbol value: otherTerm ]
 		ifFalse: [ ^ nil ]
 
 ]
 
 { #category : #printing }
-LeibnizVarTerm >> printAsLeibnizSyntaxOn: aStream [
+LbVarTerm >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPutAll: varSymbol asString
 ]
 
 { #category : #accessing }
-LeibnizVarTerm >> sort [
+LbVarTerm >> sort [
 	^sort
 ]
 
 { #category : #substituting }
-LeibnizVarTerm >> substitute: aSubstitution [
+LbVarTerm >> substitute: aSubstitution [
 	aSubstitution variables at: varSymbol ifPresent: [ :value | ^ value ].
 	^ self
 
 ]
 
 { #category : #accessing }
-LeibnizVarTerm >> variables [
+LbVarTerm >> variables [
 	^ Dictionary with: varSymbol -> sort
 
 ]

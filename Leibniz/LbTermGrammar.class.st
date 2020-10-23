@@ -7,86 +7,86 @@ The overall goal of the Leibniz term syntax is to resemble both traditional math
 
 Leibniz has a few built-in term types whose values are represented by literals, i.e. numbers and strings.
 
-${method:name=LeibnizTermGrammar>>#literalTerm|expanded=}$
+${method:name=LbTermGrammar>>#literalTerm|expanded=}$
 
 
 !!!Integers
 
 Integer syntax is perfectly standard: an optional minus sign followed by a string of digits.
 
-${method:name=LeibnizTermGrammar>>#integerTerm|expanded=}$
+${method:name=LbTermGrammar>>#integerTerm|expanded=}$
 
 
 !!!Rational numbers
 
 Fractions follow the same syntax as in Pharo: an integer followed by a slash following by a strictly positive integer.
 
-${method:name=LeibnizTermGrammar>>#rationalNumberTerm|expanded=}$
+${method:name=LbTermGrammar>>#rationalNumberTerm|expanded=}$
 
 !!!Floating-point numbers
 
 Floating-point numbers require more care because their syntax differs from Pharo's. In Leibniz, a number is floating-point if it has a fractional part, an exponent, or both. In Pharo, it's the fractional part that matters, an integer with an exponent remains an integer. Moreover, in Leibniz, but not in Pharo, the fractional part can be reduced to just a dot.
 
-${method:name=LeibnizTermGrammar>>#fpNumberTerm|expanded=}$
+${method:name=LbTermGrammar>>#fpNumberTerm|expanded=}$
 
-${method:name=LeibnizTermGrammar>>#fpIntegerPart|expanded=}$
+${method:name=LbTermGrammar>>#fpIntegerPart|expanded=}$
 
-${method:name=LeibnizTermGrammar>>#fpFractionalPart|expanded=}$
+${method:name=LbTermGrammar>>#fpFractionalPart|expanded=}$
 
-${method:name=LeibnizTermGrammar>>#fpExponentPart|expanded=}$
+${method:name=LbTermGrammar>>#fpExponentPart|expanded=}$
 
 !!!Strings
 
 Strings are delimited by double quotes. There is no mechanism for having a double quote inside a string yet.
 
-${method:name=LeibnizTermGrammar>>#stringTerm|expanded=}$
+${method:name=LbTermGrammar>>#stringTerm|expanded=}$
 
 !!Non-literal terms without arguments
 
-These terms are plain identifiers, which can be resolved either to argument-free operators or to variables (this happens in ${class:name=LeibnizTermParser}$).
+These terms are plain identifiers, which can be resolved either to argument-free operators or to variables (this happens in ${class:name=LbTermParser}$).
 
-${method:name=LeibnizTermGrammar>>#zeroArgTerm|expanded=}$
+${method:name=LbTermGrammar>>#zeroArgTerm|expanded=}$
 
-${method:name=LeibnizTermGrammar>>#identifier|expanded=}$
+${method:name=LbTermGrammar>>#identifier|expanded=}$
 
 The rules for allowed characters in an identifiers are complex and may well change in the future. The overall idea is to be permissive but still avoid conflicts with other syntactical elements.
 
-${method:name=LeibnizTermGrammar>>#identifierCharacter|expanded=}$
+${method:name=LbTermGrammar>>#identifierCharacter|expanded=}$
 
 !!Prefix operators
 
 These operators implement the standard function syntax used both in mathematics and in programming languages.
 
-${method:name=LeibnizTermGrammar>>#prefixOpTerm|expanded=}$
+${method:name=LbTermGrammar>>#prefixOpTerm|expanded=}$
 
 
 !!Parenthesized expressions
 
 Any valid expression in parenthesis is a valid term.
 
-${method:name=LeibnizTermGrammar>>#parenthesizedTerm|expanded=}$
+${method:name=LbTermGrammar>>#parenthesizedTerm|expanded=}$
 
 !!Simple and non-infix terms
 
 All terms listed up to here are so-called ""simple"" terms that can receive one of three suffixes to form the most general non-infix term.
 
-${method:name=LeibnizTermGrammar>>#simpleTerm|expanded=}$
+${method:name=LbTermGrammar>>#simpleTerm|expanded=}$
 
-${method:name=LeibnizTermGrammar>>#nonInfixTerm|expanded=}$
+${method:name=LbTermGrammar>>#nonInfixTerm|expanded=}$
 
 The three suffixes are square brackets, superscript, and subscript.
 
-${method:name=LeibnizTermGrammar>>#suffixBetween:and:withSymbol:|expanded=}$
+${method:name=LbTermGrammar>>#suffixBetween:and:withSymbol:|expanded=}$
 
 !!Infix operators
 
 The most general term is a chain of infix operators combining non-infix terms. Leibniz has no precedence rules for infix operators, because there can be potentially many of them. A chain of infix operators is therefore allowed only if all the infix operators are the same. When mixing infix operators, parentheses must be used.
 
-${method:name=LeibnizTermGrammar>>#term|expanded=}$
+${method:name=LbTermGrammar>>#term|expanded=}$
 
 "
 Class {
-	#name : #LeibnizTermGrammar,
+	#name : #LbTermGrammar,
 	#superclass : #LbGrammar,
 	#instVars : [
 		'zeroArgTerm',
@@ -109,53 +109,53 @@ Class {
 }
 
 { #category : #productions }
-LeibnizTermGrammar >> fpExponentPart [
+LbTermGrammar >> fpExponentPart [
 	^ $e asPParser , fpIntegerPart
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> fpFractionalPart [
+LbTermGrammar >> fpFractionalPart [
 	^ $. asPParser , #digit asPParser plus optional
 
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> fpIntegerPart [
+LbTermGrammar >> fpIntegerPart [
 	^ $- asPParser optional , #digit asPParser plus
 
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> fpNumberTerm [
+LbTermGrammar >> fpNumberTerm [
 	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
 			/ (fpIntegerPart , fpExponentPart))
 		flatten
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> integerTerm [
+LbTermGrammar >> integerTerm [
 	^ ($- asPParser optional , #digit asPParser plus) flatten
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> literalTerm [
+LbTermGrammar >> literalTerm [
 	^ rationalNumberTerm / fpNumberTerm / integerTerm / stringTerm
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> nonInfixTerm [
+LbTermGrammar >> nonInfixTerm [
 	^ simpleTerm, suffix optional
 
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> parenthesizedTerm [
+LbTermGrammar >> parenthesizedTerm [
 	^ $( asPParser , term, $) asPParser
 		==> [ :nodes | nodes at: 2 ]
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> prefixOpTerm [
+LbTermGrammar >> prefixOpTerm [
 	^ identifier , $( asPParser ,
 		 (term separatedBy: $, asPParser trim) ,
 		 $) asPParser
@@ -163,7 +163,7 @@ LeibnizTermGrammar >> prefixOpTerm [
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> rationalNumberTerm [
+LbTermGrammar >> rationalNumberTerm [
 	^ ($- asPParser optional , #digit asPParser plus ,
 			$/ asPParser ,
 			$0 asPParser not , #digit asPParser star) flatten 
@@ -171,23 +171,23 @@ LeibnizTermGrammar >> rationalNumberTerm [
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> simpleTerm [
+LbTermGrammar >> simpleTerm [
 	^ literalTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm
 ]
 
 { #category : #accessing }
-LeibnizTermGrammar >> start [
+LbTermGrammar >> start [
 	^ term end
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> stringTerm [
+LbTermGrammar >> stringTerm [
 	^ ($" asPParser , $" asPParser negate star , $" asPParser) flatten 
 
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> suffix [
+LbTermGrammar >> suffix [
 	^ (self suffixBetween: $[ asPParser and: $] asPParser withSymbol: #'[]')
 		 / (self suffixBetween: '^{' asPParser and: $} asPParser withSymbol: #'^')
 		 / (self suffixBetween: '_{' asPParser and: $} asPParser withSymbol: #'_')
@@ -195,13 +195,13 @@ LeibnizTermGrammar >> suffix [
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> suffixBetween: leftDelimiter and: rightDelimiter withSymbol: opSymbol [
+LbTermGrammar >> suffixBetween: leftDelimiter and: rightDelimiter withSymbol: opSymbol [
 	^ leftDelimiter , (term separatedBy: $, asPParser trim) , rightDelimiter
 		==> [ :nodes | { opSymbol . (nodes second reject: [ :element | element = $,]) } ]
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> term [
+LbTermGrammar >> term [
 	^ (nonInfixTerm separatedBy: (identifier trim))
 		==> [ :nodes |
 				| result |
@@ -218,7 +218,7 @@ LeibnizTermGrammar >> term [
 ]
 
 { #category : #productions }
-LeibnizTermGrammar >> zeroArgTerm [
+LbTermGrammar >> zeroArgTerm [
 	^ identifier
 
 ]

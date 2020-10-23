@@ -65,7 +65,7 @@ LbOperator >> addGraphToBuilder: aBuilder [
 	| saGraph |
 	aBuilder shape label
 		text: [ :r | (String streamContents:
-							[ :s | self name printForArity: r key withSort: r value On: s ])];
+							[ :s | self name printForArity: r key withSort: r value on: s ])];
 		fontName: (LbCodeFont defaultFamily);
 		color: (Color black).
 	aBuilder nodes: ranks.
@@ -110,7 +110,7 @@ LbOperator >> graphNodeForRank: anAssociation [
 	arity := anAssociation key.
 	sort := anAssociation value.
 	text := (String streamContents:
-				[ :s | self name printForArity: arity withSort: sort On: s ] )
+				[ :s | self name printForArity: arity withSort: sort on: s ] )
 			asRopedText.
 	text fontName: (LbCodeFont defaultFamily).
 	^ BlTextElement new
@@ -271,7 +271,7 @@ LbOperator >> subArityGraph [
 LbOperator >> title [
 	^String streamContents:
 		[ :stream |
-			self name printForArity: kindArity On: stream.
+			self name printForArity: kindArity on: stream.
 			stream nextPutAll: ' : '.
 			self kind printAsLeibnizSyntaxOn: stream. ]
 ]
