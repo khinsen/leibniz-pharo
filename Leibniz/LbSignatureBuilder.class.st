@@ -103,6 +103,36 @@ LbSignatureBuilder >> adoptSort: aSort [
 	^ sortGraph sortNamed: aSort name
 ]
 
+{ #category : #inspecting }
+LbSignatureBuilder >> gtOperatorsFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Operators';
+		priority: 0;
+		object: [ self signature ];
+		view: #gtOperatorsFor:
+]
+
+{ #category : #inspecting }
+LbSignatureBuilder >> gtSortGraphFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Sort graph';
+		priority: 2;
+		object: [ self signature ];
+		view: #gtSortGraphFor:
+]
+
+{ #category : #inspecting }
+LbSignatureBuilder >> gtVariablesFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Variables';
+		priority: 0;
+		object: [ self signature ];
+		view: #gtVariablesFor:
+]
+
 { #category : #initializing }
 LbSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 	sortGraph := aSortGraph.

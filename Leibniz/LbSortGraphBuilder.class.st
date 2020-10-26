@@ -31,6 +31,16 @@ LbSortGraphBuilder >> addSortGraph: aSortGraph [
 	aSortGraph withSubsortRelationsDo: [ :s1 :s2 | self make: s1 name subsortOf: s2 name ].
 ]
 
+{ #category : #accessing }
+LbSortGraphBuilder >> gtGraphFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Graph';
+		priority: 0;
+		object: [ self sortGraph ];
+		view: #gtGraphFor:
+]
+
 { #category : #testing }
 LbSortGraphBuilder >> includes: aSort [
 	^ sameKindSortsOf keys includes: aSort

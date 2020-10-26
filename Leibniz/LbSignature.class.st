@@ -90,6 +90,16 @@ LbSignature >> gtOperatorsFor: aView [
 ]
 
 { #category : #inspecting }
+LbSignature >> gtSortGraphFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Sort graph';
+		priority: 2;
+		object: [ self sortGraph ];
+		view: #gtGraphFor:
+]
+
+{ #category : #inspecting }
 LbSignature >> gtVariablesFor: aView [
 	<gtView>
 	variables isEmpty ifTrue: [ ^ aView empty ].

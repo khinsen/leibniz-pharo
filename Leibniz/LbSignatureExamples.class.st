@@ -103,13 +103,13 @@ LbSignatureExamples >> opFooOfA [
 { #category : #example }
 LbSignatureExamples >> opVarConflictInSignatureBuilder [
 	<gtExample>
-	| b |
-	b := LbSignatureBuilder sortGraph: self sortGraphABCD.
-	b addOp: #foo ofSort: #A.
-	b addVar: #bar ofSort: #A.
-	self should: [ b addVar: #foo ofSort: #A ] raise: Error.
-	self should: [ b addOp: #bar ofSort: #A ] raise: Error.
-	^ b
+	| builder |
+	builder := LbSignatureBuilder sortGraph: self sortGraphABCD.
+	builder parseAndAddOp: 'foo : A'.
+	builder parseAndAddVar: 'bar:A'.
+	self should: [ builder builder parseAndAddVar: 'foo:A' ] raise: Error.
+	self should: [ builder parseAndAddOp: 'bar : A' ] raise: Error.
+	^ builder
 ]
 
 { #category : #example }
@@ -143,33 +143,48 @@ LbSignatureExamples >> signatureFooBar [
 { #category : #example }
 LbSignatureExamples >> signatureFooBarExplicit [
 	<gtExample>
-	| builder |
-	builder := LbSignatureBuilder sortGraph: self sortGraphABCD.
-	builder addOp: #foo asLbOperatorName ofSort: #A.
-	builder addVar: #bar asLbOperatorName ofSort: #A.
-	builder addOp: #foo asLbOperatorName withArgs: #(#A) ofSort: #A.
-	builder addOp: #foo asLbOperatorName withArgs: #(#B) ofSort: #B.
-	builder addOp: #foo asLbOperatorName withArgs: #(#C) ofSort: #C.
-	builder addOp: #foo asLbOperatorName withArgs: #(#D) ofSort: #D.
-	builder addOp: (LbInfixOperatorName for: '+')
-			withArgs: #(#A #A)  ofSort: #A.
-	builder addOp: (LbBracketOperatorName new)
-			withArgs: #(#A #A #A)  ofSort: #A.
-	builder addOp: (LbSubscriptOperatorName new)
-			withArgs: #(#A #A)  ofSort: #A.
-	builder addOp: (LbSuperscriptOperatorName new)
-			withArgs: #(#A #A)  ofSort: #A.
+	| builder sortGraph sortA sortB sortC sortD |
+	sortGraph := self sortGraphABCD.
+	builder := LbSignatureBuilder sortGraph: sortGraph.
+	sortA := sortGraph sortNamed: #A.
+	sortB := sortGraph sortNamed: #B.
+	sortC := sortGraph sortNamed: #C.
+	sortD := sortGraph sortNamed: #D.
+	builder addOp: #foo asLbOperatorName ofSort: sortA.
+	builder addVar: #bar asLbOperatorName ofSort: sortA.
+	builder addOp: #foo asLbOperatorName withArgs: { sortA } ofSort: sortA.
+	builder addOp: #foo asLbOperatorName withArgs: { sortB } ofSort: sortB.
+	builder addOp: #foo asLbOperatorName withArgs: { sortC } ofSort: sortC.
+	builder addOp: #foo asLbOperatorName withArgs: { sortD }ofSort: sortD.
+	builder
+		addOp: (LbInfixOperatorName for: '+')
+		withArgs: { sortA. sortA }
+		ofSort: sortA.
+	builder
+		addOp: LbBracketOperatorName new
+		withArgs: { sortA. sortA. sortA }
+		ofSort: sortA.
+	builder
+		addOp: LbSubscriptOperatorName new
+		withArgs: { sortA. sortA }
+		ofSort: sortA.
+	builder
+		addOp: LbSuperscriptOperatorName new
+		withArgs: { sortA. sortA }
+		ofSort: sortA.
 	^ builder signature
 ]
 
 { #category : #example }
 LbSignatureExamples >> sortConflictInSignatureBuilder [
 	<gtExample>
-	| b |
-	b := LbSignatureBuilder sortGraph: self sortGraphABCD.
-	b addOp: #foo withArgs: #(#A) ofSort: #A.
-	b addVar: #bar ofSort: #A.
-	self should: [ b addOp: #foo withArgs: #(#A) ofSort: #B ] raise: Error.
-	self should: [ b addVar: #bar ofSort: #B ] raise: Error.
-	^ b
+	| builder |
+	builder := LbSignatureBuilder sortGraph: self sortGraphABCD.
+	builder parseAndAddOp: 'foo(A) : A'.
+	builder parseAndAddVar: 'bar:A'.
+	self should: [ builder parseAndAddOp: 'foo(A) : B' ]
+		 raise: Error.
+	self should: [ builder parseAndAddVar: 'bar:B' ]
+		 raise: Error.
+	^ builder
 ]

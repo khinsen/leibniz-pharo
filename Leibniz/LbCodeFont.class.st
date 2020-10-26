@@ -36,3 +36,7 @@ LbCodeFont class >> columnDoBlock [
 LbCodeFont class >> defaultFamily [
 	^ 'Arial Unicode MS'
 ]
+
+{ #category : #'as yet unclassified' }
+LbCodeFont >> defaultFamily [ ^ 'JuliaMono'
+]
