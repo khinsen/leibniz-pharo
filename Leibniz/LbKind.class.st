@@ -88,6 +88,28 @@ LbKind >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
+{ #category : #'private - comparing' }
+LbKind >> sortAfterKind: aKind [
+	| msA msB |
+	self size > aKind size ifTrue: [ ^ true ].
+	msA := self maximalSorts asArray sorted: [ :a :b | a sortBefore: b ].
+	msB := aKind maximalSorts asArray sorted: [ :a :b | a sortBefore: b ].
+	msA size > msB size ifTrue: [ ^ true ].
+	msA size < msB size ifTrue: [ ^ false ].
+	msA with: msB do: [ :a :b | a < b ifTrue: [ ^ false ] ].
+	^ true
+]
+
+{ #category : #'private - comparing' }
+LbKind >> sortAfterSort: aSort [
+	^ true
+]
+
+{ #category : #comparing }
+LbKind >> sortBefore: aSort [
+	^ aSort sortAfterKind: self
+]
+
 { #category : #inspecting }
 LbKind >> title [
 	^', ' join: (self maximalSorts collect: [ : sort | sort asString ])

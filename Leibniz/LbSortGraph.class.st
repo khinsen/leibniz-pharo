@@ -55,6 +55,20 @@ LbSortGraph >> copy [
 	^self
 ]
 
+{ #category : #accessing }
+LbSortGraph >> declarations [
+	| sorts subsorts |
+	sorts := directSubsortsOf keys sorted.
+	subsorts := OrderedCollection new.
+	sorts do: [ :eachSort |
+		(directSubsortsOf at: eachSort)
+			asArray sorted do: [ :eachSubsort |
+				subsorts add: eachSubsort, ' ⊆ ', eachSort ] ].
+	^ Dictionary
+		with: #sorts -> sorts
+		with: #subsorts -> subsorts
+]
+
 { #category : #copying }
 LbSortGraph >> deepCopy [
 	^self
@@ -99,9 +113,38 @@ LbSortGraph >> grayArrow [
 		border: (BlBorder paint: Color gray width: 1)
 ]
 
+{ #category : #accessing }
+LbSortGraph >> gtDeclarationsFor: aView [
+	<gtView>
+	self isEmpty
+		ifTrue: [ ^ aView empty ].
+	^ aView tree
+		title: 'Declarations' translated;
+		priority: 0;
+		items: [ | d |
+			d := self declarations.
+			{{'Sorts'.
+			((d at: #sorts)
+				collect: [ :each | 
+					{each.
+					#()} ])}.
+			{'Subsorts'.
+			((d at: #subsorts)
+				collect: [ :each | 
+					{each.
+					#()} ])}} ];
+		itemStencil: LbCodeFont brLabelCellStencil;
+		itemDataBinder: [ :eachLabel :eachItem |
+			eachLabel text: eachItem first ];
+		children: [ :each | each second ];
+		expandOneLevel;
+		yourself
+]
+
 { #category : #inspecting }
 LbSortGraph >> gtGraphFor: aView [
 	<gtView>
+	self isEmpty ifTrue: [ ^ aView empty ].
 	^ aView mondrian
 		title: 'Graph';
 		priority: 0;
@@ -194,6 +237,11 @@ LbSortGraph >> is: aSort subsortOf: anotherSort [
 		or: [ ss := directSubsortsOf at: anotherSort.
 				(ss includes: aSort)
 				or: [ ss anySatisfy: [:each | self is: aSort subsortOf: each ]]]
+]
+
+{ #category : #accessing }
+LbSortGraph >> isEmpty [
+	^ directSubsortsOf isEmpty
 ]
 
 { #category : #private }

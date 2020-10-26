@@ -32,6 +32,16 @@ LbSortGraphBuilder >> addSortGraph: aSortGraph [
 ]
 
 { #category : #accessing }
+LbSortGraphBuilder >> gtDeclarationsFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Declarations';
+		priority: 1;
+		object: [ self sortGraph ];
+		view: #gtDeclarationsFor:
+]
+
+{ #category : #accessing }
 LbSortGraphBuilder >> gtGraphFor: aView [ 
 	<gtView>
 	^ aView forward

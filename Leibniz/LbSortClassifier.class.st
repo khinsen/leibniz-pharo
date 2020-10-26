@@ -19,6 +19,11 @@ LbSortClassifier >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
+{ #category : #accessing }
+LbSortClassifier >> asSet [
+	self subclassResponsibility
+]
+
 { #category : #inspecting }
 LbSortClassifier >> gtGraphFor: aView [
 	<gtView>
@@ -49,6 +54,13 @@ LbSortClassifier >> kind [
 { #category : #accessing }
 LbSortClassifier >> size [
 	^ self asSet size
+]
+
+{ #category : #comparing }
+LbSortClassifier >> sortBefore: aSortClassifier [
+	"This is a total order used for uniquely sorting declarations,
+	 to be distinguished from the partial order defined by <="
+	self subclassResponsibility
 ]
 
 { #category : #accessing }

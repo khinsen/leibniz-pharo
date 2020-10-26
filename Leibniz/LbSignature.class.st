@@ -50,9 +50,51 @@ LbSignature >> copy [
 	^self
 ]
 
+{ #category : #accessing }
+LbSignature >> declarations [
+	| declarations opDecls |
+	declarations := self sortGraph declarations.
+	declarations at: #variables put:
+		(variables keys sorted collect:
+			[ :each | each, ':', (variables at: each) name ]).
+
+	opDecls := OrderedCollection new.
+	operators keys sorted do: [ :eachName |
+		| kindArities |
+		kindArities := (operators at: eachName) keys sorted: [ :x :y | x sortBefore: y ].
+		kindArities do: [ :eachKArity |
+			opDecls addAll: ((operators at: eachName) at: eachKArity) declarations ] ].
+	declarations at: #operators put: opDecls asArray.
+	^ declarations
+]
+
 { #category : #copying }
 LbSignature >> deepCopy [
 	^self
+]
+
+{ #category : #inspecting }
+LbSignature >> gtDeclarationsFor: aView [
+	<gtView>
+	| addEmptyChildList |
+	self isEmpty ifTrue: [ ^ aView empty ].
+	addEmptyChildList :=
+		[ :aList | aList collect: [ :each | {each. #()} ]].
+	^ aView tree
+		title: 'Declarations' translated;
+		priority: 3;
+		items: [ | d |
+			d := self declarations.
+			{{'Sorts'. addEmptyChildList value: (d at: #sorts) }.
+			 {'Subsorts'. addEmptyChildList value: (d at: #subsorts) }.
+			 {'Variables'. addEmptyChildList value: (d at: #variables) }.
+			 {'Operators'. addEmptyChildList value: (d at: #operators) } } ];
+		itemStencil: LbCodeFont brLabelCellStencil;
+		itemDataBinder: [ :eachLabel :eachItem |
+			eachLabel text: eachItem first ];
+		children: [ :each | each second ];
+		expandOneLevel;
+		yourself
 ]
 
 { #category : #inspecting }
@@ -124,6 +166,11 @@ LbSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: anO
 	operators := anOperatorDictionary.
 	variables := aVariableDictionary.
 	self beRecursivelyReadOnlyObject.
+]
+
+{ #category : #testing }
+LbSignature >> isEmpty [
+	^ sortGraph isEmpty and: [ operators isEmpty and: [ variables isEmpty ] ]
 ]
 
 { #category : #'term construction' }

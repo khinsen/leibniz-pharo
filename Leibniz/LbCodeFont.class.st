@@ -8,7 +8,10 @@ Class {
 LbCodeFont class >> brLabelCellStencil [
 	^ [ BrLabel new
 			look: (BrGlamorousLabelLook new
-                fontName: self defaultFamily) ]
+                fontName: self defaultFamily);
+				alignCenterLeft;
+				hMatchParent;
+				vFitContent ]
 ]
 
 { #category : #selecting }
@@ -20,16 +23,6 @@ LbCodeFont class >> chooseDefaultFamily [
 			ifTrue: [ self compile: 'defaultFamily ^ ''', family, ''''.
 						^ family ] ].
 	self error: 'No suitable Unicode font for Leibniz code'
-]
-
-{ #category : #inspecting }
-LbCodeFont class >> columnDoBlock [
-	^ [ :aColumn | aColumn
-        cellStencil: [
-            BrLabel new
-                look: (BrGlamorousLabelLook new
-                			fontName: self defaultFamily) ];
-        dataBinder: [ :eachLabel :eachText |  eachLabel text: eachText ] ]
 ]
 
 { #category : #accessing }

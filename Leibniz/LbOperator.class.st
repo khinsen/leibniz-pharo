@@ -75,6 +75,12 @@ LbOperator >> assertMonotonicity: aBlock forArity: anArity andSort: aSort [
 							' -> ', aSort asString, ' makes operator non-monotonic'.
 ]
 
+{ #category : #accessing }
+LbOperator >> declarations [
+	^ (ranks sorted: [ :rankA :rankB | rankA key sortBefore: rankB key] )
+		collect: [ :each | (self name printStringForArity: each key), ' : ', each value asLeibnizSyntaxString ]
+]
+
 { #category : #inspecting }
 LbOperator >> graphEdges [
 	| saGraph edges |

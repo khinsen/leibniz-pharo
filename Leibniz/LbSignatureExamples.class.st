@@ -1,6 +1,8 @@
 Class {
 	#name : #LbSignatureExamples,
-	#superclass : #LbSortGraphExamples,
+	#superclass : #Object,
+	#traits : 'TGtExampleAssertable',
+	#classTraits : 'TGtExampleAssertable classTrait',
 	#category : #'Leibniz-2-Signatures'
 }
 
@@ -39,7 +41,7 @@ LbSignatureExamples >> arityDC [
 { #category : #support }
 LbSignatureExamples >> arityForArgSorts: argSorts [
 	| sortGraph |
-	sortGraph := self sortGraphABCD.
+	sortGraph := LbSortGraphExamples new sortGraphABCD.
 	^ LbArity
 		sortGraph: sortGraph
 		argSorts: (argSorts collect: [ :each | sortGraph sortNamed: each ])
@@ -55,7 +57,7 @@ LbSignatureExamples >> arityKindOfA [
 LbSignatureExamples >> emptyArity [
 	<gtExample>
 	| sortGraph |
-	sortGraph := self sortGraphABCD.
+	sortGraph := LbSortGraphExamples new sortGraphABCD.
 	^ LbArity
 		sortGraph: sortGraph
 		argSorts: Array new
@@ -75,7 +77,7 @@ LbSignatureExamples >> infixOpFoo [
 LbSignatureExamples >> nonMonotonicOpInSignatureBuilder [
 	<gtExample>
 	| builder |
-	builder := LbSignatureBuilder sortGraph: self sortGraphABCD.
+	builder := LbSignatureBuilder sortGraph: LbSortGraphExamples new sortGraphABCD.
 	builder parseAndAddOp: 'foo(A) : B'.
 	self should: [ builder parseAndAddOp: 'foo(B) : A' ]
 		  raise: Error.
@@ -104,7 +106,7 @@ LbSignatureExamples >> opFooOfA [
 LbSignatureExamples >> opVarConflictInSignatureBuilder [
 	<gtExample>
 	| builder |
-	builder := LbSignatureBuilder sortGraph: self sortGraphABCD.
+	builder := LbSignatureBuilder sortGraph: LbSortGraphExamples new sortGraphABCD.
 	builder parseAndAddOp: 'foo : A'.
 	builder parseAndAddVar: 'bar:A'.
 	self should: [ builder builder parseAndAddVar: 'foo:A' ] raise: Error.
@@ -125,7 +127,7 @@ LbSignatureExamples >> prefixOpFoo [
 LbSignatureExamples >> signatureFooBar [
 	<gtExample>
 	| builder signature |
-	builder := LbSignatureBuilder sortGraph: self sortGraphABCD.
+	builder := LbSignatureBuilder sortGraph: LbSortGraphExamples new sortGraphABCD.
 	builder parseAndAddOp: 'foo : A'.
 	builder parseAndAddOp: 'foo(bar:A) : A'.
 	builder parseAndAddOp: 'foo(B) : B'.
@@ -144,7 +146,7 @@ LbSignatureExamples >> signatureFooBar [
 LbSignatureExamples >> signatureFooBarExplicit [
 	<gtExample>
 	| builder sortGraph sortA sortB sortC sortD |
-	sortGraph := self sortGraphABCD.
+	sortGraph := LbSortGraphExamples new sortGraphABCD.
 	builder := LbSignatureBuilder sortGraph: sortGraph.
 	sortA := sortGraph sortNamed: #A.
 	sortB := sortGraph sortNamed: #B.
@@ -179,7 +181,7 @@ LbSignatureExamples >> signatureFooBarExplicit [
 LbSignatureExamples >> sortConflictInSignatureBuilder [
 	<gtExample>
 	| builder |
-	builder := LbSignatureBuilder sortGraph: self sortGraphABCD.
+	builder := LbSignatureBuilder sortGraph: LbSortGraphExamples new sortGraphABCD.
 	builder parseAndAddOp: 'foo(A) : A'.
 	builder parseAndAddVar: 'bar:A'.
 	self should: [ builder parseAndAddOp: 'foo(A) : B' ]

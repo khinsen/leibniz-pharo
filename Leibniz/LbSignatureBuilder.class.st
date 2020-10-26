@@ -104,6 +104,16 @@ LbSignatureBuilder >> adoptSort: aSort [
 ]
 
 { #category : #inspecting }
+LbSignatureBuilder >> gtDeclarationsFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Declarations';
+		priority: 1;
+		object: [ self signature ];
+		view: #gtDeclarationsFor:
+]
+
+{ #category : #inspecting }
 LbSignatureBuilder >> gtOperatorsFor: aView [ 
 	<gtView>
 	^ aView forward

@@ -70,6 +70,21 @@ LbSort >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
+{ #category : #'private - comparing' }
+LbSort >> sortAfterKind: aKind [
+	^ false
+]
+
+{ #category : #'private - comparing' }
+LbSort >> sortAfterSort: aSort [
+	^ self name > aSort name
+]
+
+{ #category : #comparing }
+LbSort >> sortBefore: aSort [
+	^ aSort sortAfterSort: self
+]
+
 { #category : #enumerating }
 LbSort >> subsorts [
 	^ sortGraph subsortsOf: name

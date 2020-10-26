@@ -32,11 +32,10 @@ LbArity class >> sortGraph: aSortGraph argSorts: aSortArray [
 
 { #category : #comparing }
 LbArity >> <= anArity [
-	self size = anArity size ifFalse: [ ^false ].
+	self size = anArity size ifFalse: [ ^ false ].
 	self with: anArity do:
-		[ :s1 :s2 | s1 <= s2 ifFalse: [ ^false ] ].
-	^true
-
+		[ :s1 :s2 | s1 <= s2 ifFalse: [ ^ false ] ].
+	^ true
 ]
 
 { #category : #converting }
@@ -99,4 +98,15 @@ LbArity >> printOn: aStream [
 	aStream nextPut: $(.
 	self printAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: $)
+]
+
+{ #category : #comparing }
+LbArity >> sortBefore: anArity [
+	"This is a total order used for uniquely sorting declarations,
+	 to be distinguished from the partial order defined by <="
+	self size < anArity size ifTrue: [ ^ true ].
+	self size > anArity size ifTrue: [ ^ false ].
+	self isEmpty ifTrue: [ ^ true ].
+	self with: anArity do: [ :x :y | (x sortBefore: y) ifFalse: [ ^ false] ].
+	^ true
 ]
