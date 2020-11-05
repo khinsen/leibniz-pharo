@@ -1,14 +1,75 @@
 Class {
 	#name : #LbTermExamples,
-	#superclass : #LbSignatureExamples,
+	#superclass : #Object,
+	#traits : 'TGtExampleAssertable',
+	#classTraits : 'TGtExampleAssertable classTrait',
 	#category : #'Leibniz-3-Terms'
 }
 
 { #category : #example }
+LbTermExamples >> parserForFooBar [
+	<gtExample>
+	| signature |
+	signature := LbSignatureExamples new signatureFooBar.
+	^ LbTermParser forSignature: signature
+]
+
+{ #category : #example }
+LbTermExamples >> signatureForTermParserTests [
+	<gtExample>
+	| sortGraph |
+	sortGraph := LbSortGraphBuilder new
+		parseAndAdd: 'A';
+		parseAndAdd: 'B ⊆ A';
+		parseAndAdd: 'boolean';
+		sortGraph.
+	^ (LbSignatureBuilder sortGraph: sortGraph)
+		addBuiltin: #integers;
+		addBuiltin: #rationalNumbers;
+		addBuiltin: #fpNumbers;
+		addBuiltin: #strings;
+		parseAndAddVar: 'aVar:A';
+		parseAndAddOp: 'aZeroArgOp : B';
+		parseAndAddOp: 'aOneArgOp(A) : A';
+		parseAndAddOp: 'aOneArgOp(B) : B';
+		parseAndAddOp: 'aTwoArgOp(A, A) : A';
+		parseAndAddOp: 'A[A] : A';
+		parseAndAddOp: 'A^{A} : A';
+		parseAndAddOp: 'A^{A,A} : A';
+		parseAndAddOp: 'A_{A} : A';
+		parseAndAddOp: 'A_{A,A} : A';
+		parseAndAddOp: 'A infixOp1 A : A';
+		parseAndAddOp: 'A infixOp2 A : A';
+		parseAndAddOp: 'true : boolean';
+		parseAndAddOp: 'false : boolean';
+		signature
+]
+
+{ #category : #example }
 LbTermExamples >> termFoo [
 	<gtExample>
+	^ self parserForFooBar parse: 'foo'
+]
+
+{ #category : #example }
+LbTermExamples >> termFooBracketFooOfFoo [
+	<gtExample>
+	| signature sortGraph sortA |
+	signature := LbSignatureExamples new signatureFooBar.
+	sortGraph := signature sortGraph.
+	sortA := sortGraph sortNamed: #A.
+	^ LbOpTerm
+		symbol: LbBracketOperatorName new
+		args: { self termFooExplicit. self termFooOfFoo }
+		sort: sortA
+		forSignature: signature
+]
+
+{ #category : #example }
+LbTermExamples >> termFooExplicit [
+	<gtExample>
 	| signature sortGraph |
-	signature := self signatureFooBar.
+	signature := LbSignatureExamples new signatureFooBar.
 	sortGraph := signature sortGraph.
 	^ LbOpTerm
 		symbol: (LbPrefixOperatorName for: #foo)
@@ -18,43 +79,29 @@ LbTermExamples >> termFoo [
 ]
 
 { #category : #example }
-LbTermExamples >> termFooBracketFooOfFoo [
-	<gtExample>
-	| signature sortGraph sortA |
-	signature := self signatureFooBar.
-	sortGraph := signature sortGraph.
-	sortA := sortGraph sortNamed: #A.
-	^ LbOpTerm
-		symbol: LbBracketOperatorName new
-		args: { self termFoo. self termFooOfFoo }
-		sort: sortA
-		forSignature: signature
-]
-
-{ #category : #example }
 LbTermExamples >> termFooOfFoo [
 	<gtExample>
 	| signature sortGraph sortA |
-	signature := self signatureFooBar.
+	signature := LbSignatureExamples new signatureFooBar.
 	sortGraph := signature sortGraph.
 	sortA := sortGraph sortNamed: #A.
 	^ LbOpTerm
 		symbol: (LbPrefixOperatorName for: #foo)
-		args: { self termFoo }
+		args: { self termFooExplicit }
 		sort: sortA
 		forSignature: signature
 ]
 
 { #category : #example }
-LbTermExamples >> termFooPlusFoo [
+LbTermExamples >> termFooPlusFooExplicit [
 	<gtExample>
 	| signature sortGraph sortA |
-	signature := self signatureFooBar.
+	signature := LbSignatureExamples new signatureFooBar.
 	sortGraph := signature sortGraph.
 	sortA := sortGraph sortNamed: #A.
 	^ LbOpTerm
 		symbol: (LbInfixOperatorName for: #+)
-		args: { self termFoo. self termFoo }
+		args: { self termFooExplicit. self termFooExplicit }
 		sort: sortA
 		forSignature: signature
 ]

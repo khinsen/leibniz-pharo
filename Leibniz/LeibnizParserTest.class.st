@@ -25,10 +25,9 @@ LeibnizParserTest >> setUp [
 	super setUp.
 
 	b := LbSortGraphBuilder new.
-	b add: #A;
-	  add: #B;
-	  make: #B subsortOf: #A.
-	b add: #boolean.
+	b parseAndAdd: 'A';
+	  parseAndAdd: 'B ⊆ A'.
+	b parseAndAdd: 'boolean'.
 	sg := b sortGraph.
 
 	b := LbSignatureBuilder sortGraph: sg.
@@ -36,23 +35,21 @@ LeibnizParserTest >> setUp [
 	b addBuiltin: #rationalNumbers.
 	b addBuiltin: #fpNumbers.
 	b addBuiltin: #strings.
-	b addVar: #aVar ofSort: #A.
-	b addOp: #aZeroArgOp ofSort: #B.
-	b addOp: #aOneArgOp withArgs: #(#A) ofSort: #A.
-	b addOp: #aOneArgOp withArgs: #(#B) ofSort: #B.
-	b addOp: #aTwoArgOp withArgs: #(#A #A) ofSort: #A.
-	b addOp: #'[]' withArgs: #(#A #A) ofSort: #A.
-	b addOp: #'[]' withArgs: #(#A #A #A) ofSort: #A.
-	b addOp: #'^' withArgs: #(#A #A) ofSort: #A.
-	b addOp: #'^' withArgs: #(#A #A #A) ofSort: #A.
-	b addOp: #'_' withArgs: #(#A #A) ofSort: #A.
-	b addOp: #'_' withArgs: #(#A #A #A) ofSort: #A.
-	b addOp: #'_infixOp1' withArgs: #(#A #A) ofSort: #A.
-	b addOp: #'_infixOp2' withArgs: #(#A #A) ofSort: #A.
-	b addOp: #true ofSort: #boolean.
-	b addOp: #false ofSort: #boolean.
+	b parseAndAddVar: 'aVar:A'.
+	b parseAndAddOp: 'aZeroArgOp : B'.
+	b parseAndAddOp: 'aOneArgOp(A) : A'.
+	b parseAndAddOp: 'aOneArgOp(B) : B'.
+	b parseAndAddOp: 'aTwoArgOp(A, A) : A'.
+	b parseAndAddOp: 'A[A] : A'.
+	b parseAndAddOp: 'A^{A} : A'.
+	b parseAndAddOp: 'A^{A, A} : A'.
+	b parseAndAddOp: 'A_{A} : A'.
+	b parseAndAddOp: 'A_{A, A} : A'.
+	b parseAndAddOp: 'A infixOp1 A : A'.
+	b parseAndAddOp: 'A infixOp2 A : A'.
+	b parseAndAddOp: 'true : boolean'.
+	b parseAndAddOp: 'false : boolean'.
 	parser setSignature: b signature.
-
 ]
 
 { #category : #'term construction' }

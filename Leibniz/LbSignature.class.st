@@ -56,7 +56,7 @@ LbSignature >> declarations [
 	declarations := self sortGraph declarations.
 	declarations at: #variables put:
 		(variables keys sorted collect:
-			[ :each | each, ':', (variables at: each) name ]).
+			[ :each | each synopsis, ':', (variables at: each) name ]).
 
 	opDecls := OrderedCollection new.
 	operators keys sorted do: [ :eachName |
@@ -119,10 +119,10 @@ LbSignature >> gtOperatorsFor: aView [
 					((eachItem isKindOf: LbOperatorName)
 						ifTrue: [ '' ]
 						ifFalse: [ eachItem kind asLeibnizSyntaxString ]) ] ];
-"		column: 'Kind' item: [:each |
-			(each isKindOf: LbOperatorName)
-				ifTrue: [ '' asRopedText ]
-				ifFalse: [ each kind asLeibnizSyntaxString asRopedText fontName: (LbCodeFont defaultFamily) ] ];"
+		column: 'Ranks' text: [ :each |
+		(each isKindOf: LbOperatorName)
+			ifTrue: [ '']
+			ifFalse: [ each size asString ] ];
 		children: [ :each |
 			(each isKindOf: LbOperatorName)
 				ifTrue: [ (operators at: each) values sorted: [:a :b | a kindArity size < b kindArity size] ]
@@ -149,8 +149,14 @@ LbSignature >> gtVariablesFor: aView [
 		title: 'Variables' translated;
 		priority: 1;
 		items: [ variables associations sorted: [ :a :b | a key < b key ]];
-		column: 'Name' item: [ :each | each key ];
-		column: 'Sort' item: [ :each | each value ];
+		column: 'Name' do: [ :aColumn |
+			aColumn cellStencil: LbCodeFont brLabelCellStencil;
+			dataBinder: [ :eachLabel :eachItem |
+				eachLabel text: eachItem key synopsis ] ];
+		column: 'Sort' do: [ :aColumn |
+			aColumn cellStencil: LbCodeFont brLabelCellStencil;
+			dataBinder: [ :eachLabel :eachItem |
+				eachLabel text: eachItem value name ] ];
 		yourself
 ]
 
@@ -231,18 +237,16 @@ LbSignature >> sortGraph [
 ]
 
 { #category : #accessing }
-LbSignature >> sortOfOp: aSymbol withArgSorts: aSortArray [
-	self flag: #todo.
-	(self opNamed: aSymbol withArgs: aSortArray)
+LbSignature >> sortOfOp: anOpName withArgSorts: aSortArray [
+	(self opNamed: anOpName withArgs: aSortArray)
 		ifNotNil: [ :op | ^ op sortForArgSorts: aSortArray ].
 	"A somewhat hacky special case: if the signature includes the
     #truth builtin, it includes == for equality of arbitrary terms."
 	((builtins includes: #truth) 
-		and: [ aSymbol = #'_=='
+		and: [ anOpName = (LbInfixOperatorName for: '==')
 				and: [ aSortArray size = 2 ] ])
-		ifTrue: [ ^ #boolean ].
+		ifTrue: [ ^ sortGraph sortNamed: #boolean ].
 	^ nil
-
 ]
 
 { #category : #enumerating }
@@ -269,31 +273,29 @@ LbSignature >> withVariablesDo: aBlock [
 ]
 
 { #category : #'term construction' }
-LbSignature >> zeroArgTermNamed: aSymbol [
-	variables at: aSymbol
-		ifPresent: [ :sort | ^ LbVarTerm symbol: aSymbol sort: sort forSignature: self ].
-	(self sortOfOp: aSymbol withArgSorts: #())
+LbSignature >> zeroArgTermNamed: anOpName [
+	variables at: anOpName
+		ifPresent: [ :sort | ^ LbVarTerm symbol: anOpName sort: sort forSignature: self ].
+	(self sortOfOp: anOpName withArgSorts: #())
 		ifNil: [ ^ nil ]
-		ifNotNil: [ :sort | ^ LbOpTerm symbol: aSymbol
-													  args: #()
-													  sort: sort
-													  forSignature: self ].
-
+		ifNotNil: [ :sort | ^ LbOpTerm symbol: anOpName
+									   args: #()
+									   sort: sort
+									   forSignature: self ]
 ]
 
 { #category : #'term construction' }
-LbSignature >> zeroArgTermNamed: aSymbol extraVariables: aDictionary [
-	aDictionary at: aSymbol
-		ifPresent: [ :sort | ^ LbVarTerm symbol: aSymbol sort: sort forSignature: self ].
-	^ self zeroArgTermNamed: aSymbol
+LbSignature >> zeroArgTermNamed: anOpName extraVariables: aDictionary [
+	aDictionary at: anOpName
+		ifPresent: [ :sort | ^ LbVarTerm symbol: anOpName sort: sort forSignature: self ].
+	^ self zeroArgTermNamed: anOpName
 ]
 
 { #category : #'term construction' }
-LbSignature >> zeroArgTermNamed: aSymbol extraVariables: aDictionary onError: aBlock [
+LbSignature >> zeroArgTermNamed: anOpName extraVariables: aDictionary onError: aBlock [
 	| result |
-	result := self zeroArgTermNamed: aSymbol extraVariables: aDictionary.
-	result ifNil: [ ^ aBlock value: aSymbol ] ifNotNil: [ ^ result ]
-
+	result := self zeroArgTermNamed: anOpName extraVariables: aDictionary.
+	result ifNil: [ ^ aBlock value: anOpName ] ifNotNil: [ ^ result ]
 ]
 
 { #category : #'term construction' }

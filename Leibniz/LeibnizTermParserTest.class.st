@@ -51,29 +51,6 @@ LeibnizTermParserTest >> testInfixTerms [
 ]
 
 { #category : #testing }
-LeibnizTermParserTest >> testIntegerTerms [
-	#(#integerTerm #literalTerm #simpleTerm #nonInfixTerm #term) do:
-	[ :production |
-		self parse: '0' rule: production.
-		self assert: result equals: (self integerTerm: 0).
-		self parse: '-0' rule: production.
-		self assert: result equals: (self integerTerm: 0).
-		self parse: '123' rule: production.
-		self assert: result equals: (self integerTerm: 123).
-		self parse: '-123' rule: production.
-		self assert: result equals: (self integerTerm: -123). ].
-
-	self fail: 'abc' rule: #integerTerm.
-	self fail: '0abc' rule: #integerTerm.
-	self fail: '2/3' rule: #integerTerm.
-	self fail: '-2/3' rule: #integerTerm.
-	self fail: '2.5' rule: #integerTerm.
-	self fail: '2e2' rule: #integerTerm.
-	self fail: '2.5e2' rule: #integerTerm.
-
-]
-
-{ #category : #testing }
 LeibnizTermParserTest >> testNonInfixTerms [
 	| t |
 	t := (parser signature zeroArgTermNamed: #aZeroArgOp).
@@ -159,36 +136,6 @@ LeibnizTermParserTest >> testRationalNumberTerms [
 	self fail: 'abc' rule: #rationalNumberTerm.
 	self fail: '-2.5' rule: #rationalNumberTerm.
 	self fail: '-2.5e-1' rule: #rationalNumberTerm.
-
-]
-
-{ #category : #testing }
-LeibnizTermParserTest >> testReservedIdentifiers [
-	self fail: '⇒' rule: #identifier.
-	self fail: '→' rule: #identifier.
-	self fail: '∀' rule: #identifier.
-	self fail: '|' rule: #identifier.
-	
-	self parse: '⇒⇒' rule: #identifier.
-	self parse: '?⇒?' rule: #identifier.
-	self parse: '|+|' rule: #identifier.
-	self parse: '→|→' rule: #identifier.
-
-]
-
-{ #category : #testing }
-LeibnizTermParserTest >> testStringTerms [
-	self parse: '"abc"' rule: #stringTerm.
-	self assert: result equals: (self stringTerm: 'abc').
-	self parse: '"123"' rule: #stringTerm.
-	self assert: result equals: (self stringTerm: '123').
-	self parse: '"äéα"' rule: #stringTerm.
-	self assert: result equals: (self stringTerm: 'äéα').
-	self parse: '""' rule: #stringTerm.
-	self assert: result equals: (self stringTerm: '').
-
-	self fail: 'abc' rule: #stringTerm.
-	self fail: '123' rule: #stringTerm.
 
 ]
 

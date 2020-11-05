@@ -16,7 +16,6 @@ Class {
 { #category : #'instance creation' }
 LbTermParser class >> forSignature: aSignature [
 	^ self forSignature: aSignature extraVariables: Dictionary new.
-
 ]
 
 { #category : #'instance creation' }
@@ -35,14 +34,10 @@ LbTermParser class >> ignoredNames [
 ]
 
 { #category : #'error handling' }
-LbTermParser >> errorForOp: aSymbol withArity: anArity [
-	| expr |
-	anArity
-		ifEmpty: [ expr := aSymbol asString ]
-		ifNotEmpty: [ expr := aSymbol asString , '(' ,
-										(', ' join: (anArity collect: [ :each | each asString ])) ,
-										')' ].
-	^ PP2Failure message: expr , ' not defined in signature'
+LbTermParser >> errorForOp: anOpName withArity: anArity [
+	^ PP2Failure message:
+		(anOpName printStringForArity: anArity),
+		' not defined in signature'
 ]
 
 { #category : #accessing }
@@ -160,6 +155,9 @@ LbTermParser >> term [
 { #category : #productions }
 LbTermParser >> zeroArgTerm [
 	^ super zeroArgTerm
-		==> [ :name | signature zeroArgTermNamed: name asSymbol extraVariables: extraVariables
-										onError: [ :symbol | self errorForOp: symbol withArity: #() ] ]
+		==> [ :symbol |
+				signature
+					zeroArgTermNamed: (LbPrefixOperatorName for: symbol)
+					extraVariables: extraVariables
+					onError: [ :opName | self errorForOp: opName withArity: #() ] ]
 ]

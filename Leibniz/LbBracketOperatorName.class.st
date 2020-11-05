@@ -23,5 +23,5 @@ LbBracketOperatorName >> printForArity: anArity on: aStream [
 
 { #category : #printing }
 LbBracketOperatorName >> synopsis [
-	^ '•[• ...]' asRopedText
+	^ '•[• ...]'
 ]

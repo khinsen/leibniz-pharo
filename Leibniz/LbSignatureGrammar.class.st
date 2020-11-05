@@ -115,12 +115,12 @@ LbSignatureGrammar >> start [
 
 { #category : #productions }
 LbSignatureGrammar >> subscriptOp [
-	^ arg, underscore, openBrace, arg, closeBrace
+	^ arg, underscore, openBrace, (arg separatedBy: comma trim), closeBrace
 ]
 
 { #category : #productions }
 LbSignatureGrammar >> superscriptOp [
-	^ arg, hat, openBrace, arg, closeBrace
+	^ arg, hat, openBrace, (arg separatedBy: comma trim), closeBrace
 ]
 
 { #category : #productions }

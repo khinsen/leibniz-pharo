@@ -44,15 +44,21 @@ LbSignatureParser >> sort [
 { #category : #productions }
 LbSignatureParser >> subscriptOp [
 	^ super subscriptOp
-		==> [ :nodes | { LbSubscriptOperatorName new. { nodes first. nodes fourth } } ]
-
+		==> [ :nodes |
+				| args |
+				args := OrderedCollection with: nodes first.
+				args addAll: (nodes fourth reject: [ :element | element = $,]).
+				{ LbSubscriptOperatorName new. args asArray } ]
 ]
 
 { #category : #productions }
 LbSignatureParser >> superscriptOp [
 	^ super superscriptOp
-		==> [ :nodes | { LbSuperscriptOperatorName new. { nodes first. nodes fourth } } ]
-
+		==> [ :nodes |
+				| args |
+				args := OrderedCollection with: nodes first.
+				args addAll: (nodes fourth reject: [ :element | element = $,]).
+				{ LbSuperscriptOperatorName new. args asArray } ]
 ]
 
 { #category : #productions }

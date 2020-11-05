@@ -21,5 +21,5 @@ LbInfixOperatorName >> printForArity: anArity on: aStream [
 
 { #category : #printing }
 LbInfixOperatorName >> synopsis [
-	^ ('• ', internalSymbol allButFirst, ' •') asRopedText
+	^ '• ', internalSymbol allButFirst, ' •'
 ]

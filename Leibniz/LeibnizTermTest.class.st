@@ -61,9 +61,9 @@ LeibnizTermTest >> checkSyntaxRoundTrip: aString [
 
 { #category : #running }
 LeibnizTermTest >> setUp [
-	library := LeibnizLibrary uniqueInstance.
+"	library := LeibnizLibrary uniqueInstance.
 	builtins := library builtins.
-	examples := LeibnizExamples new.
+	examples := LeibnizExamples new."
 ]
 
 { #category : #testing }
@@ -91,21 +91,21 @@ LeibnizTermTest >> testFPNumbers [
 
 { #category : #testing }
 LeibnizTermTest >> testIntegers [
-	| c i t |
-	c := builtins contextNamed: 'integers'.
-	i := [ :x | LbIntegerTerm value: x forSignature: c signature ].
+	| s i t |
+	s := LbBuiltinSignatures integerSignature.
+	i := [ :x | LbIntegerTerm value: x forSignature: s  ].
 
 	self assert: (i value: 2) sort equals: #'ℕ.nz'.
 	self assert: (i value: -2) sort equals: #'ℤ.nz'.
 	self assert: (i value: 0) sort equals: #zero.
 
-	t := c signature nonZeroArgTermNamed: #abs withArgs: { (i value: 2) }.
+	t := s nonZeroArgTermNamed: #abs withArgs: { (i value: 2) }.
 	self assert: t sort equals: #'ℕ.nz'.
-	t := c signature nonZeroArgTermNamed: #abs withArgs: { (i value: 0) }.
+	t := s nonZeroArgTermNamed: #abs withArgs: { (i value: 0) }.
 	self assert: t sort equals: #'ℕ'.
-	t := c signature nonZeroArgTermNamed: #'_+' withArgs: { (i value: 0) . (i value: 2)}.
+	t := s nonZeroArgTermNamed: #'_+' withArgs: { (i value: 0) . (i value: 2)}.
 	self assert: t sort equals: #'ℕ.nz'.
-	t := c signature nonZeroArgTermNamed: #'_+' withArgs: { (i value: -2) . (i value: 2)}.
+	t := s nonZeroArgTermNamed: #'_+' withArgs: { (i value: -2) . (i value: 2)}.
 	self assert: t sort equals: #'ℤ'.
 ]
 

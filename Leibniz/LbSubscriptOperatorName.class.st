@@ -11,14 +11,17 @@ LbSubscriptOperatorName >> initialize [
 
 { #category : #printing }
 LbSubscriptOperatorName >> printForArity: anArity on: aStream [
-	self assert: anArity size equals: 2.
+	self assert: anArity size > 1.
 	anArity first printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: '_{'.
-	anArity second printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: '}'.
+	anArity allButFirst allButLast do: [ : each |
+		each printAsLeibnizSyntaxOn: aStream.
+		aStream nextPutAll: ', ' ].
+	anArity last printAsLeibnizSyntaxOn: aStream.
+	aStream nextPutAll: '}'
 ]
 
 { #category : #printing }
 LbSubscriptOperatorName >> synopsis [
-	^ ('•_{•}') asRopedText
+	^ '•_{•}'
 ]

@@ -72,5 +72,5 @@ LbOperatorName >> printStringForArity: anArity [
 
 { #category : #printing }
 LbOperatorName >> synopsis [
-	^ internalSymbol asString asRopedText
+	^ internalSymbol asString
 ]

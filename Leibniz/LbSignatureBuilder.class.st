@@ -45,7 +45,7 @@ LbSignatureBuilder >> addOp: anOpName withArgs: aSortArray ofSort: aSort [
 	| arity kindArity operator |
 	aSortArray ifEmpty: [
 		| sort |
-		sort := variables at: anOpName asSymbol ifAbsent: nil.
+		sort := variables at: anOpName ifAbsent: nil.
 		self assert: sort isNil
 			 description: [ 'conflicting earlier variable definition with sort ', sort name asString ] ].
 	arity := LbArity sortGraph: sortGraph argSorts: aSortArray.
@@ -76,16 +76,15 @@ LbSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
 ]
 
 { #category : #adding }
-LbSignatureBuilder >> addVar: aSymbolOrOperatorName ofSort: aSortSymbol [
-	| symbol op sort |
-	symbol := aSymbolOrOperatorName asSymbol.
-	op := operators at: symbol ifAbsent: nil.
+LbSignatureBuilder >> addVar: anOpName ofSort: aSort [
+	| op sort |
+	op := operators at: anOpName ifAbsent: nil.
 	op ifNotNil:
 		[ sort := op at: (LbArity sortGraph: sortGraph argSorts: #()) ifAbsent: nil.
 		  self assert: sort isNil
-				 description: 'conflicting earlier operator definition with sort', sort asString ].
-	sort := variables at: symbol ifAbsentPut: aSortSymbol.
-	self assert: sort = aSortSymbol
+				description: 'conflicting earlier operator definition with sort', sort asString ].
+	sort := variables at: anOpName ifAbsentPut: aSort.
+	self assert: sort = aSort
 		  description: 'conflicting earlier variable definition with sort ', sort asString.
 ]
 
@@ -155,21 +154,24 @@ LbSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 LbSignatureBuilder >> parseAndAddOp: aString [
 	| opSpec op args sort argSorts |
 	opSpec := LbSignatureParser parse: aString.
+	opSpec isPetit2Failure ifTrue: [ Error signal: opSpec message ].
 	op := opSpec first first.
 	args := opSpec first second.
 	sort := sortGraph sortNamed: opSpec second.
 	argSorts := args collect: [ :each | sortGraph sortNamed: each last ].
 	args select: [ :each | each size = 2 ]
-		  thenDo: [ :each | self addVar: each first ofSort:  each second ].
+		  thenDo: [ :each | self addVar: (LbPrefixOperatorName for: each first) ofSort: (sortGraph sortNamed: each second) ].
 	args ifEmpty: [ self addOp: op ofSort: sort ]
 		  ifNotEmpty: [ self addOp: op withArgs: argSorts ofSort: sort ]
 ]
 
 { #category : #adding }
 LbSignatureBuilder >> parseAndAddVar: aString [
-	| var |
+	| var name sort |
 	var := LbSignatureParser parse: aString startingAt: #var.
-	self addVar: var first ofSort: (sortGraph sortNamed: var second).
+	name := LbPrefixOperatorName for: var first.
+	sort := sortGraph sortNamed: var second.
+	self addVar: name ofSort: sort
 ]
 
 { #category : #accessing }
