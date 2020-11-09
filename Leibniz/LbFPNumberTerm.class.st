@@ -8,9 +8,8 @@ Class {
 }
 
 { #category : #accessing }
-LbFPNumberTerm >> sort [
-	value isNaN ifTrue: [ ^#'FP64-NaN' ].
-	value isInfinite ifTrue: [ ^#'FP64-inf' ].
-	^#'FP64-number'
-
+LbFPNumberTerm >> sortSymbol [
+	value isNaN ifTrue: [ ^ #'FP64-NaN' ].
+	value isInfinite ifTrue: [ ^ #'FP64-inf' ].
+	^ #'FP64-number'
 ]

@@ -5,6 +5,50 @@ Class {
 }
 
 { #category : #builtins }
+LbBuiltinSignatures class >> fpNumberSignature [
+	<gtExample>
+	^ (LbSignatureBuilder sortGraph:
+		((LbBuiltinSortGraphs fpNumberSortGraph
+			union: LbBuiltinSortGraphs integerSortGraph)
+			union: LbBuiltinSortGraphs truthSortGraph))
+		addBuiltin: #fpNumbers;
+		addSignature: (LbBuiltinSignatures integerSignature) includeVars: false;
+		"Arithmetic operators, single precision"
+		parseAndAddOp: 'FP32 + FP32 : FP32';
+		parseAndAddOp: 'FP32 - FP32 : FP32';
+		parseAndAddOp: '-(FP32) : FP32';
+		parseAndAddOp: 'FP32 × FP32 : FP32';
+		parseAndAddOp: 'FP32 ÷ FP32 : FP32';
+		parseAndAddOp: 'FP32 ÷ FP32 : FP32';
+		parseAndAddOp: 'FP32^{FP32} : FP32';
+		parseAndAddOp: 'FP32^{ℤ} : FP32';
+		parseAndAddOp: 'abs(FP32) : FP32';
+		parseAndAddOp: '√(FP32) : FP32';
+		"Arithmetic operators, double precision"
+		parseAndAddOp: 'FP64 + FP64 : FP64';
+		parseAndAddOp: 'FP64 - FP64 : FP64';
+		parseAndAddOp: '-(FP64) : FP64';
+		parseAndAddOp: 'FP64 × FP64 : FP64';
+		parseAndAddOp: 'FP64 ÷ FP64 : FP64';
+		parseAndAddOp: 'FP64 ÷ FP64 : FP64';
+		parseAndAddOp: 'FP64^{FP64} : FP64';
+		parseAndAddOp: 'FP64^{ℤ} : FP64';
+		parseAndAddOp: 'abs(FP64) : FP64';
+		parseAndAddOp: '√(FP64) : FP64';
+		"Comparison operators, single precision"
+		parseAndAddOp: 'FP32 < FP32 : boolean';
+		parseAndAddOp: 'FP32 > FP32 : boolean';
+		parseAndAddOp: 'FP32 ≤ FP32 : boolean';
+		parseAndAddOp: 'FP32 ≥ FP32 : boolean';
+		"Comparison operators, double precision"
+		parseAndAddOp: 'FP64 < FP64 : boolean';
+		parseAndAddOp: 'FP64 > FP64 : boolean';
+		parseAndAddOp: 'FP64 ≤ FP64 : boolean';
+		parseAndAddOp: 'FP64 ≥ FP64 : boolean';
+		signature
+]
+
+{ #category : #builtins }
 LbBuiltinSignatures class >> integerSignature [
 	<gtExample>
 	^ (LbSignatureBuilder sortGraph:

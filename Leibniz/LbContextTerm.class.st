@@ -8,7 +8,6 @@ Class {
 }
 
 { #category : #accessing }
-LbContextTerm >> sort [
-	^#context
-
+LbContextTerm >> sortSymbol [
+	^ #context
 ]

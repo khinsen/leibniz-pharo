@@ -180,26 +180,25 @@ LbSignature >> isEmpty [
 ]
 
 { #category : #'term construction' }
-LbSignature >> nonZeroArgTermNamed: aSymbol withArgs: aTermArray [
+LbSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
 	| argSorts |
 	argSorts := aTermArray collect: [ :t | t sort ].
-	(self sortOfOp: aSymbol withArgSorts: argSorts)
+	(self sortOfOp: anOpName withArgSorts: argSorts)
 		ifNil: [ ^ nil ]
-		ifNotNil: [ :sort | ^ LbOpTerm symbol: aSymbol
-													  args: aTermArray
-													  sort: sort
-													  forSignature: self ].
-
+		ifNotNil: [ :sort |
+			^ LbOpTerm symbol: anOpName
+					   args: aTermArray
+					   sort: sort
+					   forSignature: self ]
 ]
 
 { #category : #'term construction' }
-LbSignature >> nonZeroArgTermNamed: aSymbol withArgs: aTermArray onError: aBlock [
+LbSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray onError: aBlock [
 	| result |
-	result := self nonZeroArgTermNamed: aSymbol withArgs: aTermArray.
+	result := self nonZeroArgTermNamed: anOpName withArgs: aTermArray.
 	result
-		ifNil: [ ^ aBlock value: aSymbol value: (aTermArray collect: [ :t | t sort ]) ]
+		ifNil: [ ^ aBlock value: anOpName value: (aTermArray collect: [ :t | t sort ]) ]
 		ifNotNil: [ ^ result ]
-
 ]
 
 { #category : #accessing }

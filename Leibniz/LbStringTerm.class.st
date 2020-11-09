@@ -16,6 +16,6 @@ LbStringTerm >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LbStringTerm >> sort [
-	^#string
+LbStringTerm >> sortSymbol [
+	^ #string
 ]

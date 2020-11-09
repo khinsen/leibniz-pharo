@@ -26,10 +26,13 @@ LbRationalNumberTerm >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LbRationalNumberTerm >> sort [
-	value = 0 ifTrue: [ ^#zero ].
+LbRationalNumberTerm >> sortSymbol [
+	value = 0 ifTrue: [ ^ #zero ].
 	value isInteger
-		ifTrue: [ value positive ifTrue: [ ^#'ℕ.nz' ] ifFalse: [ ^#'ℤ.nz' ] ].
-	value positive ifTrue: [ ^#'ℚ.p' ] ifFalse: [ ^#'ℚ.nz' ].
-
+		ifTrue: [ value positive
+					ifTrue: [ ^ #'ℕ.nz' ]
+					ifFalse: [ ^ #'ℤ.nz' ] ].
+	value positive
+		ifTrue: [ ^ #'ℚ.p' ]
+		ifFalse: [ ^ #'ℚ.nz' ].
 ]

@@ -15,8 +15,10 @@ LbIntegerTerm class >> value: aNumber forSignature: aSignature [
 ]
 
 { #category : #acccessing }
-LbIntegerTerm >> sort [
-	value = 0 ifTrue: [ ^#zero ].
-	value positive ifTrue: [ ^#'ℕ.nz' ] ifFalse: [ ^#'ℤ.nz' ].
-
+LbIntegerTerm >> sortSymbol [
+	value = 0
+		ifTrue: [ ^ #zero ].
+	value positive
+		ifTrue: [ ^ #'ℕ.nz' ]
+		ifFalse: [ ^ #'ℤ.nz' ]
 ]

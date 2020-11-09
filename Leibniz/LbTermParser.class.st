@@ -73,14 +73,15 @@ LbTermParser >> integerTerm [
 { #category : #productions }
 LbTermParser >> nonInfixTerm [
 	^ super nonInfixTerm
-		==> [ :nodes | nodes second
-							ifNil: [ nodes first ]
-							ifNotNil: [ | symbol args |
-											symbol := nodes second first.
-											args := nodes second second.
-											signature nonZeroArgTermNamed: symbol
-														 withArgs: (args copyWithFirst: nodes first) ] ]
-
+		==> [ :nodes |
+				nodes second
+					ifNil: [ nodes first ]
+					ifNotNil: [ | symbol args |
+								symbol := nodes second first.
+								args := nodes second second.
+								signature
+									nonZeroArgTermNamed: (LbOperatorName fromInternalSymbol: symbol)
+									withArgs: (args copyWithFirst: nodes first) ] ]
 ]
 
 { #category : #productions }
@@ -90,11 +91,10 @@ LbTermParser >> prefixOpTerm [
 				| symbol args |
 				symbol := nodes first.
 				args := (nodes at: 3) reject: [ :element | element = $,].
-				signature nonZeroArgTermNamed: symbol
+				signature nonZeroArgTermNamed: (LbPrefixOperatorName for: symbol)
 							 withArgs: args
 							 onError: [ :opSymbol :arity |
 											self errorForOp: opSymbol withArity: arity ] ]
-
 ]
 
 { #category : #productions }
@@ -139,17 +139,19 @@ LbTermParser >> term [
 		==> [ :nodes |
 				nodes size = 1
 					ifTrue: [ nodes first ]
-					ifFalse: [ | opSymbol |
-									opSymbol := ('_' , nodes first) asSymbol.
-									(nodes allButFirst: 2)
-										inject: nodes second
-										into: [ :result :each |
-													| args |
-													args := { result . each }.
-													signature nonZeroArgTermNamed: opSymbol
-																 withArgs: args
-																 onError: [ :symbol :arity |
-																			 self errorForOp: symbol withArity: arity ] ] ] ]
+					ifFalse: [
+						| opSymbol |
+						opSymbol := nodes first asSymbol.
+						(nodes allButFirst: 2)
+							inject: nodes second
+							into: [ :result :each |
+								| args |
+								args := { result . each }.
+								signature
+									nonZeroArgTermNamed: (LbInfixOperatorName for: opSymbol)
+									withArgs: args
+									onError: [ :opName :arity |
+										self errorForOp: opName withArity: arity ] ] ] ]
 ]
 
 { #category : #productions }
