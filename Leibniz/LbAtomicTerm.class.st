@@ -10,12 +10,17 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
+{ #category : #private }
+LbAtomicTerm class >> requiredBuiltin [
+	self subclassResponsibility
+]
+
 { #category : #'instance creation' }
 LbAtomicTerm class >> value: aString forSignature: aSignature [
-	^self basicNew
+	aSignature assertBuiltin: self requiredBuiltin.
+	^ self basicNew
 			initializeWithValue: aString forSignature: aSignature;
 			yourself
-
 ]
 
 { #category : #converting }

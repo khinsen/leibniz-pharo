@@ -7,6 +7,11 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
+{ #category : #private }
+LbStringTerm class >> requiredBuiltin [
+	^ #strings
+]
+
 { #category : #printing }
 LbStringTerm >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPut: $".

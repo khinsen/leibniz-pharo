@@ -7,13 +7,21 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
+{ #category : #private }
+LbRationalNumberTerm class >> requiredBuiltin [
+	^ #rationalNumbers
+]
+
 { #category : #'instance creation' }
 LbRationalNumberTerm class >> value: aNumber forSignature: aSignature [
 	aNumber isInteger
-		ifTrue: [ ^ LbIntegerTerm value: aNumber forSignature: aSignature ]
-		ifFalse: [ ^self basicNew
-						initializeWithValue: aNumber forSignature: aSignature;
-						yourself ]
+		ifTrue: [
+			^ LbIntegerTerm value: aNumber forSignature: aSignature ]
+		ifFalse: [
+			aSignature assertBuiltin: self requiredBuiltin.
+			^ self basicNew
+					initializeWithValue: aNumber forSignature: aSignature;
+					yourself ]
 ]
 
 { #category : #printing }

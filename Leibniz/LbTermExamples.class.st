@@ -7,6 +7,31 @@ Class {
 }
 
 { #category : #example }
+LbTermExamples >> booleanTerm [
+	<gtExample>
+	| t |
+	t := LbBuiltinSignatures truthSignature zeroArgTermNamed: (LbPrefixOperatorName for: #true).
+	self assert: t sort name equals: #boolean.
+	^ t
+]
+
+{ #category : #example }
+LbTermExamples >> integerTerms [
+	<gtExample>
+	| inputs |
+	inputs := {
+		2 -> #'ℕ.nz'.
+		0 -> #zero.
+		-2 -> #'ℤ.nz'.
+	}.
+	^ inputs collect: [ :each |
+		| t |
+		t := LbBuiltinSignatures integerSignature atomicTerm: each key.
+		self assert: t sort name equals: each value.
+		t ]
+]
+
+{ #category : #example }
 LbTermExamples >> parserForFooBar [
 	<gtExample>
 	| signature |
@@ -43,6 +68,15 @@ LbTermExamples >> signatureForTermParserTests [
 		parseAndAddOp: 'true : boolean';
 		parseAndAddOp: 'false : boolean';
 		signature
+]
+
+{ #category : #example }
+LbTermExamples >> stringTerm [
+	<gtExample>
+	| t |
+	t := LbBuiltinSignatures stringSignature atomicTerm: 'abc'.
+	self assert: t sort name equals: #string.
+	^ t
 ]
 
 { #category : #example }

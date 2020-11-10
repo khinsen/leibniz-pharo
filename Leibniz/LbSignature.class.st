@@ -45,6 +45,16 @@ LbSignature class >> sortGraph: aSortGraph builtins: aSet operators: anOperatorD
 
 ]
 
+{ #category : #asserting }
+LbSignature >> assertBuiltin: aBuiltinSymbol [
+	self assert: (builtins includes: aBuiltinSymbol) description: aBuiltinSymbol, ' are not defined in this signature'
+]
+
+{ #category : #'term construction' }
+LbSignature >> atomicTerm: aValue [
+	^ aValue lbAtomicTermClass value: aValue forSignature: self
+]
+
 { #category : #copying }
 LbSignature >> copy [
 	^self

@@ -143,15 +143,6 @@ LeibnizTermTest >> testRationalNumbers [
 ]
 
 { #category : #testing }
-LeibnizTermTest >> testStrings [
-	| c t |
-	c := builtins contextNamed: 'strings'.
-	t := LbStringTerm value: 'abc' forSignature: c signature.
-	self assert: t sort equals: #string.
-
-]
-
-{ #category : #testing }
 LeibnizTermTest >> testSubstitutions [
 	self useContext: (examples contextNamed: 'boolean').
 
@@ -220,17 +211,6 @@ LeibnizTermTest >> testSyntax [
 	self checkSyntaxRoundTrip: '(s × g)[X]'.
 	self checkSyntaxRoundTrip: 's × g[X]'.
 	self checkSyntaxRoundTrip: 'f[g[X]]'.
-
-]
-
-{ #category : #testing }
-LeibnizTermTest >> testTruth [
-	| c t |
-	c := builtins contextNamed: 'truth'.
-	t := c signature zeroArgTermNamed: #true.
-	self assert: t sort equals: #boolean.
-	t := c signature zeroArgTermNamed: #false.
-	self assert: t sort equals: #boolean.
 
 ]
 

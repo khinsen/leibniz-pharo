@@ -7,9 +7,15 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
+{ #category : #private }
+LbIntegerTerm class >> requiredBuiltin [
+	^ #integers
+]
+
 { #category : #'instance creation' }
 LbIntegerTerm class >> value: aNumber forSignature: aSignature [
-	^self basicNew
+	aSignature assertBuiltin: self requiredBuiltin.
+	^ self basicNew
 			initializeWithValue: aNumber forSignature: aSignature;
 			yourself
 ]

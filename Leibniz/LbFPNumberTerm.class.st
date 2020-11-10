@@ -7,6 +7,11 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
+{ #category : #private }
+LbFPNumberTerm class >> requiredBuiltin [
+	^ #fpNumbers
+]
+
 { #category : #accessing }
 LbFPNumberTerm >> sortSymbol [
 	value isNaN ifTrue: [ ^ #'FP64-NaN' ].

@@ -30,6 +30,11 @@ LeibnizContext >> initializeWithName: aString sortGraph: aSortGraph signature: a
 	self beRecursivelyReadOnlyObject.
 ]
 
+{ #category : #converting }
+LeibnizContext >> lbAtomicTermClass [
+	^ LbContextTerm
+]
+
 { #category : #rewriting }
 LeibnizContext >> matchRulesFor: aTerm [
 	^ rewriteSystem matchRulesFor: aTerm
