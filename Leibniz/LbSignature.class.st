@@ -158,7 +158,7 @@ LbSignature >> gtVariablesFor: aView [
 	^ aView columnedList
 		title: 'Variables' translated;
 		priority: 1;
-		items: [ variables associations sorted: [ :a :b | a key < b key ]];
+		items: [ variables associations sorted: [ :a :b | a key <= b key ]];
 		column: 'Name' do: [ :aColumn |
 			aColumn cellStencil: LbCodeFont brLabelCellStencil;
 			dataBinder: [ :eachLabel :eachItem |
@@ -284,7 +284,7 @@ LbSignature >> withVariablesDo: aBlock [
 { #category : #'term construction' }
 LbSignature >> zeroArgTermNamed: anOpName [
 	variables at: anOpName
-		ifPresent: [ :sort | ^ LbVarTerm symbol: anOpName sort: sort forSignature: self ].
+		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort forSignature: self ].
 	(self sortOfOp: anOpName withArgSorts: #())
 		ifNil: [ ^ nil ]
 		ifNotNil: [ :sort | ^ LbOpTerm name: anOpName
@@ -296,7 +296,7 @@ LbSignature >> zeroArgTermNamed: anOpName [
 { #category : #'term construction' }
 LbSignature >> zeroArgTermNamed: anOpName extraVariables: aDictionary [
 	aDictionary at: anOpName
-		ifPresent: [ :sort | ^ LbVarTerm symbol: anOpName sort: sort forSignature: self ].
+		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort forSignature: self ].
 	^ self zeroArgTermNamed: anOpName
 ]
 

@@ -201,6 +201,8 @@ LbTermExamples >> termSyntax [
 		{ LbBuiltinSignatures fpNumberSignature.
 			'2.5'. 'abs(-2.5)'. '√(2.5)'.
 			'2.3 + 3.4'. '2.3^{3.2}'. }.
+		{ LbSignatureExamples new booleanSignature.
+			'true'. '¬(false)'. 'X ⊻ Y ⊻ (X ∧ Y)'. 'true ⊻ false ⊻ X ⊻ Y'. }.
 	} flatCollect: [ :each |
 		each allButFirst collect: [ :eachString |
 			self

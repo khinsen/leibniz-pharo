@@ -122,19 +122,12 @@ LeibnizTermTest >> testSubstitutions [
 
 { #category : #testing }
 LeibnizTermTest >> testSyntax [
-	self useContext: (examples contextNamed: 'boolean').
-	self checkSyntaxRoundTrip: 'true'.
-	self checkSyntaxRoundTrip: '¬(false)'.
-	self checkSyntaxRoundTrip: 'X ⊻ Y ⊻ (X ∧ Y)'.
-	self checkSyntaxRoundTrip: 'true ⊻ false ⊻ X ⊻ Y'.
-
 	self useContext: (examples contextNamed: 'ℝ→ℝ').
 	self checkSyntaxRoundTrip: '(f + g)[X]'.
 	self checkSyntaxRoundTrip: 'f[X] + g[X]'.
 	self checkSyntaxRoundTrip: '(s × g)[X]'.
 	self checkSyntaxRoundTrip: 's × g[X]'.
 	self checkSyntaxRoundTrip: 'f[g[X]]'.
-
 ]
 
 { #category : #testing }

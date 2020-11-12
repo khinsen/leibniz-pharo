@@ -17,13 +17,13 @@ LbUniversalVarTerm class >> symbol: aSymbol forSignature: aSignature [
 
 { #category : #converting }
 LbUniversalVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
-	^ self class symbol: varSymbol forSignature: aSignature
+	^ self class symbol: name forSignature: aSignature
 
 ]
 
 { #category : #initialization }
 LbUniversalVarTerm >> initializeWithSymbol: aSymbol forSignature: aSignature [
-	varSymbol := aSymbol.
+	name := aSymbol.
 	signature := aSignature.
 	sort := #boolean.
 ]
@@ -31,5 +31,5 @@ LbUniversalVarTerm >> initializeWithSymbol: aSymbol forSignature: aSignature [
 { #category : #matching }
 LbUniversalVarTerm >> match: otherTerm [
 	otherTerm assertNotAVariable.
-	^ LbSubstitution variable: varSymbol value: otherTerm
+	^ LbSubstitution variable: name value: otherTerm
 ]

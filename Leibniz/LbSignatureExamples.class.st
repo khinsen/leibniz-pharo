@@ -54,6 +54,20 @@ LbSignatureExamples >> arityKindOfA [
 ]
 
 { #category : #example }
+LbSignatureExamples >> booleanSignature [
+	<gtExample>
+	^ ((LbSignatureBuilder sortGraph: LbBuiltinSortGraphs truthSortGraph)
+		addSignature: (LbBuiltinSignatures truthSignature) includeVars: false)
+		parseAndAddOp: '¬(boolean) : boolean';
+		parseAndAddOp: 'boolean ∧ boolean : boolean';
+		parseAndAddOp: 'boolean ∨ boolean : boolean';
+		parseAndAddOp: 'boolean ⊻ boolean : boolean';
+		parseAndAddVar: 'X:boolean';
+		parseAndAddVar: 'Y:boolean';
+		signature
+]
+
+{ #category : #example }
 LbSignatureExamples >> emptyArity [
 	<gtExample>
 	| sortGraph |

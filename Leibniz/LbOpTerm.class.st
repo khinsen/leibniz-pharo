@@ -15,7 +15,7 @@ Class {
 { #category : #'instance creation' }
 LbOpTerm class >> name: anOpName args: anArgList sort: aSort forSignature: aSignature [
 	^self basicNew
-			initializeWithSymbol: anOpName args: anArgList sort: aSort forSignature: aSignature;
+			initializeWithName: anOpName args: anArgList sort: aSort forSignature: aSignature;
 			yourself.
 ]
 
@@ -42,8 +42,8 @@ LbOpTerm >> hasInfixOpOtherThan: anOpName [
 ]
 
 { #category : #initialization }
-LbOpTerm >> initializeWithSymbol: aSymbol args: anArgList sort: aSort forSignature: aSignature [
-	opName := aSymbol.
+LbOpTerm >> initializeWithName: anOpName args: anArgList sort: aSort forSignature: aSignature [
+	opName := anOpName.
 	arguments := anArgList.
 	sort := aSort.
 	signature := aSignature.
