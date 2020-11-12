@@ -101,22 +101,7 @@ LbTermParserExamples >> infixTermParseFailures [
 ]
 
 { #category : #example }
-LbTermParserExamples >> integerParseFailures [
-	<gtExample>
-	| inputs |
-	inputs := #('abc' '0abc' '2/3' '-2/3' '2.5' '2e2' '2.5e2').
-	inputs do: [ :each |
-		self assertParseFailure: each rule: #integerTerm ].
-	^ inputs
-]
-
-{ #category : #utility }
-LbTermParserExamples >> integerTerm: anInteger [
-	^ LbIntegerTerm value: anInteger forSignature: self signature
-]
-
-{ #category : #example }
-LbTermParserExamples >> integerTerms [
+LbTermParserExamples >> integerLiteralTerms [
 	<gtExample>
 	| rules |
 	rules := #(#integerTerm #literalTerm #simpleTerm #nonInfixTerm #term).
@@ -132,6 +117,21 @@ LbTermParserExamples >> integerTerms [
 			result := self parse: each key rule: eachRule.
 			self assert: result equals: each value ].
 		result ]
+]
+
+{ #category : #example }
+LbTermParserExamples >> integerParseFailures [
+	<gtExample>
+	| inputs |
+	inputs := #('abc' '0abc' '2/3' '-2/3' '2.5' '2e2' '2.5e2').
+	inputs do: [ :each |
+		self assertParseFailure: each rule: #integerTerm ].
+	^ inputs
+]
+
+{ #category : #utility }
+LbTermParserExamples >> integerTerm: anInteger [
+	^ LbIntegerTerm value: anInteger forSignature: self signature
 ]
 
 { #category : #example }

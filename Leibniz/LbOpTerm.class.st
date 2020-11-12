@@ -13,9 +13,9 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbOpTerm class >> symbol: aSymbol args: anArgList sort: aSort forSignature: aSignature [
+LbOpTerm class >> name: anOpName args: anArgList sort: aSort forSignature: aSignature [
 	^self basicNew
-			initializeWithSymbol: aSymbol args: anArgList sort: aSort forSignature: aSignature;
+			initializeWithSymbol: anOpName args: anArgList sort: aSort forSignature: aSignature;
 			yourself.
 ]
 
@@ -37,14 +37,8 @@ LbOpTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 ]
 
 { #category : #private }
-LbOpTerm >> hasInfixOpOtherThan: aSymbol [
-	"Not the same op."
-	aSymbol = opName
-		ifTrue: [ ^ false ].
-	"Not an infix op."
-	opName asString first = $_
-		ifFalse: [ ^ false ].
-	^ true
+LbOpTerm >> hasInfixOpOtherThan: anOpName [
+	^ opName isInfixOpOtherThan: anOpName
 ]
 
 { #category : #initialization }
@@ -65,10 +59,7 @@ LbOpTerm >> isEqualityTerm [
 
 { #category : #testing }
 LbOpTerm >> isInfix [
-	"Answer true if the term is printed in infix notation."
-	| opString |
-	opString := opName asString.
-	^ opString size > 1 and: [ opString first = $_ ]
+	^ opName isInfix
 ]
 
 { #category : #testing }
@@ -109,7 +100,7 @@ LbOpTerm >> opName [
 
 { #category : #printing }
 LbOpTerm >> printAsLeibnizSyntaxOn: aStream [
-	opName printForArity: arguments on: aStream
+	opName printForArgs: arguments on: aStream
 ]
 
 { #category : #accessing }

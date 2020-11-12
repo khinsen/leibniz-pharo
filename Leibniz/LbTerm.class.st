@@ -88,6 +88,11 @@ LbTerm >> matchOp: opSymbol andArgs: argList [
 ]
 
 { #category : #printing }
+LbTerm >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream [
+	self printAsLeibnizSyntaxOn: aStream parenthesized: (self hasInfixOpOtherThan: anOpName)
+]
+
+{ #category : #printing }
 LbTerm >> printAsLeibnizSyntaxOn: aStream [
 	self subclassResponsibility
 ]
@@ -97,7 +102,6 @@ LbTerm >> printAsLeibnizSyntaxOn: aStream parenthesized: aBoolean [
 	aBoolean ifTrue: [ aStream nextPut: $(. ].
 	self printAsLeibnizSyntaxOn: aStream.
 	aBoolean ifTrue: [ aStream nextPut: $). ].
-
 ]
 
 { #category : #printing }

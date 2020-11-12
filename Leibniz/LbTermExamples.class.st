@@ -15,8 +15,36 @@ LbTermExamples >> booleanTerm [
 	^ t
 ]
 
+{ #category : #private }
+LbTermExamples >> checkSyntaxRoundTrip: aString signature: aSignature [
+	| term |
+	term := (LbTermParser forSignature: aSignature)
+				parse: aString.
+	self assert: term asLeibnizSyntaxString equals: aString.
+	^ term
+]
+
 { #category : #example }
-LbTermExamples >> integerTerms [
+LbTermExamples >> fpNumberLiteralTerms [
+	<gtExample>
+	| inputs |
+	inputs := {
+		0.0 -> #'FP64.number'.
+		2.0 -> #'FP64.number'.
+		-2.0 -> #'FP64.number'.
+		Float nan -> #'FP64.NaN'.
+		Float infinity -> #'FP64.inf'.
+		Float negativeInfinity -> #'FP64.inf'.
+	}.
+	^ inputs collect: [ :each |
+		| t |
+		t := LbBuiltinSignatures fpNumberSignature atomicTerm: each key.
+		self assert: t sort name equals: each value.
+		t ]
+]
+
+{ #category : #example }
+LbTermExamples >> integerLiteralTerms [
 	<gtExample>
 	| inputs |
 	inputs := {
@@ -32,6 +60,34 @@ LbTermExamples >> integerTerms [
 ]
 
 { #category : #example }
+LbTermExamples >> integerTerms [
+	<gtExample>
+	| signature literals |
+	signature := LbBuiltinSignatures integerSignature.
+	literals := self integerLiteralTerms.
+	^ {
+		{ LbPrefixOperatorName for: #abs.
+		 	literals first }
+		 	-> #'ℕ.nz'.
+		{ LbPrefixOperatorName for: #abs.
+		 	literals second }
+		 	-> #'ℕ'.
+		{ LbInfixOperatorName for: #+.
+		 	literals first. literals third. }
+		 	-> #'ℤ'.
+		{ LbInfixOperatorName for: #+.
+		 	literals second. literals first. }
+		 	-> #'ℕ.nz'.
+	} collect: [ :each |
+		| term |
+		term := signature
+					nonZeroArgTermNamed: each key first
+					withArgs: each key allButFirst.
+		self assert: term sort name equals: each value.
+		term ]
+]
+
+{ #category : #example }
 LbTermExamples >> parserForFooBar [
 	<gtExample>
 	| signature |
@@ -40,34 +96,21 @@ LbTermExamples >> parserForFooBar [
 ]
 
 { #category : #example }
-LbTermExamples >> signatureForTermParserTests [
+LbTermExamples >> rationalNumberLiteralTerms [
 	<gtExample>
-	| sortGraph |
-	sortGraph := LbSortGraphBuilder new
-		parseAndAdd: 'A';
-		parseAndAdd: 'B ⊆ A';
-		parseAndAdd: 'boolean';
-		sortGraph.
-	^ (LbSignatureBuilder sortGraph: sortGraph)
-		addBuiltin: #integers;
-		addBuiltin: #rationalNumbers;
-		addBuiltin: #fpNumbers;
-		addBuiltin: #strings;
-		parseAndAddVar: 'aVar:A';
-		parseAndAddOp: 'aZeroArgOp : B';
-		parseAndAddOp: 'aOneArgOp(A) : A';
-		parseAndAddOp: 'aOneArgOp(B) : B';
-		parseAndAddOp: 'aTwoArgOp(A, A) : A';
-		parseAndAddOp: 'A[A] : A';
-		parseAndAddOp: 'A^{A} : A';
-		parseAndAddOp: 'A^{A,A} : A';
-		parseAndAddOp: 'A_{A} : A';
-		parseAndAddOp: 'A_{A,A} : A';
-		parseAndAddOp: 'A infixOp1 A : A';
-		parseAndAddOp: 'A infixOp2 A : A';
-		parseAndAddOp: 'true : boolean';
-		parseAndAddOp: 'false : boolean';
-		signature
+	| inputs |
+	inputs := {
+		0 -> #zero.
+		2 -> #'ℕ.nz'.
+		-2 -> #'ℤ.nz'.
+		2/3 -> #'ℚ.p'.
+		-2/3 -> #'ℚ.nz'.
+	}.
+	^ inputs collect: [ :each |
+		| t |
+		t := LbBuiltinSignatures rationalNumberSignature atomicTerm: each key.
+		self assert: t sort name equals: each value.
+		t ]
 ]
 
 { #category : #example }
@@ -93,7 +136,7 @@ LbTermExamples >> termFooBracketFooOfFoo [
 	sortGraph := signature sortGraph.
 	sortA := sortGraph sortNamed: #A.
 	^ LbOpTerm
-		symbol: LbBracketOperatorName new
+		name: LbBracketOperatorName new
 		args: { self termFooExplicit. self termFooOfFoo }
 		sort: sortA
 		forSignature: signature
@@ -106,7 +149,7 @@ LbTermExamples >> termFooExplicit [
 	signature := LbSignatureExamples new signatureFooBar.
 	sortGraph := signature sortGraph.
 	^ LbOpTerm
-		symbol: (LbPrefixOperatorName for: #foo)
+		name: (LbPrefixOperatorName for: #foo)
 		args: #()
 		sort: (sortGraph sortNamed: #A)
 		forSignature: signature
@@ -120,7 +163,7 @@ LbTermExamples >> termFooOfFoo [
 	sortGraph := signature sortGraph.
 	sortA := sortGraph sortNamed: #A.
 	^ LbOpTerm
-		symbol: (LbPrefixOperatorName for: #foo)
+		name: (LbPrefixOperatorName for: #foo)
 		args: { self termFooExplicit }
 		sort: sortA
 		forSignature: signature
@@ -134,8 +177,33 @@ LbTermExamples >> termFooPlusFooExplicit [
 	sortGraph := signature sortGraph.
 	sortA := sortGraph sortNamed: #A.
 	^ LbOpTerm
-		symbol: (LbInfixOperatorName for: #+)
+		name: (LbInfixOperatorName for: #+)
 		args: { self termFooExplicit. self termFooExplicit }
 		sort: sortA
 		forSignature: signature
+]
+
+{ #category : #example }
+LbTermExamples >> termSyntax [
+	<gtExample>
+	^ {
+		{ LbBuiltinSignatures truthSignature.
+			'true'. 'false'. }.
+		{ LbBuiltinSignatures integerSignature.
+			'2'. 'abs(-2)'. '2 + 3 + 4 + 5'.
+			'(2 + 3) × (2 - 7)'. '(3 - -4) div (-2 × 1)'.
+			'(2 + 3 + 4) rem 5'. '2^{3}'. '2^{2^{3}}'.
+			'(2 - 4)^{3}'. }.
+		{ LbBuiltinSignatures rationalNumberSignature.
+			'2/3'. 'abs(-2/3)'. '2/3^{3}'.
+			'2/3 + 3/4 + 1/7'.
+			'(2/3 + 3/4 + 1/7) ÷ -3/4'. '1/7 < 3/4'. }.
+		{ LbBuiltinSignatures fpNumberSignature.
+			'2.5'. 'abs(-2.5)'. '√(2.5)'.
+			'2.3 + 3.4'. '2.3^{3.2}'. }.
+	} flatCollect: [ :each |
+		each allButFirst collect: [ :eachString |
+			self
+				checkSyntaxRoundTrip: eachString
+				signature: each first ] ]
 ]

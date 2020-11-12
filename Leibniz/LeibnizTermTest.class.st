@@ -76,40 +76,6 @@ LeibnizTermTest >> testContexts [
 ]
 
 { #category : #testing }
-LeibnizTermTest >> testFPNumbers [
-	| c t |
-	c := builtins contextNamed: 'IEEE-floating-point'.
-	t := [ :x | LbFPNumberTerm value: x forSignature: c signature ].
-	self assert: (t value: 0.0) sort equals: #'FP64-number'.
-	self assert: (t value: 2.0) sort equals: #'FP64-number'.
-	self assert: (t value: -2.0) sort equals: #'FP64-number'.
-	self assert: (t value: Float nan) sort equals: #'FP64-NaN'.
-	self assert: (t value: Float infinity) sort equals: #'FP64-inf'.
-	self assert: (t value: Float negativeInfinity) sort equals: #'FP64-inf'.
-
-]
-
-{ #category : #testing }
-LeibnizTermTest >> testIntegers [
-	| s i t |
-	s := LbBuiltinSignatures integerSignature.
-	i := [ :x | LbIntegerTerm value: x forSignature: s  ].
-
-	self assert: (i value: 2) sort equals: #'ℕ.nz'.
-	self assert: (i value: -2) sort equals: #'ℤ.nz'.
-	self assert: (i value: 0) sort equals: #zero.
-
-	t := s nonZeroArgTermNamed: #abs withArgs: { (i value: 2) }.
-	self assert: t sort equals: #'ℕ.nz'.
-	t := s nonZeroArgTermNamed: #abs withArgs: { (i value: 0) }.
-	self assert: t sort equals: #'ℕ'.
-	t := s nonZeroArgTermNamed: #'_+' withArgs: { (i value: 0) . (i value: 2)}.
-	self assert: t sort equals: #'ℕ.nz'.
-	t := s nonZeroArgTermNamed: #'_+' withArgs: { (i value: -2) . (i value: 2)}.
-	self assert: t sort equals: #'ℤ'.
-]
-
-{ #category : #testing }
 LeibnizTermTest >> testMatching [
 	self useContext: (examples contextNamed: 'boolean').
 
@@ -126,19 +92,6 @@ LeibnizTermTest >> testMatching [
 
 	self check: 'true' doesNotMatch: 'false'.
 	self check: 'true ⊻ false' doesNotMatch: 'X ⊻ X'.
-
-]
-
-{ #category : #testing }
-LeibnizTermTest >> testRationalNumbers [
-	| c t |
-	c := builtins contextNamed: 'rational-numbers'.
-	t := [ :x | LbRationalNumberTerm value: x forSignature: c signature ].
-	self assert: (t value: 0) sort equals: #zero.
-	self assert: (t value: 2) sort equals: #'ℕ.nz'.
-	self assert: (t value: -2) sort equals: #'ℤ.nz'.
-	self assert: (t value: 2/3) sort equals: #'ℚ.p'.
-	self assert: (t value: -2/3) sort equals: #'ℚ.nz'.
 
 ]
 
@@ -169,36 +122,6 @@ LeibnizTermTest >> testSubstitutions [
 
 { #category : #testing }
 LeibnizTermTest >> testSyntax [
-	self useContext: (builtins contextNamed: 'truth').
-	self checkSyntaxRoundTrip: 'true'.
-	self checkSyntaxRoundTrip: 'false'.
-
-	self useContext: (builtins contextNamed: 'integers').
-	self checkSyntaxRoundTrip: '2'.
-	self checkSyntaxRoundTrip: 'abs(-2)'.
-	self checkSyntaxRoundTrip: '2 + 3 + 4 + 5'.
-	self checkSyntaxRoundTrip: '(2 + 3) × (2 - 7)'.
-	self checkSyntaxRoundTrip: '(3 - -4) div (-2 × 1)'.
-	self checkSyntaxRoundTrip: '(2 + 3 + 4) rem 5'.
-	self checkSyntaxRoundTrip: '2^{3}'.
-	self checkSyntaxRoundTrip: '2^{2^{3}}'.
-	self checkSyntaxRoundTrip: '(2 - 4)^{3}'.
-
-	self useContext: (builtins contextNamed: 'rational-numbers').
-	self checkSyntaxRoundTrip: '2/3'.
-	self checkSyntaxRoundTrip: 'abs(-2/3)'.
-	self checkSyntaxRoundTrip: '2/3^{3}'.
-	self checkSyntaxRoundTrip: '2/3 + 3/4 + 1/7'.
-	self checkSyntaxRoundTrip: '(2/3 + 3/4 + 1/7) ÷ -3/4'.
-	self checkSyntaxRoundTrip: '1/7 < 3/4'.
-
-	self useContext: (builtins contextNamed: 'IEEE-floating-point').
-	self checkSyntaxRoundTrip: '2.5'.
-	self checkSyntaxRoundTrip: 'abs(-2.5)'.
-	self checkSyntaxRoundTrip: '√(2.5)'.
-	self checkSyntaxRoundTrip: '2.3 + 3.4'.
-	self checkSyntaxRoundTrip: '2.3^{3.2}'.
-
 	self useContext: (examples contextNamed: 'boolean').
 	self checkSyntaxRoundTrip: 'true'.
 	self checkSyntaxRoundTrip: '¬(false)'.

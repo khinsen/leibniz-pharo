@@ -43,7 +43,6 @@ LbAtomicTerm >> leibnizAtomicTermValue [
 { #category : #printing }
 LbAtomicTerm >> printAsLeibnizSyntaxOn: aStream [
 	value printOn: aStream
-
 ]
 
 { #category : #accessing }

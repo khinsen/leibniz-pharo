@@ -196,7 +196,7 @@ LbSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
 	(self sortOfOp: anOpName withArgSorts: argSorts)
 		ifNil: [ ^ nil ]
 		ifNotNil: [ :sort |
-			^ LbOpTerm symbol: anOpName
+			^ LbOpTerm name: anOpName
 					   args: aTermArray
 					   sort: sort
 					   forSignature: self ]
@@ -287,7 +287,7 @@ LbSignature >> zeroArgTermNamed: anOpName [
 		ifPresent: [ :sort | ^ LbVarTerm symbol: anOpName sort: sort forSignature: self ].
 	(self sortOfOp: anOpName withArgSorts: #())
 		ifNil: [ ^ nil ]
-		ifNotNil: [ :sort | ^ LbOpTerm symbol: anOpName
+		ifNotNil: [ :sort | ^ LbOpTerm name: anOpName
 									   args: #()
 									   sort: sort
 									   forSignature: self ]

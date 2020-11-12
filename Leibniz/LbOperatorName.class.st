@@ -45,6 +45,21 @@ LbOperatorName >> internalSymbol: aSymbolOrString [
 	internalSymbol := aSymbolOrString asSymbol
 ]
 
+{ #category : #accessing }
+LbOperatorName >> isInfix [
+	^ false
+]
+
+{ #category : #testing }
+LbOperatorName >> isInfixOpOtherThan: anOpName [
+	^ false	
+]
+
+{ #category : #printing }
+LbOperatorName >> printForArgs: aTermArray on: aStream [
+	self printForArity: aTermArray on: aStream
+]
+
 { #category : #printing }
 LbOperatorName >> printForArity: anArity on: aStream [
 	self subclassResponsibility

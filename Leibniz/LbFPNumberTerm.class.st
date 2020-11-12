@@ -14,7 +14,7 @@ LbFPNumberTerm class >> requiredBuiltin [
 
 { #category : #accessing }
 LbFPNumberTerm >> sortSymbol [
-	value isNaN ifTrue: [ ^ #'FP64-NaN' ].
-	value isInfinite ifTrue: [ ^ #'FP64-inf' ].
-	^ #'FP64-number'
+	value isNaN ifTrue: [ ^ #'FP64.NaN' ].
+	value isInfinite ifTrue: [ ^ #'FP64.inf' ].
+	^ #'FP64.number'
 ]
