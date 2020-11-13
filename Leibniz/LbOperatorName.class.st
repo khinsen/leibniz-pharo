@@ -30,6 +30,11 @@ LbOperatorName >> asLbOperatorName [
 	^ self
 ]
 
+{ #category : #accessing }
+LbOperatorName >> asString [
+	^ internalSymbol asString
+]
+
 { #category : #converting }
 LbOperatorName >> asSymbol [
 	^ internalSymbol

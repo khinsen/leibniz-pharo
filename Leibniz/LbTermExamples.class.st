@@ -15,6 +15,26 @@ LbTermExamples >> booleanTerm [
 	^ t
 ]
 
+{ #category : #accessing }
+LbTermExamples >> check: aTerm matches: aPattern withSubstitution: aDictionaryOrNil signature: aSignature [
+	| p parse pattern term variables substitution |
+	p := LbTermParser forSignature: aSignature.
+	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
+	pattern := parse value: aPattern.
+	term := parse value: aTerm.
+	substitution := pattern match: term.
+	aDictionaryOrNil
+		ifNil: [ self assert: substitution equals: nil ]
+		ifNotNil: [
+			variables := Dictionary
+				newFromKeys: (aDictionaryOrNil keys collect: [ :each |
+								LbPrefixOperatorName for: each])
+				andValues: (aDictionaryOrNil values collect:[ :each |
+								parse value: each ]).
+			self assert: substitution variables equals: variables ].
+	^ substitution
+]
+
 { #category : #private }
 LbTermExamples >> checkSyntaxRoundTrip: aString signature: aSignature [
 	| term |
@@ -85,6 +105,43 @@ LbTermExamples >> integerTerms [
 					withArgs: each key allButFirst.
 		self assert: term sort name equals: each value.
 		term ]
+]
+
+{ #category : #example }
+LbTermExamples >> matches [
+	<gtExample>
+	| s |
+	s := LbSignatureExamples new booleanSignature.
+	^ {
+	self
+		check: 'true' matches: 'X'
+		withSubstitution: (Dictionary with: #X -> 'true')
+		signature: s.
+	self
+		check: '¬(true)' matches: '¬(X)'
+		withSubstitution: (Dictionary with: #X -> 'true')
+		signature: s.
+	self
+		check: '¬(true)' matches: 'X'
+		withSubstitution: (Dictionary with: #X -> '¬(true)')
+		signature: s.
+	self
+		check: 'true ⊻ false ⊻ true ⊻ ¬(true)' matches: 'true ⊻ false ⊻ X ⊻ Y'
+		withSubstitution: (Dictionary with: #X -> 'true' with: #Y -> '¬(true)')
+		signature: s.
+	self
+		check: 'true ⊻ true' matches: 'X ⊻ X'
+		withSubstitution: (Dictionary with: #X -> 'true')
+		signature: s.
+	self
+		check: 'true' matches: 'false'
+		withSubstitution: nil
+		signature: s.
+	self
+		check: 'true ⊻ false' matches: 'X ⊻ X'
+		withSubstitution: nil
+		signature: s.
+	}
 ]
 
 { #category : #example }
