@@ -406,7 +406,7 @@ LeibnizBuiltins >> createTruthContext [
 	uvar2 := LbUniversalVarTerm symbol: #Y forSignature: truth signature.
 	equalityPattern := LbOpTerm symbol: #'_==' args: { uvar1. uvar2 } sort: #boolean
 											  forSignature: truth signature.
-	truth addRule: (LeibnizFunctionRule pattern: equalityPattern function: #('X = Y' #LbBooleanTerm)).
+	truth addRule: (LbFunctionRule pattern: equalityPattern function: #('X = Y' #LbBooleanTerm)).
 "	truth build.
 
 ]

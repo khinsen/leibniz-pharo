@@ -233,6 +233,17 @@ LbSignature >> opNamed: anOpName withArgs: aSortArray [
 		ifAbsent: [ nil ].
 ]
 
+{ #category : #'term construction' }
+LbSignature >> parseTerm: aString [
+	^ self parseTerm: aString extraVariables: Dictionary new
+]
+
+{ #category : #'term construction' }
+LbSignature >> parseTerm: aString extraVariables: aDictionary [
+	^ (LbTermParser forSignature: self extraVariables: aDictionary)
+		parse: aString
+]
+
 { #category : #accessing }
 LbSignature >> ranksMatchingfOp: anOpName withArgs: aSortArray [
 	(self opNamed: anOpName withArgs: aSortArray)
@@ -243,6 +254,11 @@ LbSignature >> ranksMatchingfOp: anOpName withArgs: aSortArray [
 { #category : #accessing }
 LbSignature >> sortGraph [
 	^sortGraph
+]
+
+{ #category : #accessing }
+LbSignature >> sortNamed: aSymbol [
+	^ sortGraph sortNamed: aSymbol
 ]
 
 { #category : #accessing }

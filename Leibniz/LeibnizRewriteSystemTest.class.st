@@ -6,7 +6,7 @@ Class {
 		'builtins',
 		'examples'
 	],
-	#category : #'Leibniz-Tests'
+	#category : #'Leibniz-4-Rules'
 }
 
 { #category : #running }

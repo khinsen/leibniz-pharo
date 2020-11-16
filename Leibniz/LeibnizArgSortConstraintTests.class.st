@@ -11,7 +11,7 @@ Class {
 		'kb',
 		'kw'
 	],
-	#category : #'Leibniz-Tests'
+	#category : #'Leibniz-2-Signatures'
 }
 
 { #category : #printing }

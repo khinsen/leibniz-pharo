@@ -40,7 +40,7 @@ LeibnizRewriteSystemBuilder >> initializeWithSignature: aSignature [
 { #category : #adding }
 LeibnizRewriteSystemBuilder >> parseAndAddRule: aString [
 	| rule |
-	rule := (LeibnizRuleParser forSignature: signature)
+	rule := (LbRuleParser forSignature: signature)
 				parse: aString
 				onError: [ :message :position | self error: 'Parse error for: ', aString, ' (', message, ')'].
 	rules add: rule

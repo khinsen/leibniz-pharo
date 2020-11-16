@@ -1,6 +1,6 @@
 Class {
-	#name : #LeibnizFunctionRule,
-	#superclass : #LeibnizRule,
+	#name : #LbFunctionRule,
+	#superclass : #LbRule,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -11,18 +11,18 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizFunctionRule class >> pattern: aPattern condition: aBooleanTerm function: aString [
+LbFunctionRule class >> pattern: aPattern condition: aBooleanTerm function: aString [
 	^ self pattern: aPattern localVariables: Dictionary new condition: aBooleanTerm function: aString
 ]
 
 { #category : #'instance creation' }
-LeibnizFunctionRule class >> pattern: aPattern function: aString [
+LbFunctionRule class >> pattern: aPattern function: aString [
 	^ self pattern: aPattern condition: nil function: aString
 
 ]
 
 { #category : #'instance creation' }
-LeibnizFunctionRule class >> pattern: aPattern localVariables: aDictionary condition: aBooleanTerm function: aBlock [
+LbFunctionRule class >> pattern: aPattern localVariables: aDictionary condition: aBooleanTerm function: aBlock [
 	^ self basicNew
 			 initializeWithPattern: aPattern
 								localVariables: aDictionary
@@ -32,12 +32,12 @@ LeibnizFunctionRule class >> pattern: aPattern localVariables: aDictionary condi
 ]
 
 { #category : #rewriting }
-LeibnizFunctionRule >> apply: aSubstitution [
+LbFunctionRule >> apply: aSubstitution [
 	^ block value: signature value: aSubstitution variables
 ]
 
 { #category : #converting }
-LeibnizFunctionRule >> convertToSignature: aSignature [
+LbFunctionRule >> convertToSignature: aSignature [
 	| convertTerm |
 	convertTerm := [ :term | term convertToSignature: aSignature extraVariables: variables ].
 	^ self class
@@ -49,12 +49,12 @@ LeibnizFunctionRule >> convertToSignature: aSignature [
 ]
 
 { #category : #accessing }
-LeibnizFunctionRule >> function [
+LbFunctionRule >> function [
 	^ function
 ]
 
 { #category : #initializing }
-LeibnizFunctionRule >> initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm function: anArray [
+LbFunctionRule >> initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm function: anArray [
 	| code tempClass |
 	self initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm.
 	function := anArray.
@@ -80,13 +80,13 @@ LeibnizFunctionRule >> initializeWithPattern: aPattern localVariables: aDictiona
 ]
 
 { #category : #comparing }
-LeibnizFunctionRule >> instVarsExcludedFromEquality [
+LbFunctionRule >> instVarsExcludedFromEquality [
 	^#(#block #function)
 
 ]
 
 { #category : #printing }
-LeibnizFunctionRule >> printAsLeibnizSyntaxOn: aStream [
+LbFunctionRule >> printAsLeibnizSyntaxOn: aStream [
 	variables keysAndValuesDo:
 		[ :var :sort |
 			aStream nextPutAll: '∀ '.

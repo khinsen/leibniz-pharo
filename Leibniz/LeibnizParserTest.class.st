@@ -1,7 +1,7 @@
 Class {
 	#name : #LeibnizParserTest,
 	#superclass : #PP2CompositeNodeTest,
-	#category : #'Leibniz-Tests'
+	#category : #'Leibniz-3-Terms'
 }
 
 { #category : #'term construction' }
@@ -49,7 +49,7 @@ LeibnizParserTest >> setUp [
 	b parseAndAddOp: 'A infixOp2 A : A'.
 	b parseAndAddOp: 'true : boolean'.
 	b parseAndAddOp: 'false : boolean'.
-	parser setSignature: b signature.
+	parser signature: b signature.
 ]
 
 { #category : #'term construction' }

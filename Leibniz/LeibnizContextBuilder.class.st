@@ -189,7 +189,7 @@ LeibnizContextBuilder >> parseTerm: aString extraVariables: aDictionary [
 	| parser |
 	self phase: #rules.
 	parser := LbTermParser forSignature: signature.
-	parser setExtraVariables: aDictionary.
+	parser extraVariables: aDictionary.
 	^ parser parse: aString
 				onError: [ self error: 'Failed to parse ', aString ]
 ]
@@ -240,7 +240,7 @@ LeibnizContextBuilder >> ruleFromXML: anXMLElement [
 													descendantElements first
 							  extraVariables: vars.
 
-	^ LeibnizRewriteRule pattern: pattern localVariables: vars condition: condition replacement: replacement.
+	^ LbRewriteRule pattern: pattern localVariables: vars condition: condition replacement: replacement.
 ]
 
 { #category : #'XML import' }

@@ -1,12 +1,12 @@
 Class {
 	#name : #LeibnizNoVarRuleParserTest,
 	#superclass : #LeibnizParserTest,
-	#category : #'Leibniz-Tests'
+	#category : #'Leibniz-4-Rules'
 }
 
 { #category : #accessing }
 LeibnizNoVarRuleParserTest >> parserClass [
-	^ LeibnizNoVarRuleParser
+	^ LbNoVarRuleParser
 ]
 
 { #category : #tests }
@@ -16,13 +16,13 @@ LeibnizNoVarRuleParserTest >> testNoVarRule [
 										 withArgs: { parser signature zeroArgTermNamed: #aZeroArgOp }.
 	replacement := parser signature zeroArgTermNamed: #aZeroArgOp.
 	self parse: 'aOneArgOp(aZeroArgOp) ⇒ aZeroArgOp'.
-	expected := LeibnizRewriteRule pattern: pattern replacement: replacement.
+	expected := LbRewriteRule pattern: pattern replacement: replacement.
 	self assert: result equals: expected.
 
 	pattern := parser signature nonZeroArgTermNamed: #aOneArgOp
 										 withArgs: { parser signature zeroArgTermNamed: #aVar }.
 	self parse: 'aOneArgOp(aVar) → ''aVar'':LeibnizAtomicTerm'.
-	expected := LeibnizFunctionRule pattern: pattern function: #('aVar' #LbAtomicTerm).
+	expected := LbFunctionRule pattern: pattern function: #('aVar' #LbAtomicTerm).
 	self assert: result equals: expected.
 ]
 
@@ -35,7 +35,7 @@ LeibnizNoVarRuleParserTest >> testNoVarRuleWithCondition [
 	trueTerm := parser signature zeroArgTermNamed: #true.
 	self parse: 'aOneArgOp(aZeroArgOp) ⇒ aZeroArgOp | true'.
 	self assert: result
-		  equals: (LeibnizRewriteRule pattern: pattern condition: trueTerm replacement: replacement).
+		  equals: (LbRewriteRule pattern: pattern condition: trueTerm replacement: replacement).
 
 ]
 

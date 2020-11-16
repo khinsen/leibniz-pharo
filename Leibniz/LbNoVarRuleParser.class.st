@@ -1,11 +1,11 @@
 "
 !A term parser subclass that parses rules without variables
 
-This subclass of ${class:name=LbTermParser}$ adds a few straightforward productions for parsing Leibniz rules that contain no variables, i.e. no for-all clauses. The full rule parser is ${class:name=LeibnizRuleParser}$.
+This subclass of ${class:name=LbTermParser}$ adds a few straightforward productions for parsing Leibniz rules that contain no variables, i.e. no for-all clauses. The full rule parser is ${class:name=LbRuleParser}$.
 
 "
 Class {
-	#name : #LeibnizNoVarRuleParser,
+	#name : #LbNoVarRuleParser,
 	#superclass : #LbTermParser,
 	#instVars : [
 		'code',
@@ -21,60 +21,60 @@ Class {
 }
 
 { #category : #productions }
-LeibnizNoVarRuleParser >> code [
+LbNoVarRuleParser >> code [
 	^ $' asPParser , $' asPParser negate star flatten, $' asPParser, $: asPParser, identifier
 		==> [ :nodes | { nodes second. nodes fifth } ]
 
 ]
 
 { #category : #productions }
-LeibnizNoVarRuleParser >> conditionClause [
+LbNoVarRuleParser >> conditionClause [
 	^ underCondition trim, term
 		==> [ :nodes | nodes at: 2 ]
 
 ]
 
 { #category : #tokens }
-LeibnizNoVarRuleParser >> fnArrow [
+LbNoVarRuleParser >> fnArrow [
 	^ $→ asPParser
 ]
 
 { #category : #productions }
-LeibnizNoVarRuleParser >> noVarFnRule [
+LbNoVarRuleParser >> noVarFnRule [
 	^ term, fnArrow trim, code, conditionClause optional
 		==> [ :nodes |
-				LeibnizFunctionRule pattern: nodes first
+				LbFunctionRule pattern: nodes first
 										  localVariables: extraVariables
 									 	  condition: nodes fourth 
 										  function: nodes third ]
 ]
 
 { #category : #productions }
-LeibnizNoVarRuleParser >> noVarRewriteRule [
+LbNoVarRuleParser >> noVarRewriteRule [
 	^ term, rewriteArrow trim, term, conditionClause optional
 		==> [ :nodes |
-				LeibnizRewriteRule pattern: nodes first
+				LbRewriteRule pattern: nodes first
 								localVariables: extraVariables
 							   condition: nodes fourth 
 								replacement: nodes third ]
 ]
 
 { #category : #productions }
-LeibnizNoVarRuleParser >> noVarRule [
+LbNoVarRuleParser >> noVarRule [
 	^ noVarRewriteRule / noVarFnRule
 ]
 
 { #category : #tokens }
-LeibnizNoVarRuleParser >> rewriteArrow [
+LbNoVarRuleParser >> rewriteArrow [
 	^ $⇒ asPParser
 ]
 
 { #category : #accessing }
-LeibnizNoVarRuleParser >> start [
+LbNoVarRuleParser >> start [
 	^ noVarRule end.
 ]
 
 { #category : #tokens }
-LeibnizNoVarRuleParser >> underCondition [
+LbNoVarRuleParser >> underCondition [
 	^ $| asPParser
 ]

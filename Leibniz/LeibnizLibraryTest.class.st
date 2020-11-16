@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'library'
 	],
-	#category : #'Leibniz-Tests'
+	#category : #'Leibniz-7-Documents'
 }
 
 { #category : #initializing }

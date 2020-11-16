@@ -1,5 +1,5 @@
 Class {
-	#name : #LeibnizRule,
+	#name : #LbRule,
 	#superclass : #Object,
 	#instVars : [
 		'signature',
@@ -11,22 +11,22 @@ Class {
 }
 
 { #category : #converting }
-LeibnizRule >> asLeibnizSyntaxString [
+LbRule >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
 { #category : #accessing }
-LeibnizRule >> condition [
+LbRule >> condition [
 	^ condition
 ]
 
 { #category : #copying }
-LeibnizRule >> deepCopy [
+LbRule >> deepCopy [
 	^self
 ]
 
 { #category : #initializing }
-LeibnizRule >> initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm [
+LbRule >> initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm [
 	| patternVariables |
 	pattern := aPattern.
 	variables := aDictionary.
@@ -38,24 +38,25 @@ LeibnizRule >> initializeWithPattern: aPattern localVariables: aDictionary condi
 
 	patternVariables := pattern variables.
 	condition ifNotNil: [
-		condition variables associationsDo:
-			[ :each | self assert: (patternVariables includesAssociation: each)
-								description: 'Variable ', each key, ' in condition but not in pattern'  ] ].
+		condition variables associationsDo: [ :each |
+			self
+				assert: (patternVariables includesAssociation: each)
+				description: 'Variable ', each key asSymbol, ' in condition but not in pattern'  ] ].
 ]
 
 { #category : #rewriting }
-LeibnizRule >> match: aTerm [
+LbRule >> match: aTerm [
 	^ pattern match: aTerm.
 
 ]
 
 { #category : #accessing }
-LeibnizRule >> pattern [
+LbRule >> pattern [
 	^ pattern
 ]
 
 { #category : #printing }
-LeibnizRule >> printOn: aStream [
+LbRule >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	self printAsLeibnizSyntaxOn: aStream.
@@ -64,11 +65,11 @@ LeibnizRule >> printOn: aStream [
 ]
 
 { #category : #accessing }
-LeibnizRule >> signature [
+LbRule >> signature [
 	^ signature
 ]
 
 { #category : #accessing }
-LeibnizRule >> variables [
+LbRule >> variables [
 	^ variables
 ]

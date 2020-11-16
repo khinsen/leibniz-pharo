@@ -194,8 +194,8 @@ LbTermParserExamples >> parser [
 LbTermParserExamples >> parserForRule: aSymbol [
 	| parser |
 	parser := LbTermParser newStartingAt: aSymbol.
-	parser setSignature: self signature.
-	parser setExtraVariables: Dictionary new.
+	parser signature: self signature.
+	parser extraVariables: Dictionary new.
 	^ parser
 ]
 

@@ -1,7 +1,7 @@
 "
 !A term grammar subclass that generates terms
 
-This is a subclass of ${class:name=LbTermGrammar}$ that adds conversion of the parsed data to Leibniz terms for a given ${class:name=LbSignature}$ and optional additional variables as defined in rules (see ${class:name=LeibnizRuleParser}$). It returns an object from the ${class:name=LbTerm}$ hierarchy corresponding to the input string, or a ${class:name=PP2Failure}$ object in case of failure.
+This is a subclass of ${class:name=LbTermGrammar}$ that adds conversion of the parsed data to Leibniz terms for a given ${class:name=LbSignature}$ and optional additional variables as defined in rules (see ${class:name=LbRuleParser}$). It returns an object from the ${class:name=LbTerm}$ hierarchy corresponding to the input string, or a ${class:name=PP2Failure}$ object in case of failure.
 "
 Class {
 	#name : #LbTermParser,
@@ -22,8 +22,8 @@ LbTermParser class >> forSignature: aSignature [
 LbTermParser class >> forSignature: aSignature extraVariables: aDictionary [
 	| parser |
 	parser := self newStartingAt: self startSymbol.
-	parser setSignature: aSignature.
-	parser setExtraVariables: aDictionary.
+	parser signature: aSignature.
+	parser extraVariables: aDictionary.
 	^ parser
 ]
 
@@ -43,6 +43,11 @@ LbTermParser >> errorForOp: anOpName withArity: anArity [
 { #category : #accessing }
 LbTermParser >> extraVariables [
 	^ extraVariables
+]
+
+{ #category : #initialization }
+LbTermParser >> extraVariables: aDictionary [
+	extraVariables := aDictionary
 ]
 
 { #category : #productions }
@@ -91,10 +96,11 @@ LbTermParser >> prefixOpTerm [
 				| symbol args |
 				symbol := nodes first.
 				args := (nodes at: 3) reject: [ :element | element = $,].
-				signature nonZeroArgTermNamed: (LbPrefixOperatorName for: symbol)
-							 withArgs: args
-							 onError: [ :opSymbol :arity |
-											self errorForOp: opSymbol withArity: arity ] ]
+				signature
+					nonZeroArgTermNamed: (LbPrefixOperatorName for: symbol)
+					withArgs: args
+					onError: [ :opSymbol :arity |
+						self errorForOp: opSymbol withArity: arity ] ]
 ]
 
 { #category : #productions }
@@ -107,20 +113,15 @@ LbTermParser >> rationalNumberTerm [
 					ifFalse: [ PP2Failure message: 'Rational number literals not allowd by signature' ] ]
 ]
 
-{ #category : #initialization }
-LbTermParser >> setExtraVariables: aDictionary [
-	extraVariables := aDictionary
-]
-
-{ #category : #initialization }
-LbTermParser >> setSignature: aSignature [
-	signature := aSignature.
-	extraVariables := Dictionary new
-]
-
 { #category : #accessing }
 LbTermParser >> signature [
 	^ signature
+]
+
+{ #category : #initialization }
+LbTermParser >> signature: aSignature [
+	signature := aSignature.
+	extraVariables := Dictionary new
 ]
 
 { #category : #productions }
