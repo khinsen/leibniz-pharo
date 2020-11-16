@@ -15,11 +15,12 @@ LbTermExamples >> booleanTerm [
 	^ t
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 LbTermExamples >> check: aTerm matches: aPattern withSubstitution: aDictionaryOrNil signature: aSignature [
 	| p parse pattern term variables substitution |
 	p := LbTermParser forSignature: aSignature.
-	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
+	parse := [ :aString |
+		p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
 	term := parse value: aTerm.
 	substitution := pattern match: term.
@@ -33,6 +34,25 @@ LbTermExamples >> check: aTerm matches: aPattern withSubstitution: aDictionaryOr
 								parse value: each ]).
 			self assert: substitution variables equals: variables ].
 	^ substitution
+]
+
+{ #category : #private }
+LbTermExamples >> check: aPattern withSubstitution: aDictionary equals: aTerm signature: aSignature [
+	| p parse pattern term substitution result |
+	p := LbTermParser forSignature: aSignature.
+	parse := [ :aString |
+		p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
+	pattern := parse value: aPattern.
+	term := parse value: aTerm.
+	substitution := LbSubstitution new.
+	aDictionary keysAndValuesDo: [ :name :value |
+		substitution combineWith:
+		 (LbSubstitution
+		 	variable: (LbPrefixOperatorName for: name)
+		 	value: (parse value:  value)) ].
+	result := pattern substitute: substitution.
+	self assert: result equals: term.
+	^ result
 ]
 
 { #category : #private }
@@ -177,6 +197,45 @@ LbTermExamples >> stringTerm [
 	t := LbBuiltinSignatures stringSignature atomicTerm: 'abc'.
 	self assert: t sort name equals: #string.
 	^ t
+]
+
+{ #category : #example }
+LbTermExamples >> substitutions [
+	<gtExample>
+	| s |
+	s := LbSignatureExamples new booleanSignature.
+	^ {
+	self
+		check: 'true'
+		withSubstitution: (Dictionary new)
+		equals: 'true'
+		signature: s.
+	self
+		check: 'X'
+		withSubstitution: (Dictionary with: #X -> 'true')
+		equals: 'true'
+		signature: s.
+	self
+		check: '¬(X)'
+		withSubstitution: (Dictionary with: #X -> 'true')
+		equals: '¬(true)'
+		signature: s.
+	self
+		check: 'X ⊻ X'
+		withSubstitution: (Dictionary with: #X -> 'true')
+		equals: 'true ⊻ true'
+		signature: s.
+	self
+		check: 'X ⊻ Y'
+		withSubstitution: (Dictionary with: #X -> 'true')
+		equals: 'true ⊻ Y'
+		signature: s.
+	self
+		check: 'X ⊻ Y'
+		withSubstitution: (Dictionary with: #X -> 'true' with: #Y -> 'false')
+		equals: 'true ⊻ false'
+		signature: s.
+	}
 ]
 
 { #category : #example }

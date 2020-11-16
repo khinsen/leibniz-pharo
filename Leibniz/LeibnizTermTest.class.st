@@ -76,51 +76,6 @@ LeibnizTermTest >> testContexts [
 ]
 
 { #category : #testing }
-LeibnizTermTest >> testMatching [
-	self useContext: (examples contextNamed: 'boolean').
-
-	self check: 'true' matches: 'X'
-		  withSubstitution: (Dictionary with: #X -> 'true').
-	self check: '¬(true)' matches: '¬(X)'
-		  withSubstitution: (Dictionary with: #X -> 'true').
-	self check: '¬(true)' matches: 'X'
-		  withSubstitution: (Dictionary with: #X -> '¬(true)').
-	self check: 'true ⊻ false ⊻ true ⊻ ¬(true)' matches: 'true ⊻ false ⊻ X ⊻ Y'
-		  withSubstitution: (Dictionary with: #X -> 'true' with: #Y -> '¬(true)').
-	self check: 'true ⊻ true' matches: 'X ⊻ X'
-		  withSubstitution: (Dictionary with: #X -> 'true').
-
-	self check: 'true' doesNotMatch: 'false'.
-	self check: 'true ⊻ false' doesNotMatch: 'X ⊻ X'.
-
-]
-
-{ #category : #testing }
-LeibnizTermTest >> testSubstitutions [
-	self useContext: (examples contextNamed: 'boolean').
-
-	self check: 'true'
-		  withSubstitution: (Dictionary new)
-		  equals: 'true'.
-	self check: 'X'
-		  withSubstitution: (Dictionary with: #X -> 'true')
-		  equals: 'true'.
-	self check: '¬(X)'
-		  withSubstitution: (Dictionary with: #X -> 'true')
-		  equals: '¬(true)'.
-	self check: 'X ⊻ X'
-		  withSubstitution: (Dictionary with: #X -> 'true')
-		  equals: 'true ⊻ true'.
-	self check: 'X ⊻ Y'
-		  withSubstitution: (Dictionary with: #X -> 'true')
-		  equals: 'true ⊻ Y'.
-	self check: 'X ⊻ Y'
-		  withSubstitution: (Dictionary with: #X -> 'true' with: #Y -> 'false')
-		  equals: 'true ⊻ false'.
-
-]
-
-{ #category : #testing }
 LeibnizTermTest >> testSyntax [
 	self useContext: (examples contextNamed: 'ℝ→ℝ').
 	self checkSyntaxRoundTrip: '(f + g)[X]'.

@@ -11,9 +11,9 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbSubstitution class >> variable: aSymbol value: aTerm [
+LbSubstitution class >> variable: aName value: aTerm [
 	^self basicNew
-			initializeWithVariable: aSymbol value: aTerm;
+			initializeWithVariable: aName value: aTerm;
 			yourself.
 ]
 
