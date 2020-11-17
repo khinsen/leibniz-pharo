@@ -247,10 +247,9 @@ LbTermExamples >> termFoo [
 { #category : #example }
 LbTermExamples >> termFooBracketFooOfFoo [
 	<gtExample>
-	| signature sortGraph sortA |
+	| signature sortA |
 	signature := LbSignatureExamples new signatureFooBar.
-	sortGraph := signature sortGraph.
-	sortA := sortGraph sortNamed: #A.
+	sortA := signature sortNamed: #A.
 	^ LbOpTerm
 		name: LbBracketOperatorName new
 		args: { self termFooExplicit. self termFooOfFoo }
@@ -261,23 +260,21 @@ LbTermExamples >> termFooBracketFooOfFoo [
 { #category : #example }
 LbTermExamples >> termFooExplicit [
 	<gtExample>
-	| signature sortGraph |
+	| signature |
 	signature := LbSignatureExamples new signatureFooBar.
-	sortGraph := signature sortGraph.
 	^ LbOpTerm
 		name: (LbPrefixOperatorName for: #foo)
 		args: #()
-		sort: (sortGraph sortNamed: #A)
+		sort: (signature sortNamed: #A)
 		signature: signature
 ]
 
 { #category : #example }
 LbTermExamples >> termFooOfFoo [
 	<gtExample>
-	| signature sortGraph sortA |
+	| signature sortA |
 	signature := LbSignatureExamples new signatureFooBar.
-	sortGraph := signature sortGraph.
-	sortA := sortGraph sortNamed: #A.
+	sortA := signature sortNamed: #A.
 	^ LbOpTerm
 		name: (LbPrefixOperatorName for: #foo)
 		args: { self termFooExplicit }
@@ -288,10 +285,9 @@ LbTermExamples >> termFooOfFoo [
 { #category : #example }
 LbTermExamples >> termFooPlusFooExplicit [
 	<gtExample>
-	| signature sortGraph sortA |
+	| signature sortA |
 	signature := LbSignatureExamples new signatureFooBar.
-	sortGraph := signature sortGraph.
-	sortA := sortGraph sortNamed: #A.
+	sortA := signature sortNamed: #A.
 	^ LbOpTerm
 		name: (LbInfixOperatorName for: #+)
 		args: { self termFooExplicit. self termFooExplicit }

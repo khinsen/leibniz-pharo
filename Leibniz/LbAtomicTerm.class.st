@@ -46,7 +46,7 @@ LbAtomicTerm >> printAsLeibnizSyntaxOn: aStream [
 
 { #category : #accessing }
 LbAtomicTerm >> sort [
-	^ self signature sortGraph sortNamed: self sortSymbol
+	^ self signature sortNamed: self sortSymbol
 ]
 
 { #category : #accessing }

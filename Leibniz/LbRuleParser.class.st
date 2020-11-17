@@ -28,7 +28,7 @@ LbRuleParser >> forAll [
 { #category : #productions }
 LbRuleParser >> forAllClause [
 	^ forAll trim, identifier, colon, identifier
-		==> [ :nodes | (nodes at: 2) asSymbol asLbOperatorName -> (signature sortGraph sortNamed: (nodes at: 4) asSymbol) ]
+		==> [ :nodes | (nodes at: 2) asSymbol asLbOperatorName -> (signature sortNamed: (nodes at: 4) asSymbol) ]
 ]
 
 { #category : #productions }

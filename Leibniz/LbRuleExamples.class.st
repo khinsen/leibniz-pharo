@@ -72,6 +72,6 @@ LbRuleExamples >> signatureWithVariable [
 	integerSignature := LbBuiltinSignatures integerSignature.
 	^ (LbSignatureBuilder sortGraph: integerSignature sortGraph)
 		addSignature: integerSignature includeVars: true;
-		addVar: #X asLbOperatorName ofSort: (integerSignature sortGraph sortNamed: #'ℤ');
+		addVar: #X asLbOperatorName ofSort: (integerSignature sortNamed: #'ℤ');
 		signature.
 ]

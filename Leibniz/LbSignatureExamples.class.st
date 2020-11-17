@@ -103,16 +103,16 @@ LbSignatureExamples >> opFooOfA [
 	<gtExample>
 	| signature argSorts op |
 	signature := self signatureFooBar.
-	argSorts := { signature sortGraph sortNamed: #A }.
+	argSorts := { signature sortNamed: #A }.
 	op := signature opNamed: (self prefixOpFoo) withArgs: argSorts.
 	self assert: (op ranksMatchingArgSorts: argSorts) size equals: 4.
-	self assert: (op ranksMatchingArgSorts: { signature sortGraph sortNamed: #B }) size equals: 2.
-	self assert: (op ranksMatchingArgSorts: { signature sortGraph sortNamed: #C }) size equals: 1.
-	self assert: (op ranksMatchingArgSorts: { signature sortGraph sortNamed: #D }) size equals: 1.
+	self assert: (op ranksMatchingArgSorts: { signature sortNamed: #B }) size equals: 2.
+	self assert: (op ranksMatchingArgSorts: { signature sortNamed: #C }) size equals: 1.
+	self assert: (op ranksMatchingArgSorts: { signature sortNamed: #D }) size equals: 1.
 	self assert: (op sortForArgSorts: argSorts) name equals: #A.
-	self assert: (op sortForArgSorts: { signature sortGraph sortNamed: #B }) name equals: #B.
-	self assert: (op sortForArgSorts: { signature sortGraph sortNamed: #C }) name equals: #C.
-	self assert: (op sortForArgSorts: { signature sortGraph sortNamed: #D }) name equals: #D.
+	self assert: (op sortForArgSorts: { signature sortNamed: #B }) name equals: #B.
+	self assert: (op sortForArgSorts: { signature sortNamed: #C }) name equals: #C.
+	self assert: (op sortForArgSorts: { signature sortNamed: #D }) name equals: #D.
 	^ op
 ]
 
