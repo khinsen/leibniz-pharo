@@ -13,10 +13,10 @@ LbIntegerTerm class >> requiredBuiltin [
 ]
 
 { #category : #'instance creation' }
-LbIntegerTerm class >> value: aNumber forSignature: aSignature [
+LbIntegerTerm class >> value: aNumber signature: aSignature [
 	aSignature assertBuiltin: self requiredBuiltin.
 	^ self basicNew
-			initializeWithValue: aNumber forSignature: aSignature;
+			initializeWithValue: aNumber signature: aSignature;
 			yourself
 ]
 

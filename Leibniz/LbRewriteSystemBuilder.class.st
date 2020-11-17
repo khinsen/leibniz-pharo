@@ -1,5 +1,5 @@
 Class {
-	#name : #LeibnizRewriteSystemBuilder,
+	#name : #LbRewriteSystemBuilder,
 	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizRewriteSystemBuilder class >> signature: aSignature [
+LbRewriteSystemBuilder class >> signature: aSignature [
 	^self basicNew
 			initializeWithSignature: aSignature;
 			yourself.
@@ -20,33 +20,33 @@ LeibnizRewriteSystemBuilder class >> signature: aSignature [
 ]
 
 { #category : #adding }
-LeibnizRewriteSystemBuilder >> addRewriteSystem: aRewriteSystem [
+LbRewriteSystemBuilder >> addRewriteSystem: aRewriteSystem [
 	aRewriteSystem rules do:
 		[ :each | self addRule: (each convertToSignature: signature) ]
 ]
 
 { #category : #adding }
-LeibnizRewriteSystemBuilder >> addRule: aRule [
+LbRewriteSystemBuilder >> addRule: aRule [
 	self assert: aRule signature equals: signature.
 	rules add: aRule
 ]
 
 { #category : #initialization }
-LeibnizRewriteSystemBuilder >> initializeWithSignature: aSignature [
+LbRewriteSystemBuilder >> initializeWithSignature: aSignature [
 	signature := aSignature.
 	rules := OrderedCollection new.
 ]
 
 { #category : #adding }
-LeibnizRewriteSystemBuilder >> parseAndAddRule: aString [
+LbRewriteSystemBuilder >> parseAndAddRule: aString [
 	| rule |
-	rule := (LbRuleParser forSignature: signature)
+	rule := (LbRuleParser signature: signature)
 				parse: aString
 				onError: [ :message :position | self error: 'Parse error for: ', aString, ' (', message, ')'].
 	rules add: rule
 ]
 
 { #category : #accessing }
-LeibnizRewriteSystemBuilder >> rewriteSystem [
-	^ LeibnizRewriteSystem signature: signature rules: rules deepCopy.
+LbRewriteSystemBuilder >> rewriteSystem [
+	^ LbRewriteSystem signature: signature rules: rules deepCopy.
 ]

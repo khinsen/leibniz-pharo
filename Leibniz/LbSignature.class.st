@@ -52,7 +52,7 @@ LbSignature >> assertBuiltin: aBuiltinSymbol [
 
 { #category : #'term construction' }
 LbSignature >> atomicTerm: aValue [
-	^ aValue lbAtomicTermClass value: aValue forSignature: self
+	^ aValue lbAtomicTermClass value: aValue signature: self
 ]
 
 { #category : #copying }
@@ -199,7 +199,7 @@ LbSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
 			^ LbOpTerm name: anOpName
 					   args: aTermArray
 					   sort: sort
-					   forSignature: self ]
+					   signature: self ]
 ]
 
 { #category : #'term construction' }
@@ -240,7 +240,7 @@ LbSignature >> parseTerm: aString [
 
 { #category : #'term construction' }
 LbSignature >> parseTerm: aString extraVariables: aDictionary [
-	^ (LbTermParser forSignature: self extraVariables: aDictionary)
+	^ (LbTermParser signature: self extraVariables: aDictionary)
 		parse: aString
 ]
 
@@ -300,19 +300,19 @@ LbSignature >> withVariablesDo: aBlock [
 { #category : #'term construction' }
 LbSignature >> zeroArgTermNamed: anOpName [
 	variables at: anOpName
-		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort forSignature: self ].
+		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort signature: self ].
 	(self sortOfOp: anOpName withArgSorts: #())
 		ifNil: [ ^ nil ]
 		ifNotNil: [ :sort | ^ LbOpTerm name: anOpName
 									   args: #()
 									   sort: sort
-									   forSignature: self ]
+									   signature: self ]
 ]
 
 { #category : #'term construction' }
 LbSignature >> zeroArgTermNamed: anOpName extraVariables: aDictionary [
 	aDictionary at: anOpName
-		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort forSignature: self ].
+		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort signature: self ].
 	^ self zeroArgTermNamed: anOpName
 ]
 

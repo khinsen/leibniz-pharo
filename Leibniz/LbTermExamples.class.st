@@ -18,7 +18,7 @@ LbTermExamples >> booleanTerm [
 { #category : #private }
 LbTermExamples >> check: aTerm matches: aPattern withSubstitution: aDictionaryOrNil signature: aSignature [
 	| p parse pattern term variables substitution |
-	p := LbTermParser forSignature: aSignature.
+	p := LbTermParser signature: aSignature.
 	parse := [ :aString |
 		p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
@@ -39,7 +39,7 @@ LbTermExamples >> check: aTerm matches: aPattern withSubstitution: aDictionaryOr
 { #category : #private }
 LbTermExamples >> check: aPattern withSubstitution: aDictionary equals: aTerm signature: aSignature [
 	| p parse pattern term substitution result |
-	p := LbTermParser forSignature: aSignature.
+	p := LbTermParser signature: aSignature.
 	parse := [ :aString |
 		p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
@@ -58,7 +58,7 @@ LbTermExamples >> check: aPattern withSubstitution: aDictionary equals: aTerm si
 { #category : #private }
 LbTermExamples >> checkSyntaxRoundTrip: aString signature: aSignature [
 	| term |
-	term := (LbTermParser forSignature: aSignature)
+	term := (LbTermParser signature: aSignature)
 				parse: aString.
 	self assert: term asLeibnizSyntaxString equals: aString.
 	^ term
@@ -169,7 +169,7 @@ LbTermExamples >> parserForFooBar [
 	<gtExample>
 	| signature |
 	signature := LbSignatureExamples new signatureFooBar.
-	^ LbTermParser forSignature: signature
+	^ LbTermParser signature: signature
 ]
 
 { #category : #example }
@@ -255,7 +255,7 @@ LbTermExamples >> termFooBracketFooOfFoo [
 		name: LbBracketOperatorName new
 		args: { self termFooExplicit. self termFooOfFoo }
 		sort: sortA
-		forSignature: signature
+		signature: signature
 ]
 
 { #category : #example }
@@ -268,7 +268,7 @@ LbTermExamples >> termFooExplicit [
 		name: (LbPrefixOperatorName for: #foo)
 		args: #()
 		sort: (sortGraph sortNamed: #A)
-		forSignature: signature
+		signature: signature
 ]
 
 { #category : #example }
@@ -282,7 +282,7 @@ LbTermExamples >> termFooOfFoo [
 		name: (LbPrefixOperatorName for: #foo)
 		args: { self termFooExplicit }
 		sort: sortA
-		forSignature: signature
+		signature: signature
 ]
 
 { #category : #example }
@@ -296,7 +296,7 @@ LbTermExamples >> termFooPlusFooExplicit [
 		name: (LbInfixOperatorName for: #+)
 		args: { self termFooExplicit. self termFooExplicit }
 		sort: sortA
-		forSignature: signature
+		signature: signature
 ]
 
 { #category : #example }

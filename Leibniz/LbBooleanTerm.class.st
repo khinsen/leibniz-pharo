@@ -8,11 +8,11 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbBooleanTerm class >> value: aBoolean forSignature: aSignature [
+LbBooleanTerm class >> value: aBoolean signature: aSignature [
 	^ LbOpTerm
 		name: (LbPrefixOperatorName for:
 				(aBoolean ifTrue: [ #true ] ifFalse: [ #false ]))
 		args: Array new
 		sort: #boolean
-		forSignature: aSignature
+		signature: aSignature
 ]

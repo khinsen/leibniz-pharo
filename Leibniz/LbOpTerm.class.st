@@ -13,10 +13,10 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbOpTerm class >> name: anOpName args: anArgList sort: aSort forSignature: aSignature [
+LbOpTerm class >> name: anOpName args: anArgList sort: aSort signature: aSignature [
 	^self basicNew
-			initializeWithName: anOpName args: anArgList sort: aSort forSignature: aSignature;
-			yourself.
+			initializeWithName: anOpName args: anArgList sort: aSort signature: aSignature;
+			yourself
 ]
 
 { #category : #accessing }
@@ -42,7 +42,7 @@ LbOpTerm >> hasInfixOpOtherThan: anOpName [
 ]
 
 { #category : #initialization }
-LbOpTerm >> initializeWithName: anOpName args: anArgList sort: aSort forSignature: aSignature [
+LbOpTerm >> initializeWithName: anOpName args: anArgList sort: aSort signature: aSignature [
 	opName := anOpName.
 	arguments := anArgList.
 	sort := aSort.

@@ -13,24 +13,24 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
-{ #category : #'instance creation' }
-LbTermParser class >> forSignature: aSignature [
-	^ self forSignature: aSignature extraVariables: Dictionary new.
+{ #category : #accessing }
+LbTermParser class >> ignoredNames [
+	^ (super ignoredNames copyWith: #signature)
+								 copyWith: #extraVariables
 ]
 
 { #category : #'instance creation' }
-LbTermParser class >> forSignature: aSignature extraVariables: aDictionary [
+LbTermParser class >> signature: aSignature [
+	^ self signature: aSignature extraVariables: Dictionary new
+]
+
+{ #category : #'instance creation' }
+LbTermParser class >> signature: aSignature extraVariables: aDictionary [
 	| parser |
 	parser := self newStartingAt: self startSymbol.
 	parser signature: aSignature.
 	parser extraVariables: aDictionary.
 	^ parser
-]
-
-{ #category : #accessing }
-LbTermParser class >> ignoredNames [
-	^ (super ignoredNames copyWith: #signature)
-								 copyWith: #extraVariables
 ]
 
 { #category : #'error handling' }
@@ -61,7 +61,7 @@ LbTermParser >> fpNumberTerm [
 		==> [ :value |
 				(signature hasBuiltin: #fpNumbers)
 					ifTrue: [ LbFPNumberTerm value: (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat
-											 			  forSignature: signature ]
+											 			  signature: signature ]
 					ifFalse: [ PP2Failure message: 'Floating-point literals not allowd by signature' ] ]
 
 ]
@@ -71,7 +71,7 @@ LbTermParser >> integerTerm [
 	^ super integerTerm
 		==> [ :value |
 				(signature hasBuiltin: #integers)
-					ifTrue: [ LbIntegerTerm value: value asNumber forSignature: signature ]
+					ifTrue: [ LbIntegerTerm value: value asNumber signature: signature ]
 					ifFalse: [ PP2Failure message: 'Integer literals not allowd by signature' ] ]
 ]
 
@@ -109,7 +109,7 @@ LbTermParser >> rationalNumberTerm [
 		==> [ :value |
 				(signature hasBuiltin: #rationalNumbers)
 					ifTrue: [ LbRationalNumberTerm value: (Fraction readFromString: value)
-																  forSignature: signature ]
+																  signature: signature ]
 					ifFalse: [ PP2Failure message: 'Rational number literals not allowd by signature' ] ]
 ]
 
@@ -130,7 +130,7 @@ LbTermParser >> stringTerm [
 		==> [ :value |
 				(signature hasBuiltin: #strings)
 					ifTrue: [ LbStringTerm value: (value copyFrom: 2 to: value size - 1)
-														 forSignature: signature ]
+														 signature: signature ]
 					ifFalse: [ PP2Failure message: 'String literals not allowd by signature' ] ]
 ]
 

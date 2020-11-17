@@ -16,23 +16,22 @@ LbAtomicTerm class >> requiredBuiltin [
 ]
 
 { #category : #'instance creation' }
-LbAtomicTerm class >> value: aString forSignature: aSignature [
+LbAtomicTerm class >> value: aString signature: aSignature [
 	aSignature assertBuiltin: self requiredBuiltin.
 	^ self basicNew
-			initializeWithValue: aString forSignature: aSignature;
+			initializeWithValue: aString signature: aSignature;
 			yourself
 ]
 
 { #category : #converting }
 LbAtomicTerm >> convertToSignature: aSignature extraVariables: aDictionary [
-	^ self class value: value forSignature: aSignature
+	^ self class value: value signature: aSignature
 ]
 
 { #category : #initialization }
-LbAtomicTerm >> initializeWithValue: aString forSignature: aSignature [
+LbAtomicTerm >> initializeWithValue: aString signature: aSignature [
 	signature := aSignature.
-	value := aString.
-
+	value := aString
 ]
 
 { #category : #accessing }

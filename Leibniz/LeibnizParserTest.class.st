@@ -6,17 +6,17 @@ Class {
 
 { #category : #'term construction' }
 LeibnizParserTest >> fpNumberTerm: aFloat [
-	^ LbFPNumberTerm value: aFloat forSignature: parser signature
+	^ LbFPNumberTerm value: aFloat signature: parser signature
 ]
 
 { #category : #'term construction' }
 LeibnizParserTest >> integerTerm: anInteger [
-	^ LbIntegerTerm value: anInteger forSignature: parser signature
+	^ LbIntegerTerm value: anInteger signature: parser signature
 ]
 
 { #category : #'term construction' }
 LeibnizParserTest >> rationalNumberTerm: aFraction [
-	^ LbRationalNumberTerm value: aFraction forSignature: parser signature
+	^ LbRationalNumberTerm value: aFraction signature: parser signature
 ]
 
 { #category : #running }
@@ -54,5 +54,5 @@ LeibnizParserTest >> setUp [
 
 { #category : #'term construction' }
 LeibnizParserTest >> stringTerm: aString [
-	^ LbStringTerm value: aString forSignature: parser signature
+	^ LbStringTerm value: aString signature: parser signature
 ]

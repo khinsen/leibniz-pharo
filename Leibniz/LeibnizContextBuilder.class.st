@@ -188,7 +188,7 @@ LeibnizContextBuilder >> parseTerm: aString [
 LeibnizContextBuilder >> parseTerm: aString extraVariables: aDictionary [
 	| parser |
 	self phase: #rules.
-	parser := LbTermParser forSignature: signature.
+	parser := LbTermParser signature: signature.
 	parser extraVariables: aDictionary.
 	^ parser parse: aString
 				onError: [ self error: 'Failed to parse ', aString ]
@@ -298,7 +298,7 @@ LeibnizContextBuilder >> sortGraph [
 
 { #category : #'defining - private' }
 LeibnizContextBuilder >> startRules [
-	rewriteSystemBuilder := LeibnizRewriteSystemBuilder signature: signature.
+	rewriteSystemBuilder := LbRewriteSystemBuilder signature: signature.
 	includes do: [ :i | rewriteSystemBuilder addRewriteSystem: (i at: #context) rewriteSystem ].
 ]
 

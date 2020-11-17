@@ -8,21 +8,20 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbUniversalVarTerm class >> symbol: aSymbol forSignature: aSignature [
+LbUniversalVarTerm class >> symbol: aSymbol signature: aSignature [
 	^self basicNew
-			initializeWithSymbol: aSymbol forSignature: aSignature;
-			yourself.
-
+			initializeWithSymbol: aSymbol signature: aSignature;
+			yourself
 ]
 
 { #category : #converting }
 LbUniversalVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
-	^ self class symbol: name forSignature: aSignature
+	^ self class symbol: name signature: aSignature
 
 ]
 
 { #category : #initialization }
-LbUniversalVarTerm >> initializeWithSymbol: aSymbol forSignature: aSignature [
+LbUniversalVarTerm >> initializeWithSymbol: aSymbol signature: aSignature [
 	name := aSymbol.
 	signature := aSignature.
 	sort := #boolean.

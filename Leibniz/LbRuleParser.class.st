@@ -37,7 +37,7 @@ LbRuleParser >> rule [
 		==> [ :nodes |
 				| localVariables |
 				localVariables := (nodes at: 1) asDictionary.
-				(LbNoVarRuleParser forSignature: signature extraVariables: localVariables)
+				(LbNoVarRuleParser signature: signature extraVariables: localVariables)
 					parse: (nodes at: 2) ]
 ]
 

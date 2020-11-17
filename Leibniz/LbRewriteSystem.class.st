@@ -1,5 +1,5 @@
 Class {
-	#name : #LeibnizRewriteSystem,
+	#name : #LbRewriteSystem,
 	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizRewriteSystem class >> signature: aSignature rules: anOrderedCollection [
+LbRewriteSystem class >> signature: aSignature rules: anOrderedCollection [
 	^ self basicNew
 			 initializeWithSignature: aSignature
 								rules: anOrderedCollection;
@@ -20,7 +20,7 @@ LeibnizRewriteSystem class >> signature: aSignature rules: anOrderedCollection [
 ]
 
 { #category : #initialization }
-LeibnizRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedCollection [
+LbRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedCollection [
 	signature := aSignature.
 	rules := anOrderedCollection.
 	self beRecursivelyReadOnlyObject.
@@ -28,7 +28,7 @@ LeibnizRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedColl
 ]
 
 { #category : #rewriting }
-LeibnizRewriteSystem >> matchRulesFor: aTerm [
+LbRewriteSystem >> matchRulesFor: aTerm [
 	^ rules collect:
 		[ :each |
 			| s c r |
@@ -44,7 +44,7 @@ LeibnizRewriteSystem >> matchRulesFor: aTerm [
 ]
 
 { #category : #rewriting }
-LeibnizRewriteSystem >> reduce: aTerm [
+LbRewriteSystem >> reduce: aTerm [
 	| lastValue newValue |
 	newValue := aTerm.
 	lastValue := nil.
@@ -55,7 +55,7 @@ LeibnizRewriteSystem >> reduce: aTerm [
 ]
 
 { #category : #rewriting }
-LeibnizRewriteSystem >> rewriteHeadOnce: aTerm [
+LbRewriteSystem >> rewriteHeadOnce: aTerm [
 	self flag: #todo.
 	rules do:
 		[ :each |
@@ -64,7 +64,7 @@ LeibnizRewriteSystem >> rewriteHeadOnce: aTerm [
 			s ifNotNil:
 				[ [ (self testCondition: each condition substituting: s)
 						ifTrue: [ ^ each apply: s ] ]
-						on: LeibnizRewriteFailure do: [  ] ] ].
+						on: LbRewriteFailure do: [  ] ] ].
 	"Special rule for term equality"
 	aTerm isEqualityTerm
 		ifNotNil: [ :v | ^ aTerm signature zeroArgTermNamed: (v ifTrue: #true ifFalse: #false) ].
@@ -72,7 +72,7 @@ LeibnizRewriteSystem >> rewriteHeadOnce: aTerm [
 ]
 
 { #category : #rewriting }
-LeibnizRewriteSystem >> rewriteLeftmostInnermost: aTerm [
+LbRewriteSystem >> rewriteLeftmostInnermost: aTerm [
 	| reducer |
 	reducer := [ :each | self reduce: each ].
 	^ self rewriteHeadOnce: (aTerm withTransformedArgs: reducer)
@@ -80,17 +80,17 @@ LeibnizRewriteSystem >> rewriteLeftmostInnermost: aTerm [
 ]
 
 { #category : #accessing }
-LeibnizRewriteSystem >> rules [
+LbRewriteSystem >> rules [
 	^ rules
 ]
 
 { #category : #accessing }
-LeibnizRewriteSystem >> signature [
+LbRewriteSystem >> signature [
 	^ signature
 ]
 
 { #category : #rewriting }
-LeibnizRewriteSystem >> testCondition: aTermOrNil substituting: aSubstitution [
+LbRewriteSystem >> testCondition: aTermOrNil substituting: aSubstitution [
 	^ aTermOrNil
 		ifNil: [ true ]
 		ifNotNil: [ (self reduce: (aTermOrNil substitute: aSubstitution)) isTrue ]

@@ -13,14 +13,14 @@ LbRationalNumberTerm class >> requiredBuiltin [
 ]
 
 { #category : #'instance creation' }
-LbRationalNumberTerm class >> value: aNumber forSignature: aSignature [
+LbRationalNumberTerm class >> value: aNumber signature: aSignature [
 	aNumber isInteger
 		ifTrue: [
-			^ LbIntegerTerm value: aNumber forSignature: aSignature ]
+			^ LbIntegerTerm value: aNumber signature: aSignature ]
 		ifFalse: [
 			aSignature assertBuiltin: self requiredBuiltin.
 			^ self basicNew
-					initializeWithValue: aNumber forSignature: aSignature;
+					initializeWithValue: aNumber signature: aSignature;
 					yourself ]
 ]
 

@@ -27,7 +27,7 @@ LbRuleParserExamples >> noVarRule [
 { #category : #example }
 LbRuleParserExamples >> noVarRuleParser [
 	<gtExample>
-	^ LbNoVarRuleParser forSignature: self signature extraVariables: Dictionary new
+	^ LbNoVarRuleParser signature: self signature extraVariables: Dictionary new
 ]
 
 { #category : #example }
@@ -63,7 +63,7 @@ LbRuleParserExamples >> noVarRuleWithCondition [
 { #category : #example }
 LbRuleParserExamples >> ruleParser [
 	<gtExample>
-	^ LbRuleParser forSignature: self signature
+	^ LbRuleParser signature: self signature
 ]
 
 { #category : #example }
@@ -79,7 +79,7 @@ LbRuleParserExamples >> ruleWithVariable [
 								extraVariables: extraVariables }.
 	replacement := signature zeroArgTermNamed: #aZeroArgOp asLbOperatorName.
 	referenceRule := LbRewriteRule pattern: pattern localVariables: extraVariables replacement: replacement.
-	parsedRule := (LbRuleParser forSignature: signature)
+	parsedRule := (LbRuleParser signature: signature)
 						parse: '∀ X:A aOneArgOp(X) ⇒ aZeroArgOp'.
 	self assert: parsedRule equals: referenceRule.
 	^ parsedRule
@@ -120,5 +120,5 @@ LbRuleParserExamples >> signature [
 { #category : #example }
 LbRuleParserExamples >> termParser [
 	<gtExample>
-	^ LbTermParser forSignature: self signature
+	^ LbTermParser signature: self signature
 ]

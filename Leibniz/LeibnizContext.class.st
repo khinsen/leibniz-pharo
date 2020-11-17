@@ -47,13 +47,13 @@ LeibnizContext >> name [
 
 { #category : #operations }
 LeibnizContext >> parseTerm: aString [
-	^ (LbTermParser forSignature: signature) parse: aString
+	^ (LbTermParser signature: signature) parse: aString
 ]
 
 { #category : #rewriting }
 LeibnizContext >> parseTermAndReduce: aString [
 	| term |
-	term := (LbTermParser forSignature: signature) parse: aString.
+	term := (LbTermParser signature: signature) parse: aString.
 	term isPetit2Failure ifTrue: [ self error: term message ].
 	^ rewriteSystem reduce: term
 ]

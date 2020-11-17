@@ -27,7 +27,7 @@ LbTermParserExamples >> fpNumberParseFailures [
 
 { #category : #utility }
 LbTermParserExamples >> fpNumberTerm: aFloat [
-	^ LbFPNumberTerm value: aFloat forSignature: self signature
+	^ LbFPNumberTerm value: aFloat signature: self signature
 ]
 
 { #category : #example }
@@ -131,7 +131,7 @@ LbTermParserExamples >> integerParseFailures [
 
 { #category : #utility }
 LbTermParserExamples >> integerTerm: anInteger [
-	^ LbIntegerTerm value: anInteger forSignature: self signature
+	^ LbIntegerTerm value: anInteger signature: self signature
 ]
 
 { #category : #example }
@@ -187,7 +187,7 @@ LbTermParserExamples >> parse: aString rule: aSymbol assertEquals: aValue [
 { #category : #example }
 LbTermParserExamples >> parser [
 	<gtExample>
-	^ LbTermParser forSignature: self signature
+	^ LbTermParser signature: self signature
 ]
 
 { #category : #utility }
@@ -265,7 +265,7 @@ LbTermParserExamples >> rationalNumberParseFailures [
 
 { #category : #utility }
 LbTermParserExamples >> rationalNumberTerm: aRational [
-	^ LbRationalNumberTerm value: aRational forSignature: self signature
+	^ LbRationalNumberTerm value: aRational signature: self signature
 ]
 
 { #category : #example }
@@ -342,7 +342,7 @@ LbTermParserExamples >> stringParseFailures [
 
 { #category : #utility }
 LbTermParserExamples >> stringTerm: aString [
-	^ LbStringTerm value: aString forSignature: self signature
+	^ LbStringTerm value: aString signature: self signature
 ]
 
 { #category : #example }

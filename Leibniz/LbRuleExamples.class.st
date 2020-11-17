@@ -9,7 +9,7 @@ Class {
 { #category : #example }
 LbRuleExamples >> parserForSignatureWithVariable [
 	<gtExample>
-	^ LbRuleParser forSignature: self signatureWithVariable
+	^ LbRuleParser signature: self signatureWithVariable
 ]
 
 { #category : #accessing }
@@ -22,11 +22,15 @@ LbRuleExamples >> ruleSyntax [
 		'∀ V:ℤ ∀ W:ℤ V + W ⇒ V'
 		'∀ V:ℤ ∀ W:ℤ V + W ⇒ V | W ≥ 0')
 		collect: [ :each |
-			| rule |
+			| rule rulePrintString ruleAgain |
 			rule := self parserForSignatureWithVariable
 				parse: each
 				onError: [ Error signal: 'failed to parse ', each ].
-			self assert: rule asLeibnizSyntaxString equals: each.
+			rulePrintString := rule asLeibnizSyntaxString.
+			ruleAgain := self parserForSignatureWithVariable
+				parse: rulePrintString
+				onError: [ Error signal: 'failed to parse ', each ].
+			self assert: ruleAgain equals: rule.
 			each -> rule ]
 ]
 

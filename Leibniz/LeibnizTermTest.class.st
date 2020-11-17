@@ -13,7 +13,7 @@ Class {
 { #category : #running }
 LeibnizTermTest >> check: aTerm doesNotMatch: aPattern [
 	| p parse pattern term |
-	p := LbTermParser forSignature: currentSignature.
+	p := LbTermParser signature: currentSignature.
 	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
 	term := parse value: aTerm.
@@ -24,7 +24,7 @@ LeibnizTermTest >> check: aTerm doesNotMatch: aPattern [
 { #category : #running }
 LeibnizTermTest >> check: aTerm matches: aPattern withSubstitution: aDictionary [
 	| p parse pattern term substitutions |
-	p := LbTermParser forSignature: currentSignature.
+	p := LbTermParser signature: currentSignature.
 	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
 	term := parse value: aTerm.
@@ -36,7 +36,7 @@ LeibnizTermTest >> check: aTerm matches: aPattern withSubstitution: aDictionary 
 { #category : #running }
 LeibnizTermTest >> check: aPattern withSubstitution: aDictionary equals: aTerm [
 	| p parse pattern term substitution result |
-	p := LbTermParser forSignature: currentSignature.
+	p := LbTermParser signature: currentSignature.
 	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
 	term := parse value: aTerm.
@@ -53,7 +53,7 @@ LeibnizTermTest >> check: aPattern withSubstitution: aDictionary equals: aTerm [
 { #category : #running }
 LeibnizTermTest >> checkSyntaxRoundTrip: aString [
 	| p t |
-	p := LbTermParser forSignature: currentSignature.
+	p := LbTermParser signature: currentSignature.
 	t := p parse: aString onError: [ Error signal: 'failed to parse ', aString ].
 	self assert: t asLeibnizSyntaxString equals: aString.
 
@@ -70,7 +70,7 @@ LeibnizTermTest >> setUp [
 LeibnizTermTest >> testContexts [
 	| c t |
 	c := builtins contextNamed: 'contexts'.
-	t := LbContextTerm value: c forSignature: c signature.
+	t := LbContextTerm value: c signature: c signature.
 	self assert: t sort equals: #context.
 
 ]

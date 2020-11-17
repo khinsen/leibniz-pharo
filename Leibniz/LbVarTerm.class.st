@@ -12,12 +12,12 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbVarTerm class >> name: anOpName sort: aSort forSignature: aSignature [
+LbVarTerm class >> name: anOpName sort: aSort signature: aSignature [
 	^ self basicNew
 		initializeWithName: anOpName
 		sort: aSort
-		forSignature: aSignature;
-		yourself.
+		signature: aSignature;
+		yourself
 ]
 
 { #category : #matching }
@@ -31,11 +31,10 @@ LbVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 ]
 
 { #category : #initialization }
-LbVarTerm >> initializeWithName: aSymbol sort: aSort forSignature: aSignature [
+LbVarTerm >> initializeWithName: aSymbol sort: aSort signature: aSignature [
 	name := aSymbol.
 	sort := aSort.
-	signature := aSignature.
-
+	signature := aSignature
 ]
 
 { #category : #matching }
