@@ -71,8 +71,10 @@ LbOperator >> arrowInGraph [
 { #category : #'error signalling' }
 LbOperator >> assertMonotonicity: aBlock forArity: anArity andSort: aSort [
 	self assert: aBlock
-		  description: 'new rank ', anArity printString,
-							' -> ', aSort asString, ' makes operator non-monotonic'.
+		  description: 'declaration ',
+		  	(String streamContents: [ :s |
+		  		name printForArity: anArity withSort: aSort on: s ]),
+		  	' makes operator non-monotonic'.
 ]
 
 { #category : #accessing }

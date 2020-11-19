@@ -88,7 +88,7 @@ LbBuiltinSortGraphs class >> realNumberSortGraph [
 		parseAndAdd: 'ℚ.p ⊆ ℝ.p';
 		parseAndAdd: 'ℝ.nn ⊆ ℝ';
 		parseAndAdd: 'ℝ.p ⊆ ℝ.nn';
-		parseAndAdd: 'ℚ.p ⊆ ℝ.nn';
+		parseAndAdd: 'ℚ.nn ⊆ ℝ.nn';
 		sortGraph
 ]
 

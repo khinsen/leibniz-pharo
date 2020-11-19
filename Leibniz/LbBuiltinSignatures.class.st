@@ -148,15 +148,15 @@ LbBuiltinSignatures class >> realNumberSignature [
 		parseAndAddOp: 'ℝ.nz^{ℤ.nz} : ℝ.nz';
 		parseAndAddOp: 'ℝ^{ℕ.nz} : ℝ';
 		"Various functions"
-"		parseAndAddOp: 'abs(ℝ) : ℝ.nn';"
-"		parseAndAddOp: 'abs(ℝ.nz) : ℝ.p';"
+		parseAndAddOp: 'abs(ℝ) : ℝ.nn';
+		parseAndAddOp: 'abs(ℝ.nz) : ℝ.p';
 		parseAndAddOp: '√(ℝ.nn) : ℝ.nn';
 		parseAndAddOp: '√(ℝ.p) : ℝ.p';
 		"Comparison operators"
-		parseAndAddOp: #'ℝ < ℝ : ℝ';
-		parseAndAddOp: #'ℝ > ℝ : ℝ';
-		parseAndAddOp: #'ℝ ≤ ℝ : ℝ';
-		parseAndAddOp: #'ℝ ≥ ℝ : ℝ';
+		parseAndAddOp: #'ℝ < ℝ : boolean';
+		parseAndAddOp: #'ℝ > ℝ : boolean';
+		parseAndAddOp: #'ℝ ≤ ℝ : boolean';
+		parseAndAddOp: #'ℝ ≥ ℝ : boolean';
 		signature
 ]
 
