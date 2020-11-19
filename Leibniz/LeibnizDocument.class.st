@@ -16,7 +16,7 @@ Class {
 LeibnizDocument >> addContextFromXML: anXMLElement [
   	| name builder context |
 	name := anXMLElement attributeAt: 'id'.
-	builder := LeibnizContextBuilder name: name document: self.
+	builder := LbContextBuilder name: name document: self.
 	builder fromXML: anXMLElement.
 	context := builder context.
 	contexts at: context name put: context.
@@ -59,7 +59,7 @@ LeibnizDocument >> initialize [
 { #category : #adding }
 LeibnizDocument >> newContextBuilderNamed: aString [
 	| builder |
-	builder := LeibnizContextBuilder name: aString document: self.
+	builder := LbContextBuilder name: aString document: self.
 	contexts at: aString put: builder.
 	^ builder.
 ]

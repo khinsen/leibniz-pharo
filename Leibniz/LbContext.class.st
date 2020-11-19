@@ -2,7 +2,7 @@
 I represent a context in a Leibniz document.
 "
 Class {
-	#name : #LeibnizContext,
+	#name : #LbContext,
 	#superclass : #Object,
 	#instVars : [
 		'name',
@@ -14,44 +14,43 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizContext class >> name: aString sortGraph: aSortGraph signature: aSignature rewriteSystem: aRewriteSystem [
+LbContext class >> name: aString signature: aSignature rewriteSystem: aRewriteSystem [
 	^ self basicNew
-			 initializeWithName: aString sortGraph: aSortGraph signature: aSignature rewriteSystem: aRewriteSystem;
-			 yourself.
-
+			 initializeWithName: aString signature: aSignature rewriteSystem: aRewriteSystem;
+			 yourself
 ]
 
 { #category : #initializing }
-LeibnizContext >> initializeWithName: aString sortGraph: aSortGraph signature: aSignature rewriteSystem: aRewriteSystem [
+LbContext >> initializeWithName: aString signature: aSignature rewriteSystem: aRewriteSystem [
 	name := aString.
-	sortGraph := aSortGraph.
+	sortGraph := aSignature sortGraph.
 	signature := aSignature.
 	rewriteSystem := aRewriteSystem.
 	self beRecursivelyReadOnlyObject.
 ]
 
 { #category : #converting }
-LeibnizContext >> lbAtomicTermClass [
+LbContext >> lbAtomicTermClass [
 	^ LbContextTerm
 ]
 
 { #category : #rewriting }
-LeibnizContext >> matchRulesFor: aTerm [
+LbContext >> matchRulesFor: aTerm [
 	^ rewriteSystem matchRulesFor: aTerm
 ]
 
 { #category : #accessing }
-LeibnizContext >> name [
+LbContext >> name [
 	^ name
 ]
 
 { #category : #operations }
-LeibnizContext >> parseTerm: aString [
+LbContext >> parseTerm: aString [
 	^ (LbTermParser signature: signature) parse: aString
 ]
 
 { #category : #rewriting }
-LeibnizContext >> parseTermAndReduce: aString [
+LbContext >> parseTermAndReduce: aString [
 	| term |
 	term := (LbTermParser signature: signature) parse: aString.
 	term isPetit2Failure ifTrue: [ self error: term message ].
@@ -59,7 +58,7 @@ LeibnizContext >> parseTermAndReduce: aString [
 ]
 
 { #category : #printing }
-LeibnizContext >> printOn: aStream [
+LbContext >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	aStream nextPut: $'.
@@ -70,17 +69,17 @@ LeibnizContext >> printOn: aStream [
 ]
 
 { #category : #accessing }
-LeibnizContext >> rewriteSystem [
+LbContext >> rewriteSystem [
 	^ rewriteSystem
 ]
 
 { #category : #accessing }
-LeibnizContext >> signature [
+LbContext >> signature [
 	^signature
 
 ]
 
 { #category : #accessing }
-LeibnizContext >> sortGraph [
+LbContext >> sortGraph [
 	^ sortGraph
 ]

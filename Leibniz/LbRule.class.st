@@ -61,7 +61,6 @@ LbRule >> printOn: aStream [
 	aStream nextPut: $(.
 	self printAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: $).
-
 ]
 
 { #category : #accessing }

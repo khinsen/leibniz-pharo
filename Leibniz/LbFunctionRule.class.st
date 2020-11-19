@@ -61,22 +61,21 @@ LbFunctionRule >> initializeWithPattern: aPattern localVariables: aDictionary co
 	code := String streamContents:
 		[ :s |
 			s nextPutAll: 'block ^ [ :signature :args | | '.
-			aDictionary keysDo: [ :each | s nextPutAll: each. s nextPut: Character space ].
+			aDictionary keysDo: [ :each | s nextPutAll: each asSymbol. s nextPut: Character space ].
 			s nextPutAll: '| '.
 			aDictionary keysDo: [ :each |
-										s nextPutAll: each.
+										s nextPutAll: each asSymbol.
 										s nextPutAll: ' := (args at: '.
-										each printOn: s.
+										each asSymbol printOn: s.
 										s nextPutAll: ') leibnizAtomicTermValue. ' ].
 			s nextPutAll: function second.
 			s nextPutAll: ' value: ('.
 			s nextPutAll: function first.
-			s nextPutAll: ') forSignature: signature ] '].
+			s nextPutAll: ') signature: signature ] '].
 	tempClass := Object newAnonymousSubclass.
 	tempClass compile: code.
 	block := tempClass new block.
-	self beRecursivelyReadOnlyObject.
-
+	self beRecursivelyReadOnlyObject
 ]
 
 { #category : #comparing }
@@ -90,9 +89,9 @@ LbFunctionRule >> printAsLeibnizSyntaxOn: aStream [
 	variables keysAndValuesDo:
 		[ :var :sort |
 			aStream nextPutAll: '∀ '.
-			aStream nextPutAll: var.
+			aStream nextPutAll: var asSymbol.
 			aStream nextPut: $:.
-			aStream nextPutAll: sort.
+			aStream nextPutAll: sort name.
 			aStream nextPutAll: ' '].
 	pattern printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' → '''.

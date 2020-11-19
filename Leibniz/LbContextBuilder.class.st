@@ -2,7 +2,7 @@
 I build LeibnizContexts from a sequence of declarations
 "
 Class {
-	#name : #LeibnizContextBuilder,
+	#name : #LbContextBuilder,
 	#superclass : #Object,
 	#instVars : [
 		'document',
@@ -20,86 +20,88 @@ Class {
 }
 
 { #category : #'instance creation' }
-LeibnizContextBuilder class >> name: aString document: aDocument [
-	^ self basicNew initializeWithName: aString document: aDocument.
+LbContextBuilder class >> name: aString [
+	^ self name: aString document: nil
+]
 
+{ #category : #'instance creation' }
+LbContextBuilder class >> name: aString document: aDocument [
+	^ self basicNew initializeWithName: aString document: aDocument
 ]
 
 { #category : #'defining - signature' }
-LeibnizContextBuilder >> addBuiltin: aSymbol [
+LbContextBuilder >> addBuiltin: aSymbol [
 	self phase: #signature.
 	signatureBuilder addBuiltin: aSymbol
 ]
 
 { #category : #'defining - signature' }
-LeibnizContextBuilder >> addOp: anOpSymbol ofSort: aSortSymbol [
+LbContextBuilder >> addOp: anOpName ofSort: aSort [
 	self phase: #signature.
-	signatureBuilder addOp: anOpSymbol ofSort: aSortSymbol.
+	signatureBuilder addOp: anOpName ofSort: aSort.
 ]
 
 { #category : #'defining - signature' }
-LeibnizContextBuilder >> addOp: anOpSymbol withArgs: anArgList ofSort: aSortSymbol [
+LbContextBuilder >> addOp: anOpName withArgs: anArgList ofSort: aSort [
 	self phase: #signature.
-	signatureBuilder addOp: anOpSymbol withArgs: anArgList ofSort: aSortSymbol.
+	signatureBuilder addOp: anOpName withArgs: anArgList ofSort: aSort.
 ]
 
 { #category : #'defining - rules' }
-LeibnizContextBuilder >> addRule: aRule [
+LbContextBuilder >> addRule: aRule [
 	self phase: #rules.
 	rewriteSystemBuilder addRule: aRule
 ]
 
 { #category : #'defining - sort graph' }
-LeibnizContextBuilder >> addSort: aSymbol [
+LbContextBuilder >> addSort: aSymbol [
 	self phase: #sortGraph.
 	sortGraphBuilder add: aSymbol.
-
 ]
 
 { #category : #'defining - signature' }
-LeibnizContextBuilder >> addVar: aVarSymbol ofSort: aSortSymbol [
+LbContextBuilder >> addVar: anOpName ofSort: aSort [
 	self phase: #signature.
-	signatureBuilder addVar: aVarSymbol ofSort: aSortSymbol.
+	signatureBuilder addVar: anOpName ofSort: aSort.
 ]
 
 { #category : #accessing }
-LeibnizContextBuilder >> build [
-	document replaceBuilderByContextNamed: name.
-
+LbContextBuilder >> build [
+	document replaceBuilderByContextNamed: name
 ]
 
 { #category : #accessing }
-LeibnizContextBuilder >> context [
+LbContextBuilder >> context [
 	self phase: #finished.
-	^ LeibnizContext name: name sortGraph: sortGraph signature: signature rewriteSystem: rewriteSystem
+	^ LbContext name: name signature: signature rewriteSystem: rewriteSystem
 ]
 
 { #category : #'defining - private' }
-LeibnizContextBuilder >> endRules [
+LbContextBuilder >> endRules [
 	rewriteSystem := rewriteSystemBuilder rewriteSystem
 ]
 
 { #category : #'defining - private' }
-LeibnizContextBuilder >> endSignature [
+LbContextBuilder >> endSignature [
 	signature := signatureBuilder signature.
 
 ]
 
 { #category : #'defining - private' }
-LeibnizContextBuilder >> endSortGraph [
+LbContextBuilder >> endSortGraph [
 	sortGraph := sortGraphBuilder sortGraph.
 
 ]
 
 { #category : #'XML import' }
-LeibnizContextBuilder >> fromXML: anXMLElement [
+LbContextBuilder >> fromXML: anXMLElement [
 	self includesFromXML: anXMLElement.
 	self signatureFromXML: anXMLElement.
 	self rulesFromXML: anXMLElement.
 ]
 
 { #category : #'defining - includes' }
-LeibnizContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash inMode: useOrExtend [
+LbContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash inMode: useOrExtend [
 	| context |
 	context := LeibnizLibrary uniqueInstance contextNamed: aContextName inDocumentWithHash: aDocHash.
 	includes add: (Dictionary with: #contextName -> aContextName
@@ -111,7 +113,7 @@ LeibnizContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash in
 ]
 
 { #category : #'defining - includes' }
-LeibnizContextBuilder >> include: aContextName inMode: useOrExtend [
+LbContextBuilder >> include: aContextName inMode: useOrExtend [
 	| context |
 	context := document contextNamed: aContextName.
 	includes add: (Dictionary with: #contextName -> aContextName
@@ -121,7 +123,7 @@ LeibnizContextBuilder >> include: aContextName inMode: useOrExtend [
 ]
 
 { #category : #'XML import' }
-LeibnizContextBuilder >> includesFromXML: anXMLElement [
+LbContextBuilder >> includesFromXML: anXMLElement [
 	(anXMLElement elementsDetect: [:each | each isNamed: 'includes'])
 		descendantElementsNamed: 'include' do:
 			[ :i | | attrs |
@@ -135,7 +137,7 @@ LeibnizContextBuilder >> includesFromXML: anXMLElement [
 ]
 
 { #category : #initializing }
-LeibnizContextBuilder >> initializeWithName: aString document: aDocument [
+LbContextBuilder >> initializeWithName: aString document: aDocument [
 	name := aString.
 	document := aDocument.
 	phase := #initialization.
@@ -144,48 +146,48 @@ LeibnizContextBuilder >> initializeWithName: aString document: aDocument [
 ]
 
 { #category : #'defining - sort graph' }
-LeibnizContextBuilder >> make: aSort subsortOf: anotherSort [
+LbContextBuilder >> make: aSort subsortOf: anotherSort [
 	self phase: #sortGraph.
 	sortGraphBuilder make: aSort subsortOf: anotherSort.
 ]
 
 { #category : #accessing }
-LeibnizContextBuilder >> name [
+LbContextBuilder >> name [
 	^ name
 ]
 
 { #category : #'defining - signature' }
-LeibnizContextBuilder >> parseAndAddOp: aString [
+LbContextBuilder >> parseAndAddOp: aString [
 	self phase: #signature.
 	signatureBuilder parseAndAddOp: aString.
 ]
 
 { #category : #'defining - rules' }
-LeibnizContextBuilder >> parseAndAddRule: aString [
+LbContextBuilder >> parseAndAddRule: aString [
 	self phase: #rules.
 	rewriteSystemBuilder parseAndAddRule: aString
 ]
 
 { #category : #'defining - sort graph' }
-LeibnizContextBuilder >> parseAndAddSort: aString [
+LbContextBuilder >> parseAndAddSort: aString [
 	self phase: #sortGraph.
 	sortGraphBuilder parseAndAdd: aString.
 
 ]
 
 { #category : #'defining - signature' }
-LeibnizContextBuilder >> parseAndAddVar: aString [
+LbContextBuilder >> parseAndAddVar: aString [
 	self phase: #signature.
 	signatureBuilder parseAndAddVar: aString.
 ]
 
 { #category : #'defining - rules' }
-LeibnizContextBuilder >> parseTerm: aString [
+LbContextBuilder >> parseTerm: aString [
 	^ self parseTerm: aString extraVariables: Dictionary new
 ]
 
 { #category : #'defining - rules' }
-LeibnizContextBuilder >> parseTerm: aString extraVariables: aDictionary [
+LbContextBuilder >> parseTerm: aString extraVariables: aDictionary [
 	| parser |
 	self phase: #rules.
 	parser := LbTermParser signature: signature.
@@ -195,7 +197,7 @@ LeibnizContextBuilder >> parseTerm: aString extraVariables: aDictionary [
 ]
 
 { #category : #'defining - private' }
-LeibnizContextBuilder >> phase: aSymbol [
+LbContextBuilder >> phase: aSymbol [
 	| phaseLabels current new phaseEndMethod phaseStartMethod |
 
 	(aSymbol = phase) ifTrue:
@@ -219,7 +221,7 @@ LeibnizContextBuilder >> phase: aSymbol [
 ]
 
 { #category : #'XML import' }
-LeibnizContextBuilder >> ruleFromXML: anXMLElement [
+LbContextBuilder >> ruleFromXML: anXMLElement [
 	| vars pattern conditionElements condition replacement |
 
 	vars := Dictionary new.
@@ -244,7 +246,7 @@ LeibnizContextBuilder >> ruleFromXML: anXMLElement [
 ]
 
 { #category : #'XML import' }
-LeibnizContextBuilder >> rulesFromXML: anXMLElement [
+LbContextBuilder >> rulesFromXML: anXMLElement [
 	self phase: #rules.
 	(anXMLElement elementsDetect: [:each | each isNamed: 'rules'])
 		descendantElementsNamed: 'rule' do:
@@ -252,13 +254,13 @@ LeibnizContextBuilder >> rulesFromXML: anXMLElement [
 ]
 
 { #category : #accessing }
-LeibnizContextBuilder >> signature [
+LbContextBuilder >> signature [
 	self phase: #rules.
 	^ signature
 ]
 
 { #category : #'XML import' }
-LeibnizContextBuilder >> signatureFromXML: anXMLElement [
+LbContextBuilder >> signatureFromXML: anXMLElement [
 	(anXMLElement elementsDetect: [:each | each isNamed: 'sorts'])
 		descendantElementsNamed: 'sort' do:
 			[ :sort | self addSort: (sort attributeAt: 'id') asSymbol ].
@@ -291,19 +293,19 @@ LeibnizContextBuilder >> signatureFromXML: anXMLElement [
 ]
 
 { #category : #accessing }
-LeibnizContextBuilder >> sortGraph [
+LbContextBuilder >> sortGraph [
 	self phase: #signature.
 	^ sortGraph
 ]
 
 { #category : #'defining - private' }
-LeibnizContextBuilder >> startRules [
+LbContextBuilder >> startRules [
 	rewriteSystemBuilder := LbRewriteSystemBuilder signature: signature.
 	includes do: [ :i | rewriteSystemBuilder addRewriteSystem: (i at: #context) rewriteSystem ].
 ]
 
 { #category : #'defining - private' }
-LeibnizContextBuilder >> startSignature [
+LbContextBuilder >> startSignature [
 	signatureBuilder := LbSignatureBuilder sortGraph: sortGraph.
 	includes do: [ :i | signatureBuilder addSignature: (i at: #context) signature
 													includeVars: (i at: #mode) = 'extend' ].
@@ -311,19 +313,19 @@ LeibnizContextBuilder >> startSignature [
 ]
 
 { #category : #'defining - private' }
-LeibnizContextBuilder >> startSortGraph [
+LbContextBuilder >> startSortGraph [
 	sortGraphBuilder := LbSortGraphBuilder new.
 	includes do: [ :i | sortGraphBuilder addSortGraph: (i at: #context) sortGraph ].
 
 ]
 
 { #category : #'XML import' }
-LeibnizContextBuilder >> termFromXML: anXMLElement [
+LbContextBuilder >> termFromXML: anXMLElement [
 	^ self termFromXML: anXMLElement extraVariables: Dictionary new
 ]
 
 { #category : #'XML import' }
-LeibnizContextBuilder >> termFromXML: anXMLElement extraVariables: aDictionary [
+LbContextBuilder >> termFromXML: anXMLElement extraVariables: aDictionary [
 	anXMLElement name = 'term'
 		ifTrue: [ | op args |
 			op := (anXMLElement attributes at: #op) asSymbol.
@@ -338,7 +340,7 @@ LeibnizContextBuilder >> termFromXML: anXMLElement extraVariables: aDictionary [
 ]
 
 { #category : #'defining - private' }
-LeibnizContextBuilder >> validateIncludeWithMode: useOrExtend [
+LbContextBuilder >> validateIncludeWithMode: useOrExtend [
 	self phase: #includes.
 	self assert: (#('use' 'extend') includes: useOrExtend)
 	     description: 'include mode must be "use" or "extend"'.

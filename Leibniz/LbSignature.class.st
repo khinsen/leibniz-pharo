@@ -1,7 +1,7 @@
 "
 !!Operators, variables, and signatures
 
-Operators and variables are the building blocks of terms (see ${class:name=LbTerm}$). A signature is the collection of all operators and variables declared in a ${class:name=LeibnizContext}$.
+Operators and variables are the building blocks of terms (see ${class:name=LbTerm}$). A signature is the collection of all operators and variables declared in a ${class:name=LbContext}$.
 
 !!!Operators
 
