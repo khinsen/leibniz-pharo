@@ -4,7 +4,7 @@ Class {
 	#category : #'Leibniz-4-Rules'
 }
 
-{ #category : #example }
+{ #category : #builtins }
 LbBuiltinRewriteSystems >> integerRewriteSystem [
 	<gtExample>
 	^ (LbRewriteSystemBuilder signature: LbBuiltinSignatures integerSignature)
@@ -43,5 +43,99 @@ LbBuiltinRewriteSystems >> integerRewriteSystem [
 		parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X ≤ Y → ''X <= Y'':LbBooleanTerm';
 		parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X ≥ Y → ''X >= Y'':LbBooleanTerm';
 		"build the rewrite system"
+		rewriteSystem
+]
+
+{ #category : #builtins }
+LbBuiltinRewriteSystems >> rationalNumberRewriteSystem [
+	<gtExample>
+	^ (LbRewriteSystemBuilder signature: LbBuiltinSignatures rationalNumberSignature)
+		"addition rules"
+		parseAndAddRule: '∀ X:ℚ ∀ Zero:zero X + Zero ⇒ X';
+		parseAndAddRule: '∀ X:ℚ ∀ Zero:zero Zero + X ⇒ X';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X + Y → ''X + Y'':LbRationalNumberTerm';
+		"Subtraction rules"
+		parseAndAddRule: '∀ X:ℚ ∀ Zero:zero X - Zero ⇒ X';
+		parseAndAddRule: '∀ X:ℚ ∀ Zero:zero Zero - X ⇒ -(X)';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X - Y → ''X - Y'':LbRationalNumberTerm';
+		"Negation rules"
+		parseAndAddRule: '∀ Zero:zero -(Zero) ⇒ 0';
+		parseAndAddRule: '∀ X:ℚ -(X) → ''X negated'':LbRationalNumberTerm';
+		"Multiplication rules"
+		parseAndAddRule: '∀ X:ℚ ∀ Zero:zero X × Zero ⇒ 0';
+		parseAndAddRule: '∀ X:ℚ ∀ Zero:zero Zero × X ⇒ 0';
+		parseAndAddRule: '∀ X:ℚ 1 × X ⇒ X';
+		parseAndAddRule: '∀ X:ℚ X × 1 ⇒ X';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X × Y → ''X * Y'':LbRationalNumberTerm';
+		"Division rules"
+		parseAndAddRule: '∀ X:ℚ.nz ∀ Zero:zero Zero ÷ X ⇒ 0';
+		parseAndAddRule: '∀ X:ℚ X ÷ 1 ⇒ X';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ.nz X ÷ Y → ''X / Y'':LbRationalNumberTerm';
+		"Integer div and rem rules"
+		parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero div X ⇒ 0';
+		parseAndAddRule: '∀ X:ℤ X div 1 ⇒ X';
+		parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X div Y → ''(X abs // Y abs) * X sign * Y sign'':LbIntegerTerm';
+		parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero rem X ⇒ 0';
+		parseAndAddRule: '∀ X:ℤ X rem 1 ⇒ 0';
+		parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X rem Y → ''(X abs % Y abs) * X sign * Y sign'':LbIntegerTerm';
+		"Exponentiation rules"
+		parseAndAddRule: '∀ X:ℚ.nz ∀ Zero:zero X^{Zero} ⇒ 1';
+		parseAndAddRule: '∀ X:ℕ.nz ∀ Zero:zero Zero^{X} ⇒ 0';
+		parseAndAddRule: '∀ X:ℚ.nz ∀ Y:ℤ.nz X^{Y} → ''X raisedTo: Y'':LbRationalNumberTerm';
+		"Abs rules"
+		parseAndAddRule: '∀ X:ℚ abs(X) → ''X abs'':LbRationalNumberTerm';
+		"Comparison rules"
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X < Y → ''X < Y'':LbBooleanTerm';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X > Y → ''X > Y'':LbBooleanTerm';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X ≤ Y → ''X <= Y'':LbBooleanTerm';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X ≥ Y → ''X >= Y'':LbBooleanTerm';
+		"Build rewrite system"
+		rewriteSystem
+]
+
+{ #category : #accessing }
+LbBuiltinRewriteSystems >> realNumberRewriteSystem [
+	<gtExample>
+	^ (LbRewriteSystemBuilder signature: LbBuiltinSignatures realNumberSignature)
+		"addition rules"
+		parseAndAddRule: '∀ X:ℝ ∀ Zero:zero X + Zero ⇒ X';
+		parseAndAddRule: '∀ X:ℝ ∀ Zero:zero Zero + X ⇒ X';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X + Y → ''X + Y'':LbRationalNumberTerm';
+		"Subtraction rules"
+		parseAndAddRule: '∀ X:ℝ ∀ Zero:zero X - Zero ⇒ X';
+		parseAndAddRule: '∀ X:ℝ ∀ Zero:zero Zero - X ⇒ -(X)';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X - Y → ''X - Y'':LbRationalNumberTerm';
+		"Negation rules"
+		parseAndAddRule: '∀ Zero:zero -(Zero) ⇒ 0';
+		parseAndAddRule: '∀ X:ℚ -(X) → ''X negated'':LbRationalNumberTerm';
+		"Multiplication rules"
+		parseAndAddRule: '∀ X:ℝ ∀ Zero:zero X × Zero ⇒ 0';
+		parseAndAddRule: '∀ X:ℝ ∀ Zero:zero Zero × X ⇒ 0';
+		parseAndAddRule: '∀ X:ℝ 1 × X ⇒ X';
+		parseAndAddRule: '∀ X:ℝ X × 1 ⇒ X';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X × Y → ''X * Y'':LbRationalNumberTerm';
+		"Division rules"
+		parseAndAddRule: '∀ X:ℝ.nz ∀ Zero:zero Zero ÷ X ⇒ 0';
+		parseAndAddRule: '∀ X:ℝ X ÷ 1 ⇒ X';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ.nz X ÷ Y → ''X / Y'':LbRationalNumberTerm';
+		"Integer div and rem rules"
+		parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero div X ⇒ 0';
+		parseAndAddRule: '∀ X:ℤ X div 1 ⇒ X';
+		parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X div Y → ''(X abs // Y abs) * X sign * Y sign'':LbIntegerTerm';
+		parseAndAddRule: '∀ X:ℤ.nz ∀ Zero:zero Zero rem X ⇒ 0';
+		parseAndAddRule: '∀ X:ℤ X rem 1 ⇒ 0';
+		parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ.nz X rem Y → ''(X abs % Y abs) * X sign * Y sign'':LbIntegerTerm';
+		"Exponentiation rules"
+		parseAndAddRule: '∀ X:ℝ.nz ∀ Zero:zero X^{Zero} ⇒ 1';
+		parseAndAddRule: '∀ X:ℕ.nz ∀ Zero:zero Zero^{X} ⇒ 0';
+		parseAndAddRule: '∀ X:ℚ.nz ∀ Y:ℤ.nz X^{Y} → ''X raisedTo: Y'':LbRationalNumberTerm';
+		"Abs rules"
+		parseAndAddRule: '∀ X:ℚ abs(X) → ''X abs'':LbRationalNumberTerm';
+		"Comparison rules"
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X < Y → ''X < Y'':LbBooleanTerm';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X > Y → ''X > Y'':LbBooleanTerm';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X ≤ Y → ''X <= Y'':LbBooleanTerm';
+		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X ≥ Y → ''X >= Y'':LbBooleanTerm';
+		"Build the rewrite system"
 		rewriteSystem
 ]
