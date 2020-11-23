@@ -85,19 +85,10 @@ LbFunctionRule >> instVarsExcludedFromEquality [
 ]
 
 { #category : #printing }
-LbFunctionRule >> printAsLeibnizSyntaxOn: aStream [
-	variables keysAndValuesDo:
-		[ :var :sort |
-			aStream nextPutAll: '∀ '.
-			aStream nextPutAll: var asSymbol.
-			aStream nextPut: $:.
-			aStream nextPutAll: sort name.
-			aStream nextPutAll: ' '].
+LbFunctionRule >> printBodyAsLeibnizSyntaxOn: aStream [
 	pattern printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' → '''.
 	aStream nextPutAll: function first.
 	aStream nextPutAll: ''':'.
-	aStream nextPutAll: function second.
-	condition ifNotNil:
-		[ aStream nextPutAll: ' | '. condition printAsLeibnizSyntaxOn: aStream ].
+	aStream nextPutAll: function second
 ]

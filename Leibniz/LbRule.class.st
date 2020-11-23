@@ -56,11 +56,40 @@ LbRule >> pattern [
 ]
 
 { #category : #printing }
+LbRule >> printAsLeibnizSyntaxOn: aStream [
+	self printVariablesAsLeibnizSyntaxOn: aStream.
+	self printBodyAsLeibnizSyntaxOn: aStream.
+	self printConditionAsLeibnizSyntaxOn: aStream
+]
+
+{ #category : #printing }
+LbRule >> printBodyAsLeibnizSyntaxOn: aStream [
+	self subclassResponsibility
+]
+
+{ #category : #printing }
+LbRule >> printConditionAsLeibnizSyntaxOn: aStream [
+	condition ifNotNil:
+		[ aStream nextPutAll: ' | '. condition printAsLeibnizSyntaxOn: aStream ].
+]
+
+{ #category : #printing }
 LbRule >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	self printAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: $).
+]
+
+{ #category : #printing }
+LbRule >> printVariablesAsLeibnizSyntaxOn: aStream [
+	variables keysAndValuesDo:
+		[ :var :sort |
+			aStream nextPutAll: '∀ '.
+			aStream nextPutAll: var asSymbol.
+			aStream nextPut: $:.
+			aStream nextPutAll: sort name.
+			aStream nextPutAll: ' ']
 ]
 
 { #category : #accessing }

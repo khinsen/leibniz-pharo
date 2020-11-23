@@ -19,6 +19,26 @@ LbRewriteSystem class >> signature: aSignature rules: anOrderedCollection [
 
 ]
 
+{ #category : #inspecting }
+LbRewriteSystem >> gtRulesFor: aView [
+	<gtView>
+	"String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ] "
+	^ aView columnedList
+		title: 'Rules' translated;
+		priority: 1;
+		items: [ rules ];
+		column: 'Variables' lbCode: [ :each |
+			String streamContents: [ :s |
+				each printVariablesAsLeibnizSyntaxOn: s ] ];
+		column: 'Transformation' lbCode: [ :each |
+			String streamContents: [ :s |
+				each printBodyAsLeibnizSyntaxOn: s ] ];
+		column: 'Condition' lbCode: [ :each |
+			String streamContents: [ :s |
+				each printConditionAsLeibnizSyntaxOn: s ] ];
+		yourself
+]
+
 { #category : #initialization }
 LbRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedCollection [
 	signature := aSignature.

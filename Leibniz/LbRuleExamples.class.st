@@ -12,7 +12,7 @@ LbRuleExamples >> parserForSignatureWithVariable [
 	^ LbRuleParser signature: self signatureWithVariable
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LbRuleExamples >> ruleSyntax [
 	<gtExample>
 	^ #(

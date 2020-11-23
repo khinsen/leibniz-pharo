@@ -56,7 +56,6 @@ LbRewriteRule >> convertToSignature: aSignature [
 	 	localVariables: variables
 		condition: (condition ifNotNil: [ convertTerm value: condition ])
 		replacement: (convertTerm value: replacement)
-
 ]
 
 { #category : #initializing }
@@ -74,19 +73,10 @@ LbRewriteRule >> initializeWithPattern: aPattern localVariables: aDictionary con
 ]
 
 { #category : #printing }
-LbRewriteRule >> printAsLeibnizSyntaxOn: aStream [
-	variables keysAndValuesDo:
-		[ :var :sort |
-			aStream nextPutAll: '∀ '.
-			aStream nextPutAll: var asSymbol.
-			aStream nextPut: $:.
-			aStream nextPutAll: sort name.
-			aStream nextPutAll: ' '].
+LbRewriteRule >> printBodyAsLeibnizSyntaxOn: aStream [
 	pattern printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' ⇒ '.
-	replacement printAsLeibnizSyntaxOn: aStream.
-	condition ifNotNil:
-		[ aStream nextPutAll: ' | '. condition printAsLeibnizSyntaxOn: aStream ].
+	replacement printAsLeibnizSyntaxOn: aStream
 ]
 
 { #category : #accessing }
