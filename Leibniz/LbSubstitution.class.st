@@ -32,15 +32,10 @@ LbSubstitution >> gtItemsFor: aView [
 	^ aView columnedList
 		title: 'Items' translated;
 		priority: 1;
-		items: [ variables associations sorted: [ :a :b | a key <= b key ]];
-		column: 'Name' do: [ :aColumn |
-			aColumn cellStencil: LbCodeFont brLabelCellStencil;
-			dataBinder: [ :eachLabel :eachItem |
-				eachLabel text: eachItem key asSymbol ] ];
-		column: 'Value' do: [ :aColumn |
-			aColumn cellStencil: LbCodeFont brLabelCellStencil;
-			dataBinder: [ :eachLabel :eachItem |
-				eachLabel text: eachItem value asLeibnizSyntaxString ] ];
+		items: [ variables associations
+					sorted: [ :a :b | a key <= b key ] ];
+		column: 'Name' lbCode: [ :each | each key asSymbol ];
+		column: 'Value' lbCode: [ :each | each value asLeibnizSyntaxString];
 		yourself
 ]
 

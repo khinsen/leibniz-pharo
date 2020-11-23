@@ -99,9 +99,7 @@ LbSignature >> gtDeclarationsFor: aView [
 			 {'Subsorts'. addEmptyChildList value: (d at: #subsorts) }.
 			 {'Variables'. addEmptyChildList value: (d at: #variables) }.
 			 {'Operators'. addEmptyChildList value: (d at: #operators) } } ];
-		itemStencil: LbCodeFont brLabelCellStencil;
-		itemDataBinder: [ :eachLabel :eachItem |
-			eachLabel text: eachItem first ];
+		itemLbCode: [ :each | each first];
 		children: [ :each | each second ];
 		expandOneLevel;
 		yourself
@@ -115,24 +113,18 @@ LbSignature >> gtOperatorsFor: aView [
 		title: 'Operators' translated;
 		priority: 0;
 		items: [ operators keys sorted ];
-		column: 'Kind arity' do: [ :aColumn |
-			aColumn cellStencil: LbCodeFont brLabelCellStencil;
-			dataBinder: [ :eachLabel :eachItem |
-				eachLabel text:
-					((eachItem isKindOf: LbOperatorName)
-						ifTrue: [ eachItem synopsis ]
-						ifFalse: [ eachItem name printStringForArity: eachItem kindArity ]) ] ];
-		column: 'Kind' do: [ :aColumn |
-			aColumn cellStencil: LbCodeFont brLabelCellStencil;
-			dataBinder: [ :eachLabel :eachItem |
-				eachLabel text:
-					((eachItem isKindOf: LbOperatorName)
-						ifTrue: [ '' ]
-						ifFalse: [ eachItem kind asLeibnizSyntaxString ]) ] ];
+		column: 'Kind arity' lbCode: [ :eachItem |
+			(eachItem isKindOf: LbOperatorName)
+				ifTrue: [ eachItem synopsis ]
+				ifFalse: [ eachItem name printStringForArity: eachItem kindArity ]];
+		column: 'Kind' lbCode: [ :eachItem |
+			(eachItem isKindOf: LbOperatorName)
+				ifTrue: [ '' ]
+				ifFalse: [ eachItem kind asLeibnizSyntaxString ]];
 		column: 'Ranks' text: [ :each |
-		(each isKindOf: LbOperatorName)
-			ifTrue: [ '']
-			ifFalse: [ each size asString ] ];
+			(each isKindOf: LbOperatorName)
+				ifTrue: [ '']
+				ifFalse: [ each size asString ] ];
 		children: [ :each |
 			(each isKindOf: LbOperatorName)
 				ifTrue: [ (operators at: each) values sorted: [:a :b | a kindArity size < b kindArity size] ]
@@ -159,14 +151,8 @@ LbSignature >> gtVariablesFor: aView [
 		title: 'Variables' translated;
 		priority: 1;
 		items: [ variables associations sorted: [ :a :b | a key <= b key ]];
-		column: 'Name' do: [ :aColumn |
-			aColumn cellStencil: LbCodeFont brLabelCellStencil;
-			dataBinder: [ :eachLabel :eachItem |
-				eachLabel text: eachItem key synopsis ] ];
-		column: 'Sort' do: [ :aColumn |
-			aColumn cellStencil: LbCodeFont brLabelCellStencil;
-			dataBinder: [ :eachLabel :eachItem |
-				eachLabel text: eachItem value name ] ];
+		column: 'Name' lbCode: [ :each | each key synopsis ];
+		column: 'Sort' lbCode: [ :each | each value name ];
 		yourself
 ]
 

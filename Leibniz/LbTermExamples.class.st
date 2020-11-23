@@ -200,7 +200,7 @@ LbTermExamples >> stringTerm [
 ]
 
 { #category : #example }
-LbTermExamples >> substitutions [
+LbTermExamples >> substitutedTerms [
 	<gtExample>
 	| s |
 	s := LbSignatureExamples new booleanSignature.
@@ -236,6 +236,16 @@ LbTermExamples >> substitutions [
 		equals: 'true ⊻ false'
 		signature: s.
 	}
+]
+
+{ #category : #example }
+LbTermExamples >> substitution [
+	<gtExample>
+	| s |
+	s := LbSignatureExamples new booleanSignature.
+	^ LbSubstitution
+		 variable: (LbPrefixOperatorName for: #X)
+		 value: (s parseTerm: 'true')
 ]
 
 { #category : #example }
