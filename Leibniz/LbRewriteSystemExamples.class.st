@@ -7,6 +7,38 @@ Class {
 }
 
 { #category : #example }
+LbRewriteSystemExamples >> booleanReductions [
+	<gtExample>
+	| rws |
+	rws := self booleanRewriteSystem.
+	^ {
+		{ '¬(true)'. 'false' }.
+		{ '¬(false)'. 'true' }.
+
+		{ 'false ∧ false'. 'false' }.
+		{ 'false ∧ true'. 'false' }.
+		{ 'true ∧ false'. 'false' }.
+		{ 'true ∧ true'. 'true' }.
+
+		{ 'false ∨ false'. 'false' }.
+		{ 'false ∨ true'. 'true' }.
+		{ 'true ∨ false'. 'true' }.
+		{ 'true ∨ true'. 'true' }.
+
+		{ 'false ⊻ false'. 'false' }.
+		{ 'false ⊻ true'. 'true' }.
+		{ 'true ⊻ false'. 'true' }.
+		{ 'true ⊻ true'. 'false' }.
+	} collect: [ :each |
+		| input result reference |
+		input := rws signature parseTerm: each first.
+		result := rws reduce: input.
+		reference := rws signature parseTerm: each second.
+		self assert: result equals: reference.
+		{ input. result } ]
+]
+
+{ #category : #example }
 LbRewriteSystemExamples >> booleanRewriteSystem [
 	<gtExample>
 	^ (LbRewriteSystemBuilder signature: LbSignatureExamples new booleanSignature)
@@ -45,4 +77,41 @@ LbRewriteSystemExamples >> booleanRewriteSystem [
 
 		"Build the rewrite system"
 		rewriteSystem
+]
+
+{ #category : #example }
+LbRewriteSystemExamples >> booleanRewrites [
+	<gtExample>
+	| rws |
+	rws := self booleanRewriteSystem.
+	^ {
+		{ '¬(true)'. 'true ⊻ true' }.
+		{ '¬(false)'. 'true ⊻ false' }.
+
+		{ 'false ∧ false'. 'false' }.
+		{ 'false ∧ true'. 'false' }.
+		{ 'true ∧ false'. 'false' }.
+		{ 'true ∧ true'. 'true' }.
+
+		{ 'false ∨ false'. 'false ⊻ false ⊻ (false ∧ false)' }.
+		{ 'false ∨ true'. 'false ⊻ true ⊻ (false ∧ true)' }.
+		{ 'true ∨ false'. 'true ⊻ false ⊻ (true ∧ false)' }.
+		{ 'true ∨ true'. 'true ⊻ true ⊻ (true ∧ true)' }.
+
+		{ 'false ⊻ false'. 'false' }.
+		{ 'false ⊻ true'. 'true' }.
+		{ 'true ⊻ false'. 'true' }.
+		{ 'true ⊻ true'. 'false' }.
+	} collect: [ :each |
+		| input result reference |
+		input := rws signature parseTerm: each first.
+		result := rws rewriteHeadOnce: input.
+		reference := rws signature parseTerm: each second.
+		self assert: result equals: reference.
+		"All the inputs have literal 'true' or 'false' as
+		 arguments, and therefore rewriteLeftmostInnermost:
+		 yields the same results as rewriteHeadOnce:"
+		result := rws rewriteLeftmostInnermost: input.
+		self assert: result equals: reference.
+		{ input. result } ]
 ]

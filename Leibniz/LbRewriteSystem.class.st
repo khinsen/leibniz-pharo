@@ -64,6 +64,21 @@ LbRewriteSystem >> matchRulesFor: aTerm [
 ]
 
 { #category : #rewriting }
+LbRewriteSystem >> parseAndReduce: aString [
+	^ self reduce: (signature parseTerm: aString)
+]
+
+{ #category : #rewriting }
+LbRewriteSystem >> parseAndRewriteHeadOnce: aString [
+	^ self rewriteHeadOnce: (signature parseTerm: aString)
+]
+
+{ #category : #rewriting }
+LbRewriteSystem >> parseAndRewriteLeftmostInnermost: aString [
+	^ self rewriteLeftmostInnermost: (signature parseTerm: aString)
+]
+
+{ #category : #rewriting }
 LbRewriteSystem >> reduce: aTerm [
 	| lastValue newValue |
 	newValue := aTerm.
