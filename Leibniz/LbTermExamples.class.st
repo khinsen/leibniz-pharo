@@ -7,12 +7,16 @@ Class {
 }
 
 { #category : #example }
-LbTermExamples >> booleanTerm [
+LbTermExamples >> booleanTerms [
 	<gtExample>
-	| t |
-	t := LbBuiltinSignatures truthSignature zeroArgTermNamed: (LbPrefixOperatorName for: #true).
-	self assert: t sort name equals: #boolean.
-	^ t
+	| trueTerm falseTerm |
+	trueTerm := LbBuiltinSignatures truthSignature zeroArgTermNamed: (LbPrefixOperatorName for: #true).
+	self assert: trueTerm sort name equals: #boolean.
+	self assert: trueTerm isTrue.
+	falseTerm := LbBuiltinSignatures truthSignature zeroArgTermNamed: (LbPrefixOperatorName for: #false).
+	self assert: falseTerm sort name equals: #boolean.
+	self assert:falseTerm isTrue not.
+	^ { trueTerm. falseTerm }
 ]
 
 { #category : #private }

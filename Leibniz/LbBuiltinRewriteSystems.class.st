@@ -5,14 +5,14 @@ Class {
 }
 
 { #category : #builtins }
-LbBuiltinRewriteSystems >> integerRewriteSystem [
+LbBuiltinRewriteSystems class >> integerRewriteSystem [
 	<gtExample>
 	^ (LbRewriteSystemBuilder signature: LbBuiltinSignatures integerSignature)
 		"addition rules"
 		parseAndAddRule: '∀ X:ℤ ∀ Zero:zero X + Zero ⇒ X';
 		parseAndAddRule: '∀ X:ℤ ∀ Zero:zero Zero + X ⇒ X';
 		parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X + Y → ''X + Y'':LbIntegerTerm';
-	"subtraction rules"
+		"subtraction rules"
 		parseAndAddRule: '∀ X:ℤ ∀ Zero:zero X - Zero ⇒ X';
 		parseAndAddRule: '∀ X:ℤ ∀ Zero:zero Zero - X ⇒ -(X)';
 		parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X - Y → ''X - Y'':LbIntegerTerm';
@@ -36,6 +36,8 @@ LbBuiltinRewriteSystems >> integerRewriteSystem [
 		parseAndAddRule: '∀ X:ℕ.nz ∀ Zero:zero Zero^{X} ⇒ 0';
 		parseAndAddRule: '∀ X:ℤ ∀ Y:ℕ.nz X^{Y} → ''X raisedTo: Y'':LbIntegerTerm';
 		"abs rules"
+		parseAndAddRule: '∀ X:ℕ abs(X) ⇒ X';
+		parseAndAddRule: '∀ X:ℤ abs(X) ⇒ -(X) | X < 0';
 		parseAndAddRule: '∀ X:ℤ abs(X) → ''X abs'':LbIntegerTerm';
 		"comparison rules"
 		parseAndAddRule: '∀ X:ℤ ∀ Y:ℤ X < Y → ''X < Y'':LbBooleanTerm';
@@ -47,7 +49,7 @@ LbBuiltinRewriteSystems >> integerRewriteSystem [
 ]
 
 { #category : #builtins }
-LbBuiltinRewriteSystems >> rationalNumberRewriteSystem [
+LbBuiltinRewriteSystems class >> rationalNumberRewriteSystem [
 	<gtExample>
 	^ (LbRewriteSystemBuilder signature: LbBuiltinSignatures rationalNumberSignature)
 		"addition rules"
@@ -83,6 +85,8 @@ LbBuiltinRewriteSystems >> rationalNumberRewriteSystem [
 		parseAndAddRule: '∀ X:ℕ.nz ∀ Zero:zero Zero^{X} ⇒ 0';
 		parseAndAddRule: '∀ X:ℚ.nz ∀ Y:ℤ.nz X^{Y} → ''X raisedTo: Y'':LbRationalNumberTerm';
 		"Abs rules"
+		parseAndAddRule: '∀ X:ℚ.nn abs(X) ⇒ X';
+		parseAndAddRule: '∀ X:ℚ abs(X) ⇒ -(X) | X < 0';
 		parseAndAddRule: '∀ X:ℚ abs(X) → ''X abs'':LbRationalNumberTerm';
 		"Comparison rules"
 		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X < Y → ''X < Y'':LbBooleanTerm';
@@ -94,7 +98,7 @@ LbBuiltinRewriteSystems >> rationalNumberRewriteSystem [
 ]
 
 { #category : #accessing }
-LbBuiltinRewriteSystems >> realNumberRewriteSystem [
+LbBuiltinRewriteSystems class >> realNumberRewriteSystem [
 	<gtExample>
 	^ (LbRewriteSystemBuilder signature: LbBuiltinSignatures realNumberSignature)
 		"addition rules"
@@ -130,6 +134,8 @@ LbBuiltinRewriteSystems >> realNumberRewriteSystem [
 		parseAndAddRule: '∀ X:ℕ.nz ∀ Zero:zero Zero^{X} ⇒ 0';
 		parseAndAddRule: '∀ X:ℚ.nz ∀ Y:ℤ.nz X^{Y} → ''X raisedTo: Y'':LbRationalNumberTerm';
 		"Abs rules"
+		parseAndAddRule: '∀ X:ℝ.nn abs(X) ⇒ X';
+		parseAndAddRule: '∀ X:ℝ abs(X) ⇒ -(X) | X < 0';
 		parseAndAddRule: '∀ X:ℚ abs(X) → ''X abs'':LbRationalNumberTerm';
 		"Comparison rules"
 		parseAndAddRule: '∀ X:ℚ ∀ Y:ℚ X < Y → ''X < Y'':LbBooleanTerm';

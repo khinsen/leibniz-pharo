@@ -40,10 +40,9 @@ LbVarTerm >> initializeWithName: aSymbol sort: aSort signature: aSignature [
 { #category : #matching }
 LbVarTerm >> match: otherTerm [
 	otherTerm assertNotAVariable.
-	(signature sortGraph is: otherTerm sort subsortOf: sort)
+	otherTerm sort <= sort
 		ifTrue: [ ^ LbSubstitution variable: name value: otherTerm ]
 		ifFalse: [ ^ nil ]
-
 ]
 
 { #category : #printing }

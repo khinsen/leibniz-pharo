@@ -36,6 +36,14 @@ LbOpTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 
 ]
 
+{ #category : #testing }
+LbOpTerm >> evaluateEqualityTerm [
+	opName isEqualityOp ifFalse: [ ^ nil ].
+	arguments size == 2 ifFalse: [ ^ nil ].
+	sort = #boolean ifFalse: [ ^ nil ].
+	^ arguments first = arguments second
+]
+
 { #category : #private }
 LbOpTerm >> hasInfixOpOtherThan: anOpName [
 	^ opName isInfixOpOtherThan: anOpName
@@ -50,22 +58,14 @@ LbOpTerm >> initializeWithName: anOpName args: anArgList sort: aSort signature: 
 ]
 
 { #category : #testing }
-LbOpTerm >> isEqualityTerm [
-	opName = #'_==' ifFalse: [ ^ nil ].
-	arguments size == 2 ifFalse: [ ^ nil ].
-	sort = #boolean ifFalse: [ ^ nil ].
-	^ arguments first = arguments second
-]
-
-{ #category : #testing }
 LbOpTerm >> isInfix [
 	^ opName isInfix
 ]
 
 { #category : #testing }
 LbOpTerm >> isTrue [
-	^ (sort = #boolean)
-		and: [ (opName = #true)
+	^ (sort name = #boolean)
+		and: [ (opName asSymbol = #true)
 		and: [ arguments isEmpty ] ]
 ]
 

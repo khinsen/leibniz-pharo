@@ -37,6 +37,11 @@ LbTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	self subclassResponsibility
 ]
 
+{ #category : #testing }
+LbTerm >> evaluateEqualityTerm [
+	^ nil
+]
+
 { #category : #accessing }
 LbTerm >> gtTreeFor: aView [
 	<gtView>
@@ -56,11 +61,6 @@ LbTerm >> gtTreeFor: aView [
 { #category : #private }
 LbTerm >> hasInfixOpOtherThan: aSymbol [
 	^ false
-]
-
-{ #category : #testing }
-LbTerm >> isEqualityTerm [
-	^ nil
 ]
 
 { #category : #testing }

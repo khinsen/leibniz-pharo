@@ -50,6 +50,11 @@ LbOperatorName >> internalSymbol: aSymbolOrString [
 	internalSymbol := aSymbolOrString asSymbol
 ]
 
+{ #category : #testing }
+LbOperatorName >> isEqualityOp [
+	^ false
+]
+
 { #category : #accessing }
 LbOperatorName >> isInfix [
 	^ false

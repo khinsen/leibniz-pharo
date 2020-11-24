@@ -22,8 +22,8 @@ LbRewriteSystem class >> signature: aSignature rules: anOrderedCollection [
 { #category : #inspecting }
 LbRewriteSystem >> gtRulesFor: aView [
 	<gtView>
-	"String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ] "
-	^ aView columnedList
+	| ruleView |
+	ruleView := aView columnedList
 		title: 'Rules' translated;
 		priority: 1;
 		items: [ rules ];
@@ -33,10 +33,18 @@ LbRewriteSystem >> gtRulesFor: aView [
 		column: 'Transformation' lbCode: [ :each |
 			String streamContents: [ :s |
 				each printBodyAsLeibnizSyntaxOn: s ] ];
-		column: 'Condition' lbCode: [ :each |
+		yourself.
+	self hasRuleWithCondition ifTrue: [
+		ruleView column: 'Condition' lbCode: [ :each |
 			String streamContents: [ :s |
-				each printConditionAsLeibnizSyntaxOn: s ] ];
-		yourself
+				each printConditionAsLeibnizSyntaxOn: s ] ] ].
+	^ ruleView
+]
+
+{ #category : #testing }
+LbRewriteSystem >> hasRuleWithCondition [
+	^ rules detect: [ :each | each condition isNotNil ]
+		ifFound: [ true ] ifNone: [ false ]
 ]
 
 { #category : #initialization }
@@ -45,22 +53,6 @@ LbRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedCollectio
 	rules := anOrderedCollection.
 	self beRecursivelyReadOnlyObject.
 
-]
-
-{ #category : #rewriting }
-LbRewriteSystem >> matchRulesFor: aTerm [
-	^ rules collect:
-		[ :each |
-			| s c r |
-			s := each pattern match: aTerm.
-			s ifNotNil:
-			  [ c := self testCondition: each condition substituting: s.
-			    r := (c ifTrue: (each apply: s) ifFalse: nil).
-				 Dictionary with: #rule -> each
-								with: #substitution -> s
-								with: #condition -> c
-								with: #result -> r ] ]
-		thenReject: [ :each | each isNil ]
 ]
 
 { #category : #rewriting }
@@ -91,18 +83,14 @@ LbRewriteSystem >> reduce: aTerm [
 
 { #category : #rewriting }
 LbRewriteSystem >> rewriteHeadOnce: aTerm [
-	self flag: #todo.
-	rules do:
-		[ :each |
-			| s |
-			s := each match: aTerm.
-			s ifNotNil:
-				[ [ (self testCondition: each condition substituting: s)
-						ifTrue: [ ^ each apply: s ] ]
-						on: LbRewriteFailure do: [  ] ] ].
+	rules do: [ :each |
+		(each pattern match: aTerm) ifNotNil: [ :s |
+			[ (self testCondition: each condition substituting: s)
+				ifTrue: [ ^ each apply: s ] ]
+			on: LbRewriteFailure do: [  ] ] ].
 	"Special rule for term equality"
-	aTerm isEqualityTerm
-		ifNotNil: [ :v | ^ aTerm signature zeroArgTermNamed: (v ifTrue: #true ifFalse: #false) ].
+	aTerm evaluateEqualityTerm ifNotNil: [ :value |
+		^ LbBooleanTerm value: value signature: aTerm signature ].
 	^ aTerm
 ]
 
@@ -119,6 +107,22 @@ LbRewriteSystem >> rules [
 	^ rules
 ]
 
+{ #category : #rewriting }
+LbRewriteSystem >> rulesMatching: aTerm [
+	| matches |
+	matches := LbMatchingRules new
+					rewriteSystem: self;
+					term: aTerm.
+	rules do: [ :each |
+		(each pattern match: aTerm)
+			ifNil: [ matches addNonMatchingRule: each ]
+			ifNotNil: [ :s |
+				(self testCondition: each condition substituting: s)
+					ifFalse: [ matches addMatchingRuleFailedCondition: each ]
+					ifTrue: [ matches addMatchingRule: each result: (each apply: s) ] ] ].
+	^ matches
+]
+
 { #category : #accessing }
 LbRewriteSystem >> signature [
 	^ signature
@@ -126,7 +130,7 @@ LbRewriteSystem >> signature [
 
 { #category : #rewriting }
 LbRewriteSystem >> testCondition: aTermOrNil substituting: aSubstitution [
-	^ aTermOrNil
-		ifNil: [ true ]
-		ifNotNil: [ (self reduce: (aTermOrNil substitute: aSubstitution)) isTrue ]
+	aTermOrNil ifNil: [ ^ true ].
+	[ ^ (self reduce: (aTermOrNil substitute: aSubstitution)) isTrue ]
+	on: LbRewriteFailure do: [ ^ false ]
 ]

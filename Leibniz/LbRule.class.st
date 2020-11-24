@@ -44,12 +44,6 @@ LbRule >> initializeWithPattern: aPattern localVariables: aDictionary condition:
 				description: 'Variable ', each key asSymbol, ' in condition but not in pattern'  ] ].
 ]
 
-{ #category : #rewriting }
-LbRule >> match: aTerm [
-	^ pattern match: aTerm.
-
-]
-
 { #category : #accessing }
 LbRule >> pattern [
 	^ pattern

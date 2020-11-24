@@ -9,6 +9,11 @@ LbInfixOperatorName class >> for: aStringOrSymbol [
 	^ self new internalSymbol: '_', aStringOrSymbol
 ]
 
+{ #category : #testing }
+LbInfixOperatorName >> isEqualityOp [
+	^ internalSymbol = #'_=='
+]
+
 { #category : #accessing }
 LbInfixOperatorName >> isInfix [
 	^ true

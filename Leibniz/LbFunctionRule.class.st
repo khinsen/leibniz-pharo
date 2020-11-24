@@ -65,9 +65,9 @@ LbFunctionRule >> initializeWithPattern: aPattern localVariables: aDictionary co
 			s nextPutAll: '| '.
 			aDictionary keysDo: [ :each |
 										s nextPutAll: each asSymbol.
-										s nextPutAll: ' := (args at: '.
+										s nextPutAll: ' := (args at: (LbPrefixOperatorName for: '.
 										each asSymbol printOn: s.
-										s nextPutAll: ') leibnizAtomicTermValue. ' ].
+										s nextPutAll: ')) leibnizAtomicTermValue. ' ].
 			s nextPutAll: function second.
 			s nextPutAll: ' value: ('.
 			s nextPutAll: function first.

@@ -7,6 +7,13 @@ Class {
 }
 
 { #category : #example }
+LbRewriteSystemExamples >> booleanMatchingRules [
+	<gtExample>
+	^ self booleanRewriteSystem rulesMatching:
+		(LbSignatureExamples new booleanSignature parseTerm: 'true ∧ true')
+]
+
+{ #category : #example }
 LbRewriteSystemExamples >> booleanReductions [
 	<gtExample>
 	| rws |
@@ -114,4 +121,18 @@ LbRewriteSystemExamples >> booleanRewrites [
 		result := rws rewriteLeftmostInnermost: input.
 		self assert: result equals: reference.
 		{ input. result } ]
+]
+
+{ #category : #example }
+LbRewriteSystemExamples >> integerMatchingRules [
+	<gtExample>
+	^ LbBuiltinRewriteSystems integerRewriteSystem rulesMatching:
+		(LbBuiltinSignatures integerSignature parseTerm: 'abs(-5)')
+]
+
+{ #category : #example }
+LbRewriteSystemExamples >> integerMatchingRulesWithFailedCondition [
+	<gtExample>
+	^ LbBuiltinRewriteSystems integerRewriteSystem rulesMatching:
+		(LbBuiltinSignatures integerSignature parseTerm: 'abs(5)')
 ]

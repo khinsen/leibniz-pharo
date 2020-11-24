@@ -34,11 +34,6 @@ LbContext >> lbAtomicTermClass [
 	^ LbContextTerm
 ]
 
-{ #category : #rewriting }
-LbContext >> matchRulesFor: aTerm [
-	^ rewriteSystem matchRulesFor: aTerm
-]
-
 { #category : #accessing }
 LbContext >> name [
 	^ name
@@ -71,6 +66,11 @@ LbContext >> printOn: aStream [
 { #category : #accessing }
 LbContext >> rewriteSystem [
 	^ rewriteSystem
+]
+
+{ #category : #rewriting }
+LbContext >> rulesMatching: aTerm [
+	^ rewriteSystem rulesMatching: aTerm
 ]
 
 { #category : #accessing }
