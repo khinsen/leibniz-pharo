@@ -42,7 +42,7 @@ LbTerm >> evaluateEqualityTerm [
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : #inspecting }
 LbTerm >> gtTreeFor: aView [
 	<gtView>
 	^ aView columnedTree
@@ -61,6 +61,12 @@ LbTerm >> gtTreeFor: aView [
 { #category : #private }
 LbTerm >> hasInfixOpOtherThan: aSymbol [
 	^ false
+]
+
+{ #category : #classifying }
+LbTerm >> headOpName [
+	"The name of the head operator, which is used as a first heuristic in matching."
+	self subclassResponsibility
 ]
 
 { #category : #testing }

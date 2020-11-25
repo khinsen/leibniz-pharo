@@ -30,6 +30,11 @@ LbVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	^ aSignature zeroArgTermNamed: name extraVariables: aDictionary
 ]
 
+{ #category : #accessing }
+LbVarTerm >> headOpName [
+	^ LbPseudoOperatorName for: #Variable
+]
+
 { #category : #initialization }
 LbVarTerm >> initializeWithName: aSymbol sort: aSort signature: aSignature [
 	name := aSymbol.

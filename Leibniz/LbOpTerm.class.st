@@ -49,6 +49,11 @@ LbOpTerm >> hasInfixOpOtherThan: anOpName [
 	^ opName isInfixOpOtherThan: anOpName
 ]
 
+{ #category : #classifying }
+LbOpTerm >> headOpName [
+	^ opName
+]
+
 { #category : #initialization }
 LbOpTerm >> initializeWithName: anOpName args: anArgList sort: aSort signature: aSignature [
 	opName := anOpName.

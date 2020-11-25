@@ -28,6 +28,11 @@ LbAtomicTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	^ self class value: value signature: aSignature
 ]
 
+{ #category : #classifying }
+LbAtomicTerm >> headOpName [
+	^ LbPseudoOperatorName for: #'Built-in'
+]
+
 { #category : #initialization }
 LbAtomicTerm >> initializeWithValue: aString signature: aSignature [
 	signature := aSignature.

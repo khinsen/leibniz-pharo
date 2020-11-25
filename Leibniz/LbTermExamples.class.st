@@ -13,9 +13,11 @@ LbTermExamples >> booleanTerms [
 	trueTerm := LbBuiltinSignatures truthSignature zeroArgTermNamed: (LbPrefixOperatorName for: #true).
 	self assert: trueTerm sort name equals: #boolean.
 	self assert: trueTerm isTrue.
+	self assert: trueTerm headOpName asSymbol equals: #true.
 	falseTerm := LbBuiltinSignatures truthSignature zeroArgTermNamed: (LbPrefixOperatorName for: #false).
 	self assert: falseTerm sort name equals: #boolean.
 	self assert:falseTerm isTrue not.
+	self assert: falseTerm headOpName asSymbol equals: #false.
 	^ { trueTerm. falseTerm }
 ]
 
@@ -84,6 +86,7 @@ LbTermExamples >> fpNumberLiteralTerms [
 		| t |
 		t := LbBuiltinSignatures fpNumberSignature atomicTerm: each key.
 		self assert: t sort name equals: each value.
+		self assert: t headOpName asSymbol equals: #'Floating point number'.
 		t ]
 ]
 
@@ -100,6 +103,7 @@ LbTermExamples >> integerLiteralTerms [
 		| t |
 		t := LbBuiltinSignatures integerSignature atomicTerm: each key.
 		self assert: t sort name equals: each value.
+		self assert: t headOpName asSymbol equals: #'Number'.
 		t ]
 ]
 
@@ -191,6 +195,7 @@ LbTermExamples >> rationalNumberLiteralTerms [
 		| t |
 		t := LbBuiltinSignatures rationalNumberSignature atomicTerm: each key.
 		self assert: t sort name equals: each value.
+		self assert: t headOpName asSymbol equals: #Number.
 		t ]
 ]
 
@@ -200,6 +205,7 @@ LbTermExamples >> stringTerm [
 	| t |
 	t := LbBuiltinSignatures stringSignature atomicTerm: 'abc'.
 	self assert: t sort name equals: #string.
+	self assert: t headOpName asSymbol equals: #String.
 	^ t
 ]
 
@@ -334,4 +340,13 @@ LbTermExamples >> termSyntax [
 			self
 				checkSyntaxRoundTrip: eachString
 				signature: each first ] ]
+]
+
+{ #category : #example }
+LbTermExamples >> varTerm [
+	<gtExample>
+	| term |
+	term := self parserForFooBar parse: 'bar'.
+	self assert: term headOpName asSymbol equals: #Variable.
+	^ term
 ]
