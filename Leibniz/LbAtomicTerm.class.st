@@ -30,7 +30,7 @@ LbAtomicTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 
 { #category : #classifying }
 LbAtomicTerm >> headOpName [
-	^ LbPseudoOperatorName for: #'Built-in'
+	^ LbPseudoOperatorName for: #Atomic
 ]
 
 { #category : #initialization }

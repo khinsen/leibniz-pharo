@@ -23,36 +23,63 @@ LbRewriteSystem class >> signature: aSignature rules: anOrderedCollection [
 LbRewriteSystem >> gtRulesFor: aView [
 	<gtView>
 	| ruleView |
-	ruleView := aView columnedList
+	ruleView := aView columnedTree
 		title: 'Rules' translated;
 		priority: 1;
-		items: [ rules ];
+		items: [ rules keys sorted ];
+		children: [ :each |
+			(each isKindOf: LbOperatorName)
+				ifTrue: [ rules at: each ]
+				ifFalse: [ #() ] ];
 		column: 'Variables' lbCode: [ :each |
-			String streamContents: [ :s |
-				each printVariablesAsLeibnizSyntaxOn: s ] ];
+			(each isKindOf: LbOperatorName)
+				ifTrue: [ each synopsis ]
+				ifFalse: [ String streamContents: [ :s |
+					each printVariablesAsLeibnizSyntaxOn: s ] ] ];
 		column: 'Transformation' lbCode: [ :each |
-			String streamContents: [ :s |
-				each printBodyAsLeibnizSyntaxOn: s ] ];
+			(each isKindOf: LbOperatorName)
+				ifTrue: [ '' ]
+				ifFalse: [ String streamContents: [ :s |
+					each printBodyAsLeibnizSyntaxOn: s ] ] ];
 		yourself.
 	self hasRuleWithCondition ifTrue: [
 		ruleView column: 'Condition' lbCode: [ :each |
-			String streamContents: [ :s |
-				each printConditionAsLeibnizSyntaxOn: s ] ] ].
+			(each isKindOf: LbOperatorName)
+				ifTrue: [ '' ]
+				ifFalse: [ String streamContents: [ :s |
+					each printConditionAsLeibnizSyntaxOn: s ] ] ] ].
 	^ ruleView
 ]
 
 { #category : #testing }
 LbRewriteSystem >> hasRuleWithCondition [
-	^ rules detect: [ :each | each condition isNotNil ]
-		ifFound: [ true ] ifNone: [ false ]
+	rules valuesDo: [ :eachRuleList |
+		eachRuleList
+			detect: [ :eachRule | eachRule condition isNotNil ]
+			ifFound: [ ^ true ] ].
+	^ false
 ]
 
 { #category : #initialization }
 LbRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedCollection [
+	| varHeadOp |
 	signature := aSignature.
-	rules := anOrderedCollection.
+	"Classify rules by headOpName, to avoid scanning the full rule list
+	 when matching terms. Treat #Variable as a special case because a
+	 variable can match terms of any headOpName."
+	varHeadOp := LbPseudoOperatorName for: #Variable.
+	rules := Dictionary with: varHeadOp -> OrderedCollection new.
+	anOrderedCollection do: [ :each |
+		| head |
+		head := each pattern headOpName.
+		head = varHeadOp
+			ifTrue: [
+				rules do: [ :eachRuleList | eachRuleList add: each ] ]
+			ifFalse: [
+				(rules at: head ifAbsentPut: [ (rules at: varHeadOp) copy ])
+					add: each. ] ].
+	rules removeKey: varHeadOp.
 	self beRecursivelyReadOnlyObject.
-
 ]
 
 { #category : #rewriting }
@@ -83,14 +110,15 @@ LbRewriteSystem >> reduce: aTerm [
 
 { #category : #rewriting }
 LbRewriteSystem >> rewriteHeadOnce: aTerm [
-	rules do: [ :each |
-		(each pattern match: aTerm) ifNotNil: [ :s |
-			[ (self testCondition: each condition substituting: s)
-				ifTrue: [ ^ each apply: s ] ]
+	(rules at: aTerm headOpName ifAbsent: [ #() ]) do: [ :aRule |
+		(aRule pattern match: aTerm) ifNotNil: [ :s |
+			[ (self testCondition: aRule condition substituting: s)
+				ifTrue: [ ^ aRule apply: s ] ]
 			on: LbRewriteFailure do: [  ] ] ].
 	"Special rule for term equality"
 	aTerm evaluateEqualityTerm ifNotNil: [ :value |
 		^ LbBooleanTerm value: value signature: aTerm signature ].
+	"If no rule matches, return the input term"
 	^ aTerm
 ]
 
@@ -99,7 +127,6 @@ LbRewriteSystem >> rewriteLeftmostInnermost: aTerm [
 	| reducer |
 	reducer := [ :each | self reduce: each ].
 	^ self rewriteHeadOnce: (aTerm withTransformedArgs: reducer)
-
 ]
 
 { #category : #accessing }
@@ -109,17 +136,17 @@ LbRewriteSystem >> rules [
 
 { #category : #rewriting }
 LbRewriteSystem >> rulesMatching: aTerm [
-	| matches |
+	| matches testRule |
 	matches := LbMatchingRules new
 					rewriteSystem: self;
 					term: aTerm.
-	rules do: [ :each |
-		(each pattern match: aTerm)
-			ifNil: [ matches addNonMatchingRule: each ]
+	(rules at: aTerm headOpName ifAbsent: [ #() ]) do: [ :aRule |
+		(aRule pattern match: aTerm)
+			ifNil: [ matches addNonMatchingRule: aRule ]
 			ifNotNil: [ :s |
-				(self testCondition: each condition substituting: s)
-					ifFalse: [ matches addMatchingRuleFailedCondition: each ]
-					ifTrue: [ matches addMatchingRule: each result: (each apply: s) ] ] ].
+				(self testCondition: aRule condition substituting: s)
+					ifFalse: [ matches addMatchingRuleFailedCondition: aRule ]
+					ifTrue: [ matches addMatchingRule: aRule result: (aRule apply: s) ] ]].
 	^ matches
 ]
 

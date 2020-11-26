@@ -27,7 +27,8 @@ LbMatchingRules >> addNonMatchingRule: aRule [
 { #category : #inspecting }
 LbMatchingRules >> gtMatchesFor: aView [
 	<gtView>
-	^ aView columnedList
+	| ruleView |
+	ruleView := aView columnedList
 		title: 'Matches' translated;
 		priority: 1;
 		items: [ rules ];
@@ -45,18 +46,20 @@ LbMatchingRules >> gtMatchesFor: aView [
 				asRopedText.
 			each second ifFalse: [ text foreground: Color gray ].
 			text ];
-		column: 'Condition' lbCode: [ :each |
-			| text color |
-			text := (String streamContents: [ :s |
-				each first printConditionAsLeibnizSyntaxOn: s ])
-				asRopedText.
-			color := Color black.
-			each second
-				ifFalse: [ color := Color gray ]
-				ifTrue: [ each third ifFalse: [ color := Color red ] ].
-			text foreground: color.
-			text ];
-		column: 'Result' lbCode: [ :each |
+			yourself.
+		self hasRuleWithCondition ifTrue: [
+			ruleView column: 'Condition' lbCode: [ :each |
+				| text color |
+				text := (String streamContents: [ :s |
+					each first printConditionAsLeibnizSyntaxOn: s ])
+					asRopedText.
+				color := Color black.
+				each second
+					ifFalse: [ color := Color gray ]
+					ifTrue: [ each third ifFalse: [ color := Color red ] ].
+				text foreground: color.
+				text ] ].
+		ruleView column: 'Result' lbCode: [ :each |
 			each fourth
 				ifNil: [ '' ]
 				ifNotNil: [ :aTerm |
@@ -64,7 +67,14 @@ LbMatchingRules >> gtMatchesFor: aView [
 					text := aTerm asLeibnizSyntaxString asRopedText.
 					each second ifFalse: [ text foreground: Color gray ].
 					text ] ];
-		yourself
+		yourself.
+		^ ruleView
+]
+
+{ #category : #testing }
+LbMatchingRules >> hasRuleWithCondition [
+	rules detect: [ :each | each first condition isNotNil ]
+		ifFound: [ ^ true ] ifNone: [ ^ false ]
 ]
 
 { #category : #initializing }

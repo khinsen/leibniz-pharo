@@ -12,11 +12,6 @@ LbFPNumberTerm class >> requiredBuiltin [
 	^ #fpNumbers
 ]
 
-{ #category : #classifying }
-LbFPNumberTerm >> headOpName [
-	^ LbPseudoOperatorName for: #'Floating point number'
-]
-
 { #category : #accessing }
 LbFPNumberTerm >> sortSymbol [
 	value isNaN ifTrue: [ ^ #'FP64.NaN' ].

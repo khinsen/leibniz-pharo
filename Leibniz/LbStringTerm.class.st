@@ -12,11 +12,6 @@ LbStringTerm class >> requiredBuiltin [
 	^ #strings
 ]
 
-{ #category : #accessing }
-LbStringTerm >> headOpName [
-	^ LbPseudoOperatorName for: #String
-]
-
 { #category : #printing }
 LbStringTerm >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPut: $".

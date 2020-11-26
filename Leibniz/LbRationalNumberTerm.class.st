@@ -24,11 +24,6 @@ LbRationalNumberTerm class >> value: aNumber signature: aSignature [
 					yourself ]
 ]
 
-{ #category : #classifying }
-LbRationalNumberTerm >> headOpName [
-	^ LbPseudoOperatorName for: #Number
-]
-
 { #category : #printing }
 LbRationalNumberTerm >> printAsLeibnizSyntaxOn: aStream [
 	"Remove the parentheses that Pharo adds around fractions."

@@ -86,7 +86,7 @@ LbTermExamples >> fpNumberLiteralTerms [
 		| t |
 		t := LbBuiltinSignatures fpNumberSignature atomicTerm: each key.
 		self assert: t sort name equals: each value.
-		self assert: t headOpName asSymbol equals: #'Floating point number'.
+		self assert: t headOpName asSymbol equals: #Atomic.
 		t ]
 ]
 
@@ -103,7 +103,7 @@ LbTermExamples >> integerLiteralTerms [
 		| t |
 		t := LbBuiltinSignatures integerSignature atomicTerm: each key.
 		self assert: t sort name equals: each value.
-		self assert: t headOpName asSymbol equals: #'Number'.
+		self assert: t headOpName asSymbol equals: #Atomic.
 		t ]
 ]
 
@@ -195,7 +195,7 @@ LbTermExamples >> rationalNumberLiteralTerms [
 		| t |
 		t := LbBuiltinSignatures rationalNumberSignature atomicTerm: each key.
 		self assert: t sort name equals: each value.
-		self assert: t headOpName asSymbol equals: #Number.
+		self assert: t headOpName asSymbol equals: #Atomic.
 		t ]
 ]
 
@@ -205,7 +205,7 @@ LbTermExamples >> stringTerm [
 	| t |
 	t := LbBuiltinSignatures stringSignature atomicTerm: 'abc'.
 	self assert: t sort name equals: #string.
-	self assert: t headOpName asSymbol equals: #String.
+	self assert: t headOpName asSymbol equals: #Atomic.
 	^ t
 ]
 

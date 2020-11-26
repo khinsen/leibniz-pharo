@@ -136,3 +136,34 @@ LbRewriteSystemExamples >> integerMatchingRulesWithFailedCondition [
 	^ LbBuiltinRewriteSystems integerRewriteSystem rulesMatching:
 		(LbBuiltinSignatures integerSignature parseTerm: 'abs(5)')
 ]
+
+{ #category : #example }
+LbRewriteSystemExamples >> rewriteSystemWithVarHeadRule [
+	<gtExample>
+	"Note: this is not a useful rewrite system. It is meant
+	 for testing only."
+	| rws |
+	rws := (LbRewriteSystemBuilder signature: LbSignatureExamples new booleanSignature)
+		parseAndAddRule: '∀ X:boolean X ∨ Y ⇒ Y';
+		parseAndAddRule: '∀ X:boolean X ⇒ true';
+		parseAndAddRule: '∀ X:boolean X ∧ Y ⇒ X';
+		rewriteSystem.
+	self
+		assert: rws rules keys asSet
+		equals: { LbInfixOperatorName for: #'∨'.
+					LbInfixOperatorName for: #'∧'} asSet.
+	self
+		assert: (rws rules values collect: [ :each | each size ])
+		equals: #(2 2).
+	self
+		assert: (rws rules at:
+					(LbInfixOperatorName for: #'∨'))
+					second pattern headOpName asSymbol
+		equals: #Variable.
+	self
+		assert: (rws rules at:
+					(LbInfixOperatorName for: #'∧'))
+					first pattern headOpName asSymbol
+		equals: #Variable.
+	 ^ rws
+]
