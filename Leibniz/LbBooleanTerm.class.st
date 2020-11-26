@@ -13,6 +13,6 @@ LbBooleanTerm class >> value: aBoolean signature: aSignature [
 		name: (LbPrefixOperatorName for:
 				(aBoolean ifTrue: [ #true ] ifFalse: [ #false ]))
 		args: Array new
-		sort: #boolean
+		sort: (aSignature sortNamed: #boolean)
 		signature: aSignature
 ]

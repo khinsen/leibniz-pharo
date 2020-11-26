@@ -40,7 +40,7 @@ LbOpTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 LbOpTerm >> evaluateEqualityTerm [
 	opName isEqualityOp ifFalse: [ ^ nil ].
 	arguments size == 2 ifFalse: [ ^ nil ].
-	sort = #boolean ifFalse: [ ^ nil ].
+	sort name = #boolean ifFalse: [ ^ nil ].
 	^ arguments first = arguments second
 ]
 

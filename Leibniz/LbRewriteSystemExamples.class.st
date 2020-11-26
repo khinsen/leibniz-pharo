@@ -21,6 +21,7 @@ LbRewriteSystemExamples >> booleanReductions [
 	^ {
 		{ '¬(true)'. 'false' }.
 		{ '¬(false)'. 'true' }.
+		{ '¬(¬(false))'. 'false' }.
 
 		{ 'false ∧ false'. 'false' }.
 		{ 'false ∧ true'. 'false' }.
@@ -121,6 +122,25 @@ LbRewriteSystemExamples >> booleanRewrites [
 		result := rws rewriteLeftmostInnermost: input.
 		self assert: result equals: reference.
 		{ input. result } ]
+]
+
+{ #category : #accessing }
+LbRewriteSystemExamples >> equalityTerms [
+	<gtExample>
+	| rws |
+	rws := self booleanRewriteSystem.
+	^ {
+		#('true == true' 'true' 'true').
+		#('true == false' 'false' 'false').
+		#('¬(true) == false' 'false' 'true').
+	} collect: [ :each |
+		| term rewriteResult reduceResult |
+		term := rws signature parseTerm: each first.
+		rewriteResult := rws signature parseTerm: each second.
+		reduceResult := rws signature parseTerm: each third.
+		self assert: (rws rewriteHeadOnce: term ) equals: rewriteResult.
+		self assert: (rws reduce: term ) equals: reduceResult.
+		term ]
 ]
 
 { #category : #example }
