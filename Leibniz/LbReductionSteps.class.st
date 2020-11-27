@@ -14,6 +14,20 @@ LbReductionSteps >> finalTerm [
 ]
 
 { #category : #accessing }
+LbReductionSteps >> gtStepsFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'Steps' translated;
+		priority: 0;
+		items: [ steps ];
+		column: 'Initial' lbCode: [ :each |
+			each initialTerm asLeibnizSyntaxString ];
+		column: 'Final' lbCode: [ :each |
+			each finalTerm asLeibnizSyntaxString ];
+		yourself
+]
+
+{ #category : #accessing }
 LbReductionSteps >> initialTerm [
 	^ steps first initialTerm
 ]
@@ -21,6 +35,11 @@ LbReductionSteps >> initialTerm [
 { #category : #accessing }
 LbReductionSteps >> rewriteSystem: aRewriteSystem [
 	rewriteSystem := aRewriteSystem
+]
+
+{ #category : #accessing }
+LbReductionSteps >> steps [
+	^ steps
 ]
 
 { #category : #rewriting }

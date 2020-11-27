@@ -13,6 +13,15 @@ LbRewriteSystemExamples >> booleanMatchingRules [
 		(LbSignatureExamples new booleanSignature parseTerm: 'true ∧ true')
 ]
 
+{ #category : #accessing }
+LbRewriteSystemExamples >> booleanReductionSteps [
+	<gtExample>
+	^ LbRewriteSystemExamples new booleanRewriteSystem
+		reductionStepsFor: (LbSignatureExamples new
+								booleanSignature
+								parseTerm: '¬(true)')
+]
+
 { #category : #example }
 LbRewriteSystemExamples >> booleanReductions [
 	<gtExample>
