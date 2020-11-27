@@ -102,10 +102,17 @@ LbRewriteSystem >> reduce: aTerm [
 	| lastValue newValue |
 	newValue := aTerm.
 	lastValue := nil.
-	[ lastValue = newValue ] whileFalse:
-		[	lastValue := newValue.
-			newValue :=  self rewriteLeftmostInnermost: lastValue ].
-	^ newValue
+	[ lastValue = newValue ] whileFalse: [
+		lastValue := newValue.
+		newValue :=  self rewriteLeftmostInnermost: lastValue ].
+	^ lastValue
+]
+
+{ #category : #rewriting }
+LbRewriteSystem >> reductionStepsFor: aTerm [
+	^ LbReductionSteps new
+		rewriteSystem: self;
+		term: aTerm
 ]
 
 { #category : #rewriting }
@@ -124,9 +131,9 @@ LbRewriteSystem >> rewriteHeadOnce: aTerm [
 
 { #category : #rewriting }
 LbRewriteSystem >> rewriteLeftmostInnermost: aTerm [
-	| reducer |
-	reducer := [ :each | self reduce: each ].
-	^ self rewriteHeadOnce: (aTerm withTransformedArgs: reducer)
+	| transformedArgs |
+	transformedArgs := aTerm arguments collect: [ :each | self reduce: each ].
+	^ self rewriteHeadOnce: (aTerm withTransformedArgs: transformedArgs)
 ]
 
 { #category : #accessing }

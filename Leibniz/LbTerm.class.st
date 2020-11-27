@@ -146,6 +146,7 @@ LbTerm >> variables [
 ]
 
 { #category : #transforming }
-LbTerm >> withTransformedArgs: transformer [
+LbTerm >> withTransformedArgs: anArgList [
+	self assert: anArgList size equals: 0.
 	^ self
 ]

@@ -132,6 +132,6 @@ LbOpTerm >> variables [
 ]
 
 { #category : #transforming }
-LbOpTerm >> withTransformedArgs: transformer [
-	^ signature nonZeroArgTermNamed: opName withArgs: (arguments collect: transformer)
+LbOpTerm >> withTransformedArgs: anArgList [
+	^ signature nonZeroArgTermNamed: opName withArgs: anArgList
 ]

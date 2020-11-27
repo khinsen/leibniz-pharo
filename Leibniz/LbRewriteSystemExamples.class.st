@@ -40,8 +40,10 @@ LbRewriteSystemExamples >> booleanReductions [
 	} collect: [ :each |
 		| input result reference |
 		input := rws signature parseTerm: each first.
-		result := rws reduce: input.
 		reference := rws signature parseTerm: each second.
+		result := rws reduce: input.
+		self assert: result equals: reference.
+		result := (rws reductionStepsFor: input) finalTerm.
 		self assert: result equals: reference.
 		{ input. result } ]
 ]
