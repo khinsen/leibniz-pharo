@@ -219,6 +219,16 @@ LbSignature >> opNamed: anOpName withArgs: aSortArray [
 		ifAbsent: [ nil ].
 ]
 
+{ #category : #'asset construction' }
+LbSignature >> parseRule: aString [
+	| rule |
+	rule := (LbRuleParser signature: self)
+				parse: aString
+				onError: [ :message :position |
+					self error: 'Parse error for: ', aString, ' (', message, ')'].
+	^ rule
+]
+
 { #category : #'term construction' }
 LbSignature >> parseTerm: aString [
 	^ self parseTerm: aString extraVariables: Dictionary new

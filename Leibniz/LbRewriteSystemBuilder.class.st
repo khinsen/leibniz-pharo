@@ -21,14 +21,25 @@ LbRewriteSystemBuilder class >> signature: aSignature [
 
 { #category : #adding }
 LbRewriteSystemBuilder >> addRewriteSystem: aRewriteSystem [
-	aRewriteSystem rules do:
-		[ :each | self addRule: (each convertToSignature: signature) ]
+	aRewriteSystem rules keysAndValuesDo: [ :eachHeadOpName :eachRuleList |
+		eachRuleList do: [ :each |
+			self addRule: (each convertToSignature: signature) ] ]
 ]
 
 { #category : #adding }
 LbRewriteSystemBuilder >> addRule: aRule [
 	self assert: aRule signature equals: signature.
-	rules add: aRule
+	(rules includes: aRule) ifFalse: [ rules add: aRule ]
+]
+
+{ #category : #inspecting }
+LbRewriteSystemBuilder >> gtRulesFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Rules';
+		priority: 0;
+		object: [ self rewriteSystem ];
+		view: #gtRulesFor:
 ]
 
 { #category : #initialization }
@@ -39,11 +50,7 @@ LbRewriteSystemBuilder >> initializeWithSignature: aSignature [
 
 { #category : #adding }
 LbRewriteSystemBuilder >> parseAndAddRule: aString [
-	| rule |
-	rule := (LbRuleParser signature: signature)
-				parse: aString
-				onError: [ :message :position | self error: 'Parse error for: ', aString, ' (', message, ')'].
-	rules add: rule
+	rules add: (signature parseRule: aString)
 ]
 
 { #category : #accessing }

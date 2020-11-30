@@ -17,7 +17,6 @@ LbUniversalVarTerm class >> symbol: aSymbol signature: aSignature [
 { #category : #converting }
 LbUniversalVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	^ self class symbol: name signature: aSignature
-
 ]
 
 { #category : #initialization }

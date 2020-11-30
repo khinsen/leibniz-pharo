@@ -27,7 +27,9 @@ LbVarTerm >> assertNotAVariable [
 
 { #category : #converting }
 LbVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
-	^ aSignature zeroArgTermNamed: name extraVariables: aDictionary
+	| vars |
+	vars := aDictionary collect: [ :eachSort | aSignature sortNamed: eachSort name ].
+	^ aSignature zeroArgTermNamed: name extraVariables: vars
 ]
 
 { #category : #accessing }

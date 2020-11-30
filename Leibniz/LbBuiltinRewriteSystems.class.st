@@ -5,6 +5,48 @@ Class {
 }
 
 { #category : #builtins }
+LbBuiltinRewriteSystems class >> fpNumberRewriteSystem [
+	<gtExample>
+	^ (LbRewriteSystemBuilder signature: LbBuiltinSignatures fpNumberSignature)
+		addRewriteSystem: LbBuiltinRewriteSystems integerRewriteSystem;
+		"TODO: add rules for NaN"
+		"addition rules"
+		parseAndAddRule: '∀ X:FP64 0.0 + X ⇒ X';
+		parseAndAddRule: '∀ X:FP64 X + 0.0 ⇒ X';
+		parseAndAddRule: '∀ X:FP64 ∀ Y:FP64 X + Y → ''X + Y'':LbFPNumberTerm';
+		"Subtraction rules"
+		parseAndAddRule: '∀ X:FP64 0.0 - X ⇒ -(X)';
+		parseAndAddRule: '∀ X:FP64 X - 0.0 ⇒ X';
+		parseAndAddRule: '∀ X:FP64 ∀ Y:FP64 X - Y → ''X - Y'':LbFPNumberTerm';
+		"Negation rules"
+		parseAndAddRule: '∀ X:FP64 -(X) → ''X negated'':LbFPNumberTerm';
+		"Multiplication rules"
+		parseAndAddRule: '∀ X:FP64 1.0 × X ⇒ X';
+		parseAndAddRule: '∀ X:FP64 X × 1.0 ⇒ X';
+		parseAndAddRule: '∀ X:FP64 ∀ Y:FP64 X × Y → ''X * Y'':LbFPNumberTerm';
+		"Division rules"
+		parseAndAddRule: '∀ X:FP64 X ÷ 1.0 ⇒ X';
+		parseAndAddRule: '∀ X:FP64 ∀ Y:FP64 X ÷ Y → ''X / Y'':LbFPNumberTerm';
+		"Exponentiation rules"
+		parseAndAddRule: '∀ X:FP64 X^{0.0} ⇒ 1.0';
+		parseAndAddRule: '∀ X:FP64 X^{0} ⇒ 1.0';
+		parseAndAddRule: '∀ N:ℕ 0.0^{N} ⇒ 0.0';
+		parseAndAddRule: '∀ X:FP64 ∀ Y:FP64 X^{Y} → ''X raisedTo: Y'':LbFPNumberTerm';
+		parseAndAddRule: '∀ X:FP64 ∀ N:ℤ.nz X^{N} → ''X raisedTo: N'':LbFPNumberTerm';
+		"Abs rules"
+		parseAndAddRule: '∀ X:FP64 abs(X) ⇒ X | X ≥ 0.0';
+		parseAndAddRule: '∀ X:FP64 abs(X) ⇒ -(X) | X < 0.0';
+		parseAndAddRule: '∀ X:FP64 abs(X) → ''X abs'':LbFPNumberTerm';
+		"Comparison rules"
+		parseAndAddRule: '∀ X:FP64 ∀ Y:FP64 X < Y → ''X < Y'':LbBooleanTerm';
+		parseAndAddRule: '∀ X:FP64 ∀ Y:FP64 X > Y → ''X > Y'':LbBooleanTerm';
+		parseAndAddRule: '∀ X:FP64 ∀ Y:FP64 X ≤ Y → ''X <= Y'':LbBooleanTerm';
+		parseAndAddRule: '∀ X:FP64 ∀ Y:FP64 X ≥ Y → ''X >= Y'':LbBooleanTerm';
+		"Build rewrite system"
+		rewriteSystem
+]
+
+{ #category : #builtins }
 LbBuiltinRewriteSystems class >> integerRewriteSystem [
 	<gtExample>
 	^ (LbRewriteSystemBuilder signature: LbBuiltinSignatures integerSignature)

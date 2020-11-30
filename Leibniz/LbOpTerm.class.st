@@ -26,14 +26,15 @@ LbOpTerm >> arguments [
 
 { #category : #converting }
 LbOpTerm >> convertToSignature: aSignature extraVariables: aDictionary [
+	| vars |
+	vars := aDictionary collect: [ :eachSort | aSignature sortNamed: eachSort name ].
 	^ arguments
 		ifEmpty:
-			[ aSignature zeroArgTermNamed: opName extraVariables: aDictionary ]
+			[ aSignature zeroArgTermNamed: opName extraVariables: vars ]
 		ifNotEmpty:
 			[ aSignature nonZeroArgTermNamed: opName
 							 withArgs: (arguments collect:
-								[ :each | each convertToSignature: aSignature  extraVariables: aDictionary]) ]
-
+								[ :each | each convertToSignature: aSignature  extraVariables: vars ] ) ]
 ]
 
 { #category : #testing }

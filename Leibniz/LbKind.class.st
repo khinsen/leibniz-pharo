@@ -96,7 +96,7 @@ LbKind >> sortAfterKind: aKind [
 	msB := aKind maximalSorts asArray sorted: [ :a :b | a sortBefore: b ].
 	msA size > msB size ifTrue: [ ^ true ].
 	msA size < msB size ifTrue: [ ^ false ].
-	msA with: msB do: [ :a :b | a < b ifTrue: [ ^ false ] ].
+	msA with: msB do: [ :a :b | a <= b ifTrue: [ ^ false ] ].
 	^ true
 ]
 

@@ -19,6 +19,43 @@ LbRewriteSystem class >> signature: aSignature rules: anOrderedCollection [
 
 ]
 
+{ #category : #accessing }
+LbRewriteSystem >> declarations [
+	| declarations ruleDecls |
+	declarations := self signature declarations.
+	ruleDecls := OrderedCollection new.
+	rules keys sorted do: [ :eachHeadOpName |
+		(rules at: eachHeadOpName) do: [ :eachRule |
+			| decl |
+			decl := eachRule asLeibnizSyntaxString.
+			(ruleDecls includes: decl)
+				ifFalse: [ ruleDecls add: decl ] ] ].
+	declarations at: #rules put: ruleDecls.
+	^ declarations
+]
+
+{ #category : #inspecting }
+LbRewriteSystem >> gtDeclarationsFor: aView [
+	<gtView>
+	^ aView tree
+		title: 'Declarations' translated;
+		priority: 4;
+		items: [ | d categories |
+			d := self declarations.
+			categories := OrderedCollection new.
+			#(sorts subsorts variables operators rules) do: [ :each |
+				(d at: each) ifNotEmpty: [
+					categories add: {
+						each asString capitalized.
+						(d at: each) collect: [ :aString |
+							{ aString. #() } ] } ] ].
+			categories ];
+		itemLbCode: [ :each | each first];
+		children: [ :each | each second ];
+		expandOneLevel;
+		yourself
+]
+
 { #category : #inspecting }
 LbRewriteSystem >> gtRulesFor: aView [
 	<gtView>

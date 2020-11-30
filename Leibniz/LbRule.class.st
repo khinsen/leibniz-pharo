@@ -25,6 +25,27 @@ LbRule >> deepCopy [
 	^self
 ]
 
+{ #category : #inspecting }
+LbRule >> gtRuleFor: aView [
+	<gtView>
+	| ruleView |
+	ruleView := aView columnedList
+		title: 'Rule' translated;
+		priority: 0;
+		items: [ { self } ];
+		column: 'Variables' lbCode: [ :each |
+			String streamContents: [ :s |
+				each printVariablesAsLeibnizSyntaxOn: s ] ];
+		column: 'Transformation' lbCode: [ :each |
+			String streamContents: [ :s |
+				each printBodyAsLeibnizSyntaxOn: s ] ].
+		condition ifNotNil: [
+			ruleView column: 'Condition' lbCode: [ :each |
+			String streamContents: [ :s |
+				each printConditionAsLeibnizSyntaxOn: s ] ] ].
+	^ ruleView
+]
+
 { #category : #initializing }
 LbRule >> initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm [
 	| patternVariables |

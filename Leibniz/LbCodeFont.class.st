@@ -31,5 +31,5 @@ LbCodeFont class >> defaultFamily [
 ]
 
 { #category : #'as yet unclassified' }
-LbCodeFont >> defaultFamily [ ^ 'Arial Unicode MS'
+LbCodeFont >> defaultFamily [ ^ 'JuliaMono'
 ]

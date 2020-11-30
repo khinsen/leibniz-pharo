@@ -17,9 +17,7 @@ Class {
 LbSignatureBuilder class >> sortGraph: aSortGraph [
 	^self basicNew
 			initializeWithSortGraph: aSortGraph;
-			yourself.
-
-
+			yourself
 ]
 
 { #category : #adding }
