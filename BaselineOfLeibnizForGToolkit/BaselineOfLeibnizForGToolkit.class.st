@@ -32,17 +32,7 @@ BaselineOfLeibnizForGToolkit >> baseline: spec [
 
 { #category : #baseline }
 BaselineOfLeibnizForGToolkit >> postload: loader package: packageSpec [
-	LeibnizLibrary reset.
-	LbCodeFont chooseDefaultFamily.
-]
-
-{ #category : #baseline }
-BaselineOfLeibnizForGToolkit >> preload: loader package: packageSpec [
-	(Smalltalk globals includesKey: #LeibnizLibrary)
-		ifFalse: [ ^ self ].
-	LeibnizLibrary reset.
-	Smalltalk garbageCollect.
-
+	LbCodeFont chooseDefaultFamily
 ]
 
 { #category : #baseline }

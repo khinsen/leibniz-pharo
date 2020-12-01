@@ -43,7 +43,7 @@ LbContext >> gtDeclarationsFor: aView [
 			categories ];
 		itemLbCode: [ :each | each first];
 		children: [ :each | each second ];
-		expandOneLevel;
+		collapseAll;
 		yourself
 ]
 

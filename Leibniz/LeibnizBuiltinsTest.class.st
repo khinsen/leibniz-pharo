@@ -9,8 +9,7 @@ Class {
 
 { #category : #running }
 LeibnizBuiltinsTest >> setUp [
-	builtins := LeibnizLibrary uniqueInstance builtins.
-
+	builtins := LeibnizLibrary uniqueInstance builtins
 ]
 
 { #category : #testing }

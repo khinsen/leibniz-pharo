@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #builtins }
-LbBuiltinContexts >> fpNumberContext [
+LbBuiltinContexts class >> fpNumberContext [
 	<gtExample>
 	^ LbContext
 		name: 'IEEE-floating-point'
@@ -14,7 +14,7 @@ LbBuiltinContexts >> fpNumberContext [
 ]
 
 { #category : #builtins }
-LbBuiltinContexts >> integerContext [
+LbBuiltinContexts class >> integerContext [
 	<gtExample>
 	^ LbContext
 		name: 'integers'
@@ -23,7 +23,7 @@ LbBuiltinContexts >> integerContext [
 ]
 
 { #category : #builtins }
-LbBuiltinContexts >> rationalNumberContext [
+LbBuiltinContexts class >> rationalNumberContext [
 	<gtExample>
 	^ LbContext
 		name: 'rational-numbers'
@@ -32,7 +32,7 @@ LbBuiltinContexts >> rationalNumberContext [
 ]
 
 { #category : #builtins }
-LbBuiltinContexts >> realNumberContext [
+LbBuiltinContexts class >> realNumberContext [
 	<gtExample>
 	^ LbContext
 		name: 'real-numbers'
@@ -41,7 +41,7 @@ LbBuiltinContexts >> realNumberContext [
 ]
 
 { #category : #builtins }
-LbBuiltinContexts >> stringContext [
+LbBuiltinContexts class >> stringContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'strings')
 		parseAndAddSort: 'string';
@@ -51,7 +51,7 @@ LbBuiltinContexts >> stringContext [
 ]
 
 { #category : #builtins }
-LbBuiltinContexts >> truthContext [
+LbBuiltinContexts class >> truthContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'truth')
 		parseAndAddSort: 'boolean';

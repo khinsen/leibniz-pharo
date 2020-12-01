@@ -35,56 +35,6 @@ LeibnizExamples >> createFunctionContext [
 ]
 
 { #category : #initialization }
-LeibnizExamples >> createMassContext [
-	| b |
-	b := self newContextBuilderNamed: 'mass'.
-	b include: 'real-numbers'
-	  fromDocumentWithHash: 'e513fb1f0504a951919688029321eaa02b4e2ad014c0979c4b602b946f9cafc8'
-	  inMode: #use.
-	b parseAndAddSort: 'mass'.
-	b parseAndAddOp: 'mass + mass : mass'.
-	b parseAndAddOp: 'ℝ.p × mass : mass'.
-	b parseAndAddOp: 'mass ÷ ℝ.p : mass'.
-	b parseAndAddOp: 'mass ÷ mass : ℝ.p'.
-	b parseAndAddVar: 'M:mass'.
-	b parseAndAddVar: 'M1:mass'.
-	b parseAndAddVar: 'M2:mass'.
-	b parseAndAddVar: 'F:ℝ.p'.
-	b parseAndAddVar: 'F1:ℝ.p'.
-	b parseAndAddVar: 'F2:ℝ.p'.
-	b parseAndAddRule: '(F1 × M) + (F2 × M) ⇒ (F1 + F2) × M'.
-	b parseAndAddRule: 'F1 × (F2 × M) ⇒ (F1 × F2) × M'.
-	b parseAndAddRule: 'M ÷ F ⇒ (1 ÷ F) × M'.
-	b parseAndAddRule: 'M1 ÷ (F × M2) ⇒ (M1 ÷ F) ÷ M2'.
-	b parseAndAddRule: '(F × M1) ÷ M2 ⇒ F × (M1 ÷ M2)'.
-	b parseAndAddRule: 'M ÷ M ⇒ 1'.
-	b build.
-]
-
-{ #category : #initialization }
-LeibnizExamples >> createMassUnitContext [
-	| b |
-	b := self newContextBuilderNamed: 'mass-units'.
-	b include: 'mass'
-	  inMode: #extend.
-	b include: 'boolean'
-	  inMode: #use.
-	b parseAndAddSort: 'mass-unit ⊆ mass'.
-	b parseAndAddOp: 'kg : mass-unit'.
-	b parseAndAddOp: 'g : mass-unit'.
-	b parseAndAddOp: 'mg : mass-unit'.
-	b parseAndAddOp: 'mass in mass-unit : mass'.
-	b parseAndAddVar: 'MU:mass-unit'.
-	b parseAndAddVar: 'MU1:mass-unit'.
-	b parseAndAddVar: 'MU2:mass-unit'.
-	b parseAndAddRule: 'g ÷ kg ⇒ 1/1000'.
-	b parseAndAddRule: 'mg ÷ kg ⇒ 1/1000000'.
-	b parseAndAddRule: 'M in MU ⇒ (M ÷ MU) × MU'.
-	b parseAndAddRule: 'MU1 ÷ MU2 ⇒ (MU1 ÷ kg) ÷ (MU2 ÷ kg) | ¬(MU2 == kg)'.
-	b build.
-]
-
-{ #category : #initialization }
 LeibnizExamples >> initialize [
 	super initialize.
 	self docHash: (SHA256 hashMessage: 'examples') hex.

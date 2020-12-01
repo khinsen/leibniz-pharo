@@ -76,6 +76,7 @@ LbSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
 { #category : #adding }
 LbSignatureBuilder >> addVar: anOpName ofSort: aSort [
 	| op sort |
+	self assert: aSort sortGraph == sortGraph.
 	op := operators at: anOpName ifAbsent: nil.
 	op ifNotNil:
 		[ sort := op at: (LbArity sortGraph: sortGraph argSorts: #()) ifAbsent: nil.
@@ -90,8 +91,7 @@ LbSignatureBuilder >> addVar: anOpName ofSort: aSort [
 LbSignatureBuilder >> addVarsFromSignature: aSignature [
 	aSignature withVariablesDo:
 		[ :symbol :sort |
-		  self addVar: symbol ofSort:  sort ].
-
+		  self addVar: symbol ofSort:  (self adoptSort: sort) ].
 ]
 
 { #category : #converting }

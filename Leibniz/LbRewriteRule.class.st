@@ -49,11 +49,12 @@ LbRewriteRule >> apply: aSubstitution [
 
 { #category : #converting }
 LbRewriteRule >> convertToSignature: aSignature [
-	| convertTerm |
+	| convertTerm convertedVars |
 	convertTerm := [ :term | term convertToSignature: aSignature extraVariables: variables ].
+	convertedVars := variables collect: [ :eachSort | aSignature sortNamed: eachSort name ].
 	^ self class
 		pattern: (convertTerm value: pattern)
-	 	localVariables: variables
+		localVariables: convertedVars
 		condition: (condition ifNotNil: [ convertTerm value: condition ])
 		replacement: (convertTerm value: replacement)
 ]

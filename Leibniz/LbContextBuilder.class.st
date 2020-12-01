@@ -100,6 +100,57 @@ LbContextBuilder >> fromXML: anXMLElement [
 	self rulesFromXML: anXMLElement.
 ]
 
+{ #category : #inspecting }
+LbContextBuilder >> gtDeclarationsFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Declarations' translated;
+		priority: 4;
+		object: [ self copy context ];
+		view: #gtDeclarationsFor:;
+		yourself
+]
+
+{ #category : #accessing }
+LbContextBuilder >> gtOperatorsFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Operators';
+		priority: 1;
+		object: [ self copy context ];
+		view: #gtOperatorsFor:
+]
+
+{ #category : #inspecting }
+LbContextBuilder >> gtRulesFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Rules';
+		priority: 3;
+		object: [ self copy context ];
+		view: #gtRulesFor:
+]
+
+{ #category : #inspecting }
+LbContextBuilder >> gtSortGraphFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Sort graph';
+		priority: 0;
+		object: [ self copy context ];
+		view: #gtSortGraphFor:
+]
+
+{ #category : #inspecting }
+LbContextBuilder >> gtVariablesFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Variables';
+		priority: 2;
+		object: [ self copy context ];
+		view: #gtVariablesFor:
+]
+
 { #category : #'defining - includes' }
 LbContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash inMode: useOrExtend [
 	| context |
@@ -113,12 +164,16 @@ LbContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash inMode:
 ]
 
 { #category : #'defining - includes' }
-LbContextBuilder >> include: aContextName inMode: useOrExtend [
+LbContextBuilder >> include: aContextOrName inMode: useOrExtend [
 	| context |
-	context := document contextNamed: aContextName.
-	includes add: (Dictionary with: #contextName -> aContextName
-									  with: #mode -> useOrExtend
-									  with: #context -> context).
+	aContextOrName isString
+		ifTrue: [ context := document contextNamed: aContextOrName ]
+		ifFalse: [ context := aContextOrName ].
+	includes add:
+		(Dictionary
+			with: #contextName -> aContextOrName
+			with: #mode -> useOrExtend
+			with: #context -> context).
 	self validateIncludeWithMode: useOrExtend
 ]
 
@@ -315,8 +370,7 @@ LbContextBuilder >> startSignature [
 { #category : #'defining - private' }
 LbContextBuilder >> startSortGraph [
 	sortGraphBuilder := LbSortGraphBuilder new.
-	includes do: [ :i | sortGraphBuilder addSortGraph: (i at: #context) sortGraph ].
-
+	includes do: [ :i | sortGraphBuilder addSortGraph: (i at: #context) sortGraph ]
 ]
 
 { #category : #'XML import' }
