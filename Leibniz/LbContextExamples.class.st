@@ -14,27 +14,20 @@ LbContextExamples >> booleanContext [
 ]
 
 { #category : #example }
-LbContextExamples >> createMassUnitContext [
+LbContextExamples >> derivativeContext [
 	<gtExample>
-	^ (LbContextBuilder name: 'mass-units')
-		include: 'mass' inMode: #extend;
-		include: 'boolean' inMode: #use;
-		parseAndAddSort: 'mass-unit ⊆ mass';
-		parseAndAddOp: 'kg : mass-unit';
-		parseAndAddOp: 'g : mass-unit';
-		parseAndAddOp: 'mg : mass-unit';
-		parseAndAddOp: 'mass in mass-unit : mass';
-		parseAndAddVar: 'MU:mass-unit';
-		parseAndAddVar: 'MU1:mass-unit';
-		parseAndAddVar: 'MU2:mass-unit';
-		parseAndAddRule: 'g ÷ kg ⇒ 1/1000';
-		parseAndAddRule: 'mg ÷ kg ⇒ 1/1000000';
-		parseAndAddRule: 'M in MU ⇒ (M ÷ MU) × MU';
-		parseAndAddRule: 'MU1 ÷ MU2 ⇒ (MU1 ÷ kg) ÷ (MU2 ÷ kg) | ¬(MU2 == kg)';
+	^ (LbContextBuilder name: 'derivatives-ℝ→ℝ')
+		include: (LbContextExamples new realFunctionContext) inMode: #extend;
+		parseAndAddOp: '𝒟(ℝ→ℝ) : ℝ→ℝ';
+		parseAndAddRule: '𝒟(f + g) ⇒ 𝒟(f) + 𝒟(g)';
+		parseAndAddRule: '𝒟(f - g) ⇒ 𝒟(f) - 𝒟(g)';
+		parseAndAddRule: '𝒟(s × f) ⇒ s × 𝒟(f)';
+		parseAndAddRule: '𝒟(f × g) ⇒ (𝒟(f) × g) + (f × 𝒟(g))';
+		parseAndAddRule: '𝒟(f ○ g) ⇒ (𝒟(f) ○ g) × 𝒟(g)';
 		context
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LbContextExamples >> massContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'mass')
@@ -77,5 +70,25 @@ LbContextExamples >> massUnitContext [
 		parseAndAddRule: 'mg ÷ kg ⇒ 1/1000000';
 		parseAndAddRule: 'M in MU ⇒ (M ÷ MU) × MU';
 		parseAndAddRule: 'MU1 ÷ MU2 ⇒ (MU1 ÷ kg) ÷ (MU2 ÷ kg) | ¬(MU2 == kg)';
+		context
+]
+
+{ #category : #example }
+LbContextExamples >> realFunctionContext [
+	<gtExample>
+	^ (LbContextBuilder name: 'ℝ→ℝ')
+		include: (LbBuiltinContexts realNumberContext) inMode: #use;
+		parseAndAddSort: 'ℝ→ℝ';
+		parseAndAddOp: 'ℝ→ℝ[ℝ] : ℝ';
+		parseAndAddOp: 'f:ℝ→ℝ ○ g:ℝ→ℝ : ℝ→ℝ';
+		parseAndAddOp: 's:ℝ × g:ℝ→ℝ : ℝ→ℝ';
+		parseAndAddOp: 'f:ℝ→ℝ + g:ℝ→ℝ : ℝ→ℝ';
+		parseAndAddOp: 'f:ℝ→ℝ - g:ℝ→ℝ : ℝ→ℝ';
+		parseAndAddOp: 'f:ℝ→ℝ × g:ℝ→ℝ : ℝ→ℝ';
+		parseAndAddRule: '∀ x:ℝ (f + g)[x] ⇒ f[x] + g[x]';
+		parseAndAddRule: '∀ x:ℝ (f - g)[x] ⇒ f[x] - g[x]';
+		parseAndAddRule: '∀ x:ℝ (f × g)[x] ⇒ f[x] × g[x]';
+		parseAndAddRule: '∀ x:ℝ (s × g)[x] ⇒ s × g[x]';
+		parseAndAddRule: '∀ x:ℝ (f ○ g)[x] ⇒ f[g[x]]';
 		context
 ]
