@@ -90,18 +90,22 @@ LbSignature >> gtDeclarationsFor: aView [
 	self isEmpty ifTrue: [ ^ aView empty ].
 	addEmptyChildList :=
 		[ :aList | aList collect: [ :each | {each. #()} ]].
-	^ aView tree
+	^ aView lbTree
 		title: 'Declarations' translated;
 		priority: 3;
-		items: [ | d |
+		items: [ | d categories |
 			d := self declarations.
-			{{'Sorts'. addEmptyChildList value: (d at: #sorts) }.
-			 {'Subsorts'. addEmptyChildList value: (d at: #subsorts) }.
-			 {'Variables'. addEmptyChildList value: (d at: #variables) }.
-			 {'Operators'. addEmptyChildList value: (d at: #operators) } } ];
+			categories := OrderedCollection new.
+			#(sorts subsorts variables operators) do: [ :each |
+				(d at: each) ifNotEmpty: [
+					categories add: {
+						each asString capitalized.
+						(d at: each) collect: [ :aString |
+							{ aString. #() } ] } ] ].
+			categories ];
 		itemLbCode: [ :each | each first];
 		children: [ :each | each second ];
-		expandOneLevel;
+		expandItems: #('Variables' 'Operators');
 		yourself
 ]
 

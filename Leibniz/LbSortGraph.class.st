@@ -134,9 +134,6 @@ LbSortGraph >> gtDeclarationsFor: aView [
 					{each.
 					#()} ])}} ];
 		itemLbCode: [ :each | each first ];
-"		itemStencil: LbCodeFont brLabelCellStencil;
-		itemDataBinder: [ :eachLabel :eachItem |
-			eachLabel text: eachItem first ];"
 		children: [ :each | each second ];
 		expandOneLevel;
 		yourself

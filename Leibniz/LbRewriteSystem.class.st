@@ -37,7 +37,7 @@ LbRewriteSystem >> declarations [
 { #category : #inspecting }
 LbRewriteSystem >> gtDeclarationsFor: aView [
 	<gtView>
-	^ aView tree
+	^ aView lbTree
 		title: 'Declarations' translated;
 		priority: 4;
 		items: [ | d categories |
@@ -52,7 +52,8 @@ LbRewriteSystem >> gtDeclarationsFor: aView [
 			categories ];
 		itemLbCode: [ :each | each first];
 		children: [ :each | each second ];
-		expandOneLevel;
+		collapseAll;
+		expandItems: #('Rules');
 		yourself
 ]
 
