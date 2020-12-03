@@ -12,23 +12,46 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'sameKindSortsOf',
-		'directSubsortsOf'
+		'directSubsortsOf',
+		'origins'
 	],
 	#category : #'Leibniz-1-SortGraphs'
 }
 
 { #category : #adding }
 LbSortGraphBuilder >> add: aSymbol [
-   (self includes: aSymbol)
-     ifFalse: [ sameKindSortsOf at: aSymbol put: (Set with: aSymbol).
-                directSubsortsOf at: aSymbol put: Set new. ].
-   ^ aSymbol
+	self add: aSymbol origins: nil
+]
+
+{ #category : #adding }
+LbSortGraphBuilder >> add: aSymbol origins: aSet [
+	| newOrigins |
+	newOrigins := aSet ifNil: [ Set with: nil].
+	(self includes: aSymbol)
+		ifFalse: [
+			sameKindSortsOf at: aSymbol put: (Set with: aSymbol).
+			directSubsortsOf at: aSymbol put: Set new.
+			origins at: aSymbol put: newOrigins ]
+		ifTrue: [
+			origins at: aSymbol put: ((origins at: aSymbol) union: newOrigins) ]
 ]
 
 { #category : #adding }
 LbSortGraphBuilder >> addSortGraph: aSortGraph [ 
-	aSortGraph asSet do: [ :each | self add: each name ].
-	aSortGraph withSubsortRelationsDo: [ :s1 :s2 | self make: s1 name subsortOf: s2 name ].
+	self addSortGraph: aSortGraph origin: nil
+]
+
+{ #category : #adding }
+LbSortGraphBuilder >> addSortGraph: aSortGraph origin: aContext [
+	aSortGraph asSet do: [ :eachSort |
+		self
+			add: eachSort name
+			origins: (eachSort origins collect: [ :each | each ifNil: [ aContext ] ]) ].
+	aSortGraph withSubsortRelationsDo: [ :ssr |
+		self
+			make: ssr subsort name
+			subsortOf: ssr supersort name
+			origins: (ssr origins collect: [ :each | each ifNil: [ aContext ] ]) ]
 ]
 
 { #category : #accessing }
@@ -59,12 +82,12 @@ LbSortGraphBuilder >> includes: aSort [
 
 { #category : #initializing }
 LbSortGraphBuilder >> initialize [
-   sameKindSortsOf := Dictionary new.
+	sameKindSortsOf := Dictionary new.
 	directSubsortsOf := Dictionary new.
-
+	origins := Dictionary new
 ]
 
-{ #category : #testing }
+{ #category : #private }
 LbSortGraphBuilder >> is: aSort subsortOf: anotherSort [
 	| ss |
 	^ (aSort = anotherSort)
@@ -76,15 +99,27 @@ LbSortGraphBuilder >> is: aSort subsortOf: anotherSort [
 
 { #category : #adding }
 LbSortGraphBuilder >> make: aSort subsortOf: anotherSort [
-	| new_kind |
-	(aSort = anotherSort) ifTrue: [ ^ aSort ].
+	self make: aSort subsortOf: anotherSort origins: nil
+]
+
+{ #category : #adding }
+LbSortGraphBuilder >> make: aSort subsortOf: anotherSort origins: aSet [
+	| newOrigins sortPair newKind |
+	(aSort = anotherSort) ifTrue: [ ^ self ].
 	(self is: anotherSort subsortOf: aSort)
-		ifTrue: [ self error: 'cycle in subsort relation: ',
-			                   (anotherSort printString), '<', (aSort printString ) ].
-	new_kind := (sameKindSortsOf at: aSort) union: (sameKindSortsOf at: anotherSort).
-	new_kind do: [ :sort | sameKindSortsOf at: sort put: new_kind].
-	(directSubsortsOf at: anotherSort) add: aSort.
-	^ aSort
+		ifTrue: [
+			self error: 'cycle in subsort relation: ',
+					(anotherSort printString), '<=', (aSort printString ) ].
+	newOrigins := aSet ifNil: [ Set with: nil].
+	sortPair := { aSort. anotherSort }.
+	((directSubsortsOf at: anotherSort) includes: aSort)
+		ifFalse: [
+			newKind := (sameKindSortsOf at: aSort) union: (sameKindSortsOf at: anotherSort).
+			newKind do: [ :sort | sameKindSortsOf at: sort put: newKind].
+			(directSubsortsOf at: anotherSort) add: aSort.
+			origins at: sortPair put: newOrigins ]
+		ifTrue: [
+			origins at: sortPair put: ((origins at: sortPair) union: newOrigins)]
 ]
 
 { #category : #adding }
@@ -102,5 +137,7 @@ LbSortGraphBuilder >> parseAndAdd: aString [
 
 { #category : #accessing }
 LbSortGraphBuilder >> sortGraph [
-	^ LbSortGraph fromSubsortRelations: directSubsortsOf deepCopy.
+	^ LbSortGraph
+		fromSubsortRelations: directSubsortsOf deepCopy
+		origins: origins deepCopy
 ]

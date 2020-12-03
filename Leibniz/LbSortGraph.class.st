@@ -8,9 +8,9 @@ A sort can be declared to be a subsort of another sort, meaning that its values 
 The connected components of a sort graph are called kinds (see ${class:name=LbKind}$). Sorts that are in different kinds are completely unrelated.
 
 As an example, let's look at the sort graph of the built-in context 'real-numbers':
+
 [[[
-builtins := LeibnizLibrary uniqueInstance builtins.
-(builtins contextNamed: 'real-numbers') sortGraph
+LbBuiltinContexts realNumberContext sortGraph
 ]]]
 
 It consists of two kinds, one of which contains a single sort, ==#boolean==. The second kind groups together all the number sorts built into Leibniz. The suffix ==.nz== stands for non-zero, ==.p== stands for positive, and ==.nn== stands for non-negative.
@@ -28,15 +28,17 @@ Class {
 		'maximalSorts',
 		'directSubsortsOf',
 		'subsortsOf',
-		'kindsOf'
+		'kindsOf',
+		'origins'
 	],
 	#category : #'Leibniz-1-SortGraphs'
 }
 
-{ #category : #'instance creation' }
-LbSortGraph class >> fromSubsortRelations: aDictionary [
+{ #category : #accessing }
+LbSortGraph class >> fromSubsortRelations: aSubsetDictionary origins: anOriginDictionary [
 	^ self basicNew
-			initializeWithSubsortRelations: aDictionary;
+			initializeWithSubsortRelations: aSubsetDictionary
+			origins: anOriginDictionary;
 			yourself
 ]
 
@@ -85,13 +87,14 @@ LbSortGraph >> equalityTestWith: otherSubsorts [
 
 ]
 
-{ #category : #accessing }
+{ #category : #inspecting }
 LbSortGraph >> graphEdgesForSubset: aSet [
 	| edges |
 	edges := OrderedCollection new.
-	self withSubsortRelationsDo:
-		[ :s1 :s2 | ((aSet includes: s1) and: [aSet includes: s2])
-						ifTrue: [ edges add: s1 -> s2 ] ].
+	self withSubsortRelationsDo: [ :ssr |
+		((aSet includes: ssr subsort)
+			and: [ aSet includes: ssr supersort ])
+			ifTrue: [ edges add: ssr ] ].
 	^ edges
 ]
 
@@ -120,7 +123,7 @@ LbSortGraph >> gtDeclarationsFor: aView [
 		ifTrue: [ ^ aView empty ].
 	^ aView tree
 		title: 'Declarations' translated;
-		priority: 0;
+		priority: 1;
 		items: [ | d |
 			d := self declarations.
 			{{'Sorts'.
@@ -156,8 +159,8 @@ LbSortGraph >> gtGraphFor: aView [
 				fromCenterTop;
 				toCenterBottom;
 				connect: (self graphEdgesForSubset: self asSet)
-					from: #key
-					to: #value.
+					from: #subsort
+					to: #supersort.
 			view layout
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
@@ -211,13 +214,13 @@ LbSortGraph >> initializeSubsortsOfAt: aSort [
 ]
 
 { #category : #initializing }
-LbSortGraph >> initializeWithSubsortRelations: subsortRelations [
+LbSortGraph >> initializeWithSubsortRelations: subsortRelations origins: anOriginDictionary [
 	directSubsortsOf := subsortRelations.
+	origins := anOriginDictionary.
 	self initializeSubsortsOf.
 	self initializeMaximalSorts.
 	self initializeKinds.
-	self beRecursivelyReadOnlyObject.
-
+	self beRecursivelyReadOnlyObject
 ]
 
 { #category : #comparing }
@@ -301,7 +304,10 @@ LbSortGraph >> size [
 { #category : #accessing }
 LbSortGraph >> sortNamed: aSymbol [
 	self assert: (directSubsortsOf includesKey: aSymbol) description: 'No sort named ', aSymbol.
-	^ LbSort named: aSymbol in: self
+	^ LbSort
+		named: aSymbol
+		in: self
+		origins: (origins at: aSymbol ifAbsent: [ nil ])
 ]
 
 { #category : #private }
@@ -318,7 +324,11 @@ LbSortGraph >> union: aSortGraph [
 
 { #category : #private }
 LbSortGraph >> withSubsortRelationsDo: aBlockClosure [ 
-	directSubsortsOf associationsDo:
-		[ :assoc | assoc value do:
-					[ :sortName | aBlockClosure value: (self sortNamed: sortName) value: (self sortNamed: assoc key) ]]
+	directSubsortsOf associationsDo: [ :assoc |
+		assoc value do: [ :sortName |
+			| subSort superSort relation |
+			subSort := self sortNamed: sortName.
+			superSort := self sortNamed: assoc key.
+			relation := LbSubsortRelation new subsort: subSort supersort: superSort  origins: (origins at: { sortName. assoc key }).
+			aBlockClosure value: relation ]]
 ]

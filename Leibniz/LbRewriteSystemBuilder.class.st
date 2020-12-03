@@ -21,6 +21,11 @@ LbRewriteSystemBuilder class >> signature: aSignature [
 
 { #category : #adding }
 LbRewriteSystemBuilder >> addRewriteSystem: aRewriteSystem [
+	self addRewriteSystem: aRewriteSystem origin: nil
+]
+
+{ #category : #adding }
+LbRewriteSystemBuilder >> addRewriteSystem: aRewriteSystem origin: aContext [
 	aRewriteSystem rules keysAndValuesDo: [ :eachHeadOpName :eachRuleList |
 		eachRuleList do: [ :each |
 			self addRule: (each convertToSignature: signature) ] ]

@@ -68,6 +68,11 @@ LbSignatureBuilder >> addOpsFromSignature: aSignature [
 
 { #category : #adding }
 LbSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
+	self addSignature: aSignature includeVars: aBoolean origin: nil
+]
+
+{ #category : #adding }
+LbSignatureBuilder >> addSignature: aSignature includeVars: aBoolean origin: aContext [
 	self addBuiltinsFromSignature: aSignature.
 	self addOpsFromSignature: aSignature.
 	aBoolean ifTrue: [ self addVarsFromSignature: aSignature ]

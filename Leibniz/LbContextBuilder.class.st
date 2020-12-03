@@ -356,21 +356,29 @@ LbContextBuilder >> sortGraph [
 { #category : #'defining - private' }
 LbContextBuilder >> startRules [
 	rewriteSystemBuilder := LbRewriteSystemBuilder signature: signature.
-	includes do: [ :i | rewriteSystemBuilder addRewriteSystem: (i at: #context) rewriteSystem ].
+	includes do: [ :i |
+		rewriteSystemBuilder
+			addRewriteSystem: (i at: #context) rewriteSystem
+			origin: (i at: #context) ]
 ]
 
 { #category : #'defining - private' }
 LbContextBuilder >> startSignature [
 	signatureBuilder := LbSignatureBuilder sortGraph: sortGraph.
-	includes do: [ :i | signatureBuilder addSignature: (i at: #context) signature
-													includeVars: (i at: #mode) = 'extend' ].
-
+	includes do: [ :i |
+		signatureBuilder
+			addSignature: (i at: #context) signature
+			includeVars: (i at: #mode) = 'extend'
+			origin: (i at: #context) ]
 ]
 
 { #category : #'defining - private' }
 LbContextBuilder >> startSortGraph [
 	sortGraphBuilder := LbSortGraphBuilder new.
-	includes do: [ :i | sortGraphBuilder addSortGraph: (i at: #context) sortGraph ]
+	includes do: [ :i | 
+		sortGraphBuilder
+			addSortGraph: (i at: #context) sortGraph
+			origin: (i at: #context) ]
 ]
 
 { #category : #'XML import' }

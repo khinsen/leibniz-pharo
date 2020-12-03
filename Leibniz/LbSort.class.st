@@ -8,15 +8,16 @@ Class {
 	#name : #LbSort,
 	#superclass : #LbSortClassifier,
 	#instVars : [
-		'name'
+		'name',
+		'origins'
 	],
 	#category : #'Leibniz-1-SortGraphs'
 }
 
 { #category : #'instance creation' }
-LbSort class >> named: aSymbol in: aSortGraph [
+LbSort class >> named: aSymbol in: aSortGraph origins: aSet [
 	^self basicNew
-			initializeWithName: aSymbol sortGraph: aSortGraph;
+			initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet;
 			yourself
 ]
 
@@ -36,10 +37,22 @@ LbSort >> conformingSorts [
 	^ self subsorts
 ]
 
+{ #category : #inspecting }
+LbSort >> gtOriginsFor: aView [
+	<gtView>
+	origins ifNil: [ ^ aView empty ].
+	^ aView forward
+		title: 'Origins';
+		priority: 2;
+		object: [ origins collect: [ :each | each ifNil: 'current context' ] ];
+		view: #gtItemsFor:
+]
+
 { #category : #initialization }
-LbSort >> initializeWithName: aSymbol sortGraph: aSortGraph [
+LbSort >> initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet [
 	sortGraph := aSortGraph.
-	name := aSymbol
+	name := aSymbol.
+	origins := aSet
 ]
 
 { #category : #testing }
@@ -55,6 +68,11 @@ LbSort >> kind [
 { #category : #accessing }
 LbSort >> name [
 	^ name
+]
+
+{ #category : #accessing }
+LbSort >> origins [
+	^ origins
 ]
 
 { #category : #printing }
