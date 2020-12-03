@@ -87,6 +87,18 @@ LbSortGraph >> equalityTestWith: otherSubsorts [
 
 ]
 
+{ #category : #viewing }
+LbSortGraph >> graphArrowForSubsortRelation: aSubsortRelation [
+	| color |
+	color := aSubsortRelation isFromInclude
+		ifTrue: [ Color r: 83 g: 101 b: 201 range: 255 ]
+		ifFalse: [ Color gray ].
+	^ BlLineElement new
+		toHead: (BlArrowheadSimpleArrow new
+					border: (BlBorder paint: color width: 1));
+		border: (BlBorder paint: color width: 1)
+]
+
 { #category : #inspecting }
 LbSortGraph >> graphEdgesForSubset: aSet [
 	| edges |
@@ -99,13 +111,34 @@ LbSortGraph >> graphEdgesForSubset: aSet [
 ]
 
 { #category : #viewing }
-LbSortGraph >> graphNodeForSort: aSort [
-	| text |
+LbSortGraph >> graphNodeForSort: aSort highlight: aBoolean [
+	| text color label rectangle |
 	text := aSort name asString asRopedText.
 	text fontName: (LbCodeFont defaultFamily).
-	^ BlTextElement new
-		text: text;
-		padding: (BlInsets all: 5)
+	aSort isFromInclude
+		ifTrue: [
+			color := Color r: 63 g: 81 b: 181 range: 255 ]
+		ifFalse: [ color := Color black ].
+	text foreground: color.
+	label := BlTextElement new text: text.
+
+	aBoolean ifFalse:
+		[ ^ label
+			padding:
+				(BlInsets top: 3 right: 3 bottom: 3 left: 3);
+			yourself ].
+
+	rectangle := BlElement new
+		background: color;
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
+		padding: (BlInsets top: 3 right: 3 bottom: 3 left: 3);
+		layout: BlLinearLayout horizontal;
+		constraintsDo: [ :c |
+			c horizontal fitContent.
+			c vertical fitContent ].
+	text foreground: Color white.
+	rectangle addChild: label.
+	^ rectangle
 ]
 
 { #category : #viewing }
@@ -152,10 +185,10 @@ LbSortGraph >> gtGraphFor: aView [
 		painting: [ :view | 
 			| edges |
 			view nodes
-				shape: [ :x | self graphNodeForSort: x ];
+				shape: [ :x | self graphNodeForSort: x highlight: false ];
 				with: self asSet.
 			view edges
-				shape: [ :x | self grayArrow ];
+				shape: [ :x | self graphArrowForSubsortRelation: x ];
 				fromCenterTop;
 				toCenterBottom;
 				connect: (self graphEdgesForSubset: self asSet)
@@ -258,32 +291,6 @@ LbSortGraph >> kinds [
 { #category : #accessing }
 LbSortGraph >> maximalSorts [
 	^  maximalSorts collect: [ :aSymbol | self sortNamed: aSymbol ]
-]
-
-{ #category : #viewing }
-LbSortGraph >> nodeForSort: aSort highlight: aBoolean [
-	| text label rectangle |
-	text := aSort name asString asRopedText.
-	text fontName: (LbCodeFont defaultFamily).
-	label := BlTextElement new text: text.
-
-	aBoolean ifFalse:
-		[ ^ label
-			padding:
-				(BlInsets top: 3 right: 3 bottom: 3 left: 3);
-			yourself ].
-
-	rectangle := BlElement new
-		background: (Color r: 63 g: 81 b: 181 range: 255);
-		geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
-		padding: (BlInsets top: 3 right: 3 bottom: 3 left: 3);
-		layout: BlLinearLayout horizontal;
-		constraintsDo: [ :c |
-			c horizontal fitContent.
-			c vertical fitContent ].
-	text foreground: Color white.
-	rectangle addChild: label.
-	^ rectangle
 ]
 
 { #category : #printing }

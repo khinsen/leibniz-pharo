@@ -35,6 +35,12 @@ LbSubsortRelation >> gtOriginsFor: aView [
 		view: #gtItemsFor:
 ]
 
+{ #category : #testing }
+LbSubsortRelation >> isFromInclude [
+	origins detect: [ :each | each isNotNil ]
+		ifFound: [ ^ true] ifNone: [ ^ false ]
+]
+
 { #category : #accessing }
 LbSubsortRelation >> origins [
 	^ origins

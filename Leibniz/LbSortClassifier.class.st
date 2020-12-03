@@ -33,15 +33,15 @@ LbSortClassifier >> gtGraphFor: aView [
 		painting: [ :view | 
 			| edges |
 			view nodes
-				shape: [ :x | sortGraph nodeForSort: x highlight: x = self ];
+				shape: [ :x | sortGraph graphNodeForSort: x highlight: x = self ];
 				with: self kind asSet.
 			view edges
-				shape: [ :x | sortGraph grayArrow ];
+				shape: [ :x | sortGraph graphArrowForSubsortRelation: x ];
 				fromCenterTop;
 				toCenterBottom;
 				connect: (sortGraph graphEdgesForSubset: self kind asSet)
-					from: #key
-					to: #value.
+					from: #subsort
+					to: #supersort.
 			view layout
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]

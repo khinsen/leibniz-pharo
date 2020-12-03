@@ -60,6 +60,12 @@ LbSort >> isConformingSort: aSort [
 	^ aSort <= self
 ]
 
+{ #category : #testing }
+LbSort >> isFromInclude [
+	origins detect: [ :each | each isNotNil ]
+		ifFound: [ ^ true] ifNone: [ ^ false ]
+]
+
 { #category : #accessing }
 LbSort >> kind [
 	^ sortGraph kindOf: name
