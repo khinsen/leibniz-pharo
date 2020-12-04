@@ -34,7 +34,7 @@ Class {
 	#category : #'Leibniz-1-SortGraphs'
 }
 
-{ #category : #accessing }
+{ #category : #'instance creation' }
 LbSortGraph class >> fromSubsortRelations: aSubsetDictionary origins: anOriginDictionary [
 	^ self basicNew
 			initializeWithSubsortRelations: aSubsetDictionary

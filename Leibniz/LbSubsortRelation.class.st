@@ -6,7 +6,6 @@ Class {
 	#instVars : [
 		'subsort',
 		'supersort',
-		'sortGraph',
 		'origins'
 	],
 	#category : #'Leibniz-1-SortGraphs'
@@ -31,14 +30,14 @@ LbSubsortRelation >> gtOriginsFor: aView [
 	^ aView forward
 		title: 'Origins';
 		priority: 2;
-		object: [ origins collect: [ :each | each ifNil: 'current context' ] ];
-		view: #gtItemsFor:
+		object: [ origins ];
+		view: #gtItemsFor:;
+		yourself
 ]
 
 { #category : #testing }
 LbSubsortRelation >> isFromInclude [
-	origins detect: [ :each | each isNotNil ]
-		ifFound: [ ^ true] ifNone: [ ^ false ]
+	^ origins containsIncludes
 ]
 
 { #category : #accessing }
@@ -59,18 +58,10 @@ LbSubsortRelation >> subsort [
 ]
 
 { #category : #initialization }
-LbSubsortRelation >> subsort: sort1 supersort: sort2 in: aSortGraph origins: aSet [
+LbSubsortRelation >> subsort: sort1 supersort: sort2 origins: anLbOrigins [
 	subsort := sort1.
 	supersort := sort2.
-	sortGraph := aSortGraph.
-	origins := aSet
-]
-
-{ #category : #initialization }
-LbSubsortRelation >> subsort: sort1 supersort: sort2 origins: aSet [
-	subsort := sort1.
-	supersort := sort2.
-	origins := aSet
+	origins := anLbOrigins
 ]
 
 { #category : #accessing }

@@ -20,20 +20,18 @@ Class {
 
 { #category : #adding }
 LbSortGraphBuilder >> add: aSymbol [
-	self add: aSymbol origins: nil
+	self add: aSymbol origins: LbOrigins forCurrentContext
 ]
 
 { #category : #adding }
-LbSortGraphBuilder >> add: aSymbol origins: aSet [
-	| newOrigins |
-	newOrigins := aSet ifNil: [ Set with: nil].
+LbSortGraphBuilder >> add: aSymbol origins: anLbOrigins [
 	(self includes: aSymbol)
 		ifFalse: [
 			sameKindSortsOf at: aSymbol put: (Set with: aSymbol).
 			directSubsortsOf at: aSymbol put: Set new.
-			origins at: aSymbol put: newOrigins ]
+			origins at: aSymbol put: anLbOrigins ]
 		ifTrue: [
-			origins at: aSymbol put: ((origins at: aSymbol) union: newOrigins) ]
+			(origins at: aSymbol) merge: anLbOrigins ]
 ]
 
 { #category : #adding }
@@ -46,12 +44,12 @@ LbSortGraphBuilder >> addSortGraph: aSortGraph origin: aContext [
 	aSortGraph asSet do: [ :eachSort |
 		self
 			add: eachSort name
-			origins: (eachSort origins collect: [ :each | each ifNil: [ aContext ] ]) ].
+			origins: (eachSort origins from: aContext) ].
 	aSortGraph withSubsortRelationsDo: [ :ssr |
 		self
 			make: ssr subsort name
 			subsortOf: ssr supersort name
-			origins: (ssr origins collect: [ :each | each ifNil: [ aContext ] ]) ]
+			origins: (ssr origins from: aContext) ]
 ]
 
 { #category : #accessing }
@@ -99,27 +97,27 @@ LbSortGraphBuilder >> is: aSort subsortOf: anotherSort [
 
 { #category : #adding }
 LbSortGraphBuilder >> make: aSort subsortOf: anotherSort [
-	self make: aSort subsortOf: anotherSort origins: nil
+	self make: aSort subsortOf: anotherSort origins: LbOrigins forCurrentContext
 ]
 
 { #category : #adding }
-LbSortGraphBuilder >> make: aSort subsortOf: anotherSort origins: aSet [
-	| newOrigins sortPair newKind |
+LbSortGraphBuilder >> make: aSort subsortOf: anotherSort origins: anLbOrigins [
+	| sortPair newKind |
 	(aSort = anotherSort) ifTrue: [ ^ self ].
 	(self is: anotherSort subsortOf: aSort)
 		ifTrue: [
 			self error: 'cycle in subsort relation: ',
 					(anotherSort printString), '<=', (aSort printString ) ].
-	newOrigins := aSet ifNil: [ Set with: nil].
+
 	sortPair := { aSort. anotherSort }.
 	((directSubsortsOf at: anotherSort) includes: aSort)
 		ifFalse: [
 			newKind := (sameKindSortsOf at: aSort) union: (sameKindSortsOf at: anotherSort).
 			newKind do: [ :sort | sameKindSortsOf at: sort put: newKind].
 			(directSubsortsOf at: anotherSort) add: aSort.
-			origins at: sortPair put: newOrigins ]
+			origins at: sortPair put: anLbOrigins ]
 		ifTrue: [
-			origins at: sortPair put: ((origins at: sortPair) union: newOrigins)]
+			(origins at: sortPair) merge: anLbOrigins ]
 ]
 
 { #category : #adding }

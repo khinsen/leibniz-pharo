@@ -44,8 +44,9 @@ LbSort >> gtOriginsFor: aView [
 	^ aView forward
 		title: 'Origins';
 		priority: 2;
-		object: [ origins collect: [ :each | each ifNil: 'current context' ] ];
-		view: #gtItemsFor:
+		object: [ origins ];
+		view: #gtItemsFor:;
+		yourself
 ]
 
 { #category : #initialization }
@@ -62,8 +63,7 @@ LbSort >> isConformingSort: aSort [
 
 { #category : #testing }
 LbSort >> isFromInclude [
-	origins detect: [ :each | each isNotNil ]
-		ifFound: [ ^ true] ifNone: [ ^ false ]
+	^ origins containsIncludes
 ]
 
 { #category : #accessing }
