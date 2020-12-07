@@ -29,20 +29,21 @@ Class {
 		'sortGraph',
 		'operators',
 		'variables',
-		'builtins'
+		'builtins',
+		'origins'
 	],
 	#category : #'Leibniz-2-Signatures'
 }
 
 { #category : #'instance creation' }
-LbSignature class >> sortGraph: aSortGraph builtins: aSet operators: anOperatorDictionary variables: aVariableDictionary [
+LbSignature class >> sortGraph: aSortGraph builtins: aSet operators: anOperatorDictionary variables: aVariableDictionary origins: anOriginDictionary [
 	^ self basicNew
 			 initializeWithSortGraph: aSortGraph
 								builtins: aSet
 								operators: anOperatorDictionary
-								variables: aVariableDictionary;
-			 yourself.
-
+								variables: aVariableDictionary
+								origins: anOriginDictionary;
+			 yourself
 ]
 
 { #category : #asserting }
@@ -155,6 +156,7 @@ LbSignature >> gtVariablesFor: aView [
 		title: 'Variables' translated;
 		priority: 1;
 		items: [ variables associations sorted: [ :a :b | a key <= b key ]];
+		send: [ :each | LbVariable named: each key sort: each value in: self origins: (origins at: each key) ];
 		column: 'Name' lbCode: [ :each | each key synopsis ];
 		column: 'Sort' lbCode: [ :each | each value name ];
 		yourself
@@ -166,12 +168,13 @@ LbSignature >> hasBuiltin: aSymbol [
 ]
 
 { #category : #initializing }
-LbSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: anOperatorDictionary variables: aVariableDictionary [
+LbSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: anOperatorDictionary variables: aVariableDictionary origins: anOriginDictionary [
 	sortGraph := aSortGraph.
 	builtins := aSet.
 	operators := anOperatorDictionary.
 	variables := aVariableDictionary.
-	self beRecursivelyReadOnlyObject.
+	origins := anOriginDictionary.
+	self beRecursivelyReadOnlyObject
 ]
 
 { #category : #testing }
@@ -293,8 +296,12 @@ LbSignature >> withOperatorsDo: aBlock [
 
 { #category : #enumerating }
 LbSignature >> withVariablesDo: aBlock [
-	variables associationsDo: [ :v | aBlock value: v key value: v value ]
-
+	variables associationsDo: [ :v |
+		aBlock value: (LbVariable
+						named: v key
+						sort: v value
+						in: self
+						origins: (origins at: v key )) ]
 ]
 
 { #category : #'term construction' }

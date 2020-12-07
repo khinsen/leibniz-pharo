@@ -8,7 +8,8 @@ Class {
 		'sortGraph',
 		'builtins',
 		'operators',
-		'variables'
+		'variables',
+		'origins'
 	],
 	#category : #'Leibniz-2-Signatures'
 }
@@ -58,7 +59,7 @@ LbSignatureBuilder >> addOp: anOpName withArgs: aSortArray ofSort: aSort [
 ]
 
 { #category : #adding }
-LbSignatureBuilder >> addOpsFromSignature: aSignature [
+LbSignatureBuilder >> addOpsFromSignature: aSignature origin: aContext [
 	aSignature withOperatorsDo:
 		[ :name :args :sort |
 		  | adoptedArgs |
@@ -74,29 +75,38 @@ LbSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
 { #category : #adding }
 LbSignatureBuilder >> addSignature: aSignature includeVars: aBoolean origin: aContext [
 	self addBuiltinsFromSignature: aSignature.
-	self addOpsFromSignature: aSignature.
-	aBoolean ifTrue: [ self addVarsFromSignature: aSignature ]
+	self addOpsFromSignature: aSignature origin: aContext.
+	aBoolean ifTrue: [ self addVarsFromSignature: aSignature origin: aContext ]
 ]
 
 { #category : #adding }
 LbSignatureBuilder >> addVar: anOpName ofSort: aSort [
-	| op sort |
-	self assert: aSort sortGraph == sortGraph.
-	op := operators at: anOpName ifAbsent: nil.
-	op ifNotNil:
-		[ sort := op at: (LbArity sortGraph: sortGraph argSorts: #()) ifAbsent: nil.
-		  self assert: sort isNil
-				description: 'conflicting earlier operator definition with sort', sort asString ].
-	sort := variables at: anOpName ifAbsentPut: aSort.
-	self assert: sort = aSort
-		  description: 'conflicting earlier variable definition with sort ', sort asString.
+	self addVar: anOpName ofSort: aSort origins: LbOrigins forCurrentContext
 ]
 
 { #category : #adding }
-LbSignatureBuilder >> addVarsFromSignature: aSignature [
-	aSignature withVariablesDo:
-		[ :symbol :sort |
-		  self addVar: symbol ofSort:  (self adoptSort: sort) ].
+LbSignatureBuilder >> addVar: anOpName ofSort: aSort origins: anLbOrigins [
+	self assert: aSort sortGraph == sortGraph.
+	operators at: anOpName ifPresent: [ :op |
+		op at: (LbArity sortGraph: sortGraph argSorts: #()) ifPresent: [ :sort |
+			self error: 'conflicting earlier operator definition with sort', sort ] ].
+	variables at: anOpName
+		ifPresent: [ :sort |
+			self assert: sort = aSort
+				description: 'conflicting earlier variable definition with sort ', sort.
+			(origins at: anOpName) merge: anLbOrigins ]
+		ifAbsent: [
+			   variables at: anOpName put: aSort.
+			   origins at: anOpName put: anLbOrigins ]
+]
+
+{ #category : #adding }
+LbSignatureBuilder >> addVarsFromSignature: aSignature origin: aContext [
+	aSignature withVariablesDo: [ :each |
+		self
+			addVar: each name
+			ofSort:  (self adoptSort: each sort)
+			origins: (each origins from: aContext) ]
 ]
 
 { #category : #converting }
@@ -151,6 +161,7 @@ LbSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 	builtins := Set new.
 	operators := Dictionary new.
 	variables := Dictionary new.
+	origins := Dictionary new
 ]
 
 { #category : #adding }
@@ -179,9 +190,12 @@ LbSignatureBuilder >> parseAndAddVar: aString [
 
 { #category : #accessing }
 LbSignatureBuilder >> signature [
-	^ LbSignature sortGraph: sortGraph builtins: builtins operators: operators deepCopy variables: variables deepCopy.
-
-
+	^ LbSignature
+		sortGraph: sortGraph
+		builtins: builtins
+		operators: operators deepCopy
+		variables: variables deepCopy
+		origins: origins deepCopy
 ]
 
 { #category : #private }

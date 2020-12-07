@@ -15,9 +15,9 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbSort class >> named: aSymbol in: aSortGraph origins: aSet [
+LbSort class >> named: aSymbol in: aSortGraph origins: anLbOrigins [
 	^self basicNew
-			initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet;
+			initializeWithName: aSymbol sortGraph: aSortGraph origins: anLbOrigins;
 			yourself
 ]
 
