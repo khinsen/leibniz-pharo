@@ -284,14 +284,9 @@ LbSignature >> withBuiltinsDo: aBlock [
 
 { #category : #enumerating }
 LbSignature >> withOperatorsDo: aBlock [
-	operators keysAndValuesDo:
-		[ :symbol :byKindArity |
-		  byKindArity keysAndValuesDo:
-			[ :kindArity :operator |
-			  operator withRanksDo:
-				[ :args :sort |
-				  aBlock value: symbol value: args value: sort ]]]
-
+	operators do: [ :aDictionary |
+		aDictionary do: [ :anOperator |
+			aBlock value: anOperator ] ]
 ]
 
 { #category : #enumerating }

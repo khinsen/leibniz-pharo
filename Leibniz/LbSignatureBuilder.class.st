@@ -41,30 +41,38 @@ LbSignatureBuilder >> addOp: anOpName ofSort: aSort [
 
 { #category : #adding }
 LbSignatureBuilder >> addOp: anOpName withArgs: aSortArray ofSort: aSort [
-	| arity kindArity operator |
+	self addOp: anOpName withArgs: aSortArray ofSort: aSort origins: LbOrigins forCurrentContext
+]
+
+{ #category : #adding }
+LbSignatureBuilder >> addOp: anOpName withArgs: aSortArray ofSort: aSort origins: anLbOrigins [
+	| arity kindArity |
 	aSortArray ifEmpty: [
-		| sort |
-		sort := variables at: anOpName ifAbsent: nil.
-		self assert: sort isNil
-			 description: [ 'conflicting earlier variable definition with sort ', sort name asString ] ].
+		variables at: anOpName ifPresent: [ :sort |
+			self error: 'conflicting earlier variable definition with sort ', sort name] ].
+
 	arity := LbArity sortGraph: sortGraph argSorts: aSortArray.
 	kindArity := arity liftToKindLevel.
-	operator := (operators at: anOpName
-						   ifAbsentPut: [ Dictionary new ])
-					at: kindArity
-					ifAbsentPut: [ LbOperator name: anOpName
-											  argKinds: kindArity
-											  kind: aSort kind ].
-	operator addArity: arity withSort: aSort.
+	operators at: anOpName ifAbsentPut: [ Dictionary new ].
+	(operators at: anOpName) at: kindArity ifAbsentPut: [
+		LbOperator
+			name: anOpName
+			argKinds: kindArity
+			kind: aSort kind
+			origins: anLbOrigins ].
+	((operators at: anOpName) at: kindArity)
+		addArity: arity withSort: aSort origins: anLbOrigins
 ]
 
 { #category : #adding }
 LbSignatureBuilder >> addOpsFromSignature: aSignature origin: aContext [
-	aSignature withOperatorsDo:
-		[ :name :args :sort |
-		  | adoptedArgs |
-		  adoptedArgs := args collect: [ :each | self adoptSort: each ].
-		  self addOp: name withArgs: adoptedArgs ofSort: (self adoptSort: sort) ]
+	aSignature withOperatorsDo: [ :eachOp |
+		eachOp withRanksDo: [ :argSorts :sort |
+			self
+				addOp: eachOp name
+				withArgs: (argSorts collect: [ :each | self adoptSort: each ])
+				ofSort: (self adoptSort: sort)
+				origins: (eachOp origins from: aContext) ] ]
 ]
 
 { #category : #adding }

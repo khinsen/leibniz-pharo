@@ -13,20 +13,21 @@ Class {
 		'kind',
 		'ranks',
 		'sortGraph',
-		'name'
+		'name',
+		'origins'
 	],
 	#category : #'Leibniz-2-Signatures'
 }
 
 { #category : #'instance creation' }
-LbOperator class >> name: anOpName argKinds: aKindArray kind: aKind [
+LbOperator class >> name: anOpName argKinds: aKindArray kind: aKind origins: anLbOrigins [
 	^ self basicNew
-			initializeWithName: anOpName argKinds: aKindArray kind: aKind;
+			initializeWithName: anOpName argKinds: aKindArray kind: aKind origins: anLbOrigins;
 			yourself
 ]
 
 { #category : #adding }
-LbOperator >> addArity: newArity withSort: newSort [
+LbOperator >> addArity: newArity withSort: newSort origins: anLbOrigins [
 	self assertMonotonicity: [ kind includes: newSort ]
 		  forArity: newArity andSort: newSort.
 
@@ -58,6 +59,7 @@ LbOperator >> addArity: newArity withSort: newSort [
 							   forArity: newArity andSort: newSort]. ].
 
 	ranks add: newArity -> newSort.
+	origins merge: anLbOrigins
 ]
 
 { #category : #inspecting }
@@ -110,6 +112,20 @@ LbOperator >> graphNodeForRank: anAssociation [
 		border: (BlBorder paint: Color gray)
 ]
 
+{ #category : #accessing }
+LbOperator >> gtDeclarationsFor: aView [
+	<gtView>
+	| addEmptyChildList |
+	addEmptyChildList :=
+		[ :aList | aList collect: [ :each | {each. #()} ]].
+	^ aView list
+		title: 'Declarations' translated;
+		priority: 2;
+		items: [ self declarations ];
+		itemLbCode: [ :each | each ];
+		yourself
+]
+
 { #category : #inspecting }
 LbOperator >> gtGraphFor: aView [
 	<gtView>
@@ -141,13 +157,26 @@ LbOperator >> gtInspectorNetworkViewIn: composite [
 
 ]
 
+{ #category : #accessing }
+LbOperator >> gtOriginsFor: aView [
+	<gtView>
+	origins ifNil: [ ^ aView empty ].
+	^ aView forward
+		title: 'Origins';
+		priority: 3;
+		object: [ origins ];
+		view: #gtItemsFor:;
+		yourself
+]
+
 { #category : #initializing }
-LbOperator >> initializeWithName: anOpName argKinds: aKindArray kind: aKind [
+LbOperator >> initializeWithName: anOpName argKinds: aKindArray kind: aKind origins: anLbOrigins [
 	name := anOpName.
 	kindArity := aKindArray.
 	kind := aKind.
 	sortGraph := kind sortGraph.
-	ranks := OrderedCollection new
+	ranks := OrderedCollection new.
+	origins := anLbOrigins
 ]
 
 { #category : #accessing }
@@ -160,7 +189,7 @@ LbOperator >> kindArity [
 	^kindArity
 ]
 
-{ #category : #accessing }
+{ #category : #matching }
 LbOperator >> leastRankForArgSorts: aSortArray [
 	| arity |
 	aSortArray ifEmpty: [ self assert: ranks size equals: 1 .
@@ -192,6 +221,11 @@ LbOperator >> minimalSubArityGraph [
 { #category : #accessing }
 LbOperator >> name [
 	^ name
+]
+
+{ #category : #accessing }
+LbOperator >> origins [
+	^ origins
 ]
 
 { #category : #printing }
@@ -249,5 +283,5 @@ LbOperator >> title [
 
 { #category : #enumerating }
 LbOperator >> withRanksDo: aBlock [
-	ranks do: [ :r |  aBlock value: r key value: r value ]
+	ranks do: [ :each | aBlock value: each key value: each value ]
 ]
