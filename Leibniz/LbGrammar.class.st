@@ -30,7 +30,7 @@ LbGrammar >> identifierCharacter [
 		[ :char |
 		char isLetter "Unicode categories Ll Lm Lo Lt Lu"
 			or: [ char isLetterNumber "Unicode category Nl"
-			or: [ ('-*/?' includes: char)
+			or: [ ('-*/?☰' includes: char)
 			or: [ (char isMathSymbol "Unicode category Sm"
 						or: [ char isCurrencySymbol "Unicode category Sc"
 						or: [ char isModifierSymbol "Unicode category Sk"

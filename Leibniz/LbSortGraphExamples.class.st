@@ -153,6 +153,16 @@ LbSortGraphExamples >> sortGraphUnion [
 ]
 
 { #category : #example }
+LbSortGraphExamples >> sortGraphWithListSorts [
+	<gtExample>
+	^ LbSortGraphBuilder new
+		addSortGraph: self sortGraphABCD;
+		parseAndAdd: #'☰.A';
+		parseAndAdd: #'☰.B';
+		sortGraph
+]
+
+{ #category : #example }
 LbSortGraphExamples >> subsortsOfB [
 	<gtExample>
 	| subsorts |

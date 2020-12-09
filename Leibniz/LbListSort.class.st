@@ -6,7 +6,7 @@ Class {
 
 { #category : #sorting }
 LbListSort class >> sortNamePrefix [
-	^ '𝍫.'
+	^ '☰.'
 ]
 
 { #category : #comparing }
