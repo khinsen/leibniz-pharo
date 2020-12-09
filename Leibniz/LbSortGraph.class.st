@@ -78,7 +78,7 @@ LbSortGraph >> deepCopy [
 
 { #category : #accessing }
 LbSortGraph >> directSubsortsOf: aSymbol [
-	^ directSubsortsOf at: aSymbol.
+	^ (directSubsortsOf at: aSymbol) collect: [ : each | self sortNamed: each ]
 ]
 
 { #category : #private }
@@ -317,7 +317,7 @@ LbSortGraph >> sortNamed: aSymbol [
 		origins: (origins at: aSymbol ifAbsent: [ nil ])
 ]
 
-{ #category : #private }
+{ #category : #accessing }
 LbSortGraph >> subsortsOf: aSymbol [
 	^ (subsortsOf at: aSymbol) collect: [ : each | self sortNamed: each ]
 ]

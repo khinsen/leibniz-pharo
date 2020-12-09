@@ -16,20 +16,13 @@ Class {
 
 { #category : #'instance creation' }
 LbSort class >> named: aSymbol in: aSortGraph origins: anLbOrigins [
-	^self basicNew
+	| class |
+	class := (aSymbol beginsWith: '𝍫.')
+		ifTrue: [ LbListSort ]
+		ifFalse: [ LbPlainSort ].
+	^ class basicNew
 			initializeWithName: aSymbol sortGraph: aSortGraph origins: anLbOrigins;
 			yourself
-]
-
-{ #category : #comparing }
-LbSort >> <= aSort [
-	self sortGraph = aSort sortGraph ifFalse: [ ^ false ].
-	^ self sortGraph is: self name subsortOf: aSort name
-]
-
-{ #category : #accessing }
-LbSort >> asSet [
-	^ self subsorts
 ]
 
 { #category : #inspecting }
@@ -54,11 +47,6 @@ LbSort >> initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet [
 { #category : #testing }
 LbSort >> isFromInclude [
 	^ origins containsIncludes
-]
-
-{ #category : #accessing }
-LbSort >> kind [
-	^ sortGraph kindOf: name
 ]
 
 { #category : #accessing }
@@ -97,9 +85,4 @@ LbSort >> sortAfterSort: aSort [
 { #category : #comparing }
 LbSort >> sortBefore: aSort [
 	^ aSort sortAfterSort: self
-]
-
-{ #category : #enumerating }
-LbSort >> subsorts [
-	^ sortGraph subsortsOf: name
 ]
