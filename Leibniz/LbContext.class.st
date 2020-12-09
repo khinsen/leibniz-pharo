@@ -4,6 +4,8 @@ I represent a context in a Leibniz document.
 Class {
 	#name : #LbContext,
 	#superclass : #Object,
+	#traits : 'EqualityThroughVariables',
+	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'name',
 		'sortGraph',
