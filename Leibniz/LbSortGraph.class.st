@@ -264,15 +264,6 @@ LbSortGraph >> instVarsExcludedFromEquality [
 
 ]
 
-{ #category : #private }
-LbSortGraph >> is: aSort subsortOf: anotherSort [
-	| ss |
-	^ (aSort = anotherSort)
-		or: [ ss := directSubsortsOf at: anotherSort.
-				(ss includes: aSort)
-				or: [ ss anySatisfy: [:each | self is: aSort subsortOf: each ]]]
-]
-
 { #category : #accessing }
 LbSortGraph >> isEmpty [
 	^ directSubsortsOf isEmpty

@@ -49,7 +49,7 @@ LbSignatureBuilder >> addOp: anOpName withArgs: aSortArray ofSort: aSort origins
 	| arity kindArity |
 	aSortArray ifEmpty: [
 		variables at: anOpName ifPresent: [ :sort |
-			self error: 'conflicting earlier variable definition with sort ', sort name] ].
+			self error: 'conflicting earlier variable definition with sort ', sort name ] ].
 
 	arity := LbArity sortGraph: sortGraph argSorts: aSortArray.
 	kindArity := arity liftToKindLevel.
@@ -97,11 +97,11 @@ LbSignatureBuilder >> addVar: anOpName ofSort: aSort origins: anLbOrigins [
 	self assert: aSort sortGraph == sortGraph.
 	operators at: anOpName ifPresent: [ :op |
 		op at: (LbArity sortGraph: sortGraph argSorts: #()) ifPresent: [ :sort |
-			self error: 'conflicting earlier operator definition with sort', sort ] ].
+			self error: 'conflicting earlier operator definition with sort', sort name ] ].
 	variables at: anOpName
 		ifPresent: [ :sort |
 			self assert: sort = aSort
-				description: 'conflicting earlier variable definition with sort ', sort.
+				description: 'conflicting earlier variable definition with sort ', sort name.
 			(origins at: anOpName) merge: anLbOrigins ]
 		ifAbsent: [
 			   variables at: anOpName put: aSort.

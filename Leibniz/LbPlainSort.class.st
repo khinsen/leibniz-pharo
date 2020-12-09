@@ -13,7 +13,7 @@ LbPlainSort >> <= aSort [
 	(dss includes: self) ifTrue: [ ^ true ].
 	dss do: [ :each |
 		self <= each ifTrue: [ ^ true ] ].
-	^ false.
+	^ false
 ]
 
 { #category : #accessing }
