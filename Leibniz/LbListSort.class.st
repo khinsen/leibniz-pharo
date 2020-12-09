@@ -1,11 +1,13 @@
 Class {
 	#name : #LbListSort,
-	#superclass : #LbSort,
-	#instVars : [
-		'baseSort'
-	],
+	#superclass : #LbCollectionSort,
 	#category : #'Leibniz-1-SortGraphs'
 }
+
+{ #category : #sorting }
+LbListSort class >> sortNamePrefix [
+	^ '𝍫.'
+]
 
 { #category : #comparing }
 LbListSort >> <= aSort [
@@ -22,12 +24,6 @@ LbListSort >> <= aSort [
 { #category : #accessing }
 LbListSort >> asSet [
 	^ self subsorts
-]
-
-{ #category : #initialization }
-LbListSort >> initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet [
-	super initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet.
-	baseSort := sortGraph sortNamed: (aSymbol allButFirst: 2)
 ]
 
 { #category : #accessing }

@@ -17,7 +17,7 @@ Class {
 { #category : #'instance creation' }
 LbSort class >> named: aSymbol in: aSortGraph origins: anLbOrigins [
 	| class |
-	class := (aSymbol beginsWith: '𝍫.')
+	class := (aSymbol beginsWith: LbListSort sortNamePrefix)
 		ifTrue: [ LbListSort ]
 		ifFalse: [ LbPlainSort ].
 	^ class basicNew
