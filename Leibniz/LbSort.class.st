@@ -32,11 +32,6 @@ LbSort >> asSet [
 	^ self subsorts
 ]
 
-{ #category : #enumerating }
-LbSort >> conformingSorts [
-	^ self subsorts
-]
-
 { #category : #inspecting }
 LbSort >> gtOriginsFor: aView [
 	<gtView>
@@ -54,11 +49,6 @@ LbSort >> initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet [
 	sortGraph := aSortGraph.
 	name := aSymbol.
 	origins := aSet
-]
-
-{ #category : #testing }
-LbSort >> isConformingSort: aSort [
-	^ aSort <= self
 ]
 
 { #category : #testing }

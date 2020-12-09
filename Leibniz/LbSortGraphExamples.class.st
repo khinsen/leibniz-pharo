@@ -157,7 +157,8 @@ LbSortGraphExamples >> subsortsOfB [
 	<gtExample>
 	| subsorts |
 	subsorts := self sortB subsorts.
-	subsorts do: [ :each | each <= self sortB ].
+	subsorts do: [ :each |
+		self assert: each <= self sortB ].
 	self assert: subsorts = (Set with:self sortA with: self sortB).
 	^ subsorts
 ]

@@ -88,11 +88,11 @@ LbSortGraphBuilder >> initialize [
 { #category : #private }
 LbSortGraphBuilder >> is: aSort subsortOf: anotherSort [
 	| ss |
-	^ (aSort = anotherSort)
-		or: [ ss := directSubsortsOf at: anotherSort.
-				(ss includes: aSort)
-				or: [ ss anySatisfy: [:each | self is: aSort subsortOf: each ]]]
-
+	^ (aSort = anotherSort) or: [
+		ss := directSubsortsOf at: anotherSort.
+		(ss includes: aSort) or: [
+			ss anySatisfy: [:each |
+				self is: aSort subsortOf: each ] ] ]
 ]
 
 { #category : #adding }
