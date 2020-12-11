@@ -12,6 +12,17 @@ LbSortGraphExamples >> emptySortGraph [
 	^ LbSortGraphBuilder new sortGraph
 ]
 
+{ #category : #accessing }
+LbSortGraphExamples >> errorForListSortWithoutBaseSort [
+	<gtExample>
+	| builder |
+	builder := LbSortGraphBuilder new.
+	self
+		should: [ builder parseAndAdd: #'☰.A' ]
+		raise: Error.
+	^ nil
+]
+
 { #category : #example }
 LbSortGraphExamples >> kindOfA [
 	<gtExample>

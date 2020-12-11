@@ -13,7 +13,9 @@ Class {
 	#instVars : [
 		'sameKindSortsOf',
 		'directSubsortsOf',
-		'origins'
+		'origins',
+		'collectionSortsOf',
+		'baseSortOf'
 	],
 	#category : #'Leibniz-1-SortGraphs'
 }
@@ -25,13 +27,25 @@ LbSortGraphBuilder >> add: aSymbol [
 
 { #category : #adding }
 LbSortGraphBuilder >> add: aSymbol origins: anLbOrigins [
+	| prefix baseName |
 	(self includes: aSymbol)
 		ifFalse: [
 			sameKindSortsOf at: aSymbol put: (Set with: aSymbol).
 			directSubsortsOf at: aSymbol put: Set new.
 			origins at: aSymbol put: anLbOrigins ]
 		ifTrue: [
-			(origins at: aSymbol) merge: anLbOrigins ]
+			(origins at: aSymbol) merge: anLbOrigins ].
+	"Manage collection sorts"
+	prefix := (self splitName: aSymbol) first.
+	prefix ifEmpty: [ ^ self ].
+	baseName := (self splitName: aSymbol) second.
+	self
+		assert: (self includes: baseName)
+		description: 'Base sort ', baseName, ' not defined'.
+	baseSortOf at: aSymbol put: baseName.
+	(collectionSortsOf at: baseName
+		ifAbsentPut: [ Dictionary new ])
+			at: prefix put: aSymbol
 ]
 
 { #category : #adding }
@@ -50,6 +64,11 @@ LbSortGraphBuilder >> addSortGraph: aSortGraph origin: aContext [
 			make: ssr subsort name
 			subsortOf: ssr supersort name
 			origins: (ssr origins from: aContext) ]
+]
+
+{ #category : #private }
+LbSortGraphBuilder >> baseSortNameFor: aSymbol [
+	^ (LbSort classFor: aSymbol) baseSortNameFor: aSymbol
 ]
 
 { #category : #accessing }
@@ -82,6 +101,8 @@ LbSortGraphBuilder >> includes: aSort [
 LbSortGraphBuilder >> initialize [
 	sameKindSortsOf := Dictionary new.
 	directSubsortsOf := Dictionary new.
+	baseSortOf := Dictionary new.
+	collectionSortsOf := Dictionary new.
 	origins := Dictionary new
 ]
 
@@ -138,4 +159,9 @@ LbSortGraphBuilder >> sortGraph [
 	^ LbSortGraph
 		fromSubsortRelations: directSubsortsOf deepCopy
 		origins: origins deepCopy
+]
+
+{ #category : #private }
+LbSortGraphBuilder >> splitName: aSymbol [
+	^ (LbSort classFor: aSymbol) splitName: aSymbol
 ]

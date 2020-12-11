@@ -15,14 +15,31 @@ Class {
 }
 
 { #category : #'instance creation' }
+LbSort class >> classFor: aSymbol [
+	self allSubclasses do: [ :each |
+		each sortNamePrefix ifNotNil: [ :prefix |
+			(aSymbol beginsWith: prefix)
+				ifTrue: [ ^ each ] ] ].
+	^ LbPlainSort
+]
+
+{ #category : #'instance creation' }
 LbSort class >> named: aSymbol in: aSortGraph origins: anLbOrigins [
-	| class |
-	class := (aSymbol beginsWith: LbListSort sortNamePrefix)
-		ifTrue: [ LbListSort ]
-		ifFalse: [ LbPlainSort ].
-	^ class basicNew
-			initializeWithName: aSymbol sortGraph: aSortGraph origins: anLbOrigins;
+	^ (self classFor: aSymbol) basicNew
+			initializeWithName: aSymbol
+			sortGraph: aSortGraph
+			origins: anLbOrigins;
 			yourself
+]
+
+{ #category : #'instance creation' }
+LbSort class >> sortNamePrefix [
+	^ nil
+]
+
+{ #category : #'instance creation' }
+LbSort class >> splitName: aSymbol [
+	^ { #''. aSymbol }
 ]
 
 { #category : #inspecting }

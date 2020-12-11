@@ -33,6 +33,5 @@ LbCodeFont class >> chooseDefaultFamily [
 ]
 
 { #category : #accessing }
-LbCodeFont class >> defaultFamily [
-	^ 'Arial Unicode MS'
+LbCodeFont class >> defaultFamily [ ^ 'JuliaMono'
 ]

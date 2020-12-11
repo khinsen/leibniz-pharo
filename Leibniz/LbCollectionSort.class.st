@@ -7,8 +7,15 @@ Class {
 	#category : #'Leibniz-1-SortGraphs'
 }
 
+{ #category : #accessing }
+LbCollectionSort class >> splitName: aSymbol [
+	| prefix |
+	prefix := self sortNamePrefix.
+	^ { prefix. aSymbol allButFirst: prefix size }
+]
+
 { #category : #initialization }
 LbCollectionSort >> initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet [
 	super initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet.
-	baseSort := sortGraph sortNamed: (aSymbol allButFirst: 2)
+	baseSort := sortGraph sortNamed: (self class splitName: aSymbol) second
 ]

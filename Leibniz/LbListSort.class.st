@@ -4,7 +4,7 @@ Class {
 	#category : #'Leibniz-1-SortGraphs'
 }
 
-{ #category : #sorting }
+{ #category : #'instance creation' }
 LbListSort class >> sortNamePrefix [
 	^ '☰.'
 ]
