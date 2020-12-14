@@ -197,7 +197,17 @@ LbSortGraph >> gtGraphFor: aView [
 { #category : #initializing }
 LbSortGraph >> initializeDerivedSubsortsFrom: collectionSortsOf [
 	derivedSubsortsOf := Dictionary new.
-	directSubsortsOf keysAndValuesDo: [ :superSort :subSorts |
+	(self initializeDerivedSubsortsFrom: collectionSortsOf for: directSubsortsOf)
+		ifFalse: [ ^ self ].
+	[ self initializeDerivedSubsortsFrom: collectionSortsOf for: derivedSubsortsOf ]
+		whileTrue
+]
+
+{ #category : #accessing }
+LbSortGraph >> initializeDerivedSubsortsFrom: collectionSortsOf for: subsortMap [
+	| newEntries |
+	newEntries := false.
+	subsortMap keysAndValuesDo: [ :superSort :subSorts |
 		collectionSortsOf at: superSort ifPresent: [ :collectionSuperSorts |
 			| prefixes |
 			prefixes := collectionSuperSorts keys asSet.
@@ -208,10 +218,11 @@ LbSortGraph >> initializeDerivedSubsortsFrom: collectionSortsOf [
 					cSubSort := collectionSubSorts at: each.
 					cSuperSort := collectionSuperSorts at: each.
 					(derivedSubsortsOf at: cSuperSort
-						ifAbsentPut: [ Set new ])
+						ifAbsentPut: [ newEntries := true. Set new ])
 						add: cSubSort.
 					origins at: { cSubSort. cSuperSort } put:
-						(origins at: { subSort. superSort }) ] ] ] ] ]
+						(origins at: { subSort. superSort }) ] ] ] ] ].
+	^ newEntries
 ]
 
 { #category : #initializing }
