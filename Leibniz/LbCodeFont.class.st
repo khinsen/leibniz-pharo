@@ -1,6 +1,9 @@
 Class {
 	#name : #LbCodeFont,
 	#superclass : #Object,
+	#classVars : [
+		'DefaultFamily'
+	],
 	#category : #'Leibniz-0-Infrastructure'
 }
 
@@ -27,11 +30,11 @@ LbCodeFont class >> chooseDefaultFamily [
 	availableFamilies := SkiaFontManager default familyNames.
 	#('JuliaMono' 'Arial Unicode MS') do: [ :family |
 		(availableFamilies includes: family)
-			ifTrue: [ self class compile: 'defaultFamily ^ ''', family, ''''.
-						^ family ] ].
+			ifTrue: [ DefaultFamily := family. ^ self] ].
 	self error: 'No suitable Unicode font for Leibniz code'
 ]
 
 { #category : #accessing }
-LbCodeFont class >> defaultFamily [ ^ 'JuliaMono'
+LbCodeFont class >> defaultFamily [
+	^ DefaultFamily
 ]

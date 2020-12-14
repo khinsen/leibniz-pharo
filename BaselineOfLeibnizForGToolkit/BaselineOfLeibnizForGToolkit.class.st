@@ -21,23 +21,21 @@ BaselineOfLeibnizForGToolkit >> baseline: spec [
 			with: [ spec repository: 'github://khinsen/EqualityThroughVariablesTrait:master/src' ].
 
 		spec
+			baseline: 'SingletonTrait' 
+			with: [ spec repository: 'github://khinsen/SingletonTrait:master' ].
+
+		spec
 			package: 'Leibniz'
-			with: [ spec requires: #('RecursiveWriteBarrier'
-											'EqualityThroughVariablesTrait')];
+			with: [ spec requires:
+						#('RecursiveWriteBarrier'
+							'EqualityThroughVariablesTrait'
+							'SingletonTrait')];
 			package: 'BaselineOfLeibnizForGToolkit'.
 
-].
-
+]
 ]
 
 { #category : #baseline }
 BaselineOfLeibnizForGToolkit >> postload: loader package: packageSpec [
 	LbCodeFont chooseDefaultFamily
-]
-
-{ #category : #baseline }
-BaselineOfLeibnizForGToolkit >> projectClass [
-	Smalltalk at: #'MetacelloCypressBaselineProject' ifPresent: [ :cl | ^ cl ].
-	^ super projectClass
-
 ]

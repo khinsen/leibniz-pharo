@@ -10,12 +10,6 @@ BaselineOfLeibniz >> baseline: spec [
 	
 	spec for: #common do: [
 
-		spec postLoadDoIt: #'postload:package:'.
-
-		spec
-			baseline: 'Roassal2' 
-			with: [ spec repository: 'github://ObjectProfile/Roassal2:master/src' ].
-
 		spec
 			baseline: 'PetitParser2' 
 			with: [ spec repository: 'github://kursjan/petitparser2:master/src' ].
@@ -34,33 +28,10 @@ BaselineOfLeibniz >> baseline: spec [
 
 		spec
 			package: 'Leibniz'
-			with: [ spec requires: #('Roassal2'
-											'RecursiveWriteBarrier'
-											'EqualityThroughVariablesTrait')];
+			with: [ spec requires: #(
+					'RecursiveWriteBarrier'
+					'EqualityThroughVariablesTrait')];
 			package: 'BaselineOfLeibniz'.
 
-].
-
 ]
-
-{ #category : #baseline }
-BaselineOfLeibniz >> postload: loader package: packageSpec [
-	LeibnizLibrary reset.
-
-]
-
-{ #category : #baseline }
-BaselineOfLeibniz >> preload: loader package: packageSpec [
-	(Smalltalk globals includesKey: #LeibnizLibrary)
-		ifFalse: [ ^ self ].
-	LeibnizLibrary reset.
-	Smalltalk garbageCollect.
-
-]
-
-{ #category : #baseline }
-BaselineOfLeibniz >> projectClass [
-	Smalltalk at: #'MetacelloCypressBaselineProject' ifPresent: [ :cl | ^ cl ].
-	^ super projectClass
-
 ]
