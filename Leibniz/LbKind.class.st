@@ -28,11 +28,6 @@ LbKind >> asSet [
    ^ sorts collect: [ :each | sortGraph sortNamed: each ]
 ]
 
-{ #category : #private }
-LbKind >> equalityTestWith: otherSorts [ 
-	^ sorts = otherSorts
-]
-
 { #category : #testing }
 LbKind >> includes: aSort [
 	^ sorts includes: aSort name

@@ -166,11 +166,20 @@ LbSortGraphExamples >> sortGraphUnion [
 { #category : #example }
 LbSortGraphExamples >> sortGraphWithListSorts [
 	<gtExample>
-	^ LbSortGraphBuilder new
+	| sortGraph |
+	sortGraph := LbSortGraphBuilder new
 		addSortGraph: self sortGraphABCD;
 		parseAndAdd: #'☰.A';
 		parseAndAdd: #'☰.B';
-		sortGraph
+		sortGraph.
+	self assert: sortGraph maximalSorts size equals: 3.
+	self
+		assert: (sortGraph sortNamed: #C) subsorts size
+		equals: 3.
+	self
+		assert: (sortGraph sortNamed: #'☰.B') subsorts size
+		equals: 2.
+	^ sortGraph
 ]
 
 { #category : #example }

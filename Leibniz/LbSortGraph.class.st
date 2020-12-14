@@ -83,12 +83,6 @@ LbSortGraph >> directSubsortsOf: aSymbol [
 	^ (directSubsortsOf at: aSymbol) collect: [ : each | self sortNamed: each ]
 ]
 
-{ #category : #private }
-LbSortGraph >> equalityTestWith: otherSubsorts [ 
-	^ directSubsortsOf = otherSubsorts
-
-]
-
 { #category : #viewing }
 LbSortGraph >> graphArrowForSubsortRelation: aSubsortRelation [
 	| color |
@@ -244,9 +238,14 @@ LbSortGraph >> initializeKinds [
 
 { #category : #initializing }
 LbSortGraph >> initializeMaximalSorts [
-	maximalSorts := (directSubsortsOf values)
-							inject: directSubsortsOf keys asSet
-							into: [ :ms :ss | ms difference: ss ].
+	maximalSorts :=
+		(directSubsortsOf values)
+			inject: directSubsortsOf keys asSet
+			into: [ :ms :ss | ms difference: ss ].
+	maximalSorts :=
+		(derivedSubsortsOf values)
+			inject: maximalSorts
+			into: [ :ms :ss | ms difference: ss ].
 ]
 
 { #category : #initializing }
@@ -258,21 +257,23 @@ LbSortGraph >> initializeSubsortsOf [
 
 { #category : #initializing }
 LbSortGraph >> initializeSubsortsOfAt: aSort [
-	| ss |
+	| dss ss |
 	(subsortsOf includes: aSort) ifTrue: [ ^ self ].
-	ss := (directSubsortsOf at: aSort) copy.
+	dss := ((directSubsortsOf at: aSort)
+			union: (derivedSubsortsOf at: aSort ifAbsent: [ Set new ])).
+	ss := dss copy.
 	ss add: aSort.
-	(directSubsortsOf at: aSort) do: [ :sort |
+	dss do: [ :sort |
 		self initializeSubsortsOfAt: sort.
 		ss := ss union: (subsortsOf at: sort) ].
 	subsortsOf at: aSort put: ss
 ]
 
 { #category : #initializing }
-LbSortGraph >> initializeWithSubsortRelations: subsortRelations andCollectionSorts: aCollectionSortDictionary origins: anOriginDictionary [
+LbSortGraph >> initializeWithSubsortRelations: subsortRelations andCollectionSorts: collectionSorts origins: anOriginDictionary [
 	directSubsortsOf := subsortRelations.
 	origins := anOriginDictionary.
-	self initializeDerivedSubsortsFrom: aCollectionSortDictionary.
+	self initializeDerivedSubsortsFrom: collectionSorts.
 	self initializeSubsortsOf.
 	self initializeMaximalSorts.
 	self initializeKinds.
@@ -324,7 +325,9 @@ LbSortGraph >> size [
 
 { #category : #accessing }
 LbSortGraph >> sortNamed: aSymbol [
-	self assert: (directSubsortsOf includesKey: aSymbol) description: 'No sort named ', aSymbol.
+	self
+		assert: (directSubsortsOf includesKey: aSymbol) 
+		description: 'No sort named ', aSymbol.
 	^ LbSort
 		named: aSymbol
 		in: self
