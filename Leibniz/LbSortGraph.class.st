@@ -29,15 +29,17 @@ Class {
 		'directSubsortsOf',
 		'subsortsOf',
 		'kindsOf',
-		'origins'
+		'origins',
+		'derivedSubsortsOf'
 	],
 	#category : #'Leibniz-1-SortGraphs'
 }
 
 { #category : #'instance creation' }
-LbSortGraph class >> fromSubsortRelations: aSubsetDictionary origins: anOriginDictionary [
+LbSortGraph class >> fromSubsortRelations: aSubsetDictionary andCollectionSorts: aCollectionSortDictionary origins: anOriginDictionary [
 	^ self basicNew
 			initializeWithSubsortRelations: aSubsetDictionary
+			andCollectionSorts: aCollectionSortDictionary
 			origins: anOriginDictionary;
 			yourself
 ]
@@ -103,7 +105,7 @@ LbSortGraph >> graphArrowForSubsortRelation: aSubsortRelation [
 LbSortGraph >> graphEdgesForSubset: aSet [
 	| edges |
 	edges := OrderedCollection new.
-	self withSubsortRelationsDo: [ :ssr |
+	self withAllSubsortRelationsDo: [ :ssr |
 		((aSet includes: ssr subsort)
 			and: [ aSet includes: ssr supersort ])
 			ifTrue: [ edges add: ssr ] ].
@@ -199,6 +201,26 @@ LbSortGraph >> gtGraphFor: aView [
 ]
 
 { #category : #initializing }
+LbSortGraph >> initializeDerivedSubsortsFrom: collectionSortsOf [
+	derivedSubsortsOf := Dictionary new.
+	directSubsortsOf keysAndValuesDo: [ :superSort :subSorts |
+		collectionSortsOf at: superSort ifPresent: [ :collectionSuperSorts |
+			| prefixes |
+			prefixes := collectionSuperSorts keys asSet.
+			subSorts do: [ :subSort |
+				collectionSortsOf at: subSort ifPresent: [ :collectionSubSorts |
+				(collectionSubSorts keys asSet intersection: prefixes) do: [ :each |
+					| cSubSort cSuperSort |
+					cSubSort := collectionSubSorts at: each.
+					cSuperSort := collectionSuperSorts at: each.
+					(derivedSubsortsOf at: cSuperSort
+						ifAbsentPut: [ Set new ])
+						add: cSubSort.
+					origins at: { cSubSort. cSuperSort } put:
+						(origins at: { subSort. superSort }) ] ] ] ] ]
+]
+
+{ #category : #initializing }
 LbSortGraph >> initializeKinds [
 	| kindCandidates kind hasCommonSorts |
 	kindCandidates := maximalSorts asOrderedCollection collect: [ :sort | subsortsOf at: sort ].
@@ -230,8 +252,8 @@ LbSortGraph >> initializeMaximalSorts [
 { #category : #initializing }
 LbSortGraph >> initializeSubsortsOf [
 	subsortsOf := Dictionary new.
-	directSubsortsOf keysDo: [ :sort | self initializeSubsortsOfAt: sort ].
-	
+	directSubsortsOf keysDo: [ :sort |
+		self initializeSubsortsOfAt: sort ]	
 ]
 
 { #category : #initializing }
@@ -240,16 +262,17 @@ LbSortGraph >> initializeSubsortsOfAt: aSort [
 	(subsortsOf includes: aSort) ifTrue: [ ^ self ].
 	ss := (directSubsortsOf at: aSort) copy.
 	ss add: aSort.
-	(directSubsortsOf at: aSort) do:
-		[ :sort | self initializeSubsortsOfAt: sort.
-					 ss := ss union: (subsortsOf at: sort) ].
-	subsortsOf at: aSort put: ss.
+	(directSubsortsOf at: aSort) do: [ :sort |
+		self initializeSubsortsOfAt: sort.
+		ss := ss union: (subsortsOf at: sort) ].
+	subsortsOf at: aSort put: ss
 ]
 
 { #category : #initializing }
-LbSortGraph >> initializeWithSubsortRelations: subsortRelations origins: anOriginDictionary [
+LbSortGraph >> initializeWithSubsortRelations: subsortRelations andCollectionSorts: aCollectionSortDictionary origins: anOriginDictionary [
 	directSubsortsOf := subsortRelations.
 	origins := anOriginDictionary.
+	self initializeDerivedSubsortsFrom: aCollectionSortDictionary.
 	self initializeSubsortsOf.
 	self initializeMaximalSorts.
 	self initializeKinds.
@@ -321,12 +344,25 @@ LbSortGraph >> union: aSortGraph [
 ]
 
 { #category : #private }
-LbSortGraph >> withSubsortRelationsDo: aBlockClosure [ 
-	directSubsortsOf associationsDo: [ :assoc |
-		assoc value do: [ :sortName |
-			| subSort superSort relation |
-			subSort := self sortNamed: sortName.
-			superSort := self sortNamed: assoc key.
-			relation := LbSubsortRelation new subsort: subSort supersort: superSort  origins: (origins at: { sortName. assoc key }).
-			aBlockClosure value: relation ]]
+LbSortGraph >> withAllSubsortRelationsDo: aBlockClosure [
+	self withSubsortRelations: directSubsortsOf do: aBlockClosure.
+	self withSubsortRelations: derivedSubsortsOf do: aBlockClosure
+]
+
+{ #category : #private }
+LbSortGraph >> withSubsortRelations: aDictionary do: aBlockClosure [
+	aDictionary keysAndValuesDo: [ :superSortName :subSortNames |
+		subSortNames do: [ :subSortName |
+			aBlockClosure value:
+				(LbSubsortRelation new
+					subsort: (self sortNamed: subSortName)
+					supersort: (self sortNamed: superSortName) 
+					origins: (origins
+									at: { subSortName. superSortName }
+									"ifAbsent: [ LbOrigins forCurrentContext ]")) ] ]
+]
+
+{ #category : #private }
+LbSortGraph >> withSubsortRelationsDo: aBlockClosure [
+	self withSubsortRelations: directSubsortsOf do: aBlockClosure
 ]

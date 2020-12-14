@@ -125,6 +125,10 @@ LbSortGraphBuilder >> make: aSort subsortOf: anotherSort [
 LbSortGraphBuilder >> make: aSort subsortOf: anotherSort origins: anLbOrigins [
 	| sortPair newKind |
 	(aSort = anotherSort) ifTrue: [ ^ self ].
+
+	((self splitName: aSort) first isEmpty
+		and: [ (self splitName: anotherSort) first isEmpty ])
+		ifFalse: [ self error: 'collection sorts not allowed in subsort relation' ].
 	(self is: anotherSort subsortOf: aSort)
 		ifTrue: [
 			self error: 'cycle in subsort relation: ',
@@ -158,6 +162,7 @@ LbSortGraphBuilder >> parseAndAdd: aString [
 LbSortGraphBuilder >> sortGraph [
 	^ LbSortGraph
 		fromSubsortRelations: directSubsortsOf deepCopy
+		andCollectionSorts: collectionSortsOf deepCopy
 		origins: origins deepCopy
 ]
 
