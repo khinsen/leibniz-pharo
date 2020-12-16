@@ -52,6 +52,12 @@ LbOrigins >> merge: anLbOrigins [
 	origins := origins union: anLbOrigins origins
 ]
 
+{ #category : #testing }
+LbOrigins >> onlyIncludes [
+	origins detect: #isNil
+		ifFound: [ ^ false] ifNone: [ ^ true ]
+]
+
 { #category : #'private - accessing' }
 LbOrigins >> origins [
 	^ origins

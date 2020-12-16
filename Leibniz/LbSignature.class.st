@@ -114,7 +114,7 @@ LbSignature >> gtDeclarationsFor: aView [
 LbSignature >> gtOperatorsFor: aView [
 	<gtView>
 	operators isEmpty ifTrue: [ ^ aView empty ].
-	^ aView columnedTree
+	^ aView lbColumnedTree
 		title: 'Operators' translated;
 		priority: 0;
 		items: [ operators keys sorted ];
@@ -134,7 +134,10 @@ LbSignature >> gtOperatorsFor: aView [
 			(each isKindOf: LbOperatorName)
 				ifTrue: [ (operators at: each) values sorted: [:a :b | a kindArity size < b kindArity size] ]
 				ifFalse: [ #() ] ];
-		expandOneLevel;
+		expandItems:
+			(operators associationsSelect: [ :each |
+				each  value values first origins onlyIncludes not ])
+			keys;
 		yourself
 ]
 
