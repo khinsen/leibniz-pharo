@@ -71,6 +71,22 @@ LbSortGraphBuilder >> baseSortNameFor: aSymbol [
 	^ (LbSort classFor: aSymbol) baseSortNameFor: aSymbol
 ]
 
+{ #category : #private }
+LbSortGraphBuilder >> checkIf: aSort canBeMadeSubsortOf: anotherSort [
+	| split1 split2 |
+	split1 := self splitName: aSort.
+	split2 := self splitName: anotherSort.
+	(((split1 first isNotEmpty)
+		or: [ split2 first isNotEmpty ])
+		and: [ split1 second ~= split2 second ])
+		ifTrue: [ self error: 'collection sorts not allowed in subsort relation' ].
+
+	(self is: anotherSort subsortOf: aSort)
+		ifTrue: [
+			self error: 'cycle in subsort relation: ',
+					(anotherSort printString), '<=', (aSort printString ) ].
+]
+
 { #category : #accessing }
 LbSortGraphBuilder >> gtDeclarationsFor: aView [ 
 	<gtView>
@@ -125,14 +141,7 @@ LbSortGraphBuilder >> make: aSort subsortOf: anotherSort [
 LbSortGraphBuilder >> make: aSort subsortOf: anotherSort origins: anLbOrigins [
 	| sortPair newKind |
 	(aSort = anotherSort) ifTrue: [ ^ self ].
-
-	((self splitName: aSort) first isEmpty
-		and: [ (self splitName: anotherSort) first isEmpty ])
-		ifFalse: [ self error: 'collection sorts not allowed in subsort relation' ].
-	(self is: anotherSort subsortOf: aSort)
-		ifTrue: [
-			self error: 'cycle in subsort relation: ',
-					(anotherSort printString), '<=', (aSort printString ) ].
+	self checkIf: aSort canBeMadeSubsortOf: anotherSort.
 
 	sortPair := { aSort. anotherSort }.
 	((directSubsortsOf at: anotherSort) includes: aSort)

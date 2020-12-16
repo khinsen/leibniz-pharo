@@ -190,6 +190,7 @@ LbSortGraphExamples >> sortGraphWithListSorts [
 	sortGraph := LbSortGraphBuilder new
 		addSortGraph: self sortGraphABCD;
 		parseAndAdd: #'☰.A';
+		parseAndAdd: #'☰.ne.A ⊆ ☰.A';
 		parseAndAdd: #'☰.B';
 		sortGraph.
 	self assert: sortGraph maximalSorts size equals: 3.
@@ -198,6 +199,9 @@ LbSortGraphExamples >> sortGraphWithListSorts [
 		equals: 3.
 	self
 		assert: (sortGraph sortNamed: #'☰.B') subsorts size
+		equals: 3.
+	self
+		assert: (sortGraph sortNamed: #'☰.A') subsorts size
 		equals: 2.
 	^ sortGraph
 ]

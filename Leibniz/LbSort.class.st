@@ -16,10 +16,13 @@ Class {
 
 { #category : #'instance creation' }
 LbSort class >> classFor: aSymbol [
-	self allSubclasses do: [ :each |
-		each sortNamePrefix ifNotNil: [ :prefix |
-			(aSymbol beginsWith: prefix)
-				ifTrue: [ ^ each ] ] ].
+	(((self allSubclasses
+		select: [ :each | each sortNamePrefix isNotNil ])
+		collect: [ :each | { each sortNamePrefix. each } ])
+		sorted: [ :a :b | a first size > b first size ])
+		do: [ :each |
+		(aSymbol beginsWith: each first)
+			ifTrue: [ ^ each second ] ].
 	^ LbPlainSort
 ]
 
