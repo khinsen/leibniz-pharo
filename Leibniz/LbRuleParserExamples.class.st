@@ -69,17 +69,16 @@ LbRuleParserExamples >> ruleParser [
 { #category : #example }
 LbRuleParserExamples >> ruleWithVariable [
 	<gtExample>
-	| extraVariables pattern replacement referenceRule parsedRule signature |
-	signature := LbTermParserExamples new signature.
-	extraVariables := Dictionary with: #X asLbOperatorName-> (signature sortNamed: #A).
-	pattern := signature
+	| extraVariables pattern replacement referenceRule parsedRule |
+	extraVariables := Dictionary with: #X asLbOperatorName-> (self signature sortNamed: #A).
+	pattern := self signature
 				nonZeroArgTermNamed: #aOneArgOp asLbOperatorName
-				withArgs: { signature
+				withArgs: { self signature
 								zeroArgTermNamed: #X asLbOperatorName
 								extraVariables: extraVariables }.
-	replacement := signature zeroArgTermNamed: #aZeroArgOp asLbOperatorName.
+	replacement := self signature zeroArgTermNamed: #aZeroArgOp asLbOperatorName.
 	referenceRule := LbRewriteRule pattern: pattern localVariables: extraVariables replacement: replacement.
-	parsedRule := (LbRuleParser signature: signature)
+	parsedRule := (LbRuleParser signature: self signature)
 						parse: '∀ X:A aOneArgOp(X) ⇒ aZeroArgOp'.
 	self assert: parsedRule equals: referenceRule.
 	^ parsedRule
