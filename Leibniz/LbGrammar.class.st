@@ -15,12 +15,18 @@ Class {
 	#category : #'Leibniz-0-Infrastructure'
 }
 
+{ #category : #grammar }
+LbGrammar class >> reservedIdentifiers [
+	^ #('⇒' '→' '=' '∀' '|' '⊆')
+]
+
 { #category : #productions }
 LbGrammar >> identifier [
 	^ (identifierCharacter , (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
-		==> [ :id | (#('⇒' '→' '∀' '|' '⊆') includes: id)
-							ifFalse: [ id asSymbol ]
-							ifTrue: [ PP2Failure message: 'reserved identifier: ', id ] ]
+		==> [ :id |
+				(LbGrammar reservedIdentifiers includes: id)
+					ifFalse: [ id asSymbol ]
+					ifTrue: [ PP2Failure message: 'reserved identifier: ', id ] ]
 ]
 
 { #category : #productions }
