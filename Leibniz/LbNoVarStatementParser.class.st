@@ -6,7 +6,8 @@ Class {
 		'noVarEquation',
 		'conditionClause',
 		'underCondition',
-		'equalSign'
+		'equalSign',
+		'noVarSubsort'
 	],
 	#category : #'Leibniz-5-Statements'
 }
@@ -34,19 +35,19 @@ LbNoVarStatementParser >> noVarEquation [
 					condition: nodes fourth ]
 ]
 
-{ #category : #productions }
-LbNoVarStatementParser >> noVarRewriteRule [
-	^ term, rewriteArrow trim, term, conditionClause optional
+{ #category : #accessing }
+LbNoVarStatementParser >> noVarSubsort [
+	^ term, subsortSymbol trim, term
 		==> [ :nodes |
-				LbRewriteRule pattern: nodes first
-								localVariables: extraVariables
-							   condition: nodes fourth 
-								replacement: nodes third ]
+				LbSubsort
+					subsort: nodes first
+					supersort: nodes third
+					localVariables: extraVariables ]
 ]
 
 { #category : #accessing }
 LbNoVarStatementParser >> start [
-	^ noVarEquation end.
+	^ (noVarEquation / noVarSubsort) end.
 ]
 
 { #category : #tokens }

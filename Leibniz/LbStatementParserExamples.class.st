@@ -6,19 +6,15 @@ Class {
 	#category : #'Leibniz-5-Statements'
 }
 
-{ #category : #accessing }
+{ #category : #example }
 LbStatementParserExamples >> equationWithVariable [
 	<gtExample>
 	| extraVariables left right referenceEquation parsedEquation |
-	extraVariables := Dictionary with: #X asLbOperatorName-> (self signature sortNamed: #A).
-	left := self signature
-				nonZeroArgTermNamed: #aOneArgOp asLbOperatorName
-				withArgs: { self signature
-								zeroArgTermNamed: #X asLbOperatorName
-								extraVariables: extraVariables }.
-	right := self signature zeroArgTermNamed: #aZeroArgOp asLbOperatorName.
+	extraVariables := Dictionary with: #X asLbOperatorName-> (self termSignature sortNamed: #A).
+	left := self termSignature parseTerm: 'aOneArgOp(X)' extraVariables: extraVariables.
+	right := self termSignature parseTerm: 'aZeroArgOp'.
 	referenceEquation := LbEquation left: left right: right localVariables: extraVariables.
-	parsedEquation := self statementParser
+	parsedEquation := self statementParserForTermSignature
 						parse: '∀ X:A aOneArgOp(X) = aZeroArgOp'.
 	self assert: parsedEquation equals: referenceEquation.
 	^ parsedEquation
@@ -29,15 +25,15 @@ LbStatementParserExamples >> equationWithVariableAndCondition [
 	<gtExample>
 	| extraVariables left right referenceEquation parsedEquation trueTerm |
 	extraVariables := Dictionary
-		with: #X asLbOperatorName -> (self signature sortNamed: #A).
-	left := self signature
+		with: #X asLbOperatorName -> (self termSignature sortNamed: #A).
+	left := self termSignature
 		nonZeroArgTermNamed: #aOneArgOp asLbOperatorName
 		withArgs:
-			{(self signature
+			{(self termSignature
 				zeroArgTermNamed: #X asLbOperatorName
 				extraVariables: extraVariables)}.
-	trueTerm := self signature zeroArgTermNamed: #true asLbOperatorName.
-	right := self signature
+	trueTerm := self termSignature zeroArgTermNamed: #true asLbOperatorName.
+	right := self termSignature
 		zeroArgTermNamed: #aZeroArgOp asLbOperatorName.
 	referenceEquation :=
 		LbEquation
@@ -45,7 +41,7 @@ LbStatementParserExamples >> equationWithVariableAndCondition [
 			right: right
 			localVariables: extraVariables
 			condition: trueTerm.
-	parsedEquation := self statementParser
+	parsedEquation := self statementParserForTermSignature
 		parse: '∀ X:A aOneArgOp(X) = aZeroArgOp | true'.
 	self assert: parsedEquation equals: referenceEquation.
 	^ parsedEquation
@@ -56,11 +52,10 @@ LbStatementParserExamples >> noVarEquation [
 	<gtExample>
 	| left right expected equation |
 	equation := self noVarStatementParser parse: 'aOneArgOp(aZeroArgOp) = aZeroArgOp'.
-	left := self termParser parse: 'aOneArgOp(aZeroArgOp)'.
-	right := self termParser parse: 'aZeroArgOp'.
+	left := self termSignature parseTerm: 'aOneArgOp(aZeroArgOp)'.
+	right := self termSignature parseTerm: 'aZeroArgOp'.
 	expected := LbEquation left: left right: right.
 	self assert: equation equals: expected.
-
 	^ equation
 ]
 
@@ -68,24 +63,93 @@ LbStatementParserExamples >> noVarEquation [
 LbStatementParserExamples >> noVarStatementParser [
 	<gtExample>
 	^ LbNoVarStatementParser
-		signature: LbRuleParserExamples new signature
+		signature: self termSignature
 		extraVariables: Dictionary new
 ]
 
 { #category : #example }
-LbStatementParserExamples >> signature [
+LbStatementParserExamples >> noVarSubsort [
+	<gtExample>
+	| sub superSort expected relation |
+	relation := self noVarSubsortParser parse: 'foo ⊆ bar'.
+	sub := self sortTermParser parse: 'foo'.
+	superSort := self sortTermParser parse: 'bar'.
+	expected := LbSubsort subsort: sub supersort: superSort.
+	self assert: relation equals: expected.
+
+	^ relation
+]
+
+{ #category : #example }
+LbStatementParserExamples >> noVarSubsortParser [
+	<gtExample>
+	^ LbNoVarStatementParser
+		signature: self sortSignature
+		extraVariables: Dictionary new
+]
+
+{ #category : #example }
+LbStatementParserExamples >> sortContext [
+	<gtExample>
+	^ (LbContextBuilder name: 'sorts')
+		parseAndAddSort: 'sort';
+		parseAndAddOp: 'foo : sort';
+		parseAndAddOp: 'bar : sort';
+		context
+]
+
+{ #category : #example }
+LbStatementParserExamples >> sortSignature [
+	<gtExample>
+	^ (LbSignatureBuilder sortGraph: self sortSortGraph)
+		parseAndAddOp: 'foo : sort';
+		parseAndAddOp: 'bar : sort';
+		parseAndAddOp: 'foo(sort) : sort';
+		parseAndAddOp: 'bar(sort) : sort';
+		signature
+]
+
+{ #category : #accessing }
+LbStatementParserExamples >> sortSortGraph [
+	<gtExample>
+	^ LbSortGraphBuilder new
+		parseAndAdd: 'sort';
+		sortGraph
+]
+
+{ #category : #accessing }
+LbStatementParserExamples >> sortTermParser [
+	<gtExample>
+	^ LbTermParser signature: self sortSignature
+]
+
+{ #category : #example }
+LbStatementParserExamples >> statementParserForSortSignature [
+	<gtExample>
+	^ LbStatementParser signature: self sortSignature
+]
+
+{ #category : #example }
+LbStatementParserExamples >> statementParserForTermSignature [
+	<gtExample>
+	^ LbStatementParser signature: self termSignature
+]
+
+{ #category : #accessing }
+LbStatementParserExamples >> subsortWithVariable [
+	<gtExample>
+	| extraVariables subSort superSort expected relation |
+	extraVariables := Dictionary with: #S asLbOperatorName-> (self sortSignature sortNamed: #sort).
+	subSort := self sortSignature parseTerm: 'foo(S)' extraVariables: extraVariables.
+	superSort := self sortSignature parseTerm: 'bar(S)' extraVariables: extraVariables.
+	relation := self statementParserForSortSignature parse: '∀ S:sort foo(S) ⊆ bar(S)'.
+	expected := LbSubsort subsort: subSort supersort: superSort localVariables: extraVariables.
+	self assert: relation equals: expected.
+	^ relation
+]
+
+{ #category : #example }
+LbStatementParserExamples >> termSignature [
 	<gtExample>
 	^ LbTermParserExamples new signature
-]
-
-{ #category : #example }
-LbStatementParserExamples >> statementParser [
-	<gtExample>
-	^ LbStatementParser signature: self signature
-]
-
-{ #category : #example }
-LbStatementParserExamples >> termParser [
-	<gtExample>
-	^ LbRuleParserExamples new termParser
 ]

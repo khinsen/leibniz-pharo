@@ -4,8 +4,8 @@ Class {
 	#instVars : [
 		'forAllClause',
 		'colon',
-		'equation',
-		'forAll'
+		'forAll',
+		'statement'
 	],
 	#category : #'Leibniz-5-Statements'
 }
@@ -13,16 +13,6 @@ Class {
 { #category : #tokens }
 LbStatementParser >> colon [
 	^ $: asPParser
-]
-
-{ #category : #productions }
-LbStatementParser >> equation [
-	^ forAllClause star, #any asPParser plus flatten trim
-		==> [ :nodes |
-				| localVariables |
-				localVariables := (nodes at: 1) asDictionary.
-				(LbNoVarStatementParser signature: signature extraVariables: localVariables)
-					parse: (nodes at: 2) ]
 ]
 
 { #category : #tokens }
@@ -38,5 +28,17 @@ LbStatementParser >> forAllClause [
 
 { #category : #accessing }
 LbStatementParser >> start [
-	^ equation end.
+	^ statement end.
+]
+
+{ #category : #productions }
+LbStatementParser >> statement [
+	^ forAllClause star, #any asPParser plus flatten trim
+		==> [ :nodes |
+				| localVariables |
+				localVariables := (nodes at: 1) asDictionary.
+				(LbNoVarStatementParser
+					signature: signature
+					extraVariables: localVariables)
+						parse: (nodes at: 2) ]
 ]
