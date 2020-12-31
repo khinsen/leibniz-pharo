@@ -27,6 +27,35 @@ LbContextExamples >> derivativeContext [
 		context
 ]
 
+{ #category : #accessing }
+LbContextExamples >> fooBarBazContext [
+	<gtExample>
+	^ (LbContextBuilder name: 'foo-bar-baz')
+		include: self fooBarContext inMode: #extend;
+		parseAndAddSort: 'baz';
+		parseAndAddOp: 'baz : baz';
+		parseAndAddOp: 'foo(baz) : foo';
+		parseAndAddOp: 'baz(foo) : baz';
+		parseAndAddRule: 'foo(baz) ⇒ foo';
+		parseAndAddStatement: 'baz(foo) = baz';
+		context
+]
+
+{ #category : #example }
+LbContextExamples >> fooBarContext [
+	<gtExample>
+	^ (LbContextBuilder name: 'foo-bar')
+		parseAndAddSort: 'foo';
+		parseAndAddSort: 'bar';
+		parseAndAddOp: 'foo : foo';
+		parseAndAddOp: 'bar : bar';
+		parseAndAddOp: 'foo(bar) : foo';
+		parseAndAddOp: 'bar(foo) : bar';
+		parseAndAddRule: 'foo(bar) ⇒ foo';
+		parseAndAddStatement: 'bar(foo) = bar';
+		context
+]
+
 { #category : #example }
 LbContextExamples >> massContext [
 	<gtExample>

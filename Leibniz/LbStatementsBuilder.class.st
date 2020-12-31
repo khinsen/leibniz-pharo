@@ -21,6 +21,13 @@ LbStatementsBuilder >> add: anLbStatement [
 		add: anLbStatement
 ]
 
+{ #category : #accessing }
+LbStatementsBuilder >> addStatements: anLbStatements origin: aContext [
+	anLbStatements declarations do: [ :eachList |
+		eachList do: [ :eachDecl |
+			self parseAndAdd: eachDecl ] ]
+]
+
 { #category : #initialization }
 LbStatementsBuilder >> initializeWithSignature: aSignature [
 	signature := aSignature.
@@ -33,6 +40,7 @@ LbStatementsBuilder >> initializeWithSignature: aSignature [
 LbStatementsBuilder >> parseAndAdd: aString [
 	| statement |
 	statement := (LbStatementParser signature: signature) parse: aString.
+	statement isPetit2Failure ifTrue: [ self error: statement message ].
 	self add: statement.
 ]
 

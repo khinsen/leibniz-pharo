@@ -20,9 +20,13 @@ LbRewriteSystem class >> signature: aSignature rules: anOrderedCollection [
 ]
 
 { #category : #accessing }
+LbRewriteSystem >> allDeclarations [
+	^ self signature declarations union: self declarations
+]
+
+{ #category : #accessing }
 LbRewriteSystem >> declarations [
-	| declarations ruleDecls |
-	declarations := self signature declarations.
+	| ruleDecls |
 	ruleDecls := OrderedCollection new.
 	rules keys sorted do: [ :eachHeadOpName |
 		(rules at: eachHeadOpName) do: [ :eachRule |
@@ -30,8 +34,7 @@ LbRewriteSystem >> declarations [
 			decl := eachRule asLeibnizSyntaxString.
 			(ruleDecls includes: decl)
 				ifFalse: [ ruleDecls add: decl ] ] ].
-	declarations at: #rules put: ruleDecls.
-	^ declarations
+	^ Dictionary with: #rules -> ruleDecls
 ]
 
 { #category : #inspecting }
@@ -41,7 +44,7 @@ LbRewriteSystem >> gtDeclarationsFor: aView [
 		title: 'Declarations' translated;
 		priority: 4;
 		items: [ | d categories |
-			d := self declarations.
+			d := self allDeclarations.
 			categories := OrderedCollection new.
 			#(sorts subsorts variables operators rules) do: [ :each |
 				(d at: each) ifNotEmpty: [
@@ -119,6 +122,11 @@ LbRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedCollectio
 					add: each. ] ].
 	rules removeKey: varHeadOp.
 	self beRecursivelyReadOnlyObject.
+]
+
+{ #category : #testing }
+LbRewriteSystem >> isEmpty [
+	^ rules isEmpty
 ]
 
 { #category : #rewriting }

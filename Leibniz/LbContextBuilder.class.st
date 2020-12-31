@@ -14,7 +14,9 @@ Class {
 		'signatureBuilder',
 		'signature',
 		'rewriteSystemBuilder',
-		'rewriteSystem'
+		'rewriteSystem',
+		'statements',
+		'statementsBuilder'
 	],
 	#category : #'Leibniz-6-Contexts'
 }
@@ -49,7 +51,7 @@ LbContextBuilder >> addOp: anOpName withArgs: anArgList ofSort: aSort [
 
 { #category : #'defining - rules' }
 LbContextBuilder >> addRule: aRule [
-	self phase: #rules.
+	self phase: #rulesAndStatements.
 	rewriteSystemBuilder addRule: aRule
 ]
 
@@ -73,12 +75,17 @@ LbContextBuilder >> build [
 { #category : #accessing }
 LbContextBuilder >> context [
 	self phase: #finished.
-	^ LbContext name: name signature: signature rewriteSystem: rewriteSystem
+	^ LbContext
+		name: name
+		signature: signature
+		rewriteSystem: rewriteSystem
+		statements: statements
 ]
 
 { #category : #'defining - private' }
-LbContextBuilder >> endRules [
-	rewriteSystem := rewriteSystemBuilder rewriteSystem
+LbContextBuilder >> endRulesAndStatements [
+	rewriteSystem := rewriteSystemBuilder rewriteSystem.
+	statements := statementsBuilder statements
 ]
 
 { #category : #'defining - private' }
@@ -197,7 +204,6 @@ LbContextBuilder >> initializeWithName: aString document: aDocument [
 	document := aDocument.
 	phase := #initialization.
 	includes := OrderedCollection new.
-
 ]
 
 { #category : #'defining - sort graph' }
@@ -219,7 +225,7 @@ LbContextBuilder >> parseAndAddOp: aString [
 
 { #category : #'defining - rules' }
 LbContextBuilder >> parseAndAddRule: aString [
-	self phase: #rules.
+	self phase: #rulesAndStatements.
 	rewriteSystemBuilder parseAndAddRule: aString
 ]
 
@@ -228,6 +234,12 @@ LbContextBuilder >> parseAndAddSort: aString [
 	self phase: #sortGraph.
 	sortGraphBuilder parseAndAdd: aString.
 
+]
+
+{ #category : #accessing }
+LbContextBuilder >> parseAndAddStatement: aString [
+	self phase: #rulesAndStatements.
+	statementsBuilder parseAndAdd: aString
 ]
 
 { #category : #'defining - signature' }
@@ -244,7 +256,7 @@ LbContextBuilder >> parseTerm: aString [
 { #category : #'defining - rules' }
 LbContextBuilder >> parseTerm: aString extraVariables: aDictionary [
 	| parser |
-	self phase: #rules.
+	self phase: #rulesAndStatements.
 	parser := LbTermParser signature: signature.
 	parser extraVariables: aDictionary.
 	^ parser parse: aString
@@ -258,7 +270,7 @@ LbContextBuilder >> phase: aSymbol [
 	(aSymbol = phase) ifTrue:
 		[ ^ self ].
 
-	phaseLabels := #(#initialization #includes #sortGraph #signature #rules #assets #finished).
+	phaseLabels := #(#initialization #includes #sortGraph #signature #rulesAndStatements #assets #finished).
 	current := phaseLabels indexOf: phase.
 	new := phaseLabels indexOf: aSymbol.
 	self assert: new >= current description: 'context definition phase out of order'.
@@ -302,7 +314,7 @@ LbContextBuilder >> ruleFromXML: anXMLElement [
 
 { #category : #'XML import' }
 LbContextBuilder >> rulesFromXML: anXMLElement [
-	self phase: #rules.
+	self phase: #rulesAndStatements.
 	(anXMLElement elementsDetect: [:each | each isNamed: 'rules'])
 		descendantElementsNamed: 'rule' do:
 			[ :rule | self addRule: (self ruleFromXML: rule) ]
@@ -310,7 +322,7 @@ LbContextBuilder >> rulesFromXML: anXMLElement [
 
 { #category : #accessing }
 LbContextBuilder >> signature [
-	self phase: #rules.
+	self phase: #rulesAndStatements.
 	^ signature
 ]
 
@@ -354,11 +366,15 @@ LbContextBuilder >> sortGraph [
 ]
 
 { #category : #'defining - private' }
-LbContextBuilder >> startRules [
+LbContextBuilder >> startRulesAndStatements [
 	rewriteSystemBuilder := LbRewriteSystemBuilder signature: signature.
+	statementsBuilder := LbStatementsBuilder signature: signature.
 	includes do: [ :i |
 		rewriteSystemBuilder
 			addRewriteSystem: (i at: #context) rewriteSystem
+			origin: (i at: #context).
+		statementsBuilder
+			addStatements: (i at: #context) statements
 			origin: (i at: #context) ]
 ]
 

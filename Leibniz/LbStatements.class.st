@@ -21,15 +21,20 @@ LbStatements class >> signature: aSignature statements: aDictionary [
 ]
 
 { #category : #accessing }
+LbStatements >> allDeclarations [
+	^ self signature declarations union: self declarations
+]
+
+{ #category : #accessing }
 LbStatements >> declarations [
 	| declarations equationDecls |
-	declarations := self signature declarations.
+	declarations := Dictionary new.
 	#(equations subsortStatements) do: [ :each |
-		| decls |
-		decls := ((self perform: each)
+		declarations
+			at: each
+			put: ((self perform: each)
 					collect: #asLeibnizSyntaxString)
-					asOrderedCollection sort.
-		declarations at: each put: decls ].
+						asOrderedCollection sort ].
 	^ declarations
 ]
 
@@ -45,7 +50,7 @@ LbStatements >> gtDeclarationsFor: aView [
 		title: 'Declarations' translated;
 		priority: 4;
 		items: [ | d categories |
-			d := self declarations.
+			d := self allDeclarations.
 			categories := OrderedCollection new.
 			#(sorts subsorts variables operators
 			  equations subsortStatements) do: [ :each |
@@ -64,12 +69,14 @@ LbStatements >> gtDeclarationsFor: aView [
 ]
 
 { #category : #accessing }
-LbStatements >> gtRulesFor: aView [
+LbStatements >> gtStatementsFor: aView [
 	<gtView>
 	^ aView tree
 		title: 'Statements' translated;
 		priority: 1;
-		items: [ statements keys sorted ];
+		items: [ statements keys sorted
+					reject: [ :each |
+						(statements at: each) isEmpty ]];
 		children: [ :each |
 			(each isKindOf: Symbol)
 				ifTrue: [ statements at: each ]
@@ -78,6 +85,7 @@ LbStatements >> gtRulesFor: aView [
 			(each isKindOf: Symbol)
 				ifTrue: [ each ]
 				ifFalse: [ each asLeibnizSyntaxString ] ];
+		expandAll;
 		yourself
 ]
 
@@ -86,6 +94,13 @@ LbStatements >> initializeWithSignature: aSignature statements: aDictionary [
 	signature := aSignature.
 	statements := aDictionary.
 	self beRecursivelyReadOnlyObject
+]
+
+{ #category : #testing }
+LbStatements >> isEmpty [
+	statements values do: [ :each |
+		each ifNotEmpty: [ ^ false ] ].
+	^ true
 ]
 
 { #category : #accessing }
