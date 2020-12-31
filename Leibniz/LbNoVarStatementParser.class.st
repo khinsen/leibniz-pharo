@@ -39,7 +39,7 @@ LbNoVarStatementParser >> noVarEquation [
 LbNoVarStatementParser >> noVarSubsort [
 	^ term, subsortSymbol trim, term
 		==> [ :nodes |
-				LbSubsort
+				LbSubsortStatement
 					subsort: nodes first
 					supersort: nodes third
 					localVariables: extraVariables ]

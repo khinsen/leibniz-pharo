@@ -24,17 +24,18 @@ LbStatements class >> signature: aSignature statements: aDictionary [
 LbStatements >> declarations [
 	| declarations equationDecls |
 	declarations := self signature declarations.
-	#(equations subsorts) do: [ :each |
+	#(equations subsortStatements) do: [ :each |
 		| decls |
-		decls := (self perform: each) collect: #asLeibnizSyntaxString.
-		decls sort.
+		decls := ((self perform: each)
+					collect: #asLeibnizSyntaxString)
+					asOrderedCollection sort.
 		declarations at: each put: decls ].
 	^ declarations
 ]
 
 { #category : #accessing }
 LbStatements >> equations [
-	^ statements at: LbEquation
+	^ statements at: #LbEquation
 ]
 
 { #category : #inspecting }
@@ -46,17 +47,37 @@ LbStatements >> gtDeclarationsFor: aView [
 		items: [ | d categories |
 			d := self declarations.
 			categories := OrderedCollection new.
-			#(sorts subsorts variables operators equations subsorts) do: [ :each |
+			#(sorts subsorts variables operators
+			  equations subsortStatements) do: [ :each |
 				(d at: each) ifNotEmpty: [
 					categories add: {
 						each asString capitalized.
 						(d at: each) collect: [ :aString |
 							{ aString. #() } ] } ] ].
 			categories ];
-		itemLbCode: [ :each | each first];
-		children: [ :each | each second ];
+		itemLbCode: #first;
+		children: #second;
+		send: #first;
 		collapseAll;
-		expandItems: #('Equations' 'Subsorts');
+		expandItems: #('Equations' 'SubsortStatements');
+		yourself
+]
+
+{ #category : #accessing }
+LbStatements >> gtRulesFor: aView [
+	<gtView>
+	^ aView tree
+		title: 'Statements' translated;
+		priority: 1;
+		items: [ statements keys sorted ];
+		children: [ :each |
+			(each isKindOf: Symbol)
+				ifTrue: [ statements at: each ]
+				ifFalse: [ #() ] ];
+		itemLbCode: [ :each |
+			(each isKindOf: Symbol)
+				ifTrue: [ each ]
+				ifFalse: [ each asLeibnizSyntaxString ] ];
 		yourself
 ]
 
@@ -73,6 +94,6 @@ LbStatements >> signature [
 ]
 
 { #category : #accessing }
-LbStatements >> subsorts [
-	^ statements at: LbSubsort
+LbStatements >> subsortStatements [
+	^ statements at: #LbSubsortStatement
 ]

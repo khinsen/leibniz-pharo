@@ -94,6 +94,18 @@ LbEquation >> left [
 	^ left
 ]
 
+{ #category : #printing }
+LbEquation >> printAsLeibnizSyntaxOn: aStream [
+	self printVariablesAsLeibnizSyntaxOn: aStream.
+	aStream nextPut: Character space.
+	left printAsLeibnizSyntaxOn: aStream.
+	aStream nextPutAll: ' = '.
+	right printAsLeibnizSyntaxOn: aStream.
+	condition ifNotNil: [
+		aStream nextPutAll: ' | '.
+		condition printAsLeibnizSyntaxOn: aStream ]
+]
+
 { #category : #accessing }
 LbEquation >> right [
 	^ right

@@ -10,6 +10,16 @@ Class {
 	#category : #'Leibniz-5-Statements'
 }
 
+{ #category : #converting }
+LbStatement >> asLeibnizSyntaxString [
+	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
+]
+
+{ #category : #printing }
+LbStatement >> printAsLeibnizSyntaxOn: aStream [
+	self subclassResponsibility
+]
+
 { #category : #printing }
 LbStatement >> printVariablesAsLeibnizSyntaxOn: aStream [
 	variables keysAndValuesDo:

@@ -74,7 +74,7 @@ LbStatementParserExamples >> noVarSubsort [
 	relation := self noVarSubsortParser parse: 'foo ⊆ bar'.
 	sub := self sortTermParser parse: 'foo'.
 	superSort := self sortTermParser parse: 'bar'.
-	expected := LbSubsort subsort: sub supersort: superSort.
+	expected := LbSubsortStatement subsort: sub supersort: superSort.
 	self assert: relation equals: expected.
 
 	^ relation
@@ -86,16 +86,6 @@ LbStatementParserExamples >> noVarSubsortParser [
 	^ LbNoVarStatementParser
 		signature: self sortSignature
 		extraVariables: Dictionary new
-]
-
-{ #category : #example }
-LbStatementParserExamples >> sortContext [
-	<gtExample>
-	^ (LbContextBuilder name: 'sorts')
-		parseAndAddSort: 'sort';
-		parseAndAddOp: 'foo : sort';
-		parseAndAddOp: 'bar : sort';
-		context
 ]
 
 { #category : #example }
@@ -143,7 +133,7 @@ LbStatementParserExamples >> subsortWithVariable [
 	subSort := self sortSignature parseTerm: 'foo(S)' extraVariables: extraVariables.
 	superSort := self sortSignature parseTerm: 'bar(S)' extraVariables: extraVariables.
 	relation := self statementParserForSortSignature parse: '∀ S:sort foo(S) ⊆ bar(S)'.
-	expected := LbSubsort subsort: subSort supersort: superSort localVariables: extraVariables.
+	expected := LbSubsortStatement subsort: subSort supersort: superSort localVariables: extraVariables.
 	self assert: relation equals: expected.
 	^ relation
 ]

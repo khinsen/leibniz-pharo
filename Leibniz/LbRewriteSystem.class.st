@@ -50,8 +50,9 @@ LbRewriteSystem >> gtDeclarationsFor: aView [
 						(d at: each) collect: [ :aString |
 							{ aString. #() } ] } ] ].
 			categories ];
-		itemLbCode: [ :each | each first];
-		children: [ :each | each second ];
+		itemLbCode: #first;
+		children: #second;
+		send: #first;
 		collapseAll;
 		expandItems: #('Rules');
 		yourself

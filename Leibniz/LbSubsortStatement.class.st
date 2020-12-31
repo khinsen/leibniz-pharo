@@ -1,5 +1,5 @@
 Class {
-	#name : #LbSubsort,
+	#name : #LbSubsortStatement,
 	#superclass : #LbStatement,
 	#instVars : [
 		'subsort',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbSubsort class >> subsort: subsortTerm supersort: supersortTerm [
+LbSubsortStatement class >> subsort: subsortTerm supersort: supersortTerm [
 	^ self
 		subsort: subsortTerm
 		supersort: supersortTerm
@@ -17,7 +17,7 @@ LbSubsort class >> subsort: subsortTerm supersort: supersortTerm [
 ]
 
 { #category : #'instance creation' }
-LbSubsort class >> subsort: subsortTerm supersort: supersortTerm localVariables: aDictionary [
+LbSubsortStatement class >> subsort: subsortTerm supersort: supersortTerm localVariables: aDictionary [
 	^ self basicNew
 		initializeWithSubsort: subsortTerm
 		supersort: supersortTerm
@@ -26,7 +26,7 @@ LbSubsort class >> subsort: subsortTerm supersort: supersortTerm localVariables:
 ]
 
 { #category : #inspecting }
-LbSubsort >> gtRelationFor: aView [
+LbSubsortStatement >> gtRelationFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'Relation' translated;
@@ -45,7 +45,7 @@ LbSubsort >> gtRelationFor: aView [
 ]
 
 { #category : #initialization }
-LbSubsort >> initializeWithSubsort: subsortTerm supersort: supersortTerm localVariables: aDictionary [
+LbSubsortStatement >> initializeWithSubsort: subsortTerm supersort: supersortTerm localVariables: aDictionary [
 	subsort := subsortTerm.
 	supersort := supersortTerm.
 	self assert: subsort sort name equals: #sort.
@@ -56,12 +56,21 @@ LbSubsort >> initializeWithSubsort: subsortTerm supersort: supersortTerm localVa
 	self beRecursivelyReadOnlyObject
 ]
 
+{ #category : #printing }
+LbSubsortStatement >> printAsLeibnizSyntaxOn: aStream [
+	self printVariablesAsLeibnizSyntaxOn: aStream.
+	aStream nextPut: Character space.
+	subsort printAsLeibnizSyntaxOn: aStream.
+	aStream nextPutAll: ' ⊆ '.
+	supersort printAsLeibnizSyntaxOn: aStream
+]
+
 { #category : #accessing }
-LbSubsort >> subsort [
+LbSubsortStatement >> subsort [
 	^ subsort
 ]
 
 { #category : #accessing }
-LbSubsort >> supersort [
+LbSubsortStatement >> supersort [
 	^ supersort
 ]

@@ -17,7 +17,7 @@ LbStatementsBuilder class >> signature: aSignature [
 
 { #category : #adding }
 LbStatementsBuilder >> add: anLbStatement [
-	(statements at: anLbStatement class)
+	(statements at: anLbStatement class name)
 		add: anLbStatement
 ]
 
@@ -26,7 +26,7 @@ LbStatementsBuilder >> initializeWithSignature: aSignature [
 	signature := aSignature.
 	statements := Dictionary new.
 	LbStatement subclasses do: [ :each |
-		statements at: each put: Set new ]
+		statements at: each name put: Set new ]
 ]
 
 { #category : #adding }
