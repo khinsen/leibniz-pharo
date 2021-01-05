@@ -153,6 +153,7 @@ LbSignatureExamples >> signatureFooBar [
 	builder parseAndAddOp: 'A^{A} : A'.
 	signature := builder signature.
 	self assert: signature equals: (self signatureFooBarExplicit).
+	self assert: (signature opsOfKind: (signature sortNamed: #A) kind) size equals: 6.
 	^ signature
 ]
 

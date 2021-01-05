@@ -17,7 +17,7 @@ LbStatementExamples >> equations [
 		statements
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LbStatementExamples >> mixedStatements [
 	<gtExample>
 	^ (LbStatementsBuilder signature: self sortSignature)
@@ -39,7 +39,7 @@ LbStatementExamples >> sortSignature [
 		signature
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LbStatementExamples >> sortSortGraph [
 	<gtExample>
 	^ LbSortGraphBuilder new

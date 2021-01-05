@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'initiallyExpandedRootNodes'
 	],
-	#category : #'Leibniz-8-UI'
+	#category : #'Leibniz-0-Infrastructure'
 }
 
 { #category : #'api - scripting tree node expansion' }

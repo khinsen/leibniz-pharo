@@ -230,6 +230,16 @@ LbSignature >> opNamed: anOpName withArgs: aSortArray [
 		ifAbsent: [ nil ].
 ]
 
+{ #category : #accessing }
+LbSignature >> opsOfKind: aKind [
+	| ops |
+	ops := Set new.
+	self withOperatorsDo: [ :eachOp |
+		(eachOp kind = aKind)
+			ifTrue: [ ops add: eachOp ] ].
+	^ ops
+]
+
 { #category : #'asset construction' }
 LbSignature >> parseRule: aString [
 	| rule |

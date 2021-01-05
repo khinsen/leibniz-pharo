@@ -1,7 +1,7 @@
 Class {
 	#name : #LeibnizDocumentTest,
 	#superclass : #TestCase,
-	#category : #'Leibniz-7-Documents'
+	#category : #'Leibniz-8-Documents'
 }
 
 { #category : #testing }
