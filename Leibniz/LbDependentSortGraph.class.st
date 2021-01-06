@@ -1,9 +1,12 @@
 Class {
 	#name : #LbDependentSortGraph,
 	#superclass : #Object,
+	#traits : 'EqualityThroughVariables',
+	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'context',
-		'sorts'
+		'sorts',
+		'sortSort'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
@@ -17,7 +20,6 @@ LbDependentSortGraph class >> sortContext: anLbContext [
 
 { #category : #initialization }
 LbDependentSortGraph >> initializeSorts [
-	| sortSort |
 	[ sortSort := context sortGraph sortNamed: #sort ]
 		on: Error
 		do: [ self error: 'No sorts in sort context.' ].
@@ -32,4 +34,17 @@ LbDependentSortGraph >> initializeWithSortContext: anLbContext [
 	context := anLbContext.
 	self initializeSorts.
 	self beRecursivelyReadOnlyObject
+]
+
+{ #category : #accessing }
+LbDependentSortGraph >> parseSort: aString [
+	| sort |
+	sort := context parseTerm: aString.
+	self assert: sort sort <= sortSort.
+	^ sort
+]
+
+{ #category : #accessing }
+LbDependentSortGraph >> sortContext [
+	^ context
 ]
