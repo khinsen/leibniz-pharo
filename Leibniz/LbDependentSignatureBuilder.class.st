@@ -22,9 +22,7 @@ LbDependentSignatureBuilder class >> sortGraph: aSortGraph [
 { #category : #initialization }
 LbDependentSignatureBuilder >> initializeParsersFor: aSignature [
 	opParser := LbDependentSignatureParser newStartingAt: #opEnd.
-	opParser signature: aSignature.
-	varParser := LbDependentSignatureParser newStartingAt: #varEnd.
-	varParser signature: aSignature.
+	varParser := LbDependentSignatureParser newStartingAt: #varEnd
 ]
 
 { #category : #initialization }

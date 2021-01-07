@@ -1,10 +1,6 @@
 Class {
 	#name : #LbDependentSignatureParser,
 	#superclass : #LbDependentSignatureGrammar,
-	#instVars : [
-		'extraVariables',
-		'signature'
-	],
 	#category : #'Leibniz-7-DependentSorts'
 }
 
@@ -17,7 +13,7 @@ LbDependentSignatureParser class >> signature: aSignature extraVariables: aDicti
 	^ parser
 ]
 
-{ #category : #productions }
+{ #category : #'productions - signature' }
 LbDependentSignatureParser >> bracketOp [
 	^ super bracketOp
 		==> [ :nodes |
@@ -27,43 +23,39 @@ LbDependentSignatureParser >> bracketOp [
 				{ LbBracketOperatorName new. args asArray } ]
 ]
 
-{ #category : #'error handling' }
-LbDependentSignatureParser >> errorForOp: anOpName withArity: anArity [
-	^ PP2Failure message:
-		(anOpName printStringForArity: anArity),
-		' not defined in signature'
+{ #category : #'term construction' }
+LbDependentSignatureParser >> delayedTermWithOp: anOpName args: anArgList [
+	^ [ :aSignature :aDictionary |
+		aSignature
+			nonZeroArgTermNamed: anOpName
+			withArgs: (anArgList collect: [ :each |
+				each cull: aSignature cull: aDictionary ]) ]
 ]
 
-{ #category : #accessing }
-LbDependentSignatureParser >> extraVariables [
-	^ extraVariables
-]
-
-{ #category : #accessing }
-LbDependentSignatureParser >> extraVariables: aDictionary [
-	extraVariables := aDictionary
-]
-
-{ #category : #accessing }
+{ #category : #'productions - signature' }
 LbDependentSignatureParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
-		nodes second asSymbol asLbOperatorName -> (signature sortNamed: nodes fourth asSymbol) ]
+		| varName sortName |
+		varName := nodes second asSymbol asLbOperatorName.
+		sortName := nodes fourth asSymbol.
+		[ :aSignature :aDictionary |
+			varName -> (aSignature sortNamed: sortName) ] ]
 ]
 
-{ #category : #productions }
+{ #category : #'productions - term' }
 LbDependentSignatureParser >> fpNumberTerm [
-	^ super fpNumberTerm
+	^ super fpNumberTerm ==> [ :value | 
 		"Converting the string to a float requires some trickery:
 		 - Pharo doesn't allow a dot followed by an exponent without any fractional part.
 			Workaround: replace '.e' by '.0e'
 		 - In Pharo, a number with an exponent but without a fractional part is an integer, not a float.
-			Workaround: convert the converted string explicitly to a float."
-		==> [ :value |
-				(signature hasBuiltin: #fpNumbers)
-					ifTrue: [ LbFPNumberTerm value: (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat
-											 			  signature: signature ]
-					ifFalse: [ PP2Failure message: 'Floating-point literals not allowd by signature' ] ]
-
+		Workaround: convert the converted string explicitly to a float."
+		| floatValue |
+		floatValue := (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat.
+		[ :aSignature |
+			(aSignature hasBuiltin: #fpNumbers)
+				ifTrue: [ LbFPNumberTerm value: floatValue signature: aSignature ]
+				ifFalse: [ PP2Failure message: 'Floating-point literals not allowed by signature' ] ] ]
 ]
 
 { #category : #accessing }
@@ -73,172 +65,173 @@ LbDependentSignatureParser >> ignoredNames [
 		copyWith: #extraVariables
 ]
 
-{ #category : #productions }
+{ #category : #'productions - signature' }
 LbDependentSignatureParser >> infixOp [
-	^ super infixOp
-		==> [ :nodes | { LbInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
-
+	^ super infixOp ==> [ :nodes |
+		{ LbInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
 ]
 
-{ #category : #productions }
+{ #category : #'productions - term' }
 LbDependentSignatureParser >> integerTerm [
-	^ super integerTerm
-		==> [ :value |
-				(signature hasBuiltin: #integers)
-					ifTrue: [ LbIntegerTerm value: value asNumber signature: signature ]
-					ifFalse: [ PP2Failure message: 'Integer literals not allowd by signature' ] ]
+	^ super integerTerm ==> [ :value |
+		| intValue |
+		intValue := value asNumber.
+		[ :aSignature |
+			(aSignature hasBuiltin: #integers)
+				ifTrue: [ LbIntegerTerm value: intValue signature: aSignature ]
+				ifFalse: [ PP2Failure message: 'Integer literals not allowed by signature' ] ] ]
 ]
 
-{ #category : #productions }
+{ #category : #'productions - term' }
 LbDependentSignatureParser >> nonInfixTerm [
-	^ super nonInfixTerm
-		==> [ :nodes |
-				nodes second
-					ifNil: [ nodes first ]
-					ifNotNil: [ | symbol args |
-								symbol := nodes second first.
-								args := nodes second second.
-								signature
-									nonZeroArgTermNamed: (LbOperatorName fromInternalSymbol: symbol)
-									withArgs: (args copyWithFirst: nodes first) ] ]
+	^ super nonInfixTerm ==> [ :nodes |
+		nodes second
+			ifNil: [ nodes first ] "simpleTerm, no suffix"
+			ifNotNil: [
+				| name args |
+				name := LbOperatorName fromInternalSymbol: nodes second first.
+				args := nodes second second copyWithFirst: nodes first.
+				self delayedTermWithOp: name args: args ] ]
 ]
 
-{ #category : #productions }
+{ #category : #'productions - signature' }
 LbDependentSignatureParser >> op [
 	^ super op ==> [ :nodes |
-		{ nodes second. nodes fourth first } ]
+		| variables opName opArgs opSort |
+		variables := nodes first.
+		opName := nodes second first.
+		opArgs := nodes second second.
+		opSort := nodes fourth first.
+		[ :aSignature :aDictionary |
+			| allVariables |
+			allVariables := aDictionary copy.
+			variables do: [ :each |
+				| newVar |
+				newVar := each value: aSignature value: aDictionary.
+				allVariables at: newVar key put: newVar value ].
+			{
+				opName.
+				opArgs collect: [ :each |
+					each first cull: aSignature cull: allVariables ].
+				opSort cull: aSignature cull: allVariables
+			} ] ]
 ]
 
-{ #category : #productions }
+{ #category : #'productions - signature' }
 LbDependentSignatureParser >> opEnd [
 	^ op end
 ]
 
-{ #category : #productions }
+{ #category : #'productions - signature' }
 LbDependentSignatureParser >> prefixOp [
 	^ super prefixOp ==> [ :nodes |
 		{
 			LbPrefixOperatorName for: nodes first.
-			nodes third reject: [ :element | element = $,]
+			nodes third reject: [ :element | element = $, ]
 		} ]
 ]
 
-{ #category : #productions }
+{ #category : #'productions - term' }
 LbDependentSignatureParser >> prefixOpTerm [
 	^ super prefixOpTerm ==> [ :nodes |
-		| symbol args |
-		symbol := nodes first.
-		args := (nodes at: 3) reject: [ :element | element = $,].
-		signature
-			nonZeroArgTermNamed: (LbPrefixOperatorName for: symbol)
-			withArgs: args
-			onError: [ :opSymbol :arity |
-				self errorForOp: opSymbol withArity: arity ] ]
+		| name args |
+		name := LbPrefixOperatorName for: nodes first.
+		args := (nodes at: 3) reject: [ :element | element = $, ].
+		self delayedTermWithOp: name args: args ]
 ]
 
-{ #category : #productions }
+{ #category : #'productions - term' }
 LbDependentSignatureParser >> rationalNumberTerm [
-	^ super rationalNumberTerm
-		==> [ :value |
-				(signature hasBuiltin: #rationalNumbers)
-					ifTrue: [ LbRationalNumberTerm value: (Fraction readFromString: value)
-																  signature: signature ]
-					ifFalse: [ PP2Failure message: 'Rational number literals not allowd by signature' ] ]
+	^ super rationalNumberTerm==> [ :value |
+		| rationalValue |
+		rationalValue := Fraction readFromString: value.
+		[ :aSignature |
+			(aSignature hasBuiltin: #rationalNumbers)
+				ifTrue: [ LbRationalNumberTerm value: rationalValue signature: aSignature ]
+				ifFalse: [ PP2Failure message: 'Rational number literals not allowed by signature' ] ] ]
 ]
 
-{ #category : #accessing }
-LbDependentSignatureParser >> signature [
-	^ signature
-]
-
-{ #category : #accessing }
-LbDependentSignatureParser >> signature: aSignature [
-	signature := aSignature.
-	extraVariables := Dictionary new
-]
-
-{ #category : #productions }
+{ #category : #'productions - signature' }
 LbDependentSignatureParser >> sort [
-	^ super sort
-		==> [ :id | { id } ]
-
+	^ super sort ==> [ :id |
+		{ id } ]
 ]
 
-{ #category : #productions }
+{ #category : #'productions - term' }
 LbDependentSignatureParser >> stringTerm [
-	^ super stringTerm
-		==> [ :value |
-				(signature hasBuiltin: #strings)
-					ifTrue: [ LbStringTerm value: (value copyFrom: 2 to: value size - 1)
-														 signature: signature ]
-					ifFalse: [ PP2Failure message: 'String literals not allowd by signature' ] ]
+	^ super stringTerm ==> [ :value |
+		| stringValue |
+		stringValue := value copyFrom: 2 to: value size - 1.
+		[ :aSignature |
+			(aSignature hasBuiltin: #strings)
+				ifTrue: [ LbStringTerm value: stringValue signature: aSignature ]
+				ifFalse: [ PP2Failure message: 'String literals not allowed by signature' ] ] ]
 ]
 
-{ #category : #productions }
+{ #category : #'productions - signature' }
 LbDependentSignatureParser >> subscriptOp [
-	^ super subscriptOp
-		==> [ :nodes |
-				| args |
-				args := OrderedCollection with: nodes first.
-				args addAll: (nodes fourth reject: [ :element | element = $,]).
-				{ LbSubscriptOperatorName new. args asArray } ]
+	^ super subscriptOp ==> [ :nodes |
+		| args |
+		args := OrderedCollection with: nodes first.
+		args addAll: (nodes fourth reject: [ :element | element = $, ]).
+		{ LbSubscriptOperatorName new. args asArray } ]
 ]
 
-{ #category : #productions }
+{ #category : #'productions - signature' }
 LbDependentSignatureParser >> superscriptOp [
-	^ super superscriptOp
-		==> [ :nodes |
-				| args |
-				args := OrderedCollection with: nodes first.
-				args addAll: (nodes fourth reject: [ :element | element = $,]).
-				{ LbSuperscriptOperatorName new. args asArray } ]
+	^ super superscriptOp ==> [ :nodes |
+		| args |
+		args := OrderedCollection with: nodes first.
+		args addAll: (nodes fourth reject: [ :element | element = $, ]).
+		{ LbSuperscriptOperatorName new. args asArray } ]
 ]
 
-{ #category : #productions }
+{ #category : #'productions - term' }
 LbDependentSignatureParser >> term [
-	^ super term
-		==> [ :nodes |
-				nodes size = 1
-					ifTrue: [ nodes first ]
-					ifFalse: [
-						| opSymbol |
-						opSymbol := nodes first asSymbol.
-						(nodes allButFirst: 2)
-							inject: nodes second
-							into: [ :result :each |
-								| args |
-								args := { result . each }.
-								signature
-									nonZeroArgTermNamed: (LbInfixOperatorName for: opSymbol)
-									withArgs: args
-									onError: [ :opName :arity |
-										self errorForOp: opName withArity: arity ] ] ] ]
-]
-
-{ #category : #productions }
-LbDependentSignatureParser >> var [
-	^ super var
-		==> [ :nodes | { nodes first. nodes third } ]
-
+	^ super term  ==> [ :nodes |
+		nodes size = 1
+			ifTrue: [ nodes first ] "nonInfixTerm"
+			ifFalse: [
+				| name |
+				"nodes contains the infix operator symbol followed by
+				all the arguments. Example 'a + b + c' becomes
+				{ '+'. a. b. c } with a b c already converted to blocks."
+				name := LbInfixOperatorName for: nodes first asSymbol.
+				(nodes allButFirst: 2)
+					inject: nodes second
+					into: [ :result :nextArg |
+						self delayedTermWithOp: name args: { result . nextArg } ] ] ]
 ]
 
 { #category : #accessing }
+LbDependentSignatureParser >> termEnd [
+	^ term end
+]
+
+{ #category : #'productions - signature' }
+LbDependentSignatureParser >> var [
+	^ super var ==> [ :nodes |
+		{ nodes first. nodes third } ]
+]
+
+{ #category : #'productions - signature' }
 LbDependentSignatureParser >> varEnd [
 	^ var end
 ]
 
-{ #category : #productions }
+{ #category : #'productions - signature' }
 LbDependentSignatureParser >> zeroArgOp [
-	^ super zeroArgOp
-		==> [ :idString | { LbPrefixOperatorName for: idString. #() } ]
+	^ super zeroArgOp ==> [ :idString |
+		{ LbPrefixOperatorName for: idString. #() } ]
 ]
 
-{ #category : #productions }
+{ #category : #'productions - term' }
 LbDependentSignatureParser >> zeroArgTerm [
-	^ super zeroArgTerm
-		==> [ :symbol |
-				signature
-					zeroArgTermNamed: (LbPrefixOperatorName for: symbol)
-					extraVariables: extraVariables
-					onError: [ :opName | self errorForOp: opName withArity: #() ] ]
+	^ super zeroArgTerm ==> [ :symbol |
+		| name |
+		name := LbPrefixOperatorName for: symbol.
+		[ :aSignature :aDictionary |
+			aSignature
+				zeroArgTermNamed: name
+				extraVariables: aDictionary ] ]
 ]

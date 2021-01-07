@@ -171,8 +171,8 @@ LbDependentSignatureGrammar >> openParenthesis [
 
 { #category : #productions }
 LbDependentSignatureGrammar >> parenthesizedTerm [
-	^ $( asPParser , term, $) asPParser
-		==> [ :nodes | nodes at: 2 ]
+	^ openParenthesis , term, closeParenthesis
+		==> [ :nodes | nodes second ]
 ]
 
 { #category : #productions }
@@ -262,7 +262,7 @@ LbDependentSignatureGrammar >> underscore [
 
 { #category : #productions }
 LbDependentSignatureGrammar >> var [
-	^ identifier, colon, sort
+	^ identifier, colon, simpleTerm
 ]
 
 { #category : #productions }
