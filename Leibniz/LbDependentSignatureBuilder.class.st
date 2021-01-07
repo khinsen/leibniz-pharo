@@ -37,7 +37,9 @@ LbDependentSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 { #category : #adding }
 LbDependentSignatureBuilder >> parseAndAddOp: aString [
 	(operators at: #test ifAbsentPut: [ OrderedCollection new ])
-		add: (opParser parse: aString)
+		add: ((opParser parse: aString)
+				value: sortGraph sortContext signature
+				value: Dictionary new).
 ]
 
 { #category : #accessing }
