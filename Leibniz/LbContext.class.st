@@ -35,9 +35,19 @@ LbContext class >> name: aString signature: aSignature rewriteSystem: aRewriteSy
 			 yourself
 ]
 
+{ #category : #copying }
+LbContext >> copy [
+	^ self
+]
+
 { #category : #accessing }
 LbContext >> declarations [
 	^ rewriteSystem allDeclarations union: statements declarations
+]
+
+{ #category : #copying }
+LbContext >> deepCopy [
+	^ self
 ]
 
 { #category : #inspecting }

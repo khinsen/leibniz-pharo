@@ -18,6 +18,16 @@ LbDependentSortGraph class >> sortContext: anLbContext [
 		yourself
 ]
 
+{ #category : #copying }
+LbDependentSortGraph >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LbDependentSortGraph >> deepCopy [
+	^ self
+]
+
 { #category : #initialization }
 LbDependentSortGraph >> initializeSorts [
 	[ sortSort := context sortGraph sortNamed: #sort ]

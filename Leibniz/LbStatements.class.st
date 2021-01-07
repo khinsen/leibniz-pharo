@@ -25,6 +25,11 @@ LbStatements >> allDeclarations [
 	^ self signature declarations union: self declarations
 ]
 
+{ #category : #copying }
+LbStatements >> copy [
+	^ self
+]
+
 { #category : #accessing }
 LbStatements >> declarations [
 	| declarations equationDecls |
@@ -36,6 +41,11 @@ LbStatements >> declarations [
 					collect: #asLeibnizSyntaxString)
 						asOrderedCollection sort ].
 	^ declarations
+]
+
+{ #category : #copying }
+LbStatements >> deepCopy [
+	^ self
 ]
 
 { #category : #accessing }

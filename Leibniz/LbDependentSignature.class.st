@@ -16,6 +16,16 @@ LbDependentSignature class >> sortGraph: aSortGraph [
 		yourself
 ]
 
+{ #category : #copying }
+LbDependentSignature >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LbDependentSignature >> deepCopy [
+	^ self
+]
+
 { #category : #initialization }
 LbDependentSignature >> initializeWithSortGraph: aSortGraph [
 	sortGraph := aSortGraph.

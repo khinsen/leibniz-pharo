@@ -24,6 +24,16 @@ LbSortClassifier >> asSet [
 	self subclassResponsibility
 ]
 
+{ #category : #copying }
+LbSortClassifier >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LbSortClassifier >> deepCopy [
+	^ self
+]
+
 { #category : #inspecting }
 LbSortClassifier >> gtGraphFor: aView [
 	<gtView>

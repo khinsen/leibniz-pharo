@@ -15,6 +15,16 @@ LbStatement >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
+{ #category : #copying }
+LbStatement >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LbStatement >> deepCopy [
+	^ self
+]
+
 { #category : #printing }
 LbStatement >> printAsLeibnizSyntaxOn: aStream [
 	self subclassResponsibility

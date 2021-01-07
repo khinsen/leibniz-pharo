@@ -37,6 +37,16 @@ LbTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	self subclassResponsibility
 ]
 
+{ #category : #copying }
+LbTerm >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LbTerm >> deepCopy [
+	^ self
+]
+
 { #category : #testing }
 LbTerm >> evaluateEqualityTerm [
 	^ nil

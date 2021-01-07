@@ -21,6 +21,11 @@ LbRule >> condition [
 ]
 
 { #category : #copying }
+LbRule >> copy [
+	^self
+]
+
+{ #category : #copying }
 LbRule >> deepCopy [
 	^self
 ]
