@@ -20,13 +20,19 @@ LbDependentSortExamples >> plainSortGraph [
 { #category : #example }
 LbDependentSortExamples >> signatureWithDependentSorts [
 	<gtExample>
-	^ (LbDependentSignatureBuilder sortGraph: self sortGraphWithDependentSorts)
+	| sb s |
+	sb := (LbDependentSignatureBuilder sortGraph: self sortGraphWithDependentSorts)
 		parseAndAddOp: 'aFoo : foo(0)';
 		parseAndAddOp: '∀ n:ℕ aFoo(bar(n)) : foo(n + 1)';
 		parseAndAddOp: 'aBar : bar(0)';
 		parseAndAddOp: '∀ n:ℕ aBar(foo(n)) : bar(n + 1)';
 		parseAndAddOp: 'aBaz : baz(0)';
-		yourself
+		parseAndAddVar: '∀ n:ℕ aFooVar : foo(n)'.
+	s := sb signature.
+	self
+		should: [ sb parseAndAddOp: '∀ n:ℕ aQuux(bar(0)) : foo(n)' ]
+		raise: Error.
+	^ s
 ]
 
 { #category : #example }
@@ -37,7 +43,8 @@ LbDependentSortExamples >> signatureWithoutDependentSorts [
 		parseAndAddOp: 'aFoo(bar) : foo';
 		parseAndAddOp: 'aBar : bar';
 		parseAndAddOp: 'aBaz : baz';
-		yourself
+		parseAndAddVar: 'aFooVar : foo';
+		signature
 ]
 
 { #category : #example }
@@ -73,7 +80,7 @@ LbDependentSortExamples >> sortGraphWithDependentSorts [
 		sortContext: self sortContextWithDependentSorts.
 	#('foo(1)' 'bar(0)' 'baz(42)') do: [ :aString |
 		self
-			assert: (sortGraph parseSort: aString) sort name
+			assert: (sortGraph parseSort: aString) term sort name
 			equals: #sort ].
 	^ sortGraph
 ]
@@ -86,7 +93,7 @@ LbDependentSortExamples >> sortGraphWithoutDependentSorts [
 		sortContext:self sortContextWithoutDependentSorts.
 	#(foo bar baz) do: [ :name |
 		self
-			assert: (sortGraph parseSort: name) sort name
+			assert: (sortGraph parseSort: name) term sort name
 			equals: #sort ].
 	^ sortGraph
 ]

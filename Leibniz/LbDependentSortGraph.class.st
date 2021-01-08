@@ -28,6 +28,12 @@ LbDependentSortGraph >> deepCopy [
 	^ self
 ]
 
+{ #category : #accessing }
+LbDependentSortGraph >> includes: aSortTerm [
+	self flag: #todo.
+	^ true.
+]
+
 { #category : #initialization }
 LbDependentSortGraph >> initializeSorts [
 	[ sortSort := context sortGraph sortNamed: #sort ]
@@ -48,13 +54,16 @@ LbDependentSortGraph >> initializeWithSortContext: anLbContext [
 
 { #category : #accessing }
 LbDependentSortGraph >> parseSort: aString [
-	| sort |
-	sort := context parseTerm: aString.
-	self assert: sort sort <= sortSort.
-	^ sort
+	^ self sortFor: (context parseTerm: aString)
 ]
 
 { #category : #accessing }
 LbDependentSortGraph >> sortContext [
 	^ context
+]
+
+{ #category : #accessing }
+LbDependentSortGraph >> sortFor: aSortTerm [
+	self assert: aSortTerm sort <= sortSort.
+	^ LbDependentSort sortGraph: self term: aSortTerm
 ]

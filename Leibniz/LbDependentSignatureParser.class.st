@@ -211,7 +211,16 @@ LbDependentSignatureParser >> termEnd [
 { #category : #'productions - signature' }
 LbDependentSignatureParser >> var [
 	^ super var ==> [ :nodes |
-		{ nodes first. nodes third } ]
+		| variables |
+		variables := nodes first.
+		[ :aSignature :aDictionary |
+			| allVariables |
+			allVariables := aDictionary copy.
+			variables do: [ :each |
+				| newVar |
+				newVar := each value: aSignature value: aDictionary.
+				allVariables at: newVar key put: newVar value ].
+			{ nodes second. nodes fourth cull: aSignature cull: allVariables } ] ]
 ]
 
 { #category : #'productions - signature' }

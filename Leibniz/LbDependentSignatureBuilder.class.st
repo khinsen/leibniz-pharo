@@ -19,6 +19,62 @@ LbDependentSignatureBuilder class >> sortGraph: aSortGraph [
 		yourself
 ]
 
+{ #category : #adding }
+LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortArray ofSort: aSortTerm [
+	| arity kindArity |
+	self checksForNewOp: anOpName withArgs: aSortArray ofSort: aSortTerm.
+
+	arity := LbArity sortGraph: sortGraph argSorts: aSortArray.
+	kindArity := arity liftToKindLevel.
+	operators at: anOpName ifAbsentPut: [ Dictionary new ].
+	(operators at: anOpName) at: kindArity ifAbsentPut: [
+		LbOperator
+			name: anOpName
+			argKinds: kindArity
+			kind: aSortTerm kind
+			origins: nil ].
+	((operators at: anOpName) at: kindArity)
+		addArity: arity withSort: aSortTerm origins: nil
+]
+
+{ #category : #adding }
+LbDependentSignatureBuilder >> addVar: anOpName ofSort: aSortTerm [
+	self assert: (sortGraph includes: aSortTerm).
+	operators at: anOpName ifPresent: [ :op |
+		op at: (LbArity sortGraph: sortGraph argSorts: #()) ifPresent: [ :sort |
+			self error: 'conflicting earlier operator definition with sort', sort asLeibnizSyntaxString ] ].
+
+	variables at: anOpName
+		ifPresent: [ :sort |
+			self
+				assert: sort = aSortTerm
+				description: 'conflicting earlier variable definition with sort ', sort asLeibnizSyntaxString ]
+		ifAbsent: [ variables at: anOpName put: aSortTerm ]
+]
+
+{ #category : #private }
+LbDependentSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortArray ofSort: aSortTerm [
+	| argSortVariables |
+
+		"All sorts belong to sortGraph"
+	self assert: (sortGraph includes: aSortTerm).
+	aSortArray do: [ :each | self assert: (sortGraph includes: each) ].
+
+	"No conflict with variable declarations"
+	aSortArray ifEmpty: [
+		variables at: anOpName ifPresent: [ :sort |
+			self error: 'conflicting earlier variable definition with sort ', sort asLeibnizSyntaxString ] ].
+
+	"All variables in the result sort are used in the arg sorts"
+	argSortVariables := Dictionary new.
+	aSortArray do: [ :each |
+		argSortVariables addAll: each term variables ].
+	aSortTerm term variables associationsDo: [ :each |
+		self
+			assert: (argSortVariables includesAssociation: each)
+			description: 'Variable ', each key asSymbol, ' in operator sort but not in arguments' ]
+]
+
 { #category : #initialization }
 LbDependentSignatureBuilder >> initializeParsersFor: aSignature [
 	opParser := LbDependentSignatureParser newStartingAt: #opEnd.
@@ -36,13 +92,27 @@ LbDependentSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 
 { #category : #adding }
 LbDependentSignatureBuilder >> parseAndAddOp: aString [
-	(operators at: #test ifAbsentPut: [ OrderedCollection new ])
-		add: ((opParser parse: aString)
-				value: sortGraph sortContext signature
-				value: Dictionary new).
+	| parsedOp argSorts |
+	parsedOp := (opParser parse: aString)
+		value: sortGraph sortContext signature
+		value: Dictionary new.
+	argSorts := parsedOp second collect: [ :each | sortGraph sortFor: each ].
+	self addOp: parsedOp first withArgs: argSorts ofSort: (sortGraph sortFor: parsedOp third).
+]
+
+{ #category : #accessing }
+LbDependentSignatureBuilder >> parseAndAddVar: aString [
+	| parsedVar |
+	parsedVar := (varParser parse: aString)
+		value: sortGraph sortContext signature
+		value: Dictionary new.
+	self addVar: parsedVar first ofSort: (sortGraph sortFor: parsedVar second)
 ]
 
 { #category : #accessing }
 LbDependentSignatureBuilder >> signature [
-	^ LbDependentSignature sortGraph: sortGraph
+	^ LbDependentSignature
+		sortGraph: sortGraph
+		operators: operators
+		variables:  variables
 ]

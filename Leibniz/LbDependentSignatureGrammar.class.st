@@ -262,7 +262,7 @@ LbDependentSignatureGrammar >> underscore [
 
 { #category : #productions }
 LbDependentSignatureGrammar >> var [
-	^ identifier, colon, simpleTerm
+	^ forAllClause star, identifier trim, colon, simpleTerm trim
 ]
 
 { #category : #productions }

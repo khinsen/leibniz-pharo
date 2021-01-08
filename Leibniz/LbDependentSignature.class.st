@@ -4,15 +4,19 @@ Class {
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
-		'sortGraph'
+		'sortGraph',
+		'variables',
+		'operators'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
 
 { #category : #'instace creation' }
-LbDependentSignature class >> sortGraph: aSortGraph [
+LbDependentSignature class >> sortGraph: aSortGraph operators: operatorDictionary variables: variableDictionary [
 	^ self basicNew
-		initializeWithSortGraph: aSortGraph;
+		initializeWithSortGraph: aSortGraph
+		operators: operatorDictionary
+		variables: variableDictionary;
 		yourself
 ]
 
@@ -27,8 +31,10 @@ LbDependentSignature >> deepCopy [
 ]
 
 { #category : #initialization }
-LbDependentSignature >> initializeWithSortGraph: aSortGraph [
+LbDependentSignature >> initializeWithSortGraph: aSortGraph operators: operatorDictionary variables: variableDictionary [
 	sortGraph := aSortGraph.
+	operators := operatorDictionary.
+	variables := variableDictionary.
 	self beRecursivelyReadOnlyObject
 ]
 
