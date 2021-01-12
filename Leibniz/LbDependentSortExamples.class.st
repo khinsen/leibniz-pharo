@@ -6,6 +6,37 @@ Class {
 	#category : #'Leibniz-7-DependentSorts'
 }
 
+{ #category : #accessing }
+LbDependentSortExamples >> listSignature [
+	<gtExample>
+	^ (LbDependentSignatureBuilder sortGraph: self listSortGraph)
+		parseAndAddOp: '∅ : ∅';
+		parseAndAddOp: '∀ s:sort ∀ n:ℕ ∀ m:ℕ (list(s, n)) ++ (list(s, m)) : list(s, n + m)';
+		parseAndAddOp: '∀ s:sort ∀ n:ℕ (list(s, n)) ++ s : list(s, n + 1)';
+		signature
+]
+
+{ #category : #accessing }
+LbDependentSortExamples >> listSortContext [
+	<gtExample>
+	^ (LbContextBuilder name: 'sorts')
+		include: (LbBuiltinContexts integerContext) inMode: #use;
+		parseAndAddSort: 'sort';
+		parseAndAddOp: '∅ : sort';
+		parseAndAddOp: 'list(sort, ℕ) : sort';
+		parseAndAddStatement: '∀ s:sort ∅ ⊆ list(s, 0)';
+		context
+]
+
+{ #category : #accessing }
+LbDependentSortExamples >> listSortGraph [
+	<gtExample>
+	| sortGraph |
+	sortGraph := LbDependentSortGraph
+		sortContext: self listSortContext.
+	^ sortGraph
+]
+
 { #category : #example }
 LbDependentSortExamples >> plainSortGraph [
 	<gtExample>
