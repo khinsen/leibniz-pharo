@@ -93,9 +93,13 @@ LbDependentSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 { #category : #adding }
 LbDependentSignatureBuilder >> parseAndAddOp: aString [
 	| parsedOp argSorts |
-	parsedOp := (opParser parse: aString)
-		value: sortGraph sortContext signature
-		value: Dictionary new.
+	parsedOp := (opParser parse: aString).
+	parsedOp isPetit2Failure ifTrue:
+		[ self error: parsedOp message, ' after ',
+				 (aString sliceFrom: 1 to: parsedOp position) ].
+	parsedOp := parsedOp
+					value: sortGraph sortContext signature
+					value: Dictionary new.
 	argSorts := parsedOp second collect: [ :each | sortGraph sortFor: each ].
 	self addOp: parsedOp first withArgs: argSorts ofSort: (sortGraph sortFor: parsedOp third).
 ]
@@ -103,9 +107,13 @@ LbDependentSignatureBuilder >> parseAndAddOp: aString [
 { #category : #accessing }
 LbDependentSignatureBuilder >> parseAndAddVar: aString [
 	| parsedVar |
-	parsedVar := (varParser parse: aString)
-		value: sortGraph sortContext signature
-		value: Dictionary new.
+	parsedVar := (varParser parse: aString).
+	parsedVar isPetit2Failure ifTrue:
+		[ self error: parsedVar message, ' after ',
+				 (aString sliceFrom: 1 to: parsedVar position) ].
+	parsedVar := parsedVar
+					value: sortGraph sortContext signature
+					value: Dictionary new.
 	self addVar: parsedVar first ofSort: (sortGraph sortFor: parsedVar second)
 ]
 

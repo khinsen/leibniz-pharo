@@ -101,7 +101,7 @@ LbDependentSignatureParser >> op [
 		variables := nodes first.
 		opName := nodes second first.
 		opArgs := nodes second second.
-		opSort := nodes fourth first.
+		opSort := nodes fourth.
 		[ :aSignature :aDictionary |
 			| allVariables |
 			allVariables := aDictionary copy.
@@ -112,14 +112,9 @@ LbDependentSignatureParser >> op [
 			{
 				opName.
 				opArgs collect: [ :each |
-					each first cull: aSignature cull: allVariables ].
+					each cull: aSignature cull: allVariables ].
 				opSort cull: aSignature cull: allVariables
 			} ] ]
-]
-
-{ #category : #'productions - signature' }
-LbDependentSignatureParser >> opEnd [
-	^ op end
 ]
 
 { #category : #'productions - signature' }
@@ -221,11 +216,6 @@ LbDependentSignatureParser >> var [
 				newVar := each value: aSignature value: aDictionary.
 				allVariables at: newVar key put: newVar value ].
 			{ nodes second. nodes fourth cull: aSignature cull: allVariables } ] ]
-]
-
-{ #category : #'productions - signature' }
-LbDependentSignatureParser >> varEnd [
-	^ var end
 ]
 
 { #category : #'productions - signature' }
