@@ -165,7 +165,7 @@ LbRewriteSystem >> reductionStepsFor: aTerm [
 { #category : #rewriting }
 LbRewriteSystem >> rewriteHeadOnce: aTerm [
 	(rules at: aTerm headOpName ifAbsent: [ #() ]) do: [ :aRule |
-		(aRule pattern match: aTerm) ifNotNil: [ :s |
+		(aRule pattern match: aTerm) ifNotNull: [ :s |
 			[ (self testCondition: aRule condition substituting: s)
 				ifTrue: [ ^ aRule apply: s ] ]
 			on: LbRewriteFailure do: [  ] ] ].
@@ -196,8 +196,8 @@ LbRewriteSystem >> rulesMatching: aTerm [
 					term: aTerm.
 	(rules at: aTerm headOpName ifAbsent: [ #() ]) do: [ :aRule |
 		(aRule pattern match: aTerm)
-			ifNil: [ matches addNonMatchingRule: aRule ]
-			ifNotNil: [ :s |
+			ifNull: [ matches addNonMatchingRule: aRule ]
+			ifNotNull: [ :s |
 				(self testCondition: aRule condition substituting: s)
 					ifFalse: [ matches addMatchingRuleFailedCondition: aRule ]
 					ifTrue: [ matches addMatchingRule: aRule result: (aRule apply: s) ] ]].

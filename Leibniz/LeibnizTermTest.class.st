@@ -17,8 +17,7 @@ LeibnizTermTest >> check: aTerm doesNotMatch: aPattern [
 	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
 	term := parse value: aTerm.
-	self assert: (pattern match: term) equals: nil.
-
+	self assert: (pattern match: term) isNull.
 ]
 
 { #category : #running }
@@ -30,7 +29,6 @@ LeibnizTermTest >> check: aTerm matches: aPattern withSubstitution: aDictionary 
 	term := parse value: aTerm.
 	substitutions := aDictionary collect: [ :each | parse value: each ].
 	self assert: (pattern match: term) variables equals: substitutions.
-
 ]
 
 { #category : #running }

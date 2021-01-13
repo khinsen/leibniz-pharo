@@ -31,7 +31,7 @@ LbTermExamples >> check: aTerm matches: aPattern withSubstitution: aDictionaryOr
 	term := parse value: aTerm.
 	substitution := pattern match: term.
 	aDictionaryOrNil
-		ifNil: [ self assert: substitution equals: nil ]
+		ifNil: [ self assert: substitution isNull ]
 		ifNotNil: [
 			variables := Dictionary
 				newFromKeys: (aDictionaryOrNil keys collect: [ :each |

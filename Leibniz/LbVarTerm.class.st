@@ -49,7 +49,7 @@ LbVarTerm >> match: otherTerm [
 	otherTerm assertNotAVariable.
 	otherTerm sort <= sort
 		ifTrue: [ ^ LbSubstitution variable: name value: otherTerm ]
-		ifFalse: [ ^ nil ]
+		ifFalse: [ ^ LbSubstitution null ]
 ]
 
 { #category : #printing }

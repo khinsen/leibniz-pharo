@@ -86,17 +86,12 @@ LbOpTerm >> match: otherTerm [
 LbOpTerm >> matchOp: aSymbol andArgs: anArgList [
 	| match |
 	opName = aSymbol
-		ifFalse: [ ^ nil ].
+		ifFalse: [ ^ LbSubstitution null ].
 	arguments size = anArgList size
-		ifFalse: [ ^ nil ].
+		ifFalse: [ ^ LbSubstitution null ].
 	match := LbSubstitution new.
-	anArgList with: arguments do:
-		[ :patternArg :valueArg |
-		  | argMatch |
-			argMatch := patternArg match: valueArg.
-			argMatch ifNil: [ ^ nil ].
-			match := match combineWith: argMatch.
-			match ifNil: [ ^ nil ] ].
+	anArgList with: arguments do: [ :patternArg :valueArg |
+		match combineWith: (patternArg match: valueArg) ].
 	^ match
 ]
 
@@ -120,7 +115,6 @@ LbOpTerm >> substitute: aSubstitution [
 	| substitutedArgList |
 	substitutedArgList := arguments collect: [ :arg | arg substitute: aSubstitution ].
 	^ signature nonZeroArgTermNamed: opName withArgs: substitutedArgList
-
 ]
 
 { #category : #inspecting }

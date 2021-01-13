@@ -95,7 +95,7 @@ LbTerm >> isTrue [
 LbTerm >> match: otherTerm [
 	self = otherTerm
 		ifTrue: [ ^ LbSubstitution new ]
-		ifFalse: [ ^ nil ]
+		ifFalse: [ ^ LbSubstitution null ]
 ]
 
 { #category : #matching }
