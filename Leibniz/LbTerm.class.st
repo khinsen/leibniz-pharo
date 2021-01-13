@@ -59,9 +59,9 @@ LbTerm >> gtTreeFor: aView [
 		title: 'Tree' translated;
 		priority: 0;
 		items: [ { self } ];
-		column: 'Term' item: [ :each |
+		column: 'Term' lbCode: [ :each |
 			each synopsis ];
-		column: 'Sort' item: [ :each |
+		column: 'Sort' lbCode: [ :each |
 			each sort asLeibnizSyntaxString ];
 		children: #arguments;
 		expandAll;
