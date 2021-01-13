@@ -6,18 +6,27 @@ Class {
 	#instVars : [
 		'sortGraph',
 		'variables',
-		'operators'
+		'operators',
+		'builtins'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
 
 { #category : #'instace creation' }
-LbDependentSignature class >> sortGraph: aSortGraph operators: operatorDictionary variables: variableDictionary [
+LbDependentSignature class >> sortGraph: aSortGraph builtins: aSet operators: operatorDictionary variables: variableDictionary [
 	^ self basicNew
 		initializeWithSortGraph: aSortGraph
+		builtins: aSet
 		operators: operatorDictionary
 		variables: variableDictionary;
 		yourself
+]
+
+{ #category : #lookup }
+LbDependentSignature >> assertBuiltin: aBuiltinSymbol [
+	self
+		assert: (builtins includes: aBuiltinSymbol)
+		description: aBuiltinSymbol, ' are not defined in this signature'
 ]
 
 { #category : #copying }
@@ -38,18 +47,14 @@ LbDependentSignature >> gtOperatorsFor: aView [
 		title: 'Operators' translated;
 		priority: 0;
 		items: [ operators keys sorted ];
-		column: 'Kind arity' lbCode: [ :eachItem |
+		column: 'Arguments' lbCode: [ :eachItem |
 			(eachItem isKindOf: LbOperatorName)
 				ifTrue: [ eachItem synopsis ]
-				ifFalse: [ eachItem name printStringForArity: eachItem kindArity ]];
-		column: 'Kind' lbCode: [ :eachItem |
-			(eachItem isKindOf: LbOperatorName)
-				ifTrue: [ '' ]
-				ifFalse: [ eachItem kind asLeibnizSyntaxString ]];
+				ifFalse: [ eachItem numArgs ]];
 		column: 'Ranks' text: [ :each |
 			(each isKindOf: LbOperatorName)
 				ifTrue: [ '' ]
-				ifFalse: [ each size asString ] ];
+				ifFalse: [ each size ] ];
 		children: [ :each |
 			(each isKindOf: LbOperatorName)
 				ifTrue: [ (operators at: each) values sorted: [:a :b | a kindArity size < b kindArity size] ]
@@ -63,13 +68,83 @@ LbDependentSignature >> gtOperatorsFor: aView [
 ]
 
 { #category : #initialization }
-LbDependentSignature >> initializeWithSortGraph: aSortGraph operators: operatorDictionary variables: variableDictionary [
+LbDependentSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: operatorDictionary variables: variableDictionary [
 	sortGraph := aSortGraph.
+	builtins := aSet.
 	operators := operatorDictionary.
 	variables := variableDictionary.
 	self beRecursivelyReadOnlyObject
 ]
 
 { #category : #'term construction' }
+LbDependentSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
+	| argSorts |
+	argSorts := aTermArray collect: #sort.
+	(self sortOfOp: anOpName withArgSorts: argSorts)
+		ifNil: [ ^ nil ]
+		ifNotNil: [ :sort |
+			^ LbOpTerm
+				name: anOpName
+				args: aTermArray
+				sort: sort
+				signature: self ]
+]
+
+{ #category : #lookup }
+LbDependentSignature >> opNamed: anOpName withArgs: aSortArray [
+	^ operators at: anOpName
+		ifPresent: [ :ops | ops at: aSortArray size ifAbsent: [ nil ] ]
+		ifAbsent: [ nil ].
+]
+
+{ #category : #'term construction' }
 LbDependentSignature >> parseTerm: aString [
+	| parsedTerm |
+	parsedTerm := (LbDependentSignatureParser newStartingAt: #termEnd)
+		parse: aString.
+	parsedTerm isPetit2Failure ifTrue:
+		[ self error: parsedTerm message, ' after ',
+				 (aString sliceFrom: 1 to: parsedTerm position) ].
+	^ parsedTerm value: self value: Dictionary new
+]
+
+{ #category : #lookup }
+LbDependentSignature >> sortNamed: aSymbol [
+	self flag: #legacy.
+	^ sortGraph sortNamed: aSymbol
+]
+
+{ #category : #lookup }
+LbDependentSignature >> sortOfOp: anOpName withArgSorts: aSortArray [
+	(self opNamed: anOpName withArgs: aSortArray)
+		ifNotNil: [ :op | ^ op sortForArgSorts: aSortArray ].
+	"A somewhat hacky special case: if the signature includes the
+    #truth builtin, it also includes == for testing arbitrary terms
+    for syntactic identity."
+	((builtins includes: #truth) 
+		and: [ anOpName = (LbInfixOperatorName for: '==')
+				and: [ aSortArray size = 2 ] ])
+		ifTrue: [ ^ sortGraph sortNamed: #boolean ].
+	^ nil
+]
+
+{ #category : #'term construction' }
+LbDependentSignature >> zeroArgTermNamed: anOpName [
+	variables at: anOpName
+		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort signature: self ].
+	(self sortOfOp: anOpName withArgSorts: #())
+		ifNil: [ ^ nil ]
+		ifNotNil: [ :sort |
+			^ LbOpTerm
+				name: anOpName
+				args: #()
+				sort: sort
+				signature: self ]
+]
+
+{ #category : #'term construction' }
+LbDependentSignature >> zeroArgTermNamed: anOpName extraVariables: aDictionary [
+	aDictionary at: anOpName
+		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort signature: self ].
+	^ self zeroArgTermNamed: anOpName
 ]

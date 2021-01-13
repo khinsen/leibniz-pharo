@@ -148,15 +148,6 @@ LbOperator >> gtGraphFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
-{ #category : #inspecting }
-LbOperator >> gtInspectorNetworkViewIn: composite [
-	<gtInspectorPresentationOrder: -10>
-	composite roassal2
-		title: 'Network View';
-		initializeView: self networkView.
-
-]
-
 { #category : #accessing }
 LbOperator >> gtOriginsFor: aView [
 	<gtView>

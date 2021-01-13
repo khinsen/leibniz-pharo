@@ -20,21 +20,24 @@ LbDependentSignatureBuilder class >> sortGraph: aSortGraph [
 ]
 
 { #category : #adding }
+LbDependentSignatureBuilder >> addBuiltin: aSymbol [
+	builtins add: aSymbol
+]
+
+{ #category : #adding }
 LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortArray ofSort: aSortTerm [
 	| arity kindArity |
 	self checksForNewOp: anOpName withArgs: aSortArray ofSort: aSortTerm.
 
 	arity := LbArity sortGraph: sortGraph argSorts: aSortArray.
-	kindArity := arity liftToKindLevel.
 	operators at: anOpName ifAbsentPut: [ Dictionary new ].
-	(operators at: anOpName) at: kindArity ifAbsentPut: [
-		LbOperator
+	(operators at: anOpName) at: arity size ifAbsentPut: [
+		LbDependentOperator
 			name: anOpName
-			argKinds: kindArity
-			kind: aSortTerm kind
-			origins: nil ].
-	((operators at: anOpName) at: kindArity)
-		addArity: arity withSort: aSortTerm origins: nil
+			numArgs: arity size
+			sortGraph: sortGraph ].
+	((operators at: anOpName) at: arity size)
+		addArity: arity withSort: aSortTerm
 ]
 
 { #category : #adding }
@@ -121,6 +124,7 @@ LbDependentSignatureBuilder >> parseAndAddVar: aString [
 LbDependentSignatureBuilder >> signature [
 	^ LbDependentSignature
 		sortGraph: sortGraph
+		builtins: builtins
 		operators: operators
 		variables:  variables
 ]

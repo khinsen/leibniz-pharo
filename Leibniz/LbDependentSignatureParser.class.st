@@ -53,9 +53,8 @@ LbDependentSignatureParser >> fpNumberTerm [
 		| floatValue |
 		floatValue := (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat.
 		[ :aSignature |
-			(aSignature hasBuiltin: #fpNumbers)
-				ifTrue: [ LbFPNumberTerm value: floatValue signature: aSignature ]
-				ifFalse: [ PP2Failure message: 'Floating-point literals not allowed by signature' ] ] ]
+			aSignature assertBuiltin: #fpNumbers.
+			LbFPNumberTerm value: floatValue signature: aSignature ] ]
 ]
 
 { #category : #accessing }
@@ -77,9 +76,8 @@ LbDependentSignatureParser >> integerTerm [
 		| intValue |
 		intValue := value asNumber.
 		[ :aSignature |
-			(aSignature hasBuiltin: #integers)
-				ifTrue: [ LbIntegerTerm value: intValue signature: aSignature ]
-				ifFalse: [ PP2Failure message: 'Integer literals not allowed by signature' ] ] ]
+			aSignature assertBuiltin: #integers.
+			LbIntegerTerm value: intValue signature: aSignature ] ]
 ]
 
 { #category : #'productions - term' }
@@ -141,9 +139,8 @@ LbDependentSignatureParser >> rationalNumberTerm [
 		| rationalValue |
 		rationalValue := Fraction readFromString: value.
 		[ :aSignature |
-			(aSignature hasBuiltin: #rationalNumbers)
-				ifTrue: [ LbRationalNumberTerm value: rationalValue signature: aSignature ]
-				ifFalse: [ PP2Failure message: 'Rational number literals not allowed by signature' ] ] ]
+			aSignature assertBuiltin: #rationalNumbers.
+			LbRationalNumberTerm value: rationalValue signature: aSignature ] ]
 ]
 
 { #category : #'productions - signature' }
@@ -158,9 +155,8 @@ LbDependentSignatureParser >> stringTerm [
 		| stringValue |
 		stringValue := value copyFrom: 2 to: value size - 1.
 		[ :aSignature |
-			(aSignature hasBuiltin: #strings)
-				ifTrue: [ LbStringTerm value: stringValue signature: aSignature ]
-				ifFalse: [ PP2Failure message: 'String literals not allowed by signature' ] ] ]
+			aSignature assertBuiltin: #strings.
+			LbStringTerm value: stringValue signature: aSignature ] ]
 ]
 
 { #category : #'productions - signature' }

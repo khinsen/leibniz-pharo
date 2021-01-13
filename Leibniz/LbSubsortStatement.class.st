@@ -48,11 +48,19 @@ LbSubsortStatement >> gtRelationFor: aView [
 LbSubsortStatement >> initializeWithSubsort: subsortTerm supersort: supersortTerm localVariables: aDictionary [
 	subsort := subsortTerm.
 	supersort := supersortTerm.
-	self assert: subsort sort name equals: #sort.
-	self assert: supersort sort name equals: #sort.
 	variables := aDictionary.
 	signature := subsortTerm signature.
+
+	self assert: subsort sort name equals: #sort.
+	self assert: supersort sort name equals: #sort.
 	self assert: supersortTerm signature equals: signature.
+
+	supersort variables associationsDo: [ :each |
+		self
+			assert: (subsort variables includesAssociation: each)
+			description: 'Variable ', each key asSymbol,
+							' in supersort but not in subsort term' ].
+				
 	self beRecursivelyReadOnlyObject
 ]
 
@@ -73,4 +81,12 @@ LbSubsortStatement >> subsort [
 { #category : #accessing }
 LbSubsortStatement >> supersort [
 	^ supersort
+]
+
+{ #category : #matching }
+LbSubsortStatement >> supersortOf: aTerm [
+	^ (subsort match: aTerm)
+		ifNull: [ nil ]
+		ifNotNull: [ :substitution |
+			supersort substitute: substitution ]
 ]

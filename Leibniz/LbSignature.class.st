@@ -114,7 +114,7 @@ LbSignature >> gtDeclarationsFor: aView [
 { #category : #inspecting }
 LbSignature >> gtOperatorsFor: aView [
 	<gtView>
-	operators isEmpty ifTrue: [ ^ aView empty ].
+	operators ifEmpty: [ ^ aView empty ].
 	^ aView lbColumnedTree
 		title: 'Operators' translated;
 		priority: 0;

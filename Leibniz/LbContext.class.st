@@ -170,6 +170,11 @@ LbContext >> printOn: aStream [
 
 ]
 
+{ #category : #operations }
+LbContext >> reduce: aTerm [
+	^ rewriteSystem reduce: aTerm
+]
+
 { #category : #accessing }
 LbContext >> rewriteSystem [
 	^ rewriteSystem

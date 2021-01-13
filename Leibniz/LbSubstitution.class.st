@@ -51,14 +51,14 @@ LbSubstitution >> gtItemsFor: aView [
 
 { #category : #testing }
 LbSubstitution >> ifNotNull: aBlock [
-	self isNull ifFalse: [ ^ aBlock value: self ]
+	self isNull ifFalse: [ ^ aBlock cull: self ]
 ]
 
 { #category : #testing }
 LbSubstitution >> ifNull: aNullBlock ifNotNull: aBlock [
 	self isNull
 		ifTrue: [ ^ aNullBlock value ]
-		ifFalse: [ ^ aBlock value: self ]
+		ifFalse: [ ^ aBlock cull: self ]
 ]
 
 { #category : #initialization }

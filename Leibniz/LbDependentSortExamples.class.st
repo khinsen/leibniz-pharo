@@ -6,35 +6,44 @@ Class {
 	#category : #'Leibniz-7-DependentSorts'
 }
 
-{ #category : #accessing }
+{ #category : #example }
 LbDependentSortExamples >> listSignature [
 	<gtExample>
 	^ (LbDependentSignatureBuilder sortGraph: self listSortGraph)
 		parseAndAddOp: '∅ : ∅';
 		parseAndAddOp: '∀ s:sort ∀ n:ℕ ∀ m:ℕ (list(s, n)) ++ (list(s, m)) : list(s, n + m)';
 		parseAndAddOp: '∀ s:sort ∀ n:ℕ (list(s, n)) ++ s : list(s, n + 1)';
+		parseAndAddOp: '∀ s:sort ∅ ++ s : list(s, 1)';
+		parseAndAddOp: 'anElement : element';
 		signature
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LbDependentSortExamples >> listSortContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'sorts')
 		include: (LbBuiltinContexts integerContext) inMode: #use;
 		parseAndAddSort: 'sort';
+		parseAndAddOp: 'element : sort';
 		parseAndAddOp: '∅ : sort';
 		parseAndAddOp: 'list(sort, ℕ) : sort';
-		parseAndAddStatement: '∀ s:sort ∅ ⊆ list(s, 0)';
 		context
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LbDependentSortExamples >> listSortGraph [
 	<gtExample>
 	| sortGraph |
 	sortGraph := LbDependentSortGraph
 		sortContext: self listSortContext.
 	^ sortGraph
+]
+
+{ #category : #example }
+LbDependentSortExamples >> listTerms [
+	<gtExample>
+	^ #('∅' '∅ ++ anElement' '∅ ++ anElement ++ anElement') collect: [ :each |
+		self listSignature parseTerm: each ]
 ]
 
 { #category : #example }

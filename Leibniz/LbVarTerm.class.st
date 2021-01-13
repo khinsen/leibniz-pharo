@@ -66,7 +66,6 @@ LbVarTerm >> sort [
 LbVarTerm >> substitute: aSubstitution [
 	aSubstitution variables at: name ifPresent: [ :value | ^ value ].
 	^ self
-
 ]
 
 { #category : #accessing }

@@ -28,6 +28,13 @@ LbDependentSortGraph >> deepCopy [
 	^ self
 ]
 
+{ #category : #lookup }
+LbDependentSortGraph >> directSupersortsOf: aSortTerm [
+	^ context statements subsortStatements
+		collect: [ :each | each supersortOf: aSortTerm ]
+		thenSelect: #isNotNil
+]
+
 { #category : #accessing }
 LbDependentSortGraph >> includes: aSortTerm [
 	self flag: #todo.
@@ -53,6 +60,12 @@ LbDependentSortGraph >> initializeWithSortContext: anLbContext [
 ]
 
 { #category : #accessing }
+LbDependentSortGraph >> normalizedSortFor: aSortTerm [
+	self assert: aSortTerm sort <= sortSort.
+	^ LbDependentSort sortGraph: self term: (context reduce: aSortTerm)
+]
+
+{ #category : #lookup }
 LbDependentSortGraph >> parseSort: aString [
 	^ self sortFor: (context parseTerm: aString)
 ]
@@ -66,4 +79,10 @@ LbDependentSortGraph >> sortContext [
 LbDependentSortGraph >> sortFor: aSortTerm [
 	self assert: aSortTerm sort <= sortSort.
 	^ LbDependentSort sortGraph: self term: aSortTerm
+]
+
+{ #category : #lookup }
+LbDependentSortGraph >> sortNamed: aSymbol [
+	self flag: #legacy.
+	^ self parseSort: aSymbol
 ]
