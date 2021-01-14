@@ -30,9 +30,12 @@ LbDependentSortGraph >> deepCopy [
 
 { #category : #lookup }
 LbDependentSortGraph >> directSupersortsOf: aSortTerm [
-	^ context statements subsortStatements
-		collect: [ :each | each supersortOf: aSortTerm ]
-		thenSelect: #isNotNil
+	| supersorts |
+	supersorts := Set new.
+	context statements subsortStatements do: [ :each |
+		(each supersortOf: aSortTerm)
+			ifNotNil: [ :term | supersorts add: (self sortFor: term) ] ].
+	^ supersorts
 ]
 
 { #category : #accessing }
