@@ -59,6 +59,21 @@ LbDependentOperator >> numArgs [
 	^ numArgs
 ]
 
+{ #category : #printing }
+LbDependentOperator >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	aStream nextPutAll: name asSymbol.
+	aStream nextPutAll: '('.
+	numArgs > 1 ifTrue: [
+		(numArgs - 1) timesRepeat: [ aStream nextPutAll: '•, ' ] ].
+	numArgs > 0 ifTrue: [ aStream nextPut: $• ].
+	aStream nextPutAll: '), '.
+	ranks size printOn: aStream.
+	aStream nextPutAll: ' rank(s)'.
+	aStream nextPut: $)
+]
+
 { #category : #lookup }
 LbDependentOperator >> ranksMatchingArgSorts: aSortArray [
 	| matches |
@@ -67,9 +82,16 @@ LbDependentOperator >> ranksMatchingArgSorts: aSortArray [
 		| match |
 		match := LbSubstitution new.
 		each key with: aSortArray do: [ :patternArg :valueArg |
-			match combineWith: (patternArg match: valueArg) ].
+			| submatches |
+			submatches := patternArg matchAllSupersortsOf: valueArg.
+			submatches
+				ifEmpty: [ match makeNull ]
+				ifNotEmpty: [
+					submatches size > 1
+						ifTrue: [ self error: 'Multiple matches not yet implemented'].
+					match combineWith: submatches anyOne ] ].
 		match ifNotNull: [
-			matches add: (each key collect: [ :term | term substitute: match ])
+			matches add: (each key collect: [ :s | s substitute: match ])
 							-> (each value substituteAndReduce: match) ] ].
 	^ matches
 ]

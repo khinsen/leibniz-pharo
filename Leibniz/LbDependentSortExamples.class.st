@@ -9,7 +9,8 @@ Class {
 { #category : #example }
 LbDependentSortExamples >> bagAndListTerms [
 	<gtExample>
-	^ #('∅' '∅ ** anElement' '∅ ++ anElement') collect: [ :each |
+	^ #('∅' '∅ ** anElement' '∅ ++ anElement'
+		'size(∅)' 'size(∅ ** anElement)' 'size(∅ ++ anElement)') collect: [ :each |
 		self bagSignature parseTerm: each ]
 ]
 
@@ -17,6 +18,7 @@ LbDependentSortExamples >> bagAndListTerms [
 LbDependentSortExamples >> bagSignature [
 	<gtExample>
 	^ (LbDependentSignatureBuilder sortGraph: self bagSortGraph)
+		addBuiltin: #integers;
 		parseAndAddOp: '∅ : ∅';
 		parseAndAddOp: '∀ s:sort ∀ n:ℕ ∀ m:ℕ (list(s, n)) ++ (list(s, m)) : list(s, n + m)';
 		parseAndAddOp: '∀ s:sort ∀ n:ℕ (list(s, n)) ++ s : list(s, n + 1)';
@@ -25,35 +27,29 @@ LbDependentSortExamples >> bagSignature [
 		parseAndAddOp: '∀ s:sort ∀ n:ℕ (bag(s, n)) ** s : bag(s, n + 1)';
 		parseAndAddOp: '∀ s:sort ∅ ** s : bag(s, 1)';
 		parseAndAddOp: 'anElement : element';
+		parseAndAddOp: 'size(collection) : ℕ';
 		signature
-]
-
-{ #category : #example }
-LbDependentSortExamples >> bagSortContext [
-	<gtExample>
-	^ (LbContextBuilder name: 'sorts')
-		include: (self listSortContext) inMode: #use;
-		parseAndAddOp: 'collection : sort';
-		parseAndAddOp: 'bag(sort, ℕ) : sort';
-		parseAndAddStatement: '∀ s:sort ∀ n:ℕ list(s, n) ⊆ bag(s, n)';
-		parseAndAddStatement: '∀ s:sort ∀ n:ℕ bag(s, n) ⊆ collection';
-		context
 ]
 
 { #category : #example }
 LbDependentSortExamples >> bagSortGraph [
 	<gtExample>
-	| sortGraph |
-	sortGraph := LbDependentSortGraph
-		sortContext: self bagSortContext.
-	^ sortGraph
-]
-
-{ #category : #example }
-LbDependentSortExamples >> bagTerms [
-	<gtExample>
-	^ #('∅' '∅ ++ anElement' '∅ ++ anElement ++ anElement') collect: [ :each |
-		self listSignature parseTerm: each ]
+	| sortContext |
+	sortContext := (LbContextBuilder name: 'sorts')
+		include: (self listSortContext) inMode: #use;
+		parseAndAddOp: 'collection : sort';
+		parseAndAddOp: 'bag(sort, ℕ) : sort';
+		parseAndAddOp: 'ℕ : sort';
+		parseAndAddOp: 'ℕ.nz : sort';
+		parseAndAddOp: 'zero : sort';
+		parseAndAddStatement: '∀ s:sort ∀ n:ℕ list(s, n) ⊆ bag(s, n)';
+		parseAndAddStatement: '∀ s:sort ∀ n:ℕ bag(s, n) ⊆ collection';
+		parseAndAddStatement: '∅ ⊆ collection';
+		parseAndAddStatement: 'zero ⊆ ℕ';
+		parseAndAddStatement: 'ℕ.nz ⊆ ℕ';
+		context.
+	^ LbDependentSortGraph
+		sortContext: sortContext
 ]
 
 { #category : #example }

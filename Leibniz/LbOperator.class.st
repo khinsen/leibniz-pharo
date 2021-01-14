@@ -183,8 +183,9 @@ LbOperator >> kindArity [
 { #category : #matching }
 LbOperator >> leastRankForArgSorts: aSortArray [
 	| arity |
-	aSortArray ifEmpty: [ self assert: ranks size equals: 1 .
-								 ^ ranks first ].
+	aSortArray ifEmpty: [
+		self assert: ranks size equals: 1 .
+		^ ranks first ].
 	arity := LbArity sortGraph: sortGraph argSorts: aSortArray.
 	^ ranks detect: [ :r | arity <= r key ]
 			  ifNone: [ kindArity -> kind ].

@@ -115,6 +115,16 @@ LbDependentSort >> match: aSort [
 	^ self term match: aSort term
 ]
 
+{ #category : #matching }
+LbDependentSort >> matchAllSupersortsOf: aSort [
+	| matches |
+	matches := Set new.
+	(self term match: aSort term) ifNotNull: [ :s | matches add: s ].
+	aSort directSupersorts do: [ :each |
+		matches := matches union: (self matchAllSupersortsOf: each) ].
+	^ matches
+]
+
 { #category : #printing }
 LbDependentSort >> printAsLeibnizSyntaxOn: aStream [
 	term printAsLeibnizSyntaxOn: aStream
