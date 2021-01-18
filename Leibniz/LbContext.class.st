@@ -11,7 +11,7 @@ Class {
 		'sortGraph',
 		'signature',
 		'rewriteSystem',
-		'statements'
+		'axioms'
 	],
 	#category : #'Leibniz-6-Contexts'
 }
@@ -22,17 +22,22 @@ LbContext class >> name: aString signature: aSignature rewriteSystem: aRewriteSy
 		name: aString
 		signature: aSignature
 		rewriteSystem: aRewriteSystem
-		statements: (LbStatementsBuilder signature: aSignature) statements
+		axioms: (LbAxiomBuilder signature: aSignature) axioms
 ]
 
 { #category : #'instance creation' }
-LbContext class >> name: aString signature: aSignature rewriteSystem: aRewriteSystem statements: anLbStatements [
+LbContext class >> name: aString signature: aSignature rewriteSystem: aRewriteSystem axioms: anLbAxioms [
 	^ self basicNew
 			 initializeWithName: aString
 			 signature: aSignature
 			 rewriteSystem: aRewriteSystem
-			 statements: anLbStatements;
+			 axioms: anLbAxioms;
 			 yourself
+]
+
+{ #category : #accessing }
+LbContext >> axioms [
+	^ axioms
 ]
 
 { #category : #copying }
@@ -42,12 +47,23 @@ LbContext >> copy [
 
 { #category : #accessing }
 LbContext >> declarations [
-	^ rewriteSystem allDeclarations union: statements declarations
+	^ rewriteSystem allDeclarations union: axioms declarations
 ]
 
 { #category : #copying }
 LbContext >> deepCopy [
 	^ self
+]
+
+{ #category : #inspecting }
+LbContext >> gtAxiomsFor: aView [ 
+	<gtView>
+	axioms isEmpty ifTrue: [ ^ aView empty ].
+	^ aView forward
+		title: 'Statements';
+		priority: 4;
+		object: [ axioms ];
+		view: #gtAxiomsFor:
 ]
 
 { #category : #inspecting }
@@ -59,7 +75,7 @@ LbContext >> gtDeclarationsFor: aView [
 		items: [ | d categories |
 			d := self declarations.
 			categories := OrderedCollection new.
-			#(sorts subsorts variables operators rules equations subsortStatements) do: [ :each |
+			#(sorts subsorts variables operators rules #equalityAxioms #subsorts) do: [ :each |
 				(d at: each) ifNotEmpty: [
 					categories add: {
 						each asString capitalized.
@@ -105,17 +121,6 @@ LbContext >> gtSortGraphFor: aView [
 ]
 
 { #category : #inspecting }
-LbContext >> gtStatementsFor: aView [ 
-	<gtView>
-	statements isEmpty ifTrue: [ ^ aView empty ].
-	^ aView forward
-		title: 'Statements';
-		priority: 4;
-		object: [ statements ];
-		view: #gtStatementsFor:
-]
-
-{ #category : #inspecting }
 LbContext >> gtVariablesFor: aView [ 
 	<gtView>
 	signature numberOfVariables isZero ifTrue: [ ^ aView empty ].
@@ -127,12 +132,12 @@ LbContext >> gtVariablesFor: aView [
 ]
 
 { #category : #initializing }
-LbContext >> initializeWithName: aString signature: aSignature rewriteSystem: aRewriteSystem statements: anLbStatements [
+LbContext >> initializeWithName: aString signature: aSignature rewriteSystem: aRewriteSystem axioms: anLbAxioms [
 	name := aString.
 	sortGraph := aSignature sortGraph.
 	signature := aSignature.
 	rewriteSystem := aRewriteSystem.
-	statements := anLbStatements.
+	axioms := anLbAxioms.
 	self beRecursivelyReadOnlyObject.
 ]
 
@@ -194,9 +199,4 @@ LbContext >> signature [
 { #category : #accessing }
 LbContext >> sortGraph [
 	^ sortGraph
-]
-
-{ #category : #accessing }
-LbContext >> statements [
-	^ statements
 ]

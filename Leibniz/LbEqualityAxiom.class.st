@@ -1,16 +1,16 @@
 Class {
-	#name : #LbEquation,
-	#superclass : #LbStatement,
+	#name : #LbEqualityAxiom,
+	#superclass : #LbAxiom,
 	#instVars : [
 		'right',
 		'left',
 		'condition'
 	],
-	#category : #'Leibniz-5-Statements'
+	#category : #'Leibniz-5-Axioms'
 }
 
 { #category : #'instace creation' }
-LbEquation class >> left: aLeftTerm right: aRightTerm [
+LbEqualityAxiom class >> left: aLeftTerm right: aRightTerm [
 	^ self
 		left: aLeftTerm
 		right: aRightTerm
@@ -19,7 +19,7 @@ LbEquation class >> left: aLeftTerm right: aRightTerm [
 ]
 
 { #category : #'instace creation' }
-LbEquation class >> left: aLeftTerm right: aRightTerm localVariables: aDictionary [
+LbEqualityAxiom class >> left: aLeftTerm right: aRightTerm localVariables: aDictionary [
 	^ self
 		left: aLeftTerm
 		right: aRightTerm
@@ -28,7 +28,7 @@ LbEquation class >> left: aLeftTerm right: aRightTerm localVariables: aDictionar
 ]
 
 { #category : #'instance creation' }
-LbEquation class >> left: aLeftTerm right: aRightTerm localVariables: aDictionary condition: aBooleanTerm [ 
+LbEqualityAxiom class >> left: aLeftTerm right: aRightTerm localVariables: aDictionary condition: aBooleanTerm [ 
 	^ self basicNew
 			 initializeWithLeft: aLeftTerm
 			 right: aRightTerm
@@ -38,12 +38,12 @@ LbEquation class >> left: aLeftTerm right: aRightTerm localVariables: aDictionar
 ]
 
 { #category : #accessing }
-LbEquation >> condition [
+LbEqualityAxiom >> condition [
 	^ condition
 ]
 
 { #category : #inspecting }
-LbEquation >> gtEquationFor: aView [
+LbEqualityAxiom >> gtEquationFor: aView [
 	<gtView>
 	| equationView |
 	equationView := aView columnedList
@@ -67,7 +67,7 @@ LbEquation >> gtEquationFor: aView [
 ]
 
 { #category : #initialization }
-LbEquation >> initializeWithLeft: aLeftTerm right: aRightTerm localVariables: aDictionary condition: aBooleanTerm [
+LbEqualityAxiom >> initializeWithLeft: aLeftTerm right: aRightTerm localVariables: aDictionary condition: aBooleanTerm [
 	| termVariables |
 	left  := aLeftTerm.
 	right := aRightTerm.
@@ -90,12 +90,12 @@ LbEquation >> initializeWithLeft: aLeftTerm right: aRightTerm localVariables: aD
 ]
 
 { #category : #accessing }
-LbEquation >> left [
+LbEqualityAxiom >> left [
 	^ left
 ]
 
 { #category : #printing }
-LbEquation >> printAsLeibnizSyntaxOn: aStream [
+LbEqualityAxiom >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: Character space.
 	left printAsLeibnizSyntaxOn: aStream.
@@ -107,6 +107,6 @@ LbEquation >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LbEquation >> right [
+LbEqualityAxiom >> right [
 	^ right
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #LbStatement,
+	#name : #LbAxiom,
 	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -7,31 +7,31 @@ Class {
 		'variables',
 		'signature'
 	],
-	#category : #'Leibniz-5-Statements'
+	#category : #'Leibniz-5-Axioms'
 }
 
 { #category : #converting }
-LbStatement >> asLeibnizSyntaxString [
+LbAxiom >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
 { #category : #copying }
-LbStatement >> copy [
+LbAxiom >> copy [
 	^ self
 ]
 
 { #category : #copying }
-LbStatement >> deepCopy [
+LbAxiom >> deepCopy [
 	^ self
 ]
 
 { #category : #printing }
-LbStatement >> printAsLeibnizSyntaxOn: aStream [
+LbAxiom >> printAsLeibnizSyntaxOn: aStream [
 	self subclassResponsibility
 ]
 
 { #category : #printing }
-LbStatement >> printVariablesAsLeibnizSyntaxOn: aStream [
+LbAxiom >> printVariablesAsLeibnizSyntaxOn: aStream [
 	variables keysAndValuesDo:
 		[ :var :sort |
 			aStream nextPutAll: '∀ '.

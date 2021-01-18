@@ -1,34 +1,34 @@
 Class {
-	#name : #LbNoVarStatementParser,
+	#name : #LbNoVarAxiomParser,
 	#superclass : #LbTermParser,
 	#instVars : [
 		'subsortSymbol',
-		'noVarEquation',
 		'conditionClause',
 		'underCondition',
 		'equalSign',
-		'noVarSubsort'
+		'noVarSubsort',
+		'noVarEquality'
 	],
-	#category : #'Leibniz-5-Statements'
+	#category : #'Leibniz-5-Axioms'
 }
 
 { #category : #productions }
-LbNoVarStatementParser >> conditionClause [
+LbNoVarAxiomParser >> conditionClause [
 	^ underCondition trim, term
 		==> [ :nodes | nodes at: 2 ]
 
 ]
 
 { #category : #tokens }
-LbNoVarStatementParser >> equalSign [
+LbNoVarAxiomParser >> equalSign [
 	^ $= asPParser
 ]
 
 { #category : #productions }
-LbNoVarStatementParser >> noVarEquation [
+LbNoVarAxiomParser >> noVarEquality [
 	^ term, equalSign trim, term, conditionClause optional
 		==> [ :nodes |
-				LbEquation
+				LbEqualityAxiom
 					left: nodes first
 					right: nodes third
 					localVariables: extraVariables
@@ -36,26 +36,26 @@ LbNoVarStatementParser >> noVarEquation [
 ]
 
 { #category : #accessing }
-LbNoVarStatementParser >> noVarSubsort [
+LbNoVarAxiomParser >> noVarSubsort [
 	^ term, subsortSymbol trim, term
 		==> [ :nodes |
-				LbSubsortStatement
+				LbSubsortAxiom
 					subsort: nodes first
 					supersort: nodes third
 					localVariables: extraVariables ]
 ]
 
 { #category : #accessing }
-LbNoVarStatementParser >> start [
-	^ (noVarEquation / noVarSubsort) end.
+LbNoVarAxiomParser >> start [
+	^ (noVarEquality / noVarSubsort) end.
 ]
 
 { #category : #tokens }
-LbNoVarStatementParser >> subsortSymbol [
+LbNoVarAxiomParser >> subsortSymbol [
 	^ $⊆ asPParser
 ]
 
 { #category : #tokens }
-LbNoVarStatementParser >> underCondition [
+LbNoVarAxiomParser >> underCondition [
 	^ $| asPParser
 ]

@@ -42,11 +42,11 @@ LbDependentSortExamples >> bagSortGraph [
 		parseAndAddOp: 'ℕ : sort';
 		parseAndAddOp: 'ℕ.nz : sort';
 		parseAndAddOp: 'zero : sort';
-		parseAndAddStatement: '∀ s:sort ∀ n:ℕ list(s, n) ⊆ bag(s, n)';
-		parseAndAddStatement: '∀ s:sort ∀ n:ℕ bag(s, n) ⊆ collection';
-		parseAndAddStatement: '∅ ⊆ collection';
-		parseAndAddStatement: 'zero ⊆ ℕ';
-		parseAndAddStatement: 'ℕ.nz ⊆ ℕ';
+		parseAndAddAxiom: '∀ s:sort ∀ n:ℕ list(s, n) ⊆ bag(s, n)';
+		parseAndAddAxiom: '∀ s:sort ∀ n:ℕ bag(s, n) ⊆ collection';
+		parseAndAddAxiom: '∅ ⊆ collection';
+		parseAndAddAxiom: 'zero ⊆ ℕ';
+		parseAndAddAxiom: 'ℕ.nz ⊆ ℕ';
 		context.
 	^ LbDependentSortGraph
 		sortContext: sortContext
@@ -142,7 +142,7 @@ LbDependentSortExamples >> sortContextWithDependentSorts [
 		parseAndAddOp: 'foo(ℕ) : sort';
 		parseAndAddOp: 'bar(ℕ) : sort';
 		parseAndAddOp: 'baz(ℕ) : sort';
-		parseAndAddStatement: '∀ n:ℕ baz(n) ⊆ bar(n)';
+		parseAndAddAxiom: '∀ n:ℕ baz(n) ⊆ bar(n)';
 		context
 ]
 
@@ -154,7 +154,7 @@ LbDependentSortExamples >> sortContextWithoutDependentSorts [
 		parseAndAddOp: 'foo : sort';
 		parseAndAddOp: 'bar : sort';
 		parseAndAddOp: 'baz : sort';
-		parseAndAddStatement: 'baz ⊆ bar';
+		parseAndAddAxiom: 'baz ⊆ bar';
 		context
 ]
 

@@ -1,5 +1,5 @@
 Class {
-	#name : #LbStatements,
+	#name : #LbAxioms,
 	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -7,34 +7,34 @@ Class {
 		'equations',
 		'subsorts',
 		'signature',
-		'statements'
+		'axioms'
 	],
-	#category : #'Leibniz-5-Statements'
+	#category : #'Leibniz-5-Axioms'
 }
 
 { #category : #'instance creation' }
-LbStatements class >> signature: aSignature statements: aDictionary [
+LbAxioms class >> signature: aSignature axioms: aDictionary [
 	^ self basicNew
 		initializeWithSignature: aSignature
-		statements: aDictionary;
+		axioms: aDictionary;
 		yourself
 ]
 
 { #category : #accessing }
-LbStatements >> allDeclarations [
+LbAxioms >> allDeclarations [
 	^ self signature declarations union: self declarations
 ]
 
 { #category : #copying }
-LbStatements >> copy [
+LbAxioms >> copy [
 	^ self
 ]
 
 { #category : #accessing }
-LbStatements >> declarations [
+LbAxioms >> declarations [
 	| declarations equationDecls |
 	declarations := Dictionary new.
-	#(equations subsortStatements) do: [ :each |
+	#(#equalityAxioms #subsortAxioms) do: [ :each |
 		declarations
 			at: each
 			put: ((self perform: each)
@@ -44,17 +44,38 @@ LbStatements >> declarations [
 ]
 
 { #category : #copying }
-LbStatements >> deepCopy [
+LbAxioms >> deepCopy [
 	^ self
 ]
 
 { #category : #accessing }
-LbStatements >> equations [
-	^ statements at: #LbEquation
+LbAxioms >> equalityAxioms [
+	^ axioms at: #LbEqualityAxiom
+]
+
+{ #category : #accessing }
+LbAxioms >> gtAxiomsFor: aView [
+	<gtView>
+	^ aView tree
+		title: 'Axioms' translated;
+		priority: 1;
+		items: [ axioms keys sorted
+					reject: [ :each |
+						(axioms at: each) isEmpty ]];
+		children: [ :each |
+			(each isKindOf: Symbol)
+				ifTrue: [ axioms at: each ]
+				ifFalse: [ #() ] ];
+		itemLbCode: [ :each |
+			(each isKindOf: Symbol)
+				ifTrue: [ each ]
+				ifFalse: [ each asLeibnizSyntaxString ] ];
+		expandAll;
+		yourself
 ]
 
 { #category : #inspecting }
-LbStatements >> gtDeclarationsFor: aView [
+LbAxioms >> gtDeclarationsFor: aView [
 	<gtView>
 	^ aView lbTree
 		title: 'Declarations' translated;
@@ -62,8 +83,8 @@ LbStatements >> gtDeclarationsFor: aView [
 		items: [ | d categories |
 			d := self allDeclarations.
 			categories := OrderedCollection new.
-			#(sorts subsorts variables operators
-			  equations subsortStatements) do: [ :each |
+			#(sorts #subsorts variables operators
+			  equalityAxioms subsortAxioms) do: [ :each |
 				(d at: each) ifNotEmpty: [
 					categories add: {
 						each asString capitalized.
@@ -74,51 +95,30 @@ LbStatements >> gtDeclarationsFor: aView [
 		children: #second;
 		send: #first;
 		collapseAll;
-		expandItems: #('Equations' 'SubsortStatements');
-		yourself
-]
-
-{ #category : #accessing }
-LbStatements >> gtStatementsFor: aView [
-	<gtView>
-	^ aView tree
-		title: 'Statements' translated;
-		priority: 1;
-		items: [ statements keys sorted
-					reject: [ :each |
-						(statements at: each) isEmpty ]];
-		children: [ :each |
-			(each isKindOf: Symbol)
-				ifTrue: [ statements at: each ]
-				ifFalse: [ #() ] ];
-		itemLbCode: [ :each |
-			(each isKindOf: Symbol)
-				ifTrue: [ each ]
-				ifFalse: [ each asLeibnizSyntaxString ] ];
-		expandAll;
+		expandItems: #('EqualityAxoms' 'SubsortAxioms');
 		yourself
 ]
 
 { #category : #initialization }
-LbStatements >> initializeWithSignature: aSignature statements: aDictionary [
+LbAxioms >> initializeWithSignature: aSignature axioms: aDictionary [
 	signature := aSignature.
-	statements := aDictionary.
+	axioms := aDictionary.
 	self beRecursivelyReadOnlyObject
 ]
 
 { #category : #testing }
-LbStatements >> isEmpty [
-	statements values do: [ :each |
+LbAxioms >> isEmpty [
+	axioms values do: [ :each |
 		each ifNotEmpty: [ ^ false ] ].
 	^ true
 ]
 
 { #category : #accessing }
-LbStatements >> signature [
+LbAxioms >> signature [
 	^ signature
 ]
 
 { #category : #accessing }
-LbStatements >> subsortStatements [
-	^ statements at: #LbSubsortStatement
+LbAxioms >> subsortAxioms [
+	^ axioms at: #LbSubsortAxiom
 ]

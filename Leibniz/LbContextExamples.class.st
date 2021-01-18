@@ -37,7 +37,7 @@ LbContextExamples >> fooBarBazContext [
 		parseAndAddOp: 'foo(baz) : foo';
 		parseAndAddOp: 'baz(foo) : baz';
 		parseAndAddRule: 'foo(baz) ⇒ foo';
-		parseAndAddStatement: 'baz(foo) = baz';
+		parseAndAddAxiom: 'baz(foo) = baz';
 		context
 ]
 
@@ -52,7 +52,7 @@ LbContextExamples >> fooBarContext [
 		parseAndAddOp: 'foo(bar) : foo';
 		parseAndAddOp: 'bar(foo) : bar';
 		parseAndAddRule: 'foo(bar) ⇒ foo';
-		parseAndAddStatement: 'bar(foo) = bar';
+		parseAndAddAxiom: 'bar(foo) = bar';
 		context
 ]
 

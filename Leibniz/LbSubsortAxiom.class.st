@@ -1,15 +1,15 @@
 Class {
-	#name : #LbSubsortStatement,
-	#superclass : #LbStatement,
+	#name : #LbSubsortAxiom,
+	#superclass : #LbAxiom,
 	#instVars : [
 		'subsort',
 		'supersort'
 	],
-	#category : #'Leibniz-5-Statements'
+	#category : #'Leibniz-5-Axioms'
 }
 
 { #category : #'instance creation' }
-LbSubsortStatement class >> subsort: subsortTerm supersort: supersortTerm [
+LbSubsortAxiom class >> subsort: subsortTerm supersort: supersortTerm [
 	^ self
 		subsort: subsortTerm
 		supersort: supersortTerm
@@ -17,7 +17,7 @@ LbSubsortStatement class >> subsort: subsortTerm supersort: supersortTerm [
 ]
 
 { #category : #'instance creation' }
-LbSubsortStatement class >> subsort: subsortTerm supersort: supersortTerm localVariables: aDictionary [
+LbSubsortAxiom class >> subsort: subsortTerm supersort: supersortTerm localVariables: aDictionary [
 	^ self basicNew
 		initializeWithSubsort: subsortTerm
 		supersort: supersortTerm
@@ -26,7 +26,7 @@ LbSubsortStatement class >> subsort: subsortTerm supersort: supersortTerm localV
 ]
 
 { #category : #inspecting }
-LbSubsortStatement >> gtRelationFor: aView [
+LbSubsortAxiom >> gtRelationFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'Relation' translated;
@@ -45,7 +45,7 @@ LbSubsortStatement >> gtRelationFor: aView [
 ]
 
 { #category : #initialization }
-LbSubsortStatement >> initializeWithSubsort: subsortTerm supersort: supersortTerm localVariables: aDictionary [
+LbSubsortAxiom >> initializeWithSubsort: subsortTerm supersort: supersortTerm localVariables: aDictionary [
 	subsort := subsortTerm.
 	supersort := supersortTerm.
 	variables := aDictionary.
@@ -65,7 +65,7 @@ LbSubsortStatement >> initializeWithSubsort: subsortTerm supersort: supersortTer
 ]
 
 { #category : #printing }
-LbSubsortStatement >> printAsLeibnizSyntaxOn: aStream [
+LbSubsortAxiom >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: Character space.
 	subsort printAsLeibnizSyntaxOn: aStream.
@@ -74,17 +74,17 @@ LbSubsortStatement >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LbSubsortStatement >> subsort [
+LbSubsortAxiom >> subsort [
 	^ subsort
 ]
 
 { #category : #accessing }
-LbSubsortStatement >> supersort [
+LbSubsortAxiom >> supersort [
 	^ supersort
 ]
 
 { #category : #matching }
-LbSubsortStatement >> supersortOf: aTerm [
+LbSubsortAxiom >> supersortOf: aTerm [
 	^ (subsort match: aTerm)
 		ifNull: [ nil ]
 		ifNotNull: [ :substitution |

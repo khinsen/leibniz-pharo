@@ -1,35 +1,35 @@
 Class {
-	#name : #LbStatementExamples,
+	#name : #LbAxiomExamples,
 	#superclass : #Object,
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
-	#category : #'Leibniz-5-Statements'
+	#category : #'Leibniz-5-Axioms'
 }
 
 { #category : #example }
-LbStatementExamples >> equations [
+LbAxiomExamples >> equalityAxioms [
 	<gtExample>
-	^ (LbStatementsBuilder signature: LbBuiltinSignatures integerSignature)
+	^ (LbAxiomBuilder signature: LbBuiltinSignatures integerSignature)
 		parseAndAdd: '∀ X:zero abs(X) = 0';
 		parseAndAdd: '∀ X:ℤ abs(X) = 0 | X == 0';
 		parseAndAdd: '2 + 2 = 4';
 		parseAndAdd: '2 < 3 = true';
-		statements
+		axioms
 ]
 
 { #category : #example }
-LbStatementExamples >> mixedStatements [
+LbAxiomExamples >> mixedAxioms [
 	<gtExample>
-	^ (LbStatementsBuilder signature: self sortSignature)
+	^ (LbAxiomBuilder signature: self sortSignature)
 		parseAndAdd: 'foo ⊆ bar';
 		parseAndAdd: '∀ S:sort foo(S) ⊆ bar(S)';
 		parseAndAdd: '∀ S:sort foo(S) = bar(S)';
 		parseAndAdd: 'foo = bar';
-		statements
+		axioms
 ]
 
 { #category : #example }
-LbStatementExamples >> sortSignature [
+LbAxiomExamples >> sortSignature [
 	<gtExample>
 	^ (LbSignatureBuilder sortGraph: self sortSortGraph)
 		parseAndAddOp: 'foo : sort';
@@ -40,7 +40,7 @@ LbStatementExamples >> sortSignature [
 ]
 
 { #category : #example }
-LbStatementExamples >> sortSortGraph [
+LbAxiomExamples >> sortSortGraph [
 	<gtExample>
 	^ LbSortGraphBuilder new
 		parseAndAdd: 'sort';
@@ -48,10 +48,10 @@ LbStatementExamples >> sortSortGraph [
 ]
 
 { #category : #example }
-LbStatementExamples >> subsortStatements [
+LbAxiomExamples >> subsortAxioms [
 	<gtExample>
-	^ (LbStatementsBuilder signature: self sortSignature)
+	^ (LbAxiomBuilder signature: self sortSignature)
 		parseAndAdd: 'foo ⊆ bar';
 		parseAndAdd: '∀ S:sort foo(S) ⊆ bar(S)';
-		statements
+		axioms
 ]

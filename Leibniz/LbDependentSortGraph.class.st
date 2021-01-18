@@ -32,7 +32,7 @@ LbDependentSortGraph >> deepCopy [
 LbDependentSortGraph >> directSupersortsOf: aSortTerm [
 	| supersorts |
 	supersorts := Set new.
-	context statements subsortStatements do: [ :each |
+	context axioms subsortAxioms do: [ :each |
 		(each supersortOf: aSortTerm)
 			ifNotNil: [ :term | supersorts add: (self sortFor: term) ] ].
 	^ supersorts
