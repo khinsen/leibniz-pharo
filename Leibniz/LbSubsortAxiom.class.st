@@ -64,6 +64,26 @@ LbSubsortAxiom >> initializeWithSubsort: subsortTerm supersort: supersortTerm lo
 	self beRecursivelyReadOnlyObject
 ]
 
+{ #category : #testing }
+LbSubsortAxiom >> isTotal [
+	"Answer true if the subsort relation applied to the
+	full family defined by its top-level operator."
+	| argSorts op highestRank |
+	"1. All arguments must be variables."
+	subsort arguments
+		detect: [ :each | each isVariable not ]
+		ifFound: [ ^ false ].
+	"2. All argument variables must be distinct."
+	(subsort arguments collect: #name) asSet size = subsort arguments size
+		ifFalse: [ ^ false ].
+	"3. The highest rank of the operator matching the argument sorts
+	must have an arity equal to the argument sorts."
+	argSorts := subsort arguments collect: #sort.
+	op := signature opNamed: subsort opName withArgs: argSorts.
+	highestRank := (op ranksMatchingArgSorts: argSorts) last.
+	^ argSorts hasEqualElements: highestRank key
+]
+
 { #category : #printing }
 LbSubsortAxiom >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.

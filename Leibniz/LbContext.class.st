@@ -60,7 +60,7 @@ LbContext >> gtAxiomsFor: aView [
 	<gtView>
 	axioms isEmpty ifTrue: [ ^ aView empty ].
 	^ aView forward
-		title: 'Statements';
+		title: 'Axioms';
 		priority: 4;
 		object: [ axioms ];
 		view: #gtAxiomsFor:

@@ -48,6 +48,10 @@ LbDependentSortExamples >> bagSortGraph [
 		parseAndAddAxiom: 'zero ⊆ ℕ';
 		parseAndAddAxiom: 'ℕ.nz ⊆ ℕ';
 		context.
+	self
+		assert: (sortContext axioms subsortAxioms
+					reject: #isTotal) size
+		equals: 0.
 	^ LbDependentSortGraph
 		sortContext: sortContext
 ]
@@ -136,14 +140,17 @@ LbDependentSortExamples >> signatureWithoutDependentSorts [
 { #category : #example }
 LbDependentSortExamples >> sortContextWithDependentSorts [
 	<gtExample>
-	^ (LbContextBuilder name: 'sorts')
+	| context |
+	context := (LbContextBuilder name: 'sorts')
 		include: (LbBuiltinContexts integerContext) inMode: #use;
 		parseAndAddSort: 'sort';
 		parseAndAddOp: 'foo(ℕ) : sort';
 		parseAndAddOp: 'bar(ℕ) : sort';
 		parseAndAddOp: 'baz(ℕ) : sort';
-		parseAndAddAxiom: '∀ n:ℕ baz(n) ⊆ bar(n)';
-		context
+		parseAndAddAxiom: '∀ n:ℕ.nz baz(n) ⊆ bar(n)';
+		context.
+	self assert: context axioms subsortAxioms anyOne isTotal not.
+	^ context
 ]
 
 { #category : #example }

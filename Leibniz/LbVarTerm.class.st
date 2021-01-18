@@ -44,12 +44,22 @@ LbVarTerm >> initializeWithName: aSymbol sort: aSort signature: aSignature [
 	signature := aSignature
 ]
 
+{ #category : #testing }
+LbVarTerm >> isVariable [
+	^ true
+]
+
 { #category : #matching }
 LbVarTerm >> match: otherTerm [
 	otherTerm assertNotAVariable.
 	otherTerm sort <= sort
 		ifTrue: [ ^ LbSubstitution variable: name value: otherTerm ]
 		ifFalse: [ ^ LbSubstitution null ]
+]
+
+{ #category : #accessing }
+LbVarTerm >> name [
+	^ name
 ]
 
 { #category : #printing }

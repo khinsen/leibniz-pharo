@@ -91,6 +91,11 @@ LbTerm >> isTrue [
 	^ false.
 ]
 
+{ #category : #accessing }
+LbTerm >> isVariable [
+	^ false
+]
+
 { #category : #matching }
 LbTerm >> match: otherTerm [
 	self = otherTerm

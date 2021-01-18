@@ -36,6 +36,8 @@ LbAxiomExamples >> sortSignature [
 		parseAndAddOp: 'bar : sort';
 		parseAndAddOp: 'foo(sort) : sort';
 		parseAndAddOp: 'bar(sort) : sort';
+		parseAndAddOp: 'foo(sort, sort) : sort';
+		parseAndAddOp: 'bar(sort, sort) : sort';
 		signature
 ]
 
@@ -50,8 +52,14 @@ LbAxiomExamples >> sortSortGraph [
 { #category : #example }
 LbAxiomExamples >> subsortAxioms [
 	<gtExample>
-	^ (LbAxiomBuilder signature: self sortSignature)
+	| axioms |
+	axioms := (LbAxiomBuilder signature: self sortSignature)
 		parseAndAdd: 'foo ⊆ bar';
 		parseAndAdd: '∀ S:sort foo(S) ⊆ bar(S)';
-		axioms
+		parseAndAdd: '∀ S:sort foo(S, S) ⊆ bar(S, S)';
+		axioms.
+	self
+		assert: (axioms subsortAxioms select: #isTotal) size
+		equals: 2.
+	^ axioms
 ]

@@ -187,8 +187,9 @@ LbOperator >> leastRankForArgSorts: aSortArray [
 		self assert: ranks size equals: 1 .
 		^ ranks first ].
 	arity := LbArity sortGraph: sortGraph argSorts: aSortArray.
-	^ ranks detect: [ :r | arity <= r key ]
-			  ifNone: [ kindArity -> kind ].
+	^ ranks
+		detect: [ :r | arity <= r key ]
+		ifNone: [ kindArity -> kind ].
 ]
 
 { #category : #viewing }
