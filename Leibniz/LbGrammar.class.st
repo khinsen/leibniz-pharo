@@ -16,8 +16,45 @@ Class {
 }
 
 { #category : #grammar }
+LbGrammar class >> conditionSymbol [
+	^ $|
+]
+
+{ #category : #grammar }
+LbGrammar class >> equalSign [
+	^ $=
+]
+
+{ #category : #grammar }
+LbGrammar class >> forAllSymbol [
+	^ $∀
+]
+
+{ #category : #grammar }
+LbGrammar class >> functionArrow [
+	^ $→
+]
+
+{ #category : #grammar }
 LbGrammar class >> reservedIdentifiers [
-	^ #('⇒' '→' '=' '∀' '|' '⊆')
+	^ {
+		self rewriteArrow asString.
+		self functionArrow asString.
+		self equalSign asString.
+		self forAllSymbol asString.
+		self conditionSymbol asString.
+		self subsortSymbol asString
+		}
+]
+
+{ #category : #grammar }
+LbGrammar class >> rewriteArrow [
+	^ $⇒
+]
+
+{ #category : #grammar }
+LbGrammar class >> subsortSymbol [
+	^ $⊆
 ]
 
 { #category : #productions }
