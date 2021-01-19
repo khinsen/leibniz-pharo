@@ -15,7 +15,7 @@ LbCollectionContexts class >> listOf: sortSymbol [
 	listSortSymbol := LbListSort sortNamePrefix , sortSymbol.
 	nonEmptyListSortSymbol := LbListSort sortNamePrefix , 'ne.', sortSymbol.
 	^ (LbContextBuilder name: 'list-of-', sortSymbol)
-		include: (LbBuiltinContexts integerContext) inMode: #use;
+		include: (LbBuiltinContexts integerContext) mode: #use;
 		parseAndAddSort: sortSymbol;
 		parseAndAddSort: listSortSymbol;
 		parseAndAddSort: nonEmptyListSortSymbol , ' ⊆ ', listSortSymbol;

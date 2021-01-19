@@ -92,7 +92,7 @@ LeibnizBuiltinsTest >> testIntegerArithmetic [
 LeibnizBuiltinsTest >> testIntegerArithmeticWithSymbolicValues [
 	| b context |
 	b := LbContextBuilder name: 'test' document: LeibnizDocument new.
-	b include: 'integers' fromDocumentWithHash: 'e513fb1f0504a951919688029321eaa02b4e2ad014c0979c4b602b946f9cafc8' inMode: 'extend'.
+	b include: 'integers' fromDocumentWithHash: 'e513fb1f0504a951919688029321eaa02b4e2ad014c0979c4b602b946f9cafc8' mode: 'extend'.
 	b parseAndAddOp: 'a : ℤ'.
 	b parseAndAddOp: 'b : ℤ'.
 	context := b context.

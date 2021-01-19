@@ -11,7 +11,7 @@ Class {
 LeibnizBuiltins >> createContextContext [
 	| contextsBuilder |
 	contextsBuilder := self newContextBuilderNamed: 'contexts'.
-	contextsBuilder include: 'strings' inMode: 'use'.
+	contextsBuilder include: 'strings' mode: 'use'.
 	contextsBuilder addSort: #context.
 	contextsBuilder addOp: #context withArgs: #(#string) ofSort: #context.
 	contextsBuilder addOp: #context withArgs: #(#string #string) ofSort: #context.

@@ -32,28 +32,31 @@ LbDependentSortExamples >> bagSignature [
 ]
 
 { #category : #example }
-LbDependentSortExamples >> bagSortGraph [
+LbDependentSortExamples >> bagSortContext [
 	<gtExample>
-	| sortContext |
-	sortContext := (LbContextBuilder name: 'sorts')
-		include: (self listSortContext) inMode: #use;
+	| context |
+	context := (LbContextBuilder name: 'sorts')
+		include: (self listSortContext) mode: #use;
 		parseAndAddOp: 'collection : sort';
 		parseAndAddOp: 'bag(sort, ℕ) : sort';
 		parseAndAddOp: 'ℕ : sort';
-		parseAndAddOp: 'ℕ.nz : sort';
-		parseAndAddOp: 'zero : sort';
 		parseAndAddAxiom: '∀ s:sort ∀ n:ℕ list(s, n) ⊆ bag(s, n)';
 		parseAndAddAxiom: '∀ s:sort ∀ n:ℕ bag(s, n) ⊆ collection';
 		parseAndAddAxiom: '∅ ⊆ collection';
-		parseAndAddAxiom: 'zero ⊆ ℕ';
-		parseAndAddAxiom: 'ℕ.nz ⊆ ℕ';
 		context.
 	self
-		assert: (sortContext axioms subsortAxioms
+		assert: (context axioms subsortAxioms
 					reject: #isTotal) size
 		equals: 0.
-	^ LbDependentSortGraph
-		sortContext: sortContext
+	^ context
+]
+
+{ #category : #example }
+LbDependentSortExamples >> bagSortGraph [
+	<gtExample>
+	^ LbDependentSortGraphBuilder new
+		addSortContext: self bagSortContext;
+		sortGraph
 ]
 
 { #category : #example }
@@ -72,7 +75,7 @@ LbDependentSortExamples >> listSignature [
 LbDependentSortExamples >> listSortContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'sorts')
-		include: (LbBuiltinContexts integerContext) inMode: #use;
+		include: (LbBuiltinContexts integerContext) mode: #use;
 		parseAndAddSort: 'sort';
 		parseAndAddOp: 'element : sort';
 		parseAndAddOp: '∅ : sort';
@@ -84,8 +87,9 @@ LbDependentSortExamples >> listSortContext [
 LbDependentSortExamples >> listSortGraph [
 	<gtExample>
 	| sortGraph |
-	sortGraph := LbDependentSortGraph
-		sortContext: self listSortContext.
+	sortGraph := LbDependentSortGraphBuilder new
+		addSortContext: self listSortContext;
+		sortGraph.
 	^ sortGraph
 ]
 
@@ -142,7 +146,7 @@ LbDependentSortExamples >> sortContextWithDependentSorts [
 	<gtExample>
 	| context |
 	context := (LbContextBuilder name: 'sorts')
-		include: (LbBuiltinContexts integerContext) inMode: #use;
+		include: (LbBuiltinContexts integerContext) mode: #use;
 		parseAndAddSort: 'sort';
 		parseAndAddOp: 'foo(ℕ) : sort';
 		parseAndAddOp: 'bar(ℕ) : sort';
@@ -169,8 +173,9 @@ LbDependentSortExamples >> sortContextWithoutDependentSorts [
 LbDependentSortExamples >> sortGraphWithDependentSorts [
 	<gtExample>
 	| sortGraph |
-	sortGraph := LbDependentSortGraph
-		sortContext: self sortContextWithDependentSorts.
+	sortGraph := LbDependentSortGraphBuilder new
+		addSortContext: self sortContextWithDependentSorts;
+		sortGraph.
 	#('foo(1)' 'bar(0)' 'baz(42)') do: [ :aString |
 		self
 			assert: (sortGraph parseSort: aString) term sort name
@@ -182,8 +187,9 @@ LbDependentSortExamples >> sortGraphWithDependentSorts [
 LbDependentSortExamples >> sortGraphWithoutDependentSorts [
 	<gtExample>
 	| sortGraph |
-	sortGraph := LbDependentSortGraph
-		sortContext:self sortContextWithoutDependentSorts.
+	sortGraph := LbDependentSortGraphBuilder new
+		addSortContext:self sortContextWithoutDependentSorts;
+		sortGraph.
 	#(foo bar baz) do: [ :name |
 		self
 			assert: (sortGraph parseSort: name) term sort name

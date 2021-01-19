@@ -159,7 +159,7 @@ LbContextBuilder >> gtVariablesFor: aView [
 ]
 
 { #category : #'defining - includes' }
-LbContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash inMode: useOrExtend [
+LbContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash mode: useOrExtend [
 	| context |
 	context := LeibnizLibrary uniqueInstance contextNamed: aContextName inDocumentWithHash: aDocHash.
 	includes add: (Dictionary with: #contextName -> aContextName
@@ -171,7 +171,7 @@ LbContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash inMode:
 ]
 
 { #category : #'defining - includes' }
-LbContextBuilder >> include: aContextOrName inMode: useOrExtend [
+LbContextBuilder >> include: aContextOrName mode: useOrExtend [
 	| context |
 	aContextOrName isString
 		ifTrue: [ context := document contextNamed: aContextOrName ]
@@ -193,9 +193,9 @@ LbContextBuilder >> includesFromXML: anXMLElement [
 					 (attrs includesKey: 'document')
 					 ifTrue: [ self include: (attrs at: 'context')
 										 fromDocumentWithHash: (attrs at: 'document')
-										 inMode: (attrs at: 'mode') ]
+										 mode: (attrs at: 'mode') ]
 					 ifFalse: [ self include: (attrs at: 'context')
-										  inMode: (attrs at: 'mode') ] ]
+										  mode: (attrs at: 'mode') ] ]
 ]
 
 { #category : #initializing }

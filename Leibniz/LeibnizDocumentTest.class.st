@@ -28,7 +28,7 @@ LeibnizDocumentTest >> testPhaseErrorInCOntextDefinition [
 	doc := LeibnizDocument new.
 	builder := doc newContextBuilderNamed: 'foo'.
 	builder addSort: #A.
-	self should: [builder include: 'bar' inMode: 'use'.]
+	self should: [builder include: 'bar' mode: 'use'.]
 		  raise: Exception.
 
 

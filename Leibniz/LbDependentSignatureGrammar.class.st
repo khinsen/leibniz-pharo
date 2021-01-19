@@ -85,7 +85,7 @@ LbDependentSignatureGrammar >> comma [
 
 { #category : #'productions - tokens' }
 LbDependentSignatureGrammar >> forAll [
-	^ $∀ asPParser
+	^ LbGrammar forAllSymbol asPParser
 ]
 
 { #category : #'productions - signature' }

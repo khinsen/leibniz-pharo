@@ -17,7 +17,7 @@ LbContextExamples >> booleanContext [
 LbContextExamples >> derivativeContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'derivatives-ℝ→ℝ')
-		include: (LbContextExamples new realFunctionContext) inMode: #extend;
+		include: (LbContextExamples new realFunctionContext) mode: #extend;
 		parseAndAddOp: '𝒟(ℝ→ℝ) : ℝ→ℝ';
 		parseAndAddRule: '𝒟(f + g) ⇒ 𝒟(f) + 𝒟(g)';
 		parseAndAddRule: '𝒟(f - g) ⇒ 𝒟(f) - 𝒟(g)';
@@ -31,7 +31,7 @@ LbContextExamples >> derivativeContext [
 LbContextExamples >> fooBarBazContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'foo-bar-baz')
-		include: self fooBarContext inMode: #extend;
+		include: self fooBarContext mode: #extend;
 		parseAndAddSort: 'baz';
 		parseAndAddOp: 'baz : baz';
 		parseAndAddOp: 'foo(baz) : foo';
@@ -60,7 +60,7 @@ LbContextExamples >> fooBarContext [
 LbContextExamples >> massContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'mass')
-		include: (LbBuiltinContexts realNumberContext) inMode: #use;
+		include: (LbBuiltinContexts realNumberContext) mode: #use;
 		parseAndAddSort: 'mass';
 		parseAndAddOp: 'mass + mass : mass';
 		parseAndAddOp: 'ℝ.p × mass : mass';
@@ -85,8 +85,8 @@ LbContextExamples >> massContext [
 LbContextExamples >> massUnitContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'mass-units')
-		include: (LbContextExamples new massContext) inMode: #extend;
-		include: (LbContextExamples new booleanContext) inMode: #use;
+		include: (LbContextExamples new massContext) mode: #extend;
+		include: (LbContextExamples new booleanContext) mode: #use;
 		parseAndAddSort: 'mass-unit ⊆ mass';
 		parseAndAddOp: 'kg : mass-unit';
 		parseAndAddOp: 'g : mass-unit';
@@ -106,7 +106,7 @@ LbContextExamples >> massUnitContext [
 LbContextExamples >> realFunctionContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'ℝ→ℝ')
-		include: (LbBuiltinContexts realNumberContext) inMode: #use;
+		include: (LbBuiltinContexts realNumberContext) mode: #use;
 		parseAndAddSort: 'ℝ→ℝ';
 		parseAndAddOp: 'ℝ→ℝ[ℝ] : ℝ';
 		parseAndAddOp: 'f:ℝ→ℝ ○ g:ℝ→ℝ : ℝ→ℝ';
