@@ -23,8 +23,8 @@ LbDependentSortGraphBuilder >> addSubsortRelation: aSubsortAxiom [
 	aSubsortAxiom subsort = aSubsortAxiom supersort
 		ifTrue: [ ^ self ].
 
-	subsort := self findSortForTerm: aSubsortAxiom subsort.
-	supersort := self findSortForTerm: aSubsortAxiom supersort.
+	subsort := self findSortFamilyForTerm: aSubsortAxiom subsort.
+	supersort := self findSortFamilyForTerm: aSubsortAxiom supersort.
 
 	(self is: supersort subsortOf: subsort)
 		ifTrue: [
@@ -55,13 +55,14 @@ LbDependentSortGraphBuilder >> checkIf: subsort canBeMadeSubsortOf: supersort [
 ]
 
 { #category : #private }
-LbDependentSortGraphBuilder >> findSortForTerm: aTerm [
-	| sortOp |
+LbDependentSortGraphBuilder >> findSortFamilyForTerm: aTerm [
+	| sortOp sortFamily |
 	sortOp := sortContext signature
 		opNamed: aTerm opName
 		withArgs: (aTerm arguments collect: #sort).
-	self assert: (sorts includes: sortOp).
-	^ sortOp
+	sortFamily := LbDependentSortFamily sortOp: sortOp.
+	self assert: (sorts includes: sortFamily).
+	^ sortFamily
 ]
 
 { #category : #initializing }
@@ -88,9 +89,8 @@ LbDependentSortGraphBuilder >> initializeSorts [
 	self
 		assert: (sortSort kind maximalSorts = (Set with: sortSort))
 		description: 'Sort sort may not have supersorts'.
-	sorts := sortContext signature opsOfKind: sortSort kind.
-	sorts do: [ :each |
-		self assert: each size equals: 1 ]
+	sorts := (sortContext signature opsOfKind: sortSort kind)
+				collect: [ :each | LbDependentSortFamily sortOp: each ]
 ]
 
 { #category : #initializing }

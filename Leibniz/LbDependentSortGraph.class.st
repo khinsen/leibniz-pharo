@@ -6,11 +6,12 @@ Class {
 	#instVars : [
 		'context',
 		'sortSort',
-		'sortOps',
 		'directSubsorts',
 		'maximalSorts',
 		'subsorts',
-		'kinds'
+		'kinds',
+		'subsortAxioms',
+		'sortFamilies'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
@@ -22,6 +23,28 @@ LbDependentSortGraph class >> sortContext: aContext directSubsorts: aSubsortDict
 		directSubsorts: aSubsortDictionary
 		subsortAxioms: anAxiomDictionary;
 		yourself
+]
+
+{ #category : #comparing }
+LbDependentSortGraph >> = anObject [
+	| class instVarNames |
+	self == anObject ifTrue: [ ^true ].
+	class := self class.
+	class = anObject class ifFalse: [ ^false ].
+	instVarNames := class allInstVarNames difference: self instVarsExcludedFromEquality.
+	instVarNames do:
+		[ :name |
+			(self instVarNamed: name) = (anObject instVarNamed: name)
+				ifFalse: [^false]. ].
+	class isVariable
+		ifTrue:
+			[ self basicSize = anObject basicSize ifFalse: [^false].
+			  1 to: self basicSize do:
+				[ :index |
+					(self basicAt: index) = (anObject basicAt: index)
+						ifFalse: [ ^false ] ] ].
+	^true
+
 ]
 
 { #category : #copying }
@@ -44,6 +67,77 @@ LbDependentSortGraph >> directSupersortsOf: aSortTerm [
 	^ supersorts
 ]
 
+{ #category : #inspecting }
+LbDependentSortGraph >> graphArrowForSubsortRelation: aSubsortAxiom [
+	| color |
+	color := aSubsortAxiom "isFromInclude" isNil
+		ifTrue: [ Color r: 83 g: 101 b: 201 range: 255 ]
+		ifFalse: [ Color gray ].
+	^ BlLineElement new
+		toHead: (BlArrowheadSimpleArrow new
+					border: (BlBorder paint: color width: 1));
+		border: (BlBorder paint: color width: 1)
+]
+
+{ #category : #inspecting }
+LbDependentSortGraph >> graphFor: aView restrictedTo: aSet [
+	self isEmpty ifTrue: [ ^ aView empty ].
+	^ aView mondrian
+		title: 'Graph';
+		priority: 0;
+		painting: [ :view | 
+			| edges |
+			view nodes
+				shape: [ :x | self graphNodeForSort: x highlight: false ];
+				with: aSet.
+			view edges
+				shape: [ :x | self graphArrowForSubsortRelation: x ];
+				fromCenterTop;
+				toCenterBottom;
+				connect: context axioms subsortAxioms
+					from: [ :each | self sortFamilyForTerm: each subsort ]
+					to:  [ :each | self sortFamilyForTerm: each supersort ].
+			view layout
+				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
+]
+
+{ #category : #inspecting }
+LbDependentSortGraph >> graphNodeForSort: aSortFamily highlight: aBoolean [
+	| text color label rectangle |
+	text := aSortFamily asLeibnizSyntaxString asRopedText.
+	text fontName: (LbCodeFont defaultFamily).
+	aSortFamily "isFromInclude" isNil
+		ifTrue: [
+			color := Color r: 63 g: 81 b: 181 range: 255 ]
+		ifFalse: [ color := Color black ].
+	text foreground: color.
+	label := BlTextElement new text: text.
+
+	aBoolean ifFalse:
+		[ ^ label
+			padding:
+				(BlInsets top: 3 right: 3 bottom: 3 left: 3);
+			yourself ].
+
+	rectangle := BlElement new
+		background: color;
+		geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
+		padding: (BlInsets top: 3 right: 3 bottom: 3 left: 3);
+		layout: BlLinearLayout horizontal;
+		constraintsDo: [ :c |
+			c horizontal fitContent.
+			c vertical fitContent ].
+	text foreground: Color white.
+	rectangle addChild: label.
+	^ rectangle
+]
+
+{ #category : #inspecting }
+LbDependentSortGraph >> gtGraphFor: aView [
+	<gtView>
+	^ self graphFor: aView restrictedTo: sortFamilies
+]
+
 { #category : #accessing }
 LbDependentSortGraph >> includes: aSortTerm [
 	self flag: #todo.
@@ -52,7 +146,7 @@ LbDependentSortGraph >> includes: aSortTerm [
 
 { #category : #initialization }
 LbDependentSortGraph >> initializeKinds [
-	| kindCandidates |
+	| kindCandidates kind hasCommonSorts |
 	kindCandidates := maximalSorts asOrderedCollection
 		collect: [ :sort | subsorts at: sort ].
 	"A kind can have multiple maximal sorts. In that case, kindCandidates
@@ -60,7 +154,6 @@ LbDependentSortGraph >> initializeKinds [
 	 must be merged to obtain the kind."
 	kinds := Set new.
 	[ kindCandidates isEmpty ] whileFalse: [
-		| kind hasCommonSorts |
 		kind := kindCandidates first.
 		hasCommonSorts :=
 			kindCandidates allButFirst groupedBy: [ :c |
@@ -68,22 +161,19 @@ LbDependentSortGraph >> initializeKinds [
 		#(true false) do: [ :b |
 			hasCommonSorts at: b ifAbsentPut: OrderedCollection new. ].
 		kind := ((hasCommonSorts at: true) inject: kind into: [ :k :c | k union: c ]).
-		kinds add: (LbKind
+		kinds add: (LbDependentKind
 						sortGraph: self
 						sorts: kind
-						maximalSorts: (maximalSorts select: [ :s |
-											kind includes: s ])).
-		kindCandidates := hasCommonSorts at: false. ].
-
-"	kindsOf := Dictionary new.
-	kinds do: [ :k | k asSet do: [ :s | kindsOf at: s name put: k ] ]"
+						maximalSorts: (maximalSorts select: [ :each |
+							kind includes: each ])).
+		kindCandidates := hasCommonSorts at: false. ]
 ]
 
 { #category : #initialization }
 LbDependentSortGraph >> initializeMaximalSorts [
 	maximalSorts :=
 		(directSubsorts values)
-			inject: sortOps asSet
+			inject: sortFamilies asSet
 			into: [ :ms :ss | ms difference: ss ]
 ]
 
@@ -111,12 +201,25 @@ LbDependentSortGraph >> initializeSubsortsFor: aSort [
 { #category : #initialization }
 LbDependentSortGraph >> initializeWithSortContext: anLbContext directSubsorts: aSubsortDictionary subsortAxioms: anAxiomDictionary [
 	context := anLbContext.
-	sortOps := aSubsortDictionary keys asSet.
+	sortFamilies := aSubsortDictionary keys asSet.
 	sortSort := context sortGraph sortNamed: #sort.
 	self initializeSubsorts: aSubsortDictionary.
+	subsortAxioms := anAxiomDictionary.
 	self initializeMaximalSorts.
 	self initializeKinds.
 	self beRecursivelyReadOnlyObject
+]
+
+{ #category : #comparing }
+LbDependentSortGraph >> instVarsExcludedFromEquality [
+	"The only instance variable used in comparison is 'context', since all the
+	 others are derived from it."
+	^#(#sortSort #sortOps #directSubsorts #maximalSorts #subsorts #kinds)
+]
+
+{ #category : #testing }
+LbDependentSortGraph >> isEmpty [
+	^ sortFamilies isEmpty
 ]
 
 { #category : #accessing }
@@ -133,6 +236,17 @@ LbDependentSortGraph >> parseSort: aString [
 { #category : #accessing }
 LbDependentSortGraph >> sortContext [
 	^ context
+]
+
+{ #category : #accessing }
+LbDependentSortGraph >> sortFamilyForTerm: aTerm [
+	| sortOp sortFamily |
+	sortOp := context signature
+		opNamed: aTerm opName
+		withArgs: (aTerm arguments collect: #sort).
+	sortFamily := LbDependentSortFamily sortOp: sortOp.
+	self assert: (sortFamilies includes: sortFamily).
+	^ sortFamily
 ]
 
 { #category : #accessing }
