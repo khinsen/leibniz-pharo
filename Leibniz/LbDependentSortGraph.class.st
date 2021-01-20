@@ -12,9 +12,11 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbDependentSortGraph class >> sortContext: anLbContext [
+LbDependentSortGraph class >> sortContext: aContext directSubsorts: aSubsortDictionary subsortAxioms: anAxiomDictionary [
 	^ self basicNew
-		initializeWithSortContext: anLbContext;
+		initializeWithSortContext: aContext
+		directSubsorts: aSubsortDictionary
+		subsortAxioms: anAxiomDictionary;
 		yourself
 ]
 
@@ -45,20 +47,10 @@ LbDependentSortGraph >> includes: aSortTerm [
 ]
 
 { #category : #initialization }
-LbDependentSortGraph >> initializeSorts [
-	[ sortSort := context sortGraph sortNamed: #sort ]
-		on: Error
-		do: [ self error: 'No sorts in sort context.' ].
-	self
-		assert: (sortSort kind maximalSorts = (Set with: sortSort))
-		description: 'Sort sort may not have supersorts'.
-	sorts := context signature opsOfKind: sortSort kind.
-]
-
-{ #category : #initialization }
-LbDependentSortGraph >> initializeWithSortContext: anLbContext [
+LbDependentSortGraph >> initializeWithSortContext: anLbContext directSubsorts: aSubsortDictionary subsortAxioms: anAxiomDictionary [
 	context := anLbContext.
-	self initializeSorts.
+	sorts := aSubsortDictionary keys.
+	sortSort := context sortGraph sortNamed: #sort.
 	self beRecursivelyReadOnlyObject
 ]
 

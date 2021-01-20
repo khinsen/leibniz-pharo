@@ -6,7 +6,8 @@ Class {
 		'directSubsorts',
 		'sortContextBuilder',
 		'sortContext',
-		'sorts'
+		'sorts',
+		'subsortAxioms'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
@@ -35,7 +36,10 @@ LbDependentSortGraphBuilder >> addSubsortRelation: aSubsortAxiom [
 			| newKind |
 			newKind := (sameKindSorts at: subsort) union: (sameKindSorts at: supersort).
 			newKind do: [ :sort | sameKindSorts at: sort put: newKind ].
-			(directSubsorts at: supersort) add: subsort ]
+			(directSubsorts at: supersort) add: subsort ].
+
+	(subsortAxioms at: { subsort. supersort } ifAbsentPut: [ OrderedCollection new ])
+		add: aSubsortAxiom
 ]
 
 { #category : #initializing }
@@ -64,7 +68,8 @@ LbDependentSortGraphBuilder >> findSortForTerm: aTerm [
 LbDependentSortGraphBuilder >> initialize [
 	sameKindSorts := Dictionary new.
 	directSubsorts := Dictionary new.
-	declarations := Dictionary new.
+	sorts := Set new.
+	subsortAxioms := Dictionary new.
 	self initializeSortContextBuilder
 ]
 
@@ -110,5 +115,5 @@ LbDependentSortGraphBuilder >> is: aSort subsortOf: anotherSort [
 { #category : #accessing }
 LbDependentSortGraphBuilder >> sortGraph [
 	self buildSortContext.
-	^ LbDependentSortGraph sortContext: sortContext
+	^ LbDependentSortGraph sortContext: sortContext directSubsorts: directSubsorts subsortAxioms: subsortAxioms
 ]

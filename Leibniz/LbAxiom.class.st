@@ -30,6 +30,14 @@ LbAxiom >> printAsLeibnizSyntaxOn: aStream [
 	self subclassResponsibility
 ]
 
+{ #category : #accessing }
+LbAxiom >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	self printAsLeibnizSyntaxOn: aStream.
+	aStream nextPut: $)
+]
+
 { #category : #printing }
 LbAxiom >> printVariablesAsLeibnizSyntaxOn: aStream [
 	variables keysAndValuesDo:
