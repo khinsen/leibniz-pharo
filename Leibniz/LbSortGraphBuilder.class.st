@@ -11,7 +11,6 @@ Class {
 	#name : #LbSortGraphBuilder,
 	#superclass : #Object,
 	#instVars : [
-		'sameKindSortsOf',
 		'directSubsortsOf',
 		'origins',
 		'collectionSortsOf',
@@ -30,7 +29,6 @@ LbSortGraphBuilder >> add: aSymbol origins: anLbOrigins [
 	| prefix baseName |
 	(self includes: aSymbol)
 		ifFalse: [
-			sameKindSortsOf at: aSymbol put: (Set with: aSymbol).
 			directSubsortsOf at: aSymbol put: Set new.
 			origins at: aSymbol put: anLbOrigins ]
 		ifTrue: [
@@ -109,13 +107,11 @@ LbSortGraphBuilder >> gtGraphFor: aView [
 
 { #category : #testing }
 LbSortGraphBuilder >> includes: aSort [
-	^ sameKindSortsOf keys includes: aSort
-
+	^ directSubsortsOf keys includes: aSort
 ]
 
 { #category : #initializing }
 LbSortGraphBuilder >> initialize [
-	sameKindSortsOf := Dictionary new.
 	directSubsortsOf := Dictionary new.
 	baseSortOf := Dictionary new.
 	collectionSortsOf := Dictionary new.
@@ -146,8 +142,6 @@ LbSortGraphBuilder >> make: aSort subsortOf: anotherSort origins: anLbOrigins [
 	sortPair := { aSort. anotherSort }.
 	((directSubsortsOf at: anotherSort) includes: aSort)
 		ifFalse: [
-			newKind := (sameKindSortsOf at: aSort) union: (sameKindSortsOf at: anotherSort).
-			newKind do: [ :sort | sameKindSortsOf at: sort put: newKind].
 			(directSubsortsOf at: anotherSort) add: aSort.
 			origins at: sortPair put: anLbOrigins ]
 		ifTrue: [
