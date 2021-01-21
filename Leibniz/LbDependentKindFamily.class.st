@@ -26,7 +26,7 @@ LbDependentKindFamily >> asSet [
 { #category : #inspecting }
 LbDependentKindFamily >> gtGraphFor: aView [
 	<gtView>
-	^ sortGraph graphFor: aView restrictedTo: sortFamilies
+	^ sortGraph graphFor: aView restrictedTo: sortFamilies highlight: nil
 ]
 
 { #category : #initialization }

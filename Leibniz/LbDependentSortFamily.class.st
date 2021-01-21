@@ -23,6 +23,14 @@ LbDependentSortFamily >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | opName printForArity: argSorts on: s ]
 ]
 
+{ #category : #inspecting }
+LbDependentSortFamily >> gtGraphFor: aView [
+	<gtView>
+	| kind |
+	kind := self kind.
+	^ sortGraph graphFor: aView restrictedTo: kind asSet highlight: self
+]
+
 { #category : #initialization }
 LbDependentSortFamily >> initializeWithSortGraph: aSortGraph sortOp: anLbOperator [
 	self assert: anLbOperator size equals: 1.

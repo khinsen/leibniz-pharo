@@ -7,11 +7,11 @@ Class {
 		'context',
 		'sortSort',
 		'directSubsorts',
-		'maximalSorts',
 		'subsorts',
 		'sortFamilies',
 		'kindOf',
-		'kindFamilies'
+		'kindFamilies',
+		'maximalSortFamilies'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
@@ -86,7 +86,7 @@ LbDependentSortGraph >> graphArrowForSubsortRelation: aSubsortAxiom [
 ]
 
 { #category : #inspecting }
-LbDependentSortGraph >> graphFor: aView restrictedTo: aSet [
+LbDependentSortGraph >> graphFor: aView restrictedTo: aSet highlight: aSort [
 	self isEmpty ifTrue: [ ^ aView empty ].
 	^ aView mondrian
 		title: 'Graph';
@@ -94,7 +94,7 @@ LbDependentSortGraph >> graphFor: aView restrictedTo: aSet [
 		painting: [ :view | 
 			| edges |
 			view nodes
-				shape: [ :x | self graphNodeForSort: x highlight: false ];
+				shape: [ :x | self graphNodeForSort: x highlight: (x = aSort) ];
 				with: aSet.
 			view edges
 				shape: [ :x | self graphArrowForSubsortRelation: x ];
@@ -142,7 +142,7 @@ LbDependentSortGraph >> graphNodeForSort: aSortFamily highlight: aBoolean [
 { #category : #inspecting }
 LbDependentSortGraph >> gtGraphFor: aView [
 	<gtView>
-	^ self graphFor: aView restrictedTo: sortFamilies
+	^ self graphFor: aView restrictedTo: sortFamilies highlight: nil
 ]
 
 { #category : #accessing }
@@ -167,7 +167,7 @@ LbDependentSortGraph >> initializeDirectSubsorts [
 { #category : #initialization }
 LbDependentSortGraph >> initializeKindFamilies [
 	| candidates kindFamily hasCommonSorts |
-	candidates := maximalSorts asOrderedCollection
+	candidates := maximalSortFamilies asOrderedCollection
 		collect: [ :sort | subsorts at: sort ].
 	"A kind can have multiple maximal sorts. In that case, kindCandidates
 	 contains multiple sets that have a non-empty intersection, and which
@@ -185,13 +185,14 @@ LbDependentSortGraph >> initializeKindFamilies [
 		kindFamilies add: (LbDependentKindFamily
 							sortGraph: self
 							sorts: kindFamily
-							maximalSorts: (maximalSorts select: [ :each |
+							maximalSorts: (maximalSortFamilies select: [ :each |
 								kindFamily includes: each ])).
 		candidates := hasCommonSorts at: false. ]
 ]
 
 { #category : #initialization }
 LbDependentSortGraph >> initializeKindOf [
+	kindOf := Dictionary new.
 	kindFamilies do: [ :eachKind |
 		eachKind asSet do: [ :eachSortFamily |
 			kindOf at: eachSortFamily put: eachKind ] ]
@@ -199,7 +200,7 @@ LbDependentSortGraph >> initializeKindOf [
 
 { #category : #initialization }
 LbDependentSortGraph >> initializeMaximalSorts [
-	maximalSorts :=
+	maximalSortFamilies :=
 		(directSubsorts values)
 			inject: sortFamilies asSet
 			into: [ :ms :ss | ms difference: ss ]
@@ -252,7 +253,8 @@ LbDependentSortGraph >> initializeWithSortContext: anLbContext [
 LbDependentSortGraph >> instVarsExcludedFromEquality [
 	"The only instance variable used in comparison is 'context', since all the
 	 others are derived from it."
-	^#(#sortSort #sortFamilies #directSubsorts #maximalSorts #subsorts #kinds)
+
+	^ self class instVarNames reject: [ :each | each = #context ]
 ]
 
 { #category : #testing }
