@@ -27,6 +27,11 @@ LbDependentSort >> directSupersorts [
 	^ sortGraph directSupersortsOf: term
 ]
 
+{ #category : #lookup }
+LbDependentSort >> family [
+	^ sortGraph sortFamilyForTerm: term
+]
+
 { #category : #inspecting }
 LbDependentSort >> graphNodeForSort: aSort highlight: aBoolean [
 	| text color label rectangle |
@@ -106,8 +111,7 @@ LbDependentSort >> initializeWithSortGraph: aSortGraph term: aTerm [
 
 { #category : #accessing }
 LbDependentSort >> kind [
-	self flag: #todo.
-	^ self
+	^ sortGraph kindForTerm: term
 ]
 
 { #category : #matching }

@@ -1,5 +1,5 @@
 Class {
-	#name : #LbDependentKind,
+	#name : #LbDependentKindFamily,
 	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -12,35 +12,45 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbDependentKind class >> sortGraph: aSortGraph sorts: sorts maximalSorts: maximalSorts [
+LbDependentKindFamily class >> sortGraph: aSortGraph sorts: sorts maximalSorts: maximalSorts [
 	^ self basicNew
 		initializeWithSortGraph: aSortGraph sorts: sorts maximalSorts: maximalSorts;
 		yourself
 ]
 
+{ #category : #converting }
+LbDependentKindFamily >> asSet [
+	^ sortFamilies
+]
+
 { #category : #inspecting }
-LbDependentKind >> gtGraphFor: aView [
+LbDependentKindFamily >> gtGraphFor: aView [
 	<gtView>
 	^ sortGraph graphFor: aView restrictedTo: sortFamilies
 ]
 
 { #category : #initialization }
-LbDependentKind >> initializeWithSortGraph: aSortGraph sorts: sortSet maximalSorts: maximalSortSet [
+LbDependentKindFamily >> initializeWithSortGraph: aSortGraph sorts: sortSet maximalSorts: maximalSortSet [
 	sortGraph := aSortGraph.
 	sortFamilies := sortSet.
 	maximalSortFamilies := maximalSortSet.
 	self beRecursivelyReadOnlyObject.
 ]
 
+{ #category : #comparing }
+LbDependentKindFamily >> instVarsExcludedFromEquality [
+	^#(maximalSortFamilies)
+]
+
 { #category : #accessing }
-LbDependentKind >> maximalSorts [
+LbDependentKindFamily >> maximalSortFamilies [
 	^ maximalSortFamilies
 ]
 
 { #category : #printing }
-LbDependentKind >> printOn: aStream [
+LbDependentKindFamily >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
-	aStream nextPutAll: (', ' join: (self maximalSorts collect: [ : sort | sort asLeibnizSyntaxString ])).
+	aStream nextPutAll: (', ' join: (self maximalSortFamilies collect: [ : sort | sort asLeibnizSyntaxString ])).
 	aStream nextPut: $).
 ]

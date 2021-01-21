@@ -5,15 +5,16 @@ Class {
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'opName',
-		'argSorts'
+		'argSorts',
+		'sortGraph'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
 
 { #category : #'instance creation' }
-LbDependentSortFamily class >> sortOp: anLbOperator [
+LbDependentSortFamily class >> sortGraph: aSortGraph sortOp: anLbOperator [
 	^ self basicNew
-		initializeWithSortOp: anLbOperator;
+		initializeWithSortGraph: aSortGraph sortOp: anLbOperator;
 		yourself
 ]
 
@@ -23,10 +24,16 @@ LbDependentSortFamily >> asLeibnizSyntaxString [
 ]
 
 { #category : #initialization }
-LbDependentSortFamily >> initializeWithSortOp: anLbOperator [
+LbDependentSortFamily >> initializeWithSortGraph: aSortGraph sortOp: anLbOperator [
 	self assert: anLbOperator size equals: 1.
+	sortGraph := aSortGraph.
 	opName := anLbOperator name.
 	anLbOperator withRanksDo: [ :arity :sort | argSorts := arity ]
+]
+
+{ #category : #lookup }
+LbDependentSortFamily >> kind [
+	^ sortGraph kindOf: self
 ]
 
 { #category : #printing }
