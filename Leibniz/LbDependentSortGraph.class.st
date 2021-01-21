@@ -252,7 +252,7 @@ LbDependentSortGraph >> initializeWithSortContext: anLbContext [
 LbDependentSortGraph >> instVarsExcludedFromEquality [
 	"The only instance variable used in comparison is 'context', since all the
 	 others are derived from it."
-	^#(#sortSort #sortFamilies #directSubsorts #maximalSortFamilies #subsorts #kinds)
+	^#(#sortSort #sortFamilies #directSubsorts #maximalSorts #subsorts #kinds)
 ]
 
 { #category : #testing }
