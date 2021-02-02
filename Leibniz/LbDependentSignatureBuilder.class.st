@@ -25,19 +25,20 @@ LbDependentSignatureBuilder >> addBuiltin: aSymbol [
 ]
 
 { #category : #adding }
-LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortArray ofSort: aSortTerm [
+LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortFamilyArray ofSort: aSortFamilyTerm [
 	| arity kindArity |
-	self checksForNewOp: anOpName withArgs: aSortArray ofSort: aSortTerm.
+	self checksForNewOp: anOpName withArgs: aSortFamilyArray ofSort: aSortFamilyTerm.
 
-	arity := LbArity sortGraph: sortGraph argSorts: aSortArray.
+	arity := LbDependentArity sortGraph: sortGraph argSortFamilies: aSortFamilyArray.
+	kindArity := arity liftToKindLevel.
 	operators at: anOpName ifAbsentPut: [ Dictionary new ].
-	(operators at: anOpName) at: arity size ifAbsentPut: [
+	(operators at: anOpName) at: kindArity ifAbsentPut: [
 		LbDependentOperator
 			name: anOpName
-			numArgs: arity size
-			sortGraph: sortGraph ].
-	((operators at: anOpName) at: arity size)
-		addArity: arity withSort: aSortTerm
+			argKindFamilies: aSortFamilyArray
+			kindFamily: aSortFamilyTerm ].
+	((operators at: anOpName) at: kindArity)
+		addArity: arity withSortFamily: aSortFamilyTerm
 ]
 
 { #category : #adding }
@@ -56,11 +57,11 @@ LbDependentSignatureBuilder >> addVar: anOpName ofSort: aSortTerm [
 ]
 
 { #category : #private }
-LbDependentSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortArray ofSort: aSortTerm [
+LbDependentSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortArray ofSort: aSortFamilyTerm [
 	| argSortVariables |
 
-		"All sorts belong to sortGraph"
-	self assert: (sortGraph includes: aSortTerm).
+	"All sorts belong to sortGraph"
+	self assert: (sortGraph includes: aSortFamilyTerm).
 	aSortArray do: [ :each | self assert: (sortGraph includes: each) ].
 
 	"No conflict with variable declarations"
@@ -72,7 +73,7 @@ LbDependentSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortArray ofS
 	argSortVariables := Dictionary new.
 	aSortArray do: [ :each |
 		argSortVariables addAll: each term variables ].
-	aSortTerm term variables associationsDo: [ :each |
+	aSortFamilyTerm term variables associationsDo: [ :each |
 		self
 			assert: (argSortVariables includesAssociation: each)
 			description: 'Variable ', each key asSymbol, ' in operator sort but not in arguments' ]
@@ -103,7 +104,7 @@ LbDependentSignatureBuilder >> parseAndAddOp: aString [
 	parsedOp := parsedOp
 					value: sortGraph sortContext signature
 					value: Dictionary new.
-	argSorts := parsedOp second collect: [ :each | sortGraph sortFor: each ].
+	argSorts := parsedOp second collect: [ :each | sortGraph sortFamilyForTerm: each ].
 	self addOp: parsedOp first withArgs: argSorts ofSort: (sortGraph sortFor: parsedOp third).
 ]
 

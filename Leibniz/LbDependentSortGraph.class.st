@@ -294,7 +294,7 @@ LbDependentSortGraph >> sortFamilyForTerm: aTerm [
 	^ sortFamily
 ]
 
-{ #category : #accessing }
+{ #category : #lookup }
 LbDependentSortGraph >> sortFor: aSortTerm [
 	self assert: aSortTerm sort <= sortSort.
 	^ LbDependentSort sortGraph: self term: aSortTerm

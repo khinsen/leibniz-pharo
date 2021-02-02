@@ -15,19 +15,10 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbArity class >> sortGraph: aSortGraph argSortConstraints: aConstraintArray [
-	^(self basicNew: aConstraintArray size)
-			initializeWithSortGraph: aSortGraph argSortConstraints: aConstraintArray;
-			yourself
-
-]
-
-{ #category : #'instance creation' }
 LbArity class >> sortGraph: aSortGraph argSorts: aSortArray [
 	^(self basicNew: aSortArray size)
 			initializeWithSortGraph: aSortGraph argSorts: aSortArray;
 			yourself
-
 ]
 
 { #category : #comparing }
@@ -60,15 +51,6 @@ LbArity >> gtArgumentsFor: aView [
 		priority: 0;
 		items: [ self ];
 		itemText: [ :each | each asLeibnizSyntaxString ]
-]
-
-{ #category : #initializing }
-LbArity >> initializeWithSortGraph: aSortGraph argSortConstraints: aConstraintArray [
-	sortGraph := aSortGraph.
-	self fillFrom: aConstraintArray with: [ :x | x ].
-	self beRecursivelyReadOnlyObject.
-	^self
-
 ]
 
 { #category : #initializing }
