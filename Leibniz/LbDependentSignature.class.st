@@ -117,7 +117,7 @@ LbDependentSignature >> sortNamed: aSymbol [
 { #category : #lookup }
 LbDependentSignature >> sortOfOp: anOpName withArgSorts: aSortArray [
 	(self opNamed: anOpName withArgs: aSortArray)
-		ifNotNil: [ :op | ^ op sortForArgSorts: aSortArray ].
+		ifNotNil: [ :op | ^ op sortPatternForArgSortPatterns: aSortArray ].
 	"A somewhat hacky special case: if the signature includes the
     #truth builtin, it also includes == for testing arbitrary terms
     for syntactic identity."

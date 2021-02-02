@@ -7,29 +7,29 @@ Class {
 		'name',
 		'sortGraph',
 		'ranks',
-		'kindFamily',
-		'kindArity'
+		'kindPattern',
+		'kindPatternArity'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
 
 { #category : #'instance creation' }
-LbDependentOperator class >> name: anOpName argKindFamilies: aKindFamilyArray kindFamily: aKindFamily [
+LbDependentOperator class >> name: anOpName argKindPatterns: aKindPatternArray kindPattern: aKindPattern [
 	^ self basicNew
 			initializeWithName: anOpName
-			argKindFamilies: aKindFamilyArray
-			kindFamily: aKindFamily;
+			argKindPatterns: aKindPatternArray
+			kindPattern: aKindPattern;
 			yourself
 ]
 
 { #category : #adding }
-LbDependentOperator >> addArity: newArity withSortFamily: newSortFamily [
+LbDependentOperator >> addArity: newArity withSortPattern: newSortPattern [
 	self
-		assertMonotonicity: [ kindFamily includes: newSortFamily ]
-		forArity: newArity andSortFamily: newSortFamily.
+		assertMonotonicity: [ kindPattern includes: newSortPattern ]
+		forArity: newArity andSortPattern: newSortPattern.
 
 	ranks ifEmpty:
-		[ ranks add: newArity -> newSortFamily.
+		[ ranks add: newArity -> newSortPattern.
 		  ^ self  ].
 
 	1 to: ranks size do: [ :index |
@@ -40,32 +40,32 @@ LbDependentOperator >> addArity: newArity withSortFamily: newSortFamily [
 
 		a = newArity ifTrue: [
 			self
-				assert: [ s = newSortFamily ]
+				assert: [ s = newSortPattern ]
 				description: [ 'conflicting earlier operator definition with sort ', s asLeibnizSyntaxString ].
 			^ self ].
 
 		(newArity <= a) ifTrue: [
 			self
-				assertMonotonicity: [ newSortFamily <= s ]
-				forArity: newArity andSortFamily: newSortFamily.
-			ranks add: newArity -> newSortFamily beforeIndex: index.
+				assertMonotonicity: [ newSortPattern <= s ]
+				forArity: newArity andSortPattern: newSortPattern.
+			ranks add: newArity -> newSortPattern beforeIndex: index.
 			^ self ].
 
 		(a <= newArity) ifTrue: [
 			self
-				assertMonotonicity: [ s <= newSortFamily ]
-				forArity: newArity andSortFamily: newSortFamily]. ].
+				assertMonotonicity: [ s <= newSortPattern ]
+				forArity: newArity andSortPattern: newSortPattern]. ].
 
-	ranks add: newArity -> newSortFamily
+	ranks add: newArity -> newSortPattern
 ]
 
 { #category : #private }
-LbDependentOperator >> assertMonotonicity: aBlock forArity: anArity andSortFamily: aSortFamily [
+LbDependentOperator >> assertMonotonicity: aBlock forArity: anArity andSortPattern: aSortPattern [
 	self
 		assert: aBlock
 		description: 'declaration ',
 		  	(String streamContents: [ :s |
-		  		name printForArity: anArity withSort: aSortFamily on: s ]),
+		  		name printForArity: anArity withSort: aSortPattern on: s ]),
 		  	' makes operator non-monotonic'.
 ]
 
@@ -134,22 +134,22 @@ LbDependentOperator >> gtRanksFor: aView [
 ]
 
 { #category : #initialization }
-LbDependentOperator >> initializeWithName: anOpName argKindFamilies: aKindFamilyArray kindFamily: aKindFamily [
+LbDependentOperator >> initializeWithName: anOpName argKindPatterns: aKindPatternArray kindPattern: aKindPattern [
 	name := anOpName.
-	kindArity := aKindFamilyArray.
-	kindFamily := aKindFamily.
-	sortGraph := kindFamily sortGraph.
+	kindPatternArity := aKindPatternArray.
+	kindPattern := aKindPattern.
+	sortGraph := kindPattern sortGraph.
 	ranks := OrderedCollection new.
 ]
 
 { #category : #accessing }
-LbDependentOperator >> kindFamily [
-	^ kindFamily
+LbDependentOperator >> kindPattern [
+	^ kindPattern
 ]
 
 { #category : #accessing }
-LbDependentOperator >> kindFamilyArity [
-	^ kindArity
+LbDependentOperator >> kindPatternArity [
+	^ kindPatternArity
 ]
 
 { #category : #inspecting }
@@ -181,22 +181,22 @@ LbDependentOperator >> printOn: aStream [
 	aStream nextPut: $(.
 	aStream nextPutAll: name asSymbol.
 	aStream nextPutAll: ': ('.
-	kindArity printAsLeibnizSyntaxOn: aStream.
+	kindPatternArity printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ') -> '.
-	kindFamily printAsLeibnizSyntaxOn: aStream.
+	kindPattern printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ', '.
 	ranks size printOn: aStream.
 	aStream nextPutAll: ' rank(s)'
 ]
 
 { #category : #lookup }
-LbDependentOperator >> ranksMatchingArgSorts: aSortArray [
+LbDependentOperator >> ranksMatchingArgSortPatterns: aSortPatternArray [
 	| matches |
 	matches := OrderedCollection new.
 	ranks associationsDo: [ :each |
 		| match |
 		match := LbSubstitution new.
-		each key with: aSortArray do: [ :patternArg :valueArg |
+		each key with: aSortPatternArray do: [ :patternArg :valueArg |
 			| submatches |
 			submatches := patternArg matchAllSupersortsOf: valueArg.
 			submatches
@@ -217,9 +217,9 @@ LbDependentOperator >> size [
 ]
 
 { #category : #lookup }
-LbDependentOperator >> sortForArgSorts: aSortArray [
+LbDependentOperator >> sortPatternForArgSortPatterns: aSortPatternArray [
 	| matches |
-	matches := self ranksMatchingArgSorts: aSortArray.
+	matches := self ranksMatchingArgSortPatterns: aSortPatternArray.
 	self assert: matches size equals: 1.
 	^ matches first value
 ]

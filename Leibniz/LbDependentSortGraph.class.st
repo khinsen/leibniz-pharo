@@ -262,6 +262,13 @@ LbDependentSortGraph >> isEmpty [
 	^ sortFamilies isEmpty
 ]
 
+{ #category : #private }
+LbDependentSortGraph >> kindForTerm: aSortTerm [
+	| kindFamily |
+	kindFamily := (self sortFamilyForTerm: aSortTerm) kind.
+	^ LbDependentKind sortGraph: self kindFamily: kindFamily
+]
+
 { #category : #lookup }
 LbDependentSortGraph >> kindOf: aSortFamily [
 	^ kindOf at: aSortFamily

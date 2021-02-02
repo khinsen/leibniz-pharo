@@ -11,9 +11,9 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbDependentArity class >> sortGraph: aSortGraph argSortFamilies: anArray [
+LbDependentArity class >> sortGraph: aSortGraph argSortPatterns: anArray [
 	^(self basicNew: anArray size)
-			initializeWithSortGraph: aSortGraph argSortFamilies: anArray;
+			initializeWithSortGraph: aSortGraph argSortPatterns: anArray;
 			yourself
 ]
 
@@ -43,7 +43,7 @@ LbDependentArity >> gtArgumentsFor: aView [
 ]
 
 { #category : #initializing }
-LbDependentArity >> initializeWithSortGraph: aSortGraph argSortFamilies: anArray [
+LbDependentArity >> initializeWithSortGraph: aSortGraph argSortPatterns: anArray [
 	sortGraph := aSortGraph.
 	anArray collect: [ :s | s ] into: self.
 	self beRecursivelyReadOnlyObject
@@ -53,7 +53,7 @@ LbDependentArity >> initializeWithSortGraph: aSortGraph argSortFamilies: anArray
 LbDependentArity >> liftToKindLevel [
 	^ self class
 		sortGraph: sortGraph
-		argSortFamilies: (self collect: #kind)
+		argSortPatterns: (self collect: #kind)
 ]
 
 { #category : #printing }

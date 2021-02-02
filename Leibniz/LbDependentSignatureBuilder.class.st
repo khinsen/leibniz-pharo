@@ -25,25 +25,25 @@ LbDependentSignatureBuilder >> addBuiltin: aSymbol [
 ]
 
 { #category : #adding }
-LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortFamilyArray ofSort: aSortFamilyTerm [
+LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern [
 	| arity kindArity |
-	self checksForNewOp: anOpName withArgs: aSortFamilyArray ofSort: aSortFamilyTerm.
+	self checksForNewOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern.
 
-	arity := LbDependentArity sortGraph: sortGraph argSortFamilies: aSortFamilyArray.
+	arity := LbDependentArity sortGraph: sortGraph argSortPatterns: aSortPatternArray.
 	kindArity := arity liftToKindLevel.
 	operators at: anOpName ifAbsentPut: [ Dictionary new ].
 	(operators at: anOpName) at: kindArity ifAbsentPut: [
 		LbDependentOperator
 			name: anOpName
-			argKindFamilies: aSortFamilyArray
-			kindFamily: aSortFamilyTerm ].
+			argKindPatterns: aSortPatternArray
+			kindPattern: aSortPattern ].
 	((operators at: anOpName) at: kindArity)
-		addArity: arity withSortFamily: aSortFamilyTerm
+		addArity: arity withSortPattern: aSortPattern
 ]
 
 { #category : #adding }
-LbDependentSignatureBuilder >> addVar: anOpName ofSort: aSortTerm [
-	self assert: (sortGraph includes: aSortTerm).
+LbDependentSignatureBuilder >> addVar: anOpName ofSort: aSortPattern [
+	self assert: (sortGraph includes: aSortPattern).
 	operators at: anOpName ifPresent: [ :op |
 		op at: (LbArity sortGraph: sortGraph argSorts: #()) ifPresent: [ :sort |
 			self error: 'conflicting earlier operator definition with sort', sort asLeibnizSyntaxString ] ].
@@ -51,29 +51,29 @@ LbDependentSignatureBuilder >> addVar: anOpName ofSort: aSortTerm [
 	variables at: anOpName
 		ifPresent: [ :sort |
 			self
-				assert: sort = aSortTerm
+				assert: sort = aSortPattern
 				description: 'conflicting earlier variable definition with sort ', sort asLeibnizSyntaxString ]
-		ifAbsent: [ variables at: anOpName put: aSortTerm ]
+		ifAbsent: [ variables at: anOpName put: aSortPattern ]
 ]
 
 { #category : #private }
-LbDependentSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortArray ofSort: aSortFamilyTerm [
+LbDependentSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern [
 	| argSortVariables |
 
 	"All sorts belong to sortGraph"
-	self assert: (sortGraph includes: aSortFamilyTerm).
-	aSortArray do: [ :each | self assert: (sortGraph includes: each) ].
+	self assert: (sortGraph includes: aSortPattern).
+	aSortPatternArray do: [ :each | self assert: (sortGraph includes: each) ].
 
 	"No conflict with variable declarations"
-	aSortArray ifEmpty: [
+	aSortPatternArray ifEmpty: [
 		variables at: anOpName ifPresent: [ :sort |
 			self error: 'conflicting earlier variable definition with sort ', sort asLeibnizSyntaxString ] ].
 
-	"All variables in the result sort are used in the arg sorts"
+	"All variables in the result sort occur in the arg sorts"
 	argSortVariables := Dictionary new.
-	aSortArray do: [ :each |
+	aSortPatternArray do: [ :each |
 		argSortVariables addAll: each term variables ].
-	aSortFamilyTerm term variables associationsDo: [ :each |
+	aSortPattern term variables associationsDo: [ :each |
 		self
 			assert: (argSortVariables includesAssociation: each)
 			description: 'Variable ', each key asSymbol, ' in operator sort but not in arguments' ]
@@ -96,7 +96,7 @@ LbDependentSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 
 { #category : #adding }
 LbDependentSignatureBuilder >> parseAndAddOp: aString [
-	| parsedOp argSorts |
+	| parsedOp argSorts sort |
 	parsedOp := (opParser parse: aString).
 	parsedOp isPetit2Failure ifTrue:
 		[ self error: parsedOp message, ' after ',
@@ -104,8 +104,9 @@ LbDependentSignatureBuilder >> parseAndAddOp: aString [
 	parsedOp := parsedOp
 					value: sortGraph sortContext signature
 					value: Dictionary new.
-	argSorts := parsedOp second collect: [ :each | sortGraph sortFamilyForTerm: each ].
-	self addOp: parsedOp first withArgs: argSorts ofSort: (sortGraph sortFor: parsedOp third).
+	argSorts := parsedOp second collect: [ :each | sortGraph sortFor: each ].
+	sort := sortGraph sortFor: parsedOp third.
+	self addOp: parsedOp first withArgs: argSorts ofSort: sort
 ]
 
 { #category : #accessing }
