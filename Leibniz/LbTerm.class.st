@@ -91,7 +91,7 @@ LbTerm >> isTrue [
 	^ false.
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 LbTerm >> isVariable [
 	^ false
 ]

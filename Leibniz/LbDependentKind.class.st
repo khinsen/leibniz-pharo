@@ -17,6 +17,17 @@ LbDependentKind class >> sortGraph: aSortGraph kindFamily: aKindFamily [
 		yourself
 ]
 
+{ #category : #converting }
+LbDependentKind >> asLeibnizSyntaxString [
+	^ String streamContents: [ :s | kindFamily printAsLeibnizSyntaxOn: s ]
+]
+
+{ #category : #inspecting }
+LbDependentKind >> gtGraphFor: aView [
+	<gtView>
+	^ sortGraph graphFor: aView restrictedTo: kindFamily asSet highlight: nil
+]
+
 { #category : #initialization }
 LbDependentKind >> initializeWithsortGraph: aSortGraph kindFamily: aKindFamily [
 	sortGraph := aSortGraph.

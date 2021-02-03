@@ -61,6 +61,11 @@ LbSortClassifier >> kind [
 	self subclassResponsibility
 ]
 
+{ #category : #printing }
+LbSortClassifier >> printAsLeibnizSyntaxOn: aStream [
+	self subclassResponsibility
+]
+
 { #category : #accessing }
 LbSortClassifier >> size [
 	^ self asSet size

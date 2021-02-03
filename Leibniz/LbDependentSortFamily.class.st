@@ -12,15 +12,22 @@ Class {
 }
 
 { #category : #'instance creation' }
+LbDependentSortFamily class >> anySortInSortGraph: aSortGraph [
+	^ LbDependentSortUniversalFamily basicNew
+		initializeWithSortGraph: aSortGraph;
+		yourself
+]
+
+{ #category : #'instance creation' }
 LbDependentSortFamily class >> sortGraph: aSortGraph sortOp: anLbOperator [
-	^ self basicNew
+	^ LbDependentSortSpecificFamily basicNew
 		initializeWithSortGraph: aSortGraph sortOp: anLbOperator;
 		yourself
 ]
 
 { #category : #converting }
 LbDependentSortFamily >> asLeibnizSyntaxString [
-	^ String streamContents: [ :s | opName printForArity: argSorts on: s ]
+	self subclassResponsibility
 ]
 
 { #category : #inspecting }
@@ -31,23 +38,7 @@ LbDependentSortFamily >> gtGraphFor: aView [
 	^ sortGraph graphFor: aView restrictedTo: kind asSet highlight: self
 ]
 
-{ #category : #initialization }
-LbDependentSortFamily >> initializeWithSortGraph: aSortGraph sortOp: anLbOperator [
-	self assert: anLbOperator size equals: 1.
-	sortGraph := aSortGraph.
-	opName := anLbOperator name.
-	anLbOperator withRanksDo: [ :arity :sort | argSorts := arity ]
-]
-
 { #category : #lookup }
 LbDependentSortFamily >> kind [
 	^ sortGraph kindOf: self
-]
-
-{ #category : #printing }
-LbDependentSortFamily >> printOn: aStream [
-	super printOn: aStream.
-	aStream nextPut: $(.
-	opName printForArity: argSorts on: aStream.
-	aStream nextPut: $)
 ]

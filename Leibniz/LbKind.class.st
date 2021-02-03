@@ -61,8 +61,7 @@ LbKind >> maximalSorts [
 LbKind >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPut: $[.
 	aStream nextPutAll: (', ' join: (maximalSorts collect: [ : sort | sort asString ])).
-	aStream nextPut: $].
-
+	aStream nextPut: $]
 ]
 
 { #category : #printing }

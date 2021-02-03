@@ -166,13 +166,19 @@ LbDependentSortGraph >> initializeDirectSubsorts [
 
 { #category : #initialization }
 LbDependentSortGraph >> initializeKindFamilies [
-	| candidates kindFamily hasCommonSorts |
-	candidates := maximalSortFamilies asOrderedCollection
-		collect: [ :sort | subsorts at: sort ].
+	| anySort candidates kindFamily hasCommonSorts |
+	"A special kind family contains only the 'anySort' sort family."
+	anySort := LbDependentSortFamily anySortInSortGraph: self.
+	kindFamilies := Set with:
+		(LbDependentKindFamily
+			sortGraph: self
+			sortFamilies: (Set with: anySort)
+			maximalSortFamilies: (Set with: anySort)).
 	"A kind can have multiple maximal sorts. In that case, kindCandidates
 	 contains multiple sets that have a non-empty intersection, and which
 	 must be merged to obtain the kind."
-	kindFamilies := Set new.
+	candidates := maximalSortFamilies asOrderedCollection
+		collect: [ :sort | subsorts at: sort ].
 	[ candidates isEmpty ] whileFalse: [
 		kindFamily := candidates first.
 		hasCommonSorts :=
@@ -184,8 +190,8 @@ LbDependentSortGraph >> initializeKindFamilies [
 						inject: kindFamily into: [ :k :c | k union: c ]).
 		kindFamilies add: (LbDependentKindFamily
 							sortGraph: self
-							sorts: kindFamily
-							maximalSorts: (maximalSortFamilies select: [ :each |
+							sortFamilies: kindFamily
+							maximalSortFamilies: (maximalSortFamilies select: [ :each |
 								kindFamily includes: each ])).
 		candidates := hasCommonSorts at: false. ]
 ]
@@ -293,6 +299,8 @@ LbDependentSortGraph >> sortContext [
 { #category : #lookup }
 LbDependentSortGraph >> sortFamilyForTerm: aTerm [
 	| sortOp sortFamily |
+	aTerm isVariable
+		ifTrue: [ ^ LbDependentSortFamily anySortInSortGraph: self ].
 	sortOp := context signature
 		opNamed: aTerm opName
 		withArgs: (aTerm arguments collect: #sort).
