@@ -28,6 +28,11 @@ LbAtomicTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	^ self class value: value signature: aSignature
 ]
 
+{ #category : #testing }
+LbAtomicTerm >> hasVariables [
+	^ false
+]
+
 { #category : #classifying }
 LbAtomicTerm >> headOpName [
 	^ LbPseudoOperatorName for: #Atomic

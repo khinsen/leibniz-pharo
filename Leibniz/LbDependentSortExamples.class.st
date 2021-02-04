@@ -59,6 +59,17 @@ LbDependentSortExamples >> bagSortGraph [
 		sortGraph
 ]
 
+{ #category : #accessing }
+LbDependentSortExamples >> bagSorts [
+	<gtExample>
+	^ #('collection'
+		'∅'
+		'bag(element, 2)'
+		'list(element, 1)')
+		collect: [ :each |
+			self bagSortGraph parseSort: each ]
+]
+
 { #category : #example }
 LbDependentSortExamples >> listSignature [
 	<gtExample>

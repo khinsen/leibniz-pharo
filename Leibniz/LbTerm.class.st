@@ -73,6 +73,11 @@ LbTerm >> hasInfixOpOtherThan: aSymbol [
 	^ false
 ]
 
+{ #category : #testing }
+LbTerm >> hasVariables [
+	self subclassResponsibility
+]
+
 { #category : #classifying }
 LbTerm >> headOpName [
 	"The name of the head operator, which is used as a first heuristic in matching."

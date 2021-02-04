@@ -6,12 +6,12 @@ Class {
 	#instVars : [
 		'context',
 		'sortSort',
-		'directSubsorts',
-		'subsorts',
 		'sortFamilies',
 		'kindOf',
 		'kindFamilies',
-		'maximalSortFamilies'
+		'maximalSortFamilies',
+		'directSubsortFamilies',
+		'subsortFamilies'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
@@ -61,6 +61,16 @@ LbDependentSortGraph >> copy [
 { #category : #copying }
 LbDependentSortGraph >> deepCopy [
 	^ self
+]
+
+{ #category : #lookup }
+LbDependentSortGraph >> directSubsortsOf: aSortTerm [
+	| subsorts |
+	subsorts := Set new.
+	context axioms subsortAxioms do: [ :each |
+		(each subsortOf: aSortTerm)
+			ifNotNil: [ :term | subsorts add: (self sortFor: term) ] ].
+	^ subsorts
 ]
 
 { #category : #lookup }
@@ -152,16 +162,16 @@ LbDependentSortGraph >> includes: aSortTerm [
 ]
 
 { #category : #initialization }
-LbDependentSortGraph >> initializeDirectSubsorts [
-	directSubsorts := Dictionary new.
+LbDependentSortGraph >> initializeDirectSubsortFamilies [
+	directSubsortFamilies := Dictionary new.
 	sortFamilies do: [ :each |
-		directSubsorts at: each put: Set new ].
+		directSubsortFamilies at: each put: Set new ].
 	context axioms subsortAxioms do: [ :each |
 		 each subsort = each supersort ifFalse: [
 			| subsort supersort |
 			subsort := self sortFamilyForTerm: each subsort.
 			supersort := self sortFamilyForTerm: each supersort.
-			(directSubsorts at: supersort) add: subsort ] ].
+			(directSubsortFamilies at: supersort) add: subsort ] ].
 ]
 
 { #category : #initialization }
@@ -178,7 +188,7 @@ LbDependentSortGraph >> initializeKindFamilies [
 	 contains multiple sets that have a non-empty intersection, and which
 	 must be merged to obtain the kind."
 	candidates := maximalSortFamilies asOrderedCollection
-		collect: [ :sort | subsorts at: sort ].
+		collect: [ :sort | subsortFamilies at: sort ].
 	[ candidates isEmpty ] whileFalse: [
 		kindFamily := candidates first.
 		hasCommonSorts :=
@@ -205,9 +215,9 @@ LbDependentSortGraph >> initializeKindOf [
 ]
 
 { #category : #initialization }
-LbDependentSortGraph >> initializeMaximalSorts [
+LbDependentSortGraph >> initializeMaximalSortFamilies [
 	maximalSortFamilies :=
-		(directSubsorts values)
+		(directSubsortFamilies values)
 			inject: sortFamilies asSet
 			into: [ :ms :ss | ms difference: ss ]
 ]
@@ -220,26 +230,26 @@ LbDependentSortGraph >> initializeSortFamilies [
 ]
 
 { #category : #initialization }
-LbDependentSortGraph >> initializeSubsorts [
-	subsorts := Dictionary new.
-	directSubsorts keysDo: [ :sort |
-		self initializeSubsortsFor: sort ]	
+LbDependentSortGraph >> initializeSubsortFamilies [
+	subsortFamilies := Dictionary new.
+	directSubsortFamilies keysDo: [ :sort |
+		self initializeSubsortFamiliesFor: sort ]	
 ]
 
 { #category : #initialization }
-LbDependentSortGraph >> initializeSubsortsFor: aSort [
+LbDependentSortGraph >> initializeSubsortFamiliesFor: aSort [
 	| dss ss |
-	(subsorts includes: aSort) ifTrue: [ ^ self ].
-	dss := directSubsorts at: aSort.
+	(subsortFamilies includes: aSort) ifTrue: [ ^ self ].
+	dss := directSubsortFamilies at: aSort.
 	ss := dss copy.
 	dss do: [ :sort |
-		self initializeSubsortsFor: sort.
-		ss := ss union: (subsorts at: sort) ].
+		self initializeSubsortFamiliesFor: sort.
+		ss := ss union: (subsortFamilies at: sort) ].
 	(ss includes: aSort) ifTrue: [
 		self error: 'Cycle in subsort relations involving ',
 						aSort asLeibnizSyntaxString ].
 	ss add: aSort.
-	subsorts at: aSort put: ss
+	subsortFamilies at: aSort put: ss
 ]
 
 { #category : #initialization }
@@ -247,9 +257,9 @@ LbDependentSortGraph >> initializeWithSortContext: anLbContext [
 	context := anLbContext.
 	sortSort := context sortGraph sortNamed: #sort.
 	self initializeSortFamilies.
-	self initializeDirectSubsorts.
-	self initializeSubsorts.
-	self initializeMaximalSorts.
+	self initializeDirectSubsortFamilies.
+	self initializeSubsortFamilies.
+	self initializeMaximalSortFamilies.
 	self initializeKindFamilies.
 	self initializeKindOf.
 	self beRecursivelyReadOnlyObject

@@ -32,6 +32,11 @@ LbVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	^ aSignature zeroArgTermNamed: name extraVariables: vars
 ]
 
+{ #category : #testing }
+LbVarTerm >> hasVariables [
+	^ true
+]
+
 { #category : #accessing }
 LbVarTerm >> headOpName [
 	^ LbPseudoOperatorName for: #Variable

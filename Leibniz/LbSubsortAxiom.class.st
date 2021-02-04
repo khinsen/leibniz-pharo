@@ -98,6 +98,14 @@ LbSubsortAxiom >> subsort [
 	^ subsort
 ]
 
+{ #category : #matching }
+LbSubsortAxiom >> subsortOf: aTerm [
+	^ (supersort match: aTerm)
+		ifNull: [ nil ]
+		ifNotNull: [ :substitution |
+			subsort substitute: substitution ]
+]
+
 { #category : #accessing }
 LbSubsortAxiom >> supersort [
 	^ supersort

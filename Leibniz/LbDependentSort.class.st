@@ -23,6 +23,11 @@ LbDependentSort >> asLeibnizSyntaxString [
 ]
 
 { #category : #lookup }
+LbDependentSort >> directSubsorts [
+	^ sortGraph directSubsortsOf: term
+]
+
+{ #category : #lookup }
 LbDependentSort >> directSupersorts [
 	^ sortGraph directSupersortsOf: term
 ]
@@ -30,6 +35,19 @@ LbDependentSort >> directSupersorts [
 { #category : #lookup }
 LbDependentSort >> family [
 	^ sortGraph sortFamilyForTerm: term
+]
+
+{ #category : #lookup }
+LbDependentSort >> findNodesRecursivelyVia: aNodeFinderBlock addingEdgesUsing: anEdgeAddingBlock [
+	| nodes newNodes |
+	nodes := Set with: self.
+	[ nodes isNotEmpty ] whileTrue: [
+		newNodes := Set new.
+		nodes do: [ :eachNode |
+			(aNodeFinderBlock value: eachNode) do: [ :each |
+				newNodes add: each.
+				anEdgeAddingBlock value: eachNode value: each ] ].
+		nodes := newNodes ]
 ]
 
 { #category : #inspecting }
@@ -59,26 +77,15 @@ LbDependentSort >> graphNodeForSort: aSort highlight: aBoolean [
 	^ rectangle
 ]
 
-{ #category : #accessing }
-LbDependentSort >> gtSortSyntaxFor: aView [
-	<gtView>
-	^ aView list
-		title: 'Sort';
-		priority: 0;
-		items: [ { self } ];
-		itemLbCode: [ :each | each asLeibnizSyntaxString ];
-		yourself
-]
-
 { #category : #inspecting }
-LbDependentSort >> gtSupersortsFor: aView [
+LbDependentSort >> gtGraphFor: aView [
 	<gtView>
 	^ aView mondrian
-		title: 'Supersorts';
+		title: 'Graph';
 		priority: 1;
 		painting: [ :view | 
 			| graph |
-			graph := self supersortGraph.
+			graph := self subsortAndSupersortGraph.
 			view nodes
 				shape: [ :x | self graphNodeForSort: x highlight: (x == self) ];
 				with: (graph at: #nodes).
@@ -96,9 +103,21 @@ LbDependentSort >> gtSupersortsFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
+{ #category : #accessing }
+LbDependentSort >> gtSortSyntaxFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Sort';
+		priority: 0;
+		items: [ { self } ];
+		itemLbCode: [ :each | each asLeibnizSyntaxString ];
+		yourself
+]
+
 { #category : #testing }
 LbDependentSort >> includes: aSort [
 	self flag: #todo.
+	self halt.
 	^ true
 ]
 
@@ -147,6 +166,33 @@ LbDependentSort >> sortGraph [
 	^ sortGraph
 ]
 
+{ #category : #lookup }
+LbDependentSort >> subsortAndSupersortGraph [
+	| edges |
+	edges := Set new.
+	self
+		findNodesRecursivelyVia: [ :eachNode | eachNode directSubsorts ]
+		addingEdgesUsing: [ :oldNode :newNode | edges add: { newNode. oldNode } ].
+	self
+		findNodesRecursivelyVia: [ :eachNode | eachNode directSupersorts ]
+		addingEdgesUsing: [ :oldNode :newNode | edges add: { oldNode. newNode } ].
+	^ Dictionary
+		with: #nodes -> edges flatten
+		with: #edges -> edges
+]
+
+{ #category : #lookup }
+LbDependentSort >> subsortGraph [
+	| edges |
+	edges := Set new.
+	self
+		findNodesRecursivelyVia: [ :eachNode | eachNode directSubsorts ]
+		addingEdgesUsing: [ :oldNode :newNode | edges add: { newNode. oldNode } ].
+	^ Dictionary
+		with: #nodes -> edges flatten
+		with: #edges -> edges
+]
+
 { #category : #matching }
 LbDependentSort >> substitute: aSubstitution [
 	^ sortGraph sortFor: (term substitute: aSubstitution)
@@ -159,18 +205,14 @@ LbDependentSort >> substituteAndReduce: aSubstitution [
 
 { #category : #lookup }
 LbDependentSort >> supersortGraph [
-	| edges nodes newNodes |
+	| edges |
 	edges := Set new.
-	nodes := Set with: self.
-	[ nodes isNotEmpty ] whileTrue: [
-		newNodes := Set new.
-		nodes do: [ :eachNode |
-			eachNode directSupersorts do: [ :each |
-				newNodes add: each.
-				edges add: { eachNode. each } ] ].
-		nodes := newNodes ].
-	nodes := edges flatten.
-	^ Dictionary with: #nodes -> nodes with: #edges -> edges
+	self
+		findNodesRecursivelyVia: [ :eachNode | eachNode directSupersorts ]
+		addingEdgesUsing: [ :oldNode :newNode | edges add: { oldNode. newNode } ].
+	^ Dictionary
+		with: #nodes -> edges flatten
+		with: #edges -> edges
 ]
 
 { #category : #accessing }

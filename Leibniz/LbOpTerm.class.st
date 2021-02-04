@@ -51,6 +51,14 @@ LbOpTerm >> hasInfixOpOtherThan: anOpName [
 	^ opName isInfixOpOtherThan: anOpName
 ]
 
+{ #category : #testing }
+LbOpTerm >> hasVariables [
+	^ arguments
+		detect: [ :each | each hasVariables ]
+		ifFound: [ true ]
+		ifNone: [ false ]
+]
+
 { #category : #classifying }
 LbOpTerm >> headOpName [
 	^ opName
