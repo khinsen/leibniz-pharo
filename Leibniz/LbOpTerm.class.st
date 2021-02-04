@@ -86,14 +86,13 @@ LbOpTerm >> isTrue [
 
 { #category : #matching }
 LbOpTerm >> match: otherTerm [
-	^otherTerm matchOp: opName andArgs: arguments
-
+	^ otherTerm matchOp: opName andArgs: arguments
 ]
 
 { #category : #matching }
-LbOpTerm >> matchOp: aSymbol andArgs: anArgList [
+LbOpTerm >> matchOp: anOpName andArgs: anArgList [
 	| match |
-	opName = aSymbol
+	opName = anOpName
 		ifFalse: [ ^ LbSubstitution null ].
 	arguments size = anArgList size
 		ifFalse: [ ^ LbSubstitution null ].
@@ -128,6 +127,19 @@ LbOpTerm >> substitute: aSubstitution [
 { #category : #inspecting }
 LbOpTerm >> synopsis [
 	^ self opName synopsis
+]
+
+{ #category : #matching }
+LbOpTerm >> unifyWith: otherTerm variables: variables [
+	otherTerm unifyWithOpTerm: self op: opName args: arguments variables: variables
+]
+
+{ #category : #matching }
+LbOpTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
+	(opName = anOpName and: [ arguments size = anArgList size ])
+		ifFalse: [ variables failWith: self notEqualTo: otherTerm ].
+	anArgList with: arguments do: [ :arg1 :arg2 |
+		arg1 unifyWith: arg2 variables: variables ]
 ]
 
 { #category : #accessing }

@@ -343,6 +343,25 @@ LbTermExamples >> termSyntax [
 ]
 
 { #category : #example }
+LbTermExamples >> unifications [
+	<gtExample>
+	| s |
+	s := LbSignatureExamples new booleanSignature.
+	^ {
+		{'true'. 'X'. '(X=true)'}.
+		{'¬(X)'. '¬(true)'. '(X=true)'}.
+		{'X'. '¬(true)'. '(X=¬(true))'}.
+		{'true ⊻ false ⊻ true ⊻ ¬(true)'. 'true ⊻ false ⊻ X ⊻ Y'. '(X=true, Y=¬(true))'}.
+		{'false ⊻ X ⊻ true ⊻ ¬(true)'. 'false ⊻ true ⊻ X ⊻ Y'. '(X=true, Y=¬(true))'}.
+		{'X ⊻ ¬(X)'. 'false ⊻ ¬(X)'. '(X=false)'}.
+	} collect: [ :each |
+		| unification |
+		unification := (s parseTerm: each first) unifyWith: (s parseTerm: each  second).
+		self assert: (unification printString allButFirst: 13) equals: each third.
+		unification ]
+]
+
+{ #category : #example }
 LbTermExamples >> varTerm [
 	<gtExample>
 	| term |

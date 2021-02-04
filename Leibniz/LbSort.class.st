@@ -45,6 +45,11 @@ LbSort class >> splitName: aSymbol [
 	^ { #''. aSymbol }
 ]
 
+{ #category : #comparing }
+LbSort >> <= aSort [
+	self subclassResponsibility
+]
+
 { #category : #inspecting }
 LbSort >> gtOriginsFor: aView [
 	<gtView>
@@ -67,6 +72,13 @@ LbSort >> initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet [
 { #category : #testing }
 LbSort >> isFromInclude [
 	^ origins containsIncludes
+]
+
+{ #category : #accessing }
+LbSort >> min: aSort [
+	self <= aSort ifTrue: [ ^ self ].
+	aSort <= self ifTrue: [ ^ aSort ].
+	^ nil
 ]
 
 { #category : #accessing }

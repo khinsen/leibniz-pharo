@@ -160,6 +160,31 @@ LbTerm >> synopsis [
 	^ self asLeibnizSyntaxString
 ]
 
+{ #category : #matching }
+LbTerm >> unifyWith: otherTerm [
+	| variables |
+	variables := LbVariables new.
+	self unifyWith: otherTerm variables: variables.
+	variables beRecursivelyReadOnlyObject.
+	^ variables
+]
+
+{ #category : #matching }
+LbTerm >> unifyWith: otherTerm variables: variables [
+	self = otherTerm
+		ifFalse: [ variables failWith: self notEqualTo: otherTerm ]
+]
+
+{ #category : #matching }
+LbTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
+	variables failWith: self notEqualTo: otherTerm
+]
+
+{ #category : #matching }
+LbTerm >> unifyWithVar: aSymbol ofSort: aSort variables: anLbVariables [
+	anLbVariables bindVar: aSymbol ofSort: aSort to: self
+]
+
 { #category : #accessing }
 LbTerm >> variables [
 	self subclassResponsibility

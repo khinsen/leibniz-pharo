@@ -83,6 +83,21 @@ LbVarTerm >> substitute: aSubstitution [
 	^ self
 ]
 
+{ #category : #matching }
+LbVarTerm >> unifyWith: otherTerm variables: variables [
+	otherTerm unifyWithVar: name ofSort: sort variables: variables
+]
+
+{ #category : #matching }
+LbVarTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
+	otherTerm unifyWithVar: name ofSort: sort variables: variables
+]
+
+{ #category : #matching }
+LbVarTerm >> unifyWithVar: aSymbol ofSort: aSort variables: anLbVariables [
+	anLbVariables makeVar: name ofSort: sort equalToVar: aSymbol ofSort: aSort
+]
+
 { #category : #accessing }
 LbVarTerm >> variables [
 	^ Dictionary with: name -> sort
