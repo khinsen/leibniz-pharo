@@ -21,6 +21,26 @@ LbTermExamples >> booleanTerms [
 	^ { trueTerm. falseTerm }
 ]
 
+{ #category : #example }
+LbTermExamples >> booleanUnifications [
+	<gtExample>
+	| s |
+	s := LbSignatureExamples new booleanSignature.
+	^ {
+		{'true'. 'X'. '(X=true)'}.
+		{'¬(X)'. '¬(true)'. '(X=true)'}.
+		{'X'. '¬(true)'. '(X=¬(true))'}.
+		{'true ⊻ false ⊻ true ⊻ ¬(true)'. 'true ⊻ false ⊻ X ⊻ Y'. '(X=true, Y=¬(true))'}.
+		{'false ⊻ X ⊻ true ⊻ ¬(true)'. 'false ⊻ true ⊻ X ⊻ Y'. '(X=true, Y=¬(true))'}.
+		{'X ⊻ ¬(X)'. 'false ⊻ ¬(X)'. '(X=false)'}.
+		{'true'. 'false'.  '(failure #nonEqualTerms: false, true)' }.
+	} collect: [ :each |
+		| unification |
+		unification := (s parseTerm: each first) unifyWith: (s parseTerm: each  second).
+		self assert: (unification printString allButFirst: 13) equals: each third.
+		unification ]
+]
+
 { #category : #private }
 LbTermExamples >> check: aTerm matches: aPattern withSubstitution: aDictionaryOrNil signature: aSignature [
 	| p parse pattern term variables substitution |
@@ -170,6 +190,32 @@ LbTermExamples >> matches [
 		withSubstitution: nil
 		signature: s.
 	}
+]
+
+{ #category : #example }
+LbTermExamples >> numberUnifications [
+	<gtExample>
+	| rns s |
+	rns := LbBuiltinSignatures realNumberSignature.
+	s := (LbSignatureBuilder sortGraph: rns sortGraph)
+			addSignature: rns includeVars: false;
+			parseAndAddVar: 'anInteger:ℤ';
+			parseAndAddVar: 'aPositiveRational:ℚ.p';
+			parseAndAddVar: 'aBoolean:boolean';
+			signature.
+	^ {
+		{'anInteger'. '42'. '(anInteger=42)'}.
+		{'anInteger'. '-42'. '(anInteger=-42)'}.
+		{'aPositiveRational'. '42'. '(aPositiveRational=42)'}.
+		{'aPositiveRational'. '-42'.  '(failure #notSubsort: ℤ.nz, ℚ.p)' }.
+		{'aBoolean'. '42'. '(failure #notSubsort: ℕ.nz, boolean)'}.
+		{'anInteger'. 'aPositiveRational'. '(failure #incommensurableSorts: ℚ.p, ℤ)'}.
+		{'anInteger'. 'aBoolean'. '(failure #incommensurableSorts: boolean, ℤ)'}.
+	} collect: [ :each |
+		| unification |
+		unification := (s parseTerm: each first) unifyWith: (s parseTerm: each  second).
+		self assert: (unification printString allButFirst: 13) equals: each third.
+		unification ]
 ]
 
 { #category : #example }
@@ -340,25 +386,6 @@ LbTermExamples >> termSyntax [
 			self
 				checkSyntaxRoundTrip: eachString
 				signature: each first ] ]
-]
-
-{ #category : #example }
-LbTermExamples >> unifications [
-	<gtExample>
-	| s |
-	s := LbSignatureExamples new booleanSignature.
-	^ {
-		{'true'. 'X'. '(X=true)'}.
-		{'¬(X)'. '¬(true)'. '(X=true)'}.
-		{'X'. '¬(true)'. '(X=¬(true))'}.
-		{'true ⊻ false ⊻ true ⊻ ¬(true)'. 'true ⊻ false ⊻ X ⊻ Y'. '(X=true, Y=¬(true))'}.
-		{'false ⊻ X ⊻ true ⊻ ¬(true)'. 'false ⊻ true ⊻ X ⊻ Y'. '(X=true, Y=¬(true))'}.
-		{'X ⊻ ¬(X)'. 'false ⊻ ¬(X)'. '(X=false)'}.
-	} collect: [ :each |
-		| unification |
-		unification := (s parseTerm: each first) unifyWith: (s parseTerm: each  second).
-		self assert: (unification printString allButFirst: 13) equals: each third.
-		unification ]
 ]
 
 { #category : #example }

@@ -191,6 +191,7 @@ LbSignatureBuilder >> parseAndAddOp: aString [
 LbSignatureBuilder >> parseAndAddVar: aString [
 	| var name sort |
 	var := LbSignatureParser parse: aString startingAt: #var.
+	var isPetit2Failure ifTrue: [ Error signal: var message ].
 	name := LbPrefixOperatorName for: var first.
 	sort := sortGraph sortNamed: var second.
 	self addVar: name ofSort: sort
