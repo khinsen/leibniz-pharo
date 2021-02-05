@@ -195,7 +195,7 @@ LbDependentOperator >> ranksMatchingArgSortPatterns: aSortPatternArray [
 	matches := OrderedCollection new.
 	ranks associationsDo: [ :each |
 		| match |
-		match := LbSubstitution new.
+		match := LbVariables new.
 		each key with: aSortPatternArray do: [ :patternArg :valueArg |
 			| submatches |
 			submatches := patternArg matchAllSupersortsOf: valueArg.

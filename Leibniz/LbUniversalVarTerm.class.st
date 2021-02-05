@@ -25,9 +25,3 @@ LbUniversalVarTerm >> initializeWithSymbol: aSymbol signature: aSignature [
 	signature := aSignature.
 	sort := #boolean.
 ]
-
-{ #category : #matching }
-LbUniversalVarTerm >> match: otherTerm [
-	otherTerm assertNotAVariable.
-	^ LbSubstitution variable: name value: otherTerm
-]

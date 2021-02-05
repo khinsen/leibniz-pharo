@@ -32,23 +32,6 @@ LeibnizTermTest >> check: aTerm matches: aPattern withSubstitution: aDictionary 
 ]
 
 { #category : #running }
-LeibnizTermTest >> check: aPattern withSubstitution: aDictionary equals: aTerm [
-	| p parse pattern term substitution result |
-	p := LbTermParser signature: currentSignature.
-	parse := [ :aString | p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
-	pattern := parse value: aPattern.
-	term := parse value: aTerm.
-	substitution := LbSubstitution new.
-	aDictionary keysAndValuesDo:
-		[ :name :value | substitution combineWith:
-									(LbSubstitution variable: name
-																value: (parse value: value)) ].
-	result := pattern substitute: substitution.
-	self assert: result equals: term.
-
-]
-
-{ #category : #running }
 LeibnizTermTest >> checkSyntaxRoundTrip: aString [
 	| p t |
 	p := LbTermParser signature: currentSignature.

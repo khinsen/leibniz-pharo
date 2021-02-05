@@ -33,6 +33,7 @@ LbTermExamples >> booleanUnifications [
 		{'true ⊻ false ⊻ true ⊻ ¬(true)'. 'true ⊻ false ⊻ X ⊻ Y'. '(X=true, Y=¬(true))'}.
 		{'false ⊻ X ⊻ true ⊻ ¬(true)'. 'false ⊻ true ⊻ X ⊻ Y'. '(X=true, Y=¬(true))'}.
 		{'X ⊻ ¬(X)'. 'false ⊻ ¬(X)'. '(X=false)'}.
+		{'X ⊻ ¬(Y)'. 'false ⊻ ¬(Y)'. '(Y, X=false)'}.
 		{'true'. 'false'.  '(failure #nonEqualTerms: false, true)' }.
 	} collect: [ :each |
 		| unification |
@@ -51,14 +52,14 @@ LbTermExamples >> check: aTerm matches: aPattern withSubstitution: aDictionaryOr
 	term := parse value: aTerm.
 	substitution := pattern match: term.
 	aDictionaryOrNil
-		ifNil: [ self assert: substitution isNull ]
+		ifNil: [ self assert: substitution isFailure ]
 		ifNotNil: [
 			variables := Dictionary
 				newFromKeys: (aDictionaryOrNil keys collect: [ :each |
 								LbPrefixOperatorName for: each])
 				andValues: (aDictionaryOrNil values collect:[ :each |
 								parse value: each ]).
-			self assert: substitution variables equals: variables ].
+			self assert: substitution bindings equals: variables ].
 	^ substitution
 ]
 
@@ -70,12 +71,14 @@ LbTermExamples >> check: aPattern withSubstitution: aDictionary equals: aTerm si
 		p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
 	pattern := parse value: aPattern.
 	term := parse value: aTerm.
-	substitution := LbSubstitution new.
+	substitution := LbVariables new.
 	aDictionary keysAndValuesDo: [ :name :value |
-		substitution combineWith:
-		 (LbSubstitution
-		 	variable: (LbPrefixOperatorName for: name)
-		 	value: (parse value:  value)) ].
+		| parsedValue |
+		parsedValue := parse value: value.
+		substitution
+			bindVar: (LbPrefixOperatorName for: name)
+			ofSort: parsedValue sort
+			to: parsedValue ].
 	result := pattern substitute: substitution.
 	self assert: result equals: term.
 	^ result
@@ -292,16 +295,6 @@ LbTermExamples >> substitutedTerms [
 		equals: 'true ⊻ false'
 		signature: s.
 	}
-]
-
-{ #category : #example }
-LbTermExamples >> substitution [
-	<gtExample>
-	| s |
-	s := LbSignatureExamples new booleanSignature.
-	^ LbSubstitution
-		 variable: (LbPrefixOperatorName for: #X)
-		 value: (s parseTerm: 'true')
 ]
 
 { #category : #example }

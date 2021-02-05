@@ -32,7 +32,19 @@ LbVariables >> bindVarSet: aSet to: aTerm [
 	sorts removeKey: aSet.
 	aSet do: [ :eachVarName |
 		bound at: eachVarName put: aTerm.
-		unbound removeAt: eachVarName ]
+		unbound removeKey: eachVarName ]
+]
+
+{ #category : #lookup }
+LbVariables >> bindingFor: aSymbol [
+	bound at: aSymbol
+		ifPresent: [ :value | ^ value ]
+		ifAbsent: [ ^ nil ]
+]
+
+{ #category : #lookup }
+LbVariables >> bindings [
+	^ bound
 ]
 
 { #category : #'error handling' }
@@ -60,6 +72,11 @@ LbVariables >> initialize [
 	failure := nil.
 ]
 
+{ #category : #testing }
+LbVariables >> isFailure [
+	^ failure isNotNil
+]
+
 { #category : #'api - binding' }
 LbVariables >> makeVar: aSymbol ofSort: aSort equalToVar: anotherSymbol ofSort: anotherSort [
 	failure ifNotNil: [ ^ self ].
@@ -70,8 +87,8 @@ LbVariables >> makeVar: aSymbol ofSort: aSort equalToVar: anotherSymbol ofSort: 
 	bound at: anotherSymbol ifPresent: [ :value |
 		self bindVar: aSymbol ofSort: aSort to: value.
 		^ self ].
-	self registerUnboundVar: aSymbol ofSort: aSort.
-	self registerUnboundVar: anotherSymbol ofSort: anotherSort.
+	self registerVar: aSymbol ofSort: aSort.
+	self registerVar: anotherSymbol ofSort: anotherSort.
 	self mergeVarSetsFor: aSymbol and: anotherSymbol
 ]
 
@@ -134,19 +151,15 @@ LbVariables >> printUnboundOn: aStream [
 		separatedBy: [ aStream nextPutAll: ', ' ]
 ]
 
-{ #category : #binding }
-LbVariables >> registerUnboundVar: aSymbol ofSort: aSort [
+{ #category : #'api - binding' }
+LbVariables >> registerVar: aSymbol ofSort: aSort [
 	| varSet |
-	self registerVar: aSymbol ofSort: aSort.
+	sorts at: aSymbol
+		ifPresent: [ :sort | self assert: sort equals: aSort ]
+		ifAbsentPut: [ aSort ].
+	bound at: aSymbol ifPresent: [ ^ self ].
 	unbound at: aSymbol ifPresent: [ ^ self ].
 	varSet := Set with: aSymbol.
 	unbound at: aSymbol put: varSet.
-	sorts at: varSet put: aSort
-]
-
-{ #category : #binding }
-LbVariables >> registerVar: aSymbol ofSort: aSort [
-	sorts at: aSymbol
-		ifPresent: [ :sort | self assert: sort equals: aSort ]
-		ifAbsentPut: [ aSort ]
+	sorts at: varSet put: aSort	
 ]

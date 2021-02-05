@@ -103,9 +103,7 @@ LbTerm >> isVariable [
 
 { #category : #matching }
 LbTerm >> match: otherTerm [
-	self = otherTerm
-		ifTrue: [ ^ LbSubstitution new ]
-		ifFalse: [ ^ LbSubstitution null ]
+	^ self unifyWith: otherTerm.
 ]
 
 { #category : #matching }
@@ -151,7 +149,7 @@ LbTerm >> sort [
 
 { #category : #substituting }
 LbTerm >> substitute: aSubstitution [
-	self subclassResponsibility
+	^ self
 ]
 
 { #category : #inspecting }

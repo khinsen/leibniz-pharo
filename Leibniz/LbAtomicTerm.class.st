@@ -64,11 +64,6 @@ LbAtomicTerm >> sortSymbol [
 	self subclassResponsibility
 ]
 
-{ #category : #substituting }
-LbAtomicTerm >> substitute: aSubstitution [
-	^self
-]
-
 { #category : #accessing }
 LbAtomicTerm >> value [
 	^ value

@@ -140,9 +140,10 @@ LbDependentSort >> match: aSort [
 
 { #category : #matching }
 LbDependentSort >> matchAllSupersortsOf: aSort [
-	| matches |
+	| matches match |
 	matches := Set new.
-	(self term match: aSort term) ifNotNull: [ :s | matches add: s ].
+	match := self term match: aSort term.
+	match isFailure ifFalse: [ matches add: match ].
 	aSort directSupersorts do: [ :each |
 		matches := matches union: (self matchAllSupersortsOf: each) ].
 	^ matches

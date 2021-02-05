@@ -54,14 +54,6 @@ LbVarTerm >> isVariable [
 	^ true
 ]
 
-{ #category : #matching }
-LbVarTerm >> match: otherTerm [
-	otherTerm assertNotAVariable.
-	otherTerm sort <= sort
-		ifTrue: [ ^ LbSubstitution variable: name value: otherTerm ]
-		ifFalse: [ ^ LbSubstitution null ]
-]
-
 { #category : #accessing }
 LbVarTerm >> name [
 	^ name
@@ -79,23 +71,26 @@ LbVarTerm >> sort [
 
 { #category : #substituting }
 LbVarTerm >> substitute: aSubstitution [
-	aSubstitution variables at: name ifPresent: [ :value | ^ value ].
+	(aSubstitution bindingFor: name) ifNotNil: [ :value | ^ value ].
 	^ self
 ]
 
 { #category : #matching }
 LbVarTerm >> unifyWith: otherTerm variables: variables [
+	variables registerVar: name ofSort: sort.
 	otherTerm unifyWithVar: name ofSort: sort variables: variables
 ]
 
 { #category : #matching }
 LbVarTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
+	variables registerVar: name ofSort: sort.
 	otherTerm unifyWithVar: name ofSort: sort variables: variables
 ]
 
 { #category : #matching }
-LbVarTerm >> unifyWithVar: aSymbol ofSort: aSort variables: anLbVariables [
-	anLbVariables makeVar: name ofSort: sort equalToVar: aSymbol ofSort: aSort
+LbVarTerm >> unifyWithVar: aSymbol ofSort: aSort variables: variables [
+	variables registerVar: name ofSort: sort.
+	variables makeVar: name ofSort: sort equalToVar: aSymbol ofSort: aSort
 ]
 
 { #category : #accessing }

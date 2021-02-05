@@ -84,24 +84,6 @@ LbOpTerm >> isTrue [
 		and: [ arguments isEmpty ] ]
 ]
 
-{ #category : #matching }
-LbOpTerm >> match: otherTerm [
-	^ otherTerm matchOp: opName andArgs: arguments
-]
-
-{ #category : #matching }
-LbOpTerm >> matchOp: anOpName andArgs: anArgList [
-	| match |
-	opName = anOpName
-		ifFalse: [ ^ LbSubstitution null ].
-	arguments size = anArgList size
-		ifFalse: [ ^ LbSubstitution null ].
-	match := LbSubstitution new.
-	anArgList with: arguments do: [ :patternArg :valueArg |
-		match combineWith: (patternArg match: valueArg) ].
-	^ match
-]
-
 { #category : #accessing }
 LbOpTerm >> opName [
 	^ opName
