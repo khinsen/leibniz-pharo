@@ -13,7 +13,8 @@ Class {
 { #category : #'api - binding' }
 LbVariables >> bindVar: aSymbol ofSort: aSort to: aTerm [
 	failure ifNotNil: [ ^ self ].
-	self registerVar: aSymbol ofSort: aSort.
+	"self registerVar: aSymbol ofSort: aSort."
+	self assert: (sorts at: aSymbol) equals: aSort.
 	bound at: aSymbol ifPresent: [ :value |
 		value = aTerm
 			ifTrue: [ ^ self ]
@@ -81,14 +82,16 @@ LbVariables >> isFailure [
 LbVariables >> makeVar: aSymbol ofSort: aSort equalToVar: anotherSymbol ofSort: anotherSort [
 	failure ifNotNil: [ ^ self ].
 	aSymbol = anotherSymbol ifTrue: [ ^ self ].
+	self assert: (sorts at: aSymbol) equals: aSort.
+	self assert: (sorts at: anotherSymbol) equals: anotherSort.
 	bound at: aSymbol ifPresent: [ :value |
 		self bindVar: anotherSymbol ofSort: anotherSort to: value.
 		^ self ].
 	bound at: anotherSymbol ifPresent: [ :value |
 		self bindVar: aSymbol ofSort: aSort to: value.
 		^ self ].
-	self registerVar: aSymbol ofSort: aSort.
-	self registerVar: anotherSymbol ofSort: anotherSort.
+"	self registerVar: aSymbol ofSort: aSort.
+	self registerVar: anotherSymbol ofSort: anotherSort."
 	self mergeVarSetsFor: aSymbol and: anotherSymbol
 ]
 
@@ -162,4 +165,9 @@ LbVariables >> registerVar: aSymbol ofSort: aSort [
 	varSet := Set with: aSymbol.
 	unbound at: aSymbol put: varSet.
 	sorts at: varSet put: aSort	
+]
+
+{ #category : #'api - binding' }
+LbVariables >> switchNamespaces [
+	"Do nothing"
 ]

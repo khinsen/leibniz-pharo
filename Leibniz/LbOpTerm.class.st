@@ -126,7 +126,9 @@ LbOpTerm >> synopsis [
 
 { #category : #matching }
 LbOpTerm >> unifyWith: otherTerm variables: variables [
-	otherTerm unifyWithOpTerm: self op: opName args: arguments variables: variables
+	variables switchNamespaces.
+	otherTerm unifyWithOpTerm: self op: opName args: arguments variables: variables.
+	variables switchNamespaces
 ]
 
 { #category : #matching }

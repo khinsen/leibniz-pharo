@@ -174,7 +174,7 @@ LbTerm >> synopsis [
 { #category : #matching }
 LbTerm >> unifyWith: otherTerm [
 	| variables |
-	variables := LbVariables new.
+	variables := LbDualNamespaceVariables new.
 	self unifyWith: otherTerm variables: variables.
 	variables beRecursivelyReadOnlyObject.
 	^ variables
@@ -192,10 +192,12 @@ LbTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: var
 ]
 
 { #category : #matching }
-LbTerm >> unifyWithVar: aSymbol ofSort: aSort variables: anLbVariables [
-	anLbVariables bindVar: aSymbol ofSort: aSort to: self.
+LbTerm >> unifyWithVar: aSymbol ofSort: aSort variables: variables [
+	variables switchToNamespace: #left.
+	variables bindVar: aSymbol ofSort: aSort to: self.
+	variables switchToNamespace: #right.
 	self variables associationsDo: [ :each |
-		anLbVariables registerVar: each key ofSort: each value ]
+		variables registerVar: each key ofSort: each value ]
 ]
 
 { #category : #accessing }
