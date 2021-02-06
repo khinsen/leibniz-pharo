@@ -103,12 +103,25 @@ LbTerm >> isVariable [
 
 { #category : #matching }
 LbTerm >> match: otherTerm [
-	^ self unifyWith: otherTerm.
+	| variables |
+	variables := LbVariables new.
+	self match: otherTerm variables: variables.
+	variables beRecursivelyReadOnlyObject.
+	^ variables
 ]
 
 { #category : #matching }
-LbTerm >> matchOp: opSymbol andArgs: argList [
-	^ nil
+LbTerm >> match: otherTerm variables: variables [
+	self = otherTerm
+		ifFalse: [ variables failWith: self notEqualTo: otherTerm ]
+]
+
+{ #category : #matching }
+LbTerm >> matchVar: aSymbol ofSort: aSort variables: anLbVariables [
+	self
+		assert: self hasVariables not
+		description: 'Variable(s) in term being matched to'.
+	anLbVariables bindVar: aSymbol ofSort: aSort to: self
 ]
 
 { #category : #printing }
@@ -180,7 +193,9 @@ LbTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: var
 
 { #category : #matching }
 LbTerm >> unifyWithVar: aSymbol ofSort: aSort variables: anLbVariables [
-	anLbVariables bindVar: aSymbol ofSort: aSort to: self
+	anLbVariables bindVar: aSymbol ofSort: aSort to: self.
+	self variables associationsDo: [ :each |
+		anLbVariables registerVar: each key ofSort: each value ]
 ]
 
 { #category : #accessing }

@@ -84,6 +84,19 @@ LbOpTerm >> isTrue [
 		and: [ arguments isEmpty ] ]
 ]
 
+{ #category : #matching }
+LbOpTerm >> match: otherTerm variables: variables [
+	otherTerm matchOpTerm: self op: opName args: arguments variables: variables
+]
+
+{ #category : #matching }
+LbOpTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
+	(opName = anOpName and: [ arguments size = anArgList size ])
+		ifFalse: [ variables failWith: self notEqualTo: otherTerm ].
+	anArgList with: arguments do: [ :arg1 :arg2 |
+		arg1 match: arg2 variables: variables ]
+]
+
 { #category : #accessing }
 LbOpTerm >> opName [
 	^ opName

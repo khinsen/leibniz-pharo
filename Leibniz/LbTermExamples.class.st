@@ -163,6 +163,12 @@ LbTermExamples >> matches [
 	<gtExample>
 	| s |
 	s := LbSignatureExamples new booleanSignature.
+	self should: [
+		self
+			check: 'X ⊻ X' matches: 'true ⊻ true'
+			withSubstitution: (Dictionary with: #X -> 'true')
+			signature: s ]
+	raise: Error.
 	^ {
 	self
 		check: 'true' matches: 'X'

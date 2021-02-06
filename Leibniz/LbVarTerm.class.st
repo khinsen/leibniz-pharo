@@ -54,6 +54,22 @@ LbVarTerm >> isVariable [
 	^ true
 ]
 
+{ #category : #matching }
+LbVarTerm >> match: otherTerm variables: variables [
+	variables registerVar: name ofSort: sort.
+	otherTerm matchVar: name ofSort: sort variables: variables
+]
+
+{ #category : #matching }
+LbVarTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
+	self error: 'Variable in term being matched to'
+]
+
+{ #category : #matching }
+LbVarTerm >> matchVar: aSymbol ofSort: aSort variables: variables [
+	self error: 'Variable in term being matched to'
+]
+
 { #category : #accessing }
 LbVarTerm >> name [
 	^ name
