@@ -37,7 +37,7 @@ LbTermExamples >> booleanUnifications [
 		{'true'. 'false'.  '(failure #nonEqualTerms: false, true)' }.
 	} collect: [ :each |
 		| unification string |
-		unification := (s parseTerm: each first) unifyWith: (s parseTerm: each  second).
+		unification := (s parseTerm: each first) unify: (s parseTerm: each  second).
 		string := unification printString.
 		self assert: (string allButFirst: (string findString: '(') - 1) equals: each third.
 		unification ]
@@ -78,7 +78,7 @@ LbTermExamples >> check: aPattern withSubstitution: aDictionary equals: aTerm si
 		parsedValue := parse value: value.
 		varName := LbPrefixOperatorName for: name.
 		substitution
-			registerVar: varName
+			defineVar: varName
 			ofSort: parsedValue sort.
 		substitution
 			bindVar: varName
@@ -209,37 +209,55 @@ LbTermExamples >> matches [
 { #category : #accessing }
 LbTermExamples >> namespacedUnifications [
 	<gtExample>
-	| rns s unifications unification nameX nameY nameZ |
+	| rns s unifications unification nameX nameY nameV nameW leftZ rightZ |
 	rns := LbBuiltinSignatures integerSignature.
 	s := (LbSignatureBuilder sortGraph: rns sortGraph)
 			addSignature: rns includeVars: false;
+			parseAndAddVar: 'V:ℤ';
+			parseAndAddVar: 'W:ℤ';
 			parseAndAddVar: 'X:ℤ';
 			parseAndAddVar: 'Y:ℤ';
 			parseAndAddVar: 'Z:ℤ';
 			signature.
-	nameX := #X asLbOperatorName.
-	nameY := #Y asLbOperatorName.
-	nameZ := #Z asLbOperatorName.
+	nameV := #'left.V' asLbOperatorName.
+	nameW := #'left.W' asLbOperatorName.
+	nameX := #'right.X' asLbOperatorName.
+	nameY := #'right.Y' asLbOperatorName.
+	leftZ := #'left.Z' asLbOperatorName.
+	rightZ := #'right.Z' asLbOperatorName.
 	unifications := OrderedCollection new.
 
-	unification := (s parseTerm: 'X + Y')
-		 unifyWith: (s parseTerm: 'Z + Y').
+	unification := (s parseTerm: 'V + W')
+		 unify: (s parseTerm: 'X + Y + Z')
+		 leftVarPrefix: #left rightVarPrefix: #right.
 	self
-		assert: (unification namespace: #left)
-		equals: (Set with: nameX with: nameY).
+		assert: (unification varsInNamespace: #left)
+		equals: (Set with: nameV with: nameW).
 	self
-		assert: (unification namespace: #right)
-		equals: (Set with: nameZ with: nameY).
+		assert: (unification varsInNamespace: #right)
+		equals: (Set with: nameX with: nameY with: rightZ).
 	unifications add: unification.
 
-	unification := (s parseTerm: 'X + Y')
-		 unifyWith: (s parseTerm: 'Z + 2 + Z').
+	unification := (s parseTerm: 'Z + V')
+		 unify: (s parseTerm: 'Z + Y')
+		 leftVarPrefix: #left rightVarPrefix: #right.
 	self
-		assert: (unification namespace: #left)
-		equals: (Set with: nameX with: nameY).
+		assert: (unification varsInNamespace: #left)
+		equals: (Set with: leftZ with: nameV).
 	self
-		assert: (unification namespace: #right)
-		equals: (Set with: nameZ).
+		assert: (unification varsInNamespace: #right)
+		equals: (Set with: rightZ with: nameY).
+	unifications add: unification.
+
+	unification := (s parseTerm: 'V + W')
+		 unify: (s parseTerm: 'Z + 2 + Z')
+		 leftVarPrefix: #left rightVarPrefix: #right.
+	self
+		assert: (unification varsInNamespace: #left)
+		equals: (Set with: nameV with: nameW).
+	self
+		assert: (unification varsInNamespace: #right)
+		equals: (Set with: rightZ).
 	unifications add: unification.
 
 	^ unifications
@@ -266,7 +284,7 @@ LbTermExamples >> numberUnifications [
 		{'anInteger'. 'aBoolean'. '(failure #incommensurableSorts: boolean, ℤ)'}.
 	} collect: [ :each |
 		| unification string |
-		unification := (s parseTerm: each first) unifyWith: (s parseTerm: each  second).
+		unification := (s parseTerm: each first) unify: (s parseTerm: each  second).
 		string := unification printString.
 		self assert: (string allButFirst: (string findString: '(') - 1) equals: each third.
 		unification ]

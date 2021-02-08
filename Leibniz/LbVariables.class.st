@@ -13,7 +13,6 @@ Class {
 { #category : #'api - binding' }
 LbVariables >> bindVar: aSymbol ofSort: aSort to: aTerm [
 	failure ifNotNil: [ ^ self ].
-	"self registerVar: aSymbol ofSort: aSort."
 	self assert: (sorts at: aSymbol) equals: aSort.
 	bound at: aSymbol ifPresent: [ :value |
 		value = aTerm
@@ -46,6 +45,19 @@ LbVariables >> bindingFor: aSymbol [
 { #category : #lookup }
 LbVariables >> bindings [
 	^ bound
+]
+
+{ #category : #'api - binding' }
+LbVariables >> defineVar: aSymbol ofSort: aSort [
+	| varSet |
+	sorts at: aSymbol
+		ifPresent: [ :sort | self assert: sort equals: aSort ]
+		ifAbsentPut: [ aSort ].
+	bound at: aSymbol ifPresent: [ ^ self ].
+	unbound at: aSymbol ifPresent: [ ^ self ].
+	varSet := Set with: aSymbol.
+	unbound at: aSymbol put: varSet.
+	sorts at: varSet put: aSort	
 ]
 
 { #category : #'error handling' }
@@ -90,9 +102,12 @@ LbVariables >> makeVar: aSymbol ofSort: aSort equalToVar: anotherSymbol ofSort: 
 	bound at: anotherSymbol ifPresent: [ :value |
 		self bindVar: aSymbol ofSort: aSort to: value.
 		^ self ].
-"	self registerVar: aSymbol ofSort: aSort.
-	self registerVar: anotherSymbol ofSort: anotherSort."
 	self mergeVarSetsFor: aSymbol and: anotherSymbol
+]
+
+{ #category : #'api - binding' }
+LbVariables >> makeVar: aSymbol ofSort: aSort equalToVar: anotherSymbol ofSort: anotherSort namespace: namespaceSymbol [
+	self makeVar: aSymbol ofSort: aSort equalToVar: anotherSymbol ofSort: anotherSort
 ]
 
 { #category : #binding }
@@ -109,6 +124,11 @@ LbVariables >> mergeVarSetsFor: aSymbol and: anotherSymbol [
 	sorts at: mergedVarSet put: sort.
 	sorts removeKey: varSet1.
 	sorts removeKey: varSet2.
+]
+
+{ #category : #'api - binding' }
+LbVariables >> namespace: aSymbol [
+	"Do nothing"
 ]
 
 { #category : #printing }
@@ -146,28 +166,12 @@ LbVariables >> printOn: aStream [
 
 { #category : #printing }
 LbVariables >> printUnboundOn: aStream [
-	unbound values asSet
-		do: [ :eachVarSet | 
-			eachVarSet asArray sorted
-				do: [ :eachVarName | aStream nextPutAll: eachVarName asString ]
-				separatedBy: [ aStream nextPut: $= ] ]
+	| varSets |
+	varSets := unbound values asSet asArray collect: [ :each | each asArray sorted ].
+	varSets sort: [ :a :b | a first <= b first ].
+	varSets do: [ :eachVarSet | 
+		eachVarSet asArray sorted
+			do: [ :eachVarName | aStream nextPutAll: eachVarName asString ]
+			separatedBy: [ aStream nextPut: $= ] ]
 		separatedBy: [ aStream nextPutAll: ', ' ]
-]
-
-{ #category : #'api - binding' }
-LbVariables >> registerVar: aSymbol ofSort: aSort [
-	| varSet |
-	sorts at: aSymbol
-		ifPresent: [ :sort | self assert: sort equals: aSort ]
-		ifAbsentPut: [ aSort ].
-	bound at: aSymbol ifPresent: [ ^ self ].
-	unbound at: aSymbol ifPresent: [ ^ self ].
-	varSet := Set with: aSymbol.
-	unbound at: aSymbol put: varSet.
-	sorts at: varSet put: aSort	
-]
-
-{ #category : #'api - binding' }
-LbVariables >> switchNamespaces [
-	"Do nothing"
 ]

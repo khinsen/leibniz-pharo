@@ -56,7 +56,7 @@ LbVarTerm >> isVariable [
 
 { #category : #matching }
 LbVarTerm >> match: otherTerm variables: variables [
-	variables registerVar: name ofSort: sort.
+	variables defineVar: name ofSort: sort.
 	otherTerm matchVar: name ofSort: sort variables: variables
 ]
 
@@ -92,24 +92,24 @@ LbVarTerm >> substitute: aSubstitution [
 ]
 
 { #category : #matching }
-LbVarTerm >> unifyWith: otherTerm variables: variables [
-	variables switchToNamespace: #left.
-	variables registerVar: name ofSort: sort.
+LbVarTerm >> unify: otherTerm variables: variables [
+	variables namespace: #left.
+	variables defineVar: name ofSort: sort.
 	otherTerm unifyWithVar: name ofSort: sort variables: variables
 ]
 
 { #category : #matching }
 LbVarTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
-	variables switchToNamespace: #right.
-	variables registerVar: name ofSort: sort.
+	variables namespace: #right.
+	variables defineVar: name ofSort: sort.
 	otherTerm unifyWithVar: name ofSort: sort variables: variables
 ]
 
 { #category : #matching }
 LbVarTerm >> unifyWithVar: aSymbol ofSort: aSort variables: variables [
-	variables switchToNamespace: #right.
-	variables registerVar: name ofSort: sort.
-	variables makeVar: name ofSort: sort equalToVar: aSymbol ofSort: aSort
+	variables namespace: #right.
+	variables defineVar: name ofSort: sort.
+	variables makeVar: name ofSort: sort equalToVar: aSymbol ofSort: aSort namespace: #left
 ]
 
 { #category : #accessing }

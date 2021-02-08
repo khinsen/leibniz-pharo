@@ -125,10 +125,8 @@ LbOpTerm >> synopsis [
 ]
 
 { #category : #matching }
-LbOpTerm >> unifyWith: otherTerm variables: variables [
-	variables switchNamespaces.
+LbOpTerm >> unify: otherTerm variables: variables [
 	otherTerm unifyWithOpTerm: self op: opName args: arguments variables: variables.
-	variables switchNamespaces
 ]
 
 { #category : #matching }
@@ -136,7 +134,7 @@ LbOpTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: v
 	(opName = anOpName and: [ arguments size = anArgList size ])
 		ifFalse: [ variables failWith: self notEqualTo: otherTerm ].
 	anArgList with: arguments do: [ :arg1 :arg2 |
-		arg1 unifyWith: arg2 variables: variables ]
+		arg1 unify: arg2 variables: variables ]
 ]
 
 { #category : #accessing }
