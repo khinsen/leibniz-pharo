@@ -12,6 +12,31 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
+{ #category : #matching }
+LbTerm >> addPrefix: aSymbol toVarsConflictingWith: anotherTerm [
+	| substitution myVars otherVars |
+	myVars := self variables.
+	otherVars := anotherTerm variables.
+	substitution := LbVariables new.
+	(myVars keys union: otherVars keys)
+		ifNotEmpty: [ :conflicts |
+			conflicts do: [ :each |
+				| newName sort | [
+					newName := each addPrefix: aSymbol.
+					otherVars includes: newName
+				] whileTrue.
+				sort := myVars at: each.
+				substitution
+					bindVar: each
+					ofSort: sort
+					to: (LbVarTerm
+							name: newName
+							sort: sort
+							signature: self signature) ] ].
+	substitution beRecursivelyReadOnlyObject.
+	^ substitution
+]
+
 { #category : #accessing }
 LbTerm >> arguments [
 	^ #()

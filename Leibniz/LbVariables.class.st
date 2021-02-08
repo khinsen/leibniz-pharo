@@ -65,6 +65,11 @@ LbVariables >> failWith: aTerm notEqualTo: anotherTerm [
 	failure ifNil: [ failure := { #nonEqualTerms. aTerm. anotherTerm } ]
 ]
 
+{ #category : #testing }
+LbVariables >> hasNoBindings [
+	^ bound isEmpty
+]
+
 { #category : #initialization }
 LbVariables >> initialize [
 	bound := Dictionary new.
