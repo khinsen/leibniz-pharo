@@ -115,6 +115,8 @@ LbOpTerm >> sort [
 { #category : #substituting }
 LbOpTerm >> substitute: aSubstitution [
 	| substitutedArgList |
+	aSubstitution hasNoBindings ifTrue: [ ^ self ].
+	arguments ifEmpty: [ ^ self ].
 	substitutedArgList := arguments collect: [ :arg | arg substitute: aSubstitution ].
 	^ signature nonZeroArgTermNamed: opName withArgs: substitutedArgList
 ]
