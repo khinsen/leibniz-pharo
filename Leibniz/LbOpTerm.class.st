@@ -92,9 +92,9 @@ LbOpTerm >> match: otherTerm variables: variables [
 { #category : #matching }
 LbOpTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
 	(opName = anOpName and: [ arguments size = anArgList size ])
-		ifFalse: [ variables failWith: self notEqualTo: otherTerm ].
-	anArgList with: arguments do: [ :arg1 :arg2 |
-		arg1 match: arg2 variables: variables ]
+		ifTrue: [ anArgList with: arguments do: [ :arg1 :arg2 |
+					arg1 match: arg2 variables: variables ] ]
+		ifFalse: [ variables failWith: self notEqualTo: otherTerm ]
 ]
 
 { #category : #accessing }
@@ -134,9 +134,9 @@ LbOpTerm >> unify: otherTerm variables: variables [
 { #category : #matching }
 LbOpTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
 	(opName = anOpName and: [ arguments size = anArgList size ])
-		ifFalse: [ variables failWith: self notEqualTo: otherTerm ].
-	anArgList with: arguments do: [ :arg1 :arg2 |
-		arg1 unify: arg2 variables: variables ]
+		ifTrue: [ anArgList with: arguments do: [ :arg1 :arg2 |
+					arg1 unify: arg2 variables: variables ] ]
+		ifFalse: [ variables failWith: self notEqualTo: otherTerm ]
 ]
 
 { #category : #accessing }

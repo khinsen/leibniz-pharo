@@ -59,15 +59,16 @@ LbDependentSortExamples >> bagSortGraph [
 		sortGraph
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LbDependentSortExamples >> bagSorts [
 	<gtExample>
+	| sortGraph |
 	^ #('collection'
-		'∅'
-		'bag(element, 2)'
+		'∅' 'bag(element, 2)'
 		'list(element, 1)')
 		collect: [ :each |
-			self bagSortGraph parseSort: each ]
+			sortGraph := self bagSortGraph.
+			sortGraph parseSort: each ]
 ]
 
 { #category : #example }

@@ -34,7 +34,6 @@ LbTerm >> addPrefix: aSymbol toVarsConflictingWith: anotherTerm [
 							name: newName
 							sort: sort
 							signature: self signature) ] ].
-	substitution beRecursivelyReadOnlyObject.
 	^ substitution
 ]
 
@@ -132,7 +131,6 @@ LbTerm >> match: otherTerm [
 	| variables |
 	variables := LbVariables new.
 	self match: otherTerm variables: variables.
-	variables beRecursivelyReadOnlyObject.
 	^ variables
 ]
 
@@ -202,7 +200,6 @@ LbTerm >> unify: otherTerm [
 	| variables |
 	variables := LbVariables new.
 	self unify: otherTerm variables: variables.
-	variables beRecursivelyReadOnlyObject.
 	^ variables
 ]
 

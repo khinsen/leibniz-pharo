@@ -10,6 +10,38 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
+{ #category : #accessing }
+LbVariables >> bindToUniqueVar: aBlock [
+	| varSetBindings |
+	self isFailure ifTrue: [ ^ self ].
+	varSetBindings := Dictionary new.
+	unbound values asSet do: [ :each |
+		varSetBindings at: each put: (aBlock value: each value: (sorts at: each)) ].
+	varSetBindings keysAndValuesDo: [ :varSet :uniqueVarTerm |
+		| aVar |
+		aVar := varSet anyOne.
+		self bindVar: aVar ofSort:(sorts at: aVar) to: uniqueVarTerm  ]	
+]
+
+{ #category : #accessing }
+LbVariables >> bindToUniqueVarsWithSignature: aSignature [
+	| varSetNames |
+	self isFailure ifTrue: [ ^ self ].
+	varSetNames := Dictionary new.
+	unbound values asSet do: [ :each |
+		| name |
+		name := each anyOne.
+		varSetNames at: each put: name ].
+	varSetNames keysAndValuesDo: [ :varSet :name |
+		| varTerm aVar |
+		varTerm := LbVarTerm
+					name: name
+					sort: (sorts at: varSet)
+					signature: aSignature.
+		aVar := varSet anyOne.
+		self bindVar: aVar ofSort:(sorts at: aVar) to: varTerm  ]	
+]
+
 { #category : #'api - binding' }
 LbVariables >> bindVar: aSymbol ofSort: aSort to: aTerm [
 	failure ifNotNil: [ ^ self ].
@@ -36,10 +68,10 @@ LbVariables >> bindVarSet: aSet to: aTerm [
 ]
 
 { #category : #lookup }
-LbVariables >> bindingFor: aSymbol [
-	bound at: aSymbol
-		ifPresent: [ :value | ^ value ]
-		ifAbsent: [ ^ nil ]
+LbVariables >> bindingFor: aName [
+	bound at: aName
+		ifPresent: [ :value | ^ value ].
+	^ nil
 ]
 
 { #category : #lookup }

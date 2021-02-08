@@ -402,7 +402,7 @@ LbTermExamples >> varTerm [
 	^ term
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LbTermExamples >> variableRenaming [
 	<gtExample>
 	| rns s nameX nameY nameV nameW substitutions substitution term1 term2 |
@@ -436,5 +436,5 @@ LbTermExamples >> variableRenaming [
 	substitution := term1 addPrefix: #'term1.' toVarsConflictingWith: term2.
 	substitutions add: { term1. term2. substitution. term1 substitute: substitution }.
 
-		^ substitutions
+	^ substitutions
 ]

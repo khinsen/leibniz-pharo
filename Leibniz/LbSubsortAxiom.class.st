@@ -100,10 +100,16 @@ LbSubsortAxiom >> subsort [
 
 { #category : #matching }
 LbSubsortAxiom >> subsortOf: aTerm [
-	^ (supersort match: aTerm)
-		ifNull: [ nil ]
-		ifNotNull: [ :substitution |
-			subsort substitute: substitution ]
+	| rename preferredVarNames substitution |
+	rename := supersort addPrefix: #'temp.' toVarsConflictingWith: aTerm.
+	preferredVarNames := aTerm variables keys.
+	substitution := (supersort substitute: rename) unify: aTerm.
+	substitution isFailure ifTrue: [ ^ nil ].
+	substitution bindToUniqueVar: [ :varSet :sort |
+		| name |
+		name := (varSet intersection: preferredVarNames) asArray sorted first.
+		LbVarTerm name: name sort: sort signature: signature ].
+	^ (subsort substitute: rename) substitute: substitution
 ]
 
 { #category : #accessing }
@@ -113,8 +119,8 @@ LbSubsortAxiom >> supersort [
 
 { #category : #matching }
 LbSubsortAxiom >> supersortOf: aTerm [
-	^ (subsort match: aTerm)
-		ifNull: [ nil ]
-		ifNotNull: [ :substitution |
-			supersort substitute: substitution ]
+	| substitution |
+	substitution := subsort match: aTerm.
+	substitution isFailure ifTrue: [ ^ nil ].
+	^ supersort substitute: substitution
 ]
