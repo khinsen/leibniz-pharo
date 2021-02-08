@@ -110,11 +110,6 @@ LbVariables >> makeVar: aSymbol ofSort: aSort equalToVar: anotherSymbol ofSort: 
 	self mergeVarSetsFor: aSymbol and: anotherSymbol
 ]
 
-{ #category : #'api - binding' }
-LbVariables >> makeVar: aSymbol ofSort: aSort equalToVar: anotherSymbol ofSort: anotherSort namespace: namespaceSymbol [
-	self makeVar: aSymbol ofSort: aSort equalToVar: anotherSymbol ofSort: anotherSort
-]
-
 { #category : #binding }
 LbVariables >> mergeVarSetsFor: aSymbol and: anotherSymbol [
 	| varSet1 varSet2 sort mergedVarSet |
@@ -129,11 +124,6 @@ LbVariables >> mergeVarSetsFor: aSymbol and: anotherSymbol [
 	sorts at: mergedVarSet put: sort.
 	sorts removeKey: varSet1.
 	sorts removeKey: varSet2.
-]
-
-{ #category : #'api - binding' }
-LbVariables >> namespace: aSymbol [
-	"Do nothing"
 ]
 
 { #category : #printing }

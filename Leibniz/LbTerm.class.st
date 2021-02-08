@@ -207,17 +207,6 @@ LbTerm >> unify: otherTerm [
 ]
 
 { #category : #matching }
-LbTerm >> unify: otherTerm leftVarPrefix: leftSymbol rightVarPrefix: rightSymbol [
-	| variables |
-	variables := LbDualNamespaceVariables new.
-	variables prefix: #left -> leftSymbol.
-	variables prefix: #right -> rightSymbol.
-	self unify: otherTerm variables: variables.
-	variables beRecursivelyReadOnlyObject.
-	^ variables
-]
-
-{ #category : #matching }
 LbTerm >> unify: otherTerm variables: variables [
 	self = otherTerm
 		ifFalse: [ variables failWith: self notEqualTo: otherTerm ]
@@ -230,9 +219,7 @@ LbTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: var
 
 { #category : #matching }
 LbTerm >> unifyWithVar: aSymbol ofSort: aSort variables: variables [
-	variables namespace: #left.
 	variables bindVar: aSymbol ofSort: aSort to: self.
-	variables namespace: #right.
 	self variables associationsDo: [ :each |
 		variables defineVar: each key ofSort: each value ]
 ]

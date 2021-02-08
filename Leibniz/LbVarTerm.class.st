@@ -93,23 +93,20 @@ LbVarTerm >> substitute: aSubstitution [
 
 { #category : #matching }
 LbVarTerm >> unify: otherTerm variables: variables [
-	variables namespace: #left.
 	variables defineVar: name ofSort: sort.
 	otherTerm unifyWithVar: name ofSort: sort variables: variables
 ]
 
 { #category : #matching }
 LbVarTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
-	variables namespace: #right.
 	variables defineVar: name ofSort: sort.
 	otherTerm unifyWithVar: name ofSort: sort variables: variables
 ]
 
 { #category : #matching }
 LbVarTerm >> unifyWithVar: aSymbol ofSort: aSort variables: variables [
-	variables namespace: #right.
 	variables defineVar: name ofSort: sort.
-	variables makeVar: name ofSort: sort equalToVar: aSymbol ofSort: aSort namespace: #left
+	variables makeVar: name ofSort: sort equalToVar: aSymbol ofSort: aSort
 ]
 
 { #category : #accessing }
