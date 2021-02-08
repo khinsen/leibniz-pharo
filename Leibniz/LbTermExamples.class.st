@@ -206,63 +206,6 @@ LbTermExamples >> matches [
 	}
 ]
 
-{ #category : #accessing }
-LbTermExamples >> namespacedUnifications [
-	<gtExample>
-	| rns s unifications unification nameX nameY nameV nameW leftZ rightZ |
-	rns := LbBuiltinSignatures integerSignature.
-	s := (LbSignatureBuilder sortGraph: rns sortGraph)
-			addSignature: rns includeVars: false;
-			parseAndAddVar: 'V:ℤ';
-			parseAndAddVar: 'W:ℤ';
-			parseAndAddVar: 'X:ℤ';
-			parseAndAddVar: 'Y:ℤ';
-			parseAndAddVar: 'Z:ℤ';
-			signature.
-	nameV := #'left.V' asLbOperatorName.
-	nameW := #'left.W' asLbOperatorName.
-	nameX := #'right.X' asLbOperatorName.
-	nameY := #'right.Y' asLbOperatorName.
-	leftZ := #'left.Z' asLbOperatorName.
-	rightZ := #'right.Z' asLbOperatorName.
-	unifications := OrderedCollection new.
-
-	unification := (s parseTerm: 'V + W')
-		 unify: (s parseTerm: 'X + Y + Z')
-		 leftVarPrefix: #left rightVarPrefix: #right.
-	self
-		assert: (unification varsInNamespace: #left)
-		equals: (Set with: nameV with: nameW).
-	self
-		assert: (unification varsInNamespace: #right)
-		equals: (Set with: nameX with: nameY with: rightZ).
-	unifications add: unification.
-
-	unification := (s parseTerm: 'Z + V')
-		 unify: (s parseTerm: 'Z + Y')
-		 leftVarPrefix: #left rightVarPrefix: #right.
-	self
-		assert: (unification varsInNamespace: #left)
-		equals: (Set with: leftZ with: nameV).
-	self
-		assert: (unification varsInNamespace: #right)
-		equals: (Set with: rightZ with: nameY).
-	unifications add: unification.
-
-	unification := (s parseTerm: 'V + W')
-		 unify: (s parseTerm: 'Z + 2 + Z')
-		 leftVarPrefix: #left rightVarPrefix: #right.
-	self
-		assert: (unification varsInNamespace: #left)
-		equals: (Set with: nameV with: nameW).
-	self
-		assert: (unification varsInNamespace: #right)
-		equals: (Set with: rightZ).
-	unifications add: unification.
-
-	^ unifications
-]
-
 { #category : #example }
 LbTermExamples >> numberUnifications [
 	<gtExample>
@@ -457,4 +400,41 @@ LbTermExamples >> varTerm [
 	term := self parserForFooBar parse: 'bar'.
 	self assert: term headOpName asSymbol equals: #Variable.
 	^ term
+]
+
+{ #category : #accessing }
+LbTermExamples >> variableRenaming [
+	<gtExample>
+	| rns s nameX nameY nameV nameW substitutions substitution term1 term2 |
+	rns := LbBuiltinSignatures integerSignature.
+	s := (LbSignatureBuilder sortGraph: rns sortGraph)
+			addSignature: rns includeVars: false;
+			parseAndAddVar: 'V:ℤ';
+			parseAndAddVar: 'W:ℤ';
+			parseAndAddVar: 'X:ℤ';
+			parseAndAddVar: 'Y:ℤ';
+			signature.
+	nameV := #'left.V' asLbOperatorName.
+	nameW := #'left.W' asLbOperatorName.
+	nameX := #'right.X' asLbOperatorName.
+	nameY := #'right.Y' asLbOperatorName.
+	substitutions := OrderedCollection new.
+
+	term1 := s parseTerm: 'X + Y'.
+	term2 := s parseTerm: 'V + W'.
+	substitution := term1 addPrefix: #'term1.' toVarsConflictingWith: term2.
+	self assert: substitution hasNoBindings.
+	substitutions add: { term1. term2. substitution. term1 substitute: substitution }.
+
+	term1 := s parseTerm: 'X + Y'.
+	term2 := s parseTerm: 'Y + W'.
+	substitution := term1 addPrefix: #'term1.' toVarsConflictingWith: term2.
+	substitutions add: { term1. term2. substitution. term1 substitute: substitution }.
+	
+	term1 := s parseTerm: 'X + Y + V + W'.
+	term2 := s parseTerm: 'V + W + X + Y'.
+	substitution := term1 addPrefix: #'term1.' toVarsConflictingWith: term2.
+	substitutions add: { term1. term2. substitution. term1 substitute: substitution }.
+
+		^ substitutions
 ]

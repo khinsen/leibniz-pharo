@@ -18,7 +18,7 @@ LbTerm >> addPrefix: aSymbol toVarsConflictingWith: anotherTerm [
 	myVars := self variables.
 	otherVars := anotherTerm variables.
 	substitution := LbVariables new.
-	(myVars keys union: otherVars keys)
+	(myVars keys intersection: otherVars keys)
 		ifNotEmpty: [ :conflicts |
 			conflicts do: [ :each |
 				| newName sort | [
@@ -26,6 +26,7 @@ LbTerm >> addPrefix: aSymbol toVarsConflictingWith: anotherTerm [
 					otherVars includes: newName
 				] whileTrue.
 				sort := myVars at: each.
+				substitution defineVar: each ofSort: sort.
 				substitution
 					bindVar: each
 					ofSort: sort

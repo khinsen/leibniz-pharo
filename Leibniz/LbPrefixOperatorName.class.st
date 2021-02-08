@@ -9,6 +9,11 @@ LbPrefixOperatorName class >> for: aStringOrSymbol [
 	^ self new internalSymbol: aStringOrSymbol
 ]
 
+{ #category : #modifying }
+LbPrefixOperatorName >> addPrefix: aSymbol [
+	^ LbPrefixOperatorName for: aSymbol, internalSymbol
+]
+
 { #category : #printing }
 LbPrefixOperatorName >> printForArity: anArity on: aStream [
 	aStream nextPutAll: internalSymbol.

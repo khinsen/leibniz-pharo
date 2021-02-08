@@ -20,9 +20,14 @@ LbOperatorName class >> fromInternalSymbol: aSymbol [
 		new internalSymbol: aSymbol
 ]
 
-{ #category : #compar }
+{ #category : #comparing }
 LbOperatorName >> <= opName [
 	^ self asSymbol <= opName asSymbol
+]
+
+{ #category : #modifying }
+LbOperatorName >> addPrefix: aSymbol [
+	self shouldNotImplement
 ]
 
 { #category : #converting }
