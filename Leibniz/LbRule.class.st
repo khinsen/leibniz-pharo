@@ -108,7 +108,7 @@ LbRule >> printVariablesAsLeibnizSyntaxOn: aStream [
 			aStream nextPutAll: '∀ '.
 			aStream nextPutAll: var asSymbol.
 			aStream nextPut: $:.
-			aStream nextPutAll: sort name.
+			aStream nextPutAll: sort asLeibnizSyntaxString.
 			aStream nextPutAll: ' ']
 ]
 

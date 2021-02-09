@@ -17,9 +17,26 @@ LbDependentSort class >> sortGraph: aSortGraph term: aTerm [
 		yourself
 ]
 
+{ #category : #comparing }
+LbDependentSort >> <= anotherSort [
+	self assert: self sortGraph equals: anotherSort sortGraph.
+	self = anotherSort ifTrue: [ ^ true ].
+	self sortFamily = anotherSort sortFamily
+		ifTrue: [ ^ self compareArguments: anotherSort ]
+		ifFalse: [ ^ self compareFamilies: anotherSort ]
+]
+
 { #category : #converting }
 LbDependentSort >> asLeibnizSyntaxString [
-	^ term asLeibnizSyntaxString
+	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
+]
+
+{ #category : #comparing }
+LbDependentSort >> compareArguments: anotherSort [ 
+]
+
+{ #category : #comparing }
+LbDependentSort >> compareFamilies: anotherSort [ 
 ]
 
 { #category : #lookup }
@@ -75,6 +92,17 @@ LbDependentSort >> graphNodeForSort: aSort highlight: aBoolean [
 	text foreground: Color white.
 	rectangle addChild: label.
 	^ rectangle
+]
+
+{ #category : #inspecting }
+LbDependentSort >> gtFamilyFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Family';
+		priority: 3;
+		object: [ self family ];
+		view: #gtGraphFor:;
+		yourself
 ]
 
 { #category : #inspecting }
@@ -151,6 +179,13 @@ LbDependentSort >> matchAllSupersortsOf: aSort [
 
 { #category : #printing }
 LbDependentSort >> printAsLeibnizSyntaxOn: aStream [
+	term variables keysAndValuesDo:
+		[ :var :sort |
+			aStream nextPutAll: '∀ '.
+			aStream nextPutAll: var asSymbol.
+			aStream nextPut: $:.
+			aStream nextPutAll: sort asLeibnizSyntaxString.
+			aStream nextPutAll: ' '].
 	term printAsLeibnizSyntaxOn: aStream
 ]
 
@@ -160,6 +195,11 @@ LbDependentSort >> printOn: aStream [
 	aStream nextPut: $(.
 	self printAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: $)
+]
+
+{ #category : #accessing }
+LbDependentSort >> sortFamily [
+	^ sortGraph sortFamilyForTerm: term
 ]
 
 { #category : #accessing }

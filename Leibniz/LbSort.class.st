@@ -50,6 +50,11 @@ LbSort >> <= aSort [
 	self subclassResponsibility
 ]
 
+{ #category : #converting }
+LbSort >> asLeibnizSyntaxString [
+	^ name asString
+]
+
 { #category : #inspecting }
 LbSort >> gtOriginsFor: aView [
 	<gtView>

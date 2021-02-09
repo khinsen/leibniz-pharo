@@ -11,7 +11,9 @@ Class {
 		'kindFamilies',
 		'maximalSortFamilies',
 		'directSubsortFamilies',
-		'subsortFamilies'
+		'subsortFamilies',
+		'connectingAxioms',
+		'directSupersortFamilies'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
@@ -65,21 +67,25 @@ LbDependentSortGraph >> deepCopy [
 
 { #category : #lookup }
 LbDependentSortGraph >> directSubsortsOf: aSortTerm [
-	| subsorts |
+	| subsorts family |
 	subsorts := Set new.
-	context axioms subsortAxioms do: [ :each |
-		(each subsortOf: aSortTerm)
-			ifNotNil: [ :term | subsorts add: (self sortFor: term) ] ].
+	family := self sortFamilyForTerm: aSortTerm.
+	(directSubsortFamilies at: family) do: [ :eachFamily |
+		(connectingAxioms at: { eachFamily. family }) first do: [ :eachAxiom |
+			(eachAxiom subsortOf: aSortTerm)
+				ifNotNil: [ :term | subsorts add: (self sortFor: term) ]] ].
 	^ subsorts
 ]
 
 { #category : #lookup }
 LbDependentSortGraph >> directSupersortsOf: aSortTerm [
-	| supersorts |
+	| supersorts family |
 	supersorts := Set new.
-	context axioms subsortAxioms do: [ :each |
-		(each supersortOf: aSortTerm)
-			ifNotNil: [ :term | supersorts add: (self sortFor: term) ] ].
+	family := self sortFamilyForTerm: aSortTerm.
+	(directSupersortFamilies at: family) do: [ :eachFamily |
+		(connectingAxioms at: { family. eachFamily }) first do: [ :eachAxiom |
+			(eachAxiom supersortOf: aSortTerm)
+				ifNotNil: [ :term | supersorts add: (self sortFor: term) ]] ].
 	^ supersorts
 ]
 
@@ -110,9 +116,11 @@ LbDependentSortGraph >> graphFor: aView restrictedTo: aSet highlight: aSort [
 				shape: [ :x | self graphArrowForSubsortRelation: x ];
 				fromCenterTop;
 				toCenterBottom;
-				connect: context axioms subsortAxioms
-					from: [ :each | self sortFamilyForTerm: each subsort ]
-					to:  [ :each | self sortFamilyForTerm: each supersort ];
+				connect: (connectingAxioms associations
+							select: [ :each | each value size = 1 ]
+							thenCollect: [ :each | each value first ])
+					from: [ :each | self sortFamilyForTerm: each anyOne subsort ]
+					to: [ :each | self sortFamilyForTerm: each anyOne supersort ];
 				yourself.
 			view layout
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
@@ -162,16 +170,23 @@ LbDependentSortGraph >> includes: aSortTerm [
 ]
 
 { #category : #initialization }
-LbDependentSortGraph >> initializeDirectSubsortFamilies [
+LbDependentSortGraph >> initializeDirectSubsortRelations [
 	directSubsortFamilies := Dictionary new.
+	directSupersortFamilies := Dictionary new.
+	connectingAxioms := Dictionary new.
 	sortFamilies do: [ :each |
-		directSubsortFamilies at: each put: Set new ].
+		directSubsortFamilies at: each put: Set new.
+		directSupersortFamilies at: each put: Set new ].
 	context axioms subsortAxioms do: [ :each |
 		 each subsort = each supersort ifFalse: [
 			| subsort supersort |
 			subsort := self sortFamilyForTerm: each subsort.
 			supersort := self sortFamilyForTerm: each supersort.
-			(directSubsortFamilies at: supersort) add: subsort ] ].
+			(directSubsortFamilies at: supersort) add: subsort.
+			(directSupersortFamilies at: subsort) add: supersort.
+			(connectingAxioms at: { subsort. supersort }
+				ifAbsentPut: [ OrderedCollection with: Set new ])
+				first add: each ] ].
 ]
 
 { #category : #initialization }
@@ -238,18 +253,26 @@ LbDependentSortGraph >> initializeSubsortFamilies [
 
 { #category : #initialization }
 LbDependentSortGraph >> initializeSubsortFamiliesFor: aSort [
-	| dss ss |
+	| dssf ssf |
 	(subsortFamilies includes: aSort) ifTrue: [ ^ self ].
-	dss := directSubsortFamilies at: aSort.
-	ss := dss copy.
-	dss do: [ :sort |
-		self initializeSubsortFamiliesFor: sort.
-		ss := ss union: (subsortFamilies at: sort) ].
-	(ss includes: aSort) ifTrue: [
+	dssf := directSubsortFamilies at: aSort.
+	ssf := dssf copy.
+	dssf do: [ :each |
+		| issf |
+		self initializeSubsortFamiliesFor: each.
+		issf := subsortFamilies at: each.
+		ssf := ssf union: issf.
+		issf do: [ :eachSsf |
+			eachSsf = each ifFalse: [
+				connectingAxioms
+					at: { eachSsf. aSort }
+					put: (connectingAxioms at: { eachSsf. each }),
+							(connectingAxioms at: { each. aSort }) ]  ] ].
+	(ssf includes: aSort) ifTrue: [
 		self error: 'Cycle in subsort relations involving ',
 						aSort asLeibnizSyntaxString ].
-	ss add: aSort.
-	subsortFamilies at: aSort put: ss
+	ssf add: aSort.
+	subsortFamilies at: aSort put: ssf
 ]
 
 { #category : #initialization }
@@ -257,7 +280,7 @@ LbDependentSortGraph >> initializeWithSortContext: anLbContext [
 	context := anLbContext.
 	sortSort := context sortGraph sortNamed: #sort.
 	self initializeSortFamilies.
-	self initializeDirectSubsortFamilies.
+	self initializeDirectSubsortRelations.
 	self initializeSubsortFamilies.
 	self initializeMaximalSortFamilies.
 	self initializeKindFamilies.
