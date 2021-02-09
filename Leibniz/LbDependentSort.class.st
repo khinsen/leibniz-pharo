@@ -32,7 +32,14 @@ LbDependentSort >> asLeibnizSyntaxString [
 ]
 
 { #category : #comparing }
-LbDependentSort >> compareArguments: anotherSort [ 
+LbDependentSort >> compareArguments: anotherSort [
+	term arguments ifEmpty: [ ^ false ].
+	term arguments with: anotherSort term arguments do: [ :term1 :term2 |
+		term1 sort asLeibnizSyntaxString = #sort
+			ifTrue: [ (sortGraph sortFor: term1) <= (sortGraph sortFor: term2)
+						ifFalse: [ ^ false ] ]
+			ifFalse: [ term1 = term2 ifFalse: [ ^ false ] ] ].
+	^ true
 ]
 
 { #category : #comparing }

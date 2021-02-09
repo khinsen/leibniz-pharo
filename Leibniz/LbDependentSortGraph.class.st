@@ -13,7 +13,8 @@ Class {
 		'directSubsortFamilies',
 		'subsortFamilies',
 		'connectingAxioms',
-		'directSupersortFamilies'
+		'directSupersortFamilies',
+		'connectingPaths'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
@@ -116,9 +117,7 @@ LbDependentSortGraph >> graphFor: aView restrictedTo: aSet highlight: aSort [
 				shape: [ :x | self graphArrowForSubsortRelation: x ];
 				fromCenterTop;
 				toCenterBottom;
-				connect: (connectingAxioms associations
-							select: [ :each | each value size = 1 ]
-							thenCollect: [ :each | each value first ])
+				connect: connectingAxioms values
 					from: [ :each | self sortFamilyForTerm: each anyOne subsort ]
 					to: [ :each | self sortFamilyForTerm: each anyOne supersort ];
 				yourself.
@@ -174,6 +173,7 @@ LbDependentSortGraph >> initializeDirectSubsortRelations [
 	directSubsortFamilies := Dictionary new.
 	directSupersortFamilies := Dictionary new.
 	connectingAxioms := Dictionary new.
+	connectingPaths := Dictionary new.
 	sortFamilies do: [ :each |
 		directSubsortFamilies at: each put: Set new.
 		directSupersortFamilies at: each put: Set new ].
@@ -185,8 +185,10 @@ LbDependentSortGraph >> initializeDirectSubsortRelations [
 			(directSubsortFamilies at: supersort) add: subsort.
 			(directSupersortFamilies at: subsort) add: supersort.
 			(connectingAxioms at: { subsort. supersort }
-				ifAbsentPut: [ OrderedCollection with: Set new ])
-				first add: each ] ].
+				ifAbsentPut: [ Set new ])
+				add: each.
+			connectingPaths at: { subsort. supersort }
+				put: (Set with: (OrderedCollection with: { subsort. supersort }))] ].
 ]
 
 { #category : #initialization }
@@ -264,10 +266,12 @@ LbDependentSortGraph >> initializeSubsortFamiliesFor: aSort [
 		ssf := ssf union: issf.
 		issf do: [ :eachSsf |
 			eachSsf = each ifFalse: [
-				connectingAxioms
-					at: { eachSsf. aSort }
-					put: (connectingAxioms at: { eachSsf. each }),
-							(connectingAxioms at: { each. aSort }) ]  ] ].
+				| paths |
+				paths := connectingPaths at: { eachSsf. aSort }
+							ifAbsentPut: [ Set new ].
+				(connectingPaths at: { eachSsf. each }) do: [ :segment1 |
+					(connectingPaths at: { each. aSort }) do: [ :segment2 |
+						paths add: segment1, segment2 ] ] ] ] ].
 	(ssf includes: aSort) ifTrue: [
 		self error: 'Cycle in subsort relations involving ',
 						aSort asLeibnizSyntaxString ].

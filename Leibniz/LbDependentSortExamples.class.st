@@ -62,13 +62,17 @@ LbDependentSortExamples >> bagSortGraph [
 { #category : #example }
 LbDependentSortExamples >> bagSorts [
 	<gtExample>
-	| sortGraph |
-	^ #('collection'
-		'∅' 'bag(element, 2)'
-		'list(element, 1)')
-		collect: [ :each |
-			sortGraph := self bagSortGraph.
-			sortGraph parseSort: each ]
+	| sortGraph sorts |
+	sorts := #('collection'
+				'∅'
+				'bag(element, 2)'
+				'list(element, 1)'
+				'list(element.special, 2)')
+				collect: [ :each |
+					sortGraph := self bagSortGraph.
+					sortGraph parseSort: each ].
+	self assert: (sorts at: 5) <= (sorts at: 4).
+	^ sorts
 ]
 
 { #category : #example }
@@ -90,8 +94,10 @@ LbDependentSortExamples >> listSortContext [
 		include: (LbBuiltinContexts integerContext) mode: #use;
 		parseAndAddSort: 'sort';
 		parseAndAddOp: 'element : sort';
+		parseAndAddOp: 'element.special : sort';
 		parseAndAddOp: '∅ : sort';
 		parseAndAddOp: 'list(sort, ℕ) : sort';
+		parseAndAddAxiom: 'element.special ⊆ element';
 		context
 ]
 
