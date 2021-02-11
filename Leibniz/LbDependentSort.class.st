@@ -19,11 +19,15 @@ LbDependentSort class >> sortGraph: aSortGraph term: aTerm [
 
 { #category : #comparing }
 LbDependentSort >> <= anotherSort [
+	| myFamily otherFamily |
 	self assert: self sortGraph equals: anotherSort sortGraph.
 	self = anotherSort ifTrue: [ ^ true ].
-	self sortFamily = anotherSort sortFamily
+	myFamily := self sortFamily.
+	otherFamily := anotherSort sortFamily.
+	myFamily = otherFamily
 		ifTrue: [ ^ self compareArguments: anotherSort ]
-		ifFalse: [ ^ self compareFamilies: anotherSort ]
+		ifFalse: [ ^ self testPaths:
+					(sortGraph pathsConnecting: myFamily to: otherFamily) ]
 ]
 
 { #category : #converting }
@@ -40,10 +44,6 @@ LbDependentSort >> compareArguments: anotherSort [
 						ifFalse: [ ^ false ] ]
 			ifFalse: [ term1 = term2 ifFalse: [ ^ false ] ] ].
 	^ true
-]
-
-{ #category : #comparing }
-LbDependentSort >> compareFamilies: anotherSort [ 
 ]
 
 { #category : #lookup }
@@ -266,4 +266,20 @@ LbDependentSort >> supersortGraph [
 { #category : #accessing }
 LbDependentSort >> term [
 	^ term
+]
+
+{ #category : #comparing }
+LbDependentSort >> testPaths: aSet [
+	aSet do: [ :aPath |
+		| currentSorts |
+		currentSorts := { term }.
+		aPath do: [ :aSegment |
+			currentSorts :=
+				currentSorts flatCollect: [ :aSort |
+					(sortGraph axiomsConnecting: aSegment first to: aSegment second)
+						collect: [ :anAxiom |
+							anAxiom supersortOf: aSort ]
+						thenSelect: #isNotNil ] ].
+		currentSorts ifNotEmpty: [ ^ true ] ].
+	^ false
 ]

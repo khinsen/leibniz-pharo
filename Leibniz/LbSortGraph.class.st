@@ -295,8 +295,8 @@ LbSortGraph >> initializeWithSubsortRelations: subsortRelations andCollectionSor
 LbSortGraph >> instVarsExcludedFromEquality [
 	"The only instance variable used in comparison is directSubsortsOf,
 	 since all others are derived from it"
-	^#(#kinds #maximalSorts #subsortsOf #kindsOf)
 
+	^ self class instVarNames reject: [ :each | each = #directSubsortOf ]
 ]
 
 { #category : #accessing }

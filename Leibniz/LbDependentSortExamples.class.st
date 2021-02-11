@@ -63,15 +63,21 @@ LbDependentSortExamples >> bagSortGraph [
 LbDependentSortExamples >> bagSorts [
 	<gtExample>
 	| sortGraph sorts |
+	sortGraph := self bagSortGraph.
 	sorts := #('collection'
 				'∅'
 				'bag(element, 2)'
-				'list(element, 1)'
+				'list(element, 2)'
 				'list(element.special, 2)')
 				collect: [ :each |
-					sortGraph := self bagSortGraph.
 					sortGraph parseSort: each ].
+	self assert: (sorts at: 2) <= (sorts at: 1).
+	self assert: (sorts at: 3) <= (sorts at: 1).
+	self assert: (sorts at: 4) <= (sorts at: 1).
+	self assert: (sorts at: 5) <= (sorts at: 1).
 	self assert: (sorts at: 5) <= (sorts at: 4).
+	self assert: (sorts at: 5) <= (sorts at: 3).
+	self assert: (sorts at: 4) <= (sorts at: 3).
 	^ sorts
 ]
 

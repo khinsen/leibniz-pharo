@@ -56,6 +56,13 @@ LbDependentSortGraph >> = anObject [
 
 ]
 
+{ #category : #accessing }
+LbDependentSortGraph >> axiomsConnecting: aSortFamily to: anotherSortFamily [
+	^ connectingAxioms
+		at: { aSortFamily. anotherSortFamily }
+		ifAbsent: [ #() ]
+]
+
 { #category : #copying }
 LbDependentSortGraph >> copy [
 	^ self
@@ -326,6 +333,11 @@ LbDependentSortGraph >> normalizedSortFor: aSortTerm [
 { #category : #lookup }
 LbDependentSortGraph >> parseSort: aString [
 	^ self sortFor: (context parseTerm: aString)
+]
+
+{ #category : #accessing }
+LbDependentSortGraph >> pathsConnecting: aSortFamily to: anotherSortFamily [
+	^ connectingPaths at: { aSortFamily. anotherSortFamily }
 ]
 
 { #category : #accessing }
