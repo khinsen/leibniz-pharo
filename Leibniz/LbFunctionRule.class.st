@@ -33,7 +33,7 @@ LbFunctionRule class >> pattern: aPattern localVariables: aDictionary condition:
 
 { #category : #rewriting }
 LbFunctionRule >> apply: aSubstitution [
-	^ block value: signature value: aSubstitution variables
+	^ block value: signature value: aSubstitution bindings
 ]
 
 { #category : #converting }

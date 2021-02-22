@@ -114,6 +114,19 @@ LbVariables >> hasNoBindings [
 	^ bound isEmpty
 ]
 
+{ #category : #testing }
+LbVariables >> ifSuccess: aBlock [
+	^ failure
+		ifNil: [ aBlock cull: self ]
+]
+
+{ #category : #testing }
+LbVariables >> ifSuccess: block1 ifFailure: block2 [
+	^ failure
+		ifNil: [ block1 cull: self ]
+		ifNotNil: [ block2 value ]
+]
+
 { #category : #initialization }
 LbVariables >> initialize [
 	bound := Dictionary new.

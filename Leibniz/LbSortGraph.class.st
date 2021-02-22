@@ -296,7 +296,7 @@ LbSortGraph >> instVarsExcludedFromEquality [
 	"The only instance variable used in comparison is directSubsortsOf,
 	 since all others are derived from it"
 
-	^ self class instVarNames reject: [ :each | each = #directSubsortOf ]
+	^ self class instVarNames reject: [ :each | each = #directSubsortsOf ]
 ]
 
 { #category : #accessing }
