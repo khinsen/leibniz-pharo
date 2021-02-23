@@ -164,8 +164,8 @@ LbDependentSort >> initializeWithSortGraph: aSortGraph term: aTerm [
 ]
 
 { #category : #accessing }
-LbDependentSort >> kind [
-	^ sortGraph kindForTerm: term
+LbDependentSort >> kindFamily [
+	^ sortGraph kindFamilyForTerm: term
 ]
 
 { #category : #matching }

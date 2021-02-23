@@ -169,10 +169,9 @@ LbDependentSortGraph >> gtGraphFor: aView [
 	^ self graphFor: aView restrictedTo: sortFamilies highlight: nil
 ]
 
-{ #category : #accessing }
-LbDependentSortGraph >> includes: aSortTerm [
-	self flag: #todo.
-	^ true.
+{ #category : #testing }
+LbDependentSortGraph >> includes: aSort [
+	^ sortFamilies includes: aSort family
 ]
 
 { #category : #initialization }
@@ -313,10 +312,8 @@ LbDependentSortGraph >> isEmpty [
 ]
 
 { #category : #private }
-LbDependentSortGraph >> kindForTerm: aSortTerm [
-	| kindFamily |
-	kindFamily := (self sortFamilyForTerm: aSortTerm) kind.
-	^ LbDependentKind sortGraph: self kindFamily: kindFamily
+LbDependentSortGraph >> kindFamilyForTerm: aSortTerm [
+	^ (self sortFamilyForTerm: aSortTerm) kind
 ]
 
 { #category : #lookup }

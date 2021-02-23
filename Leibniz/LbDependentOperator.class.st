@@ -7,25 +7,25 @@ Class {
 		'name',
 		'sortGraph',
 		'ranks',
-		'kindPattern',
-		'kindPatternArity'
+		'kindFamily',
+		'kindFamilyArity'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
 
 { #category : #'instance creation' }
-LbDependentOperator class >> name: anOpName argKindPatterns: aKindPatternArray kindPattern: aKindPattern [
+LbDependentOperator class >> name: anOpName kindFamilyArity: aKindFamilyArray kindFamily: aKindFamily [
 	^ self basicNew
 			initializeWithName: anOpName
-			argKindPatterns: aKindPatternArray
-			kindPattern: aKindPattern;
+			kindFamilyArity: aKindFamilyArray
+			kindFamily: aKindFamily;
 			yourself
 ]
 
 { #category : #adding }
-LbDependentOperator >> addArity: newArity withSortPattern: newSortPattern [
+LbDependentOperator >> addArity: newArity withSort: newSortPattern [
 	self
-		assertMonotonicity: [ kindPattern includes: newSortPattern ]
+		assertMonotonicity: [ kindFamily = newSortPattern kindFamily ]
 		forArity: newArity andSortPattern: newSortPattern.
 
 	ranks ifEmpty:
@@ -134,22 +134,22 @@ LbDependentOperator >> gtRanksFor: aView [
 ]
 
 { #category : #initialization }
-LbDependentOperator >> initializeWithName: anOpName argKindPatterns: aKindPatternArray kindPattern: aKindPattern [
+LbDependentOperator >> initializeWithName: anOpName kindFamilyArity: aKindFamilyArity kindFamily: aKindFamily [
 	name := anOpName.
-	kindPatternArity := aKindPatternArray.
-	kindPattern := aKindPattern.
-	sortGraph := kindPattern sortGraph.
+	kindFamilyArity := aKindFamilyArity.
+	kindFamily := aKindFamily.
+	sortGraph := kindFamily sortGraph.
 	ranks := OrderedCollection new.
 ]
 
 { #category : #accessing }
 LbDependentOperator >> kindPattern [
-	^ kindPattern
+	^ kindFamily
 ]
 
 { #category : #accessing }
 LbDependentOperator >> kindPatternArity [
-	^ kindPatternArity
+	^ kindFamilyArity
 ]
 
 { #category : #inspecting }
@@ -181,9 +181,9 @@ LbDependentOperator >> printOn: aStream [
 	aStream nextPut: $(.
 	aStream nextPutAll: name asSymbol.
 	aStream nextPutAll: ': ('.
-	kindPatternArity printAsLeibnizSyntaxOn: aStream.
+	kindFamilyArity printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ') -> '.
-	kindPattern printAsLeibnizSyntaxOn: aStream.
+	kindFamily printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ', '.
 	ranks size printOn: aStream.
 	aStream nextPutAll: ' rank(s)'

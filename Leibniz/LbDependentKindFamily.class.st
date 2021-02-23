@@ -48,6 +48,11 @@ LbDependentKindFamily >> instVarsExcludedFromEquality [
 ]
 
 { #category : #accessing }
+LbDependentKindFamily >> kindFamily [
+	^ self
+]
+
+{ #category : #accessing }
 LbDependentKindFamily >> maximalSortFamilies [
 	^ maximalSortFamilies
 ]
@@ -65,4 +70,9 @@ LbDependentKindFamily >> printOn: aStream [
 	aStream nextPut: $(.
 	aStream nextPutAll: (', ' join: (self maximalSortFamilies collect: [ : sort | sort asLeibnizSyntaxString ])).
 	aStream nextPut: $).
+]
+
+{ #category : #accessing }
+LbDependentKindFamily >> sortGraph [
+	^ sortGraph
 ]
