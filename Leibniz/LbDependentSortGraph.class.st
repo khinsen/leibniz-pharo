@@ -247,9 +247,13 @@ LbDependentSortGraph >> initializeMaximalSortFamilies [
 
 { #category : #initialization }
 LbDependentSortGraph >> initializeSortFamilies [
+	| anySort |
 	sortFamilies :=
 		(context signature opsOfKind: sortSort kind)
-			collect: [ :each | LbDependentSortFamily sortGraph: self sortOp: each ]
+			collect: [ :each | LbDependentSortFamily sortGraph: self sortOp: each ].
+	"A special sort family represents the variable of sort #sort."
+	anySort := LbDependentSortFamily anySortInSortGraph: self.
+	sortFamilies add: anySort.
 ]
 
 { #category : #initialization }
@@ -313,7 +317,7 @@ LbDependentSortGraph >> isEmpty [
 
 { #category : #private }
 LbDependentSortGraph >> kindFamilyForTerm: aSortTerm [
-	^ (self sortFamilyForTerm: aSortTerm) kind
+	^ (self sortFamilyForTerm: aSortTerm) kindFamily
 ]
 
 { #category : #lookup }
@@ -334,7 +338,9 @@ LbDependentSortGraph >> parseSort: aString [
 
 { #category : #accessing }
 LbDependentSortGraph >> pathsConnecting: aSortFamily to: anotherSortFamily [
-	^ connectingPaths at: { aSortFamily. anotherSortFamily }
+	^ connectingPaths
+		at: { aSortFamily. anotherSortFamily }
+		ifAbsent: (Set new)
 ]
 
 { #category : #accessing }

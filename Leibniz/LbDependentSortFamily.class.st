@@ -39,6 +39,6 @@ LbDependentSortFamily >> gtGraphFor: aView [
 ]
 
 { #category : #lookup }
-LbDependentSortFamily >> kind [
+LbDependentSortFamily >> kindFamily [
 	^ sortGraph kindOf: self
 ]
