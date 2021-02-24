@@ -49,7 +49,7 @@ LbVariables >> bindVar: aSymbol ofSort: aSort to: aTerm [
 	bound at: aSymbol ifPresent: [ :value |
 		value = aTerm
 			ifTrue: [ ^ self ]
-			ifFalse: [ self failWith: aTerm notEqualTo: value ] ].
+			ifFalse: [ self failWith: aTerm notUnifiableWith: value ] ].
 	unbound at: aSymbol
 		ifPresent: [ :equalVars |
 			self bindVarSet: equalVars to: aTerm ]
@@ -105,8 +105,8 @@ LbVariables >> failWith: aSort incommensurableWith: anotherSort [
 ]
 
 { #category : #'error handling' }
-LbVariables >> failWith: aTerm notEqualTo: anotherTerm [
-	failure ifNil: [ failure := { #nonEqualTerms. aTerm. anotherTerm } ]
+LbVariables >> failWith: aTerm notUnifiableWith: anotherTerm [
+	failure ifNil: [ failure := { #nonUnifiableTerms. aTerm. anotherTerm } ]
 ]
 
 { #category : #testing }

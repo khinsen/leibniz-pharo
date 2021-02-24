@@ -137,7 +137,7 @@ LbTerm >> match: otherTerm [
 { #category : #matching }
 LbTerm >> match: otherTerm variables: variables [
 	self = otherTerm
-		ifFalse: [ variables failWith: self notEqualTo: otherTerm ]
+		ifFalse: [ variables failWith: self notUnifiableWith: otherTerm ]
 ]
 
 { #category : #matching }
@@ -206,12 +206,12 @@ LbTerm >> unify: otherTerm [
 { #category : #matching }
 LbTerm >> unify: otherTerm variables: variables [
 	self = otherTerm
-		ifFalse: [ variables failWith: self notEqualTo: otherTerm ]
+		ifFalse: [ variables failWith: self notUnifiableWith: otherTerm ]
 ]
 
 { #category : #matching }
 LbTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
-	variables failWith: self notEqualTo: otherTerm
+	variables failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : #matching }

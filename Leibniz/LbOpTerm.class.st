@@ -94,7 +94,7 @@ LbOpTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList variables: varia
 	(opName = anOpName and: [ arguments size = anArgList size ])
 		ifTrue: [ anArgList with: arguments do: [ :arg1 :arg2 |
 					arg1 match: arg2 variables: variables ] ]
-		ifFalse: [ variables failWith: self notEqualTo: otherTerm ]
+		ifFalse: [ variables failWith: self notUnifiableWith: otherTerm ]
 ]
 
 { #category : #accessing }
@@ -136,7 +136,7 @@ LbOpTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: v
 	(opName = anOpName and: [ arguments size = anArgList size ])
 		ifTrue: [ anArgList with: arguments do: [ :arg1 :arg2 |
 					arg1 unify: arg2 variables: variables ] ]
-		ifFalse: [ variables failWith: self notEqualTo: otherTerm ]
+		ifFalse: [ variables failWith: self notUnifiableWith: otherTerm ]
 ]
 
 { #category : #accessing }

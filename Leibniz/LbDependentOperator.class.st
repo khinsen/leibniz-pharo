@@ -38,23 +38,29 @@ LbDependentOperator >> addArity: newArity withSort: newSortPattern [
 		a := r key.
 		s := r value.
 
-		a = newArity ifTrue: [
-			self
-				assert: [ s = newSortPattern ]
-				description: [ 'conflicting earlier operator definition with sort ', s asLeibnizSyntaxString ].
-			^ self ].
-
 		(newArity <= a) ifTrue: [
+			"First case: all sorts conforming to newArity also conform to a.
+			 newArity must then be inserted before a."
 			self
 				assertMonotonicity: [ newSortPattern <= s ]
 				forArity: newArity andSortPattern: newSortPattern.
 			ranks add: newArity -> newSortPattern beforeIndex: index.
 			^ self ].
 
-		(a <= newArity) ifTrue: [
-			self
-				assertMonotonicity: [ s <= newSortPattern ]
-				forArity: newArity andSortPattern: newSortPattern]. ].
+		(a <= newArity)
+			ifTrue: [
+				"Second case: all sorts conforming to a also conform to newArity.
+				newArity must be inserted after a, but perhaps not immediately.
+				Continue the search."
+				self
+					assertMonotonicity: [ s <= newSortPattern ]
+					forArity: newArity andSortPattern: newSortPattern]
+			ifFalse: [
+				(a unify: newArity) ifSuccess: [ :variables |
+					"Third case: some sorts conform both to a and newArity."
+					s substitute: variables.
+					newSortPattern substitute: variables ].
+				 ] ].
 
 	ranks add: newArity -> newSortPattern
 ]

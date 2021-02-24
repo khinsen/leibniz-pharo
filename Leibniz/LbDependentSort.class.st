@@ -283,3 +283,8 @@ LbDependentSort >> testPaths: aSet [
 		currentSorts ifNotEmpty: [ ^ true ] ].
 	^ false
 ]
+
+{ #category : #matching }
+LbDependentSort >> unify: aSort variables: variables [
+	^ self term unify: aSort term variables: variables
+]

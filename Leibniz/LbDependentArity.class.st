@@ -70,3 +70,14 @@ LbDependentArity >> printOn: aStream [
 	self printAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: $)
 ]
+
+{ #category : #matching }
+LbDependentArity >> unify: otherArity [
+	| variables |
+	variables := LbVariables new.
+	self size = otherArity size
+		ifFalse: [ ^ variables failWith: self notUnifiableWith: otherArity ].
+	self with: otherArity do: [ :sp1 :sp2 |
+		sp1 unify: sp2 variables: variables ].
+	^ variables
+]
