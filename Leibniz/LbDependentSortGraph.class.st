@@ -79,10 +79,13 @@ LbDependentSortGraph >> directSubsortsOf: aSortTerm [
 	| subsorts family |
 	subsorts := Set new.
 	family := self sortFamilyForTerm: aSortTerm.
+	family = anySortFamily ifTrue: [ ^ subsorts ].
+	"First step: subsorts via the sort family graph."
 	(directSubsortFamilies at: family) do: [ :eachFamily |
 		(connectingAxioms at: { eachFamily. family }) do: [ :eachAxiom |
 			(eachAxiom subsortOf: aSortTerm)
 				ifNotNil: [ :term | subsorts add: (self sortFor: term) ]] ].
+	"Second step: subsorts via argument subsorts."
 	(aSortTerm arguments 
 		collect: [ :each | each sort asLeibnizSyntaxString = #sort
 							ifTrue: [ (self directSubsortsOf: each) collect: #term ]
@@ -91,7 +94,8 @@ LbDependentSortGraph >> directSubsortsOf: aSortTerm [
 			| term |
 			term := context signature
 						nonZeroArgTermNamed: aSortTerm opName withArgs: args.
-			subsorts add: (self sortFor: term) ].
+			term = aSortTerm
+				ifFalse: [ subsorts add: (self sortFor: term) ] ].
 	^ subsorts
 ]
 
@@ -100,10 +104,23 @@ LbDependentSortGraph >> directSupersortsOf: aSortTerm [
 	| supersorts family |
 	supersorts := Set new.
 	family := self sortFamilyForTerm: aSortTerm.
+	family = anySortFamily ifTrue: [ ^ supersorts ].
+	"First step: supersorts via the sort family graph."
 	(directSupersortFamilies at: family) do: [ :eachFamily |
 		(connectingAxioms at: { family. eachFamily }) do: [ :eachAxiom |
 			(eachAxiom supersortOf: aSortTerm)
 				ifNotNil: [ :term | supersorts add: (self sortFor: term) ]] ].
+	"Second step: supersorts via argument subsorts."
+	(aSortTerm arguments 
+		collect: [ :each | each sort asLeibnizSyntaxString = #sort
+							ifTrue: [ (self directSupersortsOf: each) collect: #term ]
+							ifFalse: [ Set with: each ] ])
+		cartesianProductDo: [ :args |
+			| term |
+			term := context signature
+						nonZeroArgTermNamed: aSortTerm opName withArgs: args.
+			term = aSortTerm
+				ifFalse: [ supersorts add: (self sortFor: term) ] ].
 	^ supersorts
 ]
 

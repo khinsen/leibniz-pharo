@@ -34,7 +34,7 @@ LbDependentSortFamily >> asLeibnizSyntaxString [
 LbDependentSortFamily >> gtGraphFor: aView [
 	<gtView>
 	| kind |
-	kind := self kind.
+	kind := self kindFamily.
 	^ sortGraph graphFor: aView restrictedTo: kind asSet highlight: self
 ]
 

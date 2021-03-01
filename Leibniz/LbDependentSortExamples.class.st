@@ -78,6 +78,10 @@ LbDependentSortExamples >> bagSorts [
 	self assert: (sorts at: 5) <= (sorts at: 4).
 	self assert: (sorts at: 5) <= (sorts at: 3).
 	self assert: (sorts at: 4) <= (sorts at: 3).
+	self assert: (((sorts at: 1) subsortGraph) at: #nodes) size equals: 4.
+	self assert: (((sorts at: 3) subsortGraph) at: #nodes) size equals: 4.
+	self assert: (((sorts at: 4) supersortGraph) at: #nodes) size equals: 3.
+	self assert: (((sorts at: 5) supersortGraph) at: #nodes) size equals: 5.
 	^ sorts
 ]
 
