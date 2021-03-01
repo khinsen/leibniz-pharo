@@ -14,7 +14,8 @@ Class {
 		'subsortFamilies',
 		'connectingAxioms',
 		'directSupersortFamilies',
-		'connectingPaths'
+		'connectingPaths',
+		'anySortFamily'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
@@ -79,9 +80,18 @@ LbDependentSortGraph >> directSubsortsOf: aSortTerm [
 	subsorts := Set new.
 	family := self sortFamilyForTerm: aSortTerm.
 	(directSubsortFamilies at: family) do: [ :eachFamily |
-		(connectingAxioms at: { eachFamily. family }) first do: [ :eachAxiom |
+		(connectingAxioms at: { eachFamily. family }) do: [ :eachAxiom |
 			(eachAxiom subsortOf: aSortTerm)
 				ifNotNil: [ :term | subsorts add: (self sortFor: term) ]] ].
+	(aSortTerm arguments 
+		collect: [ :each | each sort asLeibnizSyntaxString = #sort
+							ifTrue: [ (self directSubsortsOf: each) collect: #term ]
+							ifFalse: [ Set with: each ] ])
+		cartesianProductDo: [ :args |
+			| term |
+			term := context signature
+						nonZeroArgTermNamed: aSortTerm opName withArgs: args.
+			subsorts add: (self sortFor: term) ].
 	^ subsorts
 ]
 
@@ -91,7 +101,7 @@ LbDependentSortGraph >> directSupersortsOf: aSortTerm [
 	supersorts := Set new.
 	family := self sortFamilyForTerm: aSortTerm.
 	(directSupersortFamilies at: family) do: [ :eachFamily |
-		(connectingAxioms at: { family. eachFamily }) first do: [ :eachAxiom |
+		(connectingAxioms at: { family. eachFamily }) do: [ :eachAxiom |
 			(eachAxiom supersortOf: aSortTerm)
 				ifNotNil: [ :term | supersorts add: (self sortFor: term) ]] ].
 	^ supersorts
@@ -111,7 +121,7 @@ LbDependentSortGraph >> graphArrowForSubsortRelation: aSubsortAxiom [
 
 { #category : #inspecting }
 LbDependentSortGraph >> graphFor: aView restrictedTo: aSet highlight: aSort [
-	self isEmpty ifTrue: [ ^ aView empty ].
+	aSet isEmpty ifTrue: [ ^ aView empty ].
 	^ aView mondrian
 		title: 'Graph';
 		priority: 0;
@@ -166,7 +176,10 @@ LbDependentSortGraph >> graphNodeForSort: aSortFamily highlight: aBoolean [
 { #category : #inspecting }
 LbDependentSortGraph >> gtGraphFor: aView [
 	<gtView>
-	^ self graphFor: aView restrictedTo: sortFamilies highlight: nil
+	^ self
+		graphFor: aView
+		restrictedTo: (sortFamilies copyWithout: anySortFamily)
+		highlight: nil
 ]
 
 { #category : #testing }
@@ -201,12 +214,11 @@ LbDependentSortGraph >> initializeDirectSubsortRelations [
 LbDependentSortGraph >> initializeKindFamilies [
 	| anySort candidates kindFamily hasCommonSorts |
 	"A special kind family contains only the 'anySort' sort family."
-	anySort := LbDependentSortFamily anySortInSortGraph: self.
 	kindFamilies := Set with:
 		(LbDependentKindFamily
 			sortGraph: self
 			sortFamilies: (Set with: anySort)
-			maximalSortFamilies: (Set with: anySort)).
+			maximalSortFamilies: (Set with: anySortFamily)).
 	"A kind can have multiple maximal sorts. In that case, kindCandidates
 	 contains multiple sets that have a non-empty intersection, and which
 	 must be merged to obtain the kind."
@@ -247,13 +259,12 @@ LbDependentSortGraph >> initializeMaximalSortFamilies [
 
 { #category : #initialization }
 LbDependentSortGraph >> initializeSortFamilies [
-	| anySort |
 	sortFamilies :=
 		(context signature opsOfKind: sortSort kind)
 			collect: [ :each | LbDependentSortFamily sortGraph: self sortOp: each ].
 	"A special sort family represents the variable of sort #sort."
-	anySort := LbDependentSortFamily anySortInSortGraph: self.
-	sortFamilies add: anySort.
+	anySortFamily := LbDependentSortFamily anySortInSortGraph: self.
+	sortFamilies add: anySortFamily.
 ]
 
 { #category : #initialization }
