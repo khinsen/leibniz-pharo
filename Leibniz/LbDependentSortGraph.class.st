@@ -64,6 +64,23 @@ LbDependentSortGraph >> axiomsConnecting: aSortFamily to: anotherSortFamily [
 		ifAbsent: [ #() ]
 ]
 
+{ #category : #accessing }
+LbDependentSortGraph >> breadthFirstTraversalFrom: aSort childNodes: childNodeBlock nodesDo: nodeActionBlock edgesDo: edgeActionBlock [
+	| visitedNodes currentNodes nodesToVisit |
+	visitedNodes := Set new.
+	currentNodes := Set with: aSort.
+	[ currentNodes isNotEmpty ] whileTrue: [
+		nodesToVisit := Set new.
+		currentNodes do: [ :eachNode |
+			(childNodeBlock value: eachNode) do: [ :each |
+				edgeActionBlock cull: eachNode cull: each.
+				(visitedNodes includes: each) ifFalse: [
+					nodesToVisit add: each.
+					nodeActionBlock cull: each.
+					visitedNodes add: each ] ] ].
+		currentNodes := nodesToVisit ]
+]
+
 { #category : #copying }
 LbDependentSortGraph >> copy [
 	^ self

@@ -61,19 +61,6 @@ LbDependentSort >> family [
 	^ sortGraph sortFamilyForTerm: term
 ]
 
-{ #category : #lookup }
-LbDependentSort >> findNodesRecursivelyVia: aNodeFinderBlock addingEdgesUsing: anEdgeAddingBlock [
-	| nodes newNodes |
-	nodes := Set with: self.
-	[ nodes isNotEmpty ] whileTrue: [
-		newNodes := Set new.
-		nodes do: [ :eachNode |
-			(aNodeFinderBlock value: eachNode) do: [ :each |
-				newNodes add: each.
-				anEdgeAddingBlock value: eachNode value: each ] ].
-		nodes := newNodes ]
-]
-
 { #category : #inspecting }
 LbDependentSort >> graphNodeForSort: aSort highlight: aBoolean [
 	| text color label rectangle |
@@ -218,12 +205,18 @@ LbDependentSort >> sortGraph [
 LbDependentSort >> subsortAndSupersortGraph [
 	| edges |
 	edges := Set new.
-	self
-		findNodesRecursivelyVia: [ :eachNode | eachNode directSubsorts ]
-		addingEdgesUsing: [ :oldNode :newNode | edges add: { newNode. oldNode } ].
-	self
-		findNodesRecursivelyVia: [ :eachNode | eachNode directSupersorts ]
-		addingEdgesUsing: [ :oldNode :newNode | edges add: { oldNode. newNode } ].
+	sortGraph
+		breadthFirstTraversalFrom: self
+		childNodes: #directSubsorts
+		nodesDo: []
+		edgesDo: [ :oldNode :newNode |
+			edges add: { newNode. oldNode } ].
+	sortGraph
+		breadthFirstTraversalFrom: self
+		childNodes: #directSupersorts
+		nodesDo: []
+		edgesDo: [ :oldNode :newNode |
+			edges add: { oldNode. newNode } ].
 	^ Dictionary
 		with: #nodes -> edges flatten
 		with: #edges -> edges
@@ -233,9 +226,12 @@ LbDependentSort >> subsortAndSupersortGraph [
 LbDependentSort >> subsortGraph [
 	| edges |
 	edges := Set new.
-	self
-		findNodesRecursivelyVia: [ :eachNode | eachNode directSubsorts ]
-		addingEdgesUsing: [ :oldNode :newNode | edges add: { newNode. oldNode } ].
+	sortGraph
+		breadthFirstTraversalFrom: self
+		childNodes: #directSubsorts
+		nodesDo: []
+		edgesDo: [ :oldNode :newNode |
+			edges add: { newNode. oldNode } ].
 	^ Dictionary
 		with: #nodes -> edges flatten
 		with: #edges -> edges
@@ -255,9 +251,12 @@ LbDependentSort >> substituteAndReduce: aSubstitution [
 LbDependentSort >> supersortGraph [
 	| edges |
 	edges := Set new.
-	self
-		findNodesRecursivelyVia: [ :eachNode | eachNode directSupersorts ]
-		addingEdgesUsing: [ :oldNode :newNode | edges add: { oldNode. newNode } ].
+	sortGraph
+		breadthFirstTraversalFrom: self
+		childNodes: #directSupersorts
+		nodesDo: []
+		edgesDo: [ :oldNode :newNode |
+			edges add: { oldNode. newNode } ].
 	^ Dictionary
 		with: #nodes -> edges flatten
 		with: #edges -> edges
