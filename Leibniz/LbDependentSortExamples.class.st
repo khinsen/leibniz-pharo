@@ -60,6 +60,21 @@ LbDependentSortExamples >> bagSortGraph [
 ]
 
 { #category : #example }
+LbDependentSortExamples >> bagSortPairs [
+	<gtExample>
+	| sortGraph sorts |
+	sortGraph := self bagSortGraph.
+	sorts := #('bag(element.special, 2)'
+				'list(element, 2)'
+				'list(element.special, 2)')
+				collect: [ :each |
+					sortGraph parseSort: each ].
+	^ {
+		(sorts at: 1) pairWith: (sorts at: 2).
+	}
+]
+
+{ #category : #example }
 LbDependentSortExamples >> bagSorts [
 	<gtExample>
 	| sortGraph sorts |

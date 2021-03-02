@@ -35,7 +35,10 @@ LbDependentSortFamily >> gtGraphFor: aView [
 	<gtView>
 	| kind |
 	kind := self kindFamily.
-	^ sortGraph graphFor: aView restrictedTo: kind asSet highlight: self
+	^ sortGraph
+		graphFor: aView
+		restrictedTo: kind asSet
+		highlight: [ :sort | sort = self ]
 ]
 
 { #category : #lookup }

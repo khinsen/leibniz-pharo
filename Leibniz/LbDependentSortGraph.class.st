@@ -154,7 +154,7 @@ LbDependentSortGraph >> graphArrowForSubsortRelation: aSubsortAxiom [
 ]
 
 { #category : #inspecting }
-LbDependentSortGraph >> graphFor: aView restrictedTo: aSet highlight: aSort [
+LbDependentSortGraph >> graphFor: aView restrictedTo: aSet highlight: aBlock [
 	aSet isEmpty ifTrue: [ ^ aView empty ].
 	^ aView mondrian
 		title: 'Graph';
@@ -162,7 +162,7 @@ LbDependentSortGraph >> graphFor: aView restrictedTo: aSet highlight: aSort [
 		painting: [ :view | 
 			| edges |
 			view nodes
-				shape: [ :x | self graphNodeForSort: x highlight: (x = aSort) ];
+				shape: [ :x | self graphNodeForSort: x highlight: (aBlock cull: x) ];
 				with: aSet.
 			view edges
 				shape: [ :x | self graphArrowForSubsortRelation: x ];
@@ -213,7 +213,7 @@ LbDependentSortGraph >> gtGraphFor: aView [
 	^ self
 		graphFor: aView
 		restrictedTo: (sortFamilies copyWithout: anySortFamily)
-		highlight: nil
+		highlight: [ false ]
 ]
 
 { #category : #testing }

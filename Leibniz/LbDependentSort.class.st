@@ -62,6 +62,15 @@ LbDependentSort >> family [
 ]
 
 { #category : #inspecting }
+LbDependentSort >> graphArrow [
+	^ BlLineElement new
+		toHead:
+			(BlArrowheadSimpleArrow new
+				border: (BlBorder paint: Color gray width: 1));
+		border: (BlBorder paint: Color gray width: 1)
+]
+
+{ #category : #inspecting }
 LbDependentSort >> graphNodeForSort: aSort highlight: aBoolean [
 	| text color label rectangle |
 	color := Color black.
@@ -109,18 +118,13 @@ LbDependentSort >> gtGraphFor: aView [
 			| graph |
 			graph := self subsortAndSupersortGraph.
 			view nodes
-				shape: [ :x | self graphNodeForSort: x highlight: (x == self) ];
+				shape: [ :x | self graphNodeForSort: x highlight: x == self ];
 				with: (graph at: #nodes).
 			view edges
-				shape: [ BlLineElement new
-							toHead: (BlArrowheadSimpleArrow new
-										border: (BlBorder paint: Color gray width: 1));
-							border: (BlBorder paint: Color gray width: 1) ];
+				shape: [ self graphArrow ];
 				fromCenterTop;
 				toCenterBottom;
-				connect: (graph at: #edges)
-					from: #first
-					to: #second.
+				connect: (graph at: #edges) from: #first to: #second.
 			view layout
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
@@ -169,6 +173,11 @@ LbDependentSort >> matchAllSupersortsOf: aSort [
 	aSort directSupersorts do: [ :each |
 		matches := matches union: (self matchAllSupersortsOf: each) ].
 	^ matches
+]
+
+{ #category : #comparing }
+LbDependentSort >> pairWith: aSort [
+	^ LbDependentSortPair sortGraph: sortGraph sort1: self sort2: aSort
 ]
 
 { #category : #printing }
