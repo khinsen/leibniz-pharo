@@ -66,19 +66,21 @@ LbDependentSortGraph >> axiomsConnecting: aSortFamily to: anotherSortFamily [
 
 { #category : #accessing }
 LbDependentSortGraph >> breadthFirstTraversalFrom: aSort childNodes: childNodeBlock nodesDo: nodeActionBlock edgesDo: edgeActionBlock [
-	| visitedNodes currentNodes nodesToVisit |
+	| visitedNodes currentNodes distance nodesToVisit |
 	visitedNodes := Set new.
 	currentNodes := Set with: aSort.
+	distance := 1.
 	[ currentNodes isNotEmpty ] whileTrue: [
 		nodesToVisit := Set new.
 		currentNodes do: [ :eachNode |
 			(childNodeBlock value: eachNode) do: [ :each |
-				edgeActionBlock cull: eachNode cull: each.
+				edgeActionBlock cull: eachNode cull: each cull: distance.
 				(visitedNodes includes: each) ifFalse: [
 					nodesToVisit add: each.
-					nodeActionBlock cull: each.
+					nodeActionBlock cull: each cull: distance.
 					visitedNodes add: each ] ] ].
-		currentNodes := nodesToVisit ]
+		currentNodes := nodesToVisit.
+		distance := distance + 1 ]
 ]
 
 { #category : #copying }
@@ -142,18 +144,6 @@ LbDependentSortGraph >> directSupersortsOf: aSortTerm [
 ]
 
 { #category : #inspecting }
-LbDependentSortGraph >> graphArrowForSubsortRelation: aSubsortAxiom [
-	| color |
-	color := aSubsortAxiom "isFromInclude" isNil
-		ifTrue: [ Color r: 83 g: 101 b: 201 range: 255 ]
-		ifFalse: [ Color gray ].
-	^ BlLineElement new
-		toHead: (BlArrowheadSimpleArrow new
-					border: (BlBorder paint: color width: 1));
-		border: (BlBorder paint: color width: 1)
-]
-
-{ #category : #inspecting }
 LbDependentSortGraph >> graphFor: aView restrictedTo: aSet highlight: aBlock [
 	aSet isEmpty ifTrue: [ ^ aView empty ].
 	^ aView mondrian
@@ -165,7 +155,7 @@ LbDependentSortGraph >> graphFor: aView restrictedTo: aSet highlight: aBlock [
 				shape: [ :x | self graphNodeForSort: x highlight: (aBlock cull: x) ];
 				with: aSet.
 			view edges
-				shape: [ :x | self graphArrowForSubsortRelation: x ];
+				shape: [ :x | LbGraphicsElements graphArrow ];
 				fromCenterTop;
 				toCenterBottom;
 				connect: connectingAxioms values
@@ -178,33 +168,9 @@ LbDependentSortGraph >> graphFor: aView restrictedTo: aSet highlight: aBlock [
 
 { #category : #inspecting }
 LbDependentSortGraph >> graphNodeForSort: aSortFamily highlight: aBoolean [
-	| text color label rectangle |
-	text := aSortFamily asLeibnizSyntaxString asRopedText.
-	text fontName: (LbCodeFont defaultFamily).
-	aSortFamily "isFromInclude" isNil
-		ifTrue: [
-			color := Color r: 63 g: 81 b: 181 range: 255 ]
-		ifFalse: [ color := Color black ].
-	text foreground: color.
-	label := BlTextElement new text: text.
-
-	aBoolean ifFalse:
-		[ ^ label
-			padding:
-				(BlInsets top: 3 right: 3 bottom: 3 left: 3);
-			yourself ].
-
-	rectangle := BlElement new
-		background: color;
-		geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
-		padding: (BlInsets top: 3 right: 3 bottom: 3 left: 3);
-		layout: BlLinearLayout horizontal;
-		constraintsDo: [ :c |
-			c horizontal fitContent.
-			c vertical fitContent ].
-	text foreground: Color white.
-	rectangle addChild: label.
-	^ rectangle
+	^ LbGraphicsElements
+		graphNodeLabelled: aSortFamily asLeibnizSyntaxString
+		highlightColor: (aBoolean ifTrue: [ Color black ] ifFalse: [ nil ])
 ]
 
 { #category : #inspecting }

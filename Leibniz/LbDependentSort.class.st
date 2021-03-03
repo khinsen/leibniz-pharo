@@ -62,42 +62,6 @@ LbDependentSort >> family [
 ]
 
 { #category : #inspecting }
-LbDependentSort >> graphArrow [
-	^ BlLineElement new
-		toHead:
-			(BlArrowheadSimpleArrow new
-				border: (BlBorder paint: Color gray width: 1));
-		border: (BlBorder paint: Color gray width: 1)
-]
-
-{ #category : #inspecting }
-LbDependentSort >> graphNodeForSort: aSort highlight: aBoolean [
-	| text color label rectangle |
-	color := Color black.
-	text := aSort asLeibnizSyntaxString asRopedText.
-	text fontName: (LbCodeFont defaultFamily).
-	text foreground: color.
-	label := BlTextElement new text: text.
-
-	aBoolean ifFalse: [
-	 ^ label
-		padding: (BlInsets all: 3);
-		yourself ].
-
-	rectangle := BlElement new
-		background: color;
-		geometry: (BlRoundedRectangleGeometry cornerRadius: 2);
-		padding: (BlInsets all: 3);
-		layout: BlLinearLayout horizontal;
-		constraintsDo: [ :c |
-			c horizontal fitContent.
-			c vertical fitContent ].
-	text foreground: Color white.
-	rectangle addChild: label.
-	^ rectangle
-]
-
-{ #category : #inspecting }
 LbDependentSort >> gtFamilyFor: aView [
 	<gtView>
 	^ aView forward
@@ -118,10 +82,16 @@ LbDependentSort >> gtGraphFor: aView [
 			| graph |
 			graph := self subsortAndSupersortGraph.
 			view nodes
-				shape: [ :x | self graphNodeForSort: x highlight: x == self ];
+				shape: [ :x |
+					| highlight |
+					x = self
+						ifTrue: [ highlight :=  Color black ].
+					LbGraphicsElements
+						graphNodeLabelled: x asLeibnizSyntaxString
+						highlightColor: highlight ];
 				with: (graph at: #nodes).
 			view edges
-				shape: [ self graphArrow ];
+				shape: [ LbGraphicsElements graphArrow ];
 				fromCenterTop;
 				toCenterBottom;
 				connect: (graph at: #edges) from: #first to: #second.

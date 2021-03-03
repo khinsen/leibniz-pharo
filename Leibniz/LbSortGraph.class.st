@@ -89,10 +89,7 @@ LbSortGraph >> graphArrowForSubsortRelation: aSubsortRelation [
 	color := aSubsortRelation isFromInclude
 		ifTrue: [ Color r: 83 g: 101 b: 201 range: 255 ]
 		ifFalse: [ Color gray ].
-	^ BlLineElement new
-		toHead: (BlArrowheadSimpleArrow new
-					border: (BlBorder paint: color width: 1));
-		border: (BlBorder paint: color width: 1)
+	^ LbGraphicsElements graphArrowWithColor: color
 ]
 
 { #category : #inspecting }
