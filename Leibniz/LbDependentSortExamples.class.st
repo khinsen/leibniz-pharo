@@ -66,11 +66,14 @@ LbDependentSortExamples >> bagSortPairs [
 	sortGraph := self bagSortGraph.
 	sorts := #('bag(element.special, 2)'
 				'list(element, 2)'
-				'list(element.special, 2)')
+				'list(element.special, 2)'
+				'∀ n:ℕ list(element, n)'
+				'∀ n:ℕ.nz list(element, n)')
 				collect: [ :each |
 					sortGraph parseSort: each ].
 	^ {
 		(sorts at: 1) pairWith: (sorts at: 2).
+		(sorts at: 4) pairWith: (sorts at: 5).
 	}
 ]
 

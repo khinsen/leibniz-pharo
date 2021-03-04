@@ -34,7 +34,8 @@ LbTermExamples >> booleanUnifications [
 		{'false ⊻ X ⊻ true ⊻ ¬(true)'. 'false ⊻ true ⊻ X ⊻ Y'. '(X=true, Y=¬(true))'}.
 		{'X ⊻ ¬(X)'. 'false ⊻ ¬(X)'. '(X=false)'}.
 		{'X ⊻ ¬(Y)'. 'false ⊻ ¬(Y)'. '(Y, X=false)'}.
-		{'true'. 'false'.  '(failure #nonEqualTerms: false, true)' }.
+		{'false ⊻ ¬(X)'. 'false ⊻ ¬(Y)'. '(X=Y)'}.
+		{'true'. 'false'.  '(failure #nonUnifiableTerms: false, true)' }.
 	} collect: [ :each |
 		| unification string |
 		unification := (s parseTerm: each first) unify: (s parseTerm: each  second).

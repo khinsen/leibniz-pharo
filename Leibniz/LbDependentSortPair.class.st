@@ -139,3 +139,23 @@ LbDependentSortPair >> subsortAndSupersortGraph [
 		with: #nodes -> edges flatten
 		with: #edges -> edges
 ]
+
+{ #category : #operating }
+LbDependentSortPair >> subsortByUnification [
+	| rename preferredVarNames substitution equalUpToRenaming |
+	rename := sort2 addPrefix: #'temp.' toVarsConflictingWith: sort1.
+	preferredVarNames := sort1 variables keys.
+	substitution := (sort2 substitute: rename) unify: sort1.
+	substitution isFailure ifTrue: [ ^ nil ].
+	equalUpToRenaming := substitution hasNoBindings
+		and: [ sort1 variables size = sort2 variables size ].
+	substitution bindToUniqueVar: [ :varSet :sort |
+		| name |
+		varSet size = 2 ifFalse: [ equalUpToRenaming := false ].
+		name := (varSet intersection: preferredVarNames) asArray sorted
+					ifEmpty: [ varSet anyOne ]
+					ifNotTempy: [ :anArray | anArray first ].
+		LbVarTerm name: name sort: sort signature: sortGraph context signature ].
+	equalUpToRenaming ifTrue: [ ^ sort1 ].
+	^ sort1 substitute: substitution
+]

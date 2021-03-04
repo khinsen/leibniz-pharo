@@ -10,7 +10,7 @@ Class {
 	#category : #'Leibniz-3-Terms'
 }
 
-{ #category : #accessing }
+{ #category : #'api - binding' }
 LbVariables >> bindToUniqueVar: aBlock [
 	| varSetBindings |
 	self isFailure ifTrue: [ ^ self ].
@@ -21,25 +21,6 @@ LbVariables >> bindToUniqueVar: aBlock [
 		| aVar |
 		aVar := varSet anyOne.
 		self bindVar: aVar ofSort:(sorts at: aVar) to: uniqueVarTerm  ]	
-]
-
-{ #category : #accessing }
-LbVariables >> bindToUniqueVarsWithSignature: aSignature [
-	| varSetNames |
-	self isFailure ifTrue: [ ^ self ].
-	varSetNames := Dictionary new.
-	unbound values asSet do: [ :each |
-		| name |
-		name := each anyOne.
-		varSetNames at: each put: name ].
-	varSetNames keysAndValuesDo: [ :varSet :name |
-		| varTerm aVar |
-		varTerm := LbVarTerm
-					name: name
-					sort: (sorts at: varSet)
-					signature: aSignature.
-		aVar := varSet anyOne.
-		self bindVar: aVar ofSort:(sorts at: aVar) to: varTerm  ]	
 ]
 
 { #category : #'api - binding' }

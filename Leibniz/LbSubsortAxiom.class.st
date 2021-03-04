@@ -107,7 +107,9 @@ LbSubsortAxiom >> subsortOf: aTerm [
 	substitution isFailure ifTrue: [ ^ nil ].
 	substitution bindToUniqueVar: [ :varSet :sort |
 		| name |
-		name := (varSet intersection: preferredVarNames) asArray sorted first.
+		name := (varSet intersection: preferredVarNames) asArray sorted
+					ifEmpty: [ varSet anyOne ]
+					ifNotTempy: [ :anArray | anArray first ].
 		LbVarTerm name: name sort: sort signature: signature ].
 	^ (subsort substitute: rename) substitute: substitution
 ]

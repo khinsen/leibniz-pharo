@@ -5,7 +5,8 @@ Class {
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
-		'sortGraph'
+		'sortGraph',
+		'variables'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
@@ -46,14 +47,26 @@ LbDependentArity >> gtArgumentsFor: aView [
 LbDependentArity >> initializeWithSortGraph: aSortGraph argSortPatterns: anArray [
 	sortGraph := aSortGraph.
 	anArray collect: [ :s | s ] into: self.
+	self do: [ :each | self assert: each sortGraph = sortGraph ].
+	variables := Dictionary new.
+	self do: [ :each |
+		each variables keysAndValuesDo: [ :k : v |
+			variables at: k ifPresent: [ :priorValue |
+				self assert: v equals: priorValue ].
+			variables at: k put: v ] ].
 	self beRecursivelyReadOnlyObject
 ]
 
 { #category : #operating }
 LbDependentArity >> liftToKindFamilies [
-	^ self class
+	^ LbDependentKindArity
 		sortGraph: sortGraph
-		argSortPatterns: (self collect: #kindFamily)
+		kindFamilies: (self collect: #kindFamily)
+]
+
+{ #category : #comparing }
+LbDependentArity >> pairWith: otherArity [
+	^ LbDependentArityPair arity1: self arity2: otherArity
 ]
 
 { #category : #printing }
@@ -71,6 +84,11 @@ LbDependentArity >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
+{ #category : #accessing }
+LbDependentArity >> sortGraph [
+	^ sortGraph
+]
+
 { #category : #matching }
 LbDependentArity >> unify: otherArity [
 	| variables |
@@ -80,4 +98,11 @@ LbDependentArity >> unify: otherArity [
 	self with: otherArity do: [ :sp1 :sp2 |
 		sp1 unify: sp2 variables: variables ].
 	^ variables
+]
+
+{ #category : #accessing }
+LbDependentArity >> variables [
+	^ self
+		inject: Dictionary new
+		into:[ :total :each | total union: each variables ]
 ]

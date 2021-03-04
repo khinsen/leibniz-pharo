@@ -30,6 +30,11 @@ LbDependentSort >> <= anotherSort [
 					(sortGraph pathsConnecting: myFamily to: otherFamily) ]
 ]
 
+{ #category : #matching }
+LbDependentSort >> addPrefix: aSymbol toVarsConflictingWith: aSort [
+	^ term addPrefix: aSymbol toVarsConflictingWith: aSort term
+]
+
 { #category : #converting }
 LbDependentSort >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
@@ -263,6 +268,16 @@ LbDependentSort >> testPaths: aSet [
 ]
 
 { #category : #matching }
+LbDependentSort >> unify: aSort [
+	^ self term unify: aSort term
+]
+
+{ #category : #matching }
 LbDependentSort >> unify: aSort variables: variables [
 	^ self term unify: aSort term variables: variables
+]
+
+{ #category : #accessing }
+LbDependentSort >> variables [
+	^ term variables
 ]
