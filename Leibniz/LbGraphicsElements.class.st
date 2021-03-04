@@ -68,5 +68,6 @@ LbGraphicsElements class >> graphNodeLabelled: aString highlightColor: aColorOrN
 			c vertical fitContent ].
 	text foreground: Color white.
 	rectangle addChild: label.
+	label userData at: #graph put: rectangle graph.
 	^ rectangle
 ]
