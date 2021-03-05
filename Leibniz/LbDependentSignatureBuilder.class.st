@@ -26,18 +26,18 @@ LbDependentSignatureBuilder >> addBuiltin: aSymbol [
 
 { #category : #adding }
 LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern [
-	| arity kindFamilyArity |
+	| arity kindArity |
 	self checksForNewOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern.
 
 	arity := LbDependentArity sortGraph: sortGraph argSortPatterns: aSortPatternArray.
-	kindFamilyArity := arity liftToKindFamilies.
+	kindArity := arity liftToKinds.
 	operators at: anOpName ifAbsentPut: [ Dictionary new ].
-	(operators at: anOpName) at: kindFamilyArity ifAbsentPut: [
+	(operators at: anOpName) at: kindArity ifAbsentPut: [
 		LbDependentOperator
 			name: anOpName
-			kindFamilyArity: kindFamilyArity
-			kindFamily: aSortPattern kindFamily ].
-	((operators at: anOpName) at: kindFamilyArity)
+			kindArity: kindArity
+			kind: aSortPattern kind ].
+	((operators at: anOpName) at: kindArity)
 		addArity: arity withSort: aSortPattern
 ]
 

@@ -7,66 +7,29 @@ Class {
 		'name',
 		'sortGraph',
 		'ranks',
-		'kindFamily',
-		'kindFamilyArity'
+		'kind',
+		'kindArity'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
 
 { #category : #'instance creation' }
-LbDependentOperator class >> name: anOpName kindFamilyArity: aKindFamilyArray kindFamily: aKindFamily [
+LbDependentOperator class >> name: anOpName kindArity: aKindArray kind: aKind [
 	^ self basicNew
 			initializeWithName: anOpName
-			kindFamilyArity: aKindFamilyArray
-			kindFamily: aKindFamily;
+			kindArity: aKindArray
+			kind: aKind;
 			yourself
 ]
 
 { #category : #adding }
 LbDependentOperator >> addArity: newArity withSort: newSortPattern [
-	self
-		assertMonotonicity: [ kindFamily = newSortPattern kindFamily ]
-		forArity: newArity andSortPattern: newSortPattern.
-
-	ranks ifEmpty:
-		[ ranks add: newArity -> newSortPattern.
-		  ^ self  ].
-
-	1 to: ranks size do: [ :index |
-		| r a s |
-		r := ranks at: index.
-		a := r key.
-		s := r value.
-
-		(newArity <= a) ifTrue: [
-			"First case: all sorts conforming to newArity also conform to a.
-			 newArity must then be inserted before a."
-			self
-				assertMonotonicity: [ newSortPattern <= s ]
-				forArity: newArity andSortPattern: newSortPattern.
-			ranks add: newArity -> newSortPattern beforeIndex: index.
-			^ self ].
-
-		(a <= newArity)
-			ifTrue: [
-				"Second case: all sorts conforming to a also conform to newArity.
-				newArity must be inserted after a, but perhaps not immediately.
-				Continue the search."
-				self
-					assertMonotonicity: [ s <= newSortPattern ]
-					forArity: newArity andSortPattern: newSortPattern]
-			ifFalse: [
-				(a unify: newArity) ifSuccess: [ :variables |
-					"Third case: some sorts conform both to a and newArity."
-					s substitute: variables.
-					newSortPattern substitute: variables ].
-				 ] ].
-
 	ranks add: newArity -> newSortPattern
 ]
 
 { #category : #private }
 LbDependentOperator >> assertMonotonicity: aBlock forArity: anArity andSortPattern: aSortPattern [
+	self flag: #todo.
 	self
 		assert: aBlock
 		description: 'declaration ',
@@ -140,22 +103,22 @@ LbDependentOperator >> gtRanksFor: aView [
 ]
 
 { #category : #initialization }
-LbDependentOperator >> initializeWithName: anOpName kindFamilyArity: aKindFamilyArity kindFamily: aKindFamily [
+LbDependentOperator >> initializeWithName: anOpName kindArity: aKindArity kind: aKind [
 	name := anOpName.
-	kindFamilyArity := aKindFamilyArity.
-	kindFamily := aKindFamily.
-	sortGraph := kindFamily sortGraph.
+	kindArity := aKindArity.
+	kind := aKind.
+	sortGraph := kind sortGraph.
 	ranks := OrderedCollection new.
 ]
 
 { #category : #accessing }
-LbDependentOperator >> kindPattern [
-	^ kindFamily
+LbDependentOperator >> kind [
+	^ kind
 ]
 
 { #category : #accessing }
-LbDependentOperator >> kindPatternArity [
-	^ kindFamilyArity
+LbDependentOperator >> kindArity [
+	^ kindArity
 ]
 
 { #category : #inspecting }
@@ -187,9 +150,9 @@ LbDependentOperator >> printOn: aStream [
 	aStream nextPut: $(.
 	aStream nextPutAll: name asSymbol.
 	aStream nextPutAll: ': ('.
-	kindFamilyArity printAsLeibnizSyntaxOn: aStream.
+	kindArity printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ') -> '.
-	kindFamily printAsLeibnizSyntaxOn: aStream.
+	kind printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ', '.
 	ranks size printOn: aStream.
 	aStream nextPutAll: ' rank(s)'

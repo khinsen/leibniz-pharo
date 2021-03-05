@@ -58,10 +58,10 @@ LbDependentArity >> initializeWithSortGraph: aSortGraph argSortPatterns: anArray
 ]
 
 { #category : #operating }
-LbDependentArity >> liftToKindFamilies [
+LbDependentArity >> liftToKinds [
 	^ LbDependentKindArity
 		sortGraph: sortGraph
-		kindFamilies: (self collect: #kindFamily)
+		kinds: (self collect: #kind)
 ]
 
 { #category : #comparing }

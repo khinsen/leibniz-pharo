@@ -8,14 +8,14 @@ Class {
 		'sortSort',
 		'sortFamilies',
 		'kindOf',
-		'kindFamilies',
 		'maximalSortFamilies',
 		'directSubsortFamilies',
 		'subsortFamilies',
 		'connectingAxioms',
 		'directSupersortFamilies',
 		'connectingPaths',
-		'anySortFamily'
+		'anySortFamily',
+		'kinds'
 	],
 	#category : #'Leibniz-7-DependentSorts'
 }
@@ -211,11 +211,19 @@ LbDependentSortGraph >> initializeDirectSubsortRelations [
 ]
 
 { #category : #initialization }
-LbDependentSortGraph >> initializeKindFamilies [
-	| anySort candidates kindFamily hasCommonSorts |
+LbDependentSortGraph >> initializeKindOf [
+	kindOf := Dictionary new.
+	kinds do: [ :eachKind |
+		eachKind asSet do: [ :eachSortFamily |
+			kindOf at: eachSortFamily put: eachKind ] ]
+]
+
+{ #category : #initialization }
+LbDependentSortGraph >> initializeKinds [
+	| anySort candidates kind hasCommonSorts |
 	"A special kind family contains only the 'anySort' sort family."
-	kindFamilies := Set with:
-		(LbDependentKindFamily
+	kinds := Set with:
+		(LbDependentKind
 			sortGraph: self
 			sortFamilies: (Set with: anySort)
 			maximalSortFamilies: (Set with: anySortFamily)).
@@ -225,28 +233,20 @@ LbDependentSortGraph >> initializeKindFamilies [
 	candidates := maximalSortFamilies asOrderedCollection
 		collect: [ :sort | subsortFamilies at: sort ].
 	[ candidates isEmpty ] whileFalse: [
-		kindFamily := candidates first.
+		kind := candidates first.
 		hasCommonSorts :=
 			candidates allButFirst groupedBy: [ :each |
-				(kindFamily intersection: each) isNotEmpty ].
+				(kind intersection: each) isNotEmpty ].
 		#(true false) do: [ :b |
 			hasCommonSorts at: b ifAbsentPut: OrderedCollection new. ].
-		kindFamily := ((hasCommonSorts at: true)
-						inject: kindFamily into: [ :k :c | k union: c ]).
-		kindFamilies add: (LbDependentKindFamily
+		kind := ((hasCommonSorts at: true)
+						inject: kind into: [ :k :c | k union: c ]).
+		kinds add: (LbDependentKind
 							sortGraph: self
-							sortFamilies: kindFamily
+							sortFamilies: kind
 							maximalSortFamilies: (maximalSortFamilies select: [ :each |
-								kindFamily includes: each ])).
+								kind includes: each ])).
 		candidates := hasCommonSorts at: false. ]
-]
-
-{ #category : #initialization }
-LbDependentSortGraph >> initializeKindOf [
-	kindOf := Dictionary new.
-	kindFamilies do: [ :eachKind |
-		eachKind asSet do: [ :eachSortFamily |
-			kindOf at: eachSortFamily put: eachKind ] ]
 ]
 
 { #category : #initialization }
@@ -308,7 +308,7 @@ LbDependentSortGraph >> initializeWithSortContext: anLbContext [
 	self initializeDirectSubsortRelations.
 	self initializeSubsortFamilies.
 	self initializeMaximalSortFamilies.
-	self initializeKindFamilies.
+	self initializeKinds.
 	self initializeKindOf.
 	self beRecursivelyReadOnlyObject
 ]
@@ -327,8 +327,8 @@ LbDependentSortGraph >> isEmpty [
 ]
 
 { #category : #private }
-LbDependentSortGraph >> kindFamilyForTerm: aSortTerm [
-	^ (self sortFamilyForTerm: aSortTerm) kindFamily
+LbDependentSortGraph >> kindForTerm: aSortTerm [
+	^ (self sortFamilyForTerm: aSortTerm) kind
 ]
 
 { #category : #lookup }

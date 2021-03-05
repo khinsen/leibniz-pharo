@@ -57,7 +57,9 @@ LbDependentSignature >> gtOperatorsFor: aView [
 				ifFalse: [ each size ] ];
 		children: [ :each |
 			(each isKindOf: LbOperatorName)
-				ifTrue: [ (operators at: each) values sorted: [:a :b | a kindArity size < b kindArity size] ]
+				ifTrue: [ (operators at: each) values
+							sorted: [:a :b |
+								a kindArity size < b kindArity size] ]
 				ifFalse: [ #() ] ];
 		expandItems:
 			"Should be only the ops defined in the current context, but origin

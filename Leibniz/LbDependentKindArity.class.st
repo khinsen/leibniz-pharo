@@ -2,6 +2,8 @@ Class {
 	#name : #LbDependentKindArity,
 	#superclass : #Array,
 	#type : #variable,
+	#traits : 'EqualityThroughVariables',
+	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'sortGraph'
 	],
@@ -9,14 +11,14 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbDependentKindArity class >> sortGraph: aSortGraph kindFamilies: anArray [
+LbDependentKindArity class >> sortGraph: aSortGraph kinds: anArray [
 	^(self basicNew: anArray size)
-			initializeWithSortGraph: aSortGraph kindFamilies: anArray;
+			initializeWithSortGraph: aSortGraph kinds: anArray;
 			yourself
 ]
 
 { #category : #initialization }
-LbDependentKindArity >> initializeWithSortGraph: aSortGraph kindFamilies: anArray [
+LbDependentKindArity >> initializeWithSortGraph: aSortGraph kinds: anArray [
 	sortGraph := aSortGraph.
 	anArray collect: [ :s | s ] into: self.
 	self do: [ :each | self assert: each sortGraph = sortGraph ].

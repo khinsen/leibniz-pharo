@@ -35,28 +35,34 @@ LbOperator >> addArity: newArity withSort: newSort origins: anLbOrigins [
 		[ ranks add: newArity -> newSort.
 		  ^self  ].
 
-	1 to: ranks size do:
-		[	:index |
-		 	| r a s |
-			r := ranks at: index.
-			a := r key.
-			s := r value.
+	1 to: ranks size do: [ :index |
+		| r a s |
+		r := ranks at: index.
+		a := r key.
+		s := r value.
 
-			a = newArity
-				ifTrue:
-					[ self assert: [ s = newSort ]
-							 description: [ 'conflicting earlier operator definition with sort ', s asString ].
-					  ^self ].
+		a = newArity ifTrue: [
+			self
+				assert: s = newSort
+				description: 'conflicting earlier operator definition with sort ', s asString.
+			^ self ].
 
-			(newArity <= a)
-				ifTrue: [ self assertMonotonicity: [ newSort <= s ]
-							   forArity: newArity andSort: newSort.
-						  ranks add: newArity -> newSort beforeIndex: index.
-						  ^ self ].
+		(newArity <= a) ifTrue: [
+			"First case: all sorts conforming to newArity also conform to a.
+			 newArity must then be inserted before a."
+			self
+	 			assertMonotonicity: [ newSort <= s ]
+				 forArity: newArity andSort: newSort.
+			ranks add: newArity -> newSort beforeIndex: index.
+			^ self ].
 
-			(a <= newArity)
-				ifTrue: [ self assertMonotonicity: [ s <= newSort ]
-							   forArity: newArity andSort: newSort]. ].
+		(a <= newArity) ifTrue: [
+			"Second case: all sorts conforming to a also conform to newArity.
+			newArity must be inserted after a, but perhaps not immediately.
+			Continue the search."
+			self
+				assertMonotonicity: [ s <= newSort ]
+				forArity: newArity andSort: newSort ] ].
 
 	ranks add: newArity -> newSort.
 	origins merge: anLbOrigins

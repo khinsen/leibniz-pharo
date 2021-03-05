@@ -1,5 +1,5 @@
 Class {
-	#name : #LbDependentKindFamily,
+	#name : #LbDependentKind,
 	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -12,24 +12,24 @@ Class {
 }
 
 { #category : #'instance creation' }
-LbDependentKindFamily class >> sortGraph: aSortGraph sortFamilies: sortFamilies maximalSortFamilies: maximalSortFamilies [
+LbDependentKind class >> sortGraph: aSortGraph sortFamilies: sortFamilies maximalSortFamilies: maximalSortFamilies [
 	^ self basicNew
 		initializeWithSortGraph: aSortGraph sortFamilies: sortFamilies maximalSortFamilies: maximalSortFamilies;
 		yourself
 ]
 
 { #category : #converting }
-LbDependentKindFamily >> asLeibnizSyntaxString [
+LbDependentKind >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
 { #category : #converting }
-LbDependentKindFamily >> asSet [
+LbDependentKind >> asSet [
 	^ sortFamilies
 ]
 
 { #category : #inspecting }
-LbDependentKindFamily >> gtGraphFor: aView [
+LbDependentKind >> gtGraphFor: aView [
 	<gtView>
 	^ sortGraph
 		graphFor: aView
@@ -38,7 +38,7 @@ LbDependentKindFamily >> gtGraphFor: aView [
 ]
 
 { #category : #initialization }
-LbDependentKindFamily >> initializeWithSortGraph: aSortGraph sortFamilies: sortFamilySet maximalSortFamilies: maximalSortFamilySet [
+LbDependentKind >> initializeWithSortGraph: aSortGraph sortFamilies: sortFamilySet maximalSortFamilies: maximalSortFamilySet [
 	sortGraph := aSortGraph.
 	sortFamilies := sortFamilySet.
 	maximalSortFamilies := maximalSortFamilySet.
@@ -46,29 +46,29 @@ LbDependentKindFamily >> initializeWithSortGraph: aSortGraph sortFamilies: sortF
 ]
 
 { #category : #comparing }
-LbDependentKindFamily >> instVarsExcludedFromEquality [
+LbDependentKind >> instVarsExcludedFromEquality [
 	^#(maximalSortFamilies)
 ]
 
 { #category : #accessing }
-LbDependentKindFamily >> kindFamily [
+LbDependentKind >> kind [
 	^ self
 ]
 
 { #category : #accessing }
-LbDependentKindFamily >> maximalSortFamilies [
+LbDependentKind >> maximalSortFamilies [
 	^ maximalSortFamilies
 ]
 
 { #category : #printing }
-LbDependentKindFamily >> printAsLeibnizSyntaxOn: aStream [
+LbDependentKind >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPut: $[.
 	aStream nextPutAll: (', ' join: (maximalSortFamilies collect: [ : sort | sort asLeibnizSyntaxString ])).
 	aStream nextPut: $]
 ]
 
 { #category : #printing }
-LbDependentKindFamily >> printOn: aStream [
+LbDependentKind >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	aStream nextPutAll: (', ' join: (self maximalSortFamilies collect: [ : sort | sort asLeibnizSyntaxString ])).
@@ -76,6 +76,6 @@ LbDependentKindFamily >> printOn: aStream [
 ]
 
 { #category : #accessing }
-LbDependentKindFamily >> sortGraph [
+LbDependentKind >> sortGraph [
 	^ sortGraph
 ]
