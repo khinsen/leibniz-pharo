@@ -160,7 +160,12 @@ LbSignature >> gtVariablesFor: aView [
 		title: 'Variables' translated;
 		priority: 1;
 		items: [ variables associations sorted: [ :a :b | a key <= b key ]];
-		send: [ :each | LbVariable named: each key sort: each value in: self origins: (origins at: each key) ];
+		send: [ :each |
+			LbVariable
+				named: each key
+				sort: each value
+				in: self
+				origins: (origins at: each key) ];
 		column: 'Name' lbCode: [ :each | each key synopsis ];
 		column: 'Sort' lbCode: [ :each | each value name ];
 		yourself

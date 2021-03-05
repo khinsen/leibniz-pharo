@@ -47,10 +47,14 @@ LbDependentSignature >> gtOperatorsFor: aView [
 		title: 'Operators' translated;
 		priority: 0;
 		items: [ operators keys sorted ];
-		column: 'Arguments' lbCode: [ :eachItem |
+		column: 'Kind arity' lbCode: [ :eachItem |
 			(eachItem isKindOf: LbOperatorName)
 				ifTrue: [ eachItem synopsis ]
-				ifFalse: [ eachItem numArgs ]];
+				ifFalse: [ eachItem name printStringForArity: eachItem kindArity ]];
+		column: 'Kind' lbCode: [ :eachItem |
+			(eachItem isKindOf: LbOperatorName)
+				ifTrue: [ '' ]
+				ifFalse: [ eachItem kind asLeibnizSyntaxString ]];
 		column: 'Ranks' text: [ :each |
 			(each isKindOf: LbOperatorName)
 				ifTrue: [ '' ]
@@ -66,6 +70,25 @@ LbDependentSignature >> gtOperatorsFor: aView [
 			management isn't implemented yet."
 			(operators associationsSelect: [ :each | true ])
 			keys;
+		yourself
+]
+
+{ #category : #inspecting }
+LbDependentSignature >> gtVariablesFor: aView [
+	<gtView>
+	variables isEmpty ifTrue: [ ^ aView empty ].
+	^ aView columnedList
+		title: 'Variables' translated;
+		priority: 1;
+		items: [ variables associations sorted: [ :a :b | a key <= b key ]];
+		send: [ :each |
+			LbVariable
+				named: each key
+				sort: each value
+				in: self
+				origins: nil  ];
+		column: 'Name' lbCode: [ :each | each key synopsis ];
+		column: 'Sort' lbCode: [ :each | each value name ];
 		yourself
 ]
 

@@ -91,13 +91,21 @@ LbDependentOperator >> gtGraphFor: aView [
 LbDependentOperator >> gtRanksFor: aView [
 	<gtView>
 	ranks ifEmpty: [ ^ aView empty ].
-	^ aView list
+	^ aView columnedList
 		title: 'Ranks';
 		priority: 0;
-		items: [ ranks associations ];
-		itemLbCode: [ :each |
-			(String streamContents:
-				[ :s | self name printForArity: each key withSort: each value on: s ] )
+		items: [ ranks ];
+		column: 'Variables' lbCode: [ :each |
+			(String streamContents: [ :s |
+				each key printVariablesAsLeibnizSyntaxOn: s ] )
+			asRopedText ];
+		column: 'Arity' lbCode: [ :each |
+			(String streamContents: [ :s |
+				self name printForArity: each key on: s ] )
+			asRopedText ];
+		column: 'Sort' lbCode: [ :each |
+			(String streamContents: [ :s |
+				each value printAsLeibnizSyntaxOn: s ] )
 			asRopedText ];
 		yourself
 ]

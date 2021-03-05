@@ -157,13 +157,6 @@ LbDependentSort >> pairWith: aSort [
 
 { #category : #printing }
 LbDependentSort >> printAsLeibnizSyntaxOn: aStream [
-	term variables keysAndValuesDo:
-		[ :var :sort |
-			aStream nextPutAll: '∀ '.
-			aStream nextPutAll: var asSymbol.
-			aStream nextPut: $:.
-			aStream nextPutAll: sort asLeibnizSyntaxString.
-			aStream nextPutAll: ' '].
 	term printAsLeibnizSyntaxOn: aStream
 ]
 

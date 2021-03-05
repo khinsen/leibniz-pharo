@@ -71,6 +71,7 @@ LbDependentArity >> pairWith: otherArity [
 
 { #category : #printing }
 LbDependentArity >> printAsLeibnizSyntaxOn: aStream [
+	self printVariablesAsLeibnizSyntaxOn: aStream.
 	self
 		do: [ :each | each printAsLeibnizSyntaxOn: aStream ]
 		separatedBy: [ aStream nextPutAll: ', ' ]
@@ -82,6 +83,17 @@ LbDependentArity >> printOn: aStream [
 	aStream nextPut: $(.
 	self printAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: $)
+]
+
+{ #category : #printing }
+LbDependentArity >> printVariablesAsLeibnizSyntaxOn: aStream [
+	variables keysAndValuesDo:
+		[ :var :sort |
+			aStream nextPutAll: '∀ '.
+			aStream nextPutAll: var asSymbol.
+			aStream nextPut: $:.
+			aStream nextPutAll: sort asLeibnizSyntaxString.
+			aStream nextPutAll: ' ']
 ]
 
 { #category : #accessing }
