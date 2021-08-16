@@ -96,6 +96,16 @@ LbDependentArity >> printVariablesAsLeibnizSyntaxOn: aStream [
 			aStream nextPutAll: ' ']
 ]
 
+{ #category : 'printing' }
+LbDependentArity >> printVariablesOn: aStream [
+	variables keysAndValuesDo:
+		[ :var :sort |
+			aStream nextPutAll: var asSymbol.
+			aStream nextPut: $:.
+			aStream nextPutAll: sort asLeibnizSyntaxString.
+			aStream nextPutAll: ' ']
+]
+
 { #category : 'accessing' }
 LbDependentArity >> sortGraph [
 	^ sortGraph

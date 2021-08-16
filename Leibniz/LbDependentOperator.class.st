@@ -97,7 +97,7 @@ LbDependentOperator >> gtRanksFor: aView [
 		items: [ ranks ];
 		column: 'Variables' lbCode: [ :each |
 			(String streamContents: [ :s |
-				each key printVariablesAsLeibnizSyntaxOn: s ] )
+				each key printVariablesOn: s ] )
 			asRopedText ];
 		column: 'Arity' lbCode: [ :each |
 			(String streamContents: [ :s |
