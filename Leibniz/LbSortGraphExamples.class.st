@@ -12,17 +12,6 @@ LbSortGraphExamples >> emptySortGraph [
 	^ LbSortGraphBuilder new sortGraph
 ]
 
-{ #category : 'accessing' }
-LbSortGraphExamples >> errorForListSortWithoutBaseSort [
-	<gtExample>
-	| builder |
-	builder := LbSortGraphBuilder new.
-	self
-		should: [ builder parseAndAdd: #'☰.A' ]
-		raise: Error.
-	^ nil
-]
-
 { #category : 'example' }
 LbSortGraphExamples >> kindOfA [
 	<gtExample>
@@ -161,49 +150,6 @@ LbSortGraphExamples >> sortGraphUnion [
 	self assert: (union union: self emptySortGraph) equals: union.
 	self assert: (self emptySortGraph union: union) equals: union.
 	^ union
-]
-
-{ #category : 'accessing' }
-LbSortGraphExamples >> sortGraphWithListOfListsSorts [
-	<gtExample>
-	| sortGraph |
-	sortGraph := LbSortGraphBuilder new
-		addSortGraph: self sortGraphWithListSorts;
-		parseAndAdd: #'☰.☰.A';
-		parseAndAdd: #'☰.☰.B';
-		sortGraph.
-	self assert: sortGraph maximalSorts size equals: 4.
-	self assert: sortGraph kinds size equals: 3.
-	self
-		assert: (sortGraph sortNamed: #'☰.B') subsorts size
-		equals: 2.
-	self
-		assert: (sortGraph sortNamed: #'☰.☰.B') subsorts size
-		equals: 2.
-	^ sortGraph
-]
-
-{ #category : 'example' }
-LbSortGraphExamples >> sortGraphWithListSorts [
-	<gtExample>
-	| sortGraph |
-	sortGraph := LbSortGraphBuilder new
-		addSortGraph: self sortGraphABCD;
-		parseAndAdd: #'☰.A';
-		parseAndAdd: #'☰.ne.A ⊆ ☰.A';
-		parseAndAdd: #'☰.B';
-		sortGraph.
-	self assert: sortGraph maximalSorts size equals: 3.
-	self
-		assert: (sortGraph sortNamed: #C) subsorts size
-		equals: 3.
-	self
-		assert: (sortGraph sortNamed: #'☰.B') subsorts size
-		equals: 3.
-	self
-		assert: (sortGraph sortNamed: #'☰.A') subsorts size
-		equals: 2.
-	^ sortGraph
 ]
 
 { #category : 'example' }
