@@ -9,12 +9,13 @@ Class {
 
 { #category : 'inspecting' }
 LbCodeFont class >> brLabelCellStencil [
-	^ [ BrLabel new
-			look: (BrGlamorousLabelLook new
-                fontName: self defaultFamily);
-				alignCenterLeft;
-				hMatchParent;
-				vFitContent ]
+
+	^ [ 
+	  BrLabel new
+		  aptitude: (BrGlamorousLabelLook new fontName: self defaultFamily);
+		  alignCenterLeft;
+		  hMatchParent;
+		  vFitContent ]
 ]
 
 { #category : 'acccessing' }
