@@ -1,11 +1,11 @@
-Extension { #name : #SequenceableCollection }
+Extension { #name : 'SequenceableCollection' }
 
-{ #category : #'*Leibniz' }
+{ #category : '*Leibniz' }
 SequenceableCollection >> cartesianProductDo: aBlock [
 	self cartesianProductWith: #() do: aBlock
 ]
 
-{ #category : #'*Leibniz' }
+{ #category : '*Leibniz' }
 SequenceableCollection >> cartesianProductWith: anArray do: aBlock [
 	self
 		ifEmpty: [ aBlock cull: anArray ]

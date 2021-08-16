@@ -6,36 +6,36 @@
 The identifiers for sorts and operators live in separate namespaces but follow the same rules. The admissible characters are defined in ${method:name=LbGrammar>>#identifierCharacter|expanded=}$. All but the first character can also be digits or a dot. A small number of identifiers ('⇒' '→' '∀' '|' '⊆') are explicitly forbidden to avoid conflicts with other elements of Leibniz syntax.
 "
 Class {
-	#name : #LbGrammar,
-	#superclass : #PP2CompositeNode,
+	#name : 'LbGrammar',
+	#superclass : 'PP2CompositeNode',
 	#instVars : [
 		'identifier',
 		'identifierCharacter'
 	],
-	#category : #'Leibniz-0-Infrastructure'
+	#category : 'Leibniz-0-Infrastructure'
 }
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 LbGrammar class >> conditionSymbol [
 	^ $|
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 LbGrammar class >> equalSign [
 	^ $=
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 LbGrammar class >> forAllSymbol [
 	^ $∀
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 LbGrammar class >> functionArrow [
 	^ $→
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 LbGrammar class >> reservedIdentifiers [
 	^ {
 		self rewriteArrow asString.
@@ -47,17 +47,17 @@ LbGrammar class >> reservedIdentifiers [
 		}
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 LbGrammar class >> rewriteArrow [
 	^ $⇒
 ]
 
-{ #category : #grammar }
+{ #category : 'grammar' }
 LbGrammar class >> subsortSymbol [
 	^ $⊆
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbGrammar >> identifier [
 	^ (identifierCharacter , (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
 		==> [ :id |
@@ -66,7 +66,7 @@ LbGrammar >> identifier [
 					ifTrue: [ PP2Failure message: 'reserved identifier: ', id ] ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbGrammar >> identifierCharacter [
 	| predicate |
 	predicate := PP2CharSetPredicate on:

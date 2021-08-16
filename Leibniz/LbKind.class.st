@@ -4,18 +4,18 @@
 Kinds are the connected components in a ${class:name=LbSortGraph}$. They are not explicitly declared, but are the result of an analysis of subsort relations.
 "
 Class {
-	#name : #LbKind,
-	#superclass : #LbSortClassifier,
+	#name : 'LbKind',
+	#superclass : 'LbSortClassifier',
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'sorts',
 		'maximalSorts'
 	],
-	#category : #'Leibniz-1-SortGraphs'
+	#category : 'Leibniz-1-SortGraphs'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbKind class >> sortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOfMaximalSorts [
 	^self basicNew
 			initializeWithSortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOfMaximalSorts;
@@ -23,17 +23,17 @@ LbKind class >> sortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOfMaxim
 
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 LbKind >> asSet [
    ^ sorts collect: [ :each | sortGraph sortNamed: each ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbKind >> includes: aSort [
 	^ sorts includes: aSort name
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbKind >> initializeWithSortGraph: aSortGraph sorts: setOfSorts maximalSorts: setOfMaximalSorts [
 	sortGraph := aSortGraph.
 	sorts := setOfSorts.
@@ -41,30 +41,30 @@ LbKind >> initializeWithSortGraph: aSortGraph sorts: setOfSorts maximalSorts: se
 
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 LbKind >> instVarsExcludedFromEquality [
 	^#(#maximalSorts)
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbKind >> kind [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbKind >> maximalSorts [
 	^  maximalSorts collect: [ :each | sortGraph sortNamed: each ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbKind >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPut: $[.
 	aStream nextPutAll: (', ' join: (maximalSorts collect: [ : sort | sort asString ])).
 	aStream nextPut: $]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbKind >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -72,7 +72,7 @@ LbKind >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : #'private - comparing' }
+{ #category : 'private - comparing' }
 LbKind >> sortAfterKind: aKind [
 	| msA msB |
 	self size > aKind size ifTrue: [ ^ true ].
@@ -84,17 +84,17 @@ LbKind >> sortAfterKind: aKind [
 	^ true
 ]
 
-{ #category : #'private - comparing' }
+{ #category : 'private - comparing' }
 LbKind >> sortAfterSort: aSort [
 	^ true
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 LbKind >> sortBefore: aSort [
 	^ aSort sortAfterKind: self
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbKind >> title [
 	^', ' join: (self maximalSorts collect: [ : sort | sort asString ])
 ]

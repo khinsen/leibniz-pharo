@@ -1,6 +1,6 @@
-Extension { #name : #GtPhlowColumnedTreeView }
+Extension { #name : 'GtPhlowColumnedTreeView' }
 
-{ #category : #'*Leibniz' }
+{ #category : '*Leibniz' }
 GtPhlowColumnedTreeView >> column: aTitleString lbCode: aBlock [
 	"A variant of column:text: that uses
 	 an appropriate Unicode font for Leibniz code"

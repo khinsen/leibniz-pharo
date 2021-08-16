@@ -1,6 +1,6 @@
 Class {
-	#name : #LbDependentOperator,
-	#superclass : #Object,
+	#name : 'LbDependentOperator',
+	#superclass : 'Object',
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -10,10 +10,10 @@ Class {
 		'kind',
 		'kindArity'
 	],
-	#category : #'Leibniz-7-DependentSorts'
+	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbDependentOperator class >> name: anOpName kindArity: aKindArray kind: aKind [
 	^ self basicNew
 			initializeWithName: anOpName
@@ -22,12 +22,12 @@ LbDependentOperator class >> name: anOpName kindArity: aKindArray kind: aKind [
 			yourself
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbDependentOperator >> addArity: newArity withSort: newSortPattern [
 	ranks add: newArity -> newSortPattern
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 LbDependentOperator >> assertMonotonicity: aBlock forArity: anArity andSortPattern: aSortPattern [
 	self flag: #todo.
 	self
@@ -38,7 +38,7 @@ LbDependentOperator >> assertMonotonicity: aBlock forArity: anArity andSortPatte
 		  	' makes operator non-monotonic'.
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbDependentOperator >> graphEdges [
 	| saGraph edges |
 	saGraph := self minimalSubArityGraph.
@@ -50,7 +50,7 @@ LbDependentOperator >> graphEdges [
 	^ edges
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbDependentOperator >> graphNodeForRank: anAssociation [
 	| arity sort text |
 	arity := anAssociation key.
@@ -65,7 +65,7 @@ LbDependentOperator >> graphNodeForRank: anAssociation [
 		border: (BlBorder paint: Color gray)
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbDependentOperator >> gtGraphFor: aView [
 	<gtView>
 	^ aView mondrian
@@ -87,7 +87,7 @@ LbDependentOperator >> gtGraphFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbDependentOperator >> gtRanksFor: aView [
 	<gtView>
 	ranks ifEmpty: [ ^ aView empty ].
@@ -110,7 +110,7 @@ LbDependentOperator >> gtRanksFor: aView [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbDependentOperator >> initializeWithName: anOpName kindArity: aKindArity kind: aKind [
 	name := anOpName.
 	kindArity := aKindArity.
@@ -119,17 +119,17 @@ LbDependentOperator >> initializeWithName: anOpName kindArity: aKindArity kind: 
 	ranks := OrderedCollection new.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbDependentOperator >> kind [
 	^ kind
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbDependentOperator >> kindArity [
 	^ kindArity
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbDependentOperator >> minimalSubArityGraph [
 	"Answer the adjacency matrix for the minimal sub-arity graph that has the
 	same connected components as the full one. This minimal graph is constructed
@@ -147,12 +147,12 @@ LbDependentOperator >> minimalSubArityGraph [
 	^ m
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbDependentOperator >> name [
 	^ name
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbDependentOperator >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -166,7 +166,7 @@ LbDependentOperator >> printOn: aStream [
 	aStream nextPutAll: ' rank(s)'
 ]
 
-{ #category : #lookup }
+{ #category : 'lookup' }
 LbDependentOperator >> ranksMatchingArgSortPatterns: aSortPatternArray [
 	| matches |
 	matches := OrderedCollection new.
@@ -188,12 +188,12 @@ LbDependentOperator >> ranksMatchingArgSortPatterns: aSortPatternArray [
 	^ matches
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbDependentOperator >> size [
 	^ ranks size
 ]
 
-{ #category : #lookup }
+{ #category : 'lookup' }
 LbDependentOperator >> sortPatternForArgSortPatterns: aSortPatternArray [
 	| matches |
 	matches := self ranksMatchingArgSortPatterns: aSortPatternArray.
@@ -201,7 +201,7 @@ LbDependentOperator >> sortPatternForArgSortPatterns: aSortPatternArray [
 	^ matches first value
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbDependentOperator >> subArityGraph [
 	^ Array2D new: ranks size tabulate:
 		[ :i :j |

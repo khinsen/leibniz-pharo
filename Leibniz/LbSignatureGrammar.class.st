@@ -1,6 +1,6 @@
 Class {
-	#name : #LbSignatureGrammar,
-	#superclass : #LbSortGrammar,
+	#name : 'LbSignatureGrammar',
+	#superclass : 'LbSortGrammar',
 	#instVars : [
 		'colon',
 		'openParenthesis',
@@ -23,119 +23,119 @@ Class {
 		'hat',
 		'superscriptOp'
 	],
-	#category : #'Leibniz-2-Signatures'
+	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> arg [
 	^ var / sort
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> bracketOp [
 	^ arg, openBracket, (arg separatedBy: comma trim), closeBracket
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> closeBrace [
 	^ $} asPParser
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> closeBracket [
 	^ $] asPParser
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> closeParenthesis [
 	^ $) asPParser
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> colon [
 	^ $: asPParser
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> comma [
 	^ $, asPParser
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> hat [
 	^ $^ asPParser
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> infixOp [
 	^ arg trim, identifier trim, arg trim
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> op [
 	^ opAndArgs trim, colon, sort trim
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> opAndArgs [
 	^ prefixOp / bracketOp / infixOp / subscriptOp / superscriptOp / zeroArgOp
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> openBrace [
 	^ ${ asPParser
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> openBracket [
 	^ $[ asPParser
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> openParenthesis [
 	^ $( asPParser
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> prefixOp [
 	^ identifier trim, openParenthesis, (arg separatedBy: comma trim), closeParenthesis
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSignatureGrammar >> start [
 	^ op end
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> subscriptOp [
 	^ arg, underscore, openBrace, (arg separatedBy: comma trim), closeBrace
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> superscriptOp [
 	^ arg, hat, openBrace, (arg separatedBy: comma trim), closeBrace
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> underscore [
 	^ $_ asPParser
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> var [
 	^ identifier, colon, identifier
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureGrammar >> zeroArgOp [
 	^ identifier
 ]

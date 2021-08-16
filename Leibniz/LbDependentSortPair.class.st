@@ -1,6 +1,6 @@
 Class {
-	#name : #LbDependentSortPair,
-	#superclass : #Object,
+	#name : 'LbDependentSortPair',
+	#superclass : 'Object',
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -8,17 +8,17 @@ Class {
 		'sort1',
 		'sort2'
 	],
-	#category : #'Leibniz-7-DependentSorts'
+	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbDependentSortPair class >> sortGraph: aSortGraph sort1: sort1 sort2: sort2 [
 	^ self basicNew
 		initializeWithSortGraph: aSortGraph sort1: sort1 sort2: sort2;
 		yourself
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbDependentSortPair >> gtGraphFor: aView [
 	<gtView>
 	^ aView mondrian
@@ -45,7 +45,7 @@ LbDependentSortPair >> gtGraphFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbDependentSortPair >> gtLeastCommonSubsortsFor: aView [
 	<gtView>
 	^ aView mondrian
@@ -75,7 +75,7 @@ LbDependentSortPair >> gtLeastCommonSubsortsFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbDependentSortPair >> gtSortsFor: aView [
 	<gtView>
 	^ aView list
@@ -85,14 +85,14 @@ LbDependentSortPair >> gtSortsFor: aView [
 		yourself
 ]
 
-{ #category : #initializing }
+{ #category : 'initializing' }
 LbDependentSortPair >> initializeWithSortGraph: aSortGraph sort1: aSort sort2: anotherSort [
 	sortGraph := aSortGraph.
 	sort1 := aSort.
 	sort2 := anotherSort
 ]
 
-{ #category : #operating }
+{ #category : 'operating' }
 LbDependentSortPair >> leastCommonSubsorts [
 	| distances1 distances2 lcs1 lcs2 |
 	distances1 := Dictionary new.
@@ -118,7 +118,7 @@ LbDependentSortPair >> leastCommonSubsorts [
 	^ (lcs1 keys union: lcs2 keys) asSet
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbDependentSortPair >> subsortAndSupersortGraph [
 	| edges |
 	edges := Set new.
@@ -140,7 +140,7 @@ LbDependentSortPair >> subsortAndSupersortGraph [
 		with: #edges -> edges
 ]
 
-{ #category : #operating }
+{ #category : 'operating' }
 LbDependentSortPair >> subsortByUnification [
 	| rename preferredVarNames substitution equalUpToRenaming |
 	rename := sort2 addPrefix: #'temp.' toVarsConflictingWith: sort1.

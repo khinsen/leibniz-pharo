@@ -1,16 +1,16 @@
 Class {
-	#name : #LbAxiomParser,
-	#superclass : #LbTermParser,
+	#name : 'LbAxiomParser',
+	#superclass : 'LbTermParser',
 	#instVars : [
 		'forAllClause',
 		'colon',
 		'forAll',
 		'axiom'
 	],
-	#category : #'Leibniz-5-Axioms'
+	#category : 'Leibniz-5-Axioms'
 }
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbAxiomParser >> axiom [
 	^ forAllClause star, #any asPParser plus flatten trim
 		==> [ :nodes |
@@ -22,23 +22,23 @@ LbAxiomParser >> axiom [
 						parse: (nodes at: 2) ]
 ]
 
-{ #category : #tokens }
+{ #category : 'tokens' }
 LbAxiomParser >> colon [
 	^ $: asPParser
 ]
 
-{ #category : #tokens }
+{ #category : 'tokens' }
 LbAxiomParser >> forAll [
 	^ $∀ asPParser
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbAxiomParser >> forAllClause [
 	^ forAll trim, identifier, colon, identifier
 		==> [ :nodes | (nodes at: 2) asSymbol asLbOperatorName -> (signature sortNamed: (nodes at: 4) asSymbol) ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbAxiomParser >> start [
 	^ axiom end.
 ]

@@ -1,16 +1,16 @@
 Class {
-	#name : #LbVariables,
-	#superclass : #Object,
+	#name : 'LbVariables',
+	#superclass : 'Object',
 	#instVars : [
 		'bound',
 		'unbound',
 		'failure',
 		'sorts'
 	],
-	#category : #'Leibniz-3-Terms'
+	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : #'api - binding' }
+{ #category : 'api - binding' }
 LbVariables >> bindToUniqueVar: aBlock [
 	| varSetBindings |
 	self isFailure ifTrue: [ ^ self ].
@@ -23,7 +23,7 @@ LbVariables >> bindToUniqueVar: aBlock [
 		self bindVar: aVar ofSort:(sorts at: aVar) to: uniqueVarTerm  ]	
 ]
 
-{ #category : #'api - binding' }
+{ #category : 'api - binding' }
 LbVariables >> bindVar: aSymbol ofSort: aSort to: aTerm [
 	failure ifNotNil: [ ^ self ].
 	self assert: (sorts at: aSymbol) equals: aSort.
@@ -39,7 +39,7 @@ LbVariables >> bindVar: aSymbol ofSort: aSort to: aTerm [
 			bound at: aSymbol put: aTerm ]
 ]
 
-{ #category : #binding }
+{ #category : 'binding' }
 LbVariables >> bindVarSet: aSet to: aTerm [
 	self failUnless: aTerm sort isSubsortOf: (sorts at: aSet).
 	sorts removeKey: aSet.
@@ -48,19 +48,19 @@ LbVariables >> bindVarSet: aSet to: aTerm [
 		unbound removeKey: eachVarName ]
 ]
 
-{ #category : #lookup }
+{ #category : 'lookup' }
 LbVariables >> bindingFor: aName [
 	bound at: aName
 		ifPresent: [ :value | ^ value ].
 	^ nil
 ]
 
-{ #category : #lookup }
+{ #category : 'lookup' }
 LbVariables >> bindings [
 	^ bound
 ]
 
-{ #category : #'api - binding' }
+{ #category : 'api - binding' }
 LbVariables >> defineVar: aSymbol ofSort: aSort [
 	| varSet |
 	sorts at: aSymbol
@@ -73,42 +73,42 @@ LbVariables >> defineVar: aSymbol ofSort: aSort [
 	sorts at: varSet put: aSort	
 ]
 
-{ #category : #'error handling' }
+{ #category : 'error handling' }
 LbVariables >> failUnless: aSort isSubsortOf: anotherSort [
 	failure ifNil: [
 		aSort <= anotherSort ifFalse: [
 			failure := { #notSubsort. aSort. anotherSort } ] ]
 ]
 
-{ #category : #'error handling' }
+{ #category : 'error handling' }
 LbVariables >> failWith: aSort incommensurableWith: anotherSort [
 	failure ifNil: [ failure := { #incommensurableSorts. aSort. anotherSort } ]
 ]
 
-{ #category : #'error handling' }
+{ #category : 'error handling' }
 LbVariables >> failWith: aTerm notUnifiableWith: anotherTerm [
 	failure ifNil: [ failure := { #nonUnifiableTerms. aTerm. anotherTerm } ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbVariables >> hasNoBindings [
 	^ bound isEmpty
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbVariables >> ifSuccess: aBlock [
 	^ failure
 		ifNil: [ aBlock cull: self ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbVariables >> ifSuccess: block1 ifFailure: block2 [
 	^ failure
 		ifNil: [ block1 cull: self ]
 		ifNotNil: [ block2 value ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbVariables >> initialize [
 	bound := Dictionary new.
 	unbound := Dictionary new.
@@ -116,12 +116,12 @@ LbVariables >> initialize [
 	failure := nil.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbVariables >> isFailure [
 	^ failure isNotNil
 ]
 
-{ #category : #'api - binding' }
+{ #category : 'api - binding' }
 LbVariables >> makeVar: aSymbol ofSort: aSort equalToVar: anotherSymbol ofSort: anotherSort [
 	failure ifNotNil: [ ^ self ].
 	aSymbol = anotherSymbol ifTrue: [ ^ self ].
@@ -136,7 +136,7 @@ LbVariables >> makeVar: aSymbol ofSort: aSort equalToVar: anotherSymbol ofSort: 
 	self mergeVarSetsFor: aSymbol and: anotherSymbol
 ]
 
-{ #category : #binding }
+{ #category : 'binding' }
 LbVariables >> mergeVarSetsFor: aSymbol and: anotherSymbol [
 	| varSet1 varSet2 sort mergedVarSet |
 	varSet1 := unbound at: aSymbol.
@@ -152,7 +152,7 @@ LbVariables >> mergeVarSetsFor: aSymbol and: anotherSymbol [
 	sorts removeKey: varSet2.
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbVariables >> printBoundOn: aStream [
 	bound keys sorted
 		do: [ :each | 
@@ -162,7 +162,7 @@ LbVariables >> printBoundOn: aStream [
 		separatedBy: [ aStream nextPutAll: ', ' ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbVariables >> printFailureOn: aStream [
 	aStream nextPutAll: 'failure #'.
 	aStream nextPutAll: failure first.
@@ -172,7 +172,7 @@ LbVariables >> printFailureOn: aStream [
 		separatedBy: [ aStream nextPutAll: ', ' ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbVariables >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -185,7 +185,7 @@ LbVariables >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbVariables >> printUnboundOn: aStream [
 	| varSets |
 	varSets := unbound values asSet asArray collect: [ :each | each asArray sorted ].

@@ -1,19 +1,19 @@
 Class {
-	#name : #LbDependentSortGraphBuilder,
-	#superclass : #Object,
+	#name : 'LbDependentSortGraphBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'sortContextBuilder',
 		'sortContext'
 	],
-	#category : #'Leibniz-7-DependentSorts'
+	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbDependentSortGraphBuilder >> addSortContext: aContext [
 	sortContextBuilder include: aContext mode: #extend
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 LbDependentSortGraphBuilder >> buildSortContext [
 	| sortSort |
 	sortContext := sortContextBuilder context.
@@ -25,12 +25,12 @@ LbDependentSortGraphBuilder >> buildSortContext [
 		description: 'Sort sort may not have supersorts'.
 ]
 
-{ #category : #initializing }
+{ #category : 'initializing' }
 LbDependentSortGraphBuilder >> initialize [
 	sortContextBuilder := LbContextBuilder name: 'sorts'.
 ]
 
-{ #category : #building }
+{ #category : 'building' }
 LbDependentSortGraphBuilder >> sortGraph [
 	self buildSortContext.
 	^ LbDependentSortGraph sortContext: sortContext

@@ -3,35 +3,35 @@ My unique instance represents the library of available Leibniz documents.
 
 "
 Class {
-	#name : #LeibnizLibrary,
-	#superclass : #Object,
+	#name : 'LeibnizLibrary',
+	#superclass : 'Object',
 	#instVars : [
 		'documents'
 	],
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'Leibniz-8-Documents'
+	#category : 'Leibniz-8-Documents'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LeibnizLibrary class >> new [
 	self error: 'Use #uniqueInstance'
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LeibnizLibrary class >> reset [
 	<script>
 	uniqueInstance := nil.
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LeibnizLibrary class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := super new ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LeibnizLibrary >> XMLWithHash: aString [ 
 	| file dom docElements |
 	file := self fileWithHash: aString.
@@ -42,18 +42,18 @@ LeibnizLibrary >> XMLWithHash: aString [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LeibnizLibrary >> addDocument: aDocument [
 	documents at: aDocument docHash put: aDocument
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LeibnizLibrary >> builtins [
 	^self documentWithHash: (SHA256 hashMessage: 'builtins') hex
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LeibnizLibrary >> contextNamed: aContextName inDocumentWithHash: aDocHash [
 	| doc |
 	doc := self documentWithHash: aDocHash.
@@ -61,7 +61,7 @@ LeibnizLibrary >> contextNamed: aContextName inDocumentWithHash: aDocHash [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LeibnizLibrary >> documentWithHash: aString [ 
 	| doc |
 	^ documents
@@ -73,7 +73,7 @@ LeibnizLibrary >> documentWithHash: aString [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LeibnizLibrary >> fileWithHash: aString [ 
 	| file |
 	"TODO: implement a more complete lookup scheme."
@@ -84,7 +84,7 @@ LeibnizLibrary >> fileWithHash: aString [
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LeibnizLibrary >> initialize [
 	documents := Dictionary new.
 	self addDocument: LeibnizBuiltins new.

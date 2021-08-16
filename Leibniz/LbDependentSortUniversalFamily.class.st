@@ -1,20 +1,20 @@
 Class {
-	#name : #LbDependentSortUniversalFamily,
-	#superclass : #LbDependentSortFamily,
-	#category : #'Leibniz-7-DependentSorts'
+	#name : 'LbDependentSortUniversalFamily',
+	#superclass : 'LbDependentSortFamily',
+	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 LbDependentSortUniversalFamily >> asLeibnizSyntaxString [
 	^ '*'
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbDependentSortUniversalFamily >> initializeWithSortGraph: aSortGraph [
 	sortGraph := aSortGraph
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbDependentSortUniversalFamily >> printOn: aStream [
 	super printOn: aStream
 ]

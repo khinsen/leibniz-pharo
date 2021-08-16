@@ -1,25 +1,25 @@
 Class {
-	#name : #LbRewriteStep,
-	#superclass : #Object,
+	#name : 'LbRewriteStep',
+	#superclass : 'Object',
 	#instVars : [
 		'finalTerm',
 		'initialTerm',
 		'rewriteSystem'
 	],
-	#category : #'Leibniz-4-Rules'
+	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRewriteStep >> finalTerm [
 	^ finalTerm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRewriteStep >> finalTerm: aTerm [
 	finalTerm := aTerm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRewriteStep >> gtRulesFor: aView [
 	<gtView>
 	^ aView forward
@@ -30,22 +30,22 @@ LbRewriteStep >> gtRulesFor: aView [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRewriteStep >> initialTerm [
 	^ initialTerm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRewriteStep >> initialTerm: aTerm [
 	initialTerm := aTerm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRewriteStep >> rewriteSystem: aRewriteSystem [
 	rewriteSystem := aRewriteSystem
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbRewriteStep >> steps [
 	^ #()
 ]

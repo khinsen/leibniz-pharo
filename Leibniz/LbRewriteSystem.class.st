@@ -1,16 +1,16 @@
 Class {
-	#name : #LbRewriteSystem,
-	#superclass : #Object,
+	#name : 'LbRewriteSystem',
+	#superclass : 'Object',
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'signature',
 		'rules'
 	],
-	#category : #'Leibniz-4-Rules'
+	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbRewriteSystem class >> signature: aSignature rules: anOrderedCollection [
 	^ self basicNew
 			 initializeWithSignature: aSignature
@@ -19,12 +19,12 @@ LbRewriteSystem class >> signature: aSignature rules: anOrderedCollection [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRewriteSystem >> allDeclarations [
 	^ self signature declarations union: self declarations
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRewriteSystem >> declarations [
 	| ruleDecls |
 	ruleDecls := OrderedCollection new.
@@ -37,7 +37,7 @@ LbRewriteSystem >> declarations [
 	^ Dictionary with: #rules -> ruleDecls
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbRewriteSystem >> gtDeclarationsFor: aView [
 	<gtView>
 	^ aView lbTree
@@ -61,7 +61,7 @@ LbRewriteSystem >> gtDeclarationsFor: aView [
 		yourself
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbRewriteSystem >> gtRulesFor: aView [
 	<gtView>
 	| ruleView |
@@ -93,7 +93,7 @@ LbRewriteSystem >> gtRulesFor: aView [
 	^ ruleView
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbRewriteSystem >> hasRuleWithCondition [
 	rules valuesDo: [ :eachRuleList |
 		eachRuleList
@@ -102,7 +102,7 @@ LbRewriteSystem >> hasRuleWithCondition [
 	^ false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedCollection [
 	| varHeadOp |
 	signature := aSignature.
@@ -124,27 +124,27 @@ LbRewriteSystem >> initializeWithSignature: aSignature rules: anOrderedCollectio
 	self beRecursivelyReadOnlyObject.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbRewriteSystem >> isEmpty [
 	^ rules isEmpty
 ]
 
-{ #category : #rewriting }
+{ #category : 'rewriting' }
 LbRewriteSystem >> parseAndReduce: aString [
 	^ self reduce: (signature parseTerm: aString)
 ]
 
-{ #category : #rewriting }
+{ #category : 'rewriting' }
 LbRewriteSystem >> parseAndRewriteHeadOnce: aString [
 	^ self rewriteHeadOnce: (signature parseTerm: aString)
 ]
 
-{ #category : #rewriting }
+{ #category : 'rewriting' }
 LbRewriteSystem >> parseAndRewriteLeftmostInnermost: aString [
 	^ self rewriteLeftmostInnermost: (signature parseTerm: aString)
 ]
 
-{ #category : #rewriting }
+{ #category : 'rewriting' }
 LbRewriteSystem >> reduce: aTerm [
 	| lastValue newValue |
 	newValue := aTerm.
@@ -155,14 +155,14 @@ LbRewriteSystem >> reduce: aTerm [
 	^ lastValue
 ]
 
-{ #category : #rewriting }
+{ #category : 'rewriting' }
 LbRewriteSystem >> reductionStepsFor: aTerm [
 	^ LbReductionSteps new
 		rewriteSystem: self;
 		term: aTerm
 ]
 
-{ #category : #rewriting }
+{ #category : 'rewriting' }
 LbRewriteSystem >> rewriteHeadOnce: aTerm [
 	(rules at: aTerm headOpName ifAbsent: [ #() ]) do: [ :aRule |
 		(aRule pattern match: aTerm) ifSuccess: [ :s |
@@ -176,19 +176,19 @@ LbRewriteSystem >> rewriteHeadOnce: aTerm [
 	^ aTerm
 ]
 
-{ #category : #rewriting }
+{ #category : 'rewriting' }
 LbRewriteSystem >> rewriteLeftmostInnermost: aTerm [
 	| transformedArgs |
 	transformedArgs := aTerm arguments collect: [ :each | self reduce: each ].
 	^ self rewriteHeadOnce: (aTerm withTransformedArgs: transformedArgs)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRewriteSystem >> rules [
 	^ rules
 ]
 
-{ #category : #rewriting }
+{ #category : 'rewriting' }
 LbRewriteSystem >> rulesMatching: aTerm [
 	| matches testRule |
 	matches := LbMatchingRules new
@@ -204,12 +204,12 @@ LbRewriteSystem >> rulesMatching: aTerm [
 	^ matches
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRewriteSystem >> signature [
 	^ signature
 ]
 
-{ #category : #rewriting }
+{ #category : 'rewriting' }
 LbRewriteSystem >> testCondition: aTermOrNil substituting: aSubstitution [
 	aTermOrNil ifNil: [ ^ true ].
 	[ ^ (self reduce: (aTermOrNil substitute: aSubstitution)) isTrue ]

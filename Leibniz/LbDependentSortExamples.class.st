@@ -1,12 +1,12 @@
 Class {
-	#name : #LbDependentSortExamples,
-	#superclass : #Object,
+	#name : 'LbDependentSortExamples',
+	#superclass : 'Object',
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
-	#category : #'Leibniz-7-DependentSorts'
+	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> bagAndListTerms [
 	<gtExample>
 	^ #('∅' '∅ ** anElement' '∅ ++ anElement'
@@ -14,7 +14,7 @@ LbDependentSortExamples >> bagAndListTerms [
 		self bagSignature parseTerm: each ]
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> bagSignature [
 	<gtExample>
 	^ (LbDependentSignatureBuilder sortGraph: self bagSortGraph)
@@ -31,7 +31,7 @@ LbDependentSortExamples >> bagSignature [
 		signature
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> bagSortContext [
 	<gtExample>
 	| context |
@@ -51,7 +51,7 @@ LbDependentSortExamples >> bagSortContext [
 	^ context
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> bagSortGraph [
 	<gtExample>
 	^ LbDependentSortGraphBuilder new
@@ -59,7 +59,7 @@ LbDependentSortExamples >> bagSortGraph [
 		sortGraph
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> bagSortPairs [
 	<gtExample>
 	| sortGraph sorts |
@@ -77,7 +77,7 @@ LbDependentSortExamples >> bagSortPairs [
 	}
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> bagSorts [
 	<gtExample>
 	| sortGraph sorts |
@@ -103,7 +103,7 @@ LbDependentSortExamples >> bagSorts [
 	^ sorts
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> listSignature [
 	<gtExample>
 	^ (LbDependentSignatureBuilder sortGraph: self listSortGraph)
@@ -115,7 +115,7 @@ LbDependentSortExamples >> listSignature [
 		signature
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> listSortContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'sorts')
@@ -129,7 +129,7 @@ LbDependentSortExamples >> listSortContext [
 		context
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> listSortGraph [
 	<gtExample>
 	| sortGraph |
@@ -139,14 +139,14 @@ LbDependentSortExamples >> listSortGraph [
 	^ sortGraph
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> listTerms [
 	<gtExample>
 	^ #('∅' '∅ ++ anElement' '∅ ++ anElement ++ anElement') collect: [ :each |
 		self listSignature parseTerm: each ]
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> plainSortGraph [
 	<gtExample>
 	^ (LbSortGraphBuilder new)
@@ -157,7 +157,7 @@ LbDependentSortExamples >> plainSortGraph [
 		sortGraph
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> signatureWithDependentSorts [
 	<gtExample>
 	| sb s |
@@ -175,7 +175,7 @@ LbDependentSortExamples >> signatureWithDependentSorts [
 	^ s
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> signatureWithoutDependentSorts [
 	<gtExample>
 	^ (LbDependentSignatureBuilder sortGraph: self sortGraphWithoutDependentSorts)
@@ -187,7 +187,7 @@ LbDependentSortExamples >> signatureWithoutDependentSorts [
 		signature
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> sortContextWithDependentSorts [
 	<gtExample>
 	| context |
@@ -203,7 +203,7 @@ LbDependentSortExamples >> sortContextWithDependentSorts [
 	^ context
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> sortContextWithoutDependentSorts [
 	<gtExample>
 	^ (LbContextBuilder name: 'sorts')
@@ -215,7 +215,7 @@ LbDependentSortExamples >> sortContextWithoutDependentSorts [
 		context
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> sortGraphWithDependentSorts [
 	<gtExample>
 	| sortGraph |
@@ -229,7 +229,7 @@ LbDependentSortExamples >> sortGraphWithDependentSorts [
 	^ sortGraph
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbDependentSortExamples >> sortGraphWithoutDependentSorts [
 	<gtExample>
 	| sortGraph |

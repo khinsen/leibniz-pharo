@@ -1,15 +1,15 @@
 Class {
-	#name : #LbEqualityAxiom,
-	#superclass : #LbAxiom,
+	#name : 'LbEqualityAxiom',
+	#superclass : 'LbAxiom',
 	#instVars : [
 		'right',
 		'left',
 		'condition'
 	],
-	#category : #'Leibniz-5-Axioms'
+	#category : 'Leibniz-5-Axioms'
 }
 
-{ #category : #'instace creation' }
+{ #category : 'instace creation' }
 LbEqualityAxiom class >> left: aLeftTerm right: aRightTerm [
 	^ self
 		left: aLeftTerm
@@ -18,7 +18,7 @@ LbEqualityAxiom class >> left: aLeftTerm right: aRightTerm [
 		condition: nil
 ]
 
-{ #category : #'instace creation' }
+{ #category : 'instace creation' }
 LbEqualityAxiom class >> left: aLeftTerm right: aRightTerm localVariables: aDictionary [
 	^ self
 		left: aLeftTerm
@@ -27,7 +27,7 @@ LbEqualityAxiom class >> left: aLeftTerm right: aRightTerm localVariables: aDict
 		condition: nil
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbEqualityAxiom class >> left: aLeftTerm right: aRightTerm localVariables: aDictionary condition: aBooleanTerm [ 
 	^ self basicNew
 			 initializeWithLeft: aLeftTerm
@@ -37,12 +37,12 @@ LbEqualityAxiom class >> left: aLeftTerm right: aRightTerm localVariables: aDict
 			 yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbEqualityAxiom >> condition [
 	^ condition
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbEqualityAxiom >> gtEquationFor: aView [
 	<gtView>
 	| equationView |
@@ -66,7 +66,7 @@ LbEqualityAxiom >> gtEquationFor: aView [
 	^ equationView
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbEqualityAxiom >> initializeWithLeft: aLeftTerm right: aRightTerm localVariables: aDictionary condition: aBooleanTerm [
 	| termVariables |
 	left  := aLeftTerm.
@@ -89,12 +89,12 @@ LbEqualityAxiom >> initializeWithLeft: aLeftTerm right: aRightTerm localVariable
 	self beRecursivelyReadOnlyObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbEqualityAxiom >> left [
 	^ left
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbEqualityAxiom >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: Character space.
@@ -106,7 +106,7 @@ LbEqualityAxiom >> printAsLeibnizSyntaxOn: aStream [
 		condition printAsLeibnizSyntaxOn: aStream ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbEqualityAxiom >> right [
 	^ right
 ]

@@ -4,27 +4,27 @@
 This is a subclass of ${class:name=LbTermGrammar}$ that adds conversion of the parsed data to Leibniz terms for a given ${class:name=LbSignature}$ and optional additional variables as defined in rules (see ${class:name=LbRuleParser}$). It returns an object from the ${class:name=LbTerm}$ hierarchy corresponding to the input string, or a ${class:name=PP2Failure}$ object in case of failure.
 "
 Class {
-	#name : #LbTermParser,
-	#superclass : #LbTermGrammar,
+	#name : 'LbTermParser',
+	#superclass : 'LbTermGrammar',
 	#instVars : [
 		'signature',
 		'extraVariables'
 	],
-	#category : #'Leibniz-3-Terms'
+	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbTermParser class >> ignoredNames [
 	^ (super ignoredNames copyWith: #signature)
 								 copyWith: #extraVariables
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbTermParser class >> signature: aSignature [
 	^ self signature: aSignature extraVariables: Dictionary new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbTermParser class >> signature: aSignature extraVariables: aDictionary [
 	| parser |
 	parser := self newStartingAt: self startSymbol.
@@ -33,24 +33,24 @@ LbTermParser class >> signature: aSignature extraVariables: aDictionary [
 	^ parser
 ]
 
-{ #category : #'error handling' }
+{ #category : 'error handling' }
 LbTermParser >> errorForOp: anOpName withArity: anArity [
 	^ PP2Failure message:
 		(anOpName printStringForArity: anArity),
 		' not defined in signature'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbTermParser >> extraVariables [
 	^ extraVariables
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbTermParser >> extraVariables: aDictionary [
 	extraVariables := aDictionary
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermParser >> fpNumberTerm [
 	^ super fpNumberTerm
 		"Converting the string to a float requires some trickery:
@@ -66,7 +66,7 @@ LbTermParser >> fpNumberTerm [
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermParser >> integerTerm [
 	^ super integerTerm
 		==> [ :value |
@@ -75,7 +75,7 @@ LbTermParser >> integerTerm [
 					ifFalse: [ PP2Failure message: 'Integer literals not allowd by signature' ] ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermParser >> nonInfixTerm [
 	^ super nonInfixTerm
 		==> [ :nodes |
@@ -89,7 +89,7 @@ LbTermParser >> nonInfixTerm [
 									withArgs: (args copyWithFirst: nodes first) ] ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermParser >> prefixOpTerm [
 	^ super prefixOpTerm
 		==> [ :nodes |
@@ -103,7 +103,7 @@ LbTermParser >> prefixOpTerm [
 						self errorForOp: opSymbol withArity: arity ] ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermParser >> rationalNumberTerm [
 	^ super rationalNumberTerm
 		==> [ :value |
@@ -113,18 +113,18 @@ LbTermParser >> rationalNumberTerm [
 					ifFalse: [ PP2Failure message: 'Rational number literals not allowd by signature' ] ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbTermParser >> signature [
 	^ signature
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbTermParser >> signature: aSignature [
 	signature := aSignature.
 	extraVariables := Dictionary new
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermParser >> stringTerm [
 	^ super stringTerm
 		==> [ :value |
@@ -134,7 +134,7 @@ LbTermParser >> stringTerm [
 					ifFalse: [ PP2Failure message: 'String literals not allowd by signature' ] ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermParser >> term [
 	^ super term
 		==> [ :nodes |
@@ -155,7 +155,7 @@ LbTermParser >> term [
 										self errorForOp: opName withArity: arity ] ] ] ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermParser >> zeroArgTerm [
 	^ super zeroArgTerm
 		==> [ :symbol |

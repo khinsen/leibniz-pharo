@@ -5,57 +5,47 @@ See ${class:name=LbSortGraph}$.
 
 "
 Class {
-	#name : #LbSort,
-	#superclass : #LbSortClassifier,
+	#name : 'LbSort',
+	#superclass : 'LbSortClassifier',
 	#instVars : [
 		'name',
 		'origins'
 	],
-	#category : #'Leibniz-1-SortGraphs'
+	#category : 'Leibniz-1-SortGraphs'
 }
 
-{ #category : #'instance creation' }
-LbSort class >> classFor: aSymbol [
-	(((self allSubclasses
-		select: [ :each | each sortNamePrefix isNotNil ])
-		collect: [ :each | { each sortNamePrefix. each } ])
-		sorted: [ :a :b | a first size > b first size ])
-		do: [ :each |
-		(aSymbol beginsWith: each first)
-			ifTrue: [ ^ each second ] ].
-	^ LbPlainSort
-]
-
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbSort class >> named: aSymbol in: aSortGraph origins: anLbOrigins [
-	^ (self classFor: aSymbol) basicNew
+	^ self basicNew
 			initializeWithName: aSymbol
 			sortGraph: aSortGraph
 			origins: anLbOrigins;
 			yourself
 ]
 
-{ #category : #'instance creation' }
-LbSort class >> sortNamePrefix [
-	^ nil
-]
-
-{ #category : #'instance creation' }
-LbSort class >> splitName: aSymbol [
-	^ { #''. aSymbol }
-]
-
-{ #category : #comparing }
+{ #category : 'comparing' }
 LbSort >> <= aSort [
-	self subclassResponsibility
+	| dss |
+	self = aSort ifTrue: [ ^ true ].
+	self sortGraph = aSort sortGraph ifFalse: [ ^ false ].
+	dss := sortGraph directSubsortsOf: aSort name.
+	(dss includes: self) ifTrue: [ ^ true ].
+	dss do: [ :each |
+		self <= each ifTrue: [ ^ true ] ].
+	^ false
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 LbSort >> asLeibnizSyntaxString [
 	^ name asString
 ]
 
-{ #category : #inspecting }
+{ #category : 'accessing' }
+LbSort >> asSet [
+	^ self subsorts
+]
+
+{ #category : 'inspecting' }
 LbSort >> gtOriginsFor: aView [
 	<gtView>
 	origins ifNil: [ ^ aView empty ].
@@ -67,41 +57,46 @@ LbSort >> gtOriginsFor: aView [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbSort >> initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet [
 	sortGraph := aSortGraph.
 	name := aSymbol.
 	origins := aSet
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbSort >> isFromInclude [
 	^ origins containsIncludes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
+LbSort >> kind [
+	^ sortGraph kindOf: name
+]
+
+{ #category : 'accessing' }
 LbSort >> min: aSort [
 	self <= aSort ifTrue: [ ^ self ].
 	aSort <= self ifTrue: [ ^ aSort ].
 	^ nil
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSort >> name [
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSort >> origins [
 	^ origins
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbSort >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPutAll: name
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbSort >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -109,17 +104,22 @@ LbSort >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : #'private - comparing' }
+{ #category : 'private - comparing' }
 LbSort >> sortAfterKind: aKind [
 	^ false
 ]
 
-{ #category : #'private - comparing' }
+{ #category : 'private - comparing' }
 LbSort >> sortAfterSort: aSort [
 	^ self name > aSort name
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 LbSort >> sortBefore: aSort [
 	^ aSort sortAfterSort: self
+]
+
+{ #category : 'enumerating' }
+LbSort >> subsorts [
+	^ sortGraph subsortsOf: name
 ]

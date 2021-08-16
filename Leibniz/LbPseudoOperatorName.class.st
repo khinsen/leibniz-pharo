@@ -1,10 +1,10 @@
 Class {
-	#name : #LbPseudoOperatorName,
-	#superclass : #LbOperatorName,
-	#category : #'Leibniz-2-Signatures'
+	#name : 'LbPseudoOperatorName',
+	#superclass : 'LbOperatorName',
+	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbPseudoOperatorName class >> for: aStringOrSymbol [
 	^ self new internalSymbol: aStringOrSymbol asSymbol
 ]

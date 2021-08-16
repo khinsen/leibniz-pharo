@@ -2,17 +2,17 @@
 I represent a rational number in context 'rational-numbers'.
 "
 Class {
-	#name : #LbRationalNumberTerm,
-	#superclass : #LbAtomicTerm,
-	#category : #'Leibniz-3-Terms'
+	#name : 'LbRationalNumberTerm',
+	#superclass : 'LbAtomicTerm',
+	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 LbRationalNumberTerm class >> requiredBuiltin [
 	^ #rationalNumbers
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbRationalNumberTerm class >> value: aNumber signature: aSignature [
 	aNumber isInteger
 		ifTrue: [
@@ -24,7 +24,7 @@ LbRationalNumberTerm class >> value: aNumber signature: aSignature [
 					yourself ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbRationalNumberTerm >> printAsLeibnizSyntaxOn: aStream [
 	"Remove the parentheses that Pharo adds around fractions."
 	value isInteger
@@ -33,7 +33,7 @@ LbRationalNumberTerm >> printAsLeibnizSyntaxOn: aStream [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRationalNumberTerm >> sortSymbol [
 	value = 0 ifTrue: [ ^ #zero ].
 	value isInteger

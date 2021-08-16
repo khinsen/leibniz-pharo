@@ -1,20 +1,20 @@
 Class {
-	#name : #LbPrefixOperatorName,
-	#superclass : #LbOperatorName,
-	#category : #'Leibniz-2-Signatures'
+	#name : 'LbPrefixOperatorName',
+	#superclass : 'LbOperatorName',
+	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbPrefixOperatorName class >> for: aStringOrSymbol [
 	^ self new internalSymbol: aStringOrSymbol
 ]
 
-{ #category : #modifying }
+{ #category : 'modifying' }
 LbPrefixOperatorName >> addPrefix: aSymbol [
 	^ LbPrefixOperatorName for: aSymbol, internalSymbol
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbPrefixOperatorName >> printForArity: anArity on: aStream [
 	aStream nextPutAll: internalSymbol.
 	anArity ifNotEmpty: [

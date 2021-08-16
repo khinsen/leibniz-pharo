@@ -5,18 +5,18 @@ This is a subclass of ${class:name=LbSortGrammar}$ that adds conversion of the p
 
 "
 Class {
-	#name : #LbSortParser,
-	#superclass : #LbSortGrammar,
-	#category : #'Leibniz-1-SortGraphs'
+	#name : 'LbSortParser',
+	#superclass : 'LbSortGrammar',
+	#category : 'Leibniz-1-SortGraphs'
 }
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSortParser >> sort [
 	^ super sort
 		==> [ :id | { id } ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSortParser >> subsort [
 	^ super subsort
 		==> [ :nodes | { nodes first. nodes third } ]

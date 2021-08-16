@@ -5,8 +5,8 @@ This subclass of ${class:name=LbTermParser}$ adds a few straightforward producti
 
 "
 Class {
-	#name : #LbNoVarRuleParser,
-	#superclass : #LbTermParser,
+	#name : 'LbNoVarRuleParser',
+	#superclass : 'LbTermParser',
 	#instVars : [
 		'code',
 		'noVarRewriteRule',
@@ -17,29 +17,29 @@ Class {
 		'fnArrow',
 		'underCondition'
 	],
-	#category : #'Leibniz-4-Rules'
+	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbNoVarRuleParser >> code [
 	^ $' asPParser , $' asPParser negate star flatten, $' asPParser, $: asPParser, identifier
 		==> [ :nodes | { nodes second. nodes fifth } ]
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbNoVarRuleParser >> conditionClause [
 	^ underCondition trim, term
 		==> [ :nodes | nodes at: 2 ]
 
 ]
 
-{ #category : #tokens }
+{ #category : 'tokens' }
 LbNoVarRuleParser >> fnArrow [
 	^ $→ asPParser
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbNoVarRuleParser >> noVarFnRule [
 	^ term, fnArrow trim, code, conditionClause optional
 		==> [ :nodes |
@@ -49,7 +49,7 @@ LbNoVarRuleParser >> noVarFnRule [
 										  function: nodes third ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbNoVarRuleParser >> noVarRewriteRule [
 	^ term, rewriteArrow trim, term, conditionClause optional
 		==> [ :nodes |
@@ -59,22 +59,22 @@ LbNoVarRuleParser >> noVarRewriteRule [
 								replacement: nodes third ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbNoVarRuleParser >> noVarRule [
 	^ noVarRewriteRule / noVarFnRule
 ]
 
-{ #category : #tokens }
+{ #category : 'tokens' }
 LbNoVarRuleParser >> rewriteArrow [
 	^ $⇒ asPParser
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbNoVarRuleParser >> start [
 	^ noVarRule end.
 ]
 
-{ #category : #tokens }
+{ #category : 'tokens' }
 LbNoVarRuleParser >> underCondition [
 	^ $| asPParser
 ]

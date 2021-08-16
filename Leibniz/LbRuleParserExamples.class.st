@@ -1,12 +1,12 @@
 Class {
-	#name : #LbRuleParserExamples,
-	#superclass : #Object,
+	#name : 'LbRuleParserExamples',
+	#superclass : 'Object',
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
-	#category : #'Leibniz-4-Rules'
+	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : #example }
+{ #category : 'example' }
 LbRuleParserExamples >> noVarRule [
 	<gtExample>
 	| pattern replacement expected rule1 rule2 |
@@ -24,13 +24,13 @@ LbRuleParserExamples >> noVarRule [
 	^ { rule1. rule2 }
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRuleParserExamples >> noVarRuleParser [
 	<gtExample>
 	^ LbNoVarRuleParser signature: self signature extraVariables: Dictionary new
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRuleParserExamples >> noVarRuleSyntax [
 	<gtExample>
 	^ #(
@@ -43,7 +43,7 @@ LbRuleParserExamples >> noVarRuleSyntax [
 		rule ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRuleParserExamples >> noVarRuleWithCondition [
 	<gtExample>
 	| pattern replacement trueTerm rule |
@@ -60,13 +60,13 @@ LbRuleParserExamples >> noVarRuleWithCondition [
 	^ rule
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRuleParserExamples >> ruleParser [
 	<gtExample>
 	^ LbRuleParser signature: self signature
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRuleParserExamples >> ruleWithVariable [
 	<gtExample>
 	| extraVariables pattern replacement referenceRule parsedRule |
@@ -84,7 +84,7 @@ LbRuleParserExamples >> ruleWithVariable [
 	^ parsedRule
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRuleParserExamples >> ruleWithVariableAndCondition [
 	<gtExample>
 	| extraVariables pattern replacement referenceRule parsedRule trueTerm |
@@ -110,13 +110,13 @@ LbRuleParserExamples >> ruleWithVariableAndCondition [
 	^ parsedRule
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRuleParserExamples >> signature [
 	<gtExample>
 	^ LbTermParserExamples new signature
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRuleParserExamples >> termParser [
 	<gtExample>
 	^ LbTermParser signature: self signature

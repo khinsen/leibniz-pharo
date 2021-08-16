@@ -2,17 +2,17 @@
 I represent an integer in context 'integers'.
 "
 Class {
-	#name : #LbIntegerTerm,
-	#superclass : #LbRationalNumberTerm,
-	#category : #'Leibniz-3-Terms'
+	#name : 'LbIntegerTerm',
+	#superclass : 'LbRationalNumberTerm',
+	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 LbIntegerTerm class >> requiredBuiltin [
 	^ #integers
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbIntegerTerm class >> value: aNumber signature: aSignature [
 	aSignature assertBuiltin: self requiredBuiltin.
 	^ self basicNew
@@ -20,7 +20,7 @@ LbIntegerTerm class >> value: aNumber signature: aSignature [
 			yourself
 ]
 
-{ #category : #acccessing }
+{ #category : 'acccessing' }
 LbIntegerTerm >> sortSymbol [
 	value = 0
 		ifTrue: [ ^ #zero ].

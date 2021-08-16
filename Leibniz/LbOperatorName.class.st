@@ -1,15 +1,15 @@
 Class {
-	#name : #LbOperatorName,
-	#superclass : #Object,
+	#name : 'LbOperatorName',
+	#superclass : 'Object',
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
 		'internalSymbol'
 	],
-	#category : #'Leibniz-2-Signatures'
+	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbOperatorName class >> fromInternalSymbol: aSymbol [
 	aSymbol = #'_' ifTrue: [ ^ LbSubscriptOperatorName new ].
 	aSymbol = #'^' ifTrue: [ ^ LbSuperscriptOperatorName new ].
@@ -20,74 +20,74 @@ LbOperatorName class >> fromInternalSymbol: aSymbol [
 		new internalSymbol: aSymbol
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 LbOperatorName >> <= opName [
 	^ self asSymbol <= opName asSymbol
 ]
 
-{ #category : #modifying }
+{ #category : 'modifying' }
 LbOperatorName >> addPrefix: aSymbol [
 	self shouldNotImplement
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 LbOperatorName >> asLbOperatorName [
 	^ self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbOperatorName >> asString [
 	^ internalSymbol asString
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 LbOperatorName >> asSymbol [
 	^ internalSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbOperatorName >> internalSymbol [
 	^ internalSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbOperatorName >> internalSymbol: aSymbolOrString [
 	internalSymbol := aSymbolOrString asSymbol
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbOperatorName >> isEqualityOp [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbOperatorName >> isInfix [
 	^ false
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbOperatorName >> isInfixOpOtherThan: anOpName [
 	^ false	
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbOperatorName >> printForArgs: aTermArray on: aStream [
 	self printForArity: aTermArray on: aStream
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbOperatorName >> printForArity: anArity on: aStream [
 	self subclassResponsibility
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbOperatorName >> printForArity: anArity withSort: aSort on: aStream [
 	self printForArity: anArity on: aStream.
 	aStream nextPutAll: ' : '.
 	aStream nextPutAll: aSort asLeibnizSyntaxString.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbOperatorName >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -95,12 +95,12 @@ LbOperatorName >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbOperatorName >> printStringForArity: anArity [
 	^ String streamContents: [ :s | self printForArity: anArity on: s ]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbOperatorName >> synopsis [
 	^ internalSymbol asString
 ]

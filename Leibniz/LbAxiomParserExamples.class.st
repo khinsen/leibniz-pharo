@@ -1,24 +1,24 @@
 Class {
-	#name : #LbAxiomParserExamples,
-	#superclass : #Object,
+	#name : 'LbAxiomParserExamples',
+	#superclass : 'Object',
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
-	#category : #'Leibniz-5-Axioms'
+	#category : 'Leibniz-5-Axioms'
 }
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> axiomParserForSortSignature [
 	<gtExample>
 	^ LbAxiomParser signature: self sortSignature
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> axiomParserForTermSignature [
 	<gtExample>
 	^ LbAxiomParser signature: self termSignature
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> equalityWithVariable [
 	<gtExample>
 	| extraVariables left right referenceEquation parsedEquation |
@@ -32,7 +32,7 @@ LbAxiomParserExamples >> equalityWithVariable [
 	^ parsedEquation
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> equalityWithVariableAndCondition [
 	<gtExample>
 	| extraVariables left right referenceEquation parsedEquation trueTerm |
@@ -59,7 +59,7 @@ LbAxiomParserExamples >> equalityWithVariableAndCondition [
 	^ parsedEquation
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> noVarAxiomParser [
 	<gtExample>
 	^ LbNoVarAxiomParser
@@ -67,7 +67,7 @@ LbAxiomParserExamples >> noVarAxiomParser [
 		extraVariables: Dictionary new
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> noVarEquality [
 	<gtExample>
 	| left right expected equation |
@@ -79,7 +79,7 @@ LbAxiomParserExamples >> noVarEquality [
 	^ equation
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> noVarSubsort [
 	<gtExample>
 	| sub superSort expected relation |
@@ -92,7 +92,7 @@ LbAxiomParserExamples >> noVarSubsort [
 	^ relation
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> noVarSubsortParser [
 	<gtExample>
 	^ LbNoVarAxiomParser
@@ -100,7 +100,7 @@ LbAxiomParserExamples >> noVarSubsortParser [
 		extraVariables: Dictionary new
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> sortSignature [
 	<gtExample>
 	^ (LbSignatureBuilder sortGraph: self sortSortGraph)
@@ -111,7 +111,7 @@ LbAxiomParserExamples >> sortSignature [
 		signature
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> sortSortGraph [
 	<gtExample>
 	^ LbSortGraphBuilder new
@@ -119,13 +119,13 @@ LbAxiomParserExamples >> sortSortGraph [
 		sortGraph
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> sortTermParser [
 	<gtExample>
 	^ LbTermParser signature: self sortSignature
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> subsortWithVariable [
 	<gtExample>
 	| extraVariables subSort superSort expected relation |
@@ -138,7 +138,7 @@ LbAxiomParserExamples >> subsortWithVariable [
 	^ relation
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomParserExamples >> termSignature [
 	<gtExample>
 	^ LbTermParserExamples new signature

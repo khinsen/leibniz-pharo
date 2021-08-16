@@ -2,29 +2,29 @@
 I represent a standard Leibniz term defined by a operator and its arguments.
 "
 Class {
-	#name : #LbOpTerm,
-	#superclass : #LbTerm,
+	#name : 'LbOpTerm',
+	#superclass : 'LbTerm',
 	#instVars : [
 		'sort',
 		'opName',
 		'arguments'
 	],
-	#category : #'Leibniz-3-Terms'
+	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbOpTerm class >> name: anOpName args: anArgList sort: aSort signature: aSignature [
 	^self basicNew
 			initializeWithName: anOpName args: anArgList sort: aSort signature: aSignature;
 			yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbOpTerm >> arguments [
 	^ arguments
 ]
 
-{ #category : #converting }
+{ #category : 'converting' }
 LbOpTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	| vars |
 	vars := aDictionary collect: [ :eachSort | aSignature sortNamed: eachSort name ].
@@ -38,7 +38,7 @@ LbOpTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 					each convertToSignature: aSignature  extraVariables: aDictionary ] ) ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbOpTerm >> evaluateEqualityTerm [
 	opName isEqualityOp ifFalse: [ ^ nil ].
 	arguments size == 2 ifFalse: [ ^ nil ].
@@ -46,12 +46,12 @@ LbOpTerm >> evaluateEqualityTerm [
 	^ arguments first = arguments second
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 LbOpTerm >> hasInfixOpOtherThan: anOpName [
 	^ opName isInfixOpOtherThan: anOpName
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbOpTerm >> hasVariables [
 	^ arguments
 		detect: [ :each | each hasVariables ]
@@ -59,12 +59,12 @@ LbOpTerm >> hasVariables [
 		ifNone: [ false ]
 ]
 
-{ #category : #classifying }
+{ #category : 'classifying' }
 LbOpTerm >> headOpName [
 	^ opName
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbOpTerm >> initializeWithName: anOpName args: anArgList sort: aSort signature: aSignature [
 	opName := anOpName.
 	arguments := anArgList.
@@ -72,24 +72,24 @@ LbOpTerm >> initializeWithName: anOpName args: anArgList sort: aSort signature: 
 	signature := aSignature.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbOpTerm >> isInfix [
 	^ opName isInfix
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbOpTerm >> isTrue [
 	^ (sort name = #boolean)
 		and: [ (opName asSymbol = #true)
 		and: [ arguments isEmpty ] ]
 ]
 
-{ #category : #matching }
+{ #category : 'matching' }
 LbOpTerm >> match: otherTerm variables: variables [
 	otherTerm matchOpTerm: self op: opName args: arguments variables: variables
 ]
 
-{ #category : #matching }
+{ #category : 'matching' }
 LbOpTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
 	(opName = anOpName and: [ arguments size = anArgList size ])
 		ifTrue: [ anArgList with: arguments do: [ :arg1 :arg2 |
@@ -97,22 +97,22 @@ LbOpTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList variables: varia
 		ifFalse: [ variables failWith: self notUnifiableWith: otherTerm ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbOpTerm >> opName [
 	^ opName
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbOpTerm >> printAsLeibnizSyntaxOn: aStream [
 	opName printForArgs: arguments on: aStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbOpTerm >> sort [
 	^sort
 ]
 
-{ #category : #substituting }
+{ #category : 'substituting' }
 LbOpTerm >> substitute: aSubstitution [
 	| substitutedArgList |
 	aSubstitution hasNoBindings ifTrue: [ ^ self ].
@@ -121,17 +121,17 @@ LbOpTerm >> substitute: aSubstitution [
 	^ signature nonZeroArgTermNamed: opName withArgs: substitutedArgList
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbOpTerm >> synopsis [
 	^ self opName synopsis
 ]
 
-{ #category : #matching }
+{ #category : 'matching' }
 LbOpTerm >> unify: otherTerm variables: variables [
 	otherTerm unifyWithOpTerm: self op: opName args: arguments variables: variables.
 ]
 
-{ #category : #matching }
+{ #category : 'matching' }
 LbOpTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
 	(opName = anOpName and: [ arguments size = anArgList size ])
 		ifTrue: [ anArgList with: arguments do: [ :arg1 :arg2 |
@@ -139,12 +139,12 @@ LbOpTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: v
 		ifFalse: [ variables failWith: self notUnifiableWith: otherTerm ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbOpTerm >> variables [
 	^ arguments inject: Dictionary new into: [ :total :each | total union: each variables ]
 ]
 
-{ #category : #transforming }
+{ #category : 'transforming' }
 LbOpTerm >> withTransformedArgs: anArgList [
 	^ signature nonZeroArgTermNamed: opName withArgs: anArgList
 ]

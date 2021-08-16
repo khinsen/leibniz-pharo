@@ -1,12 +1,12 @@
 Class {
-	#name : #LbAxiomExamples,
-	#superclass : #Object,
+	#name : 'LbAxiomExamples',
+	#superclass : 'Object',
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
-	#category : #'Leibniz-5-Axioms'
+	#category : 'Leibniz-5-Axioms'
 }
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomExamples >> equalityAxioms [
 	<gtExample>
 	^ (LbAxiomBuilder signature: LbBuiltinSignatures integerSignature)
@@ -17,7 +17,7 @@ LbAxiomExamples >> equalityAxioms [
 		axioms
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomExamples >> mixedAxioms [
 	<gtExample>
 	^ (LbAxiomBuilder signature: self sortSignature)
@@ -28,7 +28,7 @@ LbAxiomExamples >> mixedAxioms [
 		axioms
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomExamples >> sortSignature [
 	<gtExample>
 	^ (LbSignatureBuilder sortGraph: self sortSortGraph)
@@ -41,7 +41,7 @@ LbAxiomExamples >> sortSignature [
 		signature
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomExamples >> sortSortGraph [
 	<gtExample>
 	^ LbSortGraphBuilder new
@@ -49,7 +49,7 @@ LbAxiomExamples >> sortSortGraph [
 		sortGraph
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbAxiomExamples >> subsortAxioms [
 	<gtExample>
 	| axioms |

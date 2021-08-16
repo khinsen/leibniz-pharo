@@ -1,13 +1,13 @@
 Class {
-	#name : #LbCodeFont,
-	#superclass : #Object,
+	#name : 'LbCodeFont',
+	#superclass : 'Object',
 	#classVars : [
 		'DefaultFamily'
 	],
-	#category : #'Leibniz-0-Infrastructure'
+	#category : 'Leibniz-0-Infrastructure'
 }
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbCodeFont class >> brLabelCellStencil [
 	^ [ BrLabel new
 			look: (BrGlamorousLabelLook new
@@ -17,14 +17,14 @@ LbCodeFont class >> brLabelCellStencil [
 				vFitContent ]
 ]
 
-{ #category : #acccessing }
+{ #category : 'acccessing' }
 LbCodeFont class >> brLabelFor: aString [
 	^ LbCodeFont brLabelCellStencil value
 			text: aString asRopedText;
 			yourself
 ]
 
-{ #category : #selecting }
+{ #category : 'selecting' }
 LbCodeFont class >> chooseDefaultFamily [
 	| availableFamilies |
 	availableFamilies := SkiaFontManager default familyNames.
@@ -34,7 +34,7 @@ LbCodeFont class >> chooseDefaultFamily [
 	self error: 'No suitable Unicode font for Leibniz code'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbCodeFont class >> defaultFamily [
 	^ DefaultFamily
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : #LbDependentSignatureBuilder,
-	#superclass : #Object,
+	#name : 'LbDependentSignatureBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'sortGraph',
 		'variables',
@@ -9,22 +9,22 @@ Class {
 		'opParser',
 		'varParser'
 	],
-	#category : #'Leibniz-7-DependentSorts'
+	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbDependentSignatureBuilder class >> sortGraph: aSortGraph [
 	^ self basicNew
 		initializeWithSortGraph: aSortGraph;
 		yourself
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbDependentSignatureBuilder >> addBuiltin: aSymbol [
 	builtins add: aSymbol
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern [
 	| arity kindArity |
 	self checksForNewOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern.
@@ -41,7 +41,7 @@ LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortPatternArray ofSor
 		addArity: arity withSort: aSortPattern
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbDependentSignatureBuilder >> addVar: anOpName ofSort: aSortPattern [
 	self assert: (sortGraph includes: aSortPattern).
 	operators at: anOpName ifPresent: [ :op |
@@ -56,7 +56,7 @@ LbDependentSignatureBuilder >> addVar: anOpName ofSort: aSortPattern [
 		ifAbsent: [ variables at: anOpName put: aSortPattern ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 LbDependentSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern [
 	| argSortVariables |
 
@@ -79,13 +79,13 @@ LbDependentSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortPatternAr
 			description: 'Variable ', each key asSymbol, ' in operator sort but not in arguments' ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbDependentSignatureBuilder >> initializeParsersFor: aSignature [
 	opParser := LbDependentSignatureParser newStartingAt: #opEnd.
 	varParser := LbDependentSignatureParser newStartingAt: #varEnd
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbDependentSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 	sortGraph := aSortGraph.
 	builtins := Set new.
@@ -94,7 +94,7 @@ LbDependentSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 	self initializeParsersFor: aSortGraph sortContext signature
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbDependentSignatureBuilder >> parseAndAddOp: aString [
 	| parsedOp argSorts sort |
 	parsedOp := (opParser parse: aString).
@@ -109,7 +109,7 @@ LbDependentSignatureBuilder >> parseAndAddOp: aString [
 	self addOp: parsedOp first withArgs: argSorts ofSort: sort
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbDependentSignatureBuilder >> parseAndAddVar: aString [
 	| parsedVar |
 	parsedVar := (varParser parse: aString).
@@ -122,7 +122,7 @@ LbDependentSignatureBuilder >> parseAndAddVar: aString [
 	self addVar: parsedVar first ofSort: (sortGraph sortFor: parsedVar second)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbDependentSignatureBuilder >> signature [
 	^ LbDependentSignature
 		sortGraph: sortGraph

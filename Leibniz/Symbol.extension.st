@@ -1,6 +1,6 @@
-Extension { #name : #Symbol }
+Extension { #name : 'Symbol' }
 
-{ #category : #'*Leibniz' }
+{ #category : '*Leibniz' }
 Symbol >> asLbOperatorName [
 	^ LbOperatorName fromInternalSymbol: self
 ]

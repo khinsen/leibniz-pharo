@@ -3,16 +3,16 @@ I represent a Leibniz document containing named contexts and references to other
 
 "
 Class {
-	#name : #LeibnizDocument,
-	#superclass : #Object,
+	#name : 'LeibnizDocument',
+	#superclass : 'Object',
 	#instVars : [
 		'docHash',
 		'contexts'
 	],
-	#category : #'Leibniz-8-Documents'
+	#category : 'Leibniz-8-Documents'
 }
 
-{ #category : #'XML import' }
+{ #category : 'XML import' }
 LeibnizDocument >> addContextFromXML: anXMLElement [
   	| name builder context |
 	name := anXMLElement attributeAt: 'id'.
@@ -23,40 +23,40 @@ LeibnizDocument >> addContextFromXML: anXMLElement [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LeibnizDocument >> contextNamed: aString [
 	^ contexts at: aString.
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LeibnizDocument >> contexts [
 	^ contexts.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LeibnizDocument >> docHash [
 	^ docHash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LeibnizDocument >> docHash: anObject [
 	docHash := anObject
 ]
 
-{ #category : #'XML import' }
+{ #category : 'XML import' }
 LeibnizDocument >> fromXML: anXMLElement [
 	anXMLElement descendantElementsNamed: 'context' do: [ :c | self addContextFromXML: c ].
 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LeibnizDocument >> initialize [
 	contexts := Dictionary new.
 
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LeibnizDocument >> newContextBuilderNamed: aString [
 	| builder |
 	builder := LbContextBuilder name: aString document: self.
@@ -64,7 +64,7 @@ LeibnizDocument >> newContextBuilderNamed: aString [
 	^ builder.
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LeibnizDocument >> replaceBuilderByContextNamed: aString [
 	| builder |
 	builder := contexts at: aString.

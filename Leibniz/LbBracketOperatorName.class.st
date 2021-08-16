@@ -1,15 +1,15 @@
 Class {
-	#name : #LbBracketOperatorName,
-	#superclass : #LbOperatorName,
-	#category : #'Leibniz-2-Signatures'
+	#name : 'LbBracketOperatorName',
+	#superclass : 'LbOperatorName',
+	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : #initializing }
+{ #category : 'initializing' }
 LbBracketOperatorName >> initialize [
 	internalSymbol := #'[]'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbBracketOperatorName >> printForArgs: aTermArray on: aStream [
 	self assert: aTermArray size > 1.
 	aTermArray first
@@ -23,7 +23,7 @@ LbBracketOperatorName >> printForArgs: aTermArray on: aStream [
 	aStream nextPutAll: ']'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbBracketOperatorName >> printForArity: anArity on: aStream [
 	self assert: anArity size > 1.
 	anArity first printAsLeibnizSyntaxOn: aStream.
@@ -35,7 +35,7 @@ LbBracketOperatorName >> printForArity: anArity on: aStream [
 	aStream nextPutAll: ']'
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbBracketOperatorName >> synopsis [
 	^ '•[• ...]'
 ]

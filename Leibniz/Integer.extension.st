@@ -1,6 +1,6 @@
-Extension { #name : #Integer }
+Extension { #name : 'Integer' }
 
-{ #category : #'*Leibniz' }
+{ #category : '*Leibniz' }
 Integer >> lbAtomicTermClass [
 	^ LbIntegerTerm
 ]

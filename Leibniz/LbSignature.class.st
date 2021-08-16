@@ -21,8 +21,8 @@ Variables are used in patterns that match different terms. A variable is defined
 
 "
 Class {
-	#name : #LbSignature,
-	#superclass : #Object,
+	#name : 'LbSignature',
+	#superclass : 'Object',
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -32,10 +32,10 @@ Class {
 		'builtins',
 		'origins'
 	],
-	#category : #'Leibniz-2-Signatures'
+	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbSignature class >> sortGraph: aSortGraph builtins: aSet operators: anOperatorDictionary variables: aVariableDictionary origins: anOriginDictionary [
 	^ self basicNew
 			 initializeWithSortGraph: aSortGraph
@@ -46,22 +46,22 @@ LbSignature class >> sortGraph: aSortGraph builtins: aSet operators: anOperatorD
 			 yourself
 ]
 
-{ #category : #asserting }
+{ #category : 'asserting' }
 LbSignature >> assertBuiltin: aBuiltinSymbol [
 	self assert: (builtins includes: aBuiltinSymbol) description: aBuiltinSymbol, ' are not defined in this signature'
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbSignature >> atomicTerm: aValue [
 	^ aValue lbAtomicTermClass value: aValue signature: self
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 LbSignature >> copy [
 	^self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSignature >> declarations [
 	| declarations opDecls |
 	declarations := self sortGraph declarations.
@@ -79,12 +79,12 @@ LbSignature >> declarations [
 	^ declarations
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 LbSignature >> deepCopy [
 	^self
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbSignature >> gtDeclarationsFor: aView [
 	<gtView>
 	| addEmptyChildList |
@@ -111,7 +111,7 @@ LbSignature >> gtDeclarationsFor: aView [
 		yourself
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbSignature >> gtOperatorsFor: aView [
 	<gtView>
 	operators ifEmpty: [ ^ aView empty ].
@@ -142,7 +142,7 @@ LbSignature >> gtOperatorsFor: aView [
 		yourself
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbSignature >> gtSortGraphFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -152,7 +152,7 @@ LbSignature >> gtSortGraphFor: aView [
 		view: #gtGraphFor:
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbSignature >> gtVariablesFor: aView [
 	<gtView>
 	variables isEmpty ifTrue: [ ^ aView empty ].
@@ -171,12 +171,12 @@ LbSignature >> gtVariablesFor: aView [
 		yourself
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbSignature >> hasBuiltin: aSymbol [
 	^builtins includes: aSymbol
 ]
 
-{ #category : #initializing }
+{ #category : 'initializing' }
 LbSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: anOperatorDictionary variables: aVariableDictionary origins: anOriginDictionary [
 	sortGraph := aSortGraph.
 	builtins := aSet.
@@ -186,12 +186,12 @@ LbSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: anO
 	self beRecursivelyReadOnlyObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbSignature >> isEmpty [
 	^ sortGraph isEmpty and: [ operators isEmpty and: [ variables isEmpty ] ]
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
 	| argSorts |
 	argSorts := aTermArray collect: [ :t | t sort ].
@@ -204,7 +204,7 @@ LbSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
 					   signature: self ]
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray onError: aBlock [
 	| result |
 	result := self nonZeroArgTermNamed: anOpName withArgs: aTermArray.
@@ -213,17 +213,17 @@ LbSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray onError: aBloc
 		ifNotNil: [ ^ result ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSignature >> numberOfOperators [
 	^operators size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSignature >> numberOfVariables [
 	^variables size
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSignature >> opNamed: anOpName withArgs: aSortArray [
 	| kindArity |
 	kindArity := (LbArity sortGraph: sortGraph
@@ -235,7 +235,7 @@ LbSignature >> opNamed: anOpName withArgs: aSortArray [
 		ifAbsent: [ nil ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSignature >> opsOfKind: aKind [
 	| ops |
 	ops := Set new.
@@ -245,7 +245,7 @@ LbSignature >> opsOfKind: aKind [
 	^ ops
 ]
 
-{ #category : #'asset construction' }
+{ #category : 'asset construction' }
 LbSignature >> parseRule: aString [
 	| rule |
 	rule := (LbRuleParser signature: self)
@@ -255,35 +255,35 @@ LbSignature >> parseRule: aString [
 	^ rule
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbSignature >> parseTerm: aString [
 	^ self parseTerm: aString extraVariables: Dictionary new
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbSignature >> parseTerm: aString extraVariables: aDictionary [
 	^ (LbTermParser signature: self extraVariables: aDictionary)
 		parse: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSignature >> ranksMatchingfOp: anOpName withArgs: aSortArray [
 	(self opNamed: anOpName withArgs: aSortArray)
 		ifNil: [ ^ OrderedCollection new. ]
 		ifNotNil: [ :op | ^ op ranksMatchingArgSorts: aSortArray]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSignature >> sortGraph [
 	^sortGraph
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSignature >> sortNamed: aSymbol [
 	^ sortGraph sortNamed: aSymbol
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSignature >> sortOfOp: anOpName withArgSorts: aSortArray [
 	(self opNamed: anOpName withArgs: aSortArray)
 		ifNotNil: [ :op | ^ op sortForArgSorts: aSortArray ].
@@ -296,19 +296,19 @@ LbSignature >> sortOfOp: anOpName withArgSorts: aSortArray [
 	^ nil
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 LbSignature >> withBuiltinsDo: aBlock [
 	builtins do: aBlock
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 LbSignature >> withOperatorsDo: aBlock [
 	operators do: [ :aDictionary |
 		aDictionary do: [ :anOperator |
 			aBlock value: anOperator ] ]
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 LbSignature >> withVariablesDo: aBlock [
 	variables associationsDo: [ :v |
 		aBlock value: (LbVariable
@@ -318,7 +318,7 @@ LbSignature >> withVariablesDo: aBlock [
 						origins: (origins at: v key )) ]
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbSignature >> zeroArgTermNamed: anOpName [
 	variables at: anOpName
 		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort signature: self ].
@@ -330,21 +330,21 @@ LbSignature >> zeroArgTermNamed: anOpName [
 									   signature: self ]
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbSignature >> zeroArgTermNamed: anOpName extraVariables: aDictionary [
 	aDictionary at: anOpName
 		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort signature: self ].
 	^ self zeroArgTermNamed: anOpName
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbSignature >> zeroArgTermNamed: anOpName extraVariables: aDictionary onError: aBlock [
 	| result |
 	result := self zeroArgTermNamed: anOpName extraVariables: aDictionary.
 	result ifNil: [ ^ aBlock value: anOpName ] ifNotNil: [ ^ result ]
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbSignature >> zeroArgTermNamed: aSymbol onError: aBlock [
 	| result |
 	result := self zeroArgTermNamed: aSymbol.

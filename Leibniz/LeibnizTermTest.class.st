@@ -1,16 +1,16 @@
 Class {
-	#name : #LeibnizTermTest,
-	#superclass : #TestCase,
+	#name : 'LeibnizTermTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'library',
 		'builtins',
 		'examples',
 		'currentSignature'
 	],
-	#category : #'Leibniz-3-Terms'
+	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 LeibnizTermTest >> check: aTerm doesNotMatch: aPattern [
 	| p parse pattern term |
 	p := LbTermParser signature: currentSignature.
@@ -20,7 +20,7 @@ LeibnizTermTest >> check: aTerm doesNotMatch: aPattern [
 	self assert: (pattern match: term) isNull.
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 LeibnizTermTest >> check: aTerm matches: aPattern withSubstitution: aDictionary [
 	| p parse pattern term substitutions |
 	p := LbTermParser signature: currentSignature.
@@ -31,7 +31,7 @@ LeibnizTermTest >> check: aTerm matches: aPattern withSubstitution: aDictionary 
 	self assert: (pattern match: term) variables equals: substitutions.
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 LeibnizTermTest >> checkSyntaxRoundTrip: aString [
 	| p t |
 	p := LbTermParser signature: currentSignature.
@@ -40,14 +40,14 @@ LeibnizTermTest >> checkSyntaxRoundTrip: aString [
 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 LeibnizTermTest >> setUp [
 "	library := LeibnizLibrary uniqueInstance.
 	builtins := library builtins.
 	examples := LeibnizExamples new."
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizTermTest >> testContexts [
 	| c t |
 	c := builtins contextNamed: 'contexts'.
@@ -56,7 +56,7 @@ LeibnizTermTest >> testContexts [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizTermTest >> testSyntax [
 	self useContext: (examples contextNamed: 'ℝ→ℝ').
 	self checkSyntaxRoundTrip: '(f + g)[X]'.
@@ -66,7 +66,7 @@ LeibnizTermTest >> testSyntax [
 	self checkSyntaxRoundTrip: 'f[g[X]]'.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizTermTest >> useContext: aContext [
 	currentSignature := aContext signature
 ]

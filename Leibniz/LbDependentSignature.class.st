@@ -1,6 +1,6 @@
 Class {
-	#name : #LbDependentSignature,
-	#superclass : #Object,
+	#name : 'LbDependentSignature',
+	#superclass : 'Object',
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -9,10 +9,10 @@ Class {
 		'operators',
 		'builtins'
 	],
-	#category : #'Leibniz-7-DependentSorts'
+	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : #'instace creation' }
+{ #category : 'instace creation' }
 LbDependentSignature class >> sortGraph: aSortGraph builtins: aSet operators: operatorDictionary variables: variableDictionary [
 	^ self basicNew
 		initializeWithSortGraph: aSortGraph
@@ -22,24 +22,24 @@ LbDependentSignature class >> sortGraph: aSortGraph builtins: aSet operators: op
 		yourself
 ]
 
-{ #category : #lookup }
+{ #category : 'lookup' }
 LbDependentSignature >> assertBuiltin: aBuiltinSymbol [
 	self
 		assert: (builtins includes: aBuiltinSymbol)
 		description: aBuiltinSymbol, ' are not defined in this signature'
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 LbDependentSignature >> copy [
 	^ self
 ]
 
-{ #category : #copying }
+{ #category : 'copying' }
 LbDependentSignature >> deepCopy [
 	^ self
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbDependentSignature >> gtOperatorsFor: aView [
 	<gtView>
 	operators isEmpty ifTrue: [ ^ aView empty ].
@@ -73,7 +73,7 @@ LbDependentSignature >> gtOperatorsFor: aView [
 		yourself
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbDependentSignature >> gtVariablesFor: aView [
 	<gtView>
 	variables isEmpty ifTrue: [ ^ aView empty ].
@@ -92,7 +92,7 @@ LbDependentSignature >> gtVariablesFor: aView [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbDependentSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: operatorDictionary variables: variableDictionary [
 	sortGraph := aSortGraph.
 	builtins := aSet.
@@ -101,7 +101,7 @@ LbDependentSignature >> initializeWithSortGraph: aSortGraph builtins: aSet opera
 	self beRecursivelyReadOnlyObject
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbDependentSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
 	| argSorts |
 	argSorts := aTermArray collect: #sort.
@@ -115,14 +115,14 @@ LbDependentSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
 				signature: self ]
 ]
 
-{ #category : #lookup }
+{ #category : 'lookup' }
 LbDependentSignature >> opNamed: anOpName withArgs: aSortArray [
 	^ operators at: anOpName
 		ifPresent: [ :ops | ops at: aSortArray size ifAbsent: [ nil ] ]
 		ifAbsent: [ nil ].
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbDependentSignature >> parseTerm: aString [
 	| parsedTerm |
 	parsedTerm := (LbDependentSignatureParser newStartingAt: #termEnd)
@@ -133,13 +133,13 @@ LbDependentSignature >> parseTerm: aString [
 	^ parsedTerm value: self value: Dictionary new
 ]
 
-{ #category : #lookup }
+{ #category : 'lookup' }
 LbDependentSignature >> sortNamed: aSymbol [
 	self flag: #legacy.
 	^ sortGraph sortNamed: aSymbol
 ]
 
-{ #category : #lookup }
+{ #category : 'lookup' }
 LbDependentSignature >> sortOfOp: anOpName withArgSorts: aSortArray [
 	(self opNamed: anOpName withArgs: aSortArray)
 		ifNotNil: [ :op | ^ op sortPatternForArgSortPatterns: aSortArray ].
@@ -153,7 +153,7 @@ LbDependentSignature >> sortOfOp: anOpName withArgSorts: aSortArray [
 	^ nil
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbDependentSignature >> zeroArgTermNamed: anOpName [
 	variables at: anOpName
 		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort signature: self ].
@@ -167,7 +167,7 @@ LbDependentSignature >> zeroArgTermNamed: anOpName [
 				signature: self ]
 ]
 
-{ #category : #'term construction' }
+{ #category : 'term construction' }
 LbDependentSignature >> zeroArgTermNamed: anOpName extraVariables: aDictionary [
 	aDictionary at: anOpName
 		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort signature: self ].

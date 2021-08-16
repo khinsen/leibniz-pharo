@@ -1,18 +1,18 @@
 Class {
-	#name : #LbRuleExamples,
-	#superclass : #Object,
+	#name : 'LbRuleExamples',
+	#superclass : 'Object',
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
-	#category : #'Leibniz-4-Rules'
+	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : #example }
+{ #category : 'example' }
 LbRuleExamples >> parserForSignatureWithVariable [
 	<gtExample>
 	^ LbRuleParser signature: self signatureWithVariable
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRuleExamples >> ruleSyntax [
 	<gtExample>
 	^ #(
@@ -34,7 +34,7 @@ LbRuleExamples >> ruleSyntax [
 			each -> rule ]
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRuleExamples >> rulesWithVariables [
 	<gtExample>
 	| parser rule1 rule2 |
@@ -65,7 +65,7 @@ LbRuleExamples >> rulesWithVariables [
 	^ { rule1. rule2 }
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRuleExamples >> signatureWithVariable [
 	<gtExample>
 	| integerSignature |

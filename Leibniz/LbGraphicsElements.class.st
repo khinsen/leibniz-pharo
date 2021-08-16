@@ -1,15 +1,15 @@
 Class {
-	#name : #LbGraphicsElements,
-	#superclass : #Object,
-	#category : #'Leibniz-0-Infrastructure'
+	#name : 'LbGraphicsElements',
+	#superclass : 'Object',
+	#category : 'Leibniz-0-Infrastructure'
 }
 
-{ #category : #'graph drawing' }
+{ #category : 'graph drawing' }
 LbGraphicsElements class >> graphArrow [
 	^ self graphArrowWithColor: Color gray
 ]
 
-{ #category : #'graph drawing' }
+{ #category : 'graph drawing' }
 LbGraphicsElements class >> graphArrowWithColor: aColor [
 	^ BlLineElement new
 		toHead:
@@ -18,7 +18,7 @@ LbGraphicsElements class >> graphArrowWithColor: aColor [
 		border: (BlBorder paint: aColor width: 1)
 ]
 
-{ #category : #'graph drawing' }
+{ #category : 'graph drawing' }
 LbGraphicsElements class >> graphNodeLabelled: aString highlight: aBoolean [
 	| text color label rectangle |
 	color := Color black.
@@ -45,7 +45,7 @@ LbGraphicsElements class >> graphNodeLabelled: aString highlight: aBoolean [
 	^ rectangle
 ]
 
-{ #category : #'graph drawing' }
+{ #category : 'graph drawing' }
 LbGraphicsElements class >> graphNodeLabelled: aString highlightColor: aColorOrNil [
 	| text label rectangle |
 	text := aString asRopedText.

@@ -1,6 +1,6 @@
-Extension { #name : #Object }
+Extension { #name : 'Object' }
 
-{ #category : #'*Leibniz' }
+{ #category : '*Leibniz' }
 Object >> leibnizAtomicTermValue [
 	LbRewriteFailure signal: 'not an atomic term: ', self asString
 ]

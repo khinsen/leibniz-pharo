@@ -1,19 +1,19 @@
 Class {
-	#name : #LbReductionSteps,
-	#superclass : #Object,
+	#name : 'LbReductionSteps',
+	#superclass : 'Object',
 	#instVars : [
 		'rewriteSystem',
 		'steps'
 	],
-	#category : #'Leibniz-4-Rules'
+	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbReductionSteps >> finalTerm [
 	^ steps last finalTerm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbReductionSteps >> gtStepsFor: aView [
 	<gtView>
 	^ aView columnedList
@@ -27,22 +27,22 @@ LbReductionSteps >> gtStepsFor: aView [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbReductionSteps >> initialTerm [
 	^ steps first initialTerm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbReductionSteps >> rewriteSystem: aRewriteSystem [
 	rewriteSystem := aRewriteSystem
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbReductionSteps >> steps [
 	^ steps
 ]
 
-{ #category : #rewriting }
+{ #category : 'rewriting' }
 LbReductionSteps >> term: aTerm [
 	| step currentTerm |
 	step := LbReductionStep new

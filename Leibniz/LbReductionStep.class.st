@@ -1,6 +1,6 @@
 Class {
-	#name : #LbReductionStep,
-	#superclass : #Object,
+	#name : 'LbReductionStep',
+	#superclass : 'Object',
 	#instVars : [
 		'initialTerm',
 		'finalTerm',
@@ -9,15 +9,15 @@ Class {
 		'termWithReducedArgs',
 		'rewriteStep'
 	],
-	#category : #'Leibniz-4-Rules'
+	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbReductionStep >> finalTerm [
 	^ finalTerm
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbReductionStep >> gtStepsFor: aView [
 	<gtView>
 	^ aView columnedTree
@@ -34,27 +34,27 @@ LbReductionStep >> gtStepsFor: aView [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbReductionStep >> initialTerm [
 	^ initialTerm
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbReductionStep >> isFinal [
 	^ initialTerm = finalTerm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbReductionStep >> rewriteSystem: aRewriteSystem [
 	rewriteSystem := aRewriteSystem
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbReductionStep >> steps [
 	^ #()
 ]
 
-{ #category : #rewriting }
+{ #category : 'rewriting' }
 LbReductionStep >> term: aTerm [
 	initialTerm := aTerm.
 	argReductionSteps := aTerm arguments collect: [ :each |

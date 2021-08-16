@@ -8,23 +8,23 @@ ${method:LeibnizSortGraphTest>>#setUp|expanded=}$
 
 "
 Class {
-	#name : #LbSortGraphBuilder,
-	#superclass : #Object,
+	#name : 'LbSortGraphBuilder',
+	#superclass : 'Object',
 	#instVars : [
 		'directSubsortsOf',
 		'origins',
 		'collectionSortsOf',
 		'baseSortOf'
 	],
-	#category : #'Leibniz-1-SortGraphs'
+	#category : 'Leibniz-1-SortGraphs'
 }
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbSortGraphBuilder >> add: aSymbol [
 	self add: aSymbol origins: LbOrigins forCurrentContext
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbSortGraphBuilder >> add: aSymbol origins: anLbOrigins [
 	| prefix baseName |
 	(self includes: aSymbol)
@@ -32,26 +32,15 @@ LbSortGraphBuilder >> add: aSymbol origins: anLbOrigins [
 			directSubsortsOf at: aSymbol put: Set new.
 			origins at: aSymbol put: anLbOrigins ]
 		ifTrue: [
-			(origins at: aSymbol) merge: anLbOrigins ].
-	"Manage collection sorts"
-	prefix := (self splitName: aSymbol) first.
-	prefix ifEmpty: [ ^ self ].
-	baseName := (self splitName: aSymbol) second.
-	self
-		assert: (self includes: baseName)
-		description: 'Base sort ', baseName, ' not defined'.
-	baseSortOf at: aSymbol put: baseName.
-	(collectionSortsOf at: baseName
-		ifAbsentPut: [ Dictionary new ])
-			at: prefix put: aSymbol
+			(origins at: aSymbol) merge: anLbOrigins ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbSortGraphBuilder >> addSortGraph: aSortGraph [ 
 	self addSortGraph: aSortGraph origin: nil
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbSortGraphBuilder >> addSortGraph: aSortGraph origin: aContext [
 	aSortGraph asSet do: [ :eachSort |
 		self
@@ -64,28 +53,15 @@ LbSortGraphBuilder >> addSortGraph: aSortGraph origin: aContext [
 			origins: (ssr origins from: aContext) ]
 ]
 
-{ #category : #private }
-LbSortGraphBuilder >> baseSortNameFor: aSymbol [
-	^ (LbSort classFor: aSymbol) baseSortNameFor: aSymbol
-]
-
-{ #category : #private }
+{ #category : 'private' }
 LbSortGraphBuilder >> checkIf: aSort canBeMadeSubsortOf: anotherSort [
-	| split1 split2 |
-	split1 := self splitName: aSort.
-	split2 := self splitName: anotherSort.
-	(((split1 first isNotEmpty)
-		or: [ split2 first isNotEmpty ])
-		and: [ split1 second ~= split2 second ])
-		ifTrue: [ self error: 'collection sorts not allowed in subsort relation' ].
-
 	(self is: anotherSort subsortOf: aSort)
 		ifTrue: [
 			self error: 'cycle in subsort relation: ',
 					(anotherSort printString), '<=', (aSort printString ) ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSortGraphBuilder >> gtDeclarationsFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -95,7 +71,7 @@ LbSortGraphBuilder >> gtDeclarationsFor: aView [
 		view: #gtDeclarationsFor:
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSortGraphBuilder >> gtGraphFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -105,12 +81,12 @@ LbSortGraphBuilder >> gtGraphFor: aView [
 		view: #gtGraphFor:
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbSortGraphBuilder >> includes: aSort [
 	^ directSubsortsOf keys includes: aSort
 ]
 
-{ #category : #initializing }
+{ #category : 'initializing' }
 LbSortGraphBuilder >> initialize [
 	directSubsortsOf := Dictionary new.
 	baseSortOf := Dictionary new.
@@ -118,7 +94,7 @@ LbSortGraphBuilder >> initialize [
 	origins := Dictionary new
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 LbSortGraphBuilder >> is: aSort subsortOf: anotherSort [
 	| ss |
 	^ (aSort = anotherSort) or: [
@@ -128,12 +104,12 @@ LbSortGraphBuilder >> is: aSort subsortOf: anotherSort [
 				self is: aSort subsortOf: each ] ] ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbSortGraphBuilder >> make: aSort subsortOf: anotherSort [
 	self make: aSort subsortOf: anotherSort origins: LbOrigins forCurrentContext
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbSortGraphBuilder >> make: aSort subsortOf: anotherSort origins: anLbOrigins [
 	| sortPair newKind |
 	(aSort = anotherSort) ifTrue: [ ^ self ].
@@ -148,7 +124,7 @@ LbSortGraphBuilder >> make: aSort subsortOf: anotherSort origins: anLbOrigins [
 			(origins at: sortPair) merge: anLbOrigins ]
 ]
 
-{ #category : #adding }
+{ #category : 'adding' }
 LbSortGraphBuilder >> parseAndAdd: aString [
 	| declaration |
 	declaration := LbSortParser parse: aString.
@@ -161,15 +137,10 @@ LbSortGraphBuilder >> parseAndAdd: aString [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSortGraphBuilder >> sortGraph [
 	^ LbSortGraph
 		fromSubsortRelations: directSubsortsOf deepCopy
 		andCollectionSorts: collectionSortsOf deepCopy
 		origins: origins deepCopy
-]
-
-{ #category : #private }
-LbSortGraphBuilder >> splitName: aSymbol [
-	^ (LbSort classFor: aSymbol) splitName: aSymbol
 ]

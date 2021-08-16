@@ -1,18 +1,18 @@
 Class {
-	#name : #LeibnizBuiltinsTest,
-	#superclass : #TestCase,
+	#name : 'LeibnizBuiltinsTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'builtins'
 	],
-	#category : #'Leibniz-Tests'
+	#category : 'Leibniz-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 LeibnizBuiltinsTest >> setUp [
 	builtins := LeibnizLibrary uniqueInstance builtins
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizBuiltinsTest >> testContexts [
 	| context |
 	context := builtins contextNamed: 'contexts'.
@@ -23,7 +23,7 @@ LeibnizBuiltinsTest >> testContexts [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizBuiltinsTest >> testFloats [
 	| context |
 	context := builtins contextNamed: 'IEEE-floating-point'.
@@ -39,7 +39,7 @@ LeibnizBuiltinsTest >> testFloats [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizBuiltinsTest >> testIntegerArithmetic [
 	| context |
 	#('integers' 'rational-numbers' 'real-numbers') do:
@@ -88,7 +88,7 @@ LeibnizBuiltinsTest >> testIntegerArithmetic [
 	self assert: (context parseTermAndReduce: '3^{-2}') equals: (context parseTerm: '3^{-2}').
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizBuiltinsTest >> testIntegerArithmeticWithSymbolicValues [
 	| b context |
 	b := LbContextBuilder name: 'test' document: LeibnizDocument new.
@@ -103,7 +103,7 @@ LeibnizBuiltinsTest >> testIntegerArithmeticWithSymbolicValues [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizBuiltinsTest >> testIntegers [
 	| context |
 	context := builtins contextNamed: 'integers-without-rules'.
@@ -130,7 +130,7 @@ LeibnizBuiltinsTest >> testIntegers [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizBuiltinsTest >> testRationalNumberArithmetic [
 	| context |
 	#('rational-numbers' 'real-numbers') do:
@@ -169,7 +169,7 @@ LeibnizBuiltinsTest >> testRationalNumberArithmetic [
 			self assert: (context parseTermAndReduce: '(2/3 + 1) == (1 + 2/3)') equals: (context parseTerm: 'true') ].
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizBuiltinsTest >> testRationalNumbers [
 	| context |
 	context := builtins contextNamed: 'rational-numbers'.
@@ -185,7 +185,7 @@ LeibnizBuiltinsTest >> testRationalNumbers [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizBuiltinsTest >> testRealNumbers [
 	| context |
 	context := builtins contextNamed: 'real-numbers'.
@@ -201,7 +201,7 @@ LeibnizBuiltinsTest >> testRealNumbers [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizBuiltinsTest >> testStrings [
 	| context |
 	context := builtins contextNamed: 'strings'.
@@ -217,7 +217,7 @@ LeibnizBuiltinsTest >> testStrings [
 
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LeibnizBuiltinsTest >> testTruth [
 	| context |
 	context := builtins contextNamed: 'truth'.

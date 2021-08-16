@@ -1,10 +1,10 @@
 Class {
-	#name : #LbSignatureParser,
-	#superclass : #LbSignatureGrammar,
-	#category : #'Leibniz-2-Signatures'
+	#name : 'LbSignatureParser',
+	#superclass : 'LbSignatureGrammar',
+	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureParser >> bracketOp [
 	^ super bracketOp
 		==> [ :nodes |
@@ -14,34 +14,34 @@ LbSignatureParser >> bracketOp [
 				{ LbBracketOperatorName new. args asArray } ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureParser >> infixOp [
 	^ super infixOp
 		==> [ :nodes | { LbInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureParser >> op [
 	^ super op
 		==> [ :nodes | { nodes first. nodes third first } ]
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureParser >> prefixOp [
 	^ super prefixOp
 		==> [ :nodes | { LbPrefixOperatorName for: nodes first. nodes third reject: [ :element | element = $,] } ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureParser >> sort [
 	^ super sort
 		==> [ :id | { id } ]
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureParser >> subscriptOp [
 	^ super subscriptOp
 		==> [ :nodes |
@@ -51,7 +51,7 @@ LbSignatureParser >> subscriptOp [
 				{ LbSubscriptOperatorName new. args asArray } ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureParser >> superscriptOp [
 	^ super superscriptOp
 		==> [ :nodes |
@@ -61,14 +61,14 @@ LbSignatureParser >> superscriptOp [
 				{ LbSuperscriptOperatorName new. args asArray } ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureParser >> var [
 	^ super var
 		==> [ :nodes | { nodes first. nodes third } ]
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbSignatureParser >> zeroArgOp [
 	^ super zeroArgOp
 		==> [ :idString | { LbPrefixOperatorName for: idString. #() } ]

@@ -86,8 +86,8 @@ ${method:name=LbTermGrammar>>#term|expanded=}$
 
 "
 Class {
-	#name : #LbTermGrammar,
-	#superclass : #LbGrammar,
+	#name : 'LbTermGrammar',
+	#superclass : 'LbGrammar',
 	#instVars : [
 		'zeroArgTerm',
 		'term',
@@ -105,56 +105,56 @@ Class {
 		'literalTerm',
 		'suffix'
 	],
-	#category : #'Leibniz-3-Terms'
+	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> fpExponentPart [
 	^ $e asPParser , fpIntegerPart
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> fpFractionalPart [
 	^ $. asPParser , #digit asPParser plus optional
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> fpIntegerPart [
 	^ $- asPParser optional , #digit asPParser plus
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> fpNumberTerm [
 	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
 			/ (fpIntegerPart , fpExponentPart))
 		flatten
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> integerTerm [
 	^ ($- asPParser optional , #digit asPParser plus) flatten
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> literalTerm [
 	^ rationalNumberTerm / fpNumberTerm / integerTerm / stringTerm
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> nonInfixTerm [
 	^ simpleTerm, suffix optional
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> parenthesizedTerm [
 	^ $( asPParser , term, $) asPParser
 		==> [ :nodes | nodes at: 2 ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> prefixOpTerm [
 	^ identifier , $( asPParser ,
 		 (term separatedBy: $, asPParser trim) ,
@@ -162,7 +162,7 @@ LbTermGrammar >> prefixOpTerm [
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> rationalNumberTerm [
 	^ ($- asPParser optional , #digit asPParser plus ,
 			$/ asPParser ,
@@ -170,23 +170,23 @@ LbTermGrammar >> rationalNumberTerm [
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> simpleTerm [
 	^ literalTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbTermGrammar >> start [
 	^ term end
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> stringTerm [
 	^ ($" asPParser , $" asPParser negate star , $" asPParser) flatten 
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> suffix [
 	^ (self suffixBetween: $[ asPParser and: $] asPParser withSymbol: #'[]')
 		 / (self suffixBetween: '^{' asPParser and: $} asPParser withSymbol: #'^')
@@ -194,13 +194,13 @@ LbTermGrammar >> suffix [
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> suffixBetween: leftDelimiter and: rightDelimiter withSymbol: opSymbol [
 	^ leftDelimiter , (term separatedBy: $, asPParser trim) , rightDelimiter
 		==> [ :nodes | { opSymbol . (nodes second reject: [ :element | element = $,]) } ]
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> term [
 	^ (nonInfixTerm separatedBy: (identifier trim))
 		==> [ :nodes |
@@ -217,7 +217,7 @@ LbTermGrammar >> term [
 
 ]
 
-{ #category : #productions }
+{ #category : 'productions' }
 LbTermGrammar >> zeroArgTerm [
 	^ identifier
 

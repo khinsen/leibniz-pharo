@@ -1,14 +1,14 @@
 Class {
-	#name : #LbSubsortAxiom,
-	#superclass : #LbAxiom,
+	#name : 'LbSubsortAxiom',
+	#superclass : 'LbAxiom',
 	#instVars : [
 		'subsort',
 		'supersort'
 	],
-	#category : #'Leibniz-5-Axioms'
+	#category : 'Leibniz-5-Axioms'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbSubsortAxiom class >> subsort: subsortTerm supersort: supersortTerm [
 	^ self
 		subsort: subsortTerm
@@ -16,7 +16,7 @@ LbSubsortAxiom class >> subsort: subsortTerm supersort: supersortTerm [
 		localVariables: Dictionary new
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 LbSubsortAxiom class >> subsort: subsortTerm supersort: supersortTerm localVariables: aDictionary [
 	^ self basicNew
 		initializeWithSubsort: subsortTerm
@@ -25,7 +25,7 @@ LbSubsortAxiom class >> subsort: subsortTerm supersort: supersortTerm localVaria
 		yourself
 ]
 
-{ #category : #inspecting }
+{ #category : 'inspecting' }
 LbSubsortAxiom >> gtRelationFor: aView [
 	<gtView>
 	^ aView columnedList
@@ -44,7 +44,7 @@ LbSubsortAxiom >> gtRelationFor: aView [
 		yourself
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 LbSubsortAxiom >> initializeWithSubsort: subsortTerm supersort: supersortTerm localVariables: aDictionary [
 	subsort := subsortTerm.
 	supersort := supersortTerm.
@@ -64,7 +64,7 @@ LbSubsortAxiom >> initializeWithSubsort: subsortTerm supersort: supersortTerm lo
 	self beRecursivelyReadOnlyObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 LbSubsortAxiom >> isTotal [
 	"Answer true if the subsort relation applied to the
 	full family defined by its top-level operator."
@@ -84,7 +84,7 @@ LbSubsortAxiom >> isTotal [
 	^ argSorts hasEqualElements: highestRank key
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 LbSubsortAxiom >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: Character space.
@@ -93,12 +93,12 @@ LbSubsortAxiom >> printAsLeibnizSyntaxOn: aStream [
 	supersort printAsLeibnizSyntaxOn: aStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSubsortAxiom >> subsort [
 	^ subsort
 ]
 
-{ #category : #matching }
+{ #category : 'matching' }
 LbSubsortAxiom >> subsortOf: aTerm [
 	| rename preferredVarNames substitution |
 	rename := supersort addPrefix: #'temp.' toVarsConflictingWith: aTerm.
@@ -114,12 +114,12 @@ LbSubsortAxiom >> subsortOf: aTerm [
 	^ (subsort substitute: rename) substitute: substitution
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbSubsortAxiom >> supersort [
 	^ supersort
 ]
 
-{ #category : #matching }
+{ #category : 'matching' }
 LbSubsortAxiom >> supersortOf: aTerm [
 	| substitution |
 	substitution := subsort match: aTerm.

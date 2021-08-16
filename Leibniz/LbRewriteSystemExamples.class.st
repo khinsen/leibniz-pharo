@@ -1,19 +1,19 @@
 Class {
-	#name : #LbRewriteSystemExamples,
-	#superclass : #Object,
+	#name : 'LbRewriteSystemExamples',
+	#superclass : 'Object',
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
-	#category : #'Leibniz-4-Rules'
+	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : #example }
+{ #category : 'example' }
 LbRewriteSystemExamples >> booleanMatchingRules [
 	<gtExample>
 	^ self booleanRewriteSystem rulesMatching:
 		(LbSignatureExamples new booleanSignature parseTerm: 'true ∧ true')
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRewriteSystemExamples >> booleanReductionSteps [
 	<gtExample>
 	^ LbRewriteSystemExamples new booleanRewriteSystem
@@ -22,7 +22,7 @@ LbRewriteSystemExamples >> booleanReductionSteps [
 								parseTerm: '¬(true)')
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRewriteSystemExamples >> booleanReductions [
 	<gtExample>
 	| rws |
@@ -57,7 +57,7 @@ LbRewriteSystemExamples >> booleanReductions [
 		{ input. result } ]
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRewriteSystemExamples >> booleanRewriteSystem [
 	<gtExample>
 	^ (LbRewriteSystemBuilder signature: LbSignatureExamples new booleanSignature)
@@ -98,7 +98,7 @@ LbRewriteSystemExamples >> booleanRewriteSystem [
 		rewriteSystem
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRewriteSystemExamples >> booleanRewrites [
 	<gtExample>
 	| rws |
@@ -135,7 +135,7 @@ LbRewriteSystemExamples >> booleanRewrites [
 		{ input. result } ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 LbRewriteSystemExamples >> equalityTerms [
 	<gtExample>
 	| rws |
@@ -154,21 +154,21 @@ LbRewriteSystemExamples >> equalityTerms [
 		term ]
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRewriteSystemExamples >> integerMatchingRules [
 	<gtExample>
 	^ LbBuiltinRewriteSystems integerRewriteSystem rulesMatching:
 		(LbBuiltinSignatures integerSignature parseTerm: 'abs(-5)')
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRewriteSystemExamples >> integerMatchingRulesWithFailedCondition [
 	<gtExample>
 	^ LbBuiltinRewriteSystems integerRewriteSystem rulesMatching:
 		(LbBuiltinSignatures integerSignature parseTerm: 'abs(5)')
 ]
 
-{ #category : #example }
+{ #category : 'example' }
 LbRewriteSystemExamples >> rewriteSystemWithVarHeadRule [
 	<gtExample>
 	"Note: this is not a useful rewrite system. It is meant
