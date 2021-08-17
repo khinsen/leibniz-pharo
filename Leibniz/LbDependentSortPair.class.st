@@ -1,3 +1,6 @@
+"
+This class provides inspector views that help in understanding the relation between two sorts in the same sort graph.
+"
 Class {
 	#name : 'LbDependentSortPair',
 	#superclass : 'Object',

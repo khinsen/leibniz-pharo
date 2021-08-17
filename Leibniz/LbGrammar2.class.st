@@ -1,5 +1,5 @@
 Class {
-	#name : 'LbDependentSignatureGrammar',
+	#name : 'LbGrammar2',
 	#superclass : 'LbTokensIdentifiersLiterals',
 	#instVars : [
 		'op',
@@ -35,154 +35,104 @@ Class {
 		'infixSortArg',
 		'infixArg'
 	],
-	#category : 'Leibniz-7-DependentSorts'
+	#category : 'Leibniz-0-Infrastructure'
 }
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> arg [
+LbGrammar2 >> arg [
 	^ varArg / sortArg
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> bracketOp [
+LbGrammar2 >> bracketOp [
 	^ arg, openBracket, (arg separatedBy: comma trim), closeBracket
 ]
 
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> closeBrace [
-	^ $} asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> closeBracket [
-	^ $] asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> closeParenthesis [
-	^ $) asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> colon [
-	^ $: asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> comma [
-	^ $, asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> forAll [
-	^ $∀ asPParser
-]
-
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> forAllClause [
+LbGrammar2 >> forAllClause [
 	^ forAll trim, identifier, colon, identifier
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> fpExponentPart [
+LbGrammar2 >> fpExponentPart [
 	^ $e asPParser , fpIntegerPart
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> fpFractionalPart [
+LbGrammar2 >> fpFractionalPart [
 	^ $. asPParser , #digit asPParser plus optional
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> fpIntegerPart [
+LbGrammar2 >> fpIntegerPart [
 	^ $- asPParser optional , #digit asPParser plus
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> fpNumberTerm [
+LbGrammar2 >> fpNumberTerm [
 	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
 			/ (fpIntegerPart , fpExponentPart))
 		flatten
 ]
 
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> hat [
-	^ $^ asPParser
-]
-
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> infixArg [
+LbGrammar2 >> infixArg [
 	^ infixVarArg / infixSortArg
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> infixOp [
+LbGrammar2 >> infixOp [
 	^ infixArg trim, identifier trim, infixArg trim
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> infixSortArg [
+LbGrammar2 >> infixSortArg [
 	^ simpleTerm
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> infixVarArg [
+LbGrammar2 >> infixVarArg [
 	^ identifier, colon, simpleTerm
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> integerTerm [
+LbGrammar2 >> integerTerm [
 	^ ($- asPParser optional , #digit asPParser plus) flatten
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> literalTerm [
+LbGrammar2 >> literalTerm [
 	^ rationalNumberTerm / fpNumberTerm / integerTerm / stringTerm
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> nonInfixTerm [
+LbGrammar2 >> nonInfixTerm [
 	^ simpleTerm, suffix optional
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> op [
+LbGrammar2 >> op [
 	^ forAllClause star, opAndArgs trim, colon, term trim
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> opAndArgs [
+LbGrammar2 >> opAndArgs [
 	^ prefixOp / bracketOp / infixOp / subscriptOp / superscriptOp / zeroArgOp
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> opEnd [
+LbGrammar2 >> opEnd [
 	^ op end
 ]
 
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> openBrace [
-	^ ${ asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> openBracket [
-	^ $[ asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> openParenthesis [
-	^ $( asPParser
-]
-
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> parenthesizedTerm [
+LbGrammar2 >> parenthesizedTerm [
 	^ openParenthesis , term, closeParenthesis
 		==> [ :nodes | nodes second ]
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> prefixOp [
+LbGrammar2 >> prefixOp [
 	^ identifier trim,
 		openParenthesis,
 		(arg separatedBy: comma trim),
@@ -190,14 +140,14 @@ LbDependentSignatureGrammar >> prefixOp [
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> prefixOpTerm [
+LbGrammar2 >> prefixOpTerm [
 	^ identifier , openParenthesis ,
 		 (term separatedBy: comma trim) ,
 		 closeParenthesis
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> rationalNumberTerm [
+LbGrammar2 >> rationalNumberTerm [
 	^ ($- asPParser optional , #digit asPParser plus ,
 			$/ asPParser ,
 			$0 asPParser not , #digit asPParser star) flatten 
@@ -205,46 +155,46 @@ LbDependentSignatureGrammar >> rationalNumberTerm [
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> simpleTerm [
+LbGrammar2 >> simpleTerm [
 	^ literalTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> sortArg [
+LbGrammar2 >> sortArg [
 	^ term
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> stringTerm [
+LbGrammar2 >> stringTerm [
 	^ ($" asPParser , $" asPParser negate star , $" asPParser) flatten 
 
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> subscriptOp [
+LbGrammar2 >> subscriptOp [
 	^ arg, underscore, openBrace, (arg separatedBy: comma trim), closeBrace
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> suffix [
+LbGrammar2 >> suffix [
 	^ (self suffixBetween: openBracket and: closeBracket withSymbol: #'[]')
 		 / (self suffixBetween: '^{' asPParser and: closeBrace withSymbol: #'^')
 		 / (self suffixBetween: '_{' asPParser and: closeBrace withSymbol: #'_')
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> suffixBetween: leftDelimiter and: rightDelimiter withSymbol: opSymbol [
+LbGrammar2 >> suffixBetween: leftDelimiter and: rightDelimiter withSymbol: opSymbol [
 	^ leftDelimiter , (term separatedBy: comma asPParser trim) , rightDelimiter
 		==> [ :nodes | { opSymbol . (nodes second reject: [ :element | element = $, ]) } ]
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> superscriptOp [
+LbGrammar2 >> superscriptOp [
 	^ arg, hat, openBrace, (arg separatedBy: comma trim), closeBrace
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> term [
+LbGrammar2 >> term [
 	^ (nonInfixTerm separatedBy: (identifier trim))
 		==> [ :nodes |
 				| result |
@@ -259,32 +209,27 @@ LbDependentSignatureGrammar >> term [
 				result ]
 ]
 
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> underscore [
-	^ $_ asPParser
-]
-
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> var [
+LbGrammar2 >> var [
 	^ forAllClause star, identifier trim, colon, simpleTerm trim
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> varArg [
+LbGrammar2 >> varArg [
 	^ identifier, colon, term
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> varEnd [
+LbGrammar2 >> varEnd [
 	^ var end
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureGrammar >> zeroArgOp [
+LbGrammar2 >> zeroArgOp [
 	^ identifier
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> zeroArgTerm [
+LbGrammar2 >> zeroArgTerm [
 	^ identifier
 ]

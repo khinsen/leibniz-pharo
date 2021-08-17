@@ -9,8 +9,7 @@ Class {
 	#instVars : [
 		'rule',
 		'forAllClause',
-		'forAll',
-		'colon'
+		'forAll'
 	],
 	#category : 'Leibniz-4-Rules'
 }

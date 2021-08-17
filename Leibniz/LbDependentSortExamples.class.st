@@ -86,7 +86,10 @@ LbDependentSortExamples >> bagSorts [
 				'∅'
 				'bag(element, 2)'
 				'list(element, 2)'
-				'list(element.special, 2)')
+				'list(element.special, 2)'
+				'bag(element, 2)'
+				'∀ n:ℕ bag(element, n)'
+				'∀ m:ℕ bag(element, m)')
 				collect: [ :each |
 					sortGraph parseSort: each ].
 	self assert: (sorts at: 2) <= (sorts at: 1).
@@ -96,6 +99,11 @@ LbDependentSortExamples >> bagSorts [
 	self assert: (sorts at: 5) <= (sorts at: 4).
 	self assert: (sorts at: 5) <= (sorts at: 3).
 	self assert: (sorts at: 4) <= (sorts at: 3).
+	self assert: ((sorts at: 4) <= (sorts at: 6)) not.
+	self assert: ((sorts at: 5) <= (sorts at: 6)) not.
+	self assert: (sorts at: 4) <= (sorts at: 7).
+	self assert: (sorts at: 7) <= (sorts at: 8).
+	self assert: (sorts at: 8) <= (sorts at: 7).
 	self assert: (((sorts at: 1) subsortGraph) at: #nodes) size equals: 4.
 	self assert: (((sorts at: 3) subsortGraph) at: #nodes) size equals: 4.
 	self assert: (((sorts at: 4) supersortGraph) at: #nodes) size equals: 3.

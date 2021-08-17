@@ -87,7 +87,7 @@ ${method:name=LbTermGrammar>>#term|expanded=}$
 "
 Class {
 	#name : 'LbTermGrammar',
-	#superclass : 'LbGrammar',
+	#superclass : 'LbTokensIdentifiersLiterals',
 	#instVars : [
 		'zeroArgTerm',
 		'term',

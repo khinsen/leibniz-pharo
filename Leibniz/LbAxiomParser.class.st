@@ -3,7 +3,6 @@ Class {
 	#superclass : 'LbTermParser',
 	#instVars : [
 		'forAllClause',
-		'colon',
 		'forAll',
 		'axiom'
 	],

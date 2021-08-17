@@ -2,10 +2,6 @@ Class {
 	#name : 'LbSignatureGrammar',
 	#superclass : 'LbSortGrammar',
 	#instVars : [
-		'colon',
-		'openParenthesis',
-		'closeParenthesis',
-		'comma',
 		'op',
 		'var',
 		'arg',
@@ -14,13 +10,7 @@ Class {
 		'infixOp',
 		'zeroArgOp',
 		'bracketOp',
-		'openBracket',
-		'closeBracket',
-		'underscore',
-		'openBrace',
-		'closeBrace',
 		'subscriptOp',
-		'hat',
 		'superscriptOp'
 	],
 	#category : 'Leibniz-2-Signatures'

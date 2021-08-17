@@ -11,7 +11,7 @@ Subsort relations are defined by ${method:name=LbSortGrammar>>#subsort|expanded=
 "
 Class {
 	#name : 'LbSortGrammar',
-	#superclass : 'LbGrammar',
+	#superclass : 'LbTokensIdentifiersLiterals',
 	#instVars : [
 		'subsortSymbol',
 		'subsort',

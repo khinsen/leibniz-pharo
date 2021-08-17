@@ -109,7 +109,7 @@ LbSubsortAxiom >> subsortOf: aTerm [
 		| name |
 		name := (varSet intersection: preferredVarNames) asArray sorted
 					ifEmpty: [ varSet anyOne ]
-					ifNotTempy: [ :anArray | anArray first ].
+					ifNotEmpty: [ :anArray | anArray first ].
 		LbVarTerm name: name sort: sort signature: signature ].
 	^ (subsort substitute: rename) substitute: substitution
 ]
