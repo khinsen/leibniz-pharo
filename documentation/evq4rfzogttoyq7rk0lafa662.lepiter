@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-16T17:55:25.015056+02:00"
+						"dateAndTimeString" : "2021-08-17T10:27:01.211456+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Digital Scientific Notations are scientific notations used at the human-computer interface in computational science."
+				"string" : "Digital Scientific Notations are scientific notations used at the human-computer interface in computational science. They are formal languages, and thus have an unambiguous meaning for software, just like programming languages. However, they are designed specifically for expressing, analyzing, and manipulating scientific models."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-16T17:53:33.019086+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2021-08-16T17:58:22.637468+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "XxcP6hCGDQC/00AWD9Rc+w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Leibniz is an experimental Digital Scientific Notation, at this time best described as a research prototype. Play with it, but don't rely on it!"
 			},
 			{
 				"__type" : "textSnippet",
@@ -152,43 +189,6 @@
 					"__type" : "textStyle"
 				},
 				"string" : "Background reading:"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-16T17:53:33.019086+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-16T17:58:22.637468+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "XxcP6hCGDQC/00AWD9Rc+w=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "Leibniz is an experimental Digital Scientific Notation, at this time best described as a research prototype. Play with it, but don't rely on it!"
 			}
 		]
 	},
@@ -211,7 +211,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2021-08-16T17:51:53.046343+02:00"
+			"dateAndTimeString" : "2021-08-17T10:21:50.826372+02:00"
 		}
 	},
 	"pageType" : {
