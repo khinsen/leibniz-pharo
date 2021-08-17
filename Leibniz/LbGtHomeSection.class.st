@@ -15,15 +15,25 @@ LbGtHomeSection >> create [
 	^ sectionContainer
 ]
 
-{ #category : 'initialization' }
+{ #category : 'accessing' }
 LbGtHomeSection >> documentationCard [
 	^ self
-		newToolCardWithTitle: 'Leibniz'
-		icon: (LeIcons lepiterDatabase create asScalableElement size: 64 @ 64)
-		action: [ :card |
-			self
-				showSpaceWithTitle: 'Leibniz Documentation'
-				with: (GtInspector createOn: LbDocumentation new database)
-				from: card ]
-		description: 'Learning about Leibniz'
+		newHeaderCardWithTitle: 'Leibniz'
+		description: 'Read the Leibniz book'
+		size: 200@150
+		content:
+			(BrLabel new
+				text: 'Leibniz Book';
+				aptitude: BrGlamorousLabelAptitude new
+					bold;
+				padding: (BlInsets all: 20)) asScalableElement
+		action: [ :card | 
+			| database startPage |
+			database := LbDocumentation new database.
+			startPage := database pageNamed: 'Leibniz - a Digital Scientific Notation'.
+			GtWorldUtility 
+				showSpaceWithTitle: startPage title
+				inPagerWith: [ startPage
+					asLepiterPagePhlowTool asElementDo: [ :e | e ] ] asStencil
+				from: card ].
 ]
