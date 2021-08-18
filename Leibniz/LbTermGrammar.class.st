@@ -91,51 +91,15 @@ Class {
 	#instVars : [
 		'zeroArgTerm',
 		'term',
-		'fpIntegerPart',
-		'fpFractionalPart',
-		'fpExponentPart',
 		'prefixOpTerm',
 		'nonInfixTerm',
 		'simpleTerm',
 		'parenthesizedTerm',
-		'rationalNumberTerm',
-		'fpNumberTerm',
-		'integerTerm',
-		'stringTerm',
 		'literalTerm',
 		'suffix'
 	],
 	#category : 'Leibniz-3-Terms'
 }
-
-{ #category : 'productions' }
-LbTermGrammar >> fpExponentPart [
-	^ $e asPParser , fpIntegerPart
-]
-
-{ #category : 'productions' }
-LbTermGrammar >> fpFractionalPart [
-	^ $. asPParser , #digit asPParser plus optional
-
-]
-
-{ #category : 'productions' }
-LbTermGrammar >> fpIntegerPart [
-	^ $- asPParser optional , #digit asPParser plus
-
-]
-
-{ #category : 'productions' }
-LbTermGrammar >> fpNumberTerm [
-	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
-			/ (fpIntegerPart , fpExponentPart))
-		flatten
-]
-
-{ #category : 'productions' }
-LbTermGrammar >> integerTerm [
-	^ ($- asPParser optional , #digit asPParser plus) flatten
-]
 
 { #category : 'productions' }
 LbTermGrammar >> literalTerm [
@@ -163,14 +127,6 @@ LbTermGrammar >> prefixOpTerm [
 ]
 
 { #category : 'productions' }
-LbTermGrammar >> rationalNumberTerm [
-	^ ($- asPParser optional , #digit asPParser plus ,
-			$/ asPParser ,
-			$0 asPParser not , #digit asPParser star) flatten 
-
-]
-
-{ #category : 'productions' }
 LbTermGrammar >> simpleTerm [
 	^ literalTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm
 ]
@@ -178,12 +134,6 @@ LbTermGrammar >> simpleTerm [
 { #category : 'accessing' }
 LbTermGrammar >> start [
 	^ term end
-]
-
-{ #category : 'productions' }
-LbTermGrammar >> stringTerm [
-	^ ($" asPParser , $" asPParser negate star , $" asPParser) flatten 
-
 ]
 
 { #category : 'productions' }

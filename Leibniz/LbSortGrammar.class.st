@@ -13,7 +13,6 @@ Class {
 	#name : 'LbSortGrammar',
 	#superclass : 'LbTokensIdentifiersLiterals',
 	#instVars : [
-		'subsortSymbol',
 		'subsort',
 		'sort'
 	],
@@ -34,11 +33,5 @@ LbSortGrammar >> start [
 { #category : 'productions' }
 LbSortGrammar >> subsort [
 	^ identifier trim, subsortSymbol, identifier trim
-
-]
-
-{ #category : 'productions' }
-LbSortGrammar >> subsortSymbol [
-	^ $⊆ asPParser
 
 ]

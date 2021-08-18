@@ -14,17 +14,10 @@ Class {
 		'superscriptOp',
 		'zeroArgTerm',
 		'term',
-		'fpIntegerPart',
-		'fpFractionalPart',
-		'fpExponentPart',
 		'prefixOpTerm',
 		'nonInfixTerm',
 		'simpleTerm',
 		'parenthesizedTerm',
-		'rationalNumberTerm',
-		'fpNumberTerm',
-		'integerTerm',
-		'stringTerm',
 		'literalTerm',
 		'suffix',
 		'forAll',
@@ -48,66 +41,9 @@ LbDependentSignatureGrammar >> bracketOp [
 	^ arg, openBracket, (arg separatedBy: comma trim), closeBracket
 ]
 
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> closeBrace [
-	^ $} asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> closeBracket [
-	^ $] asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> closeParenthesis [
-	^ $) asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> colon [
-	^ $: asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> comma [
-	^ $, asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> forAll [
-	^ $∀ asPParser
-]
-
 { #category : 'productions - signature' }
 LbDependentSignatureGrammar >> forAllClause [
 	^ forAll trim, identifier, colon, identifier
-]
-
-{ #category : 'productions - term' }
-LbDependentSignatureGrammar >> fpExponentPart [
-	^ $e asPParser , fpIntegerPart
-]
-
-{ #category : 'productions - term' }
-LbDependentSignatureGrammar >> fpFractionalPart [
-	^ $. asPParser , #digit asPParser plus optional
-]
-
-{ #category : 'productions - term' }
-LbDependentSignatureGrammar >> fpIntegerPart [
-	^ $- asPParser optional , #digit asPParser plus
-]
-
-{ #category : 'productions - term' }
-LbDependentSignatureGrammar >> fpNumberTerm [
-	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
-			/ (fpIntegerPart , fpExponentPart))
-		flatten
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> hat [
-	^ $^ asPParser
 ]
 
 { #category : 'productions - signature' }
@@ -128,11 +64,6 @@ LbDependentSignatureGrammar >> infixSortArg [
 { #category : 'productions - signature' }
 LbDependentSignatureGrammar >> infixVarArg [
 	^ identifier, colon, simpleTerm
-]
-
-{ #category : 'productions - term' }
-LbDependentSignatureGrammar >> integerTerm [
-	^ ($- asPParser optional , #digit asPParser plus) flatten
 ]
 
 { #category : 'productions - term' }
@@ -160,21 +91,6 @@ LbDependentSignatureGrammar >> opEnd [
 	^ op end
 ]
 
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> openBrace [
-	^ ${ asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> openBracket [
-	^ $[ asPParser
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> openParenthesis [
-	^ $( asPParser
-]
-
 { #category : 'productions - term' }
 LbDependentSignatureGrammar >> parenthesizedTerm [
 	^ openParenthesis , term, closeParenthesis
@@ -197,14 +113,6 @@ LbDependentSignatureGrammar >> prefixOpTerm [
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureGrammar >> rationalNumberTerm [
-	^ ($- asPParser optional , #digit asPParser plus ,
-			$/ asPParser ,
-			$0 asPParser not , #digit asPParser star) flatten 
-
-]
-
-{ #category : 'productions - term' }
 LbDependentSignatureGrammar >> simpleTerm [
 	^ literalTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm
 ]
@@ -212,12 +120,6 @@ LbDependentSignatureGrammar >> simpleTerm [
 { #category : 'productions - signature' }
 LbDependentSignatureGrammar >> sortArg [
 	^ term
-]
-
-{ #category : 'productions - term' }
-LbDependentSignatureGrammar >> stringTerm [
-	^ ($" asPParser , $" asPParser negate star , $" asPParser) flatten 
-
 ]
 
 { #category : 'productions - signature' }
@@ -257,11 +159,6 @@ LbDependentSignatureGrammar >> term [
 						(nodes at: index) = (nodes at: 2)
 							ifFalse: [ result := PP2Failure message: 'expected ', (nodes at: 2) asString, ' but got ', (nodes at: index) asString ] ].
 				result ]
-]
-
-{ #category : 'productions - tokens' }
-LbDependentSignatureGrammar >> underscore [
-	^ $_ asPParser
 ]
 
 { #category : 'productions - signature' }

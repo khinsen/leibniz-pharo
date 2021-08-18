@@ -27,39 +27,6 @@ LbSignatureGrammar >> bracketOp [
 ]
 
 { #category : 'productions' }
-LbSignatureGrammar >> closeBrace [
-	^ $} asPParser
-]
-
-{ #category : 'productions' }
-LbSignatureGrammar >> closeBracket [
-	^ $] asPParser
-]
-
-{ #category : 'productions' }
-LbSignatureGrammar >> closeParenthesis [
-	^ $) asPParser
-]
-
-{ #category : 'productions' }
-LbSignatureGrammar >> colon [
-	^ $: asPParser
-
-]
-
-{ #category : 'productions' }
-LbSignatureGrammar >> comma [
-	^ $, asPParser
-
-]
-
-{ #category : 'productions' }
-LbSignatureGrammar >> hat [
-	^ $^ asPParser
-
-]
-
-{ #category : 'productions' }
 LbSignatureGrammar >> infixOp [
 	^ arg trim, identifier trim, arg trim
 ]
@@ -73,24 +40,6 @@ LbSignatureGrammar >> op [
 { #category : 'productions' }
 LbSignatureGrammar >> opAndArgs [
 	^ prefixOp / bracketOp / infixOp / subscriptOp / superscriptOp / zeroArgOp
-]
-
-{ #category : 'productions' }
-LbSignatureGrammar >> openBrace [
-	^ ${ asPParser
-
-]
-
-{ #category : 'productions' }
-LbSignatureGrammar >> openBracket [
-	^ $[ asPParser
-
-]
-
-{ #category : 'productions' }
-LbSignatureGrammar >> openParenthesis [
-	^ $( asPParser
-
 ]
 
 { #category : 'productions' }
@@ -111,12 +60,6 @@ LbSignatureGrammar >> subscriptOp [
 { #category : 'productions' }
 LbSignatureGrammar >> superscriptOp [
 	^ arg, hat, openBrace, (arg separatedBy: comma trim), closeBrace
-]
-
-{ #category : 'productions' }
-LbSignatureGrammar >> underscore [
-	^ $_ asPParser
-
 ]
 
 { #category : 'productions' }

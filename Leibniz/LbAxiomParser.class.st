@@ -21,16 +21,6 @@ LbAxiomParser >> axiom [
 						parse: (nodes at: 2) ]
 ]
 
-{ #category : 'tokens' }
-LbAxiomParser >> colon [
-	^ $: asPParser
-]
-
-{ #category : 'tokens' }
-LbAxiomParser >> forAll [
-	^ $∀ asPParser
-]
-
 { #category : 'productions' }
 LbAxiomParser >> forAllClause [
 	^ forAll trim, identifier, colon, identifier

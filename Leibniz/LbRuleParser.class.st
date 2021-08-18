@@ -14,16 +14,6 @@ Class {
 	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : 'tokens' }
-LbRuleParser >> colon [
-	^ $: asPParser
-]
-
-{ #category : 'tokens' }
-LbRuleParser >> forAll [
-	^ $∀ asPParser
-]
-
 { #category : 'productions' }
 LbRuleParser >> forAllClause [
 	^ forAll trim, identifier, colon, identifier

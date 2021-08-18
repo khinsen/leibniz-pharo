@@ -57,13 +57,6 @@ LbDependentSignatureParser >> fpNumberTerm [
 			LbFPNumberTerm value: floatValue signature: aSignature ] ]
 ]
 
-{ #category : 'accessing' }
-LbDependentSignatureParser >> ignoredNames [
-	^ (super ignoredNames
-		copyWith: #signature)
-		copyWith: #extraVariables
-]
-
 { #category : 'productions - signature' }
 LbDependentSignatureParser >> infixOp [
 	^ super infixOp ==> [ :nodes |

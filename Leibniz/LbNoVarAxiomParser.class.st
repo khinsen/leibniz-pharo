@@ -2,7 +2,6 @@ Class {
 	#name : 'LbNoVarAxiomParser',
 	#superclass : 'LbTermParser',
 	#instVars : [
-		'subsortSymbol',
 		'conditionClause',
 		'underCondition',
 		'equalSign',
@@ -48,11 +47,6 @@ LbNoVarAxiomParser >> noVarSubsort [
 { #category : 'accessing' }
 LbNoVarAxiomParser >> start [
 	^ (noVarEquality / noVarSubsort) end.
-]
-
-{ #category : 'tokens' }
-LbNoVarAxiomParser >> subsortSymbol [
-	^ $⊆ asPParser
 ]
 
 { #category : 'tokens' }

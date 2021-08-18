@@ -1,6 +1,15 @@
 Class {
 	#name : 'LbTokensIdentifiersLiterals',
 	#superclass : 'LbTokens',
+	#instVars : [
+		'fpIntegerPart',
+		'fpFractionalPart',
+		'fpExponentPart',
+		'rationalNumberTerm',
+		'fpNumberTerm',
+		'integerTerm',
+		'stringTerm'
+	],
 	#category : 'Leibniz-0-Infrastructure'
 }
 
@@ -24,7 +33,29 @@ LbTokensIdentifiersLiterals class >> reservedIdentifiers [
 		}
 ]
 
-{ #category : 'productions - identifiers' }
+{ #category : 'literals' }
+LbTokensIdentifiersLiterals >> fpExponentPart [
+	^ $e asPParser , fpIntegerPart
+]
+
+{ #category : 'literals' }
+LbTokensIdentifiersLiterals >> fpFractionalPart [
+	^ $. asPParser , #digit asPParser plus optional
+]
+
+{ #category : 'literals' }
+LbTokensIdentifiersLiterals >> fpIntegerPart [
+	^ $- asPParser optional , #digit asPParser plus
+]
+
+{ #category : 'literals' }
+LbTokensIdentifiersLiterals >> fpNumberTerm [
+	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
+			/ (fpIntegerPart , fpExponentPart))
+		flatten
+]
+
+{ #category : 'identifiers' }
 LbTokensIdentifiersLiterals >> identifier [
 	^ (identifierCharacter , (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
 		==> [ :id |
@@ -33,7 +64,7 @@ LbTokensIdentifiersLiterals >> identifier [
 					ifTrue: [ PP2Failure message: 'reserved identifier: ', id ] ]
 ]
 
-{ #category : 'productions - identifiers' }
+{ #category : 'identifiers' }
 LbTokensIdentifiersLiterals >> identifierCharacter [
 	| predicate |
 	predicate := PP2CharSetPredicate on:
@@ -50,4 +81,23 @@ LbTokensIdentifiersLiterals >> identifierCharacter [
 		predicate: predicate;
 		predicateMessage: 'Leibniz identifier character expected';
 		yourself
+]
+
+{ #category : 'literals' }
+LbTokensIdentifiersLiterals >> integerTerm [
+	^ ($- asPParser optional , #digit asPParser plus) flatten
+]
+
+{ #category : 'literals' }
+LbTokensIdentifiersLiterals >> rationalNumberTerm [
+	^ ($- asPParser optional , #digit asPParser plus ,
+			$/ asPParser ,
+			$0 asPParser not , #digit asPParser star) flatten 
+
+]
+
+{ #category : 'literals' }
+LbTokensIdentifiersLiterals >> stringTerm [
+	^ ($" asPParser , $" asPParser negate star , $" asPParser) flatten 
+
 ]

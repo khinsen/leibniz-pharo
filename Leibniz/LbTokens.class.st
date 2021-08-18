@@ -20,62 +20,69 @@ Class {
 		'underscore',
 		'openBrace',
 		'closeBrace',
-		'hat'
+		'hat',
+		'subsortSymbol'
 	],
 	#category : 'Leibniz-0-Infrastructure'
 }
 
-{ #category : 'productions - tokens' }
+{ #category : 'tokens' }
 LbTokens >> closeBrace [
 	^ $} asPParser
 ]
 
-{ #category : 'productions - tokens' }
+{ #category : 'tokens' }
 LbTokens >> closeBracket [
 	^ $] asPParser
 ]
 
-{ #category : 'productions - tokens' }
+{ #category : 'tokens' }
 LbTokens >> closeParenthesis [
 	^ $) asPParser
 ]
 
-{ #category : 'productions - tokens' }
+{ #category : 'tokens' }
 LbTokens >> colon [
 	^ $: asPParser
 ]
 
-{ #category : 'productions - tokens' }
+{ #category : 'tokens' }
 LbTokens >> comma [
 	^ $, asPParser
 ]
 
-{ #category : 'productions - tokens' }
+{ #category : 'tokens' }
 LbTokens >> forAll [
 	^ $∀ asPParser
 ]
 
-{ #category : 'grammar' }
+{ #category : 'tokens' }
 LbTokens >> hat [
 	^ $^ asPParser
 ]
 
-{ #category : 'productions - tokens' }
+{ #category : 'tokens' }
 LbTokens >> openBrace [
 	^ ${ asPParser
 ]
 
-{ #category : 'productions - tokens' }
+{ #category : 'tokens' }
 LbTokens >> openBracket [
 	^ $[ asPParser
 ]
 
-{ #category : 'productions - tokens' }
+{ #category : 'tokens' }
 LbTokens >> openParenthesis [
 	^ $( asPParser
 ]
 
-{ #category : 'productions - tokens' }
+{ #category : 'tokens' }
+LbTokens >> subsortSymbol [
+	^ $⊆ asPParser
+
+]
+
+{ #category : 'tokens' }
 LbTokens >> underscore [
 	^ $_ asPParser
 ]
