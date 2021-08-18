@@ -245,6 +245,22 @@ LbSignature >> opsOfKind: aKind [
 	^ ops
 ]
 
+{ #category : 'term construction' }
+LbSignature >> parsePattern: aString [
+	^ self parsePattern: aString extraVariables: Dictionary new
+]
+
+{ #category : 'term construction' }
+LbSignature >> parsePattern: aString extraVariables: aDictionary [
+	| parsedTerm |
+	parsedTerm := (LbParser2 newStartingAt: #patternEnd)
+		parse: aString.
+	parsedTerm isPetit2Failure ifTrue:
+		[ self error: parsedTerm message, ' after ',
+				 (aString sliceFrom: 1 to: parsedTerm position) ].
+	^ parsedTerm value: self value: aDictionary
+]
+
 { #category : 'asset construction' }
 LbSignature >> parseRule: aString [
 	| rule |
@@ -262,8 +278,13 @@ LbSignature >> parseTerm: aString [
 
 { #category : 'term construction' }
 LbSignature >> parseTerm: aString extraVariables: aDictionary [
-	^ (LbTermParser signature: self extraVariables: aDictionary)
-		parse: aString
+	| parsedTerm |
+	parsedTerm := (LbParser2 newStartingAt: #termEnd)
+		parse: aString.
+	parsedTerm isPetit2Failure ifTrue:
+		[ self error: parsedTerm message, ' after ',
+				 (aString sliceFrom: 1 to: parsedTerm position) ].
+	^ parsedTerm value: self value: aDictionary
 ]
 
 { #category : 'accessing' }

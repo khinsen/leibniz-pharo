@@ -12,7 +12,10 @@ LbTermParserExamples >> assertParseFailure: aString rule: aSymbol [
 	parser := self parserForRule: aSymbol.
 	context := PP2Context new.
 	result := parser parse: aString withContext: context.
-	self assert: (result isPetit2Failure or: [context atEnd not ])
+	self assert:
+		(result isPetit2Failure
+			or: [ context atEnd not
+			or: [ (result returnValue value: self signature value: Dictionary new) isNil ] ])
 ]
 
 { #category : 'example' }
@@ -51,7 +54,8 @@ LbTermParserExamples >> identifiers [
 	^ #('⇒⇒' '?⇒?' '|+|' '→|→')
 		collect: [ :each |
 			| result |
-			result := self parse: each rule: #identifier.
+			result := (self parserForRule: #identifier)
+						parse: each.
 			self assert: result equals: each.
 			result ]
 ]
@@ -174,8 +178,13 @@ LbTermParserExamples >> nonInfixTerms [
 
 { #category : 'utility' }
 LbTermParserExamples >> parse: aString rule: aSymbol [
-	^ (self parserForRule: aSymbol)
-		parse: aString
+	| parsedTerm |
+	parsedTerm := (self parserForRule: aSymbol)
+					parse: aString.
+	parsedTerm isPetit2Failure ifTrue:
+		[ self error: parsedTerm message, ' after "',
+				 (aString sliceFrom: 1 to: parsedTerm position), '"' ].
+	^ parsedTerm value: self signature value: Dictionary new.
 ]
 
 { #category : 'utility' }
@@ -187,16 +196,36 @@ LbTermParserExamples >> parse: aString rule: aSymbol assertEquals: aValue [
 { #category : 'example' }
 LbTermParserExamples >> parser [
 	<gtExample>
-	^ LbTermParser signature: self signature
+	"^ LbTermParser signature: self signature"
+	^ LbParser2 newStartingAt: #termEnd
 ]
 
 { #category : 'utility' }
 LbTermParserExamples >> parserForRule: aSymbol [
-	| parser |
+"	| parser |
 	parser := LbTermParser newStartingAt: aSymbol.
 	parser signature: self signature.
-	parser extraVariables: Dictionary new.
-	^ parser
+	parser extraVariables: Dictionary new."
+	^ LbParser2 newStartingAt: aSymbol
+]
+
+{ #category : 'example' }
+LbTermParserExamples >> patterns [
+	<gtExample>
+	| ev va t v |
+	ev := Dictionary with: #a -> #A.
+	va := self zeroArgTerm: #a extraVariables: ev.
+	^ {
+		'∀ a:A a'
+			-> va.
+		'∀ a:A aOneArgOp(a)'
+			-> (self prefixOpTerm: #aOneArgOp withArgs: {va})
+	}
+	collect: [ :each | 
+		| result |
+		result := self parse: each key rule: #patternEnd.
+		self assert: result equals: each value.
+		result ]
 ]
 
 { #category : 'example' }
@@ -244,7 +273,7 @@ LbTermParserExamples >> prefixOpTerms [
 ]
 
 { #category : 'example' }
-LbTermParserExamples >> prefixTermParseFailures [
+LbTermParserExamples >> prefixTermFailures [
 	<gtExample>
 	| inputs |
 	inputs := #('aZeroArgOp()' 'aOneArgOp(aVar, aVar)' 'aTwoArgOp(aZeroArgOp)').
@@ -363,6 +392,17 @@ LbTermParserExamples >> stringTerms [
 { #category : 'utility' }
 LbTermParserExamples >> zeroArgTerm: aSymbol [
 	^ self signature zeroArgTermNamed: (LbPrefixOperatorName for: aSymbol)
+]
+
+{ #category : 'utility' }
+LbTermParserExamples >> zeroArgTerm: aSymbol extraVariables: aDictionary [
+	| ev |
+	ev := (aDictionary associations collect: [ :each |
+			(LbPrefixOperatorName for: each key)
+			-> (self signature sortNamed: each value) ]) asDictionary.
+	^ self signature
+		zeroArgTermNamed: (LbPrefixOperatorName for: aSymbol)
+		extraVariables: ev
 ]
 
 { #category : 'example' }

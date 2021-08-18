@@ -4,15 +4,6 @@ Class {
 	#category : 'Leibniz-0-Infrastructure'
 }
 
-{ #category : 'accessing' }
-LbParser2 class >> signature: aSignature extraVariables: aDictionary [
-	| parser |
-	parser := self newStartingAt: self startSymbol.
-	parser signature: aSignature.
-	parser extraVariables: aDictionary.
-	^ parser
-]
-
 { #category : 'signature' }
 LbParser2 >> bracketOp [
 	^ super bracketOp
@@ -42,6 +33,16 @@ LbParser2 >> forAllClause [
 			varName -> (aSignature sortNamed: sortName) ] ]
 ]
 
+{ #category : 'signature' }
+LbParser2 >> forAllClauseForTerms [
+	^ super forAllClauseForTerms ==> [ :nodes |
+		| varName sortName |
+		varName := nodes second asSymbol asLbOperatorName.
+		sortName := nodes fourth asSymbol.
+		[ :aSignature :aDictionary |
+			varName -> (aSignature sortNamed: sortName) ] ]
+]
+
 { #category : 'terms' }
 LbParser2 >> fpNumberTerm [
 	^ super fpNumberTerm ==> [ :value | 
@@ -52,7 +53,7 @@ LbParser2 >> fpNumberTerm [
 		Workaround: convert the converted string explicitly to a float."
 		| floatValue |
 		floatValue := (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat.
-		[ :aSignature |
+		[ :aSignature :aDictionary |
 			aSignature assertBuiltin: #fpNumbers.
 			LbFPNumberTerm value: floatValue signature: aSignature ] ]
 ]
@@ -68,7 +69,7 @@ LbParser2 >> integerTerm [
 	^ super integerTerm ==> [ :value |
 		| intValue |
 		intValue := value asNumber.
-		[ :aSignature |
+		[ :aSignature :aDictionary |
 			aSignature assertBuiltin: #integers.
 			LbIntegerTerm value: intValue signature: aSignature ] ]
 ]
@@ -108,6 +109,22 @@ LbParser2 >> op [
 			} ] ]
 ]
 
+{ #category : 'terms' }
+LbParser2 >> pattern [
+	^ super pattern ==> [ :nodes |
+		| variables parsedTerm |
+		variables := nodes first.
+		parsedTerm := nodes second.
+		[ :aSignature :aDictionary |
+			| allVariables |
+			allVariables := aDictionary copy.
+			variables do: [ :each |
+				| newVar |
+				newVar := each value: aSignature value: aDictionary.
+				allVariables at: newVar key put: newVar value ].
+			parsedTerm value: aSignature value: allVariables ] ]
+]
+
 { #category : 'signature' }
 LbParser2 >> prefixOp [
 	^ super prefixOp ==> [ :nodes |
@@ -131,7 +148,7 @@ LbParser2 >> rationalNumberTerm [
 	^ super rationalNumberTerm==> [ :value |
 		| rationalValue |
 		rationalValue := Fraction readFromString: value.
-		[ :aSignature |
+		[ :aSignature :aDictionary |
 			aSignature assertBuiltin: #rationalNumbers.
 			LbRationalNumberTerm value: rationalValue signature: aSignature ] ]
 ]
@@ -147,7 +164,7 @@ LbParser2 >> stringTerm [
 	^ super stringTerm ==> [ :value |
 		| stringValue |
 		stringValue := value copyFrom: 2 to: value size - 1.
-		[ :aSignature |
+		[ :aSignature :aDictionary |
 			aSignature assertBuiltin: #strings.
 			LbStringTerm value: stringValue signature: aSignature ] ]
 ]

@@ -46,10 +46,8 @@ LbTermExamples >> booleanUnifications [
 
 { #category : 'private' }
 LbTermExamples >> check: aTerm matches: aPattern withSubstitution: aDictionaryOrNil signature: aSignature [
-	| p parse pattern term variables substitution |
-	p := LbTermParser signature: aSignature.
-	parse := [ :aString |
-		p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
+	| parse pattern term variables substitution |
+	parse := [ :aString | aSignature parseTerm: aString ].
 	pattern := parse value: aPattern.
 	term := parse value: aTerm.
 	substitution := pattern match: term.
@@ -67,10 +65,8 @@ LbTermExamples >> check: aTerm matches: aPattern withSubstitution: aDictionaryOr
 
 { #category : 'private' }
 LbTermExamples >> check: aPattern withSubstitution: aDictionary equals: aTerm signature: aSignature [
-	| p parse pattern term substitution result |
-	p := LbTermParser signature: aSignature.
-	parse := [ :aString |
-		p parse: aString onError: [ Error signal: 'failed to parse ', aString ] ].
+	| parse pattern term substitution result |
+	parse := [ :aString | aSignature parseTerm: aString ].
 	pattern := parse value: aPattern.
 	term := parse value: aTerm.
 	substitution := LbVariables new.
@@ -93,8 +89,7 @@ LbTermExamples >> check: aPattern withSubstitution: aDictionary equals: aTerm si
 { #category : 'private' }
 LbTermExamples >> checkSyntaxRoundTrip: aString signature: aSignature [
 	| term |
-	term := (LbTermParser signature: aSignature)
-				parse: aString.
+	term := aSignature parseTerm: aString.
 	self assert: term asLeibnizSyntaxString equals: aString.
 	^ term
 ]
@@ -235,14 +230,6 @@ LbTermExamples >> numberUnifications [
 ]
 
 { #category : 'example' }
-LbTermExamples >> parserForFooBar [
-	<gtExample>
-	| signature |
-	signature := LbSignatureExamples new signatureFooBar.
-	^ LbTermParser signature: signature
-]
-
-{ #category : 'example' }
 LbTermExamples >> rationalNumberLiteralTerms [
 	<gtExample>
 	| inputs |
@@ -259,6 +246,12 @@ LbTermExamples >> rationalNumberLiteralTerms [
 		self assert: t sort name equals: each value.
 		self assert: t headOpName asSymbol equals: #Atomic.
 		t ]
+]
+
+{ #category : 'example' }
+LbTermExamples >> signatureFooBar [
+	<gtExample>
+	^ LbSignatureExamples new signatureFooBar
 ]
 
 { #category : 'example' }
@@ -313,7 +306,7 @@ LbTermExamples >> substitutedTerms [
 { #category : 'example' }
 LbTermExamples >> termFoo [
 	<gtExample>
-	^ self parserForFooBar parse: 'foo'
+	^ self signatureFooBar parseTerm: 'foo'
 ]
 
 { #category : 'example' }
@@ -398,7 +391,7 @@ LbTermExamples >> termSyntax [
 LbTermExamples >> varTerm [
 	<gtExample>
 	| term |
-	term := self parserForFooBar parse: 'bar'.
+	term := self signatureFooBar parseTerm: 'bar'.
 	self assert: term headOpName asSymbol equals: #Variable.
 	^ term
 ]

@@ -106,7 +106,7 @@ LbGrammar2 >> parenthesizedTerm [
 
 { #category : 'terms' }
 LbGrammar2 >> pattern [
-	^ forAllClauseForTerms, term
+	^ forAllClauseForTerms star, term trim
 ]
 
 { #category : 'terms' }

@@ -257,10 +257,7 @@ LbContextBuilder >> parseTerm: aString [
 LbContextBuilder >> parseTerm: aString extraVariables: aDictionary [
 	| parser |
 	self phase: #rulesAndAxioms.
-	parser := LbTermParser signature: signature.
-	parser extraVariables: aDictionary.
-	^ parser parse: aString
-				onError: [ self error: 'Failed to parse ', aString ]
+	^ signature parseTerm: aString extraVariables: aDictionary.
 ]
 
 { #category : 'defining - private' }

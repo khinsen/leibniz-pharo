@@ -153,13 +153,13 @@ LbContext >> name [
 
 { #category : 'operations' }
 LbContext >> parseTerm: aString [
-	^ (LbTermParser signature: signature) parse: aString
+	^ signature parseTerm: aString
 ]
 
 { #category : 'rewriting' }
 LbContext >> parseTermAndReduce: aString [
 	| term |
-	term := (LbTermParser signature: signature) parse: aString.
+	term := signature parseTerm: aString.
 	term isPetit2Failure ifTrue: [ self error: term message ].
 	^ rewriteSystem reduce: term
 ]
