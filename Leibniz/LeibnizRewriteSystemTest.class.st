@@ -21,9 +21,19 @@ LeibnizRewriteSystemTest >> setUp [
 LeibnizRewriteSystemTest >> testMassExample [
 	| rws tp test |
 
-	rws := (LeibnizExamples new contextNamed: 'mass-units') rewriteSystem.
-	tp := LbTermParser signature: rws signature.
-	test := [ :in :out | self assert: (rws reduce: (tp parse: in)) equals: (tp parse: out) ].
+	rws := (LbContextExamples new massUnitContext) rewriteSystem.
+	tp := LbParser newStartingAt:  #term.
+	test := [ :in :out |
+		| inTerm outTerm |
+		inTerm := (tp parse: in)
+					cull: rws signature
+					cull: Dictionary new.
+		outTerm := (tp parse: out)
+					cull: rws signature
+					cull: Dictionary new.
+		self
+			assert: (rws reduce: inTerm)
+			equals: outTerm ].
 	
 	test value: '2 × 3 × kg' value: '6 × kg'.
 

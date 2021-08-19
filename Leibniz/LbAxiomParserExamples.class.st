@@ -68,8 +68,8 @@ LbAxiomParserExamples >> noVarSubsort [
 	<gtExample>
 	| sub superSort expected relation |
 	relation := self parseForSortSignature: 'foo ⊆ bar'.
-	sub := self sortTermParser parse: 'foo'.
-	superSort := self sortTermParser parse: 'bar'.
+	sub := self parseTermForSortSignature: 'foo'.
+	superSort := self parseTermForSortSignature: 'bar'.
 	expected := LbSubsortAxiom subsort: sub supersort: superSort.
 	self assert: relation equals: expected.
 
@@ -86,6 +86,12 @@ LbAxiomParserExamples >> parseForSortSignature: aString [
 LbAxiomParserExamples >> parseForTermSignature: aString [
 	^ (self axiomParser parse: aString)
 		cull: self termSignature
+]
+
+{ #category : 'parsing' }
+LbAxiomParserExamples >> parseTermForSortSignature: aString [
+	^ (self termParser parse: aString)
+		cull: self sortSignature cull: Dictionary new
 ]
 
 { #category : 'example' }
@@ -108,12 +114,6 @@ LbAxiomParserExamples >> sortSortGraph [
 ]
 
 { #category : 'example' }
-LbAxiomParserExamples >> sortTermParser [
-	<gtExample>
-	^ LbTermParser signature: self sortSignature
-]
-
-{ #category : 'example' }
 LbAxiomParserExamples >> subsortWithVariable [
 	<gtExample>
 	| extraVariables subSort superSort expected relation |
@@ -124,6 +124,12 @@ LbAxiomParserExamples >> subsortWithVariable [
 	expected := LbSubsortAxiom subsort: subSort supersort: superSort localVariables: extraVariables.
 	self assert: relation equals: expected.
 	^ relation
+]
+
+{ #category : 'example' }
+LbAxiomParserExamples >> termParser [
+	<gtExample>
+	^ LbParser newStartingAt: #term
 ]
 
 { #category : 'example' }

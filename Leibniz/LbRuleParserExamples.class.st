@@ -113,9 +113,3 @@ LbRuleParserExamples >> signature [
 	<gtExample>
 	^ LbTermParserExamples new signature
 ]
-
-{ #category : 'example' }
-LbRuleParserExamples >> termParser [
-	<gtExample>
-	^ LbTermParser signature: self signature
-]
