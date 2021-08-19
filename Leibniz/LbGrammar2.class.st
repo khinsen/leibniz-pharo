@@ -28,7 +28,9 @@ Class {
 		'infixSortArg',
 		'infixArg',
 		'pattern',
-		'forAllClauseForTerms'
+		'forAllClauseForTerms',
+		'sort',
+		'subsort'
 	],
 	#category : 'Leibniz-0-Infrastructure'
 }
@@ -135,13 +137,28 @@ LbGrammar2 >> simpleTerm [
 ]
 
 { #category : 'signature' }
+LbGrammar2 >> sort [
+	^ identifier
+]
+
+{ #category : 'signature' }
 LbGrammar2 >> sortArg [
 	^ term
 ]
 
 { #category : 'signature' }
+LbGrammar2 >> sortOrSubsort [
+	^ (subsort / sort) end 
+]
+
+{ #category : 'signature' }
 LbGrammar2 >> subscriptOp [
 	^ arg, underscore, openBrace, (arg separatedBy: comma trim), closeBrace
+]
+
+{ #category : 'signature' }
+LbGrammar2 >> subsort [
+	^ sort trim, subsortSymbol, sort trim
 ]
 
 { #category : 'terms' }

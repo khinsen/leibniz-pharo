@@ -155,8 +155,8 @@ LbParser2 >> rationalNumberTerm [
 
 { #category : 'signature' }
 LbParser2 >> sort [
-	^ super sort ==> [ :id |
-		{ id } ]
+	^ super sort
+		==> [ :id | {id} ]
 ]
 
 { #category : 'terms' }
@@ -176,6 +176,12 @@ LbParser2 >> subscriptOp [
 		args := OrderedCollection with: nodes first.
 		args addAll: (nodes fourth reject: [ :element | element = $, ]).
 		{ LbSubscriptOperatorName new. args asArray } ]
+]
+
+{ #category : 'signature' }
+LbParser2 >> subsort [
+	^ super subsort
+		==> [ :nodes | { nodes first first. nodes third first } ]
 ]
 
 { #category : 'signature' }

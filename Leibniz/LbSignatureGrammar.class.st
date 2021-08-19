@@ -1,6 +1,6 @@
 Class {
 	#name : 'LbSignatureGrammar',
-	#superclass : 'LbSortGrammar',
+	#superclass : 'AnObsoleteLbSortGrammar',
 	#instVars : [
 		'op',
 		'var',
