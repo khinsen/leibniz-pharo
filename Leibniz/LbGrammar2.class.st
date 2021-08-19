@@ -47,7 +47,7 @@ LbGrammar2 >> bracketOp [
 
 { #category : 'signature' }
 LbGrammar2 >> forAllClause [
-	^ forAll trim, identifier, colon, identifier
+	^ forAll trim, identifier, colon, sort
 ]
 
 { #category : 'terms' }
@@ -67,12 +67,12 @@ LbGrammar2 >> infixOp [
 
 { #category : 'signature' }
 LbGrammar2 >> infixSortArg [
-	^ simpleTerm
+	^ sort
 ]
 
 { #category : 'signature' }
 LbGrammar2 >> infixVarArg [
-	^ identifier, colon, simpleTerm
+	^ identifier, colon, sort
 ]
 
 { #category : 'terms' }
@@ -87,7 +87,7 @@ LbGrammar2 >> nonInfixTerm [
 
 { #category : 'signature' }
 LbGrammar2 >> op [
-	^ forAllClause star, opAndArgs trim, colon, term trim
+	^ forAllClause star, opAndArgs trim, colon, sort trim
 ]
 
 { #category : 'terms' }
@@ -143,7 +143,7 @@ LbGrammar2 >> sort [
 
 { #category : 'signature' }
 LbGrammar2 >> sortArg [
-	^ term
+	^ sort
 ]
 
 { #category : 'signature' }
@@ -202,12 +202,12 @@ LbGrammar2 >> termEnd [
 
 { #category : 'signature' }
 LbGrammar2 >> var [
-	^ forAllClause star, identifier trim, colon, simpleTerm trim
+	^ forAllClause star, identifier trim, colon, sort trim
 ]
 
 { #category : 'signature' }
 LbGrammar2 >> varArg [
-	^ identifier, colon, term
+	^ identifier, colon, sort
 ]
 
 { #category : 'signature' }

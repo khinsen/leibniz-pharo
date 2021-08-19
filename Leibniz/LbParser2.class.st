@@ -64,6 +64,12 @@ LbParser2 >> infixOp [
 		{ LbInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
 ]
 
+{ #category : 'signature' }
+LbParser2 >> infixVarArg [
+	^ super infixVarArg ==> [ :nodes |
+		{ nodes first. nodes third first } ]
+]
+
 { #category : 'terms' }
 LbParser2 >> integerTerm [
 	^ super integerTerm ==> [ :value |
@@ -89,24 +95,11 @@ LbParser2 >> nonInfixTerm [
 { #category : 'signature' }
 LbParser2 >> op [
 	^ super op ==> [ :nodes |
-		| variables opName opArgs opSort |
-		variables := nodes first.
-		opName := nodes second first.
-		opArgs := nodes second second.
-		opSort := nodes fourth.
-		[ :aSignature :aDictionary |
-			| allVariables |
-			allVariables := aDictionary copy.
-			variables do: [ :each |
-				| newVar |
-				newVar := each value: aSignature value: aDictionary.
-				allVariables at: newVar key put: newVar value ].
-			{
-				opName.
-				opArgs collect: [ :each |
-					each cull: aSignature cull: allVariables ].
-				opSort cull: aSignature cull: allVariables
-			} ] ]
+		self assert: nodes first isEmpty. "Variables, only used for dependent sorts"
+		{
+			nodes second. "opAndArgs"
+			nodes fourth first "sort"
+		} ]
 ]
 
 { #category : 'terms' }
@@ -213,16 +206,14 @@ LbParser2 >> term [
 { #category : 'signature' }
 LbParser2 >> var [
 	^ super var ==> [ :nodes |
-		| variables |
-		variables := nodes first.
-		[ :aSignature :aDictionary |
-			| allVariables |
-			allVariables := aDictionary copy.
-			variables do: [ :each |
-				| newVar |
-				newVar := each value: aSignature value: aDictionary.
-				allVariables at: newVar key put: newVar value ].
-			{ nodes second. nodes fourth cull: aSignature cull: allVariables } ] ]
+		self assert: nodes first isEmpty. "Variables, only used for dependent sorts"
+		{ nodes second. nodes fourth first } ]
+]
+
+{ #category : 'signature' }
+LbParser2 >> varArg [
+	^ super varArg ==> [ :nodes |
+		{ nodes first. nodes third first } ]
 ]
 
 { #category : 'signature' }

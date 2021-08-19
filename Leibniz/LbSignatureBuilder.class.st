@@ -175,7 +175,8 @@ LbSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 { #category : 'adding' }
 LbSignatureBuilder >> parseAndAddOp: aString [
 	| opSpec op args sort argSorts |
-	opSpec := LbSignatureParser parse: aString.
+	opSpec := (LbParser2 newStartingAt: #op)
+				parse: aString.
 	opSpec isPetit2Failure ifTrue: [ Error signal: opSpec message ].
 	op := opSpec first first.
 	args := opSpec first second.
@@ -190,7 +191,8 @@ LbSignatureBuilder >> parseAndAddOp: aString [
 { #category : 'adding' }
 LbSignatureBuilder >> parseAndAddVar: aString [
 	| var name sort |
-	var := LbSignatureParser parse: aString startingAt: #var.
+	var := (LbParser2 newStartingAt: #var)
+				parse: aString.
 	var isPetit2Failure ifTrue: [ Error signal: var message ].
 	name := LbPrefixOperatorName for: var first.
 	sort := sortGraph sortNamed: var second.
