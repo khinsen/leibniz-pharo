@@ -10,24 +10,18 @@ Class {
 LbRuleParserExamples >> noVarRule [
 	<gtExample>
 	| pattern replacement expected rule1 rule2 |
-	rule1 := self noVarRuleParser parse: 'aOneArgOp(aZeroArgOp) ⇒ aZeroArgOp'.
-	pattern := self termParser parse: 'aOneArgOp(aZeroArgOp)'.
-	replacement := self termParser parse: 'aZeroArgOp'.
+	rule1 := self parseAsRule: 'aOneArgOp(aZeroArgOp) ⇒ aZeroArgOp'.
+	pattern := self parseAsTerm: 'aOneArgOp(aZeroArgOp)'.
+	replacement := self parseAsTerm: 'aZeroArgOp'.
 	expected := LbRewriteRule pattern: pattern replacement: replacement.
 	self assert: rule1 equals: expected.
 
-	rule2 := self noVarRuleParser parse: 'aOneArgOp(aVar) → ''aVar'':LeibnizAtomicTerm'.
-	pattern := self termParser parse: 'aOneArgOp(aVar)'.
+	rule2 := self parseAsRule: 'aOneArgOp(aVar) → ''aVar'':LeibnizAtomicTerm'.
+	pattern := self parseAsTerm: 'aOneArgOp(aVar)'.
 	expected := LbFunctionRule pattern: pattern function: #('aVar' #LbAtomicTerm).
 	self assert: rule2 equals: expected.
 
 	^ { rule1. rule2 }
-]
-
-{ #category : 'example' }
-LbRuleParserExamples >> noVarRuleParser [
-	<gtExample>
-	^ LbNoVarRuleParser signature: self signature extraVariables: Dictionary new
 ]
 
 { #category : 'example' }
@@ -38,7 +32,7 @@ LbRuleParserExamples >> noVarRuleSyntax [
 		'aOneArgOp(aVar) → ''aVar'':LeibnizStringTerm'
 	) collect: [ :each |
 		| rule |
-		rule := self noVarRuleParser parse: each.
+		rule := self parseAsRule: each.
 		self assert: rule asLeibnizSyntaxString equals: each.
 		rule ]
 ]
@@ -47,10 +41,10 @@ LbRuleParserExamples >> noVarRuleSyntax [
 LbRuleParserExamples >> noVarRuleWithCondition [
 	<gtExample>
 	| pattern replacement trueTerm rule |
-	pattern := self termParser parse: 'aOneArgOp(aZeroArgOp)'.
-	replacement := self termParser parse: 'aZeroArgOp'.
-	trueTerm := self termParser parse: 'true'.
-	rule := self noVarRuleParser parse: 'aOneArgOp(aZeroArgOp) ⇒ aZeroArgOp | true'.
+	pattern := self parseAsTerm: 'aOneArgOp(aZeroArgOp)'.
+	replacement := self parseAsTerm: 'aZeroArgOp'.
+	trueTerm := self parseAsTerm: 'true'.
+	rule := self parseAsRule: 'aOneArgOp(aZeroArgOp) ⇒ aZeroArgOp | true'.
 	self
 		assert: rule
 		equals: (LbRewriteRule
@@ -60,10 +54,16 @@ LbRuleParserExamples >> noVarRuleWithCondition [
 	^ rule
 ]
 
-{ #category : 'example' }
-LbRuleParserExamples >> ruleParser [
-	<gtExample>
-	^ LbRuleParser signature: self signature
+{ #category : 'parsing' }
+LbRuleParserExamples >> parseAsRule: aString [
+	^ ((LbParser newStartingAt: #rule) parse: aString)
+		cull: self signature
+]
+
+{ #category : 'parsing' }
+LbRuleParserExamples >> parseAsTerm: aString [
+	^ ((LbParser newStartingAt: #term) parse: aString)
+		cull: self signature cull: Dictionary new
 ]
 
 { #category : 'example' }
@@ -78,8 +78,7 @@ LbRuleParserExamples >> ruleWithVariable [
 								extraVariables: extraVariables }.
 	replacement := self signature zeroArgTermNamed: #aZeroArgOp asLbOperatorName.
 	referenceRule := LbRewriteRule pattern: pattern localVariables: extraVariables replacement: replacement.
-	parsedRule := (LbRuleParser signature: self signature)
-						parse: '∀ X:A aOneArgOp(X) ⇒ aZeroArgOp'.
+	parsedRule := self parseAsRule: '∀ X:A aOneArgOp(X) ⇒ aZeroArgOp'.
 	self assert: parsedRule equals: referenceRule.
 	^ parsedRule
 ]
@@ -104,8 +103,7 @@ LbRuleParserExamples >> ruleWithVariableAndCondition [
 		localVariables: extraVariables
 		condition: trueTerm
 		replacement: replacement.
-	parsedRule := self ruleParser
-		parse: '∀ X:A aOneArgOp(X) ⇒ aZeroArgOp | true'.
+	parsedRule := self parseAsRule: '∀ X:A aOneArgOp(X) ⇒ aZeroArgOp | true'.
 	self assert: parsedRule equals: referenceRule.
 	^ parsedRule
 ]

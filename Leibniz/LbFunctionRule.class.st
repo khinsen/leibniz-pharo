@@ -11,23 +11,29 @@ Class {
 }
 
 { #category : 'instance creation' }
-LbFunctionRule class >> pattern: aPattern condition: aBooleanTerm function: aString [
-	^ self pattern: aPattern localVariables: Dictionary new condition: aBooleanTerm function: aString
+LbFunctionRule class >> pattern: aPattern condition: aBooleanTerm function: anArray [
+	^ self
+		pattern: aPattern
+		localVariables: Dictionary new
+		condition: aBooleanTerm
+		function: anArray
 ]
 
 { #category : 'instance creation' }
-LbFunctionRule class >> pattern: aPattern function: aString [
-	^ self pattern: aPattern condition: nil function: aString
-
+LbFunctionRule class >> pattern: aPattern function: anArray [
+	^ self
+		pattern: aPattern
+		condition: nil
+		function: anArray
 ]
 
 { #category : 'instance creation' }
-LbFunctionRule class >> pattern: aPattern localVariables: aDictionary condition: aBooleanTerm function: aBlock [
+LbFunctionRule class >> pattern: aPattern localVariables: aDictionary condition: aBooleanTerm function: anArray [
 	^ self basicNew
 			 initializeWithPattern: aPattern
 								localVariables: aDictionary
 								condition: aBooleanTerm
-								function: aBlock;
+								function: anArray;
 			yourself
 ]
 

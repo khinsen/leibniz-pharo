@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbTokensIdentifiersLiterals',
-	#superclass : 'LbTokens',
+	#name : 'LbGrammarIdentifiersAndLiterals',
+	#superclass : 'LbGrammarTokens',
 	#instVars : [
 		'fpIntegerPart',
 		'fpFractionalPart',
@@ -14,7 +14,7 @@ Class {
 }
 
 { #category : 'identifiers' }
-LbTokensIdentifiersLiterals class >> reservedIdentifiers [
+LbGrammarIdentifiersAndLiterals class >> reservedIdentifiers [
 	| rewriteArrow functionArrow equalSign
 	  forAllSymbol conditionSymbol subsortSymbol |
 	rewriteArrow := '⇒'.
@@ -34,38 +34,38 @@ LbTokensIdentifiersLiterals class >> reservedIdentifiers [
 ]
 
 { #category : 'literals' }
-LbTokensIdentifiersLiterals >> fpExponentPart [
+LbGrammarIdentifiersAndLiterals >> fpExponentPart [
 	^ $e asPParser , fpIntegerPart
 ]
 
 { #category : 'literals' }
-LbTokensIdentifiersLiterals >> fpFractionalPart [
+LbGrammarIdentifiersAndLiterals >> fpFractionalPart [
 	^ $. asPParser , #digit asPParser plus optional
 ]
 
 { #category : 'literals' }
-LbTokensIdentifiersLiterals >> fpIntegerPart [
+LbGrammarIdentifiersAndLiterals >> fpIntegerPart [
 	^ $- asPParser optional , #digit asPParser plus
 ]
 
 { #category : 'literals' }
-LbTokensIdentifiersLiterals >> fpNumberTerm [
+LbGrammarIdentifiersAndLiterals >> fpNumberTerm [
 	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
 			/ (fpIntegerPart , fpExponentPart))
 		flatten
 ]
 
 { #category : 'identifiers' }
-LbTokensIdentifiersLiterals >> identifier [
+LbGrammarIdentifiersAndLiterals >> identifier [
 	^ (identifierCharacter , (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
 		==> [ :id |
-				(LbTokensIdentifiersLiterals reservedIdentifiers includes: id)
+				(LbGrammarIdentifiersAndLiterals reservedIdentifiers includes: id)
 					ifFalse: [ id asSymbol ]
 					ifTrue: [ PP2Failure message: 'reserved identifier: ', id ] ]
 ]
 
 { #category : 'identifiers' }
-LbTokensIdentifiersLiterals >> identifierCharacter [
+LbGrammarIdentifiersAndLiterals >> identifierCharacter [
 	| predicate |
 	predicate := PP2CharSetPredicate on:
 		[ :char |
@@ -84,12 +84,12 @@ LbTokensIdentifiersLiterals >> identifierCharacter [
 ]
 
 { #category : 'literals' }
-LbTokensIdentifiersLiterals >> integerTerm [
+LbGrammarIdentifiersAndLiterals >> integerTerm [
 	^ ($- asPParser optional , #digit asPParser plus) flatten
 ]
 
 { #category : 'literals' }
-LbTokensIdentifiersLiterals >> rationalNumberTerm [
+LbGrammarIdentifiersAndLiterals >> rationalNumberTerm [
 	^ ($- asPParser optional , #digit asPParser plus ,
 			$/ asPParser ,
 			$0 asPParser not , #digit asPParser star) flatten 
@@ -97,7 +97,7 @@ LbTokensIdentifiersLiterals >> rationalNumberTerm [
 ]
 
 { #category : 'literals' }
-LbTokensIdentifiersLiterals >> stringTerm [
+LbGrammarIdentifiersAndLiterals >> stringTerm [
 	^ ($" asPParser , $" asPParser negate star , $" asPParser) flatten 
 
 ]

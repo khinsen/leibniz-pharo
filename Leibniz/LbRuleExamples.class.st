@@ -7,9 +7,9 @@ Class {
 }
 
 { #category : 'example' }
-LbRuleExamples >> parserForSignatureWithVariable [
+LbRuleExamples >> ruleParser [
 	<gtExample>
-	^ LbRuleParser signature: self signatureWithVariable
+	^ LbParser newStartingAt: #rule
 ]
 
 { #category : 'example' }
@@ -23,13 +23,11 @@ LbRuleExamples >> ruleSyntax [
 		'∀ V:ℤ ∀ W:ℤ V + W ⇒ V | W ≥ 0')
 		collect: [ :each |
 			| rule rulePrintString ruleAgain |
-			rule := self parserForSignatureWithVariable
-				parse: each
-				onError: [ Error signal: 'failed to parse ', each ].
+			rule := (self ruleParser parse: each)
+						cull: self signatureWithVariable.
 			rulePrintString := rule asLeibnizSyntaxString.
-			ruleAgain := self parserForSignatureWithVariable
-				parse: rulePrintString
-				onError: [ Error signal: 'failed to parse ', each ].
+			ruleAgain := (self ruleParser parse: rulePrintString)
+							cull: self signatureWithVariable.
 			self assert: ruleAgain equals: rule.
 			each -> rule ]
 ]
@@ -38,24 +36,28 @@ LbRuleExamples >> ruleSyntax [
 LbRuleExamples >> rulesWithVariables [
 	<gtExample>
 	| parser rule1 rule2 |
-	parser := self parserForSignatureWithVariable.
-	rule1 := parser parse: '∀ Z:ℤ abs(Z) ⇒ Z'.
+	parser := self ruleParser.
+	rule1 := (parser parse: '∀ Z:ℤ abs(Z) ⇒ Z')
+				cull: self signatureWithVariable.
 	self
 		assert: rule1 variables
 		equals: (Dictionary with: #Z asLbOperatorName-> (self signatureWithVariable sortNamed: #'ℤ')).
 
-	rule2 := parser parse: '∀ Z:ℤ abs(Z) ⇒ Z | Z > 0'.
+	rule2 := (parser parse: '∀ Z:ℤ abs(Z) ⇒ Z | Z > 0')
+				cull: self signatureWithVariable.
 	self
 		assert: rule2 variables
 		equals: (Dictionary with: #Z asLbOperatorName-> (self signatureWithVariable sortNamed: #'ℤ')).
 
-	[ parser parse: '∀ Z:ℤ abs(X) ⇒ Z' ]
+	[ (parser parse: '∀ Z:ℤ abs(X) ⇒ Z')
+		cull: self signatureWithVariable ]
 	on: Error
 	do: [ :ex |
 		self
 			assert: ex messageText
 			equals:'Variable Z in replacement but not in pattern' ].
-	[ parser parse: '∀ Z:ℤ abs(Z) ⇒ Z | X > 0' ]
+	[ (parser parse: '∀ Z:ℤ abs(Z) ⇒ Z | X > 0')
+		cull: self signatureWithVariable ]
 	on: Error
 	do: [ :ex |
 		self

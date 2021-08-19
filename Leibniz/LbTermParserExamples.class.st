@@ -197,7 +197,7 @@ LbTermParserExamples >> parse: aString rule: aSymbol assertEquals: aValue [
 LbTermParserExamples >> parser [
 	<gtExample>
 	"^ LbTermParser signature: self signature"
-	^ LbParser2 newStartingAt: #termEnd
+	^ LbParser newStartingAt: #termEnd
 ]
 
 { #category : 'utility' }
@@ -206,7 +206,7 @@ LbTermParserExamples >> parserForRule: aSymbol [
 	parser := LbTermParser newStartingAt: aSymbol.
 	parser signature: self signature.
 	parser extraVariables: Dictionary new."
-	^ LbParser2 newStartingAt: aSymbol
+	^ LbParser newStartingAt: aSymbol
 ]
 
 { #category : 'example' }

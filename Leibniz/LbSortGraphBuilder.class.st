@@ -127,7 +127,7 @@ LbSortGraphBuilder >> make: aSort subsortOf: anotherSort origins: anLbOrigins [
 { #category : 'adding' }
 LbSortGraphBuilder >> parseAndAdd: aString [
 	| declaration |
-	declaration := (LbParser2 newStartingAt: #sortOrSubsort)
+	declaration := (LbParser newStartingAt: #sortOrSubsort)
 					parse: aString.
 	declaration size = 1 ifTrue:
 		[	self add: declaration first ].

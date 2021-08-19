@@ -45,8 +45,12 @@ LbAxiomBuilder >> initializeWithSignature: aSignature [
 
 { #category : 'adding' }
 LbAxiomBuilder >> parseAndAdd: aString [
-	| axiom |
-	axiom := (LbAxiomParser signature: signature) parse: aString.
-	axiom isPetit2Failure ifTrue: [ self error: axiom message ].
+	| parsedAxiom axiom |
+	parsedAxiom := (LbParser newStartingAt: #axiom)
+					parse: aString.
+	parsedAxiom isPetit2Failure ifTrue:
+		[ self error: parsedAxiom message, ' after "',
+				 (aString sliceFrom: 1 to: parsedAxiom position), '"' ].
+	axiom := parsedAxiom value: signature.
 	self add: axiom.
 ]

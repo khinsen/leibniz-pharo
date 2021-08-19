@@ -6,7 +6,7 @@
 The identifiers for sorts and operators live in separate namespaces but follow the same rules. The admissible characters are defined in ${method:name=LbGrammar>>#identifierCharacter|expanded=}$. All but the first character can also be digits or a dot. A small number of identifiers ('⇒' '→' '∀' '|' '⊆') are explicitly forbidden to avoid conflicts with other elements of Leibniz syntax.
 "
 Class {
-	#name : 'LbTokens',
+	#name : 'LbGrammarTokens',
 	#superclass : 'PP2CompositeNode',
 	#instVars : [
 		'identifier',
@@ -21,68 +21,92 @@ Class {
 		'openBrace',
 		'closeBrace',
 		'hat',
-		'subsortSymbol'
+		'subsortSymbol',
+		'conditionSymbol',
+		'equalSign',
+		'rewriteArrow',
+		'fnArrow'
 	],
 	#category : 'Leibniz-0-Infrastructure'
 }
 
 { #category : 'tokens' }
-LbTokens >> closeBrace [
+LbGrammarTokens >> closeBrace [
 	^ $} asPParser
 ]
 
 { #category : 'tokens' }
-LbTokens >> closeBracket [
+LbGrammarTokens >> closeBracket [
 	^ $] asPParser
 ]
 
 { #category : 'tokens' }
-LbTokens >> closeParenthesis [
+LbGrammarTokens >> closeParenthesis [
 	^ $) asPParser
 ]
 
 { #category : 'tokens' }
-LbTokens >> colon [
+LbGrammarTokens >> colon [
 	^ $: asPParser
 ]
 
 { #category : 'tokens' }
-LbTokens >> comma [
+LbGrammarTokens >> comma [
 	^ $, asPParser
 ]
 
 { #category : 'tokens' }
-LbTokens >> forAll [
+LbGrammarTokens >> conditionSymbol [
+	^ $| asPParser
+]
+
+{ #category : 'tokens' }
+LbGrammarTokens >> equalSign [
+	^ $= asPParser
+]
+
+{ #category : 'tokens' }
+LbGrammarTokens >> fnArrow [
+	^ $→ asPParser
+]
+
+{ #category : 'tokens' }
+LbGrammarTokens >> forAll [
 	^ $∀ asPParser
 ]
 
 { #category : 'tokens' }
-LbTokens >> hat [
+LbGrammarTokens >> hat [
 	^ $^ asPParser
 ]
 
 { #category : 'tokens' }
-LbTokens >> openBrace [
+LbGrammarTokens >> openBrace [
 	^ ${ asPParser
 ]
 
 { #category : 'tokens' }
-LbTokens >> openBracket [
+LbGrammarTokens >> openBracket [
 	^ $[ asPParser
 ]
 
 { #category : 'tokens' }
-LbTokens >> openParenthesis [
+LbGrammarTokens >> openParenthesis [
 	^ $( asPParser
 ]
 
 { #category : 'tokens' }
-LbTokens >> subsortSymbol [
+LbGrammarTokens >> rewriteArrow [
+	^ $⇒ asPParser
+]
+
+{ #category : 'tokens' }
+LbGrammarTokens >> subsortSymbol [
 	^ $⊆ asPParser
 
 ]
 
 { #category : 'tokens' }
-LbTokens >> underscore [
+LbGrammarTokens >> underscore [
 	^ $_ asPParser
 ]

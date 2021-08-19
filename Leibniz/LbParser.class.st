@@ -1,11 +1,11 @@
 Class {
-	#name : 'LbParser2',
-	#superclass : 'LbGrammar2',
+	#name : 'LbParser',
+	#superclass : 'LbGrammarRulesAndAxioms',
 	#category : 'Leibniz-0-Infrastructure'
 }
 
 { #category : 'signature' }
-LbParser2 >> bracketOp [
+LbParser >> bracketOp [
 	^ super bracketOp
 		==> [ :nodes |
 				| args |
@@ -14,8 +14,14 @@ LbParser2 >> bracketOp [
 				{ LbBracketOperatorName new. args asArray } ]
 ]
 
+{ #category : 'rules' }
+LbParser >> code [
+	^ super code
+		==> [ :nodes | { nodes second. nodes fifth } ]
+]
+
 { #category : 'terms' }
-LbParser2 >> delayedTermWithOp: anOpName args: anArgList [
+LbParser >> delayedTermWithOp: anOpName args: anArgList [
 	^ [ :aSignature :aDictionary |
 		aSignature
 			nonZeroArgTermNamed: anOpName
@@ -23,28 +29,50 @@ LbParser2 >> delayedTermWithOp: anOpName args: anArgList [
 				each cull: aSignature cull: aDictionary ]) ]
 ]
 
-{ #category : 'signature' }
-LbParser2 >> forAllClause [
-	^ super forAllClause ==> [ :nodes |
-		| varName sortName |
-		varName := nodes second asSymbol asLbOperatorName.
-		sortName := nodes fourth asSymbol.
-		[ :aSignature :aDictionary |
-			varName -> (aSignature sortNamed: sortName) ] ]
+{ #category : 'axioms' }
+LbParser >> equalityAxiom [
+	^ super equalityAxiom ==> [ :nodes |
+		[ :signature |
+			| variables |
+			variables := (nodes first collect: [ :each |
+				each cull: signature cull: Dictionary new ])
+					asDictionary.
+			LbEqualityAxiom
+				left: (nodes second cull: signature cull: variables)
+				right: (nodes fourth cull: signature cull: variables)
+				localVariables: variables
+				condition: (nodes fifth ifNotNil:
+								[ :c | c second cull: signature cull: variables ]) ] ]
+]
+
+{ #category : 'rules' }
+LbParser >> fnRule [
+	^ super fnRule ==> [ :nodes |
+		[ :signature |
+			| variables |
+			variables := (nodes first collect: [ :each |
+				each cull: signature cull: Dictionary new ])
+					asDictionary.
+			LbFunctionRule
+				pattern: (nodes second cull: signature cull: variables)
+				localVariables: variables
+				condition: (nodes fifth ifNotNil:
+								[ :c | c second cull: signature cull: variables ])
+				function: nodes fourth ] ]
 ]
 
 { #category : 'signature' }
-LbParser2 >> forAllClauseForTerms [
-	^ super forAllClauseForTerms ==> [ :nodes |
+LbParser >> forAllClause [
+	^ super forAllClause ==> [ :nodes |
 		| varName sortName |
 		varName := nodes second asSymbol asLbOperatorName.
-		sortName := nodes fourth asSymbol.
+		sortName := nodes fourth first asSymbol.
 		[ :aSignature :aDictionary |
 			varName -> (aSignature sortNamed: sortName) ] ]
 ]
 
 { #category : 'terms' }
-LbParser2 >> fpNumberTerm [
+LbParser >> fpNumberTerm [
 	^ super fpNumberTerm ==> [ :value | 
 		"Converting the string to a float requires some trickery:
 		 - Pharo doesn't allow a dot followed by an exponent without any fractional part.
@@ -59,19 +87,19 @@ LbParser2 >> fpNumberTerm [
 ]
 
 { #category : 'signature' }
-LbParser2 >> infixOp [
+LbParser >> infixOp [
 	^ super infixOp ==> [ :nodes |
 		{ LbInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
 ]
 
 { #category : 'signature' }
-LbParser2 >> infixVarArg [
+LbParser >> infixVarArg [
 	^ super infixVarArg ==> [ :nodes |
 		{ nodes first. nodes third first } ]
 ]
 
 { #category : 'terms' }
-LbParser2 >> integerTerm [
+LbParser >> integerTerm [
 	^ super integerTerm ==> [ :value |
 		| intValue |
 		intValue := value asNumber.
@@ -81,7 +109,7 @@ LbParser2 >> integerTerm [
 ]
 
 { #category : 'terms' }
-LbParser2 >> nonInfixTerm [
+LbParser >> nonInfixTerm [
 	^ super nonInfixTerm ==> [ :nodes |
 		nodes second
 			ifNil: [ nodes first ] "simpleTerm, no suffix"
@@ -93,7 +121,7 @@ LbParser2 >> nonInfixTerm [
 ]
 
 { #category : 'signature' }
-LbParser2 >> op [
+LbParser >> op [
 	^ super op ==> [ :nodes |
 		self assert: nodes first isEmpty. "Variables, only used for dependent sorts"
 		{
@@ -103,7 +131,7 @@ LbParser2 >> op [
 ]
 
 { #category : 'terms' }
-LbParser2 >> pattern [
+LbParser >> pattern [
 	^ super pattern ==> [ :nodes |
 		| variables parsedTerm |
 		variables := nodes first.
@@ -119,7 +147,7 @@ LbParser2 >> pattern [
 ]
 
 { #category : 'signature' }
-LbParser2 >> prefixOp [
+LbParser >> prefixOp [
 	^ super prefixOp ==> [ :nodes |
 		{
 			LbPrefixOperatorName for: nodes first.
@@ -128,7 +156,7 @@ LbParser2 >> prefixOp [
 ]
 
 { #category : 'terms' }
-LbParser2 >> prefixOpTerm [
+LbParser >> prefixOpTerm [
 	^ super prefixOpTerm ==> [ :nodes |
 		| name args |
 		name := LbPrefixOperatorName for: nodes first.
@@ -137,7 +165,7 @@ LbParser2 >> prefixOpTerm [
 ]
 
 { #category : 'terms' }
-LbParser2 >> rationalNumberTerm [
+LbParser >> rationalNumberTerm [
 	^ super rationalNumberTerm==> [ :value |
 		| rationalValue |
 		rationalValue := Fraction readFromString: value.
@@ -146,14 +174,30 @@ LbParser2 >> rationalNumberTerm [
 			LbRationalNumberTerm value: rationalValue signature: aSignature ] ]
 ]
 
+{ #category : 'rules' }
+LbParser >> rewriteRule [
+	^ super rewriteRule ==> [ :nodes |
+		[ :signature |
+			| variables |
+			variables := (nodes first collect: [ :each |
+				each cull: signature cull: Dictionary new ])
+					asDictionary.
+			LbRewriteRule
+				pattern: (nodes second cull: signature cull: variables)
+				localVariables: variables
+				condition: (nodes fifth ifNotNil:
+								[ :c | c second cull: signature cull: variables ])
+				replacement: (nodes fourth cull: signature cull: variables) ] ]
+]
+
 { #category : 'signature' }
-LbParser2 >> sort [
+LbParser >> sort [
 	^ super sort
 		==> [ :id | {id} ]
 ]
 
 { #category : 'terms' }
-LbParser2 >> stringTerm [
+LbParser >> stringTerm [
 	^ super stringTerm ==> [ :value |
 		| stringValue |
 		stringValue := value copyFrom: 2 to: value size - 1.
@@ -163,7 +207,7 @@ LbParser2 >> stringTerm [
 ]
 
 { #category : 'signature' }
-LbParser2 >> subscriptOp [
+LbParser >> subscriptOp [
 	^ super subscriptOp ==> [ :nodes |
 		| args |
 		args := OrderedCollection with: nodes first.
@@ -172,13 +216,27 @@ LbParser2 >> subscriptOp [
 ]
 
 { #category : 'signature' }
-LbParser2 >> subsort [
+LbParser >> subsort [
 	^ super subsort
 		==> [ :nodes | { nodes first first. nodes third first } ]
 ]
 
+{ #category : 'axioms' }
+LbParser >> subsortAxiom [
+	^ super subsortAxiom ==> [ :nodes |
+		[ :signature |
+			| variables |
+			variables := (nodes first collect: [ :each |
+				each cull: signature cull: Dictionary new ])
+					asDictionary.
+			LbSubsortAxiom
+				subsort: (nodes second cull: signature cull: variables)
+				supersort: (nodes fourth cull: signature cull: variables)
+				localVariables: variables ] ]
+]
+
 { #category : 'signature' }
-LbParser2 >> superscriptOp [
+LbParser >> superscriptOp [
 	^ super superscriptOp ==> [ :nodes |
 		| args |
 		args := OrderedCollection with: nodes first.
@@ -187,7 +245,7 @@ LbParser2 >> superscriptOp [
 ]
 
 { #category : 'terms' }
-LbParser2 >> term [
+LbParser >> term [
 	^ super term  ==> [ :nodes |
 		nodes size = 1
 			ifTrue: [ nodes first ] "nonInfixTerm"
@@ -204,26 +262,26 @@ LbParser2 >> term [
 ]
 
 { #category : 'signature' }
-LbParser2 >> var [
+LbParser >> var [
 	^ super var ==> [ :nodes |
 		self assert: nodes first isEmpty. "Variables, only used for dependent sorts"
 		{ nodes second. nodes fourth first } ]
 ]
 
 { #category : 'signature' }
-LbParser2 >> varArg [
+LbParser >> varArg [
 	^ super varArg ==> [ :nodes |
 		{ nodes first. nodes third first } ]
 ]
 
 { #category : 'signature' }
-LbParser2 >> zeroArgOp [
+LbParser >> zeroArgOp [
 	^ super zeroArgOp ==> [ :idString |
 		{ LbPrefixOperatorName for: idString. #() } ]
 ]
 
 { #category : 'terms' }
-LbParser2 >> zeroArgTerm [
+LbParser >> zeroArgTerm [
 	^ super zeroArgTerm ==> [ :symbol |
 		| name |
 		name := LbPrefixOperatorName for: symbol.

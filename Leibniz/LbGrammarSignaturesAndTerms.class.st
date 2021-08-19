@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbGrammar2',
-	#superclass : 'LbTokensIdentifiersLiterals',
+	#name : 'LbGrammarSignaturesAndTerms',
+	#superclass : 'LbGrammarIdentifiersAndLiterals',
 	#instVars : [
 		'op',
 		'var',
@@ -28,7 +28,6 @@ Class {
 		'infixSortArg',
 		'infixArg',
 		'pattern',
-		'forAllClauseForTerms',
 		'sort',
 		'subsort'
 	],
@@ -36,88 +35,83 @@ Class {
 }
 
 { #category : 'signature' }
-LbGrammar2 >> arg [
+LbGrammarSignaturesAndTerms >> arg [
 	^ varArg / sortArg
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> bracketOp [
+LbGrammarSignaturesAndTerms >> bracketOp [
 	^ arg, openBracket, (arg separatedBy: comma trim), closeBracket
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> forAllClause [
+LbGrammarSignaturesAndTerms >> forAllClause [
 	^ forAll trim, identifier, colon, sort
 ]
 
-{ #category : 'terms' }
-LbGrammar2 >> forAllClauseForTerms [
-	^ forAll trim, identifier, colon, identifier
-]
-
 { #category : 'signature' }
-LbGrammar2 >> infixArg [
+LbGrammarSignaturesAndTerms >> infixArg [
 	^ infixVarArg / infixSortArg
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> infixOp [
+LbGrammarSignaturesAndTerms >> infixOp [
 	^ infixArg trim, identifier trim, infixArg trim
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> infixSortArg [
+LbGrammarSignaturesAndTerms >> infixSortArg [
 	^ sort
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> infixVarArg [
+LbGrammarSignaturesAndTerms >> infixVarArg [
 	^ identifier, colon, sort
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> literalTerm [
+LbGrammarSignaturesAndTerms >> literalTerm [
 	^ rationalNumberTerm / fpNumberTerm / integerTerm / stringTerm
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> nonInfixTerm [
+LbGrammarSignaturesAndTerms >> nonInfixTerm [
 	^ simpleTerm, suffix optional
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> op [
+LbGrammarSignaturesAndTerms >> op [
 	^ forAllClause star, opAndArgs trim, colon, sort trim
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> opAndArgs [
+LbGrammarSignaturesAndTerms >> opAndArgs [
 	^ prefixOp / bracketOp / infixOp / subscriptOp / superscriptOp / zeroArgOp
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> opEnd [
+LbGrammarSignaturesAndTerms >> opEnd [
 	^ op end
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> parenthesizedTerm [
+LbGrammarSignaturesAndTerms >> parenthesizedTerm [
 	^ openParenthesis , term, closeParenthesis
 		==> [ :nodes | nodes second ]
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> pattern [
-	^ forAllClauseForTerms star, term trim
+LbGrammarSignaturesAndTerms >> pattern [
+	^ forAllClause star, term trim
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> patternEnd [
+LbGrammarSignaturesAndTerms >> patternEnd [
 	^ pattern end
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> prefixOp [
+LbGrammarSignaturesAndTerms >> prefixOp [
 	^ identifier trim,
 		openParenthesis,
 		(arg separatedBy: comma trim),
@@ -125,62 +119,62 @@ LbGrammar2 >> prefixOp [
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> prefixOpTerm [
+LbGrammarSignaturesAndTerms >> prefixOpTerm [
 	^ identifier , openParenthesis ,
 		 (term separatedBy: comma trim) ,
 		 closeParenthesis
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> simpleTerm [
+LbGrammarSignaturesAndTerms >> simpleTerm [
 	^ literalTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> sort [
+LbGrammarSignaturesAndTerms >> sort [
 	^ identifier
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> sortArg [
+LbGrammarSignaturesAndTerms >> sortArg [
 	^ sort
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> sortOrSubsort [
+LbGrammarSignaturesAndTerms >> sortOrSubsort [
 	^ (subsort / sort) end 
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> subscriptOp [
+LbGrammarSignaturesAndTerms >> subscriptOp [
 	^ arg, underscore, openBrace, (arg separatedBy: comma trim), closeBrace
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> subsort [
+LbGrammarSignaturesAndTerms >> subsort [
 	^ sort trim, subsortSymbol, sort trim
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> suffix [
+LbGrammarSignaturesAndTerms >> suffix [
 	^ (self suffixBetween: openBracket and: closeBracket withSymbol: #'[]')
 		 / (self suffixBetween: '^{' asPParser and: closeBrace withSymbol: #'^')
 		 / (self suffixBetween: '_{' asPParser and: closeBrace withSymbol: #'_')
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> suffixBetween: leftDelimiter and: rightDelimiter withSymbol: opSymbol [
+LbGrammarSignaturesAndTerms >> suffixBetween: leftDelimiter and: rightDelimiter withSymbol: opSymbol [
 	^ leftDelimiter , (term separatedBy: comma asPParser trim) , rightDelimiter
 		==> [ :nodes | { opSymbol . (nodes second reject: [ :element | element = $, ]) } ]
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> superscriptOp [
+LbGrammarSignaturesAndTerms >> superscriptOp [
 	^ arg, hat, openBrace, (arg separatedBy: comma trim), closeBrace
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> term [
+LbGrammarSignaturesAndTerms >> term [
 	^ (nonInfixTerm separatedBy: (identifier trim))
 		==> [ :nodes |
 				| result |
@@ -196,31 +190,31 @@ LbGrammar2 >> term [
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> termEnd [
+LbGrammarSignaturesAndTerms >> termEnd [
 	^ term end
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> var [
+LbGrammarSignaturesAndTerms >> var [
 	^ forAllClause star, identifier trim, colon, sort trim
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> varArg [
+LbGrammarSignaturesAndTerms >> varArg [
 	^ identifier, colon, sort
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> varEnd [
+LbGrammarSignaturesAndTerms >> varEnd [
 	^ var end
 ]
 
 { #category : 'signature' }
-LbGrammar2 >> zeroArgOp [
+LbGrammarSignaturesAndTerms >> zeroArgOp [
 	^ identifier
 ]
 
 { #category : 'terms' }
-LbGrammar2 >> zeroArgTerm [
+LbGrammarSignaturesAndTerms >> zeroArgTerm [
 	^ identifier
 ]

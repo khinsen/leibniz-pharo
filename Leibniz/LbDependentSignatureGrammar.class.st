@@ -1,6 +1,6 @@
 Class {
 	#name : 'LbDependentSignatureGrammar',
-	#superclass : 'LbTokensIdentifiersLiterals',
+	#superclass : 'LbGrammarIdentifiersAndLiterals',
 	#instVars : [
 		'op',
 		'var',

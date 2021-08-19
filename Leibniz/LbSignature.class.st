@@ -253,7 +253,7 @@ LbSignature >> parsePattern: aString [
 { #category : 'term construction' }
 LbSignature >> parsePattern: aString extraVariables: aDictionary [
 	| parsedTerm |
-	parsedTerm := (LbParser2 newStartingAt: #patternEnd)
+	parsedTerm := (LbParser newStartingAt: #patternEnd)
 		parse: aString.
 	parsedTerm isPetit2Failure ifTrue:
 		[ self error: parsedTerm message, ' after ',
@@ -263,12 +263,13 @@ LbSignature >> parsePattern: aString extraVariables: aDictionary [
 
 { #category : 'asset construction' }
 LbSignature >> parseRule: aString [
-	| rule |
-	rule := (LbRuleParser signature: self)
-				parse: aString
-				onError: [ :message :position |
-					self error: 'Parse error for: ', aString, ' (', message, ')'].
-	^ rule
+	| parsedRule |
+	parsedRule := (LbParser newStartingAt: #rule)
+		parse: aString.
+	parsedRule isPetit2Failure ifTrue:
+		[ self error: parsedRule message, ' after "',
+				 (aString sliceFrom: 1 to: parsedRule position), '"' ].
+	^ parsedRule value: self
 ]
 
 { #category : 'term construction' }
@@ -279,7 +280,7 @@ LbSignature >> parseTerm: aString [
 { #category : 'term construction' }
 LbSignature >> parseTerm: aString extraVariables: aDictionary [
 	| parsedTerm |
-	parsedTerm := (LbParser2 newStartingAt: #termEnd)
+	parsedTerm := (LbParser newStartingAt: #termEnd)
 		parse: aString.
 	parsedTerm isPetit2Failure ifTrue:
 		[ self error: parsedTerm message, ' after ',
