@@ -345,7 +345,7 @@ LbDependentSortGraph >> normalizedSortFor: aSortTerm [
 { #category : 'lookup' }
 LbDependentSortGraph >> parseSort: aString [
 	| parsedTerm |
-	parsedTerm := context parseTerm: aString.
+	parsedTerm := context parsePattern: aString.
 	parsedTerm isPetit2Failure ifTrue: [ self error: parsedTerm message ].
 	^ self sortFor: parsedTerm
 ]

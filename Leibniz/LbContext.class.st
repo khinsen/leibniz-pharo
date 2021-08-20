@@ -152,6 +152,11 @@ LbContext >> name [
 ]
 
 { #category : 'operations' }
+LbContext >> parsePattern: aString [
+	^ signature parsePattern: aString
+]
+
+{ #category : 'operations' }
 LbContext >> parseTerm: aString [
 	^ signature parseTerm: aString
 ]

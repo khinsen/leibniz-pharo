@@ -82,28 +82,38 @@ LbDependentSortExamples >> bagSorts [
 	<gtExample>
 	| sortGraph sorts |
 	sortGraph := self bagSortGraph.
-	sorts := #('collection'
-				'∅'
-				'bag(element, 2)'
-				'list(element, 2)'
-				'list(element.special, 2)'
-				'bag(element, 2)'
-				'∀ n:ℕ bag(element, n)'
-				'∀ m:ℕ bag(element, m)')
+	sorts := #( "1" 'collection'
+				"2" '∅'
+				"3" 'bag(element, 2)'
+				"4" 'list(element, 2)'
+				"5" 'list(element.special, 2)'
+				"6" 'bag(element, 3)'
+				"7" '∀ n:ℕ bag(element, n)'
+				"8" '∀ m:ℕ bag(element, m)')
 				collect: [ :each |
 					sortGraph parseSort: each ].
+	"All these sorts are subsorts of 'collection'"
+	self assert: (sorts at: 1) <= (sorts at: 1).
 	self assert: (sorts at: 2) <= (sorts at: 1).
 	self assert: (sorts at: 3) <= (sorts at: 1).
 	self assert: (sorts at: 4) <= (sorts at: 1).
 	self assert: (sorts at: 5) <= (sorts at: 1).
+	self assert: (sorts at: 6) <= (sorts at: 1).
+	self assert: (sorts at: 7) <= (sorts at: 1).
+	self assert: (sorts at: 8) <= (sorts at: 1).
+	"Direct and transitive subsort declarations"
+	self assert: (sorts at: 4) <= (sorts at: 3).
 	self assert: (sorts at: 5) <= (sorts at: 4).
 	self assert: (sorts at: 5) <= (sorts at: 3).
-	self assert: (sorts at: 4) <= (sorts at: 3).
+	"Length mismatch"
 	self assert: ((sorts at: 4) <= (sorts at: 6)) not.
 	self assert: ((sorts at: 5) <= (sorts at: 6)) not.
+	"Specific lengths make subsorts of generic lengths"
 	self assert: (sorts at: 4) <= (sorts at: 7).
+	"Names of variables don't matter"
 	self assert: (sorts at: 7) <= (sorts at: 8).
 	self assert: (sorts at: 8) <= (sorts at: 7).
+
 	self assert: (((sorts at: 1) subsortGraph) at: #nodes) size equals: 4.
 	self assert: (((sorts at: 3) subsortGraph) at: #nodes) size equals: 4.
 	self assert: (((sorts at: 4) supersortGraph) at: #nodes) size equals: 3.
