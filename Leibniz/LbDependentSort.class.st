@@ -26,8 +26,16 @@ LbDependentSort >> <= anotherSort [
 	otherFamily := anotherSort sortFamily.
 	myFamily = otherFamily
 		ifTrue: [ ^ self compareArguments: anotherSort ]
-		ifFalse: [ ^ self testPaths:
-					(sortGraph pathsConnecting: myFamily to: otherFamily) ]
+		ifFalse: [ 
+			| candidates |
+			candidates := self testPaths:
+					(sortGraph pathsConnecting: myFamily to: otherFamily).
+			candidates do: [ :each |
+				self assert: each sortFamily equals: otherFamily.
+				each = anotherSort ifTrue: [ ^ true ].
+				(each compareArguments: anotherSort)
+					ifTrue: [ ^ true ] ].
+			^ false ]
 ]
 
 { #category : 'matching' }
@@ -47,7 +55,7 @@ LbDependentSort >> compareArguments: anotherSort [
 		term1 sort asLeibnizSyntaxString = #sort
 			ifTrue: [ (sortGraph sortFor: term1) <= (sortGraph sortFor: term2)
 						ifFalse: [ ^ false ] ]
-			ifFalse: [ term1 = term2 ifFalse: [ ^ false ] ] ].
+			ifFalse: [ (term2 match: term1) ifFailure: [ ^ false ] ] ].
 	^ true
 ]
 
@@ -246,6 +254,8 @@ LbDependentSort >> term [
 
 { #category : 'comparing' }
 LbDependentSort >> testPaths: aSet [
+	| candidates |
+	candidates := Set new.
 	aSet do: [ :aPath |
 		| currentSorts |
 		currentSorts := { term }.
@@ -256,8 +266,10 @@ LbDependentSort >> testPaths: aSet [
 						collect: [ :anAxiom |
 							anAxiom supersortOf: aSort ]
 						thenSelect: #isNotNil ] ].
-		currentSorts ifNotEmpty: [ ^ true ] ].
-	^ false
+		currentSorts do: [ :each |
+			candidates add:
+				(LbDependentSort sortGraph: sortGraph term: each) ] ].
+	^ candidates
 ]
 
 { #category : 'matching' }

@@ -36,9 +36,10 @@ LbTermExamples >> booleanUnifications [
 		{'X ⊻ ¬(Y)'. 'false ⊻ ¬(Y)'. '(Y, X=false)'}.
 		{'false ⊻ ¬(X)'. 'false ⊻ ¬(Y)'. '(X=Y)'}.
 		{'true'. 'false'.  '(failure #nonUnifiableTerms: false, true)' }.
+		{'∀ foo:boolean ¬(foo)'. '∀ bar:boolean ¬(bar)'. '(bar=foo)'}
 	} collect: [ :each |
 		| unification string |
-		unification := (s parseTerm: each first) unify: (s parseTerm: each  second).
+		unification := (s parsePattern: each first) unify: (s parsePattern: each  second).
 		string := unification printString.
 		self assert: (string allButFirst: (string findString: '(') - 1) equals: each third.
 		unification ]

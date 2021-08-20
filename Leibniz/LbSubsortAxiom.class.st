@@ -100,7 +100,8 @@ LbSubsortAxiom >> subsort [
 
 { #category : 'matching' }
 LbSubsortAxiom >> subsortOf: aTerm [
-	| rename preferredVarNames substitution |
+	^ self unify: aTerm with: supersort thenSubstituteIn: subsort
+	"| rename preferredVarNames substitution |
 	rename := supersort addPrefix: #'temp.' toVarsConflictingWith: aTerm.
 	preferredVarNames := aTerm variables keys.
 	substitution := (supersort substitute: rename) unify: aTerm.
@@ -111,7 +112,7 @@ LbSubsortAxiom >> subsortOf: aTerm [
 					ifEmpty: [ varSet anyOne ]
 					ifNotEmpty: [ :anArray | anArray first ].
 		LbVarTerm name: name sort: sort signature: signature ].
-	^ (subsort substitute: rename) substitute: substitution
+	^ (subsort substitute: rename) substitute: substitution"
 ]
 
 { #category : 'accessing' }
@@ -121,8 +122,25 @@ LbSubsortAxiom >> supersort [
 
 { #category : 'matching' }
 LbSubsortAxiom >> supersortOf: aTerm [
-	| substitution |
+	^ self unify: aTerm with: subsort thenSubstituteIn: supersort
+	"| substitution |
 	substitution := subsort match: aTerm.
 	substitution isFailure ifTrue: [ ^ nil ].
-	^ supersort substitute: substitution
+	^ supersort substitute: substitution"
+]
+
+{ #category : 'matching' }
+LbSubsortAxiom >> unify: aTerm with: pattern1 thenSubstituteIn: pattern2 [
+	| rename preferredVarNames substitution |
+	rename := pattern1 addPrefix: #'temp.' toVarsConflictingWith: aTerm.
+	preferredVarNames := aTerm variables keys.
+	substitution := (pattern1 substitute: rename) unify: aTerm.
+	substitution isFailure ifTrue: [ ^ nil ].
+	substitution bindToUniqueVar: [ :varSet :sort |
+		| name |
+		name := (varSet intersection: preferredVarNames) asArray sorted
+					ifEmpty: [ varSet anyOne ]
+					ifNotEmpty: [ :anArray | anArray first ].
+		LbVarTerm name: name sort: sort signature: signature ].
+	^ (pattern2 substitute: rename) substitute: substitution
 ]

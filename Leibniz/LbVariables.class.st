@@ -61,15 +61,15 @@ LbVariables >> bindings [
 ]
 
 { #category : 'api - binding' }
-LbVariables >> defineVar: aSymbol ofSort: aSort [
+LbVariables >> defineVar: anLbOperatorName ofSort: aSort [
 	| varSet |
-	sorts at: aSymbol
+	sorts at: anLbOperatorName
 		ifPresent: [ :sort | self assert: sort equals: aSort ]
 		ifAbsentPut: [ aSort ].
-	bound at: aSymbol ifPresent: [ ^ self ].
-	unbound at: aSymbol ifPresent: [ ^ self ].
-	varSet := Set with: aSymbol.
-	unbound at: aSymbol put: varSet.
+	bound at: anLbOperatorName ifPresent: [ ^ self ].
+	unbound at: anLbOperatorName ifPresent: [ ^ self ].
+	varSet := Set with: anLbOperatorName.
+	unbound at: anLbOperatorName put: varSet.
 	sorts at: varSet put: aSort	
 ]
 
@@ -90,9 +90,56 @@ LbVariables >> failWith: aTerm notUnifiableWith: anotherTerm [
 	failure ifNil: [ failure := { #nonUnifiableTerms. aTerm. anotherTerm } ]
 ]
 
+{ #category : 'inspecting' }
+LbVariables >> gtBindingsFor: aView [
+	<gtView>
+	bound ifEmpty: [ ^ aView empty ].
+	^ aView columnedList
+		title: 'Bindings';
+		priority: 1;
+		items: [ bound keys ];
+		column: 'Name' lbCode: [ :each | each asSymbol ];
+		column: 'Sort' lbCode: [ :each | (sorts at: each) asLeibnizSyntaxString ];
+		column: 'Value' lbCode: [ :each | (bound at: each) asLeibnizSyntaxString ];
+		yourself
+]
+
+{ #category : 'inspecting' }
+LbVariables >> gtFailureFor: aView [
+	<gtView>
+	failure ifNil: [ ^ aView empty ].
+	^ aView list
+		title: 'Failure';
+		priority: 0;
+		items: [ { failure first. failure second asLeibnizSyntaxString. failure third asLeibnizSyntaxString } ];
+		itemLbCode: [ :each | each ];
+		yourself
+]
+
+{ #category : 'inspecting' }
+LbVariables >> gtUnboundFor: aView [
+	<gtView>
+	unbound ifEmpty: [ ^ aView empty ].
+	^ aView columnedList
+		title: 'Unbound';
+		priority: 2;
+		items: [ unbound values asSet asArray ];
+		column: 'Names' lbCode: [ :each |
+			' = ' join: (each collect: #asSymbol) ];
+		column: 'Sort' lbCode: [ :each |
+			(sorts at: each) asLeibnizSyntaxString ];
+		yourself
+]
+
 { #category : 'testing' }
 LbVariables >> hasNoBindings [
 	^ bound isEmpty
+]
+
+{ #category : 'testing' }
+LbVariables >> ifFailure: aBlock [
+	^ failure
+		ifNotNil: [ aBlock value ]
 ]
 
 { #category : 'testing' }
