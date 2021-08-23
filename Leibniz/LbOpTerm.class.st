@@ -127,15 +127,24 @@ LbOpTerm >> synopsis [
 ]
 
 { #category : 'matching' }
-LbOpTerm >> unify: otherTerm variables: variables [
-	otherTerm unifyWithOpTerm: self op: opName args: arguments variables: variables.
+LbOpTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol variables: variables [
+	otherTerm
+		unifyTagged: anotherSymbol
+		withOpTerm: self
+		tagged: aSymbol
+		op: opName args: arguments
+		variables: variables.
 ]
 
 { #category : 'matching' }
-LbOpTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
+LbOpTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: anotherSymbol op: anOpName args: anArgList variables: variables [
 	(opName = anOpName and: [ arguments size = anArgList size ])
 		ifTrue: [ anArgList with: arguments do: [ :arg1 :arg2 |
-					arg1 unify: arg2 variables: variables ] ]
+					arg1
+						unifyTagged: anotherSymbol
+						with: arg2
+						tagged: aSymbol
+						variables: variables ] ]
 		ifFalse: [ variables failWith: self notUnifiableWith: otherTerm ]
 ]
 

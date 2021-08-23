@@ -61,7 +61,7 @@ LbVariables >> bindings [
 ]
 
 { #category : 'api - binding' }
-LbVariables >> defineVar: anLbOperatorName ofSort: aSort [
+LbVariables >> defineVar: anLbOperatorName sort: aSort [
 	| varSet |
 	sorts at: anLbOperatorName
 		ifPresent: [ :sort | self assert: sort equals: aSort ]

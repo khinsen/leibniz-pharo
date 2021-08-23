@@ -56,7 +56,7 @@ LbVarTerm >> isVariable [
 
 { #category : 'matching' }
 LbVarTerm >> match: otherTerm variables: variables [
-	variables defineVar: name ofSort: sort.
+	variables defineVar: name sort: sort.
 	otherTerm matchVar: name ofSort: sort variables: variables
 ]
 
@@ -92,21 +92,27 @@ LbVarTerm >> substitute: aSubstitution [
 ]
 
 { #category : 'matching' }
-LbVarTerm >> unify: otherTerm variables: variables [
-	variables defineVar: name ofSort: sort.
-	otherTerm unifyWithVar: name ofSort: sort variables: variables
+LbVarTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol variables: variables [
+	| taggedName |
+	taggedName := LbTaggedVariableName tag: aSymbol name: name.
+	variables defineVar: taggedName sort: sort.
+	otherTerm unifyTagged: anotherSymbol withVar: taggedName sort: sort variables: variables
 ]
 
 { #category : 'matching' }
-LbVarTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
-	variables defineVar: name ofSort: sort.
-	otherTerm unifyWithVar: name ofSort: sort variables: variables
+LbVarTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: anotherSymbol op: anOpName args: anArgList variables: variables [
+	| taggedName |
+	taggedName := LbTaggedVariableName tag: aSymbol name: name.
+	variables defineVar: taggedName sort: sort.
+	otherTerm unifyTagged: anotherSymbol withVar: taggedName sort: sort variables: variables
 ]
 
 { #category : 'matching' }
-LbVarTerm >> unifyWithVar: aSymbol ofSort: aSort variables: variables [
-	variables defineVar: name ofSort: sort.
-	variables makeVar: name ofSort: sort equalToVar: aSymbol ofSort: aSort
+LbVarTerm >> unifyTagged: aSymbol withVar: aTaggedName sort: aSort variables: variables [
+	| taggedName |
+	taggedName := LbTaggedVariableName tag: aSymbol name: name.
+	variables defineVar: taggedName sort: sort.
+	variables makeVar: taggedName ofSort: sort equalToVar: aTaggedName ofSort: aSort
 ]
 
 { #category : 'accessing' }

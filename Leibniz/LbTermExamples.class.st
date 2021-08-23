@@ -77,7 +77,7 @@ LbTermExamples >> check: aPattern withSubstitution: aDictionary equals: aTerm si
 		varName := LbPrefixOperatorName for: name.
 		substitution
 			defineVar: varName
-			ofSort: parsedValue sort.
+			sort: parsedValue sort.
 		substitution
 			bindVar: varName
 			ofSort: parsedValue sort
@@ -302,6 +302,34 @@ LbTermExamples >> substitutedTerms [
 		equals: 'true ⊻ false'
 		signature: s.
 	}
+]
+
+{ #category : 'example' }
+LbTermExamples >> taggedUnifications [
+	<gtExample>
+	| s |
+	s := LbSignatureExamples new booleanSignature.
+	^ {
+		{'true'. 'X'. '(right.X=true)'}.
+		{'¬(X)'. '¬(true)'. '(left.X=true)'}.
+		{'X'. '¬(true)'. '(left.X=¬(true))'}.
+		{'true ⊻ false ⊻ true ⊻ ¬(true)'. 'true ⊻ false ⊻ X ⊻ Y'. '(right.X=true, right.Y=¬(true))'}.
+		{'false ⊻ X ⊻ true ⊻ ¬(true)'. 'false ⊻ true ⊻ X ⊻ Y'. '(left.X=true, right.X=true, right.Y=¬(true))'}.
+		{'X ⊻ ¬(X)'. 'false ⊻ ¬(X)'. '(left.X=false, right.X=false)'}.
+		{'X ⊻ ¬(Y)'. 'false ⊻ ¬(Y)'. '(left.Y=right.Y, left.X=false)'}.
+		{'false ⊻ ¬(X)'. 'false ⊻ ¬(Y)'. '(left.X=right.Y)'}.
+		{'true'. 'false'.  '(failure #nonUnifiableTerms: false, true)' }.
+		{'∀ foo:boolean ¬(foo)'. '∀ bar:boolean ¬(bar)'. '(left.foo=right.bar)'}
+	} collect: [ :each |
+		| unification string |
+		unification :=
+			(s parsePattern: each first)
+				unifyTagged: #left
+			with: (s parsePattern: each  second)
+			tagged: #right.
+		string := unification printString.
+		self assert: (string allButFirst: (string findString: '(') - 1) equals: each third.
+		unification ]
 ]
 
 { #category : 'example' }

@@ -26,7 +26,7 @@ LbTerm >> addPrefix: aSymbol toVarsConflictingWith: anotherTerm [
 					otherVars includes: newName
 				] whileTrue.
 				sort := myVars at: each.
-				substitution defineVar: each ofSort: sort.
+				substitution defineVar: each sort: sort.
 				substitution
 					bindVar: each
 					ofSort: sort
@@ -205,20 +205,39 @@ LbTerm >> unify: otherTerm [
 
 { #category : 'matching' }
 LbTerm >> unify: otherTerm variables: variables [
+	self
+		unifyTagged: nil
+		with: otherTerm
+		tagged: nil
+		variables: variables
+]
+
+{ #category : 'matching' }
+LbTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol [
+	| variables |
+	variables := LbVariables new.
+	self unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol variables: variables.
+	^ variables
+]
+
+{ #category : 'matching' }
+LbTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol variables: variables [
 	self = otherTerm
 		ifFalse: [ variables failWith: self notUnifiableWith: otherTerm ]
 ]
 
 { #category : 'matching' }
-LbTerm >> unifyWithOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
+LbTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: anotherSymbol op: anOpName args: anArgList variables: variables [
 	variables failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : 'matching' }
-LbTerm >> unifyWithVar: aSymbol ofSort: aSort variables: variables [
-	variables bindVar: aSymbol ofSort: aSort to: self.
+LbTerm >> unifyTagged: aSymbol withVar: aTaggedName sort: aSort variables: variables [
+	variables bindVar: aTaggedName ofSort: aSort to: self.
 	self variables associationsDo: [ :each |
-		variables defineVar: each key ofSort: each value ]
+		| taggedName |
+		taggedName := LbTaggedVariableName tag: aSymbol name: each key.
+		variables defineVar: taggedName sort: each value ]
 ]
 
 { #category : 'accessing' }

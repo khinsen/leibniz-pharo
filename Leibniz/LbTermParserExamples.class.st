@@ -314,7 +314,7 @@ LbTermParserExamples >> rationalNumberTerms [
 LbTermParserExamples >> reservedIdentifierFailures [
 	<gtExample>
 	| inputs |
-	inputs := LbTokensIdentifiersLiterals reservedIdentifiers.
+	inputs := LbGrammarIdentifiersAndLiterals reservedIdentifiers.
 	inputs do: [ :each |
 		self assertParseFailure: each rule: #identifier ].
 	^ inputs
