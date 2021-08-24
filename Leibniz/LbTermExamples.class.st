@@ -231,6 +231,36 @@ LbTermExamples >> numberUnifications [
 ]
 
 { #category : 'example' }
+LbTermExamples >> patternEquivalence [
+	<gtExample>
+	| rns s |
+	rns := LbBuiltinSignatures realNumberSignature.
+	s := (LbSignatureBuilder sortGraph: rns sortGraph)
+			addSignature: rns includeVars: false;
+			parseAndAddVar: 'anInteger:ℤ';
+			parseAndAddVar: 'anotherInteger:ℤ';
+			parseAndAddVar: 'aRational:ℚ';
+			parseAndAddVar: 'aPositiveRational:ℚ.p';
+			parseAndAddVar: 'aBoolean:boolean';
+			signature.
+	^ {
+		{'anInteger'. 'anInteger'. true}.
+		{'anInteger'. 'anotherInteger'. true}.
+		{'anInteger'. 'aRational'. false}.
+		{'anInteger'. 'aPositiveRational'. false}.
+		{'anInteger'. 'aBoolean'. false}.
+		{'abs(anInteger)'. 'abs(anotherInteger)'. true}.
+		{'abs(anInteger)'. 'anotherInteger'. false}.
+		{'abs(anInteger)'. 'abs(aRational)'. false}.
+		{'anInteger + anotherInteger'. 'aRational'. false}.
+	} collect: [ :each |
+		| result |
+		result := (s parseTerm: each first) isEquivalentTo: (s parseTerm: each second).
+		self assert: result equals: each third.
+		{ each first. each second. result } ]
+]
+
+{ #category : 'example' }
 LbTermExamples >> rationalNumberLiteralTerms [
 	<gtExample>
 	| inputs |

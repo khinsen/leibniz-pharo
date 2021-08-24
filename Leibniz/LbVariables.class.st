@@ -243,3 +243,13 @@ LbVariables >> printUnboundOn: aStream [
 			separatedBy: [ aStream nextPut: $= ] ]
 		separatedBy: [ aStream nextPutAll: ', ' ]
 ]
+
+{ #category : 'lookup' }
+LbVariables >> sortOf: aVarNameOrVarSet [
+	^ sorts at: aVarNameOrVarSet
+]
+
+{ #category : 'lookup' }
+LbVariables >> unboundVarSets [
+	^ unbound values asSet
+]

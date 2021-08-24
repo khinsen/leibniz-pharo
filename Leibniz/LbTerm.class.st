@@ -109,6 +109,24 @@ LbTerm >> headOpName [
 	self subclassResponsibility
 ]
 
+{ #category : 'comparing' }
+LbTerm >> isEquivalentTo: aTerm [
+	"Compares two patterns and returns true if they are equal modulo
+	 variable renaming."
+	 | vars |
+	vars := self unifyTagged: #left with: aTerm tagged: #right.
+	"The unification of two equivalent patterns results in their variables
+	 being paired up. So: no bindings, unbound sets of size 2 with one variable
+	 from each term, which have the same sorts."
+	vars ifFailure: [ ^ false ].
+	vars hasNoBindings ifFalse: [ ^ false ].
+	vars unboundVarSets do: [ :each |
+		each size = 2 ifFalse: [ ^ false ].
+		(each collect: [ :v | vars sortOf: v ])
+			size = 1 ifFalse: [ ^ false ]  ].
+	^ true
+]
+
 { #category : 'testing' }
 LbTerm >> isInfix [
 	"Answer true if the term is printed in infix notation."
