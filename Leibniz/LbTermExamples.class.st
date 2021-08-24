@@ -216,6 +216,7 @@ LbTermExamples >> numberUnifications [
 			signature.
 	^ {
 		{'anInteger'. '42'. '(anInteger=42)'}.
+		{'42'. 'anInteger'. '(anInteger=42)'}.
 		{'anInteger'. '-42'. '(anInteger=-42)'}.
 		{'aPositiveRational'. '42'. '(aPositiveRational=42)'}.
 		{'aPositiveRational'. '-42'.  '(failure #notSubsort: ℤ.nz, ℚ.p)' }.
@@ -250,6 +251,8 @@ LbTermExamples >> patternComparison [
 		{'anInteger'. 'aRational'. true}.
 		{'anInteger'. 'aPositiveRational'. false}.
 		{'anInteger'. 'aBoolean'. false}.
+		{'2'. 'anInteger'. true}.
+		{'2'. 'aRational'. true}.
 		{'abs(anInteger)'. 'abs(anotherInteger)'. true}.
 		{'abs(anInteger)'. 'anotherInteger'. true}.
 		{'abs(anInteger)'. 'abs(aRational)'. true}.

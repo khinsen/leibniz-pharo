@@ -55,7 +55,7 @@ LbDependentSort >> compareArguments: anotherSort [
 		term1 sort asLeibnizSyntaxString = #sort
 			ifTrue: [ (sortGraph sortFor: term1) <= (sortGraph sortFor: term2)
 						ifFalse: [ ^ false ] ]
-			ifFalse: [ (term2 match: term1) ifFailure: [ ^ false ] ] ].
+			ifFalse: [ (term1 isRestrictionOf: term2) ifFalse: [ ^ false ] ] ].
 	^ true
 ]
 

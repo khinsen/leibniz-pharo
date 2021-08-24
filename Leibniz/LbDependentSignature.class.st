@@ -118,7 +118,11 @@ LbDependentSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
 { #category : 'lookup' }
 LbDependentSignature >> opNamed: anOpName withArgs: aSortArray [
 	^ operators at: anOpName
-		ifPresent: [ :ops | ops at: aSortArray size ifAbsent: [ nil ] ]
+		ifPresent: [ :ops |
+			| arity kindArity |
+			arity := LbDependentArity sortGraph: sortGraph argSortPatterns: aSortArray.
+			kindArity := arity liftToKinds.
+			ops at: kindArity ifAbsent: [ nil ] ]
 		ifAbsent: [ nil ].
 ]
 

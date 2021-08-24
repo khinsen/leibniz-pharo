@@ -100,6 +100,14 @@ LbVarTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol variable
 ]
 
 { #category : 'matching' }
+LbVarTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: anotherSymbol variables: variables [
+	| taggedName |
+	taggedName := LbTaggedVariableName tag: aSymbol name: name.
+	variables defineVar: taggedName sort: sort.
+	otherTerm unifyTagged: anotherSymbol withVar: taggedName sort: sort variables: variables
+]
+
+{ #category : 'matching' }
 LbVarTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: anotherSymbol op: anOpName args: anArgList variables: variables [
 	| taggedName |
 	taggedName := LbTaggedVariableName tag: aSymbol name: name.

@@ -64,6 +64,21 @@ LbAtomicTerm >> sortSymbol [
 	self subclassResponsibility
 ]
 
+{ #category : 'matching' }
+LbAtomicTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol variables: variables [
+	otherTerm
+		unifyTagged: anotherSymbol
+		withAtomicTerm: self
+		tagged: aSymbol
+		variables: variables.
+]
+
+{ #category : 'matching' }
+LbAtomicTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: anotherSymbol variables: variables [
+	self = otherTerm
+		ifFalse: [ variables failWith: self notUnifiableWith: otherTerm ]
+]
+
 { #category : 'accessing' }
 LbAtomicTerm >> value [
 	^ value

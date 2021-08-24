@@ -264,8 +264,7 @@ LbTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol [
 
 { #category : 'matching' }
 LbTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol variables: variables [
-	self = otherTerm
-		ifFalse: [ variables failWith: self notUnifiableWith: otherTerm ]
+	self subclassResponsibility
 ]
 
 { #category : 'matching' }

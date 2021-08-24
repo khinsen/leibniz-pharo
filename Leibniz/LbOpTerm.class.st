@@ -137,6 +137,11 @@ LbOpTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol variables
 ]
 
 { #category : 'matching' }
+LbOpTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: anotherSymbol variables: variables [
+	variables failWith: self notUnifiableWith: otherTerm
+]
+
+{ #category : 'matching' }
 LbOpTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: anotherSymbol op: anOpName args: anArgList variables: variables [
 	(opName = anOpName and: [ arguments size = anArgList size ])
 		ifTrue: [ anArgList with: arguments do: [ :arg1 :arg2 |
