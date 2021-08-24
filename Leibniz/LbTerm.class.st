@@ -113,7 +113,7 @@ LbTerm >> headOpName [
 LbTerm >> isEquivalentTo: aTerm [
 	"Compares two patterns and returns true if they are equal modulo
 	 variable renaming."
-	 | vars |
+	| vars |
 	vars := self unifyTagged: #left with: aTerm tagged: #right.
 	"The unification of two equivalent patterns results in their variables
 	 being paired up. So: no bindings, unbound sets of size 2 with one variable
@@ -131,6 +131,30 @@ LbTerm >> isEquivalentTo: aTerm [
 LbTerm >> isInfix [
 	"Answer true if the term is printed in infix notation."
 	^ false.
+]
+
+{ #category : 'comparing' }
+LbTerm >> isRestrictionOf: aTerm [
+	"Compares two patterns and returns true if the set of terms matching the
+	 receiver is a subset of the terms matching the argument."
+	| vars |
+	"Unification finds the intersection of the two sets of matching terms."
+	vars := self unifyTagged: #left with: aTerm tagged: #right.
+	vars ifFailure: [ ^ false ].
+	"It's OK to have bound variables in #right, but not in #left, as that would
+	 imply a restriction of the matching set."
+	vars bindings associationsDo: [ :each |
+		each key tag = #left ifTrue: [ ^ false ] ].
+	"In each set of equal-but-unbound variables, there can be at most one
+	 variable tagged #left, otherwise there would be a restriction. The
+	 sort of the set must be equal to the sort of the variable tagged #left."
+	vars unboundVarSets do: [ :each |
+		| left |
+		left := each select: [ :v | v tag = #left ].
+		left size > 1 ifTrue: [ ^ false ].
+		left ifNotEmpty: [ (vars sortOf: left anyOne) = (vars sortOf: each)
+								ifFalse: [ ^ false ] ] ].
+	^ true
 ]
 
 { #category : 'testing' }

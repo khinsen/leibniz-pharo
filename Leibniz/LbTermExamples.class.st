@@ -231,6 +231,42 @@ LbTermExamples >> numberUnifications [
 ]
 
 { #category : 'example' }
+LbTermExamples >> patternComparison [
+	<gtExample>
+	| rns s |
+	rns := LbBuiltinSignatures realNumberSignature.
+	s := (LbSignatureBuilder sortGraph: rns sortGraph)
+			addSignature: rns includeVars: false;
+			parseAndAddVar: 'anInteger:ℤ';
+			parseAndAddVar: 'anotherInteger:ℤ';
+			parseAndAddVar: 'aThirdInteger:ℤ';
+			parseAndAddVar: 'aRational:ℚ';
+			parseAndAddVar: 'aPositiveRational:ℚ.p';
+			parseAndAddVar: 'aBoolean:boolean';
+			signature.
+	^ {
+		{'anInteger'. 'anInteger'. true}.
+		{'anInteger'. 'anotherInteger'. true}.
+		{'anInteger'. 'aRational'. true}.
+		{'anInteger'. 'aPositiveRational'. false}.
+		{'anInteger'. 'aBoolean'. false}.
+		{'abs(anInteger)'. 'abs(anotherInteger)'. true}.
+		{'abs(anInteger)'. 'anotherInteger'. true}.
+		{'abs(anInteger)'. 'abs(aRational)'. true}.
+		{'anInteger + anotherInteger'. 'aThirdInteger'. true}.
+	} collect: [ :each |
+		| left right result |
+		left := s parseTerm: each first.
+		right := s parseTerm: each second.
+		result := left isRestrictionOf: right.
+		self assert: result equals: each third.
+		{ each first. each second.
+			left
+				unifyTagged: #left
+				with: right tagged: #right } ]
+]
+
+{ #category : 'example' }
 LbTermExamples >> patternEquivalence [
 	<gtExample>
 	| rns s |
@@ -239,6 +275,7 @@ LbTermExamples >> patternEquivalence [
 			addSignature: rns includeVars: false;
 			parseAndAddVar: 'anInteger:ℤ';
 			parseAndAddVar: 'anotherInteger:ℤ';
+			parseAndAddVar: 'aThirdInteger:ℤ';
 			parseAndAddVar: 'aRational:ℚ';
 			parseAndAddVar: 'aPositiveRational:ℚ.p';
 			parseAndAddVar: 'aBoolean:boolean';
@@ -252,12 +289,17 @@ LbTermExamples >> patternEquivalence [
 		{'abs(anInteger)'. 'abs(anotherInteger)'. true}.
 		{'abs(anInteger)'. 'anotherInteger'. false}.
 		{'abs(anInteger)'. 'abs(aRational)'. false}.
-		{'anInteger + anotherInteger'. 'aRational'. false}.
+		{'anInteger + anotherInteger'. 'aThirdInteger'. false}.
 	} collect: [ :each |
-		| result |
-		result := (s parseTerm: each first) isEquivalentTo: (s parseTerm: each second).
+		| left right result |
+		left := s parseTerm: each first.
+		right := s parseTerm: each second.
+		result := left isEquivalentTo: right.
 		self assert: result equals: each third.
-		{ each first. each second. result } ]
+		{ each first. each second.
+			left
+				unifyTagged: #left
+				with: right tagged: #right } ]
 ]
 
 { #category : 'example' }
