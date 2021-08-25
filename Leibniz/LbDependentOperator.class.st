@@ -24,12 +24,47 @@ LbDependentOperator class >> name: anOpName kindArity: aKindArray kind: aKind [
 
 { #category : 'adding' }
 LbDependentOperator >> addArity: newArity withSort: newSortPattern [
+	self assertMonotonicity: [ kind includes: newSortPattern ]
+		  forArity: newArity andSortPattern: newSortPattern.
+
+	ranks ifEmpty:
+		[ ranks add: newArity -> newSortPattern.
+		  ^ self  ].
+
+	1 to: ranks size do: [ :index |
+		| r a s |
+		r := ranks at: index.
+		a := r key.
+		s := r value.
+
+		a = newArity ifTrue: [
+			self
+				assert: s = newSortPattern
+				description: 'conflicting earlier operator definition with sort ', s asString.
+			^ self ].
+
+		(newArity <= a) ifTrue: [
+			"First case: all sorts conforming to newArity also conform to a.
+			 newArity must then be inserted before a."
+			self
+	 			assertMonotonicity: [ newSortPattern <= s ]
+				 forArity: newArity andSortPattern: newSortPattern.
+			ranks add: newArity -> newSortPattern beforeIndex: index.
+			^ self ].
+
+		(a <= newArity) ifTrue: [
+			"Second case: all sorts conforming to a also conform to newArity.
+			newArity must be inserted after a, but perhaps not immediately.
+			Continue the search."
+			self
+				assertMonotonicity: [ s <= newSortPattern ]
+				forArity: newArity andSortPattern: newSortPattern ] ].
+
 	ranks add: newArity -> newSortPattern
 ]
 
 { #category : 'private' }
 LbDependentOperator >> assertMonotonicity: aBlock forArity: anArity andSortPattern: aSortPattern [
-	self flag: #todo.
 	self
 		assert: aBlock
 		description: 'declaration ',
@@ -177,12 +212,12 @@ LbDependentOperator >> ranksMatchingArgSortPatterns: aSortPatternArray [
 			| submatches |
 			submatches := patternArg matchAllSupersortsOf: valueArg.
 			submatches
-				ifEmpty: [ match makeNull ]
+				ifEmpty: [ match failUnless: valueArg isSubsortOf: patternArg ]
 				ifNotEmpty: [
 					submatches size > 1
-						ifTrue: [ self error: 'Multiple matches not yet implemented'].
+						ifTrue: [ self error: 'Multiple matches not yet implemented' ].
 					match combineWith: submatches anyOne ] ].
-		match ifNotNull: [
+		match ifSuccess: [
 			matches add: (each key collect: [ :s | s substitute: match ])
 							-> (each value substituteAndReduce: match) ] ].
 	^ matches

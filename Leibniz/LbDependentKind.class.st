@@ -37,6 +37,11 @@ LbDependentKind >> gtGraphFor: aView [
 		highlight: [ false ]
 ]
 
+{ #category : 'testing' }
+LbDependentKind >> includes: aSort [
+	^ sortFamilies includes: aSort family
+]
+
 { #category : 'initialization' }
 LbDependentKind >> initializeWithSortGraph: aSortGraph sortFamilies: sortFamilySet maximalSortFamilies: maximalSortFamilySet [
 	sortGraph := aSortGraph.

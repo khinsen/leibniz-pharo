@@ -10,7 +10,7 @@ Class {
 	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : 'api - binding' }
+{ #category : 'binding' }
 LbVariables >> bindToUniqueVar: aBlock [
 	| varSetBindings |
 	self isFailure ifTrue: [ ^ self ].
@@ -23,7 +23,7 @@ LbVariables >> bindToUniqueVar: aBlock [
 		self bindVar: aVar ofSort:(sorts at: aVar) to: uniqueVarTerm  ]	
 ]
 
-{ #category : 'api - binding' }
+{ #category : 'binding' }
 LbVariables >> bindVar: aSymbol ofSort: aSort to: aTerm [
 	failure ifNotNil: [ ^ self ].
 	self assert: (sorts at: aSymbol) equals: aSort.
@@ -60,16 +60,37 @@ LbVariables >> bindings [
 	^ bound
 ]
 
-{ #category : 'api - binding' }
-LbVariables >> defineVar: anLbOperatorName sort: aSort [
+{ #category : 'binding' }
+LbVariables >> combineWith: anLbVariables [
+	anLbVariables bindings associationsDo: [ :each |
+		| var sort binding |
+		var := each key.
+		binding := each value.
+		sort := anLbVariables sortOf: var.
+		self defineVar: var sort: sort.
+		self bindVar: var ofSort: sort to: binding. ].
+	anLbVariables unboundVarSets do: [ :eachVarSet |
+		| varsAndSorts |
+		varsAndSorts := eachVarSet asArray collect: [ :eachVar |
+			{ eachVar. anLbVariables sortOf: eachVar } ].
+		varsAndSorts do: [ :each |
+			self defineVar: each first sort: each second ].
+		varsAndSorts overlappingPairsDo: [ :a :b |
+			self
+				makeVar: a first ofSort: a second
+				equalToVar: b firs ofSort: b second ] ]
+]
+
+{ #category : 'binding' }
+LbVariables >> defineVar: anVarName sort: aSort [
 	| varSet |
-	sorts at: anLbOperatorName
+	sorts at: anVarName
 		ifPresent: [ :sort | self assert: sort equals: aSort ]
 		ifAbsentPut: [ aSort ].
-	bound at: anLbOperatorName ifPresent: [ ^ self ].
-	unbound at: anLbOperatorName ifPresent: [ ^ self ].
-	varSet := Set with: anLbOperatorName.
-	unbound at: anLbOperatorName put: varSet.
+	bound at: anVarName ifPresent: [ ^ self ].
+	unbound at: anVarName ifPresent: [ ^ self ].
+	varSet := Set with: anVarName.
+	unbound at: anVarName put: varSet.
 	sorts at: varSet put: aSort	
 ]
 
@@ -168,7 +189,7 @@ LbVariables >> isFailure [
 	^ failure isNotNil
 ]
 
-{ #category : 'api - binding' }
+{ #category : 'binding' }
 LbVariables >> makeVar: aSymbol ofSort: aSort equalToVar: anotherSymbol ofSort: anotherSort [
 	failure ifNotNil: [ ^ self ].
 	aSymbol = anotherSymbol ifTrue: [ ^ self ].

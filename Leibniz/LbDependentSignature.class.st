@@ -54,11 +54,13 @@ LbDependentSignature >> gtOperatorsFor: aView [
 		column: 'Kind' lbCode: [ :eachItem |
 			(eachItem isKindOf: LbOperatorName)
 				ifTrue: [ '' ]
-				ifFalse: [ eachItem kind asLeibnizSyntaxString ]];
+				ifFalse: [ eachItem kind asLeibnizSyntaxString ]]
+			weight: 0.3;
 		column: 'Ranks' text: [ :each |
 			(each isKindOf: LbOperatorName)
 				ifTrue: [ '' ]
-				ifFalse: [ each size ] ];
+				ifFalse: [ each size ] ]
+			weight: 0.2;
 		children: [ :each |
 			(each isKindOf: LbOperatorName)
 				ifTrue: [ (operators at: each) values
@@ -117,6 +119,7 @@ LbDependentSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
 
 { #category : 'lookup' }
 LbDependentSignature >> opNamed: anOpName withArgs: aSortArray [
+	self halt.
 	^ operators at: anOpName
 		ifPresent: [ :ops |
 			| arity kindArity |

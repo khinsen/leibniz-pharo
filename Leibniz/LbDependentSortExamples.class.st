@@ -160,7 +160,7 @@ LbDependentSortExamples >> listSortGraph [
 { #category : 'example' }
 LbDependentSortExamples >> listTerms [
 	<gtExample>
-	^ #('∅' '∅ ++ anElement' '∅ ++ anElement ++ anElement') collect: [ :each |
+	^ #("'∅'" '∅ ++ anElement' "'∅ ++ anElement ++ anElement'") collect: [ :each |
 		self listSignature parseTerm: each ]
 ]
 
