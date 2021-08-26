@@ -119,14 +119,14 @@ LbDependentSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
 
 { #category : 'lookup' }
 LbDependentSignature >> opNamed: anOpName withArgs: aSortArray [
-	self halt.
-	^ operators at: anOpName
+	operators at: anOpName
 		ifPresent: [ :ops |
 			| arity kindArity |
 			arity := LbDependentArity sortGraph: sortGraph argSortPatterns: aSortArray.
 			kindArity := arity liftToKinds.
-			ops at: kindArity ifAbsent: [ nil ] ]
-		ifAbsent: [ nil ].
+			kindArity withUniversalVariantsDo: [ :eachArity |
+				ops at: eachArity ifPresent: [ :op | ^ op ] ] ].
+	^ nil
 ]
 
 { #category : 'term construction' }

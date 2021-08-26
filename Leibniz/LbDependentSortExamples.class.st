@@ -160,8 +160,15 @@ LbDependentSortExamples >> listSortGraph [
 { #category : 'example' }
 LbDependentSortExamples >> listTerms [
 	<gtExample>
-	^ #("'∅'" '∅ ++ anElement' "'∅ ++ anElement ++ anElement'") collect: [ :each |
-		self listSignature parseTerm: each ]
+	^ {
+		{'∅'. '∅'}.
+		{'∅ ++ anElement'. 'list(element, 1)'}.
+		{'∅ ++ anElement ++ anElement'. 'list(element, 2)'}
+	  } collect: [ :each |
+		| term |
+		term := self listSignature parseTerm: each first.
+		self assert: term sort asLeibnizSyntaxString equals: each second.
+		term ]
 ]
 
 { #category : 'example' }
