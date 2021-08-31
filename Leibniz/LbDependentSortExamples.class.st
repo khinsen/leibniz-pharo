@@ -54,8 +54,7 @@ LbDependentSortExamples >> bagSortContext [
 { #category : 'example' }
 LbDependentSortExamples >> bagSortGraph [
 	<gtExample>
-	^ LbDependentSortGraphBuilder new
-		addSortContext: self bagSortContext;
+	^ (LbDependentSortGraphBuilder fromSortContext: self bagSortContext)
 		sortGraph
 ]
 
@@ -122,6 +121,17 @@ LbDependentSortExamples >> bagSorts [
 ]
 
 { #category : 'example' }
+LbDependentSortExamples >> dependentSortGraphWithPlainSorts [
+	<gtExample>
+	^ (LbDependentSortGraphBuilder new)
+		parseAndAdd: 'foo';
+		parseAndAdd: 'bar';
+		parseAndAdd: 'baz';
+		parseAndAdd: 'baz ⊆ bar';
+		sortGraph
+]
+
+{ #category : 'example' }
 LbDependentSortExamples >> listSignature [
 	<gtExample>
 	^ (LbDependentSignatureBuilder sortGraph: self listSortGraph)
@@ -151,9 +161,8 @@ LbDependentSortExamples >> listSortContext [
 LbDependentSortExamples >> listSortGraph [
 	<gtExample>
 	| sortGraph |
-	sortGraph := LbDependentSortGraphBuilder new
-		addSortContext: self listSortContext;
-		sortGraph.
+	sortGraph := (LbDependentSortGraphBuilder fromSortContext: self listSortContext)
+					sortGraph.
 	^ sortGraph
 ]
 
@@ -244,9 +253,8 @@ LbDependentSortExamples >> sortContextWithoutDependentSorts [
 LbDependentSortExamples >> sortGraphWithDependentSorts [
 	<gtExample>
 	| sortGraph |
-	sortGraph := LbDependentSortGraphBuilder new
-		addSortContext: self sortContextWithDependentSorts;
-		sortGraph.
+				sortGraph := (LbDependentSortGraphBuilder fromSortContext:
+								self sortContextWithDependentSorts)								sortGraph.
 	#('foo(1)' 'bar(0)' 'baz(42)') do: [ :aString |
 		self
 			assert: (sortGraph parseSort: aString) term sort name
@@ -258,9 +266,9 @@ LbDependentSortExamples >> sortGraphWithDependentSorts [
 LbDependentSortExamples >> sortGraphWithoutDependentSorts [
 	<gtExample>
 	| sortGraph |
-	sortGraph := LbDependentSortGraphBuilder new
-		addSortContext:self sortContextWithoutDependentSorts;
-		sortGraph.
+	sortGraph := (LbDependentSortGraphBuilder fromSortContext:
+					self sortContextWithoutDependentSorts)
+					sortGraph.
 	#(foo bar baz) do: [ :name |
 		self
 			assert: (sortGraph parseSort: name) term sort name

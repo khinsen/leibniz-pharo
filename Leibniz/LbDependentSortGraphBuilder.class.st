@@ -8,6 +8,13 @@ Class {
 	#category : 'Leibniz-7-DependentSorts'
 }
 
+{ #category : 'instance creation' }
+LbDependentSortGraphBuilder class >> fromSortContext: aContext [
+	^ self new
+		addSortContext: aContext;
+		yourself
+]
+
 { #category : 'adding' }
 LbDependentSortGraphBuilder >> addSortContext: aContext [
 	sortContextBuilder include: aContext mode: #extend
@@ -27,7 +34,21 @@ LbDependentSortGraphBuilder >> buildSortContext [
 
 { #category : 'initializing' }
 LbDependentSortGraphBuilder >> initialize [
-	sortContextBuilder := LbContextBuilder name: 'sorts'.
+	sortContextBuilder := (LbContextBuilder name: 'sorts')
+							parseAndAddSort: 'sort'.
+]
+
+{ #category : 'accessing' }
+LbDependentSortGraphBuilder >> parseAndAdd: aString [
+	| declaration |
+	declaration := (LbParser newStartingAt: #sortOrSubsort)
+					parse: aString.
+	declaration size = 1 ifTrue: [
+		sortContextBuilder parseAndAddOp: aString, ' : sort'].
+	declaration size = 2 ifTrue: [
+		sortContextBuilder parseAndAddOp: declaration first asLeibnizSyntaxString, ' : sort'.
+		sortContextBuilder parseAndAddOp: declaration second asLeibnizSyntaxString, ' : sort'.
+		sortContextBuilder parseAndAddAxiom: aString ].
 ]
 
 { #category : 'building' }
