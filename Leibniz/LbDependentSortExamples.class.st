@@ -269,6 +269,7 @@ LbDependentSortExamples >> sortGraphWithoutDependentSorts [
 	sortGraph := (LbDependentSortGraphBuilder fromSortContext:
 					self sortContextWithoutDependentSorts)
 					sortGraph.
+	self assert: sortGraph equals: self dependentSortGraphWithPlainSorts.
 	#(foo bar baz) do: [ :name |
 		self
 			assert: (sortGraph parseSort: name) term sort name

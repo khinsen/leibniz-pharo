@@ -34,21 +34,32 @@ LbDependentSortGraphBuilder >> buildSortContext [
 
 { #category : 'initializing' }
 LbDependentSortGraphBuilder >> initialize [
-	sortContextBuilder := (LbContextBuilder name: 'sorts')
-							parseAndAddSort: 'sort'.
+	| basicSortContext |
+	basicSortContext := (LbContextBuilder name: 'sorts')
+							parseAndAddSort: 'sort';
+							context.
+	sortContextBuilder := LbContextBuilder name: 'sorts'.
+	self addSortContext: basicSortContext
 ]
 
 { #category : 'accessing' }
 LbDependentSortGraphBuilder >> parseAndAdd: aString [
-	| declaration |
+	| declaration partialSortContext |
 	declaration := (LbParser newStartingAt: #sortOrSubsort)
 					parse: aString.
 	declaration size = 1 ifTrue: [
-		sortContextBuilder parseAndAddOp: aString, ' : sort'].
+		partialSortContext := (LbContextBuilder name: 'temp')
+								parseAndAddSort: 'sort';
+								parseAndAddOp: aString, ' : sort';
+								context ].
 	declaration size = 2 ifTrue: [
-		sortContextBuilder parseAndAddOp: declaration first asLeibnizSyntaxString, ' : sort'.
-		sortContextBuilder parseAndAddOp: declaration second asLeibnizSyntaxString, ' : sort'.
-		sortContextBuilder parseAndAddAxiom: aString ].
+		partialSortContext := (LbContextBuilder name: 'temp')
+								parseAndAddSort: 'sort';
+								parseAndAddOp: declaration first, ' : sort';
+								parseAndAddOp: declaration second, ' : sort';
+								parseAndAddAxiom: aString;
+								context ].
+	self addSortContext: partialSortContext
 ]
 
 { #category : 'building' }
