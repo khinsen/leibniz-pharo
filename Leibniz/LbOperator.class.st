@@ -176,6 +176,12 @@ LbOperator >> initializeWithName: anOpName argKinds: aKindArray kind: aKind orig
 	origins := anLbOrigins
 ]
 
+{ #category : 'comparing' }
+LbOperator >> instVarsExcludedFromEquality [
+	^#(origins)
+
+]
+
 { #category : 'accessing' }
 LbOperator >> kind [
 	^kind

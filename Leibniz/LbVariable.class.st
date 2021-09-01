@@ -51,6 +51,12 @@ LbVariable >> initializeWithName: aNameSymbol sort: aSort signature: aSignature 
 	origins := anLbOrigins
 ]
 
+{ #category : 'comparing' }
+LbVariable >> instVarsExcludedFromEquality [
+	^#(origins)
+
+]
+
 { #category : 'accessing' }
 LbVariable >> name [
 	^ name

@@ -186,6 +186,12 @@ LbSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: anO
 	self beRecursivelyReadOnlyObject
 ]
 
+{ #category : 'comparing' }
+LbSignature >> instVarsExcludedFromEquality [
+	^#(origins)
+
+]
+
 { #category : 'testing' }
 LbSignature >> isEmpty [
 	^ sortGraph isEmpty and: [ operators isEmpty and: [ variables isEmpty ] ]

@@ -64,6 +64,11 @@ LbSort >> initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet [
 	origins := aSet
 ]
 
+{ #category : 'comparing' }
+LbSort >> instVarsExcludedFromEquality [
+	^#(origins)
+]
+
 { #category : 'testing' }
 LbSort >> isFromInclude [
 	^ origins containsIncludes
