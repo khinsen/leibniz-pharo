@@ -45,6 +45,32 @@ LbSortGraph class >> fromSubsortRelations: aSubsetDictionary andCollectionSorts:
 ]
 
 { #category : 'converting' }
+LbSortGraph >> asDependentSortGraph [
+	^ self asDependentSortGraphBuilder sortGraph
+]
+
+{ #category : 'converting' }
+LbSortGraph >> asDependentSortGraphBuilder [
+	| builder |
+	builder := LbDependentSortGraphBuilder new.
+	self asSet do: [ :eachSort |
+		builder
+			addSortContext: ((LbContextBuilder name: 'temp')
+								parseAndAddSort: 'sort';
+								parseAndAddOp: eachSort name, ' : sort';
+								context) ].
+	self withSubsortRelationsDo: [ :ssr |
+		builder
+			addSortContext: ((LbContextBuilder name: 'temp')
+								parseAndAddSort: 'sort';
+								parseAndAddOp: ssr subsort name, ' : sort';
+								parseAndAddOp: ssr supersort name, ' : sort';
+								parseAndAddAxiom: ssr subsort name, ' ⊆ ', ssr supersort name;
+								context) ].
+	^ builder
+]
+
+{ #category : 'converting' }
 LbSortGraph >> asSet [
    ^ directSubsortsOf keys asSet collect: [ :each | self sortNamed: each ]
 ]
