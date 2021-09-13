@@ -78,6 +78,17 @@ LbTerm >> evaluateEqualityTerm [
 ]
 
 { #category : 'inspecting' }
+LbTerm >> gtSortFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Sort';
+		priority: 1;
+		object: [ self sort ];
+		view: #gtGraphFor:;
+		yourself
+]
+
+{ #category : 'inspecting' }
 LbTerm >> gtTreeFor: aView [
 	<gtView>
 	^ aView columnedTree
