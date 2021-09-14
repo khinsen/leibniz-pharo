@@ -76,6 +76,16 @@ LbDependentSignature >> gtOperatorsFor: aView [
 ]
 
 { #category : 'inspecting' }
+LbDependentSignature >> gtSortGraphFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Sort graph';
+		priority: 2;
+		object: [ self sortGraph ];
+		view: #gtGraphFor:
+]
+
+{ #category : 'inspecting' }
 LbDependentSignature >> gtVariablesFor: aView [
 	<gtView>
 	variables isEmpty ifTrue: [ ^ aView empty ].
@@ -90,7 +100,7 @@ LbDependentSignature >> gtVariablesFor: aView [
 				in: self
 				origins: nil  ];
 		column: 'Name' lbCode: [ :each | each key synopsis ];
-		column: 'Sort' lbCode: [ :each | each value name ];
+		column: 'Sort' lbCode: [ :each | each value asLeibnizSyntaxString ];
 		yourself
 ]
 
@@ -138,6 +148,11 @@ LbDependentSignature >> parseTerm: aString [
 		[ self error: parsedTerm message, ' after ',
 				 (aString sliceFrom: 1 to: parsedTerm position) ].
 	^ parsedTerm value: self value: Dictionary new
+]
+
+{ #category : 'accessing' }
+LbDependentSignature >> sortGraph [
+	^ sortGraph
 ]
 
 { #category : 'lookup' }

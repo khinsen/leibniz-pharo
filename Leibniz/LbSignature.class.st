@@ -46,6 +46,35 @@ LbSignature class >> sortGraph: aSortGraph builtins: aSet operators: anOperatorD
 			 yourself
 ]
 
+{ #category : 'converting' }
+LbSignature >> asDependentSignature [
+	^ self asDependentSignatureBuilder signature
+]
+
+{ #category : 'converting' }
+LbSignature >> asDependentSignatureBuilder [
+	| dSortGraph builder |
+	dSortGraph := self sortGraph asDependentSortGraph.
+	builder := LbDependentSignatureBuilder sortGraph: dSortGraph.
+
+	self withBuiltinsDo: [ :eachBuiltin |
+		builder addBuiltin: eachBuiltin ].
+
+	self withOperatorsDo: [ :eachOp |
+		eachOp withRanksDo: [ :argSorts :sort |
+			builder
+				addOp: eachOp name
+				withArgs: (argSorts collect: [ :each | dSortGraph sortNamed: each name ])
+				ofSort: (dSortGraph sortNamed: sort name) ] ].
+
+	self withVariablesDo: [ :eachVar |
+		builder
+			addVar: eachVar name
+			ofSort: (dSortGraph sortNamed: eachVar sort name) ].
+
+	^ builder
+]
+
 { #category : 'asserting' }
 LbSignature >> assertBuiltin: aBuiltinSymbol [
 	self assert: (builtins includes: aBuiltinSymbol) description: aBuiltinSymbol, ' are not defined in this signature'

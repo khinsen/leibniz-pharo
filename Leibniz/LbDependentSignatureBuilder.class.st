@@ -130,3 +130,8 @@ LbDependentSignatureBuilder >> signature [
 		operators: operators
 		variables:  variables
 ]
+
+{ #category : 'accessing' }
+LbDependentSignatureBuilder >> sortGraph [
+	^ sortGraph
+]
