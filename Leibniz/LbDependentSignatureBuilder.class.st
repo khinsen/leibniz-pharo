@@ -25,6 +25,13 @@ LbDependentSignatureBuilder >> addBuiltin: aSymbol [
 ]
 
 { #category : 'adding' }
+LbDependentSignatureBuilder >> addBuiltinsFromSignature: aSignature [
+	aSignature withBuiltinsDo:
+		[ :symbol |
+		  self addBuiltin: symbol ]
+]
+
+{ #category : 'adding' }
 LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern [
 	| arity kindArity |
 	self checksForNewOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern.
@@ -42,6 +49,23 @@ LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortPatternArray ofSor
 ]
 
 { #category : 'adding' }
+LbDependentSignatureBuilder >> addOpsFromSignature: aSignature [
+	aSignature withOperatorsDo: [ :eachOp |
+		eachOp withRanksDo: [ :argSorts :sort |
+			self
+				addOp: eachOp name
+				withArgs: (argSorts collect: [ :each | self sortGraph parseSort: each asLeibnizSyntaxString ])
+				ofSort: (self sortGraph parseSort: sort asLeibnizSyntaxString) ] ]
+]
+
+{ #category : 'adding' }
+LbDependentSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
+	self addBuiltinsFromSignature: aSignature.
+	self addOpsFromSignature: aSignature.
+	aBoolean ifTrue: [ self addVarsFromSignature: aSignature ]
+]
+
+{ #category : 'adding' }
 LbDependentSignatureBuilder >> addVar: anOpName ofSort: aSortPattern [
 	self assert: (sortGraph includes: aSortPattern).
 	operators at: anOpName ifPresent: [ :op |
@@ -54,6 +78,14 @@ LbDependentSignatureBuilder >> addVar: anOpName ofSort: aSortPattern [
 				assert: sort = aSortPattern
 				description: 'conflicting earlier variable definition with sort ', sort asLeibnizSyntaxString ]
 		ifAbsent: [ variables at: anOpName put: aSortPattern ]
+]
+
+{ #category : 'adding' }
+LbDependentSignatureBuilder >> addVarsFromSignature: aSignature [
+	aSignature withVariablesDo: [ :each |
+		self
+			addVar: each name
+			ofSort: (self sortGraph parseSort: each sort asLeibnizSyntaxString) ]
 ]
 
 { #category : 'private' }

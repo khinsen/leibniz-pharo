@@ -243,3 +243,8 @@ LbDependentOperator >> subArityGraph [
 			(i ~= j and: [ (ranks at: i) key <= (ranks at: j) key ])
 				ifTrue: [ 1 ] ifFalse: [ 0 ] ]
 ]
+
+{ #category : 'enumerating' }
+LbDependentOperator >> withRanksDo: aBlock [
+	ranks do: [ :each | aBlock value: each key value: each value ]
+]

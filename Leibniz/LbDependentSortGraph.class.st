@@ -386,3 +386,11 @@ LbDependentSortGraph >> sortNamed: aSymbol [
 	self flag: #legacy.
 	^ self parseSort: aSymbol
 ]
+
+{ #category : 'enumerating' }
+LbDependentSortGraph >> union: aSortGraph [
+	^ LbDependentSortGraphBuilder new
+		addSortContext: self sortContext;
+		addSortContext: aSortGraph sortContext;
+		sortGraph
+]

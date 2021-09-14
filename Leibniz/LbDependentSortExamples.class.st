@@ -17,8 +17,13 @@ LbDependentSortExamples >> bagAndListTerms [
 { #category : 'example' }
 LbDependentSortExamples >> bagSignature [
 	<gtExample>
-	^ (LbDependentSignatureBuilder sortGraph: self bagSortGraph)
-		addBuiltin: #integers;
+	| sortGraph |
+	sortGraph :=
+		(self bagSortGraph
+ union: (LbBuiltinSortGraphs integerSortGraph
+			union: LbBuiltinSortGraphs truthSortGraph) asDependentSortGraph).
+	^ (LbDependentSignatureBuilder sortGraph: sortGraph)
+		addSignature: LbBuiltinSignatures integerSignature asDependentSignature includeVars: false;
 		parseAndAddOp: '∅ : ∅';
 		parseAndAddOp: '∀ s:sort ∀ n:ℕ ∀ m:ℕ (list(s, n)) ++ (list(s, m)) : list(s, n + m)';
 		parseAndAddOp: '∀ s:sort ∀ n:ℕ (list(s, n)) ++ s : list(s, n + 1)';

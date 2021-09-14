@@ -175,6 +175,28 @@ LbDependentSignature >> sortOfOp: anOpName withArgSorts: aSortArray [
 	^ nil
 ]
 
+{ #category : 'enumerating' }
+LbDependentSignature >> withBuiltinsDo: aBlock [
+	builtins do: aBlock
+]
+
+{ #category : 'enumerating' }
+LbDependentSignature >> withOperatorsDo: aBlock [
+	operators do: [ :aDictionary |
+		aDictionary do: [ :anOperator |
+			aBlock value: anOperator ] ]
+]
+
+{ #category : 'enumerating' }
+LbDependentSignature >> withVariablesDo: aBlock [
+	variables associationsDo: [ :v |
+		aBlock value: (LbVariable
+						named: v key
+						sort: v value
+						in: self
+						origins: nil) ]
+]
+
 { #category : 'term construction' }
 LbDependentSignature >> zeroArgTermNamed: anOpName [
 	variables at: anOpName
