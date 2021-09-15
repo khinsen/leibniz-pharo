@@ -20,6 +20,11 @@ LbDependentSortGraphBuilder >> addSortContext: aContext [
 	sortContextBuilder include: aContext mode: #extend
 ]
 
+{ #category : 'adding' }
+LbDependentSortGraphBuilder >> addSortGraph: aSortGraph [
+	self addSortContext:  aSortGraph sortContext
+]
+
 { #category : 'building' }
 LbDependentSortGraphBuilder >> buildSortContext [
 	| sortSort |
