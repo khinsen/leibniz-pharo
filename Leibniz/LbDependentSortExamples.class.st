@@ -20,10 +20,10 @@ LbDependentSortExamples >> bagSignature [
 	| sortGraph |
 	sortGraph :=
 		(self bagSortGraph
- union: (LbBuiltinSortGraphs integerSortGraph
-			union: LbBuiltinSortGraphs truthSortGraph) asDependentSortGraph).
+ union: (LbBuiltinDSortGraphs integerSortGraph
+			union: LbBuiltinDSortGraphs truthSortGraph)).
 	^ (LbDependentSignatureBuilder sortGraph: sortGraph)
-		addSignature: LbBuiltinSignatures integerSignature asDependentSignature includeVars: false;
+		addSignature: LbBuiltinDSignatures integerSignature includeVars: false;
 		parseAndAddOp: '∅ : ∅';
 		parseAndAddOp: '∀ s:sort ∀ n:ℕ ∀ m:ℕ (list(s, n)) ++ (list(s, m)) : list(s, n + m)';
 		parseAndAddOp: '∀ s:sort ∀ n:ℕ (list(s, n)) ++ s : list(s, n + 1)';
