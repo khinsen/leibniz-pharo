@@ -119,7 +119,7 @@ LbDependentSignatureGrammar >> simpleTerm [
 
 { #category : 'productions - signature' }
 LbDependentSignatureGrammar >> sortArg [
-	^ term
+	^ simpleTerm
 ]
 
 { #category : 'productions - signature' }
