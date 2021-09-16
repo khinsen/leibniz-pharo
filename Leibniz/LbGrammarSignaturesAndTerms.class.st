@@ -132,7 +132,7 @@ LbGrammarSignaturesAndTerms >> simpleTerm [
 
 { #category : 'signature' }
 LbGrammarSignaturesAndTerms >> sort [
-	^ identifier
+	^ simpleTerm
 ]
 
 { #category : 'signature' }

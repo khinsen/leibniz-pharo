@@ -1,6 +1,6 @@
 Class {
 	#name : 'LbDSignatureParser',
-	#superclass : 'LbDSignatureGrammar',
+	#superclass : 'LbGrammarSignaturesAndTerms',
 	#category : 'Leibniz-7-DependentSorts'
 }
 
@@ -37,7 +37,7 @@ LbDSignatureParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
 		| varName sortName |
 		varName := nodes second asSymbol asLbOperatorName.
-		sortName := nodes fourth asSymbol.
+		sortName := nodes fourth first asSymbol.
 		[ :aSignature :aDictionary |
 			varName -> (aSignature sortNamed: sortName) ] ]
 ]
