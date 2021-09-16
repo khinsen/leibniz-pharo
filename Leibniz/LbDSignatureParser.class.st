@@ -37,7 +37,9 @@ LbDSignatureParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
 		| varName sortName |
 		varName := nodes second asSymbol asLbOperatorName.
-		sortName := nodes fourth first asSymbol.
+		sortName := nodes fourth first
+			cull: LbFakeSignatureForSortParser new cull: Dictionary new.
+		self assert: sortName isNotNil.
 		[ :aSignature :aDictionary |
 			varName -> (aSignature sortNamed: sortName) ] ]
 ]
@@ -103,8 +105,8 @@ LbDSignatureParser >> op [
 			{
 				opName.
 				opArgs collect: [ :each |
-					each cull: aSignature cull: allVariables ].
-				opSort cull: aSignature cull: allVariables
+					each first cull: aSignature cull: allVariables ].
+				opSort first cull: aSignature cull: allVariables
 			} ] ]
 ]
 

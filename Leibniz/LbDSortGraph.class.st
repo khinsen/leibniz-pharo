@@ -339,7 +339,7 @@ LbDSortGraph >> kindOf: aSortFamily [
 { #category : 'accessing' }
 LbDSortGraph >> normalizedSortFor: aSortTerm [
 	self assert: aSortTerm sort <= sortSort.
-	^ LbDependentSort sortGraph: self term: (context reduce: aSortTerm)
+	^ LbDSort sortGraph: self term: (context reduce: aSortTerm)
 ]
 
 { #category : 'lookup' }
@@ -378,7 +378,7 @@ LbDSortGraph >> sortFamilyForTerm: aTerm [
 { #category : 'lookup' }
 LbDSortGraph >> sortFor: aSortTerm [
 	self assert: aSortTerm sort <= sortSort.
-	^ LbDependentSort sortGraph: self term: aSortTerm
+	^ LbDSort sortGraph: self term: aSortTerm
 ]
 
 { #category : 'lookup' }
@@ -389,7 +389,7 @@ LbDSortGraph >> sortNamed: aSymbol [
 
 { #category : 'enumerating' }
 LbDSortGraph >> union: aSortGraph [
-	^ LbDependentSortGraphBuilder new
+	^ LbDSortGraphBuilder new
 		addSortContext: self sortContext;
 		addSortContext: aSortGraph sortContext;
 		sortGraph

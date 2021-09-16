@@ -7,7 +7,7 @@ Class {
 { #category : 'builtins' }
 LbBuiltinDSortGraphs class >> contextSortGraph [
 	<gtExample>
-	^LbDependentSortGraphBuilder new
+	^LbDSortGraphBuilder new
 		parseAndAdd: 'context';
 		sortGraph
 ]
@@ -15,7 +15,7 @@ LbBuiltinDSortGraphs class >> contextSortGraph [
 { #category : 'builtins' }
 LbBuiltinDSortGraphs class >> fpNumberSortGraph [
 	<gtExample>
-	^LbDependentSortGraphBuilder new
+	^LbDSortGraphBuilder new
 		"Generic FP Sorts"
 		parseAndAdd: 'FP';
 		parseAndAdd: 'FP.number ⊆ FP';
@@ -45,7 +45,7 @@ LbBuiltinDSortGraphs class >> fpNumberSortGraph [
 { #category : 'builtins' }
 LbBuiltinDSortGraphs class >> integerSortGraph [
 	<gtExample>
-	^LbDependentSortGraphBuilder new
+	^LbDSortGraphBuilder new
 		"Natural numbers"
 		parseAndAdd: 'ℕ';
 		parseAndAdd: 'zero ⊆ ℕ';
@@ -61,7 +61,7 @@ LbBuiltinDSortGraphs class >> integerSortGraph [
 { #category : 'builtins' }
 LbBuiltinDSortGraphs class >> rationalNumberSortGraph [
 	<gtExample>
-	^LbDependentSortGraphBuilder new
+	^LbDSortGraphBuilder new
 		addSortGraph: self integerSortGraph;
 		parseAndAdd: 'ℚ';
 		parseAndAdd: 'ℤ ⊆ ℚ';
@@ -78,7 +78,7 @@ LbBuiltinDSortGraphs class >> rationalNumberSortGraph [
 { #category : 'builtins' }
 LbBuiltinDSortGraphs class >> realNumberSortGraph [
 	<gtExample>
-	^LbDependentSortGraphBuilder new
+	^LbDSortGraphBuilder new
 		addSortGraph: self rationalNumberSortGraph;
 		parseAndAdd: 'ℝ';
 		parseAndAdd: 'ℚ ⊆ ℝ';
@@ -95,7 +95,7 @@ LbBuiltinDSortGraphs class >> realNumberSortGraph [
 { #category : 'builtins' }
 LbBuiltinDSortGraphs class >> stringSortGraph [
 	<gtExample>
-	^LbDependentSortGraphBuilder new
+	^LbDSortGraphBuilder new
 		parseAndAdd: 'string';
 		sortGraph
 ]
@@ -103,7 +103,7 @@ LbBuiltinDSortGraphs class >> stringSortGraph [
 { #category : 'builtins' }
 LbBuiltinDSortGraphs class >> truthSortGraph [
 	<gtExample>
-	^LbDependentSortGraphBuilder new
+	^LbDSortGraphBuilder new
 		parseAndAdd: 'boolean';
 		sortGraph
 ]

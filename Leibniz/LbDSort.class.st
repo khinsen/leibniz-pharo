@@ -160,7 +160,7 @@ LbDSort >> matchAllSupersortsOf: aSort [
 
 { #category : 'comparing' }
 LbDSort >> pairWith: aSort [
-	^ LbDependentSortPair sortGraph: sortGraph sort1: self sort2: aSort
+	^ LbDSortPair sortGraph: sortGraph sort1: self sort2: aSort
 ]
 
 { #category : 'printing' }

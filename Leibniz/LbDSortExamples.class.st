@@ -59,7 +59,7 @@ LbDSortExamples >> bagSortContext [
 { #category : 'example' }
 LbDSortExamples >> bagSortGraph [
 	<gtExample>
-	^ (LbDependentSortGraphBuilder fromSortContext: self bagSortContext)
+	^ (LbDSortGraphBuilder fromSortContext: self bagSortContext)
 		sortGraph
 ]
 
@@ -128,7 +128,7 @@ LbDSortExamples >> bagSorts [
 { #category : 'example' }
 LbDSortExamples >> dependentSortGraphWithPlainSorts [
 	<gtExample>
-	^ (LbDependentSortGraphBuilder new)
+	^ (LbDSortGraphBuilder new)
 		parseAndAdd: 'foo';
 		parseAndAdd: 'bar';
 		parseAndAdd: 'baz';
@@ -166,7 +166,7 @@ LbDSortExamples >> listSortContext [
 LbDSortExamples >> listSortGraph [
 	<gtExample>
 	| sortGraph |
-	sortGraph := (LbDependentSortGraphBuilder fromSortContext: self listSortContext)
+	sortGraph := (LbDSortGraphBuilder fromSortContext: self listSortContext)
 					sortGraph.
 	^ sortGraph
 ]
@@ -258,7 +258,7 @@ LbDSortExamples >> sortContextWithoutDependentSorts [
 LbDSortExamples >> sortGraphWithDependentSorts [
 	<gtExample>
 	| sortGraph |
-				sortGraph := (LbDependentSortGraphBuilder fromSortContext:
+				sortGraph := (LbDSortGraphBuilder fromSortContext:
 								self sortContextWithDependentSorts)								sortGraph.
 	#('foo(1)' 'bar(0)' 'baz(42)') do: [ :aString |
 		self
@@ -271,7 +271,7 @@ LbDSortExamples >> sortGraphWithDependentSorts [
 LbDSortExamples >> sortGraphWithoutDependentSorts [
 	<gtExample>
 	| sortGraph |
-	sortGraph := (LbDependentSortGraphBuilder fromSortContext:
+	sortGraph := (LbDSortGraphBuilder fromSortContext:
 					self sortContextWithoutDependentSorts)
 					sortGraph.
 	self assert: sortGraph equals: self dependentSortGraphWithPlainSorts.

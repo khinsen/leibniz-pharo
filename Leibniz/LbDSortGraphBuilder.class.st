@@ -1,5 +1,5 @@
 Class {
-	#name : 'LbDependentSortGraphBuilder',
+	#name : 'LbDSortGraphBuilder',
 	#superclass : 'Object',
 	#instVars : [
 		'sortContextBuilder',
@@ -9,24 +9,24 @@ Class {
 }
 
 { #category : 'instance creation' }
-LbDependentSortGraphBuilder class >> fromSortContext: aContext [
+LbDSortGraphBuilder class >> fromSortContext: aContext [
 	^ self new
 		addSortContext: aContext;
 		yourself
 ]
 
 { #category : 'adding' }
-LbDependentSortGraphBuilder >> addSortContext: aContext [
+LbDSortGraphBuilder >> addSortContext: aContext [
 	sortContextBuilder include: aContext mode: #extend
 ]
 
 { #category : 'adding' }
-LbDependentSortGraphBuilder >> addSortGraph: aSortGraph [
+LbDSortGraphBuilder >> addSortGraph: aSortGraph [
 	self addSortContext:  aSortGraph sortContext
 ]
 
 { #category : 'building' }
-LbDependentSortGraphBuilder >> buildSortContext [
+LbDSortGraphBuilder >> buildSortContext [
 	| sortSort |
 	sortContext := sortContextBuilder context.
 	[ sortSort := sortContext sortGraph sortNamed: #sort ]
@@ -38,7 +38,7 @@ LbDependentSortGraphBuilder >> buildSortContext [
 ]
 
 { #category : 'initializing' }
-LbDependentSortGraphBuilder >> initialize [
+LbDSortGraphBuilder >> initialize [
 	| basicSortContext |
 	basicSortContext := (LbContextBuilder name: 'sorts')
 							parseAndAddSort: 'sort';
@@ -48,27 +48,39 @@ LbDependentSortGraphBuilder >> initialize [
 ]
 
 { #category : 'accessing' }
-LbDependentSortGraphBuilder >> parseAndAdd: aString [
+LbDSortGraphBuilder >> parseAndAdd: aString [
+	"Note: this works for plain sorts only.
+	It's a quick hack to re-use code for constructing LbSortGraphs"
 	| declaration partialSortContext |
 	declaration := (LbParser newStartingAt: #sortOrSubsort)
 					parse: aString.
+	declaration isPetit2Failure ifTrue:
+		[ self error: declaration message, ' after ',
+				 (aString sliceFrom: 1 to: declaration position) ].
 	declaration size = 1 ifTrue: [
 		partialSortContext := (LbContextBuilder name: 'temp')
 								parseAndAddSort: 'sort';
 								parseAndAddOp: aString, ' : sort';
 								context ].
 	declaration size = 2 ifTrue: [
+		| sort1 sort2 |
+		sort1 := declaration first
+			value: LbFakeSignatureForSortParser new
+			value: Dictionary new.
+		sort2 := declaration second
+			value: LbFakeSignatureForSortParser new
+			value: Dictionary new.
 		partialSortContext := (LbContextBuilder name: 'temp')
 								parseAndAddSort: 'sort';
-								parseAndAddOp: declaration first, ' : sort';
-								parseAndAddOp: declaration second, ' : sort';
+								parseAndAddOp: sort1, ' : sort';
+								parseAndAddOp: sort2, ' : sort';
 								parseAndAddAxiom: aString;
 								context ].
 	self addSortContext: partialSortContext
 ]
 
 { #category : 'building' }
-LbDependentSortGraphBuilder >> sortGraph [
+LbDSortGraphBuilder >> sortGraph [
 	self buildSortContext.
 	^ LbDSortGraph sortContext: sortContext
 ]

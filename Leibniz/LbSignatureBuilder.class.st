@@ -180,10 +180,20 @@ LbSignatureBuilder >> parseAndAddOp: aString [
 	opSpec isPetit2Failure ifTrue: [ Error signal: opSpec message ].
 	op := opSpec first first.
 	args := opSpec first second.
-	sort := sortGraph sortNamed: opSpec second.
-	argSorts := args collect: [ :each | sortGraph sortNamed: each last ].
+	sort := sortGraph sortNamed: (opSpec second
+		value: LbFakeSignatureForSortParser new value: Dictionary new).
+	argSorts := args collect: [ :each |
+		sortGraph sortNamed: (each last
+			value: LbFakeSignatureForSortParser new value: Dictionary new) ].
 	args select: [ :each | each size = 2 ]
-		  thenDo: [ :each | self addVar: (LbPrefixOperatorName for: each first) ofSort: (sortGraph sortNamed: each second) ].
+		  thenDo: [ :each |
+		  	| argSort |
+		  	argSort := each second
+		  				value: LbFakeSignatureForSortParser new
+		  				value: Dictionary new.
+		  	self
+		  		addVar: (LbPrefixOperatorName for: each first)
+		  		ofSort: (sortGraph sortNamed: argSort) ].
 	args ifEmpty: [ self addOp: op ofSort: sort ]
 		  ifNotEmpty: [ self addOp: op withArgs: argSorts ofSort: sort ]
 ]
@@ -195,7 +205,7 @@ LbSignatureBuilder >> parseAndAddVar: aString [
 				parse: aString.
 	var isPetit2Failure ifTrue: [ Error signal: var message ].
 	name := LbPrefixOperatorName for: var first.
-	sort := sortGraph sortNamed: var second.
+	sort := sortGraph sortNamed: (var second value: LbFakeSignatureForSortParser new value: Dictionary new).
 	self addVar: name ofSort: sort
 ]
 

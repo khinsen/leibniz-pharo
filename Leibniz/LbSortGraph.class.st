@@ -52,7 +52,7 @@ LbSortGraph >> asDependentSortGraph [
 { #category : 'converting' }
 LbSortGraph >> asDependentSortGraphBuilder [
 	| builder |
-	builder := LbDependentSortGraphBuilder new.
+	builder := LbDSortGraphBuilder new.
 	self asSet do: [ :eachSort |
 		builder
 			addSortContext: ((LbContextBuilder name: 'temp')

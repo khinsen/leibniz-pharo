@@ -129,6 +129,11 @@ LbSortGraphBuilder >> parseAndAdd: aString [
 	| declaration |
 	declaration := (LbParser newStartingAt: #sortOrSubsort)
 					parse: aString.
+	declaration isPetit2Failure ifTrue:
+		[ self error: declaration message, ' after ',
+				 (aString sliceFrom: 1 to: declaration position) ].
+	declaration := declaration collect: [ :each |
+		each value: LbFakeSignatureForSortParser new value: Dictionary new ].
 	declaration size = 1 ifTrue:
 		[	self add: declaration first ].
 	declaration size = 2 ifTrue:

@@ -66,7 +66,9 @@ LbParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
 		| varName sortName |
 		varName := nodes second asSymbol asLbOperatorName.
-		sortName := nodes fourth first asSymbol.
+		sortName := nodes fourth first
+						value: LbFakeSignatureForSortParser new
+						value: Dictionary new.
 		[ :aSignature :aDictionary |
 			varName -> (aSignature sortNamed: sortName) ] ]
 ]
