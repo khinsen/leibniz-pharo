@@ -1,16 +1,16 @@
 Class {
-	#name : 'LbDependentSortSpecificFamily',
-	#superclass : 'LbDependentSortFamily',
+	#name : 'LbDSortSpecificFamily',
+	#superclass : 'LbDSortFamily',
 	#category : 'Leibniz-7-DependentSorts'
 }
 
 { #category : 'converting' }
-LbDependentSortSpecificFamily >> asLeibnizSyntaxString [
+LbDSortSpecificFamily >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | opName printForArity: argSorts on: s ]
 ]
 
 { #category : 'initialization' }
-LbDependentSortSpecificFamily >> initializeWithSortGraph: aSortGraph sortOp: anLbOperator [
+LbDSortSpecificFamily >> initializeWithSortGraph: aSortGraph sortOp: anLbOperator [
 	self assert: anLbOperator size equals: 1.
 	sortGraph := aSortGraph.
 	opName := anLbOperator name.
@@ -18,7 +18,7 @@ LbDependentSortSpecificFamily >> initializeWithSortGraph: aSortGraph sortOp: anL
 ]
 
 { #category : 'printing' }
-LbDependentSortSpecificFamily >> printOn: aStream [
+LbDSortSpecificFamily >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	opName printForArity: argSorts on: aStream.

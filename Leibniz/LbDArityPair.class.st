@@ -1,5 +1,5 @@
 Class {
-	#name : 'LbDependentArityPair',
+	#name : 'LbDArityPair',
 	#superclass : 'Object',
 	#instVars : [
 		'sortGraph',
@@ -10,14 +10,14 @@ Class {
 }
 
 { #category : 'instance creation' }
-LbDependentArityPair class >> arity1: arity1 arity2: arity2 [
+LbDArityPair class >> arity1: arity1 arity2: arity2 [
 	^ self basicNew
 		initializeWithArity1: arity1 arity2: arity2;
 		yourself
 ]
 
 { #category : 'initialization' }
-LbDependentArityPair >> initializeWithArity1: anArity arity2: anotherArity [
+LbDArityPair >> initializeWithArity1: anArity arity2: anotherArity [
 	sortGraph := anArity sortGraph.
 	self assert: sortGraph equals: anotherArity sortGraph.
 	arity1 := anArity.

@@ -1,5 +1,5 @@
 Class {
-	#name : 'LbDependentArity',
+	#name : 'LbDArity',
 	#superclass : 'Array',
 	#type : 'variable',
 	#traits : 'EqualityThroughVariables',
@@ -12,14 +12,14 @@ Class {
 }
 
 { #category : 'instance creation' }
-LbDependentArity class >> sortGraph: aSortGraph argSortPatterns: anArray [
+LbDArity class >> sortGraph: aSortGraph argSortPatterns: anArray [
 	^(self basicNew: anArray size)
 			initializeWithSortGraph: aSortGraph argSortPatterns: anArray;
 			yourself
 ]
 
 { #category : 'comparing' }
-LbDependentArity >> <= anArity [
+LbDArity >> <= anArity [
 	self species = anArity species ifFalse: [ ^ false ].
 	self size = anArity size ifFalse: [ ^ false ].
 	self with: anArity do:
@@ -28,13 +28,13 @@ LbDependentArity >> <= anArity [
 ]
 
 { #category : 'converting' }
-LbDependentArity >> asLeibnizSyntaxString [
+LbDArity >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s |
 		self printAsLeibnizSyntaxOn: s ]
 ]
 
 { #category : 'inspecting' }
-LbDependentArity >> gtArgumentsFor: aView [
+LbDArity >> gtArgumentsFor: aView [
 	<gtView>
 	^ aView list
 		title: 'Arguments' translated;
@@ -44,7 +44,7 @@ LbDependentArity >> gtArgumentsFor: aView [
 ]
 
 { #category : 'initializing' }
-LbDependentArity >> initializeWithSortGraph: aSortGraph argSortPatterns: anArray [
+LbDArity >> initializeWithSortGraph: aSortGraph argSortPatterns: anArray [
 	sortGraph := aSortGraph.
 	anArray collect: [ :s | s ] into: self.
 	self do: [ :each | self assert: each sortGraph = sortGraph ].
@@ -58,19 +58,19 @@ LbDependentArity >> initializeWithSortGraph: aSortGraph argSortPatterns: anArray
 ]
 
 { #category : 'operating' }
-LbDependentArity >> liftToKinds [
-	^ LbDependentKindArity
+LbDArity >> liftToKinds [
+	^ LbDKindArity
 		sortGraph: sortGraph
 		kinds: (self collect: #kind)
 ]
 
 { #category : 'comparing' }
-LbDependentArity >> pairWith: otherArity [
-	^ LbDependentArityPair arity1: self arity2: otherArity
+LbDArity >> pairWith: otherArity [
+	^ LbDArityPair arity1: self arity2: otherArity
 ]
 
 { #category : 'printing' }
-LbDependentArity >> printAsLeibnizSyntaxOn: aStream [
+LbDArity >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
 	self
 		do: [ :each | each printAsLeibnizSyntaxOn: aStream ]
@@ -78,7 +78,7 @@ LbDependentArity >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : 'printing' }
-LbDependentArity >> printOn: aStream [
+LbDArity >> printOn: aStream [
 	self printNameOn: aStream.
 	aStream nextPut: $(.
 	self printAsLeibnizSyntaxOn: aStream.
@@ -86,7 +86,7 @@ LbDependentArity >> printOn: aStream [
 ]
 
 { #category : 'printing' }
-LbDependentArity >> printVariablesAsLeibnizSyntaxOn: aStream [
+LbDArity >> printVariablesAsLeibnizSyntaxOn: aStream [
 	variables keysAndValuesDo:
 		[ :var :sort |
 			aStream nextPutAll: '∀ '.
@@ -97,7 +97,7 @@ LbDependentArity >> printVariablesAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : 'printing' }
-LbDependentArity >> printVariablesOn: aStream [
+LbDArity >> printVariablesOn: aStream [
 	variables keysAndValuesDo:
 		[ :var :sort |
 			aStream nextPutAll: var asSymbol.
@@ -107,12 +107,12 @@ LbDependentArity >> printVariablesOn: aStream [
 ]
 
 { #category : 'accessing' }
-LbDependentArity >> sortGraph [
+LbDArity >> sortGraph [
 	^ sortGraph
 ]
 
 { #category : 'matching' }
-LbDependentArity >> unify: otherArity [
+LbDArity >> unify: otherArity [
 	| variables |
 	variables := LbVariables new.
 	self size = otherArity size
@@ -123,7 +123,7 @@ LbDependentArity >> unify: otherArity [
 ]
 
 { #category : 'accessing' }
-LbDependentArity >> variables [
+LbDArity >> variables [
 	^ self
 		inject: Dictionary new
 		into:[ :total :each | total union: each variables ]

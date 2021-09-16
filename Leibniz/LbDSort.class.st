@@ -1,5 +1,5 @@
 Class {
-	#name : 'LbDependentSort',
+	#name : 'LbDSort',
 	#superclass : 'Object',
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -11,14 +11,14 @@ Class {
 }
 
 { #category : 'instance creation' }
-LbDependentSort class >> sortGraph: aSortGraph term: aTerm [
+LbDSort class >> sortGraph: aSortGraph term: aTerm [
 	^ self basicNew
 		initializeWithSortGraph: aSortGraph term: aTerm;
 		yourself
 ]
 
 { #category : 'comparing' }
-LbDependentSort >> <= anotherSort [
+LbDSort >> <= anotherSort [
 	| myFamily otherFamily |
 	self assert: self sortGraph equals: anotherSort sortGraph.
 	self = anotherSort ifTrue: [ ^ true ].
@@ -39,17 +39,17 @@ LbDependentSort >> <= anotherSort [
 ]
 
 { #category : 'matching' }
-LbDependentSort >> addPrefix: aSymbol toVarsConflictingWith: aSort [
+LbDSort >> addPrefix: aSymbol toVarsConflictingWith: aSort [
 	^ term addPrefix: aSymbol toVarsConflictingWith: aSort term
 ]
 
 { #category : 'converting' }
-LbDependentSort >> asLeibnizSyntaxString [
+LbDSort >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
 { #category : 'comparing' }
-LbDependentSort >> compareArguments: anotherSort [
+LbDSort >> compareArguments: anotherSort [
 	term arguments ifEmpty: [ ^ false ].
 	term arguments with: anotherSort term arguments do: [ :term1 :term2 |
 		term1 sort asLeibnizSyntaxString = #sort
@@ -60,22 +60,22 @@ LbDependentSort >> compareArguments: anotherSort [
 ]
 
 { #category : 'lookup' }
-LbDependentSort >> directSubsorts [
+LbDSort >> directSubsorts [
 	^ sortGraph directSubsortsOf: term
 ]
 
 { #category : 'lookup' }
-LbDependentSort >> directSupersorts [
+LbDSort >> directSupersorts [
 	^ sortGraph directSupersortsOf: term
 ]
 
 { #category : 'lookup' }
-LbDependentSort >> family [
+LbDSort >> family [
 	^ sortGraph sortFamilyForTerm: term
 ]
 
 { #category : 'inspecting' }
-LbDependentSort >> gtFamilyFor: aView [
+LbDSort >> gtFamilyFor: aView [
 	<gtView>
 	^ aView forward
 		title: 'Family';
@@ -86,7 +86,7 @@ LbDependentSort >> gtFamilyFor: aView [
 ]
 
 { #category : 'inspecting' }
-LbDependentSort >> gtGraphFor: aView [
+LbDSort >> gtGraphFor: aView [
 	<gtView>
 	^ aView mondrian
 		title: 'Graph';
@@ -113,7 +113,7 @@ LbDependentSort >> gtGraphFor: aView [
 ]
 
 { #category : 'accessing' }
-LbDependentSort >> gtSortSyntaxFor: aView [
+LbDSort >> gtSortSyntaxFor: aView [
 	<gtView>
 	^ aView list
 		title: 'Sort';
@@ -124,31 +124,31 @@ LbDependentSort >> gtSortSyntaxFor: aView [
 ]
 
 { #category : 'testing' }
-LbDependentSort >> includes: aSort [
+LbDSort >> includes: aSort [
 	self flag: #todo.
 	self halt.
 	^ true
 ]
 
 { #category : 'initialization' }
-LbDependentSort >> initializeWithSortGraph: aSortGraph term: aTerm [
+LbDSort >> initializeWithSortGraph: aSortGraph term: aTerm [
 	sortGraph := aSortGraph.
 	term := aTerm.
 	self beRecursivelyReadOnlyObject
 ]
 
 { #category : 'accessing' }
-LbDependentSort >> kind [
+LbDSort >> kind [
 	^ sortGraph kindForTerm: term
 ]
 
 { #category : 'matching' }
-LbDependentSort >> match: aSort [
+LbDSort >> match: aSort [
 	^ self term match: aSort term
 ]
 
 { #category : 'matching' }
-LbDependentSort >> matchAllSupersortsOf: aSort [
+LbDSort >> matchAllSupersortsOf: aSort [
 	| matches match |
 	matches := Set new.
 	match := self term match: aSort term.
@@ -159,17 +159,17 @@ LbDependentSort >> matchAllSupersortsOf: aSort [
 ]
 
 { #category : 'comparing' }
-LbDependentSort >> pairWith: aSort [
+LbDSort >> pairWith: aSort [
 	^ LbDependentSortPair sortGraph: sortGraph sort1: self sort2: aSort
 ]
 
 { #category : 'printing' }
-LbDependentSort >> printAsLeibnizSyntaxOn: aStream [
+LbDSort >> printAsLeibnizSyntaxOn: aStream [
 	term printAsLeibnizSyntaxOn: aStream
 ]
 
 { #category : 'printing' }
-LbDependentSort >> printOn: aStream [
+LbDSort >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	self printAsLeibnizSyntaxOn: aStream.
@@ -177,17 +177,17 @@ LbDependentSort >> printOn: aStream [
 ]
 
 { #category : 'accessing' }
-LbDependentSort >> sortFamily [
+LbDSort >> sortFamily [
 	^ sortGraph sortFamilyForTerm: term
 ]
 
 { #category : 'accessing' }
-LbDependentSort >> sortGraph [
+LbDSort >> sortGraph [
 	^ sortGraph
 ]
 
 { #category : 'lookup' }
-LbDependentSort >> subsortAndSupersortGraph [
+LbDSort >> subsortAndSupersortGraph [
 	| edges |
 	edges := Set new.
 	sortGraph
@@ -208,7 +208,7 @@ LbDependentSort >> subsortAndSupersortGraph [
 ]
 
 { #category : 'lookup' }
-LbDependentSort >> subsortGraph [
+LbDSort >> subsortGraph [
 	| edges |
 	edges := Set new.
 	sortGraph
@@ -223,17 +223,17 @@ LbDependentSort >> subsortGraph [
 ]
 
 { #category : 'matching' }
-LbDependentSort >> substitute: aSubstitution [
+LbDSort >> substitute: aSubstitution [
 	^ sortGraph sortFor: (term substitute: aSubstitution)
 ]
 
 { #category : 'matching' }
-LbDependentSort >> substituteAndReduce: aSubstitution [
+LbDSort >> substituteAndReduce: aSubstitution [
 	^ sortGraph normalizedSortFor: (term substitute: aSubstitution)
 ]
 
 { #category : 'lookup' }
-LbDependentSort >> supersortGraph [
+LbDSort >> supersortGraph [
 	| edges |
 	edges := Set new.
 	sortGraph
@@ -248,12 +248,12 @@ LbDependentSort >> supersortGraph [
 ]
 
 { #category : 'accessing' }
-LbDependentSort >> term [
+LbDSort >> term [
 	^ term
 ]
 
 { #category : 'comparing' }
-LbDependentSort >> testPaths: aSet [
+LbDSort >> testPaths: aSet [
 	| candidates |
 	candidates := Set new.
 	aSet do: [ :aPath |
@@ -273,16 +273,16 @@ LbDependentSort >> testPaths: aSet [
 ]
 
 { #category : 'matching' }
-LbDependentSort >> unify: aSort [
+LbDSort >> unify: aSort [
 	^ self term unify: aSort term
 ]
 
 { #category : 'matching' }
-LbDependentSort >> unify: aSort variables: variables [
+LbDSort >> unify: aSort variables: variables [
 	^ self term unify: aSort term variables: variables
 ]
 
 { #category : 'accessing' }
-LbDependentSort >> variables [
+LbDSort >> variables [
 	^ term variables
 ]

@@ -55,7 +55,7 @@ LbSignature >> asDependentSignature [
 LbSignature >> asDependentSignatureBuilder [
 	| dSortGraph builder |
 	dSortGraph := self sortGraph asDependentSortGraph.
-	builder := LbDependentSignatureBuilder sortGraph: dSortGraph.
+	builder := LbDSignatureBuilder sortGraph: dSortGraph.
 
 	self withBuiltinsDo: [ :eachBuiltin |
 		builder addBuiltin: eachBuiltin ].

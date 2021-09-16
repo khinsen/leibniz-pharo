@@ -1,5 +1,5 @@
 Class {
-	#name : 'LbDependentSortGraph',
+	#name : 'LbDSortGraph',
 	#superclass : 'Object',
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
@@ -21,14 +21,14 @@ Class {
 }
 
 { #category : 'instance creation' }
-LbDependentSortGraph class >> sortContext: aContext [
+LbDSortGraph class >> sortContext: aContext [
 	^ self basicNew
 		initializeWithSortContext: aContext;
 		yourself
 ]
 
 { #category : 'instance creation' }
-LbDependentSortGraph class >> sortContext: aContext directSubsorts: aSubsortDictionary [
+LbDSortGraph class >> sortContext: aContext directSubsorts: aSubsortDictionary [
 	^ self basicNew
 		initializeWithSortContext: aContext
 		directSubsorts: aSubsortDictionary;
@@ -36,7 +36,7 @@ LbDependentSortGraph class >> sortContext: aContext directSubsorts: aSubsortDict
 ]
 
 { #category : 'comparing' }
-LbDependentSortGraph >> = anObject [
+LbDSortGraph >> = anObject [
 	| class instVarNames |
 	self == anObject ifTrue: [ ^true ].
 	class := self class.
@@ -58,14 +58,14 @@ LbDependentSortGraph >> = anObject [
 ]
 
 { #category : 'accessing' }
-LbDependentSortGraph >> axiomsConnecting: aSortFamily to: anotherSortFamily [
+LbDSortGraph >> axiomsConnecting: aSortFamily to: anotherSortFamily [
 	^ connectingAxioms
 		at: { aSortFamily. anotherSortFamily }
 		ifAbsent: [ #() ]
 ]
 
 { #category : 'accessing' }
-LbDependentSortGraph >> breadthFirstTraversalFrom: aSort childNodes: childNodeBlock nodesDo: nodeActionBlock edgesDo: edgeActionBlock [
+LbDSortGraph >> breadthFirstTraversalFrom: aSort childNodes: childNodeBlock nodesDo: nodeActionBlock edgesDo: edgeActionBlock [
 	| visitedNodes currentNodes distance nodesToVisit |
 	visitedNodes := Set new.
 	currentNodes := Set with: aSort.
@@ -84,17 +84,17 @@ LbDependentSortGraph >> breadthFirstTraversalFrom: aSort childNodes: childNodeBl
 ]
 
 { #category : 'copying' }
-LbDependentSortGraph >> copy [
+LbDSortGraph >> copy [
 	^ self
 ]
 
 { #category : 'copying' }
-LbDependentSortGraph >> deepCopy [
+LbDSortGraph >> deepCopy [
 	^ self
 ]
 
 { #category : 'lookup' }
-LbDependentSortGraph >> directSubsortsOf: aSortTerm [
+LbDSortGraph >> directSubsortsOf: aSortTerm [
 	| subsorts family |
 	subsorts := Set new.
 	family := self sortFamilyForTerm: aSortTerm.
@@ -119,7 +119,7 @@ LbDependentSortGraph >> directSubsortsOf: aSortTerm [
 ]
 
 { #category : 'lookup' }
-LbDependentSortGraph >> directSupersortsOf: aSortTerm [
+LbDSortGraph >> directSupersortsOf: aSortTerm [
 	| supersorts family |
 	supersorts := Set new.
 	family := self sortFamilyForTerm: aSortTerm.
@@ -144,7 +144,7 @@ LbDependentSortGraph >> directSupersortsOf: aSortTerm [
 ]
 
 { #category : 'inspecting' }
-LbDependentSortGraph >> graphFor: aView restrictedTo: aSet highlight: aBlock [
+LbDSortGraph >> graphFor: aView restrictedTo: aSet highlight: aBlock [
 	aSet isEmpty ifTrue: [ ^ aView empty ].
 	^ aView mondrian
 		title: 'Graph';
@@ -167,14 +167,14 @@ LbDependentSortGraph >> graphFor: aView restrictedTo: aSet highlight: aBlock [
 ]
 
 { #category : 'inspecting' }
-LbDependentSortGraph >> graphNodeForSort: aSortFamily highlight: aBoolean [
+LbDSortGraph >> graphNodeForSort: aSortFamily highlight: aBoolean [
 	^ LbGraphicsElements
 		graphNodeLabelled: aSortFamily asLeibnizSyntaxString
 		highlightColor: (aBoolean ifTrue: [ Color black ] ifFalse: [ nil ])
 ]
 
 { #category : 'inspecting' }
-LbDependentSortGraph >> gtGraphFor: aView [
+LbDSortGraph >> gtGraphFor: aView [
 	<gtView>
 	^ self
 		graphFor: aView
@@ -183,12 +183,12 @@ LbDependentSortGraph >> gtGraphFor: aView [
 ]
 
 { #category : 'testing' }
-LbDependentSortGraph >> includes: aSort [
+LbDSortGraph >> includes: aSort [
 	^ sortFamilies includes: aSort family
 ]
 
 { #category : 'initialization' }
-LbDependentSortGraph >> initializeDirectSubsortRelations [
+LbDSortGraph >> initializeDirectSubsortRelations [
 	directSubsortFamilies := Dictionary new.
 	directSupersortFamilies := Dictionary new.
 	connectingAxioms := Dictionary new.
@@ -211,7 +211,7 @@ LbDependentSortGraph >> initializeDirectSubsortRelations [
 ]
 
 { #category : 'initialization' }
-LbDependentSortGraph >> initializeKindOf [
+LbDSortGraph >> initializeKindOf [
 	kindOf := Dictionary new.
 	kinds do: [ :eachKind |
 		eachKind asSet do: [ :eachSortFamily |
@@ -219,11 +219,11 @@ LbDependentSortGraph >> initializeKindOf [
 ]
 
 { #category : 'initialization' }
-LbDependentSortGraph >> initializeKinds [
+LbDSortGraph >> initializeKinds [
 	| anySort candidates kind hasCommonSorts |
 	"A special kind family contains only the 'anySort' sort family."
 	kinds := Set with:
-		(LbDependentKind
+		(LbDKind
 			sortGraph: self
 			sortFamilies: (Set with: anySort)
 			maximalSortFamilies: (Set with: anySortFamily)).
@@ -241,7 +241,7 @@ LbDependentSortGraph >> initializeKinds [
 			hasCommonSorts at: b ifAbsentPut: OrderedCollection new. ].
 		kind := ((hasCommonSorts at: true)
 						inject: kind into: [ :k :c | k union: c ]).
-		kinds add: (LbDependentKind
+		kinds add: (LbDKind
 							sortGraph: self
 							sortFamilies: kind
 							maximalSortFamilies: (maximalSortFamilies select: [ :each |
@@ -250,7 +250,7 @@ LbDependentSortGraph >> initializeKinds [
 ]
 
 { #category : 'initialization' }
-LbDependentSortGraph >> initializeMaximalSortFamilies [
+LbDSortGraph >> initializeMaximalSortFamilies [
 	maximalSortFamilies :=
 		(directSubsortFamilies values)
 			inject: sortFamilies asSet
@@ -258,24 +258,24 @@ LbDependentSortGraph >> initializeMaximalSortFamilies [
 ]
 
 { #category : 'initialization' }
-LbDependentSortGraph >> initializeSortFamilies [
+LbDSortGraph >> initializeSortFamilies [
 	sortFamilies :=
 		(context signature opsOfKind: sortSort kind)
-			collect: [ :each | LbDependentSortFamily sortGraph: self sortOp: each ].
+			collect: [ :each | LbDSortFamily sortGraph: self sortOp: each ].
 	"A special sort family represents the variable of sort #sort."
-	anySortFamily := LbDependentSortFamily anySortInSortGraph: self.
+	anySortFamily := LbDSortFamily anySortInSortGraph: self.
 	sortFamilies add: anySortFamily.
 ]
 
 { #category : 'initialization' }
-LbDependentSortGraph >> initializeSubsortFamilies [
+LbDSortGraph >> initializeSubsortFamilies [
 	subsortFamilies := Dictionary new.
 	directSubsortFamilies keysDo: [ :sort |
 		self initializeSubsortFamiliesFor: sort ]	
 ]
 
 { #category : 'initialization' }
-LbDependentSortGraph >> initializeSubsortFamiliesFor: aSort [
+LbDSortGraph >> initializeSubsortFamiliesFor: aSort [
 	| dssf ssf |
 	(subsortFamilies includes: aSort) ifTrue: [ ^ self ].
 	dssf := directSubsortFamilies at: aSort.
@@ -301,7 +301,7 @@ LbDependentSortGraph >> initializeSubsortFamiliesFor: aSort [
 ]
 
 { #category : 'initialization' }
-LbDependentSortGraph >> initializeWithSortContext: anLbContext [
+LbDSortGraph >> initializeWithSortContext: anLbContext [
 	context := anLbContext.
 	sortSort := context sortGraph sortNamed: #sort.
 	self initializeSortFamilies.
@@ -314,7 +314,7 @@ LbDependentSortGraph >> initializeWithSortContext: anLbContext [
 ]
 
 { #category : 'comparing' }
-LbDependentSortGraph >> instVarsExcludedFromEquality [
+LbDSortGraph >> instVarsExcludedFromEquality [
 	"The only instance variable used in comparison is 'context', since all the
 	 others are derived from it."
 
@@ -322,28 +322,28 @@ LbDependentSortGraph >> instVarsExcludedFromEquality [
 ]
 
 { #category : 'testing' }
-LbDependentSortGraph >> isEmpty [
+LbDSortGraph >> isEmpty [
 	^ sortFamilies isEmpty
 ]
 
 { #category : 'private' }
-LbDependentSortGraph >> kindForTerm: aSortTerm [
+LbDSortGraph >> kindForTerm: aSortTerm [
 	^ (self sortFamilyForTerm: aSortTerm) kind
 ]
 
 { #category : 'lookup' }
-LbDependentSortGraph >> kindOf: aSortFamily [
+LbDSortGraph >> kindOf: aSortFamily [
 	^ kindOf at: aSortFamily
 ]
 
 { #category : 'accessing' }
-LbDependentSortGraph >> normalizedSortFor: aSortTerm [
+LbDSortGraph >> normalizedSortFor: aSortTerm [
 	self assert: aSortTerm sort <= sortSort.
 	^ LbDependentSort sortGraph: self term: (context reduce: aSortTerm)
 ]
 
 { #category : 'lookup' }
-LbDependentSortGraph >> parseSort: aString [
+LbDSortGraph >> parseSort: aString [
 	| parsedTerm |
 	parsedTerm := context parsePattern: aString.
 	parsedTerm isPetit2Failure ifTrue: [ self error: parsedTerm message ].
@@ -351,44 +351,44 @@ LbDependentSortGraph >> parseSort: aString [
 ]
 
 { #category : 'accessing' }
-LbDependentSortGraph >> pathsConnecting: aSortFamily to: anotherSortFamily [
+LbDSortGraph >> pathsConnecting: aSortFamily to: anotherSortFamily [
 	^ connectingPaths
 		at: { aSortFamily. anotherSortFamily }
 		ifAbsent: (Set new)
 ]
 
 { #category : 'accessing' }
-LbDependentSortGraph >> sortContext [
+LbDSortGraph >> sortContext [
 	^ context
 ]
 
 { #category : 'lookup' }
-LbDependentSortGraph >> sortFamilyForTerm: aTerm [
+LbDSortGraph >> sortFamilyForTerm: aTerm [
 	| sortOp sortFamily |
 	aTerm isVariable
-		ifTrue: [ ^ LbDependentSortFamily anySortInSortGraph: self ].
+		ifTrue: [ ^ LbDSortFamily anySortInSortGraph: self ].
 	sortOp := context signature
 		opNamed: aTerm opName
 		withArgs: (aTerm arguments collect: #sort).
-	sortFamily := LbDependentSortFamily sortGraph: self sortOp: sortOp.
+	sortFamily := LbDSortFamily sortGraph: self sortOp: sortOp.
 	self assert: (sortFamilies includes: sortFamily).
 	^ sortFamily
 ]
 
 { #category : 'lookup' }
-LbDependentSortGraph >> sortFor: aSortTerm [
+LbDSortGraph >> sortFor: aSortTerm [
 	self assert: aSortTerm sort <= sortSort.
 	^ LbDependentSort sortGraph: self term: aSortTerm
 ]
 
 { #category : 'lookup' }
-LbDependentSortGraph >> sortNamed: aSymbol [
+LbDSortGraph >> sortNamed: aSymbol [
 	self flag: #legacy.
 	^ self parseSort: aSymbol
 ]
 
 { #category : 'enumerating' }
-LbDependentSortGraph >> union: aSortGraph [
+LbDSortGraph >> union: aSortGraph [
 	^ LbDependentSortGraphBuilder new
 		addSortContext: self sortContext;
 		addSortContext: aSortGraph sortContext;

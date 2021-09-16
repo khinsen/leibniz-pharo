@@ -1,5 +1,5 @@
 Class {
-	#name : 'LbDependentSignatureBuilder',
+	#name : 'LbDSignatureBuilder',
 	#superclass : 'Object',
 	#instVars : [
 		'sortGraph',
@@ -13,34 +13,34 @@ Class {
 }
 
 { #category : 'instance creation' }
-LbDependentSignatureBuilder class >> sortGraph: aSortGraph [
+LbDSignatureBuilder class >> sortGraph: aSortGraph [
 	^ self basicNew
 		initializeWithSortGraph: aSortGraph;
 		yourself
 ]
 
 { #category : 'adding' }
-LbDependentSignatureBuilder >> addBuiltin: aSymbol [
+LbDSignatureBuilder >> addBuiltin: aSymbol [
 	builtins add: aSymbol
 ]
 
 { #category : 'adding' }
-LbDependentSignatureBuilder >> addBuiltinsFromSignature: aSignature [
+LbDSignatureBuilder >> addBuiltinsFromSignature: aSignature [
 	aSignature withBuiltinsDo:
 		[ :symbol |
 		  self addBuiltin: symbol ]
 ]
 
 { #category : 'adding' }
-LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern [
+LbDSignatureBuilder >> addOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern [
 	| arity kindArity |
 	self checksForNewOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern.
 
-	arity := LbDependentArity sortGraph: sortGraph argSortPatterns: aSortPatternArray.
+	arity := LbDArity sortGraph: sortGraph argSortPatterns: aSortPatternArray.
 	kindArity := arity liftToKinds.
 	operators at: anOpName ifAbsentPut: [ Dictionary new ].
 	(operators at: anOpName) at: kindArity ifAbsentPut: [
-		LbDependentOperator
+		LbDOperator
 			name: anOpName
 			kindArity: kindArity
 			kind: aSortPattern kind ].
@@ -49,7 +49,7 @@ LbDependentSignatureBuilder >> addOp: anOpName withArgs: aSortPatternArray ofSor
 ]
 
 { #category : 'adding' }
-LbDependentSignatureBuilder >> addOpsFromSignature: aSignature [
+LbDSignatureBuilder >> addOpsFromSignature: aSignature [
 	aSignature withOperatorsDo: [ :eachOp |
 		eachOp withRanksDo: [ :argSorts :sort |
 			self
@@ -59,14 +59,14 @@ LbDependentSignatureBuilder >> addOpsFromSignature: aSignature [
 ]
 
 { #category : 'adding' }
-LbDependentSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
+LbDSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
 	self addBuiltinsFromSignature: aSignature.
 	self addOpsFromSignature: aSignature.
 	aBoolean ifTrue: [ self addVarsFromSignature: aSignature ]
 ]
 
 { #category : 'adding' }
-LbDependentSignatureBuilder >> addVar: anOpName ofSort: aSortPattern [
+LbDSignatureBuilder >> addVar: anOpName ofSort: aSortPattern [
 	self assert: (sortGraph includes: aSortPattern).
 	operators at: anOpName ifPresent: [ :op |
 		op at: (LbArity sortGraph: sortGraph argSorts: #()) ifPresent: [ :sort |
@@ -81,7 +81,7 @@ LbDependentSignatureBuilder >> addVar: anOpName ofSort: aSortPattern [
 ]
 
 { #category : 'adding' }
-LbDependentSignatureBuilder >> addVarsFromSignature: aSignature [
+LbDSignatureBuilder >> addVarsFromSignature: aSignature [
 	aSignature withVariablesDo: [ :each |
 		self
 			addVar: each name
@@ -89,7 +89,7 @@ LbDependentSignatureBuilder >> addVarsFromSignature: aSignature [
 ]
 
 { #category : 'private' }
-LbDependentSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern [
+LbDSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern [
 	| argSortVariables |
 
 	"All sorts belong to sortGraph"
@@ -112,13 +112,13 @@ LbDependentSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortPatternAr
 ]
 
 { #category : 'initialization' }
-LbDependentSignatureBuilder >> initializeParsersFor: aSignature [
-	opParser := LbDependentSignatureParser newStartingAt: #opEnd.
-	varParser := LbDependentSignatureParser newStartingAt: #varEnd
+LbDSignatureBuilder >> initializeParsersFor: aSignature [
+	opParser := LbDSignatureParser newStartingAt: #opEnd.
+	varParser := LbDSignatureParser newStartingAt: #varEnd
 ]
 
 { #category : 'initialization' }
-LbDependentSignatureBuilder >> initializeWithSortGraph: aSortGraph [
+LbDSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 	sortGraph := aSortGraph.
 	builtins := Set new.
 	operators := Dictionary new.
@@ -127,7 +127,7 @@ LbDependentSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 ]
 
 { #category : 'adding' }
-LbDependentSignatureBuilder >> parseAndAddOp: aString [
+LbDSignatureBuilder >> parseAndAddOp: aString [
 	| parsedOp argSorts sort |
 	parsedOp := (opParser parse: aString).
 	parsedOp isPetit2Failure ifTrue:
@@ -142,7 +142,7 @@ LbDependentSignatureBuilder >> parseAndAddOp: aString [
 ]
 
 { #category : 'accessing' }
-LbDependentSignatureBuilder >> parseAndAddVar: aString [
+LbDSignatureBuilder >> parseAndAddVar: aString [
 	| parsedVar |
 	parsedVar := (varParser parse: aString).
 	parsedVar isPetit2Failure ifTrue:
@@ -155,8 +155,8 @@ LbDependentSignatureBuilder >> parseAndAddVar: aString [
 ]
 
 { #category : 'accessing' }
-LbDependentSignatureBuilder >> signature [
-	^ LbDependentSignature
+LbDSignatureBuilder >> signature [
+	^ LbDSignature
 		sortGraph: sortGraph
 		builtins: builtins
 		operators: operators
@@ -164,6 +164,6 @@ LbDependentSignatureBuilder >> signature [
 ]
 
 { #category : 'accessing' }
-LbDependentSignatureBuilder >> sortGraph [
+LbDSignatureBuilder >> sortGraph [
 	^ sortGraph
 ]

@@ -7,7 +7,7 @@ Class {
 { #category : 'builtins' }
 LbBuiltinDSignatures class >> fpNumberSignature [
 	<gtExample>
-	^ (LbDependentSignatureBuilder sortGraph:
+	^ (LbDSignatureBuilder sortGraph:
 		((LbBuiltinDSortGraphs fpNumberSortGraph
 			union: LbBuiltinDSortGraphs integerSortGraph)
 			union: LbBuiltinDSortGraphs truthSortGraph))
@@ -51,7 +51,7 @@ LbBuiltinDSignatures class >> fpNumberSignature [
 { #category : 'builtins' }
 LbBuiltinDSignatures class >> integerSignature [
 	<gtExample>
-	^ (LbDependentSignatureBuilder sortGraph:
+	^ (LbDSignatureBuilder sortGraph:
 		(LbBuiltinDSortGraphs integerSortGraph
 			union: LbBuiltinDSortGraphs truthSortGraph))
 		addBuiltin: #integers;
@@ -89,7 +89,7 @@ LbBuiltinDSignatures class >> integerSignature [
 { #category : 'builtins' }
 LbBuiltinDSignatures class >> rationalNumberSignature [
 	<gtExample>
-	^ (LbDependentSignatureBuilder sortGraph:
+	^ (LbDSignatureBuilder sortGraph:
 		(LbBuiltinDSortGraphs rationalNumberSortGraph
 			union: LbBuiltinDSortGraphs truthSortGraph))
 		addBuiltin: #rationalNumbers;
@@ -125,7 +125,7 @@ LbBuiltinDSignatures class >> rationalNumberSignature [
 { #category : 'builtins' }
 LbBuiltinDSignatures class >> realNumberSignature [
 	<gtExample>
-	^ (LbDependentSignatureBuilder sortGraph:
+	^ (LbDSignatureBuilder sortGraph:
 		(LbBuiltinDSortGraphs realNumberSortGraph
 			union: LbBuiltinDSortGraphs truthSortGraph))
 		addBuiltin: #realNumbers;
@@ -163,7 +163,7 @@ LbBuiltinDSignatures class >> realNumberSignature [
 { #category : 'builtins' }
 LbBuiltinDSignatures class >> stringSignature [
 	<gtExample>
-	^ (LbDependentSignatureBuilder sortGraph: LbBuiltinDSortGraphs stringSortGraph)
+	^ (LbDSignatureBuilder sortGraph: LbBuiltinDSortGraphs stringSortGraph)
 		addBuiltin: #strings;
 		parseAndAddOp: 'string + string : string';
 		signature
@@ -172,7 +172,7 @@ LbBuiltinDSignatures class >> stringSignature [
 { #category : 'builtins' }
 LbBuiltinDSignatures class >> truthSignature [
 	<gtExample>
-	^ (LbDependentSignatureBuilder sortGraph: LbBuiltinDSortGraphs truthSortGraph)
+	^ (LbDSignatureBuilder sortGraph: LbBuiltinDSortGraphs truthSortGraph)
 		addBuiltin: #truth;
 		parseAndAddOp: 'true : boolean';
 		parseAndAddOp: 'false : boolean';

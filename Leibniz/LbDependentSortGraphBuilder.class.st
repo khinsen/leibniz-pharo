@@ -70,5 +70,5 @@ LbDependentSortGraphBuilder >> parseAndAdd: aString [
 { #category : 'building' }
 LbDependentSortGraphBuilder >> sortGraph [
 	self buildSortContext.
-	^ LbDependentSortGraph sortContext: sortContext
+	^ LbDSortGraph sortContext: sortContext
 ]

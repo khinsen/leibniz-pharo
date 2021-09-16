@@ -1,5 +1,5 @@
 Class {
-	#name : 'LbDependentKindArity',
+	#name : 'LbDKindArity',
 	#superclass : 'Array',
 	#type : 'variable',
 	#traits : 'EqualityThroughVariables',
@@ -11,14 +11,14 @@ Class {
 }
 
 { #category : 'instance creation' }
-LbDependentKindArity class >> sortGraph: aSortGraph kinds: anArray [
+LbDKindArity class >> sortGraph: aSortGraph kinds: anArray [
 	^(self basicNew: anArray size)
 			initializeWithSortGraph: aSortGraph kinds: anArray;
 			yourself
 ]
 
 { #category : 'initialization' }
-LbDependentKindArity >> initializeWithSortGraph: aSortGraph kinds: anArray [
+LbDKindArity >> initializeWithSortGraph: aSortGraph kinds: anArray [
 	sortGraph := aSortGraph.
 	anArray collect: [ :s | s ] into: self.
 	self do: [ :each | self assert: each sortGraph = sortGraph ].
@@ -26,17 +26,17 @@ LbDependentKindArity >> initializeWithSortGraph: aSortGraph kinds: anArray [
 ]
 
 { #category : 'printing' }
-LbDependentKindArity >> printAsLeibnizSyntaxOn: aStream [
+LbDKindArity >> printAsLeibnizSyntaxOn: aStream [
 	self
 		do: [ :each | each printAsLeibnizSyntaxOn: aStream ]
 		separatedBy: [ aStream nextPutAll: ', ' ]
 ]
 
 { #category : 'enumerating' }
-LbDependentKindArity >> withUniversalVariantsDo: aBlock [
+LbDKindArity >> withUniversalVariantsDo: aBlock [
 	| universal |
 	self ifEmpty: [ aBlock value: self. ^ self ].
-	universal := (LbDependentSortFamily anySortInSortGraph: sortGraph) kind.
+	universal := (LbDSortFamily anySortInSortGraph: sortGraph) kind.
 	#(false true) asDigitsToPower: self size do: [ :eachSelection |
 		| argKinds |
 		argKinds := Array new: self size.

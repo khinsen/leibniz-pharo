@@ -1,11 +1,11 @@
 Class {
-	#name : 'LbDependentSignatureParser',
-	#superclass : 'LbDependentSignatureGrammar',
+	#name : 'LbDSignatureParser',
+	#superclass : 'LbDSignatureGrammar',
 	#category : 'Leibniz-7-DependentSorts'
 }
 
 { #category : 'accessing' }
-LbDependentSignatureParser class >> signature: aSignature extraVariables: aDictionary [
+LbDSignatureParser class >> signature: aSignature extraVariables: aDictionary [
 	| parser |
 	parser := self newStartingAt: self startSymbol.
 	parser signature: aSignature.
@@ -14,7 +14,7 @@ LbDependentSignatureParser class >> signature: aSignature extraVariables: aDicti
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureParser >> bracketOp [
+LbDSignatureParser >> bracketOp [
 	^ super bracketOp
 		==> [ :nodes |
 				| args |
@@ -24,7 +24,7 @@ LbDependentSignatureParser >> bracketOp [
 ]
 
 { #category : 'term construction' }
-LbDependentSignatureParser >> delayedTermWithOp: anOpName args: anArgList [
+LbDSignatureParser >> delayedTermWithOp: anOpName args: anArgList [
 	^ [ :aSignature :aDictionary |
 		aSignature
 			nonZeroArgTermNamed: anOpName
@@ -33,7 +33,7 @@ LbDependentSignatureParser >> delayedTermWithOp: anOpName args: anArgList [
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureParser >> forAllClause [
+LbDSignatureParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
 		| varName sortName |
 		varName := nodes second asSymbol asLbOperatorName.
@@ -43,7 +43,7 @@ LbDependentSignatureParser >> forAllClause [
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureParser >> fpNumberTerm [
+LbDSignatureParser >> fpNumberTerm [
 	^ super fpNumberTerm ==> [ :value | 
 		"Converting the string to a float requires some trickery:
 		 - Pharo doesn't allow a dot followed by an exponent without any fractional part.
@@ -58,13 +58,13 @@ LbDependentSignatureParser >> fpNumberTerm [
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureParser >> infixOp [
+LbDSignatureParser >> infixOp [
 	^ super infixOp ==> [ :nodes |
 		{ LbInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureParser >> integerTerm [
+LbDSignatureParser >> integerTerm [
 	^ super integerTerm ==> [ :value |
 		| intValue |
 		intValue := value asNumber.
@@ -74,7 +74,7 @@ LbDependentSignatureParser >> integerTerm [
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureParser >> nonInfixTerm [
+LbDSignatureParser >> nonInfixTerm [
 	^ super nonInfixTerm ==> [ :nodes |
 		nodes second
 			ifNil: [ nodes first ] "simpleTerm, no suffix"
@@ -86,7 +86,7 @@ LbDependentSignatureParser >> nonInfixTerm [
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureParser >> op [
+LbDSignatureParser >> op [
 	^ super op ==> [ :nodes |
 		| variables opName opArgs opSort |
 		variables := nodes first.
@@ -109,7 +109,7 @@ LbDependentSignatureParser >> op [
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureParser >> prefixOp [
+LbDSignatureParser >> prefixOp [
 	^ super prefixOp ==> [ :nodes |
 		{
 			LbPrefixOperatorName for: nodes first.
@@ -118,7 +118,7 @@ LbDependentSignatureParser >> prefixOp [
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureParser >> prefixOpTerm [
+LbDSignatureParser >> prefixOpTerm [
 	^ super prefixOpTerm ==> [ :nodes |
 		| name args |
 		name := LbPrefixOperatorName for: nodes first.
@@ -127,7 +127,7 @@ LbDependentSignatureParser >> prefixOpTerm [
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureParser >> rationalNumberTerm [
+LbDSignatureParser >> rationalNumberTerm [
 	^ super rationalNumberTerm==> [ :value |
 		| rationalValue |
 		rationalValue := Fraction readFromString: value.
@@ -137,13 +137,13 @@ LbDependentSignatureParser >> rationalNumberTerm [
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureParser >> sort [
+LbDSignatureParser >> sort [
 	^ super sort ==> [ :id |
 		{ id } ]
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureParser >> stringTerm [
+LbDSignatureParser >> stringTerm [
 	^ super stringTerm ==> [ :value |
 		| stringValue |
 		stringValue := value copyFrom: 2 to: value size - 1.
@@ -153,7 +153,7 @@ LbDependentSignatureParser >> stringTerm [
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureParser >> subscriptOp [
+LbDSignatureParser >> subscriptOp [
 	^ super subscriptOp ==> [ :nodes |
 		| args |
 		args := OrderedCollection with: nodes first.
@@ -162,7 +162,7 @@ LbDependentSignatureParser >> subscriptOp [
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureParser >> superscriptOp [
+LbDSignatureParser >> superscriptOp [
 	^ super superscriptOp ==> [ :nodes |
 		| args |
 		args := OrderedCollection with: nodes first.
@@ -171,7 +171,7 @@ LbDependentSignatureParser >> superscriptOp [
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureParser >> term [
+LbDSignatureParser >> term [
 	^ super term  ==> [ :nodes |
 		nodes size = 1
 			ifTrue: [ nodes first ] "nonInfixTerm"
@@ -188,12 +188,12 @@ LbDependentSignatureParser >> term [
 ]
 
 { #category : 'accessing' }
-LbDependentSignatureParser >> termEnd [
+LbDSignatureParser >> termEnd [
 	^ term end
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureParser >> var [
+LbDSignatureParser >> var [
 	^ super var ==> [ :nodes |
 		| variables |
 		variables := nodes first.
@@ -208,13 +208,13 @@ LbDependentSignatureParser >> var [
 ]
 
 { #category : 'productions - signature' }
-LbDependentSignatureParser >> zeroArgOp [
+LbDSignatureParser >> zeroArgOp [
 	^ super zeroArgOp ==> [ :idString |
 		{ LbPrefixOperatorName for: idString. #() } ]
 ]
 
 { #category : 'productions - term' }
-LbDependentSignatureParser >> zeroArgTerm [
+LbDSignatureParser >> zeroArgTerm [
 	^ super zeroArgTerm ==> [ :symbol |
 		| name |
 		name := LbPrefixOperatorName for: symbol.
