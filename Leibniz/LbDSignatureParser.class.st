@@ -206,7 +206,7 @@ LbDSignatureParser >> var [
 				| newVar |
 				newVar := each value: aSignature value: aDictionary.
 				allVariables at: newVar key put: newVar value ].
-			{ nodes second. nodes fourth cull: aSignature cull: allVariables } ] ]
+			{ nodes second. nodes fourth first cull: aSignature cull: allVariables } ] ]
 ]
 
 { #category : 'productions - signature' }

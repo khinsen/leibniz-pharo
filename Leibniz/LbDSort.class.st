@@ -268,7 +268,7 @@ LbDSort >> testPaths: aSet [
 						thenSelect: #isNotNil ] ].
 		currentSorts do: [ :each |
 			candidates add:
-				(LbDependentSort sortGraph: sortGraph term: each) ] ].
+				(LbDSort sortGraph: sortGraph term: each) ] ].
 	^ candidates
 ]
 
