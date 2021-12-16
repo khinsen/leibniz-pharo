@@ -31,6 +31,13 @@ BaselineOfLeibnizForGToolkit >> baseline: spec [
 							'EqualityThroughVariablesTrait'
 							'SingletonTrait') ].
 
+		spec
+			package: 'Leibniz2'
+			with: [ spec requires:
+						#('RecursiveWriteBarrier'
+							'EqualityThroughVariablesTrait'
+							'SingletonTrait') ].
+
 ]
 ]
 
