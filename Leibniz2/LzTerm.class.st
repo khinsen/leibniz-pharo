@@ -3,3 +3,8 @@ Class {
 	#superclass : #Object,
 	#category : #Leibniz2
 }
+
+{ #category : #accessing }
+LzTerm >> sort [
+	self subclassResponsibility
+]
