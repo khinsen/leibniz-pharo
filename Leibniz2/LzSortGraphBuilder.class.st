@@ -9,7 +9,12 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
-{ #category : #accessing }
+{ #category : #building }
+LzSortGraphBuilder >> build [
+	self notYetImplemented
+]
+
+{ #category : #initializing }
 LzSortGraphBuilder >> initialize [
 	includeDeclarations :=
 		OrderedCollection with: LzBuiltinContexts sortContext.
@@ -19,5 +24,12 @@ LzSortGraphBuilder >> initialize [
 
 { #category : #defining }
 LzSortGraphBuilder >> sort: aString [
-	self notYetImplemented
+	| declaration |
+	declaration := (LzParser newStartingAt: #sortOrSubsort) parse: aString.
+	declaration isPetit2Failure ifTrue:
+		[ self error: declaration message, ' after ',
+				 (aString sliceFrom: 1 to: declaration position) ].
+	declaration size = 1
+		ifTrue: [ sortDeclarations add: declaration ]
+		ifTrue: [ subsortAxioms add: declaration ].
 ]
