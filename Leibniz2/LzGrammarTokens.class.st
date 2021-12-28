@@ -2,8 +2,6 @@ Class {
 	#name : #LzGrammarTokens,
 	#superclass : #PP2CompositeNode,
 	#instVars : [
-		'identifier',
-		'identifierCharacter',
 		'colon',
 		'openParenthesis',
 		'closeParenthesis',

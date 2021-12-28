@@ -27,9 +27,7 @@ Class {
 		'infixVarArg',
 		'infixSortArg',
 		'infixArg',
-		'pattern',
-		'sort',
-		'subsort'
+		'pattern'
 	],
 	#category : #'Leibniz2-Parser'
 }
@@ -46,7 +44,7 @@ LzGrammarSignaturesAndTerms >> bracketOp [
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> forAllClause [
-	^ forAll trim, identifier, colon, sort
+	^ forAll trim, varIdentifier, colon, simpleTerm
 ]
 
 { #category : #signature }
@@ -56,17 +54,17 @@ LzGrammarSignaturesAndTerms >> infixArg [
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> infixOp [
-	^ infixArg trim, identifier trim, infixArg trim
+	^ infixArg trim, opIdentifier trim, infixArg trim
 ]
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> infixSortArg [
-	^ sort
+	^ term
 ]
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> infixVarArg [
-	^ identifier, colon, sort
+	^ varIdentifier, colon, term
 ]
 
 { #category : #terms }
@@ -81,7 +79,7 @@ LzGrammarSignaturesAndTerms >> nonInfixTerm [
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> op [
-	^ forAllClause star, opAndArgs trim, colon, sort trim
+	^ forAllClause star, opAndArgs trim, colon, simpleTerm trim
 ]
 
 { #category : #terms }
@@ -102,7 +100,7 @@ LzGrammarSignaturesAndTerms >> parenthesizedTerm [
 
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> pattern [
-	^ forAllClause star, term trim
+	^ forAllClause star, simpleTerm trim
 ]
 
 { #category : #terms }
@@ -112,7 +110,7 @@ LzGrammarSignaturesAndTerms >> patternEnd [
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> prefixOp [
-	^ identifier trim,
+	^ opIdentifier trim,
 		openParenthesis,
 		(arg separatedBy: comma trim),
 		closeParenthesis
@@ -120,7 +118,7 @@ LzGrammarSignaturesAndTerms >> prefixOp [
 
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> prefixOpTerm [
-	^ identifier , openParenthesis ,
+	^ opIdentifier , openParenthesis ,
 		 (term separatedBy: comma trim) ,
 		 closeParenthesis
 ]
@@ -131,28 +129,13 @@ LzGrammarSignaturesAndTerms >> simpleTerm [
 ]
 
 { #category : #signature }
-LzGrammarSignaturesAndTerms >> sort [
-	^ simpleTerm
-]
-
-{ #category : #signature }
 LzGrammarSignaturesAndTerms >> sortArg [
-	^ sort
-]
-
-{ #category : #signature }
-LzGrammarSignaturesAndTerms >> sortOrSubsort [
-	^ (subsort / sort) end 
+	^ simpleTerm
 ]
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> subscriptOp [
 	^ arg, underscore, openBrace, (arg separatedBy: comma trim), closeBrace
-]
-
-{ #category : #signature }
-LzGrammarSignaturesAndTerms >> subsort [
-	^ sort trim, subsortSymbol, sort trim
 ]
 
 { #category : #terms }
@@ -175,7 +158,7 @@ LzGrammarSignaturesAndTerms >> superscriptOp [
 
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> term [
-	^ (nonInfixTerm separatedBy: (identifier trim))
+	^ (nonInfixTerm separatedBy: (opIdentifier trim))
 		==> [ :nodes |
 				| result |
 				result := OrderedCollection new.
@@ -196,12 +179,12 @@ LzGrammarSignaturesAndTerms >> termEnd [
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> var [
-	^ forAllClause star, identifier trim, colon, sort trim
+	^ forAllClause star, varIdentifier trim, colon, simpleTerm trim
 ]
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> varArg [
-	^ identifier, colon, sort
+	^ varIdentifier, colon, simpleTerm
 ]
 
 { #category : #signature }
@@ -211,10 +194,10 @@ LzGrammarSignaturesAndTerms >> varEnd [
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> zeroArgOp [
-	^ identifier
+	^ opIdentifier
 ]
 
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> zeroArgTerm [
-	^ identifier
+	^ opIdentifier
 ]

@@ -25,7 +25,8 @@ LzSortGraphBuilder >> initialize [
 { #category : #defining }
 LzSortGraphBuilder >> sort: aString [
 	| declaration |
-	declaration := (LzParser newStartingAt: #sortOrSubsort) parse: aString.
+	declaration := (LzParser newStartingAt: #op)
+		parse: (aString, ' : sort').
 	declaration isPetit2Failure ifTrue:
 		[ self error: declaration message, ' after ',
 				 (aString sliceFrom: 1 to: declaration position) ].

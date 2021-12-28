@@ -19,7 +19,7 @@ LzGrammarRulesAndAxioms >> axiom [
 
 { #category : #rules }
 LzGrammarRulesAndAxioms >> code [
-	^ $' asPParser , $' asPParser negate star flatten, $' asPParser, $: asPParser, identifier
+	^ $' asPParser , $' asPParser negate star flatten, $' asPParser, $: asPParser, opIdentifier
 ]
 
 { #category : #clauses }

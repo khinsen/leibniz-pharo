@@ -11,7 +11,7 @@ LzParser >> bracketOp [
 				| args |
 				args := OrderedCollection with: nodes first.
 				args addAll: (nodes third reject: [ :element | element = $,]).
-				{ LbBracketOperatorName new. args asArray } ]
+				{ LzBracketOperatorName new. args asArray } ]
 ]
 
 { #category : #rules }
@@ -91,7 +91,7 @@ LzParser >> fpNumberTerm [
 { #category : #signature }
 LzParser >> infixOp [
 	^ super infixOp ==> [ :nodes |
-		{ LbInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
+		{ LzInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
 ]
 
 { #category : #signature }
@@ -125,11 +125,12 @@ LzParser >> nonInfixTerm [
 { #category : #signature }
 LzParser >> op [
 	^ super op ==> [ :nodes |
-		self assert: nodes first isEmpty. "Variables, only used for dependent sorts"
-		{
-			nodes second. "opAndArgs"
-			nodes fourth first "sort"
-		} ]
+		| variables opName opArgs opSort |
+		variables := nodes first.
+		opName := nodes second first.
+		opArgs := nodes second second.
+		opSort := nodes fourth.
+		{ opName. opArgs. opSort } ]
 ]
 
 { #category : #terms }
@@ -152,7 +153,7 @@ LzParser >> pattern [
 LzParser >> prefixOp [
 	^ super prefixOp ==> [ :nodes |
 		{
-			LbPrefixOperatorName for: nodes first.
+			LzPrefixOperatorName for: nodes first.
 			nodes third reject: [ :element | element = $, ]
 		} ]
 ]
@@ -192,12 +193,6 @@ LzParser >> rewriteRule [
 				replacement: (nodes fourth cull: signature cull: variables) ] ]
 ]
 
-{ #category : #signature }
-LzParser >> sort [
-	^ super sort
-		==> [ :id | {id} ]
-]
-
 { #category : #terms }
 LzParser >> stringTerm [
 	^ super stringTerm ==> [ :value |
@@ -214,13 +209,7 @@ LzParser >> subscriptOp [
 		| args |
 		args := OrderedCollection with: nodes first.
 		args addAll: (nodes fourth reject: [ :element | element = $, ]).
-		{ LbSubscriptOperatorName new. args asArray } ]
-]
-
-{ #category : #signature }
-LzParser >> subsort [
-	^ super subsort
-		==> [ :nodes | { nodes first first. nodes third first } ]
+		{ LzSubscriptOperatorName new. args asArray } ]
 ]
 
 { #category : #axioms }
@@ -243,7 +232,7 @@ LzParser >> superscriptOp [
 		| args |
 		args := OrderedCollection with: nodes first.
 		args addAll: (nodes fourth reject: [ :element | element = $, ]).
-		{ LbSuperscriptOperatorName new. args asArray } ]
+		{ LzSuperscriptOperatorName new. args asArray } ]
 ]
 
 { #category : #terms }
