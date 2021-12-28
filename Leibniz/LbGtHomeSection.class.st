@@ -1,10 +1,10 @@
 Class {
-	#name : 'LbGtHomeSection',
-	#superclass : 'GtHomeSection',
+	#name : #LbGtHomeSection,
+	#superclass : #GtHomeSection,
 	#category : 'Leibniz-0-Infrastructure'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbGtHomeSection >> create [
 	| sectionContainer cardContainer |
 	sectionContainer := self newSectionContainer.
@@ -15,7 +15,7 @@ LbGtHomeSection >> create [
 	^ sectionContainer
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbGtHomeSection >> documentationCard [
 	^ self
 		newHeaderCardWithTitle: 'Leibniz'

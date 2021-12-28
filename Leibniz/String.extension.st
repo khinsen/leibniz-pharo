@@ -1,6 +1,6 @@
-Extension { #name : 'String' }
+Extension { #name : #String }
 
-{ #category : '*Leibniz' }
+{ #category : #'*Leibniz' }
 String >> lbAtomicTermClass [
 	^ LbStringTerm
 ]

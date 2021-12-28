@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbRule',
-	#superclass : 'Object',
+	#name : #LbRule,
+	#superclass : #Object,
 	#instVars : [
 		'signature',
 		'variables',
@@ -10,27 +10,27 @@ Class {
 	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbRule >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbRule >> condition [
 	^ condition
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbRule >> copy [
 	^self
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbRule >> deepCopy [
 	^self
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbRule >> gtRuleFor: aView [
 	<gtView>
 	| ruleView |
@@ -51,7 +51,7 @@ LbRule >> gtRuleFor: aView [
 	^ ruleView
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbRule >> initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm [
 	| patternVariables |
 	pattern := aPattern.
@@ -70,30 +70,30 @@ LbRule >> initializeWithPattern: aPattern localVariables: aDictionary condition:
 				description: 'Variable ', each key asSymbol, ' in condition but not in pattern'  ] ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbRule >> pattern [
 	^ pattern
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbRule >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
 	self printBodyAsLeibnizSyntaxOn: aStream.
 	self printConditionAsLeibnizSyntaxOn: aStream
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbRule >> printBodyAsLeibnizSyntaxOn: aStream [
 	self subclassResponsibility
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbRule >> printConditionAsLeibnizSyntaxOn: aStream [
 	condition ifNotNil:
 		[ aStream nextPutAll: ' | '. condition printAsLeibnizSyntaxOn: aStream ].
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbRule >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -101,7 +101,7 @@ LbRule >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbRule >> printVariablesAsLeibnizSyntaxOn: aStream [
 	variables keysAndValuesDo:
 		[ :var :sort |
@@ -112,12 +112,12 @@ LbRule >> printVariablesAsLeibnizSyntaxOn: aStream [
 			aStream nextPutAll: ' ']
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbRule >> signature [
 	^ signature
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbRule >> variables [
 	^ variables
 ]

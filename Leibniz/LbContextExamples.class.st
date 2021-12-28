@@ -1,10 +1,10 @@
 Class {
-	#name : 'LbContextExamples',
-	#superclass : 'Object',
+	#name : #LbContextExamples,
+	#superclass : #Object,
 	#category : 'Leibniz-6-Contexts'
 }
 
-{ #category : 'example' }
+{ #category : #example }
 LbContextExamples >> booleanContext [
 	<gtExample>
 	^ LbContext
@@ -13,7 +13,7 @@ LbContextExamples >> booleanContext [
 		rewriteSystem: (LbRewriteSystemExamples new booleanRewriteSystem)
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbContextExamples >> derivativeContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'derivatives-ℝ→ℝ')
@@ -27,7 +27,7 @@ LbContextExamples >> derivativeContext [
 		context
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContextExamples >> fooBarBazContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'foo-bar-baz')
@@ -41,7 +41,7 @@ LbContextExamples >> fooBarBazContext [
 		context
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbContextExamples >> fooBarContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'foo-bar')
@@ -56,7 +56,7 @@ LbContextExamples >> fooBarContext [
 		context
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbContextExamples >> massContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'mass')
@@ -81,7 +81,7 @@ LbContextExamples >> massContext [
 		context
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbContextExamples >> massUnitContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'mass-units')
@@ -102,7 +102,7 @@ LbContextExamples >> massUnitContext [
 		context
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbContextExamples >> realFunctionContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'ℝ→ℝ')

@@ -1,10 +1,10 @@
 Class {
-	#name : 'LeibnizDocumentTest',
-	#superclass : 'TestCase',
+	#name : #LeibnizDocumentTest,
+	#superclass : #TestCase,
 	#category : 'Leibniz-8-Documents'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 LeibnizDocumentTest >> testGoodContextDefinition [
 	| doc builder |
 	doc := LeibnizDocument new.
@@ -22,7 +22,7 @@ LeibnizDocumentTest >> testGoodContextDefinition [
 
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 LeibnizDocumentTest >> testPhaseErrorInCOntextDefinition [
 	| doc builder |
 	doc := LeibnizDocument new.

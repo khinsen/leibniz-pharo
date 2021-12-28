@@ -1,10 +1,10 @@
 Class {
-	#name : 'LbParser',
-	#superclass : 'LbGrammarRulesAndAxioms',
+	#name : #LbParser,
+	#superclass : #LbGrammarRulesAndAxioms,
 	#category : 'Leibniz-0-Infrastructure'
 }
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> bracketOp [
 	^ super bracketOp
 		==> [ :nodes |
@@ -14,13 +14,13 @@ LbParser >> bracketOp [
 				{ LbBracketOperatorName new. args asArray } ]
 ]
 
-{ #category : 'rules' }
+{ #category : #rules }
 LbParser >> code [
 	^ super code
 		==> [ :nodes | { nodes second. nodes fifth } ]
 ]
 
-{ #category : 'terms' }
+{ #category : #terms }
 LbParser >> delayedTermWithOp: anOpName args: anArgList [
 	^ [ :aSignature :aDictionary |
 		aSignature
@@ -29,7 +29,7 @@ LbParser >> delayedTermWithOp: anOpName args: anArgList [
 				each cull: aSignature cull: aDictionary ]) ]
 ]
 
-{ #category : 'axioms' }
+{ #category : #axioms }
 LbParser >> equalityAxiom [
 	^ super equalityAxiom ==> [ :nodes |
 		[ :signature |
@@ -45,7 +45,7 @@ LbParser >> equalityAxiom [
 								[ :c | c second cull: signature cull: variables ]) ] ]
 ]
 
-{ #category : 'rules' }
+{ #category : #rules }
 LbParser >> fnRule [
 	^ super fnRule ==> [ :nodes |
 		[ :signature |
@@ -61,7 +61,7 @@ LbParser >> fnRule [
 				function: nodes fourth ] ]
 ]
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
 		| varName sortName |
@@ -73,7 +73,7 @@ LbParser >> forAllClause [
 			varName -> (aSignature sortNamed: sortName) ] ]
 ]
 
-{ #category : 'terms' }
+{ #category : #terms }
 LbParser >> fpNumberTerm [
 	^ super fpNumberTerm ==> [ :value | 
 		"Converting the string to a float requires some trickery:
@@ -88,19 +88,19 @@ LbParser >> fpNumberTerm [
 			LbFPNumberTerm value: floatValue signature: aSignature ] ]
 ]
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> infixOp [
 	^ super infixOp ==> [ :nodes |
 		{ LbInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
 ]
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> infixVarArg [
 	^ super infixVarArg ==> [ :nodes |
 		{ nodes first. nodes third first } ]
 ]
 
-{ #category : 'terms' }
+{ #category : #terms }
 LbParser >> integerTerm [
 	^ super integerTerm ==> [ :value |
 		| intValue |
@@ -110,7 +110,7 @@ LbParser >> integerTerm [
 			LbIntegerTerm value: intValue signature: aSignature ] ]
 ]
 
-{ #category : 'terms' }
+{ #category : #terms }
 LbParser >> nonInfixTerm [
 	^ super nonInfixTerm ==> [ :nodes |
 		nodes second
@@ -122,7 +122,7 @@ LbParser >> nonInfixTerm [
 				self delayedTermWithOp: name args: args ] ]
 ]
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> op [
 	^ super op ==> [ :nodes |
 		self assert: nodes first isEmpty. "Variables, only used for dependent sorts"
@@ -132,7 +132,7 @@ LbParser >> op [
 		} ]
 ]
 
-{ #category : 'terms' }
+{ #category : #terms }
 LbParser >> pattern [
 	^ super pattern ==> [ :nodes |
 		| variables parsedTerm |
@@ -148,7 +148,7 @@ LbParser >> pattern [
 			parsedTerm value: aSignature value: allVariables ] ]
 ]
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> prefixOp [
 	^ super prefixOp ==> [ :nodes |
 		{
@@ -157,7 +157,7 @@ LbParser >> prefixOp [
 		} ]
 ]
 
-{ #category : 'terms' }
+{ #category : #terms }
 LbParser >> prefixOpTerm [
 	^ super prefixOpTerm ==> [ :nodes |
 		| name args |
@@ -166,7 +166,7 @@ LbParser >> prefixOpTerm [
 		self delayedTermWithOp: name args: args ]
 ]
 
-{ #category : 'terms' }
+{ #category : #terms }
 LbParser >> rationalNumberTerm [
 	^ super rationalNumberTerm==> [ :value |
 		| rationalValue |
@@ -176,7 +176,7 @@ LbParser >> rationalNumberTerm [
 			LbRationalNumberTerm value: rationalValue signature: aSignature ] ]
 ]
 
-{ #category : 'rules' }
+{ #category : #rules }
 LbParser >> rewriteRule [
 	^ super rewriteRule ==> [ :nodes |
 		[ :signature |
@@ -192,13 +192,13 @@ LbParser >> rewriteRule [
 				replacement: (nodes fourth cull: signature cull: variables) ] ]
 ]
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> sort [
 	^ super sort
 		==> [ :id | {id} ]
 ]
 
-{ #category : 'terms' }
+{ #category : #terms }
 LbParser >> stringTerm [
 	^ super stringTerm ==> [ :value |
 		| stringValue |
@@ -208,7 +208,7 @@ LbParser >> stringTerm [
 			LbStringTerm value: stringValue signature: aSignature ] ]
 ]
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> subscriptOp [
 	^ super subscriptOp ==> [ :nodes |
 		| args |
@@ -217,13 +217,13 @@ LbParser >> subscriptOp [
 		{ LbSubscriptOperatorName new. args asArray } ]
 ]
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> subsort [
 	^ super subsort
 		==> [ :nodes | { nodes first first. nodes third first } ]
 ]
 
-{ #category : 'axioms' }
+{ #category : #axioms }
 LbParser >> subsortAxiom [
 	^ super subsortAxiom ==> [ :nodes |
 		[ :signature |
@@ -237,7 +237,7 @@ LbParser >> subsortAxiom [
 				localVariables: variables ] ]
 ]
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> superscriptOp [
 	^ super superscriptOp ==> [ :nodes |
 		| args |
@@ -246,7 +246,7 @@ LbParser >> superscriptOp [
 		{ LbSuperscriptOperatorName new. args asArray } ]
 ]
 
-{ #category : 'terms' }
+{ #category : #terms }
 LbParser >> term [
 	^ super term  ==> [ :nodes |
 		nodes size = 1
@@ -263,26 +263,26 @@ LbParser >> term [
 						self delayedTermWithOp: name args: { result . nextArg } ] ] ]
 ]
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> var [
 	^ super var ==> [ :nodes |
 		self assert: nodes first isEmpty. "Variables, only used for dependent sorts"
 		{ nodes second. nodes fourth first } ]
 ]
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> varArg [
 	^ super varArg ==> [ :nodes |
 		{ nodes first. nodes third first } ]
 ]
 
-{ #category : 'signature' }
+{ #category : #signature }
 LbParser >> zeroArgOp [
 	^ super zeroArgOp ==> [ :idString |
 		{ LbPrefixOperatorName for: idString. #() } ]
 ]
 
-{ #category : 'terms' }
+{ #category : #terms }
 LbParser >> zeroArgTerm [
 	^ super zeroArgTerm ==> [ :symbol |
 		| name |

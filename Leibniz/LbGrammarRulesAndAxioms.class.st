@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbGrammarRulesAndAxioms',
-	#superclass : 'LbGrammarSignaturesAndTerms',
+	#name : #LbGrammarRulesAndAxioms,
+	#superclass : #LbGrammarSignaturesAndTerms,
 	#instVars : [
 		'conditionClause',
 		'code',
@@ -12,42 +12,42 @@ Class {
 	#category : 'Leibniz-0-Infrastructure'
 }
 
-{ #category : 'axioms' }
+{ #category : #axioms }
 LbGrammarRulesAndAxioms >> axiom [
 	^ (equalityAxiom / subsortAxiom) end
 ]
 
-{ #category : 'rules' }
+{ #category : #rules }
 LbGrammarRulesAndAxioms >> code [
 	^ $' asPParser , $' asPParser negate star flatten, $' asPParser, $: asPParser, identifier
 ]
 
-{ #category : 'clauses' }
+{ #category : #clauses }
 LbGrammarRulesAndAxioms >> conditionClause [
 	^ conditionSymbol trim, term
 ]
 
-{ #category : 'axioms' }
+{ #category : #axioms }
 LbGrammarRulesAndAxioms >> equalityAxiom [
 	^ forAllClause star trim, term, equalSign trim, term, conditionClause optional
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbGrammarRulesAndAxioms >> fnRule [
 	^ forAllClause star trim, term, fnArrow trim, code, conditionClause optional
 ]
 
-{ #category : 'rules' }
+{ #category : #rules }
 LbGrammarRulesAndAxioms >> rewriteRule [
 	^ forAllClause star trim, term, rewriteArrow trim, term, conditionClause optional
 ]
 
-{ #category : 'rules' }
+{ #category : #rules }
 LbGrammarRulesAndAxioms >> rule [
 	^ (rewriteRule / fnRule) end
 ]
 
-{ #category : 'axioms' }
+{ #category : #axioms }
 LbGrammarRulesAndAxioms >> subsortAxiom [
 	^ forAllClause star trim, term, subsortSymbol trim, term
 ]

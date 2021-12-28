@@ -1,6 +1,6 @@
-Extension { #name : 'Float' }
+Extension { #name : #Float }
 
-{ #category : '*Leibniz' }
+{ #category : #'*Leibniz' }
 Float >> lbAtomicTermClass [
 	^ LbFPNumberTerm
 ]

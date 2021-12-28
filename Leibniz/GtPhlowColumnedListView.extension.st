@@ -1,6 +1,6 @@
-Extension { #name : 'GtPhlowColumnedListView' }
+Extension { #name : #GtPhlowColumnedListView }
 
-{ #category : '*Leibniz' }
+{ #category : #'*Leibniz' }
 GtPhlowColumnedListView >> column: aTitleString lbCode: aBlock [
 	"A variant of column:text: that uses
 	 an appropriate Unicode font for Leibniz code"
@@ -10,7 +10,7 @@ GtPhlowColumnedListView >> column: aTitleString lbCode: aBlock [
 			eachLabel text: (aBlock value: eachItem)  ] ]
 ]
 
-{ #category : '*Leibniz' }
+{ #category : #'*Leibniz' }
 GtPhlowColumnedListView >> column: aTitleString lbCode: aBlock weight: aNumber [
 	"A variant of column:text: that uses
 	 an appropriate Unicode font for Leibniz code"

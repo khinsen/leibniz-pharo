@@ -2,8 +2,8 @@
 This class provides inspector views that help in understanding the relation between two sorts in the same sort graph.
 "
 Class {
-	#name : 'LbDSortPair',
-	#superclass : 'Object',
+	#name : #LbDSortPair,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -14,14 +14,14 @@ Class {
 	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbDSortPair class >> sortGraph: aSortGraph sort1: sort1 sort2: sort2 [
 	^ self basicNew
 		initializeWithSortGraph: aSortGraph sort1: sort1 sort2: sort2;
 		yourself
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDSortPair >> gtGraphFor: aView [
 	<gtView>
 	^ aView mondrian
@@ -48,7 +48,7 @@ LbDSortPair >> gtGraphFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDSortPair >> gtLeastCommonSubsortsFor: aView [
 	<gtView>
 	^ aView mondrian
@@ -78,7 +78,7 @@ LbDSortPair >> gtLeastCommonSubsortsFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDSortPair >> gtSortsFor: aView [
 	<gtView>
 	^ aView list
@@ -88,14 +88,14 @@ LbDSortPair >> gtSortsFor: aView [
 		yourself
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbDSortPair >> initializeWithSortGraph: aSortGraph sort1: aSort sort2: anotherSort [
 	sortGraph := aSortGraph.
 	sort1 := aSort.
 	sort2 := anotherSort
 ]
 
-{ #category : 'operating' }
+{ #category : #operating }
 LbDSortPair >> leastCommonSubsorts [
 	| distances1 distances2 lcs1 lcs2 |
 	distances1 := Dictionary new.
@@ -121,7 +121,7 @@ LbDSortPair >> leastCommonSubsorts [
 	^ (lcs1 keys union: lcs2 keys) asSet
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDSortPair >> subsortAndSupersortGraph [
 	| edges |
 	edges := Set new.
@@ -143,7 +143,7 @@ LbDSortPair >> subsortAndSupersortGraph [
 		with: #edges -> edges
 ]
 
-{ #category : 'operating' }
+{ #category : #operating }
 LbDSortPair >> subsortByUnification [
 	| rename preferredVarNames substitution equalUpToRenaming |
 	rename := sort2 addPrefix: #'temp.' toVarsConflictingWith: sort1.

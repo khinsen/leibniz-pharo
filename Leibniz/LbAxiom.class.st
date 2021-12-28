@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbAxiom',
-	#superclass : 'Object',
+	#name : #LbAxiom,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -10,27 +10,27 @@ Class {
 	#category : 'Leibniz-5-Axioms'
 }
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbAxiom >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbAxiom >> copy [
 	^ self
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbAxiom >> deepCopy [
 	^ self
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbAxiom >> printAsLeibnizSyntaxOn: aStream [
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbAxiom >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -38,7 +38,7 @@ LbAxiom >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbAxiom >> printVariablesAsLeibnizSyntaxOn: aStream [
 	variables keysAndValuesDo:
 		[ :var :sort |

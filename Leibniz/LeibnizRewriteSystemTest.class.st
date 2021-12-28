@@ -1,6 +1,6 @@
 Class {
-	#name : 'LeibnizRewriteSystemTest',
-	#superclass : 'TestCase',
+	#name : #LeibnizRewriteSystemTest,
+	#superclass : #TestCase,
 	#instVars : [
 		'library',
 		'builtins',
@@ -9,7 +9,7 @@ Class {
 	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : 'running' }
+{ #category : #running }
 LeibnizRewriteSystemTest >> setUp [
 	super setUp.
 	library := LeibnizLibrary uniqueInstance.
@@ -17,7 +17,7 @@ LeibnizRewriteSystemTest >> setUp [
 	examples := LeibnizExamples new.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 LeibnizRewriteSystemTest >> testMassExample [
 	| rws tp test |
 

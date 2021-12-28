@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbDSignature',
-	#superclass : 'Object',
+	#name : #LbDSignature,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -12,7 +12,7 @@ Class {
 	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : 'instace creation' }
+{ #category : #'instace creation' }
 LbDSignature class >> sortGraph: aSortGraph builtins: aSet operators: operatorDictionary variables: variableDictionary [
 	^ self basicNew
 		initializeWithSortGraph: aSortGraph
@@ -22,24 +22,24 @@ LbDSignature class >> sortGraph: aSortGraph builtins: aSet operators: operatorDi
 		yourself
 ]
 
-{ #category : 'lookup' }
+{ #category : #lookup }
 LbDSignature >> assertBuiltin: aBuiltinSymbol [
 	self
 		assert: (builtins includes: aBuiltinSymbol)
 		description: aBuiltinSymbol, ' are not defined in this signature'
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbDSignature >> copy [
 	^ self
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbDSignature >> deepCopy [
 	^ self
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDSignature >> gtOperatorsFor: aView [
 	<gtView>
 	operators isEmpty ifTrue: [ ^ aView empty ].
@@ -75,7 +75,7 @@ LbDSignature >> gtOperatorsFor: aView [
 		yourself
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDSignature >> gtSortGraphFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -85,7 +85,7 @@ LbDSignature >> gtSortGraphFor: aView [
 		view: #gtGraphFor:
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDSignature >> gtVariablesFor: aView [
 	<gtView>
 	variables isEmpty ifTrue: [ ^ aView empty ].
@@ -104,7 +104,7 @@ LbDSignature >> gtVariablesFor: aView [
 		yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbDSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: operatorDictionary variables: variableDictionary [
 	sortGraph := aSortGraph.
 	builtins := aSet.
@@ -113,7 +113,7 @@ LbDSignature >> initializeWithSortGraph: aSortGraph builtins: aSet operators: op
 	self beRecursivelyReadOnlyObject
 ]
 
-{ #category : 'term construction' }
+{ #category : #'term construction' }
 LbDSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
 	| argSorts |
 	argSorts := aTermArray collect: #sort.
@@ -127,7 +127,7 @@ LbDSignature >> nonZeroArgTermNamed: anOpName withArgs: aTermArray [
 				signature: self ]
 ]
 
-{ #category : 'lookup' }
+{ #category : #lookup }
 LbDSignature >> opNamed: anOpName withArgs: aSortArray [
 	operators at: anOpName
 		ifPresent: [ :ops |
@@ -139,7 +139,7 @@ LbDSignature >> opNamed: anOpName withArgs: aSortArray [
 	^ nil
 ]
 
-{ #category : 'term construction' }
+{ #category : #'term construction' }
 LbDSignature >> parseTerm: aString [
 	| parsedTerm |
 	parsedTerm := (LbDSignatureParser newStartingAt: #termEnd)
@@ -150,18 +150,18 @@ LbDSignature >> parseTerm: aString [
 	^ parsedTerm value: self value: Dictionary new
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDSignature >> sortGraph [
 	^ sortGraph
 ]
 
-{ #category : 'lookup' }
+{ #category : #lookup }
 LbDSignature >> sortNamed: aSymbol [
 	self flag: #legacy.
 	^ sortGraph sortNamed: aSymbol
 ]
 
-{ #category : 'lookup' }
+{ #category : #lookup }
 LbDSignature >> sortOfOp: anOpName withArgSorts: aSortArray [
 	(self opNamed: anOpName withArgs: aSortArray)
 		ifNotNil: [ :op | ^ op sortPatternForArgSortPatterns: aSortArray ].
@@ -175,19 +175,19 @@ LbDSignature >> sortOfOp: anOpName withArgSorts: aSortArray [
 	^ nil
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 LbDSignature >> withBuiltinsDo: aBlock [
 	builtins do: aBlock
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 LbDSignature >> withOperatorsDo: aBlock [
 	operators do: [ :aDictionary |
 		aDictionary do: [ :anOperator |
 			aBlock value: anOperator ] ]
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 LbDSignature >> withVariablesDo: aBlock [
 	variables associationsDo: [ :v |
 		aBlock value: (LbVariable
@@ -197,7 +197,7 @@ LbDSignature >> withVariablesDo: aBlock [
 						origins: nil) ]
 ]
 
-{ #category : 'term construction' }
+{ #category : #'term construction' }
 LbDSignature >> zeroArgTermNamed: anOpName [
 	variables at: anOpName
 		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort signature: self ].
@@ -211,7 +211,7 @@ LbDSignature >> zeroArgTermNamed: anOpName [
 				signature: self ]
 ]
 
-{ #category : 'term construction' }
+{ #category : #'term construction' }
 LbDSignature >> zeroArgTermNamed: anOpName extraVariables: aDictionary [
 	aDictionary at: anOpName
 		ifPresent: [ :sort | ^ LbVarTerm name: anOpName sort: sort signature: self ].

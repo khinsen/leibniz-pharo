@@ -1,12 +1,12 @@
 Class {
-	#name : 'LbTermParserExamples',
-	#superclass : 'Object',
+	#name : #LbTermParserExamples,
+	#superclass : #Object,
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
 	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> assertParseFailure: aString rule: aSymbol [
 	| parser context result |
 	parser := self parserForRule: aSymbol.
@@ -18,7 +18,7 @@ LbTermParserExamples >> assertParseFailure: aString rule: aSymbol [
 			or: [ (result returnValue value: self signature value: Dictionary new) isNil ] ])
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> fpNumberParseFailures [
 	<gtExample>
 	| inputs |
@@ -28,12 +28,12 @@ LbTermParserExamples >> fpNumberParseFailures [
 	^ inputs
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> fpNumberTerm: aFloat [
 	^ LbFPNumberTerm value: aFloat signature: self signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> fpNumberTerms [
 	<gtExample>
 	^ {
@@ -48,7 +48,7 @@ LbTermParserExamples >> fpNumberTerms [
 		result ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> identifiers [
 	<gtExample>
 	^ #('⇒⇒' '?⇒?' '|+|' '→|→')
@@ -60,12 +60,12 @@ LbTermParserExamples >> identifiers [
 			result ]
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> infixOpTerm: aSymbol withArgs: anArray [
 	^ self signature nonZeroArgTermNamed: (LbInfixOperatorName for: aSymbol) withArgs: anArray
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> infixOpTerms [
 	<gtExample>
 	| t |
@@ -94,7 +94,7 @@ LbTermParserExamples >> infixOpTerms [
 		result ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> infixTermParseFailures [
 	<gtExample>
 	| inputs |
@@ -104,7 +104,7 @@ LbTermParserExamples >> infixTermParseFailures [
 	^ inputs
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> integerLiteralTerms [
 	<gtExample>
 	| rules |
@@ -123,7 +123,7 @@ LbTermParserExamples >> integerLiteralTerms [
 		result ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> integerParseFailures [
 	<gtExample>
 	| inputs |
@@ -133,12 +133,12 @@ LbTermParserExamples >> integerParseFailures [
 	^ inputs
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> integerTerm: anInteger [
 	^ LbIntegerTerm value: anInteger signature: self signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> nonInfixTerms [
 	<gtExample>
 	| t |
@@ -176,7 +176,7 @@ LbTermParserExamples >> nonInfixTerms [
 		result ]
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> parse: aString rule: aSymbol [
 	| parsedTerm |
 	parsedTerm := (self parserForRule: aSymbol)
@@ -187,20 +187,20 @@ LbTermParserExamples >> parse: aString rule: aSymbol [
 	^ parsedTerm value: self signature value: Dictionary new.
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> parse: aString rule: aSymbol assertEquals: aValue [
 	self assert: (self parse: aString rule: aSymbol)
 		 equals: aValue
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> parser [
 	<gtExample>
 	"^ LbTermParser signature: self signature"
 	^ LbParser newStartingAt: #termEnd
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> parserForRule: aSymbol [
 "	| parser |
 	parser := LbTermParser newStartingAt: aSymbol.
@@ -209,7 +209,7 @@ LbTermParserExamples >> parserForRule: aSymbol [
 	^ LbParser newStartingAt: aSymbol
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> patterns [
 	<gtExample>
 	| ev va t v |
@@ -228,7 +228,7 @@ LbTermParserExamples >> patterns [
 		result ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> precedenceRuleExamples [
 	<gtExample>
 	^ {
@@ -244,12 +244,12 @@ LbTermParserExamples >> precedenceRuleExamples [
 		t1 ]
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> prefixOpTerm: aSymbol withArgs: anArray [
 	^ self signature nonZeroArgTermNamed: (LbPrefixOperatorName for: aSymbol) withArgs: anArray
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> prefixOpTerms [
 	<gtExample>
 	| t v |
@@ -272,7 +272,7 @@ LbTermParserExamples >> prefixOpTerms [
 		result ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> prefixTermFailures [
 	<gtExample>
 	| inputs |
@@ -282,7 +282,7 @@ LbTermParserExamples >> prefixTermFailures [
 	^ inputs
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> rationalNumberParseFailures [
 	<gtExample>
 	| inputs |
@@ -292,12 +292,12 @@ LbTermParserExamples >> rationalNumberParseFailures [
 	^ inputs
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> rationalNumberTerm: aRational [
 	^ LbRationalNumberTerm value: aRational signature: self signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> rationalNumberTerms [
 	<gtExample>
 	^ {
@@ -310,7 +310,7 @@ LbTermParserExamples >> rationalNumberTerms [
 		result ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> reservedIdentifierFailures [
 	<gtExample>
 	| inputs |
@@ -320,7 +320,7 @@ LbTermParserExamples >> reservedIdentifierFailures [
 	^ inputs
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> signature [
 	<gtExample>
 	| sortGraph |
@@ -354,12 +354,12 @@ LbTermParserExamples >> signature [
 		signature
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> specialOpTerm: aSymbol withArgs: anArray [
 	^ self signature nonZeroArgTermNamed: (LbOperatorName fromInternalSymbol: aSymbol) withArgs: anArray
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> stringParseFailures [
 	<gtExample>
 	| inputs |
@@ -369,12 +369,12 @@ LbTermParserExamples >> stringParseFailures [
 	^ inputs
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> stringTerm: aString [
 	^ LbStringTerm value: aString signature: self signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> stringTerms [
 	<gtExample>
 	^ {
@@ -389,12 +389,12 @@ LbTermParserExamples >> stringTerms [
 		result ]
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> zeroArgTerm: aSymbol [
 	^ self signature zeroArgTermNamed: (LbPrefixOperatorName for: aSymbol)
 ]
 
-{ #category : 'utility' }
+{ #category : #utility }
 LbTermParserExamples >> zeroArgTerm: aSymbol extraVariables: aDictionary [
 	| ev |
 	ev := (aDictionary associations collect: [ :each |
@@ -405,7 +405,7 @@ LbTermParserExamples >> zeroArgTerm: aSymbol extraVariables: aDictionary [
 		extraVariables: ev
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> zeroArgTermParseFailures [
 	<gtExample>
 	| inputs |
@@ -415,7 +415,7 @@ LbTermParserExamples >> zeroArgTermParseFailures [
 	^ inputs
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermParserExamples >> zeroArgTerms [
 	<gtExample>
 	^ {

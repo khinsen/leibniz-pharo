@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbRewriteSystemBuilder',
-	#superclass : 'Object',
+	#name : #LbRewriteSystemBuilder,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -10,7 +10,7 @@ Class {
 	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbRewriteSystemBuilder class >> signature: aSignature [
 	^self basicNew
 			initializeWithSignature: aSignature;
@@ -19,25 +19,25 @@ LbRewriteSystemBuilder class >> signature: aSignature [
 
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbRewriteSystemBuilder >> addRewriteSystem: aRewriteSystem [
 	self addRewriteSystem: aRewriteSystem origin: nil
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbRewriteSystemBuilder >> addRewriteSystem: aRewriteSystem origin: aContext [
 	aRewriteSystem rules keysAndValuesDo: [ :eachHeadOpName :eachRuleList |
 		eachRuleList do: [ :each |
 			self addRule: (each convertToSignature: signature) ] ]
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbRewriteSystemBuilder >> addRule: aRule [
 	self assert: aRule signature equals: signature.
 	(rules includes: aRule) ifFalse: [ rules add: aRule ]
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbRewriteSystemBuilder >> gtRulesFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -47,18 +47,18 @@ LbRewriteSystemBuilder >> gtRulesFor: aView [
 		view: #gtRulesFor:
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbRewriteSystemBuilder >> initializeWithSignature: aSignature [
 	signature := aSignature.
 	rules := OrderedCollection new.
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbRewriteSystemBuilder >> parseAndAddRule: aString [
 	rules add: (signature parseRule: aString)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbRewriteSystemBuilder >> rewriteSystem [
 	^ LbRewriteSystem signature: signature rules: rules deepCopy.
 ]

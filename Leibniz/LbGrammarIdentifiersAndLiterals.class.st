@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbGrammarIdentifiersAndLiterals',
-	#superclass : 'LbGrammarTokens',
+	#name : #LbGrammarIdentifiersAndLiterals,
+	#superclass : #LbGrammarTokens,
 	#instVars : [
 		'fpIntegerPart',
 		'fpFractionalPart',
@@ -13,7 +13,7 @@ Class {
 	#category : 'Leibniz-0-Infrastructure'
 }
 
-{ #category : 'identifiers' }
+{ #category : #identifiers }
 LbGrammarIdentifiersAndLiterals class >> reservedIdentifiers [
 	| rewriteArrow functionArrow equalSign
 	  forAllSymbol conditionSymbol subsortSymbol |
@@ -33,29 +33,29 @@ LbGrammarIdentifiersAndLiterals class >> reservedIdentifiers [
 		}
 ]
 
-{ #category : 'literals' }
+{ #category : #literals }
 LbGrammarIdentifiersAndLiterals >> fpExponentPart [
 	^ $e asPParser , fpIntegerPart
 ]
 
-{ #category : 'literals' }
+{ #category : #literals }
 LbGrammarIdentifiersAndLiterals >> fpFractionalPart [
 	^ $. asPParser , #digit asPParser plus optional
 ]
 
-{ #category : 'literals' }
+{ #category : #literals }
 LbGrammarIdentifiersAndLiterals >> fpIntegerPart [
 	^ $- asPParser optional , #digit asPParser plus
 ]
 
-{ #category : 'literals' }
+{ #category : #literals }
 LbGrammarIdentifiersAndLiterals >> fpNumberTerm [
 	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
 			/ (fpIntegerPart , fpExponentPart))
 		flatten
 ]
 
-{ #category : 'identifiers' }
+{ #category : #identifiers }
 LbGrammarIdentifiersAndLiterals >> identifier [
 	^ (identifierCharacter , (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
 		==> [ :id |
@@ -64,7 +64,7 @@ LbGrammarIdentifiersAndLiterals >> identifier [
 					ifTrue: [ PP2Failure message: 'reserved identifier: ', id ] ]
 ]
 
-{ #category : 'identifiers' }
+{ #category : #identifiers }
 LbGrammarIdentifiersAndLiterals >> identifierCharacter [
 	| predicate |
 	predicate := PP2CharSetPredicate on:
@@ -83,12 +83,12 @@ LbGrammarIdentifiersAndLiterals >> identifierCharacter [
 		yourself
 ]
 
-{ #category : 'literals' }
+{ #category : #literals }
 LbGrammarIdentifiersAndLiterals >> integerTerm [
 	^ ($- asPParser optional , #digit asPParser plus) flatten
 ]
 
-{ #category : 'literals' }
+{ #category : #literals }
 LbGrammarIdentifiersAndLiterals >> rationalNumberTerm [
 	^ ($- asPParser optional , #digit asPParser plus ,
 			$/ asPParser ,
@@ -96,7 +96,7 @@ LbGrammarIdentifiersAndLiterals >> rationalNumberTerm [
 
 ]
 
-{ #category : 'literals' }
+{ #category : #literals }
 LbGrammarIdentifiersAndLiterals >> stringTerm [
 	^ ($" asPParser , $" asPParser negate star , $" asPParser) flatten 
 

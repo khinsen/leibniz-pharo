@@ -2,12 +2,12 @@
 I am a convenience constructor for creating boolean terms from Pharo code
 "
 Class {
-	#name : 'LbBooleanTerm',
-	#superclass : 'LbOpTerm',
+	#name : #LbBooleanTerm,
+	#superclass : #LbOpTerm,
 	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbBooleanTerm class >> value: aBoolean signature: aSignature [
 	^ LbOpTerm
 		name: (LbPrefixOperatorName for:

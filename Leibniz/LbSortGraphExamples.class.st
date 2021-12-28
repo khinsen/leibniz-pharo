@@ -1,18 +1,18 @@
 Class {
-	#name : 'LbSortGraphExamples',
-	#superclass : 'Object',
+	#name : #LbSortGraphExamples,
+	#superclass : #Object,
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
 	#category : 'Leibniz-1-SortGraphs'
 }
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> emptySortGraph [
 	<gtExample>
 	^ LbSortGraphBuilder new sortGraph
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> kindOfA [
 	<gtExample>
 	| kind |
@@ -23,7 +23,7 @@ LbSortGraphExamples >> kindOfA [
 	^ kind
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> maximalSortsABCDVW [
 	<gtExample>
 	| maximalSorts |
@@ -32,7 +32,7 @@ LbSortGraphExamples >> maximalSortsABCDVW [
 	^ maximalSorts
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> maximalSortsKindOfA [
 	<gtExample>
 	| maximalSorts |
@@ -41,19 +41,19 @@ LbSortGraphExamples >> maximalSortsKindOfA [
 	^ maximalSorts
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> sortA [
 	<gtExample>
 	^ self sortGraphABCDVW sortNamed: #A
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> sortB [
 	<gtExample>
 	^ self sortGraphABCDVW sortNamed: #B
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> sortGraphABCD [
 	<gtExample>
 	| sortGraph |
@@ -75,7 +75,7 @@ LbSortGraphExamples >> sortGraphABCD [
 	^ sortGraph
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> sortGraphABCDExplicit [
 	<gtExample>
 	^ LbSortGraphBuilder new
@@ -89,7 +89,7 @@ LbSortGraphExamples >> sortGraphABCDExplicit [
 		sortGraph
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> sortGraphABCDVW [
 	<gtExample>
 	^ LbSortGraphBuilder new
@@ -98,7 +98,7 @@ LbSortGraphExamples >> sortGraphABCDVW [
         sortGraph.
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> sortGraphAXY [
 	<gtExample>
 	| sortGraph |
@@ -110,7 +110,7 @@ LbSortGraphExamples >> sortGraphAXY [
 	^ sortGraph
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> sortGraphAXYExplicit [
 	<gtExample>
 	^ LbSortGraphBuilder new
@@ -122,7 +122,7 @@ LbSortGraphExamples >> sortGraphAXYExplicit [
 		sortGraph
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> sortGraphBuilderABCD [
 	<gtExample>
 	| builder |
@@ -134,7 +134,7 @@ LbSortGraphExamples >> sortGraphBuilderABCD [
 	^ builder
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> sortGraphUnion [
 	<gtExample>
 	| sg1 sg2 union |
@@ -152,7 +152,7 @@ LbSortGraphExamples >> sortGraphUnion [
 	^ union
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSortGraphExamples >> subsortsOfB [
 	<gtExample>
 	| subsorts |

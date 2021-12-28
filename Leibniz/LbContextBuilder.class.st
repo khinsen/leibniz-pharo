@@ -2,8 +2,8 @@
 I build LeibnizContexts from a sequence of declarations
 "
 Class {
-	#name : 'LbContextBuilder',
-	#superclass : 'Object',
+	#name : #LbContextBuilder,
+	#superclass : #Object,
 	#instVars : [
 		'document',
 		'name',
@@ -21,58 +21,58 @@ Class {
 	#category : 'Leibniz-6-Contexts'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbContextBuilder class >> name: aString [
 	^ self name: aString document: nil
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbContextBuilder class >> name: aString document: aDocument [
 	^ self basicNew initializeWithName: aString document: aDocument
 ]
 
-{ #category : 'defining - signature' }
+{ #category : #'defining - signature' }
 LbContextBuilder >> addBuiltin: aSymbol [
 	self phase: #signature.
 	signatureBuilder addBuiltin: aSymbol
 ]
 
-{ #category : 'defining - signature' }
+{ #category : #'defining - signature' }
 LbContextBuilder >> addOp: anOpName ofSort: aSort [
 	self phase: #signature.
 	signatureBuilder addOp: anOpName ofSort: aSort.
 ]
 
-{ #category : 'defining - signature' }
+{ #category : #'defining - signature' }
 LbContextBuilder >> addOp: anOpName withArgs: anArgList ofSort: aSort [
 	self phase: #signature.
 	signatureBuilder addOp: anOpName withArgs: anArgList ofSort: aSort.
 ]
 
-{ #category : 'defining - rules' }
+{ #category : #'defining - rules' }
 LbContextBuilder >> addRule: aRule [
 	self phase: #rulesAndAxioms.
 	rewriteSystemBuilder addRule: aRule
 ]
 
-{ #category : 'defining - sort graph' }
+{ #category : #'defining - sort graph' }
 LbContextBuilder >> addSort: aSymbol [
 	self phase: #sortGraph.
 	sortGraphBuilder add: aSymbol.
 ]
 
-{ #category : 'defining - signature' }
+{ #category : #'defining - signature' }
 LbContextBuilder >> addVar: anOpName ofSort: aSort [
 	self phase: #signature.
 	signatureBuilder addVar: anOpName ofSort: aSort.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContextBuilder >> build [
 	document replaceBuilderByContextNamed: name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContextBuilder >> context [
 	self phase: #finished.
 	^ LbContext
@@ -82,32 +82,32 @@ LbContextBuilder >> context [
 		axioms: axioms
 ]
 
-{ #category : 'defining - private' }
+{ #category : #'defining - private' }
 LbContextBuilder >> endRulesAndAxioms [
 	rewriteSystem := rewriteSystemBuilder rewriteSystem.
 	axioms := axiomBuilder axioms
 ]
 
-{ #category : 'defining - private' }
+{ #category : #'defining - private' }
 LbContextBuilder >> endSignature [
 	signature := signatureBuilder signature.
 
 ]
 
-{ #category : 'defining - private' }
+{ #category : #'defining - private' }
 LbContextBuilder >> endSortGraph [
 	sortGraph := sortGraphBuilder sortGraph.
 
 ]
 
-{ #category : 'XML import' }
+{ #category : #'XML import' }
 LbContextBuilder >> fromXML: anXMLElement [
 	self includesFromXML: anXMLElement.
 	self signatureFromXML: anXMLElement.
 	self rulesFromXML: anXMLElement.
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbContextBuilder >> gtDeclarationsFor: aView [
 	<gtView>
 	^ aView forward
@@ -118,7 +118,7 @@ LbContextBuilder >> gtDeclarationsFor: aView [
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContextBuilder >> gtOperatorsFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -128,7 +128,7 @@ LbContextBuilder >> gtOperatorsFor: aView [
 		view: #gtOperatorsFor:
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbContextBuilder >> gtRulesFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -138,7 +138,7 @@ LbContextBuilder >> gtRulesFor: aView [
 		view: #gtRulesFor:
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbContextBuilder >> gtSortGraphFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -148,7 +148,7 @@ LbContextBuilder >> gtSortGraphFor: aView [
 		view: #gtSortGraphFor:
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbContextBuilder >> gtVariablesFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -158,7 +158,7 @@ LbContextBuilder >> gtVariablesFor: aView [
 		view: #gtVariablesFor:
 ]
 
-{ #category : 'defining - includes' }
+{ #category : #'defining - includes' }
 LbContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash mode: useOrExtend [
 	| context |
 	context := LeibnizLibrary uniqueInstance contextNamed: aContextName inDocumentWithHash: aDocHash.
@@ -170,7 +170,7 @@ LbContextBuilder >> include: aContextName fromDocumentWithHash: aDocHash mode: u
 
 ]
 
-{ #category : 'defining - includes' }
+{ #category : #'defining - includes' }
 LbContextBuilder >> include: aContextOrName mode: useOrExtend [
 	| context |
 	aContextOrName isString
@@ -184,7 +184,7 @@ LbContextBuilder >> include: aContextOrName mode: useOrExtend [
 	self validateIncludeWithMode: useOrExtend
 ]
 
-{ #category : 'XML import' }
+{ #category : #'XML import' }
 LbContextBuilder >> includesFromXML: anXMLElement [
 	(anXMLElement elementsDetect: [:each | each isNamed: 'includes'])
 		descendantElementsNamed: 'include' do:
@@ -198,7 +198,7 @@ LbContextBuilder >> includesFromXML: anXMLElement [
 										  mode: (attrs at: 'mode') ] ]
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbContextBuilder >> initializeWithName: aString document: aDocument [
 	name := aString.
 	document := aDocument.
@@ -206,61 +206,61 @@ LbContextBuilder >> initializeWithName: aString document: aDocument [
 	includes := OrderedCollection new.
 ]
 
-{ #category : 'defining - sort graph' }
+{ #category : #'defining - sort graph' }
 LbContextBuilder >> make: aSort subsortOf: anotherSort [
 	self phase: #sortGraph.
 	sortGraphBuilder make: aSort subsortOf: anotherSort.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContextBuilder >> name [
 	^ name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContextBuilder >> parseAndAddAxiom: aString [
 	self phase: #rulesAndAxioms.
 	axiomBuilder parseAndAdd: aString
 ]
 
-{ #category : 'defining - signature' }
+{ #category : #'defining - signature' }
 LbContextBuilder >> parseAndAddOp: aString [
 	self phase: #signature.
 	signatureBuilder parseAndAddOp: aString.
 ]
 
-{ #category : 'defining - rules' }
+{ #category : #'defining - rules' }
 LbContextBuilder >> parseAndAddRule: aString [
 	self phase: #rulesAndAxioms.
 	rewriteSystemBuilder parseAndAddRule: aString
 ]
 
-{ #category : 'defining - sort graph' }
+{ #category : #'defining - sort graph' }
 LbContextBuilder >> parseAndAddSort: aString [
 	self phase: #sortGraph.
 	sortGraphBuilder parseAndAdd: aString.
 
 ]
 
-{ #category : 'defining - signature' }
+{ #category : #'defining - signature' }
 LbContextBuilder >> parseAndAddVar: aString [
 	self phase: #signature.
 	signatureBuilder parseAndAddVar: aString.
 ]
 
-{ #category : 'defining - rules' }
+{ #category : #'defining - rules' }
 LbContextBuilder >> parseTerm: aString [
 	^ self parseTerm: aString extraVariables: Dictionary new
 ]
 
-{ #category : 'defining - rules' }
+{ #category : #'defining - rules' }
 LbContextBuilder >> parseTerm: aString extraVariables: aDictionary [
 	| parser |
 	self phase: #rulesAndAxioms.
 	^ signature parseTerm: aString extraVariables: aDictionary.
 ]
 
-{ #category : 'defining - private' }
+{ #category : #'defining - private' }
 LbContextBuilder >> phase: aSymbol [
 	| phaseLabels current new phaseEndMethod phaseStartMethod |
 
@@ -284,7 +284,7 @@ LbContextBuilder >> phase: aSymbol [
 
 ]
 
-{ #category : 'XML import' }
+{ #category : #'XML import' }
 LbContextBuilder >> ruleFromXML: anXMLElement [
 	| vars pattern conditionElements condition replacement |
 
@@ -309,7 +309,7 @@ LbContextBuilder >> ruleFromXML: anXMLElement [
 	^ LbRewriteRule pattern: pattern localVariables: vars condition: condition replacement: replacement.
 ]
 
-{ #category : 'XML import' }
+{ #category : #'XML import' }
 LbContextBuilder >> rulesFromXML: anXMLElement [
 	self phase: #rulesAndAxioms.
 	(anXMLElement elementsDetect: [:each | each isNamed: 'rules'])
@@ -317,13 +317,13 @@ LbContextBuilder >> rulesFromXML: anXMLElement [
 			[ :rule | self addRule: (self ruleFromXML: rule) ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContextBuilder >> signature [
 	self phase: #rulesAndAxioms.
 	^ signature
 ]
 
-{ #category : 'XML import' }
+{ #category : #'XML import' }
 LbContextBuilder >> signatureFromXML: anXMLElement [
 	(anXMLElement elementsDetect: [:each | each isNamed: 'sorts'])
 		descendantElementsNamed: 'sort' do:
@@ -356,13 +356,13 @@ LbContextBuilder >> signatureFromXML: anXMLElement [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContextBuilder >> sortGraph [
 	self phase: #signature.
 	^ sortGraph
 ]
 
-{ #category : 'defining - private' }
+{ #category : #'defining - private' }
 LbContextBuilder >> startRulesAndAxioms [
 	rewriteSystemBuilder := LbRewriteSystemBuilder signature: signature.
 	axiomBuilder := LbAxiomBuilder signature: signature.
@@ -375,7 +375,7 @@ LbContextBuilder >> startRulesAndAxioms [
 			origin: (i at: #context) ]
 ]
 
-{ #category : 'defining - private' }
+{ #category : #'defining - private' }
 LbContextBuilder >> startSignature [
 	signatureBuilder := LbSignatureBuilder sortGraph: sortGraph.
 	includes do: [ :i |
@@ -385,7 +385,7 @@ LbContextBuilder >> startSignature [
 			origin: (i at: #context) ]
 ]
 
-{ #category : 'defining - private' }
+{ #category : #'defining - private' }
 LbContextBuilder >> startSortGraph [
 	sortGraphBuilder := LbSortGraphBuilder new.
 	includes do: [ :i | 
@@ -394,12 +394,12 @@ LbContextBuilder >> startSortGraph [
 			origin: (i at: #context) ]
 ]
 
-{ #category : 'XML import' }
+{ #category : #'XML import' }
 LbContextBuilder >> termFromXML: anXMLElement [
 	^ self termFromXML: anXMLElement extraVariables: Dictionary new
 ]
 
-{ #category : 'XML import' }
+{ #category : #'XML import' }
 LbContextBuilder >> termFromXML: anXMLElement extraVariables: aDictionary [
 	anXMLElement name = 'term'
 		ifTrue: [ | op args |
@@ -414,7 +414,7 @@ LbContextBuilder >> termFromXML: anXMLElement extraVariables: aDictionary [
 	self error: anXMLElement name.
 ]
 
-{ #category : 'defining - private' }
+{ #category : #'defining - private' }
 LbContextBuilder >> validateIncludeWithMode: useOrExtend [
 	self phase: #includes.
 	self assert: (#('use' 'extend') includes: useOrExtend)

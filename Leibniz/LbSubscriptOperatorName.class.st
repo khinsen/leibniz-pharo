@@ -1,15 +1,15 @@
 Class {
-	#name : 'LbSubscriptOperatorName',
-	#superclass : 'LbOperatorName',
+	#name : #LbSubscriptOperatorName,
+	#superclass : #LbOperatorName,
 	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbSubscriptOperatorName >> initialize [
 	internalSymbol := #'_'
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbSubscriptOperatorName >> printForArgs: aTermArray on: aStream [
 	self assert: aTermArray size > 1.
 	aTermArray first
@@ -23,7 +23,7 @@ LbSubscriptOperatorName >> printForArgs: aTermArray on: aStream [
 	aStream nextPutAll: '}'
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbSubscriptOperatorName >> printForArity: anArity on: aStream [
 	self assert: anArity size > 1.
 	anArity first printAsLeibnizSyntaxOn: aStream.
@@ -35,7 +35,7 @@ LbSubscriptOperatorName >> printForArity: anArity on: aStream [
 	aStream nextPutAll: '}'
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbSubscriptOperatorName >> synopsis [
 	^ '•_{•}'
 ]

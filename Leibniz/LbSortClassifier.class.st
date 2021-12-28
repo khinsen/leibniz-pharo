@@ -4,8 +4,8 @@
 Sort graphs  (${class:name=LbSortGraph}$) have two important types of subgraphs: sorts (representing themselves and their subsorts) and kinds (the connected components of a sort graph.)
 "
 Class {
-	#name : 'LbSortClassifier',
-	#superclass : 'Object',
+	#name : #LbSortClassifier,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -14,27 +14,27 @@ Class {
 	#category : 'Leibniz-1-SortGraphs'
 }
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbSortClassifier >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortClassifier >> asSet [
 	self subclassResponsibility
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbSortClassifier >> copy [
 	^ self
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbSortClassifier >> deepCopy [
 	^ self
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbSortClassifier >> gtGraphFor: aView [
 	<gtView>
 	^ aView mondrian
@@ -56,29 +56,29 @@ LbSortClassifier >> gtGraphFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortClassifier >> kind [
 	self subclassResponsibility
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbSortClassifier >> printAsLeibnizSyntaxOn: aStream [
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortClassifier >> size [
 	^ self asSet size
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbSortClassifier >> sortBefore: aSortClassifier [
 	"This is a total order used for uniquely sorting declarations,
 	 to be distinguished from the partial order defined by <="
 	self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortClassifier >> sortGraph [
 	^sortGraph
 ]

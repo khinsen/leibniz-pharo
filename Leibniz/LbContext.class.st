@@ -2,8 +2,8 @@
 I represent a context in a Leibniz document.
 "
 Class {
-	#name : 'LbContext',
-	#superclass : 'Object',
+	#name : #LbContext,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -16,7 +16,7 @@ Class {
 	#category : 'Leibniz-6-Contexts'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbContext class >> name: aString signature: aSignature rewriteSystem: aRewriteSystem [
 	^ self
 		name: aString
@@ -25,7 +25,7 @@ LbContext class >> name: aString signature: aSignature rewriteSystem: aRewriteSy
 		axioms: (LbAxiomBuilder signature: aSignature) axioms
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbContext class >> name: aString signature: aSignature rewriteSystem: aRewriteSystem axioms: anLbAxioms [
 	^ self basicNew
 			 initializeWithName: aString
@@ -35,27 +35,27 @@ LbContext class >> name: aString signature: aSignature rewriteSystem: aRewriteSy
 			 yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContext >> axioms [
 	^ axioms
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbContext >> copy [
 	^ self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContext >> declarations [
 	^ rewriteSystem allDeclarations union: axioms declarations
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbContext >> deepCopy [
 	^ self
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbContext >> gtAxiomsFor: aView [ 
 	<gtView>
 	axioms isEmpty ifTrue: [ ^ aView empty ].
@@ -66,7 +66,7 @@ LbContext >> gtAxiomsFor: aView [
 		view: #gtAxiomsFor:
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbContext >> gtDeclarationsFor: aView [
 	<gtView>
 	^ aView tree
@@ -89,7 +89,7 @@ LbContext >> gtDeclarationsFor: aView [
 		yourself
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbContext >> gtOperatorsFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -99,7 +99,7 @@ LbContext >> gtOperatorsFor: aView [
 		view: #gtOperatorsFor:
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbContext >> gtRulesFor: aView [ 
 	<gtView>
 	rewriteSystem isEmpty ifTrue: [ ^ aView empty ].
@@ -110,7 +110,7 @@ LbContext >> gtRulesFor: aView [
 		view: #gtRulesFor:
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbContext >> gtSortGraphFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -120,7 +120,7 @@ LbContext >> gtSortGraphFor: aView [
 		view: #gtGraphFor:
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbContext >> gtVariablesFor: aView [ 
 	<gtView>
 	signature numberOfVariables isZero ifTrue: [ ^ aView empty ].
@@ -131,7 +131,7 @@ LbContext >> gtVariablesFor: aView [
 		view: #gtVariablesFor:
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbContext >> initializeWithName: aString signature: aSignature rewriteSystem: aRewriteSystem axioms: anLbAxioms [
 	name := aString.
 	sortGraph := aSignature sortGraph.
@@ -141,27 +141,27 @@ LbContext >> initializeWithName: aString signature: aSignature rewriteSystem: aR
 	self beRecursivelyReadOnlyObject.
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbContext >> lbAtomicTermClass [
 	^ LbContextTerm
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContext >> name [
 	^ name
 ]
 
-{ #category : 'operations' }
+{ #category : #operations }
 LbContext >> parsePattern: aString [
 	^ signature parsePattern: aString
 ]
 
-{ #category : 'operations' }
+{ #category : #operations }
 LbContext >> parseTerm: aString [
 	^ signature parseTerm: aString
 ]
 
-{ #category : 'rewriting' }
+{ #category : #rewriting }
 LbContext >> parseTermAndReduce: aString [
 	| term |
 	term := signature parseTerm: aString.
@@ -169,7 +169,7 @@ LbContext >> parseTermAndReduce: aString [
 	^ rewriteSystem reduce: term
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbContext >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -180,28 +180,28 @@ LbContext >> printOn: aStream [
 
 ]
 
-{ #category : 'operations' }
+{ #category : #operations }
 LbContext >> reduce: aTerm [
 	^ rewriteSystem reduce: aTerm
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContext >> rewriteSystem [
 	^ rewriteSystem
 ]
 
-{ #category : 'rewriting' }
+{ #category : #rewriting }
 LbContext >> rulesMatching: aTerm [
 	^ rewriteSystem rulesMatching: aTerm
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContext >> signature [
 	^signature
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbContext >> sortGraph [
 	^ sortGraph
 ]

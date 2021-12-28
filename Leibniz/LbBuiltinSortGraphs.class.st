@@ -1,10 +1,10 @@
 Class {
-	#name : 'LbBuiltinSortGraphs',
-	#superclass : 'Object',
+	#name : #LbBuiltinSortGraphs,
+	#superclass : #Object,
 	#category : 'Leibniz-1-SortGraphs'
 }
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSortGraphs class >> contextSortGraph [
 	<gtExample>
 	^LbSortGraphBuilder new
@@ -12,7 +12,7 @@ LbBuiltinSortGraphs class >> contextSortGraph [
 		sortGraph
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSortGraphs class >> fpNumberSortGraph [
 	<gtExample>
 	^LbSortGraphBuilder new
@@ -42,7 +42,7 @@ LbBuiltinSortGraphs class >> fpNumberSortGraph [
 		sortGraph
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSortGraphs class >> integerSortGraph [
 	<gtExample>
 	^LbSortGraphBuilder new
@@ -58,7 +58,7 @@ LbBuiltinSortGraphs class >> integerSortGraph [
 		sortGraph
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSortGraphs class >> rationalNumberSortGraph [
 	<gtExample>
 	^LbSortGraphBuilder new
@@ -75,7 +75,7 @@ LbBuiltinSortGraphs class >> rationalNumberSortGraph [
 		sortGraph
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSortGraphs class >> realNumberSortGraph [
 	<gtExample>
 	^LbSortGraphBuilder new
@@ -92,7 +92,7 @@ LbBuiltinSortGraphs class >> realNumberSortGraph [
 		sortGraph
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSortGraphs class >> stringSortGraph [
 	<gtExample>
 	^LbSortGraphBuilder new
@@ -100,7 +100,7 @@ LbBuiltinSortGraphs class >> stringSortGraph [
 		sortGraph
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSortGraphs class >> truthSortGraph [
 	<gtExample>
 	^LbSortGraphBuilder new

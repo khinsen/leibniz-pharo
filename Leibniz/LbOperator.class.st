@@ -4,8 +4,8 @@ See ${class:name=LbSignature}$.
 
 "
 Class {
-	#name : 'LbOperator',
-	#superclass : 'Object',
+	#name : #LbOperator,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -19,14 +19,14 @@ Class {
 	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbOperator class >> name: anOpName argKinds: aKindArray kind: aKind origins: anLbOrigins [
 	^ self basicNew
 			initializeWithName: anOpName argKinds: aKindArray kind: aKind origins: anLbOrigins;
 			yourself
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbOperator >> addArity: newArity withSort: newSort origins: anLbOrigins [
 	self assertMonotonicity: [ kind includes: newSort ]
 		  forArity: newArity andSort: newSort.
@@ -68,7 +68,7 @@ LbOperator >> addArity: newArity withSort: newSort origins: anLbOrigins [
 	origins merge: anLbOrigins
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbOperator >> arrowInGraph [
 	^ BlLineElement new
 		toHead: (BlArrowheadSimpleArrow new
@@ -76,7 +76,7 @@ LbOperator >> arrowInGraph [
 		border: (BlBorder paint: Color gray width: 1)
 ]
 
-{ #category : 'error signalling' }
+{ #category : #'error signalling' }
 LbOperator >> assertMonotonicity: aBlock forArity: anArity andSort: aSort [
 	self assert: aBlock
 		  description: 'declaration ',
@@ -85,13 +85,13 @@ LbOperator >> assertMonotonicity: aBlock forArity: anArity andSort: aSort [
 		  	' makes operator non-monotonic'.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbOperator >> declarations [
 	^ (ranks sorted: [ :rankA :rankB | rankA key sortBefore: rankB key] )
 		collect: [ :each | (self name printStringForArity: each key), ' : ', each value asLeibnizSyntaxString ]
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbOperator >> graphEdges [
 	| saGraph edges |
 	saGraph := self minimalSubArityGraph.
@@ -103,7 +103,7 @@ LbOperator >> graphEdges [
 	^ edges
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbOperator >> graphNodeForRank: anAssociation [
 	| arity sort text |
 	arity := anAssociation key.
@@ -118,7 +118,7 @@ LbOperator >> graphNodeForRank: anAssociation [
 		border: (BlBorder paint: Color gray)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbOperator >> gtDeclarationsFor: aView [
 	<gtView>
 	| addEmptyChildList |
@@ -132,7 +132,7 @@ LbOperator >> gtDeclarationsFor: aView [
 		yourself
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbOperator >> gtGraphFor: aView [
 	<gtView>
 	^ aView mondrian
@@ -154,7 +154,7 @@ LbOperator >> gtGraphFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbOperator >> gtOriginsFor: aView [
 	<gtView>
 	origins ifNil: [ ^ aView empty ].
@@ -166,7 +166,7 @@ LbOperator >> gtOriginsFor: aView [
 		yourself
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbOperator >> initializeWithName: anOpName argKinds: aKindArray kind: aKind origins: anLbOrigins [
 	name := anOpName.
 	kindArity := aKindArray.
@@ -176,23 +176,23 @@ LbOperator >> initializeWithName: anOpName argKinds: aKindArray kind: aKind orig
 	origins := anLbOrigins
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbOperator >> instVarsExcludedFromEquality [
 	^#(origins)
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbOperator >> kind [
 	^kind
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbOperator >> kindArity [
 	^kindArity
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbOperator >> leastRankForArgSorts: aSortArray [
 	| arity |
 	aSortArray ifEmpty: [
@@ -204,7 +204,7 @@ LbOperator >> leastRankForArgSorts: aSortArray [
 		ifNone: [ kindArity -> kind ].
 ]
 
-{ #category : 'viewing' }
+{ #category : #viewing }
 LbOperator >> minimalSubArityGraph [
 	"Answer the adjacency matrix for the minimal sub-arity graph that has the
 	same connected components as the full one. This minimal graph is constructed
@@ -223,17 +223,17 @@ LbOperator >> minimalSubArityGraph [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbOperator >> name [
 	^ name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbOperator >> origins [
 	^ origins
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbOperator >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -247,29 +247,29 @@ LbOperator >> printOn: aStream [
 	aStream nextPutAll: ' rank(s)'.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbOperator >> ranksMatchingArgSorts: aSortArray [
 	| arity |
 	arity := LbArity sortGraph: sortGraph argSorts: aSortArray.
 	^ ranks select: [ :r | arity <= r key ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbOperator >> size [
 	^ranks size
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbOperator >> sortForArgSorts: aSortArray [
 	^ (self leastRankForArgSorts: aSortArray) value
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbOperator >> sortGraph [
 	^ sortGraph
 ]
 
-{ #category : 'viewing' }
+{ #category : #viewing }
 LbOperator >> subArityGraph [
 	^ Array2D new: ranks size tabulate:
 		[ :i :j |
@@ -277,7 +277,7 @@ LbOperator >> subArityGraph [
 				ifTrue: [ 1 ] ifFalse: [ 0 ] ]
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbOperator >> title [
 	^String streamContents:
 		[ :stream |
@@ -286,7 +286,7 @@ LbOperator >> title [
 			self kind printAsLeibnizSyntaxOn: stream. ]
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 LbOperator >> withRanksDo: aBlock [
 	ranks do: [ :each | aBlock value: each key value: each value ]
 ]

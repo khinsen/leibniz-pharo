@@ -20,15 +20,6 @@ LzParser >> code [
 		==> [ :nodes | { nodes second. nodes fifth } ]
 ]
 
-{ #category : #terms }
-LzParser >> delayedTermWithOp: anOpName args: anArgList [
-	^ [ :aSignature :aDictionary |
-		aSignature
-			nonZeroArgTermNamed: anOpName
-			withArgs: (anArgList collect: [ :each |
-				each cull: aSignature cull: aDictionary ]) ]
-]
-
 { #category : #axioms }
 LzParser >> equalityAxiom [
 	^ super equalityAxiom ==> [ :nodes |
@@ -73,21 +64,6 @@ LzParser >> forAllClause [
 			varName -> (aSignature sortNamed: sortName) ] ]
 ]
 
-{ #category : #terms }
-LzParser >> fpNumberTerm [
-	^ super fpNumberTerm ==> [ :value | 
-		"Converting the string to a float requires some trickery:
-		 - Pharo doesn't allow a dot followed by an exponent without any fractional part.
-			Workaround: replace '.e' by '.0e'
-		 - In Pharo, a number with an exponent but without a fractional part is an integer, not a float.
-		Workaround: convert the converted string explicitly to a float."
-		| floatValue |
-		floatValue := (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat.
-		[ :aSignature :aDictionary |
-			aSignature assertBuiltin: #fpNumbers.
-			LbFPNumberTerm value: floatValue signature: aSignature ] ]
-]
-
 { #category : #signature }
 LzParser >> infixOp [
 	^ super infixOp ==> [ :nodes |
@@ -101,25 +77,15 @@ LzParser >> infixVarArg [
 ]
 
 { #category : #terms }
-LzParser >> integerTerm [
-	^ super integerTerm ==> [ :value |
-		| intValue |
-		intValue := value asNumber.
-		[ :aSignature :aDictionary |
-			aSignature assertBuiltin: #integers.
-			LbIntegerTerm value: intValue signature: aSignature ] ]
-]
-
-{ #category : #terms }
 LzParser >> nonInfixTerm [
 	^ super nonInfixTerm ==> [ :nodes |
 		nodes second
 			ifNil: [ nodes first ] "simpleTerm, no suffix"
-			ifNotNil: [
+			ifNotNil: [ :suffixNode |
 				| name args |
-				name := LbOperatorName fromInternalSymbol: nodes second first.
-				args := nodes second second copyWithFirst: nodes first.
-				self delayedTermWithOp: name args: args ] ]
+				name := suffixNode first.
+				args := suffixNode second copyWithFirst: nodes first.
+				{ name. args } ] ]
 ]
 
 { #category : #signature }
@@ -139,14 +105,7 @@ LzParser >> pattern [
 		| variables parsedTerm |
 		variables := nodes first.
 		parsedTerm := nodes second.
-		[ :aSignature :aDictionary |
-			| allVariables |
-			allVariables := aDictionary copy.
-			variables do: [ :each |
-				| newVar |
-				newVar := each value: aSignature value: aDictionary.
-				allVariables at: newVar key put: newVar value ].
-			parsedTerm value: aSignature value: allVariables ] ]
+		{ variables. parsedTerm } ]
 ]
 
 { #category : #signature }
@@ -162,19 +121,9 @@ LzParser >> prefixOp [
 LzParser >> prefixOpTerm [
 	^ super prefixOpTerm ==> [ :nodes |
 		| name args |
-		name := LbPrefixOperatorName for: nodes first.
+		name := LzPrefixOperatorName for: nodes first.
 		args := (nodes at: 3) reject: [ :element | element = $, ].
-		self delayedTermWithOp: name args: args ]
-]
-
-{ #category : #terms }
-LzParser >> rationalNumberTerm [
-	^ super rationalNumberTerm==> [ :value |
-		| rationalValue |
-		rationalValue := Fraction readFromString: value.
-		[ :aSignature :aDictionary |
-			aSignature assertBuiltin: #rationalNumbers.
-			LbRationalNumberTerm value: rationalValue signature: aSignature ] ]
+		{ name. args } ]
 ]
 
 { #category : #rules }
@@ -191,16 +140,6 @@ LzParser >> rewriteRule [
 				condition: (nodes fifth ifNotNil:
 								[ :c | c second cull: signature cull: variables ])
 				replacement: (nodes fourth cull: signature cull: variables) ] ]
-]
-
-{ #category : #terms }
-LzParser >> stringTerm [
-	^ super stringTerm ==> [ :value |
-		| stringValue |
-		stringValue := value copyFrom: 2 to: value size - 1.
-		[ :aSignature :aDictionary |
-			aSignature assertBuiltin: #strings.
-			LbStringTerm value: stringValue signature: aSignature ] ]
 ]
 
 { #category : #signature }
@@ -245,11 +184,11 @@ LzParser >> term [
 				"nodes contains the infix operator symbol followed by
 				all the arguments. Example 'a + b + c' becomes
 				{ '+'. a. b. c } with a b c already converted to blocks."
-				name := LbInfixOperatorName for: nodes first asSymbol.
+				name := LzInfixOperatorName for: nodes first asSymbol.
 				(nodes allButFirst: 2)
 					inject: nodes second
 					into: [ :result :nextArg |
-						self delayedTermWithOp: name args: { result . nextArg } ] ] ]
+						{ name. { result . nextArg } } ] ] ]
 ]
 
 { #category : #signature }
@@ -274,10 +213,5 @@ LzParser >> zeroArgOp [
 { #category : #terms }
 LzParser >> zeroArgTerm [
 	^ super zeroArgTerm ==> [ :symbol |
-		| name |
-		name := LbPrefixOperatorName for: symbol.
-		[ :aSignature :aDictionary |
-			aSignature
-				zeroArgTermNamed: name
-				extraVariables: aDictionary ] ]
+		{ LzPrefixOperatorName for: symbol } ]
 ]

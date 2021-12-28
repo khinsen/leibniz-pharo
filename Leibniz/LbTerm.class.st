@@ -2,8 +2,8 @@
 I represent an abstract Leibniz term. My subclasses represent concrete terms. 
 "
 Class {
-	#name : 'LbTerm',
-	#superclass : 'Object',
+	#name : #LbTerm,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -12,7 +12,7 @@ Class {
 	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbTerm >> addPrefix: aSymbol toVarsConflictingWith: anotherTerm [
 	| substitution myVars otherVars |
 	myVars := self variables.
@@ -37,47 +37,47 @@ LbTerm >> addPrefix: aSymbol toVarsConflictingWith: anotherTerm [
 	^ substitution
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbTerm >> arguments [
 	^ #()
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbTerm >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbTerm >> assertNotAVariable [
 	^ self
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbTerm >> convertToSignature: aSignature [
 	^ self convertToSignature: aSignature extraVariables: Dictionary new.
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	self subclassResponsibility
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbTerm >> copy [
 	^ self
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbTerm >> deepCopy [
 	^ self
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 LbTerm >> evaluateEqualityTerm [
 	^ nil
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbTerm >> gtSortFor: aView [
 	<gtView>
 	^ aView forward
@@ -88,7 +88,7 @@ LbTerm >> gtSortFor: aView [
 		yourself
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbTerm >> gtTreeFor: aView [
 	<gtView>
 	^ aView columnedTree
@@ -104,23 +104,23 @@ LbTerm >> gtTreeFor: aView [
 		yourself
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 LbTerm >> hasInfixOpOtherThan: aSymbol [
 	^ false
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 LbTerm >> hasVariables [
 	self subclassResponsibility
 ]
 
-{ #category : 'classifying' }
+{ #category : #classifying }
 LbTerm >> headOpName [
 	"The name of the head operator, which is used as a first heuristic in matching."
 	self subclassResponsibility
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbTerm >> isEquivalentTo: aTerm [
 	"Compares two patterns and returns true if they are equal modulo
 	 variable renaming."
@@ -138,13 +138,13 @@ LbTerm >> isEquivalentTo: aTerm [
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 LbTerm >> isInfix [
 	"Answer true if the term is printed in infix notation."
 	^ false.
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbTerm >> isRestrictionOf: aTerm [
 	"Compares two patterns and returns true if the set of terms matching the
 	 receiver is a subset of the terms matching the argument."
@@ -168,18 +168,18 @@ LbTerm >> isRestrictionOf: aTerm [
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 LbTerm >> isTrue [
 	"Answer true if the term the truth value 'true'."
 	^ false.
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 LbTerm >> isVariable [
 	^ false
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbTerm >> match: otherTerm [
 	| variables |
 	variables := LbVariables new.
@@ -187,13 +187,13 @@ LbTerm >> match: otherTerm [
 	^ variables
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbTerm >> match: otherTerm variables: variables [
 	self = otherTerm
 		ifFalse: [ variables failWith: self notUnifiableWith: otherTerm ]
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbTerm >> matchVar: aSymbol ofSort: aSort variables: anLbVariables [
 	self
 		assert: self hasVariables not
@@ -201,24 +201,24 @@ LbTerm >> matchVar: aSymbol ofSort: aSort variables: anLbVariables [
 	anLbVariables bindVar: aSymbol ofSort: aSort to: self
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbTerm >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream [
 	self printAsLeibnizSyntaxOn: aStream parenthesized: (self hasInfixOpOtherThan: anOpName)
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbTerm >> printAsLeibnizSyntaxOn: aStream [
 	self subclassResponsibility
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbTerm >> printAsLeibnizSyntaxOn: aStream parenthesized: aBoolean [
 	aBoolean ifTrue: [ aStream nextPut: $(. ].
 	self printAsLeibnizSyntaxOn: aStream.
 	aBoolean ifTrue: [ aStream nextPut: $). ].
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbTerm >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -227,28 +227,28 @@ LbTerm >> printOn: aStream [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbTerm >> signature [
 	^signature
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbTerm >> sort [
 	^self subclassResponsibility
 ]
 
-{ #category : 'substituting' }
+{ #category : #substituting }
 LbTerm >> substitute: aSubstitution [
 	^ self
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbTerm >> synopsis [
 	"The text shown in a tree view. This is the full term except for LbOpTerms"
 	^ self asLeibnizSyntaxString
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbTerm >> unify: otherTerm [
 	| variables |
 	variables := LbVariables new.
@@ -256,7 +256,7 @@ LbTerm >> unify: otherTerm [
 	^ variables
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbTerm >> unify: otherTerm variables: variables [
 	self
 		unifyTagged: nil
@@ -265,7 +265,7 @@ LbTerm >> unify: otherTerm variables: variables [
 		variables: variables
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol [
 	| variables |
 	variables := LbVariables new.
@@ -273,17 +273,17 @@ LbTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol [
 	^ variables
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol variables: variables [
 	self subclassResponsibility
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: anotherSymbol op: anOpName args: anArgList variables: variables [
 	variables failWith: self notUnifiableWith: otherTerm
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbTerm >> unifyTagged: aSymbol withVar: aTaggedName sort: aSort variables: variables [
 	variables bindVar: aTaggedName ofSort: aSort to: self.
 	self variables associationsDo: [ :each |
@@ -292,12 +292,12 @@ LbTerm >> unifyTagged: aSymbol withVar: aTaggedName sort: aSort variables: varia
 		variables defineVar: taggedName sort: each value ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbTerm >> variables [
 	self subclassResponsibility
 ]
 
-{ #category : 'transforming' }
+{ #category : #transforming }
 LbTerm >> withTransformedArgs: anArgList [
 	self assert: anArgList size equals: 0.
 	^ self

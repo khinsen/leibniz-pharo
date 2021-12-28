@@ -2,24 +2,24 @@
 I represent a special Leibniz variable that matches terms of any sort.
 "
 Class {
-	#name : 'LbUniversalVarTerm',
-	#superclass : 'LbVarTerm',
+	#name : #LbUniversalVarTerm,
+	#superclass : #LbVarTerm,
 	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbUniversalVarTerm class >> symbol: aSymbol signature: aSignature [
 	^self basicNew
 			initializeWithSymbol: aSymbol signature: aSignature;
 			yourself
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbUniversalVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	^ self class symbol: name signature: aSignature
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbUniversalVarTerm >> initializeWithSymbol: aSymbol signature: aSignature [
 	name := aSymbol.
 	signature := aSignature.

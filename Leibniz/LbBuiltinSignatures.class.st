@@ -1,10 +1,10 @@
 Class {
-	#name : 'LbBuiltinSignatures',
-	#superclass : 'Object',
+	#name : #LbBuiltinSignatures,
+	#superclass : #Object,
 	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSignatures class >> fpNumberSignature [
 	<gtExample>
 	^ (LbSignatureBuilder sortGraph:
@@ -48,7 +48,7 @@ LbBuiltinSignatures class >> fpNumberSignature [
 		signature
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSignatures class >> integerSignature [
 	<gtExample>
 	^ (LbSignatureBuilder sortGraph:
@@ -86,7 +86,7 @@ LbBuiltinSignatures class >> integerSignature [
 		signature
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSignatures class >> rationalNumberSignature [
 	<gtExample>
 	^ (LbSignatureBuilder sortGraph:
@@ -122,7 +122,7 @@ LbBuiltinSignatures class >> rationalNumberSignature [
 		signature
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSignatures class >> realNumberSignature [
 	<gtExample>
 	^ (LbSignatureBuilder sortGraph:
@@ -160,7 +160,7 @@ LbBuiltinSignatures class >> realNumberSignature [
 		signature
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSignatures class >> stringSignature [
 	<gtExample>
 	^ (LbSignatureBuilder sortGraph: LbBuiltinSortGraphs stringSortGraph)
@@ -169,7 +169,7 @@ LbBuiltinSignatures class >> stringSignature [
 		signature
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinSignatures class >> truthSignature [
 	<gtExample>
 	^ (LbSignatureBuilder sortGraph: LbBuiltinSortGraphs truthSortGraph)

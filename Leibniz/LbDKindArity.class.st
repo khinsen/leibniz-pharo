@@ -1,7 +1,7 @@
 Class {
-	#name : 'LbDKindArity',
-	#superclass : 'Array',
-	#type : 'variable',
+	#name : #LbDKindArity,
+	#superclass : #Array,
+	#type : #variable,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -10,14 +10,14 @@ Class {
 	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbDKindArity class >> sortGraph: aSortGraph kinds: anArray [
 	^(self basicNew: anArray size)
 			initializeWithSortGraph: aSortGraph kinds: anArray;
 			yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbDKindArity >> initializeWithSortGraph: aSortGraph kinds: anArray [
 	sortGraph := aSortGraph.
 	anArray collect: [ :s | s ] into: self.
@@ -25,14 +25,14 @@ LbDKindArity >> initializeWithSortGraph: aSortGraph kinds: anArray [
 	self beRecursivelyReadOnlyObject
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbDKindArity >> printAsLeibnizSyntaxOn: aStream [
 	self
 		do: [ :each | each printAsLeibnizSyntaxOn: aStream ]
 		separatedBy: [ aStream nextPutAll: ', ' ]
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 LbDKindArity >> withUniversalVariantsDo: aBlock [
 	| universal |
 	self ifEmpty: [ aBlock value: self. ^ self ].

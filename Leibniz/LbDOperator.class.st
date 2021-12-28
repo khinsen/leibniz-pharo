@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbDOperator',
-	#superclass : 'Object',
+	#name : #LbDOperator,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -13,7 +13,7 @@ Class {
 	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbDOperator class >> name: anOpName kindArity: aKindArray kind: aKind [
 	^ self basicNew
 			initializeWithName: anOpName
@@ -22,7 +22,7 @@ LbDOperator class >> name: anOpName kindArity: aKindArray kind: aKind [
 			yourself
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbDOperator >> addArity: newArity withSort: newSortPattern [
 	self assertMonotonicity: [ kind includes: newSortPattern ]
 		  forArity: newArity andSortPattern: newSortPattern.
@@ -63,7 +63,7 @@ LbDOperator >> addArity: newArity withSort: newSortPattern [
 	ranks add: newArity -> newSortPattern
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 LbDOperator >> assertMonotonicity: aBlock forArity: anArity andSortPattern: aSortPattern [
 	self
 		assert: aBlock
@@ -73,7 +73,7 @@ LbDOperator >> assertMonotonicity: aBlock forArity: anArity andSortPattern: aSor
 		  	' makes operator non-monotonic'.
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDOperator >> graphEdges [
 	| saGraph edges |
 	saGraph := self minimalSubArityGraph.
@@ -85,7 +85,7 @@ LbDOperator >> graphEdges [
 	^ edges
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDOperator >> graphNodeForRank: anAssociation [
 	| arity sort text |
 	arity := anAssociation key.
@@ -100,7 +100,7 @@ LbDOperator >> graphNodeForRank: anAssociation [
 		border: (BlBorder paint: Color gray)
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDOperator >> gtGraphFor: aView [
 	<gtView>
 	^ aView mondrian
@@ -122,7 +122,7 @@ LbDOperator >> gtGraphFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDOperator >> gtRanksFor: aView [
 	<gtView>
 	ranks ifEmpty: [ ^ aView empty ].
@@ -145,7 +145,7 @@ LbDOperator >> gtRanksFor: aView [
 		yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbDOperator >> initializeWithName: anOpName kindArity: aKindArity kind: aKind [
 	name := anOpName.
 	kindArity := aKindArity.
@@ -154,17 +154,17 @@ LbDOperator >> initializeWithName: anOpName kindArity: aKindArity kind: aKind [
 	ranks := OrderedCollection new.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDOperator >> kind [
 	^ kind
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDOperator >> kindArity [
 	^ kindArity
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDOperator >> minimalSubArityGraph [
 	"Answer the adjacency matrix for the minimal sub-arity graph that has the
 	same connected components as the full one. This minimal graph is constructed
@@ -182,12 +182,12 @@ LbDOperator >> minimalSubArityGraph [
 	^ m
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDOperator >> name [
 	^ name
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbDOperator >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -201,7 +201,7 @@ LbDOperator >> printOn: aStream [
 	aStream nextPutAll: ' rank(s)'
 ]
 
-{ #category : 'lookup' }
+{ #category : #lookup }
 LbDOperator >> ranksMatchingArgSortPatterns: aSortPatternArray [
 	| matches |
 	matches := OrderedCollection new.
@@ -223,12 +223,12 @@ LbDOperator >> ranksMatchingArgSortPatterns: aSortPatternArray [
 	^ matches
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDOperator >> size [
 	^ ranks size
 ]
 
-{ #category : 'lookup' }
+{ #category : #lookup }
 LbDOperator >> sortPatternForArgSortPatterns: aSortPatternArray [
 	| matches |
 	matches := self ranksMatchingArgSortPatterns: aSortPatternArray.
@@ -236,7 +236,7 @@ LbDOperator >> sortPatternForArgSortPatterns: aSortPatternArray [
 	^ matches first value
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDOperator >> subArityGraph [
 	^ Array2D new: ranks size tabulate:
 		[ :i :j |
@@ -244,7 +244,7 @@ LbDOperator >> subArityGraph [
 				ifTrue: [ 1 ] ifFalse: [ 0 ] ]
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 LbDOperator >> withRanksDo: aBlock [
 	ranks do: [ :each | aBlock value: each key value: each value ]
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbDKind',
-	#superclass : 'Object',
+	#name : #LbDKind,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -11,24 +11,24 @@ Class {
 	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbDKind class >> sortGraph: aSortGraph sortFamilies: sortFamilies maximalSortFamilies: maximalSortFamilies [
 	^ self basicNew
 		initializeWithSortGraph: aSortGraph sortFamilies: sortFamilies maximalSortFamilies: maximalSortFamilies;
 		yourself
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbDKind >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbDKind >> asSet [
 	^ sortFamilies
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDKind >> gtGraphFor: aView [
 	<gtView>
 	^ sortGraph
@@ -37,12 +37,12 @@ LbDKind >> gtGraphFor: aView [
 		highlight: [ false ]
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 LbDKind >> includes: aSort [
 	^ sortFamilies includes: aSort family
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbDKind >> initializeWithSortGraph: aSortGraph sortFamilies: sortFamilySet maximalSortFamilies: maximalSortFamilySet [
 	sortGraph := aSortGraph.
 	sortFamilies := sortFamilySet.
@@ -50,29 +50,29 @@ LbDKind >> initializeWithSortGraph: aSortGraph sortFamilies: sortFamilySet maxim
 	self beRecursivelyReadOnlyObject.
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbDKind >> instVarsExcludedFromEquality [
 	^#(maximalSortFamilies)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDKind >> kind [
 	^ self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDKind >> maximalSortFamilies [
 	^ maximalSortFamilies
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbDKind >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPut: $[.
 	aStream nextPutAll: (', ' join: (maximalSortFamilies collect: [ : sort | sort asLeibnizSyntaxString ])).
 	aStream nextPut: $]
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbDKind >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -80,7 +80,7 @@ LbDKind >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDKind >> sortGraph [
 	^ sortGraph
 ]

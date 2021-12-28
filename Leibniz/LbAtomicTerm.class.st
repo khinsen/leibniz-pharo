@@ -2,20 +2,20 @@
 I represent atomic terms, such as numbers and strings.
 "
 Class {
-	#name : 'LbAtomicTerm',
-	#superclass : 'LbTerm',
+	#name : #LbAtomicTerm,
+	#superclass : #LbTerm,
 	#instVars : [
 		'value'
 	],
 	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 LbAtomicTerm class >> requiredBuiltin [
 	self subclassResponsibility
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbAtomicTerm class >> value: aString signature: aSignature [
 	aSignature assertBuiltin: self requiredBuiltin.
 	^ self basicNew
@@ -23,48 +23,48 @@ LbAtomicTerm class >> value: aString signature: aSignature [
 			yourself
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbAtomicTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	^ self class value: value signature: aSignature
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 LbAtomicTerm >> hasVariables [
 	^ false
 ]
 
-{ #category : 'classifying' }
+{ #category : #classifying }
 LbAtomicTerm >> headOpName [
 	^ LbPseudoOperatorName for: #Atomic
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbAtomicTerm >> initializeWithValue: aString signature: aSignature [
 	signature := aSignature.
 	value := aString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbAtomicTerm >> leibnizAtomicTermValue [
 	^ value
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbAtomicTerm >> printAsLeibnizSyntaxOn: aStream [
 	value printOn: aStream
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbAtomicTerm >> sort [
 	^ self signature sortNamed: self sortSymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbAtomicTerm >> sortSymbol [
 	self subclassResponsibility
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbAtomicTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol variables: variables [
 	otherTerm
 		unifyTagged: anotherSymbol
@@ -73,18 +73,18 @@ LbAtomicTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol varia
 		variables: variables.
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbAtomicTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: anotherSymbol variables: variables [
 	self = otherTerm
 		ifFalse: [ variables failWith: self notUnifiableWith: otherTerm ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbAtomicTerm >> value [
 	^ value
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbAtomicTerm >> variables [
 	^ Dictionary new
 ]

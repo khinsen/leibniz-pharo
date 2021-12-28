@@ -5,8 +5,8 @@ See ${class:name=LbSortGraph}$.
 
 "
 Class {
-	#name : 'LbSort',
-	#superclass : 'LbSortClassifier',
+	#name : #LbSort,
+	#superclass : #LbSortClassifier,
 	#instVars : [
 		'name',
 		'origins'
@@ -14,7 +14,7 @@ Class {
 	#category : 'Leibniz-1-SortGraphs'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbSort class >> named: aSymbol in: aSortGraph origins: anLbOrigins [
 	^ self basicNew
 			initializeWithName: aSymbol
@@ -23,7 +23,7 @@ LbSort class >> named: aSymbol in: aSortGraph origins: anLbOrigins [
 			yourself
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbSort >> <= aSort [
 	| dss |
 	self = aSort ifTrue: [ ^ true ].
@@ -35,17 +35,17 @@ LbSort >> <= aSort [
 	^ false
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbSort >> asLeibnizSyntaxString [
 	^ name asString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSort >> asSet [
 	^ self subsorts
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbSort >> gtOriginsFor: aView [
 	<gtView>
 	origins ifNil: [ ^ aView empty ].
@@ -57,51 +57,51 @@ LbSort >> gtOriginsFor: aView [
 		yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbSort >> initializeWithName: aSymbol sortGraph: aSortGraph origins: aSet [
 	sortGraph := aSortGraph.
 	name := aSymbol.
 	origins := aSet
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbSort >> instVarsExcludedFromEquality [
 	^#(origins)
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 LbSort >> isFromInclude [
 	^ origins containsIncludes
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSort >> kind [
 	^ sortGraph kindOf: name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSort >> min: aSort [
 	self <= aSort ifTrue: [ ^ self ].
 	aSort <= self ifTrue: [ ^ aSort ].
 	^ nil
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSort >> name [
 	^ name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSort >> origins [
 	^ origins
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbSort >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPutAll: name
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbSort >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -109,22 +109,22 @@ LbSort >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : 'private - comparing' }
+{ #category : #'private - comparing' }
 LbSort >> sortAfterKind: aKind [
 	^ false
 ]
 
-{ #category : 'private - comparing' }
+{ #category : #'private - comparing' }
 LbSort >> sortAfterSort: aSort [
 	^ self name > aSort name
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbSort >> sortBefore: aSort [
 	^ aSort sortAfterSort: self
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 LbSort >> subsorts [
 	^ sortGraph subsortsOf: name
 ]

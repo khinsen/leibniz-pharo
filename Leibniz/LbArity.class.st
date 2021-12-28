@@ -3,9 +3,9 @@ I represent an arity, i.e. the sort constraints for each argument of an operator
 
 "
 Class {
-	#name : 'LbArity',
-	#superclass : 'Array',
-	#type : 'variable',
+	#name : #LbArity,
+	#superclass : #Array,
+	#type : #variable,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -14,14 +14,14 @@ Class {
 	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbArity class >> sortGraph: aSortGraph argSorts: aSortArray [
 	^(self basicNew: aSortArray size)
 			initializeWithSortGraph: aSortGraph argSorts: aSortArray;
 			yourself
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbArity >> <= anArity [
 	self size = anArity size ifFalse: [ ^ false ].
 	self with: anArity do:
@@ -29,7 +29,7 @@ LbArity >> <= anArity [
 	^ true
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbArity >> asArgSorts [
 	| argSorts |
 	argSorts := Array new: self size.
@@ -38,12 +38,12 @@ LbArity >> asArgSorts [
 
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbArity >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s | self printAsLeibnizSyntaxOn: s ]
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbArity >> gtArgumentsFor: aView [
 	<gtView>
 	^ aView list
@@ -53,7 +53,7 @@ LbArity >> gtArgumentsFor: aView [
 		itemText: [ :each | each asLeibnizSyntaxString ]
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbArity >> initializeWithSortGraph: aSortGraph argSorts: aSortArray [
 	sortGraph := aSortGraph.
 	aSortArray collect: [ :s | s ] into: self.
@@ -61,20 +61,20 @@ LbArity >> initializeWithSortGraph: aSortGraph argSorts: aSortArray [
 	^ self
 ]
 
-{ #category : 'operating' }
+{ #category : #operating }
 LbArity >> liftToKindLevel [
 	^ self class
 		sortGraph: sortGraph
 		argSorts: (self collect: #kind)
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbArity >> printAsLeibnizSyntaxOn: aStream [
 	self do: [ :sc | sc printAsLeibnizSyntaxOn: aStream ]
 		  separatedBy: [ aStream nextPutAll: ', ' ]
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbArity >> printOn: aStream [
 	self printNameOn: aStream.
 	aStream nextPut: $(.
@@ -82,7 +82,7 @@ LbArity >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbArity >> sortBefore: anArity [
 	"This is a total order used for uniquely sorting declarations,
 	 to be distinguished from the partial order defined by <="

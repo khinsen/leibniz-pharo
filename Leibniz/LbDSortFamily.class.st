@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbDSortFamily',
-	#superclass : 'Object',
+	#name : #LbDSortFamily,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -11,26 +11,26 @@ Class {
 	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbDSortFamily class >> anySortInSortGraph: aSortGraph [
 	^ LbDSortUniversalFamily basicNew
 		initializeWithSortGraph: aSortGraph;
 		yourself
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbDSortFamily class >> sortGraph: aSortGraph sortOp: anLbOperator [
 	^ LbDSortSpecificFamily basicNew
 		initializeWithSortGraph: aSortGraph sortOp: anLbOperator;
 		yourself
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbDSortFamily >> asLeibnizSyntaxString [
 	self subclassResponsibility
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbDSortFamily >> gtGraphFor: aView [
 	<gtView>
 	| kind |
@@ -41,7 +41,7 @@ LbDSortFamily >> gtGraphFor: aView [
 		highlight: [ :sort | sort = self ]
 ]
 
-{ #category : 'lookup' }
+{ #category : #lookup }
 LbDSortFamily >> kind [
 	^ sortGraph kindOf: self
 ]

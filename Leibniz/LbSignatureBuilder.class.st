@@ -2,8 +2,8 @@
 I build LeibnizSignatures from a sequence of operator and variable declarations.
 "
 Class {
-	#name : 'LbSignatureBuilder',
-	#superclass : 'Object',
+	#name : #LbSignatureBuilder,
+	#superclass : #Object,
 	#instVars : [
 		'sortGraph',
 		'builtins',
@@ -14,19 +14,19 @@ Class {
 	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbSignatureBuilder class >> sortGraph: aSortGraph [
 	^self basicNew
 			initializeWithSortGraph: aSortGraph;
 			yourself
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> addBuiltin: aSymbol [
 	builtins add: aSymbol
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> addBuiltinsFromSignature: aSignature [
 	aSignature withBuiltinsDo:
 		[ :symbol |
@@ -34,17 +34,17 @@ LbSignatureBuilder >> addBuiltinsFromSignature: aSignature [
 
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> addOp: anOpName ofSort: aSort [
 	self addOp: anOpName withArgs: #() ofSort: aSort
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> addOp: anOpName withArgs: aSortArray ofSort: aSort [
 	self addOp: anOpName withArgs: aSortArray ofSort: aSort origins: LbOrigins forCurrentContext
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> addOp: anOpName withArgs: aSortArray ofSort: aSort origins: anLbOrigins [
 	| arity kindArity |
 	aSortArray ifEmpty: [
@@ -64,7 +64,7 @@ LbSignatureBuilder >> addOp: anOpName withArgs: aSortArray ofSort: aSort origins
 		addArity: arity withSort: aSort origins: anLbOrigins
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> addOpsFromSignature: aSignature origin: aContext [
 	aSignature withOperatorsDo: [ :eachOp |
 		eachOp withRanksDo: [ :argSorts :sort |
@@ -75,24 +75,24 @@ LbSignatureBuilder >> addOpsFromSignature: aSignature origin: aContext [
 				origins: (eachOp origins from: aContext) ] ]
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
 	self addSignature: aSignature includeVars: aBoolean origin: nil
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> addSignature: aSignature includeVars: aBoolean origin: aContext [
 	self addBuiltinsFromSignature: aSignature.
 	self addOpsFromSignature: aSignature origin: aContext.
 	aBoolean ifTrue: [ self addVarsFromSignature: aSignature origin: aContext ]
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> addVar: anOpName ofSort: aSort [
 	self addVar: anOpName ofSort: aSort origins: LbOrigins forCurrentContext
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> addVar: anOpName ofSort: aSort origins: anLbOrigins [
 	self assert: aSort sortGraph == sortGraph.
 	operators at: anOpName ifPresent: [ :op |
@@ -108,7 +108,7 @@ LbSignatureBuilder >> addVar: anOpName ofSort: aSort origins: anLbOrigins [
 			   origins at: anOpName put: anLbOrigins ]
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> addVarsFromSignature: aSignature origin: aContext [
 	aSignature withVariablesDo: [ :each |
 		self
@@ -117,13 +117,13 @@ LbSignatureBuilder >> addVarsFromSignature: aSignature origin: aContext [
 			origins: (each origins from: aContext) ]
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbSignatureBuilder >> adoptSort: aSort [
 	"Adopt a sort from a foreign sort graph, by name"
 	^ sortGraph sortNamed: aSort name
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbSignatureBuilder >> gtDeclarationsFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -133,7 +133,7 @@ LbSignatureBuilder >> gtDeclarationsFor: aView [
 		view: #gtDeclarationsFor:
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbSignatureBuilder >> gtOperatorsFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -143,7 +143,7 @@ LbSignatureBuilder >> gtOperatorsFor: aView [
 		view: #gtOperatorsFor:
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbSignatureBuilder >> gtSortGraphFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -153,7 +153,7 @@ LbSignatureBuilder >> gtSortGraphFor: aView [
 		view: #gtSortGraphFor:
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbSignatureBuilder >> gtVariablesFor: aView [ 
 	<gtView>
 	^ aView forward
@@ -163,7 +163,7 @@ LbSignatureBuilder >> gtVariablesFor: aView [
 		view: #gtVariablesFor:
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 	sortGraph := aSortGraph.
 	builtins := Set new.
@@ -172,7 +172,7 @@ LbSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 	origins := Dictionary new
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> parseAndAddOp: aString [
 	| opSpec op args sort argSorts |
 	opSpec := (LbParser newStartingAt: #op)
@@ -198,7 +198,7 @@ LbSignatureBuilder >> parseAndAddOp: aString [
 		  ifNotEmpty: [ self addOp: op withArgs: argSorts ofSort: sort ]
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbSignatureBuilder >> parseAndAddVar: aString [
 	| var name sort |
 	var := (LbParser newStartingAt: #var)
@@ -209,7 +209,7 @@ LbSignatureBuilder >> parseAndAddVar: aString [
 	self addVar: name ofSort: sort
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSignatureBuilder >> signature [
 	^ LbSignature
 		sortGraph: sortGraph
@@ -219,7 +219,7 @@ LbSignatureBuilder >> signature [
 		origins: origins deepCopy
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 LbSignatureBuilder >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
 

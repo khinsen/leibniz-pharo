@@ -1,12 +1,12 @@
 Class {
-	#name : 'LbTermExamples',
-	#superclass : 'Object',
+	#name : #LbTermExamples,
+	#superclass : #Object,
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
 	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> booleanTerms [
 	<gtExample>
 	| trueTerm falseTerm |
@@ -21,7 +21,7 @@ LbTermExamples >> booleanTerms [
 	^ { trueTerm. falseTerm }
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> booleanUnifications [
 	<gtExample>
 	| s |
@@ -45,7 +45,7 @@ LbTermExamples >> booleanUnifications [
 		unification ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 LbTermExamples >> check: aTerm matches: aPattern withSubstitution: aDictionaryOrNil signature: aSignature [
 	| parse pattern term variables substitution |
 	parse := [ :aString | aSignature parseTerm: aString ].
@@ -64,7 +64,7 @@ LbTermExamples >> check: aTerm matches: aPattern withSubstitution: aDictionaryOr
 	^ substitution
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 LbTermExamples >> check: aPattern withSubstitution: aDictionary equals: aTerm signature: aSignature [
 	| parse pattern term substitution result |
 	parse := [ :aString | aSignature parseTerm: aString ].
@@ -87,7 +87,7 @@ LbTermExamples >> check: aPattern withSubstitution: aDictionary equals: aTerm si
 	^ result
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 LbTermExamples >> checkSyntaxRoundTrip: aString signature: aSignature [
 	| term |
 	term := aSignature parseTerm: aString.
@@ -95,7 +95,7 @@ LbTermExamples >> checkSyntaxRoundTrip: aString signature: aSignature [
 	^ term
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> fpNumberLiteralTerms [
 	<gtExample>
 	| inputs |
@@ -115,7 +115,7 @@ LbTermExamples >> fpNumberLiteralTerms [
 		t ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> integerLiteralTerms [
 	<gtExample>
 	| inputs |
@@ -132,7 +132,7 @@ LbTermExamples >> integerLiteralTerms [
 		t ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> integerTerms [
 	<gtExample>
 	| signature literals |
@@ -160,7 +160,7 @@ LbTermExamples >> integerTerms [
 		term ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> matches [
 	<gtExample>
 	| s |
@@ -203,7 +203,7 @@ LbTermExamples >> matches [
 	}
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> numberUnifications [
 	<gtExample>
 	| rns s |
@@ -231,7 +231,7 @@ LbTermExamples >> numberUnifications [
 		unification ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> patternComparison [
 	<gtExample>
 	| rns s |
@@ -269,7 +269,7 @@ LbTermExamples >> patternComparison [
 				with: right tagged: #right } ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> patternEquivalence [
 	<gtExample>
 	| rns s |
@@ -305,7 +305,7 @@ LbTermExamples >> patternEquivalence [
 				with: right tagged: #right } ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> rationalNumberLiteralTerms [
 	<gtExample>
 	| inputs |
@@ -324,13 +324,13 @@ LbTermExamples >> rationalNumberLiteralTerms [
 		t ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> signatureFooBar [
 	<gtExample>
 	^ LbSignatureExamples new signatureFooBar
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> stringTerm [
 	<gtExample>
 	| t |
@@ -340,7 +340,7 @@ LbTermExamples >> stringTerm [
 	^ t
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> substitutedTerms [
 	<gtExample>
 	| s |
@@ -379,7 +379,7 @@ LbTermExamples >> substitutedTerms [
 	}
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> taggedUnifications [
 	<gtExample>
 	| s |
@@ -407,13 +407,13 @@ LbTermExamples >> taggedUnifications [
 		unification ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> termFoo [
 	<gtExample>
 	^ self signatureFooBar parseTerm: 'foo'
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> termFooBracketFooOfFoo [
 	<gtExample>
 	| signature sortA |
@@ -426,7 +426,7 @@ LbTermExamples >> termFooBracketFooOfFoo [
 		signature: signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> termFooExplicit [
 	<gtExample>
 	| signature |
@@ -438,7 +438,7 @@ LbTermExamples >> termFooExplicit [
 		signature: signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> termFooOfFoo [
 	<gtExample>
 	| signature sortA |
@@ -451,7 +451,7 @@ LbTermExamples >> termFooOfFoo [
 		signature: signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> termFooPlusFooExplicit [
 	<gtExample>
 	| signature sortA |
@@ -464,7 +464,7 @@ LbTermExamples >> termFooPlusFooExplicit [
 		signature: signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> termSyntax [
 	<gtExample>
 	^ {
@@ -491,7 +491,7 @@ LbTermExamples >> termSyntax [
 				signature: each first ] ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> varTerm [
 	<gtExample>
 	| term |
@@ -500,7 +500,7 @@ LbTermExamples >> varTerm [
 	^ term
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbTermExamples >> variableRenaming [
 	<gtExample>
 	| rns s nameX nameY nameV nameW substitutions substitution term1 term2 |

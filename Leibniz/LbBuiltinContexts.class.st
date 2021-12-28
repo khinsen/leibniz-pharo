@@ -1,10 +1,10 @@
 Class {
-	#name : 'LbBuiltinContexts',
-	#superclass : 'Object',
+	#name : #LbBuiltinContexts,
+	#superclass : #Object,
 	#category : 'Leibniz-6-Contexts'
 }
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinContexts class >> fpNumberContext [
 	<gtExample>
 	^ LbContext
@@ -13,7 +13,7 @@ LbBuiltinContexts class >> fpNumberContext [
 		rewriteSystem: (LbBuiltinRewriteSystems fpNumberRewriteSystem)
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinContexts class >> integerContext [
 	<gtExample>
 	^ LbContext
@@ -22,7 +22,7 @@ LbBuiltinContexts class >> integerContext [
 		rewriteSystem: (LbBuiltinRewriteSystems integerRewriteSystem)
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinContexts class >> rationalNumberContext [
 	<gtExample>
 	^ LbContext
@@ -31,7 +31,7 @@ LbBuiltinContexts class >> rationalNumberContext [
 		rewriteSystem: (LbBuiltinRewriteSystems rationalNumberRewriteSystem)
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinContexts class >> realNumberContext [
 	<gtExample>
 	^ LbContext
@@ -40,7 +40,7 @@ LbBuiltinContexts class >> realNumberContext [
 		rewriteSystem: (LbBuiltinRewriteSystems realNumberRewriteSystem)
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinContexts class >> stringContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'strings')
@@ -50,7 +50,7 @@ LbBuiltinContexts class >> stringContext [
 		context
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinContexts class >> truthContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'truth')

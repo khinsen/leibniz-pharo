@@ -73,6 +73,11 @@ LzGrammarSignaturesAndTerms >> literalTerm [
 ]
 
 { #category : #terms }
+LzGrammarSignaturesAndTerms >> literalTermEnd [
+	^ literalTerm end
+]
+
+{ #category : #terms }
 LzGrammarSignaturesAndTerms >> nonInfixTerm [
 	^ simpleTerm, suffix optional
 ]
@@ -128,6 +133,11 @@ LzGrammarSignaturesAndTerms >> simpleTerm [
 	^ literalTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm
 ]
 
+{ #category : #terms }
+LzGrammarSignaturesAndTerms >> simpleTermEnd [
+	^ simpleTerm end
+]
+
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> sortArg [
 	^ simpleTerm
@@ -140,15 +150,21 @@ LzGrammarSignaturesAndTerms >> subscriptOp [
 
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> suffix [
-	^ (self suffixBetween: openBracket and: closeBracket withSymbol: #'[]')
-		 / (self suffixBetween: '^{' asPParser and: closeBrace withSymbol: #'^')
-		 / (self suffixBetween: '_{' asPParser and: closeBrace withSymbol: #'_')
+	^ (self
+		suffixBetween: openBracket and: closeBracket
+		withOpName: LzBracketOperatorName new)
+		 / (self
+		 	suffixBetween: '^{' asPParser and: closeBrace
+		 	withOpName: LzSuperscriptOperatorName new)
+		 / (self
+		 	suffixBetween: '_{' asPParser and: closeBrace
+		 	withOpName: LzSubscriptOperatorName new)
 ]
 
 { #category : #terms }
-LzGrammarSignaturesAndTerms >> suffixBetween: leftDelimiter and: rightDelimiter withSymbol: opSymbol [
+LzGrammarSignaturesAndTerms >> suffixBetween: leftDelimiter and: rightDelimiter withOpName: opName [
 	^ leftDelimiter , (term separatedBy: comma asPParser trim) , rightDelimiter
-		==> [ :nodes | { opSymbol . (nodes second reject: [ :element | element = $, ]) } ]
+		==> [ :nodes | { opName . (nodes second reject: [ :element | element = $, ]) } ]
 ]
 
 { #category : #signature }

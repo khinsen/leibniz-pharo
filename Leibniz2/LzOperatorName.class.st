@@ -9,17 +9,6 @@ Class {
 	#category : #'Leibniz2-Parser'
 }
 
-{ #category : #'instance creation' }
-LzOperatorName class >> fromInternalSymbol: aSymbol [
-	aSymbol = #'_' ifTrue: [ ^ LbSubscriptOperatorName new ].
-	aSymbol = #'^' ifTrue: [ ^ LbSuperscriptOperatorName new ].
-	aSymbol = #'[]' ifTrue: [ ^ LbBracketOperatorName new ].
-	^ ((aSymbol first = $_)
-		ifTrue: [  LbInfixOperatorName ]
-		ifFalse: [ LbPrefixOperatorName ])
-		new internalSymbol: aSymbol
-]
-
 { #category : #comparing }
 LzOperatorName >> <= opName [
 	^ self asSymbol <= opName asSymbol
@@ -31,7 +20,7 @@ LzOperatorName >> addPrefix: aSymbol [
 ]
 
 { #category : #converting }
-LzOperatorName >> asLbOperatorName [
+LzOperatorName >> asLzOperatorName [
 	^ self
 ]
 

@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbAxioms',
-	#superclass : 'Object',
+	#name : #LbAxioms,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -12,7 +12,7 @@ Class {
 	#category : 'Leibniz-5-Axioms'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbAxioms class >> signature: aSignature axioms: aDictionary [
 	^ self basicNew
 		initializeWithSignature: aSignature
@@ -20,17 +20,17 @@ LbAxioms class >> signature: aSignature axioms: aDictionary [
 		yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbAxioms >> allDeclarations [
 	^ self signature declarations union: self declarations
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbAxioms >> copy [
 	^ self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbAxioms >> declarations [
 	| declarations equationDecls |
 	declarations := Dictionary new.
@@ -43,17 +43,17 @@ LbAxioms >> declarations [
 	^ declarations
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbAxioms >> deepCopy [
 	^ self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbAxioms >> equalityAxioms [
 	^ axioms at: #LbEqualityAxiom
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbAxioms >> gtAxiomsFor: aView [
 	<gtView>
 	^ aView tree
@@ -74,7 +74,7 @@ LbAxioms >> gtAxiomsFor: aView [
 		yourself
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbAxioms >> gtDeclarationsFor: aView [
 	<gtView>
 	^ aView lbTree
@@ -99,26 +99,26 @@ LbAxioms >> gtDeclarationsFor: aView [
 		yourself
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbAxioms >> initializeWithSignature: aSignature axioms: aDictionary [
 	signature := aSignature.
 	axioms := aDictionary.
 	self beRecursivelyReadOnlyObject
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 LbAxioms >> isEmpty [
 	axioms values do: [ :each |
 		each ifNotEmpty: [ ^ false ] ].
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbAxioms >> signature [
 	^ signature
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbAxioms >> subsortAxioms [
 	^ axioms at: #LbSubsortAxiom
 ]

@@ -2,12 +2,12 @@
 My unique instance is a special document that contains the built-in contexts of Leibniz.
 "
 Class {
-	#name : 'LeibnizBuiltins',
-	#superclass : 'LeibnizDocument',
+	#name : #LeibnizBuiltins,
+	#superclass : #LeibnizDocument,
 	#category : 'Leibniz-8-Documents'
 }
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LeibnizBuiltins >> createContextContext [
 	| contextsBuilder |
 	contextsBuilder := self newContextBuilderNamed: 'contexts'.
@@ -22,7 +22,7 @@ LeibnizBuiltins >> createContextContext [
 	contextsBuilder build.
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LeibnizBuiltins >> initialize [
 	super initialize.
 	self docHash: (SHA256 hashMessage: 'builtins') hex.

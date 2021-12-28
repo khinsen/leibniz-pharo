@@ -1,6 +1,6 @@
-Extension { #name : 'Fraction' }
+Extension { #name : #Fraction }
 
-{ #category : '*Leibniz' }
+{ #category : #'*Leibniz' }
 Fraction >> lbAtomicTermClass [
 	^ LbRationalNumberTerm
 ]

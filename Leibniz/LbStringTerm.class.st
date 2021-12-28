@@ -2,17 +2,17 @@
 I represent a string in context 'strings'.
 "
 Class {
-	#name : 'LbStringTerm',
-	#superclass : 'LbAtomicTerm',
+	#name : #LbStringTerm,
+	#superclass : #LbAtomicTerm,
 	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : 'private' }
+{ #category : #private }
 LbStringTerm class >> requiredBuiltin [
 	^ #strings
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbStringTerm >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPut: $".
 	aStream nextPutAll: value.
@@ -20,7 +20,7 @@ LbStringTerm >> printAsLeibnizSyntaxOn: aStream [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbStringTerm >> sortSymbol [
 	^ #string
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbVariable',
-	#superclass : 'Object',
+	#name : #LbVariable,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -12,14 +12,14 @@ Class {
 	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbVariable class >> named: aSymbol sort: aSort in: aSignature origins: anLbOrigins [
 	^self basicNew
 			initializeWithName: aSymbol sort: aSort signature: aSignature origins: anLbOrigins;
 			yourself
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbVariable >> gtDeclarationFor: aView [
 	<gtView>
 	^ aView explicit
@@ -31,7 +31,7 @@ LbVariable >> gtDeclarationFor: aView [
 				padding: (BlInsets all: 5) ]
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbVariable >> gtOriginsFor: aView [
 	<gtView>
 	origins ifNil: [ ^ aView empty ].
@@ -43,7 +43,7 @@ LbVariable >> gtOriginsFor: aView [
 		yourself
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbVariable >> initializeWithName: aNameSymbol sort: aSort signature: aSignature origins: anLbOrigins [
 	signature := aSignature.
 	name := aNameSymbol.
@@ -51,30 +51,30 @@ LbVariable >> initializeWithName: aNameSymbol sort: aSort signature: aSignature 
 	origins := anLbOrigins
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbVariable >> instVarsExcludedFromEquality [
 	^#(origins)
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbVariable >> name [
 	^ name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbVariable >> origins [
 	^ origins
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbVariable >> printOn: aStream [
 	aStream nextPutAll: name asSymbol asString.
 	aStream nextPutAll: ':'.
 	aStream nextPutAll: sort name asString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbVariable >> sort [
 	^ sort
 ]

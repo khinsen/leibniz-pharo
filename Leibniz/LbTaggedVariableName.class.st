@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbTaggedVariableName',
-	#superclass : 'Object',
+	#name : #LbTaggedVariableName,
+	#superclass : #Object,
 	#instVars : [
 		'tag',
 		'name'
@@ -8,7 +8,7 @@ Class {
 	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbTaggedVariableName class >> tag: aSymbolOrNil name: anLbOperatorName [
 	^ aSymbolOrNil
 		ifNil: [ anLbOperatorName ]
@@ -18,44 +18,44 @@ LbTaggedVariableName class >> tag: aSymbolOrNil name: anLbOperatorName [
 						yourself ]
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbTaggedVariableName >> <= other [
 	^ self asString <= other asString
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbTaggedVariableName >> = other [
 	^ (self class = other class)
 		and: [ (self tag = other tag)
 				and: self name = other name ]
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbTaggedVariableName >> asString [
 	^ tag asString, '.', name asString
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbTaggedVariableName >> asSymbol [
 	^ self asString asSymbol
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbTaggedVariableName >> hash [
 	^ tag hash bitXor: name hash
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbTaggedVariableName >> name [
 	^ name
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbTaggedVariableName >> name: anLbOperatorName [
 	name := anLbOperatorName
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbTaggedVariableName >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -65,12 +65,12 @@ LbTaggedVariableName >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbTaggedVariableName >> tag [
 	^ tag
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbTaggedVariableName >> tag: aSymbol [
 	tag := aSymbol
 ]

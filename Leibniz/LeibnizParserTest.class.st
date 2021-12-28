@@ -1,25 +1,25 @@
 Class {
-	#name : 'LeibnizParserTest',
-	#superclass : 'PP2CompositeNodeTest',
+	#name : #LeibnizParserTest,
+	#superclass : #PP2CompositeNodeTest,
 	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : 'term construction' }
+{ #category : #'term construction' }
 LeibnizParserTest >> fpNumberTerm: aFloat [
 	^ LbFPNumberTerm value: aFloat signature: parser signature
 ]
 
-{ #category : 'term construction' }
+{ #category : #'term construction' }
 LeibnizParserTest >> integerTerm: anInteger [
 	^ LbIntegerTerm value: anInteger signature: parser signature
 ]
 
-{ #category : 'term construction' }
+{ #category : #'term construction' }
 LeibnizParserTest >> rationalNumberTerm: aFraction [
 	^ LbRationalNumberTerm value: aFraction signature: parser signature
 ]
 
-{ #category : 'running' }
+{ #category : #running }
 LeibnizParserTest >> setUp [
 	| b sg |
 	super setUp.
@@ -52,7 +52,7 @@ LeibnizParserTest >> setUp [
 	parser signature: b signature.
 ]
 
-{ #category : 'term construction' }
+{ #category : #'term construction' }
 LeibnizParserTest >> stringTerm: aString [
 	^ LbStringTerm value: aString signature: parser signature
 ]

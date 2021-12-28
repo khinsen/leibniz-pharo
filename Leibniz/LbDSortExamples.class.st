@@ -1,12 +1,12 @@
 Class {
-	#name : 'LbDSortExamples',
-	#superclass : 'Object',
+	#name : #LbDSortExamples,
+	#superclass : #Object,
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
 	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> bagAndListTerms [
 	<gtExample>
 	^ #('∅' '∅ ** anElement' '∅ ++ anElement'
@@ -14,7 +14,7 @@ LbDSortExamples >> bagAndListTerms [
 		self bagSignature parseTerm: each ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> bagSignature [
 	<gtExample>
 	| sortGraph |
@@ -36,7 +36,7 @@ LbDSortExamples >> bagSignature [
 		signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> bagSortContext [
 	<gtExample>
 	| context |
@@ -56,14 +56,14 @@ LbDSortExamples >> bagSortContext [
 	^ context
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> bagSortGraph [
 	<gtExample>
 	^ (LbDSortGraphBuilder fromSortContext: self bagSortContext)
 		sortGraph
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> bagSortPairs [
 	<gtExample>
 	| sortGraph sorts |
@@ -81,7 +81,7 @@ LbDSortExamples >> bagSortPairs [
 	}
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> bagSorts [
 	<gtExample>
 	| sortGraph sorts |
@@ -125,7 +125,7 @@ LbDSortExamples >> bagSorts [
 	^ sorts
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> dependentSortGraphWithPlainSorts [
 	<gtExample>
 	^ (LbDSortGraphBuilder new)
@@ -136,7 +136,7 @@ LbDSortExamples >> dependentSortGraphWithPlainSorts [
 		sortGraph
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> listSignature [
 	<gtExample>
 	^ (LbDSignatureBuilder sortGraph: self listSortGraph)
@@ -148,7 +148,7 @@ LbDSortExamples >> listSignature [
 		signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> listSortContext [
 	<gtExample>
 	^ (LbContextBuilder name: 'sorts')
@@ -162,7 +162,7 @@ LbDSortExamples >> listSortContext [
 		context
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> listSortGraph [
 	<gtExample>
 	| sortGraph |
@@ -171,7 +171,7 @@ LbDSortExamples >> listSortGraph [
 	^ sortGraph
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> listTerms [
 	<gtExample>
 	^ {
@@ -185,7 +185,7 @@ LbDSortExamples >> listTerms [
 		term ]
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> plainSortGraph [
 	<gtExample>
 	^ (LbSortGraphBuilder new)
@@ -196,7 +196,7 @@ LbDSortExamples >> plainSortGraph [
 		sortGraph
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> signatureWithDependentSorts [
 	<gtExample>
 	| sb s |
@@ -214,7 +214,7 @@ LbDSortExamples >> signatureWithDependentSorts [
 	^ s
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> signatureWithoutDependentSorts [
 	<gtExample>
 	^ (LbDSignatureBuilder sortGraph: self sortGraphWithoutDependentSorts)
@@ -226,7 +226,7 @@ LbDSortExamples >> signatureWithoutDependentSorts [
 		signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> sortContextWithDependentSorts [
 	<gtExample>
 	| context |
@@ -242,7 +242,7 @@ LbDSortExamples >> sortContextWithDependentSorts [
 	^ context
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> sortContextWithoutDependentSorts [
 	<gtExample>
 	^ (LbContextBuilder name: 'sorts')
@@ -254,7 +254,7 @@ LbDSortExamples >> sortContextWithoutDependentSorts [
 		context
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> sortGraphWithDependentSorts [
 	<gtExample>
 	| sortGraph |
@@ -267,7 +267,7 @@ LbDSortExamples >> sortGraphWithDependentSorts [
 	^ sortGraph
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbDSortExamples >> sortGraphWithoutDependentSorts [
 	<gtExample>
 	| sortGraph |

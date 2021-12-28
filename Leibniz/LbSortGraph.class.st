@@ -19,8 +19,8 @@ Sort graphs are immutable objects. They are constructed by a ${class:name=LbSort
 
 "
 Class {
-	#name : 'LbSortGraph',
-	#superclass : 'Object',
+	#name : #LbSortGraph,
+	#superclass : #Object,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -35,7 +35,7 @@ Class {
 	#category : 'Leibniz-1-SortGraphs'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbSortGraph class >> fromSubsortRelations: aSubsetDictionary andCollectionSorts: aCollectionSortDictionary origins: anOriginDictionary [
 	^ self basicNew
 			initializeWithSubsortRelations: aSubsetDictionary
@@ -44,12 +44,12 @@ LbSortGraph class >> fromSubsortRelations: aSubsetDictionary andCollectionSorts:
 			yourself
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbSortGraph >> asDependentSortGraph [
 	^ self asDependentSortGraphBuilder sortGraph
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbSortGraph >> asDependentSortGraphBuilder [
 	| builder |
 	builder := LbDSortGraphBuilder new.
@@ -70,22 +70,22 @@ LbSortGraph >> asDependentSortGraphBuilder [
 	^ builder
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbSortGraph >> asSet [
    ^ directSubsortsOf keys asSet collect: [ :each | self sortNamed: each ]
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbSortGraph >> asSortGraphBuilder [
 	^ LbSortGraphBuilder new addSortGraph: self
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbSortGraph >> copy [
 	^self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortGraph >> declarations [
 	| sorts subsorts |
 	sorts := directSubsortsOf keys sorted.
@@ -99,17 +99,17 @@ LbSortGraph >> declarations [
 		with: #subsorts -> subsorts
 ]
 
-{ #category : 'copying' }
+{ #category : #copying }
 LbSortGraph >> deepCopy [
 	^self
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortGraph >> directSubsortsOf: aSymbol [
 	^ (directSubsortsOf at: aSymbol) collect: [ : each | self sortNamed: each ]
 ]
 
-{ #category : 'viewing' }
+{ #category : #viewing }
 LbSortGraph >> graphArrowForSubsortRelation: aSubsortRelation [
 	| color |
 	color := aSubsortRelation isFromInclude
@@ -118,7 +118,7 @@ LbSortGraph >> graphArrowForSubsortRelation: aSubsortRelation [
 	^ LbGraphicsElements graphArrowWithColor: color
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbSortGraph >> graphEdgesForSubset: aSet [
 	| edges |
 	edges := OrderedCollection new.
@@ -129,7 +129,7 @@ LbSortGraph >> graphEdgesForSubset: aSet [
 	^ edges
 ]
 
-{ #category : 'viewing' }
+{ #category : #viewing }
 LbSortGraph >> graphNodeForSort: aSort highlight: aBoolean [
 	| text color label rectangle |
 	text := aSort name asString asRopedText.
@@ -160,7 +160,7 @@ LbSortGraph >> graphNodeForSort: aSort highlight: aBoolean [
 	^ rectangle
 ]
 
-{ #category : 'viewing' }
+{ #category : #viewing }
 LbSortGraph >> grayArrow [
 	^ BlLineElement new
 		toHead: (BlArrowheadSimpleArrow new
@@ -168,7 +168,7 @@ LbSortGraph >> grayArrow [
 		border: (BlBorder paint: Color gray width: 1)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortGraph >> gtDeclarationsFor: aView [
 	<gtView>
 	self isEmpty
@@ -194,7 +194,7 @@ LbSortGraph >> gtDeclarationsFor: aView [
 		yourself
 ]
 
-{ #category : 'inspecting' }
+{ #category : #inspecting }
 LbSortGraph >> gtGraphFor: aView [
 	<gtView>
 	self isEmpty ifTrue: [ ^ aView empty ].
@@ -217,7 +217,7 @@ LbSortGraph >> gtGraphFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbSortGraph >> initializeDerivedSubsortsFrom: collectionSortsOf [
 	derivedSubsortsOf := Dictionary new.
 	(self initializeDerivedSubsortsFrom: collectionSortsOf for: directSubsortsOf)
@@ -226,7 +226,7 @@ LbSortGraph >> initializeDerivedSubsortsFrom: collectionSortsOf [
 		whileTrue
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortGraph >> initializeDerivedSubsortsFrom: collectionSortsOf for: subsortMap [
 	| newEntries |
 	newEntries := false.
@@ -248,7 +248,7 @@ LbSortGraph >> initializeDerivedSubsortsFrom: collectionSortsOf for: subsortMap 
 	^ newEntries
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbSortGraph >> initializeKinds [
 	| kindCandidates kind hasCommonSorts |
 	kindCandidates := maximalSorts asOrderedCollection collect: [ :sort | subsortsOf at: sort ].
@@ -270,7 +270,7 @@ LbSortGraph >> initializeKinds [
 	kinds do: [ :k | k asSet do: [ :s | kindsOf at: s name put: k ] ]
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbSortGraph >> initializeMaximalSorts [
 	maximalSorts :=
 		(directSubsortsOf values)
@@ -282,14 +282,14 @@ LbSortGraph >> initializeMaximalSorts [
 			into: [ :ms :ss | ms difference: ss ].
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbSortGraph >> initializeSubsortsOf [
 	subsortsOf := Dictionary new.
 	directSubsortsOf keysDo: [ :sort |
 		self initializeSubsortsOfAt: sort ]	
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbSortGraph >> initializeSubsortsOfAt: aSort [
 	| dss ss |
 	(subsortsOf includes: aSort) ifTrue: [ ^ self ].
@@ -303,7 +303,7 @@ LbSortGraph >> initializeSubsortsOfAt: aSort [
 	subsortsOf at: aSort put: ss
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbSortGraph >> initializeWithSubsortRelations: subsortRelations andCollectionSorts: collectionSorts origins: anOriginDictionary [
 	directSubsortsOf := subsortRelations.
 	origins := anOriginDictionary.
@@ -314,7 +314,7 @@ LbSortGraph >> initializeWithSubsortRelations: subsortRelations andCollectionSor
 	self beRecursivelyReadOnlyObject
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbSortGraph >> instVarsExcludedFromEquality [
 	"The only instance variable used in comparison is directSubsortsOf,
 	 since all others are derived from it"
@@ -322,27 +322,27 @@ LbSortGraph >> instVarsExcludedFromEquality [
 	^ self class instVarNames reject: [ :each | each = #directSubsortsOf ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortGraph >> isEmpty [
 	^ directSubsortsOf isEmpty
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 LbSortGraph >> kindOf: aSymbol [
 	^ kindsOf at: aSymbol
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortGraph >> kinds [
 	^ kinds
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortGraph >> maximalSorts [
 	^  maximalSorts collect: [ :aSymbol | self sortNamed: aSymbol ]
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbSortGraph >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -351,13 +351,13 @@ LbSortGraph >> printOn: aStream [
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortGraph >> size [
 	^ self asSet size.
 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortGraph >> sortNamed: aSymbol [
 	self
 		assert: (directSubsortsOf includesKey: aSymbol) 
@@ -368,25 +368,25 @@ LbSortGraph >> sortNamed: aSymbol [
 		origins: (origins at: aSymbol ifAbsent: [ nil ])
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbSortGraph >> subsortsOf: aSymbol [
 	^ (subsortsOf at: aSymbol) collect: [ : each | self sortNamed: each ]
 ]
 
-{ #category : 'enumerating' }
+{ #category : #enumerating }
 LbSortGraph >> union: aSortGraph [ 
 	^ self asSortGraphBuilder
 		addSortGraph: aSortGraph;
 		sortGraph
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 LbSortGraph >> withAllSubsortRelationsDo: aBlockClosure [
 	self withSubsortRelations: directSubsortsOf do: aBlockClosure.
 	self withSubsortRelations: derivedSubsortsOf do: aBlockClosure
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 LbSortGraph >> withSubsortRelations: aDictionary do: aBlockClosure [
 	aDictionary keysAndValuesDo: [ :superSortName :subSortNames |
 		subSortNames do: [ :subSortName |
@@ -399,7 +399,7 @@ LbSortGraph >> withSubsortRelations: aDictionary do: aBlockClosure [
 									"ifAbsent: [ LbOrigins forCurrentContext ]")) ] ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 LbSortGraph >> withSubsortRelationsDo: aBlockClosure [
 	self withSubsortRelations: directSubsortsOf do: aBlockClosure
 ]

@@ -1,10 +1,10 @@
 Class {
-	#name : 'LbDSignatureParser',
-	#superclass : 'LbGrammarSignaturesAndTerms',
+	#name : #LbDSignatureParser,
+	#superclass : #LbGrammarSignaturesAndTerms,
 	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDSignatureParser class >> signature: aSignature extraVariables: aDictionary [
 	| parser |
 	parser := self newStartingAt: self startSymbol.
@@ -13,7 +13,7 @@ LbDSignatureParser class >> signature: aSignature extraVariables: aDictionary [
 	^ parser
 ]
 
-{ #category : 'productions - signature' }
+{ #category : #'productions - signature' }
 LbDSignatureParser >> bracketOp [
 	^ super bracketOp
 		==> [ :nodes |
@@ -23,7 +23,7 @@ LbDSignatureParser >> bracketOp [
 				{ LbBracketOperatorName new. args asArray } ]
 ]
 
-{ #category : 'term construction' }
+{ #category : #'term construction' }
 LbDSignatureParser >> delayedTermWithOp: anOpName args: anArgList [
 	^ [ :aSignature :aDictionary |
 		aSignature
@@ -32,7 +32,7 @@ LbDSignatureParser >> delayedTermWithOp: anOpName args: anArgList [
 				each cull: aSignature cull: aDictionary ]) ]
 ]
 
-{ #category : 'productions - signature' }
+{ #category : #'productions - signature' }
 LbDSignatureParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
 		| varName sortName |
@@ -44,7 +44,7 @@ LbDSignatureParser >> forAllClause [
 			varName -> (aSignature sortNamed: sortName) ] ]
 ]
 
-{ #category : 'productions - term' }
+{ #category : #'productions - term' }
 LbDSignatureParser >> fpNumberTerm [
 	^ super fpNumberTerm ==> [ :value | 
 		"Converting the string to a float requires some trickery:
@@ -59,13 +59,13 @@ LbDSignatureParser >> fpNumberTerm [
 			LbFPNumberTerm value: floatValue signature: aSignature ] ]
 ]
 
-{ #category : 'productions - signature' }
+{ #category : #'productions - signature' }
 LbDSignatureParser >> infixOp [
 	^ super infixOp ==> [ :nodes |
 		{ LbInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
 ]
 
-{ #category : 'productions - term' }
+{ #category : #'productions - term' }
 LbDSignatureParser >> integerTerm [
 	^ super integerTerm ==> [ :value |
 		| intValue |
@@ -75,7 +75,7 @@ LbDSignatureParser >> integerTerm [
 			LbIntegerTerm value: intValue signature: aSignature ] ]
 ]
 
-{ #category : 'productions - term' }
+{ #category : #'productions - term' }
 LbDSignatureParser >> nonInfixTerm [
 	^ super nonInfixTerm ==> [ :nodes |
 		nodes second
@@ -87,7 +87,7 @@ LbDSignatureParser >> nonInfixTerm [
 				self delayedTermWithOp: name args: args ] ]
 ]
 
-{ #category : 'productions - signature' }
+{ #category : #'productions - signature' }
 LbDSignatureParser >> op [
 	^ super op ==> [ :nodes |
 		| variables opName opArgs opSort |
@@ -110,7 +110,7 @@ LbDSignatureParser >> op [
 			} ] ]
 ]
 
-{ #category : 'productions - signature' }
+{ #category : #'productions - signature' }
 LbDSignatureParser >> prefixOp [
 	^ super prefixOp ==> [ :nodes |
 		{
@@ -119,7 +119,7 @@ LbDSignatureParser >> prefixOp [
 		} ]
 ]
 
-{ #category : 'productions - term' }
+{ #category : #'productions - term' }
 LbDSignatureParser >> prefixOpTerm [
 	^ super prefixOpTerm ==> [ :nodes |
 		| name args |
@@ -128,7 +128,7 @@ LbDSignatureParser >> prefixOpTerm [
 		self delayedTermWithOp: name args: args ]
 ]
 
-{ #category : 'productions - term' }
+{ #category : #'productions - term' }
 LbDSignatureParser >> rationalNumberTerm [
 	^ super rationalNumberTerm==> [ :value |
 		| rationalValue |
@@ -138,13 +138,13 @@ LbDSignatureParser >> rationalNumberTerm [
 			LbRationalNumberTerm value: rationalValue signature: aSignature ] ]
 ]
 
-{ #category : 'productions - signature' }
+{ #category : #'productions - signature' }
 LbDSignatureParser >> sort [
 	^ super sort ==> [ :id |
 		{ id } ]
 ]
 
-{ #category : 'productions - term' }
+{ #category : #'productions - term' }
 LbDSignatureParser >> stringTerm [
 	^ super stringTerm ==> [ :value |
 		| stringValue |
@@ -154,7 +154,7 @@ LbDSignatureParser >> stringTerm [
 			LbStringTerm value: stringValue signature: aSignature ] ]
 ]
 
-{ #category : 'productions - signature' }
+{ #category : #'productions - signature' }
 LbDSignatureParser >> subscriptOp [
 	^ super subscriptOp ==> [ :nodes |
 		| args |
@@ -163,7 +163,7 @@ LbDSignatureParser >> subscriptOp [
 		{ LbSubscriptOperatorName new. args asArray } ]
 ]
 
-{ #category : 'productions - signature' }
+{ #category : #'productions - signature' }
 LbDSignatureParser >> superscriptOp [
 	^ super superscriptOp ==> [ :nodes |
 		| args |
@@ -172,7 +172,7 @@ LbDSignatureParser >> superscriptOp [
 		{ LbSuperscriptOperatorName new. args asArray } ]
 ]
 
-{ #category : 'productions - term' }
+{ #category : #'productions - term' }
 LbDSignatureParser >> term [
 	^ super term  ==> [ :nodes |
 		nodes size = 1
@@ -189,12 +189,12 @@ LbDSignatureParser >> term [
 						self delayedTermWithOp: name args: { result . nextArg } ] ] ]
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDSignatureParser >> termEnd [
 	^ term end
 ]
 
-{ #category : 'productions - signature' }
+{ #category : #'productions - signature' }
 LbDSignatureParser >> var [
 	^ super var ==> [ :nodes |
 		| variables |
@@ -209,13 +209,13 @@ LbDSignatureParser >> var [
 			{ nodes second. nodes fourth first cull: aSignature cull: allVariables } ] ]
 ]
 
-{ #category : 'productions - signature' }
+{ #category : #'productions - signature' }
 LbDSignatureParser >> zeroArgOp [
 	^ super zeroArgOp ==> [ :idString |
 		{ LbPrefixOperatorName for: idString. #() } ]
 ]
 
-{ #category : 'productions - term' }
+{ #category : #'productions - term' }
 LbDSignatureParser >> zeroArgTerm [
 	^ super zeroArgTerm ==> [ :symbol |
 		| name |

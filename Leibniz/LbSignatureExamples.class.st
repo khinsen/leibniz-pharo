@@ -1,24 +1,24 @@
 Class {
-	#name : 'LbSignatureExamples',
-	#superclass : 'Object',
+	#name : #LbSignatureExamples,
+	#superclass : #Object,
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
 	#category : 'Leibniz-2-Signatures'
 }
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> arityA [
 	<gtExample>
 	^ self arityForArgSorts: #(#A)
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> arityAB [
 	<gtExample>
 	^ self arityForArgSorts: #(#A #B)
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> arityB [
 	<gtExample>
 	| arity |
@@ -28,7 +28,7 @@ LbSignatureExamples >> arityB [
 	^ arity
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> arityDC [
 	<gtExample>
 	| arity |
@@ -38,7 +38,7 @@ LbSignatureExamples >> arityDC [
 	^ arity
 ]
 
-{ #category : 'support' }
+{ #category : #support }
 LbSignatureExamples >> arityForArgSorts: argSorts [
 	| sortGraph |
 	sortGraph := LbSortGraphExamples new sortGraphABCD.
@@ -47,13 +47,13 @@ LbSignatureExamples >> arityForArgSorts: argSorts [
 		argSorts: (argSorts collect: [ :each | sortGraph sortNamed: each ])
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> arityKindOfA [
 	<gtExample>
 	^ self arityA liftToKindLevel
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> booleanSignature [
 	<gtExample>
 	^ ((LbSignatureBuilder sortGraph: LbBuiltinSortGraphs truthSortGraph)
@@ -67,7 +67,7 @@ LbSignatureExamples >> booleanSignature [
 		signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> emptyArity [
 	<gtExample>
 	| sortGraph |
@@ -77,7 +77,7 @@ LbSignatureExamples >> emptyArity [
 		argSorts: Array new
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> infixOpFoo [
 	<gtExample>
 	| opName |
@@ -87,7 +87,7 @@ LbSignatureExamples >> infixOpFoo [
 	^ opName
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> nonMonotonicOpInSignatureBuilder [
 	<gtExample>
 	| builder |
@@ -98,7 +98,7 @@ LbSignatureExamples >> nonMonotonicOpInSignatureBuilder [
 	^ builder
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> opFooOfA [
 	<gtExample>
 	| signature argSorts op |
@@ -116,7 +116,7 @@ LbSignatureExamples >> opFooOfA [
 	^ op
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> opVarConflictInSignatureBuilder [
 	<gtExample>
 	| builder |
@@ -128,7 +128,7 @@ LbSignatureExamples >> opVarConflictInSignatureBuilder [
 	^ builder
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> prefixOpFoo [
 	<gtExample>
 	| opName |
@@ -137,7 +137,7 @@ LbSignatureExamples >> prefixOpFoo [
 	^ opName
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> signatureFooBar [
 	<gtExample>
 	| builder signature |
@@ -157,7 +157,7 @@ LbSignatureExamples >> signatureFooBar [
 	^ signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> signatureFooBarExplicit [
 	<gtExample>
 	| builder sortGraph sortA sortB sortC sortD |
@@ -192,7 +192,7 @@ LbSignatureExamples >> signatureFooBarExplicit [
 	^ builder signature
 ]
 
-{ #category : 'example' }
+{ #category : #example }
 LbSignatureExamples >> sortConflictInSignatureBuilder [
 	<gtExample>
 	| builder |

@@ -2,8 +2,8 @@
 I represent a Leibniz variable.
 "
 Class {
-	#name : 'LbVarTerm',
-	#superclass : 'LbTerm',
+	#name : #LbVarTerm,
+	#superclass : #LbTerm,
 	#instVars : [
 		'sort',
 		'name'
@@ -11,7 +11,7 @@ Class {
 	#category : 'Leibniz-3-Terms'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbVarTerm class >> name: anOpName sort: aSort signature: aSignature [
 	^ self basicNew
 		initializeWithName: anOpName
@@ -20,78 +20,78 @@ LbVarTerm class >> name: anOpName sort: aSort signature: aSignature [
 		yourself
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbVarTerm >> assertNotAVariable [
 	Error signal: 'No variables allowed in matching terms'
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbVarTerm >> convertToSignature: aSignature extraVariables: aDictionary [
 	| vars |
 	vars := aDictionary collect: [ :eachSort | aSignature sortNamed: eachSort name ].
 	^ aSignature zeroArgTermNamed: name extraVariables: vars
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 LbVarTerm >> hasVariables [
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbVarTerm >> headOpName [
 	^ LbPseudoOperatorName for: #Variable
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbVarTerm >> initializeWithName: aSymbol sort: aSort signature: aSignature [
 	name := aSymbol.
 	sort := aSort.
 	signature := aSignature
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 LbVarTerm >> isVariable [
 	^ true
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbVarTerm >> match: otherTerm variables: variables [
 	variables defineVar: name sort: sort.
 	otherTerm matchVar: name ofSort: sort variables: variables
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbVarTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList variables: variables [
 	self error: 'Variable in term being matched to'
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbVarTerm >> matchVar: aSymbol ofSort: aSort variables: variables [
 	self error: 'Variable in term being matched to'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbVarTerm >> name [
 	^ name
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbVarTerm >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPutAll: name internalSymbol asString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbVarTerm >> sort [
 	^sort
 ]
 
-{ #category : 'substituting' }
+{ #category : #substituting }
 LbVarTerm >> substitute: aSubstitution [
 	(aSubstitution bindingFor: name) ifNotNil: [ :value | ^ value ].
 	^ self
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbVarTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol variables: variables [
 	| taggedName |
 	taggedName := LbTaggedVariableName tag: aSymbol name: name.
@@ -99,7 +99,7 @@ LbVarTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol variable
 	otherTerm unifyTagged: anotherSymbol withVar: taggedName sort: sort variables: variables
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbVarTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: anotherSymbol variables: variables [
 	| taggedName |
 	taggedName := LbTaggedVariableName tag: aSymbol name: name.
@@ -107,7 +107,7 @@ LbVarTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: anotherSymbo
 	otherTerm unifyTagged: anotherSymbol withVar: taggedName sort: sort variables: variables
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbVarTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: anotherSymbol op: anOpName args: anArgList variables: variables [
 	| taggedName |
 	taggedName := LbTaggedVariableName tag: aSymbol name: name.
@@ -115,7 +115,7 @@ LbVarTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: anotherSymbol op
 	otherTerm unifyTagged: anotherSymbol withVar: taggedName sort: sort variables: variables
 ]
 
-{ #category : 'matching' }
+{ #category : #matching }
 LbVarTerm >> unifyTagged: aSymbol withVar: aTaggedName sort: aSort variables: variables [
 	| taggedName |
 	taggedName := LbTaggedVariableName tag: aSymbol name: name.
@@ -123,7 +123,7 @@ LbVarTerm >> unifyTagged: aSymbol withVar: aTaggedName sort: aSort variables: va
 	variables makeVar: taggedName ofSort: sort equalToVar: aTaggedName ofSort: aSort
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbVarTerm >> variables [
 	^ Dictionary with: name -> sort
 

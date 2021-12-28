@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbDSortGraphBuilder',
-	#superclass : 'Object',
+	#name : #LbDSortGraphBuilder,
+	#superclass : #Object,
 	#instVars : [
 		'sortContextBuilder',
 		'sortContext'
@@ -8,24 +8,24 @@ Class {
 	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbDSortGraphBuilder class >> fromSortContext: aContext [
 	^ self new
 		addSortContext: aContext;
 		yourself
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbDSortGraphBuilder >> addSortContext: aContext [
 	sortContextBuilder include: aContext mode: #extend
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbDSortGraphBuilder >> addSortGraph: aSortGraph [
 	self addSortContext:  aSortGraph sortContext
 ]
 
-{ #category : 'building' }
+{ #category : #building }
 LbDSortGraphBuilder >> buildSortContext [
 	| sortSort |
 	sortContext := sortContextBuilder context.
@@ -37,7 +37,7 @@ LbDSortGraphBuilder >> buildSortContext [
 		description: 'Sort sort may not have supersorts'.
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbDSortGraphBuilder >> initialize [
 	| basicSortContext |
 	basicSortContext := (LbContextBuilder name: 'sorts')
@@ -47,7 +47,7 @@ LbDSortGraphBuilder >> initialize [
 	self addSortContext: basicSortContext
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDSortGraphBuilder >> parseAndAdd: aString [
 	"Note: this works for plain sorts only.
 	It's a quick hack to re-use code for constructing LbSortGraphs"
@@ -79,7 +79,7 @@ LbDSortGraphBuilder >> parseAndAdd: aString [
 	self addSortContext: partialSortContext
 ]
 
-{ #category : 'building' }
+{ #category : #building }
 LbDSortGraphBuilder >> sortGraph [
 	self buildSortContext.
 	^ LbDSortGraph sortContext: sortContext

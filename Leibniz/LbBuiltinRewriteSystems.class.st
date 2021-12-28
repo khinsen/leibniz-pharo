@@ -1,10 +1,10 @@
 Class {
-	#name : 'LbBuiltinRewriteSystems',
-	#superclass : 'Object',
+	#name : #LbBuiltinRewriteSystems,
+	#superclass : #Object,
 	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinRewriteSystems class >> fpNumberRewriteSystem [
 	<gtExample>
 	^ (LbRewriteSystemBuilder signature: LbBuiltinSignatures fpNumberSignature)
@@ -46,7 +46,7 @@ LbBuiltinRewriteSystems class >> fpNumberRewriteSystem [
 		rewriteSystem
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinRewriteSystems class >> integerRewriteSystem [
 	<gtExample>
 	^ (LbRewriteSystemBuilder signature: LbBuiltinSignatures integerSignature)
@@ -90,7 +90,7 @@ LbBuiltinRewriteSystems class >> integerRewriteSystem [
 		rewriteSystem
 ]
 
-{ #category : 'builtins' }
+{ #category : #builtins }
 LbBuiltinRewriteSystems class >> rationalNumberRewriteSystem [
 	<gtExample>
 	^ (LbRewriteSystemBuilder signature: LbBuiltinSignatures rationalNumberSignature)
@@ -139,7 +139,7 @@ LbBuiltinRewriteSystems class >> rationalNumberRewriteSystem [
 		rewriteSystem
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbBuiltinRewriteSystems class >> realNumberRewriteSystem [
 	<gtExample>
 	^ (LbRewriteSystemBuilder signature: LbBuiltinSignatures realNumberSignature)

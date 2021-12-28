@@ -1,6 +1,6 @@
-Extension { #name : 'GtPhlowProtoView' }
+Extension { #name : #GtPhlowProtoView }
 
-{ #category : '*Leibniz' }
+{ #category : #'*Leibniz' }
 GtPhlowProtoView >> lbColumnedTree [
 	^ LbPhlowColumnedTreeView new
 		originalView: self;
@@ -9,7 +9,7 @@ GtPhlowProtoView >> lbColumnedTree [
 			collect)
 ]
 
-{ #category : '*Leibniz' }
+{ #category : #'*Leibniz' }
 GtPhlowProtoView >> lbTree [
 	^ LbPhlowTreeView new
 		originalView: self;

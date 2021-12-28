@@ -1,6 +1,6 @@
-Extension { #name : 'GtHome' }
+Extension { #name : #GtHome }
 
-{ #category : '*Leibniz' }
+{ #category : #'*Leibniz' }
 GtHome >> leibnizSection [
 	<gtHomeSection>
 	^ LbGtHomeSection new

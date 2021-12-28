@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbDSignatureBuilder',
-	#superclass : 'Object',
+	#name : #LbDSignatureBuilder,
+	#superclass : #Object,
 	#instVars : [
 		'sortGraph',
 		'variables',
@@ -12,26 +12,26 @@ Class {
 	#category : 'Leibniz-7-DependentSorts'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbDSignatureBuilder class >> sortGraph: aSortGraph [
 	^ self basicNew
 		initializeWithSortGraph: aSortGraph;
 		yourself
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbDSignatureBuilder >> addBuiltin: aSymbol [
 	builtins add: aSymbol
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbDSignatureBuilder >> addBuiltinsFromSignature: aSignature [
 	aSignature withBuiltinsDo:
 		[ :symbol |
 		  self addBuiltin: symbol ]
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbDSignatureBuilder >> addOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern [
 	| arity kindArity |
 	self checksForNewOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern.
@@ -48,7 +48,7 @@ LbDSignatureBuilder >> addOp: anOpName withArgs: aSortPatternArray ofSort: aSort
 		addArity: arity withSort: aSortPattern
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbDSignatureBuilder >> addOpsFromSignature: aSignature [
 	aSignature withOperatorsDo: [ :eachOp |
 		eachOp withRanksDo: [ :argSorts :sort |
@@ -58,14 +58,14 @@ LbDSignatureBuilder >> addOpsFromSignature: aSignature [
 				ofSort: (self sortGraph parseSort: sort asLeibnizSyntaxString) ] ]
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbDSignatureBuilder >> addSignature: aSignature includeVars: aBoolean [
 	self addBuiltinsFromSignature: aSignature.
 	self addOpsFromSignature: aSignature.
 	aBoolean ifTrue: [ self addVarsFromSignature: aSignature ]
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbDSignatureBuilder >> addVar: anOpName ofSort: aSortPattern [
 	self assert: (sortGraph includes: aSortPattern).
 	operators at: anOpName ifPresent: [ :op |
@@ -80,7 +80,7 @@ LbDSignatureBuilder >> addVar: anOpName ofSort: aSortPattern [
 		ifAbsent: [ variables at: anOpName put: aSortPattern ]
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbDSignatureBuilder >> addVarsFromSignature: aSignature [
 	aSignature withVariablesDo: [ :each |
 		self
@@ -88,7 +88,7 @@ LbDSignatureBuilder >> addVarsFromSignature: aSignature [
 			ofSort: (self sortGraph parseSort: each sort asLeibnizSyntaxString) ]
 ]
 
-{ #category : 'private' }
+{ #category : #private }
 LbDSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortPatternArray ofSort: aSortPattern [
 	| argSortVariables |
 
@@ -111,13 +111,13 @@ LbDSignatureBuilder >> checksForNewOp: anOpName withArgs: aSortPatternArray ofSo
 			description: 'Variable ', each key asSymbol, ' in operator sort but not in arguments' ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbDSignatureBuilder >> initializeParsersFor: aSignature [
 	opParser := LbDSignatureParser newStartingAt: #opEnd.
 	varParser := LbDSignatureParser newStartingAt: #varEnd
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 LbDSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 	sortGraph := aSortGraph.
 	builtins := Set new.
@@ -126,7 +126,7 @@ LbDSignatureBuilder >> initializeWithSortGraph: aSortGraph [
 	self initializeParsersFor: aSortGraph sortContext signature
 ]
 
-{ #category : 'adding' }
+{ #category : #adding }
 LbDSignatureBuilder >> parseAndAddOp: aString [
 	| parsedOp argSorts sort |
 	parsedOp := (opParser parse: aString).
@@ -141,7 +141,7 @@ LbDSignatureBuilder >> parseAndAddOp: aString [
 	self addOp: parsedOp first withArgs: argSorts ofSort: sort
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDSignatureBuilder >> parseAndAddVar: aString [
 	| parsedVar |
 	parsedVar := (varParser parse: aString).
@@ -154,7 +154,7 @@ LbDSignatureBuilder >> parseAndAddVar: aString [
 	self addVar: parsedVar first ofSort: (sortGraph sortFor: parsedVar second)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDSignatureBuilder >> signature [
 	^ LbDSignature
 		sortGraph: sortGraph
@@ -163,7 +163,7 @@ LbDSignatureBuilder >> signature [
 		variables:  variables
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbDSignatureBuilder >> sortGraph [
 	^ sortGraph
 ]

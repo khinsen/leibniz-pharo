@@ -1,6 +1,6 @@
 Class {
-	#name : 'LbFunctionRule',
-	#superclass : 'LbRule',
+	#name : #LbFunctionRule,
+	#superclass : #LbRule,
 	#traits : 'EqualityThroughVariables',
 	#classTraits : 'EqualityThroughVariables classTrait',
 	#instVars : [
@@ -10,7 +10,7 @@ Class {
 	#category : 'Leibniz-4-Rules'
 }
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbFunctionRule class >> pattern: aPattern condition: aBooleanTerm function: anArray [
 	^ self
 		pattern: aPattern
@@ -19,7 +19,7 @@ LbFunctionRule class >> pattern: aPattern condition: aBooleanTerm function: anAr
 		function: anArray
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbFunctionRule class >> pattern: aPattern function: anArray [
 	^ self
 		pattern: aPattern
@@ -27,7 +27,7 @@ LbFunctionRule class >> pattern: aPattern function: anArray [
 		function: anArray
 ]
 
-{ #category : 'instance creation' }
+{ #category : #'instance creation' }
 LbFunctionRule class >> pattern: aPattern localVariables: aDictionary condition: aBooleanTerm function: anArray [
 	^ self basicNew
 			 initializeWithPattern: aPattern
@@ -37,12 +37,12 @@ LbFunctionRule class >> pattern: aPattern localVariables: aDictionary condition:
 			yourself
 ]
 
-{ #category : 'rewriting' }
+{ #category : #rewriting }
 LbFunctionRule >> apply: aSubstitution [
 	^ block value: signature value: aSubstitution bindings
 ]
 
-{ #category : 'converting' }
+{ #category : #converting }
 LbFunctionRule >> convertToSignature: aSignature [
 	| convertTerm convertedVars |
 	convertTerm := [ :term | term convertToSignature: aSignature extraVariables: variables ].
@@ -54,12 +54,12 @@ LbFunctionRule >> convertToSignature: aSignature [
 		function: function
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 LbFunctionRule >> function [
 	^ function
 ]
 
-{ #category : 'initializing' }
+{ #category : #initializing }
 LbFunctionRule >> initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm function: anArray [
 	| code tempClass |
 	self initializeWithPattern: aPattern localVariables: aDictionary condition: aBooleanTerm.
@@ -84,13 +84,13 @@ LbFunctionRule >> initializeWithPattern: aPattern localVariables: aDictionary co
 	self beRecursivelyReadOnlyObject
 ]
 
-{ #category : 'comparing' }
+{ #category : #comparing }
 LbFunctionRule >> instVarsExcludedFromEquality [
 	^#(#block #function)
 
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 LbFunctionRule >> printBodyAsLeibnizSyntaxOn: aStream [
 	pattern printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' → '''.
