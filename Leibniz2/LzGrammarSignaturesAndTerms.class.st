@@ -24,10 +24,8 @@ Class {
 		'forAllClause',
 		'sortArg',
 		'varArg',
-		'infixVarArg',
-		'infixSortArg',
-		'infixArg',
-		'pattern'
+		'pattern',
+		'varTerm'
 	],
 	#category : #'Leibniz2-Parser'
 }
@@ -48,23 +46,8 @@ LzGrammarSignaturesAndTerms >> forAllClause [
 ]
 
 { #category : #signature }
-LzGrammarSignaturesAndTerms >> infixArg [
-	^ infixVarArg / infixSortArg
-]
-
-{ #category : #signature }
 LzGrammarSignaturesAndTerms >> infixOp [
-	^ infixArg trim, opIdentifier trim, infixArg trim
-]
-
-{ #category : #signature }
-LzGrammarSignaturesAndTerms >> infixSortArg [
-	^ term
-]
-
-{ #category : #signature }
-LzGrammarSignaturesAndTerms >> infixVarArg [
-	^ varIdentifier, colon, term
+	^ arg trim, opIdentifier trim, arg trim
 ]
 
 { #category : #terms }
@@ -130,7 +113,7 @@ LzGrammarSignaturesAndTerms >> prefixOpTerm [
 
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> simpleTerm [
-	^ literalTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm
+	^ literalTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm / varTerm
 ]
 
 { #category : #terms }
@@ -206,6 +189,11 @@ LzGrammarSignaturesAndTerms >> varArg [
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> varEnd [
 	^ var end
+]
+
+{ #category : #terms }
+LzGrammarSignaturesAndTerms >> varTerm [
+	^ varIdentifier
 ]
 
 { #category : #signature }

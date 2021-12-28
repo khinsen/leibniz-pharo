@@ -19,11 +19,6 @@ LzOperatorName >> addPrefix: aSymbol [
 	self shouldNotImplement
 ]
 
-{ #category : #converting }
-LzOperatorName >> asLzOperatorName [
-	^ self
-]
-
 { #category : #accessing }
 LzOperatorName >> asString [
 	^ internalSymbol asString

@@ -70,12 +70,6 @@ LzParser >> infixOp [
 		{ LzInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
 ]
 
-{ #category : #signature }
-LzParser >> infixVarArg [
-	^ super infixVarArg ==> [ :nodes |
-		{ nodes first. nodes third first } ]
-]
-
 { #category : #terms }
 LzParser >> nonInfixTerm [
 	^ super nonInfixTerm ==> [ :nodes |
@@ -194,14 +188,17 @@ LzParser >> term [
 { #category : #signature }
 LzParser >> var [
 	^ super var ==> [ :nodes |
-		self assert: nodes first isEmpty. "Variables, only used for dependent sorts"
-		{ nodes second. nodes fourth first } ]
+		| variables varName sortTerm |
+		variables := nodes first.
+		varName := LzVarName for: nodes second.
+		sortTerm := nodes fourth first.
+		{ varName.  { variables. sortTerm } } ]
 ]
 
-{ #category : #signature }
-LzParser >> varArg [
-	^ super varArg ==> [ :nodes |
-		{ nodes first. nodes third first } ]
+{ #category : #terms }
+LzParser >> varTerm [
+	^ super varTerm ==> [ :symbol |
+		{ LzVarName for: symbol } ]
 ]
 
 { #category : #signature }

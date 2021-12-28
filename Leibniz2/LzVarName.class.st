@@ -1,16 +1,21 @@
 Class {
-	#name : #LzPrefixOperatorName,
+	#name : #LzVarName,
 	#superclass : #LzOperatorName,
 	#category : #'Leibniz2-Parser'
 }
 
 { #category : #'instance creation' }
-LzPrefixOperatorName class >> for: aStringOrSymbol [
+LzVarName class >> for: aStringOrSymbol [
 	^ self new internalSymbol: aStringOrSymbol
 ]
 
+{ #category : #modifying }
+LzVarName >> addPrefix: aSymbol [
+	^ LzVarName for: aSymbol, internalSymbol
+]
+
 { #category : #printing }
-LzPrefixOperatorName >> printForArity: anArity on: aStream [
+LzVarName >> printForArity: anArity on: aStream [
 	aStream nextPutAll: internalSymbol.
 	anArity ifNotEmpty: [
 		aStream nextPut: $(.

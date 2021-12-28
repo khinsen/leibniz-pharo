@@ -28,7 +28,14 @@ LzParserExamples >> literalTerms [
 LzParserExamples >> opDeclarations [
 	<gtExample>
 	^ {
-		'foo : Foo'
+		'foo : Foo'.
+		'foo(Bar) : Foo(Bar)'.
+		'foo(?bar:Bar) : Foo(Bar)'.
+		'foo(Bar, Baz) : Foo(Bar, Baz)'.
+		'Foo[Bar] : Baz'.
+		'Foo^{Bar} : Baz'.
+		'Foo_{Bar} : Baz'.
+		'Foo + Bar : Baz'.
 	} collect: [ :each |
 		self opParser parse: each ]
 ]
@@ -50,6 +57,7 @@ LzParserExamples >> simpleTerms [
 	<gtExample>
 	^ {
 		'foo'.
+		'?foo'.
 		'foo(bar)'.
 		'(foo + bar)'.
 		'(foo[bar])'.
@@ -71,6 +79,7 @@ LzParserExamples >> terms [
 	^ {
 		'foo + bar'.
 		'foo + bar + baz'.
+		'foo + (bar + baz)'.
 		'foo(bar, baz)'.
 		'foo(bar + baz)'.
 		'foo[bar]'.
