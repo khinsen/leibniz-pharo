@@ -51,3 +51,8 @@ LzGrammarRulesAndAxioms >> rule [
 LzGrammarRulesAndAxioms >> subsortAxiom [
 	^ forAllClause star trim, term, subsortSymbol trim, term
 ]
+
+{ #category : #axioms }
+LzGrammarRulesAndAxioms >> subsortAxiomEnd [
+	^ subsortAxiom end
+]

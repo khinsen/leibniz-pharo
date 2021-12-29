@@ -20,22 +20,6 @@ LzParser >> code [
 		==> [ :nodes | { nodes second. nodes fifth } ]
 ]
 
-{ #category : #axioms }
-LzParser >> equalityAxiom [
-	^ super equalityAxiom ==> [ :nodes |
-		[ :signature |
-			| variables |
-			variables := (nodes first collect: [ :each |
-				each cull: signature cull: Dictionary new ])
-					asDictionary.
-			LbEqualityAxiom
-				left: (nodes second cull: signature cull: variables)
-				right: (nodes fourth cull: signature cull: variables)
-				localVariables: variables
-				condition: (nodes fifth ifNotNil:
-								[ :c | c second cull: signature cull: variables ]) ] ]
-]
-
 { #category : #rules }
 LzParser >> fnRule [
 	^ super fnRule ==> [ :nodes |
@@ -55,13 +39,10 @@ LzParser >> fnRule [
 { #category : #signature }
 LzParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
-		| varName sortName |
-		varName := nodes second asSymbol asLbOperatorName.
-		sortName := nodes fourth first
-						value: LbFakeSignatureForSortParser new
-						value: Dictionary new.
-		[ :aSignature :aDictionary |
-			varName -> (aSignature sortNamed: sortName) ] ]
+		| varName sortTerm |
+		varName := LzVarName for: nodes second.
+		sortTerm := nodes fourth.
+		{ varName. sortTerm } ]
 ]
 
 { #category : #signature }
@@ -148,15 +129,11 @@ LzParser >> subscriptOp [
 { #category : #axioms }
 LzParser >> subsortAxiom [
 	^ super subsortAxiom ==> [ :nodes |
-		[ :signature |
-			| variables |
-			variables := (nodes first collect: [ :each |
-				each cull: signature cull: Dictionary new ])
-					asDictionary.
-			LbSubsortAxiom
-				subsort: (nodes second cull: signature cull: variables)
-				supersort: (nodes fourth cull: signature cull: variables)
-				localVariables: variables ] ]
+		| variables subsort supersort |
+		variables := nodes first.
+		subsort := nodes second.
+		supersort := nodes fourth.
+		{ variables. subsort. supersort } ]
 ]
 
 { #category : #signature }
