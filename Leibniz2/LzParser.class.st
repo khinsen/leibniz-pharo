@@ -39,10 +39,22 @@ LzParser >> fnRule [
 { #category : #signature }
 LzParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
-		| varName sortTerm |
-		varName := LzVarName for: nodes second.
-		sortTerm := nodes fourth.
-		{ varName. sortTerm } ]
+		LzVarBlueprint new
+			name: (LzVarName for: nodes second);
+			sort: nodes fourth ]
+]
+
+{ #category : #terms }
+LzParser >> fpNumberTerm [
+	^ super fpNumberTerm
+		==> [ :string |
+		 	"In Pharo, a number with an exponent but without a fractional part
+		 	 is an integer, not a float.
+			  Workaround: convert the converted string explicitly to a float."
+			  LzLiteralBlueprint new
+					value: string asNumber asFloat;
+					sort: (LzOpTermBlueprint new
+							opName: (LzPrefixOperatorName for: #fpNumber)) ]
 ]
 
 { #category : #signature }
@@ -52,26 +64,34 @@ LzParser >> infixOp [
 ]
 
 { #category : #terms }
+LzParser >> integerTerm [
+	^ super integerTerm
+		==> [ :string |
+			  LzLiteralBlueprint new
+					value: string asNumber;
+					sort: (LzOpTermBlueprint new
+							opName: (LzPrefixOperatorName for: #integer)) ]
+]
+
+{ #category : #terms }
 LzParser >> nonInfixTerm [
 	^ super nonInfixTerm ==> [ :nodes |
 		nodes second
 			ifNil: [ nodes first ] "simpleTerm, no suffix"
 			ifNotNil: [ :suffixNode |
-				| name args |
-				name := suffixNode first.
-				args := suffixNode second copyWithFirst: nodes first.
-				{ name. args } ] ]
+				LzOpTermBlueprint new
+					opName: suffixNode first;
+					args: (suffixNode second copyWithFirst: nodes first) ] ]
 ]
 
 { #category : #signature }
 LzParser >> op [
 	^ super op ==> [ :nodes |
-		| variables opName opArgs opSort |
-		variables := nodes first.
-		opName := nodes second first.
-		opArgs := nodes second second.
-		opSort := nodes fourth.
-		{ opName. opArgs. opSort } ]
+		LzOpBlueprint new
+			name: nodes second first;
+			args: nodes second second;
+			sort: nodes fourth;
+			variables: nodes first ]
 ]
 
 { #category : #terms }
@@ -80,7 +100,9 @@ LzParser >> pattern [
 		| variables parsedTerm |
 		variables := nodes first.
 		parsedTerm := nodes second.
-		{ variables. parsedTerm } ]
+		LzPatternBlueprint new
+			variables: nodes first;
+			term: nodes second ]
 ]
 
 { #category : #signature }
@@ -95,10 +117,19 @@ LzParser >> prefixOp [
 { #category : #terms }
 LzParser >> prefixOpTerm [
 	^ super prefixOpTerm ==> [ :nodes |
-		| name args |
-		name := LzPrefixOperatorName for: nodes first.
-		args := (nodes at: 3) reject: [ :element | element = $, ].
-		{ name. args } ]
+		LzOpTermBlueprint new
+			opName: (LzPrefixOperatorName for: nodes first);
+			args: ((nodes at: 3) reject: [ :element | element = $, ]) ]
+]
+
+{ #category : #terms }
+LzParser >> rationalNumberTerm [
+	^ super rationalNumberTerm
+		==> [ :string |
+			  LzLiteralBlueprint new
+				value: (Fraction readFromString: string);
+				sort: (LzOpTermBlueprint new
+						opName: (LzPrefixOperatorName for: #rational)) ]
 ]
 
 { #category : #rules }
@@ -115,6 +146,16 @@ LzParser >> rewriteRule [
 				condition: (nodes fifth ifNotNil:
 								[ :c | c second cull: signature cull: variables ])
 				replacement: (nodes fourth cull: signature cull: variables) ] ]
+]
+
+{ #category : #terms }
+LzParser >> stringTerm [
+	^ super stringTerm
+		==> [ :string |
+			  LzLiteralBlueprint new
+					value: string;
+					sort: (LzOpTermBlueprint new
+							opName: (LzPrefixOperatorName for: #string)) ]
 ]
 
 { #category : #signature }
@@ -155,27 +196,29 @@ LzParser >> term [
 				"nodes contains the infix operator symbol followed by
 				all the arguments. Example 'a + b + c' becomes
 				{ '+'. a. b. c } with a b c already converted to blocks."
-				name := LzInfixOperatorName for: nodes first asSymbol.
+				name := LzInfixOperatorName
+							for: nodes first asSymbol.
 				(nodes allButFirst: 2)
 					inject: nodes second
 					into: [ :result :nextArg |
-						{ name. { result . nextArg } } ] ] ]
+						LzOpTermBlueprint new
+							opName: name;
+							args: { result . nextArg } ] ] ]
 ]
 
 { #category : #signature }
 LzParser >> var [
 	^ super var ==> [ :nodes |
-		| variables varName sortTerm |
-		variables := nodes first.
-		varName := LzVarName for: nodes second.
-		sortTerm := nodes fourth first.
-		{ varName.  { variables. sortTerm } } ]
+		LzVarBlueprint new
+			name: (LzVarName for: nodes first);
+			sort: nodes third ]
 ]
 
 { #category : #terms }
 LzParser >> varTerm [
 	^ super varTerm ==> [ :symbol |
-		{ LzVarName for: symbol } ]
+		LzVarTermBlueprint new
+			name: (LzVarName for: symbol) ]
 ]
 
 { #category : #signature }
@@ -187,5 +230,7 @@ LzParser >> zeroArgOp [
 { #category : #terms }
 LzParser >> zeroArgTerm [
 	^ super zeroArgTerm ==> [ :symbol |
-		{ LzPrefixOperatorName for: symbol } ]
+		LzOpTermBlueprint new
+			opName: (LzPrefixOperatorName for: symbol);
+			args: #() ]
 ]

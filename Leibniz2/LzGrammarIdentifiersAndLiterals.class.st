@@ -55,15 +55,9 @@ LzGrammarIdentifiersAndLiterals >> fpIntegerPart [
 LzGrammarIdentifiersAndLiterals >> fpNumberTerm [
 	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
 			/ (fpIntegerPart , fpExponentPart)) flatten
-		==> [ :value |
-			"Converting the string to a float requires some trickery:
-		 	- Pharo doesn't allow a dot followed by an exponent without any fractional part.
-				Workaround: replace '.e' by '.0e'
-		 	- In Pharo, a number with an exponent but without a fractional part is an integer, not a float.
-				Workaround: convert the converted string explicitly to a float."
-				LzLiteral new
-					value: (value copyReplaceAll: '.e' with: '.0e') asNumber asFloat;
-					type: #fpNumber ]
+	 	"Pharo doesn't allow a dot followed by an exponent without any fractional part.
+		  Workaround: replace '.e' by '.0e'"
+		==> [ :value | value copyReplaceAll: '.e' with: '.0e' ]
 ]
 
 { #category : #identifiers }
@@ -88,10 +82,6 @@ LzGrammarIdentifiersAndLiterals >> identifierCharacter [
 { #category : #literals }
 LzGrammarIdentifiersAndLiterals >> integerTerm [
 	^ ($- asPParser optional , #digit asPParser plus) flatten
-		==> [ :value |
-				LzLiteral new
-					value: value asNumber;
-					type: #integer ]
 ]
 
 { #category : #identifiers }
@@ -108,19 +98,12 @@ LzGrammarIdentifiersAndLiterals >> rationalNumberTerm [
 	^ ($- asPParser optional , #digit asPParser plus ,
 			$/ asPParser ,
 			$0 asPParser not , #digit asPParser star) flatten 
-		==> [ :value |
-				LzLiteral new
-					value: (Fraction readFromString: value);
-					type: #rational ]
 ]
 
 { #category : #literals }
 LzGrammarIdentifiersAndLiterals >> stringTerm [
 	^ ($" asPParser , $" asPParser negate star , $" asPParser) flatten 
-		==> [ :value |
-				LzLiteral new
-					value: (value copyFrom: 2 to: value size - 1);
-					type: #string ]
+		==> [ :value | value copyFrom: 2 to: value size - 1 ]
 ]
 
 { #category : #identifiers }

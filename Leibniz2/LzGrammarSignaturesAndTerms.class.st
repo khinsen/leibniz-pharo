@@ -178,7 +178,7 @@ LzGrammarSignaturesAndTerms >> termEnd [
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> var [
-	^ forAllClause star, varIdentifier trim, colon, simpleTerm trim
+	^ varIdentifier trim, colon, pattern trim
 ]
 
 { #category : #signature }

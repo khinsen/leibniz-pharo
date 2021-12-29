@@ -45,6 +45,7 @@ LzParserExamples >> opDeclarations [
 		'Foo + Bar : Baz'.
 		'boolean ∨ boolean : boolean'.
 		'bag(?element:Sort, ?n:ℕ) : Sort'.
+		'∀ ?s:sort ∀ ?n:ℕ ∀ ?m:ℕ (list(?s, ?n)) ++ (list(?s, ?m)) : list(?s, ?n + ?m)'.
 	} collect: [ :each |
 		self opParser parse: each ]
 ]
@@ -52,7 +53,7 @@ LzParserExamples >> opDeclarations [
 { #category : #accessing }
 LzParserExamples >> opParser [
 	<gtExample>
-	^ LzParser newStartingAt: #op
+	^ LzParser newStartingAt: #opEnd
 ]
 
 { #category : #accessing }
@@ -159,4 +160,20 @@ LzParserExamples >> terms [
 	^ self termStrings
 		collect: [ :each |
 			self termParser parse: each ]
+]
+
+{ #category : #accessing }
+LzParserExamples >> varDeclarations [
+	<gtExample>
+	^ {
+		'?foo: Foo'.
+		'?list : ∀ ?n:ℕ list(n)'.
+	} collect: [ :each |
+		self varParser parse: each ]
+]
+
+{ #category : #accessing }
+LzParserExamples >> varParser [
+	<gtExample>
+	^ LzParser newStartingAt: #varEnd
 ]
