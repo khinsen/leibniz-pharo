@@ -8,9 +8,16 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
+{ #category : #building }
+LzContextBuilder >> context [
+	self notYetImplemented
+]
+
 { #category : #initializing }
 LzContextBuilder >> initialize [
-	sortGraphBuilder := LzSortGraphBuilder new
+	sortGraphBuilder := LzSortGraphBuilder new.
+	signatureBuilder := LzSignatureBuilder new
+							sortGraphBuilder: sortGraphBuilder.
 ]
 
 { #category : #defining }
@@ -20,20 +27,24 @@ LzContextBuilder >> op: aString [
 
 { #category : #defining }
 LzContextBuilder >> signatureBuilder [
-	^ signatureBuilder ifNil: [
-		signatureBuilder :=
-			LzSignatureBuilder new
-				sortGraph: self sortGraphBuilder build ]
+	^ signatureBuilder
 ]
 
 { #category : #defining }
 LzContextBuilder >> sort: aString [
-	self assert: signatureBuilder isNil.
 	self sortGraphBuilder sort: aString
 ]
 
 { #category : #defining }
+LzContextBuilder >> sortContext: LzBuiltinContexts [ 
+]
+
+{ #category : #defining }
 LzContextBuilder >> sortGraphBuilder [
-	^ sortGraphBuilder ifNil: [
-		sortGraphBuilder := LzSortGraphBuilder new ]
+	^ sortGraphBuilder
+]
+
+{ #category : #defining }
+LzContextBuilder >> subsort: aString [
+	self sortGraphBuilder subsort: aString
 ]

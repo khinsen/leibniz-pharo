@@ -4,6 +4,16 @@ Class {
 	#category : #'Leibniz2-Parser'
 }
 
+{ #category : #comparing }
+LzASTNode >> = anObject [
+	self == anObject ifTrue: [ ^true ].
+	self class = anObject class ifFalse: [ ^false ].
+	self fieldNames do: [ :field |
+		(self instVarNamed: field) = (anObject instVarNamed: field)
+				ifFalse: [ ^ false ] ].
+	^ true
+]
+
 { #category : #converting }
 LzASTNode >> associations [
 	^ self fieldNames collect: [ :each |
@@ -23,7 +33,7 @@ LzASTNode >> gtTreeFor: aView [
 		priority: 1;
 		items: [ self associations ];
 		children: [ :each | 
-			each value isLzBlueprint
+			each value isLzASTNode
 				ifTrue: [ each value associations ]
 				ifFalse: [ (each value isArray and: [ each value allSatisfy: #isDictionary ])
 						ifTrue: [ each value collectWithIndex: [ :x :i | i -> x ] ]
@@ -33,8 +43,16 @@ LzASTNode >> gtTreeFor: aView [
 		send: [ :assoc | assoc value ]
 ]
 
+{ #category : #comparing }
+LzASTNode >> hash [
+	^ self fieldNames
+		inject: self class hash
+		into: [ :total :each |
+			total bitXor: (self instVarNamed: each) hash ]
+]
+
 { #category : #testing }
-LzASTNode >> isLzBlueprint [
+LzASTNode >> isLzASTNode [
 	^ true
 ]
 

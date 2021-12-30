@@ -2,29 +2,53 @@ Class {
 	#name : #LzSignatureBuilder,
 	#superclass : #Object,
 	#instVars : [
-		'sortGraph',
 		'varDeclarations',
-		'opDeclarations'
+		'opDeclarations',
+		'sortGraphBuilder'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
 
-{ #category : #building }
-LzSignatureBuilder >> build [
-	self notYetImplemented
+{ #category : #accessing }
+LzSignatureBuilder >> initialize [
+	opDeclarations := OrderedCollection new.
+	varDeclarations := OrderedCollection new.
 ]
 
 { #category : #accessing }
 LzSignatureBuilder >> op: aString [
+	opDeclarations add:
+		(LzParser
+			parse: aString
+			startingAt: #opEnd
+			yielding: LzASTOpDeclaration).
+]
+
+{ #category : #building }
+LzSignatureBuilder >> signature [
 	self notYetImplemented
 ]
 
 { #category : #accessing }
 LzSignatureBuilder >> sortGraph [
-	^ sortGraph
+	^ self sortGraphBuilder build
 ]
 
 { #category : #accessing }
-LzSignatureBuilder >> sortGraph: aSortGraph [
-	sortGraph := aSortGraph
+LzSignatureBuilder >> sortGraphBuilder [
+	^ sortGraphBuilder
+]
+
+{ #category : #initializing }
+LzSignatureBuilder >> sortGraphBuilder: aSortGraphBuilder [
+	sortGraphBuilder := aSortGraphBuilder
+]
+
+{ #category : #accessing }
+LzSignatureBuilder >> var: aString [
+	varDeclarations add:
+		(LzParser
+			parse: aString
+			startingAt: #varEnd
+			yielding: LzASTVarDeclaration).
 ]

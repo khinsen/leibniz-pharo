@@ -4,6 +4,24 @@ Class {
 	#category : #'Leibniz2-Parser'
 }
 
+{ #category : #parsing }
+LzParser class >> parse: aString startingAt: aSymbol [
+	| astNode |
+	astNode := (self newStartingAt: aSymbol) parse: aString.
+	astNode isPetit2Failure ifTrue:
+		[ self error: astNode message, ' after ',
+				 (aString sliceFrom: 1 to: astNode position) ].
+	^ astNode
+]
+
+{ #category : #parsing }
+LzParser class >> parse: aString startingAt: aSymbol yielding: aLzASTNodeSubclass [
+	| astNode |
+	astNode := self parse: aString startingAt: aSymbol.
+	self assert: astNode class equals: aLzASTNodeSubclass.
+	^ astNode
+]
+
 { #category : #signature }
 LzParser >> bracketOp [
 	^ super bracketOp
@@ -209,6 +227,14 @@ LzParser >> term [
 { #category : #signature }
 LzParser >> var [
 	^ super var ==> [ :nodes |
+		LzASTVarDeclaration new
+			name: (LzVarName for: nodes first);
+			sort: nodes third ]
+]
+
+{ #category : #signature }
+LzParser >> varArg [
+	^ super varArg ==> [ :nodes |
 		LzASTVarDeclaration new
 			name: (LzVarName for: nodes first);
 			sort: nodes third ]

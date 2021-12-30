@@ -2,35 +2,46 @@ Class {
 	#name : #LzSortGraphBuilder,
 	#superclass : #Object,
 	#instVars : [
-		'subsortAxioms',
 		'sortDeclarations',
-		'includeDeclarations'
+		'subsortDeclarations'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
 
-{ #category : #building }
-LzSortGraphBuilder >> build [
-	self notYetImplemented
-]
-
 { #category : #initializing }
 LzSortGraphBuilder >> initialize [
-	includeDeclarations :=
-		OrderedCollection with: LzBuiltinContexts sortContext.
 	sortDeclarations := OrderedCollection new.
-	subsortAxioms := OrderedCollection new.
+	subsortDeclarations := OrderedCollection new.
 ]
 
 { #category : #defining }
 LzSortGraphBuilder >> sort: aString [
-	| declaration |
-	declaration := (LzParser newStartingAt: #op)
-		parse: (aString, ' : sort').
-	declaration isPetit2Failure ifTrue:
-		[ self error: declaration message, ' after ',
-				 (aString sliceFrom: 1 to: declaration position) ].
-	declaration size = 1
-		ifTrue: [ sortDeclarations add: declaration ]
-		ifTrue: [ subsortAxioms add: declaration ].
+	sortDeclarations add:
+		(LzParser
+			parse: (aString, ' : ', LzConstants opNameSort)
+			startingAt: #opEnd
+			yielding: LzASTOpDeclaration).
+]
+
+{ #category : #building }
+LzSortGraphBuilder >> sortGraph [
+	| uniqueSorts sortContext |
+	uniqueSorts := (sortDeclarations collect: [ :each |
+		each extractVarDeclarations first ]) asSet.
+	self assert: subsortDeclarations isEmpty.
+	sortContext :=
+		LzContextBuilder new
+			sortContext: LzBuiltinContexts sortContext;
+			sorts: uniqueSorts;
+			context.
+	^ LzSortGraph fromSortContext: sortContext
+]
+
+{ #category : #defining }
+LzSortGraphBuilder >> subsort: aString [
+	subsortDeclarations add:
+		(LzParser
+			parse: aString
+			startingAt: #subsortAxiomEnd
+			yielding: LzASTSubsortAxiom).
 ]

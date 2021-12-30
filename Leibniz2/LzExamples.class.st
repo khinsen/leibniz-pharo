@@ -8,11 +8,13 @@ Class {
 
 { #category : #example }
 LzExamples >> simpleContext [
-	^ self simpleContextBuilder build
+	<gtExample>
+	^ self simpleContextBuilder context
 ]
 
 { #category : #example }
 LzExamples >> simpleContextBuilder [
+	<gtExample>
 	^ LzContextBuilder new
 		sort: 'Foo';
 		op: 'aFoo : Foo'.

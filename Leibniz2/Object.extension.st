@@ -1,6 +1,6 @@
 Extension { #name : #Object }
 
 { #category : #'*Leibniz2' }
-Object >> isLzBlueprint [
+Object >> isLzASTNode [
 	^ false
 ]

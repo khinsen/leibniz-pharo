@@ -23,6 +23,18 @@ LzASTOpDeclaration >> args: anObject [
 ]
 
 { #category : #accessing }
+LzASTOpDeclaration >> extractVarDeclarations [
+	| pureArgs varDeclarations |
+	varDeclarations := args select: [ :each |
+		each class == LzASTVarDeclaration ].
+	pureArgs  := args collect: [ :each |
+		each class == LzASTVarDeclaration
+			ifTrue: [ each sort ]
+			ifFalse: [ each ] ].
+	^ { pureArgs. varDeclarations }
+]
+
+{ #category : #accessing }
 LzASTOpDeclaration >> fieldNames [
 	^ #(name variables args sort)
 ]
