@@ -1,22 +1,22 @@
 Class {
-	#name : #LzBlueprint,
+	#name : #LzASTNode,
 	#superclass : #Object,
 	#category : #'Leibniz2-Parser'
 }
 
 { #category : #converting }
-LzBlueprint >> associations [
+LzASTNode >> associations [
 	^ self fieldNames collect: [ :each |
 		each -> (self instVarNamed:  each) ]
 ]
 
 { #category : #accessing }
-LzBlueprint >> fieldNames [
+LzASTNode >> fieldNames [
 	^ self class allInstVarNames
 ]
 
 { #category : #inspecting }
-LzBlueprint >> gtTreeFor: aView [
+LzASTNode >> gtTreeFor: aView [
 	<gtView>
 	^ aView columnedTree
 		title: 'Tree';
@@ -34,12 +34,12 @@ LzBlueprint >> gtTreeFor: aView [
 ]
 
 { #category : #testing }
-LzBlueprint >> isLzBlueprint [
+LzASTNode >> isLzBlueprint [
 	^ true
 ]
 
 { #category : #printing }
-LzBlueprint >> printOn: aStream [
+LzASTNode >> printOn: aStream [
 	super printOn: aStream.
 	self associations printElementsOn: aStream.
 ]

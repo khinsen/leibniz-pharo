@@ -1,6 +1,6 @@
 Class {
-	#name : #LzSubsortAxiomBlueprint,
-	#superclass : #LzAxiomBlueprint,
+	#name : #LzASTSubsortAxiom,
+	#superclass : #LzASTAxiom,
 	#instVars : [
 		'supersort',
 		'subsort'
@@ -9,25 +9,25 @@ Class {
 }
 
 { #category : #accessing }
-LzSubsortAxiomBlueprint >> subsort [
+LzASTSubsortAxiom >> subsort [
 
 	^ subsort
 ]
 
 { #category : #accessing }
-LzSubsortAxiomBlueprint >> subsort: anObject [
+LzASTSubsortAxiom >> subsort: anObject [
 
 	subsort := anObject
 ]
 
 { #category : #accessing }
-LzSubsortAxiomBlueprint >> supersort [
+LzASTSubsortAxiom >> supersort [
 
 	^ supersort
 ]
 
 { #category : #accessing }
-LzSubsortAxiomBlueprint >> supersort: anObject [
+LzASTSubsortAxiom >> supersort: anObject [
 
 	supersort := anObject
 ]

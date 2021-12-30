@@ -1,6 +1,6 @@
 Class {
-	#name : #LzVarBlueprint,
-	#superclass : #LzBlueprint,
+	#name : #LzASTVarDeclaration,
+	#superclass : #LzASTNode,
 	#instVars : [
 		'sort',
 		'name'
@@ -9,30 +9,30 @@ Class {
 }
 
 { #category : #accessing }
-LzVarBlueprint >> fieldNames [
+LzASTVarDeclaration >> fieldNames [
 	^ #(name sort)
 ]
 
 { #category : #accessing }
-LzVarBlueprint >> name [
+LzASTVarDeclaration >> name [
 
 	^ name
 ]
 
 { #category : #accessing }
-LzVarBlueprint >> name: anObject [
+LzASTVarDeclaration >> name: anObject [
 
 	name := anObject
 ]
 
 { #category : #accessing }
-LzVarBlueprint >> sort [
+LzASTVarDeclaration >> sort [
 
 	^ sort
 ]
 
 { #category : #accessing }
-LzVarBlueprint >> sort: anObject [
+LzASTVarDeclaration >> sort: anObject [
 
 	sort := anObject
 ]

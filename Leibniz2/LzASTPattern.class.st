@@ -1,6 +1,6 @@
 Class {
-	#name : #LzPatternBlueprint,
-	#superclass : #LzBlueprint,
+	#name : #LzASTPattern,
+	#superclass : #LzASTNode,
 	#instVars : [
 		'term',
 		'variables'
@@ -9,30 +9,30 @@ Class {
 }
 
 { #category : #accessing }
-LzPatternBlueprint >> fieldNames [
+LzASTPattern >> fieldNames [
 	^ #(term variables)
 ]
 
 { #category : #accessing }
-LzPatternBlueprint >> term [
+LzASTPattern >> term [
 
 	^ term
 ]
 
 { #category : #accessing }
-LzPatternBlueprint >> term: anObject [
+LzASTPattern >> term: anObject [
 
 	term := anObject
 ]
 
 { #category : #accessing }
-LzPatternBlueprint >> variables [
+LzASTPattern >> variables [
 
 	^ variables
 ]
 
 { #category : #accessing }
-LzPatternBlueprint >> variables: anObject [
+LzASTPattern >> variables: anObject [
 
 	variables := anObject
 ]

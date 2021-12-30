@@ -1,6 +1,6 @@
 Class {
-	#name : #LzOpBlueprint,
-	#superclass : #LzBlueprint,
+	#name : #LzASTOpDeclaration,
+	#superclass : #LzASTNode,
 	#instVars : [
 		'sort',
 		'args',
@@ -11,52 +11,52 @@ Class {
 }
 
 { #category : #accessing }
-LzOpBlueprint >> args [
+LzASTOpDeclaration >> args [
 
 	^ args
 ]
 
 { #category : #accessing }
-LzOpBlueprint >> args: anObject [
+LzASTOpDeclaration >> args: anObject [
 
 	args := anObject
 ]
 
 { #category : #accessing }
-LzOpBlueprint >> fieldNames [
+LzASTOpDeclaration >> fieldNames [
 	^ #(name variables args sort)
 ]
 
 { #category : #accessing }
-LzOpBlueprint >> name [
+LzASTOpDeclaration >> name [
 
 	^ name
 ]
 
 { #category : #accessing }
-LzOpBlueprint >> name: anObject [
+LzASTOpDeclaration >> name: anObject [
 
 	name := anObject
 ]
 
 { #category : #accessing }
-LzOpBlueprint >> sort [
+LzASTOpDeclaration >> sort [
 
 	^ sort
 ]
 
 { #category : #accessing }
-LzOpBlueprint >> sort: anObject [
+LzASTOpDeclaration >> sort: anObject [
 
 	sort := anObject
 ]
 
 { #category : #accessing }
-LzOpBlueprint >> variables [
+LzASTOpDeclaration >> variables [
 	^ variables
 ]
 
 { #category : #accessing }
-LzOpBlueprint >> variables: aCollection [
+LzASTOpDeclaration >> variables: aCollection [
 	variables := aCollection
 ]

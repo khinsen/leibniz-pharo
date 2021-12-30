@@ -1,6 +1,6 @@
 Class {
-	#name : #LzAxiomBlueprint,
-	#superclass : #LzBlueprint,
+	#name : #LzASTAxiom,
+	#superclass : #LzASTNode,
 	#instVars : [
 		'variables'
 	],
@@ -8,13 +8,13 @@ Class {
 }
 
 { #category : #accessing }
-LzAxiomBlueprint >> variables [
+LzASTAxiom >> variables [
 
 	^ variables
 ]
 
 { #category : #accessing }
-LzAxiomBlueprint >> variables: anObject [
+LzASTAxiom >> variables: anObject [
 
 	variables := anObject
 ]

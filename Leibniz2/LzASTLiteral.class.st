@@ -1,6 +1,6 @@
 Class {
-	#name : #LzLiteralBlueprint,
-	#superclass : #LzTermBlueprint,
+	#name : #LzASTLiteral,
+	#superclass : #LzASTTerm,
 	#instVars : [
 		'value',
 		'sort'
@@ -9,12 +9,12 @@ Class {
 }
 
 { #category : #accessing }
-LzLiteralBlueprint >> fieldNames [
+LzASTLiteral >> fieldNames [
 	^ #(sort value)
 ]
 
 { #category : #printing }
-LzLiteralBlueprint >> printOn: aStream [
+LzASTLiteral >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	sort printOn: aStream.
@@ -24,23 +24,23 @@ LzLiteralBlueprint >> printOn: aStream [
 ]
 
 { #category : #accessing }
-LzLiteralBlueprint >> sort [
+LzASTLiteral >> sort [
 
 	^ sort
 ]
 
 { #category : #accessing }
-LzLiteralBlueprint >> sort: anObject [
+LzASTLiteral >> sort: anObject [
 
 	sort := anObject
 ]
 
 { #category : #accessing }
-LzLiteralBlueprint >> value [
+LzASTLiteral >> value [
 	^ value
 ]
 
 { #category : #accessing }
-LzLiteralBlueprint >> value: anObject [
+LzASTLiteral >> value: anObject [
 	value := anObject
 ]

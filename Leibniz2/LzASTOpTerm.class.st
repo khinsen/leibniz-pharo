@@ -1,6 +1,6 @@
 Class {
-	#name : #LzOpTermBlueprint,
-	#superclass : #LzTermBlueprint,
+	#name : #LzASTOpTerm,
+	#superclass : #LzASTTerm,
 	#instVars : [
 		'opName',
 		'args'
@@ -9,29 +9,29 @@ Class {
 }
 
 { #category : #accessing }
-LzOpTermBlueprint >> args [
+LzASTOpTerm >> args [
 
 	^ args
 ]
 
 { #category : #accessing }
-LzOpTermBlueprint >> args: anObject [
+LzASTOpTerm >> args: anObject [
 
 	args := anObject
 ]
 
 { #category : #accessing }
-LzOpTermBlueprint >> fieldNames [
+LzASTOpTerm >> fieldNames [
 	^ #(opName args)
 ]
 
 { #category : #accessing }
-LzOpTermBlueprint >> opName [
+LzASTOpTerm >> opName [
 
 	^ opName
 ]
 
 { #category : #acccessing }
-LzOpTermBlueprint >> opName: anOpName [
+LzASTOpTerm >> opName: anOpName [
 	opName := anOpName 
 ]

@@ -39,7 +39,7 @@ LzParser >> fnRule [
 { #category : #signature }
 LzParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
-		LzVarBlueprint new
+		LzASTVarDeclaration new
 			name: (LzVarName for: nodes second);
 			sort: nodes fourth ]
 ]
@@ -51,9 +51,9 @@ LzParser >> fpNumberTerm [
 		 	"In Pharo, a number with an exponent but without a fractional part
 		 	 is an integer, not a float.
 			  Workaround: convert the converted string explicitly to a float."
-			  LzLiteralBlueprint new
+			  LzASTLiteral new
 					value: string asNumber asFloat;
-					sort: (LzOpTermBlueprint new
+					sort: (LzASTOpTerm new
 							opName: (LzPrefixOperatorName for: #fpNumber)) ]
 ]
 
@@ -67,9 +67,9 @@ LzParser >> infixOp [
 LzParser >> integerTerm [
 	^ super integerTerm
 		==> [ :string |
-			  LzLiteralBlueprint new
+			  LzASTLiteral new
 					value: string asNumber;
-					sort: (LzOpTermBlueprint new
+					sort: (LzASTOpTerm new
 							opName: (LzPrefixOperatorName for: #integer)) ]
 ]
 
@@ -79,7 +79,7 @@ LzParser >> nonInfixTerm [
 		nodes second
 			ifNil: [ nodes first ] "simpleTerm, no suffix"
 			ifNotNil: [ :suffixNode |
-				LzOpTermBlueprint new
+				LzASTOpTerm new
 					opName: suffixNode first;
 					args: (suffixNode second copyWithFirst: nodes first) ] ]
 ]
@@ -87,7 +87,7 @@ LzParser >> nonInfixTerm [
 { #category : #signature }
 LzParser >> op [
 	^ super op ==> [ :nodes |
-		LzOpBlueprint new
+		LzASTOpDeclaration new
 			name: nodes second first;
 			args: nodes second second;
 			sort: nodes fourth;
@@ -100,7 +100,7 @@ LzParser >> pattern [
 		| variables parsedTerm |
 		variables := nodes first.
 		parsedTerm := nodes second.
-		LzPatternBlueprint new
+		LzASTPattern new
 			variables: nodes first;
 			term: nodes second ]
 ]
@@ -117,7 +117,7 @@ LzParser >> prefixOp [
 { #category : #terms }
 LzParser >> prefixOpTerm [
 	^ super prefixOpTerm ==> [ :nodes |
-		LzOpTermBlueprint new
+		LzASTOpTerm new
 			opName: (LzPrefixOperatorName for: nodes first);
 			args: ((nodes at: 3) reject: [ :element | element = $, ]) ]
 ]
@@ -126,9 +126,9 @@ LzParser >> prefixOpTerm [
 LzParser >> rationalNumberTerm [
 	^ super rationalNumberTerm
 		==> [ :string |
-			  LzLiteralBlueprint new
+			  LzASTLiteral new
 				value: (Fraction readFromString: string);
-				sort: (LzOpTermBlueprint new
+				sort: (LzASTOpTerm new
 						opName: (LzPrefixOperatorName for: #rational)) ]
 ]
 
@@ -152,9 +152,9 @@ LzParser >> rewriteRule [
 LzParser >> stringTerm [
 	^ super stringTerm
 		==> [ :string |
-			  LzLiteralBlueprint new
+			  LzASTLiteral new
 					value: string;
-					sort: (LzOpTermBlueprint new
+					sort: (LzASTOpTerm new
 							opName: (LzPrefixOperatorName for: #string)) ]
 ]
 
@@ -201,7 +201,7 @@ LzParser >> term [
 				(nodes allButFirst: 2)
 					inject: nodes second
 					into: [ :result :nextArg |
-						LzOpTermBlueprint new
+						LzASTOpTerm new
 							opName: name;
 							args: { result . nextArg } ] ] ]
 ]
@@ -209,7 +209,7 @@ LzParser >> term [
 { #category : #signature }
 LzParser >> var [
 	^ super var ==> [ :nodes |
-		LzVarBlueprint new
+		LzASTVarDeclaration new
 			name: (LzVarName for: nodes first);
 			sort: nodes third ]
 ]
@@ -217,7 +217,7 @@ LzParser >> var [
 { #category : #terms }
 LzParser >> varTerm [
 	^ super varTerm ==> [ :symbol |
-		LzVarTermBlueprint new
+		LzASTVarTerm new
 			name: (LzVarName for: symbol) ]
 ]
 
@@ -230,7 +230,7 @@ LzParser >> zeroArgOp [
 { #category : #terms }
 LzParser >> zeroArgTerm [
 	^ super zeroArgTerm ==> [ :symbol |
-		LzOpTermBlueprint new
+		LzASTOpTerm new
 			opName: (LzPrefixOperatorName for: symbol);
 			args: #() ]
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : #LzVarTermBlueprint,
-	#superclass : #LzTermBlueprint,
+	#name : #LzASTVarTerm,
+	#superclass : #LzASTTerm,
 	#instVars : [
 		'name'
 	],
@@ -8,11 +8,11 @@ Class {
 }
 
 { #category : #accessing }
-LzVarTermBlueprint >> name [
+LzASTVarTerm >> name [
 	^ name
 ]
 
 { #category : #accessing }
-LzVarTermBlueprint >> name: aVarName [
+LzASTVarTerm >> name: aVarName [
 	name := aVarName
 ]
