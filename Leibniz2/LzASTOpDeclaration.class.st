@@ -23,18 +23,6 @@ LzASTOpDeclaration >> args: anObject [
 ]
 
 { #category : #accessing }
-LzASTOpDeclaration >> extractVarDeclarations [
-	| pureArgs varDeclarations |
-	varDeclarations := args select: [ :each |
-		each class == LzASTVarDeclaration ].
-	pureArgs  := args collect: [ :each |
-		each class == LzASTVarDeclaration
-			ifTrue: [ each sort ]
-			ifFalse: [ each ] ].
-	^ { pureArgs. varDeclarations }
-]
-
-{ #category : #accessing }
 LzASTOpDeclaration >> fieldNames [
 	^ #(name variables args sort)
 ]
@@ -64,6 +52,12 @@ LzASTOpDeclaration >> sort: anObject [
 ]
 
 { #category : #accessing }
+LzASTOpDeclaration >> varDeclarations [
+	^ args select: [ :each |
+		each class == LzASTVarDeclaration ]
+]
+
+{ #category : #accessing }
 LzASTOpDeclaration >> variables [
 	^ variables
 ]
@@ -71,4 +65,18 @@ LzASTOpDeclaration >> variables [
 { #category : #accessing }
 LzASTOpDeclaration >> variables: aCollection [
 	variables := aCollection
+]
+
+{ #category : #accessing }
+LzASTOpDeclaration >> withoutVarDeclarations [
+	| plainArgs |
+	plainArgs := args collect: [ :each |
+		each class == LzASTVarDeclaration
+			ifTrue: [ each sort ]
+			ifFalse: [ each ] ].
+	^ self class new
+			name: self name;
+			args: plainArgs;
+			sort: self sort;
+			variables: self variables
 ]

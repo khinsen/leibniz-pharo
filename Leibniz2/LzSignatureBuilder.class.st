@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'varDeclarations',
 		'opDeclarations',
-		'sortGraphBuilder'
+		'sortGraph'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
@@ -24,24 +24,38 @@ LzSignatureBuilder >> op: aString [
 			yielding: LzASTOpDeclaration).
 ]
 
+{ #category : #accessing }
+LzSignatureBuilder >> parsedOps: aCollection [
+	opDeclarations addAll: aCollection
+]
+
 { #category : #building }
 LzSignatureBuilder >> signature [
-	self notYetImplemented
+	| uniqueVars uniqueOps variables |
+	uniqueOps := (opDeclarations collect: [ :each |
+		each withoutVarDeclarations ]) asSet.
+	uniqueVars := (varDeclarations,
+		(opDeclarations flatCollect: [ :each | each varDeclarations ])) asSet.
+	self flag: #todo.
+	"Check for var declarations with sorts that are equal up to variable renaming."
+	variables := uniqueVars collect: [ :each |
+		each name -> self sortGraph buildSort: each sort ].
+	^ LzSignature new
+		sortGraph: self sortGraph;
+		operators: uniqueOps;
+		variables: variables;
+		beRecursivelyReadOnlyObject;
+		yourself.
 ]
 
 { #category : #accessing }
 LzSignatureBuilder >> sortGraph [
-	^ self sortGraphBuilder build
-]
-
-{ #category : #accessing }
-LzSignatureBuilder >> sortGraphBuilder [
-	^ sortGraphBuilder
+	^ sortGraph
 ]
 
 { #category : #initializing }
-LzSignatureBuilder >> sortGraphBuilder: aSortGraphBuilder [
-	sortGraphBuilder := aSortGraphBuilder
+LzSignatureBuilder >> sortGraph: aSortGraph [
+	sortGraph := aSortGraph
 ]
 
 { #category : #accessing }

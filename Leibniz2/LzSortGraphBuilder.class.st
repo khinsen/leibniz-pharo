@@ -27,14 +27,19 @@ LzSortGraphBuilder >> sort: aString [
 LzSortGraphBuilder >> sortGraph [
 	| uniqueSorts sortContext |
 	uniqueSorts := (sortDeclarations collect: [ :each |
-		each extractVarDeclarations first ]) asSet.
+		each withoutVarDeclarations ]) asSet.
 	self assert: subsortDeclarations isEmpty.
-	sortContext :=
-		LzContextBuilder new
-			sortContext: LzBuiltinContexts sortContext;
-			sorts: uniqueSorts;
-			context.
-	^ LzSortGraph fromSortContext: sortContext
+	sortContext := uniqueSorts
+		ifEmpty: [ LzSortHierarchyRoot uniqueInstance sortContext ]
+		ifNotEmpty: [
+			LzContextBuilder new
+				sortContext: LzSortHierarchyRoot uniqueInstance sortContext;
+				parsedOps: uniqueSorts;
+				context ].
+	^ LzSortGraph new
+		sortContext: sortContext;
+		beRecursivelyReadOnlyObject;
+		yourself
 ]
 
 { #category : #defining }

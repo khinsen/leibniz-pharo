@@ -10,19 +10,32 @@ Class {
 
 { #category : #building }
 LzContextBuilder >> context [
-	self notYetImplemented
+	| signature sortGraph |
+	sortGraph := self sortGraphBuilder
+		sortGraph.
+	signature := self signatureBuilder 
+		sortGraph: sortGraph;
+		signature.
+	^ LzContext new
+		signature: signature;
+		beRecursivelyReadOnlyObject;
+		yourself
 ]
 
 { #category : #initializing }
 LzContextBuilder >> initialize [
 	sortGraphBuilder := LzSortGraphBuilder new.
-	signatureBuilder := LzSignatureBuilder new
-							sortGraphBuilder: sortGraphBuilder.
+	signatureBuilder := LzSignatureBuilder new.
 ]
 
 { #category : #defining }
 LzContextBuilder >> op: aString [
 	self signatureBuilder op: aString
+]
+
+{ #category : #defining }
+LzContextBuilder >> parsedOps: aCollection [
+	self signatureBuilder parsedOps: aCollection
 ]
 
 { #category : #defining }
@@ -36,7 +49,7 @@ LzContextBuilder >> sort: aString [
 ]
 
 { #category : #defining }
-LzContextBuilder >> sortContext: LzBuiltinContexts [ 
+LzContextBuilder >> sortContext: aContext [ 
 ]
 
 { #category : #defining }

@@ -7,12 +7,17 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
-{ #category : #'instance creation' }
-LzSortGraph class >> fromSortContext: aSortContext [
-	^ self new
-		sortContext: aSortContext;
-		beRecursivelyReadOnlyObject;
-		yourself
+{ #category : #accessing }
+LzSortGraph >> buildSort: anASTPatternNode [
+	self flag: #todo.
+	^ anASTPatternNode
+]
+
+{ #category : #accessing }
+LzSortGraph >> sort: aString [
+	| astNode |
+	astNode := LzParser parse: aString startingAt: #patternEnd yielding: LzASTPattern.
+	^ self buildSort: astNode
 ]
 
 { #category : #accessing }
