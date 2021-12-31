@@ -6,33 +6,55 @@ Class {
 	#instVars : [
 		'sortSignature',
 		'sortContext',
-		'sortGraph'
+		'sortGraph',
+		'sortTerm'
 	],
 	#category : #Leibniz2
 }
 
 { #category : #accessing }
 LzSortHierarchyRoot >> initialize [
-	self sortContext beRecursivelyReadOnlyObject.
-	self sortGraph beRecursivelyReadOnlyObject.
-	self sortSignature beRecursivelyReadOnlyObject
+	"The sortTerm is lacking its signature, but that doesn't matter. It is fully
+	 operational for the bootstrap."
+	| sortOperators |
+	sortTerm := LzSortTerm new
+		opName: self sortOpName;
+		args: #().
+	sortTerm sort: sortTerm.
+
+	sortGraph := LzSortHierarchyRootGraph new.
+	sortGraph sortTerm: self sortTerm.
+
+	sortContext := LzContext new.
+	sortGraph sortContext: sortContext.
+
+	sortOperators := LzOperators new
+							sortGraph: self sortGraph;
+							operators: Set new.
+	sortSignature :=
+		LzSignature new
+			sortGraph: sortGraph;
+			variables: Dictionary new;
+			operators: sortOperators.
+
+	sortContext signature: sortSignature.
+	sortTerm signature: sortSignature.
+
+	sortOperators addOp:
+		(LzParser
+			parse: LzConstants opNameSort, ' : ', LzConstants opNameSort
+			startingAt: #opEnd
+			yielding: LzASTOp).
 ]
 
 { #category : #accessing }
 LzSortHierarchyRoot >> sortContext [
-	^ sortContext ifNil: [
-		sortContext :=
-			LzContext new
-				signature: self sortSignature.
-		"Close the loop"
-		self sortGraph sortContext: sortContext.
-		sortContext ]
+	^ sortContext
 ]
 
 { #category : #accessing }
 LzSortHierarchyRoot >> sortGraph [
-	^ sortGraph ifNil: [
-		sortGraph := LzSortGraph new ]
+	^ sortGraph
 ]
 
 { #category : #accessing }
@@ -42,28 +64,14 @@ LzSortHierarchyRoot >> sortOpName [
 
 { #category : #accessing }
 LzSortHierarchyRoot >> sortSignature [
-	^ sortSignature ifNil: [
-		| op |
-		op := LzParser
-			parse: LzConstants opNameSort, ' : ', LzConstants opNameSort
-			startingAt: #opEnd
-			yielding: LzASTOp.
-		sortSignature :=
-			LzSignature new
-				sortGraph: self sortGraph;
-				operators: (Set with: op);
-				variables: Dictionary new]
+	^ sortSignature
 ]
 
 { #category : #accessing }
 LzSortHierarchyRoot >> sortTerm [
-	| term |
-	term := LzSortTerm new
-		signature: self sortSignature;
-		opName: self sortOpName;
-		args: #().
-	^ term
-		sort: term;
-		beRecursivelyReadOnlyObject;
-		yourself
+	^ sortTerm ifNil: [
+		
+		sortTerm
+			sort: sortTerm;
+			yourself ]
 ]

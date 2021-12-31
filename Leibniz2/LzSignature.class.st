@@ -14,12 +14,12 @@ LzSignature >> opTerm: anOpName args: anArrayOfTerms [
 	| sort |
 	sort := self operators
 				sortForOp: anOpName
-				args: (anArrayOfTerms collect: #sort).
+				args: (LzArity forArgs: anArrayOfTerms).
 	^ LzOpTerm new
 		signature: self;
 		opName: anOpName;
 		args: anArrayOfTerms;
-		sort: nil. 
+		sort: sort. 
 ]
 
 { #category : #accessing }

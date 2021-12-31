@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'sortDeclarations',
-		'subsortDeclarations'
+		'subsortDeclarations',
+		'sortContext'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
@@ -23,22 +24,36 @@ LzSortGraphBuilder >> sort: aString [
 			yielding: LzASTOp).
 ]
 
+{ #category : #accessing }
+LzSortGraphBuilder >> sortContext [
+	^ sortContext ifNil: [
+		| uniqueSorts |
+		uniqueSorts := (sortDeclarations collect: [ :each |
+			each withoutVarDeclarations ]) asSet.
+		self flag: #todo.
+		self assert: subsortDeclarations isEmpty. "For now..."
+
+		sortContext := uniqueSorts
+			ifEmpty: [ LzSortHierarchyRoot uniqueInstance sortContext ]
+			ifNotEmpty: [
+				LzContextBuilder new
+					sortContext: LzSortHierarchyRoot uniqueInstance sortContext;
+					parsedOps: uniqueSorts;
+					context ].
+		sortContext ]
+]
+
+{ #category : #accessing }
+LzSortGraphBuilder >> sortContext: aContext [
+	self assert: sortDeclarations isEmpty.
+	self assert: subsortDeclarations isEmpty.
+	sortContext := aContext
+]
+
 { #category : #building }
 LzSortGraphBuilder >> sortGraph [
-	| uniqueSorts sortContext |
-	uniqueSorts := (sortDeclarations collect: [ :each |
-		each withoutVarDeclarations ]) asSet.
-	self flag: #todo.
-	self assert: subsortDeclarations isEmpty. "For now..."
-	sortContext := uniqueSorts
-		ifEmpty: [ LzSortHierarchyRoot uniqueInstance sortContext ]
-		ifNotEmpty: [
-			LzContextBuilder new
-				sortContext: LzSortHierarchyRoot uniqueInstance sortContext;
-				parsedOps: uniqueSorts;
-				context ].
 	^ LzSortGraph new
-		sortContext: sortContext;
+		sortContext: self sortContext;
 		beRecursivelyReadOnlyObject;
 		yourself
 ]

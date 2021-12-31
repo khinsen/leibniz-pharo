@@ -15,24 +15,20 @@ LzASTPattern >> fieldNames [
 
 { #category : #accessing }
 LzASTPattern >> term [
-
 	^ term
 ]
 
 { #category : #accessing }
 LzASTPattern >> term: anObject [
-
 	term := anObject
 ]
 
 { #category : #accessing }
 LzASTPattern >> variables [
-
 	^ variables
 ]
 
 { #category : #accessing }
 LzASTPattern >> variables: anObject [
-
 	variables := anObject
 ]

@@ -9,7 +9,7 @@ Class {
 
 { #category : #constructing }
 LzContext >> parsedPattern: anASTPatternNode [
-	^ self signature parsedTerm: anASTPatternNode
+	^ self signature parsedPattern: anASTPatternNode
 ]
 
 { #category : #constructing }

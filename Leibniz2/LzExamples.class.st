@@ -19,3 +19,9 @@ LzExamples >> simpleContextBuilder [
 		sort: 'Foo';
 		op: 'aFoo : Foo'.
 ]
+
+{ #category : #example }
+LzExamples >> simpleContextTerm [
+	<gtExample>
+	^ self simpleContext term: 'aFoo'
+]

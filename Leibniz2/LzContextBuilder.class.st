@@ -49,7 +49,8 @@ LzContextBuilder >> sort: aString [
 ]
 
 { #category : #defining }
-LzContextBuilder >> sortContext: aContext [ 
+LzContextBuilder >> sortContext: aContext [
+	sortGraphBuilder sortContext: aContext
 ]
 
 { #category : #defining }

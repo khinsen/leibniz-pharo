@@ -10,15 +10,25 @@ Class {
 
 { #category : #defining }
 LzOperators >> addOp: anASTOpNode [
-	| argSorts resultSort |
-	argSorts := anASTOpNode args collect: [ :each |
-		self sortGraph
-			parsedSortTerm: each
-			variables: anASTOpNode variables ].
-	resultSort := self sortGraph
+	| argSorts valueSort key op |
+	argSorts := LzArity new: anASTOpNode args size.
+	argSorts sortGraph: self sortGraph.
+	1 to: argSorts size do: [ :index |
+		argSorts at: index put:
+			(self sortGraph
+			parsedSortTerm: (anASTOpNode args at: index)
+			variables: anASTOpNode variables) ].
+	valueSort := self sortGraph
 		parsedSortTerm: anASTOpNode sort
 		variables: anASTOpNode variables.
-	self notYetImplemented
+	key := { anASTOpNode name. argSorts kindArity }.
+	op := opTable at: key
+			ifAbsentPut: [ LzOperator new 
+								sortGraph: self sortGraph;
+								opName: key first;
+								kindArity: key second;
+								kind: valueSort kind ].
+	op addArity: argSorts sort: valueSort
 ]
 
 { #category : #defining }
@@ -28,9 +38,10 @@ LzOperators >> operators: aSetOfASTOpNodes [
 		self addOp: each ]
 ]
 
-{ #category : #accessing }
-LzOperators >> sortForOp: anOpName args: anArrayOfTerms [
-	self notYetImplemented
+{ #category : #lookup }
+LzOperators >> sortForOp: anOpName args: anArity [
+	^ (opTable at: { anOpName. anArity kindArity })
+		sortForArity: anArity
 ]
 
 { #category : #accessing }
