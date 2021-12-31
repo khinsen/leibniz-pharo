@@ -1,5 +1,5 @@
 Class {
-	#name : #LzASTVarDeclaration,
+	#name : #LzASTVar,
 	#superclass : #LzASTNode,
 	#instVars : [
 		'sort',
@@ -9,30 +9,30 @@ Class {
 }
 
 { #category : #accessing }
-LzASTVarDeclaration >> fieldNames [
+LzASTVar >> fieldNames [
 	^ #(name sort)
 ]
 
 { #category : #accessing }
-LzASTVarDeclaration >> name [
+LzASTVar >> name [
 
 	^ name
 ]
 
 { #category : #accessing }
-LzASTVarDeclaration >> name: anObject [
+LzASTVar >> name: anObject [
 
 	name := anObject
 ]
 
 { #category : #accessing }
-LzASTVarDeclaration >> sort [
+LzASTVar >> sort [
 
 	^ sort
 ]
 
 { #category : #accessing }
-LzASTVarDeclaration >> sort: anObject [
+LzASTVar >> sort: anObject [
 
 	sort := anObject
 ]

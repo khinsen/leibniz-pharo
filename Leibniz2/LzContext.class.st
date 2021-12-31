@@ -7,6 +7,21 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
+{ #category : #constructing }
+LzContext >> parsedPattern: anASTPatternNode [
+	^ self signature parsedTerm: anASTPatternNode
+]
+
+{ #category : #constructing }
+LzContext >> parsedTerm: anASTTermNode [
+	^ self signature parsedTerm: anASTTermNode
+]
+
+{ #category : #constructing }
+LzContext >> pattern: aString [
+	^ self signature pattern: aString
+]
+
 { #category : #accessing }
 LzContext >> signature [
 	^ signature
@@ -20,4 +35,9 @@ LzContext >> signature: aSignature [
 { #category : #accessing }
 LzContext >> sortGraph [
 	^ self signature sortGraph
+]
+
+{ #category : #constructing }
+LzContext >> term: aString [
+	^ self signature term: aString
 ]

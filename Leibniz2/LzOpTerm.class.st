@@ -4,19 +4,19 @@ Class {
 	#instVars : [
 		'opName',
 		'sort',
-		'arguments'
+		'args'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
 
 { #category : #accessing }
-LzOpTerm >> arguments [
-	^ arguments
+LzOpTerm >> args [
+	^ args
 ]
 
 { #category : #accessing }
-LzOpTerm >> arguments: anArray [
-	arguments := anArray
+LzOpTerm >> args: anArray [
+	args := anArray
 ]
 
 { #category : #accessing }

@@ -18,7 +18,7 @@ LzParser class >> parse: aString startingAt: aSymbol [
 LzParser class >> parse: aString startingAt: aSymbol yielding: aLzASTNodeSubclass [
 	| astNode |
 	astNode := self parse: aString startingAt: aSymbol.
-	self assert: astNode class equals: aLzASTNodeSubclass.
+	self assert: (astNode isKindOf: aLzASTNodeSubclass).
 	^ astNode
 ]
 
@@ -57,7 +57,7 @@ LzParser >> fnRule [
 { #category : #signature }
 LzParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
-		LzASTVarDeclaration new
+		LzASTVar new
 			name: (LzVarName for: nodes second);
 			sort: nodes fourth ]
 ]
@@ -105,7 +105,7 @@ LzParser >> nonInfixTerm [
 { #category : #signature }
 LzParser >> op [
 	^ super op ==> [ :nodes |
-		LzASTOpDeclaration new
+		LzASTOp new
 			name: nodes second first;
 			args: nodes second second;
 			sort: nodes fourth;
@@ -227,7 +227,7 @@ LzParser >> term [
 { #category : #signature }
 LzParser >> var [
 	^ super var ==> [ :nodes |
-		LzASTVarDeclaration new
+		LzASTVar new
 			name: (LzVarName for: nodes first);
 			sort: nodes third ]
 ]
@@ -235,7 +235,7 @@ LzParser >> var [
 { #category : #signature }
 LzParser >> varArg [
 	^ super varArg ==> [ :nodes |
-		LzASTVarDeclaration new
+		LzASTVar new
 			name: (LzVarName for: nodes first);
 			sort: nodes third ]
 ]

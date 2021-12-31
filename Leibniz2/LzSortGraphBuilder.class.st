@@ -20,7 +20,7 @@ LzSortGraphBuilder >> sort: aString [
 		(LzParser
 			parse: (aString, ' : ', LzConstants opNameSort)
 			startingAt: #opEnd
-			yielding: LzASTOpDeclaration).
+			yielding: LzASTOp).
 ]
 
 { #category : #building }
@@ -28,7 +28,8 @@ LzSortGraphBuilder >> sortGraph [
 	| uniqueSorts sortContext |
 	uniqueSorts := (sortDeclarations collect: [ :each |
 		each withoutVarDeclarations ]) asSet.
-	self assert: subsortDeclarations isEmpty.
+	self flag: #todo.
+	self assert: subsortDeclarations isEmpty. "For now..."
 	sortContext := uniqueSorts
 		ifEmpty: [ LzSortHierarchyRoot uniqueInstance sortContext ]
 		ifNotEmpty: [

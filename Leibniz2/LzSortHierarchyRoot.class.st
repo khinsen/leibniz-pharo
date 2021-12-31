@@ -12,6 +12,13 @@ Class {
 }
 
 { #category : #accessing }
+LzSortHierarchyRoot >> initialize [
+	self sortContext beRecursivelyReadOnlyObject.
+	self sortGraph beRecursivelyReadOnlyObject.
+	self sortSignature beRecursivelyReadOnlyObject
+]
+
+{ #category : #accessing }
 LzSortHierarchyRoot >> sortContext [
 	^ sortContext ifNil: [
 		sortContext :=
@@ -40,7 +47,7 @@ LzSortHierarchyRoot >> sortSignature [
 		op := LzParser
 			parse: LzConstants opNameSort, ' : ', LzConstants opNameSort
 			startingAt: #opEnd
-			yielding: LzASTOpDeclaration.
+			yielding: LzASTOp.
 		sortSignature :=
 			LzSignature new
 				sortGraph: self sortGraph;
@@ -54,7 +61,7 @@ LzSortHierarchyRoot >> sortTerm [
 	term := LzSortTerm new
 		signature: self sortSignature;
 		opName: self sortOpName;
-		arguments: #().
+		args: #().
 	^ term
 		sort: term;
 		beRecursivelyReadOnlyObject;

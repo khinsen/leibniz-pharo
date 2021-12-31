@@ -21,7 +21,7 @@ LzSignatureBuilder >> op: aString [
 		(LzParser
 			parse: aString
 			startingAt: #opEnd
-			yielding: LzASTOpDeclaration).
+			yielding: LzASTOp).
 ]
 
 { #category : #accessing }
@@ -31,7 +31,7 @@ LzSignatureBuilder >> parsedOps: aCollection [
 
 { #category : #building }
 LzSignatureBuilder >> signature [
-	| uniqueVars uniqueOps variables |
+	| uniqueVars uniqueOps variables operators |
 	uniqueOps := (opDeclarations collect: [ :each |
 		each withoutVarDeclarations ]) asSet.
 	uniqueVars := (varDeclarations,
@@ -39,10 +39,14 @@ LzSignatureBuilder >> signature [
 	self flag: #todo.
 	"Check for var declarations with sorts that are equal up to variable renaming."
 	variables := uniqueVars collect: [ :each |
-		each name -> self sortGraph buildSort: each sort ].
+		each name -> self sortGraph parsedSort: each sort ].
+	operators :=
+		LzOperators new
+			sortGraph: self sortGraph;
+			operators: uniqueOps.
 	^ LzSignature new
 		sortGraph: self sortGraph;
-		operators: uniqueOps;
+		operators: operators;
 		variables: variables;
 		beRecursivelyReadOnlyObject;
 		yourself.
@@ -64,5 +68,5 @@ LzSignatureBuilder >> var: aString [
 		(LzParser
 			parse: aString
 			startingAt: #varEnd
-			yielding: LzASTVarDeclaration).
+			yielding: LzASTVar).
 ]

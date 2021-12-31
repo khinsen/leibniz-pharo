@@ -1,5 +1,5 @@
 Class {
-	#name : #LzASTOpDeclaration,
+	#name : #LzASTOp,
 	#superclass : #LzASTNode,
 	#instVars : [
 		'sort',
@@ -11,67 +11,67 @@ Class {
 }
 
 { #category : #accessing }
-LzASTOpDeclaration >> args [
+LzASTOp >> args [
 
 	^ args
 ]
 
 { #category : #accessing }
-LzASTOpDeclaration >> args: anObject [
+LzASTOp >> args: anObject [
 
 	args := anObject
 ]
 
 { #category : #accessing }
-LzASTOpDeclaration >> fieldNames [
+LzASTOp >> fieldNames [
 	^ #(name variables args sort)
 ]
 
 { #category : #accessing }
-LzASTOpDeclaration >> name [
+LzASTOp >> name [
 
 	^ name
 ]
 
 { #category : #accessing }
-LzASTOpDeclaration >> name: anObject [
+LzASTOp >> name: anObject [
 
 	name := anObject
 ]
 
 { #category : #accessing }
-LzASTOpDeclaration >> sort [
+LzASTOp >> sort [
 
 	^ sort
 ]
 
 { #category : #accessing }
-LzASTOpDeclaration >> sort: anObject [
+LzASTOp >> sort: anObject [
 
 	sort := anObject
 ]
 
 { #category : #accessing }
-LzASTOpDeclaration >> varDeclarations [
+LzASTOp >> varDeclarations [
 	^ args select: [ :each |
-		each class == LzASTVarDeclaration ]
+		each class == LzASTVar ]
 ]
 
 { #category : #accessing }
-LzASTOpDeclaration >> variables [
+LzASTOp >> variables [
 	^ variables
 ]
 
 { #category : #accessing }
-LzASTOpDeclaration >> variables: aCollection [
+LzASTOp >> variables: aCollection [
 	variables := aCollection
 ]
 
 { #category : #accessing }
-LzASTOpDeclaration >> withoutVarDeclarations [
+LzASTOp >> withoutVarDeclarations [
 	| plainArgs |
 	plainArgs := args collect: [ :each |
-		each class == LzASTVarDeclaration
+		each class == LzASTVar
 			ifTrue: [ each sort ]
 			ifFalse: [ each ] ].
 	^ self class new
