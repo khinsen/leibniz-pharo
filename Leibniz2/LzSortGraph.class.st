@@ -9,11 +9,6 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
-{ #category : #accessing }
-LzSortGraph >> fieldNames [
-	^ #(sortContext)
-]
-
 { #category : #constructing }
 LzSortGraph >> parsedSort: anASTPatternNode [
 	^ LzSort new
@@ -46,4 +41,9 @@ LzSortGraph >> sortContext [
 { #category : #accessing }
 LzSortGraph >> sortContext: aSortContext [
 	sortContext := aSortContext
+]
+
+{ #category : #accessing }
+LzSortGraph >> valueSlots [
+	^ #(sortContext)
 ]

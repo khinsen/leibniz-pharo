@@ -30,11 +30,6 @@ LzOperatorName >> asSymbol [
 ]
 
 { #category : #accessing }
-LzOperatorName >> fieldNames [
-	^ #(internalSymbol)
-]
-
-{ #category : #accessing }
 LzOperatorName >> internalSymbol [
 	^ internalSymbol
 ]
@@ -92,4 +87,9 @@ LzOperatorName >> printStringForArity: anArity [
 { #category : #printing }
 LzOperatorName >> synopsis [
 	^ internalSymbol asString
+]
+
+{ #category : #accessing }
+LzOperatorName >> valueSlots [
+	^ #(internalSymbol)
 ]

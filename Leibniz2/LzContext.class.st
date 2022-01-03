@@ -9,11 +9,6 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
-{ #category : #accessing }
-LzContext >> fieldNames [
-	^ #(signature)
-]
-
 { #category : #constructing }
 LzContext >> parsedPattern: anASTPatternNode [
 	^ self signature parsedPattern: anASTPatternNode
@@ -47,4 +42,9 @@ LzContext >> sortGraph [
 { #category : #constructing }
 LzContext >> term: aString [
 	^ self signature term: aString
+]
+
+{ #category : #accessing }
+LzContext >> valueSlots [
+	^ #(signature)
 ]

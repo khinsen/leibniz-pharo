@@ -17,11 +17,16 @@ LzExamples >> simpleContextBuilder [
 	<gtExample>
 	^ LzContextBuilder new
 		sort: 'Foo';
-		op: 'aFoo : Foo'.
+		op: 'aFoo : Foo';
+		op: 'aFoo(Foo) : Foo'.
 ]
 
 { #category : #example }
-LzExamples >> simpleContextTerm [
+LzExamples >> simpleContextTerms [
 	<gtExample>
-	^ self simpleContext term: 'aFoo'
+	^ {
+		'aFoo'.
+		'aFoo(aFoo)'
+	} collect: [ :each |
+		self simpleContext term: each ]
 ]

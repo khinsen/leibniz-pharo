@@ -8,13 +8,8 @@ Class {
 
 { #category : #converting }
 LzASTNode >> associations [
-	^ self fieldNames collect: [ :each |
+	^ self valueSlots collect: [ :each |
 		each -> (self instVarNamed:  each) ]
-]
-
-{ #category : #accessing }
-LzASTNode >> fieldNames [
-	^ self class allInstVarNames
 ]
 
 { #category : #inspecting }
@@ -44,4 +39,9 @@ LzASTNode >> isLzASTNode [
 LzASTNode >> printOn: aStream [
 	super printOn: aStream.
 	self associations printElementsOn: aStream.
+]
+
+{ #category : #accessing }
+LzASTNode >> valueSlots [
+	^ self class allInstVarNames
 ]

@@ -21,11 +21,6 @@ LzASTOpTerm >> args: anObject [
 ]
 
 { #category : #accessing }
-LzASTOpTerm >> fieldNames [
-	^ #(opName args)
-]
-
-{ #category : #accessing }
 LzASTOpTerm >> opName [
 
 	^ opName
@@ -34,4 +29,9 @@ LzASTOpTerm >> opName [
 { #category : #acccessing }
 LzASTOpTerm >> opName: anOpName [
 	opName := anOpName 
+]
+
+{ #category : #accessing }
+LzASTOpTerm >> valueSlots [
+	^ #(opName args)
 ]

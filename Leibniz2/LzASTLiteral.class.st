@@ -8,11 +8,6 @@ Class {
 	#category : #'Leibniz2-Parser'
 }
 
-{ #category : #accessing }
-LzASTLiteral >> fieldNames [
-	^ #(sort value)
-]
-
 { #category : #printing }
 LzASTLiteral >> printOn: aStream [
 	super printOn: aStream.
@@ -43,4 +38,9 @@ LzASTLiteral >> value [
 { #category : #accessing }
 LzASTLiteral >> value: anObject [
 	value := anObject
+]
+
+{ #category : #accessing }
+LzASTLiteral >> valueSlots [
+	^ #(sort value)
 ]

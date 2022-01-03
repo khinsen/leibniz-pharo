@@ -19,11 +19,6 @@ LzOperator >> addArity: anArity sort: aSort [
 ]
 
 { #category : #accessing }
-LzOperator >> fieldNames [
-	^ #(kind kindArity opName sortGraph ranks)
-]
-
-{ #category : #accessing }
 LzOperator >> initialize [
 	ranks := OrderedCollection new
 ]
@@ -58,6 +53,16 @@ LzOperator >> opName: anOpName [
 	opName := anOpName
 ]
 
+{ #category : #accessing }
+LzOperator >> referenceNames [
+	^ #(sortGraph)
+]
+
+{ #category : #accessing }
+LzOperator >> referenceSlots [
+	^ #(sortGraph)
+]
+
 { #category : #lookup }
 LzOperator >> sortForArity: anArity [
 	self flag: #todo.
@@ -73,4 +78,9 @@ LzOperator >> sortGraph [
 { #category : #accessing }
 LzOperator >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
+]
+
+{ #category : #accessing }
+LzOperator >> valueSlots [
+	^ #(kind kindArity opName ranks)
 ]

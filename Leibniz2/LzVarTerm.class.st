@@ -27,3 +27,8 @@ LzVarTerm >> sort [
 LzVarTerm >> sort: aSort [
 	sort := aSort
 ]
+
+{ #category : #accessing }
+LzVarTerm >> valueSlots [
+	^ #(signature name)
+]

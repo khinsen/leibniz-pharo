@@ -11,17 +11,14 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
-{ #category : #accessing }
-LzSignature >> fieldNames [
-	^ #(sortGraph operators variables)
-]
-
 { #category : #constructing }
 LzSignature >> opTerm: anOpName args: anArrayOfTerms [
 	| sort |
 	sort := self operators
 				sortForOp: anOpName
 				args: (LzArity forArgs: anArrayOfTerms).
+	anArrayOfTerms do: [ :each |
+		self assert: each signature == self ].
 	^ LzOpTerm new
 		signature: self;
 		opName: anOpName;
@@ -92,6 +89,11 @@ LzSignature >> sortGraph: aSortGraph [
 LzSignature >> term: aString [
 	^ self parsedTerm:
 		(LzParser parse: aString startingAt: #termEnd yielding: LzASTTerm)
+]
+
+{ #category : #accessing }
+LzSignature >> valueSlots [
+	^ #(sortGraph operators variables)
 ]
 
 { #category : #constructing }

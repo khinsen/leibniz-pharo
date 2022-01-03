@@ -33,11 +33,6 @@ LzOperators >> addOp: anASTOpNode [
 	op addArity: argSorts sort: valueSort
 ]
 
-{ #category : #accessing }
-LzOperators >> fieldNames [
-	^ #(sortGraph opTable)
-]
-
 { #category : #defining }
 LzOperators >> operators: aSetOfASTOpNodes [
 	opTable := Dictionary new.
@@ -45,8 +40,17 @@ LzOperators >> operators: aSetOfASTOpNodes [
 		self addOp: each ]
 ]
 
+{ #category : #accessing }
+LzOperators >> referenceSlots [
+	^ #(sortGraph)
+]
+
 { #category : #lookup }
 LzOperators >> sortForOp: anOpName args: anArity [
+"	(KhEqualityExplorer
+		for: { anOpName. anArity kindArity }
+		and: opTable keys last)
+			inspect."
 	^ (opTable at: { anOpName. anArity kindArity })
 		sortForArity: anArity
 ]
@@ -59,4 +63,9 @@ LzOperators >> sortGraph [
 { #category : #accessing }
 LzOperators >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
+]
+
+{ #category : #accessing }
+LzOperators >> valueSlots [
+	^ #(opTable)
 ]

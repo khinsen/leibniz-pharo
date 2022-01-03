@@ -1,6 +1,8 @@
 Class {
 	#name : #LzSort,
 	#superclass : #Object,
+	#traits : 'TLzEquality',
+	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'sortGraph',
 		'term'
@@ -8,24 +10,16 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
-{ #category : #comparing }
-LzSort >> = anObject [
-	self class == anObject class ifFalse: [ ^ false ].
-	self sortGraph == anObject sortGraph ifFalse: [ ^ false ].
-	self term = anObject term ifFalse: [ ^ false ].
-	^ true
-]
-
-{ #category : #comparing }
-LzSort >> hash [
-	^ self term hash
-]
-
 { #category : #accessing }
 LzSort >> kind [
 	self flag: #todo.
 	"A big lie..."
 	^ self
+]
+
+{ #category : #accessing }
+LzSort >> referenceSlots [
+	^ #(sortGraph)
 ]
 
 { #category : #accessing }
@@ -46,4 +40,9 @@ LzSort >> term [
 { #category : #accessing }
 LzSort >> term: aTerm [
 	term := aTerm
+]
+
+{ #category : #accessing }
+LzSort >> valueSlots [
+	^ #(term)
 ]

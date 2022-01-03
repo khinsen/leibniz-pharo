@@ -9,11 +9,6 @@ Class {
 }
 
 { #category : #accessing }
-LzASTVar >> fieldNames [
-	^ #(name sort)
-]
-
-{ #category : #accessing }
 LzASTVar >> name [
 
 	^ name
@@ -35,4 +30,9 @@ LzASTVar >> sort [
 LzASTVar >> sort: anObject [
 
 	sort := anObject
+]
+
+{ #category : #accessing }
+LzASTVar >> valueSlots [
+	^ #(name sort)
 ]

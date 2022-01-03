@@ -38,3 +38,8 @@ LzOpTerm >> sort [
 LzOpTerm >> sort: aSort [
 	sort := aSort
 ]
+
+{ #category : #accessing }
+LzOpTerm >> valueSlots [
+	^ #(opName args)
+]

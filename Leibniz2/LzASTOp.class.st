@@ -23,11 +23,6 @@ LzASTOp >> args: anObject [
 ]
 
 { #category : #accessing }
-LzASTOp >> fieldNames [
-	^ #(name variables args sort)
-]
-
-{ #category : #accessing }
 LzASTOp >> name [
 
 	^ name
@@ -49,6 +44,11 @@ LzASTOp >> sort [
 LzASTOp >> sort: anObject [
 
 	sort := anObject
+]
+
+{ #category : #accessing }
+LzASTOp >> valueSlots [
+	^ #(name variables args sort)
 ]
 
 { #category : #accessing }

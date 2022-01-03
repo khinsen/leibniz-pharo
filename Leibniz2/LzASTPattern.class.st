@@ -9,11 +9,6 @@ Class {
 }
 
 { #category : #accessing }
-LzASTPattern >> fieldNames [
-	^ #(term variables)
-]
-
-{ #category : #accessing }
 LzASTPattern >> term [
 	^ term
 ]
@@ -21,6 +16,11 @@ LzASTPattern >> term [
 { #category : #accessing }
 LzASTPattern >> term: anObject [
 	term := anObject
+]
+
+{ #category : #accessing }
+LzASTPattern >> valueSlots [
+	^ #(term variables)
 ]
 
 { #category : #accessing }

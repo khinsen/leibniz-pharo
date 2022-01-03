@@ -7,22 +7,30 @@ Trait {
 TLzEquality >> = anObject [
 	self == anObject ifTrue: [ ^true ].
 	self class == anObject class ifFalse: [ ^false ].
-	self fieldNames do: [ :name |
+	self referenceSlots do: [ :name |
+		(self instVarNamed: name) == (anObject instVarNamed: name)
+			ifFalse: [ ^ false ] ].
+	self valueSlots do: [ :name |
 		(self instVarNamed: name) = (anObject instVarNamed: name)
-			ifFalse: [^false] ].
+			ifFalse: [ ^ false ] ].
 	^ true
-]
-
-{ #category : #accessing }
-TLzEquality >> fieldNames [
-	self notYetImplemented
 ]
 
 { #category : #comparing }
 TLzEquality >> hash [
 	| hash |
 	hash := self class hash.
-	self fieldNames do: [ :name |
+	self valueSlots do: [ :name |
 		hash := hash bitXor: (self instVarNamed: name) hash ].
 	^ hash
+]
+
+{ #category : #accessing }
+TLzEquality >> referenceSlots [
+	^ #()
+]
+
+{ #category : #accessing }
+TLzEquality >> valueSlots [
+	self notYetImplemented
 ]
