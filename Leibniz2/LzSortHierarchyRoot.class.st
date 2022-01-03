@@ -7,7 +7,7 @@ Class {
 		'sortSignature',
 		'sortContext',
 		'sortGraph',
-		'sortTerm'
+		'sortSort'
 	],
 	#category : #Leibniz2
 }
@@ -16,15 +16,18 @@ Class {
 LzSortHierarchyRoot >> initialize [
 	"The sortTerm is lacking its signature, but that doesn't matter. It is fully
 	 operational for the bootstrap."
-	| sortOperators |
-	sortTerm := LzSortTerm new
+	| sortTerm sortOperators |
+	sortTerm := LzOpTerm new
 		opName: self sortOpName;
 		args: #().
-	sortTerm sort: sortTerm.
+	sortSort := LzSort new
+		term: sortTerm.
+	sortTerm sort: sortSort.
 
 	sortGraph := LzSortHierarchyRootGraph new.
-	sortGraph sortTerm: self sortTerm.
-
+	sortGraph sortSort: sortSort.
+	sortSort sortGraph: sortGraph.
+	
 	sortContext := LzContext new.
 	sortGraph sortContext: sortContext.
 
@@ -68,10 +71,6 @@ LzSortHierarchyRoot >> sortSignature [
 ]
 
 { #category : #accessing }
-LzSortHierarchyRoot >> sortTerm [
-	^ sortTerm ifNil: [
-		
-		sortTerm
-			sort: sortTerm;
-			yourself ]
+LzSortHierarchyRoot >> sortSort [
+	^ sortSort
 ]

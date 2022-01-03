@@ -16,7 +16,11 @@ LzSortGraph >> fieldNames [
 
 { #category : #constructing }
 LzSortGraph >> parsedSort: anASTPatternNode [
-	^ self sortContext parsedPattern: anASTPatternNode
+	^ LzSort new
+		sortGraph: self;
+		term: (self sortContext parsedPattern: anASTPatternNode);
+		beRecursivelyReadOnlyObject;
+		yourself
 ]
 
 { #category : #accessing }
