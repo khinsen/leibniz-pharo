@@ -18,7 +18,11 @@ LzExamples >> simpleContextBuilder [
 	^ LzContextBuilder new
 		sort: 'Foo';
 		op: 'aFoo : Foo';
-		op: 'aFoo(Foo) : Foo'.
+		op: 'aFoo(Foo) : Foo';
+		op: 'Foo + Foo : Foo';
+		op: 'Foo[Foo] : Foo';
+		op: 'Foo^{Foo} : Foo';
+		op: 'Foo_{Foo} : Foo'.
 ]
 
 { #category : #example }
@@ -27,7 +31,11 @@ LzExamples >> simpleContextTerms [
 	^ {
 		'aFoo'.
 		'aFoo(aFoo)'.
-		'aFoo(aFoo(aFoo))'
+		'aFoo(aFoo(aFoo))'.
+		'aFoo(aFoo + aFoo)'.
+		'aFoo[aFoo]'.
+		'aFoo^{aFoo}'.
+		'aFoo_{aFoo}'
 	} collect: [ :each |
 		| term |
 		term := self simpleContext term: each.

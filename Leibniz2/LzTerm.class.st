@@ -14,6 +14,11 @@ LzTerm >> hasInfixOpOtherThan: aSymbol [
 	^ false
 ]
 
+{ #category : #testing }
+LzTerm >> isInfix [
+	^ false
+]
+
 { #category : #printing }
 LzTerm >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream [
 	self

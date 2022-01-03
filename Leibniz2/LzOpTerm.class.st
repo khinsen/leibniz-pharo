@@ -24,6 +24,11 @@ LzOpTerm >> hasInfixOpOtherThan: anOpName [
 	^ opName isInfixOpOtherThan: anOpName
 ]
 
+{ #category : #testing }
+LzOpTerm >> isInfix [
+	^ opName isInfix
+]
+
 { #category : #accessing }
 LzOpTerm >> opName [
 	^ opName

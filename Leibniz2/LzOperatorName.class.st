@@ -44,7 +44,7 @@ LzOperatorName >> isEqualityOp [
 	^ false
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 LzOperatorName >> isInfix [
 	^ false
 ]
