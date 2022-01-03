@@ -26,7 +26,11 @@ LzExamples >> simpleContextTerms [
 	<gtExample>
 	^ {
 		'aFoo'.
-		'aFoo(aFoo)'
+		'aFoo(aFoo)'.
+		'aFoo(aFoo(aFoo))'
 	} collect: [ :each |
-		self simpleContext term: each ]
+		| term |
+		term := self simpleContext term: each.
+		self assert: term asLeibnizSyntaxString equals: each.
+		term ]
 ]

@@ -20,6 +20,11 @@ LzOpTerm >> args: anArray [
 ]
 
 { #category : #accessing }
+LzOpTerm >> hasInfixOpOtherThan: anOpName [
+	^ opName isInfixOpOtherThan: anOpName
+]
+
+{ #category : #accessing }
 LzOpTerm >> opName [
 	^ opName
 ]
@@ -27,6 +32,11 @@ LzOpTerm >> opName [
 { #category : #accessing }
 LzOpTerm >> opName: anOpName [
 	opName := anOpName
+]
+
+{ #category : #printing }
+LzOpTerm >> printAsLeibnizSyntaxOn: aStream [
+	opName printForArgs: args on: aStream
 ]
 
 { #category : #accessing }

@@ -51,7 +51,7 @@ LzOperatorName >> isInfix [
 
 { #category : #testing }
 LzOperatorName >> isInfixOpOtherThan: anOpName [
-	^ false	
+	^ false
 ]
 
 { #category : #printing }
@@ -68,7 +68,7 @@ LzOperatorName >> printForArity: anArity on: aStream [
 LzOperatorName >> printForArity: anArity withSort: aSort on: aStream [
 	self printForArity: anArity on: aStream.
 	aStream nextPutAll: ' : '.
-	aStream nextPutAll: aSort asLeibnizSyntaxString.
+	aSort printAsLeibnizSyntaxOn: aStream.
 ]
 
 { #category : #accessing }

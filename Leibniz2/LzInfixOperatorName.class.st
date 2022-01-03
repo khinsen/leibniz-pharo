@@ -19,30 +19,32 @@ LzInfixOperatorName >> isInfix [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 LzInfixOperatorName >> isInfixOpOtherThan: anOpName [
 	^ anOpName ~= self
 ]
 
 { #category : #printing }
-LzInfixOperatorName >> printForArgs: aTermArray on: aStream [
-	self assert: aTermArray size equals: 2.
-	aTermArray first printAsFirstArgOfInfixTermWithOpName: self on: aStream.
-	aStream nextPutAll: ' '.
+LzInfixOperatorName >> printForArgs: anArrayOfTerms on: aStream [
+	self assert: anArrayOfTerms size equals: 2.
+	anArrayOfTerms first
+		printAsFirstArgOfInfixTermWithOpName: self
+		on: aStream.
+	aStream nextPut: Character space.
 	aStream nextPutAll: internalSymbol allButFirst.
-	aStream nextPutAll: ' '.
-	aTermArray second
+	aStream nextPut: Character space.
+	anArrayOfTerms second
 		printAsLeibnizSyntaxOn: aStream
-		parenthesized: aTermArray second isInfix
+		parenthesized: anArrayOfTerms second isInfix
 ]
 
 { #category : #printing }
 LzInfixOperatorName >> printForArity: anArity on: aStream [
 	self assert: anArity size equals: 2.
 	anArity first printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: ' '.
+	aStream nextPut: Character space.
 	aStream nextPutAll: internalSymbol allButFirst.
-	aStream nextPutAll: ' '.
+	aStream nextPut: Character space.
 	anArity second printAsLeibnizSyntaxOn: aStream.
 ]
 

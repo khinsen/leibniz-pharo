@@ -10,17 +10,17 @@ LzSubscriptOperatorName >> initialize [
 ]
 
 { #category : #printing }
-LzSubscriptOperatorName >> printForArgs: aTermArray on: aStream [
-	self assert: aTermArray size > 1.
-	aTermArray first
+LzSubscriptOperatorName >> printForArgs: anArrayOfTerms on: aStream [
+	self assert: anArrayOfTerms size > 1.
+	anArrayOfTerms first
 		printAsLeibnizSyntaxOn: aStream
-		parenthesized: aTermArray first isInfix.
+		parenthesized: anArrayOfTerms first isInfix.
 	aStream nextPutAll: '_{'.
-	aTermArray allButFirst allButLast do: [ : each |
+	anArrayOfTerms allButFirst allButLast do: [ : each |
 		each printAsLeibnizSyntaxOn: aStream.
 		aStream nextPutAll: ', ' ].
-	aTermArray last printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: '}'
+	anArrayOfTerms last printAsLeibnizSyntaxOn: aStream.
+	aStream nextPut: $}
 ]
 
 { #category : #printing }
@@ -32,7 +32,7 @@ LzSubscriptOperatorName >> printForArity: anArity on: aStream [
 		each printAsLeibnizSyntaxOn: aStream.
 		aStream nextPutAll: ', ' ].
 	anArity last printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: '}'
+	aStream nextPut: $}
 ]
 
 { #category : #printing }

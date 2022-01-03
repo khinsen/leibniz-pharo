@@ -18,6 +18,11 @@ LzVarTerm >> name: aVarName [
 	name := aVarName
 ]
 
+{ #category : #printing }
+LzVarTerm >> printAsLeibnizSyntaxOn: aStream [
+	aStream nextPutAll: name asSymbol
+]
+
 { #category : #accessing }
 LzVarTerm >> sort [
 	^ sort
