@@ -1,6 +1,8 @@
 Class {
 	#name : #LzOperators,
 	#superclass : #Object,
+	#traits : 'TLzEquality',
+	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'sortGraph',
 		'opTable'
@@ -29,6 +31,11 @@ LzOperators >> addOp: anASTOpNode [
 								kindArity: key second;
 								kind: valueSort kind ].
 	op addArity: argSorts sort: valueSort
+]
+
+{ #category : #accessing }
+LzOperators >> fieldNames [
+	^ #(sortGraph opTable)
 ]
 
 { #category : #defining }

@@ -1,11 +1,18 @@
 Class {
 	#name : #LzSortGraph,
 	#superclass : #Object,
+	#traits : 'TLzEquality',
+	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'sortContext'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
+
+{ #category : #accessing }
+LzSortGraph >> fieldNames [
+	^ #(sortContext)
+]
 
 { #category : #constructing }
 LzSortGraph >> parsedSort: anASTPatternNode [

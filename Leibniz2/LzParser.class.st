@@ -250,7 +250,7 @@ LzParser >> varTerm [
 { #category : #signature }
 LzParser >> zeroArgOp [
 	^ super zeroArgOp ==> [ :idString |
-		{ LbPrefixOperatorName for: idString. #() } ]
+		{ LzPrefixOperatorName for: idString. #() } ]
 ]
 
 { #category : #terms }

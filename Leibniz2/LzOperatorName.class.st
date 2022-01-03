@@ -1,8 +1,8 @@
 Class {
 	#name : #LzOperatorName,
 	#superclass : #Object,
-	#traits : 'EqualityThroughVariables',
-	#classTraits : 'EqualityThroughVariables classTrait',
+	#traits : 'TLzEquality',
+	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'internalSymbol'
 	],
@@ -27,6 +27,11 @@ LzOperatorName >> asString [
 { #category : #converting }
 LzOperatorName >> asSymbol [
 	^ internalSymbol
+]
+
+{ #category : #accessing }
+LzOperatorName >> fieldNames [
+	^ #(internalSymbol)
 ]
 
 { #category : #accessing }

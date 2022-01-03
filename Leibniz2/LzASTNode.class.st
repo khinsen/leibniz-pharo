@@ -1,18 +1,10 @@
 Class {
 	#name : #LzASTNode,
 	#superclass : #Object,
+	#traits : 'TLzEquality',
+	#classTraits : 'TLzEquality classTrait',
 	#category : #'Leibniz2-Parser'
 }
-
-{ #category : #comparing }
-LzASTNode >> = anObject [
-	self == anObject ifTrue: [ ^true ].
-	self class = anObject class ifFalse: [ ^false ].
-	self fieldNames do: [ :field |
-		(self instVarNamed: field) = (anObject instVarNamed: field)
-				ifFalse: [ ^ false ] ].
-	^ true
-]
 
 { #category : #converting }
 LzASTNode >> associations [
@@ -41,14 +33,6 @@ LzASTNode >> gtTreeFor: aView [
 		column: 'Field' text: [ :assoc | assoc key ];
 		column: 'Value' text: [ :assoc | assoc value ];
 		send: [ :assoc | assoc value ]
-]
-
-{ #category : #comparing }
-LzASTNode >> hash [
-	^ self fieldNames
-		inject: self class hash
-		into: [ :total :each |
-			total bitXor: (self instVarNamed: each) hash ]
 ]
 
 { #category : #testing }

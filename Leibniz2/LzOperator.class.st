@@ -1,6 +1,8 @@
 Class {
 	#name : #LzOperator,
 	#superclass : #Object,
+	#traits : 'TLzEquality',
+	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'kind',
 		'kindArity',
@@ -14,6 +16,11 @@ Class {
 { #category : #defining }
 LzOperator >> addArity: anArity sort: aSort [
 	self flag: #todo
+]
+
+{ #category : #accessing }
+LzOperator >> fieldNames [
+	^ #(kind kindArity opName sortGraph ranks)
 ]
 
 { #category : #accessing }

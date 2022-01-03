@@ -1,6 +1,8 @@
 Class {
 	#name : #LzSignature,
 	#superclass : #Object,
+	#traits : 'TLzEquality',
+	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'sortGraph',
 		'operators',
@@ -8,6 +10,11 @@ Class {
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
+
+{ #category : #accessing }
+LzSignature >> fieldNames [
+	^ #(sortGraph operators variables)
+]
 
 { #category : #constructing }
 LzSignature >> opTerm: anOpName args: anArrayOfTerms [

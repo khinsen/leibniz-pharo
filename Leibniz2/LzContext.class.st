@@ -1,11 +1,18 @@
 Class {
 	#name : #LzContext,
 	#superclass : #Object,
+	#traits : 'TLzEquality',
+	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'signature'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
+
+{ #category : #accessing }
+LzContext >> fieldNames [
+	^ #(signature)
+]
 
 { #category : #constructing }
 LzContext >> parsedPattern: anASTPatternNode [
