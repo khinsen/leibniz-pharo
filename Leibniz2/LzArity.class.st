@@ -32,5 +32,7 @@ LzArity >> sortGraph [
 
 { #category : #accessing }
 LzArity >> sortGraph: aSortGraph [
-	sortGraph := aSortGraph
+	self flag: #todo.
+	"Not sure this is really needed!"
+	"sortGraph := aSortGraph"
 ]

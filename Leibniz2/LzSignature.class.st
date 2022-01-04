@@ -6,7 +6,9 @@ Class {
 	#instVars : [
 		'sortGraph',
 		'operators',
-		'variables'
+		'variables',
+		'varDeclarations',
+		'opDeclarations'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
@@ -53,6 +55,16 @@ LzSignature >> gtVariablesFor: aView [
 		column: 'Sort' lzCode: [ :each |
 			each value asLeibnizSyntaxString ];
 		yourself
+]
+
+{ #category : #accessing }
+LzSignature >> opDeclarations [
+	^ opDeclarations
+]
+
+{ #category : #accessing }
+LzSignature >> opDeclarations: aCollection [
+	opDeclarations := aCollection
 ]
 
 { #category : #constructing }
@@ -138,6 +150,16 @@ LzSignature >> term: aString [
 { #category : #accessing }
 LzSignature >> valueSlots [
 	^ #(sortGraph operators variables)
+]
+
+{ #category : #accessing }
+LzSignature >> varDeclarations [
+	^ varDeclarations
+]
+
+{ #category : #accessing }
+LzSignature >> varDeclarations: aCollection [
+	varDeclarations := aCollection
 ]
 
 { #category : #constructing }

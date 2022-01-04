@@ -14,9 +14,7 @@ Class {
 
 { #category : #accessing }
 LzSortHierarchyRoot >> initialize [
-	"The sortTerm is lacking its signature, but that doesn't matter. It is fully
-	 operational for the bootstrap."
-	| sortTerm sortOperators |
+	| sortTerm sortDeclaration sortOperators |
 	sortTerm := LzOpTerm new
 		opName: self sortOpName;
 		args: #().
@@ -24,7 +22,15 @@ LzSortHierarchyRoot >> initialize [
 		term: sortTerm.
 	sortTerm sort: sortSort.
 
-	sortGraph := LzSortHierarchyRootGraph new.
+	sortDeclaration :=
+		LzParser
+			parse: LzConstants opNameSort, ' : ', LzConstants opNameSort
+			startingAt: #opEnd
+			yielding: LzASTOp.
+
+	sortGraph := LzSortHierarchyRootGraph new
+		sortDeclarations: { sortDeclaration };
+		subsortDeclarations: #().
 	sortGraph sortSort: sortSort.
 	sortSort sortGraph: sortGraph.
 	
@@ -38,16 +44,14 @@ LzSortHierarchyRoot >> initialize [
 		LzSignature new
 			sortGraph: sortGraph;
 			variables: Dictionary new;
-			operators: sortOperators.
+			operators: sortOperators;
+			varDeclarations: #();
+			opDeclarations: (OrderedCollection with: sortDeclaration).
 
 	sortContext signature: sortSignature.
 	sortTerm signature: sortSignature.
 
-	sortOperators addOp:
-		(LzParser
-			parse: LzConstants opNameSort, ' : ', LzConstants opNameSort
-			startingAt: #opEnd
-			yielding: LzASTOp).
+	sortOperators addOp: sortDeclaration.
 ]
 
 { #category : #accessing }

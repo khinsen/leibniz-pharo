@@ -22,6 +22,12 @@ LzContextBuilder >> context [
 		yourself
 ]
 
+{ #category : #defining }
+LzContextBuilder >> include: aContext [
+	self sortGraphBuilder include: aContext sortGraph.
+	self signatureBuilder include: aContext signature.
+]
+
 { #category : #initializing }
 LzContextBuilder >> initialize [
 	sortGraphBuilder := LzSortGraphBuilder new.

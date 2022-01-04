@@ -4,7 +4,9 @@ Class {
 	#traits : 'TLzEquality',
 	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
-		'sortContext'
+		'sortContext',
+		'subsortDeclarations',
+		'sortDeclarations'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
@@ -41,6 +43,26 @@ LzSortGraph >> sortContext [
 { #category : #accessing }
 LzSortGraph >> sortContext: aSortContext [
 	sortContext := aSortContext
+]
+
+{ #category : #accessing }
+LzSortGraph >> sortDeclarations [
+	^ sortDeclarations
+]
+
+{ #category : #accessing }
+LzSortGraph >> sortDeclarations: aCollection [
+	sortDeclarations := aCollection
+]
+
+{ #category : #accessing }
+LzSortGraph >> subsortDeclarations [
+	^ subsortDeclarations
+]
+
+{ #category : #accessing }
+LzSortGraph >> subsortDeclarations: aCollection [
+	subsortDeclarations := aCollection
 ]
 
 { #category : #accessing }

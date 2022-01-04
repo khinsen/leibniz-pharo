@@ -96,11 +96,11 @@ LzOperators >> referenceSlots [
 
 { #category : #lookup }
 LzOperators >> sortForOp: anOpName args: anArity [
-"	(KhEqualityExplorer
-		for: { anOpName. anArity kindArity }
-		and: opTable keys last)
-			inspect."
-	^ (opTable at: { anOpName. anArity kindArity })
+	| key |
+	key := { anOpName. anArity kindArity }.
+	^ (opTable at: key
+		ifAbsent: [ opTable keys do: [ :each |
+						(KhEqualityExplorer for: key and: each) inspect ] ])
 		sortForArity: anArity
 ]
 

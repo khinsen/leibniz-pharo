@@ -9,13 +9,19 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
+{ #category : #defining }
+LzSignatureBuilder >> include: aSignature [
+	self parsedOps: aSignature opDeclarations.
+	self parsedVars: aSignature varDeclarations
+]
+
 { #category : #accessing }
 LzSignatureBuilder >> initialize [
 	opDeclarations := OrderedCollection new.
 	varDeclarations := OrderedCollection new.
 ]
 
-{ #category : #accessing }
+{ #category : #defining }
 LzSignatureBuilder >> op: aString [
 	opDeclarations add:
 		(LzParser
@@ -24,9 +30,14 @@ LzSignatureBuilder >> op: aString [
 			yielding: LzASTOp).
 ]
 
-{ #category : #accessing }
+{ #category : #defining }
 LzSignatureBuilder >> parsedOps: aCollection [
 	opDeclarations addAll: aCollection
+]
+
+{ #category : #defining }
+LzSignatureBuilder >> parsedVars: aCollection [
+	varDeclarations addAll: aCollection
 ]
 
 { #category : #building }
@@ -49,6 +60,8 @@ LzSignatureBuilder >> signature [
 		sortGraph: self sortGraph;
 		operators: operators;
 		variables: variables;
+		opDeclarations: opDeclarations copy;
+		varDeclarations: varDeclarations copy;
 		beRecursivelyReadOnlyObject;
 		yourself.
 ]

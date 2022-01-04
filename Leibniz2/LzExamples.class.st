@@ -7,6 +7,18 @@ Class {
 }
 
 { #category : #example }
+LzExamples >> listSortContext [
+	<gtExample>
+	^ (LzContextBuilder new
+		include: LzBuiltinContexts sortContext;
+		sort: 'ℕ';
+		op: 'element : 𝕊';
+		op: '∅ : 𝕊';
+		op: 'list(𝕊, ℕ) : 𝕊')
+		context.
+]
+
+{ #category : #example }
 LzExamples >> simpleContext [
 	<gtExample>
 	^ self simpleContextBuilder context
