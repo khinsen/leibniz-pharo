@@ -41,11 +41,11 @@ LzInfixOperatorName >> printForArgs: anArrayOfTerms on: aStream [
 { #category : #printing }
 LzInfixOperatorName >> printForArity: anArity on: aStream [
 	self assert: anArity size equals: 2.
-	anArity first printAsLeibnizSyntaxOn: aStream.
+	anArity first printAsLeibnizSyntaxOn: aStream parenthesized: true.
 	aStream nextPut: Character space.
 	aStream nextPutAll: internalSymbol allButFirst.
 	aStream nextPut: Character space.
-	anArity second printAsLeibnizSyntaxOn: aStream.
+	anArity second printAsLeibnizSyntaxOn: aStream parenthesized: true.
 ]
 
 { #category : #inspecting }

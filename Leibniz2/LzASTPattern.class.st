@@ -8,6 +8,15 @@ Class {
 	#category : #'Leibniz2-Parser'
 }
 
+{ #category : #printing }
+LzASTPattern >> printAsLeibnizSyntaxOn: aStream [
+	variables do: [ :each |
+		aStream nextPutAll: '∀ '.
+		each printAsLeibnizSyntaxOn: aStream.
+		aStream nextPut: Character space ].
+	term printAsLeibnizSyntaxOn: aStream
+]
+
 { #category : #accessing }
 LzASTPattern >> term [
 	^ term

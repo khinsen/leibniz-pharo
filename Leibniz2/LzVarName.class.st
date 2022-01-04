@@ -15,13 +15,12 @@ LzVarName >> addPrefix: aSymbol [
 ]
 
 { #category : #printing }
+LzVarName >> printAsLeibnizSyntaxOn: aStream [
+	aStream nextPutAll: internalSymbol
+]
+
+{ #category : #printing }
 LzVarName >> printForArity: anArity on: aStream [
-	aStream nextPutAll: internalSymbol.
-	anArity ifNotEmpty: [
-		aStream nextPut: $(.
-		anArity allButLastDo: [ :each |
-			each printAsLeibnizSyntaxOn: aStream.
-			aStream nextPutAll: ', ' ].
-		anArity last printAsLeibnizSyntaxOn: aStream.
-		aStream nextPut: $) ]
+	self assert: anArity isEmpty.
+	self printAsLeibnizSyntaxOn: aStream
 ]

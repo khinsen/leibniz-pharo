@@ -47,7 +47,12 @@ LzParserExamples >> opDeclarations [
 		'bag(?element:Sort, ?n:ℕ) : Sort'.
 		'∀ ?s:sort ∀ ?n:ℕ ∀ ?m:ℕ (list(?s, ?n)) ++ (list(?s, ?m)) : list(?s, ?n + ?m)'.
 	} collect: [ :each |
-		self opParser parse: each ]
+		| astNode |
+		astNode := self opParser parse: each.
+		self
+			assert: (self opParser parse:  astNode asLeibnizSyntaxString)
+			equals: astNode.
+		astNode ]
 ]
 
 { #category : #accessing }
@@ -159,7 +164,12 @@ LzParserExamples >> terms [
 	<gtExample>
 	^ self termStrings
 		collect: [ :each |
-			self termParser parse: each ]
+			| astNode |
+			astNode := self termParser parse: each.
+			self
+				assert: (self termParser parse:  astNode asLeibnizSyntaxString)
+				equals: astNode.
+			astNode ]
 ]
 
 { #category : #accessing }
@@ -169,7 +179,12 @@ LzParserExamples >> varDeclarations [
 		'?foo: Foo'.
 		'?list : ∀ ?n:ℕ list(n)'.
 	} collect: [ :each |
-		self varParser parse: each ]
+		| astNode |
+		astNode := self varParser parse: each.
+		self
+			assert: (self varParser parse:  astNode asLeibnizSyntaxString)
+			equals: astNode.
+		astNode ]
 ]
 
 { #category : #accessing }

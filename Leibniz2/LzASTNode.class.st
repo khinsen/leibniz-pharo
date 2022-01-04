@@ -1,8 +1,8 @@
 Class {
 	#name : #LzASTNode,
 	#superclass : #Object,
-	#traits : 'TLzEquality',
-	#classTraits : 'TLzEquality classTrait',
+	#traits : 'TLzEquality + TLzPrintable',
+	#classTraits : 'TLzEquality classTrait + TLzPrintable classTrait',
 	#category : #'Leibniz2-Parser'
 }
 
@@ -38,7 +38,9 @@ LzASTNode >> isLzASTNode [
 { #category : #printing }
 LzASTNode >> printOn: aStream [
 	super printOn: aStream.
-	self associations printElementsOn: aStream.
+	aStream nextPutAll: '('''.
+	self printAsLeibnizSyntaxOn: aStream.
+	aStream nextPutAll: ''')'
 ]
 
 { #category : #accessing }

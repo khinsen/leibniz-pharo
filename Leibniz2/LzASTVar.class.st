@@ -20,6 +20,13 @@ LzASTVar >> name: anObject [
 	name := anObject
 ]
 
+{ #category : #printing }
+LzASTVar >> printAsLeibnizSyntaxOn: aStream [
+	name printAsLeibnizSyntaxOn: aStream.
+	aStream nextPut: $:.
+	sort printAsLeibnizSyntaxOn: aStream.
+]
+
 { #category : #accessing }
 LzASTVar >> sort [
 

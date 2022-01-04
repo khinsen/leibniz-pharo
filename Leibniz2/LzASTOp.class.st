@@ -34,6 +34,15 @@ LzASTOp >> name: anObject [
 	name := anObject
 ]
 
+{ #category : #printing }
+LzASTOp >> printAsLeibnizSyntaxOn: aStream [
+	variables do: [ :each |
+		aStream nextPutAll: '∀ '.
+		each printAsLeibnizSyntaxOn: aStream.
+		aStream nextPut: Character space ].
+	self name printForArity: args withSort: self sort on: aStream
+]
+
 { #category : #accessing }
 LzASTOp >> sort [
 

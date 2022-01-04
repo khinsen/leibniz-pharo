@@ -16,3 +16,8 @@ LzASTVarTerm >> name [
 LzASTVarTerm >> name: aVarName [
 	name := aVarName
 ]
+
+{ #category : #printing }
+LzASTVarTerm >> printAsLeibnizSyntaxOn: aStream [
+	aStream nextPutAll: name asSymbol
+]

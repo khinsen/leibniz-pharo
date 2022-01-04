@@ -69,7 +69,7 @@ LzParser >> fpNumberTerm [
 		 	"In Pharo, a number with an exponent but without a fractional part
 		 	 is an integer, not a float.
 			  Workaround: convert the converted string explicitly to a float."
-			  LzASTLiteral new
+			  LzASTFPLiteral new
 					value: string asNumber asFloat;
 					sort: (LzASTOpTerm new
 							opName: (LzPrefixOperatorName for: #fpNumber)) ]
@@ -85,7 +85,7 @@ LzParser >> infixOp [
 LzParser >> integerTerm [
 	^ super integerTerm
 		==> [ :string |
-			  LzASTLiteral new
+			  LzASTIntegerLiteral new
 					value: string asNumber;
 					sort: (LzASTOpTerm new
 							opName: (LzPrefixOperatorName for: #integer)) ]
@@ -144,7 +144,7 @@ LzParser >> prefixOpTerm [
 LzParser >> rationalNumberTerm [
 	^ super rationalNumberTerm
 		==> [ :string |
-			  LzASTLiteral new
+			  LzASTRationalLiteral new
 				value: (Fraction readFromString: string);
 				sort: (LzASTOpTerm new
 						opName: (LzPrefixOperatorName for: #rational)) ]
@@ -170,7 +170,7 @@ LzParser >> rewriteRule [
 LzParser >> stringTerm [
 	^ super stringTerm
 		==> [ :string |
-			  LzASTLiteral new
+			  LzASTStringLiteral new
 					value: string;
 					sort: (LzASTOpTerm new
 							opName: (LzPrefixOperatorName for: #string)) ]
