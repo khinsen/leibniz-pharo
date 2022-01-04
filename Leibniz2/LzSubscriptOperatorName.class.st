@@ -35,7 +35,7 @@ LzSubscriptOperatorName >> printForArity: anArity on: aStream [
 	aStream nextPut: $}
 ]
 
-{ #category : #printing }
+{ #category : #inspecting }
 LzSubscriptOperatorName >> synopsis [
 	^ '•_{•}'
 ]

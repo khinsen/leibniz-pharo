@@ -33,6 +33,55 @@ LzOperators >> addOp: anASTOpNode [
 	op addArity: argSorts sort: valueSort
 ]
 
+{ #category : #accessing }
+LzOperators >> gtOperatorsFor: aView [
+	<gtView>
+	| operators |
+	opTable isEmpty ifTrue: [ ^ aView empty ].
+	operators := Dictionary new.
+	opTable keysAndValuesDo: [ :key :op |
+		| opName |
+		opName := key first.
+		operators at: opName
+			ifPresent: [ :opList | opList add: op ]
+			ifAbsentPut: [ OrderedCollection with: op ] ].
+	operators := operators associations
+					sorted: [ :a :b | a key <= b key ].
+	operators do: [ :each |
+		each value sort: [ :a :b  |
+					a kindArity size <= b kindArity size ] ].
+	^ aView lzColumnedTree
+		title: 'Operators' translated;
+		priority: 0;
+		items: [ operators ];
+		children: [ :each |
+			each isAssociation
+				ifTrue: [ each value ]
+				ifFalse: [ #() ] ];
+		column: 'Kind arity' lzCode: [ :each |
+			each isAssociation
+				ifTrue: [ each key synopsis ]
+				ifFalse: [ each opName printStringForArity: each kindArity ] ]
+			weight: 0.5 ;
+		column: 'Kind' lzCode: [ :each |
+			each isAssociation
+				ifTrue: [ '' ]
+				ifFalse: [ each kind asLeibnizSyntaxString ]]
+			weight: 0.3;
+		column: 'Ranks' text: [ :each |
+			each isAssociation
+				ifTrue: [ '' ]
+				ifFalse: [ each size ] ]
+			weight: 0.2;
+		expandItems: operators;
+		yourself
+]
+
+{ #category : #testing }
+LzOperators >> isEmpty [
+	^ opTable isEmpty
+]
+
 { #category : #defining }
 LzOperators >> operators: aSetOfASTOpNodes [
 	opTable := Dictionary new.

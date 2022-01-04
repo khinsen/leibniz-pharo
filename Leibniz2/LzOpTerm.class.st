@@ -55,6 +55,11 @@ LzOpTerm >> sort: aSort [
 ]
 
 { #category : #accessing }
+LzOpTerm >> synopsis [
+	^ self opName synopsis
+]
+
+{ #category : #accessing }
 LzOpTerm >> valueSlots [
 	^ #(opName args)
 ]

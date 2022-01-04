@@ -18,6 +18,27 @@ LzOperator >> addArity: anArity sort: aSort [
 	self flag: #todo
 ]
 
+{ #category : #inspecting }
+LzOperator >> gtRanksFor: aView [
+	<gtView>
+	ranks ifEmpty: [ ^ aView empty ].
+	^ aView columnedList
+		title: 'Ranks';
+		priority: 0;
+		items: [ ranks ];
+		column: 'Variables' lzCode: [ :each |
+			(String streamContents: [ :s |
+				each key printVariablesOn: s ] )
+			asRopedText ];
+		column: 'Arity' lzCode: [ :each |
+			(String streamContents: [ :s |
+				self opName printForArity: each key on: s ] )
+			asRopedText ];
+		column: 'Sort' lzCode: [ :each |
+			each value asLeibnizSyntaxString asRopedText ];
+		yourself
+]
+
 { #category : #accessing }
 LzOperator >> initialize [
 	ranks := OrderedCollection new
@@ -61,6 +82,11 @@ LzOperator >> referenceNames [
 { #category : #accessing }
 LzOperator >> referenceSlots [
 	^ #(sortGraph)
+]
+
+{ #category : #accessing }
+LzOperator >> size [
+	^ ranks size
 ]
 
 { #category : #lookup }

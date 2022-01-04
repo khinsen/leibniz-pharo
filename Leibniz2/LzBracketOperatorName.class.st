@@ -35,7 +35,7 @@ LzBracketOperatorName >> printForArity: anArity on: aStream [
 	aStream nextPut: $]
 ]
 
-{ #category : #printing }
+{ #category : #inspecting }
 LzBracketOperatorName >> synopsis [
 	^ '•[• ...]'
 ]

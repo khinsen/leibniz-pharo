@@ -11,6 +11,50 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
+{ #category : #inspecting }
+LzSignature >> gtOperatorsFor: aView [
+	<gtView>
+	operators isEmpty ifTrue: [ ^ aView empty ].
+	^ aView forward
+		title: 'Operators' translated;
+		priority: 0;
+		object: [ operators ] ;
+		view: #gtOperatorsFor:;
+		yourself
+]
+
+{ #category : #accessing }
+LzSignature >> gtSortGraphFor: aView [ 
+	<gtView>
+	^ aView forward
+		title: 'Sort graph';
+		priority: 2;
+		object: [ self sortGraph ];
+		view: #gtGraphFor:
+]
+
+{ #category : #inspecting }
+LzSignature >> gtVariablesFor: aView [
+	<gtView>
+	variables isEmpty ifTrue: [ ^ aView empty ].
+	^ aView columnedList
+		title: 'Variables' translated;
+		priority: 1;
+		items: [ variables associations
+					sorted: [ :a :b | a key <= b key ]];
+		send: [ :each |
+			LbVariable
+				named: each key
+				sort: each value
+				in: self
+				origins: nil  ];
+		column: 'Name' lzCode: [ :each |
+			each key synopsis ];
+		column: 'Sort' lzCode: [ :each |
+			each value asLeibnizSyntaxString ];
+		yourself
+]
+
 { #category : #constructing }
 LzSignature >> opTerm: anOpName args: anArrayOfTerms [
 	| sort |

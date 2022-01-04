@@ -48,7 +48,7 @@ LzInfixOperatorName >> printForArity: anArity on: aStream [
 	anArity second printAsLeibnizSyntaxOn: aStream.
 ]
 
-{ #category : #printing }
+{ #category : #inspecting }
 LzInfixOperatorName >> synopsis [
 	^ '• ', internalSymbol allButFirst, ' •'
 ]

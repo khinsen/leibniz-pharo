@@ -84,7 +84,7 @@ LzOperatorName >> printStringForArity: anArity [
 	^ String streamContents: [ :s | self printForArity: anArity on: s ]
 ]
 
-{ #category : #printing }
+{ #category : #inspecting }
 LzOperatorName >> synopsis [
 	^ internalSymbol asString
 ]
