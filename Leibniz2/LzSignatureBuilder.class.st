@@ -38,8 +38,9 @@ LzSignatureBuilder >> signature [
 		(opDeclarations flatCollect: [ :each | each varDeclarations ])) asSet.
 	self flag: #todo.
 	"Check for var declarations with sorts that are equal up to variable renaming."
-	variables := uniqueVars collect: [ :each |
-		each name -> self sortGraph parsedSort: each sort ].
+	variables := (uniqueVars collect: [ :each |
+		each name -> (self sortGraph parsedSort: each sort) ])
+		asDictionary.
 	operators :=
 		LzOperators new
 			sortGraph: self sortGraph;

@@ -62,3 +62,8 @@ LzContextBuilder >> sortGraphBuilder [
 LzContextBuilder >> subsort: aString [
 	self sortGraphBuilder subsort: aString
 ]
+
+{ #category : #defining }
+LzContextBuilder >> var: aString [
+	self signatureBuilder var: aString
+]

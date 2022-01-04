@@ -9,6 +9,11 @@ Class {
 	#category : #Leibniz2
 }
 
+{ #category : #accessing }
+LzTerm >> args [
+	^ #()
+]
+
 { #category : #inspecting }
 LzTerm >> gtSortFor: aView [
 	<gtView>

@@ -22,7 +22,8 @@ LzExamples >> simpleContextBuilder [
 		op: 'Foo + Foo : Foo';
 		op: 'Foo[Foo] : Foo';
 		op: 'Foo^{Foo} : Foo';
-		op: 'Foo_{Foo} : Foo'.
+		op: 'Foo_{Foo} : Foo';
+		var: '?foo : Foo'.
 ]
 
 { #category : #example }
@@ -31,7 +32,7 @@ LzExamples >> simpleContextTerms [
 	^ {
 		'aFoo'.
 		'aFoo(aFoo)'.
-		'aFoo(aFoo(aFoo))'.
+		'aFoo(aFoo(?foo))'.
 		'aFoo(aFoo + aFoo)'.
 		'aFoo[aFoo]'.
 		'aFoo^{aFoo}'.
