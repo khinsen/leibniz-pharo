@@ -55,3 +55,13 @@ LzExamples >> simpleContextTerms [
 		self assert: term asLeibnizSyntaxString equals: each.
 		term ]
 ]
+
+{ #category : #example }
+LzExamples >> sortGraphWithSubsorts [
+	<gtExample>
+	^ (LzSortGraphBuilder new
+		sort: 'A';
+		sort: 'B';
+		subsort: 'B ⊆ A')
+		sortGraph
+]

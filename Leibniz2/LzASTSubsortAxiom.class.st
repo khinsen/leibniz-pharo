@@ -9,6 +9,15 @@ Class {
 }
 
 { #category : #accessing }
+LzASTSubsortAxiom >> printAsLeibnizSyntaxOn: aStream [
+	self printVariablesAsLeibnizSyntaxOn: aStream.
+	aStream nextPut: Character space.
+	subsort printAsLeibnizSyntaxOn: aStream.
+	aStream nextPutAll: ' ⊆ '.
+	supersort printAsLeibnizSyntaxOn: aStream
+]
+
+{ #category : #accessing }
 LzASTSubsortAxiom >> subsort [
 
 	^ subsort

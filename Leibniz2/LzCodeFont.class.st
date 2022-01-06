@@ -4,7 +4,7 @@ Class {
 	#classVars : [
 		'DefaultFamily'
 	],
-	#category : #Leibniz2
+	#category : #'Leibniz2-Infrastructure'
 }
 
 { #category : #inspecting }

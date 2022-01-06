@@ -192,7 +192,10 @@ LzParser >> subsortAxiom [
 		variables := nodes first.
 		subsort := nodes second.
 		supersort := nodes fourth.
-		{ variables. subsort. supersort } ]
+		LzASTSubsortAxiom new
+			variables: nodes first;
+			subsort: nodes second;
+			supersort: nodes fourth ]
 ]
 
 { #category : #signature }

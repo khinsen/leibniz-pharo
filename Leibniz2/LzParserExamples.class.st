@@ -119,7 +119,7 @@ LzParserExamples >> subsortAxiomStrings [
 	<gtExample>
 	^ {
 		'A ⊆ B'.
-		'∀ ?s:sort ∀ ?n:ℕ list(s, n) ⊆ bag(s, n)'
+		'∀ ?s:𝕊 ∀ ?n:ℕ list(?s, ?n) ⊆ bag(?s, ?n)'
 	}
 ]
 

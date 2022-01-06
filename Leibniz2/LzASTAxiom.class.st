@@ -8,6 +8,15 @@ Class {
 }
 
 { #category : #accessing }
+LzASTAxiom >> printVariablesAsLeibnizSyntaxOn: aStream [
+	variables do:
+		[ :var |
+			aStream nextPutAll: '∀ '.
+			var printAsLeibnizSyntaxOn: aStream.
+			aStream nextPut: Character space]
+]
+
+{ #category : #accessing }
 LzASTAxiom >> variables [
 
 	^ variables

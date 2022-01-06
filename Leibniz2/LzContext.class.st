@@ -4,10 +4,16 @@ Class {
 	#traits : 'TLzEquality',
 	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
-		'signature'
+		'signature',
+		'axioms'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
+
+{ #category : #accessing }
+LzContext >> axioms: aCollection [
+	axioms := aCollection
+]
 
 { #category : #constructing }
 LzContext >> parsedPattern: anASTPatternNode [

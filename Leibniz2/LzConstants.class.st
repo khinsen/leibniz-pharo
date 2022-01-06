@@ -1,7 +1,7 @@
 Class {
 	#name : #LzConstants,
 	#superclass : #Object,
-	#category : #'Leibniz2-Leibniz2'
+	#category : #'Leibniz2-Infrastructure'
 }
 
 { #category : #accessing }

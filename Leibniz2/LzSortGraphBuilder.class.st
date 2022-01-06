@@ -52,18 +52,18 @@ LzSortGraphBuilder >> sort: aString [
 { #category : #accessing }
 LzSortGraphBuilder >> sortContext [
 	^ sortContext ifNil: [
-		| uniqueSorts |
+		| uniqueSorts uniqueSubsorts |
 		uniqueSorts := (sortDeclarations collect: [ :each |
 			each withoutVarDeclarations ]) asSet.
-		self flag: #todo.
-		self assert: subsortDeclarations isEmpty. "For now..."
-
-		sortContext := uniqueSorts
-			ifEmpty: [ LzSortHierarchyRoot uniqueInstance sortContext ]
-			ifNotEmpty: [
+		uniqueSubsorts := subsortDeclarations asSet.
+		self flag: #todo. "Check for axioms that are equal up to variable names."
+		sortContext := (uniqueSorts isEmpty and: [ uniqueSubsorts isEmpty])
+			ifTrue: [ LzSortHierarchyRoot uniqueInstance sortContext ]
+			ifFalse: [
 				LzContextBuilder new
 					sortContext: LzSortHierarchyRoot uniqueInstance sortContext;
 					parsedOps: uniqueSorts;
+					parsedAxioms: uniqueSubsorts;
 					context ].
 		sortContext ]
 ]

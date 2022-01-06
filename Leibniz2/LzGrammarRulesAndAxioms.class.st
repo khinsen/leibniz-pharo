@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #axioms }
-LzGrammarRulesAndAxioms >> axiom [
+LzGrammarRulesAndAxioms >> axiomEnd [
 	^ (equalityAxiom / subsortAxiom) end
 ]
 
