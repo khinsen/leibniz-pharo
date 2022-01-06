@@ -92,6 +92,11 @@ LzSignature >> operators: anObject [
 	operators := anObject
 ]
 
+{ #category : #accessing }
+LzSignature >> opsOfKind: aKind [
+	^ self operators opsOfKind: aKind
+]
+
 { #category : #constructing }
 LzSignature >> parsedPattern: anASTPatternNode [
 	^ self

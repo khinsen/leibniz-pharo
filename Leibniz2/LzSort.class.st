@@ -34,6 +34,11 @@ LzSort >> gtGraphFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
+{ #category : #testing }
+LzSort >> isSortSort [
+	^ term args isEmpty and: [ term opName asSymbol = LzConstants opNameSort ]
+]
+
 { #category : #accessing }
 LzSort >> kind [
 	self flag: #todo.

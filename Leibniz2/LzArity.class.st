@@ -2,6 +2,8 @@ Class {
 	#name : #LzArity,
 	#superclass : #Array,
 	#type : #variable,
+	#traits : 'TLzPrintable',
+	#classTraits : 'TLzPrintable classTrait',
 	#instVars : [
 		'sortGraph'
 	],
@@ -23,6 +25,14 @@ LzArity >> kindArity [
 					sortGraph: self sortGraph.
 	self collect: #kind into: kindArity.
 	^ kindArity
+]
+
+{ #category : #printing }
+LzArity >> printAsLeibnizSyntaxOn: aStream [
+	"self printVariablesAsLeibnizSyntaxOn: aStream."
+	self
+		do: [ :each | each printAsLeibnizSyntaxOn: aStream ]
+		separatedBy: [ aStream nextPutAll: ', ' ]
 ]
 
 { #category : #accessing }

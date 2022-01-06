@@ -3,7 +3,7 @@ Trait {
 	#category : #'Leibniz2-Infrastructure'
 }
 
-{ #category : #accessing }
+{ #category : #converting }
 TLzPrintable >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s |
 		self printAsLeibnizSyntaxOn: s ]
@@ -28,7 +28,22 @@ TLzPrintable >> gtSyntaxFor: aView [
 								glamorousRegularSize) ) ]
 ]
 
-{ #category : #accessing }
+{ #category : #printing }
 TLzPrintable >> printAsLeibnizSyntaxOn: aStream [
 	self notYetImplemented
+]
+
+{ #category : #printing }
+TLzPrintable >> printAsLeibnizSyntaxOn: aStream parenthesized: aBoolean [
+	aBoolean ifTrue: [ aStream nextPut: $(. ].
+	self printAsLeibnizSyntaxOn: aStream.
+	aBoolean ifTrue: [ aStream nextPut: $). ]
+]
+
+{ #category : #printing }
+TLzPrintable >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPutAll: '('''.
+	self printAsLeibnizSyntaxOn: aStream.
+	aStream nextPutAll: ''')'
 ]

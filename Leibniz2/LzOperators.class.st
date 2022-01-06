@@ -90,6 +90,11 @@ LzOperators >> operators: aSetOfASTOpNodes [
 ]
 
 { #category : #accessing }
+LzOperators >> opsOfKind: aKind [
+	^ opTable values select: [ :each | each kind = aKind ]
+]
+
+{ #category : #accessing }
 LzOperators >> referenceSlots [
 	^ #(sortGraph)
 ]

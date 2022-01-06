@@ -20,10 +20,3 @@ LzASTTerm >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream [
 		printAsLeibnizSyntaxOn: aStream
 		parenthesized: (self hasInfixOpOtherThan: anOpName)
 ]
-
-{ #category : #printing }
-LzASTTerm >> printAsLeibnizSyntaxOn: aStream parenthesized: aBoolean [
-	aBoolean ifTrue: [ aStream nextPut: $( ].
-	self printAsLeibnizSyntaxOn: aStream.
-	aBoolean ifTrue: [ aStream nextPut: $) ]
-]

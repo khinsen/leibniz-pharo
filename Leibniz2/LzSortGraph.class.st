@@ -6,10 +6,33 @@ Class {
 	#instVars : [
 		'sortContext',
 		'subsortDeclarations',
-		'sortDeclarations'
+		'sortDeclarations',
+		'sortSort',
+		'sortFamilies',
+		'anySortFamily'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
+
+{ #category : #initializing }
+LzSortGraph >> initializeFromSortContext [
+	sortSort := self sortContext sortGraph sort: LzConstants opNameSort.
+	self initializeSortFamilies.
+]
+
+{ #category : #initializing }
+LzSortGraph >> initializeSortFamilies [
+	sortFamilies :=
+		(self sortContext signature opsOfKind: sortSort kind)
+			collect: [ :each |
+				LzOpSortFamily new
+					sortGraph: self;
+					op: each ].
+	"A special sort family represents the variable of sort #sort."
+	anySortFamily := LzUniversalSortFamily new
+						sortGraph: self.
+	sortFamilies := sortFamilies copyWith: anySortFamily.
+]
 
 { #category : #constructing }
 LzSortGraph >> parsedSort: anASTPatternNode [
@@ -40,9 +63,10 @@ LzSortGraph >> sortContext [
 	^ sortContext
 ]
 
-{ #category : #accessing }
+{ #category : #initializing }
 LzSortGraph >> sortContext: aSortContext [
-	sortContext := aSortContext
+	sortContext := aSortContext.
+	self initializeFromSortContext
 ]
 
 { #category : #accessing }

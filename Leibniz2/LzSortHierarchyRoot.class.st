@@ -31,10 +31,11 @@ LzSortHierarchyRoot >> initialize [
 	sortGraph := LzSortHierarchyRootGraph new
 		sortDeclarations: { sortDeclaration };
 		subsortDeclarations: #().
-	sortGraph sortSort: sortSort.
+	sortGraph rootSortSort: sortSort.
 	sortSort sortGraph: sortGraph.
 	
-	sortContext := LzContext new.
+	sortContext := LzContext new
+		axioms: Set new.
 	sortGraph sortContext: sortContext.
 
 	sortOperators := LzOperators new

@@ -62,6 +62,11 @@ LzExamples >> sortGraphWithSubsorts [
 	^ (LzSortGraphBuilder new
 		sort: 'A';
 		sort: 'B';
-		subsort: 'B ⊆ A')
+		sort: 'C';
+		sort: 'D';
+		subsort: 'B ⊆ A';
+		subsort: 'C ⊆ A';
+		subsort: 'D ⊆ B';
+		subsort: 'D ⊆ C')
 		sortGraph
 ]

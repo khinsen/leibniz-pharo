@@ -1,8 +1,8 @@
 Class {
 	#name : #LzOperator,
 	#superclass : #Object,
-	#traits : 'TLzEquality',
-	#classTraits : 'TLzEquality classTrait',
+	#traits : 'TLzEquality + TLzPrintable',
+	#classTraits : 'TLzEquality classTrait + TLzPrintable classTrait',
 	#instVars : [
 		'kind',
 		'kindArity',
@@ -72,6 +72,11 @@ LzOperator >> opName [
 { #category : #accessing }
 LzOperator >> opName: anOpName [
 	opName := anOpName
+]
+
+{ #category : #printing }
+LzOperator >> printAsLeibnizSyntaxOn: aStream [
+	opName printForArity:  kindArity on: aStream
 ]
 
 { #category : #accessing }

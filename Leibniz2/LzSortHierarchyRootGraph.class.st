@@ -2,7 +2,7 @@ Class {
 	#name : #LzSortHierarchyRootGraph,
 	#superclass : #LzSortGraph,
 	#instVars : [
-		'sortSort'
+		'rootSortSort'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
@@ -13,10 +13,10 @@ LzSortHierarchyRootGraph >> parsedSort: anASTPatternNode [
 	self assert: anASTPatternNode variables isEmpty.
 	self assert: anASTPatternNode term opName internalSymbol equals: LzConstants opNameSort.
 	self assert: anASTPatternNode term args isEmpty.
-	^ sortSort.
+	^ rootSortSort.
 ]
 
 { #category : #accessing }
-LzSortHierarchyRootGraph >> sortSort: aSort [
-	sortSort := aSort
+LzSortHierarchyRootGraph >> rootSortSort: aSort [
+	rootSortSort := aSort
 ]

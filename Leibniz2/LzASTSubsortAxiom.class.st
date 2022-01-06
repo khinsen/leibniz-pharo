@@ -24,9 +24,8 @@ LzASTSubsortAxiom >> subsort [
 ]
 
 { #category : #accessing }
-LzASTSubsortAxiom >> subsort: anObject [
-
-	subsort := anObject
+LzASTSubsortAxiom >> subsort: anASTTermNode [
+	subsort := anASTTermNode
 ]
 
 { #category : #accessing }
@@ -36,7 +35,6 @@ LzASTSubsortAxiom >> supersort [
 ]
 
 { #category : #accessing }
-LzASTSubsortAxiom >> supersort: anObject [
-
-	supersort := anObject
+LzASTSubsortAxiom >> supersort: anASTTermNode [
+	supersort := anASTTermNode
 ]

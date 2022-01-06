@@ -51,6 +51,11 @@ LzTerm >> isInfix [
 	^ false
 ]
 
+{ #category : #accessing }
+LzTerm >> opName [
+	^ nil
+]
+
 { #category : #printing }
 LzTerm >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream [
 	self
@@ -61,13 +66,6 @@ LzTerm >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream [
 { #category : #printing }
 LzTerm >> printAsLeibnizSyntaxOn: aStream [
 	self subclassResponsibility
-]
-
-{ #category : #printing }
-LzTerm >> printAsLeibnizSyntaxOn: aStream parenthesized: aBoolean [
-	aBoolean ifTrue: [ aStream nextPut: $( ].
-	self printAsLeibnizSyntaxOn: aStream.
-	aBoolean ifTrue: [ aStream nextPut: $) ]
 ]
 
 { #category : #printing }

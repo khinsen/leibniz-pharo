@@ -35,14 +35,6 @@ LzASTNode >> isLzASTNode [
 	^ true
 ]
 
-{ #category : #printing }
-LzASTNode >> printOn: aStream [
-	super printOn: aStream.
-	aStream nextPutAll: '('''.
-	self printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: ''')'
-]
-
 { #category : #accessing }
 LzASTNode >> valueSlots [
 	^ self class allInstVarNames
