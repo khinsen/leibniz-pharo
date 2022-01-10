@@ -11,6 +11,11 @@ Class {
 }
 
 { #category : #accessing }
+LzContext >> axioms [
+	^ axioms
+]
+
+{ #category : #accessing }
 LzContext >> axioms: aCollection [
 	axioms := aCollection
 ]
@@ -43,6 +48,11 @@ LzContext >> signature: aSignature [
 { #category : #accessing }
 LzContext >> sortGraph [
 	^ self signature sortGraph
+]
+
+{ #category : #accessing }
+LzContext >> subsortAxioms [
+	^ self axioms select: [ :each | each isKindOf: LzSubsortAxiom ]
 ]
 
 { #category : #constructing }

@@ -9,29 +9,63 @@ Class {
 		'sortDeclarations',
 		'sortSort',
 		'sortFamilies',
-		'anySortFamily'
+		'anySortFamily',
+		'directSubFamilies',
+		'directSuperFamilies',
+		'connectingAxioms',
+		'connectingPaths'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
 
 { #category : #initializing }
+LzSortGraph >> familyForSortTerm: aTerm [
+	^ aTerm isVarTerm
+		ifTrue: [ anySortFamily ]
+		ifFalse: [ sortFamilies at: (sortContext signature operators opForTerm: aTerm) ]
+]
+
+{ #category : #initializing }
+LzSortGraph >> initializeDirectSubsortRelations [
+	directSubFamilies := Dictionary new.
+	directSuperFamilies := Dictionary new.
+	connectingAxioms := Dictionary new.
+	connectingPaths := Dictionary new.
+	sortFamilies values do: [ :each |
+		directSubFamilies at: each put: Set new.
+		directSuperFamilies at: each put: Set new ].
+	sortContext subsortAxioms do: [ :each |
+		 each subsort = each supersort ifFalse: [
+			| subsort supersort |
+			subsort := self familyForSortTerm: each subsort.
+			supersort := self familyForSortTerm: each supersort.
+			(directSubFamilies at: supersort) add: subsort.
+			(directSuperFamilies at: subsort) add: supersort.
+			(connectingAxioms at: { subsort. supersort }
+				ifAbsentPut: [ Set new ])
+				add: each.
+			connectingPaths at: { subsort. supersort }
+				put: (Set with: (OrderedCollection with: { subsort. supersort }))] ].
+]
+
+{ #category : #initializing }
 LzSortGraph >> initializeFromSortContext [
 	sortSort := self sortContext sortGraph sort: LzConstants opNameSort.
 	self initializeSortFamilies.
+	self initializeDirectSubsortRelations.
 ]
 
 { #category : #initializing }
 LzSortGraph >> initializeSortFamilies [
-	sortFamilies :=
-		(self sortContext signature opsOfKind: sortSort kind)
-			collect: [ :each |
-				LzOpSortFamily new
-					sortGraph: self;
-					op: each ].
+	sortFamilies := Dictionary new.
+	(self sortContext signature opsOfKind: sortSort kind) do: [ :each |
+		sortFamilies at: each put:
+			(LzOpSortFamily new
+				sortGraph: self;
+				op: each) ].
 	"A special sort family represents the variable of sort #sort."
 	anySortFamily := LzUniversalSortFamily new
 						sortGraph: self.
-	sortFamilies := sortFamilies copyWith: anySortFamily.
 ]
 
 { #category : #constructing }

@@ -72,7 +72,7 @@ LzSignature >> opTerm: anOpName args: anArrayOfTerms [
 	| sort |
 	sort := self operators
 				sortForOp: anOpName
-				args: (LzArity forArgs: anArrayOfTerms).
+				arity: (LzArity forArgs: anArrayOfTerms).
 	anArrayOfTerms do: [ :each |
 		self assert: each signature == self ].
 	^ LzOpTerm new

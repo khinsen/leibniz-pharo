@@ -7,6 +7,11 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
+{ #category : #initializing }
+LzSortHierarchyRootGraph >> initializeFromSortContext [
+	"No initialization for this special sort graph"
+]
+
 { #category : #constructing }
 LzSortHierarchyRootGraph >> parsedSort: anASTPatternNode [
 	| termNode |

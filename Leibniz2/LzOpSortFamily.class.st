@@ -21,3 +21,8 @@ LzOpSortFamily >> op: anOperator [
 LzOpSortFamily >> printAsLeibnizSyntaxOn: aStream [
 	self op opName printForArity: op kindArity on: aStream
 ]
+
+{ #category : #accessing }
+LzOpSortFamily >> valueSlots [
+	^ #(op)
+]

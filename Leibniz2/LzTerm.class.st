@@ -14,6 +14,11 @@ LzTerm >> args [
 	^ #()
 ]
 
+{ #category : #accessing }
+LzTerm >> arity [
+	^ LzArity forArgs: self args
+]
+
 { #category : #inspecting }
 LzTerm >> gtSortFor: aView [
 	<gtView>
@@ -48,6 +53,11 @@ LzTerm >> hasInfixOpOtherThan: aSymbol [
 
 { #category : #testing }
 LzTerm >> isInfix [
+	^ false
+]
+
+{ #category : #testing }
+LzTerm >> isVarTerm [
 	^ false
 ]
 

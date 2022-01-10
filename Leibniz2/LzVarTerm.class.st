@@ -8,6 +8,11 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
+{ #category : #testing }
+LzVarTerm >> isVarTerm [
+	^ true
+]
+
 { #category : #accessing }
 LzVarTerm >> name [
 	^ name

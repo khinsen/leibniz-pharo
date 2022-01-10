@@ -82,6 +82,23 @@ LzOperators >> isEmpty [
 	^ opTable isEmpty
 ]
 
+{ #category : #lookup }
+LzOperators >> opForTerm: aTerm [
+	^ self
+		opNamed: aTerm opName
+		arity: aTerm arity
+]
+
+{ #category : #lookup }
+LzOperators >> opNamed: anOpName arity: anArity [
+	| key |
+	key := { anOpName. anArity kindArity }.
+	^ opTable at: key
+		"Error handling for the development phase"
+		ifAbsent: [ opTable keys do: [ :each |
+						(KhEqualityExplorer for: key and: each) inspect ] ]
+]
+
 { #category : #defining }
 LzOperators >> operators: aSetOfASTOpNodes [
 	opTable := Dictionary new.
@@ -100,12 +117,8 @@ LzOperators >> referenceSlots [
 ]
 
 { #category : #lookup }
-LzOperators >> sortForOp: anOpName args: anArity [
-	| key |
-	key := { anOpName. anArity kindArity }.
-	^ (opTable at: key
-		ifAbsent: [ opTable keys do: [ :each |
-						(KhEqualityExplorer for: key and: each) inspect ] ])
+LzOperators >> sortForOp: anOpName arity: anArity [
+	^ (self opNamed: anOpName arity: anArity)
 		sortForArity: anArity
 ]
 
