@@ -16,7 +16,8 @@ Class {
 		'connectingPaths',
 		'subFamilies',
 		'maximalFamilies',
-		'kinds'
+		'kinds',
+		'kindOf'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
@@ -26,6 +27,45 @@ LzSortGraph >> familyForSortTerm: aTerm [
 	^ aTerm isVarTerm
 		ifTrue: [ anySortFamily ]
 		ifFalse: [ sortFamilies at: (sortContext signature operators opForTerm: aTerm) ]
+]
+
+{ #category : #inspecting }
+LzSortGraph >> graphFor: aView restrictedTo: aSet highlight: aBlock [
+	aSet isEmpty ifTrue: [ ^ aView empty ].
+	^ aView mondrian
+		title: 'Graph';
+		priority: 0;
+		painting: [ :view | 
+			| edges |
+			view nodes
+				shape: [ :x | self graphNodeForSort: x highlight: (aBlock cull: x) ];
+				with: aSet.
+			view edges
+				shape: [ :x | LbGraphicsElements graphArrow ];
+				fromCenterTop;
+				toCenterBottom;
+				connect: connectingAxioms values
+					from: [ :each | self familyForSortTerm: each anyOne subsort ]
+					to: [ :each | self familyForSortTerm: each anyOne supersort ];
+				yourself.
+			view layout
+				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
+]
+
+{ #category : #inspecting }
+LzSortGraph >> graphNodeForSort: aSortFamily highlight: aBoolean [
+	^ LzGraphicsElements
+		graphNodeLabelled: aSortFamily asLeibnizSyntaxString
+		highlightColor: (aBoolean ifTrue: [ Color black ] ifFalse: [ nil ])
+]
+
+{ #category : #inspecting }
+LzSortGraph >> gtGraphFor: aView [
+	<gtView>
+	^ self
+		graphFor: aView
+		restrictedTo: (sortFamilies copyWithout: anySortFamily)
+		highlight: [ false ]
 ]
 
 { #category : #initializing }
@@ -59,6 +99,15 @@ LzSortGraph >> initializeFromSortContext [
 	self initializeSubFamilies.
 	self initializeMaximalFamilies.
 	self initializeKinds.
+	self initializeKindOf.
+]
+
+{ #category : #initializing }
+LzSortGraph >> initializeKindOf [
+	kindOf := Dictionary new.
+	kinds do: [ :eachKind |
+		eachKind sortFamilies do: [ :eachFamily |
+			kindOf at: eachFamily put: eachKind ] ]
 ]
 
 { #category : #initializing }
