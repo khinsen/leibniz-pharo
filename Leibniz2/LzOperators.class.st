@@ -96,7 +96,8 @@ LzOperators >> opNamed: anOpName arity: anArity [
 	^ opTable at: key
 		"Error handling for the development phase"
 		ifAbsent: [ opTable keys do: [ :each |
-						(KhEqualityExplorer for: key and: each) inspect ] ]
+						(KhEqualityExplorer for: key and: each) inspect ].
+					nil ]
 ]
 
 { #category : #defining }

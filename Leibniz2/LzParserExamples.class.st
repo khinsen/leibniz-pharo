@@ -74,6 +74,7 @@ LzParserExamples >> patternStrings [
 	{
 		'∀ ?bar:Bar foo(?bar)'.
 		'∀ ?foo:Foo ∀ ?bar:Bar (?foo + ?bar)'.
+		'∀ ?l:(∀ ?n:ℕ.nz list(?n)) tail(l)'.
 	}
 ]
 

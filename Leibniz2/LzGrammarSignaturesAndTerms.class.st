@@ -25,7 +25,8 @@ Class {
 		'sortArg',
 		'varArg',
 		'pattern',
-		'varTerm'
+		'varTerm',
+		'sort'
 	],
 	#category : #'Leibniz2-Parser'
 }
@@ -42,7 +43,7 @@ LzGrammarSignaturesAndTerms >> bracketOp [
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> forAllClause [
-	^ forAll trim, varIdentifier, colon, simpleTerm
+	^ forAll trim, varIdentifier, colon, sort
 ]
 
 { #category : #signature }
@@ -119,6 +120,11 @@ LzGrammarSignaturesAndTerms >> simpleTerm [
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> simpleTermEnd [
 	^ simpleTerm end
+]
+
+{ #category : #signature }
+LzGrammarSignaturesAndTerms >> sort [
+	^ simpleTerm / (openParenthesis, pattern, closeParenthesis)
 ]
 
 { #category : #signature }

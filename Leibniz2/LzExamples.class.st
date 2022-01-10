@@ -6,6 +6,20 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
+{ #category : #accessing }
+LzExamples >> bagSortContext [
+	<gtExample>
+	^ LzContextBuilder new
+		include: self listSortContext;
+		op: 'collection : 𝕊';
+		op: 'bag(𝕊, ℕ) : 𝕊';
+		op: 'ℕ : 𝕊';
+		axiom: '∀ ?s:𝕊 ∀ ?n:ℕ list(?s, ?n) ⊆ bag(s, n)';
+		axiom: '∀ ?s:𝕊 ∀ ?n:ℕ bag(?s, ?n) ⊆ collection';
+		axiom: '∅ ⊆ collection';
+		context
+]
+
 { #category : #example }
 LzExamples >> listSortContext [
 	<gtExample>
@@ -13,9 +27,19 @@ LzExamples >> listSortContext [
 		include: LzBuiltinContexts sortContext;
 		sort: 'ℕ';
 		op: 'element : 𝕊';
+		op: 'element.special : 𝕊';
 		op: '∅ : 𝕊';
-		op: 'list(𝕊, ℕ) : 𝕊')
+		op: 'list(𝕊, ℕ) : 𝕊';
+		axiom: 'element.special ⊆ element')
 		context.
+]
+
+{ #category : #example }
+LzExamples >> listSortGraph [
+	<gtExample>
+	^ LzSortGraphBuilder new
+		sortContext: self listSortContext;
+		sortGraph
 ]
 
 { #category : #example }

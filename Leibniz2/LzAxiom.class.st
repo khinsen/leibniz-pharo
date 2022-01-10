@@ -14,7 +14,7 @@ Class {
 LzAxiom class >> signature: aSignature declaration: anASTAxiomNode [
 	| variables axiom |
 	variables := (anASTAxiomNode variables collect: [ :each |
-		each name -> aSignature parsedSort: each sort ])
+		each name -> (aSignature sortGraph parsedSort: each sort) ])
 			asDictionary.
 	axiom := (self subclassFor: anASTAxiomNode) new
 		signature: aSignature;
@@ -22,7 +22,7 @@ LzAxiom class >> signature: aSignature declaration: anASTAxiomNode [
 	(anASTAxiomNode valueSlots copyWithout:  #variables) do: [ :each |
 		| termNode term |
 		termNode := anASTAxiomNode instVarNamed: each.
-		term := (aSignature parsedTerm: termNode variables: anASTAxiomNode variables).
+		term := (aSignature parsedTerm: termNode variables: variables).
 		axiom perform: (each, ':') with: term ].
 	^ axiom
 ]

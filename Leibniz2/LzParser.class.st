@@ -166,6 +166,16 @@ LzParser >> rewriteRule [
 				replacement: (nodes fourth cull: signature cull: variables) ] ]
 ]
 
+{ #category : #accessing }
+LzParser >> sort [
+	^ super sort ==> [ :nodes |
+		nodes isCollection
+			ifTrue: [ nodes second ]
+			ifFalse: [ LzASTPattern new
+						variables: #();
+						term: nodes ] ]
+]
+
 { #category : #terms }
 LzParser >> stringTerm [
 	^ super stringTerm
