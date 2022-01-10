@@ -8,3 +8,8 @@ Class {
 LzUniversalSortFamily >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPut: $*
 ]
+
+{ #category : #accessing }
+LzUniversalSortFamily >> valueSlots [
+	^ #()
+]
