@@ -43,5 +43,6 @@ BaselineOfLeibnizForGToolkit >> baseline: spec [
 
 { #category : #baseline }
 BaselineOfLeibnizForGToolkit >> postload: loader package: packageSpec [
-	LbCodeFont chooseDefaultFamily
+	LbCodeFont chooseDefaultFamily.
+	LzCodeFont chooseDefaultFamily.
 ]

@@ -111,3 +111,8 @@ LzTerm >> synopsis [
 	"The text shown in a tree view. This is the full term except for LbOpTerms"
 	^ self asLeibnizSyntaxString
 ]
+
+{ #category : #accessing }
+LzTerm >> vars [
+	^ Dictionary new
+]

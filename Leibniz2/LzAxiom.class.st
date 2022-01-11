@@ -40,7 +40,7 @@ LzAxiom >> printVariablesAsLeibnizSyntaxOn: aStream [
 			aStream nextPutAll: '∀ '.
 			aStream nextPutAll: var asSymbol.
 			aStream nextPut: $:.
-			aStream nextPutAll: sort name.
+			sort printAsLeibnizSyntaxOn:  aStream.
 			aStream nextPutAll: ' ']
 ]
 

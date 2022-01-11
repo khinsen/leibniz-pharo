@@ -14,7 +14,6 @@ Class {
 LzOperators >> addOp: anASTOpNode [
 	| argSorts valueSort key op |
 	argSorts := LzArity new: anASTOpNode args size.
-	argSorts sortGraph: self sortGraph.
 	1 to: argSorts size do: [ :index |
 		argSorts at: index put:
 			(self sortGraph
@@ -96,8 +95,9 @@ LzOperators >> opNamed: anOpName arity: anArity [
 	^ opTable at: key
 		"Error handling for the development phase"
 		ifAbsent: [ opTable keys do: [ :each |
-						(KhEqualityExplorer for: key and: each) inspect ].
-					nil ]
+						each first = key first ifTrue: [
+							(KhEqualityExplorer for: key and: each) inspect ] ].
+					self error: 'No op matching ', key printString ]
 ]
 
 { #category : #defining }

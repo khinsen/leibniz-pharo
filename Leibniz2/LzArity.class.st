@@ -4,9 +4,6 @@ Class {
 	#type : #variable,
 	#traits : 'TLzPrintable',
 	#classTraits : 'TLzPrintable classTrait',
-	#instVars : [
-		'sortGraph'
-	],
 	#category : #'Leibniz2-Leibniz2'
 }
 
@@ -18,11 +15,19 @@ LzArity class >> forArgs: anArrayOfTerms [
 	^ arity
 ]
 
+{ #category : #comparing }
+LzArity >> <= anArity [
+	self species = anArity species ifFalse: [ ^ false ].
+	self size = anArity size ifFalse: [ ^ false ].
+	self with: anArity do:
+		[ :s1 :s2 | s1 <= s2 ifFalse: [ ^ false ] ].
+	^ true
+]
+
 { #category : #constructing }
 LzArity >> kindArity [
 	| kindArity |
-	kindArity := (LzArity new: self size)
-					sortGraph: self sortGraph.
+	kindArity := LzArity new: self size.
 	self collect: #kind into: kindArity.
 	^ kindArity
 ]
@@ -35,14 +40,18 @@ LzArity >> printAsLeibnizSyntaxOn: aStream [
 		separatedBy: [ aStream nextPutAll: ', ' ]
 ]
 
-{ #category : #accessing }
-LzArity >> sortGraph [
-	^ sortGraph
+{ #category : #printing }
+LzArity >> printVariablesOn: aStream [
+	self vars keysAndValuesDo: [ :var :sort |
+		aStream nextPutAll: var asSymbol.
+		aStream nextPut: $:.
+		aStream nextPutAll: sort asLeibnizSyntaxString.
+		aStream nextPutAll: ' ' ]
 ]
 
 { #category : #accessing }
-LzArity >> sortGraph: aSortGraph [
-	self flag: #todo.
-	"Not sure this is really needed!"
-	"sortGraph := aSortGraph"
+LzArity >> vars [
+	^ self
+		inject: Dictionary new
+		into: [ :total :each | total union: each vars ]
 ]

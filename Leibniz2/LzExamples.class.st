@@ -14,7 +14,7 @@ LzExamples >> bagSortContext [
 		op: 'collection : 𝕊';
 		op: 'bag(𝕊, ℕ) : 𝕊';
 		op: 'ℕ : 𝕊';
-		axiom: '∀ ?s:𝕊 ∀ ?n:ℕ list(?s, ?n) ⊆ bag(s, n)';
+		axiom: '∀ ?s:𝕊 ∀ ?n:ℕ list(?s, ?n) ⊆ bag(?s, ?n)';
 		axiom: '∀ ?s:𝕊 ∀ ?n:ℕ bag(?s, ?n) ⊆ collection';
 		axiom: '∅ ⊆ collection';
 		context
@@ -95,8 +95,10 @@ LzExamples >> sortGraphWithSubsorts [
 		subsort: 'D ⊆ C')
 		sortGraph.
 	self assert: (sortGraph sort: 'B') <= (sortGraph sort: 'A').
-	self assert: ((sortGraph sort: 'A') <= (sortGraph sort: 'B')) not.
 	self assert: (sortGraph sort: 'C') <= (sortGraph sort: 'A').
 	self assert: (sortGraph sort: 'D') <= (sortGraph sort: 'A').
+	self assert: ((sortGraph sort: 'A') <= (sortGraph sort: 'B')) not.
+	self assert: ((sortGraph sort: 'B') <= (sortGraph sort: 'C')) not.
+	self assert: ((sortGraph sort: 'C') <= (sortGraph sort: 'B')) not.
 	^ sortGraph
 ]

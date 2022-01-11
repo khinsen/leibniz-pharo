@@ -63,3 +63,10 @@ LzOpTerm >> synopsis [
 LzOpTerm >> valueSlots [
 	^ #(opName args)
 ]
+
+{ #category : #accessing }
+LzOpTerm >> vars [
+	^ args
+		inject: Dictionary new
+		into: [ :total :each | total union: each vars ]
+]

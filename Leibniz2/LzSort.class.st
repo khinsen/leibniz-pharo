@@ -140,3 +140,8 @@ LzSort >> testPaths: aSet [
 LzSort >> valueSlots [
 	^ #(term)
 ]
+
+{ #category : #accessing }
+LzSort >> vars [
+	^ term vars
+]

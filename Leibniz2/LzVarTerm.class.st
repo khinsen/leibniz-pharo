@@ -40,5 +40,10 @@ LzVarTerm >> sort: aSort [
 
 { #category : #accessing }
 LzVarTerm >> valueSlots [
-	^ #(signature name)
+	^ #(name sort)
+]
+
+{ #category : #accessing }
+LzVarTerm >> vars [
+	^ Dictionary with: name -> sort
 ]
