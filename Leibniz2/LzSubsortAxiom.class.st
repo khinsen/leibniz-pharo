@@ -40,6 +40,14 @@ LzSubsortAxiom >> supersort: aPattern [
 ]
 
 { #category : #accessing }
+LzSubsortAxiom >> supersortOf: aTerm [
+	self flag: #todo. "Implement full form"
+	"^ self unify: aTerm with: subsort thenSubstituteIn: supersort"
+	subsort = aTerm ifTrue: [ ^ supersort ].
+	^ nil
+]
+
+{ #category : #accessing }
 LzSubsortAxiom >> valueSlots [
 	^ #(subsort supersort)
 ]

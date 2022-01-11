@@ -22,6 +22,13 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
+{ #category : #accessing }
+LzSortGraph >> axiomsConnecting: aFamily to: anotherFamily [
+	^ connectingAxioms
+		at: { aFamily. anotherFamily }
+		ifAbsent: [ #() ]
+]
+
 { #category : #initializing }
 LzSortGraph >> familyForSortTerm: aTerm [
 	^ aTerm isVarTerm
@@ -198,11 +205,8 @@ LzSortGraph >> initializeSubFamiliesFor: aFamily [
 
 { #category : #constructing }
 LzSortGraph >> parsedSort: anASTPatternNode [
-	^ LzSort new
-		sortGraph: self;
-		term: (self sortContext parsedPattern: anASTPatternNode);
-		beRecursivelyReadOnlyObject;
-		yourself
+	^ self sortWithTerm:
+		(self sortContext parsedPattern: anASTPatternNode)
 ]
 
 { #category : #accessing }
@@ -211,6 +215,13 @@ LzSortGraph >> parsedSortTerm: anASTTermNode variables: anArrayOfASTVarNodes [
 		(LzASTPattern new
 			variables: anArrayOfASTVarNodes;
 			term: anASTTermNode)
+]
+
+{ #category : #accessing }
+LzSortGraph >> pathsConnecting: aFamily to: anotherFamily [
+	^ connectingPaths
+		at: { aFamily. anotherFamily }
+		ifAbsent: (Set new)
 ]
 
 { #category : #constructing }
@@ -239,6 +250,15 @@ LzSortGraph >> sortDeclarations [
 { #category : #accessing }
 LzSortGraph >> sortDeclarations: aCollection [
 	sortDeclarations := aCollection
+]
+
+{ #category : #constructing }
+LzSortGraph >> sortWithTerm: aTerm [
+	^ LzSort new
+		sortGraph: self;
+		term: aTerm;
+		beRecursivelyReadOnlyObject;
+		yourself
 ]
 
 { #category : #accessing }

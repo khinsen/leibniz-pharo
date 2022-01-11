@@ -83,7 +83,8 @@ LzExamples >> simpleContextTerms [
 { #category : #example }
 LzExamples >> sortGraphWithSubsorts [
 	<gtExample>
-	^ (LzSortGraphBuilder new
+	| sortGraph |
+	sortGraph := (LzSortGraphBuilder new
 		sort: 'A';
 		sort: 'B';
 		sort: 'C';
@@ -92,5 +93,10 @@ LzExamples >> sortGraphWithSubsorts [
 		subsort: 'C ⊆ A';
 		subsort: 'D ⊆ B';
 		subsort: 'D ⊆ C')
-		sortGraph
+		sortGraph.
+	self assert: (sortGraph sort: 'B') <= (sortGraph sort: 'A').
+	self assert: ((sortGraph sort: 'A') <= (sortGraph sort: 'B')) not.
+	self assert: (sortGraph sort: 'C') <= (sortGraph sort: 'A').
+	self assert: (sortGraph sort: 'D') <= (sortGraph sort: 'A').
+	^ sortGraph
 ]
