@@ -72,7 +72,8 @@ LzParser >> fpNumberTerm [
 			  LzASTFPLiteral new
 					value: string asNumber asFloat;
 					sort: (LzASTOpTerm new
-							opName: (LzPrefixOperatorName for: #fpNumber)) ]
+							opName: (LzPrefixOperatorName for: #fpNumber);
+							args: #()) ]
 ]
 
 { #category : #signature }
@@ -88,7 +89,8 @@ LzParser >> integerTerm [
 			  LzASTIntegerLiteral new
 					value: string asNumber;
 					sort: (LzASTOpTerm new
-							opName: (LzPrefixOperatorName for: #integer)) ]
+							opName: (LzPrefixOperatorName for: #integer);
+							args: #()) ]
 ]
 
 { #category : #terms }
@@ -147,7 +149,8 @@ LzParser >> rationalNumberTerm [
 			  LzASTRationalLiteral new
 				value: (Fraction readFromString: string);
 				sort: (LzASTOpTerm new
-						opName: (LzPrefixOperatorName for: #rational)) ]
+						opName: (LzPrefixOperatorName for: #rational);
+						args: #()) ]
 ]
 
 { #category : #rules }
@@ -183,7 +186,8 @@ LzParser >> stringTerm [
 			  LzASTStringLiteral new
 					value: string;
 					sort: (LzASTOpTerm new
-							opName: (LzPrefixOperatorName for: #string)) ]
+							opName: (LzPrefixOperatorName for: #string);
+							args: #()) ]
 ]
 
 { #category : #signature }

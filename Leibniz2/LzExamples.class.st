@@ -6,7 +6,19 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
-{ #category : #accessing }
+{ #category : #example }
+LzExamples >> bagSignature [
+	<gtExample>
+	^ LzSignatureBuilder new
+		sortGraph: self bagSortGraph;
+		include: self listSignature;
+		op: '∀ ?s:𝕊 ∀ ?n:ℕ ∀ ?m:ℕ (bag(?s, ?n)) ** (bag(?s, ?m)) : bag(?s, ?n + ?m)';
+		op: '∀ ?s:𝕊 ∀ ?n:ℕ (bag(?s, ?n)) ** ?s : bag(?s, ?n + one)';
+		op: '∀ ?s:𝕊 ∅ ** ?s : bag(?s, one)';
+		signature
+]
+
+{ #category : #example }
 LzExamples >> bagSortContext [
 	<gtExample>
 	^ LzContextBuilder new
@@ -29,11 +41,30 @@ LzExamples >> bagSortGraph [
 ]
 
 { #category : #example }
+LzExamples >> listSignature [
+	<gtExample>
+	^ LzSignatureBuilder new
+		sortGraph: self listSortGraph;
+		op: '∅ : ∅';
+		op: '∀ ?s:𝕊 ∀ ?n:ℕ ∀ ?m:ℕ ',
+				'(list(?s, ?n)) ++ (list(?s, ?m)) : list(?s, ?n + ?m)';
+		op: '∀ ?s:𝕊 ∀ ?n:ℕ ',
+				'(list(?s, ?n)) ++ ?s : list(?s, ?n + one)';
+		op: '∀ ?s:𝕊 ',
+				'∅ ++ ?s : list(?s, one)';
+		op: 'anElement : element';
+		signature
+]
+
+{ #category : #example }
 LzExamples >> listSortContext [
 	<gtExample>
+	self flag: #todo.
 	^ (LzContextBuilder new
 		include: LzBuiltinContexts sortContext;
 		sort: 'ℕ';
+		op: 'one : ℕ';  "Workaround, until integers are implemented"
+		op: 'ℕ + ℕ : ℕ'; "Another workaround"
 		op: 'element : 𝕊';
 		op: 'element.special : 𝕊';
 		op: '∅ : 𝕊';

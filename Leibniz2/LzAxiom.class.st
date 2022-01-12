@@ -13,9 +13,7 @@ Class {
 { #category : #'instance creation' }
 LzAxiom class >> signature: aSignature declaration: anASTAxiomNode [
 	| variables axiom |
-	variables := (anASTAxiomNode variables collect: [ :each |
-		each name -> (aSignature sortGraph parsedSort: each sort) ])
-			asDictionary.
+	variables := aSignature parsedVariables: anASTAxiomNode variables.
 	axiom := (self subclassFor: anASTAxiomNode) new
 		signature: aSignature;
 		variables: variables.

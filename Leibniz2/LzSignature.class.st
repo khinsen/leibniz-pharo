@@ -126,8 +126,9 @@ LzSignature >> parsedTerm: anASTTermNode variables: aDictionary [
 
 { #category : #constructing }
 LzSignature >> parsedVariables: anArrayOfASTVarDeclarationNodes [
-	^ anArrayOfASTVarDeclarationNodes collect: [ :each |
-		each name -> self sortGraph parsedSort: each sort ]
+	^ (anArrayOfASTVarDeclarationNodes collect: [ :each |
+		each name -> (self sortGraph parsedSort: each sort) ])
+		asDictionary
 ]
 
 { #category : #constructing }
