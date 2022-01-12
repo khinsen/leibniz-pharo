@@ -21,6 +21,14 @@ LzExamples >> bagSortContext [
 ]
 
 { #category : #example }
+LzExamples >> bagSortGraph [
+	<gtExample>
+	^ LzSortGraphBuilder new
+		sortContext: self bagSortContext;
+		sortGraph
+]
+
+{ #category : #example }
 LzExamples >> listSortContext [
 	<gtExample>
 	^ (LzContextBuilder new

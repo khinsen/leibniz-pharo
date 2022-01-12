@@ -31,6 +31,7 @@ LzContextBuilder >> context [
 	^ LzContext new
 		signature: signature;
 		axioms: axioms;
+		axiomDeclarations: axiomDeclarations copy;
 		beRecursivelyReadOnlyObject;
 		yourself
 ]
@@ -39,6 +40,7 @@ LzContextBuilder >> context [
 LzContextBuilder >> include: aContext [
 	self sortGraphBuilder include: aContext sortGraph.
 	self signatureBuilder include: aContext signature.
+	axiomDeclarations addAll: aContext axiomDeclarations 
 ]
 
 { #category : #initializing }

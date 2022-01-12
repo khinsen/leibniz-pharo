@@ -31,11 +31,12 @@ LzSortHierarchyRoot >> initialize [
 	sortGraph := LzSortHierarchyRootGraph new
 		sortDeclarations: { sortDeclaration };
 		subsortDeclarations: #().
-	sortGraph rootSortSort: sortSort.
+	sortGraph sortSort: sortSort.
 	sortSort sortGraph: sortGraph.
 	
 	sortContext := LzContext new
-		axioms: Set new.
+		axioms: Set new;
+		axiomDeclarations: Set new.
 	sortGraph sortContext: sortContext.
 
 	sortOperators := LzOperators new
@@ -53,6 +54,7 @@ LzSortHierarchyRoot >> initialize [
 	sortTerm signature: sortSignature.
 
 	sortOperators addOp: sortDeclaration.
+	sortGraph initializeSortFamilies
 ]
 
 { #category : #accessing }

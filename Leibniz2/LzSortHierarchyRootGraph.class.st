@@ -1,15 +1,14 @@
 Class {
 	#name : #LzSortHierarchyRootGraph,
 	#superclass : #LzSortGraph,
-	#instVars : [
-		'rootSortSort'
-	],
 	#category : #'Leibniz2-Leibniz2'
 }
 
 { #category : #initializing }
 LzSortHierarchyRootGraph >> initializeFromSortContext [
-	"No initialization for this special sort graph"
+	"Minimal initialization for this special sort graph"
+	connectingAxioms := Dictionary new.
+	connectingPaths := Dictionary new.
 ]
 
 { #category : #constructing }
@@ -18,10 +17,10 @@ LzSortHierarchyRootGraph >> parsedSort: anASTPatternNode [
 	self assert: anASTPatternNode variables isEmpty.
 	self assert: anASTPatternNode term opName internalSymbol equals: LzConstants opNameSort.
 	self assert: anASTPatternNode term args isEmpty.
-	^ rootSortSort.
+	^ sortSort.
 ]
 
 { #category : #accessing }
-LzSortHierarchyRootGraph >> rootSortSort: aSort [
-	rootSortSort := aSort
+LzSortHierarchyRootGraph >> sortSort: aSort [
+	sortSort := aSort
 ]

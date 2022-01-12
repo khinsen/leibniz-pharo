@@ -5,10 +5,21 @@ Class {
 	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'signature',
-		'axioms'
+		'axioms',
+		'axiomDeclarations'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
+
+{ #category : #accessing }
+LzContext >> axiomDeclarations [
+	^ axiomDeclarations
+]
+
+{ #category : #accessing }
+LzContext >> axiomDeclarations: aSet [
+	axiomDeclarations := aSet
+]
 
 { #category : #accessing }
 LzContext >> axioms [
