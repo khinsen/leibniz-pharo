@@ -18,6 +18,11 @@ LzContextBuilder >> axiom: aString [
 			yielding: LzASTAxiom)
 ]
 
+{ #category : #accessing }
+LzContextBuilder >> builtin: aSymbol [
+	self signatureBuilder builtin: aSymbol
+]
+
 { #category : #building }
 LzContextBuilder >> context [
 	| sortGraph signature axioms |
@@ -40,7 +45,7 @@ LzContextBuilder >> context [
 LzContextBuilder >> include: aContext [
 	self sortGraphBuilder include: aContext sortGraph.
 	self signatureBuilder include: aContext signature.
-	axiomDeclarations addAll: aContext axiomDeclarations 
+	axiomDeclarations addAll: aContext axiomDeclarations.
 ]
 
 { #category : #initializing }

@@ -41,6 +41,18 @@ LzExamples >> bagSortGraph [
 ]
 
 { #category : #example }
+LzExamples >> integerTerms [
+	<gtExample>
+	^ {
+		'0'.
+		'1'.
+		'-1'.
+	}
+	collect: [ :each |
+		 LzBuiltinContexts integerContext term: each ]
+]
+
+{ #category : #example }
 LzExamples >> listSignature [
 	<gtExample>
 	^ LzSignatureBuilder new
@@ -49,9 +61,9 @@ LzExamples >> listSignature [
 		op: '∀ ?s:𝕊 ∀ ?n:ℕ ∀ ?m:ℕ ',
 				'(list(?s, ?n)) ++ (list(?s, ?m)) : list(?s, ?n + ?m)';
 		op: '∀ ?s:𝕊 ∀ ?n:ℕ ',
-				'(list(?s, ?n)) ++ ?s : list(?s, ?n + one)';
+				'(list(?s, ?n)) ++ ?s : list(?s, ?n + 1)';
 		op: '∀ ?s:𝕊 ',
-				'∅ ++ ?s : list(?s, one)';
+				'∅ ++ ?s : list(?s, 1)';
 		op: 'anElement : element';
 		signature
 ]
@@ -62,9 +74,7 @@ LzExamples >> listSortContext [
 	self flag: #todo.
 	^ (LzContextBuilder new
 		include: LzBuiltinContexts sortContext;
-		sort: 'ℕ';
-		op: 'one : ℕ';  "Workaround, until integers are implemented"
-		op: 'ℕ + ℕ : ℕ'; "Another workaround"
+		include: LzBuiltinContexts integerContext;
 		op: 'element : 𝕊';
 		op: 'element.special : 𝕊';
 		op: '∅ : 𝕊';

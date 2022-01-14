@@ -8,10 +8,21 @@ Class {
 		'operators',
 		'variables',
 		'varDeclarations',
-		'opDeclarations'
+		'opDeclarations',
+		'builtins'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
+
+{ #category : #accessing }
+LzSignature >> builtins [
+	^ builtins
+]
+
+{ #category : #accessing }
+LzSignature >> builtins: aSet [
+	builtins := aSet
+]
 
 { #category : #inspecting }
 LzSignature >> gtOperatorsFor: aView [
@@ -79,7 +90,9 @@ LzSignature >> opTerm: anOpName args: anArrayOfTerms [
 		signature: self;
 		opName: anOpName;
 		args: anArrayOfTerms;
-		sort: sort. 
+		sort: sort;
+		beRecursivelyReadOnlyObject;
+		yourself 
 ]
 
 { #category : #accessing }
@@ -121,6 +134,13 @@ LzSignature >> parsedTerm: anASTTermNode variables: aDictionary [
 		^ self
 			varTerm: anASTTermNode name
 			variables: aDictionary ].
+	(anASTTermNode isKindOf: LzASTIntegerLiteral) ifTrue: [
+		self assert: (builtins includes: #integers).
+		^ LzIntegerTerm new
+			signature:  self;
+			value: anASTTermNode value;
+			beRecursivelyReadOnlyObject;
+			yourself ].
 	self notYetImplemented
 ]
 
@@ -135,6 +155,11 @@ LzSignature >> parsedVariables: anArrayOfASTVarDeclarationNodes [
 LzSignature >> pattern: aString [
 	^ self parsedPattern:
 		(LzParser parse: aString startingAt: #termEnd yielding: LzASTPattern)
+]
+
+{ #category : #constructing }
+LzSignature >> sort: aString [
+	^ self sortGraph sort: aString
 ]
 
 { #category : #accessing }
@@ -176,7 +201,9 @@ LzSignature >> varTerm: aVarName variables: aDictionary [
 	^ LzVarTerm new
 		signature: self;
 		name: aVarName;
-		sort: sort.
+		sort: sort;
+		beRecursivelyReadOnlyObject;
+		yourself
 ]
 
 { #category : #accessing }

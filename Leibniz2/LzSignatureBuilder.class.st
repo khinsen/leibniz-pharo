@@ -4,21 +4,29 @@ Class {
 	#instVars : [
 		'varDeclarations',
 		'opDeclarations',
-		'sortGraph'
+		'sortGraph',
+		'builtins'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
 
 { #category : #defining }
+LzSignatureBuilder >> builtin: aSymbol [
+	builtins add: aSymbol 
+]
+
+{ #category : #defining }
 LzSignatureBuilder >> include: aSignature [
 	self parsedOps: aSignature opDeclarations.
-	self parsedVars: aSignature varDeclarations
+	self parsedVars: aSignature varDeclarations.
+	aSignature builtins do: [ :each | self builtin: each ]
 ]
 
 { #category : #accessing }
 LzSignatureBuilder >> initialize [
 	opDeclarations := OrderedCollection new.
 	varDeclarations := OrderedCollection new.
+	builtins := Set new
 ]
 
 { #category : #defining }
@@ -58,6 +66,7 @@ LzSignatureBuilder >> signature [
 			operators: uniqueOps.
 	^ LzSignature new
 		sortGraph: self sortGraph;
+		builtins: builtins copy;
 		operators: operators;
 		variables: variables;
 		opDeclarations: opDeclarations copy;
