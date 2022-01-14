@@ -174,7 +174,7 @@ LzExamples >> termsForSignatureWithSubsorts [
 	<gtExample>
 	^ {
 		'anA'. 'aB'. 'aC'. 'aD'.
-		'foo(anA)'. 'foo(aB)'. 'foo(aC)'. 'foo(aD)'.
+		"'foo(anA)'. 'foo(aB)'. 'foo(aC)'. 'foo(aD)'."
 	} collect: [ :each |
 		self signatureWithSubsorts term: each ]
 ]

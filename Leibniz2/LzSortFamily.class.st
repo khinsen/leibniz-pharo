@@ -15,6 +15,16 @@ Class {
 }
 
 { #category : #accessing }
+LzSortFamily >> family [
+	^ self
+]
+
+{ #category : #accessing }
+LzSortFamily >> kind [
+	self sortGraph kindOf: self
+]
+
+{ #category : #accessing }
 LzSortFamily >> referenceSlots [
 	^ #(sortGraph)
 ]

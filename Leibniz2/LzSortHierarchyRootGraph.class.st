@@ -1,14 +1,29 @@
 Class {
 	#name : #LzSortHierarchyRootGraph,
 	#superclass : #LzSortGraph,
+	#instVars : [
+		'sortKind',
+		'sortFamily'
+	],
 	#category : #'Leibniz2-Leibniz2'
 }
+
+{ #category : #accessing }
+LzSortHierarchyRootGraph >> familyForSortTerm: aTerm [
+	^ sortFamily
+]
 
 { #category : #initializing }
 LzSortHierarchyRootGraph >> initializeFromSortContext [
 	"Minimal initialization for this special sort graph"
 	connectingAxioms := Dictionary new.
 	connectingPaths := Dictionary new.
+]
+
+{ #category : #accessing }
+LzSortHierarchyRootGraph >> kindOf: aFamily [
+	self assert: aFamily equals: sortFamily.
+	^ sortKind
 ]
 
 { #category : #constructing }
@@ -18,6 +33,16 @@ LzSortHierarchyRootGraph >> parsedSort: anASTPatternNode [
 	self assert: anASTPatternNode term opName internalSymbol equals: LzConstants opNameSort.
 	self assert: anASTPatternNode term args isEmpty.
 	^ sortSort.
+]
+
+{ #category : #accessing }
+LzSortHierarchyRootGraph >> sortFamily: aSortFamily [
+	sortFamily := aSortFamily
+]
+
+{ #category : #accessing }
+LzSortHierarchyRootGraph >> sortKind: aKind [
+	sortKind := aKind
 ]
 
 { #category : #accessing }

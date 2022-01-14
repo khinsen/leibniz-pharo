@@ -82,9 +82,7 @@ LzSort >> isSortSort [
 
 { #category : #accessing }
 LzSort >> kind [
-	self flag: #todo.
-	"A big lie..."
-	^ self
+	^ self family kind
 ]
 
 { #category : #printing }

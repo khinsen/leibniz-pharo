@@ -203,6 +203,11 @@ LzSortGraph >> initializeSubFamiliesFor: aFamily [
 	subFamilies at: aFamily put: ssf
 ]
 
+{ #category : #lookup }
+LzSortGraph >> kindOf: aSortOrFamily [
+	^ kindOf at: aSortOrFamily family
+]
+
 { #category : #constructing }
 LzSortGraph >> parsedSort: anASTPatternNode [
 	^ self sortWithTerm:

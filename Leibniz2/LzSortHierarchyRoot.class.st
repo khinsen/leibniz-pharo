@@ -14,7 +14,7 @@ Class {
 
 { #category : #accessing }
 LzSortHierarchyRoot >> initialize [
-	| sortTerm sortDeclaration sortOperators |
+	| sortTerm sortDeclaration sortOperators sortFamily sortKind |
 	sortTerm := LzOpTerm new
 		opName: self sortOpName;
 		args: #().
@@ -54,8 +54,24 @@ LzSortHierarchyRoot >> initialize [
 	sortContext signature: sortSignature.
 	sortTerm signature: sortSignature.
 
+	sortFamily :=
+		LzOpSortFamily new
+			sortGraph: sortGraph.
+	sortGraph sortFamily: sortFamily.
+	sortKind :=
+		LzKind new
+			sortGraph: sortGraph;
+			sortFamilies: (Set with: sortFamily);
+			maximalFamilies: (Set with: sortFamily).
+	sortGraph sortKind: sortKind.
 	sortOperators addOp: sortDeclaration.
-	sortGraph initializeSortFamilies
+	sortFamily op: (sortOperators opForTerm: sortTerm).
+"	sortGraph initializeSortFamilies.
+	sortGraph initializeDirectSubFamilyRelations.
+	sortGraph initializeSubFamilies.
+	sortGraph initializeMaximalFamilies.
+	sortGraph initializeKinds.
+	sortGraph initializeKindOf."
 ]
 
 { #category : #accessing }
