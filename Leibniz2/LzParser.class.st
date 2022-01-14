@@ -70,10 +70,7 @@ LzParser >> fpNumberTerm [
 		 	 is an integer, not a float.
 			  Workaround: convert the converted string explicitly to a float."
 			  LzASTFPLiteral new
-					value: string asNumber asFloat;
-					sort: (LzASTOpTerm new
-							opName: (LzPrefixOperatorName for: #fpNumber);
-							args: #()) ]
+				value: string asNumber asFloat ]
 ]
 
 { #category : #signature }
@@ -87,10 +84,7 @@ LzParser >> integerTerm [
 	^ super integerTerm
 		==> [ :string |
 			  LzASTIntegerLiteral new
-					value: string asNumber;
-					sort: (LzASTOpTerm new
-							opName: (LzPrefixOperatorName for: #integer);
-							args: #()) ]
+					value: string asNumber ]
 ]
 
 { #category : #terms }
@@ -147,10 +141,7 @@ LzParser >> rationalNumberTerm [
 	^ super rationalNumberTerm
 		==> [ :string |
 			  LzASTRationalLiteral new
-				value: (Fraction readFromString: string);
-				sort: (LzASTOpTerm new
-						opName: (LzPrefixOperatorName for: #rational);
-						args: #()) ]
+				value: (Fraction readFromString: string) ]
 ]
 
 { #category : #rules }
@@ -184,10 +175,7 @@ LzParser >> stringTerm [
 	^ super stringTerm
 		==> [ :string |
 			  LzASTStringLiteral new
-					value: string;
-					sort: (LzASTOpTerm new
-							opName: (LzPrefixOperatorName for: #string);
-							args: #()) ]
+					value: string ]
 ]
 
 { #category : #signature }

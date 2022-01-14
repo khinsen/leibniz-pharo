@@ -91,6 +91,23 @@ LzExamples >> listSortGraph [
 		sortGraph
 ]
 
+{ #category : #accessing }
+LzExamples >> signatureWithSubsorts [
+	<gtExample>
+	^ LzSignatureBuilder new
+		sortGraph: self sortGraphWithSubsorts;
+		op: 'anA : A';
+		op: 'aB : B';
+		op: 'aC : C';
+		op: 'aD : D';
+		op: 'foo(A) : A';
+		var: '?A : A';
+		var: '?B : B';
+		var: '?C : C';
+		var: '?D : D';
+		signature
+]
+
 { #category : #example }
 LzExamples >> simpleContext [
 	<gtExample>
@@ -150,4 +167,14 @@ LzExamples >> sortGraphWithSubsorts [
 	self assert: ((sortGraph sort: 'B') <= (sortGraph sort: 'C')) not.
 	self assert: ((sortGraph sort: 'C') <= (sortGraph sort: 'B')) not.
 	^ sortGraph
+]
+
+{ #category : #example }
+LzExamples >> termsForSignatureWithSubsorts [
+	<gtExample>
+	^ {
+		'anA'. 'aB'. 'aC'. 'aD'.
+		'foo(anA)'. 'foo(aB)'. 'foo(aC)'. 'foo(aD)'.
+	} collect: [ :each |
+		self signatureWithSubsorts term: each ]
 ]

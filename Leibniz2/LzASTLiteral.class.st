@@ -2,8 +2,7 @@ Class {
 	#name : #LzASTLiteral,
 	#superclass : #LzASTTerm,
 	#instVars : [
-		'value',
-		'sort'
+		'value'
 	],
 	#category : #'Leibniz2-Parser'
 }
@@ -12,22 +11,8 @@ Class {
 LzASTLiteral >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
-	sort printOn: aStream.
-	aStream nextPutAll: ': '.
 	value printOn: aStream.
 	aStream nextPut: $)
-]
-
-{ #category : #accessing }
-LzASTLiteral >> sort [
-
-	^ sort
-]
-
-{ #category : #accessing }
-LzASTLiteral >> sort: anObject [
-
-	sort := anObject
 ]
 
 { #category : #accessing }
@@ -42,5 +27,5 @@ LzASTLiteral >> value: anObject [
 
 { #category : #accessing }
 LzASTLiteral >> valueSlots [
-	^ #(sort value)
+	^ #(value)
 ]
