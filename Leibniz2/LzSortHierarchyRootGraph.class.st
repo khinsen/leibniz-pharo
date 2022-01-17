@@ -25,6 +25,13 @@ LzSortHierarchyRootGraph >> initializeFromSortContext [
 	connectingPaths := Dictionary new.
 ]
 
+{ #category : #initializing }
+LzSortHierarchyRootGraph >> initializeSortFamilies [
+	sortFamilies := Dictionary with: sortFamily op -> sortFamily.
+	anySortFamily := LzUniversalSortFamily new
+						sortGraph: self.
+]
+
 { #category : #accessing }
 LzSortHierarchyRootGraph >> kindOf: aFamily [
 	self assert: aFamily equals: sortFamily.

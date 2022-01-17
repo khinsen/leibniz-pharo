@@ -66,12 +66,12 @@ LzSortHierarchyRoot >> initialize [
 	sortGraph sortKind: sortKind.
 	sortOperators addOp: sortDeclaration.
 	sortFamily op: (sortOperators opForTerm: sortTerm).
-"	sortGraph initializeSortFamilies.
+	sortGraph initializeSortFamilies.
 	sortGraph initializeDirectSubFamilyRelations.
 	sortGraph initializeSubFamilies.
 	sortGraph initializeMaximalFamilies.
 	sortGraph initializeKinds.
-	sortGraph initializeKindOf."
+	sortGraph initializeKindOf.
 ]
 
 { #category : #accessing }
@@ -84,7 +84,6 @@ LzSortHierarchyRoot >> selfTest [
 	family := sortSort family.
 	kind := sortSort kind.
 	self assert: family kind equals: kind.
-	^ kind
 ]
 
 { #category : #accessing }

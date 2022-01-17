@@ -150,7 +150,7 @@ LzOperator >> referenceNames [
 
 { #category : #accessing }
 LzOperator >> referenceSlots [
-	^ #(sortGraph)
+	^ #(sortGraph kind kindArity)
 ]
 
 { #category : #accessing }
@@ -178,5 +178,5 @@ LzOperator >> sortGraph: aSortGraph [
 
 { #category : #accessing }
 LzOperator >> valueSlots [
-	^ #(kind kindArity opName ranks)
+	^ #(opName ranks)
 ]
