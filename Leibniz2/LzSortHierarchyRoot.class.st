@@ -75,6 +75,19 @@ LzSortHierarchyRoot >> initialize [
 ]
 
 { #category : #accessing }
+LzSortHierarchyRoot >> selfTest [
+	| family kind |
+	self assert: sortContext signature == sortSignature.
+	self assert: sortSignature sortGraph == sortGraph.
+	self assert: sortSort sortGraph == sortGraph.
+	self assert: (sortGraph sort: LzConstants opNameSort asString) equals: sortSort.
+	family := sortSort family.
+	kind := sortSort kind.
+	self assert: family kind equals: kind.
+	^ kind
+]
+
+{ #category : #accessing }
 LzSortHierarchyRoot >> sortContext [
 	^ sortContext
 ]

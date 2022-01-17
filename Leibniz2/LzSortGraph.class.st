@@ -278,5 +278,5 @@ LzSortGraph >> subsortDeclarations: aCollection [
 
 { #category : #accessing }
 LzSortGraph >> valueSlots [
-	^ #(sortContext)
+	^ #(sortContext sortDeclarations subsortDeclarations)
 ]

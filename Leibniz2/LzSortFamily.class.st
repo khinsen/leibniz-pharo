@@ -21,7 +21,7 @@ LzSortFamily >> family [
 
 { #category : #accessing }
 LzSortFamily >> kind [
-	self sortGraph kindOf: self
+	^ self sortGraph kindOf: self
 ]
 
 { #category : #accessing }

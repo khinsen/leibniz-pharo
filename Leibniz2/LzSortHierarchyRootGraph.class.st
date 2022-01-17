@@ -8,6 +8,11 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
+{ #category : #comparing }
+LzSortHierarchyRootGraph >> = otherSortGraph [
+	^ self == otherSortGraph
+]
+
 { #category : #accessing }
 LzSortHierarchyRootGraph >> familyForSortTerm: aTerm [
 	^ sortFamily
