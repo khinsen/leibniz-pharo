@@ -1,8 +1,8 @@
 Class {
 	#name : #LzOperatorName,
 	#superclass : #Object,
-	#traits : 'TLzEquality',
-	#classTraits : 'TLzEquality classTrait',
+	#traits : 'TLzEquality + TLzPrintable',
+	#classTraits : 'TLzEquality classTrait + TLzPrintable classTrait',
 	#instVars : [
 		'internalSymbol'
 	],
@@ -52,6 +52,11 @@ LzOperatorName >> isInfix [
 { #category : #testing }
 LzOperatorName >> isInfixOpOtherThan: anOpName [
 	^ false
+]
+
+{ #category : #printing }
+LzOperatorName >> printAsLeibnizSyntaxOn: aStream [
+	aStream nextPutAll: internalSymbol
 ]
 
 { #category : #printing }

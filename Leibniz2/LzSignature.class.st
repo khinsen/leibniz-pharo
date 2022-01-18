@@ -25,6 +25,17 @@ LzSignature >> builtins: aSet [
 ]
 
 { #category : #inspecting }
+LzSignature >> gtBuiltinsFor: aView [
+	<gtView>
+	self builtins ifEmpty: [ ^ aView empty ].
+	^ aView list
+		title: 'Builtins' translated;
+		priority: 4;
+		items: [ self builtins asArray sorted ];
+		yourself
+]
+
+{ #category : #inspecting }
 LzSignature >> gtOperatorsFor: aView [
 	<gtView>
 	operators isEmpty ifTrue: [ ^ aView empty ].

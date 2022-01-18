@@ -32,6 +32,19 @@ LzContext >> axioms: aCollection [
 ]
 
 { #category : #inspecting }
+LzContext >> gtBuiltinsFor: aView [
+	<gtView>
+	self signature builtins
+		ifEmpty: [ ^ aView empty ].
+	^ aView forward
+		title: 'Builtins';
+		priority: 4;
+		object: [ self signature ];
+		view: #gtBuiltinsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
 LzContext >> gtOperatorsFor: aView [
 	<gtView>
 	| operators |

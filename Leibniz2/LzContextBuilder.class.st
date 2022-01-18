@@ -48,6 +48,11 @@ LzContextBuilder >> include: aContext [
 	axiomDeclarations addAll: aContext axiomDeclarations.
 ]
 
+{ #category : #defining }
+LzContextBuilder >> includeSortContext: aContext [
+	self sortGraphBuilder includeSortContext: aContext
+]
+
 { #category : #initializing }
 LzContextBuilder >> initialize [
 	sortGraphBuilder := LzSortGraphBuilder new.

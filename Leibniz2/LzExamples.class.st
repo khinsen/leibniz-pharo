@@ -7,6 +7,22 @@ Class {
 }
 
 { #category : #example }
+LzExamples >> bagContext [
+	<gtExample>
+	^ LzContextBuilder new
+		include: self listContext;
+		sort: 'collection';
+		sort: 'bag(𝕊, ℕ)';
+		subsort: '∀ ?s:𝕊 ∀ ?n:ℕ list(?s, ?n) ⊆ bag(?s, ?n)';
+		subsort: '∀ ?s:𝕊 ∀ ?n:ℕ bag(?s, ?n) ⊆ collection';
+		subsort: '∅ ⊆ collection';
+		op: '∀ ?s:𝕊 ∀ ?n:ℕ ∀ ?m:ℕ (bag(?s, ?n)) ** (bag(?s, ?m)) : bag(?s, ?n + ?m)';
+		op: '∀ ?s:𝕊 ∀ ?n:ℕ (bag(?s, ?n)) ** ?s : bag(?s, ?n + 1)';
+		op: '∀ ?s:𝕊 ∅ ** ?s : bag(?s, 1)';
+		context
+]
+
+{ #category : #example }
 LzExamples >> bagSignature [
 	<gtExample>
 	^ LzSignatureBuilder new
@@ -53,6 +69,36 @@ LzExamples >> integerTerms [
 ]
 
 { #category : #example }
+LzExamples >> listContext [
+	<gtExample>
+	^ LzContextBuilder new
+		includeSortContext: LzBuiltinContexts integerContext;
+		sort: 'element';
+		sort: 'element.special';
+		sort: '∅';
+		sort: 'list(𝕊, ℕ)';
+		subsort: 'element.special ⊆ element';		
+		op: '∅ : ∅';
+		op: '∀ ?s:𝕊 ∀ ?n:ℕ ∀ ?m:ℕ ',
+				'(list(?s, ?n)) ++ (list(?s, ?m)) : list(?s, ?n + ?m)';
+		op: '∀ ?s:𝕊 ∀ ?n:ℕ ',
+				'(list(?s, ?n)) ++ ?s : list(?s, ?n + 1)';
+		op: '∀ ?s:𝕊 ',
+				'∅ ++ ?s : list(?s, 1)';
+		op: 'anElement : element';
+		context
+]
+
+{ #category : #example }
+LzExamples >> listPlusIntegerContext [
+	<gtExample>
+	^ LzContextBuilder new
+		include: self listContext;
+		include: LzBuiltinContexts integerContext;
+		context
+]
+
+{ #category : #example }
 LzExamples >> listSignature [
 	<gtExample>
 	^ LzSignatureBuilder new
@@ -89,6 +135,18 @@ LzExamples >> listSortGraph [
 	^ LzSortGraphBuilder new
 		sortContext: self listSortContext;
 		sortGraph
+]
+
+{ #category : #example }
+LzExamples >> listTerms [
+	<gtExample>
+	^ {
+		'∅'.
+		'∅ ++ 1'.
+"		'∅ ++ 1 + 2'."
+	}
+	collect: [ :each |
+		 self listPlusIntegerContext term: each ]
 ]
 
 { #category : #accessing }

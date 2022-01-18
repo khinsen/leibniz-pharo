@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'sortDeclarations',
 		'subsortDeclarations',
-		'sortContext'
+		'sortContext',
+		'sortContextInclusions'
 	],
 	#category : #'Leibniz2-Leibniz2'
 }
@@ -16,16 +17,24 @@ LzSortGraphBuilder >> clearCache [
 
 { #category : #defining }
 LzSortGraphBuilder >> include: aSortGraph [
+	aSortGraph sortContext = LzSortHierarchyRoot uniqueInstance sortContext
+		ifFalse: [ self includeSortContext: aSortGraph sortContext ].
 	aSortGraph sortDeclarations do: [ :each |
 		self parsedSortDeclaration: each ].
 	aSortGraph subsortDeclarations do: [ :each |
 		self parsedSubsortDeclaration: each ]
 ]
 
+{ #category : #defining }
+LzSortGraphBuilder >> includeSortContext: aContext [
+	sortContextInclusions add: aContext
+]
+
 { #category : #initializing }
 LzSortGraphBuilder >> initialize [
 	sortDeclarations := OrderedCollection new.
 	subsortDeclarations := OrderedCollection new.
+	sortContextInclusions := OrderedCollection new
 ]
 
 { #category : #defining }
@@ -57,14 +66,20 @@ LzSortGraphBuilder >> sortContext [
 			each withoutVarDeclarations ]) asSet.
 		uniqueSubsorts := subsortDeclarations asSet.
 		self flag: #todo. "Check for axioms that are equal up to variable names."
-		sortContext := (uniqueSorts isEmpty and: [ uniqueSubsorts isEmpty])
+		sortContext := (uniqueSorts isEmpty
+						and: [ uniqueSubsorts isEmpty
+						and: [ sortContextInclusions isEmpty ] ])
 			ifTrue: [ LzSortHierarchyRoot uniqueInstance sortContext ]
 			ifFalse: [
-				LzContextBuilder new
-					sortContext: LzSortHierarchyRoot uniqueInstance sortContext;
+				| builder |
+				builder := LzContextBuilder new.
+				sortContextInclusions do: [ :each |
+					builder include: each ].
+				builder
+					op: LzConstants opNameSort, ' : ', LzConstants opNameSort;
 					parsedOps: uniqueSorts;
-					parsedAxioms: uniqueSubsorts;
-					context ].
+					parsedAxioms: uniqueSubsorts.
+				builder context ].
 		sortContext ]
 ]
 
@@ -72,6 +87,7 @@ LzSortGraphBuilder >> sortContext [
 LzSortGraphBuilder >> sortContext: aContext [
 	self assert: sortDeclarations isEmpty.
 	self assert: subsortDeclarations isEmpty.
+	self assert: sortContextInclusions isEmpty.
 	sortContext := aContext
 ]
 
