@@ -93,11 +93,17 @@ LzOperators >> opNamed: anOpName arity: anArity [
 	| key |
 	key := { anOpName. anArity kindArity }.
 	^ opTable at: key
-		"Error handling for the development phase"
-		ifAbsent: [ opTable keys do: [ :each |
-						each first = key first ifTrue: [
-							(KhEqualityExplorer for: key and: each) inspect ] ].
-					self error: 'No op matching ', key printString ]
+		ifAbsent: [
+			| message |
+			"Error analysis for the development phase"
+			opTable keys do: [ :each |
+				each first = key first ifTrue: [
+					(KhEqualityExplorer for: key and: each) inspect ] ].
+			"Error message"
+			message := String streamContents: [ :s |
+				s << 'No op matching '.
+				key first printForArity:  key second on: s ].
+			self error: message ]
 ]
 
 { #category : #defining }

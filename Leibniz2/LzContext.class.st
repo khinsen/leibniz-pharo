@@ -31,6 +31,44 @@ LzContext >> axioms: aCollection [
 	axioms := aCollection
 ]
 
+{ #category : #inspecting }
+LzContext >> gtOperatorsFor: aView [
+	<gtView>
+	| operators |
+	operators := self signature operators.
+	operators isEmpty ifTrue: [ ^ aView empty ].
+	^ aView forward
+		title: 'Operators' translated;
+		priority: 1;
+		object: [ operators ] ;
+		view: #gtOperatorsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzContext >> gtSortGraphFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Sort graph';
+		priority: 0;
+		object: [ self sortGraph ];
+		view: #gtGraphFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzContext >> gtVariablesFor: aView [
+	<gtView>
+	self signature variables
+		isEmpty ifTrue: [ ^ aView empty ].
+	^ aView forward
+		title: 'Variables';
+		priority: 3;
+		object: [ self signature ];
+		view: #gtVariablesFor:;
+		yourself
+]
+
 { #category : #constructing }
 LzContext >> parsedPattern: anASTPatternNode [
 	^ self signature parsedPattern: anASTPatternNode

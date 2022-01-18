@@ -57,6 +57,55 @@ LzOperator >> addArity: newArity sort: newSort [
 	ranks add: newArity -> newSort
 ]
 
+{ #category : #accessing }
+LzOperator >> graphEdges [
+	| saGraph edges |
+	saGraph := self minimalSubArityGraph.
+	edges := OrderedCollection new.
+	saGraph withIndicesDo:
+		[ :edge :i :j |
+		  edge = 1 ifTrue:
+				[ edges add: (ranks at: i) -> (ranks at: j) ] ].
+	^ edges
+]
+
+{ #category : #inspecting }
+LzOperator >> graphNodeForRank: anAssociation [
+	| arity sort text |
+	arity := anAssociation key.
+	sort := anAssociation value.
+	text := (String streamContents: [ :s |
+		self opName printForArity: arity withSort: sort on: s ] )
+		asRopedText.
+	text fontName: (LbCodeFont defaultFamily).
+	^ BlTextElement new
+		text: text;
+		padding: (BlInsets all: 3);
+		border: (BlBorder paint: Color gray)
+]
+
+{ #category : #inspecting }
+LzOperator >> gtGraphFor: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Graph';
+		priority: 1;
+		painting: [ :view | 
+			| edges |
+			view nodes
+				shape: [ :r | self graphNodeForRank: r ];
+				with: ranks.
+			view edges
+				shape: [ :x | LzGraphicsElements graphArrow ];
+				fromCenterTop;
+				toCenterBottom;
+				connect: (self graphEdges)
+					from: #key
+					to: #value.
+			view layout
+				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
+]
+
 { #category : #inspecting }
 LzOperator >> gtRanksFor: aView [
 	<gtView>
@@ -101,6 +150,24 @@ LzOperator >> kindArity [
 { #category : #accessing }
 LzOperator >> kindArity: anArity [
 	kindArity := anArity
+]
+
+{ #category : #inspecting }
+LzOperator >> minimalSubArityGraph [
+	"Answer the adjacency matrix for the minimal sub-arity graph that has the
+	same connected components as the full one. This minimal graph is constructed
+	from the full one by removing all edges that are equivalent to multi-edge
+	paths."
+	| m mPower |
+	m := self subArityGraph.
+	mPower := m.
+	ranks size - 2 timesRepeat:
+		[ mPower := mPower +* m.
+		  m := m with: mPower collect: [ :a :b | b > 0 ifTrue: [ 0 ] ifFalse: [ a ] ] ].
+	"Since the graph is acyclic, the next power must be all zeros."
+	mPower := mPower +* m.
+	self assert: mPower equals: (Array2D zeros: ranks size).
+	^ m
 ]
 
 { #category : #accessing }
@@ -162,7 +229,7 @@ LzOperator >> size [
 LzOperator >> sortForArity: anArity [
 	| matches |
 	matches := self ranksMatching: anArity.
-	self assert: matches size equals: 1.
+	matches ifEmpty: [ self error: 'No rank matching arity ', anArity asLeibnizSyntaxString ].
 	^ matches first value
 ]
 
@@ -174,6 +241,14 @@ LzOperator >> sortGraph [
 { #category : #accessing }
 LzOperator >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
+]
+
+{ #category : #inspecting }
+LzOperator >> subArityGraph [
+	^ Array2D new: ranks size tabulate:
+		[ :i :j |
+			(i ~= j and: [ (ranks at: i) key <= (ranks at: j) key ])
+				ifTrue: [ 1 ] ifFalse: [ 0 ] ]
 ]
 
 { #category : #accessing }

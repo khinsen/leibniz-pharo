@@ -13,8 +13,8 @@ LzExamples >> bagSignature [
 		sortGraph: self bagSortGraph;
 		include: self listSignature;
 		op: '∀ ?s:𝕊 ∀ ?n:ℕ ∀ ?m:ℕ (bag(?s, ?n)) ** (bag(?s, ?m)) : bag(?s, ?n + ?m)';
-		op: '∀ ?s:𝕊 ∀ ?n:ℕ (bag(?s, ?n)) ** ?s : bag(?s, ?n + one)';
-		op: '∀ ?s:𝕊 ∅ ** ?s : bag(?s, one)';
+		op: '∀ ?s:𝕊 ∀ ?n:ℕ (bag(?s, ?n)) ** ?s : bag(?s, ?n + 1)';
+		op: '∀ ?s:𝕊 ∅ ** ?s : bag(?s, 1)';
 		signature
 ]
 
