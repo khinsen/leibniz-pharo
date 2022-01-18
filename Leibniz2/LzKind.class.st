@@ -11,6 +11,11 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
+{ #category : #testing }
+LzKind >> includes: aSort [
+	^ sortFamilies includes: aSort family
+]
+
 { #category : #accessing }
 LzKind >> maximalFamilies [
 	^ maximalFamilies

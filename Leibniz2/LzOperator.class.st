@@ -15,9 +15,9 @@ Class {
 
 { #category : #defining }
 LzOperator >> addArity: newArity sort: newSort [
-	self flag: #todo.
-	"self assertMonotonicity: [ kind includes: newSortPattern ]
-		  forArity: newArity andSortPattern: newSortPattern."
+	self
+		assertMonotonicity: [ kind includes: newSort ]
+		arity: newArity sort: newSort.
 
 	ranks ifEmpty: [
 		ranks add: newArity -> newSort.
@@ -38,10 +38,9 @@ LzOperator >> addArity: newArity sort: newSort [
 		(newArity <= a) ifTrue: [
 			"First case: all sorts conforming to newArity also conform to a.
 			 newArity must then be inserted before a."
-			self flag: #todo.
-			"self
-	 			assertMonotonicity: [ newSort <= s ]
-				 forArity: newArity andSortPattern: newSort."
+			self
+				assertMonotonicity: [ newSort <= s ]
+				arity: newArity sort: newSort.
 			ranks add: newArity -> newSort beforeIndex: index.
 			^ self ].
 
@@ -49,12 +48,21 @@ LzOperator >> addArity: newArity sort: newSort [
 			"Second case: all sorts conforming to a also conform to newArity.
 			newArity must be inserted after a, but perhaps not immediately.
 			Continue the search."
-			self flag: #todo.
-			"self
+			self
 				assertMonotonicity: [ s <= newSort ]
-				forArity: newArity andSortPattern: newSort" ] ].
+				arity: newArity sort: newSort ] ].
 
 	ranks add: newArity -> newSort
+]
+
+{ #category : #private }
+LzOperator >> assertMonotonicity: aBlock arity: anArity sort: aSort [
+	self
+		assert: aBlock
+		description: 'declaration ',
+		  	(String streamContents: [ :s |
+		  		opName printForArity: anArity withSort: aSort on: s ]),
+		  	' makes operator non-monotonic'.
 ]
 
 { #category : #accessing }
