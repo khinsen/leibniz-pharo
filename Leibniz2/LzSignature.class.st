@@ -165,7 +165,7 @@ LzSignature >> parsedVariables: anArrayOfASTVarDeclarationNodes [
 { #category : #constructing }
 LzSignature >> pattern: aString [
 	^ self parsedPattern:
-		(LzParser parse: aString startingAt: #termEnd yielding: LzASTPattern)
+		(LzParser parse: aString startingAt: #patternEnd yielding: LzASTPattern)
 ]
 
 { #category : #constructing }
@@ -208,7 +208,8 @@ LzSignature >> varDeclarations: aCollection [
 LzSignature >> varTerm: aVarName variables: aDictionary [
 	| sort |
 	sort := aDictionary at: aVarName
-				ifAbsent: [ self variables at: aVarName ].
+				ifAbsent: [ self variables at: aVarName
+								ifAbsent: [ self error: 'No var named ', aVarName asSymbol ] ].
 	^ LzVarTerm new
 		signature: self;
 		name: aVarName;

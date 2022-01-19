@@ -9,8 +9,24 @@ Class {
 }
 
 { #category : #testing }
+LzVarTerm >> hasVars [
+	^ true
+]
+
+{ #category : #testing }
 LzVarTerm >> isVarTerm [
 	^ true
+]
+
+{ #category : #unifying }
+LzVarTerm >> match: otherTerm bindings: bindings [
+	bindings defineVar: name sort: sort.
+	otherTerm matchVar: name sort: sort bindings: bindings
+]
+
+{ #category : #unifying }
+LzVarTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: bindings [
+	self error: 'Variable in term being matched to'
 ]
 
 { #category : #accessing }

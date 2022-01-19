@@ -72,6 +72,7 @@ LzParserExamples >> patternStrings [
 	<gtExample>
 	^ self simpleTermStrings,
 	{
+		'?bar'.
 		'∀ ?bar:Bar foo(?bar)'.
 		'∀ ?foo:Foo ∀ ?bar:Bar (?foo + ?bar)'.
 		'∀ ?l:(∀ ?n:ℕ.nz list(?n)) tail(l)'.
@@ -178,10 +179,11 @@ LzParserExamples >> varDeclarations [
 	<gtExample>
 	^ {
 		'?foo: Foo'.
-		'?list : ∀ ?n:ℕ list(n)'.
+		'?list : ∀ ?n:ℕ list(?n)'.
 	} collect: [ :each |
 		| astNode |
 		astNode := self varParser parse: each.
+		self assert: astNode isPetit2Failure not.
 		self
 			assert: (self varParser parse:  astNode asLeibnizSyntaxString)
 			equals: astNode.

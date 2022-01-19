@@ -187,6 +187,29 @@ LzExamples >> simpleContextBuilder [
 ]
 
 { #category : #example }
+LzExamples >> simpleContextTermMatches [
+	<gtExample>
+	| context |
+	context := self simpleContext.
+	^ {
+		{ '?foo'. 'aFoo'.  {'?foo' -> 'aFoo'} }.
+		{ '?foo'. 'aFoo(aFoo)'.  {'?foo' -> 'aFoo(aFoo)'} }.
+		{ 'aFoo(?foo)'. 'aFoo(aFoo)'. {'?foo' -> 'aFoo'} }.
+		{ '(?foo + ?foo)'. 'aFoo + aFoo'. {'?foo' -> 'aFoo'} }.
+		{ 'aFoo(?foo)'. 'aFoo'. {} }
+	} collect: [ :each |
+		| pattern term bindings result |
+		pattern := context pattern: each first.
+		term := context term: each second.
+		bindings := pattern match: term.
+		result := each third collect: [ :eachEntry |
+					(LzVarName for: eachEntry key)
+						-> (context term: eachEntry value) ].
+		self assert: bindings bindings equals: result asDictionary.
+		bindings ]
+]
+
+{ #category : #example }
 LzExamples >> simpleContextTerms [
 	<gtExample>
 	^ {

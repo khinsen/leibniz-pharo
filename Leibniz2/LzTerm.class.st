@@ -52,6 +52,11 @@ LzTerm >> hasInfixOpOtherThan: aSymbol [
 ]
 
 { #category : #testing }
+LzTerm >> hasVars [
+	^ self
+]
+
+{ #category : #testing }
 LzTerm >> isInfix [
 	^ false
 ]
@@ -59,6 +64,28 @@ LzTerm >> isInfix [
 { #category : #testing }
 LzTerm >> isVarTerm [
 	^ false
+]
+
+{ #category : #unifying }
+LzTerm >> match: otherTerm [
+	| bindings |
+	bindings := LzBindings new.
+	self match: otherTerm bindings: bindings.
+	^ bindings
+]
+
+{ #category : #unifying }
+LzTerm >> match: otherTerm bindings: bindings [
+	self = otherTerm ifFalse: [
+		bindings failWith: self notUnifiableWith: otherTerm ]
+]
+
+{ #category : #unifying }
+LzTerm >> matchVar: aSymbol sort: aSort bindings: bindings [
+	self
+		assert: self hasVars not
+		description: 'Term being matched to has variables'.
+	bindings bindVar: aSymbol sort: aSort to: self
 ]
 
 { #category : #accessing }
@@ -110,6 +137,28 @@ LzTerm >> sort [
 LzTerm >> synopsis [
 	"The text shown in a tree view. This is the full term except for LbOpTerms"
 	^ self asLeibnizSyntaxString
+]
+
+{ #category : #unifying }
+LzTerm >> unify: otherTerm [
+	| bindings |
+	bindings := LzBindings new.
+	self unify: otherTerm bindings: bindings.
+	^ bindings
+]
+
+{ #category : #unifying }
+LzTerm >> unify: otherTerm bindings: bindings [
+	self
+		unifyTagged: nil
+		with: otherTerm
+		tagged: nil
+		bindings: bindings
+]
+
+{ #category : #unifying }
+LzTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: bindings [
+	self subclassResponsibility
 ]
 
 { #category : #accessing }

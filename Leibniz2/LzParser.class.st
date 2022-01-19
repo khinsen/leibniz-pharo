@@ -111,12 +111,17 @@ LzParser >> op [
 { #category : #terms }
 LzParser >> pattern [
 	^ super pattern ==> [ :nodes |
-		| variables parsedTerm |
-		variables := nodes first.
-		parsedTerm := nodes second.
-		LzASTPattern new
-			variables: nodes first;
-			term: nodes second ]
+		nodes isCollection ifTrue: [
+			| variables parsedTerm |
+			variables := nodes first.
+			parsedTerm := nodes second.
+			LzASTPattern new
+				variables: nodes first;
+				term: nodes second ]
+		ifFalse: [
+			LzASTPattern new
+				variables: #();
+				term: nodes ] ]
 ]
 
 { #category : #signature }

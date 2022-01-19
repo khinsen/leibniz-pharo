@@ -25,8 +25,29 @@ LzOpTerm >> hasInfixOpOtherThan: anOpName [
 ]
 
 { #category : #testing }
+LzOpTerm >> hasVars [
+	^ args
+		detect: #hasVars
+		ifFound: [ true ]
+		ifNone: [ false ]
+]
+
+{ #category : #testing }
 LzOpTerm >> isInfix [
 	^ opName isInfix
+]
+
+{ #category : #unifying }
+LzOpTerm >> match: otherTerm bindings: bindings [
+	otherTerm matchOpTerm: self op: opName args: args bindings: bindings
+]
+
+{ #category : #unifying }
+LzOpTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: bindings [
+	(opName = anOpName and: [ args size = anArgList size ])
+		ifTrue: [ anArgList with: args do: [ :arg1 :arg2 |
+					arg1 match: arg2 bindings: bindings ] ]
+		ifFalse: [ bindings failWith: self notUnifiableWith: otherTerm ]
 ]
 
 { #category : #accessing }

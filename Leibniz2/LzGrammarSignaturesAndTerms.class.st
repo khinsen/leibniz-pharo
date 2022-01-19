@@ -89,7 +89,7 @@ LzGrammarSignaturesAndTerms >> parenthesizedTerm [
 
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> pattern [
-	^ forAllClause star, simpleTerm trim
+	^ (forAllClause plus, simpleTerm trim) / term
 ]
 
 { #category : #terms }
