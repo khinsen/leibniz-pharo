@@ -54,6 +54,46 @@ LzVarTerm >> sort: aSort [
 	sort := aSort
 ]
 
+{ #category : #unifying }
+LzVarTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: bindings [
+	| taggedName |
+	taggedName := LzTaggedVarName tag: aSymbol name: name.
+	bindings defineVar: taggedName sort: sort.
+	otherTerm unifyTagged: otherSymbol withVar: taggedName sort: sort bindings: bindings
+]
+
+{ #category : #unifying }
+LzVarTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: otherSymbol bindings: bindings [
+	| taggedName |
+	taggedName := LzTaggedVarName tag: aSymbol name: name.
+	bindings defineVar: taggedName sort: sort.
+	otherTerm unifyTagged: otherSymbol withVar: taggedName sort: sort bindings: bindings
+]
+
+{ #category : #unifying }
+LzVarTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: otherSymbol op: anOpName args: anArgList bindings: bindings [
+	| taggedName |
+	taggedName := LzTaggedVarName tag: aSymbol name: name.
+	bindings defineVar: taggedName sort: sort.
+	otherTerm
+		unifyTagged: otherSymbol
+		withVar: taggedName
+		sort: sort
+		bindings: bindings
+]
+
+{ #category : #unifying }
+LzVarTerm >> unifyTagged: aSymbol withVar: aTaggedName sort: aSort bindings: bindings [
+	| taggedName |
+	taggedName := LzTaggedVarName tag: aSymbol name: name.
+	bindings defineVar: taggedName sort: sort.
+	bindings
+		makeVar: taggedName
+		sort: sort
+		equalToVar: aTaggedName
+		sort: aSort
+]
+
 { #category : #accessing }
 LzVarTerm >> valueSlots [
 	^ #(name sort)

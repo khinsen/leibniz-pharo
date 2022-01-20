@@ -12,6 +12,21 @@ LzAtomicTerm >> printAsLeibnizSyntaxOn: aStream [
 	value printOn: aStream
 ]
 
+{ #category : #unifying }
+LzAtomicTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: bindings [
+	otherTerm
+		unifyTagged: otherSymbol
+		withAtomicTerm: self
+		tagged: aSymbol
+		variables: bindings.
+]
+
+{ #category : #unifying }
+LzAtomicTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: otherSymbol bindings: bindings [
+	self = otherTerm
+		ifFalse: [ bindings failWith: self notUnifiableWith: otherTerm ]
+]
+
 { #category : #accessing }
 LzAtomicTerm >> value [
 	^ value

@@ -80,6 +80,33 @@ LzOpTerm >> synopsis [
 	^ self opName synopsis
 ]
 
+{ #category : #unifying }
+LzOpTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: bindings [
+	otherTerm
+		unifyTagged: otherSymbol
+		withOpTerm: self
+		tagged: aSymbol
+		op: opName args: args
+		bindings: bindings.
+]
+
+{ #category : #unifying }
+LzOpTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: otherSymbol bindings: bindings [
+	bindings failWith: self notUnifiableWith: otherTerm
+]
+
+{ #category : #unifying }
+LzOpTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: otherSymbol op: anOpName args: anArgList bindings: bindings [
+	(opName = anOpName and: [ args size = anArgList size ])
+		ifTrue: [ anArgList with: args do: [ :arg1 :arg2 |
+					arg1
+						unifyTagged: otherSymbol
+						with: arg2
+						tagged: aSymbol
+						bindings: bindings ] ]
+		ifFalse: [ bindings failWith: self notUnifiableWith: otherTerm ]
+]
+
 { #category : #accessing }
 LzOpTerm >> valueSlots [
 	^ #(opName args)

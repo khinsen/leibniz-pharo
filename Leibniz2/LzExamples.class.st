@@ -56,6 +56,44 @@ LzExamples >> bagSortGraph [
 		sortGraph
 ]
 
+{ #category : #accessing }
+LzExamples >> booleanContext [
+	<gtExample>
+	^ LzContextBuilder new
+		include: LzBuiltinContexts truthContext;
+		op: '¬(boolean) : boolean';
+		op: 'boolean ∧ boolean : boolean';
+		op: 'boolean ∨ boolean : boolean';
+		op: 'boolean ⊻ boolean : boolean';
+		var: '?X : boolean';
+		var: '?Y : boolean';
+		context
+]
+
+{ #category : #example }
+LzExamples >> booleanUnifications [
+	<gtExample>
+	| c |
+	c := self booleanContext.
+	^ {
+		{'true'. '?X'. '(?X=true)'}.
+		{'¬(?X)'. '¬(true)'. '(?X=true)'}.
+		{'?X'. '¬(true)'. '(?X=¬(true))'}.
+		{'true ⊻ false ⊻ true ⊻ ¬(true)'. 'true ⊻ false ⊻ ?X ⊻ ?Y'. '(?X=true, ?Y=¬(true))'}.
+		{'false ⊻ ?X ⊻ true ⊻ ¬(true)'. 'false ⊻ true ⊻ ?X ⊻ ?Y'. '(?X=true, ?Y=¬(true))'}.
+		{'?X ⊻ ¬(?X)'. 'false ⊻ ¬(?X)'. '(?X=false)'}.
+		{'?X ⊻ ¬(?Y)'. 'false ⊻ ¬(?Y)'. '(?Y, ?X=false)'}.
+		{'false ⊻ ¬(?X)'. 'false ⊻ ¬(?Y)'. '(?X=?Y)'}.
+		{'true'. 'false'.  '(failure #nonUnifiableTerms: false, true)' }.
+		{'∀ ?foo:boolean ¬(?foo)'. '∀ ?bar:boolean ¬(?bar)'. '(?bar=?foo)'}
+	} collect: [ :each |
+		| unification string |
+		unification := (c pattern: each first) unify: (c pattern: each  second).
+		string := unification printString.
+		self assert: (string allButFirst: (string findString: '(') - 1) equals: each third.
+		unification ]
+]
+
 { #category : #example }
 LzExamples >> integerTerms [
 	<gtExample>

@@ -157,8 +157,30 @@ LzTerm >> unify: otherTerm bindings: bindings [
 ]
 
 { #category : #unifying }
+LzTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol [
+	| bindings |
+	bindings := LbVariables new.
+	self unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol bindings: bindings.
+	^ bindings
+]
+
+{ #category : #unifying }
 LzTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: bindings [
 	self subclassResponsibility
+]
+
+{ #category : #unifying }
+LzTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: anotherSymbol op: anOpName args: anArgList bindings: bindings [
+	bindings failWith: self notUnifiableWith: otherTerm
+]
+
+{ #category : #unifying }
+LzTerm >> unifyTagged: aSymbol withVar: aTaggedName sort: aSort bindings: bindings [
+	bindings bindVar: aTaggedName sort: aSort to: self.
+	self vars associationsDo: [ :each |
+		| taggedName |
+		taggedName := LzTaggedVarName tag: aSymbol name: each key.
+		bindings defineVar: taggedName sort: each value ]
 ]
 
 { #category : #accessing }

@@ -7,7 +7,7 @@ Class {
 		'failure',
 		'sorts'
 	],
-	#category : 'Leibniz-3-Terms'
+	#category : #'Leibniz-3-Terms'
 }
 
 { #category : #binding }
@@ -78,7 +78,7 @@ LbVariables >> combineWith: anLbVariables [
 		varsAndSorts overlappingPairsDo: [ :a :b |
 			self
 				makeVar: a first ofSort: a second
-				equalToVar: b firs ofSort: b second ] ]
+				equalToVar: b first ofSort: b second ] ]
 ]
 
 { #category : #binding }

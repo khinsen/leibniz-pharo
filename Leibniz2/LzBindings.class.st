@@ -11,6 +11,19 @@ Class {
 }
 
 { #category : #binding }
+LzBindings >> bindToUniqueVar: aBlock [
+	| varSetBindings |
+	self ifFailure: [ ^ self ].
+	varSetBindings := Dictionary new.
+	unbound values asSet do: [ :each |
+		varSetBindings at: each put: (aBlock value: each value: (sorts at: each)) ].
+	varSetBindings keysAndValuesDo: [ :varSet :uniqueVarTerm |
+		| aVar |
+		aVar := varSet anyOne.
+		self bindVar: aVar sort:(sorts at: aVar) to: uniqueVarTerm  ]	
+]
+
+{ #category : #binding }
 LzBindings >> bindVar: aSymbol sort: aSort to: aTerm [
 	failure ifNotNil: [ ^ self ].
 	self assert: (sorts at: aSymbol) equals: aSort.
@@ -45,6 +58,27 @@ LzBindings >> bindingFor: aName [
 { #category : #accessing }
 LzBindings >> bindings [
 	^ bound
+]
+
+{ #category : #binding }
+LzBindings >> combineWith: otherBindings [
+	otherBindings bindings associationsDo: [ :each |
+		| var sort binding |
+		var := each key.
+		binding := each value.
+		sort := otherBindings sortOf: var.
+		self defineVar: var sort: sort.
+		self bindVar: var sort: sort to: binding. ].
+	otherBindings unboundVarSets do: [ :eachVarSet |
+		| varsAndSorts |
+		varsAndSorts := eachVarSet asArray collect: [ :eachVar |
+			{ eachVar. otherBindings sortOf: eachVar } ].
+		varsAndSorts do: [ :each |
+			self defineVar: each first sort: each second ].
+		varsAndSorts overlappingPairsDo: [ :a :b |
+			self
+				makeVar: a first sort: a second
+				equalToVar: b first sort: b second ] ]
 ]
 
 { #category : #binding }
@@ -122,12 +156,73 @@ LzBindings >> gtUnboundFor: aView [
 		yourself
 ]
 
+{ #category : #testing }
+LzBindings >> hasNoBindings [
+	^ bound isEmpty
+]
+
+{ #category : #testing }
+LzBindings >> ifFailure: aBlock [
+	^ failure
+		ifNotNil: [ aBlock value ]
+]
+
+{ #category : #testing }
+LzBindings >> ifSuccess: aBlock [
+	^ failure
+		ifNil: [ aBlock cull: self ]
+]
+
+{ #category : #testing }
+LzBindings >> ifSuccess: block1 ifFailure: block2 [
+	^ failure
+		ifNil: [ block1 cull: self ]
+		ifNotNil: [ block2 value ]
+]
+
 { #category : #accessing }
 LzBindings >> initialize [
 	bound := Dictionary new.
 	unbound := Dictionary new.
 	sorts := Dictionary new.
 	failure := nil.
+]
+
+{ #category : #testing }
+LzBindings >> isFailure [
+	^ failure isNotNil
+]
+
+{ #category : #binding }
+LzBindings >> makeVar: aSymbol sort: aSort equalToVar: otherSymbol sort: otherSort [
+	failure ifNotNil: [ ^ self ].
+	aSymbol = otherSymbol ifTrue: [ ^ self ].
+	self assert: (sorts at: aSymbol) equals: aSort.
+	self assert: (sorts at: otherSymbol) equals: otherSort.
+	bound at: aSymbol ifPresent: [ :value |
+		self bindVar: otherSymbol sort: otherSort to: value.
+		^ self ].
+	bound at: otherSymbol ifPresent: [ :value |
+		self bindVar: aSymbol sort: aSort to: value.
+		^ self ].
+	self mergeVarSetsFor: aSymbol and: otherSymbol
+]
+
+{ #category : #binding }
+LzBindings >> mergeVarSetsFor: aSymbol and: otherSymbol [
+	| varSet1 varSet2 sort mergedVarSet |
+	varSet1 := unbound at: aSymbol.
+	(varSet1 includes: otherSymbol) ifTrue: [ ^ self ].
+	varSet2 := unbound at: otherSymbol.
+	sort := (sorts at: varSet1) min: (sorts at: varSet2).
+	sort ifNil: [ self failWith:(sorts at: varSet1)
+					incommensurableWith: (sorts at: varSet2) ].
+	mergedVarSet := varSet1 union: varSet2.
+	mergedVarSet do: [ :each |
+		unbound at: each put: mergedVarSet ].
+	sorts at: mergedVarSet put: sort.
+	sorts removeKey: varSet1.
+	sorts removeKey: varSet2.
 ]
 
 { #category : #printing }
@@ -174,4 +269,14 @@ LzBindings >> printUnboundOn: aStream [
 			do: [ :eachVarName | aStream nextPutAll: eachVarName asString ]
 			separatedBy: [ aStream nextPut: $= ] ]
 		separatedBy: [ aStream nextPutAll: ', ' ]
+]
+
+{ #category : #accessing }
+LzBindings >> sortOf: aVarNameOrVarSet [
+	^ sorts at: aVarNameOrVarSet
+]
+
+{ #category : #accessing }
+LzBindings >> unboundVarSets [
+	^ unbound values asSet
 ]

@@ -85,6 +85,13 @@ LzSort >> kind [
 	^ self family kind
 ]
 
+{ #category : #comparing }
+LzSort >> min: aSort [
+	self <= aSort ifTrue: [ ^ self ].
+	aSort <= self ifTrue: [ ^ aSort ].
+	^ nil
+]
+
 { #category : #printing }
 LzSort >> printAsLeibnizSyntaxOn: aStream [
 	self term printAsLeibnizSyntaxOn: aStream
