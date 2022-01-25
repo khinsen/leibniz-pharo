@@ -155,7 +155,6 @@ LzExamples >> listSignature [
 { #category : #example }
 LzExamples >> listSortContext [
 	<gtExample>
-	self flag: #todo.
 	^ (LzContextBuilder new
 		include: LzBuiltinContexts sortContext;
 		include: LzBuiltinContexts integerContext;

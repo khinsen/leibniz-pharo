@@ -32,6 +32,26 @@ LzContext >> axioms: aCollection [
 ]
 
 { #category : #inspecting }
+LzContext >> gtAxiomsFor: aView [
+	<gtView>
+	| axiomTree |
+	axioms ifEmpty: [ ^ aView empty ].
+	axiomTree := axioms groupedBy: #class .
+	^ aView tree
+		title: 'Axioms';
+		priority: 3;
+		items: [ axiomTree keys sorted ];
+		itemLzCode: [ :each |
+			each isClass ifTrue: [ each name ]
+			ifFalse: [ each asLeibnizSyntaxString ] ];
+		children: [ :each |
+			each isClass ifTrue: [ axiomTree at: each ]
+			ifFalse: [ #() ] ];
+		expandAll;
+		yourself
+]
+
+{ #category : #inspecting }
 LzContext >> gtBuiltinsFor: aView [
 	<gtView>
 	self signature builtins
