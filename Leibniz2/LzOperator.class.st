@@ -198,22 +198,21 @@ LzOperator >> ranksMatching: anArity [
 	| matches |
 	matches := OrderedCollection new.
 	ranks do: [ :each |
-		self flag: #todo. "Implement full version"
-		anArity <= each key ifTrue: [ matches add: each ].
-		"| match |
-		match := LbVariables new.
+		| match |
+		match := LzBindings new.
 		each key with: anArity do: [ :patternArg :valueArg |
 			| submatches |
 			submatches := patternArg matchAllSupersortsOf: valueArg.
 			submatches
 				ifEmpty: [ match failUnless: valueArg isSubsortOf: patternArg ]
 				ifNotEmpty: [
+					self flag: #todo.
 					submatches size > 1
 						ifTrue: [ self error: 'Multiple matches not yet implemented' ].
 					match combineWith: submatches anyOne ] ].
 		match ifSuccess: [
 			matches add: (each key collect: [ :s | s substitute: match ])
-							-> (each value substituteAndReduce: match) ]"
+							-> (each value substituteAndReduce: match) ]
 	].
 	^ matches
 ]

@@ -1,6 +1,8 @@
 Class {
 	#name : #LzBindings,
 	#superclass : #Object,
+	#traits : 'TLzEquality',
+	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'sorts',
 		'bound',
@@ -279,4 +281,9 @@ LzBindings >> sortOf: aVarNameOrVarSet [
 { #category : #accessing }
 LzBindings >> unboundVarSets [
 	^ unbound values asSet
+]
+
+{ #category : #accessing }
+LzBindings >> valueSlots [
+	^ #(failure bound unbound sorts)
 ]

@@ -31,6 +31,11 @@ LzSort >> <= otherSort [
 			^ false ]
 ]
 
+{ #category : #unifying }
+LzSort >> addPrefix: aSymbol toVarsConflictingWith: aSort [
+	^ term addPrefix: aSymbol toVarsConflictingWith: aSort term
+]
+
 { #category : #comparing }
 LzSort >> compareArguments: otherSort [
 	term args ifEmpty: [ ^ false ].
@@ -39,11 +44,14 @@ LzSort >> compareArguments: otherSort [
 			ifTrue: [ (sortGraph sortWithTerm: term1) <= (sortGraph sortWithTerm: term2)
 						ifFalse: [ ^ false ] ]
 			ifFalse: [
-				self flag: #todo. "Implement full form"
-				"(term1 isRestrictionOf: term2)
-					ifFalse: [ ^ false ]."
-				 term1 = term2 ifFalse: [ ^ false ] ] ].
+				(term1 isRestrictionOf: term2)
+					ifFalse: [ ^ false ] ] ].
 	^ true
+]
+
+{ #category : #accessing }
+LzSort >> directSupersorts [
+	^ sortGraph directSupersortsOf: term
 ]
 
 { #category : #accessing }
@@ -54,8 +62,6 @@ LzSort >> family [
 { #category : #accessing }
 LzSort >> gtGraphFor: aView [
 	<gtView>
-	self flag: #todo. "Must first implement sort graphs more completely"
-	true ifTrue: [ ^ aView empty ].
 	^ aView mondrian
 		title: 'Tree view';
 		priority: 0;
@@ -85,6 +91,17 @@ LzSort >> kind [
 	^ self family kind
 ]
 
+{ #category : #unifying }
+LzSort >> matchAllSupersortsOf: aSort [
+	| matches match |
+	matches := Set new.
+	(self term match: aSort term)
+		ifSuccess: [ :m | matches add: m ].
+	aSort directSupersorts do: [ :each |
+		matches := matches union: (self matchAllSupersortsOf: each) ].
+	^ matches
+]
+
 { #category : #comparing }
 LzSort >> min: aSort [
 	self <= aSort ifTrue: [ ^ self ].
@@ -110,6 +127,18 @@ LzSort >> sortGraph [
 { #category : #accessing }
 LzSort >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
+]
+
+{ #category : #unifying }
+LzSort >> substitute: bindings [
+	^ sortGraph sortWithTerm: (term substitute: bindings)
+]
+
+{ #category : #unifying }
+LzSort >> substituteAndReduce: bindings [
+	self flag: #todo. "Do reduction"
+	^ sortGraph sortWithTerm:
+		(term substitute: bindings)
 ]
 
 { #category : #accessing }

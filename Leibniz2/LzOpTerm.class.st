@@ -75,6 +75,15 @@ LzOpTerm >> sort: aSort [
 	sort := aSort
 ]
 
+{ #category : #unifying }
+LzOpTerm >> substitute: bindings [
+	| substitutedArgList |
+	bindings hasNoBindings ifTrue: [ ^ self ].
+	args ifEmpty: [ ^ self ].
+	substitutedArgList := args collect: [ :arg | arg substitute: bindings ].
+	^ signature opTerm: opName args: substitutedArgList
+]
+
 { #category : #accessing }
 LzOpTerm >> synopsis [
 	^ self opName synopsis

@@ -55,6 +55,12 @@ LzVarTerm >> sort: aSort [
 ]
 
 { #category : #unifying }
+LzVarTerm >> substitute: bindings [
+	(bindings bindingFor: name) ifNotNil: [ :value | ^ value ].
+	^ self
+]
+
+{ #category : #unifying }
 LzVarTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: bindings [
 	| taggedName |
 	taggedName := LzTaggedVarName tag: aSymbol name: name.

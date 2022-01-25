@@ -29,6 +29,11 @@ LzSubsortAxiom >> subsort: aPattern [
 ]
 
 { #category : #accessing }
+LzSubsortAxiom >> subsortOf: aTerm [
+	^ self unify: aTerm with: supersort thenSubstituteIn: subsort
+]
+
+{ #category : #accessing }
 LzSubsortAxiom >> supersort [
 	^ supersort
 ]
@@ -41,10 +46,30 @@ LzSubsortAxiom >> supersort: aPattern [
 
 { #category : #accessing }
 LzSubsortAxiom >> supersortOf: aTerm [
-	self flag: #todo. "Implement full form"
-	"^ self unify: aTerm with: subsort thenSubstituteIn: supersort"
-	subsort = aTerm ifTrue: [ ^ supersort ].
-	^ nil
+	^ self unify: aTerm with: subsort thenSubstituteIn: supersort
+]
+
+{ #category : #unifying }
+LzSubsortAxiom >> unify: aTerm with: pattern1 thenSubstituteIn: pattern2 [
+	| rename preferredVarNames bindings |
+	rename := pattern1
+		addPrefix: #'temp.'
+		toVarsConflictingWith: aTerm.
+	preferredVarNames := aTerm vars keys.
+	bindings := (pattern1 substitute: rename) unify: aTerm.
+	bindings isFailure ifTrue: [ ^ nil ].
+	bindings bindToUniqueVar: [ :varSet :sort |
+		| name |
+		name := (varSet intersection: preferredVarNames) asArray sorted
+					ifEmpty: [ varSet anyOne ]
+					ifNotEmpty: [ :anArray | anArray first ].
+		LzVarTerm new
+			signature: signature;
+			name: name;
+			sort: sort;
+			beRecursivelyReadOnlyObject;
+			yourself ].
+	^ (pattern2 substitute: rename) substitute: bindings
 ]
 
 { #category : #accessing }

@@ -29,6 +29,31 @@ LzSortGraph >> axiomsConnecting: aFamily to: anotherFamily [
 		ifAbsent: [ #() ]
 ]
 
+{ #category : #accessing }
+LzSortGraph >> directSupersortsOf: aSortTerm [
+	| supersorts family |
+	supersorts := Set new.
+	family := self familyForSortTerm: aSortTerm.
+	family = anySortFamily ifTrue: [ ^ supersorts ].
+	"First step: supersorts via the sort family graph."
+	(directSuperFamilies at: family) do: [ :eachFamily |
+		(connectingAxioms at: { family. eachFamily }) do: [ :eachAxiom |
+			(eachAxiom supersortOf: aSortTerm)
+				ifNotNil: [ :term | supersorts add: (self sortWithTerm: term) ]] ].
+	"Second step: supersorts via argument subsorts."
+	(aSortTerm args 
+		collect: [ :each | each sort isSortSort
+							ifTrue: [ (self directSupersortsOf: each) collect: #term ]
+							ifFalse: [ Set with: each ] ])
+		cartesianProductDo: [ :args |
+			| term |
+			term := self sortContext signature
+						opTerm: aSortTerm opName args: args.
+			term = aSortTerm
+				ifFalse: [ supersorts add: (self sortWithTerm: term) ] ].
+	^ supersorts
+]
+
 { #category : #initializing }
 LzSortGraph >> familyForSortTerm: aTerm [
 	^ aTerm isVarTerm
