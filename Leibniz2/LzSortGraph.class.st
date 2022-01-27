@@ -36,6 +36,25 @@ LzSortGraph >> axiomsConnecting: aFamily to: anotherFamily [
 ]
 
 { #category : #accessing }
+LzSortGraph >> breadthFirstTraversalFrom: aSort childNodes: childNodeBlock nodesDo: nodeActionBlock edgesDo: edgeActionBlock [
+	| visitedNodes currentNodes distance nodesToVisit |
+	visitedNodes := Set new.
+	currentNodes := Set with: aSort.
+	distance := 1.
+	[ currentNodes isNotEmpty ] whileTrue: [
+		nodesToVisit := Set new.
+		currentNodes do: [ :eachNode |
+			(childNodeBlock value: eachNode) do: [ :each |
+				edgeActionBlock cull: eachNode cull: each cull: distance.
+				(visitedNodes includes: each) ifFalse: [
+					nodesToVisit add: each.
+					nodeActionBlock cull: each cull: distance.
+					visitedNodes add: each ] ] ].
+		currentNodes := nodesToVisit.
+		distance := distance + 1 ]
+]
+
+{ #category : #accessing }
 LzSortGraph >> directSubsortsOf: aSortTerm [
 	| subsorts family |
 	subsorts := Set new.
