@@ -202,18 +202,20 @@ LzOperator >> ranksMatching: anArity [
 		match := LzBindings new.
 		each key with: anArity do: [ :patternArg :valueArg |
 			| submatches |
-			submatches := patternArg matchAllSupersortsOf: valueArg.
-			submatches
-				ifEmpty: [ match failUnless: valueArg isSubsortOf: patternArg ]
-				ifNotEmpty: [
-					self flag: #todo.
-					submatches size > 1
-						ifTrue: [ self error: 'Multiple matches not yet implemented' ].
-					match combineWith: submatches anyOne ] ].
+			(patternArg match: valueArg)
+				ifSuccess: [ :b | match combineWith: b ]
+				ifFailure: [
+					submatches := patternArg matchAllSupersortsOf: valueArg.
+					submatches
+						ifEmpty: [ match failUnless: valueArg isSubsortOf: patternArg ]
+						ifNotEmpty: [
+							self flag: #todo.
+							submatches size > 1
+								ifTrue: [ self error: 'Multiple matches not yet implemented' ].
+							match combineWith: submatches anyOne ] ] ].
 		match ifSuccess: [
 			matches add: (each key collect: [ :s | s substitute: match ])
-							-> (each value substituteAndReduce: match) ]
-	].
+							-> (each value substituteAndReduce: match) ] ].
 	^ matches
 ]
 

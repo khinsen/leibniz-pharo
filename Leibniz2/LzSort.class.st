@@ -102,6 +102,11 @@ LzSort >> kind [
 ]
 
 { #category : #unifying }
+LzSort >> match: aSort [
+	^self term match: aSort term
+]
+
+{ #category : #unifying }
 LzSort >> matchAllSupersortsOf: aSort [
 	| matches match |
 	matches := Set new.
