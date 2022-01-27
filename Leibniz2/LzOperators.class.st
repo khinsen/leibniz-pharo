@@ -81,6 +81,15 @@ LzOperators >> isEmpty [
 	^ opTable isEmpty
 ]
 
+{ #category : #failing }
+LzOperators >> noMatchFor: aKey [
+	| message |
+	message := String streamContents: [ :s |
+		s << 'No op matching '.
+		aKey first printForArity:  aKey second on: s ].
+	self error: message
+]
+
 { #category : #lookup }
 LzOperators >> opForTerm: aTerm [
 	^ self
@@ -90,20 +99,22 @@ LzOperators >> opForTerm: aTerm [
 
 { #category : #lookup }
 LzOperators >> opNamed: anOpName arity: anArity [
-	| key |
-	key := { anOpName. anArity kindArity }.
-	^ opTable at: key
-		ifAbsent: [
-			| message |
-			"Error analysis for the development phase"
-			opTable keys do: [ :each |
-				each first = key first ifTrue: [
-					(KhEqualityExplorer for: key and: each) inspect ] ].
-			"Error message"
-			message := String streamContents: [ :s |
-				s << 'No op matching '.
-				key first printForArity:  key second on: s ].
-			self error: message ]
+	| key kindArity message |
+	anArity ifEmpty: [
+		key := { anOpName. anArity }.
+		opTable at: key
+			ifPresent: [ :op | ^ op ]
+			ifAbsent: [ self noMatchFor: key ] ].
+	kindArity := anArity kindArity .
+	#(false true) asDigitsToPower: kindArity size do: [ :eachSelection |
+		| candidate |
+		candidate := kindArity copy.
+		1 to: kindArity size do: [ :index |
+			(eachSelection at: index) ifTrue: [
+				candidate at: index put: self sortGraph anySortKind ] ].
+		key := { anOpName. candidate }.
+		opTable at: key ifPresent: [ :op | ^ op ] ].
+	self noMatchFor: key.
 ]
 
 { #category : #defining }
