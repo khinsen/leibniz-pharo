@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'signature'
 	],
-	#category : #Leibniz2
+	#category : #'Leibniz2-Terms'
 }
 
 { #category : #unifying }

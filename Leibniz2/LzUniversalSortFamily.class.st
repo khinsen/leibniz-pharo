@@ -1,7 +1,7 @@
 Class {
 	#name : #LzUniversalSortFamily,
 	#superclass : #LzSortFamily,
-	#category : #'Leibniz2-Leibniz2'
+	#category : #'Leibniz2-Sorts'
 }
 
 { #category : #accessing }

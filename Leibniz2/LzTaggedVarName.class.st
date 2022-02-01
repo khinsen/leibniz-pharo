@@ -7,7 +7,7 @@ Class {
 		'tag',
 		'name'
 	],
-	#category : #Leibniz2
+	#category : #'Leibniz2-Terms'
 }
 
 { #category : #'instance creation' }

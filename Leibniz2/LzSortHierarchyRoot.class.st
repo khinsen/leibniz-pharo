@@ -9,7 +9,7 @@ Class {
 		'sortGraph',
 		'sortSort'
 	],
-	#category : #Leibniz2
+	#category : #'Leibniz2-Sorts'
 }
 
 { #category : #accessing }

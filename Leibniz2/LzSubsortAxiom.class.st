@@ -5,7 +5,7 @@ Class {
 		'supersort',
 		'subsort'
 	],
-	#category : #'Leibniz2-Leibniz2'
+	#category : #'Leibniz2-Axioms'
 }
 
 { #category : #printing }
