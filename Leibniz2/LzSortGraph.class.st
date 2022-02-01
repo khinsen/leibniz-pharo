@@ -17,16 +17,66 @@ Class {
 		'subFamilies',
 		'maximalFamilies',
 		'kinds',
-		'kindOf'
+		'kindOf',
+		'anySortKind'
 	],
 	#category : #'Leibniz2-Sorts'
 }
+
+{ #category : #accessing }
+LzSortGraph >> anySortKind [
+	^ anySortKind
+]
 
 { #category : #accessing }
 LzSortGraph >> axiomsConnecting: aFamily to: anotherFamily [
 	^ connectingAxioms
 		at: { aFamily. anotherFamily }
 		ifAbsent: [ #() ]
+]
+
+{ #category : #accessing }
+LzSortGraph >> breadthFirstTraversalFrom: aSort childNodes: childNodeBlock nodesDo: nodeActionBlock edgesDo: edgeActionBlock [
+	| visitedNodes currentNodes distance nodesToVisit |
+	visitedNodes := Set new.
+	currentNodes := Set with: aSort.
+	distance := 1.
+	[ currentNodes isNotEmpty ] whileTrue: [
+		nodesToVisit := Set new.
+		currentNodes do: [ :eachNode |
+			(childNodeBlock value: eachNode) do: [ :each |
+				edgeActionBlock cull: eachNode cull: each cull: distance.
+				(visitedNodes includes: each) ifFalse: [
+					nodesToVisit add: each.
+					nodeActionBlock cull: each cull: distance.
+					visitedNodes add: each ] ] ].
+		currentNodes := nodesToVisit.
+		distance := distance + 1 ]
+]
+
+{ #category : #accessing }
+LzSortGraph >> directSubsortsOf: aSortTerm [
+	| subsorts family |
+	subsorts := Set new.
+	family := self familyForSortTerm: aSortTerm.
+	family = anySortFamily ifTrue: [ ^ subsorts ].
+	"First step: subsorts via the sort family graph."
+	(directSuperFamilies at: family) do: [ :eachFamily |
+		(connectingAxioms at: { family. eachFamily }) do: [ :eachAxiom |
+			(eachAxiom subsortOf: aSortTerm)
+				ifNotNil: [ :term | subsorts add: (self sortWithTerm: term) ]] ].
+	"Second step: subsorts via argument subsorts."
+	(aSortTerm args 
+		collect: [ :each | each sort isSortSort
+							ifTrue: [ (self directSubsortsOf: each) collect: #term ]
+							ifFalse: [ Set with: each ] ])
+		cartesianProductDo: [ :args |
+			| term |
+			term := self sortContext signature
+						opTerm: aSortTerm opName args: args.
+			term = aSortTerm
+				ifFalse: [ subsorts add: (self sortWithTerm: term) ] ].
+	^ subsorts
 ]
 
 { #category : #accessing }
@@ -146,11 +196,12 @@ LzSortGraph >> initializeKindOf [
 LzSortGraph >> initializeKinds [
 	"A special kind only the 'anySort' family."
 	| candidates |
-	kinds := Set with:
-		(LzKind new
+	anySortKind :=
+		LzKind new
 			sortGraph: self;
 			sortFamilies: (Set with: anySortFamily);
-			maximalFamilies: (Set with: anySortFamily)).
+			maximalFamilies: (Set with: anySortFamily).
+	kinds := Set with: anySortKind.
 	"A kind can have multiple maximal families. In that case, candidates
 	 contains multiple sets that have a non-empty intersection, and which
 	 must be merged to obtain the kind."

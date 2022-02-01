@@ -49,7 +49,12 @@ LzSort >> compareArguments: otherSort [
 	^ true
 ]
 
-{ #category : #accessing }
+{ #category : #lookup }
+LzSort >> directSubsorts [
+	^ sortGraph directSubsortsOf: term
+]
+
+{ #category : #lookup }
 LzSort >> directSupersorts [
 	^ sortGraph directSupersortsOf: term
 ]
@@ -59,24 +64,29 @@ LzSort >> family [
 	^ sortGraph familyForSortTerm:  term
 ]
 
-{ #category : #accessing }
+{ #category : #inspecting }
 LzSort >> gtGraphFor: aView [
 	<gtView>
 	^ aView mondrian
-		title: 'Tree view';
-		priority: 0;
+		title: 'Graph';
+		priority: 1;
 		painting: [ :view | 
-			| edges |
+			| graph |
+			graph := self subsortAndSupersortGraph.
 			view nodes
-				shape: [ :x | sortGraph graphNodeForSort: x highlight: x = self ];
-				with: self kind asSet.
+				shape: [ :x |
+					| highlight |
+					x = self
+						ifTrue: [ highlight :=  Color black ].
+					LzGraphicsElements
+						graphNodeLabelled: x asLeibnizSyntaxString
+						highlightColor: highlight ];
+				with: (graph at: #nodes).
 			view edges
-				shape: [ :x | sortGraph graphArrowForSubsortRelation: x ];
+				shape: [ LzGraphicsElements graphArrow ];
 				fromCenterTop;
 				toCenterBottom;
-				connect: (sortGraph graphEdgesForSubset: self kind asSet)
-					from: #subsort
-					to: #supersort.
+				connect: (graph at: #edges) from: #first to: #second.
 			view layout
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
@@ -89,6 +99,11 @@ LzSort >> isSortSort [
 { #category : #accessing }
 LzSort >> kind [
 	^ self family kind
+]
+
+{ #category : #unifying }
+LzSort >> match: aSort [
+	^self term match: aSort term
 ]
 
 { #category : #unifying }
@@ -129,6 +144,42 @@ LzSort >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
 ]
 
+{ #category : #lookup }
+LzSort >> subsortAndSupersortGraph [
+	| edges |
+	edges := Set new.
+	sortGraph
+		breadthFirstTraversalFrom: self
+		childNodes: #directSubsorts
+		nodesDo: []
+		edgesDo: [ :oldNode :newNode |
+			edges add: { newNode. oldNode } ].
+	sortGraph
+		breadthFirstTraversalFrom: self
+		childNodes: #directSupersorts
+		nodesDo: []
+		edgesDo: [ :oldNode :newNode |
+			edges add: { oldNode. newNode } ].
+	^ Dictionary
+		with: #nodes -> (edges flatten union: (Set with: self))
+		with: #edges -> edges
+]
+
+{ #category : #lookup }
+LzSort >> subsortGraph [
+	| edges |
+	edges := Set new.
+	sortGraph
+		breadthFirstTraversalFrom: self
+		childNodes: #directSubsorts
+		nodesDo: []
+		edgesDo: [ :oldNode :newNode |
+			edges add: { newNode. oldNode } ].
+	^ Dictionary
+		with: #nodes -> (edges flatten union: (Set with: self))
+		with: #edges -> edges
+]
+
 { #category : #unifying }
 LzSort >> substitute: bindings [
 	^ sortGraph sortWithTerm: (term substitute: bindings)
@@ -139,6 +190,21 @@ LzSort >> substituteAndReduce: bindings [
 	self flag: #todo. "Do reduction"
 	^ sortGraph sortWithTerm:
 		(term substitute: bindings)
+]
+
+{ #category : #accessing }
+LzSort >> supersortGraph [
+	| edges |
+	edges := Set new.
+	sortGraph
+		breadthFirstTraversalFrom: self
+		childNodes: #directSupersorts
+		nodesDo: []
+		edgesDo: [ :oldNode :newNode |
+			edges add: { oldNode. newNode } ].
+	^ Dictionary
+		with: #nodes -> (edges flatten union: (Set with: self))
+		with: #edges -> edges
 ]
 
 { #category : #accessing }

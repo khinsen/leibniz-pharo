@@ -180,7 +180,7 @@ LzExamples >> listTerms [
 	^ {
 		'∅'.
 		'∅ ++ 1'.
-"		'∅ ++ 1 + 2'."
+		'∅ ++ 1 ++ 2'.
 	}
 	collect: [ :each |
 		 self listPlusIntegerContext term: each ]

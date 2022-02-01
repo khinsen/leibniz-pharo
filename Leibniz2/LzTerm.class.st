@@ -80,7 +80,7 @@ LzTerm >> hasInfixOpOtherThan: aSymbol [
 
 { #category : #testing }
 LzTerm >> hasVars [
-	^ self
+	^ false
 ]
 
 { #category : #testing }
