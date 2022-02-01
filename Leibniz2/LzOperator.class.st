@@ -10,7 +10,7 @@ Class {
 		'sortGraph',
 		'ranks'
 	],
-	#category : #'Leibniz2-Leibniz2'
+	#category : #'Leibniz2-Signatures'
 }
 
 { #category : #defining }

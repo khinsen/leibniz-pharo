@@ -9,7 +9,7 @@ Class {
 		'unbound',
 		'failure'
 	],
-	#category : #'Leibniz2-Leibniz2'
+	#category : #'Leibniz2-Terms'
 }
 
 { #category : #binding }

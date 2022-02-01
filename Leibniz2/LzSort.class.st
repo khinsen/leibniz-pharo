@@ -7,7 +7,7 @@ Class {
 		'sortGraph',
 		'term'
 	],
-	#category : #'Leibniz2-Leibniz2'
+	#category : #'Leibniz2-Sorts'
 }
 
 { #category : #comparing }
