@@ -29,6 +29,11 @@ LzASTRewriteRule >> replacement: aTermNode [
 ]
 
 { #category : #accessing }
+LzASTRewriteRule >> ruleClass [
+	^ LzRewriteRule
+]
+
+{ #category : #accessing }
 LzASTRewriteRule >> valueSlots [
 	super valueSlots, #(replacement)
 ]

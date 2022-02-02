@@ -29,3 +29,8 @@ LzASTFunctionRule >> printAsLeibnizSyntaxOn: aStream [
 		aStream nextPutAll: ' | '.
 		self condition printAsLeibnizSyntaxOn: aStream ]
 ]
+
+{ #category : #accessing }
+LzASTFunctionRule >> ruleClass [
+	^ LzFunctionRule
+]

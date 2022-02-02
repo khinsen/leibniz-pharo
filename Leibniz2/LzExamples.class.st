@@ -11,6 +11,7 @@ LzExamples >> bagContext [
 	<gtExample>
 	^ LzContextBuilder new
 		include: self listContext;
+		include: LzBuiltinContexts integerContext;
 		sort: 'collection';
 		sort: 'bag(𝕊, ℕ)';
 		subsort: '∀ ?s:𝕊 ∀ ?n:ℕ list(?s, ?n) ⊆ bag(?s, ?n)';
@@ -19,7 +20,21 @@ LzExamples >> bagContext [
 		op: '∀ ?s:𝕊 ∀ ?n:ℕ ∀ ?m:ℕ (bag(?s, ?n)) ** (bag(?s, ?m)) : bag(?s, ?n + ?m)';
 		op: '∀ ?s:𝕊 ∀ ?n:ℕ (bag(?s, ?n)) ** ?s : bag(?s, ?n + 1)';
 		op: '∀ ?s:𝕊 ∅ ** ?s : bag(?s, 1)';
+		op: 'size(collection) : ℕ';
 		context
+]
+
+{ #category : #example }
+LzExamples >> bagRules [
+	<gtExample>
+	^ {
+		'∅ ++ 1 ⇒ ∅'.
+		'length(∅) ⇒ 0'.
+	} collect: [ :each |
+		| rule |
+		rule := self bagContext rule: each.
+		self assert: rule asLeibnizSyntaxString equals: each.
+		rule ]
 ]
 
 { #category : #example }
@@ -111,6 +126,7 @@ LzExamples >> listContext [
 	<gtExample>
 	^ LzContextBuilder new
 		includeSortContext: LzBuiltinContexts integerContext;
+		include: LzBuiltinContexts truthContext;
 		sort: 'element';
 		sort: 'element.special';
 		sort: '∅';
@@ -228,6 +244,8 @@ LzExamples >> simpleContextRules [
 	<gtExample>
 	^ {
 		'aFoo ⇒ aFoo'.
+		'aFoo(?foo) ⇒ aFoo'.
+		'∀ ?someFoo:Foo aFoo(?someFoo) ⇒ ?someFoo'.
 	} collect: [ :each |
 		| rule |
 		rule := self simpleContext rule: each.

@@ -117,6 +117,11 @@ LzTerm >> isVarTerm [
 	^ false
 ]
 
+{ #category : #accessing }
+LzTerm >> kind [
+	^ self sort kind
+]
+
 { #category : #unifying }
 LzTerm >> match: otherTerm [
 	| bindings |

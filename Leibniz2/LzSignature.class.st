@@ -130,8 +130,28 @@ LzSignature >> parsedPattern: anASTPatternNode [
 
 { #category : #constructing }
 LzSignature >> parsedRule: anASTRuleNode [
-	self flag: #todo.
-	^ anASTRuleNode
+	| ruleVariables rule |
+	ruleVariables := self parsedVariables: anASTRuleNode variables.
+	rule := anASTRuleNode ruleClass new
+				signature: self;
+				variables: ruleVariables;
+				pattern: (self
+					parsedTerm: anASTRuleNode pattern
+					variables: ruleVariables).
+	anASTRuleNode condition ifNotNil: [ :c |
+		rule condition: (self parsedTerm: c variables: ruleVariables)].
+	(anASTRuleNode isKindOf: LzASTRewriteRule)
+		ifTrue: [
+			rule replacement:
+				(self
+					parsedTerm: anASTRuleNode replacement
+					variables: ruleVariables) ]
+		ifFalse: [
+			rule function: anASTRuleNode function ].
+	^ rule
+		checkConsistency;
+		beRecursivelyReadOnlyObject;
+		yourself
 ]
 
 { #category : #constructing }
