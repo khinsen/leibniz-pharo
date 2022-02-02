@@ -224,6 +224,18 @@ LzExamples >> simpleContextBuilder [
 ]
 
 { #category : #example }
+LzExamples >> simpleContextRules [
+	<gtExample>
+	^ {
+		'aFoo ⇒ aFoo'.
+	} collect: [ :each |
+		| rule |
+		rule := self simpleContext rule: each.
+		self assert: rule asLeibnizSyntaxString equals: each.
+		rule ]
+]
+
+{ #category : #example }
 LzExamples >> simpleContextTermMatches [
 	<gtExample>
 	| context |

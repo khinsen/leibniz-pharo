@@ -43,7 +43,7 @@ LzGrammarRulesAndAxioms >> rewriteRule [
 ]
 
 { #category : #rules }
-LzGrammarRulesAndAxioms >> rule [
+LzGrammarRulesAndAxioms >> ruleEnd [
 	^ (rewriteRule / fnRule) end
 ]
 

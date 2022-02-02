@@ -117,6 +117,11 @@ LzContext >> pattern: aString [
 	^ self signature pattern: aString
 ]
 
+{ #category : #constructing }
+LzContext >> rule: aString [
+	^ self signature rule: aString
+]
+
 { #category : #accessing }
 LzContext >> signature [
 	^ signature

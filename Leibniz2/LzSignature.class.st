@@ -129,6 +129,12 @@ LzSignature >> parsedPattern: anASTPatternNode [
 ]
 
 { #category : #constructing }
+LzSignature >> parsedRule: anASTRuleNode [
+	self flag: #todo.
+	^ anASTRuleNode
+]
+
+{ #category : #constructing }
 LzSignature >> parsedTerm: anASTTermNode [
 	^ self parsedTerm: anASTTermNode variables: Dictionary new
 ]
@@ -166,6 +172,12 @@ LzSignature >> parsedVariables: anArrayOfASTVarDeclarationNodes [
 LzSignature >> pattern: aString [
 	^ self parsedPattern:
 		(LzParser parse: aString startingAt: #patternEnd yielding: LzASTPattern)
+]
+
+{ #category : #constructing }
+LzSignature >> rule: aString [
+	^ self parsedRule:
+		(LzParser parse: aString startingAt: #ruleEnd yielding: LzASTRule)
 ]
 
 { #category : #constructing }

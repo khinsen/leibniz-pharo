@@ -4,7 +4,7 @@ Class {
 	#type : #variable,
 	#traits : 'TLzPrintable',
 	#classTraits : 'TLzPrintable classTrait',
-	#category : #'Leibniz2-Signature'
+	#category : #'Leibniz2-Signatures'
 }
 
 { #category : #constructing }

@@ -88,6 +88,36 @@ LzParserExamples >> patterns [
 ]
 
 { #category : #accessing }
+LzParserExamples >> ruleParser [
+	<gtExample>
+	^ LzParser newStartingAt: #ruleEnd
+]
+
+{ #category : #accessing }
+LzParserExamples >> ruleStrings [
+	<gtExample>
+	^ {
+		'a ⇒ b'.
+		'a ⇒ b | true'.
+		'∀ ?bar:Bar foo(?bar) ⇒ fooBar'.
+		'∀ ?bar:Bar foo(?bar) ⇒ fooBar | false'.
+		'∀ ?bar:Bar ∀ ?baz:Baz foo(?bar, ?baz) ⇒ fooBar | ?baz'.
+		'foo(?bar) → ''?bar'':fn'.
+	}
+]
+
+{ #category : #accessing }
+LzParserExamples >> rules [
+	<gtExample>
+	^ self ruleStrings
+		collect: [ :each |
+			| parsedRule |
+			parsedRule := self ruleParser parse: each.
+			self assert: parsedRule asLeibnizSyntaxString equals: each.
+			parsedRule ]
+]
+
+{ #category : #accessing }
 LzParserExamples >> simpleTermParser [
 	<gtExample>
 	^ LzParser newStartingAt: #simpleTermEnd

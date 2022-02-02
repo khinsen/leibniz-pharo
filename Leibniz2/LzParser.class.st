@@ -41,17 +41,14 @@ LzParser >> code [
 { #category : #rules }
 LzParser >> fnRule [
 	^ super fnRule ==> [ :nodes |
-		[ :signature |
-			| variables |
-			variables := (nodes first collect: [ :each |
-				each cull: signature cull: Dictionary new ])
-					asDictionary.
-			LbFunctionRule
-				pattern: (nodes second cull: signature cull: variables)
-				localVariables: variables
-				condition: (nodes fifth ifNotNil:
-								[ :c | c second cull: signature cull: variables ])
-				function: nodes fourth ] ]
+		| rule |
+		rule := LzASTFunctionRule new
+			variables: nodes first;
+			pattern: nodes second;
+			function: nodes fourth.
+		nodes fifth ifNotNil: [ :c |
+			rule condition: c second ].
+		rule ]
 ]
 
 { #category : #signature }
@@ -152,17 +149,14 @@ LzParser >> rationalNumberTerm [
 { #category : #rules }
 LzParser >> rewriteRule [
 	^ super rewriteRule ==> [ :nodes |
-		[ :signature |
-			| variables |
-			variables := (nodes first collect: [ :each |
-				each cull: signature cull: Dictionary new ])
-					asDictionary.
-			LbRewriteRule
-				pattern: (nodes second cull: signature cull: variables)
-				localVariables: variables
-				condition: (nodes fifth ifNotNil:
-								[ :c | c second cull: signature cull: variables ])
-				replacement: (nodes fourth cull: signature cull: variables) ] ]
+		| rule |
+		rule := LzASTRewriteRule new
+			variables: nodes first;
+			pattern: nodes second;
+			replacement: nodes fourth.
+		nodes fifth ifNotNil: [ :c |
+			rule condition: c second ].
+		rule ]
 ]
 
 { #category : #accessing }
