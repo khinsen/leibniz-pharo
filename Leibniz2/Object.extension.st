@@ -4,3 +4,8 @@ Extension { #name : #Object }
 Object >> isLzASTNode [
 	^ false
 ]
+
+{ #category : #'*Leibniz2' }
+Object >> lzAtomicTermValue [
+	LzRewriteFailure signal: 'not an atomic term: ', self asString
+]

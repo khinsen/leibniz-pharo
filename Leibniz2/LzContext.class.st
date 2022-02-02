@@ -6,7 +6,8 @@ Class {
 	#instVars : [
 		'signature',
 		'axioms',
-		'axiomDeclarations'
+		'axiomDeclarations',
+		'rewriteSystem'
 	],
 	#category : #'Leibniz2-Contexts'
 }
@@ -115,6 +116,16 @@ LzContext >> parsedTerm: anASTTermNode [
 { #category : #constructing }
 LzContext >> pattern: aString [
 	^ self signature pattern: aString
+]
+
+{ #category : #accessing }
+LzContext >> rewriteSystem [
+	^ rewriteSystem
+]
+
+{ #category : #accessing }
+LzContext >> rewriteSystem: aRewriteSystem [
+	rewriteSystem := aRewriteSystem
 ]
 
 { #category : #constructing }

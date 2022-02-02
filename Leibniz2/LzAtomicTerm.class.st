@@ -7,6 +7,11 @@ Class {
 	#category : #'Leibniz2-Terms'
 }
 
+{ #category : #accessing }
+LzAtomicTerm >> lzAtomicTermValue [
+	^ self value
+]
+
 { #category : #printing }
 LzAtomicTerm >> printAsLeibnizSyntaxOn: aStream [
 	value printOn: aStream

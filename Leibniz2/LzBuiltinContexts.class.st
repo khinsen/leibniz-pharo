@@ -6,21 +6,19 @@ Class {
 
 { #category : #accessing }
 LzBuiltinContexts class >> integerContext [
-	^ LzContextBuilder new
+	| builder |
+	builder := LzContextBuilder new
 		include: self truthContext;
-		builtin: #integers;
-		"Natural numbers"
-		sort: 'ℕ';
-		sort: 'ℕ.nz';
-		sort: 'zero';
-		subsort: 'zero ⊆ ℕ';
-		subsort: 'ℕ.nz ⊆ ℕ';
-		"Integers"
-		sort: 'ℤ';
-		sort: 'ℤ.nz';
-		subsort: 'ℕ ⊆ ℤ';
-		subsort: 'ℤ.nz ⊆ ℤ';
-		subsort: 'ℕ.nz ⊆ ℤ.nz';
+		builtin: #integers.
+	self integerSortsFor: builder.
+	self integerOpsFor: builder.
+	self integerRulesFor: builder.
+	^ builder context
+]
+
+{ #category : #private }
+LzBuiltinContexts class >> integerOpsFor: aContextBuilder [
+	aContextBuilder
 		"Arithmetic operators"
 		op: 'ℤ + ℤ : ℤ';
 		op: 'ℕ + ℕ : ℕ';
@@ -47,8 +45,65 @@ LzBuiltinContexts class >> integerContext [
 		op: 'ℤ < ℤ : boolean';
 		op: 'ℤ > ℤ : boolean';
 		op: 'ℤ ≤ ℤ : boolean';
-		op: 'ℤ ≥ ℤ : boolean';
-		context
+		op: 'ℤ ≥ ℤ : boolean'.
+]
+
+{ #category : #private }
+LzBuiltinContexts class >> integerRulesFor: aContextBuilder [
+	aContextBuilder
+		"addition rules"
+		rule: '∀ ?x:ℤ ∀ ?zero:zero ?x + ?zero ⇒ ?x';
+		rule: '∀ ?x:ℤ ∀ ?zero:zero ?zero + ?x ⇒ ?x';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x + ?y → ''x + y'':LzIntegerTerm';
+		"subtraction rules"
+		rule: '∀ ?x:ℤ ∀ ?zero:zero ?x - ?zero ⇒ ?x';
+		rule: '∀ ?x:ℤ ∀ ?zero:zero ?zero - ?x ⇒ -(?x)';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x - ?y → ''x - y'':LzIntegerTerm';
+		rule: '∀ ?zero:zero -(?zero) ⇒ 0';
+		rule: '∀ ?x:ℤ -(?x) → ''x negated'':LzIntegerTerm';
+		"multiplication rules"
+		rule: '∀ ?x:ℤ ∀ ?zero:zero ?x × ?zero ⇒ 0';
+		rule: '∀ ?x:ℤ ∀ ?zero:zero ?zero × ?x ⇒ 0';
+		rule: '∀ ?x:ℤ 1 × ?x ⇒ ?x';
+		rule: '∀ ?x:ℤ ?x × 1 ⇒ ?x';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x × ?y → ''x * y'':LzIntegerTerm';
+		"division rules"
+		rule: '∀ ?x:ℤ.nz ∀ ?zero:zero ?zero div ?x ⇒ 0';
+		rule: '∀ ?x:ℤ ?x div 1 ⇒ ?x';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ.nz ?x div ?y → ''(x abs // y abs) * x sign * y sign'':LzIntegerTerm';
+		rule: '∀ ?x:ℤ.nz ∀ ?zero:zero ?zero rem ?x ⇒ 0';
+		rule: '∀ ?x:ℤ ?x rem 1 ⇒ 0';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ.nz ?x rem ?y → ''(x abs % y abs) * x sign * y sign'':LzIntegerTerm';
+		"exponentiation rules"
+		rule: '∀ ?x:ℤ.nz ∀ ?zero:zero ?x^{?zero} ⇒ 1';
+		rule: '∀ ?x:ℕ.nz ∀ ?zero:zero ?zero^{?x} ⇒ 0';
+		rule: '∀ ?x:ℤ ∀ ?y:ℕ.nz ?x^{?y} → ''x raisedTo: y'':LzIntegerTerm';
+		"abs rules"
+		rule: '∀ ?x:ℕ abs(?x) ⇒ ?x';
+		rule: '∀ ?x:ℤ abs(?x) ⇒ -(?x) | ?x < 0';
+		rule: '∀ ?x:ℤ abs(?x) → ''x abs'':LzIntegerTerm'.
+		"comparison rules"
+"		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x < ?y → ''x < y'':LzBooleanTerm';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x > ?y → ''x > y'':LzBooleanTerm';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x ≤ ?y → ''x <= y'':LzBooleanTerm';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x ≥ ?y → ''x >= y'':LzBooleanTerm'."
+]
+
+{ #category : #private }
+LzBuiltinContexts class >> integerSortsFor: aContextBuilder [
+	aContextBuilder
+		"Natural numbers"
+		sort: 'ℕ';
+		sort: 'ℕ.nz';
+		sort: 'zero';
+		subsort: 'zero ⊆ ℕ';
+		subsort: 'ℕ.nz ⊆ ℕ';
+		"Integers"
+		sort: 'ℤ';
+		sort: 'ℤ.nz';
+		subsort: 'ℕ ⊆ ℤ';
+		subsort: 'ℤ.nz ⊆ ℤ';
+		subsort: 'ℕ.nz ⊆ ℤ.nz'.
 ]
 
 { #category : #accessing }

@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'sortGraphBuilder',
 		'signatureBuilder',
-		'axiomDeclarations'
+		'axiomDeclarations',
+		'rewriteSystemBuilder'
 	],
 	#category : #'Leibniz2-Contexts'
 }
@@ -25,7 +26,7 @@ LzContextBuilder >> builtin: aSymbol [
 
 { #category : #building }
 LzContextBuilder >> context [
-	| sortGraph signature axioms |
+	| sortGraph signature axioms rewriteSystem |
 	sortGraph := self sortGraphBuilder
 		sortGraph.
 	signature := self signatureBuilder 
@@ -33,10 +34,14 @@ LzContextBuilder >> context [
 		signature.
 	axioms := axiomDeclarations collect: [ :each |
 		LzAxiom signature: signature declaration: each ].
+	rewriteSystem := self rewriteSystemBuilder
+		signature: signature;
+		rewriteSystem.
 	^ LzContext new
 		signature: signature;
 		axioms: axioms;
 		axiomDeclarations: axiomDeclarations copy;
+		rewriteSystem: rewriteSystem;
 		beRecursivelyReadOnlyObject;
 		yourself
 ]
@@ -57,7 +62,8 @@ LzContextBuilder >> includeSortContext: aContext [
 LzContextBuilder >> initialize [
 	sortGraphBuilder := LzSortGraphBuilder new.
 	signatureBuilder := LzSignatureBuilder new.
-	axiomDeclarations := Set new
+	axiomDeclarations := Set new.
+	rewriteSystemBuilder := LzRewriteSystemBuilder new.
 ]
 
 { #category : #defining }
@@ -78,6 +84,16 @@ LzContextBuilder >> parsedAxioms: aCollection [
 { #category : #defining }
 LzContextBuilder >> parsedOps: aCollection [
 	self signatureBuilder parsedOps: aCollection
+]
+
+{ #category : #accessing }
+LzContextBuilder >> rewriteSystemBuilder [
+	^ rewriteSystemBuilder
+]
+
+{ #category : #defining }
+LzContextBuilder >> rule: aString [
+	self rewriteSystemBuilder rule: aString
 ]
 
 { #category : #defining }

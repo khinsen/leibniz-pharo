@@ -17,7 +17,7 @@ LzRule >> checkConsistency [
 	self assert: pattern signature == signature.
 	condition ifNotNil: [
 		self assert: condition signature == signature.
-		self assert: condition sort printString equals: 'boolean' ].
+		self assert: condition sort asLeibnizSyntaxString equals: 'boolean' ].
 	self flag: #todo. "Check variable consistency pattern->condition and pattern->replacement"
 ]
 

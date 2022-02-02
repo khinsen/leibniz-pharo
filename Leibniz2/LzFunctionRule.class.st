@@ -20,18 +20,18 @@ LzFunctionRule >> function: anArray [
 	code := String streamContents: [ :s |
 		s nextPutAll: 'block ^ [ :signature :args | | '.
 		self variables keysDo: [ :each |
-			s nextPutAll: each asSymbol.
+			s nextPutAll: each asSymbol allButFirst.
 			s nextPut: Character space ].
 		s nextPutAll: '| '.
 		self variables keysDo: [ :each |
-			s nextPutAll: each asSymbol.
+			s nextPutAll: each asSymbol allButFirst.
 			s nextPutAll: ' := (args at: (LzPrefixOperatorName for: '.
 			each asSymbol printOn: s.
-			s nextPutAll: ')) leibnizAtomicTermValue. ' ].
+			s nextPutAll: ')) lzAtomicTermValue. ' ].
 			s nextPutAll: function second.
-			s nextPutAll: ' value: ('.
+			s nextPutAll: ' new signature: signature; value: ('.
 			s nextPutAll: function first.
-			s nextPutAll: ') signature: signature ] '].
+			s nextPutAll: '); beRecursivelyReadOnlyObject; yourself ] '].
 	tempClass := Object newAnonymousSubclass.
 	tempClass compile: code.
 	block := tempClass new block.
