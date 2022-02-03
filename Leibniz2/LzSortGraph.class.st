@@ -285,6 +285,15 @@ LzSortGraph >> kindOf: aSortOrFamily [
 ]
 
 { #category : #constructing }
+LzSortGraph >> normalizedSortWithTerm: aTerm [
+	^ LzSort new
+		sortGraph: self;
+		term: (sortContext reduce: aTerm);
+		beRecursivelyReadOnlyObject;
+		yourself
+]
+
+{ #category : #constructing }
 LzSortGraph >> parsedSort: anASTPatternNode [
 	^ self sortWithTerm:
 		(self sortContext parsedPattern: anASTPatternNode)

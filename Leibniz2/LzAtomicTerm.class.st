@@ -7,6 +7,15 @@ Class {
 	#category : #'Leibniz2-Terms'
 }
 
+{ #category : #'instance creation' }
+LzAtomicTerm class >> signature: aSignature value: anObject [
+	^ self new
+		signature: aSignature;
+		value: anObject;
+		beRecursivelyReadOnlyObject;
+		yourself
+]
+
 { #category : #organizing }
 LzAtomicTerm >> fingerprint [
 	^ #atomic

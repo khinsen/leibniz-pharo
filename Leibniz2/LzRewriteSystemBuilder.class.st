@@ -15,7 +15,6 @@ LzRewriteSystemBuilder >> initialize [
 
 { #category : #accessing }
 LzRewriteSystemBuilder >> rewriteSystem [
-	self flag: #todo.
 	^ LzRewriteSystem new
 		signature: self signature;
 		rules: (self ruleDeclarations collect: [ :each |

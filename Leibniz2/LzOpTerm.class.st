@@ -135,5 +135,6 @@ LzOpTerm >> vars [
 
 { #category : #transforming }
 LzOpTerm >> withTransformedArgs: anArgList [
+	anArgList ifEmpty: [ ^ self ].
 	^ signature opTerm: opName args: anArgList
 ]

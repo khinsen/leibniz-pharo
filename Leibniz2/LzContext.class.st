@@ -187,5 +187,5 @@ LzContext >> term: aString [
 
 { #category : #accessing }
 LzContext >> valueSlots [
-	^ #(signature)
+	^ #(signature axioms rewriteSystem)
 ]

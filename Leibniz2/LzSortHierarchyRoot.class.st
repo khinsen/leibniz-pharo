@@ -72,6 +72,11 @@ LzSortHierarchyRoot >> initialize [
 	sortGraph initializeMaximalFamilies.
 	sortGraph initializeKinds.
 	sortGraph initializeKindOf.
+	
+	sortContext rewriteSystem:
+		(LzRewriteSystem new
+			signature: sortSignature;
+			rules: #()).
 ]
 
 { #category : #accessing }

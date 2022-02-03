@@ -187,8 +187,7 @@ LzSort >> substitute: bindings [
 
 { #category : #unifying }
 LzSort >> substituteAndReduce: bindings [
-	self flag: #todo. "Do reduction"
-	^ sortGraph sortWithTerm:
+	^ sortGraph normalizedSortWithTerm:
 		(term substitute: bindings)
 ]
 

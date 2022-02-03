@@ -173,11 +173,9 @@ LzSignature >> parsedTerm: anASTTermNode variables: aDictionary [
 			variables: aDictionary ].
 	(anASTTermNode isKindOf: LzASTIntegerLiteral) ifTrue: [
 		self assert: (builtins includes: #integers).
-		^ LzIntegerTerm new
-			signature:  self;
-			value: anASTTermNode value;
-			beRecursivelyReadOnlyObject;
-			yourself ].
+		^ LzIntegerTerm
+			signature:  self
+			value: anASTTermNode value ].
 	self notYetImplemented
 ]
 

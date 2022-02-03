@@ -34,9 +34,9 @@ LzFunctionRule >> function: anArray [
 			each asSymbol printOn: s.
 			s nextPutAll: ')) lzAtomicTermValue. ' ].
 			s nextPutAll: function second.
-			s nextPutAll: ' new signature: signature; value: ('.
+			s nextPutAll: ' signature: signature value: ('.
 			s nextPutAll: function first.
-			s nextPutAll: '); beRecursivelyReadOnlyObject; yourself ] '].
+			s nextPutAll: ') ] '].
 	self class compile: code.
 	block := self tempMethod
 ]
@@ -49,5 +49,5 @@ LzFunctionRule >> printRHSAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #'as yet unclassified' }
-LzFunctionRule >> tempMethod [ ^ [ :signature :args | | y x | y := (args at: (LzVarName for: #'?y')) lzAtomicTermValue. x := (args at: (LzVarName for: #'?x')) lzAtomicTermValue. LzBooleanTerm new signature: signature; value: (x >= y); beRecursivelyReadOnlyObject; yourself ] 
+LzFunctionRule >> tempMethod [ ^ [ :signature :args | | y x | y := (args at: (LzVarName for: #'?y')) lzAtomicTermValue. x := (args at: (LzVarName for: #'?x')) lzAtomicTermValue. LzBooleanTerm signature: signature value: (x >= y) ] 
 ]

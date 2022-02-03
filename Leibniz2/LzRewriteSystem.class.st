@@ -1,6 +1,8 @@
 Class {
 	#name : #LzRewriteSystem,
 	#superclass : #Object,
+	#traits : 'TLzEquality',
+	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'rules',
 		'signature'
@@ -67,6 +69,11 @@ LzRewriteSystem >> reduce: aTerm [
 		lastValue := newValue.
 		newValue :=  self rewriteLeftmostInnermost: lastValue ].
 	^ lastValue
+]
+
+{ #category : #accessing }
+LzRewriteSystem >> referenceSlots [
+	^ #(signature)
 ]
 
 { #category : #rewriting }
@@ -144,4 +151,9 @@ LzRewriteSystem >> testCondition: aTermOrNil substituting: bindings [
 	aTermOrNil ifNil: [ ^ true ].
 	[ ^ (self reduce: (aTermOrNil substitute: bindings)) isTrue ]
 	on: LzRewriteFailure do: [ ^ false ]
+]
+
+{ #category : #accessing }
+LzRewriteSystem >> valueSlots [
+	^ #(rules)
 ]
