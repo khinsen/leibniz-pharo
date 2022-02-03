@@ -19,6 +19,11 @@ LzOpTerm >> args: anArray [
 	args := anArray
 ]
 
+{ #category : #organizing }
+LzOpTerm >> fingerprint [
+	^ opName
+]
+
 { #category : #accessing }
 LzOpTerm >> hasInfixOpOtherThan: anOpName [
 	^ opName isInfixOpOtherThan: anOpName

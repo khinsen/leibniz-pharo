@@ -8,6 +8,11 @@ Class {
 	#category : #'Leibniz2-Terms'
 }
 
+{ #category : #organizing }
+LzVarTerm >> fingerprint [
+	^ #var
+]
+
 { #category : #testing }
 LzVarTerm >> hasVars [
 	^ true

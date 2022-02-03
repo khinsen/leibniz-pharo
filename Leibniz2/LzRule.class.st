@@ -49,7 +49,13 @@ LzRule >> printAsLeibnizSyntaxOn: aStream [
 	self printRHSAsLeibnizSyntaxOn: aStream.
 	self condition ifNotNil: [ :c |
 		aStream nextPutAll: ' | '.
-		c printAsLeibnizSyntaxOn: aStream ].
+		self printConditionAsLeibnizSyntaxOn: aStream ].
+]
+
+{ #category : #printing }
+LzRule >> printConditionAsLeibnizSyntaxOn: aStream [
+	self condition ifNotNil: [ :c |
+		c printAsLeibnizSyntaxOn: aStream ]
 ]
 
 { #category : #printing }

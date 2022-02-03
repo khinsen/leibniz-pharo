@@ -46,6 +46,11 @@ LzTerm >> arity [
 	^ LzArity forArgs: self args
 ]
 
+{ #category : #organizing }
+LzTerm >> fingerprint [
+	self subclassResponsibility
+]
+
 { #category : #inspecting }
 LzTerm >> gtSortFor: aView [
 	<gtView>

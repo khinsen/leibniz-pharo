@@ -80,6 +80,17 @@ LzContext >> gtOperatorsFor: aView [
 ]
 
 { #category : #inspecting }
+LzContext >> gtRulesFor: aView [ 
+	<gtView>
+	self rewriteSystem isEmpty ifTrue: [ ^ aView empty ].
+	^ aView forward
+		title: 'Rules';
+		priority: 5;
+		object: [ self rewriteSystem ];
+		view: #gtRulesFor:
+]
+
+{ #category : #inspecting }
 LzContext >> gtSortGraphFor: aView [
 	<gtView>
 	^ aView forward

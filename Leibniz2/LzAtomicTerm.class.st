@@ -7,6 +7,11 @@ Class {
 	#category : #'Leibniz2-Terms'
 }
 
+{ #category : #organizing }
+LzAtomicTerm >> fingerprint [
+	^ #atomic
+]
+
 { #category : #accessing }
 LzAtomicTerm >> lzAtomicTermValue [
 	^ self value
