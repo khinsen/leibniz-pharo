@@ -253,3 +253,9 @@ LzTerm >> unifyTagged: aSymbol withVar: aTaggedName sort: aSort bindings: bindin
 LzTerm >> vars [
 	^ Dictionary new
 ]
+
+{ #category : #transforming }
+LzTerm >> withTransformedArgs: anArgList [
+	self assert: anArgList size equals: 0.
+	^ self
+]

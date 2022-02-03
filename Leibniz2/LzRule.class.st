@@ -12,6 +12,11 @@ Class {
 	#category : #'Leibniz2-Rules'
 }
 
+{ #category : #rewriting }
+LzRule >> apply: bindings [
+	self subclassResponsibility
+]
+
 { #category : #'instance creation' }
 LzRule >> checkConsistency [
 	self assert: pattern signature == signature.

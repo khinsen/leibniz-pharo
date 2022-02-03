@@ -129,6 +129,14 @@ LzContext >> pattern: aString [
 	^ self signature pattern: aString
 ]
 
+{ #category : #rewriting }
+LzContext >> reduce: aTermOrString [
+	^ self rewriteSystem reduce:
+		(aTermOrString isString
+			ifTrue: [ self term: aTermOrString ]
+			ifFalse: [ aTermOrString ])
+]
+
 { #category : #accessing }
 LzContext >> rewriteSystem [
 	^ rewriteSystem
@@ -142,6 +150,14 @@ LzContext >> rewriteSystem: aRewriteSystem [
 { #category : #constructing }
 LzContext >> rule: aString [
 	^ self signature rule: aString
+]
+
+{ #category : #rewriting }
+LzContext >> rulesMatching: aTermOrString [
+	^ self rewriteSystem rulesMatching:
+		(aTermOrString isString
+			ifTrue: [ self term: aTermOrString ]
+			ifFalse: [ aTermOrString ])
 ]
 
 { #category : #accessing }

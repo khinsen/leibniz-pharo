@@ -110,6 +110,32 @@ LzExamples >> booleanUnifications [
 ]
 
 { #category : #example }
+LzExamples >> integerArithmetic [
+	<gtExample>
+	| context |
+	context := LzBuiltinContexts integerContext.
+	^ {
+		{ '-(2)'. '-2' }.
+		{ '2 + 2'. '4'}.
+		{ '2 - 2'. '0'}.
+		{ '3 × 2'. '6'}.
+		{ '3 div 2'. '1'}.		
+		{ '3 rem 2'. '1'}.
+		{ '3^{2}'. '9'}.
+		{ '3^{0}'. '1'}.
+		{ '0^{2}'. '0'}.
+		{ '2 < 3'. 'true'}.
+		{ '2 > 3'. 'false'}.
+	}
+	collect: [ :each |
+		| term result |
+		term := context term: each first.
+		result := context reduce: term.
+		self assert: result equals: (context term: each second).
+		{ term. result } ]
+]
+
+{ #category : #example }
 LzExamples >> integerTerms [
 	<gtExample>
 	^ {

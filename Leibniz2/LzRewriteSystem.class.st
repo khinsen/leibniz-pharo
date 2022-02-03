@@ -58,6 +58,39 @@ LzRewriteSystem >> isEmpty [
 	^ rules isEmpty
 ]
 
+{ #category : #rewriting }
+LzRewriteSystem >> reduce: aTerm [
+	| lastValue newValue |
+	newValue := aTerm.
+	lastValue := nil.
+	[ lastValue = newValue ] whileFalse: [
+		lastValue := newValue.
+		newValue :=  self rewriteLeftmostInnermost: lastValue ].
+	^ lastValue
+]
+
+{ #category : #rewriting }
+LzRewriteSystem >> rewriteHeadOnce: aTerm [
+	(rules at: aTerm fingerprint ifAbsent: [ #() ]) do: [ :aRule |
+		(aRule pattern match: aTerm) ifSuccess: [ :s |
+			[ (self testCondition: aRule condition substituting: s)
+				ifTrue: [ ^ aRule apply: s ] ]
+			on: LzRewriteFailure do: [  ] ] ].
+	"Special rule for term equality"
+	self flag: #todo.
+"	aTerm evaluateEqualityTerm ifNotNil: [ :value |
+		^ LbBooleanTerm value: value signature: aTerm signature ]."
+	"If no rule matches, return the input term"
+	^ aTerm
+]
+
+{ #category : #rewriting }
+LzRewriteSystem >> rewriteLeftmostInnermost: aTerm [
+	| transformedArgs |
+	transformedArgs := aTerm args collect: [ :each | self reduce: each ].
+	^ self rewriteHeadOnce: (aTerm withTransformedArgs: transformedArgs)
+]
+
 { #category : #accessing }
 LzRewriteSystem >> rules [
 	^ rules
@@ -83,6 +116,14 @@ LzRewriteSystem >> rules: anOrderedCollection [
 	rules removeKey: #var.
 ]
 
+{ #category : #rewriting }
+LzRewriteSystem >> rulesMatching: aTerm [
+	^LzMatchingRules new
+		rewriteSystem: self;
+		term: aTerm
+		match
+]
+
 { #category : #accessing }
 LzRewriteSystem >> signature [
 	^ signature
@@ -96,4 +137,11 @@ LzRewriteSystem >> signature: aSignature [
 { #category : #accessing }
 LzRewriteSystem >> size [
 	^ self rules size
+]
+
+{ #category : #rewriting }
+LzRewriteSystem >> testCondition: aTermOrNil substituting: bindings [
+	aTermOrNil ifNil: [ ^ true ].
+	[ ^ (self reduce: (aTermOrNil substitute: bindings)) isTrue ]
+	on: LzRewriteFailure do: [ ^ false ]
 ]

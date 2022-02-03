@@ -8,6 +8,11 @@ Class {
 	#category : #'Leibniz2-Rules'
 }
 
+{ #category : #rewriting }
+LzFunctionRule >> apply: bindings [
+	^ block value: signature value: bindings bindings
+]
+
 { #category : #printing }
 LzFunctionRule >> function [
 	^ function
@@ -15,26 +20,25 @@ LzFunctionRule >> function [
 
 { #category : #accessing }
 LzFunctionRule >> function: anArray [
-	| code tempClass |
+	| code |
 	function := anArray.
 	code := String streamContents: [ :s |
-		s nextPutAll: 'block ^ [ :signature :args | | '.
+		s nextPutAll: 'tempMethod ^ [ :signature :args | | '.
 		self variables keysDo: [ :each |
 			s nextPutAll: each asSymbol allButFirst.
 			s nextPut: Character space ].
 		s nextPutAll: '| '.
 		self variables keysDo: [ :each |
 			s nextPutAll: each asSymbol allButFirst.
-			s nextPutAll: ' := (args at: (LzPrefixOperatorName for: '.
+			s nextPutAll: ' := (args at: (LzVarName for: '.
 			each asSymbol printOn: s.
 			s nextPutAll: ')) lzAtomicTermValue. ' ].
 			s nextPutAll: function second.
 			s nextPutAll: ' new signature: signature; value: ('.
 			s nextPutAll: function first.
 			s nextPutAll: '); beRecursivelyReadOnlyObject; yourself ] '].
-	tempClass := Object newAnonymousSubclass.
-	tempClass compile: code.
-	block := tempClass new block.
+	self class compile: code.
+	block := self tempMethod
 ]
 
 { #category : #printing }
@@ -42,4 +46,8 @@ LzFunctionRule >> printRHSAsLeibnizSyntaxOn: aStream [
 	self function first printOn: aStream.
 	aStream nextPutAll: ':'.
 	aStream nextPutAll:  self function second.
+]
+
+{ #category : #'as yet unclassified' }
+LzFunctionRule >> tempMethod [ ^ [ :signature :args | | y x | y := (args at: (LzVarName for: #'?y')) lzAtomicTermValue. x := (args at: (LzVarName for: #'?x')) lzAtomicTermValue. LzBooleanTerm new signature: signature; value: (x >= y); beRecursivelyReadOnlyObject; yourself ] 
 ]

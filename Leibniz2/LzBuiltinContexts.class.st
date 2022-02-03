@@ -81,12 +81,12 @@ LzBuiltinContexts class >> integerRulesFor: aContextBuilder [
 		"abs rules"
 		rule: '∀ ?x:ℕ abs(?x) ⇒ ?x';
 		rule: '∀ ?x:ℤ abs(?x) ⇒ -(?x) | ?x < 0';
-		rule: '∀ ?x:ℤ abs(?x) → ''x abs'':LzIntegerTerm'.
+		rule: '∀ ?x:ℤ abs(?x) → ''x abs'':LzIntegerTerm';
 		"comparison rules"
-"		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x < ?y → ''x < y'':LzBooleanTerm';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x < ?y → ''x < y'':LzBooleanTerm';
 		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x > ?y → ''x > y'':LzBooleanTerm';
 		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x ≤ ?y → ''x <= y'':LzBooleanTerm';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x ≥ ?y → ''x >= y'':LzBooleanTerm'."
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x ≥ ?y → ''x >= y'':LzBooleanTerm'.
 ]
 
 { #category : #private }

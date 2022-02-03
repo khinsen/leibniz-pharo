@@ -132,3 +132,8 @@ LzOpTerm >> vars [
 		inject: Dictionary new
 		into: [ :total :each | total union: each vars ]
 ]
+
+{ #category : #transforming }
+LzOpTerm >> withTransformedArgs: anArgList [
+	^ signature opTerm: opName args: anArgList
+]

@@ -7,6 +7,11 @@ Class {
 	#category : #'Leibniz2-Rules'
 }
 
+{ #category : #rewriting }
+LzRewriteRule >> apply: bindings [
+	^ replacement substitute: bindings
+]
+
 { #category : #'instance creation' }
 LzRewriteRule >> checkConsistency [
 	super checkConsistency.
