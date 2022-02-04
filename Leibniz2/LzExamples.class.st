@@ -29,7 +29,7 @@ LzExamples >> bagRules [
 	<gtExample>
 	^ {
 		'∅ ++ 1 ⇒ ∅'.
-		'length(∅) ⇒ 0'.
+		'size(∅) ⇒ 0'.
 	} collect: [ :each |
 		| rule |
 		rule := self bagContext rule: each.
