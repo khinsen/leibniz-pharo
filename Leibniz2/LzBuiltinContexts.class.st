@@ -107,6 +107,121 @@ LzBuiltinContexts class >> integerSortsFor: aContextBuilder [
 ]
 
 { #category : #accessing }
+LzBuiltinContexts class >> rationalNumberContext [
+	| builder |
+	builder := LzContextBuilder new
+		include: self truthContext;
+		builtin: #integers;
+		builtin: #rationalNumbers.
+	self integerSortsFor: builder.
+	self rationalSortsFor: builder.
+	self integerOpsFor: builder.
+	self rationalOpsFor: builder.
+	"No integerRules here, the few that are required are repeated in rationalRules."
+	self rationalRulesFor: builder.
+	^ builder context
+]
+
+{ #category : #private }
+LzBuiltinContexts class >> rationalOpsFor: aContextBuilder [
+	aContextBuilder
+		"Arithmetic operators"
+		op: 'ℚ + ℚ : ℚ';
+		op: 'ℚ.p + ℚ.p : ℚ.p';
+		op: 'ℚ.nn + ℚ.nn : ℚ.nn';
+		op: 'ℚ - ℚ : ℚ';
+		op: '-(ℚ) : ℚ';
+		op: 'ℚ × ℚ : ℚ';
+		op: 'ℚ.p × ℚ.p : ℚ.p';
+		op: 'ℚ.nn × ℚ.nn : ℚ.nn';
+		op: 'ℚ.nz × ℚ.nz : ℚ.nz';
+		op: 'ℚ ÷ ℚ.nz : ℚ';
+		op: 'ℚ.nz ÷ ℚ.nz : ℚ.nz';
+		op: 'ℚ.nn ÷ ℚ.p : ℚ.nn';
+		op: 'ℚ.p ÷ ℚ.p : ℚ.p';
+		op: 'ℚ.nz^{ℤ.nz} : ℚ.nz';
+		op: 'ℚ.p^{ℤ.nz} : ℚ.p';
+		op: 'ℚ.nz^{zero} : ℕ.nz';
+		op: 'abs(ℚ) : ℚ.nn';
+		op: 'abs(ℚ.nz) : ℚ.p';
+		"Comparison operators"
+		op: 'ℚ < ℚ : boolean';
+		op: 'ℚ > ℚ : boolean';
+		op: 'ℚ ≤ ℚ : boolean';
+		op: 'ℚ ≥ ℚ : boolean'.
+]
+
+{ #category : #private }
+LzBuiltinContexts class >> rationalRulesFor: aContextBuilder [
+	aContextBuilder
+		"addition rules"
+		rule: '∀ ?x:ℚ ∀ ?z:zero ?x + ?z ⇒ ?x';
+		rule: '∀ ?x:ℚ ∀ ?z:zero ?z + ?x ⇒ ?x';
+		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x + ?y → ''x + y'':LzRationalNumberTerm';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x + ?y → ''x + y'':LzIntegerTerm';
+		"Subtraction rules"
+		rule: '∀ ?x:ℚ ∀ ?z:zero ?x - ?z ⇒ ?x';
+		rule: '∀ ?x:ℚ ∀ ?z:zero ?z - ?x ⇒ -(?x)';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x - ?y → ''x - y'':LzIntegerTerm';
+		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x - ?y → ''x - y'':LzRationalNumberTerm';
+		"Negation rules"
+		rule: '∀ ?z:zero -(?z) ⇒ 0';
+		rule: '∀ ?x:ℤ -(?x) → ''x negated'':LzIntegerTerm';
+		rule: '∀ ?x:ℚ -(?x) → ''x negated'':LzRationalNumberTerm';
+		"Multiplication rules"
+		rule: '∀ ?x:ℚ ∀ ?z:zero ?x × ?z ⇒ 0';
+		rule: '∀ ?x:ℚ ∀ ?z:zero ?z × ?x ⇒ 0';
+		rule: '∀ ?x:ℚ 1 × ?x ⇒ ?x';
+		rule: '∀ ?x:ℚ ?x × 1 ⇒ ?x';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x × ?y → ''x * y'':LzIntegerTerm';
+		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x × ?y → ''x * y'':LzRationalNumberTerm';
+		"Division rules"
+		rule: '∀ ?x:ℚ.nz ∀ ?z:zero ?z ÷ ?x ⇒ 0';
+		rule: '∀ ?x:ℚ ?x ÷ 1 ⇒ ?x';
+		rule: '∀ ?x:ℚ ∀ ?y:ℚ.nz ?x ÷ ?y → ''x / y'':LzRationalNumberTerm';
+		"Integer div and rem rules"
+		rule: '∀ ?x:ℤ.nz ∀ ?z:zero ?z div ?x ⇒ 0';
+		rule: '∀ ?x:ℤ ?x div 1 ⇒ ?x';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ.nz ?x div ?y → ''(x abs // y abs) * x sign * y sign'':LzIntegerTerm';
+		rule: '∀ ?x:ℤ.nz ∀ ?z:zero ?z rem ?x ⇒ 0';
+		rule: '∀ ?x:ℤ ?x rem 1 ⇒ 0';
+		rule: '∀ ?x:ℤ ∀ ?y:ℤ.nz ?x rem ?y → ''(x abs % y abs) * x sign * y sign'':LzIntegerTerm';
+		"Exponentiation rules"
+		rule: '∀ ?x:ℚ.nz ∀ ?z:zero ?x^{?z} ⇒ 1';
+		rule: '∀ ?x:ℕ.nz ∀ ?z:zero ?z^{?x} ⇒ 0';
+		rule: '∀ ?x:ℤ ∀ ?y:ℕ.nz ?x^{?y} → ''x raisedTo: y'':LzIntegerTerm';
+		rule: '∀ ?x:ℚ.nz ∀ ?y:ℤ.nz ?x^{?y} → ''x raisedTo: y'':LzRationalNumberTerm';
+		"Abs rules"
+		rule: '∀ ?x:ℚ.nn abs(?x) ⇒ ?x';
+		rule: '∀ ?x:ℚ abs(?x) ⇒ -(?x) | ?x < 0';
+		rule: '∀ ?x:ℤ abs(?x) → ''x abs'':LzIntegerTerm';
+		rule: '∀ ?x:ℚ abs(?x) → ''x abs'':LzRationalNumberTerm';
+		"Comparison rules"
+		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x < ?y → ''x < y'':LzBooleanTerm';
+		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x > ?y → ''x > y'':LzBooleanTerm';
+		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x ≤ ?y → ''x <= y'':LzBooleanTerm';
+		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x ≥ ?y → ''x >= y'':LzBooleanTerm'.
+]
+
+{ #category : #private }
+LzBuiltinContexts class >> rationalSortsFor: aContextBuilder [
+	aContextBuilder
+		"Rational numbers"
+		sort: 'ℚ';
+		sort: 'ℚ.nn';
+		sort: 'ℚ.nz';
+		sort: 'ℚ.p';
+		subsort: 'ℚ.nz ⊆ ℚ';
+		subsort: 'ℚ.p ⊆ ℚ.nz';
+		subsort: 'ℚ.nn ⊆ ℚ';
+		subsort: 'ℚ.p ⊆ ℚ.nn';
+		subsort: 'ℕ ⊆ ℚ.nn';
+		subsort: 'ℕ.nz ⊆ ℚ.p';
+		subsort: 'ℤ ⊆ ℚ';
+		subsort: 'ℤ.nz ⊆ ℚ.nz'.
+]
+
+{ #category : #accessing }
 LzBuiltinContexts class >> sortContext [
 	^ LzSortHierarchyRoot uniqueInstance sortContext
 ]

@@ -171,11 +171,17 @@ LzSignature >> parsedTerm: anASTTermNode variables: aDictionary [
 		^ self
 			varTerm: anASTTermNode name
 			variables: aDictionary ].
-	(anASTTermNode isKindOf: LzASTIntegerLiteral) ifTrue: [
-		self assert: (builtins includes: #integers).
-		^ LzIntegerTerm
-			signature:  self
-			value: anASTTermNode value ].
+	{
+		{ LzASTIntegerLiteral. #integers. LzIntegerTerm }.
+		{ LzASTRationalLiteral. #rationalNumbers. LzRationalNumberTerm }.
+		{ LzASTFPLiteral. #floatingPointNumbers. LzFloatingPointNumberTerm }.
+		{ LzASTStringLiteral. #strings. LzStringTerm }.
+	} do: [ :each |
+		(anASTTermNode isKindOf: each first) ifTrue: [
+			self assert: (builtins includes: each second ).
+			^ each third
+				signature:  self
+				value: anASTTermNode value ] ].
 	self notYetImplemented
 ]
 

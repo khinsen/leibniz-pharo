@@ -12,6 +12,11 @@ Class {
 
 { #category : #defining }
 LzSignatureBuilder >> builtin: aSymbol [
+	self assert:
+		(#(integers
+			rationalNumbers
+			floatingPointNumbers
+			strings) includes: aSymbol).
 	builtins add: aSymbol 
 ]
 

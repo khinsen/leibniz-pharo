@@ -139,12 +139,17 @@ LzExamples >> integerArithmetic [
 LzExamples >> integerTerms [
 	<gtExample>
 	^ {
-		'0'.
-		'1'.
-		'-1'.
+		{ '0'. 'zero'. }.
+		{ '1'. 'ℕ.nz' }.
+		{ '-1'. 'ℤ.nz' }.
+		{ '-1 + 1'. 'ℤ' }.
+		{ '1 + 1'. 'ℕ.nz' }.
 	}
 	collect: [ :each |
-		 LzBuiltinContexts integerContext term: each ]
+		| term |
+		term := LzBuiltinContexts integerContext term: each first.
+		self assert: term sort asLeibnizSyntaxString equals: each second.
+		term  ]
 ]
 
 { #category : #example }
@@ -226,6 +231,51 @@ LzExamples >> listTerms [
 	}
 	collect: [ :each |
 		 self listPlusIntegerContext term: each ]
+]
+
+{ #category : #example }
+LzExamples >> rationalArithmetic [
+	<gtExample>
+	| context |
+	context := LzBuiltinContexts rationalNumberContext.
+	^ {
+		{ '-(2/3)'. '-2/3' }.
+		{ '1/3 + 2/3'. '1'}.
+		{ '2/3 - 2/3'. '0'}.
+		{ '1/3 × 2/5'. '2/15'}.
+		{ '3 ÷ 2'. '3/2'}.
+		{ '3/2^{2}'. '9/4'}.
+		{ '3/2^{0}'. '1'}.
+		{ '2/5 < 3/5'. 'true'}.
+		{ '2/5 > 3/5'. 'false'}.
+	}
+	collect: [ :each |
+		| term result |
+		term := context term: each first.
+		result := context reduce: term.
+		self assert: result equals: (context term: each second).
+		{ term. result } ]
+]
+
+{ #category : #example }
+LzExamples >> rationalNumberTerms [
+	<gtExample>
+	^ {
+		{ '0'. 'zero'. }.
+		{ '1'. 'ℕ.nz' }.
+		{ '-1'. 'ℤ.nz' }.
+		{ '-1 + 1'. 'ℤ' }.
+		{ '1 + 1'. 'ℕ.nz' }.
+		{ '1/3'. 'ℚ.p' }.
+		{ '-1/3'. 'ℚ.nz' }.
+		{ '-1/3 + 1/3'. 'ℚ' }.
+		{ '1/3 + 1/3'. 'ℚ.p' }.
+	}
+	collect: [ :each |
+		| term |
+		term := LzBuiltinContexts rationalNumberContext term: each first.
+		self assert: term sort asLeibnizSyntaxString equals: each second.
+		term  ]
 ]
 
 { #category : #accessing }

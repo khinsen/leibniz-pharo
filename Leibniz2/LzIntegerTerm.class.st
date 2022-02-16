@@ -1,6 +1,6 @@
 Class {
 	#name : #LzIntegerTerm,
-	#superclass : #LzAtomicTerm,
+	#superclass : #LzRationalNumberTerm,
 	#category : #'Leibniz2-Terms'
 }
 
