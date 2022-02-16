@@ -227,6 +227,16 @@ LzBuiltinContexts class >> sortContext [
 ]
 
 { #category : #accessing }
+LzBuiltinContexts class >> stringContext [
+	^ LzContextBuilder new
+		builtin: #strings;
+		sort: 'string';
+		op: 'string + string : string';
+		rule: '∀ ?a:string ∀ ?b:string ?a + ?b → ''a, b'':LzStringTerm';
+		context
+]
+
+{ #category : #accessing }
 LzBuiltinContexts class >> truthContext [
 	^ LzContextBuilder new
 		sort: 'boolean';
