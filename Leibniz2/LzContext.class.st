@@ -5,9 +5,10 @@ Class {
 	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'signature',
-		'axioms',
 		'axiomDeclarations',
-		'rewriteSystem'
+		'rewriteSystem',
+		'equalityAxioms',
+		'subsortAxioms'
 	],
 	#category : #'Leibniz2-Contexts'
 }
@@ -23,30 +24,34 @@ LzContext >> axiomDeclarations: aSet [
 ]
 
 { #category : #accessing }
-LzContext >> axioms [
-	^ axioms
+LzContext >> axioms: aCollection [
+	equalityAxioms := aCollection select: [ :each | each isKindOf: LzEqualityAxiom ].
+	subsortAxioms := aCollection select: [ :each | each isKindOf: LzSubsortAxiom ].
 ]
 
 { #category : #accessing }
-LzContext >> axioms: aCollection [
-	axioms := aCollection
+LzContext >> equalityAxioms [
+	^ equalityAxioms
 ]
 
 { #category : #inspecting }
 LzContext >> gtAxiomsFor: aView [
 	<gtView>
 	| axiomTree |
-	axioms ifEmpty: [ ^ aView empty ].
-	axiomTree := axioms groupedBy: #class .
+	(equalityAxioms size +  subsortAxioms size)
+		= 0 ifTrue: [ ^ aView empty ].
+	axiomTree := Dictionary
+		with: #Equality -> self equalityAxioms 
+		with: #Subsorts -> self subsortAxioms.
 	^ aView tree
 		title: 'Axioms';
 		priority: 3;
 		items: [ axiomTree keys sorted ];
 		itemLzCode: [ :each |
-			each isClass ifTrue: [ each name ]
+			each isSymbol ifTrue: [ each ]
 			ifFalse: [ each asLeibnizSyntaxString ] ];
 		children: [ :each |
-			each isClass ifTrue: [ axiomTree at: each ]
+			each isSymbol ifTrue: [ axiomTree at: each ]
 			ifFalse: [ #() ] ];
 		expandAll;
 		yourself
@@ -177,7 +182,7 @@ LzContext >> sortGraph [
 
 { #category : #accessing }
 LzContext >> subsortAxioms [
-	^ self axioms select: [ :each | each isKindOf: LzSubsortAxiom ]
+	^ subsortAxioms
 ]
 
 { #category : #constructing }
@@ -187,5 +192,5 @@ LzContext >> term: aString [
 
 { #category : #accessing }
 LzContext >> valueSlots [
-	^ #(signature axioms rewriteSystem)
+	^ #(signature equalityXAxioms subsortAxioms rewriteSystem)
 ]

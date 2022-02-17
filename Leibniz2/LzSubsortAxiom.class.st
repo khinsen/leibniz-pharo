@@ -8,6 +8,12 @@ Class {
 	#category : #'Leibniz2-Axioms'
 }
 
+{ #category : #'instance creation' }
+LzSubsortAxiom >> checkConsistency [
+	self assert: subsort sort isSortSort.
+	self assert: supersort sort isSortSort.
+]
+
 { #category : #printing }
 LzSubsortAxiom >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
@@ -24,7 +30,6 @@ LzSubsortAxiom >> subsort [
 
 { #category : #accessing }
 LzSubsortAxiom >> subsort: aPattern [
-	self assert: aPattern sort isSortSort.
 	subsort := aPattern
 ]
 
@@ -40,7 +45,6 @@ LzSubsortAxiom >> supersort [
 
 { #category : #accessing }
 LzSubsortAxiom >> supersort: aPattern [
-	self assert: aPattern sort isSortSort.
 	supersort := aPattern
 ]
 

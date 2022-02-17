@@ -4,6 +4,17 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
+{ #category : #private }
+LzBuiltinContexts class >> integerAxiomsFor: aContextBuilder [
+	aContextBuilder
+		"addition axioms"
+		axiom: '∀ ?x:ℤ ∀ ?y:ℤ  ?x + ?y = ?y + ?x';
+		axiom: '∀ ?x:ℤ ∀ ?y:ℤ  ∀ ?z:ℤ  (?x + ?y) + ?z = ?x + (?y + ?z)';
+		"multiplication axioms"
+		axiom: '∀ ?x:ℤ ∀ ?y:ℤ  ?x × ?y = ?y × ?x';
+		axiom: '∀ ?x:ℤ ∀ ?y:ℤ  ∀ ?z:ℤ  (?x × ?y) × ?z = ?x × (?y × ?z)'.
+]
+
 { #category : #accessing }
 LzBuiltinContexts class >> integerContext [
 	| builder |
@@ -12,6 +23,7 @@ LzBuiltinContexts class >> integerContext [
 		builtin: #integers.
 	self integerSortsFor: builder.
 	self integerOpsFor: builder.
+	self integerAxiomsFor: builder.
 	self integerRulesFor: builder.
 	^ builder context
 ]
@@ -106,6 +118,17 @@ LzBuiltinContexts class >> integerSortsFor: aContextBuilder [
 		subsort: 'ℕ.nz ⊆ ℤ.nz'.
 ]
 
+{ #category : #private }
+LzBuiltinContexts class >> rationalAxiomsFor: aContextBuilder [
+	aContextBuilder
+		"addition axioms"
+		axiom: '∀ ?x:ℚ ∀ ?y:ℚ  ?x + ?y = ?y + ?x';
+		axiom: '∀ ?x:ℚ ∀ ?y:ℚ  ∀ ?z:ℚ  (?x + ?y) + ?z = ?x + (?y + ?z)';
+		"multiplication axioms"
+		axiom: '∀ ?x:ℚ ∀ ?y:ℚ  ?x × ?y = ?y × ?x';
+		axiom: '∀ ?x:ℚ ∀ ?y:ℚ  ∀ ?z:ℚ  (?x × ?y) × ?z = ?x × (?y × ?z)'.
+]
+
 { #category : #accessing }
 LzBuiltinContexts class >> rationalNumberContext [
 	| builder |
@@ -117,7 +140,9 @@ LzBuiltinContexts class >> rationalNumberContext [
 	self rationalSortsFor: builder.
 	self integerOpsFor: builder.
 	self rationalOpsFor: builder.
-	"No integerRules here, the few that are required are repeated in rationalRules."
+	"No integerAxioms, because they would be redundant."
+	self rationalAxiomsFor:  builder.
+	"No integerRules, the few that are required are repeated in rationalRules."
 	self rationalRulesFor: builder.
 	^ builder context
 ]

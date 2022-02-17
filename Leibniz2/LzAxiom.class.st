@@ -20,8 +20,12 @@ LzAxiom class >> signature: aSignature declaration: anASTAxiomNode [
 	(anASTAxiomNode valueSlots copyWithout:  #variables) do: [ :each |
 		| termNode term |
 		termNode := anASTAxiomNode instVarNamed: each.
-		term := (aSignature parsedTerm: termNode variables: variables).
-		axiom perform: (each, ':') with: term ].
+		termNode ifNotNil: [
+			term := (aSignature parsedTerm: termNode variables: variables).
+			axiom perform: (each, ':') with: term ] ].
+	axiom
+		checkConsistency;
+		beRecursivelyReadOnlyObject.
 	^ axiom
 ]
 
@@ -29,6 +33,12 @@ LzAxiom class >> signature: aSignature declaration: anASTAxiomNode [
 LzAxiom class >> subclassFor: anASTAxiomNode [
 	(anASTAxiomNode isKindOf: LzASTSubsortAxiom)
 		ifTrue: [ ^ LzSubsortAxiom ]
+		ifFalse: [ ^ LzEqualityAxiom ]
+]
+
+{ #category : #'instance creation' }
+LzAxiom >> checkConsistency [
+	self subclassResponsibility
 ]
 
 { #category : #printing }

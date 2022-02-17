@@ -38,6 +38,19 @@ LzParser >> code [
 		==> [ :nodes | { nodes second. nodes fifth } ]
 ]
 
+{ #category : #axioms }
+LzParser >> equalityAxiom [
+	^ super equalityAxiom ==> [ :nodes |
+		| axiom |
+		axiom := LzASTEqualityAxiom new
+			variables: nodes first;
+			left: nodes second;
+			right: nodes fourth.
+		nodes fifth ifNotNil: [ :c |
+			axiom condition: c second ].
+		axiom ]
+]
+
 { #category : #rules }
 LzParser >> fnRule [
 	^ super fnRule ==> [ :nodes |
