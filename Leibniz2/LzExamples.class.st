@@ -157,7 +157,8 @@ LzExamples >> listContext [
 	<gtExample>
 	^ LzContextBuilder new
 		includeSortContext: LzBuiltinContexts integerContext;
-		include: LzBuiltinContexts truthContext;
+		includeSortContext: LzBuiltinContexts sortContext;
+		include: LzBuiltinContexts sortContext;
 		sort: 'element';
 		sort: 'element.special';
 		sort: '∅';

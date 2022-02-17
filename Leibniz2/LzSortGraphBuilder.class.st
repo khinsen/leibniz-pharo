@@ -76,7 +76,6 @@ LzSortGraphBuilder >> sortContext [
 				sortContextInclusions do: [ :each |
 					builder include: each ].
 				builder
-					op: LzConstants opNameSort, ' : ', LzConstants opNameSort;
 					parsedOps: uniqueSorts;
 					parsedAxioms: uniqueSubsorts.
 				builder context ].
