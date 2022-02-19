@@ -91,15 +91,15 @@ LzExamples >> booleanUnifications [
 	| c |
 	c := self booleanContext.
 	^ {
-		{'true'. '?X'. '(?X=true)'}.
-		{'¬(?X)'. '¬(true)'. '(?X=true)'}.
-		{'?X'. '¬(true)'. '(?X=¬(true))'}.
-		{'true ⊻ false ⊻ true ⊻ ¬(true)'. 'true ⊻ false ⊻ ?X ⊻ ?Y'. '(?X=true, ?Y=¬(true))'}.
-		{'false ⊻ ?X ⊻ true ⊻ ¬(true)'. 'false ⊻ true ⊻ ?X ⊻ ?Y'. '(?X=true, ?Y=¬(true))'}.
-		{'?X ⊻ ¬(?X)'. 'false ⊻ ¬(?X)'. '(?X=false)'}.
-		{'?X ⊻ ¬(?Y)'. 'false ⊻ ¬(?Y)'. '(?Y, ?X=false)'}.
-		{'false ⊻ ¬(?X)'. 'false ⊻ ¬(?Y)'. '(?X=?Y)'}.
-		{'true'. 'false'.  '(failure #nonUnifiableTerms: false, true)' }.
+		{'⊤'. '?X'. '(?X=⊤)'}.
+		{'¬(?X)'. '¬(⊤)'. '(?X=⊤)'}.
+		{'?X'. '¬(⊤)'. '(?X=¬(⊤))'}.
+		{'⊤ ⊻ ⊥ ⊻ ⊤ ⊻ ¬(⊤)'. '⊤ ⊻ ⊥ ⊻ ?X ⊻ ?Y'. '(?X=⊤, ?Y=¬(⊤))'}.
+		{'⊥ ⊻ ?X ⊻ ⊤ ⊻ ¬(⊤)'. '⊥ ⊻ ⊤ ⊻ ?X ⊻ ?Y'. '(?X=⊤, ?Y=¬(⊤))'}.
+		{'?X ⊻ ¬(?X)'. '⊥ ⊻ ¬(?X)'. '(?X=⊥)'}.
+		{'?X ⊻ ¬(?Y)'. '⊥ ⊻ ¬(?Y)'. '(?Y, ?X=⊥)'}.
+		{'⊥ ⊻ ¬(?X)'. '⊥ ⊻ ¬(?Y)'. '(?X=?Y)'}.
+		{'⊤'. '⊥'.  '(failure #nonUnifiableTerms: ⊥, ⊤)' }.
 		{'∀ ?foo:𝔹 ¬(?foo)'. '∀ ?bar:𝔹 ¬(?bar)'. '(?bar=?foo)'}
 	} collect: [ :each |
 		| unification string |
@@ -124,8 +124,8 @@ LzExamples >> integerArithmetic [
 		{ '3^{2}'. '9'}.
 		{ '3^{0}'. '1'}.
 		{ '0^{2}'. '0'}.
-		{ '2 < 3'. 'true'}.
-		{ '2 > 3'. 'false'}.
+		{ '2 < 3'. '⊤'}.
+		{ '2 > 3'. '⊥'}.
 	}
 	collect: [ :each |
 		| term result |
@@ -247,8 +247,8 @@ LzExamples >> rationalArithmetic [
 		{ '3 ÷ 2'. '3/2'}.
 		{ '3/2^{2}'. '9/4'}.
 		{ '3/2^{0}'. '1'}.
-		{ '2/5 < 3/5'. 'true'}.
-		{ '2/5 > 3/5'. 'false'}.
+		{ '2/5 < 3/5'. '⊤'}.
+		{ '2/5 > 3/5'. '⊥'}.
 	}
 	collect: [ :each |
 		| term result |

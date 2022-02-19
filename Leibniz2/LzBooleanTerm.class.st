@@ -8,8 +8,12 @@ Class {
 LzBooleanTerm class >> signature: aSignature value: aBoolean [
 	^ LzOpTerm new
 		signature: aSignature;
-		opName: (LzPrefixOperatorName for: aBoolean printString asSymbol);
+		opName: (LzPrefixOperatorName for:
+					(aBoolean
+						ifTrue: [ '⊤' ]
+						ifFalse: [ '⊥' ]));
 		args: #();
+		sort: (aSignature sort: '𝔹');
 		beRecursivelyReadOnlyObject;
 		yourself
 ]

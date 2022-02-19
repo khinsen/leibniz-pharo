@@ -265,7 +265,7 @@ LzBuiltinContexts class >> stringContext [
 LzBuiltinContexts class >> truthContext [
 	^ LzContextBuilder new
 		sort: '𝔹';
-		op: 'true : 𝔹';
-		op: 'false : 𝔹';
+		op: '⊤ : 𝔹';
+		op: '⊥ : 𝔹';
 		context
 ]
