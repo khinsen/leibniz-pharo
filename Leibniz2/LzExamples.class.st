@@ -76,12 +76,12 @@ LzExamples >> booleanContext [
 	<gtExample>
 	^ LzContextBuilder new
 		include: LzBuiltinContexts truthContext;
-		op: '¬(boolean) : boolean';
-		op: 'boolean ∧ boolean : boolean';
-		op: 'boolean ∨ boolean : boolean';
-		op: 'boolean ⊻ boolean : boolean';
-		var: '?X : boolean';
-		var: '?Y : boolean';
+		op: '¬(𝔹) : 𝔹';
+		op: '𝔹 ∧ 𝔹 : 𝔹';
+		op: '𝔹 ∨ 𝔹 : 𝔹';
+		op: '𝔹 ⊻ 𝔹 : 𝔹';
+		var: '?X : 𝔹';
+		var: '?Y : 𝔹';
 		context
 ]
 
@@ -100,7 +100,7 @@ LzExamples >> booleanUnifications [
 		{'?X ⊻ ¬(?Y)'. 'false ⊻ ¬(?Y)'. '(?Y, ?X=false)'}.
 		{'false ⊻ ¬(?X)'. 'false ⊻ ¬(?Y)'. '(?X=?Y)'}.
 		{'true'. 'false'.  '(failure #nonUnifiableTerms: false, true)' }.
-		{'∀ ?foo:boolean ¬(?foo)'. '∀ ?bar:boolean ¬(?bar)'. '(?bar=?foo)'}
+		{'∀ ?foo:𝔹 ¬(?foo)'. '∀ ?bar:𝔹 ¬(?bar)'. '(?bar=?foo)'}
 	} collect: [ :each |
 		| unification string |
 		unification := (c pattern: each first) unify: (c pattern: each  second).

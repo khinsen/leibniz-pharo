@@ -54,10 +54,10 @@ LzBuiltinContexts class >> integerOpsFor: aContextBuilder [
 		op: 'abs(ℤ) : ℕ';
 		op: 'abs(ℤ.nz) : ℕ.nz';
 		"Comparison operators"
-		op: 'ℤ < ℤ : boolean';
-		op: 'ℤ > ℤ : boolean';
-		op: 'ℤ ≤ ℤ : boolean';
-		op: 'ℤ ≥ ℤ : boolean'.
+		op: 'ℤ < ℤ : 𝔹';
+		op: 'ℤ > ℤ : 𝔹';
+		op: 'ℤ ≤ ℤ : 𝔹';
+		op: 'ℤ ≥ ℤ : 𝔹'.
 ]
 
 { #category : #private }
@@ -170,10 +170,10 @@ LzBuiltinContexts class >> rationalOpsFor: aContextBuilder [
 		op: 'abs(ℚ) : ℚ.nn';
 		op: 'abs(ℚ.nz) : ℚ.p';
 		"Comparison operators"
-		op: 'ℚ < ℚ : boolean';
-		op: 'ℚ > ℚ : boolean';
-		op: 'ℚ ≤ ℚ : boolean';
-		op: 'ℚ ≥ ℚ : boolean'.
+		op: 'ℚ < ℚ : 𝔹';
+		op: 'ℚ > ℚ : 𝔹';
+		op: 'ℚ ≤ ℚ : 𝔹';
+		op: 'ℚ ≥ ℚ : 𝔹'.
 ]
 
 { #category : #private }
@@ -264,8 +264,8 @@ LzBuiltinContexts class >> stringContext [
 { #category : #accessing }
 LzBuiltinContexts class >> truthContext [
 	^ LzContextBuilder new
-		sort: 'boolean';
-		op: 'true : boolean';
-		op: 'false : boolean';
+		sort: '𝔹';
+		op: 'true : 𝔹';
+		op: 'false : 𝔹';
 		context
 ]
