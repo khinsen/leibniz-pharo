@@ -35,7 +35,7 @@ LzRewriteSystem >> gtRulesFor: aView [
 			(topLevel value: each)
 				ifTrue: [ '' ]
 				ifFalse: [ String streamContents: [ :s |
-					each printRHSAsLeibnizSyntaxOn: s ] ] ];
+					each printBodyAsLeibnizSyntaxOn: s ] ] ];
 		yourself.
 	self hasConditionalRule ifTrue: [
 		ruleView column: 'Condition' lzCode: [ :each |

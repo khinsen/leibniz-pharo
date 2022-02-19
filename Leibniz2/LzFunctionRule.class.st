@@ -42,10 +42,12 @@ LzFunctionRule >> function: anArray [
 ]
 
 { #category : #printing }
-LzFunctionRule >> printRHSAsLeibnizSyntaxOn: aStream [
-	self function first printOn: aStream.
-	aStream nextPutAll: ':'.
-	aStream nextPutAll:  self function second.
+LzFunctionRule >> printBodyAsLeibnizSyntaxOn: aStream [
+	self pattern printAsLeibnizSyntaxOn: aStream.
+	aStream nextPutAll: ' → '''.
+	aStream nextPutAll: self function first.
+	aStream nextPutAll: ''':'.
+	aStream nextPutAll: self function second
 ]
 
 { #category : #'as yet unclassified' }

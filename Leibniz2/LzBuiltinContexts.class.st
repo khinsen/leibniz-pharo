@@ -1,3 +1,7 @@
+"
+Builtin contexts are contexts that cannot be defined in Leibniz itself, because they make use of builtin terms such as numbers or strings. {{gtMethod:name=LzBuiltinContexts class>>#truthContext}} is an exception: it could very well be defined as a standard Leibniz context, but since it is used by the number contexts, it is part of the builtin contexts as well.
+
+"
 Class {
 	#name : #LzBuiltinContexts,
 	#superclass : #Object,

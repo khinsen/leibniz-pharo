@@ -20,7 +20,9 @@ LzRewriteRule >> checkConsistency [
 ]
 
 { #category : #printing }
-LzRewriteRule >> printRHSAsLeibnizSyntaxOn: aStream [
+LzRewriteRule >> printBodyAsLeibnizSyntaxOn: aStream [
+	self pattern printAsLeibnizSyntaxOn: aStream.
+	aStream nextPutAll: ' ⇒ '.
 	self replacement printAsLeibnizSyntaxOn: aStream
 ]
 

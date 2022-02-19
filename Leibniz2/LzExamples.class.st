@@ -71,25 +71,15 @@ LzExamples >> bagSortGraph [
 		sortGraph
 ]
 
-{ #category : #accessing }
-LzExamples >> booleanContext [
-	<gtExample>
-	^ LzContextBuilder new
-		include: LzBuiltinContexts truthContext;
-		op: '¬(𝔹) : 𝔹';
-		op: '𝔹 ∧ 𝔹 : 𝔹';
-		op: '𝔹 ∨ 𝔹 : 𝔹';
-		op: '𝔹 ⊻ 𝔹 : 𝔹';
-		var: '?X : 𝔹';
-		var: '?Y : 𝔹';
-		context
-]
-
 { #category : #example }
 LzExamples >> booleanUnifications [
 	<gtExample>
 	| c |
-	c := self booleanContext.
+	c := LzContextBuilder new
+			include: LzExampleContexts booleanContext;
+			var: '?X : 𝔹';
+			var: '?Y : 𝔹';
+			context.
 	^ {
 		{'⊤'. '?X'. '(?X=⊤)'}.
 		{'¬(?X)'. '¬(⊤)'. '(?X=⊤)'}.

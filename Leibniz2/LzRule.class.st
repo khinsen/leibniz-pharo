@@ -49,23 +49,21 @@ LzRule >> pattern: aTerm [
 { #category : #printing }
 LzRule >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
-	pattern printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: ' ⇒ '.
-	self printRHSAsLeibnizSyntaxOn: aStream.
+	self printBodyAsLeibnizSyntaxOn: aStream.
 	self condition ifNotNil: [ :c |
 		aStream nextPutAll: ' | '.
 		self printConditionAsLeibnizSyntaxOn: aStream ].
 ]
 
 { #category : #printing }
-LzRule >> printConditionAsLeibnizSyntaxOn: aStream [
-	self condition ifNotNil: [ :c |
-		c printAsLeibnizSyntaxOn: aStream ]
+LzRule >> printBodyAsLeibnizSyntaxOn: aStream [
+	self subclassResponsibility
 ]
 
 { #category : #printing }
-LzRule >> printRHSAsLeibnizSyntaxOn: aStream [
-	self subclassResponsibility
+LzRule >> printConditionAsLeibnizSyntaxOn: aStream [
+	self condition ifNotNil: [ :c |
+		c printAsLeibnizSyntaxOn: aStream ]
 ]
 
 { #category : #printing }
