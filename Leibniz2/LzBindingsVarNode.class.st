@@ -1,6 +1,8 @@
 Class {
 	#name : #LzBindingsVarNode,
 	#superclass : #Object,
+	#traits : 'TLzEquality',
+	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'name',
 		'sort',
@@ -64,4 +66,9 @@ LzBindingsVarNode >> value [
 { #category : #accessing }
 LzBindingsVarNode >> value: aTerm [
 	value := aTerm
+]
+
+{ #category : #accessing }
+LzBindingsVarNode >> valueSlots [
+	^ #(name sort value parent rank)
 ]

@@ -61,7 +61,7 @@ LzSubsortAxiom >> unify: aTerm with: pattern1 thenSubstituteIn: pattern2 [
 		toVarsConflictingWith: aTerm.
 	preferredVarNames := aTerm vars keys.
 	bindings := (pattern1 substitute: rename) unify: aTerm.
-	bindings isFailure ifTrue: [ ^ nil ].
+	bindings ifFailure: [ ^ nil ].
 	bindings bindToUniqueVar: [ :varSet :sort |
 		| name |
 		name := (varSet intersection: preferredVarNames) asArray sorted
