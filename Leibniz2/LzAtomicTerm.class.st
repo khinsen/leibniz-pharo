@@ -20,6 +20,7 @@ LzAtomicTerm class >> signature: aSignature value: anObject [
 LzAtomicTerm >> asENodeIn: anEGraph [
 	^ anEGraph add:
 		(LzAtomicENode new
+			graph: anEGraph;
 			atomicTerm: self)
 ]
 

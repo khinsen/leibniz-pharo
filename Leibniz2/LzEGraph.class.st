@@ -31,6 +31,11 @@ LzEGraph >> canonicalize: anENode [
 ]
 
 { #category : #accessing }
+LzEGraph >> classForId: anInteger [
+	^ classes at: anInteger
+]
+
+{ #category : #accessing }
 LzEGraph >> findClassIdFor: anENode [
 	self canonicalize: anENode.
 	^ memo at: anENode
@@ -46,7 +51,7 @@ LzEGraph >> findRootFor: anEClassId [
 { #category : #accessing }
 LzEGraph >> initialize [
 	disjointSets := LzDisjointIntegerSets new.
-	memo := IdentityDictionary new.
+	memo := Dictionary new.
 	classes := Dictionary new.
 	classIdsNeedingRebuild := OrderedCollection new.
 ]
@@ -73,7 +78,8 @@ LzEGraph >> merge: anEClassId with: otherEClassId [
 	mergedClass := classes at: mergedId.
 	staleClass := classes at: staleId.
 	mergedClass addNodes: staleClass nodes.
-	staleClass nodesDo: [ :each | 
+	staleClass nodesDo: [ :each |
+		memo removeKey: each.
 		self canonicalize: each.
 		memo at: each put: mergedId ].
 	staleClass parentsDo: [ :node :id | 
@@ -98,9 +104,10 @@ LzEGraph >> repair: aClassId [
 	| class newParents |
 	class := classes at: aClassId.
 	class parentsDo: [ :node :id |
+		memo removeKey: node.
 		self canonicalize:  node.
 		memo at: node put: ((self findRootFor:  id)) ].
-	newParents := IdentityDictionary new.
+	newParents := Dictionary new.
 	class parentsDo: [ :node :id |
 		(newParents includesKey: node)
 			ifTrue: [ self merge: id with: (newParents at: node)].

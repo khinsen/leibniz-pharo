@@ -23,13 +23,14 @@ LzOpTerm >> args: anArray [
 LzOpTerm >> asENodeIn: anEGraph [
 	| nArgs node |
 	nArgs := self args size.
-	node := LzOpENode new: nArgs.
-	node opName: self opName.
+	node := (LzOpENode new: nArgs)
+				graph: anEGraph;
+				opName: self opName.
 	1 to: nArgs do: [ :index |
 		node
 			at: index
-			put: (self args at: index)
-					asENodeIn: anEGraph ].
+			put: ((self args at: index)
+					asENodeIn: anEGraph) ].
 	^ anEGraph add: node
 ]
 

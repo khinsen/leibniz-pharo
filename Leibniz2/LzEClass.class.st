@@ -25,10 +25,27 @@ LzEClass >> addParentNode: anENode classId: anInteger [
 	parentNodes add: anENode.
 ]
 
+{ #category : #accessing }
+LzEClass >> anyNode [
+	^ nodes first
+]
+
 { #category : #initializing }
 LzEClass >> clearParents [
 	parentClassIds := OrderedCollection new.
 	parentNodes := OrderedCollection new
+]
+
+{ #category : #inspecting }
+LzEClass >> gtNodesFor: aView [
+	<gtView>
+	self nodes ifEmpty: [ ^ aView empty ].
+	^ aView list
+		title: 'Nodes';
+		priority: 0;
+		items: [ self nodes ];
+		itemLzCode: #asLeibnizSyntaxString;
+		yourself
 ]
 
 { #category : #initializing }
@@ -50,4 +67,17 @@ LzEClass >> nodesDo: aBlock [
 { #category : #enumerating }
 LzEClass >> parentsDo: aBlock [
 	parentNodes with: parentClassIds do: aBlock
+]
+
+{ #category : #printing }
+LzEClass >> printOn: aStream [
+	| n |
+	n := self nodes size.
+	super printOn: aStream.
+	aStream
+		<< $(;
+		<< n asString;
+		<< ' node';
+		<< (n == 1 ifTrue: [ '' ] ifFalse: [ 's' ]);
+		<< $).
 ]

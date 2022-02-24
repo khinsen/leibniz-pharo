@@ -19,6 +19,33 @@ LzDisjointIntegerSets >> findRootFor: anInteger [
 	^ root
 ]
 
+{ #category : #inspecting }
+LzDisjointIntegerSets >> gtSetsFor: aView [
+	<gtView>
+	| sets |
+	sets := self sets.
+	sets ifEmpty: [ ^ aView empty ].
+	^ aView mondrian
+		title: 'Sets';
+		priority: 0;
+		painting: [ :view |
+			view nodes
+				shape: [ :x |
+					| size |
+					size := 20 * (x size * 2 sqrt) asInteger. 
+					BlElement new
+						border: (BlBorder paint: Color black);
+						size: size @ size ] ;
+				with: sets;
+				forEach: [ :each |
+					view nodes
+						shape: [ :x |
+							BlTextElement new
+								text: x asString asRopedText ];
+						with: each.
+					view layout force ] ]
+]
+
 { #category : #initializing }
 LzDisjointIntegerSets >> initialize [
 	parents := OrderedCollection new.
@@ -53,6 +80,29 @@ LzDisjointIntegerSets >> merge: anInteger with: otherInteger [
 	rank1  = (ranks at: root2)
 		ifTrue: [ ranks at: root1 put: rank1 + 1 ] ].
 	^ root1
+]
+
+{ #category : #printing }
+LzDisjointIntegerSets >> printOn: aStream [
+	super printOn: aStream.
+	aStream
+		<< $(;
+		<< self sets size asString;
+		<< ' sets';
+		<< $).
+]
+
+{ #category : #accessing }
+LzDisjointIntegerSets >> sets [
+	| sets |
+	sets := Dictionary new.
+	1 to: self size do: [ :index |
+		(parents at: index) = index
+			ifTrue: [ sets at: index put: Set new ] ].
+	1 to: self size do: [ :index |
+		(sets at: (self findRootFor: index))
+			add: index ].
+	^ sets values
 ]
 
 { #category : #accessing }

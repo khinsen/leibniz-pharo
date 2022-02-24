@@ -17,3 +17,8 @@ LzAtomicENode >> atomicTerm [
 LzAtomicENode >> atomicTerm: aTerm [
 	atomicTerm := aTerm
 ]
+
+{ #category : #printing }
+LzAtomicENode >> printAsLeibnizSyntaxOn: aStream [
+	self atomicTerm printAsLeibnizSyntaxOn: aStream
+]
