@@ -19,6 +19,20 @@ LzOpTerm >> args: anArray [
 	args := anArray
 ]
 
+{ #category : #converting }
+LzOpTerm >> asENodeIn: anEGraph [
+	| nArgs node |
+	nArgs := self args size.
+	node := LzOpENode new: nArgs.
+	node opName: self opName.
+	1 to: nArgs do: [ :index |
+		node
+			at: index
+			put: (self args at: index)
+					asENodeIn: anEGraph ].
+	^ anEGraph add: node
+]
+
 { #category : #organizing }
 LzOpTerm >> fingerprint [
 	^ opName

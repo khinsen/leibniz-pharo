@@ -8,6 +8,11 @@ Class {
 	#category : #'Leibniz2-Terms'
 }
 
+{ #category : #converting }
+LzVarTerm >> asENodeIn: anEGraph [
+	self shouldNotImplement
+]
+
 { #category : #organizing }
 LzVarTerm >> fingerprint [
 	^ #var

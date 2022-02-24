@@ -16,6 +16,13 @@ LzAtomicTerm class >> signature: aSignature value: anObject [
 		yourself
 ]
 
+{ #category : #converting }
+LzAtomicTerm >> asENodeIn: anEGraph [
+	^ anEGraph add:
+		(LzAtomicENode new
+			atomicTerm: self)
+]
+
 { #category : #organizing }
 LzAtomicTerm >> fingerprint [
 	^ #atomic

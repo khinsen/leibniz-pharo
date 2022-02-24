@@ -46,6 +46,11 @@ LzTerm >> arity [
 	^ LzArity forArgs: self args
 ]
 
+{ #category : #converting }
+LzTerm >> asENodeIn: anEGraph [
+	self subclassResponsibility
+]
+
 { #category : #organizing }
 LzTerm >> fingerprint [
 	self subclassResponsibility
