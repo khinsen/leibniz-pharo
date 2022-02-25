@@ -3,7 +3,8 @@ Class {
 	#superclass : #LzENode,
 	#type : #variable,
 	#instVars : [
-		'opName'
+		'opName',
+		'sort'
 	],
 	#category : #'Leibniz2-EGraphs'
 }
@@ -47,4 +48,14 @@ LzOpENode >> printAsLeibnizSyntaxOn: aStream [
 	argENodes := self collect: [ :each |
 		(graph classForId: each) anyNode ].
 	opName printForArgs: argENodes on: aStream
+]
+
+{ #category : #accessing }
+LzOpENode >> sort [
+	^ sort
+]
+
+{ #category : #accessing }
+LzOpENode >> sort: aSort [
+	sort := aSort
 ]

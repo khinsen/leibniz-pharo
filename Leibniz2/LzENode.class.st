@@ -59,3 +59,8 @@ LzENode >> printOn: aStream [
 	self printAsLeibnizSyntaxOn: aStream.
 	aStream << $).
 ]
+
+{ #category : #accessing }
+LzENode >> sort [
+	self subclassResponsibility
+]

@@ -25,7 +25,8 @@ LzOpTerm >> asENodeIn: anEGraph [
 	nArgs := self args size.
 	node := (LzOpENode new: nArgs)
 				graph: anEGraph;
-				opName: self opName.
+				opName: self opName;
+				sort: self sort.
 	1 to: nArgs do: [ :index |
 		node
 			at: index

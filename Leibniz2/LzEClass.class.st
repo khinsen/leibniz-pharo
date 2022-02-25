@@ -9,14 +9,22 @@ Class {
 	#instVars : [
 		'nodes',
 		'parentClassIds',
-		'parentNodes'
+		'parentNodes',
+		'sort'
 	],
 	#category : #'Leibniz2-EGraphs'
 }
 
 { #category : #adding }
 LzEClass >> addNode: anENode [
-	nodes add: anENode
+	nodes add: anENode.
+	sort
+		ifNil: [ sort := anENode sort ]
+		ifNotNil: [
+			anENode sort <= sort
+				ifFalse: [
+					self assert: sort <= anENode sort.
+					sort := anENode sort ] ]
 ]
 
 { #category : #adding }
@@ -45,11 +53,12 @@ LzEClass >> clearParents [
 LzEClass >> gtNodesFor: aView [
 	<gtView>
 	self nodes ifEmpty: [ ^ aView empty ].
-	^ aView list
+	^ aView columnedList
 		title: 'Nodes';
 		priority: 0;
 		items: [ self nodes ];
-		itemLzCode: #asLeibnizSyntaxString;
+		column: 'Representative term' lzCode: #asLeibnizSyntaxString;
+		column: 'Sort' lzCode: [ :node | node sort asLeibnizSyntaxString ];
 		yourself
 ]
 
@@ -84,7 +93,9 @@ LzEClass >> printOn: aStream [
 		<< n asString;
 		<< ' node';
 		<< (n == 1 ifTrue: [ '' ] ifFalse: [ 's' ]);
-		<< $).
+		<< ', sort='.
+	self sort printAsLeibnizSyntaxOn: aStream.
+	aStream << $)
 ]
 
 { #category : #rebuilding }
@@ -95,4 +106,9 @@ LzEClass >> removeDuplicateNodes [
 { #category : #accessing }
 LzEClass >> size [
 	^ nodes size
+]
+
+{ #category : #accessing }
+LzEClass >> sort [
+	^ sort
 ]

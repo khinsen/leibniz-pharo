@@ -80,12 +80,21 @@ LzEGraph >> gtGraphFor: aView [
 			edges := OrderedCollection new.
 			view nodes
 				shape: [ :eClass |
-					BlElement new
+					| el |
+					el := BlElement new
 						border: (BlBorder paint: Color black);
 						padding: (BlInsets all: 5);
 						constraintsDo: [ :c |
 							c horizontal fitContent.
-							c vertical fitContent ] ] ;
+							c vertical fitContent ].
+					el addChild: (LzCodeFont brLabelFor: eClass sort asLeibnizSyntaxString).
+					el addChild:
+						(BlElement new
+							border: (BlBorder paint: Color gray);
+							constraintsDo: [ :c |
+								c horizontal matchParent.
+								c vertical exact: 1 ]).
+					el ] ;
 				with: eClasses;
 				forEach: [ :eachEClass |
 					view nodes
@@ -112,15 +121,6 @@ LzEGraph >> initialize [
 	memo := Dictionary new.
 	classes := Dictionary new.
 	classIdsNeedingRebuild := OrderedCollection new.
-]
-
-{ #category : #testing }
-LzEGraph >> is: anENode inSameClassAs: otherENode [
-	^ disjointSets is: (memo at: anENode) inSameSetAs: (memo at: otherENode)
-]
-
-{ #category : #accessing }
-LzEGraph >> makeSet [
 ]
 
 { #category : #accessing }

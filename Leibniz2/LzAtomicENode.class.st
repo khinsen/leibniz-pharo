@@ -22,3 +22,8 @@ LzAtomicENode >> atomicTerm: aTerm [
 LzAtomicENode >> printAsLeibnizSyntaxOn: aStream [
 	self atomicTerm printAsLeibnizSyntaxOn: aStream
 ]
+
+{ #category : #accessing }
+LzAtomicENode >> sort [
+	^ self atomicTerm sort
+]
