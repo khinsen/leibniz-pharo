@@ -27,6 +27,12 @@ LzENode >> graph: anEGraph [
 	graph := anEGraph
 ]
 
+{ #category : #inspecting }
+LzENode >> gtDisplayOn: stream [
+	"Replace the implementation on Collections by the basic one for other objects."
+	self printOn: stream
+]
+
 { #category : #printing }
 LzENode >> hasInfixOpOtherThan: anOpName [
 	^ false

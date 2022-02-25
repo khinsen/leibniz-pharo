@@ -36,6 +36,11 @@ LzEGraph >> classForId: anInteger [
 ]
 
 { #category : #accessing }
+LzEGraph >> classes [
+	^ classes values
+]
+
+{ #category : #accessing }
 LzEGraph >> findClassIdFor: anENode [
 	self canonicalize: anENode.
 	^ memo at: anENode
@@ -46,6 +51,59 @@ LzEGraph >> findClassIdFor: anENode [
 { #category : #accessing }
 LzEGraph >> findRootFor: anEClassId [
 	^ disjointSets findRootFor: anEClassId
+]
+
+{ #category : #inspecting }
+LzEGraph >> gtClassesFor: aView [
+	<gtView>
+	| eClasses |
+	eClasses := classes values.
+	eClasses ifEmpty: [ ^ aView empty ].
+	^ aView list
+		title: 'Classes';
+		priority: 0;
+		items: eClasses;
+		yourself
+]
+
+{ #category : #inspecting }
+LzEGraph >> gtGraphFor: aView [
+	<gtView>
+	| eClasses |
+	eClasses := self classes.
+	eClasses ifEmpty: [ ^ aView empty ].
+	^ aView mondrian
+		title: 'Graph';
+		priority: 1;
+		painting: [ :view |
+			| edges |
+			edges := OrderedCollection new.
+			view nodes
+				shape: [ :eClass |
+					BlElement new
+						border: (BlBorder paint: Color black);
+						padding: (BlInsets all: 5);
+						constraintsDo: [ :c |
+							c horizontal fitContent.
+							c vertical fitContent ] ] ;
+				with: eClasses;
+				forEach: [ :eachEClass |
+					view nodes
+						shape: [ :eachENode |
+							LzCodeFont brLabelFor: eachENode asLeibnizSyntaxString ];
+						with: eachEClass nodes.
+					edges addAll:
+						(eachEClass nodes flatCollect: [ :eachENode |
+							eachENode collect: [ :eachClassId |
+								eachENode -> (classes at: eachClassId) ] ]).
+					view layout vertical ].
+			view edges
+				connectAssociations: edges;
+				shape: [ :x | LzGraphicsElements graphArrow ].
+			view layout force
+				strength: 0.15;
+				charge: -250;
+				length: 70 ]
 ]
 
 { #category : #accessing }
@@ -83,6 +141,7 @@ LzEGraph >> merge: anEClassId with: otherEClassId [
 		self canonicalize: each.
 		memo at: each put: mergedId ].
 	staleClass parentsDo: [ :node :id | 
+		self canonicalize: node.
 		mergedClass addParentNode: node classId: id ].
 	classes removeKey: staleId.
 	"Put the merged class on the todo list for the next rebuild."
@@ -106,7 +165,7 @@ LzEGraph >> repair: aClassId [
 	class parentsDo: [ :node :id |
 		memo removeKey: node.
 		self canonicalize:  node.
-		memo at: node put: ((self findRootFor:  id)) ].
+		memo at: node put: (self findRootFor:  id) ].
 	newParents := Dictionary new.
 	class parentsDo: [ :node :id |
 		(newParents includesKey: node)
@@ -114,5 +173,6 @@ LzEGraph >> repair: aClassId [
 		newParents at: node put: (self findRootFor: id) ].
 	class clearParents.
 	newParents keysAndValuesDo: [ :node :id |
-		class addParentNode: node classId: id ]
+		class addParentNode: node classId: id ].
+	class removeDuplicateNodes
 ]

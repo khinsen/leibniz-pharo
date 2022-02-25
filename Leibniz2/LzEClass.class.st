@@ -1,3 +1,8 @@
+"
+An EClass is a set of equivalent ENodes. Since ENodes are mutable, because the classIds they store change whenever two classes are merged, the implementation of an EClass uses an {{gtClass:name=OrderedCollection}} rather than a {{gtClass:name=Set}} to store the nodes. Duplicates are removed explicitly during the EGraph rebuilding process.
+
+An EClass stores references to its parents (ENodes whose arguments are the EClass' classId, plus the classIds of the EClasses to which these ENodes belong) in order to make the rebuilding step faster. The parents include all ENodes that are potentially affected by a change to an EClass during a merge operation.
+"
 Class {
 	#name : #LzEClass,
 	#superclass : #Object,
@@ -80,4 +85,14 @@ LzEClass >> printOn: aStream [
 		<< ' node';
 		<< (n == 1 ifTrue: [ '' ] ifFalse: [ 's' ]);
 		<< $).
+]
+
+{ #category : #rebuilding }
+LzEClass >> removeDuplicateNodes [
+	nodes := nodes asSet asOrderedCollection
+]
+
+{ #category : #accessing }
+LzEClass >> size [
+	^ nodes size
 ]
