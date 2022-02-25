@@ -34,6 +34,11 @@ LzAtomicTerm >> lzAtomicTermValue [
 	^ self value
 ]
 
+{ #category : #unifying }
+LzAtomicTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: bindings [
+	bindings failWith: self notUnifiableWith: otherTerm
+]
+
 { #category : #printing }
 LzAtomicTerm >> printAsLeibnizSyntaxOn: aStream [
 	value printOn: aStream
