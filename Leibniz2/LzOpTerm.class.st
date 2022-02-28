@@ -19,7 +19,7 @@ LzOpTerm >> args: anArray [
 	args := anArray
 ]
 
-{ #category : #converting }
+{ #category : #egraphs }
 LzOpTerm >> asENodeIn: anEGraph [
 	| nArgs node |
 	nArgs := self args size.

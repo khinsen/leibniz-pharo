@@ -46,7 +46,7 @@ LzTerm >> arity [
 	^ LzArity forArgs: self args
 ]
 
-{ #category : #converting }
+{ #category : #egraphs }
 LzTerm >> asENodeIn: anEGraph [
 	self subclassResponsibility
 ]

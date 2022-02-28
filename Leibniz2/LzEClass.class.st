@@ -38,6 +38,13 @@ LzEClass >> addParentNode: anENode classId: anInteger [
 	parentNodes add: anENode.
 ]
 
+{ #category : #enumerating }
+LzEClass >> allTerms [
+	^ Generator on: [ :generator |
+		nodes do: [ :eachNode |
+			eachNode allTerms do: [ :eachTerm | generator yield: eachTerm ] ] ]
+]
+
 { #category : #accessing }
 LzEClass >> anyNode [
 	^ nodes first
@@ -59,6 +66,17 @@ LzEClass >> gtNodesFor: aView [
 		items: [ self nodes ];
 		column: 'Representative term' lzCode: #asLeibnizSyntaxString;
 		column: 'Sort' lzCode: [ :node | node sort asLeibnizSyntaxString ];
+		yourself
+]
+
+{ #category : #inspecting }
+LzEClass >> gtTermsFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Terms';
+		priority: 2;
+		object: [ LzTermGeneratorView new generator: self allTerms ];
+		view: #gtTermsFor:;
 		yourself
 ]
 

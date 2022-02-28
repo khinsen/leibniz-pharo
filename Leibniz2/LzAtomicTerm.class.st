@@ -16,7 +16,7 @@ LzAtomicTerm class >> signature: aSignature value: anObject [
 		yourself
 ]
 
-{ #category : #converting }
+{ #category : #egraphs }
 LzAtomicTerm >> asENodeIn: anEGraph [
 	^ anEGraph add:
 		(LzAtomicENode new

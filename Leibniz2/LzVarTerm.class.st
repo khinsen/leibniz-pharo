@@ -8,7 +8,7 @@ Class {
 	#category : #'Leibniz2-Terms'
 }
 
-{ #category : #converting }
+{ #category : #egraphs }
 LzVarTerm >> asENodeIn: anEGraph [
 	self shouldNotImplement
 ]

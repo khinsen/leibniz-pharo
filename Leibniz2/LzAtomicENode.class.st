@@ -8,6 +8,11 @@ Class {
 	#category : #'Leibniz2-EGraphs'
 }
 
+{ #category : #enumerating }
+LzAtomicENode >> allTerms [
+	^ { self atomicTerm }
+]
+
 { #category : #accessing }
 LzAtomicENode >> atomicTerm [
 	^ atomicTerm

@@ -17,6 +17,28 @@ LzOpENode >> = otherObject [
 	^ self hasEqualElements: otherObject
 ]
 
+{ #category : #enumerating }
+LzOpENode >> allArgTerms: classIds [
+	classIds ifEmpty: [ ^ #(#()) ].
+	^ Generator on: [ :generator |
+		(graph classForId: classIds first)
+			allTerms do: [ :firstArg |
+				(self allArgTerms: classIds allButFirst) do: [ :restArgs |
+					generator yield: { firstArg }, restArgs ]   ] ]
+]
+
+{ #category : #enumerating }
+LzOpENode >> allTerms [
+	| signature |
+	signature := graph signature.
+	^ self
+		ifEmpty: [ { signature opTerm: self opName args: #() } ]
+		ifNotEmpty: [
+			Generator on: [ :generator |
+				(self allArgTerms: self) do: [ :args |
+					generator yield: (signature opTerm: self opName args: args) ] ] ]
+]
+
 { #category : #printing }
 LzOpENode >> hasInfixOpOtherThan: anOpName [
 	^ opName isInfixOpOtherThan: anOpName

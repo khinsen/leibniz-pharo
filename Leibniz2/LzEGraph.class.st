@@ -5,7 +5,8 @@ Class {
 		'disjointSets',
 		'memo',
 		'classes',
-		'classIdsNeedingRebuild'
+		'classIdsNeedingRebuild',
+		'signature'
 	],
 	#category : #'Leibniz2-EGraphs'
 }
@@ -23,6 +24,13 @@ LzEGraph >> add: anENode [
 	classes at: classId put: class.
 	memo at: anENode put: classId.
 	^ classId
+]
+
+{ #category : #enumerating }
+LzEGraph >> allTerms [
+	^ Generator on: [ :generator |
+		self classes do: [ :each |
+			each allTerms do: [ :eachTerm | generator yield: eachTerm ] ] ]
 ]
 
 { #category : #accessing }
@@ -115,6 +123,17 @@ LzEGraph >> gtGraphFor: aView [
 				length: 70 ]
 ]
 
+{ #category : #inspecting }
+LzEGraph >> gtTermsFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Terms';
+		priority: 3;
+		object: [ LzTermGeneratorView new generator: self allTerms ];
+		view: #gtTermsFor:;
+		yourself
+]
+
 { #category : #accessing }
 LzEGraph >> initialize [
 	disjointSets := LzDisjointIntegerSets new.
@@ -175,4 +194,14 @@ LzEGraph >> repair: aClassId [
 	newParents keysAndValuesDo: [ :node :id |
 		class addParentNode: node classId: id ].
 	class removeDuplicateNodes
+]
+
+{ #category : #accessing }
+LzEGraph >> signature [
+	^ signature
+]
+
+{ #category : #accessing }
+LzEGraph >> signature: aSignature [
+	signature := aSignature
 ]

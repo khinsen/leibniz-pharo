@@ -10,6 +10,11 @@ Class {
 	#category : #'Leibniz2-EGraphs'
 }
 
+{ #category : #enumerating }
+LzENode >> allTerms [
+	self subclassResponsibility
+]
+
 { #category : #accessing }
 LzENode >> canonicalizeIn: anEGraph [
 	1 to: self size do: [ :index|
@@ -31,6 +36,17 @@ LzENode >> graph: anEGraph [
 LzENode >> gtDisplayOn: stream [
 	"Replace the implementation on Collections by the basic one for other objects."
 	self printOn: stream
+]
+
+{ #category : #accessing }
+LzENode >> gtTermsFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Terms';
+		priority: 1;
+		object: [ LzTermGeneratorView new generator: self allTerms ];
+		view: #gtTermsFor:;
+		yourself
 ]
 
 { #category : #printing }
