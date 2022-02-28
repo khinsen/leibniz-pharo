@@ -152,6 +152,31 @@ LzContext >> rewriteSystem: aRewriteSystem [
 	rewriteSystem := aRewriteSystem
 ]
 
+{ #category : #accessing }
+LzContext >> rewriteSystemWithEqualityAxioms [
+	| builder |
+	builder := LzRewriteSystemBuilder new
+		signature: self signature;
+		include: self rewriteSystem.
+	axiomDeclarations
+		select: [ :each | each isKindOf: LzASTEqualityAxiom ]
+		thenDo: [ :each |
+			self flag: #todo. "Check if the constructed rules are well-formed."
+			builder parsedRule:
+				(LzASTRewriteRule new
+					variables: each variables;
+					pattern: each left;
+					replacement: each right;
+					condition: each condition).
+			builder parsedRule:
+				(LzASTRewriteRule new
+					variables: each variables;
+					pattern: each right;
+					replacement: each left;
+					condition: each condition) ].
+	^ builder rewriteSystem
+]
+
 { #category : #constructing }
 LzContext >> rule: aString [
 	^ self signature rule: aString

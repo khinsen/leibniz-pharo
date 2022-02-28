@@ -17,7 +17,9 @@ LzMatchingRules >> match [
 	(rules at: self term fingerprint ifAbsent: [ #() ]) do: [ :aRule |
 		(aRule pattern match: self term)
 			ifSuccess: [ :s |
-				(rewriteSystem testCondition: aRule condition substituting: s)
+				(aRule
+					testConditionForSubstitution: s
+					reduction: [ :t | rewriteSystem reduce: t ])
 					ifFalse: [ rules add: { aRule. true. false. nil } ]
 					ifTrue: [ rules add: { aRule. true. true. aRule apply: s } ] ]
 			ifFailure: [ rules add: { aRule. false. false. nil } ] ].

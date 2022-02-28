@@ -18,6 +18,11 @@ LzRewriteSystemBuilder >> initialize [
 	ruleDeclarations := OrderedCollection new
 ]
 
+{ #category : #defining }
+LzRewriteSystemBuilder >> parsedRule: anLzASTRule [
+	ruleDeclarations add: anLzASTRule
+]
+
 { #category : #accessing }
 LzRewriteSystemBuilder >> rewriteSystem [
 	^ LzRewriteSystem new
@@ -31,7 +36,7 @@ LzRewriteSystemBuilder >> rewriteSystem [
 
 { #category : #defining }
 LzRewriteSystemBuilder >> rule: aString [
-	ruleDeclarations add:
+	self parsedRule:
 		(LzParser
 			parse: aString
 			startingAt: #ruleEnd

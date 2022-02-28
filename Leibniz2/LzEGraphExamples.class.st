@@ -7,6 +7,16 @@ Class {
 }
 
 { #category : #examples }
+LzEGraphExamples >> contextForEGraphWithEqualities [
+	<gtExample>
+	^ LzContextBuilder new
+		include: self contextForSimpleEGraph;
+		axiom: 'a = b';
+		axiom: 'b = c';
+		context
+]
+
+{ #category : #examples }
 LzEGraphExamples >> contextForSimpleEGraph [
 	<gtExample>
 	^ LzContextBuilder new
@@ -16,6 +26,20 @@ LzEGraphExamples >> contextForSimpleEGraph [
 		op: 'c : ℕ';
 		var: '?x : ℕ';
 		context
+]
+
+{ #category : #examples }
+LzEGraphExamples >> eGraphWithEqualities [
+	<gtExample>
+	| context nodes egraph |
+	context := self contextForEGraphWithEqualities.
+	egraph := LzEGraph new
+				signature: context signature.
+	nodes := { '1'. 'a'. 'a + 1'. 'b'. 'b + 1' } collect: [ :each |
+		(context term: each) asENodeIn: egraph ].
+	egraph addRewritesFromRewriteSystem:
+		context rewriteSystemWithEqualityAxioms.
+	^ egraph
 ]
 
 { #category : #examples }

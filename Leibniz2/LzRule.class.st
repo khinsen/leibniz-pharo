@@ -92,6 +92,13 @@ LzRule >> signature: aSignature [
 	signature := aSignature
 ]
 
+{ #category : #rewriting }
+LzRule >> testConditionForSubstitution: bindings reduction: aBlock [
+	self condition ifNil: [ ^ true ].
+	[ ^ (aBlock value: (self condition substitute: bindings)) isTrue ]
+	on: LzRewriteFailure do: [ ^ false ]
+]
+
 { #category : #accessing }
 LzRule >> valueSlots [
 	^ #(variables pattern condition)

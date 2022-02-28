@@ -81,7 +81,9 @@ LzRewriteSystem >> referenceSlots [
 LzRewriteSystem >> rewriteHeadOnce: aTerm [
 	(rules at: aTerm fingerprint ifAbsent: [ #() ]) do: [ :aRule |
 		(aRule pattern match: aTerm) ifSuccess: [ :s |
-			[ (self testCondition: aRule condition substituting: s)
+			[ (aRule
+				testConditionForSubstitution: s
+				reduction: [ :t | self reduce: t ])
 				ifTrue: [ ^ aRule apply: s ] ]
 			on: LzRewriteFailure do: [  ] ] ].
 	"Special rule for term equality"
@@ -155,13 +157,6 @@ LzRewriteSystem >> signature: aSignature [
 { #category : #accessing }
 LzRewriteSystem >> size [
 	^ self rules size
-]
-
-{ #category : #rewriting }
-LzRewriteSystem >> testCondition: aTermOrNil substituting: bindings [
-	aTermOrNil ifNil: [ ^ true ].
-	[ ^ (self reduce: (aTermOrNil substitute: bindings)) isTrue ]
-	on: LzRewriteFailure do: [ ^ false ]
 ]
 
 { #category : #accessing }

@@ -11,7 +11,7 @@ Class {
 	#category : #'Leibniz2-EGraphs'
 }
 
-{ #category : #accessing }
+{ #category : #adding }
 LzEGraph >> add: anENode [
 	| classId class |
 	(self findClassIdFor: anENode)
@@ -26,6 +26,32 @@ LzEGraph >> add: anENode [
 	^ classId
 ]
 
+{ #category : #adding }
+LzEGraph >> addRewritesFromRewriteSystem: aRewriteSystem [
+	aRewriteSystem rules values do: [ :eachRuleList |
+		eachRuleList do: [ :eachRule |
+			self addRewritesFromRule: eachRule ] ]
+]
+
+{ #category : #adding }
+LzEGraph >> addRewritesFromRule: aRule [
+	| matches |
+	self flag: #todo. "Add safety guard against infinite match lists."
+	matches := (self matchesFor: aRule pattern) contents.
+	self flag: #todo. "Perform rewriting on conditions."
+	matches do: [ :each |
+		| newTerm newClassId |
+		(aRule
+			testConditionForSubstitution: each substitution
+			reduction: [ :t | t ]) ifTrue: [
+				[
+					newTerm := aRule apply: each substitution.
+					newClassId := newTerm asENodeIn:  self.
+					self merge: newClassId with: each classId ]
+				on: LzRewriteFailure do: [] ] ].
+	self rebuild
+]
+
 { #category : #enumerating }
 LzEGraph >> allTerms [
 	^ Generator on: [ :generator |
@@ -33,7 +59,7 @@ LzEGraph >> allTerms [
 			each allTerms do: [ :eachTerm | generator yield: eachTerm ] ] ]
 ]
 
-{ #category : #accessing }
+{ #category : #updating }
 LzEGraph >> canonicalize: anENode [
 	anENode canonicalizeIn: self
 ]
@@ -134,7 +160,7 @@ LzEGraph >> gtTermsFor: aView [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #initializing }
 LzEGraph >> initialize [
 	disjointSets := LzDisjointIntegerSets new.
 	memo := Dictionary new.
@@ -176,7 +202,7 @@ LzEGraph >> matchesForPatterns: patterns withClassIds: classIds bindings: bindin
 							do: [ :b2 | b2 ifSuccess: [ generator yield: b2 ] ] ] ] ] ]
 ]
 
-{ #category : #accessing }
+{ #category : #updating }
 LzEGraph >> merge: anEClassId with: otherEClassId [
 	| root1 root2 mergedId staleId mergedClass staleClass |
 	root1 := self findRootFor: anEClassId.

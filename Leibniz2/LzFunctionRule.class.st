@@ -51,5 +51,5 @@ LzFunctionRule >> printBodyAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #'as yet unclassified' }
-LzFunctionRule >> tempMethod [ ^ [ :signature :args | | y x | y := (args at: (LzVarName for: #'?y')) lzAtomicTermValue. x := (args at: (LzVarName for: #'?x')) lzAtomicTermValue. LzBooleanTerm signature: signature value: (x >= y) ] 
+LzFunctionRule >> tempMethod [ ^ [ :signature :args | | x y | x := (args at: (LzVarName for: #'?x')) lzAtomicTermValue. y := (args at: (LzVarName for: #'?y')) lzAtomicTermValue. LzBooleanTerm signature: signature value: (x >= y) ] 
 ]
