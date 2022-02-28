@@ -76,6 +76,7 @@ LzSortHierarchyRoot >> initialize [
 	sortContext rewriteSystem:
 		(LzRewriteSystem new
 			signature: sortSignature;
+			ruleDeclarations: #();
 			rules: #()).
 ]
 

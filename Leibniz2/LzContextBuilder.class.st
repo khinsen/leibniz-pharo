@@ -50,6 +50,7 @@ LzContextBuilder >> context [
 LzContextBuilder >> include: aContext [
 	self sortGraphBuilder include: aContext sortGraph.
 	self signatureBuilder include: aContext signature.
+	self rewriteSystemBuilder include: aContext rewriteSystem.
 	axiomDeclarations addAll: aContext axiomDeclarations.
 ]
 

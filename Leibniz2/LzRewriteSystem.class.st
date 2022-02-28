@@ -5,7 +5,8 @@ Class {
 	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'rules',
-		'signature'
+		'signature',
+		'ruleDeclarations'
 	],
 	#category : #'Leibniz2-Rules'
 }
@@ -96,6 +97,16 @@ LzRewriteSystem >> rewriteLeftmostInnermost: aTerm [
 	| transformedArgs |
 	transformedArgs := aTerm args collect: [ :each | self reduce: each ].
 	^ self rewriteHeadOnce: (aTerm withTransformedArgs: transformedArgs)
+]
+
+{ #category : #accessing }
+LzRewriteSystem >> ruleDeclarations [
+	^ ruleDeclarations
+]
+
+{ #category : #accessing }
+LzRewriteSystem >> ruleDeclarations: aCollection [
+	ruleDeclarations := aCollection
 ]
 
 { #category : #accessing }
