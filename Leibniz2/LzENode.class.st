@@ -44,7 +44,7 @@ LzENode >> gtTermsFor: aView [
 	^ aView forward
 		title: 'Terms';
 		priority: 1;
-		object: [ LzTermGeneratorView new generator: self allTerms ];
+		object: [ LzTermStreamContents new streamOrSequence: self allTerms ];
 		view: #gtTermsFor:;
 		yourself
 ]

@@ -108,6 +108,16 @@ LzBindings >> gtBindingsFor: aView [
 		yourself
 ]
 
+{ #category : #printing }
+LzBindings >> gtDisplayOn: aStream [
+	failure ifNil: [
+		self printUnboundOn: aStream.
+		self bindings ifNotEmpty: [
+			self unboundVarSets ifNotEmpty: [ aStream nextPutAll: ', ' ] ].
+		self printBoundOn: aStream ]
+		ifNotNil: [ self printFailureOn: aStream ]
+]
+
 { #category : #inspecting }
 LzBindings >> gtFailureFor: aView [
 	<gtView>
@@ -213,12 +223,7 @@ LzBindings >> printFailureOn: aStream [
 LzBindings >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
-	failure ifNil: [
-		self printUnboundOn: aStream.
-		self bindings ifNotEmpty: [
-			self unboundVarSets ifNotEmpty: [ aStream nextPutAll: ', ' ] ].
-		self printBoundOn: aStream ]
-		ifNotNil: [ self printFailureOn: aStream ].
+	self gtDisplayOn: aStream.
 	aStream nextPut: $)
 ]
 

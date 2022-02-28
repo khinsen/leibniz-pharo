@@ -75,7 +75,7 @@ LzEClass >> gtTermsFor: aView [
 	^ aView forward
 		title: 'Terms';
 		priority: 2;
-		object: [ LzTermGeneratorView new generator: self allTerms ];
+		object: [ LzTermStreamContents new streamOrSequence: self allTerms ];
 		view: #gtTermsFor:;
 		yourself
 ]

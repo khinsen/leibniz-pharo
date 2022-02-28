@@ -129,7 +129,7 @@ LzEGraph >> gtTermsFor: aView [
 	^ aView forward
 		title: 'Terms';
 		priority: 3;
-		object: [ LzTermGeneratorView new generator: self allTerms ];
+		object: [ LzTermStreamContents new streamOrSequence: self allTerms ];
 		view: #gtTermsFor:;
 		yourself
 ]
@@ -151,7 +151,12 @@ LzEGraph >> matchesFor: aPattern [
 					matchesFor: aPattern
 					bindings: LzBindings new)
 					do: [ :bindings |
-						generator yield: { bindings. classId } ] ] ] ]
+						| match |
+						match := LzEGraphMatch new
+									graph: self;
+									substitution: bindings;
+									classId: classId.
+						generator yield:  match ] ] ] ]
 ]
 
 { #category : #matching }

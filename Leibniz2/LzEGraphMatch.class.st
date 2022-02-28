@@ -20,6 +20,11 @@ LzEGraphMatch >> classId: anEClassId [
 ]
 
 { #category : #accessing }
+LzEGraphMatch >> eClass [
+	^ graph classForId: classId
+]
+
+{ #category : #accessing }
 LzEGraphMatch >> graph [
 	^ graph
 ]
@@ -27,6 +32,41 @@ LzEGraphMatch >> graph [
 { #category : #accessing }
 LzEGraphMatch >> graph: anEGraph [
 	graph := anEGraph
+]
+
+{ #category : #inspecting }
+LzEGraphMatch >> gtBindingsFor: aView [
+	<gtView>
+	substitution ifFailure: [ ^ aView empty ].
+	^ aView forward
+		title: 'Bindings';
+		priority: 1;
+		object: [ substitution ];
+		view: #gtBindingsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzEGraphMatch >> gtEClassNodesFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Parent eClass nodes';
+		priority: 5;
+		object: [ self eClass ];
+		view: #gtNodesFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzEGraphMatch >> gtFailureFor: aView [
+	<gtView>
+	substitution ifSuccess: [ ^ aView empty ].
+	^ aView forward
+		title: 'Failure';
+		priority: 1;
+		object: [ substitution ];
+		view: #gtFailureFor:;
+		yourself
 ]
 
 { #category : #accessing }
