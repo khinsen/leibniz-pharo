@@ -63,6 +63,17 @@ LzOpTerm >> match: otherTerm bindings: bindings [
 	otherTerm matchOpTerm: self op: opName args: args bindings: bindings
 ]
 
+{ #category : #egraphs }
+LzOpTerm >> matchOpENode: anOpENode  bindings: bindings [
+	^ (opName = anOpENode opName
+		and: [ args size = anOpENode size])
+		ifTrue: [ anOpENode graph
+					matchesForPatterns: args
+					withClassIds: anOpENode
+					bindings: bindings ]
+		ifFalse: [ #() ]
+]
+
 { #category : #unifying }
 LzOpTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: bindings [
 	(opName = anOpName and: [ args size = anArgList size ])

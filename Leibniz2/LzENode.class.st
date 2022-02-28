@@ -59,6 +59,11 @@ LzENode >> isInfix [
 	^ false
 ]
 
+{ #category : #matching }
+LzENode >> matchesFor: aPattern bindings: bindings [
+	self subclassResponsibility
+]
+
 { #category : #printing }
 LzENode >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream [
 	self

@@ -142,6 +142,35 @@ LzEGraph >> initialize [
 	classIdsNeedingRebuild := OrderedCollection new.
 ]
 
+{ #category : #matching }
+LzEGraph >> matchesFor: aPattern [
+	^ Generator on: [ :generator |
+		classes keysAndValuesDo: [ :classId :class |
+			class nodes do: [ :eachNode |
+				(eachNode
+					matchesFor: aPattern
+					bindings: LzBindings new)
+					do: [ :bindings |
+						generator yield: { bindings. classId } ] ] ] ]
+]
+
+{ #category : #matching }
+LzEGraph >> matchesForPatterns: patterns withClassIds: classIds bindings: bindings [
+	patterns ifEmpty: [ ^ { bindings } ].
+	^ Generator on: [ :generator |
+		(classes at: classIds first) nodes do: [ :eachNode |
+			(eachNode
+				matchesFor: patterns first
+				bindings: bindings copy)
+				do: [ :b1 |
+					b1 ifSuccess: [
+						(self
+							matchesForPatterns: patterns allButFirst
+							withClassIds: classIds allButFirst
+							bindings: b1)
+							do: [ :b2 | b2 ifSuccess: [ generator yield: b2 ] ] ] ] ] ]
+]
+
 { #category : #accessing }
 LzEGraph >> merge: anEClassId with: otherEClassId [
 	| root1 root2 mergedId staleId mergedClass staleClass |

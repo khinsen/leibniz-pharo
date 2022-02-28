@@ -146,6 +146,11 @@ LzTerm >> match: otherTerm bindings: bindings [
 		bindings failWith: self notUnifiableWith: otherTerm ]
 ]
 
+{ #category : #egraphs }
+LzTerm >> matchOpENode: anOpENode  bindings: bindings [
+	self subclassResponsibility
+]
+
 { #category : #unifying }
 LzTerm >> matchVar: aSymbol sort: aSort bindings: bindings [
 	self

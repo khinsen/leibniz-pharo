@@ -54,6 +54,11 @@ LzOpENode >> isInfix [
 	^ opName isInfix
 ]
 
+{ #category : #matching }
+LzOpENode >> matchesFor: aPattern bindings: bindings [
+	^ aPattern matchOpENode: self bindings: bindings
+]
+
 { #category : #accessing }
 LzOpENode >> opName [
 	^ opName

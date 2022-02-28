@@ -23,6 +23,16 @@ LzAtomicENode >> atomicTerm: aTerm [
 	atomicTerm := aTerm
 ]
 
+{ #category : #matching }
+LzAtomicENode >> matchesFor: aPattern bindings: bindings [
+	| b |
+	b := bindings copy.
+	aPattern match: self atomicTerm bindings: b.
+	^ b
+		ifSuccess: [ { b } ]
+		ifFailure: [ #() ]
+]
+
 { #category : #printing }
 LzAtomicENode >> printAsLeibnizSyntaxOn: aStream [
 	self atomicTerm printAsLeibnizSyntaxOn: aStream

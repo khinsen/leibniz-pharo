@@ -34,6 +34,11 @@ LzAtomicTerm >> lzAtomicTermValue [
 	^ self value
 ]
 
+{ #category : #egraphs }
+LzAtomicTerm >> matchOpENode: anOpENode  bindings: bindings [
+	^ #()
+]
+
 { #category : #unifying }
 LzAtomicTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
