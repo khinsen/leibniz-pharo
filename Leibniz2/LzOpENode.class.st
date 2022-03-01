@@ -30,7 +30,7 @@ LzOpENode >> allArgTerms: classIds [
 { #category : #enumerating }
 LzOpENode >> allTerms [
 	| signature |
-	signature := graph signature.
+	signature := graph context signature.
 	^ self
 		ifEmpty: [ { signature opTerm: self opName args: #() } ]
 		ifNotEmpty: [

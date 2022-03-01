@@ -34,7 +34,7 @@ LzEGraphExamples >> eGraphWithEqualities [
 	| context nodes egraph |
 	context := self contextForEGraphWithEqualities.
 	egraph := LzEGraph new
-				signature: context signature.
+				context: context.
 	nodes := { '1'. 'a'. 'a + 1'. 'b'. 'b + 1' } collect: [ :each |
 		(context term: each) asENodeIn: egraph ].
 	egraph addRewritesFromRewriteSystem:
@@ -46,7 +46,7 @@ LzEGraphExamples >> eGraphWithEqualities [
 LzEGraphExamples >> emptyEGraph [
 	<gtExample>
 	^ LzEGraph new
-		signature: self contextForSimpleEGraph signature.
+		context: self contextForSimpleEGraph
 ]
 
 { #category : #examples }
@@ -55,7 +55,7 @@ LzEGraphExamples >> simpleEGraph [
 	| nodes egraph |
 	egraph := self emptyEGraph.
 	nodes := { '1'. 'a'. 'a + 1'. 'b'. 'b + 1' } collect: [ :each |
-		(egraph signature term: each) asENodeIn: egraph ].
+		(egraph context term: each) asENodeIn: egraph ].
 	egraph merge: nodes second with: nodes fourth.
 	egraph rebuild.
 	^ egraph

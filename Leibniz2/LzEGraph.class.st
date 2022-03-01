@@ -6,7 +6,7 @@ Class {
 		'memo',
 		'classes',
 		'classIdsNeedingRebuild',
-		'signature'
+		'context'
 	],
 	#category : #'Leibniz2-EGraphs'
 }
@@ -72,6 +72,16 @@ LzEGraph >> classForId: anInteger [
 { #category : #accessing }
 LzEGraph >> classes [
 	^ classes values
+]
+
+{ #category : #accessing }
+LzEGraph >> context [
+	^ context
+]
+
+{ #category : #accessing }
+LzEGraph >> context: aContext [
+	context := aContext
 ]
 
 { #category : #accessing }
@@ -254,14 +264,4 @@ LzEGraph >> repair: aClassId [
 	newParents keysAndValuesDo: [ :node :id |
 		class addParentNode: node classId: id ].
 	class removeDuplicateNodes
-]
-
-{ #category : #accessing }
-LzEGraph >> signature [
-	^ signature
-]
-
-{ #category : #accessing }
-LzEGraph >> signature: aSignature [
-	signature := aSignature
 ]
