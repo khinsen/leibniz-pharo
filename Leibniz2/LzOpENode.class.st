@@ -39,6 +39,20 @@ LzOpENode >> allTerms [
 					generator yield: (signature opTerm: self opName args: args) ] ] ]
 ]
 
+{ #category : #updating }
+LzOpENode >> canonicalizeIn: anEGraph [
+	| oldClassId |
+	oldClassId := nil.
+	1 to: self size do: [ :index |
+		| classId rootId |
+		classId := self at: index.
+		rootId := anEGraph findRootFor: classId.
+		(oldClassId isNil and: [ rootId ~= classId ]) ifTrue: [
+			oldClassId := anEGraph removeFromMemo: self ].
+		self at: index put: rootId  ].
+	oldClassId ifNotNil: [ anEGraph addMemoEntry: self classId: oldClassId ]
+]
+
 { #category : #printing }
 LzOpENode >> hasInfixOpOtherThan: anOpName [
 	^ opName isInfixOpOtherThan: anOpName

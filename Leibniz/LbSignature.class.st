@@ -32,7 +32,7 @@ Class {
 		'builtins',
 		'origins'
 	],
-	#category : 'Leibniz-2-Signatures'
+	#category : #'Leibniz-2-Signatures'
 }
 
 { #category : #'instance creation' }
@@ -78,11 +78,6 @@ LbSignature >> asDependentSignatureBuilder [
 { #category : #asserting }
 LbSignature >> assertBuiltin: aBuiltinSymbol [
 	self assert: (builtins includes: aBuiltinSymbol) description: aBuiltinSymbol, ' are not defined in this signature'
-]
-
-{ #category : #'term construction' }
-LbSignature >> atomicTerm: aValue [
-	^ aValue lbAtomicTermClass value: aValue signature: self
 ]
 
 { #category : #copying }
@@ -224,6 +219,11 @@ LbSignature >> instVarsExcludedFromEquality [
 { #category : #testing }
 LbSignature >> isEmpty [
 	^ sortGraph isEmpty and: [ operators isEmpty and: [ variables isEmpty ] ]
+]
+
+{ #category : #'term construction' }
+LbSignature >> leafTerm: aValue [
+	^ aValue lbAtomicTermClass value: aValue signature: self
 ]
 
 { #category : #'term construction' }

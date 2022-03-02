@@ -23,15 +23,20 @@ LzOpTerm >> args: anArray [
 LzOpTerm >> asENodeIn: anEGraph [
 	| nArgs node |
 	nArgs := self args size.
-	node := (LzOpENode new: nArgs)
-				graph: anEGraph;
-				opName: self opName;
-				sort: self sort.
-	1 to: nArgs do: [ :index |
-		node
-			at: index
-			put: ((self args at: index)
-					asENodeIn: anEGraph) ].
+	nArgs = 0
+		ifTrue: [ node := LzLeafENode new
+							graph: anEGraph;
+							leafTerm: self]
+		ifFalse: [
+			node := (LzOpENode new: nArgs)
+						graph: anEGraph;
+						opName: self opName;
+						sort: self sort.
+			1 to: nArgs do: [ :index |
+				node
+					at: index
+					put: ((self args at: index)
+							asENodeIn: anEGraph) ] ].
 	^ anEGraph add: node
 ]
 

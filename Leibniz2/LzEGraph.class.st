@@ -14,8 +14,9 @@ Class {
 { #category : #adding }
 LzEGraph >> add: anENode [
 	| classId class |
-	(self findClassIdFor: anENode)
-		ifNotNil: [ :id | ^ id ].
+	self canonicalize: anENode.
+	memo at: anENode
+		ifPresent: [ :id | ^ self findRootFor:  id ].
 	classId := disjointSets makeSet.
 	class := LzEClass new
 				addNode: anENode.
@@ -24,6 +25,11 @@ LzEGraph >> add: anENode [
 	classes at: classId put: class.
 	memo at: anENode put: classId.
 	^ classId
+]
+
+{ #category : #updating }
+LzEGraph >> addMemoEntry: anENode classId: aClassId [
+	memo at: anENode put: aClassId
 ]
 
 { #category : #adding }
@@ -38,12 +44,11 @@ LzEGraph >> addRewritesFromRule: aRule [
 	| matches |
 	self flag: #todo. "Add safety guard against infinite match lists."
 	matches := (self matchesFor: aRule pattern) contents.
-	self flag: #todo. "Perform rewriting on conditions."
 	matches do: [ :each |
 		| newTerm newClassId |
 		(aRule
 			testConditionForSubstitution: each substitution
-			reduction: [ :t | t ]) ifTrue: [
+			reduction: [ :t | self context reduce: t ]) ifTrue: [
 				[
 					newTerm := aRule apply: each substitution.
 					newClassId := newTerm asENodeIn:  self.
@@ -82,14 +87,6 @@ LzEGraph >> context [
 { #category : #accessing }
 LzEGraph >> context: aContext [
 	context := aContext
-]
-
-{ #category : #accessing }
-LzEGraph >> findClassIdFor: anENode [
-	self canonicalize: anENode.
-	^ memo at: anENode
-		ifPresent: [ :id | self findRootFor:  id ]
-		ifAbsent: [ nil ]
 ]
 
 { #category : #accessing }
@@ -226,7 +223,6 @@ LzEGraph >> merge: anEClassId with: otherEClassId [
 	staleClass := classes at: staleId.
 	mergedClass addNodes: staleClass nodes.
 	staleClass nodesDo: [ :each |
-		memo removeKey: each.
 		self canonicalize: each.
 		memo at: each put: mergedId ].
 	staleClass parentsDo: [ :node :id | 
@@ -247,18 +243,24 @@ LzEGraph >> rebuild [
 		todo do: [ :each | self repair: each ] ]
 ]
 
+{ #category : #updating }
+LzEGraph >> removeFromMemo: oldENode [
+	| oldId |
+	oldId := memo at: oldENode.
+	memo removeKey: oldENode.
+	^ oldId
+]
+
 { #category : #rebuilding }
 LzEGraph >> repair: aClassId [
 	| class newParents |
 	class := classes at: aClassId.
 	class parentsDo: [ :node :id |
-		memo removeKey: node.
-		self canonicalize:  node.
-		memo at: node put: (self findRootFor:  id) ].
+		self canonicalize:  node ].
 	newParents := Dictionary new.
 	class parentsDo: [ :node :id |
 		(newParents includesKey: node)
-			ifTrue: [ self merge: id with: (newParents at: node)].
+			ifTrue: [ self merge: id with: (newParents at: node) ].
 		newParents at: node put: (self findRootFor: id) ].
 	class clearParents.
 	newParents keysAndValuesDo: [ :node :id |

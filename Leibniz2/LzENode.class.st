@@ -15,11 +15,9 @@ LzENode >> allTerms [
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : #updating }
 LzENode >> canonicalizeIn: anEGraph [
-	1 to: self size do: [ :index|
-		self at: index put:
-			(anEGraph findRootFor: (self at: index)) ].
+	self subclassResponsibility
 ]
 
 { #category : #accessing }

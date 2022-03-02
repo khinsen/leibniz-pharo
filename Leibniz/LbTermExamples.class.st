@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TGtExampleAssertable',
 	#classTraits : 'TGtExampleAssertable classTrait',
-	#category : 'Leibniz-3-Terms'
+	#category : #'Leibniz-3-Terms'
 }
 
 { #category : #example }
@@ -109,7 +109,7 @@ LbTermExamples >> fpNumberLiteralTerms [
 	}.
 	^ inputs collect: [ :each |
 		| t |
-		t := LbBuiltinSignatures fpNumberSignature atomicTerm: each key.
+		t := LbBuiltinSignatures fpNumberSignature leafTerm: each key.
 		self assert: t sort name equals: each value.
 		self assert: t headOpName asSymbol equals: #Atomic.
 		t ]
@@ -126,7 +126,7 @@ LbTermExamples >> integerLiteralTerms [
 	}.
 	^ inputs collect: [ :each |
 		| t |
-		t := LbBuiltinSignatures integerSignature atomicTerm: each key.
+		t := LbBuiltinSignatures integerSignature leafTerm: each key.
 		self assert: t sort name equals: each value.
 		self assert: t headOpName asSymbol equals: #Atomic.
 		t ]
@@ -318,7 +318,7 @@ LbTermExamples >> rationalNumberLiteralTerms [
 	}.
 	^ inputs collect: [ :each |
 		| t |
-		t := LbBuiltinSignatures rationalNumberSignature atomicTerm: each key.
+		t := LbBuiltinSignatures rationalNumberSignature leafTerm: each key.
 		self assert: t sort name equals: each value.
 		self assert: t headOpName asSymbol equals: #Atomic.
 		t ]
@@ -334,7 +334,7 @@ LbTermExamples >> signatureFooBar [
 LbTermExamples >> stringTerm [
 	<gtExample>
 	| t |
-	t := LbBuiltinSignatures stringSignature atomicTerm: 'abc'.
+	t := LbBuiltinSignatures stringSignature leafTerm: 'abc'.
 	self assert: t sort name equals: #string.
 	self assert: t headOpName asSymbol equals: #Atomic.
 	^ t

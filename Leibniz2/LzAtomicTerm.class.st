@@ -19,9 +19,9 @@ LzAtomicTerm class >> signature: aSignature value: anObject [
 { #category : #egraphs }
 LzAtomicTerm >> asENodeIn: anEGraph [
 	^ anEGraph add:
-		(LzAtomicENode new
+		(LzLeafENode new
 			graph: anEGraph;
-			atomicTerm: self)
+			leafTerm: self)
 ]
 
 { #category : #organizing }
