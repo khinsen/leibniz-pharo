@@ -19,11 +19,16 @@ LzRule >> apply: bindings [
 
 { #category : #'instance creation' }
 LzRule >> checkConsistency [
+	| patternVars |
 	self assert: pattern signature == signature.
+	patternVars := pattern vars.
 	condition ifNotNil: [
 		self assert: condition signature == signature.
-		self assert: condition sort asLeibnizSyntaxString equals: '𝔹' ].
-	self flag: #todo. "Check variable consistency pattern->condition and pattern->replacement"
+		self assert: condition sort asLeibnizSyntaxString equals: '𝔹'.
+		condition vars associationsDo: [ :each |
+			self
+				assert: (patternVars includesAssociation: each)
+				description: 'Variable ', each key asSymbol, ' in condition but not in pattern'  ] ]
 ]
 
 { #category : #accessing }
