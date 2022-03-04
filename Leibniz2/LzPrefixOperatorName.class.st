@@ -10,6 +10,20 @@ LzPrefixOperatorName class >> for: aStringOrSymbol [
 ]
 
 { #category : #printing }
+LzPrefixOperatorName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
+	aStream nextPutAll: internalSymbol.
+	anENodeArray ifNotEmpty: [
+		aStream nextPut: $(.
+		anENodeArray allButLastDo: [ :each |
+			each printAsLeibnizSyntaxOn: aStream parents: aNodeSet.
+			aStream nextPutAll: ', ' ].
+		anENodeArray last
+			printAsLeibnizSyntaxOn: aStream
+			parents: aNodeSet.
+		aStream nextPut: $) ]
+]
+
+{ #category : #printing }
 LzPrefixOperatorName >> printForArity: anArity on: aStream [
 	aStream nextPutAll: internalSymbol.
 	anArity ifNotEmpty: [

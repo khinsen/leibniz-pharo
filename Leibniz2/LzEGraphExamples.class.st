@@ -17,6 +17,17 @@ LzEGraphExamples >> contextForEGraphWithEqualities [
 ]
 
 { #category : #examples }
+LzEGraphExamples >> contextForEGraphWithInfiniteRewrites [
+	<gtExample>
+	^ LzContextBuilder new
+		include: self contextForSimpleEGraph;
+		axiom: 'a = b + 1';
+		axiom: 'b = c + 1';
+		axiom: 'c = a + 1';
+		context
+]
+
+{ #category : #examples }
 LzEGraphExamples >> contextForSimpleEGraph [
 	<gtExample>
 	^ LzContextBuilder new
@@ -29,6 +40,20 @@ LzEGraphExamples >> contextForSimpleEGraph [
 ]
 
 { #category : #examples }
+LzEGraphExamples >> eGraphWithCycle [
+	<gtExample>
+	| context nodes egraph |
+	context := self contextForSimpleEGraph.
+	egraph := LzEGraph new
+				context: context.
+	egraph
+		merge: (egraph addTerm: 'a')
+		with: (egraph addTerm: 'a + 1').
+	egraph rebuild.
+	^ egraph
+]
+
+{ #category : #examples }
 LzEGraphExamples >> eGraphWithEqualities [
 	<gtExample>
 	| context nodes egraph |
@@ -36,7 +61,20 @@ LzEGraphExamples >> eGraphWithEqualities [
 	egraph := LzEGraph new
 				context: context.
 	nodes := { '1'. 'a'. 'a + 1'. 'b'. 'b + 1' } collect: [ :each |
-		(context term: each) asENodeIn: egraph ].
+		egraph addTerm: each ].
+	egraph addRewritesFromRewriteSystem:
+		context rewriteSystemWithEqualityAxioms.
+	^ egraph
+]
+
+{ #category : #examples }
+LzEGraphExamples >> eGraphWithInfiniteRewrites [
+	<gtExample>
+	| context nodes egraph |
+	context := self contextForEGraphWithCycle.
+	egraph := LzEGraph new
+				context: context.
+	egraph addTerm: 'a + 1'.
 	egraph addRewritesFromRewriteSystem:
 		context rewriteSystemWithEqualityAxioms.
 	^ egraph
@@ -55,7 +93,7 @@ LzEGraphExamples >> simpleEGraph [
 	| nodes egraph |
 	egraph := self emptyEGraph.
 	nodes := { '1'. 'a'. 'a + 1'. 'b'. 'b + 1' } collect: [ :each |
-		(egraph context term: each) asENodeIn: egraph ].
+		egraph addTerm: each ].
 	egraph merge: nodes second with: nodes fourth.
 	egraph rebuild.
 	^ egraph

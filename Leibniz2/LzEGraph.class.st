@@ -33,6 +33,11 @@ LzEGraph >> addMemoEntry: anENode classId: aClassId [
 ]
 
 { #category : #adding }
+LzEGraph >> addParsedTerm: anASTTermNode [
+	^ (context parsedTerm: anASTTermNode) asENodeIn: self
+]
+
+{ #category : #adding }
 LzEGraph >> addRewritesFromRewriteSystem: aRewriteSystem [
 	aRewriteSystem rules values do: [ :eachRuleList |
 		eachRuleList do: [ :eachRule |
@@ -55,6 +60,11 @@ LzEGraph >> addRewritesFromRule: aRule [
 					self merge: newClassId with: each classId ]
 				on: LzRewriteFailure do: [] ] ].
 	self rebuild
+]
+
+{ #category : #adding }
+LzEGraph >> addTerm: aString [
+	^ (context term: aString) asENodeIn: self
 ]
 
 { #category : #enumerating }

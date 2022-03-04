@@ -85,10 +85,25 @@ LzOpENode >> opName: anOpName [
 
 { #category : #printing }
 LzOpENode >> printAsLeibnizSyntaxOn: aStream [
+	self
+		printAsLeibnizSyntaxOn: aStream
+		parents: IdentitySet new
+]
+
+{ #category : #printing }
+LzOpENode >> printAsLeibnizSyntaxOn: aStream parents: aNodeSet [
 	| argENodes |
-	argENodes := self collect: [ :each |
-		(graph classForId: each) anyNode ].
-	opName printForArgs: argENodes on: aStream
+	(aNodeSet includes: self)
+		ifTrue: [ aStream nextPut: $⃞ ]
+		ifFalse: [
+			| parents |
+			parents := aNodeSet copyWith: self.
+			argENodes := self collect: [ :each |
+				(graph classForId: each) anyNode ].
+			opName
+				printForArgs: argENodes
+				on: aStream
+				parents: parents ]
 ]
 
 { #category : #accessing }

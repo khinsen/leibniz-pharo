@@ -39,6 +39,22 @@ LzInfixOperatorName >> printForArgs: anArrayOfTerms on: aStream [
 ]
 
 { #category : #printing }
+LzInfixOperatorName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
+	self assert: anENodeArray size equals: 2.
+	anENodeArray first
+		printAsFirstArgOfInfixTermWithOpName: self
+		on: aStream
+		parents: aNodeSet.
+	aStream nextPut: Character space.
+	aStream nextPutAll: internalSymbol allButFirst.
+	aStream nextPut: Character space.
+	anENodeArray second
+		printAsLeibnizSyntaxOn: aStream
+		parenthesized: anENodeArray second isInfix
+		parents: aNodeSet
+]
+
+{ #category : #printing }
 LzInfixOperatorName >> printForArity: anArity on: aStream [
 	self assert: anArity size equals: 2.
 	anArity first printAsLeibnizSyntaxOn: aStream parenthesized: true.

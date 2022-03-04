@@ -70,6 +70,14 @@ LzENode >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream [
 ]
 
 { #category : #printing }
+LzENode >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream parents: aNodeSet [
+	self
+		printAsLeibnizSyntaxOn: aStream
+		parenthesized: (self hasInfixOpOtherThan: anOpName)
+		parents: aNodeSet
+]
+
+{ #category : #printing }
 LzENode >> printOn: aStream [
 	aStream
 		<< 'a ';

@@ -41,6 +41,18 @@ TLzPrintable >> printAsLeibnizSyntaxOn: aStream parenthesized: aBoolean [
 ]
 
 { #category : #printing }
+TLzPrintable >> printAsLeibnizSyntaxOn: aStream parenthesized: aBoolean parents: aSet [
+	aBoolean ifTrue: [ aStream nextPut: $(. ].
+	self printAsLeibnizSyntaxOn: aStream parents: aSet.
+	aBoolean ifTrue: [ aStream nextPut: $). ]
+]
+
+{ #category : #printing }
+TLzPrintable >> printAsLeibnizSyntaxOn: aStream parents: aSet [
+	self notYetImplemented
+]
+
+{ #category : #printing }
 TLzPrintable >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPutAll: '('''.

@@ -24,6 +24,23 @@ LzSubscriptOperatorName >> printForArgs: anArrayOfTerms on: aStream [
 ]
 
 { #category : #printing }
+LzSubscriptOperatorName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
+	self assert: anENodeArray size > 1.
+	anENodeArray first
+		printAsLeibnizSyntaxOn: aStream
+		parenthesized: anENodeArray first isInfix
+		parents: aNodeSet.
+	aStream nextPutAll: '_{'.
+	anENodeArray allButFirst allButLast do: [ : each |
+		each printAsLeibnizSyntaxOn: aStream parents: aNodeSet.
+		aStream nextPutAll: ', ' ].
+	anENodeArray last
+		printAsLeibnizSyntaxOn: aStream
+		parents: aNodeSet.
+	aStream nextPut: $}
+]
+
+{ #category : #printing }
 LzSubscriptOperatorName >> printForArity: anArity on: aStream [
 	self assert: anArity size > 1.
 	anArity first printAsLeibnizSyntaxOn: aStream.

@@ -55,6 +55,11 @@ LzLeafENode >> printAsLeibnizSyntaxOn: aStream [
 	self leafTerm printAsLeibnizSyntaxOn: aStream
 ]
 
+{ #category : #printing }
+LzLeafENode >> printAsLeibnizSyntaxOn: aStream parents: aNodeSet [
+	self printAsLeibnizSyntaxOn: aStream
+]
+
 { #category : #accessing }
 LzLeafENode >> sort [
 	^ self leafTerm sort

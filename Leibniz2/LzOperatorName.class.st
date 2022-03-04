@@ -65,6 +65,11 @@ LzOperatorName >> printForArgs: aTermArray on: aStream [
 ]
 
 { #category : #printing }
+LzOperatorName >> printForArgs: aTermArray on: aStream parents: aNodeSet [
+	self subclassResponsibility
+]
+
+{ #category : #printing }
 LzOperatorName >> printForArity: anArity on: aStream [
 	self subclassResponsibility
 ]

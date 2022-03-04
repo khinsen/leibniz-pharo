@@ -20,6 +20,11 @@ LzVarName >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #printing }
+LzVarName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
+	self printForArgs: anENodeArray on: aStream
+]
+
+{ #category : #printing }
 LzVarName >> printForArity: anArity on: aStream [
 	self assert: anArity isEmpty.
 	self printAsLeibnizSyntaxOn: aStream
