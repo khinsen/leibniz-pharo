@@ -251,6 +251,8 @@ LzExamples >> rationalArithmetic [
 { #category : #example }
 LzExamples >> rationalNumberTerms [
 	<gtExample>
+	| context |
+	context := LzBuiltinContexts rationalNumberContext.
 	^ {
 		{ '0'. 'zero'. }.
 		{ '1'. 'ℕ.nz' }.
@@ -264,7 +266,7 @@ LzExamples >> rationalNumberTerms [
 	}
 	collect: [ :each |
 		| term |
-		term := LzBuiltinContexts rationalNumberContext term: each first.
+		term := context term: each first.
 		self assert: term sort asLeibnizSyntaxString equals: each second.
 		term  ]
 ]

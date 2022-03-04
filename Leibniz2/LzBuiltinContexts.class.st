@@ -38,6 +38,7 @@ LzBuiltinContexts class >> integerOpsFor: aContextBuilder [
 		"Arithmetic operators"
 		op: 'ℤ + ℤ : ℤ';
 		op: 'ℕ + ℕ : ℕ';
+		op: 'ℕ.nz + ℕ.nz : ℕ.nz';
 		op: 'ℕ.nz + ℕ : ℕ.nz';
 		op: 'ℕ + ℕ.nz : ℕ.nz';
 		op: 'ℤ - ℤ : ℤ';
