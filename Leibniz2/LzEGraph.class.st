@@ -59,7 +59,8 @@ LzEGraph >> addRewritesFromRule: aRule [
 					newClassId := newTerm asENodeIn:  self.
 					self merge: newClassId with: each classId ]
 				on: LzRewriteFailure do: [] ] ].
-	self rebuild
+	self rebuild.
+	self hasCycle ifTrue: [ (LzEGraphRewriteCycleError new rule: aRule) signal ]
 ]
 
 { #category : #adding }

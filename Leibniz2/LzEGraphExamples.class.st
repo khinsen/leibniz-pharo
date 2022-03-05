@@ -7,23 +7,23 @@ Class {
 }
 
 { #category : #examples }
-LzEGraphExamples >> contextForEGraphWithEqualities [
-	<gtExample>
-	^ LzContextBuilder new
-		include: self contextForSimpleEGraph;
-		axiom: 'a = b';
-		axiom: 'b = c';
-		context
-]
-
-{ #category : #examples }
-LzEGraphExamples >> contextForEGraphWithInfiniteRewrites [
+LzEGraphExamples >> contextForEGraphWithContradictoryRewrites [
 	<gtExample>
 	^ LzContextBuilder new
 		include: self contextForSimpleEGraph;
 		axiom: 'a = b + 1';
 		axiom: 'b = c + 1';
 		axiom: 'c = a + 1';
+		context
+]
+
+{ #category : #examples }
+LzEGraphExamples >> contextForEGraphWithEqualities [
+	<gtExample>
+	^ LzContextBuilder new
+		include: self contextForSimpleEGraph;
+		axiom: 'a = b';
+		axiom: 'b = c';
 		context
 ]
 
@@ -37,6 +37,21 @@ LzEGraphExamples >> contextForSimpleEGraph [
 		op: 'c : ℕ';
 		var: '?x : ℕ';
 		context
+]
+
+{ #category : #examples }
+LzEGraphExamples >> eGraphWithContradictoryRewrites [
+	<gtExample>
+	| context nodes egraph |
+	context := self contextForEGraphWithContradictoryRewrites.
+	egraph := LzEGraph new
+				context: context.
+	egraph addTerm: 'a + 1'.
+	self should: [
+		egraph addRewritesFromRewriteSystem:
+			context rewriteSystemWithEqualityAxioms ]
+		raise: LzEGraphRewriteCycleError.
+	^ egraph
 ]
 
 { #category : #examples }
@@ -63,20 +78,6 @@ LzEGraphExamples >> eGraphWithEqualities [
 				context: context.
 	nodes := { '1'. 'a'. 'a + 1'. 'b'. 'b + 1' } collect: [ :each |
 		egraph addTerm: each ].
-	egraph addRewritesFromRewriteSystem:
-		context rewriteSystemWithEqualityAxioms.
-	self assert: egraph hasCycle not.
-	^ egraph
-]
-
-{ #category : #examples }
-LzEGraphExamples >> eGraphWithInfiniteRewrites [
-	<gtExample>
-	| context nodes egraph |
-	context := self contextForEGraphWithInfiniteRewrites.
-	egraph := LzEGraph new
-				context: context.
-	egraph addTerm: 'a + 1'.
 	egraph addRewritesFromRewriteSystem:
 		context rewriteSystemWithEqualityAxioms.
 	self assert: egraph hasCycle not.
