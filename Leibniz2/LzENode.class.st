@@ -36,7 +36,7 @@ LzENode >> gtDisplayOn: stream [
 	self printOn: stream
 ]
 
-{ #category : #accessing }
+{ #category : #inspecting }
 LzENode >> gtTermsFor: aView [
 	<gtView>
 	^ aView forward
@@ -49,6 +49,11 @@ LzENode >> gtTermsFor: aView [
 
 { #category : #printing }
 LzENode >> hasInfixOpOtherThan: anOpName [
+	^ false
+]
+
+{ #category : #testing }
+LzENode >> hasLinkToAncestorIn: aSet [
 	^ false
 ]
 

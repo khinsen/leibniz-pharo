@@ -50,6 +50,7 @@ LzEGraphExamples >> eGraphWithCycle [
 		merge: (egraph addTerm: 'a')
 		with: (egraph addTerm: 'a + 1').
 	egraph rebuild.
+	self assert: egraph hasCycle.
 	^ egraph
 ]
 
@@ -64,6 +65,7 @@ LzEGraphExamples >> eGraphWithEqualities [
 		egraph addTerm: each ].
 	egraph addRewritesFromRewriteSystem:
 		context rewriteSystemWithEqualityAxioms.
+	self assert: egraph hasCycle not.
 	^ egraph
 ]
 
@@ -77,6 +79,7 @@ LzEGraphExamples >> eGraphWithInfiniteRewrites [
 	egraph addTerm: 'a + 1'.
 	egraph addRewritesFromRewriteSystem:
 		context rewriteSystemWithEqualityAxioms.
+	self assert: egraph hasCycle not.
 	^ egraph
 ]
 
@@ -96,5 +99,6 @@ LzEGraphExamples >> simpleEGraph [
 		egraph addTerm: each ].
 	egraph merge: nodes second with: nodes fourth.
 	egraph rebuild.
+	self assert: egraph hasCycle not.
 	^ egraph
 ]

@@ -80,6 +80,21 @@ LzEClass >> gtTermsFor: aView [
 		yourself
 ]
 
+{ #category : #testing }
+LzEClass >> hasCycle [
+	^ self hasLinkToAncestorIn: IdentitySet new.
+]
+
+{ #category : #testing }
+LzEClass >> hasLinkToAncestorIn: aSet [
+	| ancestors |
+	ancestors := aSet copyWith: self.
+	^ self nodes
+		detect: [ :each | each hasLinkToAncestorIn: ancestors ]
+		ifFound: [ true ]
+		ifNone: [ false ]
+]
+
 { #category : #initializing }
 LzEClass >> initialize [
 	nodes := OrderedCollection new.

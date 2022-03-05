@@ -177,6 +177,14 @@ LzEGraph >> gtTermsFor: aView [
 		yourself
 ]
 
+{ #category : #testing }
+LzEGraph >> hasCycle [
+	^ self classes
+		detect: [ :each | each hasCycle ]
+		ifFound: [ true ]
+		ifNone: [ false ]
+]
+
 { #category : #initializing }
 LzEGraph >> initialize [
 	disjointSets := LzDisjointIntegerSets new.

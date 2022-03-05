@@ -21,10 +21,12 @@ LzOpENode >> = otherObject [
 LzOpENode >> allArgTerms: classIds [
 	classIds ifEmpty: [ ^ #(#()) ].
 	^ Generator on: [ :generator |
-		(graph classForId: classIds first)
-			allTerms do: [ :firstArg |
-				(self allArgTerms: classIds allButFirst) do: [ :restArgs |
-					generator yield: { firstArg }, restArgs ]   ] ]
+		| gFirst gRest |
+		gFirst :=  (graph classForId: classIds first) allTerms.
+		gRest := self allArgTerms: classIds allButFirst.
+		gFirst do: [ :firstArg |
+			gRest do: [ :restArgs |
+				generator yield: { firstArg }, restArgs ]   ] ]
 ]
 
 { #category : #enumerating }
@@ -56,6 +58,17 @@ LzOpENode >> canonicalizeIn: anEGraph [
 { #category : #printing }
 LzOpENode >> hasInfixOpOtherThan: anOpName [
 	^ opName isInfixOpOtherThan: anOpName
+]
+
+{ #category : #testing }
+LzOpENode >> hasLinkToAncestorIn: aSet [
+	^ self
+		detect: [ :each |
+			| class |
+			class := graph classForId: each.
+			(aSet includes: class) or: [ class hasLinkToAncestorIn: aSet ] ]
+		ifFound: [ true ]
+		ifNone: [ false ]
 ]
 
 { #category : #comparing }
