@@ -73,7 +73,7 @@ LzEGraphExamples >> eGraphWithEqualities [
 LzEGraphExamples >> eGraphWithInfiniteRewrites [
 	<gtExample>
 	| context nodes egraph |
-	context := self contextForEGraphWithCycle.
+	context := self contextForEGraphWithInfiniteRewrites.
 	egraph := LzEGraph new
 				context: context.
 	egraph addTerm: 'a + 1'.

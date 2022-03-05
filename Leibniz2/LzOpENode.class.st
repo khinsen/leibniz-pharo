@@ -32,6 +32,7 @@ LzOpENode >> allArgTerms: classIds [
 { #category : #enumerating }
 LzOpENode >> allTerms [
 	| signature |
+	self assert: self hasCycle not.
 	signature := graph context signature.
 	^ self
 		ifEmpty: [ { signature opTerm: self opName args: #() } ]

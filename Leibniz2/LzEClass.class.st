@@ -40,6 +40,7 @@ LzEClass >> addParentNode: anENode classId: anInteger [
 
 { #category : #enumerating }
 LzEClass >> allTerms [
+	self assert: self hasCycle not.
 	^ Generator on: [ :generator |
 		nodes do: [ :eachNode |
 			eachNode allTerms do: [ :eachTerm | generator yield: eachTerm ] ] ]

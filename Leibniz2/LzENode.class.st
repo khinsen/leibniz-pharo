@@ -47,6 +47,11 @@ LzENode >> gtTermsFor: aView [
 		yourself
 ]
 
+{ #category : #testing }
+LzENode >> hasCycle [
+	^ self hasLinkToAncestorIn: IdentitySet new
+]
+
 { #category : #printing }
 LzENode >> hasInfixOpOtherThan: anOpName [
 	^ false

@@ -69,6 +69,7 @@ LzEGraph >> addTerm: aString [
 
 { #category : #enumerating }
 LzEGraph >> allTerms [
+	self assert: self hasCycle not.
 	^ Generator on: [ :generator |
 		self classes do: [ :each |
 			each allTerms do: [ :eachTerm | generator yield: eachTerm ] ] ]
@@ -198,6 +199,7 @@ LzEGraph >> matchesFor: aPattern [
 	^ Generator on: [ :generator |
 		classes keysAndValuesDo: [ :classId :class |
 			class nodes do: [ :eachNode |
+				self assert: eachNode hasCycle not.
 				(eachNode
 					matchesFor: aPattern
 					bindings: LzBindings new)
