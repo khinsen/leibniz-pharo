@@ -106,6 +106,11 @@ LzEGraph >> findRootFor: anEClassId [
 	^ disjointSets findRootFor: anEClassId
 ]
 
+{ #category : #testing }
+LzEGraph >> fingerprint [
+	^ self classes collect: [ :each | (each nodes collect: #size) asArray ]
+]
+
 { #category : #inspecting }
 LzEGraph >> gtClassesFor: aView [
 	<gtView>
@@ -287,4 +292,15 @@ LzEGraph >> repair: aClassId [
 	newParents keysAndValuesDo: [ :node :id |
 		class addParentNode: node classId: id ].
 	class removeDuplicateNodes
+]
+
+{ #category : #adding }
+LzEGraph >> saturateFromRewriteSystem: aRewriteSystem [
+	| oldFingerprint newFingerprint |
+	oldFingerprint := nil.
+	newFingerprint := self fingerprint.
+	[ newFingerprint = oldFingerprint ] whileFalse: [
+		oldFingerprint := newFingerprint.
+		self addRewritesFromRewriteSystem: aRewriteSystem.
+		newFingerprint := self fingerprint ]
 ]

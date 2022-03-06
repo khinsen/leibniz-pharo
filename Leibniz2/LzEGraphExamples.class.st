@@ -78,7 +78,7 @@ LzEGraphExamples >> eGraphWithEqualities [
 				context: context.
 	nodes := { '1'. 'a'. 'a + 1'. 'b'. 'b + 1' } collect: [ :each |
 		egraph addTerm: each ].
-	egraph addRewritesFromRewriteSystem:
+	egraph saturateFromRewriteSystem:
 		context rewriteSystemWithEqualityAxioms.
 	self assert: egraph hasCycle not.
 	^ egraph
