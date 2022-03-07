@@ -115,18 +115,18 @@ LzSort >> matchAllSupersortsOf: aSort [
 { #category : #unifying }
 LzSort >> matchWithSupersortsOf: aSort [
 	^ (self term match: aSort term)
-		ifSuccess: [ :b | b ]
+		ifSuccess: [ :m | m ]
 		ifFailure: [
-			| match submatches |
-			match := LzBindings new.
+			| submatches |
 			submatches := self matchAllSupersortsOf: aSort.
 			submatches
-				ifEmpty: [ match failUnless: aSort isSubsortOf: self ]
+				ifEmpty: [ LzBindings new
+							failUnless: aSort isSubsortOf: self ]
 				ifNotEmpty: [
 					self flag: #todo.
 					submatches size > 1
 						ifTrue: [ self error: 'Multiple matches not yet implemented' ].
-					match combineWith: submatches anyOne ] ]
+					submatches anyOne ] ]
 ]
 
 { #category : #comparing }

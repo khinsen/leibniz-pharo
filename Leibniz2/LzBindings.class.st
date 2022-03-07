@@ -23,7 +23,7 @@ LzBindings >> bindToUniqueVar: aBlock [
 { #category : #accessing }
 LzBindings >> bindVar: aVarName sort: aSort to: aTerm [
 	| root |
-	failure ifNotNil: [ ^ self ].
+	self ifFailure: [ ^ self ].
 	self assert: (vars at: aVarName) sort equals: aSort.
 	root := self findRootFor: aVarName.
 	root value
@@ -46,6 +46,8 @@ LzBindings >> bindings [
 
 { #category : #combining }
 LzBindings >> combineWith: otherBindings [
+	self ifFailure: [ ^ self ].
+	otherBindings ifFailure: [ :f | failure := f. ^ self ].
 	otherBindings varNodes do: [ :each |
 		self defineVar: each name sort: each sort ].
 	otherBindings varNodes do: [ :each |
@@ -157,7 +159,7 @@ LzBindings >> hasNoBindings [
 { #category : #testing }
 LzBindings >> ifFailure: aBlock [
 	^ failure
-		ifNotNil: [ aBlock value ]
+		ifNotNil: [ aBlock cull: failure ]
 ]
 
 { #category : #testing }
@@ -170,7 +172,7 @@ LzBindings >> ifSuccess: aBlock [
 LzBindings >> ifSuccess: block1 ifFailure: block2 [
 	^ failure
 		ifNil: [ block1 cull: self ]
-		ifNotNil: [ block2 value ]
+		ifNotNil: [ block2 cull: failure ]
 ]
 
 { #category : #initializing }

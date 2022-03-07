@@ -167,8 +167,7 @@ LzOperator >> matchingRanksGeneratorFor: anArity [
 			| match |
 			match := LzBindings new.
 			each key with: anArity do: [ :sortPattern :sort |
-				(sortPattern matchWithSupersortsOf: sort)
-					ifSuccess: [ :b | match combineWith: b ] ].
+				match combineWith: (sortPattern matchWithSupersortsOf: sort) ].
 			match ifSuccess: [
 				generator yield: (each key collect: [ :s | s substitute: match ])
 									-> (each value substituteAndReduce: match) ] ] ]
