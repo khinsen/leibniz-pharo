@@ -160,6 +160,20 @@ LzOperator >> kindArity: anArity [
 	kindArity := anArity
 ]
 
+{ #category : #lookup }
+LzOperator >> matchingRanksGeneratorFor: anArity [
+	^ Generator on: [ :generator |
+		ranks do: [ :each |
+			| match |
+			match := LzBindings new.
+			each key with: anArity do: [ :sortPattern :sort |
+				(sortPattern matchWithSupersortsOf: sort)
+					ifSuccess: [ :b | match combineWith: b ] ].
+			match ifSuccess: [
+				generator yield: (each key collect: [ :s | s substitute: match ])
+									-> (each value substituteAndReduce: match) ] ] ]
+]
+
 { #category : #inspecting }
 LzOperator >> minimalSubArityGraph [
 	"Answer the adjacency matrix for the minimal sub-arity graph that has the
@@ -195,28 +209,7 @@ LzOperator >> printAsLeibnizSyntaxOn: aStream [
 
 { #category : #lookup }
 LzOperator >> ranksMatching: anArity [
-	| matches |
-	matches := OrderedCollection new.
-	ranks do: [ :each |
-		| match |
-		match := LzBindings new.
-		each key with: anArity do: [ :patternArg :valueArg |
-			| submatches |
-			(patternArg match: valueArg)
-				ifSuccess: [ :b | match combineWith: b ]
-				ifFailure: [
-					submatches := patternArg matchAllSupersortsOf: valueArg.
-					submatches
-						ifEmpty: [ match failUnless: valueArg isSubsortOf: patternArg ]
-						ifNotEmpty: [
-							self flag: #todo.
-							submatches size > 1
-								ifTrue: [ self error: 'Multiple matches not yet implemented' ].
-							match combineWith: submatches anyOne ] ] ].
-		match ifSuccess: [
-			matches add: (each key collect: [ :s | s substitute: match ])
-							-> (each value substituteAndReduce: match) ] ].
-	^ matches
+	^ (self matchingRanksGeneratorFor: anArity) contents
 ]
 
 { #category : #accessing }
@@ -237,9 +230,11 @@ LzOperator >> size [
 { #category : #lookup }
 LzOperator >> sortForArity: anArity [
 	| matches |
-	matches := self ranksMatching: anArity.
-	matches ifEmpty: [ self error: 'No rank matching arity ', anArity asLeibnizSyntaxString ].
-	^ matches first value
+	matches := self matchingRanksGeneratorFor: anArity.
+	matches atEnd ifTrue: [
+		self error: 'No rank matching arity ',
+				anArity asLeibnizSyntaxString ].
+	^ matches next value
 ]
 
 { #category : #accessing }

@@ -102,11 +102,6 @@ LzSort >> kind [
 ]
 
 { #category : #unifying }
-LzSort >> match: aSort [
-	^self term match: aSort term
-]
-
-{ #category : #unifying }
 LzSort >> matchAllSupersortsOf: aSort [
 	| matches match |
 	matches := Set new.
@@ -115,6 +110,23 @@ LzSort >> matchAllSupersortsOf: aSort [
 	aSort directSupersorts do: [ :each |
 		matches := matches union: (self matchAllSupersortsOf: each) ].
 	^ matches
+]
+
+{ #category : #unifying }
+LzSort >> matchWithSupersortsOf: aSort [
+	^ (self term match: aSort term)
+		ifSuccess: [ :b | b ]
+		ifFailure: [
+			| match submatches |
+			match := LzBindings new.
+			submatches := self matchAllSupersortsOf: aSort.
+			submatches
+				ifEmpty: [ match failUnless: aSort isSubsortOf: self ]
+				ifNotEmpty: [
+					self flag: #todo.
+					submatches size > 1
+						ifTrue: [ self error: 'Multiple matches not yet implemented' ].
+					match combineWith: submatches anyOne ] ]
 ]
 
 { #category : #comparing }

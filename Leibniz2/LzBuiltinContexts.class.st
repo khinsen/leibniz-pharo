@@ -8,6 +8,16 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
+{ #category : #accessing }
+LzBuiltinContexts class >> equalityContext [
+	| builder |
+	builder := LzContextBuilder new
+		include: self truthContext;
+		op: '∀ ?s:𝕊 ?s == ?s : 𝔹';
+		rule: '∀ ?x:(∀ ?s:𝕊 ?s) ∀ ?y:(∀ ?s:𝕊 ?s) ?x == ?y → ''x = y'':LzBooleanTerm'.
+	^ builder context
+]
+
 { #category : #private }
 LzBuiltinContexts class >> integerAxiomsFor: aContextBuilder [
 	aContextBuilder
