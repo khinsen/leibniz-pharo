@@ -29,7 +29,7 @@ LzParser >> bracketOp [
 				| args |
 				args := OrderedCollection with: nodes first.
 				args addAll: (nodes third reject: [ :element | element = $,]).
-				{ LzBracketOperatorName new. args asArray } ]
+				{ LzBracketOpName new. args asArray } ]
 ]
 
 { #category : #rules }
@@ -86,7 +86,7 @@ LzParser >> fpNumberTerm [
 { #category : #signature }
 LzParser >> infixOp [
 	^ super infixOp ==> [ :nodes |
-		{ LzInfixOperatorName for: nodes second. { nodes first. nodes third } } ]
+		{ LzInfixOpName for: nodes second. { nodes first. nodes third } } ]
 ]
 
 { #category : #terms }
@@ -138,7 +138,7 @@ LzParser >> pattern [
 LzParser >> prefixOp [
 	^ super prefixOp ==> [ :nodes |
 		{
-			LzPrefixOperatorName for: nodes first.
+			LzPrefixOpName for: nodes first.
 			nodes third reject: [ :element | element = $, ]
 		} ]
 ]
@@ -147,7 +147,7 @@ LzParser >> prefixOp [
 LzParser >> prefixOpTerm [
 	^ super prefixOpTerm ==> [ :nodes |
 		LzASTOpTerm new
-			opName: (LzPrefixOperatorName for: nodes first);
+			opName: (LzPrefixOpName for: nodes first);
 			args: ((nodes at: 3) reject: [ :element | element = $, ]) ]
 ]
 
@@ -196,7 +196,7 @@ LzParser >> subscriptOp [
 		| args |
 		args := OrderedCollection with: nodes first.
 		args addAll: (nodes fourth reject: [ :element | element = $, ]).
-		{ LzSubscriptOperatorName new. args asArray } ]
+		{ LzSubscriptOpName new. args asArray } ]
 ]
 
 { #category : #axioms }
@@ -218,7 +218,7 @@ LzParser >> superscriptOp [
 		| args |
 		args := OrderedCollection with: nodes first.
 		args addAll: (nodes fourth reject: [ :element | element = $, ]).
-		{ LzSuperscriptOperatorName new. args asArray } ]
+		{ LzSuperscriptOpName new. args asArray } ]
 ]
 
 { #category : #terms }
@@ -231,7 +231,7 @@ LzParser >> term [
 				"nodes contains the infix operator symbol followed by
 				all the arguments. Example 'a + b + c' becomes
 				{ '+'. a. b. c } with a b c already converted to blocks."
-				name := LzInfixOperatorName
+				name := LzInfixOpName
 							for: nodes first asSymbol.
 				(nodes allButFirst: 2)
 					inject: nodes second
@@ -267,13 +267,13 @@ LzParser >> varTerm [
 { #category : #signature }
 LzParser >> zeroArgOp [
 	^ super zeroArgOp ==> [ :idString |
-		{ LzPrefixOperatorName for: idString. #() } ]
+		{ LzPrefixOpName for: idString. #() } ]
 ]
 
 { #category : #terms }
 LzParser >> zeroArgTerm [
 	^ super zeroArgTerm ==> [ :symbol |
 		LzASTOpTerm new
-			opName: (LzPrefixOperatorName for: symbol);
+			opName: (LzPrefixOpName for: symbol);
 			args: #() ]
 ]

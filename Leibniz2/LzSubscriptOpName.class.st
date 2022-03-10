@@ -1,21 +1,21 @@
 Class {
-	#name : #LzSuperscriptOperatorName,
-	#superclass : #LzOperatorName,
+	#name : #LzSubscriptOpName,
+	#superclass : #LzOpName,
 	#category : #'Leibniz2-Parser'
 }
 
 { #category : #initializing }
-LzSuperscriptOperatorName >> initialize [
-	internalSymbol := #'^'
+LzSubscriptOpName >> initialize [
+	internalSymbol := #'_'
 ]
 
 { #category : #printing }
-LzSuperscriptOperatorName >> printForArgs: anArrayOfTerms on: aStream [
+LzSubscriptOpName >> printForArgs: anArrayOfTerms on: aStream [
 	self assert: anArrayOfTerms size > 1.
 	anArrayOfTerms first
 		printAsLeibnizSyntaxOn: aStream
 		parenthesized: anArrayOfTerms first isInfix.
-	aStream nextPutAll: '^{'.
+	aStream nextPutAll: '\{'.
 	anArrayOfTerms allButFirst allButLast do: [ : each |
 		each printAsLeibnizSyntaxOn: aStream.
 		aStream nextPutAll: ', ' ].
@@ -24,13 +24,13 @@ LzSuperscriptOperatorName >> printForArgs: anArrayOfTerms on: aStream [
 ]
 
 { #category : #printing }
-LzSuperscriptOperatorName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
+LzSubscriptOpName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
 	self assert: anENodeArray size > 1.
 	anENodeArray first
 		printAsLeibnizSyntaxOn: aStream
 		parenthesized: anENodeArray first isInfix
 		parents: aNodeSet.
-	aStream nextPutAll: '^{'.
+	aStream nextPutAll: '\{'.
 	anENodeArray allButFirst allButLast do: [ : each |
 		each printAsLeibnizSyntaxOn: aStream parents: aNodeSet.
 		aStream nextPutAll: ', ' ].
@@ -41,18 +41,18 @@ LzSuperscriptOperatorName >> printForArgs: anENodeArray on: aStream parents: aNo
 ]
 
 { #category : #printing }
-LzSuperscriptOperatorName >> printForArity: anArity on: aStream [
+LzSubscriptOpName >> printForArity: anArity on: aStream [
 	self assert: anArity size > 1.
 	anArity first printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: '^{'.
+	aStream nextPutAll: '\{'.
 	anArity allButFirst allButLast do: [ : each |
 		each printAsLeibnizSyntaxOn: aStream.
 		aStream nextPutAll: ', ' ].
 	anArity last printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: '}'
+	aStream nextPut: $}
 ]
 
-{ #category : #printing }
-LzSuperscriptOperatorName >> synopsis [
-	^ '•^{•}'
+{ #category : #inspecting }
+LzSubscriptOpName >> synopsis [
+	^ '•\{•}'
 ]

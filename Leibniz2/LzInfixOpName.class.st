@@ -1,31 +1,31 @@
 Class {
-	#name : #LzInfixOperatorName,
-	#superclass : #LzOperatorName,
+	#name : #LzInfixOpName,
+	#superclass : #LzOpName,
 	#category : #'Leibniz2-Parser'
 }
 
 { #category : #'instance creation' }
-LzInfixOperatorName class >> for: aStringOrSymbol [
+LzInfixOpName class >> for: aStringOrSymbol [
 	^ self new internalSymbol: '_', aStringOrSymbol
 ]
 
 { #category : #testing }
-LzInfixOperatorName >> isEqualityOp [
+LzInfixOpName >> isEqualityOp [
 	^ internalSymbol = #'_=='
 ]
 
 { #category : #accessing }
-LzInfixOperatorName >> isInfix [
+LzInfixOpName >> isInfix [
 	^ true
 ]
 
 { #category : #testing }
-LzInfixOperatorName >> isInfixOpOtherThan: anOpName [
+LzInfixOpName >> isInfixOpOtherThan: anOpName [
 	^ anOpName ~= self
 ]
 
 { #category : #printing }
-LzInfixOperatorName >> printForArgs: anArrayOfTerms on: aStream [
+LzInfixOpName >> printForArgs: anArrayOfTerms on: aStream [
 	self assert: anArrayOfTerms size equals: 2.
 	anArrayOfTerms first
 		printAsFirstArgOfInfixTermWithOpName: self
@@ -39,7 +39,7 @@ LzInfixOperatorName >> printForArgs: anArrayOfTerms on: aStream [
 ]
 
 { #category : #printing }
-LzInfixOperatorName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
+LzInfixOpName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
 	self assert: anENodeArray size equals: 2.
 	anENodeArray first
 		printAsFirstArgOfInfixTermWithOpName: self
@@ -55,7 +55,7 @@ LzInfixOperatorName >> printForArgs: anENodeArray on: aStream parents: aNodeSet 
 ]
 
 { #category : #printing }
-LzInfixOperatorName >> printForArity: anArity on: aStream [
+LzInfixOpName >> printForArity: anArity on: aStream [
 	self assert: anArity size equals: 2.
 	anArity first printAsLeibnizSyntaxOn: aStream parenthesized: true.
 	aStream nextPut: Character space.
@@ -65,6 +65,6 @@ LzInfixOperatorName >> printForArity: anArity on: aStream [
 ]
 
 { #category : #inspecting }
-LzInfixOperatorName >> synopsis [
+LzInfixOpName >> synopsis [
 	^ '• ', internalSymbol allButFirst, ' •'
 ]

@@ -1,16 +1,16 @@
 Class {
-	#name : #LzPrefixOperatorName,
-	#superclass : #LzOperatorName,
+	#name : #LzPrefixOpName,
+	#superclass : #LzOpName,
 	#category : #'Leibniz2-Parser'
 }
 
 { #category : #'instance creation' }
-LzPrefixOperatorName class >> for: aStringOrSymbol [
+LzPrefixOpName class >> for: aStringOrSymbol [
 	^ self new internalSymbol: aStringOrSymbol
 ]
 
 { #category : #printing }
-LzPrefixOperatorName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
+LzPrefixOpName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
 	aStream nextPutAll: internalSymbol.
 	anENodeArray ifNotEmpty: [
 		aStream nextPut: $(.
@@ -24,7 +24,7 @@ LzPrefixOperatorName >> printForArgs: anENodeArray on: aStream parents: aNodeSet
 ]
 
 { #category : #printing }
-LzPrefixOperatorName >> printForArity: anArity on: aStream [
+LzPrefixOpName >> printForArity: anArity on: aStream [
 	aStream nextPutAll: internalSymbol.
 	anArity ifNotEmpty: [
 		aStream nextPut: $(.

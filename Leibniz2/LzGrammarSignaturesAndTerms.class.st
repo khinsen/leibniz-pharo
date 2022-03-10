@@ -114,7 +114,7 @@ LzGrammarSignaturesAndTerms >> prefixOpTerm [
 
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> simpleTerm [
-	^ literalTerm / parenthesizedTerm / prefixOpTerm / zeroArgTerm / varTerm
+	^ literalTerm / parenthesizedTerm / varTerm / prefixOpTerm / zeroArgTerm
 ]
 
 { #category : #terms }
@@ -134,20 +134,20 @@ LzGrammarSignaturesAndTerms >> sortArg [
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> subscriptOp [
-	^ arg, underscore, openBrace, (arg separatedBy: comma trim), closeBrace
+	^ arg, backslash, openBrace, (arg separatedBy: comma trim), closeBrace
 ]
 
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> suffix [
 	^ (self
 		suffixBetween: openBracket and: closeBracket
-		withOpName: LzBracketOperatorName new)
+		withOpName: LzBracketOpName new)
 		 / (self
 		 	suffixBetween: '^{' asPParser and: closeBrace
-		 	withOpName: LzSuperscriptOperatorName new)
+		 	withOpName: LzSuperscriptOpName new)
 		 / (self
-		 	suffixBetween: '_{' asPParser and: closeBrace
-		 	withOpName: LzSubscriptOperatorName new)
+		 	suffixBetween: '\{' asPParser and: closeBrace
+		 	withOpName: LzSubscriptOpName new)
 ]
 
 { #category : #terms }

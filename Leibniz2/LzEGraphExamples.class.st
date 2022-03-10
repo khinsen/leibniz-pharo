@@ -35,7 +35,7 @@ LzEGraphExamples >> contextForSimpleEGraph [
 		op: 'a : ℕ';
 		op: 'b : ℕ';
 		op: 'c : ℕ';
-		var: '?x : ℕ';
+		var: 'x_ : ℕ';
 		context
 ]
 
@@ -48,7 +48,7 @@ LzEGraphExamples >> eGraphWithContradictoryRewrites [
 				context: context.
 	egraph addTerm: 'a + 1'.
 	self should: [
-		egraph addRewritesFromRewriteSystem:
+		egraph saturateFromRewriteSystem:
 			context rewriteSystemWithEqualityAxioms ]
 		raise: LzEGraphRewriteCycleError.
 	^ egraph

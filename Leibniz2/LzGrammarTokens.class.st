@@ -16,10 +16,16 @@ Class {
 		'conditionSymbol',
 		'equalSign',
 		'rewriteArrow',
-		'fnArrow'
+		'fnArrow',
+		'backslash'
 	],
 	#category : #'Leibniz2-Parser'
 }
+
+{ #category : #tokens }
+LzGrammarTokens >> backslash [
+	^ $\ asPParser
+]
 
 { #category : #tokens }
 LzGrammarTokens >> closeBrace [

@@ -104,7 +104,7 @@ LzSortHierarchyRoot >> sortGraph [
 
 { #category : #accessing }
 LzSortHierarchyRoot >> sortOpName [
-	^ LzPrefixOperatorName for: LzConstants opNameSort
+	^ LzPrefixOpName for: LzConstants opNameSort
 ]
 
 { #category : #accessing }

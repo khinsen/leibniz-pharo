@@ -13,8 +13,8 @@ LzBuiltinContexts class >> equalityContext [
 	| builder |
 	builder := LzContextBuilder new
 		include: self truthContext;
-		op: '∀ ?s:𝕊 ?s == ?s : 𝔹';
-		rule: '∀ ?x:(∀ ?s:𝕊 ?s) ∀ ?y:(∀ ?s:𝕊 ?s) ?x == ?y → ''x = y'':LzBooleanTerm'.
+		op: '∀ s_:𝕊 s_ == s_ : 𝔹';
+		rule: '∀ x_:(∀ s_:𝕊 s_) ∀ y_:(∀ s_:𝕊 s_) x_ == y_ → ''x = y'':LzBooleanTerm'.
 	^ builder context
 ]
 
@@ -22,11 +22,11 @@ LzBuiltinContexts class >> equalityContext [
 LzBuiltinContexts class >> integerAxiomsFor: aContextBuilder [
 	aContextBuilder
 		"addition axioms"
-		axiom: '∀ ?x:ℤ ∀ ?y:ℤ  ?x + ?y = ?y + ?x';
-		axiom: '∀ ?x:ℤ ∀ ?y:ℤ  ∀ ?z:ℤ  (?x + ?y) + ?z = ?x + (?y + ?z)';
+		axiom: '∀ x_:ℤ ∀ y_:ℤ  x_ + y_ = y_ + x_';
+		axiom: '∀ x_:ℤ ∀ y_:ℤ  ∀ z_:ℤ  (x_ + y_) + z_ = x_ + (y_ + z_)';
 		"multiplication axioms"
-		axiom: '∀ ?x:ℤ ∀ ?y:ℤ  ?x × ?y = ?y × ?x';
-		axiom: '∀ ?x:ℤ ∀ ?y:ℤ  ∀ ?z:ℤ  (?x × ?y) × ?z = ?x × (?y × ?z)'.
+		axiom: '∀ x_:ℤ ∀ y_:ℤ  x_ × y_ = y_ × x_';
+		axiom: '∀ x_:ℤ ∀ y_:ℤ  ∀ z_:ℤ  (x_ × y_) × z_ = x_ × (y_ × z_)'.
 ]
 
 { #category : #accessing }
@@ -79,41 +79,41 @@ LzBuiltinContexts class >> integerOpsFor: aContextBuilder [
 LzBuiltinContexts class >> integerRulesFor: aContextBuilder [
 	aContextBuilder
 		"addition rules"
-		rule: '∀ ?x:ℤ ∀ ?zero:zero ?x + ?zero ⇒ ?x';
-		rule: '∀ ?x:ℤ ∀ ?zero:zero ?zero + ?x ⇒ ?x';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x + ?y → ''x + y'':LzIntegerTerm';
+		rule: '∀ x_:ℤ ∀ zero_:zero x_ + zero_ ⇒ x_';
+		rule: '∀ x_:ℤ ∀ zero_:zero zero_ + x_ ⇒ x_';
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ + y_ → ''x + y'':LzIntegerTerm';
 		"subtraction rules"
-		rule: '∀ ?x:ℤ ∀ ?zero:zero ?x - ?zero ⇒ ?x';
-		rule: '∀ ?x:ℤ ∀ ?zero:zero ?zero - ?x ⇒ -(?x)';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x - ?y → ''x - y'':LzIntegerTerm';
-		rule: '∀ ?zero:zero -(?zero) ⇒ 0';
-		rule: '∀ ?x:ℤ -(?x) → ''x negated'':LzIntegerTerm';
+		rule: '∀ x_:ℤ ∀ zero_:zero x_ - zero_ ⇒ x_';
+		rule: '∀ x_:ℤ ∀ zero_:zero zero_ - x_ ⇒ -(x_)';
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ - y_ → ''x - y'':LzIntegerTerm';
+		rule: '∀ zero_:zero -(zero_) ⇒ 0';
+		rule: '∀ x_:ℤ -(x_) → ''x negated'':LzIntegerTerm';
 		"multiplication rules"
-		rule: '∀ ?x:ℤ ∀ ?zero:zero ?x × ?zero ⇒ 0';
-		rule: '∀ ?x:ℤ ∀ ?zero:zero ?zero × ?x ⇒ 0';
-		rule: '∀ ?x:ℤ 1 × ?x ⇒ ?x';
-		rule: '∀ ?x:ℤ ?x × 1 ⇒ ?x';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x × ?y → ''x * y'':LzIntegerTerm';
+		rule: '∀ x_:ℤ ∀ zero_:zero x_ × zero_ ⇒ 0';
+		rule: '∀ x_:ℤ ∀ zero_:zero zero_ × x_ ⇒ 0';
+		rule: '∀ x_:ℤ 1 × x_ ⇒ x_';
+		rule: '∀ x_:ℤ x_ × 1 ⇒ x_';
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ × y_ → ''x * y'':LzIntegerTerm';
 		"division rules"
-		rule: '∀ ?x:ℤ.nz ∀ ?zero:zero ?zero div ?x ⇒ 0';
-		rule: '∀ ?x:ℤ ?x div 1 ⇒ ?x';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ.nz ?x div ?y → ''(x abs // y abs) * x sign * y sign'':LzIntegerTerm';
-		rule: '∀ ?x:ℤ.nz ∀ ?zero:zero ?zero rem ?x ⇒ 0';
-		rule: '∀ ?x:ℤ ?x rem 1 ⇒ 0';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ.nz ?x rem ?y → ''(x abs % y abs) * x sign * y sign'':LzIntegerTerm';
+		rule: '∀ x_:ℤ.nz ∀ zero_:zero zero_ div x_ ⇒ 0';
+		rule: '∀ x_:ℤ x_ div 1 ⇒ x_';
+		rule: '∀ x_:ℤ ∀ y_:ℤ.nz x_ div y_ → ''(x abs // y abs) * x sign * y sign'':LzIntegerTerm';
+		rule: '∀ x_:ℤ.nz ∀ zero_:zero zero_ rem x_ ⇒ 0';
+		rule: '∀ x_:ℤ x_ rem 1 ⇒ 0';
+		rule: '∀ x_:ℤ ∀ y_:ℤ.nz x_ rem y_ → ''(x abs % y abs) * x sign * y sign'':LzIntegerTerm';
 		"exponentiation rules"
-		rule: '∀ ?x:ℤ.nz ∀ ?zero:zero ?x^{?zero} ⇒ 1';
-		rule: '∀ ?x:ℕ.nz ∀ ?zero:zero ?zero^{?x} ⇒ 0';
-		rule: '∀ ?x:ℤ ∀ ?y:ℕ.nz ?x^{?y} → ''x raisedTo: y'':LzIntegerTerm';
+		rule: '∀ x_:ℤ.nz ∀ zero_:zero x_^{zero_} ⇒ 1';
+		rule: '∀ x_:ℕ.nz ∀ zero_:zero zero_^{x_} ⇒ 0';
+		rule: '∀ x_:ℤ ∀ y_:ℕ.nz x_^{y_} → ''x raisedTo: y'':LzIntegerTerm';
 		"abs rules"
-		rule: '∀ ?x:ℕ abs(?x) ⇒ ?x';
-		rule: '∀ ?x:ℤ abs(?x) ⇒ -(?x) | ?x < 0';
-		rule: '∀ ?x:ℤ abs(?x) → ''x abs'':LzIntegerTerm';
+		rule: '∀ x_:ℕ abs(x_) ⇒ x_';
+		rule: '∀ x_:ℤ abs(x_) ⇒ -(x_) | x_ < 0';
+		rule: '∀ x_:ℤ abs(x_) → ''x abs'':LzIntegerTerm';
 		"comparison rules"
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x < ?y → ''x < y'':LzBooleanTerm';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x > ?y → ''x > y'':LzBooleanTerm';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x ≤ ?y → ''x <= y'':LzBooleanTerm';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x ≥ ?y → ''x >= y'':LzBooleanTerm'.
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ < y_ → ''x < y'':LzBooleanTerm';
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ > y_ → ''x > y'':LzBooleanTerm';
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ ≤ y_ → ''x <= y'':LzBooleanTerm';
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ ≥ y_ → ''x >= y'':LzBooleanTerm'.
 ]
 
 { #category : #private }
@@ -137,11 +137,11 @@ LzBuiltinContexts class >> integerSortsFor: aContextBuilder [
 LzBuiltinContexts class >> rationalAxiomsFor: aContextBuilder [
 	aContextBuilder
 		"addition axioms"
-		axiom: '∀ ?x:ℚ ∀ ?y:ℚ  ?x + ?y = ?y + ?x';
-		axiom: '∀ ?x:ℚ ∀ ?y:ℚ  ∀ ?z:ℚ  (?x + ?y) + ?z = ?x + (?y + ?z)';
+		axiom: '∀ x_:ℚ ∀ y_:ℚ  x_ + y_ = y_ + x_';
+		axiom: '∀ x_:ℚ ∀ y_:ℚ  ∀ z_:ℚ  (x_ + y_) + z_ = x_ + (y_ + z_)';
 		"multiplication axioms"
-		axiom: '∀ ?x:ℚ ∀ ?y:ℚ  ?x × ?y = ?y × ?x';
-		axiom: '∀ ?x:ℚ ∀ ?y:ℚ  ∀ ?z:ℚ  (?x × ?y) × ?z = ?x × (?y × ?z)'.
+		axiom: '∀ x_:ℚ ∀ y_:ℚ  x_ × y_ = y_ × x_';
+		axiom: '∀ x_:ℚ ∀ y_:ℚ  ∀ z_:ℚ  (x_ × y_) × z_ = x_ × (y_ × z_)'.
 ]
 
 { #category : #accessing }
@@ -195,52 +195,52 @@ LzBuiltinContexts class >> rationalOpsFor: aContextBuilder [
 LzBuiltinContexts class >> rationalRulesFor: aContextBuilder [
 	aContextBuilder
 		"addition rules"
-		rule: '∀ ?x:ℚ ∀ ?z:zero ?x + ?z ⇒ ?x';
-		rule: '∀ ?x:ℚ ∀ ?z:zero ?z + ?x ⇒ ?x';
-		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x + ?y → ''x + y'':LzRationalNumberTerm';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x + ?y → ''x + y'':LzIntegerTerm';
+		rule: '∀ x_:ℚ ∀ z_:zero x_ + z_ ⇒ x_';
+		rule: '∀ x_:ℚ ∀ z_:zero z_ + x_ ⇒ x_';
+		rule: '∀ x_:ℚ ∀ y_:ℚ x_ + y_ → ''x + y'':LzRationalNumberTerm';
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ + y_ → ''x + y'':LzIntegerTerm';
 		"Subtraction rules"
-		rule: '∀ ?x:ℚ ∀ ?z:zero ?x - ?z ⇒ ?x';
-		rule: '∀ ?x:ℚ ∀ ?z:zero ?z - ?x ⇒ -(?x)';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x - ?y → ''x - y'':LzIntegerTerm';
-		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x - ?y → ''x - y'':LzRationalNumberTerm';
+		rule: '∀ x_:ℚ ∀ z_:zero x_ - z_ ⇒ x_';
+		rule: '∀ x_:ℚ ∀ z_:zero z_ - x_ ⇒ -(x_)';
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ - y_ → ''x - y'':LzIntegerTerm';
+		rule: '∀ x_:ℚ ∀ y_:ℚ x_ - y_ → ''x - y'':LzRationalNumberTerm';
 		"Negation rules"
-		rule: '∀ ?z:zero -(?z) ⇒ 0';
-		rule: '∀ ?x:ℤ -(?x) → ''x negated'':LzIntegerTerm';
-		rule: '∀ ?x:ℚ -(?x) → ''x negated'':LzRationalNumberTerm';
+		rule: '∀ z_:zero -(z_) ⇒ 0';
+		rule: '∀ x_:ℤ -(x_) → ''x negated'':LzIntegerTerm';
+		rule: '∀ x_:ℚ -(x_) → ''x negated'':LzRationalNumberTerm';
 		"Multiplication rules"
-		rule: '∀ ?x:ℚ ∀ ?z:zero ?x × ?z ⇒ 0';
-		rule: '∀ ?x:ℚ ∀ ?z:zero ?z × ?x ⇒ 0';
-		rule: '∀ ?x:ℚ 1 × ?x ⇒ ?x';
-		rule: '∀ ?x:ℚ ?x × 1 ⇒ ?x';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ ?x × ?y → ''x * y'':LzIntegerTerm';
-		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x × ?y → ''x * y'':LzRationalNumberTerm';
+		rule: '∀ x_:ℚ ∀ z_:zero x_ × z_ ⇒ 0';
+		rule: '∀ x_:ℚ ∀ z_:zero z_ × x_ ⇒ 0';
+		rule: '∀ x_:ℚ 1 × x_ ⇒ x_';
+		rule: '∀ x_:ℚ x_ × 1 ⇒ x_';
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ × y_ → ''x * y'':LzIntegerTerm';
+		rule: '∀ x_:ℚ ∀ y_:ℚ x_ × y_ → ''x * y'':LzRationalNumberTerm';
 		"Division rules"
-		rule: '∀ ?x:ℚ.nz ∀ ?z:zero ?z ÷ ?x ⇒ 0';
-		rule: '∀ ?x:ℚ ?x ÷ 1 ⇒ ?x';
-		rule: '∀ ?x:ℚ ∀ ?y:ℚ.nz ?x ÷ ?y → ''x / y'':LzRationalNumberTerm';
+		rule: '∀ x_:ℚ.nz ∀ z_:zero z_ ÷ x_ ⇒ 0';
+		rule: '∀ x_:ℚ x_ ÷ 1 ⇒ x_';
+		rule: '∀ x_:ℚ ∀ y_:ℚ.nz x_ ÷ y_ → ''x / y'':LzRationalNumberTerm';
 		"Integer div and rem rules"
-		rule: '∀ ?x:ℤ.nz ∀ ?z:zero ?z div ?x ⇒ 0';
-		rule: '∀ ?x:ℤ ?x div 1 ⇒ ?x';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ.nz ?x div ?y → ''(x abs // y abs) * x sign * y sign'':LzIntegerTerm';
-		rule: '∀ ?x:ℤ.nz ∀ ?z:zero ?z rem ?x ⇒ 0';
-		rule: '∀ ?x:ℤ ?x rem 1 ⇒ 0';
-		rule: '∀ ?x:ℤ ∀ ?y:ℤ.nz ?x rem ?y → ''(x abs % y abs) * x sign * y sign'':LzIntegerTerm';
+		rule: '∀ x_:ℤ.nz ∀ z_:zero z_ div x_ ⇒ 0';
+		rule: '∀ x_:ℤ x_ div 1 ⇒ x_';
+		rule: '∀ x_:ℤ ∀ y_:ℤ.nz x_ div y_ → ''(x abs // y abs) * x sign * y sign'':LzIntegerTerm';
+		rule: '∀ x_:ℤ.nz ∀ z_:zero z_ rem x_ ⇒ 0';
+		rule: '∀ x_:ℤ x_ rem 1 ⇒ 0';
+		rule: '∀ x_:ℤ ∀ y_:ℤ.nz x_ rem y_ → ''(x abs % y abs) * x sign * y sign'':LzIntegerTerm';
 		"Exponentiation rules"
-		rule: '∀ ?x:ℚ.nz ∀ ?z:zero ?x^{?z} ⇒ 1';
-		rule: '∀ ?x:ℕ.nz ∀ ?z:zero ?z^{?x} ⇒ 0';
-		rule: '∀ ?x:ℤ ∀ ?y:ℕ.nz ?x^{?y} → ''x raisedTo: y'':LzIntegerTerm';
-		rule: '∀ ?x:ℚ.nz ∀ ?y:ℤ.nz ?x^{?y} → ''x raisedTo: y'':LzRationalNumberTerm';
+		rule: '∀ x_:ℚ.nz ∀ z_:zero x_^{z_} ⇒ 1';
+		rule: '∀ x_:ℕ.nz ∀ z_:zero z_^{x_} ⇒ 0';
+		rule: '∀ x_:ℤ ∀ y_:ℕ.nz x_^{y_} → ''x raisedTo: y'':LzIntegerTerm';
+		rule: '∀ x_:ℚ.nz ∀ y_:ℤ.nz x_^{y_} → ''x raisedTo: y'':LzRationalNumberTerm';
 		"Abs rules"
-		rule: '∀ ?x:ℚ.nn abs(?x) ⇒ ?x';
-		rule: '∀ ?x:ℚ abs(?x) ⇒ -(?x) | ?x < 0';
-		rule: '∀ ?x:ℤ abs(?x) → ''x abs'':LzIntegerTerm';
-		rule: '∀ ?x:ℚ abs(?x) → ''x abs'':LzRationalNumberTerm';
+		rule: '∀ x_:ℚ.nn abs(x_) ⇒ x_';
+		rule: '∀ x_:ℚ abs(x_) ⇒ -(x_) | x_ < 0';
+		rule: '∀ x_:ℤ abs(x_) → ''x abs'':LzIntegerTerm';
+		rule: '∀ x_:ℚ abs(x_) → ''x abs'':LzRationalNumberTerm';
 		"Comparison rules"
-		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x < ?y → ''x < y'':LzBooleanTerm';
-		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x > ?y → ''x > y'':LzBooleanTerm';
-		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x ≤ ?y → ''x <= y'':LzBooleanTerm';
-		rule: '∀ ?x:ℚ ∀ ?y:ℚ ?x ≥ ?y → ''x >= y'':LzBooleanTerm'.
+		rule: '∀ x_:ℚ ∀ y_:ℚ x_ < y_ → ''x < y'':LzBooleanTerm';
+		rule: '∀ x_:ℚ ∀ y_:ℚ x_ > y_ → ''x > y'':LzBooleanTerm';
+		rule: '∀ x_:ℚ ∀ y_:ℚ x_ ≤ y_ → ''x <= y'':LzBooleanTerm';
+		rule: '∀ x_:ℚ ∀ y_:ℚ x_ ≥ y_ → ''x >= y'':LzBooleanTerm'.
 ]
 
 { #category : #private }
@@ -272,7 +272,7 @@ LzBuiltinContexts class >> stringContext [
 		builtin: #strings;
 		sort: 'string';
 		op: 'string + string : string';
-		rule: '∀ ?a:string ∀ ?b:string ?a + ?b → ''a, b'':LzStringTerm';
+		rule: '∀ a_:string ∀ b_:string a_ + b_ → ''a, b'':LzStringTerm';
 		context
 ]
 

@@ -14,12 +14,12 @@ LzExamples >> bagContext [
 		include: LzBuiltinContexts integerContext;
 		sort: 'collection';
 		sort: 'bag(𝕊, ℕ)';
-		subsort: '∀ ?s:𝕊 ∀ ?n:ℕ list(?s, ?n) ⊆ bag(?s, ?n)';
-		subsort: '∀ ?s:𝕊 ∀ ?n:ℕ bag(?s, ?n) ⊆ collection';
+		subsort: '∀ s_:𝕊 ∀ n_:ℕ list(s_, n_) ⊆ bag(s_, n_)';
+		subsort: '∀ s_:𝕊 ∀ n_:ℕ bag(s_, n_) ⊆ collection';
 		subsort: '∅ ⊆ collection';
-		op: '∀ ?s:𝕊 ∀ ?n:ℕ ∀ ?m:ℕ (bag(?s, ?n)) ** (bag(?s, ?m)) : bag(?s, ?n + ?m)';
-		op: '∀ ?s:𝕊 ∀ ?n:ℕ (bag(?s, ?n)) ** ?s : bag(?s, ?n + 1)';
-		op: '∀ ?s:𝕊 ∅ ** ?s : bag(?s, 1)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ (bag(s_, n_)) ** (bag(s_, m_)) : bag(s_, n_ + m_)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ (bag(s_, n_)) ** s_ : bag(s_, n_ + 1)';
+		op: '∀ s_:𝕊 ∅ ** s_ : bag(s_, 1)';
 		op: 'size(collection) : ℕ';
 		context
 ]
@@ -27,12 +27,14 @@ LzExamples >> bagContext [
 { #category : #example }
 LzExamples >> bagRules [
 	<gtExample>
+	| context |
+	context := self bagContext.
 	^ {
 		'∅ ++ 1 ⇒ ∅'.
 		'size(∅) ⇒ 0'.
 	} collect: [ :each |
 		| rule |
-		rule := self bagContext rule: each.
+		rule := context rule: each.
 		self assert: rule asLeibnizSyntaxString equals: each.
 		rule ]
 ]
@@ -43,9 +45,9 @@ LzExamples >> bagSignature [
 	^ LzSignatureBuilder new
 		sortGraph: self bagSortGraph;
 		include: self listSignature;
-		op: '∀ ?s:𝕊 ∀ ?n:ℕ ∀ ?m:ℕ (bag(?s, ?n)) ** (bag(?s, ?m)) : bag(?s, ?n + ?m)';
-		op: '∀ ?s:𝕊 ∀ ?n:ℕ (bag(?s, ?n)) ** ?s : bag(?s, ?n + 1)';
-		op: '∀ ?s:𝕊 ∅ ** ?s : bag(?s, 1)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ (bag(s_, n_)) ** (bag(s_, m_)) : bag(s_, n_ + m_)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ (bag(s_, n_)) ** s_ : bag(s_, n_ + 1)';
+		op: '∀ s_:𝕊 ∅ ** s_ : bag(s_, 1)';
 		signature
 ]
 
@@ -57,8 +59,8 @@ LzExamples >> bagSortContext [
 		op: 'collection : 𝕊';
 		op: 'bag(𝕊, ℕ) : 𝕊';
 		op: 'ℕ : 𝕊';
-		axiom: '∀ ?s:𝕊 ∀ ?n:ℕ list(?s, ?n) ⊆ bag(?s, ?n)';
-		axiom: '∀ ?s:𝕊 ∀ ?n:ℕ bag(?s, ?n) ⊆ collection';
+		axiom: '∀ s_:𝕊 ∀ n_:ℕ list(s_, n_) ⊆ bag(s_, n_)';
+		axiom: '∀ s_:𝕊 ∀ n_:ℕ bag(s_, n_) ⊆ collection';
 		axiom: '∅ ⊆ collection';
 		context
 ]
@@ -77,20 +79,20 @@ LzExamples >> booleanUnifications [
 	| c |
 	c := LzContextBuilder new
 			include: LzExampleContexts booleanContext;
-			var: '?X : 𝔹';
-			var: '?Y : 𝔹';
+			var: 'X_ : 𝔹';
+			var: 'Y_ : 𝔹';
 			context.
 	^ {
-		{'⊤'. '?X'. '(?X=⊤)'}.
-		{'¬(?X)'. '¬(⊤)'. '(?X=⊤)'}.
-		{'?X'. '¬(⊤)'. '(?X=¬(⊤))'}.
-		{'⊤ ⊻ ⊥ ⊻ ⊤ ⊻ ¬(⊤)'. '⊤ ⊻ ⊥ ⊻ ?X ⊻ ?Y'. '(?X=⊤, ?Y=¬(⊤))'}.
-		{'⊥ ⊻ ?X ⊻ ⊤ ⊻ ¬(⊤)'. '⊥ ⊻ ⊤ ⊻ ?X ⊻ ?Y'. '(?X=⊤, ?Y=¬(⊤))'}.
-		{'?X ⊻ ¬(?X)'. '⊥ ⊻ ¬(?X)'. '(?X=⊥)'}.
-		{'?X ⊻ ¬(?Y)'. '⊥ ⊻ ¬(?Y)'. '(?Y, ?X=⊥)'}.
-		{'⊥ ⊻ ¬(?X)'. '⊥ ⊻ ¬(?Y)'. '(?X=?Y)'}.
+		{'⊤'. 'X_'. '(X_=⊤)'}.
+		{'¬(X_)'. '¬(⊤)'. '(X_=⊤)'}.
+		{'X_'. '¬(⊤)'. '(X_=¬(⊤))'}.
+		{'⊤ ⊻ ⊥ ⊻ ⊤ ⊻ ¬(⊤)'. '⊤ ⊻ ⊥ ⊻ X_ ⊻ Y_'. '(X_=⊤, Y_=¬(⊤))'}.
+		{'⊥ ⊻ X_ ⊻ ⊤ ⊻ ¬(⊤)'. '⊥ ⊻ ⊤ ⊻ X_ ⊻ Y_'. '(X_=⊤, Y_=¬(⊤))'}.
+		{'X_ ⊻ ¬(X_)'. '⊥ ⊻ ¬(X_)'. '(X_=⊥)'}.
+		{'X_ ⊻ ¬(Y_)'. '⊥ ⊻ ¬(Y_)'. '(Y_, X_=⊥)'}.
+		{'⊥ ⊻ ¬(X_)'. '⊥ ⊻ ¬(Y_)'. '(X_=Y_)'}.
 		{'⊤'. '⊥'.  '(failure #nonUnifiableTerms: ⊥, ⊤)' }.
-		{'∀ ?foo:𝔹 ¬(?foo)'. '∀ ?bar:𝔹 ¬(?bar)'. '(?bar=?foo)'}
+		{'∀ foo_:𝔹 ¬(foo_)'. '∀ bar_:𝔹 ¬(bar_)'. '(bar_=foo_)'}
 	} collect: [ :each |
 		| unification string |
 		unification := (c pattern: each first) unify: (c pattern: each  second).
@@ -128,6 +130,8 @@ LzExamples >> integerArithmetic [
 { #category : #example }
 LzExamples >> integerTerms [
 	<gtExample>
+	| context |
+	context := LzBuiltinContexts integerContext.
 	^ {
 		{ '0'. 'zero'. }.
 		{ '1'. 'ℕ.nz' }.
@@ -137,7 +141,7 @@ LzExamples >> integerTerms [
 	}
 	collect: [ :each |
 		| term |
-		term := LzBuiltinContexts integerContext term: each first.
+		term := context term: each first.
 		self assert: term sort asLeibnizSyntaxString equals: each second.
 		term  ]
 ]
@@ -155,12 +159,12 @@ LzExamples >> listContext [
 		sort: 'list(𝕊, ℕ)';
 		subsort: 'element.special ⊆ element';		
 		op: '∅ : ∅';
-		op: '∀ ?s:𝕊 ∀ ?n:ℕ ∀ ?m:ℕ ',
-				'(list(?s, ?n)) ++ (list(?s, ?m)) : list(?s, ?n + ?m)';
-		op: '∀ ?s:𝕊 ∀ ?n:ℕ ',
-				'(list(?s, ?n)) ++ ?s : list(?s, ?n + 1)';
-		op: '∀ ?s:𝕊 ',
-				'∅ ++ ?s : list(?s, 1)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ ',
+				'(list(s_, n_)) ++ (list(s_, m_)) : list(s_, n_ + m_)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ',
+				'(list(s_, n_)) ++ s_ : list(s_, n_ + 1)';
+		op: '∀ s_:𝕊 ',
+				'∅ ++ s_ : list(s_, 1)';
 		op: 'anElement : element';
 		context
 ]
@@ -180,12 +184,12 @@ LzExamples >> listSignature [
 	^ LzSignatureBuilder new
 		sortGraph: self listSortGraph;
 		op: '∅ : ∅';
-		op: '∀ ?s:𝕊 ∀ ?n:ℕ ∀ ?m:ℕ ',
-				'(list(?s, ?n)) ++ (list(?s, ?m)) : list(?s, ?n + ?m)';
-		op: '∀ ?s:𝕊 ∀ ?n:ℕ ',
-				'(list(?s, ?n)) ++ ?s : list(?s, ?n + 1)';
-		op: '∀ ?s:𝕊 ',
-				'∅ ++ ?s : list(?s, 1)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ ',
+				'(list(s_, n_)) ++ (list(s_, m_)) : list(s_, n_ + m_)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ',
+				'(list(s_, n_)) ++ s_ : list(s_, n_ + 1)';
+		op: '∀ s_:𝕊 ',
+				'∅ ++ s_ : list(s_, 1)';
 		op: 'anElement : element';
 		signature
 ]
@@ -215,13 +219,15 @@ LzExamples >> listSortGraph [
 { #category : #example }
 LzExamples >> listTerms [
 	<gtExample>
+	| context |
+	context := self listPlusIntegerContext.
 	^ {
 		'∅'.
 		'∅ ++ 1'.
 		'∅ ++ 1 ++ 2'.
 	}
 	collect: [ :each |
-		 self listPlusIntegerContext term: each ]
+		 context term: each ]
 ]
 
 { #category : #example }
@@ -281,10 +287,10 @@ LzExamples >> signatureWithSubsorts [
 		op: 'aC : C';
 		op: 'aD : D';
 		op: 'foo(A) : A';
-		var: '?A : A';
-		var: '?B : B';
-		var: '?C : C';
-		var: '?D : D';
+		var: 'A_ : A';
+		var: 'B_ : B';
+		var: 'C_ : C';
+		var: 'D_ : D';
 		signature
 ]
 
@@ -304,8 +310,8 @@ LzExamples >> simpleContextBuilder [
 		op: 'Foo + Foo : Foo';
 		op: 'Foo[Foo] : Foo';
 		op: 'Foo^{Foo} : Foo';
-		op: 'Foo_{Foo} : Foo';
-		var: '?foo : Foo'.
+		op: 'Foo\{Foo} : Foo';
+		var: 'foo_ : Foo'.
 ]
 
 { #category : #example }
@@ -313,8 +319,8 @@ LzExamples >> simpleContextRules [
 	<gtExample>
 	^ {
 		'aFoo ⇒ aFoo'.
-		'aFoo(?foo) ⇒ aFoo'.
-		'∀ ?someFoo:Foo aFoo(?someFoo) ⇒ ?someFoo'.
+		'aFoo(foo_) ⇒ aFoo'.
+		'∀ someFoo_:Foo aFoo(someFoo_) ⇒ someFoo_'.
 	} collect: [ :each |
 		| rule |
 		rule := self simpleContext rule: each.
@@ -328,11 +334,11 @@ LzExamples >> simpleContextTermMatches [
 	| context |
 	context := self simpleContext.
 	^ {
-		{ '?foo'. 'aFoo'.  {'?foo' -> 'aFoo'} }.
-		{ '?foo'. 'aFoo(aFoo)'.  {'?foo' -> 'aFoo(aFoo)'} }.
-		{ 'aFoo(?foo)'. 'aFoo(aFoo)'. {'?foo' -> 'aFoo'} }.
-		{ '(?foo + ?foo)'. 'aFoo + aFoo'. {'?foo' -> 'aFoo'} }.
-		{ 'aFoo(?foo)'. 'aFoo'. {} }
+		{ 'foo_'. 'aFoo'.  {'foo_' -> 'aFoo'} }.
+		{ 'foo_'. 'aFoo(aFoo)'.  {'foo_' -> 'aFoo(aFoo)'} }.
+		{ 'aFoo(foo_)'. 'aFoo(aFoo)'. {'foo_' -> 'aFoo'} }.
+		{ '(foo_ + foo_)'. 'aFoo + aFoo'. {'foo_' -> 'aFoo'} }.
+		{ 'aFoo(foo_)'. 'aFoo'. {} }
 	} collect: [ :each |
 		| pattern term bindings result |
 		pattern := context pattern: each first.
@@ -351,11 +357,11 @@ LzExamples >> simpleContextTerms [
 	^ {
 		'aFoo'.
 		'aFoo(aFoo)'.
-		'aFoo(aFoo(?foo))'.
+		'aFoo(aFoo(foo_))'.
 		'aFoo(aFoo + aFoo)'.
 		'aFoo[aFoo]'.
 		'aFoo^{aFoo}'.
-		'aFoo_{aFoo}'
+		'aFoo\{aFoo}'
 	} collect: [ :each |
 		| term |
 		term := self simpleContext term: each.
@@ -407,13 +413,15 @@ LzExamples >> stringOperations [
 { #category : #example }
 LzExamples >> stringTerms [
 	<gtExample>
+	| context |
+	context := LzBuiltinContexts stringContext.
 	^ {
 		{ '""'. 'string'. }.
 		{ '"abc"'. 'string' }.
 	}
 	collect: [ :each |
 		| term |
-		term := LzBuiltinContexts stringContext term: each first.
+		term := context term: each first.
 		self assert: term sort asLeibnizSyntaxString equals: each second.
 		term  ]
 ]

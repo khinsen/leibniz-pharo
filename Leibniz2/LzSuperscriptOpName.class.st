@@ -1,56 +1,58 @@
 Class {
-	#name : #LzBracketOperatorName,
-	#superclass : #LzOperatorName,
+	#name : #LzSuperscriptOpName,
+	#superclass : #LzOpName,
 	#category : #'Leibniz2-Parser'
 }
 
 { #category : #initializing }
-LzBracketOperatorName >> initialize [
-	internalSymbol := #'[]'
+LzSuperscriptOpName >> initialize [
+	internalSymbol := #'^'
 ]
 
 { #category : #printing }
-LzBracketOperatorName >> printForArgs: anArrayOfTerms on: aStream [
+LzSuperscriptOpName >> printForArgs: anArrayOfTerms on: aStream [
 	self assert: anArrayOfTerms size > 1.
 	anArrayOfTerms first
 		printAsLeibnizSyntaxOn: aStream
 		parenthesized: anArrayOfTerms first isInfix.
-	aStream nextPut: $[.
+	aStream nextPutAll: '^{'.
 	anArrayOfTerms allButFirst allButLast do: [ : each |
 		each printAsLeibnizSyntaxOn: aStream.
 		aStream nextPutAll: ', ' ].
 	anArrayOfTerms last printAsLeibnizSyntaxOn: aStream.
-	aStream nextPut: $]
+	aStream nextPut: $}
 ]
 
 { #category : #printing }
-LzBracketOperatorName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
+LzSuperscriptOpName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
 	self assert: anENodeArray size > 1.
 	anENodeArray first
 		printAsLeibnizSyntaxOn: aStream
+		parenthesized: anENodeArray first isInfix
 		parents: aNodeSet.
-	aStream nextPut: $[.
+	aStream nextPutAll: '^{'.
 	anENodeArray allButFirst allButLast do: [ : each |
 		each printAsLeibnizSyntaxOn: aStream parents: aNodeSet.
 		aStream nextPutAll: ', ' ].
 	anENodeArray last
-		printAsLeibnizSyntaxOn: aStream parents: aNodeSet.
-	aStream nextPut: $]
+		printAsLeibnizSyntaxOn: aStream
+		parents: aNodeSet.
+	aStream nextPut: $}
 ]
 
 { #category : #printing }
-LzBracketOperatorName >> printForArity: anArity on: aStream [
+LzSuperscriptOpName >> printForArity: anArity on: aStream [
 	self assert: anArity size > 1.
 	anArity first printAsLeibnizSyntaxOn: aStream.
-	aStream nextPut: $[.
+	aStream nextPutAll: '^{'.
 	anArity allButFirst allButLast do: [ : each |
 		each printAsLeibnizSyntaxOn: aStream.
 		aStream nextPutAll: ', ' ].
 	anArity last printAsLeibnizSyntaxOn: aStream.
-	aStream nextPut: $]
+	aStream nextPutAll: '}'
 ]
 
-{ #category : #inspecting }
-LzBracketOperatorName >> synopsis [
-	^ '•[• ...]'
+{ #category : #printing }
+LzSuperscriptOpName >> synopsis [
+	^ '•^{•}'
 ]

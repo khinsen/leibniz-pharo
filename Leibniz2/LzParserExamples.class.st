@@ -99,10 +99,10 @@ LzParserExamples >> ruleStrings [
 	^ {
 		'a ⇒ b'.
 		'a ⇒ b | true'.
-		'∀ ?bar:Bar foo(?bar) ⇒ fooBar'.
-		'∀ ?bar:Bar foo(?bar) ⇒ fooBar | false'.
-		'∀ ?bar:Bar ∀ ?baz:Baz foo(?bar, ?baz) ⇒ fooBar | ?baz'.
-		'foo(?bar) → ''?bar'':fn'.
+		'∀ bar_:Bar foo(bar_) ⇒ fooBar'.
+		'∀ bar_:Bar foo(bar_) ⇒ fooBar | false'.
+		'∀ bar_:Bar ∀ baz_:Baz foo(bar_, baz_) ⇒ fooBar | baz_'.
+		'foo(bar_) → ''bar_'':fn'.
 	}
 ]
 
@@ -129,12 +129,12 @@ LzParserExamples >> simpleTermStrings [
 	^ self literalTermStrings,
 	{
 		'foo'.
-		'?foo'.
+		'foo_'.
 		'foo(bar)'.
 		'(foo + bar)'.
 		'(foo[bar])'.
 		'(foo^{bar})'.
-		'(foo_{bar})'.
+		'(foo\{bar})'.
 	}
 ]
 
@@ -187,7 +187,7 @@ LzParserExamples >> termStrings [
 		'foo(bar + baz)'.
 		'foo[bar]'.
 		'foo^{bar}'.
-		'foo_{bar}'.
+		'foo\{bar}'.
 	}
 ]
 
@@ -208,8 +208,8 @@ LzParserExamples >> terms [
 LzParserExamples >> varDeclarations [
 	<gtExample>
 	^ {
-		'?foo: Foo'.
-		'?list : ∀ ?n:ℕ list(?n)'.
+		'foo_: Foo'.
+		'list_ : ∀ n_:ℕ list(n_)'.
 	} collect: [ :each |
 		| astNode |
 		astNode := self varParser parse: each.

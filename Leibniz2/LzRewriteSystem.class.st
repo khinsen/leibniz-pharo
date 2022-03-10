@@ -16,7 +16,7 @@ LzRewriteSystem >> gtRulesFor: aView [
 	<gtView>
 	| ruleView topLevel label |
 	topLevel := [ :object |
-		object isSymbol or: [ object isKindOf: LzOperatorName] ].
+		object isSymbol or: [ object isKindOf: LzOpName] ].
 	label := [ :object |
 		object isSymbol ifTrue: [ object ] ifFalse: [ object synopsis ] ].
 	ruleView := aView columnedTree

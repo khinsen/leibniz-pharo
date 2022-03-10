@@ -1,6 +1,6 @@
 Class {
 	#name : #LzVarName,
-	#superclass : #LzOperatorName,
+	#superclass : #LzOpName,
 	#category : #'Leibniz2-Parser'
 }
 

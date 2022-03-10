@@ -108,6 +108,6 @@ LzGrammarIdentifiersAndLiterals >> stringTerm [
 
 { #category : #identifiers }
 LzGrammarIdentifiersAndLiterals >> varIdentifier [
-	^ ($? asPParser, (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
+	^ (opIdentifier, $_ asPParser) flatten
 		==> [ :id | id asSymbol ]
 ]

@@ -8,7 +8,7 @@ Class {
 LzBooleanTerm class >> signature: aSignature value: aBoolean [
 	^ LzOpTerm new
 		signature: aSignature;
-		opName: (LzPrefixOperatorName for:
+		opName: (LzPrefixOpName for:
 					(aBoolean
 						ifTrue: [ '⊤' ]
 						ifFalse: [ '⊥' ]));

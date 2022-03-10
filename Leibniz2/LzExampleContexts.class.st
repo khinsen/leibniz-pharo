@@ -16,12 +16,12 @@ LzExampleContexts class >> booleanContext [
 		op: '𝔹 ∧ 𝔹 : 𝔹';
 		op: '𝔹 ∨ 𝔹 : 𝔹';
 		op: '𝔹 ⊻ 𝔹 : 𝔹';
-		axiom: '∀ ?x:𝔹 ∀ ?y:𝔹 ?x ∧ ?y = ?y ∧ ?x';
-		axiom: '∀ ?x:𝔹 ∀ ?y:𝔹 ∀ ?z:𝔹 (?x ∧ ?y) ∧ ?z = ?x ∧ (?y ∧ ?z)';
-		axiom: '∀ ?x:𝔹 ∀ ?y:𝔹 ?x ∨ ?y = ?y ∨ ?x';
-		axiom: '∀ ?x:𝔹 ∀ ?y:𝔹 ∀ ?z:𝔹 (?x ∨ ?y) ∨ ?z = ?x ∨ (?y ∨ ?z)';
-		axiom: '∀ ?x:𝔹 ∀ ?y:𝔹 ?x ⊻ ?y = ?y ⊻ ?x';
-		axiom: '∀ ?x:𝔹 ∀ ?y:𝔹 ∀ ?z:𝔹 (?x ⊻ ?y) ⊻ ?z = ?x ⊻ (?y ⊻ ?z)'.
+		axiom: '∀ x_:𝔹 ∀ y_:𝔹 x_ ∧ y_ = y_ ∧ x_';
+		axiom: '∀ x_:𝔹 ∀ y_:𝔹 ∀ z_:𝔹 (x_ ∧ y_) ∧ z_ = x_ ∧ (y_ ∧ z_)';
+		axiom: '∀ x_:𝔹 ∀ y_:𝔹 x_ ∨ y_ = y_ ∨ x_';
+		axiom: '∀ x_:𝔹 ∀ y_:𝔹 ∀ z_:𝔹 (x_ ∨ y_) ∨ z_ = x_ ∨ (y_ ∨ z_)';
+		axiom: '∀ x_:𝔹 ∀ y_:𝔹 x_ ⊻ y_ = y_ ⊻ x_';
+		axiom: '∀ x_:𝔹 ∀ y_:𝔹 ∀ z_:𝔹 (x_ ⊻ y_) ⊻ z_ = x_ ⊻ (y_ ⊻ z_)'.
 	self booleanRulesFor: builder.
 	^ builder context
 ]
@@ -32,33 +32,33 @@ LzExampleContexts class >> booleanRulesFor: builder [
 		"1. Eliminate NOT and OR"
 
 		"1a. NOT is replaced by XOR with ⊤"
-		rule: '∀ ?x:𝔹 ¬(?x) ⇒ ⊤ ⊻ ?x';
+		rule: '∀ x_:𝔹 ¬(x_) ⇒ ⊤ ⊻ x_';
 
 		"1b. OR is replaced by XOR and AND"
-		rule: '∀ ?y:𝔹  ∀ ?x:𝔹 ?x ∨ ?y ⇒ ?x ⊻ ?y ⊻ (?x ∧ ?y)';
+		rule: '∀ y_:𝔹  ∀ x_:𝔹 x_ ∨ y_ ⇒ x_ ⊻ y_ ⊻ (x_ ∧ y_)';
 
 		"2 Simplify AND relations"
 
 		"2a. AND is ⊥ if one of its arguments is ⊥"
-		rule: '∀ ?x:𝔹 ?x ∧ ⊥ ⇒ ⊥';
-		rule: '∀ ?x:𝔹 ⊥ ∧ ?x ⇒ ⊥';
+		rule: '∀ x_:𝔹 x_ ∧ ⊥ ⇒ ⊥';
+		rule: '∀ x_:𝔹 ⊥ ∧ x_ ⇒ ⊥';
 
 		"2b. If one argument of AND is ⊤, the result is the other argument"
-		rule: '∀ ?x:𝔹 ?x ∧ ⊤ ⇒ ?x';
-		rule: '∀ ?x:𝔹 ⊤ ∧ ?x ⇒ ?x';
+		rule: '∀ x_:𝔹 x_ ∧ ⊤ ⇒ x_';
+		rule: '∀ x_:𝔹 ⊤ ∧ x_ ⇒ x_';
 
 		"2c. If the two arguments to AND are equal, they are also equal to the result"
-		rule: '∀ ?x:𝔹 ?x ∧ ?x ⇒ ?x';
+		rule: '∀ x_:𝔹 x_ ∧ x_ ⇒ x_';
 
 		"3 Simplify XOR relations"
 
 		"3a. XOR with ⊥ leaves truth values unchanged"
-		rule: '∀ ?x:𝔹 ?x ⊻ ⊥ ⇒ ?x';
-		rule: '∀ ?x:𝔹 ⊥ ⊻ ?x ⇒ ?x';
+		rule: '∀ x_:𝔹 x_ ⊻ ⊥ ⇒ x_';
+		rule: '∀ x_:𝔹 ⊥ ⊻ x_ ⇒ x_';
 
 		"3b. If the two arguments to XOR are equal, the result is ⊥"
-		rule: '∀ ?x:𝔹 ?x ⊻ ?x ⇒ ⊥';
+		rule: '∀ x_:𝔹 x_ ⊻ x_ ⇒ ⊥';
 
 		"4. Standardize combinations of XOR and AND"
-		rule: '∀ ?x:𝔹 ∀ ?y:𝔹 ∀ ?z:𝔹 ?x ∧ (?y ⊻ ?z) ⇒ (?x ∧ ?y) ⊻ (?x ∧ ?z)'.
+		rule: '∀ x_:𝔹 ∀ y_:𝔹 ∀ z_:𝔹 x_ ∧ (y_ ⊻ z_) ⇒ (x_ ∧ y_) ⊻ (x_ ∧ z_)'.
 ]

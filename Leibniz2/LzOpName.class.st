@@ -1,5 +1,5 @@
 Class {
-	#name : #LzOperatorName,
+	#name : #LzOpName,
 	#superclass : #Object,
 	#traits : 'TLzEquality + TLzPrintable',
 	#classTraits : 'TLzEquality classTrait + TLzPrintable classTrait',
@@ -10,79 +10,79 @@ Class {
 }
 
 { #category : #comparing }
-LzOperatorName >> <= opName [
+LzOpName >> <= opName [
 	^ self asSymbol <= opName asSymbol
 ]
 
 { #category : #modifying }
-LzOperatorName >> addPrefix: aSymbol [
+LzOpName >> addPrefix: aSymbol [
 	self shouldNotImplement
 ]
 
 { #category : #accessing }
-LzOperatorName >> asString [
+LzOpName >> asString [
 	^ internalSymbol asString
 ]
 
 { #category : #converting }
-LzOperatorName >> asSymbol [
+LzOpName >> asSymbol [
 	^ internalSymbol
 ]
 
 { #category : #accessing }
-LzOperatorName >> internalSymbol [
+LzOpName >> internalSymbol [
 	^ internalSymbol
 ]
 
 { #category : #accessing }
-LzOperatorName >> internalSymbol: aSymbolOrString [
+LzOpName >> internalSymbol: aSymbolOrString [
 	internalSymbol := aSymbolOrString asSymbol
 ]
 
 { #category : #testing }
-LzOperatorName >> isEqualityOp [
+LzOpName >> isEqualityOp [
 	^ false
 ]
 
 { #category : #testing }
-LzOperatorName >> isInfix [
+LzOpName >> isInfix [
 	^ false
 ]
 
 { #category : #testing }
-LzOperatorName >> isInfixOpOtherThan: anOpName [
+LzOpName >> isInfixOpOtherThan: anOpName [
 	^ false
 ]
 
 { #category : #printing }
-LzOperatorName >> printAsLeibnizSyntaxOn: aStream [
+LzOpName >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPutAll: internalSymbol
 ]
 
 { #category : #printing }
-LzOperatorName >> printForArgs: aTermArray on: aStream [
+LzOpName >> printForArgs: aTermArray on: aStream [
 	self printForArity: aTermArray on: aStream
 ]
 
 { #category : #printing }
-LzOperatorName >> printForArgs: aTermArray on: aStream parents: aNodeSet [
+LzOpName >> printForArgs: aTermArray on: aStream parents: aNodeSet [
 	self subclassResponsibility
 ]
 
 { #category : #printing }
-LzOperatorName >> printForArity: anArity on: aStream [
+LzOpName >> printForArity: anArity on: aStream [
 	self subclassResponsibility
 ]
 
 { #category : #printing }
-LzOperatorName >> printForArity: anArity withSort: aSort on: aStream [
+LzOpName >> printForArity: anArity withSort: aSort on: aStream [
 	self printForArity: anArity on: aStream.
 	aStream nextPutAll: ' : '.
 	aSort printAsLeibnizSyntaxOn: aStream.
 ]
 
 { #category : #accessing }
-LzOperatorName >> printOn: aStream [
+LzOpName >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	aStream nextPutAll: internalSymbol.
@@ -90,16 +90,16 @@ LzOperatorName >> printOn: aStream [
 ]
 
 { #category : #accessing }
-LzOperatorName >> printStringForArity: anArity [
+LzOpName >> printStringForArity: anArity [
 	^ String streamContents: [ :s | self printForArity: anArity on: s ]
 ]
 
 { #category : #inspecting }
-LzOperatorName >> synopsis [
+LzOpName >> synopsis [
 	^ internalSymbol asString
 ]
 
 { #category : #accessing }
-LzOperatorName >> valueSlots [
+LzOpName >> valueSlots [
 	^ #(internalSymbol)
 ]

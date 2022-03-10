@@ -25,11 +25,11 @@ LzFunctionRule >> function: anArray [
 	code := String streamContents: [ :s |
 		s nextPutAll: 'tempMethod ^ [ :signature :args | | '.
 		self variables keysDo: [ :each |
-			s nextPutAll: each asSymbol allButFirst.
+			s nextPutAll: each asSymbol allButLast.
 			s nextPut: Character space ].
 		s nextPutAll: '| '.
 		self variables keysDo: [ :each |
-			s nextPutAll: each asSymbol allButFirst.
+			s nextPutAll: each asSymbol allButLast.
 			s nextPutAll: ' := (args at: (LzVarName for: '.
 			each asSymbol printOn: s.
 			s nextPutAll: ')) lzAtomicTermValue. ' ].
@@ -51,5 +51,5 @@ LzFunctionRule >> printBodyAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #'as yet unclassified' }
-LzFunctionRule >> tempMethod [ ^ [ :signature :args | | y x | y := (args at: (LzVarName for: #'?y')) lzAtomicTermValue. x := (args at: (LzVarName for: #'?x')) lzAtomicTermValue. LzBooleanTerm signature: signature value: (x >= y) ] 
+LzFunctionRule >> tempMethod [ ^ [ :signature :args | | y x | y := (args at: (LzVarName for: #y_)) lzAtomicTermValue. x := (args at: (LzVarName for: #x_)) lzAtomicTermValue. LzBooleanTerm signature: signature value: (x >= y) ] 
 ]
