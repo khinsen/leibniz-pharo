@@ -39,6 +39,11 @@ LzASTRule >> printVariablesAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
+LzASTRule >> ruleClass [
+	self subclassResponsibility
+]
+
+{ #category : #accessing }
 LzASTRule >> valueSlots [
 	^ #(variables pattern condition)
 ]

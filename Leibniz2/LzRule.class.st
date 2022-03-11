@@ -17,6 +17,19 @@ LzRule >> apply: bindings [
 	self subclassResponsibility
 ]
 
+{ #category : #initialization }
+LzRule >> buildTermsFrom: anASTRuleNode [
+	self pattern:
+		(anASTRuleNode pattern
+			buildFor: self signature
+			variables: variables).
+	anASTRuleNode condition ifNotNil: [ :c |
+		self condition:
+			(c
+				buildFor: self signature
+				variables: variables)].
+]
+
 { #category : #'instance creation' }
 LzRule >> checkConsistency [
 	| patternVars |

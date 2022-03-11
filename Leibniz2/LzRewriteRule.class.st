@@ -12,6 +12,15 @@ LzRewriteRule >> apply: bindings [
 	^ replacement substitute: bindings
 ]
 
+{ #category : #initialization }
+LzRewriteRule >> buildTermsFrom: anASTRuleNode [
+	super buildTermsFrom: anASTRuleNode.
+	self replacement:
+		(anASTRuleNode replacement
+			buildFor: self signature
+			variables: variables).
+]
+
 { #category : #'instance creation' }
 LzRewriteRule >> checkConsistency [
 	| patternVars |

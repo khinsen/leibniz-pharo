@@ -13,6 +13,12 @@ LzFunctionRule >> apply: bindings [
 	^ block value: signature value: bindings bindings
 ]
 
+{ #category : #initialization }
+LzFunctionRule >> buildTermsFrom: anASTRuleNode [
+	super buildTermsFrom: anASTRuleNode.
+	self function: anASTRuleNode function
+]
+
 { #category : #printing }
 LzFunctionRule >> function [
 	^ function
