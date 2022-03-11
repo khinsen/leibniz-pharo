@@ -10,30 +10,9 @@ Class {
 	#category : #'Leibniz2-Axioms'
 }
 
-{ #category : #'instance creation' }
-LzAxiom class >> signature: aSignature declaration: anASTAxiomNode [
-	| variables axiom |
-	variables := aSignature parsedVariables: anASTAxiomNode variables.
-	axiom := (self subclassFor: anASTAxiomNode) new
-		signature: aSignature;
-		variables: variables.
-	(anASTAxiomNode valueSlots copyWithout:  #variables) do: [ :each |
-		| termNode term |
-		termNode := anASTAxiomNode instVarNamed: each.
-		termNode ifNotNil: [
-			term := (aSignature parsedTerm: termNode variables: variables).
-			axiom perform: (each, ':') with: term ] ].
-	axiom
-		checkConsistency;
-		beRecursivelyReadOnlyObject.
-	^ axiom
-]
-
-{ #category : #'instance creation' }
-LzAxiom class >> subclassFor: anASTAxiomNode [
-	(anASTAxiomNode isKindOf: LzASTSubsortAxiom)
-		ifTrue: [ ^ LzSubsortAxiom ]
-		ifFalse: [ ^ LzEqualityAxiom ]
+{ #category : #initialization }
+LzAxiom >> buildTermsFrom: aDictionary [
+	self subclassResponsibility
 ]
 
 { #category : #'instance creation' }

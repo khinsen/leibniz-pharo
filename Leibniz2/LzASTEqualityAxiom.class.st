@@ -10,6 +10,11 @@ Class {
 }
 
 { #category : #accessing }
+LzASTEqualityAxiom >> axiomClass [
+	^ LzEqualityAxiom
+]
+
+{ #category : #accessing }
 LzASTEqualityAxiom >> condition [
 	^ condition
 ]
@@ -49,4 +54,11 @@ LzASTEqualityAxiom >> right [
 { #category : #accessing }
 LzASTEqualityAxiom >> right: aTermNode [
 	right := aTermNode
+]
+
+{ #category : #accessing }
+LzASTEqualityAxiom >> terms [
+	^ Dictionary
+		with: #left -> self left
+		with: #right -> self right
 ]

@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #accessing }
+LzASTSubsortAxiom >> axiomClass [
+	^ LzSubsortAxiom
+]
+
+{ #category : #accessing }
 LzASTSubsortAxiom >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: Character space.
@@ -37,4 +42,11 @@ LzASTSubsortAxiom >> supersort [
 { #category : #accessing }
 LzASTSubsortAxiom >> supersort: anASTTermNode [
 	supersort := anASTTermNode
+]
+
+{ #category : #accessing }
+LzASTSubsortAxiom >> terms [
+	^ Dictionary
+		with: #subsort -> self subsort
+		with: #supersort -> self supersort
 ]

@@ -7,6 +7,11 @@ Class {
 	#category : #'Leibniz2-Parser'
 }
 
+{ #category : #constructing }
+LzASTVarTerm >> buildFor: aSignature variables: aDictionary [
+	^ aSignature varTerm: self name variables: aDictionary
+]
+
 { #category : #accessing }
 LzASTVarTerm >> name [
 	^ name

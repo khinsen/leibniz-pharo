@@ -8,6 +8,13 @@ Class {
 	#category : #'Leibniz2-Parser'
 }
 
+{ #category : #constructing }
+LzASTPattern >> buildFor: aSignature [
+	^ self term
+		buildFor: aSignature
+		variables: (aSignature parsedVariables:  self variables)
+]
+
 { #category : #printing }
 LzASTPattern >> printAsLeibnizSyntaxOn: aStream [
 	variables do: [ :each |

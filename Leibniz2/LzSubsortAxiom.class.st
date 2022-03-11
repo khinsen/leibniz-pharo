@@ -8,6 +8,16 @@ Class {
 	#category : #'Leibniz2-Axioms'
 }
 
+{ #category : #initialization }
+LzSubsortAxiom >> buildTermsFrom: aDictionary [
+	self subsort: ((aDictionary at: #subsort)
+						buildFor: self signature
+						variables: self variables).
+	self supersort: ((aDictionary at: #supersort)
+						buildFor: self signature
+						variables: self variables)
+]
+
 { #category : #'instance creation' }
 LzSubsortAxiom >> checkConsistency [
 	self assert: subsort sort isSortSort.

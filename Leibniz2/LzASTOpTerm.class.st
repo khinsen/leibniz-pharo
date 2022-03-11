@@ -20,6 +20,14 @@ LzASTOpTerm >> args: anObject [
 	args := anObject
 ]
 
+{ #category : #constructing }
+LzASTOpTerm >> buildFor: aSignature variables: aDictionary [
+	^ aSignature
+		opTerm: self opName
+		args: (self args collect: [ :each |
+				each buildFor: aSignature variables: aDictionary ])
+]
+
 { #category : #accessing }
 LzASTOpTerm >> hasInfixOpOtherThan: anOpName [
 	^ self opName isInfixOpOtherThan: anOpName

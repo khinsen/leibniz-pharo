@@ -9,6 +9,16 @@ Class {
 	#category : #'Leibniz2-Axioms'
 }
 
+{ #category : #initialization }
+LzEqualityAxiom >> buildTermsFrom: aDictionary [
+	self left: ((aDictionary at: #left)
+					buildFor: self signature
+					variables: self variables).
+	self right: ((aDictionary at: #right)
+					buildFor: self signature
+					variables: self variables)
+]
+
 { #category : #accessing }
 LzEqualityAxiom >> checkConsistency [
 	self assert: left signature == signature.

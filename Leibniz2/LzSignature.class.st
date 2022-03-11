@@ -14,6 +14,11 @@ Class {
 	#category : #'Leibniz2-Signatures'
 }
 
+{ #category : #testing }
+LzSignature >> assertBuiltin: aSymbol [
+	self assert: (builtins includes: aSymbol)
+]
+
 { #category : #accessing }
 LzSignature >> builtins [
 	^ builtins
@@ -79,6 +84,22 @@ LzSignature >> gtVariablesFor: aView [
 		yourself
 ]
 
+{ #category : #constructing }
+LzSignature >> literalTerm: anASTTermNode [
+	{
+		{ LzASTIntegerLiteral. #integers. LzIntegerTerm }.
+		{ LzASTRationalLiteral. #rationalNumbers. LzRationalNumberTerm }.
+		{ LzASTFPLiteral. #floatingPointNumbers. LzFloatingPointNumberTerm }.
+		{ LzASTStringLiteral. #strings. LzStringTerm }.
+	} do: [ :each |
+		(anASTTermNode isKindOf: each first) ifTrue: [
+			self assert: (builtins includes: each second ).
+			^ each third
+				signature:  self
+				value: anASTTermNode value ] ].
+	self notYetImplemented
+]
+
 { #category : #accessing }
 LzSignature >> opDeclarations [
 	^ opDeclarations
@@ -122,10 +143,19 @@ LzSignature >> opsOfKind: aKind [
 ]
 
 { #category : #constructing }
+LzSignature >> parsedAxiom: anASTAxiomNode [
+	^ anASTAxiomNode axiomClass new
+		signature: self;
+		variables: (self parsedVariables: anASTAxiomNode variables);
+		buildTermsFrom: anASTAxiomNode terms;
+		checkConsistency;
+		beRecursivelyReadOnlyObject
+]
+
+{ #category : #constructing }
 LzSignature >> parsedPattern: anASTPatternNode [
-	^ self
-		parsedTerm: anASTPatternNode term
-		variables: (self parsedVariables: anASTPatternNode variables)
+	^ anASTPatternNode
+		buildFor: self
 ]
 
 { #category : #constructing }
@@ -135,16 +165,16 @@ LzSignature >> parsedRule: anASTRuleNode [
 	rule := anASTRuleNode ruleClass new
 				signature: self;
 				variables: ruleVariables;
-				pattern: (self
-					parsedTerm: anASTRuleNode pattern
+				pattern: (anASTRuleNode pattern
+					buildFor: self
 					variables: ruleVariables).
 	anASTRuleNode condition ifNotNil: [ :c |
-		rule condition: (self parsedTerm: c variables: ruleVariables)].
+		rule condition: (c buildFor: self variables: ruleVariables)].
 	(anASTRuleNode isKindOf: LzASTRewriteRule)
 		ifTrue: [
 			rule replacement:
-				(self
-					parsedTerm: anASTRuleNode replacement
+				(anASTRuleNode replacement
+					buildFor: self
 					variables: ruleVariables) ]
 		ifFalse: [
 			rule function: anASTRuleNode function ].
@@ -156,33 +186,12 @@ LzSignature >> parsedRule: anASTRuleNode [
 
 { #category : #constructing }
 LzSignature >> parsedTerm: anASTTermNode [
-	^ self parsedTerm: anASTTermNode variables: Dictionary new
+	^ anASTTermNode buildFor: self variables: Dictionary new
 ]
 
 { #category : #constructing }
 LzSignature >> parsedTerm: anASTTermNode variables: aDictionary [
-	(anASTTermNode isKindOf: LzASTOpTerm) ifTrue: [
-		^ self
-			opTerm: anASTTermNode opName
-			args: (anASTTermNode args
-					collect: [ :each |
-						self parsedTerm: each variables: aDictionary ]) ].
-	(anASTTermNode isKindOf: LzASTVarTerm) ifTrue: [
-		^ self
-			varTerm: anASTTermNode name
-			variables: aDictionary ].
-	{
-		{ LzASTIntegerLiteral. #integers. LzIntegerTerm }.
-		{ LzASTRationalLiteral. #rationalNumbers. LzRationalNumberTerm }.
-		{ LzASTFPLiteral. #floatingPointNumbers. LzFloatingPointNumberTerm }.
-		{ LzASTStringLiteral. #strings. LzStringTerm }.
-	} do: [ :each |
-		(anASTTermNode isKindOf: each first) ifTrue: [
-			self assert: (builtins includes: each second ).
-			^ each third
-				signature:  self
-				value: anASTTermNode value ] ].
-	self notYetImplemented
+	^ anASTTermNode buildFor: self variables: aDictionary.
 ]
 
 { #category : #constructing }

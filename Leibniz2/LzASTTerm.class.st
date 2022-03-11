@@ -4,6 +4,11 @@ Class {
 	#category : #'Leibniz2-Parser'
 }
 
+{ #category : #constructing }
+LzASTTerm >> buildFor: aSignature variables: aDictionary [
+	self subclassResponsibility
+]
+
 { #category : #accessing }
 LzASTTerm >> hasInfixOpOtherThan: aSymbol [
 	^ false

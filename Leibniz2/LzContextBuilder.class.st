@@ -33,7 +33,7 @@ LzContextBuilder >> context [
 		sortGraph: sortGraph;
 		signature.
 	axioms := axiomDeclarations collect: [ :each |
-		LzAxiom signature: signature declaration: each ].
+		signature parsedAxiom: each ].
 	rewriteSystem := self rewriteSystemBuilder
 		signature: signature;
 		rewriteSystem.
