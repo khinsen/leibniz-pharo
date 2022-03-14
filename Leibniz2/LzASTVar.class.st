@@ -8,15 +8,18 @@ Class {
 	#category : #'Leibniz2-Parser'
 }
 
+{ #category : #testing }
+LzASTVar >> isSortVar [
+	^ name asSymbol endsWith: '__' 
+]
+
 { #category : #accessing }
 LzASTVar >> name [
-
 	^ name
 ]
 
 { #category : #accessing }
 LzASTVar >> name: anObject [
-
 	name := anObject
 ]
 

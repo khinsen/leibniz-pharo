@@ -181,9 +181,21 @@ LzSignature >> parsedTerm: anASTTermNode variables: aDictionary [
 
 { #category : #constructing }
 LzSignature >> parsedVariables: anArrayOfASTVarDeclarationNodes [
-	^ (anArrayOfASTVarDeclarationNodes collect: [ :each |
-		each name -> (self sortGraph parsedSort: each sort) ])
-		asDictionary
+	| noVariables termVariables sortVariables |
+	noVariables := Dictionary new.
+	sortVariables := (anArrayOfASTVarDeclarationNodes
+		select: [ :each | each isSortVar ]
+		thenCollect: [ :each |
+			each name -> (self sortGraph sortContext sortGraph
+							parsedSort: each sort variables: noVariables) ])
+		asDictionary.
+	termVariables := (anArrayOfASTVarDeclarationNodes
+		select: [ :each | each isSortVar not ]
+		thenCollect: [ :each |
+			each name -> (self sortGraph
+							parsedSort: each sort variables: sortVariables) ])
+		asDictionary.
+	^ termVariables
 ]
 
 { #category : #constructing }

@@ -37,15 +37,15 @@ LzParserExamples >> opDeclarations [
 	^ {
 		'foo : Foo'.
 		'foo(Bar) : Foo(Bar)'.
-		'foo(?bar:Bar) : Foo(Bar)'.
+		'foo(bar_:Bar) : Foo(Bar)'.
 		'foo(Bar, Baz) : Foo(Bar, Baz)'.
 		'Foo[Bar] : Baz'.
 		'Foo^{Bar} : Baz'.
-		'Foo_{Bar} : Baz'.
+		'Foo\{Bar} : Baz'.
 		'Foo + Bar : Baz'.
 		'boolean ∨ boolean : boolean'.
-		'bag(?element:Sort, ?n:ℕ) : Sort'.
-		'∀ ?s:sort ∀ ?n:ℕ ∀ ?m:ℕ (list(?s, ?n)) ++ (list(?s, ?m)) : list(?s, ?n + ?m)'.
+		'bag(element_:Sort, n_:ℕ) : Sort'.
+		'∀ s_:sort ∀ n_:ℕ ∀ m_:ℕ (list(s_, n_)) ++ (list(s_, m_)) : list(s_, n_ + m_)'.
 	} collect: [ :each |
 		| astNode |
 		astNode := self opParser parse: each.

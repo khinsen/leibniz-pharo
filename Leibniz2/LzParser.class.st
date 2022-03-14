@@ -177,9 +177,7 @@ LzParser >> sort [
 	^ super sort ==> [ :nodes |
 		nodes isCollection
 			ifTrue: [ nodes second ]
-			ifFalse: [ LzASTPattern new
-						variables: #();
-						term: nodes ] ]
+			ifFalse: [ nodes ] ]
 ]
 
 { #category : #terms }

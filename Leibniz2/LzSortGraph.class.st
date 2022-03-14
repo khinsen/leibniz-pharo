@@ -295,12 +295,22 @@ LzSortGraph >> normalizedSortWithTerm: aTerm [
 
 { #category : #constructing }
 LzSortGraph >> parsedSort: anASTPatternNode [
+	self flag: #todo. "Obsolete? Is parsedSort:variables: sufficient?"
 	^ self sortWithTerm:
 		(self sortContext parsedPattern: anASTPatternNode)
 ]
 
+{ #category : #constructing }
+LzSortGraph >> parsedSort: anASTTermNode variables: aDictionary [
+	^ self sortWithTerm:
+		(anASTTermNode
+			buildFor: self sortContext signature
+			variables: aDictionary)
+]
+
 { #category : #accessing }
 LzSortGraph >> parsedSortTerm: anASTTermNode variables: anArrayOfASTVarNodes [
+	self flag: #todo. "Obsolete?"
 	^ self parsedSort: 
 		(LzASTPattern new
 			variables: anArrayOfASTVarNodes;

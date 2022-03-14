@@ -124,7 +124,7 @@ LzGrammarSignaturesAndTerms >> simpleTermEnd [
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> sort [
-	^ simpleTerm / (openParenthesis, pattern, closeParenthesis)
+	^ simpleTerm / (openParenthesis, term, closeParenthesis)
 ]
 
 { #category : #signature }

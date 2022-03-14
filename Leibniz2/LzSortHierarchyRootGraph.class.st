@@ -47,6 +47,15 @@ LzSortHierarchyRootGraph >> parsedSort: anASTPatternNode [
 	^ sortSort.
 ]
 
+{ #category : #constructing }
+LzSortHierarchyRootGraph >> parsedSort: anASTTermNode variables: aDictionary [
+	self flag: #todo. "Obsolete?"
+	^ self sortWithTerm:
+		(anASTTermNode
+			buildFor: self sortContext signature
+			variables: aDictionary)
+]
+
 { #category : #accessing }
 LzSortHierarchyRootGraph >> sortFamily: aSortFamily [
 	sortFamily := aSortFamily
