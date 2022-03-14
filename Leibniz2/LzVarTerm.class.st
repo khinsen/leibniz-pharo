@@ -83,10 +83,25 @@ LzVarTerm >> substitute: bindings [
 
 { #category : #unifying }
 LzVarTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: bindings [
-	| taggedName |
+	| taggedName sortBindings matchedSort |
 	taggedName := LzTaggedVarName tag: aSymbol name: name.
-	bindings defineVar: taggedName sort: sort.
-	otherTerm unifyTagged: otherSymbol withVar: taggedName sort: sort bindings: bindings
+	sortBindings :=
+		sort term
+			unifyTagged: aSymbol
+			with: otherTerm sort term
+			tagged: otherSymbol.
+	sortBindings
+		ifSuccess: [
+			matchedSort := sort sortGraph sortWithTerm:
+					(sort term substitute: sortBindings).
+			bindings combineWith: sortBindings ]
+		ifFailure: [ matchedSort := sort ].
+	bindings defineVar: taggedName sort: matchedSort.
+	otherTerm
+		unifyTagged: otherSymbol
+		withVar: taggedName
+		sort: matchedSort
+		bindings: bindings
 ]
 
 { #category : #unifying }
@@ -111,12 +126,17 @@ LzVarTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: otherSymbol op: 
 
 { #category : #unifying }
 LzVarTerm >> unifyTagged: aSymbol withVar: aTaggedName sort: aSort bindings: bindings [
-	| taggedName |
+	| taggedName matchedSort |
 	taggedName := LzTaggedVarName tag: aSymbol name: name.
-	bindings defineVar: taggedName sort: sort.
+	"When we get here, the unification of the sorts of the two
+	 vars has already been done, as has the substitution in
+	 aSort."
+	matchedSort := sort sortGraph sortWithTerm:
+					(sort term substitute: bindings).
+	bindings defineVar: taggedName sort: matchedSort.
 	bindings
 		makeVar: taggedName
-		sort: sort
+		sort: matchedSort
 		equalToVar: aTaggedName
 		sort: aSort
 ]

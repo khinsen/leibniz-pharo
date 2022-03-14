@@ -39,8 +39,9 @@ LzSort >> addPrefix: aSymbol toVarsConflictingWith: aSort [
 { #category : #comparing }
 LzSort >> compareArguments: otherSort [
 	term args ifEmpty: [ ^ false ].
+	term args size = otherSort term args size ifFalse: [ ^ false ].
 	term args with: otherSort term args do: [ :term1 :term2 |
-		term1 isSortSort
+		term1 sort isSortSort
 			ifTrue: [ (sortGraph sortWithTerm: term1) <= (sortGraph sortWithTerm: term2)
 						ifFalse: [ ^ false ] ]
 			ifFalse: [
@@ -105,7 +106,7 @@ LzSort >> kind [
 LzSort >> matchAllSupersortsOf: aSort [
 	| matches match |
 	matches := Set new.
-	(self term match: aSort term)
+	(self term matchAllowingVars: aSort term)
 		ifSuccess: [ :m | matches add: m ].
 	aSort directSupersorts do: [ :each |
 		matches := matches union: (self matchAllSupersortsOf: each) ].
@@ -114,7 +115,7 @@ LzSort >> matchAllSupersortsOf: aSort [
 
 { #category : #unifying }
 LzSort >> matchWithSupersortsOf: aSort [
-	^ (self term match: aSort term)
+	^ (self term matchAllowingVars: aSort term)
 		ifSuccess: [ :m | m ]
 		ifFailure: [
 			| submatches |

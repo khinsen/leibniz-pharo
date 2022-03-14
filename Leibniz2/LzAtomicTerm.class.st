@@ -55,7 +55,7 @@ LzAtomicTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol binding
 		unifyTagged: otherSymbol
 		withAtomicTerm: self
 		tagged: aSymbol
-		variables: bindings.
+		bindings: bindings.
 ]
 
 { #category : #unifying }

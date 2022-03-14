@@ -64,6 +64,7 @@ LzRewriteSystem >> isEmpty [
 { #category : #rewriting }
 LzRewriteSystem >> reduce: aTerm [
 	| lastValue newValue |
+	self assert: aTerm signature equals: signature.
 	newValue := aTerm.
 	lastValue := nil.
 	[ lastValue = newValue ] whileFalse: [
@@ -80,7 +81,7 @@ LzRewriteSystem >> referenceSlots [
 { #category : #rewriting }
 LzRewriteSystem >> rewriteHeadOnce: aTerm [
 	(rules at: aTerm fingerprint ifAbsent: [ #() ]) do: [ :aRule |
-		(aRule pattern match: aTerm) ifSuccess: [ :s |
+		(aRule pattern matchAllowingVars: aTerm) ifSuccess: [ :s |
 			[ (aRule
 				testConditionForSubstitution: s
 				reduction: [ :t | self reduce: t ])

@@ -275,7 +275,6 @@ LzTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: anotherSymbol op: a
 
 { #category : #unifying }
 LzTerm >> unifyTagged: aSymbol withVar: aTaggedName sort: aSort bindings: bindings [
-	self sort term unifyTagged: aSymbol with: aSort term tagged: aTaggedName tag bindings: bindings.
 	bindings bindVar: aTaggedName sort: aSort to: self.
 	self vars associationsDo: [ :each |
 		| taggedName |

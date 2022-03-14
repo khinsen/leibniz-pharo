@@ -165,7 +165,10 @@ LzExamples >> listContext [
 				'(list(s_, n_)) ++ s_ : list(s_, n_ + 1)';
 		op: '∀ s_:𝕊 ',
 				'∅ ++ s_ : list(s_, 1)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ.nz ',
+				'first(list(s_, n_)) : s_';
 		op: 'anElement : element';
+		rule: '∀ s__:𝕊 ∀ e_:s__ first(∅ ++ e_) ⇒ e_';
 		context
 ]
 
@@ -217,6 +220,21 @@ LzExamples >> listSortGraph [
 ]
 
 { #category : #example }
+LzExamples >> listTermRewrites [
+	<gtExample>
+	| context |
+	context := self listPlusIntegerContext.
+	^ {
+		'first(∅ ++ 1)'.
+	}
+	collect: [ :each |
+		| term rewrittenTerm rule |
+		term := context term: each.
+		rewrittenTerm := context reduce: term.
+		{ term. rewrittenTerm } ]
+]
+
+{ #category : #example }
 LzExamples >> listTerms [
 	<gtExample>
 	| context |
@@ -225,6 +243,7 @@ LzExamples >> listTerms [
 		'∅'.
 		'∅ ++ 1'.
 		'∅ ++ 1 ++ 2'.
+		'first(∅ ++ 1)'.
 	}
 	collect: [ :each |
 		 context term: each ]
