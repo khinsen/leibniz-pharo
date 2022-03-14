@@ -5,6 +5,12 @@ Builtin contexts are contexts that cannot be defined in Leibniz itself, because 
 Class {
 	#name : #LzBuiltinContexts,
 	#superclass : #Object,
+	#classVars : [
+		'IntegerContext',
+		'RationalNumberContext',
+		'StringContext',
+		'TruthContext'
+	],
 	#category : #'Leibniz2-Leibniz2'
 }
 
@@ -31,15 +37,17 @@ LzBuiltinContexts class >> integerAxiomsFor: aContextBuilder [
 
 { #category : #accessing }
 LzBuiltinContexts class >> integerContext [
-	| builder |
-	builder := LzContextBuilder new
-		include: self truthContext;
-		builtin: #integers.
-	self integerSortsFor: builder.
-	self integerOpsFor: builder.
-	self integerAxiomsFor: builder.
-	self integerRulesFor: builder.
-	^ builder context
+	IntegerContext ifNil: [
+		| builder |
+		builder := LzContextBuilder new
+			include: self truthContext;
+			builtin: #integers.
+		self integerSortsFor: builder.
+		self integerOpsFor: builder.
+		self integerAxiomsFor: builder.
+		self integerRulesFor: builder.
+		IntegerContext := builder context ].
+	^ IntegerContext
 ]
 
 { #category : #private }
@@ -146,20 +154,22 @@ LzBuiltinContexts class >> rationalAxiomsFor: aContextBuilder [
 
 { #category : #accessing }
 LzBuiltinContexts class >> rationalNumberContext [
-	| builder |
-	builder := LzContextBuilder new
-		include: self truthContext;
-		builtin: #integers;
-		builtin: #rationalNumbers.
-	self integerSortsFor: builder.
-	self rationalSortsFor: builder.
-	self integerOpsFor: builder.
-	self rationalOpsFor: builder.
-	"No integerAxioms, because they would be redundant."
-	self rationalAxiomsFor:  builder.
-	"No integerRules, the few that are required are repeated in rationalRules."
-	self rationalRulesFor: builder.
-	^ builder context
+	RationalNumberContext ifNil: [
+		| builder |
+		builder := LzContextBuilder new
+			include: self truthContext;
+			builtin: #integers;
+			builtin: #rationalNumbers.
+		self integerSortsFor: builder.
+		self rationalSortsFor: builder.
+		self integerOpsFor: builder.
+		self rationalOpsFor: builder.
+		"No integerAxioms, because they would be redundant."
+		self rationalAxiomsFor:  builder.
+		"No integerRules, the few that are required are repeated in rationalRules."
+		self rationalRulesFor: builder.
+		RationalNumberContext := builder context ].
+	^ RationalNumberContext
 ]
 
 { #category : #private }
@@ -268,19 +278,25 @@ LzBuiltinContexts class >> sortContext [
 
 { #category : #accessing }
 LzBuiltinContexts class >> stringContext [
-	^ LzContextBuilder new
-		builtin: #strings;
-		sort: 'string';
-		op: 'string + string : string';
-		rule: '∀ a_:string ∀ b_:string a_ + b_ → ''a, b'':LzStringTerm';
-		context
+	StringContext ifNil: [
+		StringContext :=
+			LzContextBuilder new
+				builtin: #strings;
+				sort: 'string';
+				op: 'string + string : string';
+				rule: '∀ a_:string ∀ b_:string a_ + b_ → ''a, b'':LzStringTerm';
+				context ].
+	^ StringContext
 ]
 
 { #category : #accessing }
 LzBuiltinContexts class >> truthContext [
-	^ LzContextBuilder new
-		sort: '𝔹';
-		op: '⊤ : 𝔹';
-		op: '⊥ : 𝔹';
-		context
+	TruthContext ifNil: [
+		TruthContext :=
+			LzContextBuilder new
+				sort: '𝔹';
+				op: '⊤ : 𝔹';
+				op: '⊥ : 𝔹';
+				context ].
+	^ TruthContext
 ]
