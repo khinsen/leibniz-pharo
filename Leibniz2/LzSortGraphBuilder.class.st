@@ -27,7 +27,7 @@ LzSortGraphBuilder >> include: aSortGraph [
 
 { #category : #defining }
 LzSortGraphBuilder >> includeSortContext: aContext [
-	sortContextInclusions add: aContext
+	sortContextInclusions addIfNotPresent: aContext
 ]
 
 { #category : #initializing }

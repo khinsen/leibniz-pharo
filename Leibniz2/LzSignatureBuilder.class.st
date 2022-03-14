@@ -45,12 +45,14 @@ LzSignatureBuilder >> op: aString [
 
 { #category : #defining }
 LzSignatureBuilder >> parsedOps: aCollection [
-	opDeclarations addAll: aCollection
+	aCollection do: [ :each |
+		opDeclarations addIfNotPresent: each ]
 ]
 
 { #category : #defining }
 LzSignatureBuilder >> parsedVars: aCollection [
-	varDeclarations addAll: aCollection
+	aCollection do: [ :each |
+		varDeclarations addIfNotPresent: each ]
 ]
 
 { #category : #building }

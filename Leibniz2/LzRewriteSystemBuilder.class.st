@@ -10,7 +10,8 @@ Class {
 
 { #category : #defining }
 LzRewriteSystemBuilder >> include: aRewriteSystem [
-	ruleDeclarations addAll: aRewriteSystem ruleDeclarations
+	aRewriteSystem ruleDeclarations do: [ :each |
+		ruleDeclarations addIfNotPresent: each ] 
 ]
 
 { #category : #accessing }

@@ -35,5 +35,5 @@ LzASTRewriteRule >> ruleClass [
 
 { #category : #accessing }
 LzASTRewriteRule >> valueSlots [
-	super valueSlots, #(replacement)
+	^ super valueSlots, #(replacement)
 ]

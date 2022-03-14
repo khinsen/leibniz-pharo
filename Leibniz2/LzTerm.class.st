@@ -146,6 +146,24 @@ LzTerm >> match: otherTerm bindings: bindings [
 		bindings failWith: self notUnifiableWith: otherTerm ]
 ]
 
+{ #category : #unifying }
+LzTerm >> matchAllowingVars: otherTerm [
+	| bindings |
+	bindings := self unifyTagged: nil with: otherTerm tagged: #arg.
+	bindings bindToUniqueVar: [ :varSet :sort |
+		| name candidates |
+		candidates := varSet select: [ :each | each tag = #arg ].
+		candidates ifEmpty: [ nil ]
+		ifNotEmpty: [
+			LzVarTerm new
+				signature: self signature;
+				name: candidates anyOne name;
+				sort: sort;
+				beRecursivelyReadOnlyObject;
+				yourself ] ].
+	^ bindings
+]
+
 { #category : #egraphs }
 LzTerm >> matchOpENode: anOpENode  bindings: bindings [
 	self subclassResponsibility
@@ -209,6 +227,11 @@ LzTerm >> substitute: bindings [
 	^ self
 ]
 
+{ #category : #unifying }
+LzTerm >> substitute: bindings tag: aSymbol [
+	^ self
+]
+
 { #category : #inspecting }
 LzTerm >> synopsis [
 	"The text shown in a tree view. This is the full term except for LbOpTerms"
@@ -235,7 +258,7 @@ LzTerm >> unify: otherTerm bindings: bindings [
 { #category : #unifying }
 LzTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol [
 	| bindings |
-	bindings := LbVariables new.
+	bindings := LzBindings new.
 	self unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol bindings: bindings.
 	^ bindings
 ]
@@ -252,6 +275,7 @@ LzTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: anotherSymbol op: a
 
 { #category : #unifying }
 LzTerm >> unifyTagged: aSymbol withVar: aTaggedName sort: aSort bindings: bindings [
+	self sort term unifyTagged: aSymbol with: aSort term tagged: aTaggedName tag bindings: bindings.
 	bindings bindVar: aTaggedName sort: aSort to: self.
 	self vars associationsDo: [ :each |
 		| taggedName |
