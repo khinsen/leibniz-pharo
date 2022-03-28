@@ -92,6 +92,17 @@ LzSort >> gtGraphFor: aView [
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]
 
+{ #category : #accessing }
+LzSort >> gtSortGraphFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Sort graph';
+		priority: 10;
+		object: [ self sortGraph ];
+		view: #gtGraphFor:;
+		yourself
+]
+
 { #category : #testing }
 LzSort >> isSortSort [
 	^ term args isEmpty and: [ term opName asSymbol = LzConstants opNameSort ]

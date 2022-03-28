@@ -201,6 +201,11 @@ LzContext >> signature: aSignature [
 ]
 
 { #category : #accessing }
+LzContext >> sort: aString [
+	^ self sortGraph sort: aString
+]
+
+{ #category : #accessing }
 LzContext >> sortGraph [
 	^ self signature sortGraph
 ]
