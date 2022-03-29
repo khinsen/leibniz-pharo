@@ -165,7 +165,8 @@ LzOperator >> matchingRanksGeneratorFor: anArity [
 	^ Generator on: [ :generator |
 		ranks do: [ :each |
 			| match |
-			match := LzBindings new.
+			match := LzBindings new
+						sortGraph: sortGraph.
 			each key with: anArity do: [ :sortPattern :sort |
 				match combineWith: (sortPattern matchWithSupersortsOf: sort) ].
 			match ifSuccess: [

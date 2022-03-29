@@ -28,6 +28,11 @@ LzVarTerm >> isVarTerm [
 	^ true
 ]
 
+{ #category : #accessing }
+LzVarTerm >> lzAtomicTermValue [
+	^ self
+]
+
 { #category : #unifying }
 LzVarTerm >> match: otherTerm bindings: bindings [
 	bindings defineVar: name sort: sort.

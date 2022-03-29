@@ -102,6 +102,28 @@ LzExamples >> booleanUnifications [
 ]
 
 { #category : #example }
+LzExamples >> equalityTerms [
+	<gtExample>
+	| context |
+	context := self listPlusIntegerContext.
+	self should: [
+		context term: '1 == ∅' ]
+		raise: Error.
+	^ {
+		{ '1 == 1'. '⊤'}.
+		{ '1 == 2'. '⊥'}.
+		{ '(∅ ++ 1) == (∅ ++ 1)'. '⊤'}.
+		{'(∅ ++ 1) == (∅ ++ 2)'. '⊥'}
+	} collect: [ :each |
+		| term rewrittenTerm expected |
+		term := context term: each first.
+		expected := context term: each second.
+		rewrittenTerm := context reduce: term.
+		self assert: rewrittenTerm equals: expected.
+		{ term. rewrittenTerm } ]
+]
+
+{ #category : #example }
 LzExamples >> integerArithmetic [
 	<gtExample>
 	| context |
@@ -178,6 +200,7 @@ LzExamples >> listPlusIntegerContext [
 	^ LzContextBuilder new
 		include: self listContext;
 		include: LzBuiltinContexts integerContext;
+		include: LzBuiltinContexts equalityContext;
 		context
 ]
 

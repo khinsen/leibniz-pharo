@@ -58,6 +58,17 @@ LzBindingsVarNode >> sort: aSort [
 	sort := aSort
 ]
 
+{ #category : #unifying }
+LzBindingsVarNode >> unifyWithValue: aTerm bindings: anLzBindings [
+	value
+		ifNil: [
+			anLzBindings failUnless: aTerm sort isSubsortOf: sort.
+			self value: aTerm ]
+		ifNotNil: [
+			value = aTerm
+				ifFalse: [ anLzBindings failWith: aTerm notUnifiableWith: value ] ]
+]
+
 { #category : #accessing }
 LzBindingsVarNode >> value [
 	^ value

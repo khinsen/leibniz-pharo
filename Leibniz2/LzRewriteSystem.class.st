@@ -87,10 +87,6 @@ LzRewriteSystem >> rewriteHeadOnce: aTerm [
 				reduction: [ :t | self reduce: t ])
 				ifTrue: [ ^ aRule apply: s ] ]
 			on: LzRewriteFailure do: [  ] ] ].
-	"Special rule for term equality"
-	self flag: #todo.
-"	aTerm evaluateEqualityTerm ifNotNil: [ :value |
-		^ LbBooleanTerm value: value signature: aTerm signature ]."
 	"If no rule matches, return the input term"
 	^ aTerm
 ]

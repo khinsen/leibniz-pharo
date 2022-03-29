@@ -20,7 +20,7 @@ LzBuiltinContexts class >> equalityContext [
 	builder := LzContextBuilder new
 		include: self truthContext;
 		op: '∀ s_:𝕊 s_ == s_ : 𝔹';
-		rule: '∀ x_:(∀ s_:𝕊 s_) ∀ y_:(∀ s_:𝕊 s_) x_ == y_ → ''x = y'':LzBooleanTerm'.
+		rule: '∀ s__:𝕊 ∀ x_:s__ ∀ y_:s__ x_ == y_ → ''x = y'':LzBooleanTerm'.
 	^ builder context
 ]
 

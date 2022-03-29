@@ -5,7 +5,8 @@ Class {
 	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'vars',
-		'failure'
+		'failure',
+		'sortGraph'
 	],
 	#category : #'Leibniz2-Terms'
 }
@@ -25,10 +26,8 @@ LzBindings >> bindVar: aVarName sort: aSort to: aTerm [
 	| root |
 	self ifFailure: [ ^ self ].
 	self assert: (vars at: aVarName) sort equals: aSort.
-	root := self findRootFor: aVarName.
-	root value
-		ifNil: [ self failUnless: aTerm sort isSubsortOf: aSort. root value: aTerm ]
-		ifNotNil: [ :v | v = aTerm ifFalse: [ self failWith: aTerm notUnifiableWith: v ] ]
+	(self findRootFor: aVarName)
+		unifyWithValue: aTerm bindings: self
 ]
 
 { #category : #accessing }
@@ -55,16 +54,20 @@ LzBindings >> combineWith: otherBindings [
 		| root |
 		root := otherBindings findRootFor: each name.
 		self makeVar: each name sort: each sort equalToVar: root name sort: root sort.
-		(self findRootFor: each name) value: root value ]
+		(self findRootFor: each name)
+			unifyWithValue: root value bindings: self ]
 ]
 
 { #category : #binding }
 LzBindings >> defineVar: aVarName sort: aSort [
 	vars at: aVarName
 		ifPresent: [ :node | self assert: node sort equals: aSort ]
-		ifAbsentPut: [ LzBindingsVarNode new
-							name: aVarName;
-							sort: aSort ]	
+		ifAbsentPut: [
+			(aSort isSortSort
+				ifTrue: [ LzBindingsSortVarNode ]
+				ifFalse: [ LzBindingsVarNode ]) new
+					name: aVarName;
+					sort: aSort ]	
 ]
 
 { #category : #failing }
@@ -243,6 +246,16 @@ LzBindings >> printUnboundOn: aStream [
 		separatedBy: [ aStream nextPutAll: ', ' ]
 ]
 
+{ #category : #accessing }
+LzBindings >> sortGraph [
+	^ sortGraph
+]
+
+{ #category : #accessing }
+LzBindings >> sortGraph: aSortGraph [
+	sortGraph := aSortGraph
+]
+
 { #category : #private }
 LzBindings >> unboundVarSets [
 	| varSets |
@@ -255,6 +268,15 @@ LzBindings >> unboundVarSets [
 		varSets at: (self findRootFor: each name)
 			ifPresent: [ :s | s add: each name ] ].
 	^ varSets
+]
+
+{ #category : #accessing }
+LzBindings >> unify: v with: aTerm sort: aSort [
+	aSort isSortSort
+		ifTrue: []
+		ifFalse: [
+			v = aTerm ifFalse: [ self failWith: aTerm notUnifiableWith: v ].
+			^ v ]
 ]
 
 { #category : #accessing }

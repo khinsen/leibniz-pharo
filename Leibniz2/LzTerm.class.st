@@ -258,7 +258,8 @@ LzTerm >> unify: otherTerm bindings: bindings [
 { #category : #unifying }
 LzTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol [
 	| bindings |
-	bindings := LzBindings new.
+	bindings := LzBindings new
+					sortGraph: self signature sortGraph.
 	self unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol bindings: bindings.
 	^ bindings
 ]
