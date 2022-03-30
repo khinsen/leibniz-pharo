@@ -12,16 +12,18 @@ Class {
 
 { #category : #defining }
 LzOperators >> addOp: anASTOpNode [
-	| argSorts valueSort key op |
+	| vars argSorts valueSort key op |
+	vars := self sortGraph sortContext signature
+				parsedVariables: anASTOpNode variables.
 	argSorts := LzArity new: anASTOpNode args size.
 	1 to: argSorts size do: [ :index |
 		argSorts at: index put:
 			(self sortGraph
-			parsedSortTerm: (anASTOpNode args at: index)
-			variables: anASTOpNode variables) ].
+			parsedSort: (anASTOpNode args at: index)
+			variables: vars) ].
 	valueSort := self sortGraph
-		parsedSortTerm: anASTOpNode sort
-		variables: anASTOpNode variables.
+		parsedSort: anASTOpNode sort
+		variables: vars.
 	key := { anASTOpNode name. argSorts kindArity }.
 	op := opTable at: key
 			ifAbsentPut: [ LzOperator new 

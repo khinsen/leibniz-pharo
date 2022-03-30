@@ -105,7 +105,11 @@ LzSort >> gtSortGraphFor: aView [
 
 { #category : #testing }
 LzSort >> isSortSort [
-	^ term args isEmpty and: [ term opName asSymbol = LzConstants opNameSort ]
+	term args ifNotEmpty: [ ^ false ].
+	^ term opName
+		ifNil: [ false ]
+		ifNotNil: [ :n |
+			n asSymbol = LzConstants opNameSort ]
 ]
 
 { #category : #accessing }
