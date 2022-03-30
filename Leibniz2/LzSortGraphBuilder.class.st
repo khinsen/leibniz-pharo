@@ -72,7 +72,8 @@ LzSortGraphBuilder >> sortContext [
 			ifTrue: [ LzSortHierarchyRoot uniqueInstance sortContext ]
 			ifFalse: [
 				| builder |
-				builder := LzContextBuilder new.
+				builder := LzContextBuilder new
+							beSortContextBuilder.
 				sortContextInclusions do: [ :each |
 					builder include: each ].
 				builder
@@ -92,12 +93,15 @@ LzSortGraphBuilder >> sortContext: aContext [
 
 { #category : #building }
 LzSortGraphBuilder >> sortGraph [
-	^ LzSortGraph new
+	| sortGraph |
+	sortGraph := LzSortGraph new
 		sortContext: self sortContext;
 		sortDeclarations: sortDeclarations copy;
 		subsortDeclarations: subsortDeclarations copy;
 		beRecursivelyReadOnlyObject;
-		yourself
+		yourself.
+	self sortContext signature clientSortGraph: sortGraph.
+	^ sortGraph.
 ]
 
 { #category : #defining }

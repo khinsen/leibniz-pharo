@@ -19,6 +19,11 @@ LzContextBuilder >> axiom: aString [
 			yielding: LzASTAxiom)
 ]
 
+{ #category : #defining }
+LzContextBuilder >> beSortContextBuilder [
+	self signatureBuilder beSortSignatureBuilder
+]
+
 { #category : #accessing }
 LzContextBuilder >> builtin: aSymbol [
 	self signatureBuilder builtin: aSymbol
