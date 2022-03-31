@@ -8,11 +8,11 @@ Class {
 }
 
 { #category : #constructing }
-LzASTLiteral >> buildFor: aSignature variables: aDictionary [
-	aSignature assertBuiltin:  self builtin.
-	^ self termClass
-		signature: aSignature
-		value: self value
+LzASTLiteral >> buildFor: aTermBuilder variables: aDictionary [
+	^ aTermBuilder
+		literalTerm: self value
+		class: self termClass
+		builtin: self builtin
 ]
 
 { #category : #accessing }

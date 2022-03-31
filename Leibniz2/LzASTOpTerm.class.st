@@ -21,11 +21,11 @@ LzASTOpTerm >> args: anObject [
 ]
 
 { #category : #constructing }
-LzASTOpTerm >> buildFor: aSignature variables: aDictionary [
-	^ aSignature
+LzASTOpTerm >> buildFor: aTermBuilder variables: aDictionary [
+	^ aTermBuilder
 		opTerm: self opName
 		args: (self args collect: [ :each |
-				each buildFor: aSignature variables: aDictionary ])
+				each buildFor: aTermBuilder variables: aDictionary ])
 ]
 
 { #category : #accessing }

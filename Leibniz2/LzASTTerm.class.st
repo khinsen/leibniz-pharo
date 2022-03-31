@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #constructing }
-LzASTTerm >> buildFor: aSignature variables: aDictionary [
+LzASTTerm >> buildFor: aTermBuilder variables: aDictionary [
 	self subclassResponsibility
 ]
 

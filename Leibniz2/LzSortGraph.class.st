@@ -18,7 +18,8 @@ Class {
 		'maximalFamilies',
 		'kinds',
 		'kindOf',
-		'anySortKind'
+		'anySortKind',
+		'sortTermBuilder'
 	],
 	#category : #'Leibniz2-Sorts'
 }
@@ -176,6 +177,9 @@ LzSortGraph >> initializeDirectSubFamilyRelations [
 { #category : #initializing }
 LzSortGraph >> initializeFromSortContext [
 	sortSort := self sortContext sortGraph sort: LzConstants opNameSort.
+	sortTermBuilder := LzSortTermBuilder new
+							signature: self sortContext signature;
+							clientSortGraph: self.
 	self initializeSortFamilies.
 	self initializeDirectSubFamilyRelations.
 	self initializeSubFamilies.
@@ -296,14 +300,14 @@ LzSortGraph >> normalizedSortWithTerm: aTerm [
 { #category : #constructing }
 LzSortGraph >> parsedSort: anASTPatternNode [
 	^ self sortWithTerm:
-		(anASTPatternNode buildFor: self sortContext signature)
+		(anASTPatternNode buildFor: sortTermBuilder)
 ]
 
 { #category : #constructing }
 LzSortGraph >> parsedSort: anASTTermNode variables: aDictionary [
 	^ self sortWithTerm:
 		(anASTTermNode
-			buildFor: self sortContext signature
+			buildFor: sortTermBuilder
 			variables: aDictionary)
 ]
 
@@ -344,6 +348,7 @@ LzSortGraph >> sortDeclarations: aCollection [
 
 { #category : #constructing }
 LzSortGraph >> sortWithTerm: aTerm [
+	self assert: aTerm class == LzSortTerm.
 	^ LzSort new
 		sortGraph: self;
 		term: aTerm;
