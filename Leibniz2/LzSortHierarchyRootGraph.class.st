@@ -40,20 +40,17 @@ LzSortHierarchyRootGraph >> kindOf: aFamily [
 
 { #category : #constructing }
 LzSortHierarchyRootGraph >> parsedSort: anASTPatternNode [
-	| termNode |
-	self assert: anASTPatternNode variables isEmpty.
-	self assert: anASTPatternNode term opName internalSymbol equals: LzConstants opNameSort.
-	self assert: anASTPatternNode term args isEmpty.
-	^ sortSort.
+	^ self
+		parsedSort: anASTPatternNode term
+		variables: Dictionary new
 ]
 
 { #category : #constructing }
 LzSortHierarchyRootGraph >> parsedSort: anASTTermNode variables: aDictionary [
-	self flag: #todo. "Obsolete?"
-	^ self sortWithTerm:
-		(anASTTermNode
-			buildFor: self sortContext signature
-			variables: aDictionary)
+	self assert: aDictionary isEmpty.
+	self assert: anASTTermNode opName internalSymbol equals: LzConstants opNameSort.
+	self assert: anASTTermNode args isEmpty.
+	^ sortSort
 ]
 
 { #category : #accessing }
