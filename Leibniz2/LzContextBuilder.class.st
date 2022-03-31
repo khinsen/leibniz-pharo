@@ -27,6 +27,7 @@ LzContextBuilder >> builtin: aSymbol [
 { #category : #building }
 LzContextBuilder >> context [
 	| sortGraph signature axioms rewriteSystem |
+	LzDebuggingUtilities checkForInfiniteRecursion.
 	sortGraph := self sortGraphBuilder
 		sortGraph.
 	signature := self signatureBuilder 

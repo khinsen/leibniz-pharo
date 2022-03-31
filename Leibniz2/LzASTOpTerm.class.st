@@ -22,6 +22,7 @@ LzASTOpTerm >> args: anObject [
 
 { #category : #constructing }
 LzASTOpTerm >> buildFor: aTermBuilder variables: aDictionary [
+	LzDebuggingUtilities checkForInfiniteRecursion.
 	^ aTermBuilder
 		opTerm: self opName
 		args: (self args collect: [ :each |
