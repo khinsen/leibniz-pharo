@@ -85,19 +85,11 @@ LzSignature >> gtVariablesFor: aView [
 ]
 
 { #category : #constructing }
-LzSignature >> literalTerm: anASTTermNode [
-	{
-		{ LzASTIntegerLiteral. #integers. LzIntegerTerm }.
-		{ LzASTRationalLiteral. #rationalNumbers. LzRationalNumberTerm }.
-		{ LzASTFPLiteral. #floatingPointNumbers. LzFloatingPointNumberTerm }.
-		{ LzASTStringLiteral. #strings. LzStringTerm }.
-	} do: [ :each |
-		(anASTTermNode isKindOf: each first) ifTrue: [
-			self assert: (builtins includes: each second ).
-			^ each third
-				signature:  self
-				value: anASTTermNode value ] ].
-	self notYetImplemented
+LzSignature >> literalTerm:  anObject class: aLiteralTermClass builtin: aSymbol [
+	self assertBuiltin: aSymbol.
+	^ aLiteralTermClass
+		signature: self
+		value: anObject
 ]
 
 { #category : #accessing }

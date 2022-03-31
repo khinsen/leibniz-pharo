@@ -271,6 +271,14 @@ LzBuiltinContexts class >> rationalSortsFor: aContextBuilder [
 		subsort: 'ℤ.nz ⊆ ℚ.nz'.
 ]
 
+{ #category : #resetting }
+LzBuiltinContexts class >> reset [
+	TruthContext := nil.
+	IntegerContext := nil.
+	RationalNumberContext := nil.
+	StringContext := nil.
+]
+
 { #category : #accessing }
 LzBuiltinContexts class >> sortContext [
 	^ LzSortHierarchyRoot uniqueInstance sortContext

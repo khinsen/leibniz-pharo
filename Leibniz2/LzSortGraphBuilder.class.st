@@ -66,9 +66,10 @@ LzSortGraphBuilder >> sortContext [
 			each withoutVarDeclarations ]) asSet.
 		uniqueSubsorts := subsortDeclarations asSet.
 		self flag: #todo. "Check for axioms that are equal up to variable names."
-		sortContext := (uniqueSorts isEmpty
-						and: [ uniqueSubsorts isEmpty
-						and: [ sortContextInclusions isEmpty ] ])
+		sortContext := (uniqueSubsorts isEmpty
+						and: [ sortContextInclusions isEmpty
+						and: [ uniqueSorts isEmpty
+						or: [ uniqueSorts = self sortSortDeclaration ] ] ])
 			ifTrue: [ LzSortHierarchyRoot uniqueInstance sortContext ]
 			ifFalse: [
 				| builder |
@@ -98,6 +99,20 @@ LzSortGraphBuilder >> sortGraph [
 		subsortDeclarations: subsortDeclarations copy;
 		beRecursivelyReadOnlyObject;
 		yourself
+]
+
+{ #category : #accessing }
+LzSortGraphBuilder >> sortSortDeclaration [
+	| opName astOp |
+	opName := LzPrefixOpName for: LzConstants opNameSort.
+	astOp := LzASTOp new
+		name: opName;
+		args: #();
+		sort:  (LzASTOpTerm new
+					opName: opName;
+					args: #());
+		variables: OrderedCollection new.
+	^ Set with: astOp
 ]
 
 { #category : #defining }
