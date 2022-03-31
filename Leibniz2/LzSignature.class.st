@@ -112,13 +112,12 @@ LzSignature >> opDeclarations: aCollection [
 
 { #category : #constructing }
 LzSignature >> opTerm: anOpName args: anArrayOfTerms [
-	| sort term |
+	| sort |
 	sort := self operators
 				sortForOp: anOpName
 				arity: (LzArity forArgs: anArrayOfTerms).
 	anArrayOfTerms do: [ :each |
 		self assert: each signature == self ].
-	sort isSortSort ifTrue: [].
 	^ LzOpTerm new
 		signature: self;
 		opName: anOpName;
