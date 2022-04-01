@@ -207,6 +207,15 @@ LzSignature >> sort: aString [
 	^ self sortGraph sort: aString
 ]
 
+{ #category : #constructing }
+LzSignature >> sortForVar: aVarName variables: aDictionary [
+	^ aDictionary
+		at: aVarName
+		ifAbsent: [ self variables
+						at: aVarName
+						ifAbsent: [ self error: 'No var named ', aVarName asSymbol ] ]
+]
+
 { #category : #accessing }
 LzSignature >> sortGraph [
 	^ sortGraph
@@ -240,14 +249,10 @@ LzSignature >> varDeclarations: aCollection [
 
 { #category : #constructing }
 LzSignature >> varTerm: aVarName variables: aDictionary [
-	| sort |
-	sort := aDictionary at: aVarName
-				ifAbsent: [ self variables at: aVarName
-								ifAbsent: [ self error: 'No var named ', aVarName asSymbol ] ].
 	^ LzVarTerm new
 		signature: self;
 		name: aVarName;
-		sort: sort;
+		sort: (self sortForVar: aVarName variables: aDictionary);
 		beRecursivelyReadOnlyObject;
 		yourself
 ]

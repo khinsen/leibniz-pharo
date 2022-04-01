@@ -18,7 +18,7 @@ LzOperator >> addArity: newArity sort: newSort [
 	self
 		assertMonotonicity: [ kind includes: newSort ]
 		arity: newArity sort: newSort.
-opName asSymbol = #'_+' ifTrue: [ self halt ].
+
 	ranks ifEmpty: [
 		ranks add: newArity -> newSort.
 		^ self  ].

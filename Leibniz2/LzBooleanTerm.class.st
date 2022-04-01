@@ -6,14 +6,10 @@ Class {
 
 { #category : #'instance creation' }
 LzBooleanTerm class >> signature: aSignature value: aBoolean [
-	^ LzOpTerm new
-		signature: aSignature;
-		opName: (LzPrefixOpName for:
+	| opName |
+	opName := LzPrefixOpName for:
 					(aBoolean
 						ifTrue: [ '⊤' ]
-						ifFalse: [ '⊥' ]));
-		args: #();
-		sort: (aSignature sort: '𝔹');
-		beRecursivelyReadOnlyObject;
-		yourself
+						ifFalse: [ '⊥' ]).
+	^ aSignature opTerm: opName args: #()
 ]

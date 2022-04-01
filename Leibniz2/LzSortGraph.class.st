@@ -348,7 +348,7 @@ LzSortGraph >> sortDeclarations: aCollection [
 
 { #category : #constructing }
 LzSortGraph >> sortWithTerm: aTerm [
-	self assert: aTerm class == LzSortTerm.
+	"self assert: aTerm class == LzSortTerm."
 	^ LzSort new
 		sortGraph: self;
 		term: aTerm;
