@@ -114,7 +114,6 @@ LzSortGraph >> familyForSortTerm: aTerm [
 
 { #category : #inspecting }
 LzSortGraph >> graphFor: aView restrictedTo: aSet highlight: aBlock [
-	aSet isEmpty ifTrue: [ ^ aView empty ].
 	^ aView mondrian
 		title: 'Graph';
 		priority: 0;
@@ -345,7 +344,6 @@ LzSortGraph >> sortDeclarations: aCollection [
 
 { #category : #constructing }
 LzSortGraph >> sortWithTerm: aTerm [
-	"self assert: aTerm class == LzSortTerm."
 	^ LzSort new
 		sortGraph: self;
 		term: aTerm;

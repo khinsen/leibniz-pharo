@@ -17,8 +17,6 @@ LzSortGraphBuilder >> clearCache [
 
 { #category : #defining }
 LzSortGraphBuilder >> include: aSortGraph [
-	aSortGraph sortContext = LzSortHierarchyRoot uniqueInstance sortContext
-		ifFalse: [ self includeSortContext: aSortGraph sortContext ].
 	aSortGraph sortDeclarations do: [ :each |
 		self parsedSortDeclaration: each ].
 	aSortGraph subsortDeclarations do: [ :each |
@@ -67,13 +65,14 @@ LzSortGraphBuilder >> sortContext [
 		uniqueSubsorts := subsortDeclarations asSet.
 		self flag: #todo. "Check for axioms that are equal up to variable names."
 		sortContext := (uniqueSubsorts isEmpty
-						and: [ sortContextInclusions isEmpty
-						and: [ uniqueSorts isEmpty
-						or: [ uniqueSorts = self sortSortDeclaration ] ] ])
+						and: [ (uniqueSorts isEmpty
+								or: [ uniqueSorts = self sortSortDeclaration ])
+						and: [ sortContextInclusions = self sortContextInclusion] ])
 			ifTrue: [ LzSortHierarchyRoot uniqueInstance sortContext ]
 			ifFalse: [
 				| builder |
 				builder := LzContextBuilder new.
+				builder includeSortContext: LzSortHierarchyRoot uniqueInstance sortContext.
 				sortContextInclusions do: [ :each |
 					builder include: each ].
 				builder
@@ -89,6 +88,11 @@ LzSortGraphBuilder >> sortContext: aContext [
 	self assert: subsortDeclarations isEmpty.
 	self assert: sortContextInclusions isEmpty.
 	sortContext := aContext
+]
+
+{ #category : #accessing }
+LzSortGraphBuilder >> sortContextInclusion [
+	^ OrderedCollection with: LzSortHierarchyRoot uniqueInstance sortContext
 ]
 
 { #category : #building }

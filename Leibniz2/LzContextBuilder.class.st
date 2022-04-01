@@ -53,7 +53,8 @@ LzContextBuilder >> include: aContext [
 	self signatureBuilder include: aContext signature.
 	self rewriteSystemBuilder include: aContext rewriteSystem.
 	aContext axiomDeclarations do: [ :each |
-		axiomDeclarations addIfNotPresent:  each ]
+		axiomDeclarations addIfNotPresent:  each ].
+	self includeSortContext: aContext sortGraph sortContext
 ]
 
 { #category : #defining }
