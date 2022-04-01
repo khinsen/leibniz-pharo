@@ -15,7 +15,7 @@ Class {
 { #category : #accessing }
 LzSortHierarchyRoot >> initialize [
 	| sortTerm sortDeclaration sortOperators sortFamily sortKind |
-	sortTerm := LzSortTerm new
+	sortTerm := LzOpTerm new
 		opName: self sortOpName;
 		args: #().
 	sortSort := LzSort new
@@ -33,7 +33,6 @@ LzSortHierarchyRoot >> initialize [
 		subsortDeclarations: #().
 	sortGraph sortSort: sortSort.
 	sortSort sortGraph: sortGraph.
-	sortTerm sortGraph: sortGraph.
 
 	sortContext := LzContext new
 		axioms: Set new;

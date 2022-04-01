@@ -190,8 +190,24 @@ LzExamples >> listContext [
 		op: '∀ s_:𝕊 ∀ n_:ℕ.nz ',
 				'first(list(s_, n_)) : s_';
 		op: 'anElement : element';
+		op: 'aSpecialElement : element.special';
 		rule: '∀ s__:𝕊 ∀ e_:s__ first(∅ ++ e_) ⇒ e_';
 		context
+]
+
+{ #category : #example }
+LzExamples >> listOfIntegerTerms [
+	<gtExample>
+	| context |
+	context := self listPlusIntegerContext.
+	^ {
+		'∅'.
+		'∅ ++ 1'.
+		'∅ ++ 1 ++ 2'.
+		'first(∅ ++ 1)'.
+	}
+	collect: [ :each |
+		 context term: each ]
 ]
 
 { #category : #example }
@@ -261,15 +277,22 @@ LzExamples >> listTermRewrites [
 LzExamples >> listTerms [
 	<gtExample>
 	| context |
-	context := self listPlusIntegerContext.
+	context := self listContext.
 	^ {
-		'∅'.
-		'∅ ++ 1'.
-		'∅ ++ 1 ++ 2'.
-		'first(∅ ++ 1)'.
+		{ '∅'. '∅' }.
+		{ '∅ ++ anElement'. 'list(element, 1)' }.
+		{ '∅ ++ aSpecialElement'. 'list(element.special, 1)' }.
+		{ '∅ ++ anElement ++ aSpecialElement'. 'list(element, 2)' }.
+		{ '∅ ++ aSpecialElement ++ anElement'. 'list(element, 2)' }.
+		{ 'first(∅ ++ anElement)'. 'element' }.
+		{ 'first(∅ ++ aSpecialElement)'. 'element.special'}.
 	}
 	collect: [ :each |
-		 context term: each ]
+		| term sort |
+		 term := context term: each first.
+		 sort := context sort: each second.
+		 self assert: term sort equals: sort.
+		 term ]
 ]
 
 { #category : #example }
