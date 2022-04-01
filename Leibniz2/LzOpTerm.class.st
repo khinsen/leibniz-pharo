@@ -63,11 +63,6 @@ LzOpTerm >> isInfix [
 	^ opName isInfix
 ]
 
-{ #category : #accessing }
-LzOpTerm >> lzAtomicTermValue [
-	^ self
-]
-
 { #category : #unifying }
 LzOpTerm >> match: otherTerm bindings: bindings [
 	otherTerm matchOpTerm: self op: opName args: args bindings: bindings

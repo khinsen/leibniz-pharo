@@ -38,7 +38,10 @@ LzFunctionRule >> function: anArray [
 			s nextPutAll: each asSymbol allButLast.
 			s nextPutAll: ' := (args at: (LzVarName for: '.
 			each asSymbol printOn: s.
-			s nextPutAll: ')) lzAtomicTermValue. ' ].
+			s nextPutAll: '))'.
+			each asSymbol first isUppercase
+				ifFalse: [ s nextPutAll: ' lzAtomicTermValue' ].
+			s nextPutAll: '. ' ].
 			s nextPutAll: function second.
 			s nextPutAll: ' signature: signature value: ('.
 			s nextPutAll: function first.
