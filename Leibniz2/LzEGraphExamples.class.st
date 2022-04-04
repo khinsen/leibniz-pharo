@@ -35,7 +35,6 @@ LzEGraphExamples >> contextForSimpleEGraph [
 		op: 'a : ℕ';
 		op: 'b : ℕ';
 		op: 'c : ℕ';
-		var: 'x_ : ℕ';
 		context
 ]
 

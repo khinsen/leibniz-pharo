@@ -94,6 +94,11 @@ LzSignatureBuilder >> sortGraph: aSortGraph [
 
 { #category : #accessing }
 LzSignatureBuilder >> var: aString [
+	self flag: #todo.
+	"Signature-level vars are the reason why var-containing terms were not allowed
+	in the rhs of match: in the past. They do not seem very important in practice so
+	far. Current experiment: allow vars in matches, but don't allow signature-level vars."
+	self shouldNotImplement.
 	varDeclarations add:
 		(LzParser
 			parse: aString

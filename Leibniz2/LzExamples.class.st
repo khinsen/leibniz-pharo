@@ -77,20 +77,16 @@ LzExamples >> bagSortGraph [
 LzExamples >> booleanUnifications [
 	<gtExample>
 	| c |
-	c := LzContextBuilder new
-			include: LzExampleContexts booleanContext;
-			var: 'X_ : 𝔹';
-			var: 'Y_ : 𝔹';
-			context.
+	c := LzExampleContexts booleanContext.
 	^ {
-		{'⊤'. 'X_'. '(X_=⊤)'}.
-		{'¬(X_)'. '¬(⊤)'. '(X_=⊤)'}.
-		{'X_'. '¬(⊤)'. '(X_=¬(⊤))'}.
-		{'⊤ ⊻ ⊥ ⊻ ⊤ ⊻ ¬(⊤)'. '⊤ ⊻ ⊥ ⊻ X_ ⊻ Y_'. '(X_=⊤, Y_=¬(⊤))'}.
-		{'⊥ ⊻ X_ ⊻ ⊤ ⊻ ¬(⊤)'. '⊥ ⊻ ⊤ ⊻ X_ ⊻ Y_'. '(X_=⊤, Y_=¬(⊤))'}.
-		{'X_ ⊻ ¬(X_)'. '⊥ ⊻ ¬(X_)'. '(X_=⊥)'}.
-		{'X_ ⊻ ¬(Y_)'. '⊥ ⊻ ¬(Y_)'. '(Y_, X_=⊥)'}.
-		{'⊥ ⊻ ¬(X_)'. '⊥ ⊻ ¬(Y_)'. '(X_=Y_)'}.
+		{'⊤'. '∀ X_:𝔹 X_'. '(X_=⊤)'}.
+		{'∀ X_:𝔹 ¬(X_)'. '¬(⊤)'. '(X_=⊤)'}.
+		{'∀ X_:𝔹 X_'. '¬(⊤)'. '(X_=¬(⊤))'}.
+		{'⊤ ⊻ ⊥ ⊻ ⊤ ⊻ ¬(⊤)'. '∀ X_:𝔹 ∀ Y_:𝔹 (⊤ ⊻ ⊥ ⊻ X_ ⊻ Y_)'. '(X_=⊤, Y_=¬(⊤))'}.
+		{'∀ X_:𝔹 (⊥ ⊻ X_ ⊻ ⊤ ⊻ ¬(⊤))'. '∀ X_:𝔹 ∀ Y_:𝔹 (⊥ ⊻ ⊤ ⊻ X_ ⊻ Y_)'. '(X_=⊤, Y_=¬(⊤))'}.
+		{'∀ X_:𝔹 (X_ ⊻ ¬(X_))'. '∀ X_:𝔹 (⊥ ⊻ ¬(X_))'. '(X_=⊥)'}.
+		{'∀ X_:𝔹 ∀ Y_:𝔹 (X_ ⊻ ¬(Y_))'. '∀ Y_:𝔹 (⊥ ⊻ ¬(Y_))'. '(Y_, X_=⊥)'}.
+		{'∀ X_:𝔹 (⊥ ⊻ ¬(X_))'. '∀ Y_:𝔹 (⊥ ⊻ ¬(Y_))'. '(X_=Y_)'}.
 		{'⊤'. '⊥'.  '(failure #nonUnifiableTerms: ⊥, ⊤)' }.
 		{'∀ foo_:𝔹 ¬(foo_)'. '∀ bar_:𝔹 ¬(bar_)'. '(bar_=foo_)'}
 	} collect: [ :each |
@@ -350,10 +346,6 @@ LzExamples >> signatureWithSubsorts [
 		op: 'aC : C';
 		op: 'aD : D';
 		op: 'foo(A) : A';
-		var: 'A_ : A';
-		var: 'B_ : B';
-		var: 'C_ : C';
-		var: 'D_ : D';
 		signature
 ]
 
@@ -373,8 +365,7 @@ LzExamples >> simpleContextBuilder [
 		op: 'Foo + Foo : Foo';
 		op: 'Foo[Foo] : Foo';
 		op: 'Foo^{Foo} : Foo';
-		op: 'Foo\{Foo} : Foo';
-		var: 'foo_ : Foo'.
+		op: 'Foo\{Foo} : Foo'.
 ]
 
 { #category : #example }
@@ -382,7 +373,7 @@ LzExamples >> simpleContextRules [
 	<gtExample>
 	^ {
 		'aFoo ⇒ aFoo'.
-		'aFoo(foo_) ⇒ aFoo'.
+		'aFoo(aFoo) ⇒ aFoo'.
 		'∀ someFoo_:Foo aFoo(someFoo_) ⇒ someFoo_'.
 	} collect: [ :each |
 		| rule |
@@ -397,11 +388,11 @@ LzExamples >> simpleContextTermMatches [
 	| context |
 	context := self simpleContext.
 	^ {
-		{ 'foo_'. 'aFoo'.  {'foo_' -> 'aFoo'} }.
-		{ 'foo_'. 'aFoo(aFoo)'.  {'foo_' -> 'aFoo(aFoo)'} }.
-		{ 'aFoo(foo_)'. 'aFoo(aFoo)'. {'foo_' -> 'aFoo'} }.
-		{ '(foo_ + foo_)'. 'aFoo + aFoo'. {'foo_' -> 'aFoo'} }.
-		{ 'aFoo(foo_)'. 'aFoo'. {} }
+		{ '∀ foo_:Foo foo_'. 'aFoo'.  {'foo_' -> 'aFoo'} }.
+		{ '∀ foo_:Foo foo_'. 'aFoo(aFoo)'.  {'foo_' -> 'aFoo(aFoo)'} }.
+		{ '∀ foo_:Foo aFoo(foo_)'. 'aFoo(aFoo)'. {'foo_' -> 'aFoo'} }.
+		{ '∀ foo_:Foo (foo_ + foo_)'. 'aFoo + aFoo'. {'foo_' -> 'aFoo'} }.
+		{ '∀ foo_:Foo aFoo(foo_)'. 'aFoo'. {} }
 	} collect: [ :each |
 		| pattern term bindings result |
 		pattern := context pattern: each first.
@@ -420,7 +411,6 @@ LzExamples >> simpleContextTerms [
 	^ {
 		'aFoo'.
 		'aFoo(aFoo)'.
-		'aFoo(aFoo(foo_))'.
 		'aFoo(aFoo + aFoo)'.
 		'aFoo[aFoo]'.
 		'aFoo^{aFoo}'.
@@ -494,7 +484,7 @@ LzExamples >> termsForSignatureWithSubsorts [
 	<gtExample>
 	^ {
 		'anA'. 'aB'. 'aC'. 'aD'.
-		"'foo(anA)'. 'foo(aB)'. 'foo(aC)'. 'foo(aD)'."
+		'foo(anA)'. 'foo(aB)'. 'foo(aC)'. 'foo(aD)'.
 	} collect: [ :each |
 		self signatureWithSubsorts term: each ]
 ]
