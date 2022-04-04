@@ -30,8 +30,16 @@ LzVarTerm >> isVarTerm [
 
 { #category : #unifying }
 LzVarTerm >> match: otherTerm bindings: bindings [
-	bindings defineVar: name sort: sort.
-	otherTerm matchVar: name sort: sort bindings: bindings
+	| sortBindings matchedSort |
+	sortBindings := self sort term match: otherTerm sort term.
+	sortBindings
+		ifSuccess: [
+			matchedSort := sort sortGraph sortWithTerm:
+					(sort term substitute: sortBindings).
+			bindings combineWith: sortBindings ]
+		ifFailure: [ matchedSort := sort ].
+	bindings defineVar: name sort: matchedSort.
+	otherTerm matchVar: name sort: matchedSort bindings: bindings
 ]
 
 { #category : #egraphs }

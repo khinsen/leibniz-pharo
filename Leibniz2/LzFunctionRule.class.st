@@ -1,3 +1,10 @@
+"
+Function rules are implemented as a pattern, a piece of Pharo code, and the subclass of {{gtClass:name=LzTerm}}  representing the desired return value. The Pharo code has access to the variable bindings resulting from the pattern match, the variable names being the same as in the pattern but lacking the trailing underscore that marks Leibniz identifiers as variables.
+
+Variables whose names start with an upper-case character have Leibniz terms as their values, i.e. instances of a subclass of {{gtClass:name=LzTerm}}. All other variables must be bound to an instance of a subclass of {{gtClass:name=LzAtomicTerm}}, the Pharo code receiving the Pharo representation of the value (i.e. a number or string object).
+
+The return value is constructed via the message {{gtMethod:name=LzAtomicTerm class>>signature:value:}} .
+"
 Class {
 	#name : #LzFunctionRule,
 	#superclass : #LzRule,

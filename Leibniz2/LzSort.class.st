@@ -119,10 +119,13 @@ LzSort >> kind [
 
 { #category : #unifying }
 LzSort >> matchAllSupersortsOf: aSort [
-	| matches match |
+	| matches bindings |
+	self flag: #todo. "Use matchAllowingVars: ?"
 	matches := Set new.
-	(self term matchAllowingVars: aSort term)
-		ifSuccess: [ :m | matches add: m ].
+	bindings := LzBindings new
+					sortGraph: self sortGraph.
+	self term match: aSort term bindings: bindings.
+	bindings ifSuccess: [ :b | matches add: b ].
 	aSort directSupersorts do: [ :each |
 		matches := matches union: (self matchAllSupersortsOf: each) ].
 	^ matches
@@ -130,8 +133,13 @@ LzSort >> matchAllSupersortsOf: aSort [
 
 { #category : #unifying }
 LzSort >> matchWithSupersortsOf: aSort [
-	^ (self term matchAllowingVars: aSort term)
-		ifSuccess: [ :m | m ]
+	| bindings |
+	self flag: #todo. "Use matchAllowingVars: ?"
+	bindings := LzBindings new
+					sortGraph: self sortGraph.
+	self term match: aSort term bindings: bindings.
+	^ bindings
+		ifSuccess: [ :b | b ]
 		ifFailure: [
 			| submatches |
 			submatches := self matchAllSupersortsOf: aSort.

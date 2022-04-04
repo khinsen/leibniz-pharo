@@ -81,7 +81,13 @@ LzRewriteSystem >> referenceSlots [
 { #category : #rewriting }
 LzRewriteSystem >> rewriteHeadOnce: aTerm [
 	(rules at: aTerm fingerprint ifAbsent: [ #() ]) do: [ :aRule |
-		(aRule pattern matchAllowingVars: aTerm) ifSuccess: [ :s |
+		| bindings |
+		self flag: #todo. "Use matchAllowingVars: ?"
+		"bindings := aRule pattern matchAllowingVars: aTerm."
+		bindings := LzBindings new
+						sortGraph: self signature sortGraph.
+		aRule pattern match: aTerm bindings: bindings.
+		bindings ifSuccess: [ :s |
 			[ (aRule
 				testConditionForSubstitution: s
 				reduction: [ :t | self reduce: t ])

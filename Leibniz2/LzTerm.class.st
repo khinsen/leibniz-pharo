@@ -149,6 +149,7 @@ LzTerm >> match: otherTerm bindings: bindings [
 { #category : #unifying }
 LzTerm >> matchAllowingVars: otherTerm [
 	| bindings |
+	self flag: #todo. "Obsolete? Allowing vars in standard match operations is simpler."
 	bindings := self unifyTagged: nil with: otherTerm tagged: #arg.
 	bindings bindToUniqueVar: [ :varSet :sort |
 		| name candidates |
@@ -171,9 +172,10 @@ LzTerm >> matchOpENode: anOpENode  bindings: bindings [
 
 { #category : #unifying }
 LzTerm >> matchVar: aSymbol sort: aSort bindings: bindings [
-	self
+	self flag: #todo. "Should vars be allowed in bound values?"
+	"self
 		assert: self hasVars not
-		description: 'Term being matched to has variables'.
+		description: 'Term being matched to has variables'."
 	bindings bindVar: aSymbol sort: aSort to: self
 ]
 
@@ -258,6 +260,7 @@ LzTerm >> unify: otherTerm bindings: bindings [
 { #category : #unifying }
 LzTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol [
 	| bindings |
+	self flag: #todo. "sortGraph: part of ongoing experiment"
 	bindings := LzBindings new
 					sortGraph: self signature sortGraph.
 	self unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol bindings: bindings.
