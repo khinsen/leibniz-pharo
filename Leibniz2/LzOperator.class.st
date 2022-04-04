@@ -124,7 +124,7 @@ LzOperator >> gtRanksFor: aView [
 		items: [ ranks ];
 		column: 'Variables' lzCode: [ :each |
 			(String streamContents: [ :s |
-				each key printVariablesOn: s ] )
+				each key printVariablesAsLeibnizSyntaxOn: s ] )
 			asRopedText ];
 		column: 'Arity' lzCode: [ :each |
 			(String streamContents: [ :s |

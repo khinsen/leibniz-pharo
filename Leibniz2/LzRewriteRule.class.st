@@ -50,3 +50,8 @@ LzRewriteRule >> replacement [
 LzRewriteRule >> replacement: aTerm [
 	replacement := aTerm
 ]
+
+{ #category : #accessing }
+LzRewriteRule >> valueSlots [
+	^ super valueSlots, #(replacement)
+]

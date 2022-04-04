@@ -69,3 +69,8 @@ LzFunctionRule >> printBodyAsLeibnizSyntaxOn: aStream [
 { #category : #'as yet unclassified' }
 LzFunctionRule >> tempMethod [ ^ [ :signature :args | | y x | y := (args at: (LzVarName for: #y_)) lzAtomicTermValue. x := (args at: (LzVarName for: #x_)) lzAtomicTermValue. LzBooleanTerm signature: signature value: (x >= y) ] 
 ]
+
+{ #category : #accessing }
+LzFunctionRule >> valueSlots [
+	^ super valueSlots, #(block function)
+]

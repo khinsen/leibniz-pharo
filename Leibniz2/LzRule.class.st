@@ -1,13 +1,9 @@
 Class {
 	#name : #LzRule,
-	#superclass : #Object,
-	#traits : 'TLzEquality + TLzPrintable',
-	#classTraits : 'TLzEquality classTrait + TLzPrintable classTrait',
+	#superclass : #LzTermsWithSharedVars,
 	#instVars : [
-		'signature',
 		'condition',
-		'pattern',
-		'variables'
+		'pattern'
 	],
 	#category : #'Leibniz2-Rules'
 }
@@ -84,22 +80,6 @@ LzRule >> printConditionAsLeibnizSyntaxOn: aStream [
 		c printAsLeibnizSyntaxOn: aStream ]
 ]
 
-{ #category : #printing }
-LzRule >> printVariablesAsLeibnizSyntaxOn: aStream [
-	variables keysAndValuesDo:
-		[ :var :sort |
-			aStream nextPutAll: '∀ '.
-			aStream nextPutAll: var asSymbol.
-			aStream nextPut: $:.
-			sort printAsLeibnizSyntaxOn:  aStream.
-			aStream nextPut: Character space]
-]
-
-{ #category : #accessing }
-LzRule >> referenceSlots [
-	^ #(signature)
-]
-
 { #category : #accessing }
 LzRule >> signature [
 	^ signature
@@ -119,15 +99,5 @@ LzRule >> testConditionForSubstitution: bindings reduction: aBlock [
 
 { #category : #accessing }
 LzRule >> valueSlots [
-	^ #(variables pattern condition)
-]
-
-{ #category : #accessing }
-LzRule >> variables [
-	^ variables
-]
-
-{ #category : #accessing }
-LzRule >> variables: aDictionary [
-	variables := aDictionary
+	^ super valueSlots, #(pattern condition)
 ]

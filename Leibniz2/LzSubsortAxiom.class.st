@@ -88,5 +88,5 @@ LzSubsortAxiom >> unify: aTerm with: pattern1 thenSubstituteIn: pattern2 [
 
 { #category : #accessing }
 LzSubsortAxiom >> valueSlots [
-	^ #(subsort supersort)
+	^ super valueSlots, #(subsort supersort)
 ]

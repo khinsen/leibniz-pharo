@@ -82,5 +82,5 @@ LzEqualityAxiom >> right: aPattern [
 
 { #category : #accessing }
 LzEqualityAxiom >> valueSlots [
-	^ #(left right condition)
+	^ super valueSlots, #(left right condition)
 ]

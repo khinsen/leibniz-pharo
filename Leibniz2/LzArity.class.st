@@ -34,19 +34,28 @@ LzArity >> kindArity [
 
 { #category : #printing }
 LzArity >> printAsLeibnizSyntaxOn: aStream [
-	"self printVariablesAsLeibnizSyntaxOn: aStream."
+	self printVariablesAsLeibnizSyntaxOn: aStream.
+	aStream nextPut: $(.
 	self
 		do: [ :each | each printAsLeibnizSyntaxOn: aStream ]
-		separatedBy: [ aStream nextPutAll: ', ' ]
+		separatedBy: [ aStream nextPutAll: ', ' ].
+	aStream nextPut: $).
 ]
 
 { #category : #printing }
-LzArity >> printVariablesOn: aStream [
-	self vars keysAndValuesDo: [ :var :sort |
+LzArity >> printVariablesAsLeibnizSyntaxOn: aStream [
+	| printVars vars sortVars |
+	printVars := [ :var :sort |
 		aStream nextPutAll: var asSymbol.
 		aStream nextPut: $:.
 		aStream nextPutAll: sort asLeibnizSyntaxString.
-		aStream nextPutAll: ' ' ]
+		aStream nextPutAll: ' ' ].
+	vars := self vars.
+	sortVars := (vars values collect: [ :each | each term vars ])
+					inject: Dictionary new
+					into: [ :total :each | total union: each ].
+	sortVars keysAndValuesDo: printVars.
+	vars keysAndValuesDo: printVars
 ]
 
 { #category : #accessing }
