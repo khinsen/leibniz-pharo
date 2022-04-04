@@ -208,7 +208,8 @@ LzEGraph >> matchesFor: aPattern [
 				self assert: eachNode hasCycle not.
 				(eachNode
 					matchesFor: aPattern
-					bindings: LzBindings new)
+					bindings: (LzBindings new
+								sortGraph: self context sortGraph))
 					do: [ :bindings |
 						| match |
 						match := LzEGraphMatch new

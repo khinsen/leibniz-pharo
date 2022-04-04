@@ -32,6 +32,7 @@ LzEGraphExamples >> contextForSimpleEGraph [
 	<gtExample>
 	^ LzContextBuilder new
 		include: LzBuiltinContexts integerContext;
+		include: LzBuiltinContexts equalityContext;
 		op: 'a : ℕ';
 		op: 'b : ℕ';
 		op: 'c : ℕ';
@@ -95,8 +96,9 @@ LzEGraphExamples >> simpleEGraph [
 	<gtExample>
 	| nodes egraph |
 	egraph := self emptyEGraph.
-	nodes := { '1'. 'a'. 'a + 1'. 'b'. 'b + 1' } collect: [ :each |
-		egraph addTerm: each ].
+	nodes := { '1'. 'a'. 'a + 1'. 'b'. 'b + 1'. 'a == b' }
+		collect: [ :each |
+			egraph addTerm: each ].
 	egraph merge: nodes second with: nodes fourth.
 	egraph rebuild.
 	self assert: egraph hasCycle not.

@@ -139,7 +139,7 @@ LzSort >> matchWithSupersortsOf: aSort [
 					sortGraph: self sortGraph.
 	self term match: aSort term bindings: bindings.
 	^ bindings
-		ifSuccess: [ :b | b ]
+		ifSuccess: [ bindings ]
 		ifFailure: [
 			| submatches |
 			submatches := self matchAllSupersortsOf: aSort.

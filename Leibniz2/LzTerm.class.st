@@ -260,9 +260,7 @@ LzTerm >> unify: otherTerm bindings: bindings [
 { #category : #unifying }
 LzTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol [
 	| bindings |
-	self flag: #todo. "sortGraph: part of ongoing experiment"
-	bindings := LzBindings new
-					sortGraph: self signature sortGraph.
+	bindings := LzBindings new.
 	self unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol bindings: bindings.
 	^ bindings
 ]
