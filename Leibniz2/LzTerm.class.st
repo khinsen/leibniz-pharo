@@ -18,16 +18,17 @@ LzTerm >> addPrefix: aSymbol toVarsConflictingWith: anotherTerm [
 	(myVars keys intersection: otherVars keys)
 		ifNotEmpty: [ :conflicts |
 			conflicts do: [ :each |
-				| newName sort | [
-				newName := each addPrefix: aSymbol.
-				otherVars includes: newName
+				| newName sort |
+				[
+					newName := each addPrefix: aSymbol.
+					otherVars includes: newName
 				] whileTrue.
 				sort := myVars at: each.
 				bindings defineVar: each sort: sort.
 				bindings
 					bindVar: each
-					ofSort: sort
-					to: (LzVarTerm
+					sort: sort
+					to: (LzVarTerm new
 							signature: self signature;
 							name: newName;
 							sort: sort;

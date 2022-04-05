@@ -33,6 +33,7 @@ LzBindings >> bindVar: aVarName sort: aSort to: aTerm [
 { #category : #accessing }
 LzBindings >> bindingFor: aName [
 	self ifFailure: [ ^ nil ].
+	vars at: aName ifAbsent: [ ^ nil ].
 	^ (self findRootFor: aName) value
 ]
 
