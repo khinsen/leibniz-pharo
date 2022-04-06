@@ -160,18 +160,29 @@ LzOperator >> kindArity: anArity [
 	kindArity := anArity
 ]
 
+{ #category : #private }
+LzOperator >> matchRank: aRank to: anArity [
+	| match |
+	"opName asSymbol == #'_++' ifTrue: [ self halt ]."
+	match := LzBindings new
+				sortGraph: sortGraph.
+	aRank key with: anArity do: [ :sortPattern :sort |
+		match combineWith: (sortPattern matchWithSupersortsOf: sort) ].
+	^ match
+		ifSuccess: [
+			(aRank key collect: [ :s | s substitute: match ])
+							-> (aRank value substituteAndReduce: match) ]
+		ifFailure: [ nil ]
+]
+
 { #category : #lookup }
 LzOperator >> matchingRanksGeneratorFor: anArity [
+	self flag: #todo. "Obsolete?"
 	^ Generator on: [ :generator |
 		ranks do: [ :each |
-			| match |
-			match := LzBindings new
-						sortGraph: sortGraph.
-			each key with: anArity do: [ :sortPattern :sort |
-				match combineWith: (sortPattern matchWithSupersortsOf: sort) ].
-			match ifSuccess: [
+			(self matchRank: each to: anArity) ifNotNil: [ :match |
 				generator yield: (each key collect: [ :s | s substitute: match ])
-									-> (each value substituteAndReduce: match) ] ] ]
+									-> (each value substituteAndReduce: match)  ] ] ]
 ]
 
 { #category : #inspecting }
@@ -209,7 +220,8 @@ LzOperator >> printAsLeibnizSyntaxOn: aStream [
 
 { #category : #lookup }
 LzOperator >> ranksMatching: anArity [
-	^ (self matchingRanksGeneratorFor: anArity) contents
+	^ ranks select: [ :each |
+		(self matchRank: each to: anArity) isNotNil ]
 ]
 
 { #category : #accessing }
@@ -229,12 +241,11 @@ LzOperator >> size [
 
 { #category : #lookup }
 LzOperator >> sortForArity: anArity [
-	| matches |
-	matches := self matchingRanksGeneratorFor: anArity.
-	matches atEnd ifTrue: [
-		self error: 'No rank matching arity ',
-				anArity asLeibnizSyntaxString ].
-	^ matches next value
+	ranks do: [ :each |
+		(self matchRank: each to: anArity) ifNotNil: [ :match |
+			^ match value ] ].
+	self error: 'No rank matching arity ',
+				anArity asLeibnizSyntaxString
 ]
 
 { #category : #accessing }

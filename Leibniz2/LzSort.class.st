@@ -133,24 +133,23 @@ LzSort >> matchAllSupersortsOf: aSort [
 
 { #category : #unifying }
 LzSort >> matchWithSupersortsOf: aSort [
-	| bindings |
+	| bindings matches |
 	self flag: #todo. "Use matchAllowingVars: ?"
 	bindings := LzBindings new
 					sortGraph: self sortGraph.
 	self term match: aSort term bindings: bindings.
-	^ bindings
-		ifSuccess: [ bindings ]
-		ifFailure: [
-			| submatches |
-			submatches := self matchAllSupersortsOf: aSort.
-			submatches
-				ifEmpty: [ LzBindings new
-							failUnless: aSort isSubsortOf: self ]
-				ifNotEmpty: [
-					self flag: #todo.
-					submatches size > 1
-						ifTrue: [ self error: 'Multiple matches not yet implemented' ].
-					submatches anyOne ] ]
+	bindings ifSuccess: [ ^ bindings ].
+
+	matches := Set new.
+	aSort directSupersorts do: [ :each |
+		(self matchWithSupersortsOf: each)
+			ifSuccess: [ :b | matches add: b ] ].
+	matches ifEmpty: [ ^ LzBindings new
+							failUnless: aSort isSubsortOf: self ].
+	self flag: #todo.
+	matches size > 1
+		ifTrue: [ self error: 'Multiple matches not yet implemented' ].
+	^ matches anyOne
 ]
 
 { #category : #comparing }
