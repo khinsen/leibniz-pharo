@@ -163,7 +163,6 @@ LzOperator >> kindArity: anArity [
 { #category : #private }
 LzOperator >> matchRank: aRank to: anArity [
 	| match |
-	"opName asSymbol == #'_++' ifTrue: [ self halt ]."
 	match := LzBindings new
 				sortGraph: sortGraph.
 	aRank key with: anArity do: [ :sortPattern :sort |

@@ -65,6 +65,11 @@ LzSort >> family [
 	^ sortGraph familyForSortTerm:  term
 ]
 
+{ #category : #lookup }
+LzSort >> greatestCommonSubsortWith: otherSort [
+	^ (LzSortPair sort1: self sort2: otherSort) greatestCommonSubsort
+]
+
 { #category : #inspecting }
 LzSort >> gtGraphFor: aView [
 	<gtView>
@@ -117,23 +122,14 @@ LzSort >> kind [
 	^ self family kind
 ]
 
-{ #category : #unifying }
-LzSort >> matchAllSupersortsOf: aSort [
-	| matches bindings |
-	self flag: #todo. "Use matchAllowingVars: ?"
-	matches := Set new.
-	bindings := LzBindings new
-					sortGraph: self sortGraph.
-	self term match: aSort term bindings: bindings.
-	bindings ifSuccess: [ :b | matches add: b ].
-	aSort directSupersorts do: [ :each |
-		matches := matches union: (self matchAllSupersortsOf: each) ].
-	^ matches
+{ #category : #lookup }
+LzSort >> leastCommonSupersortWith: otherSort [
+	^ (LzSortPair sort1: self sort2: otherSort) leastCommonSupersort
 ]
 
 { #category : #unifying }
 LzSort >> matchWithSupersortsOf: aSort [
-	| bindings matches |
+	| bindings matches matchBindings matchVariables |
 	self flag: #todo. "Use matchAllowingVars: ?"
 	bindings := LzBindings new
 					sortGraph: self sortGraph.
@@ -146,10 +142,28 @@ LzSort >> matchWithSupersortsOf: aSort [
 			ifSuccess: [ :b | matches add: b ] ].
 	matches ifEmpty: [ ^ LzBindings new
 							failUnless: aSort isSubsortOf: self ].
-	self flag: #todo.
-	matches size > 1
-		ifTrue: [ self error: 'Multiple matches not yet implemented' ].
-	^ matches anyOne
+	matches size = 1 ifTrue: [ ^ matches anyOne ].
+	"There are multiple matches. This is allowed only if there is a unique
+	least sort among them. This means that all non-sort variable bindings
+	must be equal, and for each sort variable binding, one value is a subsort
+	of all the others."
+	matches := matches asArray.
+	matchBindings := matches collect: #bindings.
+	matches first nonSortVars do: [ :eachVarName |
+		(matchBindings collect: [ :b | b at: eachVarName ])
+			asSet size > 1 ifTrue: [ self error: 'Conflicting matches' ] ].
+	matches first sortVars do: [ :eachVarName |
+		| sorts |
+		sorts := matchBindings collect: [ :b |
+			self sortGraph sortWithTerm: (b at: eachVarName) ].
+		1 to: sorts size do: [ :index1 |
+			| least |
+			least := true.
+			1 to: sorts size do: [ :index2 |
+				(sorts at: index1) <= (sorts at: index2)
+					ifFalse: [ least := false ] ].
+			least ifTrue: [ ^ matches at: index1 ] ] ].
+	self error: 'Conflicting matches'.
 ]
 
 { #category : #comparing }

@@ -204,6 +204,14 @@ LzBindings >> makeVar: aVarName sort: aSort equalToVar: otherVarName sort: other
 		ifTrue: [ root1 incrementRank ].
 ]
 
+{ #category : #accessing }
+LzBindings >> nonSortVars [
+	^ vars associations
+		select: [ :each |
+			each value sort isSortSort not ]
+		thenCollect: #key
+]
+
 { #category : #printing }
 LzBindings >> printBoundOn: aStream [
 	| bound |
@@ -255,6 +263,14 @@ LzBindings >> sortGraph [
 { #category : #accessing }
 LzBindings >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
+]
+
+{ #category : #accessing }
+LzBindings >> sortVars [
+	^ vars associations
+		select: [ :each |
+			each value sort isSortSort ]
+		thenCollect: #key
 ]
 
 { #category : #private }
