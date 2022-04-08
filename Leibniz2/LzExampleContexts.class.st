@@ -62,3 +62,67 @@ LzExampleContexts class >> booleanRulesFor: builder [
 		"4. Standardize combinations of XOR and AND"
 		rule: '∀ x_:𝔹 ∀ y_:𝔹 ∀ z_:𝔹 x_ ∧ (y_ ⊻ z_) ⇒ (x_ ∧ y_) ⊻ (x_ ∧ z_)'.
 ]
+
+{ #category : #private }
+LzExampleContexts class >> collectionConstructorOpsFor: builder [
+	builder
+		op: '∅ : ∅';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ ',
+				'(list(s_, n_)) ++ (list(s_, m_)) : list(s_, n_ + m_)';
+		op: '∀ s_:𝕊 ',
+				'(list(s_)) ++ (list(s_)) : list(s_)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ ',
+				'(bag(s_, n_)) ++ (bag(s_, m_)) : bag(s_, n_ + m_)';
+		op: '∀ s_:𝕊 ',
+				'(bag(s_)) ++ (bag(s_)) : bag(s_)';
+		op: '∀ s_:𝕊 ',
+				'(set(s_)) ++ (set(s_)) : set(s_)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ',
+				'(list(s_, n_)) ++ s_ : list(s_, n_ + 1)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ',
+				'(bag(s_, n_)) ++ s_ : bag(s_, n_ + 1)';
+		op: '∀ s_:𝕊 ',
+				'(set(s_)) ++ s_ : set(s_)';
+		op: '∀ s_:𝕊 ',
+				'∅ ++ s_ : list(s_, 1)';
+		op: '∀ s_:𝕊 ',
+				'singleton(s_) : list(s_, 1)'
+]
+
+{ #category : #defining }
+LzExampleContexts class >> collectionContext [
+	| builder |
+	builder := LzContextBuilder new
+		includeSortContext: LzBuiltinContexts integerContext.
+	self collectionSortsFor: builder. 
+	self collectionConstructorOpsFor: builder.
+	self constructionAccessorsFor: builder.
+	^ builder context
+]
+
+{ #category : #private }
+LzExampleContexts class >> collectionSortsFor: builder [
+	builder
+		sort: 'collection';
+		sort: '∅';
+		subsort: '∅ ⊆ collection';
+		sort: 'list(𝕊, ℕ)';
+		sort: 'bag(𝕊, ℕ)';
+		sort: 'list(𝕊)';
+		sort: 'bag(𝕊)';
+		sort: 'set(𝕊)';
+		subsort: '∀ s_:𝕊 ∀ n_:ℕ list(s_, n_) ⊆ bag(s_, n_)';
+		subsort: '∀ s_:𝕊 ∀ n_:ℕ list(s_, n_) ⊆ list(s_)';
+		subsort: '∀ s_:𝕊 ∀ n_:ℕ bag(s_, n_) ⊆ bag(s_)';
+		subsort: '∀ s_:𝕊 list(s_) ⊆ bag(s_)';
+		subsort: '∀ s_:𝕊 bag(s_) ⊆ set(s_)';
+		subsort: '∀ s_:𝕊 set(s_) ⊆ collection'
+]
+
+{ #category : #private }
+LzExampleContexts class >> constructionAccessorsFor: builder [
+	builder
+		op: '∀ s_:𝕊 ∀ n_:ℕ.nz ',
+				'first(list(s_, n_)) : s_';
+		rule: '∀ s__:𝕊 ∀ e_:s__ first(∅ ++ e_) ⇒ e_'
+]
