@@ -62,3 +62,8 @@ LzKind >> sortGraph: aSortGraph [
 LzKind >> valueSlots [
 	^ #(sortFamilies maximalFamilies)
 ]
+
+{ #category : #accessing }
+LzKind >> vars [
+	^ Dictionary new
+]
