@@ -36,7 +36,7 @@ LzFunctionRule >> function: anArray [
 	| code |
 	function := anArray.
 	code := String streamContents: [ :s |
-		s nextPutAll: 'tempMethod ^ [ :signature :args | | '.
+		s nextPutAll: '[ :signature :args | | '.
 		self variables keysDo: [ :each |
 			s nextPutAll: each asSymbol allButLast.
 			s nextPut: Character space ].
@@ -53,8 +53,9 @@ LzFunctionRule >> function: anArray [
 			s nextPutAll: ' signature: signature value: ('.
 			s nextPutAll: function first.
 			s nextPutAll: ') ] '].
-	self class compile: code.
-	block := self tempMethod
+	block := Smalltalk compiler class new
+				source: code;
+				evaluate
 ]
 
 { #category : #printing }
@@ -64,10 +65,6 @@ LzFunctionRule >> printBodyAsLeibnizSyntaxOn: aStream [
 	aStream nextPutAll: self function first.
 	aStream nextPutAll: ''':'.
 	aStream nextPutAll: self function second
-]
-
-{ #category : #'as yet unclassified' }
-LzFunctionRule >> tempMethod [ ^ [ :signature :args | | y x | y := (args at: (LzVarName for: #y_)) lzAtomicTermValue. x := (args at: (LzVarName for: #x_)) lzAtomicTermValue. LzBooleanTerm signature: signature value: (x >= y) ] 
 ]
 
 { #category : #accessing }
