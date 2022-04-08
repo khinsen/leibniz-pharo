@@ -82,6 +82,10 @@ LzExampleContexts class >> collectionConstructorOpsFor: builder [
 		op: '∀ s_:𝕊 ∀ n_:ℕ ',
 				'(bag(s_, n_)) ++ s_ : bag(s_, n_ + 1)';
 		op: '∀ s_:𝕊 ',
+				'(list(s_)) ++ s_ : list(s_)';
+		op: '∀ s_:𝕊 ',
+				'(bag(s_)) ++ s_ : bag(s_)';
+		op: '∀ s_:𝕊 ',
 				'(set(s_)) ++ s_ : set(s_)';
 		op: '∀ s_:𝕊 ',
 				'∅ ++ s_ : list(s_, 1)';
@@ -123,6 +127,41 @@ LzExampleContexts class >> collectionSortsFor: builder [
 LzExampleContexts class >> constructionAccessorsFor: builder [
 	builder
 		op: '∀ s_:𝕊 ∀ n_:ℕ.nz ',
-				'first(list(s_, n_)) : s_';
-		rule: '∀ s__:𝕊 ∀ e_:s__ first(∅ ++ e_) ⇒ e_'
+				'allButLast(list(s_, n_)) : list(s_, pred(n_))';
+		rule: '∀ s__:𝕊 ∀ n__:ℕ ∀ l_:list(s__, n__) ∀ e_:s__ ',
+				'allButLast(l_ ++ e_) ⇒ l_';
+		op: '∀ s_:𝕊 ∀ n_:ℕ.nz ',
+				'last(list(s_, n_)) : s_';
+		rule: '∀ s__:𝕊 ∀ n__:ℕ ∀ l_:list(s__, n__) ∀ e_:s__ ',
+				'last(l_ ++ e_) ⇒ e_'
+]
+
+{ #category : #defining }
+LzExampleContexts class >> functionContext [
+	^ LzContextBuilder new
+		sort: '∀ from_:𝕊 ∀ to_:𝕊 ',
+				'fn(from_, to_)';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ',
+				'(fn(from_, to_))[from_] : to_';
+		context
+]
+
+{ #category : #defining }
+LzExampleContexts class >> mapContext [
+	^ LzContextBuilder new
+		include: self functionContext;
+		include: self collectionContext;
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ n_:ℕ ',
+			'map(fn(from_, to_), list(from_, n_)) : list(to_, n_)';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ n_:ℕ ',
+			'map(fn(from_, to_), ∅) : ∅';
+		rule: '∀ from__:𝕊 ∀ to__:𝕊 ∀ f_:fn(from__, to__) ',
+				'∀ n__:ℕ ∀ l_:list(from__, n__) ∀ e_:from__ ',
+				'map(f_, l_ ++ e_) ⇒ map(f_, l_) ++ f_[e_]';
+		rule: '∀ from__:𝕊 ∀ to__:𝕊 ∀ f_:fn(from__, to__) ',
+				'∀ e_:from__ ',
+				'map(f_, ∅ ++ e_) ⇒ ∅ ++ f_[e_]';
+		rule: '∀ from__:𝕊 ∀ to__:𝕊 ∀ f_:fn(from__, to__) ',
+				'map(f_, ∅) ⇒ ∅';
+		context
 ]

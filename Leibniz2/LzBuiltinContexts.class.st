@@ -54,6 +54,9 @@ LzBuiltinContexts class >> integerContext [
 { #category : #private }
 LzBuiltinContexts class >> integerOpsFor: aContextBuilder [
 	aContextBuilder
+		"Predecessor and successor for natural numbers"
+		op: 'succ(ℕ) : ℕ.nz';
+		op: 'pred(ℕ.nz) : ℕ';
 		"Arithmetic operators"
 		op: 'ℤ + ℤ : ℤ';
 		op: 'ℕ + ℕ : ℕ';
@@ -87,6 +90,9 @@ LzBuiltinContexts class >> integerOpsFor: aContextBuilder [
 { #category : #private }
 LzBuiltinContexts class >> integerRulesFor: aContextBuilder [
 	aContextBuilder
+		"predecessor/successor rules"
+		rule: '∀ x_:ℕ.nz pred(x_) → ''x - 1'':LzIntegerTerm';
+		rule: '∀ x_:ℕ succ(x_) → ''x + 1'':LzIntegerTerm';
 		"addition rules"
 		rule: '∀ x_:ℤ ∀ zero_:zero x_ + zero_ ⇒ x_';
 		rule: '∀ x_:ℤ ∀ zero_:zero zero_ + x_ ⇒ x_';
