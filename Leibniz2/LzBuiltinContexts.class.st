@@ -6,6 +6,7 @@ Class {
 	#name : #LzBuiltinContexts,
 	#superclass : #Object,
 	#classVars : [
+		'EqualityContext',
 		'IntegerContext',
 		'RationalNumberContext',
 		'StringContext',
@@ -16,13 +17,15 @@ Class {
 
 { #category : #accessing }
 LzBuiltinContexts class >> equalityContext [
-	| builder |
-	builder := LzContextBuilder new
-		include: self truthContext;
-		op: '∀ s_:𝕊 s_ == s_ : 𝔹';
-		axiom: '∀ s__:𝕊 ∀ x_:s__ ∀ y_:s__ (x_ == y_) = (y_ == x_)';
-		rule: '∀ s__:𝕊 ∀ X_:s__ ∀ Y_:s__ X_ == Y_ → ''X = Y'':LzBooleanTerm'.
-	^ builder context
+	EqualityContext ifNil: [
+		| builder |
+		builder := LzContextBuilder new
+			include: self truthContext;
+			op: '∀ s_:𝕊 s_ == s_ : 𝔹';
+			axiom: '∀ s__:𝕊 ∀ x_:s__ ∀ y_:s__ (x_ == y_) = (y_ == x_)';
+			rule: '∀ s__:𝕊 ∀ X_:s__ ∀ Y_:s__ X_ == Y_ → ''X = Y'':LzBooleanTerm'.
+		EqualityContext := builder context ].
+	^ EqualityContext
 ]
 
 { #category : #private }
