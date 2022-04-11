@@ -163,5 +163,10 @@ LzExampleContexts class >> mapContext [
 				'map(f_, ∅ ++ e_) ⇒ ∅ ++ f_[e_]';
 		rule: '∀ from__:𝕊 ∀ to__:𝕊 ∀ f_:fn(from__, to__) ',
 				'map(f_, ∅) ⇒ ∅';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ n_:ℕ ',
+				'(fn(from_, to_))[list(from_, n_)] : list(to_, n_)';
+		rule: '∀ from__:𝕊 ∀ to__:𝕊 ',
+				'∀ f_:fn(from__, to__) ∀ n__:ℕ  ∀ l_:list(from__, n__) ',
+				'f_[l_] ⇒ map(f_, l_)';
 		context
 ]
