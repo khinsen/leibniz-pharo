@@ -73,11 +73,11 @@ LzBuiltinContexts class >> integerOpsFor: aContextBuilder [
 		op: 'ℕ div ℕ.nz : ℕ';
 		op: 'ℤ rem ℤ.nz : ℤ';
 		op: 'ℕ rem ℕ.nz : ℕ';
-		op: 'ℤ^{ℕ.nz} : ℤ';
-		op: 'ℕ^{ℕ.nz} : ℕ';
-		op: 'ℕ.nz^{ℕ.nz} : ℕ.nz';
-		op: 'ℤ.nz^{ℕ.nz} : ℤ.nz';
-		op: 'ℤ.nz^{zero} : ℕ.nz';
+		op: 'ℤ^(ℕ.nz) : ℤ';
+		op: 'ℕ^(ℕ.nz) : ℕ';
+		op: 'ℕ.nz^(ℕ.nz) : ℕ.nz';
+		op: 'ℤ.nz^(ℕ.nz) : ℤ.nz';
+		op: 'ℤ.nz^(zero) : ℕ.nz';
 		op: 'abs(ℤ) : ℕ';
 		op: 'abs(ℤ.nz) : ℕ.nz';
 		"Comparison operators"
@@ -117,9 +117,9 @@ LzBuiltinContexts class >> integerRulesFor: aContextBuilder [
 		rule: '∀ x_:ℤ x_ rem 1 ⇒ 0';
 		rule: '∀ x_:ℤ ∀ y_:ℤ.nz x_ rem y_ → ''(x abs % y abs) * x sign * y sign'':LzIntegerTerm';
 		"exponentiation rules"
-		rule: '∀ x_:ℤ.nz ∀ zero_:zero x_^{zero_} ⇒ 1';
-		rule: '∀ x_:ℕ.nz ∀ zero_:zero zero_^{x_} ⇒ 0';
-		rule: '∀ x_:ℤ ∀ y_:ℕ.nz x_^{y_} → ''x raisedTo: y'':LzIntegerTerm';
+		rule: '∀ x_:ℤ.nz ∀ zero_:zero x_^(zero_) ⇒ 1';
+		rule: '∀ x_:ℕ.nz ∀ zero_:zero zero_^(x_) ⇒ 0';
+		rule: '∀ x_:ℤ ∀ y_:ℕ.nz x_^(y_) → ''x raisedTo: y'':LzIntegerTerm';
 		"abs rules"
 		rule: '∀ x_:ℕ abs(x_) ⇒ x_';
 		rule: '∀ x_:ℤ abs(x_) ⇒ -(x_) | x_ < 0';
@@ -196,9 +196,9 @@ LzBuiltinContexts class >> rationalOpsFor: aContextBuilder [
 		op: 'ℚ.nz ÷ ℚ.nz : ℚ.nz';
 		op: 'ℚ.nn ÷ ℚ.p : ℚ.nn';
 		op: 'ℚ.p ÷ ℚ.p : ℚ.p';
-		op: 'ℚ.nz^{ℤ.nz} : ℚ.nz';
-		op: 'ℚ.p^{ℤ.nz} : ℚ.p';
-		op: 'ℚ.nz^{zero} : ℕ.nz';
+		op: 'ℚ.nz^(ℤ.nz) : ℚ.nz';
+		op: 'ℚ.p^(ℤ.nz) : ℚ.p';
+		op: 'ℚ.nz^(zero) : ℕ.nz';
 		op: 'abs(ℚ) : ℚ.nn';
 		op: 'abs(ℚ.nz) : ℚ.p';
 		"Comparison operators"
@@ -244,10 +244,10 @@ LzBuiltinContexts class >> rationalRulesFor: aContextBuilder [
 		rule: '∀ x_:ℤ x_ rem 1 ⇒ 0';
 		rule: '∀ x_:ℤ ∀ y_:ℤ.nz x_ rem y_ → ''(x abs % y abs) * x sign * y sign'':LzIntegerTerm';
 		"Exponentiation rules"
-		rule: '∀ x_:ℚ.nz ∀ z_:zero x_^{z_} ⇒ 1';
-		rule: '∀ x_:ℕ.nz ∀ z_:zero z_^{x_} ⇒ 0';
-		rule: '∀ x_:ℤ ∀ y_:ℕ.nz x_^{y_} → ''x raisedTo: y'':LzIntegerTerm';
-		rule: '∀ x_:ℚ.nz ∀ y_:ℤ.nz x_^{y_} → ''x raisedTo: y'':LzRationalNumberTerm';
+		rule: '∀ x_:ℚ.nz ∀ z_:zero x_^(z_) ⇒ 1';
+		rule: '∀ x_:ℕ.nz ∀ z_:zero z_^(x_) ⇒ 0';
+		rule: '∀ x_:ℤ ∀ y_:ℕ.nz x_^(y_) → ''x raisedTo: y'':LzIntegerTerm';
+		rule: '∀ x_:ℚ.nz ∀ y_:ℤ.nz x_^(y_) → ''x raisedTo: y'':LzRationalNumberTerm';
 		"Abs rules"
 		rule: '∀ x_:ℚ.nn abs(x_) ⇒ x_';
 		rule: '∀ x_:ℚ abs(x_) ⇒ -(x_) | x_ < 0';

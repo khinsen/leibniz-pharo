@@ -40,8 +40,8 @@ LzParserExamples >> opDeclarations [
 		'foo(bar_:Bar) : Foo(Bar)'.
 		'foo(Bar, Baz) : Foo(Bar, Baz)'.
 		'Foo[Bar] : Baz'.
-		'Foo^{Bar} : Baz'.
-		'Foo\{Bar} : Baz'.
+		'Foo^(Bar) : Baz'.
+		'Foo\(Bar) : Baz'.
 		'Foo + Bar : Baz'.
 		'boolean ∨ boolean : boolean'.
 		'bag(element_:Sort, n_:ℕ) : Sort'.
@@ -133,8 +133,8 @@ LzParserExamples >> simpleTermStrings [
 		'foo(bar)'.
 		'(foo + bar)'.
 		'(foo[bar])'.
-		'(foo^{bar})'.
-		'(foo\{bar})'.
+		'(foo^(bar))'.
+		'(foo\(bar))'.
 	}
 ]
 
@@ -186,8 +186,8 @@ LzParserExamples >> termStrings [
 		'foo(bar, baz)'.
 		'foo(bar + baz)'.
 		'foo[bar]'.
-		'foo^{bar}'.
-		'foo\{bar}'.
+		'foo^(bar)'.
+		'foo\(bar)'.
 	}
 ]
 

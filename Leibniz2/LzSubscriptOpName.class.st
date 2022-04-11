@@ -15,12 +15,12 @@ LzSubscriptOpName >> printForArgs: anArrayOfTerms on: aStream [
 	anArrayOfTerms first
 		printAsLeibnizSyntaxOn: aStream
 		parenthesized: anArrayOfTerms first isInfix.
-	aStream nextPutAll: '\{'.
+	aStream nextPutAll: '\('.
 	anArrayOfTerms allButFirst allButLast do: [ : each |
 		each printAsLeibnizSyntaxOn: aStream.
 		aStream nextPutAll: ', ' ].
 	anArrayOfTerms last printAsLeibnizSyntaxOn: aStream.
-	aStream nextPut: $}
+	aStream nextPut: $)
 ]
 
 { #category : #printing }
@@ -30,29 +30,29 @@ LzSubscriptOpName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
 		printAsLeibnizSyntaxOn: aStream
 		parenthesized: anENodeArray first isInfix
 		parents: aNodeSet.
-	aStream nextPutAll: '\{'.
+	aStream nextPutAll: '\('.
 	anENodeArray allButFirst allButLast do: [ : each |
 		each printAsLeibnizSyntaxOn: aStream parents: aNodeSet.
 		aStream nextPutAll: ', ' ].
 	anENodeArray last
 		printAsLeibnizSyntaxOn: aStream
 		parents: aNodeSet.
-	aStream nextPut: $}
+	aStream nextPut: $)
 ]
 
 { #category : #printing }
 LzSubscriptOpName >> printForArity: anArity on: aStream [
 	self assert: anArity size > 1.
 	anArity first printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: '\{'.
+	aStream nextPutAll: '\('.
 	anArity allButFirst allButLast do: [ : each |
 		each printAsLeibnizSyntaxOn: aStream.
 		aStream nextPutAll: ', ' ].
 	anArity last printAsLeibnizSyntaxOn: aStream.
-	aStream nextPut: $}
+	aStream nextPut: $)
 ]
 
 { #category : #inspecting }
 LzSubscriptOpName >> synopsis [
-	^ '•\{•}'
+	^ '•\(•)'
 ]

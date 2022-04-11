@@ -134,7 +134,7 @@ LzGrammarSignaturesAndTerms >> sortArg [
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> subscriptOp [
-	^ arg, backslash, openBrace, (arg separatedBy: comma trim), closeBrace
+	^ arg, backslash, openParenthesis, (arg separatedBy: comma trim), closeParenthesis
 ]
 
 { #category : #terms }
@@ -143,10 +143,10 @@ LzGrammarSignaturesAndTerms >> suffix [
 		suffixBetween: openBracket and: closeBracket
 		withOpName: LzBracketOpName new)
 		 / (self
-		 	suffixBetween: '^{' asPParser and: closeBrace
+		 	suffixBetween: '^(' asPParser and: closeParenthesis
 		 	withOpName: LzSuperscriptOpName new)
 		 / (self
-		 	suffixBetween: '\{' asPParser and: closeBrace
+		 	suffixBetween: '\(' asPParser and: closeParenthesis
 		 	withOpName: LzSubscriptOpName new)
 ]
 
@@ -158,7 +158,7 @@ LzGrammarSignaturesAndTerms >> suffixBetween: leftDelimiter and: rightDelimiter 
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> superscriptOp [
-	^ arg, hat, openBrace, (arg separatedBy: comma trim), closeBrace
+	^ arg, hat, openParenthesis, (arg separatedBy: comma trim), closeParenthesis
 ]
 
 { #category : #terms }
