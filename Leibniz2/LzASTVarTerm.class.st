@@ -8,8 +8,8 @@ Class {
 }
 
 { #category : #constructing }
-LzASTVarTerm >> buildFor: aTermBuilder variables: aDictionary [
-	^ aTermBuilder varTerm: self name variables: aDictionary
+LzASTVarTerm >> buildFor: aSignature variables: aDictionary [
+	^ aSignature varTerm: self name variables: aDictionary
 ]
 
 { #category : #accessing }

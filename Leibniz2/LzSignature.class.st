@@ -14,6 +14,16 @@ Class {
 	#category : #'Leibniz2-Signatures'
 }
 
+{ #category : #constructing }
+LzSignature >> arrayTerm:  elements shape: shape [
+	self assertBuiltin: #arrays.
+	^ LzArrayTerm new
+		signature: self;
+		elements: elements;
+		shape: shape;
+		beRecursivelyReadOnlyObject
+]
+
 { #category : #testing }
 LzSignature >> assertBuiltin: aSymbol [
 	self assert: (builtins includes: aSymbol)

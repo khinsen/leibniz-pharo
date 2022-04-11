@@ -6,13 +6,31 @@ Class {
 	#category : #'Leibniz2-Parser'
 }
 
-{ #category : #accessing }
+{ #category : #example }
+LzParserExamples >> arrayTermStrings [
+	<gtExample>
+	^ {
+		'{[]}'.
+		'{[1, 2, 3]}'.
+		'{[[1], [2], [3]]}'.
+	}
+]
+
+{ #category : #example }
+LzParserExamples >> arrayTerms [
+	<gtExample>
+	^ self arrayTermStrings
+		collect: [ :each |
+			self simpleTermParser parse: each ]
+]
+
+{ #category : #example }
 LzParserExamples >> literalTermParser [
 	<gtExample>
 	^ LzParser newStartingAt: #literalTermEnd
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> literalTermStrings [
 	<gtExample>
 	^ {
@@ -23,7 +41,7 @@ LzParserExamples >> literalTermStrings [
 	}
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> literalTerms [
 	<gtExample>
 	^ self literalTermStrings
@@ -31,7 +49,7 @@ LzParserExamples >> literalTerms [
 			self literalTermParser parse: each ]
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> opDeclarations [
 	<gtExample>
 	^ {
@@ -55,19 +73,19 @@ LzParserExamples >> opDeclarations [
 		astNode ]
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> opParser [
 	<gtExample>
 	^ LzParser newStartingAt: #opEnd
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> patternParser [
 	<gtExample>
 	^ LzParser newStartingAt: #patternEnd
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> patternStrings [
 	<gtExample>
 	^ self simpleTermStrings,
@@ -79,7 +97,7 @@ LzParserExamples >> patternStrings [
 	}
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> patterns [
 	<gtExample>
 	^ self patternStrings
@@ -87,13 +105,13 @@ LzParserExamples >> patterns [
 			self patternParser parse: each ]
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> ruleParser [
 	<gtExample>
 	^ LzParser newStartingAt: #ruleEnd
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> ruleStrings [
 	<gtExample>
 	^ {
@@ -106,7 +124,7 @@ LzParserExamples >> ruleStrings [
 	}
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> rules [
 	<gtExample>
 	^ self ruleStrings
@@ -117,13 +135,13 @@ LzParserExamples >> rules [
 			parsedRule ]
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> simpleTermParser [
 	<gtExample>
 	^ LzParser newStartingAt: #simpleTermEnd
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> simpleTermStrings [
 	<gtExample>
 	^ self literalTermStrings,
@@ -138,7 +156,7 @@ LzParserExamples >> simpleTermStrings [
 	}
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> simpleTerms [
 	<gtExample>
 	^ self simpleTermStrings
@@ -146,7 +164,7 @@ LzParserExamples >> simpleTerms [
 			self simpleTermParser parse: each ]
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> subsortAxiomStrings [
 	<gtExample>
 	^ {
@@ -155,7 +173,7 @@ LzParserExamples >> subsortAxiomStrings [
 	}
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> subsortAxioms [
 	<gtExample>
 	^ self subsortAxiomStrings
@@ -163,19 +181,19 @@ LzParserExamples >> subsortAxioms [
 			self subsortParser parse: each ]
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> subsortParser [
 	<gtExample>
 	^ LzParser newStartingAt: #subsortAxiomEnd
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> termParser [
 	<gtExample>
 	^ LzParser newStartingAt: #termEnd
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> termStrings [
 	<gtExample>
 	^ self simpleTermStrings,
@@ -191,7 +209,7 @@ LzParserExamples >> termStrings [
 	}
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> terms [
 	<gtExample>
 	^ self termStrings
@@ -204,7 +222,7 @@ LzParserExamples >> terms [
 			astNode ]
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> varDeclarations [
 	<gtExample>
 	^ {
@@ -220,7 +238,7 @@ LzParserExamples >> varDeclarations [
 		astNode ]
 ]
 
-{ #category : #accessing }
+{ #category : #example }
 LzParserExamples >> varParser [
 	<gtExample>
 	^ LzParser newStartingAt: #varEnd

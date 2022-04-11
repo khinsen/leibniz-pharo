@@ -26,7 +26,9 @@ Class {
 		'varArg',
 		'pattern',
 		'varTerm',
-		'sort'
+		'sort',
+		'arrayElements',
+		'arrayTerm'
 	],
 	#category : #'Leibniz2-Parser'
 }
@@ -34,6 +36,18 @@ Class {
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> arg [
 	^ varArg / sortArg
+]
+
+{ #category : #terms }
+LzGrammarSignaturesAndTerms >> arrayElements [
+	^ openBracket,
+		 ((arrayElements separatedBy: comma trim) / (term separatedBy: comma trim)) optional,
+		 closeBracket
+]
+
+{ #category : #terms }
+LzGrammarSignaturesAndTerms >> arrayTerm [
+	^ openBrace, arrayElements, closeBrace
 ]
 
 { #category : #signature }
@@ -114,7 +128,7 @@ LzGrammarSignaturesAndTerms >> prefixOpTerm [
 
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> simpleTerm [
-	^ literalTerm / parenthesizedTerm / varTerm / prefixOpTerm / zeroArgTerm
+	^ literalTerm / parenthesizedTerm / arrayTerm / varTerm / prefixOpTerm / zeroArgTerm
 ]
 
 { #category : #terms }

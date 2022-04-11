@@ -8,8 +8,8 @@ Class {
 }
 
 { #category : #constructing }
-LzASTLiteral >> buildFor: aTermBuilder variables: aDictionary [
-	^ aTermBuilder
+LzASTLiteral >> buildFor: aSignature variables: aDictionary [
+	^ aSignature
 		literalTerm: self value
 		class: self termClass
 		builtin: self builtin

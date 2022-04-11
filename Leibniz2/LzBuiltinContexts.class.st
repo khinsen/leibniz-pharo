@@ -16,6 +16,27 @@ Class {
 }
 
 { #category : #accessing }
+LzBuiltinContexts class >> arrayContext [
+	^ LzContextBuilder new
+		includeSortContext: LzBuiltinContexts integerContext;
+		builtin: #arrays;
+		sort: 'Array(𝕊)';
+		sort: 'Array(𝕊, ℕ)';
+		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ',
+					'Array(s_, i1_) ⊆ Array(s_)';
+		sort: 'Array(𝕊, ℕ, ℕ)';
+		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ',
+					'Array(s_, i1_, i2_) ⊆ Array(s_, i1_)';
+		sort: 'Array(𝕊, ℕ, ℕ, ℕ)';
+		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ',
+					'Array(s_, i1_, i2_, i3_) ⊆ Array(s_, i1_, i2_)';
+		sort: 'Array(𝕊, ℕ, ℕ, ℕ, ℕ)';
+		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ∀ i4_:ℕ ',
+					'Array(s_, i1_, i2_, i3_, i4_) ⊆ Array(s_, i1_, i2_, i3_)';
+		context
+]
+
+{ #category : #accessing }
 LzBuiltinContexts class >> equalityContext [
 	EqualityContext ifNil: [
 		| builder |

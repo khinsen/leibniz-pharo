@@ -22,6 +22,27 @@ LzParser class >> parse: aString startingAt: aSymbol yielding: aLzASTNodeSubclas
 	^ astNode
 ]
 
+{ #category : #terms }
+LzParser >> arrayElements [
+	^ super arrayElements
+		==> [ :nodes |
+				| elements |
+				elements := nodes second.
+				elements
+					ifNil: [ #() ]
+					ifNotNil: [
+						(1 to: elements size by: 2) collect: [ :each |
+							elements at: each ] ] ]
+]
+
+{ #category : #terms }
+LzParser >> arrayTerm [
+	^ super arrayTerm
+		==> [ :nodes |
+				LzASTArrayTerm new
+					elements: nodes second ].
+]
+
 { #category : #signature }
 LzParser >> bracketOp [
 	^ super bracketOp

@@ -21,12 +21,12 @@ LzASTOpTerm >> args: anObject [
 ]
 
 { #category : #constructing }
-LzASTOpTerm >> buildFor: aTermBuilder variables: aDictionary [
+LzASTOpTerm >> buildFor: aSignature variables: aDictionary [
 	LzDebuggingUtilities checkForInfiniteRecursion.
-	^ aTermBuilder
+	^ aSignature
 		opTerm: self opName
 		args: (self args collect: [ :each |
-				each buildFor: aTermBuilder variables: aDictionary ])
+				each buildFor: aSignature variables: aDictionary ])
 ]
 
 { #category : #accessing }
