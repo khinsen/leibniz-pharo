@@ -11,7 +11,7 @@ Class {
 { #category : #constructing }
 LzASTArrayTerm >> buildFor: aSignature variables: aDictionary [
 	^ aSignature
-		arrayTerm: (self elements flatCollect: [ :each |
+		arrayTerm: (self elements flattened collect: [ :each |
 						each buildFor: aSignature variables: aDictionary ])
 		shape: self shape
 ]

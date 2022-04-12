@@ -16,7 +16,8 @@ LzSignatureBuilder >> builtin: aSymbol [
 		(#(integers
 			rationalNumbers
 			floatingPointNumbers
-			strings) includes: aSymbol).
+			strings
+			arrays) includes: aSymbol).
 	builtins add: aSymbol 
 ]
 

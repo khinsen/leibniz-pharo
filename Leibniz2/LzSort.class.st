@@ -67,7 +67,7 @@ LzSort >> family [
 
 { #category : #lookup }
 LzSort >> greatestCommonSubsortWith: otherSort [
-	^ (LzSortPair sort1: self sort2: otherSort) greatestCommonSubsort
+	^ (LzSortPair sort1: self sort2: otherSort) greatestUniqueCommonSubsort
 ]
 
 { #category : #inspecting }
@@ -124,7 +124,7 @@ LzSort >> kind [
 
 { #category : #lookup }
 LzSort >> leastCommonSupersortWith: otherSort [
-	^ (LzSortPair sort1: self sort2: otherSort) leastCommonSupersort
+	^ (LzSortPair sort1: self sort2: otherSort) leastUniqueCommonSupersort
 ]
 
 { #category : #unifying }

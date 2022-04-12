@@ -7,6 +7,27 @@ Class {
 }
 
 { #category : #example }
+LzExamples >> arrayOfIntegerTerms [
+	<gtExample>
+	| context |
+	context := LzBuiltinContexts arrayContext.
+"	self should: [
+		context term: '' ]
+		raise: Error."
+	^ {
+		{ '{[ 1, 2, 3 ]}'. '{[ 1, 2, 3 ]}' }.
+		{ '{[[0], [1], [2]]}'. '{[[0], [1], [2]]}' }.
+		{ '{[1 + 2, 2 + 3]}'. '{[3, 5]}' }.
+		{ 'shape({[1, 2, 3]})'. '{[3]}' }.
+	} collect: [ :each |
+		| term reducedTerm shape |
+		term := context term: each first.
+		reducedTerm := context term: each second.
+		self assert: (context reduce: term) equals: reducedTerm.
+		term ]
+]
+
+{ #category : #example }
 LzExamples >> bagContext [
 	<gtExample>
 	^ LzContextBuilder new

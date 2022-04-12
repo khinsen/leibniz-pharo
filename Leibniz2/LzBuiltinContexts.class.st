@@ -17,9 +17,26 @@ Class {
 
 { #category : #accessing }
 LzBuiltinContexts class >> arrayContext [
-	^ LzContextBuilder new
-		includeSortContext: LzBuiltinContexts integerContext;
-		builtin: #arrays;
+	| builder |
+	builder := LzContextBuilder new
+				includeSortContext: LzBuiltinContexts integerContext;
+				include: LzBuiltinContexts integerContext;
+				builtin: #arrays.
+	self arraySortsFor: builder.
+	self arrayOpsFor: builder.
+	^ builder context
+]
+
+{ #category : #accessing }
+LzBuiltinContexts class >> arrayOpsFor: builder [
+	builder
+		op: '∀ s_:𝕊 shape(Array(s_)) : Array(ℕ)';
+		rule: '∀ s__:𝕊 ∀ A_:Array(s__) shape(A_) → ''A shapeAsArrayTerm'':nil'.
+]
+
+{ #category : #private }
+LzBuiltinContexts class >> arraySortsFor: builder [
+	builder
 		sort: 'Array(𝕊)';
 		sort: 'Array(𝕊, ℕ)';
 		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ',
@@ -32,8 +49,7 @@ LzBuiltinContexts class >> arrayContext [
 					'Array(s_, i1_, i2_, i3_) ⊆ Array(s_, i1_, i2_)';
 		sort: 'Array(𝕊, ℕ, ℕ, ℕ, ℕ)';
 		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ∀ i4_:ℕ ',
-					'Array(s_, i1_, i2_, i3_, i4_) ⊆ Array(s_, i1_, i2_, i3_)';
-		context
+					'Array(s_, i1_, i2_, i3_, i4_) ⊆ Array(s_, i1_, i2_, i3_)'
 ]
 
 { #category : #accessing }

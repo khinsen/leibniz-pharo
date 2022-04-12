@@ -29,6 +29,18 @@ LzSortGraph >> anySortKind [
 	^ anySortKind
 ]
 
+{ #category : #constructing }
+LzSortGraph >> arraySortFor: elementSort shape: shape [
+	| signature term |
+	signature := self sortContext signature.
+	term := signature
+		opTerm: (LzPrefixOpName for: #Array)
+		args: { elementSort term },
+				(shape collect: [ :each |
+					LzRationalNumberTerm signature: signature value: each ]).
+	^ self sortWithTerm: term
+]
+
 { #category : #accessing }
 LzSortGraph >> axiomsConnecting: aFamily to: anotherFamily [
 	^ connectingAxioms

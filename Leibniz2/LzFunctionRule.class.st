@@ -36,23 +36,28 @@ LzFunctionRule >> function: anArray [
 	| code |
 	function := anArray.
 	code := String streamContents: [ :s |
-		s nextPutAll: '[ :signature :args | | '.
+		s << '[ :signature :args | | '.
 		self variables keysDo: [ :each |
-			s nextPutAll: each asSymbol allButLast.
-			s nextPut: Character space ].
-		s nextPutAll: '| '.
+			s << each asSymbol allButLast.
+			s << Character space ].
+		s << '| '.
 		self variables keysDo: [ :each |
-			s nextPutAll: each asSymbol allButLast.
-			s nextPutAll: ' := (args at: (LzVarName for: '.
+			s << each asSymbol allButLast.
+			s << ' := (args at: (LzVarName for: '.
 			each asSymbol printOn: s.
-			s nextPutAll: '))'.
+			s << '))'.
 			each asSymbol first isUppercase
-				ifFalse: [ s nextPutAll: ' lzAtomicTermValue' ].
-			s nextPutAll: '. ' ].
-			s nextPutAll: function second.
-			s nextPutAll: ' signature: signature value: ('.
-			s nextPutAll: function first.
-			s nextPutAll: ') ] '].
+				ifFalse: [ s << ' lzAtomicTermValue' ].
+			s << '. ' ].
+		function second = #nil
+			ifTrue: [
+				s << function first ]
+			ifFalse: [
+				s << function second.
+				s << ' signature: signature value: ('.
+				s << function first.
+				s << ')' ].
+		s << ' ] ' ].
 	block := Smalltalk compiler class new
 				source: code;
 				evaluate

@@ -40,9 +40,9 @@ LzGrammarSignaturesAndTerms >> arg [
 
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> arrayElements [
-	^ openBracket,
+	^ openBracket trimRight,
 		 ((arrayElements separatedBy: comma trim) / (term separatedBy: comma trim)) optional,
-		 closeBracket
+		 closeBracket trimLeft
 ]
 
 { #category : #terms }
