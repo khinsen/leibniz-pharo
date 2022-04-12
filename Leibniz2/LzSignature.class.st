@@ -18,16 +18,19 @@ Class {
 LzSignature >> arrayTerm:  elements shape: shape [
 	| sorts elementSort arraySort |
 	self assertBuiltin: #arrays.
-	sorts := (elements collect: #sort) asSet asArray.
-	(sorts collect: #kind) asSet size > 1
-		ifTrue: [ self error: 'Array elements must be of same kind' ].
-	elementSort :=
-		sorts size = 1
-			ifTrue: [ sorts first ]
-			ifFalse: [ sorts allButFirst
-				inject: sorts first
-				into: [ :total :each |
-						total leastCommonSupersortWith: each ] ].
+	elements
+		ifEmpty: [ elementSort := nil ]
+		ifNotEmpty: [
+			sorts := (elements collect: #sort) asSet asArray.
+			(sorts collect: #kind) asSet size > 1
+				ifTrue: [ self error: 'Array elements must be of same kind' ].
+			elementSort :=
+				sorts size = 1
+					ifTrue: [ sorts first ]
+					ifFalse: [ sorts allButFirst
+						inject: sorts first
+						into: [ :total :each |
+								total leastCommonSupersortWith: each ] ] ].
 	arraySort := sortGraph arraySortFor: elementSort shape: shape.
 	^ LzArrayTerm new
 		signature: self;

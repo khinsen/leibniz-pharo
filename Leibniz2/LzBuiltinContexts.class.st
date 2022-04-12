@@ -49,7 +49,20 @@ LzBuiltinContexts class >> arraySortsFor: builder [
 					'Array(s_, i1_, i2_, i3_) ⊆ Array(s_, i1_, i2_)';
 		sort: 'Array(𝕊, ℕ, ℕ, ℕ, ℕ)';
 		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ∀ i4_:ℕ ',
-					'Array(s_, i1_, i2_, i3_, i4_) ⊆ Array(s_, i1_, i2_, i3_)'
+					'Array(s_, i1_, i2_, i3_, i4_) ⊆ Array(s_, i1_, i2_, i3_)';
+		sort: 'EmptyArray';
+		sort: 'EmptyArray(ℕ)';
+		subsort: '∀ i1_:ℕ ',
+					'EmptyArray(i1_) ⊆ EmptyArray';
+		sort: 'EmptyArray(ℕ, ℕ)';
+		subsort: '∀ i1_:ℕ ∀ i2_:ℕ ',
+					'EmptyArray(i1_, i2_) ⊆ EmptyArray(i1_)';
+		sort: 'EmptyArray(ℕ, ℕ, ℕ)';
+		subsort: '∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ',
+					'EmptyArray(i1_, i2_, i3_) ⊆ EmptyArray(i1_, i2_)';
+		sort: 'EmptyArray(ℕ, ℕ, ℕ, ℕ)';
+		subsort: '∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ∀ i4_:ℕ ',
+					'EmptyArray(i1_, i2_, i3_, i4_) ⊆ EmptyArray(i1_, i2_, i3_)'
 ]
 
 { #category : #accessing }

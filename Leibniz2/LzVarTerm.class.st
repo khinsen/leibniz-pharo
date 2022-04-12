@@ -31,7 +31,7 @@ LzVarTerm >> isVarTerm [
 { #category : #unifying }
 LzVarTerm >> match: otherTerm bindings: bindings [
 	| sortBindings matchedSort |
-	sortBindings := self sort term match: otherTerm sort term.
+	sortBindings := self sort matchWithSupersortsOf: otherTerm sort.
 	sortBindings
 		ifSuccess: [
 			matchedSort := sort sortGraph sortWithTerm:

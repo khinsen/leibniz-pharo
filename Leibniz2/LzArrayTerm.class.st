@@ -66,6 +66,7 @@ LzArrayTerm >> shape [
 
 { #category : #accessing }
 LzArrayTerm >> shape: anArray [
+	self assert: anArray isNotEmpty.
 	shape := anArray
 ]
 

@@ -31,13 +31,19 @@ LzSortGraph >> anySortKind [
 
 { #category : #constructing }
 LzSortGraph >> arraySortFor: elementSort shape: shape [
-	| signature term |
+	| signature term shapeTerms |
 	signature := self sortContext signature.
-	term := signature
-		opTerm: (LzPrefixOpName for: #Array)
-		args: { elementSort term },
-				(shape collect: [ :each |
+	shapeTerms := (shape collect: [ :each |
 					LzRationalNumberTerm signature: signature value: each ]).
+	term := elementSort
+		ifNil:  [
+			signature
+				opTerm: (LzPrefixOpName for: #EmptyArray)
+				args: shapeTerms ]
+		ifNotNil: [
+			signature
+				opTerm: (LzPrefixOpName for: #Array)
+				args: { elementSort term }, shapeTerms ].
 	^ self sortWithTerm: term
 ]
 

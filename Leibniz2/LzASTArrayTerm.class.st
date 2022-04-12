@@ -35,10 +35,10 @@ LzASTArrayTerm >> elements [
 	^ elements
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 LzASTArrayTerm >> elements: anArray [
 	elements := anArray.
-	shape := self shape: anArray
+	shape := self shapeFor: anArray
 ]
 
 { #category : #printing }
@@ -63,17 +63,17 @@ LzASTArrayTerm >> shape [
 	^ shape
 ]
 
-{ #category : #asserting }
-LzASTArrayTerm >> shape: anArray [
+{ #category : #initialization }
+LzASTArrayTerm >> shapeFor: anArray [
 	| subshapes |
-	anArray ifEmpty: [ ^ #() ].
+	anArray ifEmpty: [ ^ #(0) ].
 	anArray first isCollection ifFalse: [
 		self assert: (anArray allSatisfy: [ :each |
 							each isCollection not ]).
 		^ { anArray size } ].
 	self assert: (anArray allSatisfy: [ :each |
 						each isCollection ]).
-	subshapes := anArray collect: [ :each | self shape: each ].
+	subshapes := anArray collect: [ :each | self shapeFor: each ].
 	self assert: subshapes asSet size equals: 1.
 	^ { anArray size }, subshapes first
 ]
