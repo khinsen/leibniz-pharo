@@ -1,10 +1,9 @@
 Class {
 	#name : #LzOpENode,
-	#superclass : #LzENode,
+	#superclass : #LzNonLeafENode,
 	#type : #variable,
 	#instVars : [
-		'opName',
-		'sort'
+		'opName'
 	],
 	#category : #'Leibniz2-EGraphs'
 }
@@ -15,18 +14,6 @@ LzOpENode >> = otherObject [
 	self class == otherObject class ifFalse: [ ^ false ].
 	self opName = otherObject opName ifFalse: [ ^ false ].
 	^ self hasEqualElements: otherObject
-]
-
-{ #category : #enumerating }
-LzOpENode >> allArgTerms: classIds [
-	classIds ifEmpty: [ ^ #(#()) ].
-	^ Generator on: [ :generator |
-		| gFirst gRest |
-		gFirst :=  (graph classForId: classIds first) allTerms.
-		gRest := self allArgTerms: classIds allButFirst.
-		gFirst do: [ :firstArg |
-			gRest do: [ :restArgs |
-				generator yield: { firstArg }, restArgs ]   ] ]
 ]
 
 { #category : #enumerating }
@@ -42,34 +29,9 @@ LzOpENode >> allTerms [
 					generator yield: (signature opTerm: self opName args: args) ] ] ]
 ]
 
-{ #category : #updating }
-LzOpENode >> canonicalizeIn: anEGraph [
-	| oldClassId |
-	oldClassId := nil.
-	1 to: self size do: [ :index |
-		| classId rootId |
-		classId := self at: index.
-		rootId := anEGraph findRootFor: classId.
-		(oldClassId isNil and: [ rootId ~= classId ]) ifTrue: [
-			oldClassId := anEGraph removeFromMemo: self ].
-		self at: index put: rootId  ].
-	oldClassId ifNotNil: [ anEGraph addMemoEntry: self classId: oldClassId ]
-]
-
 { #category : #printing }
 LzOpENode >> hasInfixOpOtherThan: anOpName [
 	^ opName isInfixOpOtherThan: anOpName
-]
-
-{ #category : #testing }
-LzOpENode >> hasLinkToAncestorIn: aSet [
-	^ self
-		detect: [ :each |
-			| class |
-			class := graph classForId: each.
-			(aSet includes: class) or: [ class hasLinkToAncestorIn: aSet ] ]
-		ifFound: [ true ]
-		ifNone: [ false ]
 ]
 
 { #category : #comparing }
@@ -98,13 +60,6 @@ LzOpENode >> opName: anOpName [
 ]
 
 { #category : #printing }
-LzOpENode >> printAsLeibnizSyntaxOn: aStream [
-	self
-		printAsLeibnizSyntaxOn: aStream
-		parents: IdentitySet new
-]
-
-{ #category : #printing }
 LzOpENode >> printAsLeibnizSyntaxOn: aStream parents: aNodeSet [
 	| argENodes |
 	(aNodeSet includes: self)
@@ -118,14 +73,4 @@ LzOpENode >> printAsLeibnizSyntaxOn: aStream parents: aNodeSet [
 				printForArgs: argENodes
 				on: aStream
 				parents: parents ]
-]
-
-{ #category : #accessing }
-LzOpENode >> sort [
-	^ sort
-]
-
-{ #category : #accessing }
-LzOpENode >> sort: aSort [
-	sort := aSort
 ]

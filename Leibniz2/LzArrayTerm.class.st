@@ -18,6 +18,21 @@ LzArrayTerm >> args [
 	^ elements
 ]
 
+{ #category : #egraphs }
+LzArrayTerm >> asENodeIn: anEGraph [
+	| node |
+	node := (LzArrayENode new: self elements size)
+				graph: anEGraph;
+				shape: self shape;
+				sort: self sort.
+	1 to: node size do: [ :index |
+		node
+			at: index
+			put: ((self elements at: index)
+					asENodeIn: anEGraph) ].
+	^ anEGraph add: node
+]
+
 { #category : #accessing }
 LzArrayTerm >> elements [
 	^ elements
@@ -38,12 +53,28 @@ LzArrayTerm >> match: otherTerm bindings: bindings [
 	otherTerm matchArrayTerm: self elements: elements shape: shape bindings: bindings
 ]
 
+{ #category : #egraphs }
+LzArrayTerm >> matchArrayENode: anArrayENode  bindings: bindings [
+	^ (shape = anArrayENode shape
+		and: [ self elements size = anArrayENode size])
+		ifTrue: [ anArrayENode graph
+					matchesForPatterns: self elements
+					withClassIds: anArrayENode
+					bindings: bindings ]
+		ifFalse: [ #() ]
+]
+
 { #category : #unifying }
 LzArrayTerm >> matchArrayTerm: otherTerm elements: aTermList shape: anArray bindings: bindings [
 	(shape = anArray and: [ elements size = aTermList size ])
 		ifTrue: [ aTermList with: elements do: [ :arg1 :arg2 |
 					arg1 match: arg2 bindings: bindings ] ]
 		ifFalse: [ bindings failWith: self notUnifiableWith: otherTerm ]
+]
+
+{ #category : #egraphs }
+LzArrayTerm >> matchOpENode: anOpENode  bindings: bindings [
+	^ #()
 ]
 
 { #category : #unifying }

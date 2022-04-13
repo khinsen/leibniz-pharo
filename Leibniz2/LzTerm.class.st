@@ -167,6 +167,11 @@ LzTerm >> matchAllowingVars: otherTerm [
 ]
 
 { #category : #egraphs }
+LzTerm >> matchArrayENode: anOpENode  bindings: bindings [
+	self subclassResponsibility
+]
+
+{ #category : #egraphs }
 LzTerm >> matchOpENode: anOpENode  bindings: bindings [
 	self subclassResponsibility
 ]

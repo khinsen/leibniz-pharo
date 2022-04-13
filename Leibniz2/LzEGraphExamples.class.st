@@ -7,6 +7,15 @@ Class {
 }
 
 { #category : #examples }
+LzEGraphExamples >> contextForEGraphWithArraysAndEqualities [
+	<gtExample>
+	^ LzContextBuilder new
+		include: self contextForEGraphWithEqualities;
+		include: LzBuiltinContexts arrayContext;
+		context
+]
+
+{ #category : #examples }
 LzEGraphExamples >> contextForEGraphWithContradictoryRewrites [
 	<gtExample>
 	^ LzContextBuilder new
@@ -37,6 +46,24 @@ LzEGraphExamples >> contextForSimpleEGraph [
 		op: 'b : ℕ';
 		op: 'c : ℕ';
 		context
+]
+
+{ #category : #examples }
+LzEGraphExamples >> eGraphWithArraysAndEqualities [
+	<gtExample>
+	| context nodes egraph |
+	context := self contextForEGraphWithArraysAndEqualities.
+	egraph := LzEGraph new
+				context: context.
+	nodes := {
+		'1'. 'a'. 'a + 1'. 'b'. 'b + 1'.
+		'{[1, a, b]}'. '{[[1, a], [c, 1]]}'.
+				} collect: [ :each |
+					egraph addTerm: each ].
+	egraph saturateFromRewriteSystem:
+		context rewriteSystemWithEqualityAxioms.
+	self assert: egraph hasCycle not.
+	^ egraph
 ]
 
 { #category : #examples }

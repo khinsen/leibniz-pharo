@@ -42,6 +42,17 @@ LzVarTerm >> match: otherTerm bindings: bindings [
 	otherTerm matchVar: name sort: matchedSort bindings: bindings
 ]
 
+{ #category : #egraphs }
+LzVarTerm >> matchArrayENode: anArrayENode  bindings: bindings [
+	bindings defineVar: self name sort: self sort.
+	^ Generator on: [ :generator |
+		anArrayENode allTerms do: [ :each |
+			| b |
+			b := bindings copy.
+			b bindVar: self name sort: self sort to: each.
+			b ifSuccess: [ generator yield: b ] ] ]
+]
+
 { #category : #unifying }
 LzVarTerm >> matchArrayTerm: otherTerm elements: aTermList bindings: bindings [
 	self error: 'Variable in term being matched to'

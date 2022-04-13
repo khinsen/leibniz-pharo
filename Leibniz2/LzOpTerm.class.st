@@ -68,6 +68,11 @@ LzOpTerm >> match: otherTerm bindings: bindings [
 	otherTerm matchOpTerm: self op: opName args: args bindings: bindings
 ]
 
+{ #category : #egraphs }
+LzOpTerm >> matchArrayENode: anOpENode  bindings: bindings [
+	^ #()
+]
+
 { #category : #unifying }
 LzOpTerm >> matchArrayTerm: otherTerm elements: aTermList shape: anArray bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
