@@ -272,6 +272,11 @@ LzTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: bin
 ]
 
 { #category : #unifying }
+LzTerm >> unifyTagged: aSymbol withArrayTerm: otherTerm tagged: otherSymbol elements: aTermList shape: anArray bindings: bindings [
+	bindings failWith: self notUnifiableWith: otherTerm
+]
+
+{ #category : #unifying }
 LzTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: anotherSymbol op: anOpName args: anArgList bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
 ]

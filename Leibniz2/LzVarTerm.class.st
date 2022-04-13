@@ -42,6 +42,11 @@ LzVarTerm >> match: otherTerm bindings: bindings [
 	otherTerm matchVar: name sort: matchedSort bindings: bindings
 ]
 
+{ #category : #unifying }
+LzVarTerm >> matchArrayTerm: otherTerm elements: aTermList bindings: bindings [
+	self error: 'Variable in term being matched to'
+]
+
 { #category : #egraphs }
 LzVarTerm >> matchOpENode: anOpENode  bindings: bindings [
 	bindings defineVar: self name sort: self sort.
@@ -109,6 +114,18 @@ LzVarTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: 
 		unifyTagged: otherSymbol
 		withVar: taggedName
 		sort: matchedSort
+		bindings: bindings
+]
+
+{ #category : #unifying }
+LzVarTerm >> unifyTagged: aSymbol withArrayTerm: otherTerm tagged: otherSymbol elements: aTermList shape: anArray bindings: bindings [
+	| taggedName |
+	taggedName := LzTaggedVarName tag: aSymbol name: name.
+	bindings defineVar: taggedName sort: sort.
+	otherTerm
+		unifyTagged: otherSymbol
+		withVar: taggedName
+		sort: sort
 		bindings: bindings
 ]
 

@@ -7,13 +7,38 @@ Class {
 }
 
 { #category : #example }
+LzExamples >> arrayOfIntegerPatterns [
+	<gtExample>
+	| context |
+	context := LzBuiltinContexts arrayContext.
+	^ {
+		{ '∀ n_:ℕ {[ 1, n_, 3 ]}'. '{[ 1, 2, 3 ]}'. 1 }.
+		{ '∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ {[[i_], [j_], [k_]]}'. '{[[0], [1], [2]]}'. 3 }.
+		{ '∀ n_:ℕ shape({[n_]})'. 'shape({[3]})'. 1 }.
+	} collect: [ :each |
+		| pattern term bindings |
+		pattern := context pattern: each first.
+		term := context term: each second.
+		bindings := pattern match: term.
+		self assert: bindings bindings size equals: each third.
+		self assert: (pattern substitute: bindings) equals: term.
+		bindings := pattern unify: term.
+		self assert: bindings bindings size equals: each third.
+		self assert: (pattern substitute: bindings) equals: term.
+		pattern ]
+]
+
+{ #category : #example }
 LzExamples >> arrayOfIntegerTerms [
 	<gtExample>
 	| context |
 	context := LzBuiltinContexts arrayContext.
-"	self should: [
-		context term: '' ]
-		raise: Error."
+	{
+		'{[1, [2]]}'.
+		'{[[1, 2], [3]]}'.
+	} do: [ :each | self
+		should: [ context term: each ]
+		raise: Error ].
 	^ {
 		{ '{[]}'. '{[]}'. }.
 		{ '{[ 1, 2, 3 ]}'. '{[ 1, 2, 3 ]}' }.

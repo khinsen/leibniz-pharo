@@ -68,6 +68,11 @@ LzOpTerm >> match: otherTerm bindings: bindings [
 	otherTerm matchOpTerm: self op: opName args: args bindings: bindings
 ]
 
+{ #category : #unifying }
+LzOpTerm >> matchArrayTerm: otherTerm elements: aTermList shape: anArray bindings: bindings [
+	bindings failWith: self notUnifiableWith: otherTerm
+]
+
 { #category : #egraphs }
 LzOpTerm >> matchOpENode: anOpENode  bindings: bindings [
 	^ (opName = anOpENode opName
@@ -134,6 +139,11 @@ LzOpTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: b
 		tagged: aSymbol
 		op: opName args: args
 		bindings: bindings.
+]
+
+{ #category : #unifying }
+LzOpTerm >> unifyTagged: aSymbol withArrayTerm: otherTerm tagged: otherSymbol elements: aTermList shape: anArray bindings: bindings [
+	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : #unifying }
