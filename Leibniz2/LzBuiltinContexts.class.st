@@ -9,6 +9,7 @@ Class {
 		'EqualityContext',
 		'IntegerContext',
 		'RationalNumberContext',
+		'RealNumberContext',
 		'StringContext',
 		'TruthContext'
 	],
@@ -329,6 +330,106 @@ LzBuiltinContexts class >> rationalSortsFor: aContextBuilder [
 		subsort: 'ℕ.nz ⊆ ℚ.p';
 		subsort: 'ℤ ⊆ ℚ';
 		subsort: 'ℤ.nz ⊆ ℚ.nz'.
+]
+
+{ #category : #private }
+LzBuiltinContexts class >> realNumberAxiomsFor: aContextBuilder [
+	aContextBuilder
+		"addition axioms"
+		axiom: '∀ x_:ℝ ∀ y_:ℝ  x_ + y_ = y_ + x_';
+		axiom: '∀ x_:ℝ ∀ y_:ℝ  ∀ z_:ℝ  (x_ + y_) + z_ = x_ + (y_ + z_)';
+		"multiplication axioms"
+		axiom: '∀ x_:ℝ ∀ y_:ℝ  x_ × y_ = y_ × x_';
+axiom: '∀ x_:ℝ ∀ y_:ℝ  ∀ z_:ℝ  (x_ × y_) × z_ = x_ × (y_ × z_)'
+]
+
+{ #category : #accessing }
+LzBuiltinContexts class >> realNumberContext [
+	RealNumberContext ifNil: [
+		| builder |
+		builder := LzContextBuilder new
+			include: self rationalNumberContext.
+		self realNumberSortsFor: builder.
+		self realNumberOpsFor: builder.
+		self realNumberAxiomsFor: builder.
+		self realNumberRulesFor: builder.
+		RealNumberContext := builder context ].
+	^ RealNumberContext
+]
+
+{ #category : #private }
+LzBuiltinContexts class >> realNumberOpsFor: builder [
+	builder
+		"Arithmetic operators"
+		op: 'ℝ + ℝ : ℝ';
+		op: 'ℝ.p + ℝ.p : ℝ.p';
+		op: 'ℝ.nn + ℝ.nn : ℝ.nn';
+		op: 'ℝ - ℝ : ℝ';
+		op: '-(ℝ) : ℝ';
+		op: 'ℝ × ℝ : ℝ';
+		op: 'ℝ.p × ℝ.p : ℝ.p';
+		op: 'ℝ.nn × ℝ.nn : ℝ.nn';
+		op: 'ℝ ÷ ℝ.nz : ℝ';
+		op: 'ℝ.nz ÷ ℝ.nz : ℝ.nz';
+		op: 'ℝ.p ÷ ℝ.p : ℝ.p';
+		op: 'ℝ.nn ÷ ℝ.p : ℝ.nn';
+		op: 'ℝ.nz^(zero) : ℕ.nz';
+		op: 'ℝ.p^(ℝ.nz) : ℝ.p';
+		op: 'ℝ.nz^(ℤ.nz) : ℝ.nz';
+		op: 'ℝ^(ℕ.nz) : ℝ';
+		"Various functions"
+		op: 'abs(ℝ) : ℝ.nn';
+		op: 'abs(ℝ.nz) : ℝ.p';
+		op: '√(ℝ.nn) : ℝ.nn';
+		op: '√(ℝ.p) : ℝ.p';
+		"Comparison operators"
+		op: #'ℝ < ℝ : 𝔹';
+		op: #'ℝ > ℝ : 𝔹';
+		op: #'ℝ ≤ ℝ : 𝔹';
+		op: #'ℝ ≥ ℝ : 𝔹'.
+]
+
+{ #category : #private }
+LzBuiltinContexts class >> realNumberRulesFor: builder [
+	builder
+		"addition rules"
+		rule: '∀ x_:ℝ ∀ zero_:zero x_ + zero_ ⇒ x_';
+		rule: '∀ x_:ℝ ∀ zero_:zero zero_ + x_ ⇒ x_';
+		"Subtraction rules"
+		rule: '∀ x_:ℝ ∀ zero_:zero x_ - zero_ ⇒ x_';
+		rule: '∀ x_:ℝ ∀ zero_:zero zero_ - x_ ⇒ -(x_)';
+		"Negation rules"
+		rule: '∀ zero_:zero -(zero_) ⇒ 0';
+		"Multiplication rules"
+		rule: '∀ x_:ℝ ∀ zero_:zero x_ × zero_ ⇒ 0';
+		rule: '∀ x_:ℝ ∀ zero_:zero zero_ × x_ ⇒ 0';
+		rule: '∀ x_:ℝ 1 × x_ ⇒ x_';
+		rule: '∀ x_:ℝ x_ × 1 ⇒ x_';
+		"Division rules"
+		rule: '∀ x_:ℝ.nz ∀ zero_:zero zero_ ÷ x_ ⇒ 0';
+		rule: '∀ x_:ℝ x_ ÷ 1 ⇒ x_';
+		"Exponentiation rules"
+		rule: '∀ x_:ℝ.nz ∀ zero_:zero x_^(zero_) ⇒ 1';
+		"Abs rules"
+		rule: '∀ x_:ℝ.nn abs(x_) ⇒ x_';
+		rule: '∀ x_:ℝ abs(x_) ⇒ -(x_) | x_ < 0'.
+]
+
+{ #category : #private }
+LzBuiltinContexts class >> realNumberSortsFor: builder [
+	builder
+		sort: 'ℝ';
+		sort: 'ℝ.nz';
+		sort: 'ℝ.nn';
+		sort: 'ℝ.p';
+		subsort: 'ℚ ⊆ ℝ';
+		subsort: 'ℝ.nz ⊆ ℝ';
+		subsort: 'ℚ.nz ⊆ ℝ.nz';
+		subsort: 'ℝ.p ⊆ ℝ.nz';
+		subsort: 'ℚ.p ⊆ ℝ.p';
+		subsort: 'ℝ.nn ⊆ ℝ';
+		subsort: 'ℝ.p ⊆ ℝ.nn';
+		subsort: 'ℚ.nn ⊆ ℝ.nn'.
 ]
 
 { #category : #resetting }
