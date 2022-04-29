@@ -146,6 +146,112 @@ LzExampleContexts class >> functionContext [
 		context
 ]
 
+{ #category : #private }
+LzExampleContexts class >> geometricAlgebra3DBasisFor: builder [
+	builder
+		op: 'e1 : Vector';
+		op: 'e2 : Vector';
+		op: 'e3 : Vector';
+		rule: 'e1 × e1 ⇒ 1';
+		rule: 'e2 × e2 ⇒ 1';
+		rule: 'e3 × e3 ⇒ 1';
+		axiom: 'e1 × e2 = -(e2 × e1)';
+		axiom: 'e2 × e3 = -(e3 × e2)';
+		axiom: 'e3 × e1 = -(e1 × e3)';
+
+		op: 'i : Pseudoscalar';
+		rule: 'i × i ⇒ -1';
+		axiom: 'i = e1 × e2 × e3';
+		axiom: '∀ x_:Multivector i × x_ = x_ × i';
+		axiom: 'e1 × e2 = i × e3';
+		axiom: 'e2 × e3 = i × e1';
+		axiom: 'e3 × e1 = i × e2'
+]
+
+{ #category : #defining }
+LzExampleContexts class >> geometricAlgebra3DContext [
+	| builder |
+	builder := LzContextBuilder new
+		include: LzBuiltinContexts realNumberContext.
+	self geometricAlgebra3DSortsFor: builder.
+	self geometricAlgebra3DSumsFor: builder.
+	self geometricAlgebra3DProductsFor: builder.
+	self geometricAlgebra3DBasisFor: builder.
+	^ builder context
+]
+
+{ #category : #private }
+LzExampleContexts class >> geometricAlgebra3DProductsFor: builder [
+	builder
+		op: 'Multivector × Multivector : Multivector';
+		op: 'ℝ × Vector : Vector';
+		op: 'Vector × ℝ : Vector';
+		op: 'ℝ × Bivector : Bivector';
+		op: 'Bivector × ℝ : Bivector';
+		op: 'ℝ × Pseudoscalar : Pseudoscalar';
+		op: 'Pseudoscalar × ℝ : Pseudoscalar';
+		op: 'Vector × Pseudoscalar : Bivector';
+		op: 'Pseudoscalar × Vector : Bivector';
+		op: 'Bivector × Pseudoscalar : Vector';
+		op: 'Pseudoscalar × Bivector : Vector';
+		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  (x_ × y_) × z_ = x_ × (y_ × z_)';
+		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)';
+		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  (x_ + y_) × z_ = (x_ × z_) + (y_ × z_)';
+		rule: '∀ x_:Multivector 1 × x_ ⇒ x_';
+		rule: '∀ x_:Multivector x_ × 1 ⇒ x_';
+
+		op: 'Multivector ∧ Multivector : Multivector';
+		op: 'ℝ ∧ Vector : Vector';
+		op: 'Vector ∧ ℝ : Vector';
+		op: 'Vector ∧ Vector : Bivector';
+		op: 'Vector ∧ Bivector : Pseudoscalar';
+		op: 'Bivector ∧ Vector : Pseudoscalar';
+		axiom: '∀ x_:Multivector ∀ y_:Multivector x_ ∧ y_ = -(y_ ∧ x_)';
+		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  (x_ ∧ y_) ∧ z_ = x_ ∧ (y_ ∧ z_)';
+		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  x_ ∧ (y_ + z_) = (x_ ∧ y_) + (x_ ∧ z_)';
+		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  (x_ + y_) ∧ z_ = (x_ ∧ z_) + (y_ ∧ z_)';
+		axiom: '∀ x_:Multivector ∀ y_:Multivector x_ ∧ y_ = 1/2 × ((x_ × y_) - (y_ × x_))';
+		rule: '∀ x_:Multivector 1 ∧ x_ ⇒ x_';
+		rule: '∀ x_:Multivector x_ ∧ 1 ⇒ x_';
+
+		op: 'Vector ⋅ Vector: ℝ';
+		axiom: '∀ x_:Vector ∀ y_:Vector x_ ⋅ y_ = 1/2 × ((x_ × y_) + (y_ × x_))'
+]
+
+{ #category : #private }
+LzExampleContexts class >> geometricAlgebra3DSortsFor: builder [
+	builder
+		sort: 'Multivector';
+		sort: 'Vector';
+		sort: 'Bivector';
+		sort: 'Pseudoscalar';
+		subsort: 'ℝ ⊆ Multivector';
+		subsort: 'Vector ⊆ Multivector';
+		subsort: 'Bivector ⊆ Multivector';
+		subsort: 'Pseudoscalar ⊆ Multivector'
+]
+
+{ #category : #private }
+LzExampleContexts class >> geometricAlgebra3DSumsFor: builder [
+	builder
+		op: 'Multivector + Multivector : Multivector';
+		op: 'Vector + Vector : Vector';
+		op: 'Bivector + Bivector : Bivector';
+		op: 'Pseudoscalar + Pseudoscalar : Pseudoscalar';
+		axiom: '∀ x_:Multivector ∀ y_:Multivector  x_ + y_ = y_ + x_';
+		axiom: '∀ x_:Multivector ∀ y_:Multivector  ∀ z_:Multivector  (x_ + y_) + z_ = x_ + (y_ + z_)';
+
+		op: 'Multivector - Multivector : Multivector';
+		op: 'Vector - Vector : Vector';
+		op: 'Bivector - Bivector : Bivector';
+		op: 'Pseudoscalar - Pseudoscalar : Pseudoscalar';
+
+		op: '-(Multivector) : Multivector';
+		op: '-(Vector) : Vector';
+		op: '-(Bivector) : Bivector';
+		op: '-(Pseudoscalar) : Pseudoscalar'
+]
+
 { #category : #defining }
 LzExampleContexts class >> mapContext [
 	^ LzContextBuilder new
