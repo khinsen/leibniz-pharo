@@ -87,7 +87,9 @@ LzBuiltinContexts class >> integerAxiomsFor: aContextBuilder [
 		axiom: '∀ x_:ℤ ∀ y_:ℤ  ∀ z_:ℤ  (x_ + y_) + z_ = x_ + (y_ + z_)';
 		"multiplication axioms"
 		axiom: '∀ x_:ℤ ∀ y_:ℤ  x_ × y_ = y_ × x_';
-		axiom: '∀ x_:ℤ ∀ y_:ℤ  ∀ z_:ℤ  (x_ × y_) × z_ = x_ × (y_ × z_)'.
+		axiom: '∀ x_:ℤ ∀ y_:ℤ  ∀ z_:ℤ  (x_ × y_) × z_ = x_ × (y_ × z_)';
+		"distribution"
+		axiom: '∀ x_:ℤ ∀ y_:ℤ  ∀ z_:ℤ  x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)'
 ]
 
 { #category : #accessing }
@@ -203,14 +205,16 @@ LzBuiltinContexts class >> integerSortsFor: aContextBuilder [
 ]
 
 { #category : #private }
-LzBuiltinContexts class >> rationalAxiomsFor: aContextBuilder [
+LzBuiltinContexts class >> rationalNumberAxiomsFor: aContextBuilder [
 	aContextBuilder
 		"addition axioms"
 		axiom: '∀ x_:ℚ ∀ y_:ℚ  x_ + y_ = y_ + x_';
 		axiom: '∀ x_:ℚ ∀ y_:ℚ  ∀ z_:ℚ  (x_ + y_) + z_ = x_ + (y_ + z_)';
 		"multiplication axioms"
 		axiom: '∀ x_:ℚ ∀ y_:ℚ  x_ × y_ = y_ × x_';
-		axiom: '∀ x_:ℚ ∀ y_:ℚ  ∀ z_:ℚ  (x_ × y_) × z_ = x_ × (y_ × z_)'.
+		axiom: '∀ x_:ℚ ∀ y_:ℚ  ∀ z_:ℚ  (x_ × y_) × z_ = x_ × (y_ × z_)';
+		"distribution"
+		axiom: '∀ x_:ℚ ∀ y_:ℚ  ∀ z_:ℚ  x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)'
 ]
 
 { #category : #private }
@@ -254,7 +258,7 @@ LzBuiltinContexts class >> rationalNumberContext [
 		self integerOpsFor: builder.
 		self rationalNumberOpsFor: builder.
 		"No integerAxioms, because they would be redundant."
-		self rationalAxiomsFor:  builder.
+		self rationalNumberAxiomsFor:  builder.
 		"No integerRules, the few that are required are repeated in rationalRules."
 		self rationalNumberRulesFor: builder.
 		RationalNumberContext := builder context ].
@@ -354,7 +358,9 @@ LzBuiltinContexts class >> realNumberAxiomsFor: aContextBuilder [
 		axiom: '∀ x_:ℝ ∀ y_:ℝ  ∀ z_:ℝ  (x_ + y_) + z_ = x_ + (y_ + z_)';
 		"multiplication axioms"
 		axiom: '∀ x_:ℝ ∀ y_:ℝ  x_ × y_ = y_ × x_';
-		axiom: '∀ x_:ℝ ∀ y_:ℝ  ∀ z_:ℝ  (x_ × y_) × z_ = x_ × (y_ × z_)'
+		axiom: '∀ x_:ℝ ∀ y_:ℝ  ∀ z_:ℝ  (x_ × y_) × z_ = x_ × (y_ × z_)';
+		"distribution"
+		axiom: '∀ x_:ℝ ∀ y_:ℝ  ∀ z_:ℝ  x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)'.
 ]
 
 { #category : #accessing }
