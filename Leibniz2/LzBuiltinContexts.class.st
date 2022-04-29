@@ -213,6 +213,34 @@ LzBuiltinContexts class >> rationalAxiomsFor: aContextBuilder [
 		axiom: '∀ x_:ℚ ∀ y_:ℚ  ∀ z_:ℚ  (x_ × y_) × z_ = x_ × (y_ × z_)'.
 ]
 
+{ #category : #private }
+LzBuiltinContexts class >> rationalNumberBuiltinRulesFor: aContextBuilder [
+	aContextBuilder
+		"addition rules"
+		rule: '∀ x_:ℚ ∀ y_:ℚ x_ + y_ → ''x + y'':LzRationalNumberTerm';
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ + y_ → ''x + y'':LzIntegerTerm';
+		"Subtraction rules"
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ - y_ → ''x - y'':LzIntegerTerm';
+		rule: '∀ x_:ℚ ∀ y_:ℚ x_ - y_ → ''x - y'':LzRationalNumberTerm';
+		"Negation rules"
+		rule: '∀ x_:ℤ -(x_) → ''x negated'':LzIntegerTerm';
+		rule: '∀ x_:ℚ -(x_) → ''x negated'':LzRationalNumberTerm';
+		"Multiplication rules"
+		rule: '∀ x_:ℤ ∀ y_:ℤ x_ × y_ → ''x * y'':LzIntegerTerm';
+		rule: '∀ x_:ℚ ∀ y_:ℚ x_ × y_ → ''x * y'':LzRationalNumberTerm';
+		"Division rules"
+		rule: '∀ x_:ℚ ∀ y_:ℚ.nz x_ ÷ y_ → ''x / y'':LzRationalNumberTerm';
+		"Integer div and rem rules"
+		rule: '∀ x_:ℤ ∀ y_:ℤ.nz x_ div y_ → ''(x abs // y abs) * x sign * y sign'':LzIntegerTerm';
+		rule: '∀ x_:ℤ ∀ y_:ℤ.nz x_ rem y_ → ''(x abs % y abs) * x sign * y sign'':LzIntegerTerm';
+		"Exponentiation rules"
+		rule: '∀ x_:ℤ ∀ y_:ℕ.nz x_^(y_) → ''x raisedTo: y'':LzIntegerTerm';
+		rule: '∀ x_:ℚ.nz ∀ y_:ℤ.nz x_^(y_) → ''x raisedTo: y'':LzRationalNumberTerm';
+		"Abs rules"
+		rule: '∀ x_:ℤ abs(x_) → ''x abs'':LzIntegerTerm';
+		rule: '∀ x_:ℚ abs(x_) → ''x abs'':LzRationalNumberTerm'.
+]
+
 { #category : #accessing }
 LzBuiltinContexts class >> rationalNumberContext [
 	RationalNumberContext ifNil: [
@@ -222,19 +250,19 @@ LzBuiltinContexts class >> rationalNumberContext [
 			builtin: #integers;
 			builtin: #rationalNumbers.
 		self integerSortsFor: builder.
-		self rationalSortsFor: builder.
+		self rationalNumberSortsFor: builder.
 		self integerOpsFor: builder.
-		self rationalOpsFor: builder.
+		self rationalNumberOpsFor: builder.
 		"No integerAxioms, because they would be redundant."
 		self rationalAxiomsFor:  builder.
 		"No integerRules, the few that are required are repeated in rationalRules."
-		self rationalRulesFor: builder.
+		self rationalNumberRulesFor: builder.
 		RationalNumberContext := builder context ].
 	^ RationalNumberContext
 ]
 
 { #category : #private }
-LzBuiltinContexts class >> rationalOpsFor: aContextBuilder [
+LzBuiltinContexts class >> rationalNumberOpsFor: aContextBuilder [
 	aContextBuilder
 		"Arithmetic operators"
 		op: 'ℚ + ℚ : ℚ';
@@ -263,59 +291,45 @@ LzBuiltinContexts class >> rationalOpsFor: aContextBuilder [
 ]
 
 { #category : #private }
-LzBuiltinContexts class >> rationalRulesFor: aContextBuilder [
+LzBuiltinContexts class >> rationalNumberRulesFor: aContextBuilder [
 	aContextBuilder
 		"addition rules"
 		rule: '∀ x_:ℚ ∀ z_:zero x_ + z_ ⇒ x_';
 		rule: '∀ x_:ℚ ∀ z_:zero z_ + x_ ⇒ x_';
-		rule: '∀ x_:ℚ ∀ y_:ℚ x_ + y_ → ''x + y'':LzRationalNumberTerm';
-		rule: '∀ x_:ℤ ∀ y_:ℤ x_ + y_ → ''x + y'':LzIntegerTerm';
 		"Subtraction rules"
 		rule: '∀ x_:ℚ ∀ z_:zero x_ - z_ ⇒ x_';
 		rule: '∀ x_:ℚ ∀ z_:zero z_ - x_ ⇒ -(x_)';
-		rule: '∀ x_:ℤ ∀ y_:ℤ x_ - y_ → ''x - y'':LzIntegerTerm';
-		rule: '∀ x_:ℚ ∀ y_:ℚ x_ - y_ → ''x - y'':LzRationalNumberTerm';
 		"Negation rules"
 		rule: '∀ z_:zero -(z_) ⇒ 0';
-		rule: '∀ x_:ℤ -(x_) → ''x negated'':LzIntegerTerm';
-		rule: '∀ x_:ℚ -(x_) → ''x negated'':LzRationalNumberTerm';
 		"Multiplication rules"
 		rule: '∀ x_:ℚ ∀ z_:zero x_ × z_ ⇒ 0';
 		rule: '∀ x_:ℚ ∀ z_:zero z_ × x_ ⇒ 0';
 		rule: '∀ x_:ℚ 1 × x_ ⇒ x_';
 		rule: '∀ x_:ℚ x_ × 1 ⇒ x_';
-		rule: '∀ x_:ℤ ∀ y_:ℤ x_ × y_ → ''x * y'':LzIntegerTerm';
-		rule: '∀ x_:ℚ ∀ y_:ℚ x_ × y_ → ''x * y'':LzRationalNumberTerm';
 		"Division rules"
 		rule: '∀ x_:ℚ.nz ∀ z_:zero z_ ÷ x_ ⇒ 0';
 		rule: '∀ x_:ℚ x_ ÷ 1 ⇒ x_';
-		rule: '∀ x_:ℚ ∀ y_:ℚ.nz x_ ÷ y_ → ''x / y'':LzRationalNumberTerm';
 		"Integer div and rem rules"
 		rule: '∀ x_:ℤ.nz ∀ z_:zero z_ div x_ ⇒ 0';
 		rule: '∀ x_:ℤ x_ div 1 ⇒ x_';
-		rule: '∀ x_:ℤ ∀ y_:ℤ.nz x_ div y_ → ''(x abs // y abs) * x sign * y sign'':LzIntegerTerm';
 		rule: '∀ x_:ℤ.nz ∀ z_:zero z_ rem x_ ⇒ 0';
 		rule: '∀ x_:ℤ x_ rem 1 ⇒ 0';
-		rule: '∀ x_:ℤ ∀ y_:ℤ.nz x_ rem y_ → ''(x abs % y abs) * x sign * y sign'':LzIntegerTerm';
 		"Exponentiation rules"
 		rule: '∀ x_:ℚ.nz ∀ z_:zero x_^(z_) ⇒ 1';
 		rule: '∀ x_:ℕ.nz ∀ z_:zero z_^(x_) ⇒ 0';
-		rule: '∀ x_:ℤ ∀ y_:ℕ.nz x_^(y_) → ''x raisedTo: y'':LzIntegerTerm';
-		rule: '∀ x_:ℚ.nz ∀ y_:ℤ.nz x_^(y_) → ''x raisedTo: y'':LzRationalNumberTerm';
 		"Abs rules"
 		rule: '∀ x_:ℚ.nn abs(x_) ⇒ x_';
 		rule: '∀ x_:ℚ abs(x_) ⇒ -(x_) | x_ < 0';
-		rule: '∀ x_:ℤ abs(x_) → ''x abs'':LzIntegerTerm';
-		rule: '∀ x_:ℚ abs(x_) → ''x abs'':LzRationalNumberTerm';
 		"Comparison rules"
 		rule: '∀ x_:ℚ ∀ y_:ℚ x_ < y_ → ''x < y'':LzBooleanTerm';
 		rule: '∀ x_:ℚ ∀ y_:ℚ x_ > y_ → ''x > y'':LzBooleanTerm';
 		rule: '∀ x_:ℚ ∀ y_:ℚ x_ ≤ y_ → ''x <= y'':LzBooleanTerm';
 		rule: '∀ x_:ℚ ∀ y_:ℚ x_ ≥ y_ → ''x >= y'':LzBooleanTerm'.
+	self rationalNumberBuiltinRulesFor: aContextBuilder
 ]
 
 { #category : #private }
-LzBuiltinContexts class >> rationalSortsFor: aContextBuilder [
+LzBuiltinContexts class >> rationalNumberSortsFor: aContextBuilder [
 	aContextBuilder
 		"Rational numbers"
 		sort: 'ℚ';
@@ -340,7 +354,7 @@ LzBuiltinContexts class >> realNumberAxiomsFor: aContextBuilder [
 		axiom: '∀ x_:ℝ ∀ y_:ℝ  ∀ z_:ℝ  (x_ + y_) + z_ = x_ + (y_ + z_)';
 		"multiplication axioms"
 		axiom: '∀ x_:ℝ ∀ y_:ℝ  x_ × y_ = y_ × x_';
-axiom: '∀ x_:ℝ ∀ y_:ℝ  ∀ z_:ℝ  (x_ × y_) × z_ = x_ × (y_ × z_)'
+		axiom: '∀ x_:ℝ ∀ y_:ℝ  ∀ z_:ℝ  (x_ × y_) × z_ = x_ × (y_ × z_)'
 ]
 
 { #category : #accessing }
@@ -348,10 +362,18 @@ LzBuiltinContexts class >> realNumberContext [
 	RealNumberContext ifNil: [
 		| builder |
 		builder := LzContextBuilder new
-			include: self rationalNumberContext.
+			include: self truthContext;
+			builtin: #integers;
+			builtin: #rationalNumbers.
+		self integerSortsFor: builder.
+		self rationalNumberSortsFor: builder.
 		self realNumberSortsFor: builder.
+		self integerOpsFor: builder.
+		self rationalNumberOpsFor: builder.
 		self realNumberOpsFor: builder.
+		"No rationalNumberAxioms, because they would be redundant."
 		self realNumberAxiomsFor: builder.
+		"No rationalNumberRules, the few that are required are repeated in realNumberRules."
 		self realNumberRulesFor: builder.
 		RealNumberContext := builder context ].
 	^ RealNumberContext
@@ -390,8 +412,8 @@ LzBuiltinContexts class >> realNumberOpsFor: builder [
 ]
 
 { #category : #private }
-LzBuiltinContexts class >> realNumberRulesFor: builder [
-	builder
+LzBuiltinContexts class >> realNumberRulesFor: aContextBuilder [
+	aContextBuilder
 		"addition rules"
 		rule: '∀ x_:ℝ ∀ zero_:zero x_ + zero_ ⇒ x_';
 		rule: '∀ x_:ℝ ∀ zero_:zero zero_ + x_ ⇒ x_';
@@ -408,11 +430,23 @@ LzBuiltinContexts class >> realNumberRulesFor: builder [
 		"Division rules"
 		rule: '∀ x_:ℝ.nz ∀ zero_:zero zero_ ÷ x_ ⇒ 0';
 		rule: '∀ x_:ℝ x_ ÷ 1 ⇒ x_';
+		"Integer div and rem rules"
+		rule: '∀ x_:ℤ.nz ∀ z_:zero z_ div x_ ⇒ 0';
+		rule: '∀ x_:ℤ x_ div 1 ⇒ x_';
+		rule: '∀ x_:ℤ.nz ∀ z_:zero z_ rem x_ ⇒ 0';
+		rule: '∀ x_:ℤ x_ rem 1 ⇒ 0';
 		"Exponentiation rules"
 		rule: '∀ x_:ℝ.nz ∀ zero_:zero x_^(zero_) ⇒ 1';
+		rule: '∀ x_:ℕ.nz ∀ z_:zero z_^(x_) ⇒ 0';
 		"Abs rules"
 		rule: '∀ x_:ℝ.nn abs(x_) ⇒ x_';
-		rule: '∀ x_:ℝ abs(x_) ⇒ -(x_) | x_ < 0'.
+		rule: '∀ x_:ℝ abs(x_) ⇒ -(x_) | x_ < 0';
+		"Comparison rules"
+		rule: '∀ x_:ℝ ∀ y_:ℝ x_ < y_ → ''x < y'':LzBooleanTerm';
+		rule: '∀ x_:ℝ ∀ y_:ℝ x_ > y_ → ''x > y'':LzBooleanTerm';
+		rule: '∀ x_:ℝ ∀ y_:ℝ x_ ≤ y_ → ''x <= y'':LzBooleanTerm';
+		rule: '∀ x_:ℝ ∀ y_:ℝ x_ ≥ y_ → ''x >= y'':LzBooleanTerm'.
+	self rationalNumberBuiltinRulesFor: aContextBuilder
 ]
 
 { #category : #private }
@@ -437,6 +471,7 @@ LzBuiltinContexts class >> reset [
 	TruthContext := nil.
 	IntegerContext := nil.
 	RationalNumberContext := nil.
+	RealNumberContext := nil.
 	StringContext := nil.
 ]
 
