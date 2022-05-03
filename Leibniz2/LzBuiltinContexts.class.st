@@ -6,6 +6,7 @@ Class {
 	#name : #LzBuiltinContexts,
 	#superclass : #Object,
 	#classVars : [
+		'ArrayContext',
 		'EqualityContext',
 		'IntegerContext',
 		'RationalNumberContext',
@@ -16,19 +17,21 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
-{ #category : #accessing }
+{ #category : #defining }
 LzBuiltinContexts class >> arrayContext [
-	| builder |
-	builder := LzContextBuilder new
-				includeSortContext: LzBuiltinContexts integerContext;
-				include: LzBuiltinContexts integerContext;
-				builtin: #arrays.
-	self arraySortsFor: builder.
-	self arrayOpsFor: builder.
-	^ builder context
+	ArrayContext ifNil: [
+		| builder |
+		builder := LzContextBuilder new
+					includeSortContext: LzBuiltinContexts integerContext;
+					include: LzBuiltinContexts integerContext;
+					builtin: #arrays.
+		self arraySortsFor: builder.
+		self arrayOpsFor: builder.
+		ArrayContext := builder context ].
+	^ ArrayContext
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 LzBuiltinContexts class >> arrayOpsFor: builder [
 	builder
 		op: '∀ s_:𝕊 shape(Array(s_)) : Array(ℕ)';
@@ -39,34 +42,66 @@ LzBuiltinContexts class >> arrayOpsFor: builder [
 LzBuiltinContexts class >> arraySortsFor: builder [
 	builder
 		sort: 'Array(𝕊)';
+		sort: 'Array1D(𝕊)';
+		subsort: '∀ s_:𝕊 ',
+					'Array1D(s_) ⊆ Array(s_)';
+		sort: 'Array2D(𝕊)';
+		subsort: '∀ s_:𝕊 ',
+					'Array2D(s_) ⊆ Array(s_)';
+		sort: 'Array3D(𝕊)';
+		subsort: '∀ s_:𝕊 ',
+					'Array3D(s_) ⊆ Array(s_)';
+		sort: 'Array4D(𝕊)';
+		subsort: '∀ s_:𝕊 ',
+					'Array4D(s_) ⊆ Array(s_)';
 		sort: 'Array(𝕊, ℕ)';
 		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ',
-					'Array(s_, i1_) ⊆ Array(s_)';
+					'Array(s_, i1_) ⊆ Array1D(s_)';
 		sort: 'Array(𝕊, ℕ, ℕ)';
+		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ',
+					'Array(s_, i1_, i2_) ⊆ Array2D(s_)';
 		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ',
 					'Array(s_, i1_, i2_) ⊆ Array(s_, i1_)';
 		sort: 'Array(𝕊, ℕ, ℕ, ℕ)';
 		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ',
+					'Array(s_, i1_, i2_, i3_) ⊆ Array3D(s_)';
+		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ',
 					'Array(s_, i1_, i2_, i3_) ⊆ Array(s_, i1_, i2_)';
 		sort: 'Array(𝕊, ℕ, ℕ, ℕ, ℕ)';
 		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ∀ i4_:ℕ ',
+					'Array(s_, i1_, i2_, i3_, i4_) ⊆ Array3D(s_)';
+		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ∀ i4_:ℕ ',
 					'Array(s_, i1_, i2_, i3_, i4_) ⊆ Array(s_, i1_, i2_, i3_)';
 		sort: 'EmptyArray';
+		sort: 'EmptyArray1D';
+		sort: 'EmptyArray2D';
+		sort: 'EmptyArray3D';
+		sort: 'EmptyArray4D';
+		subsort: 'EmptyArray1D ⊆ EmptyArray';
+		subsort: 'EmptyArray2D ⊆ EmptyArray';
+		subsort: 'EmptyArray3D ⊆ EmptyArray';
+		subsort: 'EmptyArray4D ⊆ EmptyArray';
 		sort: 'EmptyArray(ℕ)';
 		subsort: '∀ i1_:ℕ ',
-					'EmptyArray(i1_) ⊆ EmptyArray';
+					'EmptyArray(i1_) ⊆ EmptyArray1D';
 		sort: 'EmptyArray(ℕ, ℕ)';
+		subsort: '∀ i1_:ℕ ∀ i2_:ℕ ',
+					'EmptyArray(i1_, i2_) ⊆ EmptyArray2D';
 		subsort: '∀ i1_:ℕ ∀ i2_:ℕ ',
 					'EmptyArray(i1_, i2_) ⊆ EmptyArray(i1_)';
 		sort: 'EmptyArray(ℕ, ℕ, ℕ)';
 		subsort: '∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ',
+					'EmptyArray(i1_, i2_, i3_) ⊆ EmptyArray3D';
+		subsort: '∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ',
 					'EmptyArray(i1_, i2_, i3_) ⊆ EmptyArray(i1_, i2_)';
 		sort: 'EmptyArray(ℕ, ℕ, ℕ, ℕ)';
+		subsort: '∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ∀ i4_:ℕ ',
+					'EmptyArray(i1_, i2_, i3_, i4_) ⊆ EmptyArray4D';
 		subsort: '∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ∀ i4_:ℕ ',
 					'EmptyArray(i1_, i2_, i3_, i4_) ⊆ EmptyArray(i1_, i2_, i3_)'
 ]
 
-{ #category : #accessing }
+{ #category : #defining }
 LzBuiltinContexts class >> equalityContext [
 	EqualityContext ifNil: [
 		| builder |
@@ -92,7 +127,7 @@ LzBuiltinContexts class >> integerAxiomsFor: aContextBuilder [
 		axiom: '∀ x_:ℤ ∀ y_:ℤ  ∀ z_:ℤ  x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)'
 ]
 
-{ #category : #accessing }
+{ #category : #defining }
 LzBuiltinContexts class >> integerContext [
 	IntegerContext ifNil: [
 		| builder |
@@ -245,7 +280,7 @@ LzBuiltinContexts class >> rationalNumberBuiltinRulesFor: aContextBuilder [
 		rule: '∀ x_:ℚ abs(x_) → ''x abs'':LzRationalNumberTerm'.
 ]
 
-{ #category : #accessing }
+{ #category : #defining }
 LzBuiltinContexts class >> rationalNumberContext [
 	RationalNumberContext ifNil: [
 		| builder |
@@ -363,7 +398,7 @@ LzBuiltinContexts class >> realNumberAxiomsFor: aContextBuilder [
 		axiom: '∀ x_:ℝ ∀ y_:ℝ  ∀ z_:ℝ  x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)'.
 ]
 
-{ #category : #accessing }
+{ #category : #defining }
 LzBuiltinContexts class >> realNumberContext [
 	RealNumberContext ifNil: [
 		| builder |
@@ -479,14 +514,15 @@ LzBuiltinContexts class >> reset [
 	RationalNumberContext := nil.
 	RealNumberContext := nil.
 	StringContext := nil.
+	ArrayContext := nil.
 ]
 
-{ #category : #accessing }
+{ #category : #defining }
 LzBuiltinContexts class >> sortContext [
 	^ LzSortHierarchyRoot uniqueInstance sortContext
 ]
 
-{ #category : #accessing }
+{ #category : #defining }
 LzBuiltinContexts class >> stringContext [
 	StringContext ifNil: [
 		StringContext :=
@@ -499,7 +535,7 @@ LzBuiltinContexts class >> stringContext [
 	^ StringContext
 ]
 
-{ #category : #accessing }
+{ #category : #defining }
 LzBuiltinContexts class >> truthContext [
 	TruthContext ifNil: [
 		TruthContext :=
