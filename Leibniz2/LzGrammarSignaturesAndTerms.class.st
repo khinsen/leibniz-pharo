@@ -67,7 +67,7 @@ LzGrammarSignaturesAndTerms >> infixOp [
 
 { #category : #terms }
 LzGrammarSignaturesAndTerms >> literalTerm [
-	^ rationalNumberTerm / fpNumberTerm / integerTerm / stringTerm
+	^ rationalNumberTerm / decimalRationalNumberTerm / fpNumberTerm / integerTerm / stringTerm
 ]
 
 { #category : #terms }

@@ -59,6 +59,15 @@ LzParser >> code [
 		==> [ :nodes | { nodes second. nodes fifth } ]
 ]
 
+{ #category : #terms }
+LzParser >> decimalRationalNumberTerm [
+	^ super decimalRationalNumberTerm
+		==> [ :string |
+				self flag: #todo. "Round-off-free conversion"
+			  LzASTRationalLiteral new
+				value: string asNumber asFloat asFraction ]
+]
+
 { #category : #axioms }
 LzParser >> equalityAxiom [
 	^ super equalityAxiom ==> [ :nodes |

@@ -11,7 +11,9 @@ Class {
 		'rationalNumberTerm',
 		'fpNumberTerm',
 		'integerTerm',
-		'stringTerm'
+		'stringTerm',
+		'decimalRationalNumberTerm',
+		'fpNumber'
 	],
 	#category : #'Leibniz2-Parser'
 }
@@ -37,6 +39,11 @@ LzGrammarIdentifiersAndLiterals class >> reservedIdentifiers [
 ]
 
 { #category : #literals }
+LzGrammarIdentifiersAndLiterals >> decimalRationalNumberTerm [
+	^ $# asPParser, fpNumber ==> [ :nodes | nodes second ]
+]
+
+{ #category : #literals }
 LzGrammarIdentifiersAndLiterals >> fpExponentPart [
 	^ $e asPParser , fpIntegerPart
 ]
@@ -52,12 +59,17 @@ LzGrammarIdentifiersAndLiterals >> fpIntegerPart [
 ]
 
 { #category : #literals }
-LzGrammarIdentifiersAndLiterals >> fpNumberTerm [
+LzGrammarIdentifiersAndLiterals >> fpNumber [
 	^ ((fpIntegerPart , fpFractionalPart , fpExponentPart optional)
 			/ (fpIntegerPart , fpExponentPart)) flatten
 	 	"Pharo doesn't allow a dot followed by an exponent without any fractional part.
 		  Workaround: replace '.e' by '.0e'"
 		==> [ :value | value copyReplaceAll: '.e' with: '.0e' ]
+]
+
+{ #category : #literals }
+LzGrammarIdentifiersAndLiterals >> fpNumberTerm [
+	^ fpNumber
 ]
 
 { #category : #identifiers }

@@ -375,6 +375,8 @@ LzExamples >> rationalNumberTerms [
 		{ '-1/3'. 'ℚ.nz' }.
 		{ '-1/3 + 1/3'. 'ℚ' }.
 		{ '1/3 + 1/3'. 'ℚ.p' }.
+		{ '#0.5'. 'ℚ.p' }.
+		{ '#-0.5e1'. 'ℤ.nz' }.
 	}
 	collect: [ :each |
 		| term |
