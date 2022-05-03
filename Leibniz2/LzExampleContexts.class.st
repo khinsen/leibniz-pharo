@@ -215,7 +215,10 @@ LzExampleContexts class >> geometricAlgebra3DProductsFor: builder [
 		rule: '∀ x_:Multivector x_ ∧ 1 ⇒ x_';
 
 		op: 'Vector ⋅ Vector: ℝ';
-		axiom: '∀ x_:Vector ∀ y_:Vector x_ ⋅ y_ = 1/2 × ((x_ × y_) + (y_ × x_))'
+		axiom: '∀ x_:Vector ∀ y_:Vector x_ ⋅ y_ = 1/2 × ((x_ × y_) + (y_ × x_))';
+
+		op: 'sq(Vector): ℝ';
+		rule: '∀ x_:Vector x_ × x_ ⇒ sq(x_)'
 ]
 
 { #category : #private }
