@@ -143,6 +143,10 @@ LzExampleContexts class >> functionContext [
 				'fn(from_, to_)';
 		op: '∀ from_:𝕊 ∀ to_:𝕊 ',
 				'(fn(from_, to_))[from_] : to_';
+		sort: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
+				'fn(from1_, from2_, to_)';
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
+				'(fn(from1_, from2_, to_))[from1_, from2_] : to_';
 		context
 ]
 
