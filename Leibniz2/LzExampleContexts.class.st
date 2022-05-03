@@ -181,6 +181,7 @@ LzExampleContexts class >> geometricAlgebra3DContext [
 	self geometricAlgebra3DSumsFor: builder.
 	self geometricAlgebra3DProductsFor: builder.
 	self geometricAlgebra3DBasisFor: builder.
+	self geometricAlgebra3DSimplificationsFor: builder.
 	^ builder context
 ]
 
@@ -226,9 +227,25 @@ LzExampleContexts class >> geometricAlgebra3DProductsFor: builder [
 		op: 'Vector ⋅ Vector: ℝ';
 		axiom: '∀ x_:Vector ∀ y_:Vector x_ ⋅ y_ = 1/2 × ((x_ × y_) + (y_ × x_))';
 
-		op: 'sq(Vector): ℝ';
+		op: 'sq(Vector): ℝ.nn';
 		rule: '∀ x_:Vector x_ × x_ ⇒ sq(x_)';
 		rule: '∀ x_:Vector x_ ⋅ x_ ⇒ sq(x_)'
+]
+
+{ #category : #defining }
+LzExampleContexts class >> geometricAlgebra3DSimplificationsFor: builder [
+	builder
+		rule: '∀ s_:ℝ ∀ v_:Vector sq(s_ × v_) ⇒ s_^(2) × sq(v_)';
+		rule: '∀ x1_:ℝ ∀ y1_:ℝ ∀ z1_:ℝ ',
+				'∀ x2_:ℝ ∀ y2_:ℝ ∀ z2_:ℝ ',
+				'((x1_ × e1) + (y1_ × e2) + (z1_ × e3)) ',
+				'+ ((x2_ × e1) + (y2_ × e2) + (z2_ × e3)) ',
+				'⇒ ((x1_ + x2_) × e1) + ((y1_ + y2_) × e2) + ((z1_ + z2_) × e3)';
+		rule: '∀ x1_:ℝ ∀ y1_:ℝ ∀ z1_:ℝ ',
+				'∀ x2_:ℝ ∀ y2_:ℝ ∀ z2_:ℝ ',
+				'((x1_ × e1) + (y1_ × e2) + (z1_ × e3)) ',
+				'- ((x2_ × e1) + (y2_ × e2) + (z2_ × e3)) ',
+				'⇒ ((x1_ - x2_) × e1) + ((y1_ - y2_) × e2) + ((z1_ - z2_) × e3)'
 ]
 
 { #category : #private }
