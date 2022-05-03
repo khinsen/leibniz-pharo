@@ -199,6 +199,8 @@ LzExampleContexts class >> geometricAlgebra3DProductsFor: builder [
 		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  (x_ + y_) × z_ = (x_ × z_) + (y_ × z_)';
 		rule: '∀ x_:Multivector 1 × x_ ⇒ x_';
 		rule: '∀ x_:Multivector x_ × 1 ⇒ x_';
+		rule: '∀ zero_:zero ∀ x_:Multivector zero_ × x_ ⇒ 0';
+		rule: '∀ zero_:zero ∀ x_:Multivector x_ × zero_ ⇒ 0';
 
 		op: 'Multivector ∧ Multivector : Multivector';
 		op: 'ℝ ∧ Vector : Vector';
@@ -213,12 +215,16 @@ LzExampleContexts class >> geometricAlgebra3DProductsFor: builder [
 		axiom: '∀ x_:Multivector ∀ y_:Multivector x_ ∧ y_ = 1/2 × ((x_ × y_) - (y_ × x_))';
 		rule: '∀ x_:Multivector 1 ∧ x_ ⇒ x_';
 		rule: '∀ x_:Multivector x_ ∧ 1 ⇒ x_';
+		rule: '∀ zero_:zero ∀ x_:Multivector zero_ ∧ x_ ⇒ 0';
+		rule: '∀ zero_:zero ∀ x_:Multivector x_ ∧ zero_ ⇒ 0';
+		rule: '∀ x_:Vector x_ ∧ x_ ⇒ 0';
 
 		op: 'Vector ⋅ Vector: ℝ';
 		axiom: '∀ x_:Vector ∀ y_:Vector x_ ⋅ y_ = 1/2 × ((x_ × y_) + (y_ × x_))';
 
 		op: 'sq(Vector): ℝ';
-		rule: '∀ x_:Vector x_ × x_ ⇒ sq(x_)'
+		rule: '∀ x_:Vector x_ × x_ ⇒ sq(x_)';
+		rule: '∀ x_:Vector x_ ⋅ x_ ⇒ sq(x_)'
 ]
 
 { #category : #private }
