@@ -47,7 +47,7 @@ LzBuiltinContexts class >> arrayMapContext [
 		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ∀ l_:ℕ ',
 			'(fn(from_, to_))[Array(from_, i_, j_, k_, l_)] : Array(to_, i_, j_, k_, l_)';
 		rule: '∀ from__:𝕊 ∀ to__:𝕊 ∀ F_:fn(from__, to__) ',
-				'∀ i__:ℕ ∀ A_:Array(from__, i__) ',
+				'∀ A_:Array(from__) ',
 				'F_[A_] → ''A applyFn: F'':nil';
 
 		op: '∀ from_:𝕊 ∀ to_:𝕊 ',

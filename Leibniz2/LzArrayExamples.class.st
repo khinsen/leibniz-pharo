@@ -14,10 +14,12 @@ LzArrayExamples >> arrayMappings [
 		include: LzBuiltinContexts arrayMapContext;
 		op: 'abs : fn(ℤ, ℕ)';
 		rule: '∀ x_:ℤ abs[x_] ⇒ abs(x_)';
+		op: 'anInteger : ℤ';
 		context.
 	^ {
 		{ 'abs[{[ 1, -2, 3 ]}]'. '{[ 1, 2, 3 ]}' }.
 		{ 'abs[{[ [1], [-2], [3] ]}]'. '{[ [1], [2], [3] ]}' }.
+		{ 'abs[{[ 1, -2, anInteger ]}]'. '{[ 1, 2, abs(anInteger) ]}' }.
 	} collect: [ :each |
 		| term reducedTerm |
 		term := context term: each first.
