@@ -93,7 +93,7 @@ LzRule >> signature: aSignature [
 { #category : #rewriting }
 LzRule >> testConditionForSubstitution: bindings reduction: aBlock [
 	self condition ifNil: [ ^ true ].
-	[ ^ (aBlock value: (self condition substitute: bindings)) isTrue ]
+	[ ^ (aBlock value: (self condition substitute: bindings)) isBooleanTrue ]
 	on: LzRewriteFailure do: [ ^ false ]
 ]
 

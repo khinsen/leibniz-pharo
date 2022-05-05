@@ -5,6 +5,21 @@ Class {
 }
 
 { #category : #accessing }
+LzConstants class >> opNameBoolean [
+	^ '𝔹'
+]
+
+{ #category : #accessing }
+LzConstants class >> opNameFalse [
+	^ '⊥'
+]
+
+{ #category : #accessing }
 LzConstants class >> opNameSort [
 	^ '𝕊'
+]
+
+{ #category : #accessing }
+LzConstants class >> opNameTrue [
+	^ '⊤'
 ]

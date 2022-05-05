@@ -59,6 +59,13 @@ LzOpTerm >> hasVars [
 ]
 
 { #category : #testing }
+LzOpTerm >> isBooleanTrue [
+	^ self sort isBooleanSort
+		and: [ self args isEmpty
+			and: [ self opName asSymbol = LzConstants opNameTrue ] ]
+]
+
+{ #category : #testing }
 LzOpTerm >> isInfix [
 	^ opName isInfix
 ]

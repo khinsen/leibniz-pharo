@@ -109,6 +109,15 @@ LzSort >> gtSortGraphFor: aView [
 ]
 
 { #category : #testing }
+LzSort >> isBooleanSort [
+	term args ifNotEmpty: [ ^ false ].
+	^ term opName
+		ifNil: [ false ]
+		ifNotNil: [ :n |
+			n asSymbol = LzConstants opNameBoolean ]
+]
+
+{ #category : #testing }
 LzSort >> isSortSort [
 	term args ifNotEmpty: [ ^ false ].
 	^ term opName

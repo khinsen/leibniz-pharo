@@ -9,7 +9,7 @@ LzBooleanTerm class >> signature: aSignature value: aBoolean [
 	| opName |
 	opName := LzPrefixOpName for:
 					(aBoolean
-						ifTrue: [ '⊤' ]
-						ifFalse: [ '⊥' ]).
+						ifTrue: [ LzConstants opNameTrue ]
+						ifFalse: [ LzConstants opNameFalse ]).
 	^ aSignature opTerm: opName args: #()
 ]
