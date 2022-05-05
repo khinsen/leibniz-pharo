@@ -13,6 +13,18 @@ Class {
 LzArrayTerm class >> signature: aSignature value: anArray [
 ]
 
+{ #category : #transforming }
+LzArrayTerm >> applyFn: aTerm [
+	| transformedElements |
+	transformedElements := elements collect: [ :each |
+		self signature
+			opTerm: LzBracketOpName new
+			args: { aTerm. each } ].
+	^ self signature
+		arrayTerm: transformedElements
+		shape: self shape
+]
+
 { #category : #accessing }
 LzArrayTerm >> args [
 	^ elements

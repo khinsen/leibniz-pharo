@@ -31,6 +31,41 @@ LzBuiltinContexts class >> arrayContext [
 	^ ArrayContext
 ]
 
+{ #category : #defining }
+LzBuiltinContexts class >> arrayMapContext [
+	^ LzContextBuilder new
+		include: self arrayContext;
+		include: self functionContext;
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ',
+			'(fn(from_, to_))[Array(from_)] : Array(to_)';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ',
+			'(fn(from_, to_))[Array(from_, i_)] : Array(to_, i_)';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ',
+			'(fn(from_, to_))[Array(from_, i_, j_)] : Array(to_, i_, j_)';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ',
+			'(fn(from_, to_))[Array(from_, i_, j_, k_)] : Array(to_, i_, j_, k_)';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ∀ l_:ℕ ',
+			'(fn(from_, to_))[Array(from_, i_, j_, k_, l_)] : Array(to_, i_, j_, k_, l_)';
+		rule: '∀ from__:𝕊 ∀ to__:𝕊 ∀ F_:fn(from__, to__) ',
+				'∀ i__:ℕ ∀ A_:Array(from__, i__) ',
+				'F_[A_] → ''A applyFn: F'':nil';
+
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ',
+			'(fn(from_, to_))[EmptyArray] : EmptyArray';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ',
+			'(fn(from_, to_))[EmptyArray(i_)] : EmptyArray(i_)';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ',
+			'(fn(from_, to_))[EmptyArray(i_, j_)] : EmptyArray(i_, j_)';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ',
+			'(fn(from_, to_))[EmptyArray(i_, j_, k_)] : EmptyArray(i_, j_, k_)';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ∀ l_:ℕ ',
+			'(fn(from_, to_))[EmptyArray(i_, j_, k_, l_)] : EmptyArray(i_, j_, k_, l_)';
+		rule: '∀ from__:𝕊 ∀ to__:𝕊 ∀ f_:fn(from__, to__) ',
+				'∀ a_:EmptyArray ',
+				'f_[a_] ⇒ a_';
+		context
+]
+
 { #category : #private }
 LzBuiltinContexts class >> arrayOpsFor: builder [
 	builder
@@ -112,6 +147,20 @@ LzBuiltinContexts class >> equalityContext [
 			rule: '∀ s__:𝕊 ∀ X_:s__ ∀ Y_:s__ X_ == Y_ → ''X = Y'':LzBooleanTerm'.
 		EqualityContext := builder context ].
 	^ EqualityContext
+]
+
+{ #category : #defining }
+LzBuiltinContexts class >> functionContext [
+	^ LzContextBuilder new
+		sort: '∀ from_:𝕊 ∀ to_:𝕊 ',
+				'fn(from_, to_)';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ',
+				'(fn(from_, to_))[from_] : to_';
+		sort: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
+				'fn(from1_, from2_, to_)';
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
+				'(fn(from1_, from2_, to_))[from1_, from2_] : to_';
+		context
 ]
 
 { #category : #private }
