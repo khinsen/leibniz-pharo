@@ -117,3 +117,25 @@ LzArrayExamples >> arrayOfIntegerTerms [
 		self assert: (context reduce: term) equals: reducedTerm.
 		term ]
 ]
+
+{ #category : #example }
+LzArrayExamples >> numberArrays [
+	<gtExample>
+	| context |
+	context := LzContextBuilder new
+		include: LzBuiltinContexts rationalNumberArrayContext;
+		context.
+	^ {
+		{ '{[1, 2]} + {[3, 4]}'. '{[4, 6]}' }.
+		{ '{[1, 2]} - {[3, 4]}'. '{[-2, -2]}' }.
+		{ '{[1, 2]} × {[3, 4]}'. '{[3, 8]}' }.
+		{ '{[1, 2]} ÷ {[3, 4]}'. '{[1/3, 1/2]}' }.
+		{ 'Σ({[1, 2]})'. '3' }.
+		{ 'Π({[1, 2]})'. '2' }.
+	} collect: [ :each |
+		| term reducedTerm |
+		term := context term: each first.
+		reducedTerm := context term: each second.
+		self assert: (context reduce: term) equals: reducedTerm.
+		{ term. reducedTerm } ]
+]

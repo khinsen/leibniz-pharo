@@ -347,6 +347,62 @@ LzBuiltinContexts class >> integerSortsFor: aContextBuilder [
 ]
 
 { #category : #private }
+LzBuiltinContexts class >> numberArrayOpsAndRulesForBuilder: builder sort: s [
+	builder
+		op: '+ : fn(',s,', ',s,', ',s,')';
+		rule: '∀ x_:',s,' ∀ y_:',s,' +[x_, y_] ⇒ x_ + y_';
+		op: '∀ i_:ℕ.nz (Array(',s,', i_)) + (Array(',s,', i_)) : Array(',s,', i_)';
+		rule: '∀ i__:ℕ.nz ∀ a_:Array(',s,', i__) ∀ b_:Array(',s,', i__) ',
+				'a_ + b_ ⇒ +[a_, b_]';
+		op: '∀ i_:zero (EmptyArray(i_)) + (EmptyArray(i_)) : EmptyArray(i_)';
+		rule: '∀ i__:ℕ ∀ a_:EmptyArray(i__) ∀ b_:EmptyArray(i__) a_ + b_ ⇒ a_';
+
+		op: '∀ i_:ℕ.nz Σ(Array(',s,', i_)) : ',s,'';
+		rule: '∀ i__:ℕ.nz ∀ a_:Array(',s,', i__)',
+				'Σ(a_) ⇒ fold(+, 0, a_)';
+
+		op: '- : fn(',s,', ',s,', ',s,')';
+		rule: '∀ x_:',s,' ∀ y_:',s,' -[x_, y_] ⇒ x_ - y_';
+		op: '∀ i_:ℕ.nz (Array(',s,', i_)) - (Array(',s,', i_)) : Array(',s,', i_)';
+		rule: '∀ i__:ℕ.nz ∀ a_:Array(',s,', i__) ∀ b_:Array(',s,', i__) ',
+				'a_ - b_ ⇒ -[a_, b_]';
+		op: '∀ i_:zero (EmptyArray(i_)) - (EmptyArray(i_)) : EmptyArray(i_)';
+		rule: '∀ i__:ℕ ∀ a_:EmptyArray(i__) ∀ b_:EmptyArray(i__) a_ - b_ ⇒ a_';
+
+		op: '× : fn(',s,', ',s,', ',s,')';
+		rule: '∀ x_:',s,' ∀ y_:',s,' ×[x_, y_] ⇒ x_ × y_';
+		op: '∀ i_:ℕ.nz (Array(',s,', i_)) × (Array(',s,', i_)) : Array(',s,', i_)';
+		rule: '∀ i__:ℕ.nz ∀ a_:Array(',s,', i__) ∀ b_:Array(',s,', i__) ',
+				'a_ × b_ ⇒ ×[a_, b_]';
+		op: '∀ i_:zero (EmptyArray(i_)) × (EmptyArray(i_)) : EmptyArray(i_)';
+		rule: '∀ i__:ℕ ∀ a_:EmptyArray(i__) ∀ b_:EmptyArray(i__) a_ × b_ ⇒ a_';
+
+		op: '∀ i_:ℕ.nz Π(Array(',s,', i_)) : ',s,'';
+		rule: '∀ i__:ℕ.nz ∀ a_:Array(',s,', i__)',
+				'Π(a_) ⇒ fold(×, 1, a_)';
+
+
+		op: '÷ : fn(',s,', ',s,'.nz, ',s,')';
+		rule: '∀ x_:',s,' ∀ y_:',s,'.nz ÷[x_, y_] ⇒ x_ ÷ y_';
+		op: '∀ i_:ℕ.nz (Array(',s,', i_)) ÷ (Array(',s,', i_)) : Array(',s,', i_)';
+		rule: '∀ i__:ℕ.nz ∀ a_:Array(',s,', i__) ∀ b_:Array(',s,', i__) ',
+				'a_ ÷ b_ ⇒ ÷[a_, b_]';
+		op: '∀ i_:zero (EmptyArray(i_)) ÷ (EmptyArray(i_)) : EmptyArray(i_)';
+		rule: '∀ i__:ℕ ∀ a_:EmptyArray(i__) ∀ b_:EmptyArray(i__) a_ ÷ b_ ⇒ a_'
+]
+
+{ #category : #defining }
+LzBuiltinContexts class >> rationalNumberArrayContext [
+	| builder |
+	builder := LzContextBuilder new
+		include: self arrayMap2Context;
+		include: self arrayFoldContext;
+		include: self rationalNumberContext.
+	self numberArrayOpsAndRulesForBuilder: builder sort: 'ℚ'.
+	^ builder context
+]
+
+{ #category : #private }
 LzBuiltinContexts class >> rationalNumberAxiomsFor: aContextBuilder [
 	aContextBuilder
 		"addition axioms"
@@ -490,6 +546,17 @@ LzBuiltinContexts class >> rationalNumberSortsFor: aContextBuilder [
 		subsort: 'ℕ.nz ⊆ ℚ.p';
 		subsort: 'ℤ ⊆ ℚ';
 		subsort: 'ℤ.nz ⊆ ℚ.nz'.
+]
+
+{ #category : #defining }
+LzBuiltinContexts class >> realNumberArrayContext [
+	| builder |
+	builder := LzContextBuilder new
+		include: self arrayMap2Context;
+		include: self arrayFoldContext;
+		include: self realNumberContext.
+	self numberArrayOpsAndRulesForBuilder: builder sort: 'ℝ'.
+	^ builder context
 ]
 
 { #category : #private }
