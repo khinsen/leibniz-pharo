@@ -198,7 +198,14 @@ LzBindings >> makeVar: aVarName sort: aSort equalToVar: otherVarName sort: other
 	root1 rank < root2 rank
 		ifTrue: [ | temp | temp := root1. root1 := root2. root2 := temp ].
 	root2 parent: root1.
-	root1 value ifNil: [ root1 value: root2 value ].
+	root1 value ifNil: [
+		root1 value: root2 value.
+		root1 value ifNil: [
+			| restrictedSort |
+			restrictedSort := root1 restrictedSort min: root2 restrictedSort.
+			restrictedSort ifNil: [ self failWith: root1 restrictedSort
+					incommensurableWith: root2 restrictedSort ].
+			root1 restrictedSort: restrictedSort ] ].
 	self assert: root1 value equals: root2 value.
 	root1 rank = root2 rank
 		ifTrue: [ root1 incrementRank ].
@@ -256,6 +263,11 @@ LzBindings >> printUnboundOn: aStream [
 ]
 
 { #category : #accessing }
+LzBindings >> restrictedSortOf: aVarName [
+	^ (vars at: aVarName) restrictedSort
+]
+
+{ #category : #accessing }
 LzBindings >> sortGraph [
 	^ sortGraph
 ]
@@ -263,6 +275,11 @@ LzBindings >> sortGraph [
 { #category : #accessing }
 LzBindings >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
+]
+
+{ #category : #accessing }
+LzBindings >> sortOf: aVarName [
+	^ (vars at: aVarName) sort
 ]
 
 { #category : #accessing }

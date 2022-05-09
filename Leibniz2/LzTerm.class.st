@@ -115,11 +115,10 @@ LzTerm >> isRestrictionOf: aTerm [
 	 variable tagged #left, otherwise there would be a restriction. The
 	 sort of the set must be equal to the sort of the variable tagged #left."
 	vars unboundVarSets do: [ :each |
-		| left |
-		left := each select: [ :v | v tag = #left ].
-		left size > 1 ifTrue: [ ^ false ].
-		left ifNotEmpty: [ (vars sortOf: left anyOne) = (vars sortOf: each)
-								ifFalse: [ ^ false ] ] ].
+		(each select: [ :v | v tag = #left ]) ifNotEmpty: [ :left | 
+			left size > 1 ifTrue: [ ^ false ].
+			(vars sortOf: left anyOne) = (vars restrictedSortOf: left anyOne)
+				ifFalse: [ ^ false ] ] ].
 	^ true
 ]
 

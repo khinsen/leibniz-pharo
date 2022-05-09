@@ -8,7 +8,8 @@ Class {
 		'sort',
 		'value',
 		'parent',
-		'rank'
+		'rank',
+		'restrictedSort'
 	],
 	#category : #'Leibniz2-Terms'
 }
@@ -49,13 +50,24 @@ LzBindingsVarNode >> rank [
 ]
 
 { #category : #accessing }
+LzBindingsVarNode >> restrictedSort [
+	^ restrictedSort
+]
+
+{ #category : #accessing }
+LzBindingsVarNode >> restrictedSort: aSort [
+	restrictedSort := aSort
+]
+
+{ #category : #accessing }
 LzBindingsVarNode >> sort [
 	^ sort
 ]
 
 { #category : #accessing }
 LzBindingsVarNode >> sort: aSort [
-	sort := aSort
+	sort := aSort.
+	restrictedSort := sort
 ]
 
 { #category : #unifying }
