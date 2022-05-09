@@ -32,6 +32,26 @@ LzBuiltinContexts class >> arrayContext [
 ]
 
 { #category : #defining }
+LzBuiltinContexts class >> arrayFoldContext [
+	^ LzContextBuilder new
+		include: self arrayContext;
+		include: self functionContext;
+		op: '∀ s_:𝕊 ∀ n_:ℕ.nz ',
+			'fold(fn(s_, s_, s_), s_, Array(s_, n_)) : s_';
+		rule: '∀ s__:𝕊 ∀ n__:ℕ.nz ',
+				'∀ F_:fn(s__, s__, s__) ',
+				'∀ V_:s__ ',
+				'∀ A_:Array(s__, n__) ',
+				'fold(F_, V_, A_) → ''A inject: V into: F'':nil';
+		op: '∀ s_:𝕊 ',
+			'fold(fn(s_, s_, s_), s_, EmptyArray) : s_';
+		rule: '∀ s__:𝕊 ∀ f_:fn(s__, s__, s__) ',
+				'∀ v_:s__ ∀ a_:EmptyArray ',
+				'fold(f_, v_, a_) ⇒ v_';
+		context
+]
+
+{ #category : #defining }
 LzBuiltinContexts class >> arrayMapContext [
 	^ LzContextBuilder new
 		include: self arrayContext;

@@ -60,6 +60,15 @@ LzArrayTerm >> fingerprint [
 	^ #array
 ]
 
+{ #category : #transforming }
+LzArrayTerm >> inject: aTerm into: aFnTerm [
+	| transformedElements |
+	^ elements inject: aTerm into: [ :total :each |
+		self signature
+			opTerm: LzBracketOpName new
+			args: { aFnTerm. total. each }]
+]
+
 { #category : #unifying }
 LzArrayTerm >> match: otherTerm bindings: bindings [
 	otherTerm matchArrayTerm: self elements: elements shape: shape bindings: bindings
