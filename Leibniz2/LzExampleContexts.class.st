@@ -219,7 +219,10 @@ LzExampleContexts class >> geometricAlgebra3DProductsFor: builder [
 
 		op: 'sq(Vector): ℝ.nn';
 		rule: '∀ x_:Vector x_ × x_ ⇒ sq(x_)';
-		rule: '∀ x_:Vector x_ ⋅ x_ ⇒ sq(x_)'
+		rule: '∀ x_:Vector x_ ⋅ x_ ⇒ sq(x_)';
+
+		op: 'norm(Vector): ℝ.nn';
+		axiom: '∀ v_:Vector norm(v_) = √(sq(v_))'
 ]
 
 { #category : #defining }
@@ -235,7 +238,11 @@ LzExampleContexts class >> geometricAlgebra3DSimplificationsFor: builder [
 		rule: '∀ x1_:ℝ ∀ y1_:ℝ ∀ z1_:ℝ ',
 				'∀ x2_:ℝ ∀ y2_:ℝ ∀ z2_:ℝ ',
 				'v(x1_, y1_, z1_) - v(x2_, y2_, z2_)',
-				'⇒ v(x1_ - x2_, y1_ - y2_, z1_ - z2_)'
+				'⇒ v(x1_ - x2_, y1_ - y2_, z1_ - z2_)';
+		rule: '∀ x_:ℝ ∀ y_:ℝ ∀ z_:ℝ ',
+				'sq(v(x_, y_, z_)) ⇒ (x_ × x_) + (y_ × y_) + (z_ × z_)';
+		rule: '∀ x_:ℝ ∀ y_:ℝ ∀ z_:ℝ ',
+				'norm(v(x_, y_, z_)) ⇒ √(sq(v(x_, y_, z_)))'
 ]
 
 { #category : #private }
