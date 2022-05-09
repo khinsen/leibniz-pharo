@@ -50,6 +50,28 @@ LzArrayExamples >> arrayMappings [
 ]
 
 { #category : #example }
+LzArrayExamples >> arrayMappings2 [
+	<gtExample>
+	| context |
+	context := LzContextBuilder new
+		include: LzBuiltinContexts arrayMap2Context;
+		op: 'sum : fn(ℤ, ℤ, ℤ)';
+		rule: '∀ x_:ℤ ∀ y_:ℤ sum[x_, y_] ⇒ x_ + y_';
+		op: 'anInteger : ℤ';
+		context.
+	^ {
+		{ 'sum[{[ 1, -2, 3 ]}, {[ 1, 2, 3 ]}]'. '{[ 2, 0, 6 ]}' }.
+		{ 'sum[{[ [1], [-2], [3] ]}, {[ [1], [2], [3] ]}]'. '{[ [2], [0], [6] ]}' }.
+		{ 'sum[{[ 1, -2, anInteger ]}, {[ 1, 2, 0 ]}]'. '{[ 2, 0, anInteger ]}' }.
+	} collect: [ :each |
+		| term reducedTerm |
+		term := context term: each first.
+		reducedTerm := context term: each second.
+		self assert: (context reduce: term) equals: reducedTerm.
+		{ term. reducedTerm } ]
+]
+
+{ #category : #example }
 LzArrayExamples >> arrayOfIntegerPatterns [
 	<gtExample>
 	| context |

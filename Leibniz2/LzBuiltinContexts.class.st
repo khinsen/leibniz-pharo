@@ -52,6 +52,44 @@ LzBuiltinContexts class >> arrayFoldContext [
 ]
 
 { #category : #defining }
+LzBuiltinContexts class >> arrayMap2Context [
+	^ LzContextBuilder new
+		include: self arrayContext;
+		include: self functionContext;
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
+			'(fn(from1_, from2_, to_))[Array(from1_), Array(from2_)] : Array(to_)';
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ',
+			'(fn(from1_, from2_, to_))[Array(from1_, i_), Array(from2_, i_)] : Array(to_, i_)';
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ',
+			'(fn(from1_, from2_, to_))[Array(from1_, i_, j_), Array(from2_, i_, j_)] : Array(to_, i_, j_)';
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ',
+			'(fn(from1_, from2_, to_))[Array(from1_, i_, j_, k_), Array(from2_, i_, j_, k_)] : Array(to_, i_, j_, k_)';
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ∀ l_:ℕ ',
+			'(fn(from1_, from2_, to_))[Array(from1_, i_, j_, k_, l_), Array(from2_, i_, j_, k_, l_)] : Array(to_, i_, j_, k_, l_)';
+		rule: '∀ from1__:𝕊 ∀ from2__:𝕊 ∀ to__:𝕊 ',
+				'∀ F_:fn(from1__, from2__, to__) ',
+				'∀ A_:Array(from1__) ',
+				'∀ B_:Array(from2__) ',
+				'F_[A_, B_] → ''A with: B applyFn: F'':nil';
+
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
+			'(fn(from1_, from2_, to_))[EmptyArray, EmptyArray] : EmptyArray';
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ',
+			'(fn(from1_, from2_, to_))[EmptyArray(i_), EmptyArray(i_)] : EmptyArray(i_)';
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ',
+			'(fn(from1_, from2_, to_))[EmptyArray(i_, j_), EmptyArray(i_, j_)] : EmptyArray(i_, j_)';
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ',
+			'(fn(from1_, from2_, to_))[EmptyArray(i_, j_, k_), EmptyArray(i_, j_, k_)] : EmptyArray(i_, j_, k_)';
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ∀ l_:ℕ ',
+			'(fn(from1_, from2_, to_))[EmptyArray(i_, j_, k_, l_), EmptyArray(i_, j_, k_, l_)] : EmptyArray(i_, j_, k_, l_)';
+		rule: '∀ from1__:𝕊 ∀ from2__:𝕊 ∀ to__:𝕊 ',
+				'∀ f_:fn(from1__, from2__, to__) ',
+				'∀ a_:EmptyArray ',
+				'f_[a_, a_] ⇒ a_';
+		context
+]
+
+{ #category : #defining }
 LzBuiltinContexts class >> arrayMapContext [
 	^ LzContextBuilder new
 		include: self arrayContext;
