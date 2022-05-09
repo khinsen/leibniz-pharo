@@ -155,7 +155,11 @@ LzExampleContexts class >> geometricAlgebra3DBasisFor: builder [
 		axiom: '∀ x_:Multivector i × x_ = x_ × i';
 		axiom: 'e1 × e2 = i × e3';
 		axiom: 'e2 × e3 = i × e1';
-		axiom: 'e3 × e1 = i × e2'
+		axiom: 'e3 × e1 = i × e2';
+
+		op: 'v(ℝ, ℝ, ℝ) : Vector';
+		axiom: '∀ x_:ℝ ∀ y_:ℝ ∀ z_:ℝ ',
+				'v(x_, y_, z_) = ((x_ × e1) + (y_ × e2) + (z_ × e3))'
 ]
 
 { #category : #defining }
@@ -222,16 +226,16 @@ LzExampleContexts class >> geometricAlgebra3DProductsFor: builder [
 LzExampleContexts class >> geometricAlgebra3DSimplificationsFor: builder [
 	builder
 		rule: '∀ s_:ℝ ∀ v_:Vector sq(s_ × v_) ⇒ s_^(2) × sq(v_)';
+		rule: '∀ s_:ℝ ∀ x_:ℝ ∀ y_:ℝ ∀ z_:ℝ ',
+				's_ × v(x_, y_, z_) ⇒ v(s_ × x_, s_ × y_, s_ × z_)';
 		rule: '∀ x1_:ℝ ∀ y1_:ℝ ∀ z1_:ℝ ',
 				'∀ x2_:ℝ ∀ y2_:ℝ ∀ z2_:ℝ ',
-				'((x1_ × e1) + (y1_ × e2) + (z1_ × e3)) ',
-				'+ ((x2_ × e1) + (y2_ × e2) + (z2_ × e3)) ',
-				'⇒ ((x1_ + x2_) × e1) + ((y1_ + y2_) × e2) + ((z1_ + z2_) × e3)';
+				'v(x1_, y1_, z1_) + v(x2_, y2_, z2_)',
+				'⇒ v(x1_ + x2_, y1_ + y2_, z1_ + z2_)';
 		rule: '∀ x1_:ℝ ∀ y1_:ℝ ∀ z1_:ℝ ',
 				'∀ x2_:ℝ ∀ y2_:ℝ ∀ z2_:ℝ ',
-				'((x1_ × e1) + (y1_ × e2) + (z1_ × e3)) ',
-				'- ((x2_ × e1) + (y2_ × e2) + (z2_ × e3)) ',
-				'⇒ ((x1_ - x2_) × e1) + ((y1_ - y2_) × e2) + ((z1_ - z2_) × e3)'
+				'v(x1_, y1_, z1_) - v(x2_, y2_, z2_)',
+				'⇒ v(x1_ - x2_, y1_ - y2_, z1_ - z2_)'
 ]
 
 { #category : #private }
