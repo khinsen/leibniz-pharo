@@ -36,13 +36,13 @@ LzBuiltinContexts class >> arrayFoldContext [
 	^ LzContextBuilder new
 		include: self arrayContext;
 		include: self functionContext;
-		op: '∀ s_:𝕊 ∀ n_:ℕ.nz ',
-			'fold(fn(s_, s_, s_), s_, Array(s_, n_)) : s_';
-		rule: '∀ s__:𝕊 ∀ n__:ℕ.nz ',
+		op: '∀ s_:𝕊 ',
+			'fold(fn(s_, s_, s_), s_, Array1D(s_)) : s_';
+		rule: '∀ s__:𝕊 ',
 				'∀ F_:fn(s__, s__, s__) ',
 				'∀ V_:s__ ',
-				'∀ A_:Array(s__, n__) ',
-				'fold(F_, V_, A_) → ''A inject: V into: F reducer: reducer'':nil';
+				'∀ A_:Array1D(s__) ',
+				'fold(F_, V_, A_) → ''A ensureArrayTerm. A inject: V into: F reducer: reducer'':nil';
 		op: '∀ s_:𝕊 ',
 			'fold(fn(s_, s_, s_), s_, EmptyArray) : s_';
 		rule: '∀ s__:𝕊 ∀ f_:fn(s__, s__, s__) ',
@@ -70,7 +70,7 @@ LzBuiltinContexts class >> arrayMap2Context [
 				'∀ F_:fn(from1__, from2__, to__) ',
 				'∀ A_:Array(from1__) ',
 				'∀ B_:Array(from2__) ',
-				'F_[A_, B_] → ''A with: B applyFn: F reducer: reducer'':nil';
+				'F_[A_, B_] → ''A ensureArrayTerm. B ensureArrayTerm. A with: B applyFn: F reducer: reducer'':nil';
 
 		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
 			'(fn(from1_, from2_, to_))[EmptyArray, EmptyArray] : EmptyArray';
@@ -106,7 +106,7 @@ LzBuiltinContexts class >> arrayMapContext [
 			'(fn(from_, to_))[Array(from_, i_, j_, k_, l_)] : Array(to_, i_, j_, k_, l_)';
 		rule: '∀ from__:𝕊 ∀ to__:𝕊 ∀ F_:fn(from__, to__) ',
 				'∀ A_:Array(from__) ',
-				'F_[A_] → ''A applyFn: F reducer: reducer'':nil';
+				'F_[A_] → ''A ensureArrayTerm. A applyFn: F reducer: reducer'':nil';
 
 		op: '∀ from_:𝕊 ∀ to_:𝕊 ',
 			'(fn(from_, to_))[EmptyArray] : EmptyArray';
@@ -153,18 +153,12 @@ LzBuiltinContexts class >> arraySortsFor: builder [
 		sort: 'Array(𝕊, ℕ, ℕ)';
 		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ',
 					'Array(s_, i1_, i2_) ⊆ Array2D(s_)';
-		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ',
-					'Array(s_, i1_, i2_) ⊆ Array(s_, i1_)';
 		sort: 'Array(𝕊, ℕ, ℕ, ℕ)';
 		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ',
 					'Array(s_, i1_, i2_, i3_) ⊆ Array3D(s_)';
-		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ',
-					'Array(s_, i1_, i2_, i3_) ⊆ Array(s_, i1_, i2_)';
 		sort: 'Array(𝕊, ℕ, ℕ, ℕ, ℕ)';
 		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ∀ i4_:ℕ ',
 					'Array(s_, i1_, i2_, i3_, i4_) ⊆ Array3D(s_)';
-		subsort: '∀ s_:𝕊 ∀ i1_:ℕ ∀ i2_:ℕ ∀ i3_:ℕ ∀ i4_:ℕ ',
-					'Array(s_, i1_, i2_, i3_, i4_) ⊆ Array(s_, i1_, i2_, i3_)';
 		sort: 'EmptyArray';
 		sort: 'EmptyArray1D';
 		sort: 'EmptyArray2D';
@@ -357,8 +351,9 @@ LzBuiltinContexts class >> numberArrayOpsAndRulesForBuilder: builder sort: s [
 		op: '∀ i_:zero (EmptyArray(i_)) + (EmptyArray(i_)) : EmptyArray(i_)';
 		rule: '∀ i__:ℕ ∀ a_:EmptyArray(i__) ∀ b_:EmptyArray(i__) a_ + b_ ⇒ a_';
 
+		op: 'Σ(Array1D(',s,')) : ',s,'';
 		op: '∀ i_:ℕ.nz Σ(Array(',s,', i_)) : ',s,'';
-		rule: '∀ i__:ℕ.nz ∀ a_:Array(',s,', i__)',
+		rule: '∀ a_:Array1D(',s,')',
 				'Σ(a_) ⇒ fold(+, 0, a_)';
 
 		op: '- : fn(',s,', ',s,', ',s,')';
@@ -377,10 +372,10 @@ LzBuiltinContexts class >> numberArrayOpsAndRulesForBuilder: builder sort: s [
 		op: '∀ i_:zero (EmptyArray(i_)) × (EmptyArray(i_)) : EmptyArray(i_)';
 		rule: '∀ i__:ℕ ∀ a_:EmptyArray(i__) ∀ b_:EmptyArray(i__) a_ × b_ ⇒ a_';
 
+		op: 'Π(Array1D(',s,')) : ',s,'';
 		op: '∀ i_:ℕ.nz Π(Array(',s,', i_)) : ',s,'';
-		rule: '∀ i__:ℕ.nz ∀ a_:Array(',s,', i__)',
+		rule: '∀ a_:Array1D(',s,')',
 				'Π(a_) ⇒ fold(×, 1, a_)';
-
 
 		op: '÷ : fn(',s,', ',s,'.nz, ',s,')';
 		rule: '∀ x_:',s,' ∀ y_:',s,'.nz ÷[x_, y_] ⇒ x_ ÷ y_';

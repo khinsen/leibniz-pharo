@@ -52,6 +52,11 @@ LzTerm >> asENodeIn: anEGraph [
 	self subclassResponsibility
 ]
 
+{ #category : #testing }
+LzTerm >> ensureArrayTerm [
+	LzRewriteFailure signal: 'not an array term'
+]
+
 { #category : #organizing }
 LzTerm >> fingerprint [
 	self subclassResponsibility

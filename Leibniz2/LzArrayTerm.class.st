@@ -56,6 +56,10 @@ LzArrayTerm >> elements: anArray [
 	elements := anArray
 ]
 
+{ #category : #testing }
+LzArrayTerm >> ensureArrayTerm [
+]
+
 { #category : #organizing }
 LzArrayTerm >> fingerprint [
 	^ #array
