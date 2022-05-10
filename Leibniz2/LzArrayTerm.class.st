@@ -14,12 +14,13 @@ LzArrayTerm class >> signature: aSignature value: anArray [
 ]
 
 { #category : #transforming }
-LzArrayTerm >> applyFn: aTerm [
+LzArrayTerm >> applyFn: aTerm reducer: aBlock [
 	| transformedElements |
 	transformedElements := elements collect: [ :each |
-		self signature
-			opTerm: LzBracketOpName new
-			args: { aTerm. each } ].
+		aBlock value:
+			(self signature
+				opTerm: LzBracketOpName new
+				args: { aTerm. each }) ].
 	^ self signature
 		arrayTerm: transformedElements
 		shape: self shape
@@ -67,6 +68,16 @@ LzArrayTerm >> inject: aTerm into: aFnTerm [
 		self signature
 			opTerm: LzBracketOpName new
 			args: { aFnTerm. total. each }]
+]
+
+{ #category : #transforming }
+LzArrayTerm >> inject: aTerm into: aFnTerm reducer: aBlock [
+	| transformedElements |
+	^ elements inject: aTerm into: [ :total :each |
+		aBlock value:
+			(self signature
+				opTerm: LzBracketOpName new
+				args: { aFnTerm. total. each })]
 ]
 
 { #category : #unifying }
@@ -213,6 +224,20 @@ LzArrayTerm >> with: otherArrayTerm applyFn: aTerm [
 		self signature
 			opTerm: LzBracketOpName new
 			args: { aTerm. arg1. arg2 } ].
+	^ self signature
+		arrayTerm: transformedElements
+		shape: self shape
+]
+
+{ #category : #transforming }
+LzArrayTerm >> with: otherArrayTerm applyFn: aTerm reducer: aBlock [
+	| transformedElements |
+	self assert: self shape equals: otherArrayTerm shape.
+	transformedElements := elements with: otherArrayTerm elements collect: [ :arg1 :arg2 |
+		aBlock value:
+			(self signature
+				opTerm: LzBracketOpName new
+				args: { aTerm. arg1. arg2 }) ].
 	^ self signature
 		arrayTerm: transformedElements
 		shape: self shape

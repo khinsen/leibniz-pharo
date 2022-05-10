@@ -16,8 +16,8 @@ Class {
 }
 
 { #category : #rewriting }
-LzFunctionRule >> apply: bindings [
-	^ block value: signature value: bindings bindings
+LzFunctionRule >> apply: bindings reducer: aBlock [
+	^ block value: signature value: bindings bindings value: aBlock
 ]
 
 { #category : #initialization }
@@ -36,7 +36,7 @@ LzFunctionRule >> function: anArray [
 	| code |
 	function := anArray.
 	code := String streamContents: [ :s |
-		s << '[ :signature :args | | '.
+		s << '[ :signature :args :reducer | | '.
 		self variables keysDo: [ :each |
 			s << each asSymbol allButLast.
 			s << Character space ].

@@ -42,7 +42,7 @@ LzBuiltinContexts class >> arrayFoldContext [
 				'∀ F_:fn(s__, s__, s__) ',
 				'∀ V_:s__ ',
 				'∀ A_:Array(s__, n__) ',
-				'fold(F_, V_, A_) → ''A inject: V into: F'':nil';
+				'fold(F_, V_, A_) → ''A inject: V into: F reducer: reducer'':nil';
 		op: '∀ s_:𝕊 ',
 			'fold(fn(s_, s_, s_), s_, EmptyArray) : s_';
 		rule: '∀ s__:𝕊 ∀ f_:fn(s__, s__, s__) ',
@@ -70,7 +70,7 @@ LzBuiltinContexts class >> arrayMap2Context [
 				'∀ F_:fn(from1__, from2__, to__) ',
 				'∀ A_:Array(from1__) ',
 				'∀ B_:Array(from2__) ',
-				'F_[A_, B_] → ''A with: B applyFn: F'':nil';
+				'F_[A_, B_] → ''A with: B applyFn: F reducer: reducer'':nil';
 
 		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
 			'(fn(from1_, from2_, to_))[EmptyArray, EmptyArray] : EmptyArray';
@@ -106,7 +106,7 @@ LzBuiltinContexts class >> arrayMapContext [
 			'(fn(from_, to_))[Array(from_, i_, j_, k_, l_)] : Array(to_, i_, j_, k_, l_)';
 		rule: '∀ from__:𝕊 ∀ to__:𝕊 ∀ F_:fn(from__, to__) ',
 				'∀ A_:Array(from__) ',
-				'F_[A_] → ''A applyFn: F'':nil';
+				'F_[A_] → ''A applyFn: F reducer: reducer'':nil';
 
 		op: '∀ from_:𝕊 ∀ to_:𝕊 ',
 			'(fn(from_, to_))[EmptyArray] : EmptyArray';

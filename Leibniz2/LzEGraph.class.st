@@ -46,16 +46,17 @@ LzEGraph >> addRewritesFromRewriteSystem: aRewriteSystem [
 
 { #category : #adding }
 LzEGraph >> addRewritesFromRule: aRule [
-	| matches |
+	| reducer matches |
 	self flag: #todo. "Add safety guard against infinite match lists."
+	reducer := [ :t | self context reduce: t ].
 	matches := (self matchesFor: aRule pattern) contents.
 	matches do: [ :each |
 		| newTerm newClassId |
 		(aRule
 			testConditionForSubstitution: each substitution
-			reduction: [ :t | self context reduce: t ]) ifTrue: [
+			reducer: reducer) ifTrue: [
 				[
-					newTerm := aRule apply: each substitution.
+					newTerm := aRule apply: each substitution reducer: reducer.
 					newClassId := newTerm asENodeIn:  self.
 					self merge: newClassId with: each classId ]
 				on: LzRewriteFailure do: [] ] ].

@@ -19,7 +19,7 @@ LzMatchingRules >> match [
 			ifSuccess: [ :s |
 				(aRule
 					testConditionForSubstitution: s
-					reduction: [ :t | rewriteSystem reduce: t ])
+					reducer: [ :t | rewriteSystem reduce: t ])
 					ifFalse: [ rules add: { aRule. true. false. nil } ]
 					ifTrue: [ rules add: { aRule. true. true. aRule apply: s } ] ]
 			ifFailure: [ rules add: { aRule. false. false. nil } ] ].

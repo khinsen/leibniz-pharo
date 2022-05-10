@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #rewriting }
-LzRewriteRule >> apply: bindings [
+LzRewriteRule >> apply: bindings reducer: aBlock [
 	^ replacement substitute: bindings
 ]
 

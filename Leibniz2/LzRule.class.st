@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #rewriting }
-LzRule >> apply: bindings [
+LzRule >> apply: bindings reducer: aBlock [
 	self subclassResponsibility
 ]
 
@@ -91,7 +91,7 @@ LzRule >> signature: aSignature [
 ]
 
 { #category : #rewriting }
-LzRule >> testConditionForSubstitution: bindings reduction: aBlock [
+LzRule >> testConditionForSubstitution: bindings reducer: aBlock [
 	self condition ifNil: [ ^ true ].
 	[ ^ (aBlock value: (self condition substitute: bindings)) isBooleanTrue ]
 	on: LzRewriteFailure do: [ ^ false ]
