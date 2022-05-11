@@ -14,6 +14,17 @@ LzArrayTerm class >> signature: aSignature value: anArray [
 ]
 
 { #category : #transforming }
+LzArrayTerm >> append: anArrayTerm [
+	| shapeFirst shapeRest |
+	shapeFirst := self shape first + anArrayTerm shape first.
+	shapeRest := self shape allButFirst.
+	self assert: anArrayTerm shape allButFirst equals: shapeRest.
+	^ self signature
+		arrayTerm: elements, anArrayTerm elements
+		shape: { shapeFirst }, shapeRest
+]
+
+{ #category : #transforming }
 LzArrayTerm >> applyFn: aTerm reducer: aBlock [
 	| transformedElements |
 	transformedElements := elements collect: [ :each |

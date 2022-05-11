@@ -7,6 +7,26 @@ Class {
 }
 
 { #category : #example }
+LzArrayExamples >> arrayAppends [
+	<gtExample>
+	| context |
+	context := LzContextBuilder new
+		include: LzBuiltinContexts arrayAppendContext;
+		op: 'anInteger : ℤ';
+		context.
+	^ {
+		{ '{[ 1, 2, 3 ]} ⧟ {[ 4, 5, 6 ]}'. '{[ 1, 2, 3, 4, 5, 6 ]}' }.
+		{ '{[ 1, 2, 3 ]} ⟜ anInteger'. '{[ 1, 2, 3, anInteger ]}' }.
+		{ 'anInteger ⊸ {[ 1, 2, 3 ]}'. '{[ anInteger, 1, 2, 3 ]}' }.
+	} collect: [ :each |
+		| term reducedTerm |
+		term := context term: each first.
+		reducedTerm := context term: each second.
+		self assert: (context reduce: term) equals: reducedTerm.
+		{ term. reducedTerm } ]
+]
+
+{ #category : #example }
 LzArrayExamples >> arrayFolds [
 	<gtExample>
 	| context |

@@ -18,6 +18,57 @@ Class {
 }
 
 { #category : #defining }
+LzBuiltinContexts class >> arrayAppendContext [
+	^ LzContextBuilder new
+		include: self arrayContext;
+		"⊸ ⟜ ⧟"
+		op: '∀ s_:𝕊 ',
+				'(Array1D(s_)) ⧟ (Array1D(s_)) : Array1D(s_)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ ',
+				'(Array(s_, n_)) ⧟ (Array(s_, m_)) : Array(s_, n_ + m_)';
+		op: '∀ s_:𝕊 ',
+				'(Array1D(s_)) ⧟ (EmptyArray1D) : Array1D(s_)';
+		rule: '∀ s__:𝕊 ',
+				'∀ A_:Array1D(s__) ∀ B_:Array1D(s__) ',
+				'A_ ⧟ B_ → ''A ensureArrayTerm. B ensureArrayTerm. A append: B'':nil';
+		op: '∀ s_:𝕊 ',
+				'(EmptyArray1D) ⧟ (Array1D(s_)) : Array1D(s_)';
+		rule: '∀ s__:𝕊 ',
+				'∀ e_:EmptyArray1D ∀ a_:Array1D(s__) ',
+				'e_ ⧟ a_ ⇒ a_';
+		rule: '∀ s__:𝕊 ',
+				'∀ e_:EmptyArray1D ∀ a_:Array1D(s__) ',
+				'a_ ⧟ e_ ⇒ a_';
+
+		op: '∀ s_:𝕊 ',
+				'(Array1D(s_)) ⟜ (s_) : Array1D(s_)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ',
+				'(Array(s_, n_)) ⟜ (s_) : Array(s_, succ(n_))';
+		rule: '∀ s__:𝕊 ',
+				'∀ a_:Array1D(s__) ∀ v_:s__ ',
+				'a_ ⟜ v_ ⇒ a_ ⧟ {[ v_ ]}';
+		op: '∀ s_:𝕊 ',
+				'(EmptyArray1D) ⟜ (s_) : Array(s_, 1)';
+		rule: '∀ s__:𝕊 ',
+				'∀ e_:EmptyArray1D ∀ v_:s__ ',
+				'e_ ⟜ v_ ⇒ {[ v_ ]}';
+
+		op: '∀ s_:𝕊 ',
+				'(s_) ⊸ (Array1D(s_)) : Array1D(s_)';
+		op: '∀ s_:𝕊 ∀ n_:ℕ ',
+				'(s_) ⊸ (Array(s_, n_)) : Array(s_, succ(n_))';
+		rule: '∀ s__:𝕊 ',
+				'∀ a_:Array1D(s__) ∀ v_:s__ ',
+				'v_ ⊸ a_ ⇒ {[ v_ ]} ⧟ a_';
+		op: '∀ s_:𝕊 ',
+				'(s_) ⊸ (EmptyArray1D) : Array(s_, 1)';
+		rule: '∀ s__:𝕊 ',
+				'∀ e_:EmptyArray1D ∀ v_:s__ ',
+				'v_ ⊸ e_ ⇒ {[ v_ ]}';
+		context
+]
+
+{ #category : #defining }
 LzBuiltinContexts class >> arrayContext [
 	ArrayContext ifNil: [
 		| builder |
