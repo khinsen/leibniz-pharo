@@ -38,6 +38,11 @@ LzBuiltinContexts class >> arrayAppendContext [
 		rule: '∀ s__:𝕊 ',
 				'∀ e_:EmptyArray1D ∀ a_:Array1D(s__) ',
 				'a_ ⧟ e_ ⇒ a_';
+		op: '∀ s_:𝕊 ',
+				'(EmptyArray1D) ⧟ (EmptyArray1D) : EmptyArray1D';
+		rule: '∀ s__:𝕊 ',
+				'∀ e1_:EmptyArray1D ∀ e2_:EmptyArray1D ',
+				'e1_ ⧟ e2_ ⇒ e1_';
 
 		op: '∀ s_:𝕊 ',
 				'(Array1D(s_)) ⟜ (s_) : Array1D(s_)';
