@@ -303,3 +303,43 @@ LzExampleContexts class >> mapContext [
 				'f_[l_] ⇒ map(f_, l_)';
 		context
 ]
+
+{ #category : #defining }
+LzExampleContexts class >> pairContext [
+	^ LzContextBuilder new
+		include: LzBuiltinContexts arrayIndexingContext;
+		include: LzBuiltinContexts arrayMapContext;
+		include: LzBuiltinContexts arrayAppendContext;
+		includeSortContext: LzBuiltinContexts integerContext;
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ n_:ℕ ',
+			'mapOverPairs(fn(from_, from_, to_), from_, Array1D(from_)) : Array1D(to_)';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ n_:ℕ ',
+			'mapOverPairs(fn(from_, from_, to_), from_, Array(from_, n_)) : Array(to_, n_)';
+		rule:'∀ from__:𝕊 ∀ to__:𝕊 ∀ n__:ℕ.nz ',
+				'∀ f_:fn(from__, from__, to__) ',
+				'∀ v_:from__',
+				'∀ a_:Array(from__, n__) ',
+				'mapOverPairs(f_, v_, a_) ⇒ (f_[v_])[a_]';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ n_:ℕ ',
+			'mapOverPairs(fn(from_, from_, to_), from_, EmptyArray1D) : EmptyArray1D';
+		rule:'∀ from__:𝕊 ∀ to__:𝕊 ',
+				'∀ f_:fn(from__, from__, to__) ',
+				'∀ v_:from__',
+				'∀ a_:EmptyArray1D ',
+				'mapOverPairs(f_, v_, a_) ⇒ a_';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ',
+			'mapOverPairs(fn(from_, from_, to_), Array1D(from_)) : Array1D(to_)';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ∀ n_:ℕ.nz ',
+			'mapOverPairs(fn(from_, from_, to_), Array(from_, n_)) : Array(to_, n_ × pred(n_))';
+		op: '∀ from_:𝕊 ∀ to_:𝕊 ',
+			'mapOverPairs(fn(from_, from_, to_), EmptyArray1D) : EmptyArray1D';
+		rule:'∀ from__:𝕊 ∀ to__:𝕊 ',
+				'∀ f_:fn(from__, from__, to__) ',
+				'∀ a_:EmptyArray1D ',
+				'mapOverPairs(f_, a_) ⇒ a_';
+		rule:'∀ from__:𝕊 ∀ to__:𝕊 ∀ n__:ℕ.nz ',
+				'∀ f_:fn(from__, from__, to__) ',
+				'∀ a_:Array(from__, n__) ',
+				'mapOverPairs(f_, a_) ⇒ mapOverPairs(f_, a_[1], a_[2 ⋯ ∎]) ⧟ mapOverPairs(f_, a_[2 ⋯ ∎])';
+		context
+]

@@ -181,3 +181,21 @@ LzArrayExamples >> numberArrays [
 		self assert: (context reduce: term) equals: reducedTerm.
 		{ term. reducedTerm } ]
 ]
+
+{ #category : #example }
+LzArrayExamples >> pairMappings [
+	<gtExample>
+	| context |
+	context := LzContextBuilder new
+		include: LzBuiltinContexts rationalNumberArrayContext;
+		include: LzExampleContexts pairContext;
+		context.
+	^ {
+		{ 'mapOverPairs(+, {[1, 2, 3, 4]})'. '{[ 3, 4, 5, 5, 6, 7 ]}'. }.
+	} collect: [ :each |
+		| term reducedTerm |
+		term := context term: each first.
+		reducedTerm := context term: each second.
+		self assert: (context reduce: term) equals: reducedTerm.
+		{ term. reducedTerm } ]
+]
