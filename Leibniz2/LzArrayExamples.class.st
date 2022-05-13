@@ -74,12 +74,15 @@ LzArrayExamples >> arrayMappings [
 		include: LzBuiltinContexts arrayMapContext;
 		op: 'abs : fn(ℤ, ℕ)';
 		rule: '∀ x_:ℤ abs[x_] ⇒ abs(x_)';
+		op: 'add : fn(ℤ, ℤ, ℕ)';
+		rule: '∀ x_:ℤ ∀ y_:ℤ add[x_, y_] ⇒ x_ + y_';
 		op: 'anInteger : ℤ';
 		context.
 	^ {
 		{ 'abs[{[ 1, -2, 3 ]}]'. '{[ 1, 2, 3 ]}' }.
 		{ 'abs[{[ [1], [-2], [3] ]}]'. '{[ [1], [2], [3] ]}' }.
 		{ 'abs[{[ 1, -2, anInteger ]}]'. '{[ 1, 2, abs(anInteger) ]}' }.
+		{ '(add[2])[{[ 1, -2, 3 ]}]'. '{[ 3, 0, 5 ]}' }.
 	} collect: [ :each |
 		| term reducedTerm |
 		term := context term: each first.

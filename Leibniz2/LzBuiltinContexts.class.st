@@ -288,6 +288,12 @@ LzBuiltinContexts class >> functionContext [
 				'fn(from1_, from2_, to_)';
 		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
 				'(fn(from1_, from2_, to_))[from1_, from2_] : to_';
+		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
+				'(fn(from1_, from2_, to_))[from1_] : fn(from2_, to_)';
+		rule: '∀ from1__:𝕊 ∀ from2__:𝕊 ∀ to__:𝕊 ',
+				'∀ f_:fn(from1__, from2__, to__) ',
+				'∀ a_:from1__ ∀ b_:from2__ ',
+				'(f_[a_])[b_] ⇒ f_[a_, b_]';
 		context
 ]
 
