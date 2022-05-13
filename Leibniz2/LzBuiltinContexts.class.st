@@ -21,7 +21,6 @@ Class {
 LzBuiltinContexts class >> arrayAppendContext [
 	^ LzContextBuilder new
 		include: self arrayContext;
-		"⊸ ⟜ ⧟"
 		op: '∀ s_:𝕊 ',
 				'(Array1D(s_)) ⧟ (Array1D(s_)) : Array1D(s_)';
 		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ ',
@@ -99,6 +98,32 @@ LzBuiltinContexts class >> arrayFoldContext [
 		rule: '∀ s__:𝕊 ∀ f_:fn(s__, s__, s__) ',
 				'∀ v_:s__ ∀ a_:EmptyArray ',
 				'fold(f_, v_, a_) ⇒ v_';
+		context
+]
+
+{ #category : #defining }
+LzBuiltinContexts class >> arrayIndexingContext [
+	^ LzContextBuilder new
+		include: self arrayContext;
+		sort: '⋯';
+		op: 'ℕ.nz ⋯ ℕ.nz : ⋯';
+		op: '∎ : ℕ.nz';
+		op: '∀ s_:𝕊 ',
+				'(Array1D(s_))[ℕ.nz] : s_';
+		rule: '∀ s__:𝕊 ',
+				'∀ A_:Array1D(s__) ',
+				'∀ i_:ℕ.nz ',
+				'A_[i_] → ''A ensureArrayTerm. A index: i'':nil';
+		op: '∀ s_:𝕊 ',
+				'(Array1D(s_))[⋯] : Array1D(s_)';
+		rule: '∀ s__:𝕊 ',
+				'∀ A_:Array1D(s__) ',
+				'∀ i_:ℕ.nz ',
+				'A_[i_ ⋯ ∎] → ''A ensureArrayTerm. A sliceToEndFrom: i'':nil';
+		rule: '∀ s__:𝕊 ',
+				'∀ A_:Array1D(s__) ',
+				'∀ i_:ℕ.nz ∀ j_:ℕ.nz ',
+				'A_[i_ ⋯ j_] → ''A ensureArrayTerm. A slice: i to: j'':nil';
 		context
 ]
 

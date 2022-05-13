@@ -48,6 +48,25 @@ LzArrayExamples >> arrayFolds [
 ]
 
 { #category : #example }
+LzArrayExamples >> arrayIndexing [
+	<gtExample>
+	| context |
+	context := LzBuiltinContexts arrayIndexingContext.
+	^ {
+		{ '{[ 1, 2, 3 ]}[2]'. '2' }.
+		{ '{[ 1, 2, 3 ]}[2 ⋯ 3]'. '{[ 2, 3 ]}' }.
+		{ '{[ 1, 2, 3 ]}[2 ⋯ ∎]'. '{[ 2, 3 ]}' }.
+		{ '{[ 1, 2, 3 ]}[2 ⋯ 2]'. '{[ 2 ]}' }.
+		{ '{[ 1, 2, 3 ]}[2 ⋯ 1]'. '{[ ]}' }.
+	} collect: [ :each |
+		| term reducedTerm |
+		term := context term: each first.
+		reducedTerm := context term: each second.
+		self assert: (context reduce: term) equals: reducedTerm.
+		{ term. reducedTerm } ]
+]
+
+{ #category : #example }
 LzArrayExamples >> arrayMappings [
 	<gtExample>
 	| context |

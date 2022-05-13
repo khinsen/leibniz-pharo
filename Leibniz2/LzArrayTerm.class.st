@@ -77,6 +77,14 @@ LzArrayTerm >> fingerprint [
 ]
 
 { #category : #transforming }
+LzArrayTerm >> index: anInteger [
+	self assert: self shape size == 1.
+	^ elements
+		at: anInteger
+		ifAbsent: [ LzRewriteFailure signal: 'index ', anInteger asString, ' out of range' ]
+]
+
+{ #category : #transforming }
 LzArrayTerm >> inject: aTerm into: aFnTerm [
 	| transformedElements |
 	^ elements inject: aTerm into: [ :total :each |
@@ -172,6 +180,22 @@ LzArrayTerm >> shapeAsArrayTerm [
 		arrayTerm: (self shape collect: [ :each |
 						LzIntegerTerm signature: self signature value: each])
 		shape: { self shape size }
+]
+
+{ #category : #transforming }
+LzArrayTerm >> slice: first to: last [
+	self assert: self shape size == 1.
+	^ self signature
+		arrayTerm: (elements copyFrom: (first max: 1) to: (last min: elements size))
+		shape: { last - first + 1 }
+]
+
+{ #category : #transforming }
+LzArrayTerm >> sliceToEndFrom: first [
+	| last |
+	self assert: self shape size == 1.
+	last := self shape first.
+	^ self slice: first to: last
 ]
 
 { #category : #accessing }
