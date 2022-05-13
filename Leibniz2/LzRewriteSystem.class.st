@@ -144,7 +144,7 @@ LzRewriteSystem >> rules: anOrderedCollection [
 LzRewriteSystem >> rulesMatching: aTerm [
 	^LzMatchingRules new
 		rewriteSystem: self;
-		term: aTerm
+		term: aTerm;
 		match
 ]
 
