@@ -76,15 +76,7 @@ LzGrammarIdentifiersAndLiterals >> fpNumberTerm [
 LzGrammarIdentifiersAndLiterals >> identifierCharacter [
 	| predicate |
 	predicate := PP2CharSetPredicate on:
-		[ :char |
-		char isLetter "Unicode categories Ll Lm Lo Lt Lu"
-			or: [ char isLetterNumber "Unicode category Nl"
-			or: [ ('-*/☰' includes: char)
-			or: [ (char isMathSymbol "Unicode category Sm"
-						or: [ char isCurrencySymbol "Unicode category Sc"
-						or: [ char isModifierSymbol "Unicode category Sk"
-						or: [ char isOtherSymbol "Unicode category So" ] ] ])
-					and: [ ('^' includes: char) not ] ] ] ] ].
+		[ :char | char isLzIdentifierCharacter ].
 	^ PP2PredicateObjectNode new
 		predicate: predicate;
 		predicateMessage: 'Leibniz identifier character expected';
