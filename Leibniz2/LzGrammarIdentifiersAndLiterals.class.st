@@ -18,26 +18,6 @@ Class {
 	#category : #'Leibniz2-Parser'
 }
 
-{ #category : #identifiers }
-LzGrammarIdentifiersAndLiterals class >> reservedIdentifiers [
-	| rewriteArrow functionArrow equalSign
-	  forAllSymbol conditionSymbol subsortSymbol |
-	rewriteArrow := '⇒'.
-	functionArrow := '→'.
-	equalSign := '='.
-	forAllSymbol := '∀'.
-	conditionSymbol := '|'.
-	subsortSymbol := '⊆'.
-	^ {
-		rewriteArrow.
-		functionArrow.
-		equalSign.
-		forAllSymbol.
-		conditionSymbol.
-		subsortSymbol
-		}
-]
-
 { #category : #literals }
 LzGrammarIdentifiersAndLiterals >> decimalRationalNumberTerm [
 	^ $# asPParser, fpNumber ==> [ :nodes | nodes second ]
@@ -92,7 +72,7 @@ LzGrammarIdentifiersAndLiterals >> integerTerm [
 LzGrammarIdentifiersAndLiterals >> opIdentifier [
 	^ (identifierCharacter , (#digit asPParser / $. asPParser / identifierCharacter) star) flatten
 		==> [ :id |
-				(LbGrammarIdentifiersAndLiterals reservedIdentifiers includes: id)
+				(LzConstants reservedIdentifiers includes: id)
 					ifFalse: [ id asSymbol ]
 					ifTrue: [ PP2Failure message: 'reserved identifier: ', id ] ]
 ]

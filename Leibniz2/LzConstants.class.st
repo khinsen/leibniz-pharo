@@ -23,3 +23,23 @@ LzConstants class >> opNameSort [
 LzConstants class >> opNameTrue [
 	^ '⊤'
 ]
+
+{ #category : #accessing }
+LzConstants class >> reservedIdentifiers [
+	| rewriteArrow functionArrow equalSign
+	  forAllSymbol conditionSymbol subsortSymbol |
+	rewriteArrow := '⇒'.
+	functionArrow := '→'.
+	equalSign := '='.
+	forAllSymbol := '∀'.
+	conditionSymbol := '|'.
+	subsortSymbol := '⊆'.
+	^ {
+		rewriteArrow.
+		functionArrow.
+		equalSign.
+		forAllSymbol.
+		conditionSymbol.
+		subsortSymbol
+		}
+]
