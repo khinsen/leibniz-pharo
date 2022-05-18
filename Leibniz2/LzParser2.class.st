@@ -6,7 +6,7 @@ Class {
 
 { #category : #'generated-accessing' }
 LzParser2 class >> cacheId [
-	^'2022-05-17T17:58:45.607456+02:00'
+	^'2022-05-18T18:15:55.363613+02:00'
 ]
 
 { #category : #generated }
@@ -14,9 +14,12 @@ LzParser2 class >> definitionComment [
 "%unicode;
 
 %glr;
-%root AST2;
+%root ParseTree;
 %prefix Lz;
 %suffix Node;
+%start Term;
+%hierarchy LiteralTerm (IntegerLiteralTerm RationalNumberLiteralTerm FpNumberLiteralTerm StringLiteralTerm);
+%hierarchy Term (VarTerm LiteralTerm);
 <whitespace>
 	: \s+
 	;
@@ -46,54 +49,71 @@ Start
 	;
 Term
 	: VarTerm
-	| IntegerLiteralTerm
+	| LiteralTerm
+	;
+LiteralTerm
+	: IntegerLiteralTerm
 	| RationalNumberLiteralTerm
 	| FpNumberLiteralTerm
 	| StringLiteralTerm
 	;
 VarTerm
-	: <varIdentifier> 'id'
-		{ LzASTVarTerm new
-			name: (LzVarName for: id value) }
+	: <varIdentifier> 'text' {{}}
+		#{ LzASTVarTerm new
+		#	name: (LzVarName for: id value) }
 	;
 StringLiteralTerm
-	: <string> 'string'
-		{ LzASTStringLiteral new
-			value: string value allButFirst allButLast }
+	: <string> 'text' {{}}
+		#{ LzASTStringLiteral new
+		#	value: string value allButFirst allButLast }
 	;
 IntegerLiteralTerm
-	: <integer> 'string'
-		{ LzASTIntegerLiteral new
-			value: string value asNumber }
+	: <integer> 'text' {{}}
+		#{ LzASTIntegerLiteral new
+		#	value: string value asNumber }
 	;
 RationalNumberLiteralTerm
-	: <rationalNumber> 'string'
-		{ LzASTRationalLiteral new
-			value: (Fraction readFromString: string value) }
+	: <rationalNumber> 'text' {{}}
+		#{ LzASTRationalLiteral new
+		#	value: (Fraction readFromString: string value) }
 	;
 FpNumberLiteralTerm
-	: <fpNumber> 'string'
+	: <fpNumber> 'text' {{}}
 		# Pharo doesn't allow a dot followed by an exponent without any fractional part.
 		# Workaround: replace '.e' by '.0e'
-		{ LzASTFPLiteral new
-			value: (string value copyReplaceAll: '.e' with: '.0e') asNumber asFloat }
+		#{ LzASTFPLiteral new
+		#	value: (string value copyReplaceAll: '.e' with: '.0e') asNumber asFloat }
 	;"
+]
+
+{ #category : #initializing }
+LzParser2 class >> initialize [
+	LeParser annotationParsers
+		at: 'lzTerm'
+		put: [ :parser | parser spawnParser: self startingAt: self startingStateForTerm ]
+]
+
+{ #category : #accessing }
+LzParser2 class >> obsolete [
+	LeParser annotationParsers removeKey: 'lzTerm' ifAbsent: [  ].
+	^ super obsolete
 ]
 
 { #category : #generated }
 LzParser2 class >> reduceTable [
 ^#(
-	#(10 1 #reduceActionForVarTerm1: 570369 false) 
-	#(11 1 #reduceActionForStringLiteralTerm1: 665601 false) 
-	#(12 1 #reduceActionForIntegerLiteralTerm1: 785409 false) 
-	#(13 1 #reduceActionForRationalNumberLiteralTerm1: 893953 false) 
-	#(14 1 #reduceActionForFpNumberLiteralTerm1: 1036289 false) 
-	#(8 1 #liftFirstValue: 435201 false) 
-	#(9 1 #liftFirstValue: 453633 false) 
-	#(9 1 #liftFirstValue: 453637 false) 
-	#(9 1 #liftFirstValue: 453634 false) 
-	#(9 1 #liftFirstValue: 453635 false) 
-	#(9 1 #liftFirstValue: 453636 false)
+	#(11 1 #reduceActionForVarTerm1: 771073 false) 
+	#(12 1 #reduceActionForStringLiteralTerm1: 875521 false) 
+	#(13 1 #reduceActionForIntegerLiteralTerm1: 1000449 false) 
+	#(14 1 #reduceActionForRationalNumberLiteralTerm1: 1114113 false) 
+	#(15 1 #reduceActionForFpNumberLiteralTerm1: 1261569 false) 
+	#(8 1 #liftFirstValue: 605185 false) 
+	#(9 1 #liftFirstValue: 623618 false) 
+	#(9 1 #liftFirstValue: 623617 false) 
+	#(10 1 #liftFirstValue: 658436 false) 
+	#(10 1 #liftFirstValue: 658433 false) 
+	#(10 1 #liftFirstValue: 658434 false) 
+	#(10 1 #liftFirstValue: 658435 false)
 	).
 ]
 
@@ -108,55 +128,78 @@ LzParser2 class >> startingStateForStart [
 ]
 
 { #category : #generated }
+LzParser2 class >> startingStateForTerm [
+	^ 2
+]
+
+{ #category : #generated }
 LzParser2 class >> symbolNames [
-	^ #('<whitespace>' '<varIdentifier>' '<string>' '<integer>' '<rationalNumber>' '<fpNumber>' 'B e g i n' 'Start' 'Term' 'VarTerm' 'StringLiteralTerm' 'IntegerLiteralTerm' 'RationalNumberLiteralTerm' 'FpNumberLiteralTerm' 'E O F' 'error')
+	^ #('<whitespace>' '<varIdentifier>' '<string>' '<integer>' '<rationalNumber>' '<fpNumber>' 'B e g i n' 'Start' 'Term' 'LiteralTerm' 'VarTerm' 'StringLiteralTerm' 'IntegerLiteralTerm' 'RationalNumberLiteralTerm' 'FpNumberLiteralTerm' 'E O F' 'error')
 ]
 
 { #category : #generated }
 LzParser2 class >> symbolTypes [
-	^ #(#SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #Object #Object #Object #Object #Object #Object #Object #Object #SmaCCToken #SmaCCErrorNode)
+	^ #(#SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #LzTermNode #LzTermNode #LzTermNode #LzLiteralTermNode #LzVarTermNode #LzStringLiteralTermNode #LzIntegerLiteralTermNode #LzRationalNumberLiteralTermNode #LzFpNumberLiteralTermNode #SmaCCToken #SmaCCErrorNode)
 ]
 
 { #category : #generated }
 LzParser2 class >> transitionTable [
 ^#(
-#[1 0 9 0 2 0 13 0 3 0 17 0 4 0 21 0 5 0 25 0 6 0 29 0 8 0 29 0 9 0 29 0 10 0 29 0 11 0 29 0 12 0 29 0 13 0 29 0 14] 
-#[0 0 6 0 15] 
-#[0 0 10 0 15] 
-#[0 0 14 0 15] 
-#[0 0 18 0 15] 
-#[0 0 22 0 15] 
-#[0 0 0 0 15] 
-#[0 0 26 0 15] 
-#[0 0 30 0 15] 
-#[0 0 34 0 15] 
-#[0 0 38 0 15] 
-#[0 0 42 0 15] 
-#[0 0 46 0 15]
+#[1 0 13 0 2 0 17 0 3 0 21 0 4 0 25 0 5 0 29 0 6 0 33 0 8 0 33 0 9 0 33 0 10 0 33 0 11 0 33 0 12 0 33 0 13 0 33 0 14 0 33 0 15] 
+#[1 0 13 0 2 0 17 0 3 0 21 0 4 0 25 0 5 0 29 0 6 0 65 0 9 0 65 0 10 0 65 0 11 0 65 0 12 0 65 0 13 0 65 0 14 0 65 0 15] 
+#[0 0 6 0 16] 
+#[0 0 10 0 16] 
+#[0 0 14 0 16] 
+#[0 0 18 0 16] 
+#[0 0 22 0 16] 
+#[0 0 0 0 16] 
+#[0 0 26 0 16] 
+#[0 0 30 0 16] 
+#[0 0 34 0 16] 
+#[0 0 38 0 16] 
+#[0 0 42 0 16] 
+#[0 0 46 0 16] 
+#[0 0 50 0 16] 
+#[0 0 0 0 16]
 	).
 ]
 
 { #category : #'generated-reduction actions' }
 LzParser2 >> reduceActionForFpNumberLiteralTerm1: nodes [
-	^ LzASTFPLiteral new value: ((nodes at: 1) value copyReplaceAll: '.e' with: '.0e') asNumber asFloat
+	| result |
+	result := LzFpNumberLiteralTermNode new.
+	result text: (nodes at: 1).
+	^ result
 ]
 
 { #category : #'generated-reduction actions' }
 LzParser2 >> reduceActionForIntegerLiteralTerm1: nodes [
-	^ LzASTIntegerLiteral new value: (nodes at: 1) value asNumber
+	| result |
+	result := LzIntegerLiteralTermNode new.
+	result text: (nodes at: 1).
+	^ result
 ]
 
 { #category : #'generated-reduction actions' }
 LzParser2 >> reduceActionForRationalNumberLiteralTerm1: nodes [
-	^ LzASTRationalLiteral new value: (Fraction readFromString: (nodes at: 1) value)
+	| result |
+	result := LzRationalNumberLiteralTermNode new.
+	result text: (nodes at: 1).
+	^ result
 ]
 
 { #category : #'generated-reduction actions' }
 LzParser2 >> reduceActionForStringLiteralTerm1: nodes [
-	^ LzASTStringLiteral new value: (nodes at: 1) value allButFirst allButLast
+	| result |
+	result := LzStringLiteralTermNode new.
+	result text: (nodes at: 1).
+	^ result
 ]
 
 { #category : #'generated-reduction actions' }
 LzParser2 >> reduceActionForVarTerm1: nodes [
-	^ LzASTVarTerm new name: (LzVarName for: (nodes at: 1) value)
+	| result |
+	result := LzVarTermNode new.
+	result text: (nodes at: 1).
+	^ result
 ]
