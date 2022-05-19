@@ -6,6 +6,21 @@ Trait {
 }
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitArrayElements: anArrayElements [
+	^ self visitParseTree: anArrayElements
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitArrayTerm: anArrayTerm [
+	^ self visitTerm: anArrayTerm
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitBracketOpTerm: aBracketOpTerm [
+	^ self visitTerm: aBracketOpTerm
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitFpNumberLiteralTerm: aFpNumberLiteralTerm [
 	^ self visitLiteralTerm: aFpNumberLiteralTerm
 ]
@@ -26,6 +41,11 @@ TLzParseTreeNodeVisitor >> visitParseTree: aParseTree [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitPrefixOpTerm: aPrefixOpTerm [
+	^ self visitTerm: aPrefixOpTerm
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitRationalNumberLiteralTerm: aRationalNumberLiteralTerm [
 	^ self visitLiteralTerm: aRationalNumberLiteralTerm
 ]
@@ -33,6 +53,16 @@ TLzParseTreeNodeVisitor >> visitRationalNumberLiteralTerm: aRationalNumberLitera
 { #category : #generated }
 TLzParseTreeNodeVisitor >> visitStringLiteralTerm: aStringLiteralTerm [
 	^ self visitLiteralTerm: aStringLiteralTerm
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitSubscriptOpTerm: aSubscriptOpTerm [
+	^ self visitTerm: aSubscriptOpTerm
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitSuperscriptOpTerm: aSuperscriptOpTerm [
+	^ self visitTerm: aSuperscriptOpTerm
 ]
 
 { #category : #generated }
