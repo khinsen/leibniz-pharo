@@ -17,11 +17,20 @@ LzTermStyler class >> obsolete [
 	^ super obsolete
 ]
 
+{ #category : #accessing }
+LzTermStyler >> page [
+	^ self snippet page
+]
+
+{ #category : #accessing }
+LzTermStyler >> snippet [
+	^ self composite snippetViewModel snippetModel
+]
+
 { #category : #styling }
-LzTermStyler >> styleAnnotation: anAnnotation color: aColor [
-	(self text
-		from: anAnnotation parent startPosition
-		to: anAnnotation parent stopPosition) foreground: aColor
+LzTermStyler >> styleAnnotation: anAnnotation [
+	(self text from: anAnnotation parent startPosition to: anAnnotation parent stopPosition)
+		fontName: LzCodeFont defaultFamily
 ]
 
 { #category : #styling }
@@ -43,10 +52,10 @@ LzTermStyler >> styleTermButton: aTermAnnotation [
 		beAppend;
 		stencil: [
 			| button label |
-			label := aTermAnnotation text value.
+			label := aTermAnnotation source.
 			button := LeSnippetStylerVisitor textLinkButtonPadding:
 				(BlInsets top: 2) margin: BlInsets empty.
-			button aptitude glamorousCodeFont.
+			button aptitude fontName: LzCodeFont defaultFamily.
 			button
 				beSmallSize;
 				label: label;
@@ -78,6 +87,7 @@ LzTermStyler >> visitSmaCCError: aSmaCCError [
 
 { #category : #visiting }
 LzTermStyler >> visitTerm: aTermAnnotation [
+	self styleAnnotation: aTermAnnotation.
 	self styleAutoHidingAnnotation: aTermAnnotation.
 	self styleTermButton: aTermAnnotation
 ]
