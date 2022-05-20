@@ -2,7 +2,7 @@ Class {
 	#name : #LzPrefixOpTermNode,
 	#superclass : #LzTermNode,
 	#instVars : [
-		'name',
+		'opName',
 		'leftParen',
 		'args',
 		'commas',
@@ -66,13 +66,13 @@ LzPrefixOpTermNode >> leftParen: aSmaCCToken [
 ]
 
 { #category : #generated }
-LzPrefixOpTermNode >> name [
-	^ name
+LzPrefixOpTermNode >> opName [
+	^ opName
 ]
 
 { #category : #generated }
-LzPrefixOpTermNode >> name: aSmaCCToken [
-	name := aSmaCCToken
+LzPrefixOpTermNode >> opName: aSmaCCToken [
+	opName := aSmaCCToken
 ]
 
 { #category : #generated }
@@ -87,5 +87,5 @@ LzPrefixOpTermNode >> rightParen: aSmaCCToken [
 
 { #category : #generated }
 LzPrefixOpTermNode >> tokenVariables [
-	^ #(#name #leftParen #rightParen)
+	^ #(#opName #leftParen #rightParen)
 ]

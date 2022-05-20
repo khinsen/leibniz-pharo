@@ -2,7 +2,7 @@ Class {
 	#name : #LzVarTermNode,
 	#superclass : #LzTermNode,
 	#instVars : [
-		'name'
+		'varName'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
@@ -13,16 +13,16 @@ LzVarTermNode >> acceptVisitor: aParseTreeVisitor [
 ]
 
 { #category : #generated }
-LzVarTermNode >> name [
-	^ name
-]
-
-{ #category : #generated }
-LzVarTermNode >> name: aSmaCCToken [
-	name := aSmaCCToken
-]
-
-{ #category : #generated }
 LzVarTermNode >> tokenVariables [
-	^ #(#name)
+	^ #(#varName)
+]
+
+{ #category : #generated }
+LzVarTermNode >> varName [
+	^ varName
+]
+
+{ #category : #generated }
+LzVarTermNode >> varName: aSmaCCToken [
+	varName := aSmaCCToken
 ]

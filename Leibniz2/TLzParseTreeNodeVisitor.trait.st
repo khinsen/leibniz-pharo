@@ -26,6 +26,11 @@ TLzParseTreeNodeVisitor >> visitFpNumberLiteralTerm: aFpNumberLiteralTerm [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitInfixOpTerm: anInfixOpTerm [
+	^ self visitParseTree: anInfixOpTerm
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitIntegerLiteralTerm: anIntegerLiteralTerm [
 	^ self visitLiteralTerm: anIntegerLiteralTerm
 ]

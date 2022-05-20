@@ -75,7 +75,6 @@ LzTermStyler >> text [
 
 { #category : #visiting }
 LzTermStyler >> visitParseTree: aParseTree [
-	self halt.
 	^ self visitSmaCCParseNode: aParseTree
 ]
 

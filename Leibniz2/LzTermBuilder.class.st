@@ -87,6 +87,17 @@ LzTermBuilder >> visitFpNumberLiteralTerm: aFpNumberLiteralTerm [
 ]
 
 { #category : #visiting }
+LzTermBuilder >> visitInfixOpTerm: anInfixOpTerm [
+	| opNames opName args |
+	opNames := anInfixOpTerm opNames collect: #value.
+	self assert: opNames asSet size equals: 1.
+	args := anInfixOpTerm args collect: [ :each | self build: each ].
+	opName := LzInfixOpName for: opNames anyOne asSymbol.
+	^ args allButFirst inject: args first into: [ :total :each |
+		signature opTerm: opName args: { total. each } ]
+]
+
+{ #category : #visiting }
 LzTermBuilder >> visitIntegerLiteralTerm: anIntegerLiteralTerm [
 	| value |
 	value := anIntegerLiteralTerm text value asNumber.
@@ -104,7 +115,7 @@ LzTermBuilder >> visitParseTree: aParseTree [
 { #category : #visiting }
 LzTermBuilder >> visitPrefixOpTerm: aPrefixOpTerm [
 	^ signature
-		opTerm: (LzPrefixOpName for: aPrefixOpTerm name value asSymbol)
+		opTerm: (LzPrefixOpName for: aPrefixOpTerm opName value asSymbol)
 		args: (aPrefixOpTerm args collect: [ :each | self build: each ])
 ]
 
@@ -145,6 +156,6 @@ LzTermBuilder >> visitSuperscriptOpTerm: aBracketOpTerm [
 { #category : #visiting }
 LzTermBuilder >> visitVarTerm: aVarTerm [
 	^ signature
-		varTerm: (LzVarName for: aVarTerm name value)
+		varTerm: (LzVarName for: aVarTerm opName value)
 		variables: self variables
 ]
