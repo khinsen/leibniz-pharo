@@ -76,6 +76,11 @@ TLzParseTreeNodeVisitor >> visitTerm: aTerm [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitTopLevelTerm: aTopLevelTerm [
+	^ self visitParseTree: aTopLevelTerm
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitVarTerm: aVarTerm [
 	^ self visitTerm: aVarTerm
 ]

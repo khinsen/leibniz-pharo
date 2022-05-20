@@ -6,12 +6,12 @@ Class {
 
 { #category : #generated }
 LzScanner >> emptySymbolTokenId [
-	^ 38
+	^ 39
 ]
 
 { #category : #generated }
 LzScanner >> errorTokenId [
-	^ 39
+	^ 40
 ]
 
 { #category : #generated }
