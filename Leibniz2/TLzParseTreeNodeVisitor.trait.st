@@ -26,6 +26,11 @@ TLzParseTreeNodeVisitor >> visitFpNumberLiteralTerm: aFpNumberLiteralTerm [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitInfixOp: anInfixOp [
+	^ self visitOp: anInfixOp
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitInfixOpTerm: anInfixOpTerm [
 	^ self visitParseTree: anInfixOpTerm
 ]
@@ -41,8 +46,18 @@ TLzParseTreeNodeVisitor >> visitLiteralTerm: aLiteralTerm [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitOp: anOp [
+	^ self visitParseTree: anOp
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitParseTree: aParseTree [
 	^ self visitSmaCCParseNode: aParseTree
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitPrefixOp: aPrefixOp [
+	^ self visitOp: aPrefixOp
 ]
 
 { #category : #generated }
@@ -73,6 +88,16 @@ TLzParseTreeNodeVisitor >> visitSuperscriptOpTerm: aSuperscriptOpTerm [
 { #category : #generated }
 TLzParseTreeNodeVisitor >> visitTerm: aTerm [
 	^ self visitParseTree: aTerm
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitTopLevelOp: aTopLevelOp [
+	^ self visitParseTree: aTopLevelOp
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitTopLevelSort: aTopLevelSort [
+	^ self visitParseTree: aTopLevelSort
 ]
 
 { #category : #generated }

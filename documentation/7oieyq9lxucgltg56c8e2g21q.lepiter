@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-17T10:23:27.84732+02:00"
+						"dateAndTimeString" : "2022-05-20T20:59:47.411733+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,92 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-17T10:23:29.392602+02:00"
+						"dateAndTimeString" : "2022-05-20T21:13:33.9488+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "hHh3wh6GDQCw4M1mCdo5eA=="
+					"uidString" : "jNaR09ebDQCf893wDT69gQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "[[Leibniz - a Digital Scientific Notation]]"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-20T21:02:49.435017+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-20T21:02:58.635984+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "F76h39ebDQCgBOVGDT69gQ=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "[[Implementation overview: dependent sorts]]"
-						}
-					]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-17T10:57:43.867913+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-17T10:57:47.535006+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "wuILPx+GDQCVQp65D2GZzw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "[[Dependent sorts]]"
+				"string" : "Boolean sort: {{lzSort:𝔹}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -130,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-17T11:29:17.755728+02:00"
+						"dateAndTimeString" : "2022-05-20T21:00:14.450932+02:00"
 					}
 				},
 				"editEmail" : {
@@ -141,17 +66,54 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-20T21:03:12.392463+02:00"
+						"dateAndTimeString" : "2022-05-20T21:00:45.918316+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "+ev9rx+GDQCVctvGD2GZzw=="
+					"uidString" : "iTRd1debDQCf9dI/DT69gQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "[[Context definitions]]"
+				"string" : "True: {{lzOp:⊤ : 𝔹}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-05-20T21:00:28.131169+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-05-20T21:00:43.443737+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "cVIe19ebDQCf983KDT69gQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "False: {{lzOp:⊥ : 𝔹}}"
 			}
 		]
 	},
@@ -163,7 +125,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2021-08-17T10:22:46.94715+02:00"
+			"dateAndTimeString" : "2022-05-20T20:59:27.018151+02:00"
 		}
 	},
 	"editEmail" : {
@@ -174,15 +136,15 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2021-08-17T10:22:57.203721+02:00"
+			"dateAndTimeString" : "2022-05-20T20:59:27.018151+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Leibniz book"
+		"title" : "Truth"
 	},
 	"uid" : {
 		"__type" : "uuid",
-		"uuid" : "fbd476c2-1e86-0d00-b0df-624109da3978"
+		"uuid" : "5e2891d3-d79b-0d00-9ff2-4b690d3ebd81"
 	}
 }
