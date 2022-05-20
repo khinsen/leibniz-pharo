@@ -4,16 +4,9 @@ Class {
 	#category : #'Leibniz2-SmaCCParser'
 }
 
-{ #category : #generated }
-LzParser2 class >> ambiguousTransitions [
-^#(
-#[ 0 38 0 42]
-	).
-]
-
 { #category : #'generated-accessing' }
 LzParser2 class >> cacheId [
-	^'2022-05-20T15:13:07.150063+02:00'
+	^'2022-05-20T15:40:40.653985+02:00'
 ]
 
 { #category : #generated }
@@ -57,7 +50,7 @@ TopLevelTerm
 	: Term 'term' {{}}
 	;
 Term
-	: NonInfixTerm 'arg' (<opIdentifier> 'opName' NonInfixTerm 'arg') * {{InfixOpTerm}}
+	: NonInfixTerm 'arg' (<opIdentifier> 'opName' NonInfixTerm 'arg')+ {{InfixOpTerm}}
 	| NonInfixTerm
 	;
 NonInfixTerm
@@ -137,43 +130,43 @@ LzParser2 class >> obsolete [
 { #category : #generated }
 LzParser2 class >> reduceTable [
 ^#(
-	#(27 1 #reduceActionForPrefixOpTerm1: 1346561 false) 
-	#(28 1 #reduceActionForVarTerm1: 1475585 false) 
-	#(35 1 #reduceActionForStringLiteralTerm1: 1890305 false) 
-	#(36 1 #reduceActionForIntegerLiteralTerm1: 1936385 false) 
-	#(37 1 #reduceActionForRationalNumberLiteralTerm1: 1984513 false) 
-	#(38 1 #reduceActionForFpNumberLiteralTerm1: 2046977 false) 
+	#(27 1 #reduceActionForPrefixOpTerm1: 1345537 false) 
+	#(28 1 #reduceActionForVarTerm1: 1474561 false) 
+	#(35 1 #reduceActionForStringLiteralTerm1: 1889281 false) 
+	#(36 1 #reduceActionForIntegerLiteralTerm1: 1935361 false) 
+	#(37 1 #reduceActionForRationalNumberLiteralTerm1: 1983489 false) 
+	#(38 1 #reduceActionForFpNumberLiteralTerm1: 2045953 false) 
 	#(18 1 #liftFirstValue: 685057 false) 
 	#(19 1 #reduceActionForTopLevelTerm1: 711681 false) 
 	#(20 1 #liftFirstValue: 748546 false) 
-	#(22 0 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg____1: 776193 false) 
-	#(23 1 #liftFirstValue: 860161 false) 
-	#(26 1 #liftFirstValue: 1259524 false) 
-	#(26 1 #liftFirstValue: 1259525 false) 
-	#(26 1 #liftFirstValue: 1259523 false) 
-	#(26 1 #liftFirstValue: 1259521 false) 
-	#(34 1 #liftFirstValue: 1777668 false) 
-	#(34 1 #liftFirstValue: 1777665 false) 
-	#(34 1 #liftFirstValue: 1777666 false) 
-	#(34 1 #liftFirstValue: 1777667 false) 
+	#(23 1 #liftFirstValue: 859137 false) 
+	#(26 1 #liftFirstValue: 1258500 false) 
+	#(26 1 #liftFirstValue: 1258501 false) 
+	#(26 1 #liftFirstValue: 1258499 false) 
+	#(26 1 #liftFirstValue: 1258497 false) 
+	#(34 1 #liftFirstValue: 1776644 false) 
+	#(34 1 #liftFirstValue: 1776641 false) 
+	#(34 1 #liftFirstValue: 1776642 false) 
+	#(34 1 #liftFirstValue: 1776643 false) 
+	#(22 1 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___1: 776193 false) 
 	#(20 2 #reduceActionForTerm1: 748545 false) 
-	#(26 3 #liftSecondValue: 1259522 false) 
-	#(33 1 #liftFirstValue: 1735681 false) 
-	#(33 1 #liftFirstValue: 1735682 false) 
-	#(32 0 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg____1: 1669121 false) 
-	#(29 3 #reduceActionForArrayTerm1: 1521665 false) 
-	#(25 0 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg____1: 944129 false) 
-	#(22 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg____2: 776194 false) 
+	#(26 3 #liftSecondValue: 1258498 false) 
+	#(33 1 #liftFirstValue: 1734657 false) 
+	#(33 1 #liftFirstValue: 1734658 false) 
+	#(32 0 #reduceActionFor______comma__ArrayElement__element___1: 1668097 false) 
+	#(29 3 #reduceActionForArrayTerm1: 1520641 false) 
+	#(25 0 #reduceActionFor______comma__ArrayElement__element___1: 943105 false) 
 	#(21 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: 776193 false) 
-	#(30 4 #reduceActionForArrayElements1: 1607681 false) 
-	#(32 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg____2: 1669122 false) 
-	#(27 5 #reduceActionForPrefixOpTerm2: 1346562 false) 
-	#(25 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg____2: 944130 false) 
-	#(23 5 #reduceActionForNonInfixTerm2: 860162 false) 
-	#(23 5 #reduceActionForNonInfixTerm4: 860164 false) 
-	#(23 5 #reduceActionForNonInfixTerm3: 860163 false) 
-	#(31 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: 1669121 false) 
-	#(24 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: 944129 false)
+	#(22 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___2: 776194 false) 
+	#(30 4 #reduceActionForArrayElements1: 1606657 false) 
+	#(32 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___2: 1668098 false) 
+	#(27 5 #reduceActionForPrefixOpTerm2: 1345538 false) 
+	#(25 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___2: 943106 false) 
+	#(23 5 #reduceActionForNonInfixTerm2: 859138 false) 
+	#(23 5 #reduceActionForNonInfixTerm4: 859140 false) 
+	#(23 5 #reduceActionForNonInfixTerm3: 859139 false) 
+	#(31 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: 1668097 false) 
+	#(24 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: 943105 false)
 	).
 ]
 
@@ -194,7 +187,7 @@ LzParser2 class >> startingStateForTopLevelTerm [
 
 { #category : #generated }
 LzParser2 class >> symbolNames [
-	^ #('"("' '")"' '","' '"["' '"\("' '"]"' '"^("' '"{"' '"}"' '<whitespace>' '<opIdentifier>' '<varIdentifier>' '<string>' '<integer>' '<rationalNumber>' '<fpNumber>' 'B e g i n' 'Start' 'TopLevelTerm' 'Term' '(<opIdentifier> ''opName'' NonInfixTerm ''arg'')' '(<opIdentifier> ''opName'' NonInfixTerm ''arg'') *' 'NonInfixTerm' '("," ''comma'' Term ''arg'')' '("," ''comma'' Term ''arg'')*' 'SimpleTerm' 'PrefixOpTerm' 'VarTerm' 'ArrayTerm' 'ArrayElements' '("," ''comma'' ArrayElement ''element'')' '("," ''comma'' ArrayElement ''element'')*' 'ArrayElement' 'LiteralTerm' 'StringLiteralTerm' 'IntegerLiteralTerm' 'RationalNumberLiteralTerm' 'FpNumberLiteralTerm' 'E O F' 'error')
+	^ #('"("' '")"' '","' '"["' '"\("' '"]"' '"^("' '"{"' '"}"' '<whitespace>' '<opIdentifier>' '<varIdentifier>' '<string>' '<integer>' '<rationalNumber>' '<fpNumber>' 'B e g i n' 'Start' 'TopLevelTerm' 'Term' '(<opIdentifier> ''opName'' NonInfixTerm ''arg'')' '(<opIdentifier> ''opName'' NonInfixTerm ''arg'')+' 'NonInfixTerm' '("," ''comma'' Term ''arg'')' '("," ''comma'' Term ''arg'')*' 'SimpleTerm' 'PrefixOpTerm' 'VarTerm' 'ArrayTerm' 'ArrayElements' '("," ''comma'' ArrayElement ''element'')' '("," ''comma'' ArrayElement ''element'')*' 'ArrayElement' 'LiteralTerm' 'StringLiteralTerm' 'IntegerLiteralTerm' 'RationalNumberLiteralTerm' 'FpNumberLiteralTerm' 'E O F' 'error')
 ]
 
 { #category : #generated }
@@ -218,8 +211,9 @@ LzParser2 class >> transitionTable [
 #[0 0 0 0 39] 
 #[0 0 30 0 39] 
 #[0 0 34 0 39] 
-#[1 0 7 0 2 0 7 0 3 0 7 0 6 0 42 0 11 0 117 0 22 0 7 0 39] 
-#[1 0 46 0 2 0 46 0 3 0 121 0 4 0 125 0 5 0 46 0 6 0 129 0 7 0 46 0 11 0 46 0 39] 
+#[1 0 38 0 2 0 38 0 3 0 38 0 6 0 117 0 11 0 121 0 21 0 125 0 22 0 38 0 39] 
+#[1 0 42 0 2 0 42 0 3 0 129 0 4 0 133 0 5 0 42 0 6 0 137 0 7 0 42 0 11 0 42 0 39] 
+#[0 0 46 0 2 0 3 0 4 0 5 0 6 0 7 0 11 0 39] 
 #[0 0 50 0 2 0 3 0 4 0 5 0 6 0 7 0 11 0 39] 
 #[0 0 54 0 2 0 3 0 4 0 5 0 6 0 7 0 11 0 39] 
 #[0 0 58 0 2 0 3 0 4 0 5 0 6 0 7 0 11 0 39] 
@@ -227,38 +221,38 @@ LzParser2 class >> transitionTable [
 #[0 0 66 0 2 0 3 0 4 0 5 0 6 0 7 0 11 0 39] 
 #[0 0 70 0 2 0 3 0 4 0 5 0 6 0 7 0 11 0 39] 
 #[0 0 74 0 2 0 3 0 4 0 5 0 6 0 7 0 11 0 39] 
-#[0 0 78 0 2 0 3 0 4 0 5 0 6 0 7 0 11 0 39] 
 #[0 0 0 0 39] 
-#[0 0 133 0 2] 
-#[1 0 13 0 1 0 105 0 4 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 145 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 145 0 30 0 145 0 33 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
-#[0 0 149 0 9] 
-#[1 0 13 0 1 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 153 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
-#[1 0 82 0 2 0 82 0 3 0 82 0 6 0 157 0 11 0 161 0 21 0 82 0 39] 
-#[1 0 13 0 1 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 165 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
-#[1 0 13 0 1 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 169 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
+#[0 0 141 0 2] 
+#[1 0 13 0 1 0 105 0 4 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 153 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 153 0 30 0 153 0 33 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
+#[0 0 157 0 9] 
+#[1 0 13 0 1 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 161 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
+#[1 0 13 0 1 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 165 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
+#[0 0 78 0 2 0 3 0 6 0 11 0 39] 
+#[1 0 82 0 2 0 82 0 3 0 82 0 6 0 117 0 11 0 169 0 21 0 82 0 39] 
 #[1 0 13 0 1 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 173 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
+#[1 0 13 0 1 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 177 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
+#[1 0 13 0 1 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 181 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
 #[0 0 86 0 2 0 3 0 4 0 5 0 6 0 7 0 11 0 39] 
 #[0 0 90 0 3 0 6] 
 #[0 0 94 0 3 0 6] 
-#[1 0 98 0 3 0 98 0 6 0 177 0 32] 
+#[1 0 98 0 3 0 98 0 6 0 185 0 32] 
 #[0 0 102 0 2 0 3 0 4 0 5 0 6 0 7 0 11 0 39] 
-#[1 0 106 0 2 0 106 0 3 0 181 0 25] 
-#[1 0 13 0 1 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 185 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
+#[1 0 106 0 2 0 106 0 3 0 189 0 25] 
 #[0 0 110 0 2 0 3 0 6 0 11 0 39] 
-#[1 0 106 0 3 0 106 0 6 0 189 0 25] 
-#[1 0 106 0 2 0 106 0 3 0 193 0 25] 
-#[1 0 106 0 2 0 106 0 3 0 197 0 25] 
-#[1 0 201 0 3 0 205 0 6 0 209 0 31] 
-#[1 0 213 0 2 0 217 0 3 0 221 0 24] 
 #[0 0 114 0 2 0 3 0 6 0 11 0 39] 
-#[1 0 217 0 3 0 225 0 6 0 221 0 24] 
-#[1 0 229 0 2 0 217 0 3 0 221 0 24] 
-#[1 0 233 0 2 0 217 0 3 0 221 0 24] 
-#[1 0 13 0 1 0 105 0 4 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 237 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 237 0 30 0 237 0 33 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
+#[1 0 106 0 3 0 106 0 6 0 193 0 25] 
+#[1 0 106 0 2 0 106 0 3 0 197 0 25] 
+#[1 0 106 0 2 0 106 0 3 0 201 0 25] 
+#[1 0 205 0 3 0 209 0 6 0 213 0 31] 
+#[1 0 217 0 2 0 221 0 3 0 225 0 24] 
+#[1 0 221 0 3 0 229 0 6 0 225 0 24] 
+#[1 0 233 0 2 0 221 0 3 0 225 0 24] 
+#[1 0 237 0 2 0 221 0 3 0 225 0 24] 
+#[1 0 13 0 1 0 105 0 4 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 241 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 241 0 30 0 241 0 33 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
 #[0 0 118 0 3 0 6 0 9] 
 #[0 0 122 0 3 0 6] 
 #[0 0 126 0 2 0 3 0 4 0 5 0 6 0 7 0 11 0 39] 
-#[1 0 13 0 1 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 241 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
+#[1 0 13 0 1 0 17 0 8 0 21 0 11 0 25 0 12 0 29 0 13 0 33 0 14 0 37 0 15 0 41 0 16 0 245 0 20 0 57 0 23 0 61 0 26 0 61 0 27 0 61 0 28 0 61 0 29 0 61 0 34 0 61 0 35 0 61 0 36 0 61 0 37 0 61 0 38] 
 #[0 0 130 0 2 0 3 0 6] 
 #[0 0 134 0 2 0 3 0 6 0 11 0 39] 
 #[0 0 138 0 2 0 3 0 6 0 11 0 39] 
@@ -409,6 +403,15 @@ LzParser2 >> reduceActionForVarTerm1: nodes [
 ]
 
 { #category : #'generated-reduction actions' }
+LzParser2 >> reduceActionFor______comma__ArrayElement__element___1: nodes [
+	| result |
+	result := Array new: 2.
+	result at: 1 put: (OrderedCollection new: 2).
+	result at: 2 put: (OrderedCollection new: 2).
+	^ result
+]
+
+{ #category : #'generated-reduction actions' }
 LzParser2 >> reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: nodes [
 	| result |
 	result := Array new: 2.
@@ -418,16 +421,18 @@ LzParser2 >> reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: nodes
 ]
 
 { #category : #'generated-reduction actions' }
-LzParser2 >> reduceActionFor__opIdentifier___opName__NonInfixTerm__arg____1: nodes [
+LzParser2 >> reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___1: nodes [
 	| result |
 	result := Array new: 2.
 	result at: 1 put: (OrderedCollection new: 2).
 	result at: 2 put: (OrderedCollection new: 2).
+	self add: ((nodes at: 1) at: 1) to: (result at: 1).
+	self add: ((nodes at: 1) at: 2) to: (result at: 2).
 	^ result
 ]
 
 { #category : #'generated-reduction actions' }
-LzParser2 >> reduceActionFor__opIdentifier___opName__NonInfixTerm__arg____2: nodes [
+LzParser2 >> reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___2: nodes [
 	| result |
 	result := nodes at: 1.
 	self add: ((nodes at: 2) at: 1) to: (result at: 1).

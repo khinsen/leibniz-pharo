@@ -109,7 +109,7 @@ LzTermBuilder >> visitIntegerLiteralTerm: anIntegerLiteralTerm [
 
 { #category : #visiting }
 LzTermBuilder >> visitParseTree: aParseTree [
-	self error: 'Not a term: ', aParseTree value
+	self error: 'Not a term: ', aParseTree printString.
 ]
 
 { #category : #visiting }
@@ -151,6 +151,11 @@ LzTermBuilder >> visitSuperscriptOpTerm: aBracketOpTerm [
 	^ signature
 		opTerm: LzSuperscriptOpName new
 		args: (aBracketOpTerm args collect: [ :each | self build: each ])
+]
+
+{ #category : #visiting }
+LzTermBuilder >> visitTopLevelTerm: aTopLevelTerm [
+	^ self acceptNode: aTopLevelTerm term
 ]
 
 { #category : #visiting }
