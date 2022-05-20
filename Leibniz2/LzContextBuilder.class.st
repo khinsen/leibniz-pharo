@@ -10,6 +10,20 @@ Class {
 	#category : #'Leibniz2-Contexts'
 }
 
+{ #category : #lepiter }
+LzContextBuilder >> addDeclarationNode: aTopLevelNode [
+	"aTopLevelNode inspect"
+]
+
+{ #category : #lepiter }
+LzContextBuilder >> addDeclarationsFrom: aLePage [
+	aLePage allChildrenDepthFirstDo: [ :eachSnippet |
+		eachSnippet ast ifNotNil: [ :ast |
+			ast allNodesDo: [ :eachNode |
+				 (eachNode class name beginsWith: 'LzTopLevel')
+			 		ifTrue: [ self addDeclarationNode: eachNode ] ] ] ]
+]
+
 { #category : #defining }
 LzContextBuilder >> axiom: aString [
 	self parsedAxiom:
