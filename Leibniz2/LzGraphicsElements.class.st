@@ -49,7 +49,7 @@ LzGraphicsElements class >> graphNodeLabelled: aString highlight: aBoolean [
 LzGraphicsElements class >> graphNodeLabelled: aString highlightColor: aColorOrNil [
 	| text label rectangle |
 	text := aString asRopedText.
-	text fontName: (LbCodeFont defaultFamily).
+	text fontName: (LzCodeFont defaultFamily).
 	text foreground: Color black.
 	label := BlTextElement new text: text.
 

@@ -80,7 +80,7 @@ LzContextBuilder >> context [
 { #category : #inspecting }
 LzContextBuilder >> gtAxiomsFor: aView [
 	<gtView>
-	aView forward
+	^ aView forward
 		title: 'Axioms';
 		priority: 3;
 		object: [ self context ];
