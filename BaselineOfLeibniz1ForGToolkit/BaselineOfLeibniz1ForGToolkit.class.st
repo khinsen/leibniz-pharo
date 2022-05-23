@@ -1,11 +1,11 @@
 Class {
-	#name : #BaselineOfLeibnizForGToolkit,
+	#name : #BaselineOfLeibniz1ForGToolkit,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfLeibnizForGToolkit
+	#category : #BaselineOfLeibniz1ForGToolkit
 }
 
 { #category : #baseline }
-BaselineOfLeibnizForGToolkit >> baseline: spec [
+BaselineOfLeibniz1ForGToolkit >> baseline: spec [
 	<baseline>
 	
 	spec for: #common do: [
@@ -17,19 +17,24 @@ BaselineOfLeibnizForGToolkit >> baseline: spec [
 			with: [ spec repository: 'github://khinsen/RecursiveWriteBarrier:master/src' ].
 
 		spec
+			baseline: 'EqualityThroughVariablesTrait' 
+			with: [ spec repository: 'github://khinsen/EqualityThroughVariablesTrait:master/src' ].
+
+		spec
 			baseline: 'SingletonTrait' 
 			with: [ spec repository: 'github://khinsen/SingletonTrait:master' ].
 
 		spec
-			package: 'Leibniz2'
+			package: 'Leibniz1'
 			with: [ spec requires:
 						#('RecursiveWriteBarrier'
+							'EqualityThroughVariablesTrait'
 							'SingletonTrait') ].
 
 ]
 ]
 
 { #category : #baseline }
-BaselineOfLeibnizForGToolkit >> postload: loader package: packageSpec [
-	LzCodeFont chooseDefaultFamily
+BaselineOfLeibniz1ForGToolkit >> postload: loader package: packageSpec [
+	LbCodeFont chooseDefaultFamily
 ]
