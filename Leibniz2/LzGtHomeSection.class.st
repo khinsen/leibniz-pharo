@@ -1,11 +1,11 @@
 Class {
-	#name : #LbGtHomeSection,
+	#name : #LzGtHomeSection,
 	#superclass : #GtHomeSection,
-	#category : 'Leibniz-0-Infrastructure'
+	#category : #'Leibniz2-Infrastructure'
 }
 
 { #category : #initialization }
-LbGtHomeSection >> create [
+LzGtHomeSection >> create [
 	| sectionContainer cardContainer |
 	sectionContainer := self newSectionContainer.
 	sectionContainer addChild: (self newSectionTitle: 'Leibniz').
@@ -16,7 +16,7 @@ LbGtHomeSection >> create [
 ]
 
 { #category : #accessing }
-LbGtHomeSection >> documentationCard [
+LzGtHomeSection >> documentationCard [
 	^ self
 		newHeaderCardWithTitle: 'Leibniz'
 		description: 'Read the Leibniz book'
@@ -29,7 +29,7 @@ LbGtHomeSection >> documentationCard [
 				padding: (BlInsets all: 20)) asScalableElement
 		action: [ :card | 
 			| database startPage |
-			database := LbDocumentation new database.
+			database := LzBook new database.
 			startPage := database pageNamed: 'Leibniz - a Digital Scientific Notation'.
 			GtWorldUtility 
 				showSpaceWithTitle: startPage title

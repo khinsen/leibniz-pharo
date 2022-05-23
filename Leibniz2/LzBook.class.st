@@ -1,11 +1,11 @@
 Class {
-	#name : #LbDocumentation,
+	#name : #LzBook,
 	#superclass : #Object,
-	#category : 'Leibniz-0-Infrastructure'
+	#category : #'Leibniz2-Infrastructure'
 }
 
 { #category : #accessing }
-LbDocumentation >> database [
+LzBook >> database [
 	| logicalDB db |
 	logicalDB := LeDatabasesRegistry uniqueInstance currentLoadedDefaultLogicalDatabase.
 	db := logicalDB databases
@@ -20,13 +20,13 @@ LbDocumentation >> database [
 ]
 
 { #category : #accessing }
-LbDocumentation >> databaseLocation [
+LzBook >> databaseLocation [
 	^ FileLocator imageDirectory
 		/ 'pharo-local' / 'iceberg'
 		/ 'khinsen' / 'leibniz-pharo' / 'documentation'
 ]
 
 { #category : #accessing }
-LbDocumentation >> databaseName [
+LzBook >> databaseName [
 	^ 'Leibniz documentation'
 ]

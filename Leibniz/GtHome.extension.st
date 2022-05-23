@@ -3,6 +3,6 @@ Extension { #name : #GtHome }
 { #category : #'*Leibniz' }
 GtHome >> leibnizSection [
 	<gtHomeSection>
-	^ LbGtHomeSection new
+	^ LzGtHomeSection new
 		priority: 11
 ]
