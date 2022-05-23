@@ -51,10 +51,13 @@ LzASTArrayTerm >> printAsLeibnizSyntaxOn: aStream [
 { #category : #printing }
 LzASTArrayTerm >> printElementsOf: anArray asLeibnizSyntaxOn: aStream [
 	aStream << $[.
-	anArray do: [ :each |
-		each isCollection
-			ifTrue: [ self printElementsOf: each asLeibnizSyntaxOn: aStream ]
-			ifFalse: [ each printAsLeibnizSyntaxOn: aStream ] ].
+	1 to: anArray size do: [ :eachIndex |
+		| element |
+		element := anArray at: eachIndex.
+		element isCollection
+			ifTrue: [ self printElementsOf: element asLeibnizSyntaxOn: aStream ]
+			ifFalse: [ element printAsLeibnizSyntaxOn: aStream ].
+		eachIndex < anArray size ifTrue: [ aStream << ', ' ] ].
 	aStream << $]
 ]
 
