@@ -21,10 +21,14 @@ LzContextBuilder class >> fromPage: aString [
 LzContextBuilder >> addDeclarationNode: aTopLevelNode [
 	| declaration |
 	declaration := LzDeclarationBuilder new acceptNode: aTopLevelNode.
-	aTopLevelNode class == LzTopLevelSortNode
+	(aTopLevelNode isKindOf: LzTopLevelSortNode)
 		ifTrue: [ self sortGraphBuilder parsedSortDeclaration: declaration ].
-	aTopLevelNode class == LzTopLevelOpNode
+	(aTopLevelNode isKindOf: LzTopLevelOpNode)
 		ifTrue: [ self signatureBuilder parsedOps: { declaration } ].
+	(aTopLevelNode isKindOf: LzTopLevelAxiomNode)
+		ifTrue: [ self parsedAxiom: declaration ].
+	(aTopLevelNode isKindOf: LzTopLevelRuleNode)
+		ifTrue: [ self rewriteSystemBuilder parsedRule:  declaration ].
 ]
 
 { #category : #lepiter }

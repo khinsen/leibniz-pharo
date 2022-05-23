@@ -104,6 +104,23 @@ LzDeclarationBuilder >> visitSuperscriptOpTerm: aSuperscriptOpTerm [
 ]
 
 { #category : #accessing }
+LzDeclarationBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
+	| varBuilder axiom |
+	varBuilder := LzVarDeclarationBuilder new.
+	varBuilder acceptNode: aTopLevelEqualityAxiom left.
+	varBuilder acceptNode: aTopLevelEqualityAxiom right.
+	aTopLevelEqualityAxiom condition ifNotNil: [ :c |
+		varBuilder acceptNode: c ].
+	axiom := LzASTEqualityAxiom new
+		variables: varBuilder vars;
+		left: (self acceptNode: aTopLevelEqualityAxiom left);
+		right: (self acceptNode: aTopLevelEqualityAxiom right).
+	aTopLevelEqualityAxiom condition ifNotNil: [ :c |
+		axiom condition: (self acceptNode: c) ].
+	^ axiom
+]
+
+{ #category : #accessing }
 LzDeclarationBuilder >> visitTopLevelOp: aTopLevelOp [
 	| varBuilder op |
 	varBuilder := LzVarDeclarationBuilder new.
@@ -113,6 +130,23 @@ LzDeclarationBuilder >> visitTopLevelOp: aTopLevelOp [
 	op sort: (self acceptNode: aTopLevelOp sort).
 	op variables: varBuilder vars.
 	^ op
+]
+
+{ #category : #accessing }
+LzDeclarationBuilder >> visitTopLevelRewriteRule: aTopLevelRewriteRule [
+	| varBuilder rule |
+	varBuilder := LzVarDeclarationBuilder new.
+	varBuilder acceptNode: aTopLevelRewriteRule pattern.
+	varBuilder acceptNode: aTopLevelRewriteRule replacement.
+	aTopLevelRewriteRule condition ifNotNil: [ :c |
+		varBuilder acceptNode: c ].
+	rule := LzASTRewriteRule new
+		variables: varBuilder vars;
+		pattern: (self acceptNode: aTopLevelRewriteRule pattern);
+		replacement: (self acceptNode: aTopLevelRewriteRule replacement).
+	aTopLevelRewriteRule condition ifNotNil: [ :c |
+		rule condition: (self acceptNode: c) ].
+	^ rule
 ]
 
 { #category : #visiting }
@@ -127,6 +161,19 @@ LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
 					args: #()).
 	op variables: varBuilder vars.
 	^ op
+]
+
+{ #category : #accessing }
+LzDeclarationBuilder >> visitTopLevelSubsortAxiom: aTopLevelSubsortAxiom [
+	| varBuilder axiom |
+	varBuilder := LzVarDeclarationBuilder new.
+	varBuilder acceptNode: aTopLevelSubsortAxiom subsort.
+	varBuilder acceptNode: aTopLevelSubsortAxiom supersort.
+	axiom := LzASTSubsortAxiom new
+		variables: varBuilder vars;
+		subsort: (self acceptNode: aTopLevelSubsortAxiom subsort);
+		supersort: (self acceptNode: aTopLevelSubsortAxiom supersort).
+	^ axiom
 ]
 
 { #category : #visiting }
