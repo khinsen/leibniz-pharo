@@ -10,9 +10,21 @@ Class {
 	#category : #'Leibniz2-Contexts'
 }
 
+{ #category : #'instance creation' }
+LzContextBuilder class >> fromPage: aString [
+	^ self new
+		addDeclarationsFrom: (LzBook new database pageNamed: aString);
+		yourself
+]
+
 { #category : #lepiter }
 LzContextBuilder >> addDeclarationNode: aTopLevelNode [
-	"aTopLevelNode inspect"
+	| declaration |
+	declaration := LzDeclarationBuilder new acceptNode: aTopLevelNode.
+	aTopLevelNode class == LzTopLevelSortNode
+		ifTrue: [ self sortGraphBuilder parsedSortDeclaration: declaration ].
+	aTopLevelNode class == LzTopLevelOpNode
+		ifTrue: [ self signatureBuilder parsedOps: { declaration } ].
 ]
 
 { #category : #lepiter }
@@ -58,6 +70,55 @@ LzContextBuilder >> context [
 		axiomDeclarations: axiomDeclarations copy;
 		rewriteSystem: rewriteSystem;
 		beRecursivelyReadOnlyObject;
+		yourself
+]
+
+{ #category : #inspecting }
+LzContextBuilder >> gtAxiomsFor: aView [
+	<gtView>
+	aView forward
+		title: 'Axioms';
+		priority: 3;
+		object: [ self context ];
+		view: #gtAxiomsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzContextBuilder >> gtOperatorsFor: aView [
+	<gtView>
+	| operators |
+	operators := self context signature operators.
+	operators isEmpty ifTrue: [ ^ aView empty ].
+	^ aView forward
+		title: 'Operators' translated;
+		priority: 1;
+		object: [ operators ] ;
+		view: #gtOperatorsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzContextBuilder >> gtRulesFor: aView [ 
+	<gtView>
+	| rws |
+	rws := self context rewriteSystem.
+	rws isEmpty ifTrue: [ ^ aView empty ].
+	^ aView forward
+		title: 'Rules';
+		priority: 5;
+		object: [ rws ];
+		view: #gtRulesFor:
+]
+
+{ #category : #inspecting }
+LzContextBuilder >> gtSortGraphFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Sort graph';
+		priority: 0;
+		object: [ self context sortGraph ];
+		view: #gtGraphFor:;
 		yourself
 ]
 

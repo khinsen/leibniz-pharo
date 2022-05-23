@@ -121,8 +121,8 @@ LzDeclarationBuilder >> visitTopLevelOp: aTopLevelOp [
 LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
 	| op |
 	op := self acceptNode: aTopLevelSort op.
-	op sort: (LzASTOpTerm new;
-					opName: (LzPrefixOpName for: LzConstants opNameSort)
+	op sort: (LzASTOpTerm new
+					opName: (LzPrefixOpName for: LzConstants opNameSort);
 					args: #()).
 	^ op
 ]
