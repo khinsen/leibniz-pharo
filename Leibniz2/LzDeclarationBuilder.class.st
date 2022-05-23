@@ -41,11 +41,8 @@ LzDeclarationBuilder >> visitFpNumberLiteralTerm: aFpNumberLiteralTerm [
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitInfixOp: aInfixOp [
-	self flag: #todo. "Implement variables"
 	^ LzASTOp new
-		name: (LzInfixOpName for: aInfixOp opName value asSymbol);
-		args: (self acceptNodes: aInfixOp args);
-		variables: #()
+		name: (LzInfixOpName for: aInfixOp opName value asSymbol)
 ]
 
 { #category : #visiting }
@@ -69,11 +66,8 @@ LzDeclarationBuilder >> visitIntegerLiteralTerm: anIntegerLiteralTerm [
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitPrefixOp: aPrefixOp [
-	self flag: #todo. "Implement variables"
 	^ LzASTOp new
-		name: (LzPrefixOpName for: aPrefixOp opName value asSymbol);
-		args: (self acceptNodes: aPrefixOp args);
-		variables: #()
+		name: (LzPrefixOpName for: aPrefixOp opName value asSymbol)
 ]
 
 { #category : #visiting }
@@ -111,29 +105,41 @@ LzDeclarationBuilder >> visitSuperscriptOpTerm: aSuperscriptOpTerm [
 
 { #category : #accessing }
 LzDeclarationBuilder >> visitTopLevelOp: aTopLevelOp [
-	| op |
+	| varBuilder op |
+	varBuilder := LzVarDeclarationBuilder new.
+	varBuilder acceptNodes: aTopLevelOp op args.
 	op := self acceptNode: aTopLevelOp op.
+	op args: (aTopLevelOp op args collect: [ :each | self acceptNode: each ]).
 	op sort: (self acceptNode: aTopLevelOp sort).
+	op variables: varBuilder vars.
 	^ op
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
-	| op |
+	| varBuilder op |
+	varBuilder := LzVarDeclarationBuilder new.
+	varBuilder acceptNodes: aTopLevelSort op args.
 	op := self acceptNode: aTopLevelSort op.
+	op args: (aTopLevelSort op args collect: [ :each | self acceptNode: each ]).
 	op sort: (LzASTOpTerm new
 					opName: (LzPrefixOpName for: LzConstants opNameSort);
 					args: #()).
+	op variables: varBuilder vars.
 	^ op
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitTopLevelTerm: aTopLevelTerm [
+	| varBuilder |
+	varBuilder := LzVarDeclarationBuilder new.
+	varBuilder acceptNode: aTopLevelTerm term.
+	self assert: varBuilder vars size equals: 0.
 	^ self acceptNode: aTopLevelTerm term
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitVarTerm: aVarTerm [
 	^ LzASTVarTerm new
-		name: (LzVarName for: aVarTerm opName value)
+		name: (LzVarName for: aVarTerm varName value)
 ]

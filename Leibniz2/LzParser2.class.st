@@ -4,9 +4,21 @@ Class {
 	#category : #'Leibniz2-SmaCCParser'
 }
 
+{ #category : #generated }
+LzParser2 class >> ambiguousTransitions [
+^#(
+#[ 0 14 0 149] 
+#[ 0 42 0 157] 
+#[ 0 42 0 161] 
+#[ 0 42 0 165] 
+#[ 0 82 0 173] 
+#[ 0 90 0 173]
+	).
+]
+
 { #category : #'generated-accessing' }
 LzParser2 class >> cacheId [
-	^'2022-05-20T20:55:32.871278+02:00'
+	^'2022-05-23T12:05:37.425812+02:00'
 ]
 
 { #category : #generated }
@@ -18,6 +30,7 @@ LzParser2 class >> definitionComment [
 %suffix Node;
 %start TopLevelTerm TopLevelOp TopLevelSort;
 %hierarchy LiteralTerm (IntegerLiteralTerm RationalNumberLiteralTerm FpNumberLiteralTerm StringLiteralTerm);
+%hierarchy VarTerm (VarTermWithSort);
 %hierarchy Term (PrefixOpTerm BracketOpTerm SuperscriptOpTerm SubscriptOpTerm VarTerm ArrayTerm LiteralTerm);
 %hierarchy Op (PrefixOp InfixOp);
 <whitespace>
@@ -94,7 +107,8 @@ PrefixOpTerm
 			("","" 'comma' Term 'arg')* "")"" 'rightParen')? {{}}
 	;
 VarTerm
-	: <varIdentifier> 'varName' {{}}
+	: <varIdentifier> 'varName' "":"" 'colon' Term 'sort' {{VarTermWithSort}}
+	| <varIdentifier> 'varName' {{}}
 	;
 ArrayTerm
 	: ""{"" 'leftBrace' ArrayElements 'arrayElements' ""}"" 'rightBrace' {{}}
@@ -151,48 +165,49 @@ LzParser2 class >> obsolete [
 { #category : #generated }
 LzParser2 class >> reduceTable [
 ^#(
-	#(22 1 #reduceActionForOp1: 860161 false) 
-	#(31 1 #reduceActionForPrefixOpTerm1: 1699841 false) 
-	#(32 1 #reduceActionForVarTerm1: 1828865 false) 
-	#(39 1 #reduceActionForStringLiteralTerm1: 2243585 false) 
-	#(40 1 #reduceActionForIntegerLiteralTerm1: 2289665 false) 
-	#(41 1 #reduceActionForRationalNumberLiteralTerm1: 2337793 false) 
-	#(42 1 #reduceActionForFpNumberLiteralTerm1: 2400257 false) 
-	#(19 1 #liftFirstValue: 744449 false) 
-	#(21 1 #reduceActionForTopLevelSort1: 827393 false) 
-	#(29 1 #liftFirstValue: 1213441 false) 
-	#(30 1 #liftFirstValue: 1612804 false) 
-	#(30 1 #liftFirstValue: 1612805 false) 
-	#(30 1 #liftFirstValue: 1612803 false) 
-	#(30 1 #liftFirstValue: 1612801 false) 
-	#(38 1 #liftFirstValue: 2130948 false) 
-	#(38 1 #liftFirstValue: 2130945 false) 
-	#(38 1 #liftFirstValue: 2130946 false) 
-	#(38 1 #liftFirstValue: 2130947 false) 
-	#(25 1 #reduceActionForTopLevelTerm1: 1065985 false) 
-	#(26 1 #liftFirstValue: 1102850 false) 
-	#(28 1 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___1: 1130497 false) 
-	#(26 2 #reduceActionForTerm1: 1102849 false) 
-	#(30 3 #liftSecondValue: 1612802 false) 
-	#(37 1 #liftFirstValue: 2088961 false) 
-	#(37 1 #liftFirstValue: 2088962 false) 
-	#(36 0 #reduceActionFor______comma__ArrayElement__element___1: 2022401 false) 
-	#(33 3 #reduceActionForArrayTerm1: 1874945 false) 
-	#(24 0 #reduceActionFor______comma__ArrayElement__element___1: 924673 false) 
-	#(22 3 #reduceActionForOp3: 860163 false) 
-	#(27 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: 1130497 false) 
-	#(28 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___2: 1130498 false) 
-	#(20 3 #reduceActionForTopLevelOp1: 771073 false) 
-	#(34 4 #reduceActionForArrayElements1: 1960961 false) 
-	#(36 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___2: 2022402 false) 
-	#(22 5 #reduceActionForOp2: 860162 false) 
-	#(31 5 #reduceActionForPrefixOpTerm2: 1699842 false) 
-	#(24 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___2: 924674 false) 
-	#(29 5 #reduceActionForNonInfixTerm2: 1213442 false) 
-	#(29 5 #reduceActionForNonInfixTerm4: 1213444 false) 
-	#(29 5 #reduceActionForNonInfixTerm3: 1213443 false) 
-	#(35 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: 2022401 false) 
-	#(23 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: 924673 false)
+	#(22 1 #reduceActionForOp1: 899073 false) 
+	#(31 1 #reduceActionForPrefixOpTerm1: 1738753 false) 
+	#(32 1 #reduceActionForVarTerm2: 1867778 false) 
+	#(39 1 #reduceActionForStringLiteralTerm1: 2357249 false) 
+	#(40 1 #reduceActionForIntegerLiteralTerm1: 2403329 false) 
+	#(41 1 #reduceActionForRationalNumberLiteralTerm1: 2451457 false) 
+	#(42 1 #reduceActionForFpNumberLiteralTerm1: 2513921 false) 
+	#(19 1 #liftFirstValue: 783361 false) 
+	#(21 1 #reduceActionForTopLevelSort1: 866305 false) 
+	#(29 1 #liftFirstValue: 1252353 false) 
+	#(30 1 #liftFirstValue: 1651716 false) 
+	#(30 1 #liftFirstValue: 1651717 false) 
+	#(30 1 #liftFirstValue: 1651715 false) 
+	#(30 1 #liftFirstValue: 1651713 false) 
+	#(38 1 #liftFirstValue: 2244612 false) 
+	#(38 1 #liftFirstValue: 2244609 false) 
+	#(38 1 #liftFirstValue: 2244610 false) 
+	#(38 1 #liftFirstValue: 2244611 false) 
+	#(25 1 #reduceActionForTopLevelTerm1: 1104897 false) 
+	#(26 1 #liftFirstValue: 1141762 false) 
+	#(28 1 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___1: 1169409 false) 
+	#(26 2 #reduceActionForTerm1: 1141761 false) 
+	#(30 3 #liftSecondValue: 1651714 false) 
+	#(37 1 #liftFirstValue: 2202625 false) 
+	#(37 1 #liftFirstValue: 2202626 false) 
+	#(36 0 #reduceActionFor______comma__ArrayElement__element___1: 2136065 false) 
+	#(33 3 #reduceActionForArrayTerm1: 1988609 false) 
+	#(24 0 #reduceActionFor______comma__ArrayElement__element___1: 963585 false) 
+	#(32 3 #reduceActionForVarTerm1: 1867777 false) 
+	#(22 3 #reduceActionForOp3: 899075 false) 
+	#(27 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: 1169409 false) 
+	#(28 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___2: 1169410 false) 
+	#(20 3 #reduceActionForTopLevelOp1: 809985 false) 
+	#(34 4 #reduceActionForArrayElements1: 2074625 false) 
+	#(36 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___2: 2136066 false) 
+	#(22 5 #reduceActionForOp2: 899074 false) 
+	#(31 5 #reduceActionForPrefixOpTerm2: 1738754 false) 
+	#(24 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___2: 963586 false) 
+	#(29 5 #reduceActionForNonInfixTerm2: 1252354 false) 
+	#(29 5 #reduceActionForNonInfixTerm4: 1252356 false) 
+	#(29 5 #reduceActionForNonInfixTerm3: 1252355 false) 
+	#(35 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: 2136065 false) 
+	#(23 2 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg__1: 963585 false)
 	).
 ]
 
@@ -241,7 +256,7 @@ LzParser2 class >> transitionTable [
 #[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 133 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
 #[1 0 137 0 5 0 141 0 34] 
 #[1 0 145 0 1 0 6 0 4 0 10 0 5 0 10 0 6 0 10 0 8 0 10 0 12 0 6 0 43] 
-#[0 0 14 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
+#[1 0 14 0 2 0 14 0 3 0 7 0 4 0 14 0 5 0 14 0 6 0 14 0 7 0 14 0 8 0 14 0 12 0 14 0 43] 
 #[0 0 18 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
 #[0 0 22 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
 #[0 0 26 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
@@ -249,8 +264,8 @@ LzParser2 class >> transitionTable [
 #[0 0 0 0 43] 
 #[0 0 34 0 43] 
 #[0 0 38 0 43] 
-#[0 0 149 0 12] 
-#[1 0 42 0 2 0 42 0 3 0 42 0 4 0 153 0 5 0 157 0 6 0 42 0 7 0 161 0 8 0 42 0 12 0 42 0 43] 
+#[0 0 153 0 12] 
+#[1 0 42 0 2 0 42 0 3 0 42 0 4 0 11 0 5 0 15 0 6 0 42 0 7 0 19 0 8 0 42 0 12 0 42 0 43] 
 #[0 0 46 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
 #[0 0 50 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
 #[0 0 54 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
@@ -259,58 +274,60 @@ LzParser2 class >> transitionTable [
 #[0 0 66 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
 #[0 0 70 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
 #[0 0 74 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
-#[1 0 165 0 1 0 10 0 2 0 10 0 3 0 10 0 4 0 10 0 5 0 10 0 6 0 10 0 7 0 10 0 8 0 10 0 12 0 10 0 43] 
+#[1 0 169 0 1 0 10 0 2 0 10 0 3 0 10 0 4 0 10 0 5 0 10 0 6 0 10 0 7 0 10 0 8 0 10 0 12 0 10 0 43] 
 #[0 0 0 0 43] 
 #[0 0 78 0 43] 
-#[1 0 82 0 2 0 82 0 3 0 82 0 7 0 169 0 12 0 173 0 27 0 177 0 28 0 82 0 43] 
+#[1 0 82 0 2 0 82 0 3 0 82 0 4 0 82 0 5 0 82 0 6 0 82 0 7 0 82 0 8 0 23 0 12 0 177 0 27 0 181 0 28 0 82 0 43] 
 #[0 0 0 0 43] 
-#[0 0 181 0 4] 
+#[0 0 185 0 4] 
 #[0 0 0 0 43] 
-#[0 0 185 0 2] 
-#[1 0 21 0 1 0 137 0 5 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 197 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 197 0 34 0 197 0 37 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
-#[0 0 201 0 10] 
-#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 205 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
-#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 209 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
+#[0 0 189 0 2] 
+#[1 0 21 0 1 0 137 0 5 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 201 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 201 0 34 0 201 0 37 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
+#[0 0 205 0 10] 
+#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 209 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
 #[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 213 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
-#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 217 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
+#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 217 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
 #[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 221 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
 #[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 225 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
-#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 229 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
-#[0 0 86 0 2 0 3 0 7 0 12 0 43] 
-#[1 0 90 0 2 0 90 0 3 0 90 0 7 0 169 0 12 0 233 0 27 0 90 0 43] 
-#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 237 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
+#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 229 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
+#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 233 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
+#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 237 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
+#[0 0 86 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
+#[1 0 90 0 2 0 90 0 3 0 90 0 4 0 90 0 5 0 90 0 6 0 90 0 7 0 90 0 8 0 27 0 12 0 241 0 27 0 90 0 43] 
+#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 0 245 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
 #[0 0 94 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
 #[0 0 98 0 3 0 7] 
 #[0 0 102 0 3 0 7] 
-#[1 0 106 0 3 0 106 0 7 0 241 0 36] 
+#[1 0 106 0 3 0 106 0 7 0 249 0 36] 
 #[0 0 110 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
-#[1 0 114 0 2 0 114 0 3 0 245 0 24] 
-#[0 0 118 0 4 0 43] 
-#[1 0 114 0 3 0 114 0 7 0 249 0 24] 
 #[1 0 114 0 2 0 114 0 3 0 253 0 24] 
-#[1 0 114 0 2 0 114 0 3 1 1 0 24] 
+#[0 0 118 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
+#[0 0 122 0 4 0 43] 
+#[1 0 114 0 3 0 114 0 7 1 1 0 24] 
 #[1 0 114 0 2 0 114 0 3 1 5 0 24] 
-#[0 0 122 0 2 0 3 0 7 0 12 0 43] 
-#[0 0 126 0 2 0 3 0 7 0 12 0 43] 
-#[0 0 130 0 43] 
-#[1 1 9 0 3 1 13 0 7 1 17 0 35] 
-#[1 1 21 0 2 1 25 0 3 1 29 0 23] 
-#[1 1 25 0 3 1 33 0 7 1 29 0 23] 
-#[1 1 37 0 2 1 25 0 3 1 29 0 23] 
-#[1 1 41 0 2 1 25 0 3 1 29 0 23] 
-#[1 1 45 0 2 1 25 0 3 1 29 0 23] 
-#[1 0 21 0 1 0 137 0 5 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 1 49 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 1 49 0 34 1 49 0 37 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
-#[0 0 134 0 3 0 7 0 10] 
-#[0 0 138 0 3 0 7] 
-#[1 0 142 0 4 0 146 0 5 0 146 0 6 0 146 0 8 0 146 0 12 0 142 0 43] 
-#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 1 53 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
-#[0 0 150 0 2 0 3 0 7] 
-#[0 0 154 0 2 0 3 0 4 0 7 0 12 0 43] 
-#[0 0 158 0 2 0 3 0 4 0 7 0 12 0 43] 
-#[0 0 162 0 2 0 3 0 4 0 7 0 12 0 43] 
-#[0 0 146 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
-#[0 0 166 0 3 0 7] 
-#[0 0 170 0 2 0 3 0 7]
+#[1 0 114 0 2 0 114 0 3 1 9 0 24] 
+#[1 0 114 0 2 0 114 0 3 1 13 0 24] 
+#[0 0 126 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
+#[0 0 130 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
+#[0 0 134 0 43] 
+#[1 1 17 0 3 1 21 0 7 1 25 0 35] 
+#[1 1 29 0 2 1 33 0 3 1 37 0 23] 
+#[1 1 33 0 3 1 41 0 7 1 37 0 23] 
+#[1 1 45 0 2 1 33 0 3 1 37 0 23] 
+#[1 1 49 0 2 1 33 0 3 1 37 0 23] 
+#[1 1 53 0 2 1 33 0 3 1 37 0 23] 
+#[1 0 21 0 1 0 137 0 5 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 1 57 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 1 57 0 34 1 57 0 37 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
+#[0 0 138 0 3 0 7 0 10] 
+#[0 0 142 0 3 0 7] 
+#[1 0 146 0 4 0 150 0 5 0 150 0 6 0 150 0 8 0 150 0 12 0 146 0 43] 
+#[1 0 21 0 1 0 25 0 9 0 105 0 12 0 33 0 13 0 37 0 14 0 41 0 15 0 45 0 16 0 49 0 17 1 61 0 26 0 117 0 29 0 69 0 30 0 69 0 31 0 69 0 32 0 69 0 33 0 69 0 38 0 69 0 39 0 69 0 40 0 69 0 41 0 69 0 42] 
+#[0 0 154 0 2 0 3 0 7] 
+#[0 0 158 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
+#[0 0 162 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
+#[0 0 166 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
+#[0 0 150 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 12 0 43] 
+#[0 0 170 0 3 0 7] 
+#[0 0 174 0 2 0 3 0 7]
 	).
 ]
 
@@ -497,6 +514,16 @@ LzParser2 >> reduceActionForTopLevelTerm1: nodes [
 
 { #category : #'generated-reduction actions' }
 LzParser2 >> reduceActionForVarTerm1: nodes [
+	| result |
+	result := LzVarTermWithSortNode new.
+	result varName: (nodes at: 1).
+	result colon: (nodes at: 2).
+	result sort: (nodes at: 3).
+	^ result
+]
+
+{ #category : #'generated-reduction actions' }
+LzParser2 >> reduceActionForVarTerm2: nodes [
 	| result |
 	result := LzVarTermNode new.
 	result varName: (nodes at: 1).
