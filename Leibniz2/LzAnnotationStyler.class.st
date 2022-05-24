@@ -86,19 +86,12 @@ LzAnnotationStyler >> styleTermButton: aTermAnnotation [
 { #category : #styling }
 LzAnnotationStyler >> styleUseContextButton: anAnnotation [
 	| attribute pageReference forSortsFlag |
-	pageReference := anAnnotation items detect: [ :each |
-		each isKindOf: LzPageReferenceNode ]
-		ifNone: [ ^ self ].
-	pageReference := pageReference value value allButFirst allButLast.
+	pageReference := anAnnotation pageName value allButFirst allButLast.
 	(LzBook new database hasPageNamed: pageReference)
 		ifFalse: [ ^ self ].
-	forSortsFlag := anAnnotation items detect: [ :each |
-		each isKindOf: LzSortFlagNode ]
-		ifNone: [ nil ].
-	forSortsFlag :=
-		forSortsFlag
-			ifNil: [ false ]
-			ifNotNil: [ forSortsFlag yesno value = 'yes' ].
+	forSortsFlag := anAnnotation sortFlag
+		ifNil: [ false ]
+		ifNotNil: [ :f | f value = 'yes' ].
 	attribute := GtButtonAttribute new
 		beAppend;
 		stencil: [
@@ -138,6 +131,13 @@ LzAnnotationStyler >> visitParseTree: aParseTree [
 LzAnnotationStyler >> visitSmaCCError: aSmaCCError [
 	self halt.
 	^ self visitSmaCCParseNode: aSmaCCError
+]
+
+{ #category : #styling }
+LzAnnotationStyler >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
+	self styleAnnotation: aTopLevelEqualityAxiom.
+	self styleAutoHidingAnnotation: aTopLevelEqualityAxiom.
+	self styleGenericButton: aTopLevelEqualityAxiom
 ]
 
 { #category : #styling }

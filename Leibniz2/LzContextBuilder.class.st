@@ -13,7 +13,7 @@ Class {
 { #category : #'instance creation' }
 LzContextBuilder class >> fromPage: aString [
 	^ self new
-		addDeclarationsFrom: (LzBook new database pageNamed: aString);
+		addDeclarationsFromPageNamed: aString;
 		yourself
 ]
 
@@ -30,7 +30,9 @@ LzContextBuilder >> addDeclarationNode: aTopLevelNode [
 	(aTopLevelNode isKindOf: LzTopLevelRuleNode)
 		ifTrue: [ self rewriteSystemBuilder parsedRule:  declaration ].
 	(aTopLevelNode isKindOf: LzTopLevelUseContextNode)
-		ifTrue: [ self include:  declaration ].
+		ifTrue: [ declaration second
+			ifFalse: [ self addDeclarationsFromPageNamed: declaration first ]
+			ifTrue: [ self halt ] ].
 ]
 
 { #category : #lepiter }
@@ -40,6 +42,11 @@ LzContextBuilder >> addDeclarationsFrom: aLePage [
 			ast allNodesDo: [ :eachNode |
 				 (eachNode class name beginsWith: 'LzTopLevel')
 			 		ifTrue: [ self addDeclarationNode: eachNode ] ] ] ]
+]
+
+{ #category : #lepiter }
+LzContextBuilder >> addDeclarationsFromPageNamed: aString [
+	self addDeclarationsFrom: (LzBook new database pageNamed: aString)
 ]
 
 { #category : #defining }

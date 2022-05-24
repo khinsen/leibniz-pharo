@@ -103,7 +103,7 @@ LzDeclarationBuilder >> visitSuperscriptOpTerm: aSuperscriptOpTerm [
 		args: (aSuperscriptOpTerm args collect: [ :each | self acceptNode: each ])
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 LzDeclarationBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	| varBuilder axiom |
 	varBuilder := LzVarDeclarationBuilder new.
@@ -120,7 +120,7 @@ LzDeclarationBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	^ axiom
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 LzDeclarationBuilder >> visitTopLevelOp: aTopLevelOp [
 	| varBuilder op |
 	varBuilder := LzVarDeclarationBuilder new.
@@ -132,7 +132,7 @@ LzDeclarationBuilder >> visitTopLevelOp: aTopLevelOp [
 	^ op
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 LzDeclarationBuilder >> visitTopLevelRewriteRule: aTopLevelRewriteRule [
 	| varBuilder rule |
 	varBuilder := LzVarDeclarationBuilder new.
@@ -163,7 +163,7 @@ LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
 	^ op
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
 LzDeclarationBuilder >> visitTopLevelSubsortAxiom: aTopLevelSubsortAxiom [
 	| varBuilder axiom |
 	varBuilder := LzVarDeclarationBuilder new.
@@ -183,6 +183,12 @@ LzDeclarationBuilder >> visitTopLevelTerm: aTopLevelTerm [
 	varBuilder acceptNode: aTopLevelTerm term.
 	self assert: varBuilder vars size equals: 0.
 	^ self acceptNode: aTopLevelTerm term
+]
+
+{ #category : #visiting }
+LzDeclarationBuilder >> visitTopLevelUseContext: aTopLevelUseContext [
+	^ { aTopLevelUseContext pageName value allButFirst allButLast.
+		aTopLevelUseContext sortFlag ifNil: [ false ] ifNotNil: [ :f | f value = 'yes' ] }
 ]
 
 { #category : #visiting }

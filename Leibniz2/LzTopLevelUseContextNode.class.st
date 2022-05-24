@@ -2,8 +2,8 @@ Class {
 	#name : #LzTopLevelUseContextNode,
 	#superclass : #LzParseTreeNode,
 	#instVars : [
-		'items',
-		'bars'
+		'pageName',
+		'sortFlag'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
@@ -14,40 +14,26 @@ LzTopLevelUseContextNode >> acceptVisitor: aParseTreeVisitor [
 ]
 
 { #category : #generated }
-LzTopLevelUseContextNode >> bars [
-	^ bars
+LzTopLevelUseContextNode >> pageName [
+	^ pageName
 ]
 
 { #category : #generated }
-LzTopLevelUseContextNode >> bars: anOrderedCollection [
-	bars := anOrderedCollection
+LzTopLevelUseContextNode >> pageName: aSmaCCToken [
+	pageName := aSmaCCToken
 ]
 
 { #category : #generated }
-LzTopLevelUseContextNode >> compositeNodeVariables [
-	^ #(#items)
+LzTopLevelUseContextNode >> sortFlag [
+	^ sortFlag
 ]
 
 { #category : #generated }
-LzTopLevelUseContextNode >> compositeTokenVariables [
-	^ #(#bars)
-]
-
-{ #category : #'generated-initialize-release' }
-LzTopLevelUseContextNode >> initialize [
-	super initialize.
-	items := OrderedCollection new: 2.
-	bars := OrderedCollection new: 2.
+LzTopLevelUseContextNode >> sortFlag: aSmaCCToken [
+	sortFlag := aSmaCCToken
 ]
 
 { #category : #generated }
-LzTopLevelUseContextNode >> items [
-	^ items
-]
-
-{ #category : #generated }
-LzTopLevelUseContextNode >> items: anOrderedCollection [
-	self setParents: self items to: nil.
-	items := anOrderedCollection.
-	self setParents: self items to: self
+LzTopLevelUseContextNode >> tokenVariables [
+	^ #(#pageName #sortFlag)
 ]
