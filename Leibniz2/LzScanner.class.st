@@ -4,22 +4,33 @@ Class {
 	#category : #'Leibniz2-SmaCCParser'
 }
 
+{ #category : #'generated-initialization' }
+LzScanner class >> initializeKeywordMap [
+	keywordMap := Dictionary new.
+	#(#(21 'forSorts' 10) #(21 'name' 11) #(21 'no' 12) #(21 'yes' 13))
+		do: [ :each | 
+			(keywordMap at: each first ifAbsentPut: [ Dictionary new ])
+				at: (each at: 2)
+				put: each last ].
+	^ keywordMap
+]
+
 { #category : #generated }
 LzScanner >> emptySymbolTokenId [
-	^ 50
+	^ 61
 ]
 
 { #category : #generated }
 LzScanner >> errorTokenId [
-	^ 51
+	^ 62
 ]
 
 { #category : #generated }
 LzScanner >> scan1 [
-	[ self recordMatch: #(17).
+	[ self recordMatch: #(21).
 	self step.
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -34,7 +45,7 @@ LzScanner >> scan10 [
 	self step.
 	currentCharacter == $- ifTrue: [ self step ].
 	(currentCharacter between: $0 and: $9)
-		ifTrue: [ [ self recordMatch: #(22).
+		ifTrue: [ [ self recordMatch: #(26).
 			self step.
 			currentCharacter between: $0 and: $9 ] whileTrue ].
 	^ self reportLastMatch
@@ -42,10 +53,10 @@ LzScanner >> scan10 [
 
 { #category : #generated }
 LzScanner >> scan11 [
-	self recordMatch: #(5 17).
+	self recordMatch: #(5 21).
 	self step.
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -57,10 +68,10 @@ LzScanner >> scan11 [
 
 { #category : #generated }
 LzScanner >> scan12 [
-	self recordMatch: #(11 17).
+	self recordMatch: #(15 21).
 	self step.
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -72,10 +83,10 @@ LzScanner >> scan12 [
 
 { #category : #generated }
 LzScanner >> scan13 [
-	self recordMatch: #(13 17).
+	self recordMatch: #(17 21).
 	self step.
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -87,10 +98,10 @@ LzScanner >> scan13 [
 
 { #category : #generated }
 LzScanner >> scan14 [
-	self recordMatch: #(14 17).
+	self recordMatch: #(18 21).
 	self step.
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -102,10 +113,10 @@ LzScanner >> scan14 [
 
 { #category : #generated }
 LzScanner >> scan15 [
-	self recordMatch: #(15 17).
+	self recordMatch: #(19 21).
 	self step.
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -117,10 +128,10 @@ LzScanner >> scan15 [
 
 { #category : #generated }
 LzScanner >> scan2 [
-	self recordMatch: #(17).
+	self recordMatch: #(21).
 	self step.
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -132,12 +143,12 @@ LzScanner >> scan2 [
 
 { #category : #generated }
 LzScanner >> scan3 [
-	[ self recordMatch: #(17 20).
+	[ self recordMatch: #(21 24).
 	self step.
 	currentCharacter == $. ifTrue: [ ^ self scan4 ].
 	currentCharacter == $/ ifTrue: [ ^ self scan8 ].
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -149,10 +160,10 @@ LzScanner >> scan3 [
 
 { #category : #generated }
 LzScanner >> scan4 [
-	[ self recordMatch: #(17 22).
+	[ self recordMatch: #(21 26).
 	self step.
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -165,11 +176,11 @@ LzScanner >> scan4 [
 
 { #category : #generated }
 LzScanner >> scan5 [
-	self recordMatch: #(17).
+	self recordMatch: #(21).
 	self step.
 	currentCharacter == $- ifTrue: [ ^ self scan6 ].
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -181,10 +192,10 @@ LzScanner >> scan5 [
 
 { #category : #generated }
 LzScanner >> scan6 [
-	self recordMatch: #(17).
+	self recordMatch: #(21).
 	self step.
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -196,10 +207,10 @@ LzScanner >> scan6 [
 
 { #category : #generated }
 LzScanner >> scan7 [
-	[ self recordMatch: #(17 22).
+	[ self recordMatch: #(21 26).
 	self step.
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -211,10 +222,10 @@ LzScanner >> scan7 [
 
 { #category : #generated }
 LzScanner >> scan8 [
-	self recordMatch: #(17).
+	self recordMatch: #(21).
 	self step.
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -226,10 +237,10 @@ LzScanner >> scan8 [
 
 { #category : #generated }
 LzScanner >> scan9 [
-	[ self recordMatch: #(17 21).
+	[ self recordMatch: #(21 25).
 	self step.
 	currentCharacter == $_
-		ifTrue: [ [ self recordMatch: #(18).
+		ifTrue: [ [ self recordMatch: #(22).
 			self step.
 			currentCharacter == $_ ] whileTrue.
 			^ self reportLastMatch ].
@@ -244,7 +255,7 @@ LzScanner >> scanForToken [
 	self step.
 	currentCharacter == $"
 		ifTrue: [ [ self step.
-			currentCharacter == $" ifTrue: [ ^ self recordAndReportMatch: #(19) ].
+			currentCharacter == $" ifTrue: [ ^ self recordAndReportMatch: #(23) ].
 			true ] whileTrue ].
 	currentCharacter == $( ifTrue: [ ^ self recordAndReportMatch: #(1) ].
 	currentCharacter == $) ifTrue: [ ^ self recordAndReportMatch: #(2) ].
@@ -261,10 +272,10 @@ LzScanner >> scanForToken [
 
 { #category : #generated }
 LzScanner >> scanForTokenX1 [
-	[ self recordMatch: #(20).
+	[ self recordMatch: #(24).
 	self step.
 	currentCharacter == $.
-		ifTrue: [ [ self recordMatch: #(22).
+		ifTrue: [ [ self recordMatch: #(26).
 			self step.
 			currentCharacter == $e ifTrue: [ ^ self scan10 ].
 			currentCharacter between: $0 and: $9 ] whileTrue.
@@ -272,7 +283,7 @@ LzScanner >> scanForTokenX1 [
 	currentCharacter == $/
 		ifTrue: [ self step.
 			(currentCharacter between: $1 and: $9)
-				ifTrue: [ [ self recordMatch: #(21).
+				ifTrue: [ [ self recordMatch: #(25).
 					self step.
 					currentCharacter between: $0 and: $9 ] whileTrue ].
 			^ self reportLastMatch ].
@@ -283,7 +294,7 @@ LzScanner >> scanForTokenX1 [
 
 { #category : #generated }
 LzScanner >> scanForTokenX2 [
-	[ self recordMatch: #(16).
+	[ self recordMatch: #(20).
 	self step.
 	currentCharacter isSeparator or: [ currentCharacter == Character pageUp ] ]
 		whileTrue.
@@ -306,9 +317,9 @@ LzScanner >> scanForTokenX4 [
 
 { #category : #generated }
 LzScanner >> scanForTokenX5 [
-	currentCharacter == ${ ifTrue: [ ^ self recordAndReportMatch: #(10) ].
+	currentCharacter == ${ ifTrue: [ ^ self recordAndReportMatch: #(14) ].
 	currentCharacter == $| ifTrue: [ ^ self scan12 ].
-	currentCharacter == $} ifTrue: [ ^ self recordAndReportMatch: #(12) ].
+	currentCharacter == $} ifTrue: [ ^ self recordAndReportMatch: #(16) ].
 	currentCharacter = (Character value: 8594) ifTrue: [ ^ self scan13 ].
 	currentCharacter = (Character value: 8658) ifTrue: [ ^ self scan14 ].
 	currentCharacter = (Character value: 8838) ifTrue: [ ^ self scan15 ].
@@ -321,5 +332,5 @@ LzScanner >> scanForTokenX5 [
 
 { #category : #generated }
 LzScanner >> tokenActions [
-	^ #(nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil #whitespace)
+	^ #(nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil #whitespace)
 ]

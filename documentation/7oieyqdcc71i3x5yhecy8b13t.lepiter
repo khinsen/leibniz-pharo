@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-20T21:03:19.34552+02:00"
+						"dateAndTimeString" : "2022-05-24T11:29:57.244265+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-20T21:03:23.216516+02:00"
+						"dateAndTimeString" : "2022-05-24T11:30:15.03983+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "DJck4debDQCgCdCCDT69gQ=="
+					"uidString" : "oz1BViCcDQCifb+zA/k7DA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "[[Truth]]"
+				"string" : "[[Logical truth]] and  [[Boolean algebra]]"
 			}
 		]
 	},

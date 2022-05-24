@@ -29,6 +29,8 @@ LzContextBuilder >> addDeclarationNode: aTopLevelNode [
 		ifTrue: [ self parsedAxiom: declaration ].
 	(aTopLevelNode isKindOf: LzTopLevelRuleNode)
 		ifTrue: [ self rewriteSystemBuilder parsedRule:  declaration ].
+	(aTopLevelNode isKindOf: LzTopLevelUseContextNode)
+		ifTrue: [ self include:  declaration ].
 ]
 
 { #category : #lepiter }

@@ -83,6 +83,47 @@ LzAnnotationStyler >> styleTermButton: aTermAnnotation [
 	self styleGenericButton: aTermAnnotation
 ]
 
+{ #category : #styling }
+LzAnnotationStyler >> styleUseContextButton: anAnnotation [
+	| attribute pageReference forSortsFlag |
+	pageReference := anAnnotation items detect: [ :each |
+		each isKindOf: LzPageReferenceNode ]
+		ifNone: [ ^ self ].
+	pageReference := pageReference value value allButFirst allButLast.
+	(LzBook new database hasPageNamed: pageReference)
+		ifFalse: [ ^ self ].
+	forSortsFlag := anAnnotation items detect: [ :each |
+		each isKindOf: LzSortFlagNode ]
+		ifNone: [ nil ].
+	forSortsFlag :=
+		forSortsFlag
+			ifNil: [ false ]
+			ifNotNil: [ forSortsFlag yesno value = 'yes' ].
+	attribute := GtButtonAttribute new
+		beAppend;
+		stencil: [
+			| button label |
+			label := forSortsFlag
+				ifTrue: [ pageReference, ' (in sorts)' ]
+				ifFalse: [ pageReference ].
+			button := LeSnippetStylerVisitor textLinkButtonPadding:
+				(BlInsets top: 2) margin: BlInsets empty.
+			button aptitude glamorousRegularFont.
+			button
+				beSmallSize;
+				label: label;
+				action: [ :aButton |
+					aButton phlow spawnTool:
+						(LzBook new database
+							pageNamed: pageReference)
+							asPhlowTool ].
+			button ].
+	self text
+		attribute: attribute
+		from: anAnnotation parent startPosition
+		to: anAnnotation parent stopPosition
+]
+
 { #category : #private }
 LzAnnotationStyler >> text [
 	^ self composite text
@@ -118,4 +159,10 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 	self styleAnnotation: aTopLevelTermAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.
 	self styleTermButton: aTopLevelTermAnnotation
+]
+
+{ #category : #visiting }
+LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
+	self styleAutoHidingAnnotation: aTopLevelUseContext.
+	self styleUseContextButton: aTopLevelUseContext
 ]

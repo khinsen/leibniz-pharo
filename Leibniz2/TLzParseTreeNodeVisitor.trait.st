@@ -51,6 +51,11 @@ TLzParseTreeNodeVisitor >> visitOp: anOp [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitPageReference: aPageReference [
+	^ self visitParseTree: aPageReference
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitParseTree: aParseTree [
 	^ self visitSmaCCParseNode: aParseTree
 ]
@@ -68,6 +73,11 @@ TLzParseTreeNodeVisitor >> visitPrefixOpTerm: aPrefixOpTerm [
 { #category : #generated }
 TLzParseTreeNodeVisitor >> visitRationalNumberLiteralTerm: aRationalNumberLiteralTerm [
 	^ self visitLiteralTerm: aRationalNumberLiteralTerm
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitSortFlag: aSortFlag [
+	^ self visitParseTree: aSortFlag
 ]
 
 { #category : #generated }
@@ -133,6 +143,11 @@ TLzParseTreeNodeVisitor >> visitTopLevelSubsortAxiom: aTopLevelSubsortAxiom [
 { #category : #generated }
 TLzParseTreeNodeVisitor >> visitTopLevelTerm: aTopLevelTerm [
 	^ self visitParseTree: aTopLevelTerm
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitTopLevelUseContext: aTopLevelUseContext [
+	^ self visitParseTree: aTopLevelUseContext
 ]
 
 { #category : #generated }
