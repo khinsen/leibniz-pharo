@@ -71,7 +71,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-24T17:15:09.625451+02:00"
+									"dateAndTimeString" : "2022-05-25T10:04:52.503928+02:00"
 								}
 							},
 							"uid" : {
@@ -81,7 +81,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Negation:\t{{lzOp: ¬(𝔹) : 𝔹}}"
+							"string" : "NOT:\t{{lzOp: ¬(𝔹) : 𝔹}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -108,7 +108,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-24T17:15:14.209579+02:00"
+									"dateAndTimeString" : "2022-05-25T10:04:56.107873+02:00"
 								}
 							},
 							"uid" : {
@@ -118,7 +118,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "And:\t{{lzOp:𝔹 ∧ 𝔹 : 𝔹}}"
+							"string" : "AND:\t{{lzOp:𝔹 ∧ 𝔹 : 𝔹}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -145,7 +145,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-24T17:15:19.621805+02:00"
+									"dateAndTimeString" : "2022-05-25T10:04:58.667933+02:00"
 								}
 							},
 							"uid" : {
@@ -155,7 +155,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Or:\t{{lzOp:𝔹 ∨ 𝔹 : 𝔹}}"
+							"string" : "OR:\t{{lzOp:𝔹 ∨ 𝔹 : 𝔹}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -182,7 +182,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-24T17:15:22.753001+02:00"
+									"dateAndTimeString" : "2022-05-25T10:05:06.391279+02:00"
 								}
 							},
 							"uid" : {
@@ -192,7 +192,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Xor:\t{{lzOp:𝔹 ⊻ 𝔹 : 𝔹}}"
+							"string" : "XOR:\t{{lzOp:𝔹 ⊻ 𝔹 : 𝔹}}"
 						}
 					]
 				},
@@ -215,7 +215,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-24T17:14:30.810932+02:00"
+						"dateAndTimeString" : "2022-05-25T10:43:14.949391+02:00"
 					}
 				},
 				"uid" : {
@@ -225,7 +225,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "There are four fundamental logical operations:"
+				"string" : "###### The four fundamental logical operations"
 			},
 			{
 				"__type" : "textSnippet",
@@ -246,7 +246,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-24T17:33:52.439934+02:00"
+									"dateAndTimeString" : "2022-05-25T10:43:42.880748+02:00"
 								}
 							},
 							"editEmail" : {
@@ -257,17 +257,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-24T17:34:00.141072+02:00"
+									"dateAndTimeString" : "2022-05-25T11:44:23.88039+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "weK7ayWcDQCM1I2/CUyIFQ=="
+								"uidString" : "UjC7zjOcDQCCWizWBA9lnw=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "And is commutative: {{lzAxiom:(x_:𝔹) ∧ (y_:𝔹) = y_ ∧ x_}} and distributive: {{lzAxiom:((x_:𝔹) ∧ (y_:𝔹)) ∧ (z_:𝔹) = x_ ∧ (y_ ∧ z_)}}"
+							"string" : "AND is commutative:\n\t{{lzAxiom:(x_:𝔹) ∧ (y_:𝔹) = y_ ∧ x_}}\nand distributive:\n\t{{lzAxiom:((x_:𝔹) ∧ (y_:𝔹)) ∧ (z_:𝔹) = x_ ∧ (y_ ∧ z_)}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -283,7 +283,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-24T17:28:45.99137+02:00"
+									"dateAndTimeString" : "2022-05-25T10:44:16.529619+02:00"
 								}
 							},
 							"editEmail" : {
@@ -294,17 +294,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-24T17:31:27.530222+02:00"
+									"dateAndTimeString" : "2022-05-25T11:12:45.2576+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "7PFZWSWcDQCMxuaOCUyIFQ=="
+								"uidString" : "aaG80DOcDQCCXFRZBA9lnw=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Or is commutative: {{lzAxiom:(x_:𝔹) ∨ (y_:𝔹) = y_ ∨ x_}} and distributive: {{lzAxiom:((x_:𝔹) ∨ (y_:𝔹)) ∨ (z_:𝔹) = x_ ∨ (y_ ∨ z_)}}"
+							"string" : "OR is commutative:\n\t{{lzAxiom:(x_:𝔹) ∨ (y_:𝔹) = y_ ∨ x_}}\nand distributive:\n\t{{lzAxiom:((x_:𝔹) ∨ (y_:𝔹)) ∨ (z_:𝔹) = x_ ∨ (y_ ∨ z_)}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -320,7 +320,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-24T17:29:25.364351+02:00"
+									"dateAndTimeString" : "2022-05-25T10:44:47.656999+02:00"
 								}
 							},
 							"editEmail" : {
@@ -331,54 +331,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-24T17:32:03.952419+02:00"
+									"dateAndTimeString" : "2022-05-25T11:12:48.51822+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "M7n2WSWcDQCMyd6QCUyIFQ=="
+								"uidString" : "BJKX0jOcDQCCX3EPBA9lnw=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Xor is commutative: {{lzAxiom:(x_:𝔹) ⊻ (y_:𝔹) = y_ ⊻ x_}} and distributive: {{lzAxiom:((x_:𝔹) ⊻ (y_:𝔹)) ⊻ (z_:𝔹) = x_ ⊻ (y_ ⊻ z_)}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-24T17:29:38.032747+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-24T17:29:38.032747+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "v/yRXCWcDQCMy+jGCUyIFQ=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : ""
+							"string" : "XOR is commutative:\n\t{{lzAxiom:(x_:𝔹) ⊻ (y_:𝔹) = y_ ⊻ x_}}\nand distributive:\n\t{{lzAxiom:((x_:𝔹) ⊻ (y_:𝔹)) ⊻ (z_:𝔹) = x_ ⊻ (y_ ⊻ z_)}}"
 						}
 					]
 				},
@@ -401,7 +364,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-24T17:17:35.379953+02:00"
+						"dateAndTimeString" : "2022-05-25T10:42:57.577087+02:00"
 					}
 				},
 				"uid" : {
@@ -411,7 +374,381 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Axioms:"
+				"string" : "###### Axioms"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-25T10:39:45.454064+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-25T10:39:48.101561+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "0lyUwDOcDQCCV4ZdBA9lnw=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "NOT is replaced by XOR with {{lzTerm:⊤}} :\n\t{{lzRule:¬(x_:𝔹) ⇒ ⊤ ⊻ x_}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-25T10:38:29.980288+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-25T10:39:45.475589+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "X7UUvDOcDQCCVgZzBA9lnw=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "OR is replaced by XOR and AND:\n\t{{lzRule:(x_:𝔹) ∨ (y_:𝔹) ⇒ x_ ⊻ y_ ⊻ (x_ ∧ y_)}}"
+									}
+								]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-05-25T10:05:37.916875+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-05-25T10:05:37.916875+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "9m+JRjOcDQCCSxN+BA9lnw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Eliminate NOT and OR"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-25T10:40:00.589751+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-25T10:41:58.415843+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "l1J7wTOcDQCCWGaSBA9lnw=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "AND is {{lzTerm:⊥}} if one of its arguments is {{lzTerm:⊥}}:\n\t{{lzRule:(x_:𝔹) ∧ ⊥ ⇒ ⊥}}\n\t{{lzRule:⊥ ∧ (x_:𝔹) ⇒ ⊥}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-25T10:40:15.249735+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-25T10:42:02.016578+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "LfRawjOcDQCCWSZLBA9lnw=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "If one argument of AND is {{lzTerm:⊤}}, the result is the other argument:\n\t{{lzRule:(x_:𝔹) ∧ ⊤ ⇒ x_}}\n\t{{lzRule:⊤ ∧ (x_:𝔹) ⇒ x_}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-25T10:06:14.656541+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-25T10:42:44.782716+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "Iwq6SDOcDQCCT+EwBA9lnw=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "If the two arguments to AND are equal, the result is any of the arguments:\n\t{{lzRule:(x_:𝔹) ∧ x_ ⇒ x_}}"
+									}
+								]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-05-25T10:05:46.756899+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-05-25T10:05:46.756899+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "0k8QRzOcDQCCTRmABA9lnw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Simplify AND relations"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-25T10:04:07.684986+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-25T11:45:35.341319+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "im74QDOcDQCCRou7BA9lnw=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "XOR with {{lzTerm:⊥}} leaves truth values unchanged\n{{lzRule:(x_:𝔹) ⊻ ⊥ ⇒ x_}}\n{{lzRule:⊥ ⊻ (x_:𝔹) ⇒ x_}}\n\n3b. If the two arguments to XOR are equal, the result is {{lzTerm:⊥}}\n{{lzRule:(x_:𝔹) ⊻ x_ ⇒ ⊥}}\n\n4. Standardize combinations of XOR and AND\n{{lzRule:(x_:𝔹) ∧ ((y_:𝔹) ⊻ (z_:𝔹)) ⇒ (x_ ∧ y_) ⊻ (x_ ∧ z_)}}"
+									}
+								]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-05-25T10:06:37.557591+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-05-25T10:06:37.557591+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "MXUXSjOcDQCCUYKTBA9lnw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Simplify XOR relations"
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-05-25T10:03:59.18701+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-05-25T10:42:55.016+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "v/yRXCWcDQCMy+jGCUyIFQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###### Simplification rules"
 			}
 		]
 	},
