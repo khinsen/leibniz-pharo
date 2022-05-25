@@ -46,7 +46,7 @@ LzContextBuilder >> addDeclarationsFrom: aLePage [
 
 { #category : #lepiter }
 LzContextBuilder >> addDeclarationsFromPageNamed: aString [
-	self addDeclarationsFrom: (LzBook database pageNamed: aString)
+	self addDeclarationsFrom: (LzBook pageNamed: aString)
 ]
 
 { #category : #defining }

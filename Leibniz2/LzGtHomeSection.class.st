@@ -28,9 +28,8 @@ LzGtHomeSection >> documentationCard [
 					bold;
 				padding: (BlInsets all: 20)) asScalableElement
 		action: [ :card | 
-			| database startPage |
-			database := LzBook database.
-			startPage := database pageNamed: 'Leibniz - a Digital Scientific Notation'.
+			| startPage |
+			startPage := LzBook pageNamed: 'Leibniz - a Digital Scientific Notation'.
 			GtWorldUtility 
 				showSpaceWithTitle: startPage title
 				inPagerWith: [ startPage

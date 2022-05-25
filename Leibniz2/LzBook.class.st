@@ -33,3 +33,25 @@ LzBook class >> databaseLocation [
 LzBook class >> databaseName [
 	^ 'Leibniz documentation'
 ]
+
+{ #category : #testing }
+LzBook class >> hasPageNamed: aString [
+	^ self database hasPageNamed: aString
+]
+
+{ #category : #accessing }
+LzBook class >> latestEditTimeOfPageNamed: aString [
+	"should be:
+		(self pageNamed: aString) latestEditTime
+	but this is note reliably updated upon editing"
+	| snippetEditTimes |
+	snippetEditTimes := (self pageNamed: aString) allChildrenDepthFirst
+		collect: #latestEditTime.
+	^ snippetEditTimes allButFirst inject: snippetEditTimes first
+		into: [ :total :each | total max: each ]
+]
+
+{ #category : #accessing }
+LzBook class >> pageNamed: aString [
+	^ self database pageNamed: aString
+]

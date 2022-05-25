@@ -215,7 +215,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-25T10:43:14.949391+02:00"
+						"dateAndTimeString" : "2022-05-25T17:17:39.092739+02:00"
 					}
 				},
 				"uid" : {
@@ -225,7 +225,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "###### The four fundamental logical operations"
+				"string" : "###### Logical operations"
 			},
 			{
 				"__type" : "textSnippet",
@@ -411,7 +411,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-25T10:39:48.101561+02:00"
+												"dateAndTimeString" : "2022-05-25T17:59:19.852862+02:00"
 											}
 										},
 										"uid" : {
@@ -523,7 +523,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-25T10:41:58.415843+02:00"
+												"dateAndTimeString" : "2022-05-25T18:00:59.279907+02:00"
 											}
 										},
 										"uid" : {

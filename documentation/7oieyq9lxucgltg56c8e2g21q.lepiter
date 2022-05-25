@@ -104,7 +104,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-24T11:28:26.847836+02:00"
+						"dateAndTimeString" : "2022-05-25T17:19:07.565116+02:00"
 					}
 				},
 				"uid" : {
@@ -114,7 +114,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Boolean values are repsented by the sort {{lzSort:𝔹}}. It has two values:"
+				"string" : "Boolean values are represented by the sort {{lzSort:𝔹}}. It has two values:"
 			}
 		]
 	},

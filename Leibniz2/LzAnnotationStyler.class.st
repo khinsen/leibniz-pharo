@@ -18,6 +18,12 @@ LzAnnotationStyler class >> obsolete [
 ]
 
 { #category : #accessing }
+LzAnnotationStyler >> context [
+	^ LzContextCache uniqueInstance
+		contextForPageNamed: self page title
+]
+
+{ #category : #accessing }
 LzAnnotationStyler >> page [
 	^ self snippet page
 ]
@@ -46,7 +52,7 @@ LzAnnotationStyler >> styleAutoHidingAnnotation: anAnnotation [
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleGenericButton: anLzAnnotation [
+LzAnnotationStyler >> styleButton: anLzAnnotation spawning: aBlock [
 	| attribute |
 	attribute := GtButtonAttribute new
 		beAppend;
@@ -60,12 +66,17 @@ LzAnnotationStyler >> styleGenericButton: anLzAnnotation [
 				beSmallSize;
 				label: label;
 				action: [ :aButton |
-					aButton phlow spawnObject: anLzAnnotation ].
+					aButton phlow spawnObject: aBlock value ].
 			button ].
 	self text
 		attribute: attribute
 		from: anLzAnnotation parent startPosition
 		to: anLzAnnotation parent stopPosition
+]
+
+{ #category : #styling }
+LzAnnotationStyler >> styleGenericButton: anLzAnnotation [
+	self styleButton: anLzAnnotation spawning: [ anLzAnnotation ].
 ]
 
 { #category : #styling }
@@ -80,14 +91,16 @@ LzAnnotationStyler >> styleSortButton: aTopLevelSortAnnotation [
 
 { #category : #styling }
 LzAnnotationStyler >> styleTermButton: aTermAnnotation [
-	self styleGenericButton: aTermAnnotation
+	self styleButton: aTermAnnotation spawning: [
+		self context parsedTerm:
+			(LzDeclarationBuilder new acceptNode: aTermAnnotation) ]
 ]
 
 { #category : #styling }
 LzAnnotationStyler >> styleUseContextButton: anAnnotation [
 	| attribute pageReference forSortsFlag |
 	pageReference := anAnnotation pageName value allButFirst allButLast.
-	(LzBook database hasPageNamed: pageReference)
+	(LzBook hasPageNamed: pageReference)
 		ifFalse: [ ^ self ].
 	forSortsFlag := anAnnotation sortFlag
 		ifNil: [ false ]
@@ -107,8 +120,7 @@ LzAnnotationStyler >> styleUseContextButton: anAnnotation [
 				label: label;
 				action: [ :aButton |
 					aButton phlow spawnTool:
-						(LzBook database
-							pageNamed: pageReference)
+						(LzBook pageNamed: pageReference)
 							asPhlowTool ].
 			button ].
 	self text
