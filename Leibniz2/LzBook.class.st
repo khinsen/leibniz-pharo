@@ -5,28 +5,31 @@ Class {
 }
 
 { #category : #accessing }
-LzBook >> database [
+LzBook class >> database [
 	| logicalDB db |
-	logicalDB := LeDatabasesRegistry uniqueInstance currentLoadedDefaultLogicalDatabase.
+	logicalDB := LeDatabasesRegistry defaultLogicalDatabase.
 	db := logicalDB databases
 		detect: [ :each | each databaseName = self databaseName ]
 		ifNone: [
 			| newDB |
-			newDB := LeLocalStoreLoad current loadAndMonitorFrom: self databaseLocation.
+			logicalDB properties addRegisteredDirectory: self databaseLocation.
+			logicalDB reload.
+			logicalDB databaseNamed: self databaseName
+"			newDB := LeLocalStoreLoad current loadAndMonitorFrom: self databaseLocation.
 			newDB databaseName: self databaseName.
 			logicalDB addDB: newDB.
-			newDB ].
+			newDB" ].
 	^ db
 ]
 
 { #category : #accessing }
-LzBook >> databaseLocation [
+LzBook class >> databaseLocation [
 	^ FileLocator imageDirectory
 		/ 'pharo-local' / 'iceberg'
 		/ 'khinsen' / 'leibniz-pharo' / 'documentation'
 ]
 
 { #category : #accessing }
-LzBook >> databaseName [
+LzBook class >> databaseName [
 	^ 'Leibniz documentation'
 ]

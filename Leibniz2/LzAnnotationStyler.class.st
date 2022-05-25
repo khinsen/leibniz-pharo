@@ -87,7 +87,7 @@ LzAnnotationStyler >> styleTermButton: aTermAnnotation [
 LzAnnotationStyler >> styleUseContextButton: anAnnotation [
 	| attribute pageReference forSortsFlag |
 	pageReference := anAnnotation pageName value allButFirst allButLast.
-	(LzBook new database hasPageNamed: pageReference)
+	(LzBook database hasPageNamed: pageReference)
 		ifFalse: [ ^ self ].
 	forSortsFlag := anAnnotation sortFlag
 		ifNil: [ false ]
@@ -107,7 +107,7 @@ LzAnnotationStyler >> styleUseContextButton: anAnnotation [
 				label: label;
 				action: [ :aButton |
 					aButton phlow spawnTool:
-						(LzBook new database
+						(LzBook database
 							pageNamed: pageReference)
 							asPhlowTool ].
 			button ].
@@ -145,6 +145,13 @@ LzAnnotationStyler >> visitTopLevelOp: aTopLevelOpAnnotation [
 	self styleAnnotation: aTopLevelOpAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelOpAnnotation.
 	self styleOpButton: aTopLevelOpAnnotation
+]
+
+{ #category : #generated }
+LzAnnotationStyler >> visitTopLevelRule: aTopLevelRule [
+	self styleAnnotation: aTopLevelRule.
+	self styleAutoHidingAnnotation: aTopLevelRule.
+	self styleGenericButton: aTopLevelRule
 ]
 
 { #category : #visiting }

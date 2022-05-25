@@ -51,6 +51,11 @@ TLzParseTreeNodeVisitor >> visitOp: anOp [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitParenthesizedTerm: aParenthesizedTerm [
+	^ self visitTerm: aParenthesizedTerm
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitParseTree: aParseTree [
 	^ self visitSmaCCParseNode: aParseTree
 ]

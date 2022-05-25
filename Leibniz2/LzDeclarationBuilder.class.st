@@ -65,6 +65,11 @@ LzDeclarationBuilder >> visitIntegerLiteralTerm: anIntegerLiteralTerm [
 ]
 
 { #category : #visiting }
+LzDeclarationBuilder >> visitParenthesizedTerm: aParenthesizedTerm [
+	^ self acceptNode: aParenthesizedTerm term
+]
+
+{ #category : #visiting }
 LzDeclarationBuilder >> visitPrefixOp: aPrefixOp [
 	^ LzASTOp new
 		name: (LzPrefixOpName for: aPrefixOp opName value asSymbol)
@@ -106,6 +111,7 @@ LzDeclarationBuilder >> visitSuperscriptOpTerm: aSuperscriptOpTerm [
 { #category : #visiting }
 LzDeclarationBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	| varBuilder axiom |
+	self halt.
 	varBuilder := LzVarDeclarationBuilder new.
 	varBuilder acceptNode: aTopLevelEqualityAxiom left.
 	varBuilder acceptNode: aTopLevelEqualityAxiom right.
@@ -193,6 +199,12 @@ LzDeclarationBuilder >> visitTopLevelUseContext: aTopLevelUseContext [
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitVarTerm: aVarTerm [
+	^ LzASTVarTerm new
+		name: (LzVarName for: aVarTerm varName value)
+]
+
+{ #category : #visiting }
+LzDeclarationBuilder >> visitVarTermWithSort: aVarTerm [
 	^ LzASTVarTerm new
 		name: (LzVarName for: aVarTerm varName value)
 ]

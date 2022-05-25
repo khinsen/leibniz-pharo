@@ -29,11 +29,6 @@ LzTermBuilder >> arrayShapeFor: anArray [
 	^ { anArray size }, subshapes first
 ]
 
-{ #category : #constructing }
-LzTermBuilder >> build: aTermNode [
-	^ self acceptNode: aTermNode
-]
-
 { #category : #accessing }
 LzTermBuilder >> signature [
 	^ signature
@@ -61,7 +56,7 @@ LzTermBuilder >> visitArrayTerm: anArrayTerm [
 	shape := self arrayShapeFor: elements.
 	^ signature
 		arrayTerm: (elements flattened collect: [ :each |
-						self build: each ])
+						self acceptNode: each ])
 		shape: shape
 ]
 
@@ -69,7 +64,7 @@ LzTermBuilder >> visitArrayTerm: anArrayTerm [
 LzTermBuilder >> visitBracketOpTerm: aBracketOpTerm [
 	^ signature
 		opTerm: LzBracketOpName new
-		args: (aBracketOpTerm args collect: [ :each | self build: each ])
+		args: (aBracketOpTerm args collect: [ :each | self acceptNode: each ])
 ]
 
 { #category : #visiting }
@@ -91,7 +86,7 @@ LzTermBuilder >> visitInfixOpTerm: anInfixOpTerm [
 	| opNames opName args |
 	opNames := anInfixOpTerm opNames collect: #value.
 	self assert: opNames asSet size equals: 1.
-	args := anInfixOpTerm args collect: [ :each | self build: each ].
+	args := anInfixOpTerm args collect: [ :each | self acceptNode: each ].
 	opName := LzInfixOpName for: opNames anyOne asSymbol.
 	^ args allButFirst inject: args first into: [ :total :each |
 		signature opTerm: opName args: { total. each } ]
@@ -108,6 +103,11 @@ LzTermBuilder >> visitIntegerLiteralTerm: anIntegerLiteralTerm [
 ]
 
 { #category : #visiting }
+LzTermBuilder >> visitParenthesizedTerm: aParenthesizedTerm [
+	^ self acceptNode: aParenthesizedTerm term
+]
+
+{ #category : #visiting }
 LzTermBuilder >> visitParseTree: aParseTree [
 	self error: 'Not a term: ', aParseTree printString.
 ]
@@ -116,7 +116,7 @@ LzTermBuilder >> visitParseTree: aParseTree [
 LzTermBuilder >> visitPrefixOpTerm: aPrefixOpTerm [
 	^ signature
 		opTerm: (LzPrefixOpName for: aPrefixOpTerm opName value asSymbol)
-		args: (aPrefixOpTerm args collect: [ :each | self build: each ])
+		args: (aPrefixOpTerm args collect: [ :each | self acceptNode: each ])
 ]
 
 { #category : #visiting }
@@ -143,14 +143,14 @@ LzTermBuilder >> visitStringLiteralTerm: aStringLiteralTerm [
 LzTermBuilder >> visitSubscriptOpTerm: aBracketOpTerm [
 	^ signature
 		opTerm: LzSubscriptOpName new
-		args: (aBracketOpTerm args collect: [ :each | self build: each ])
+		args: (aBracketOpTerm args collect: [ :each | self acceptNode: each ])
 ]
 
 { #category : #visiting }
 LzTermBuilder >> visitSuperscriptOpTerm: aBracketOpTerm [
 	^ signature
 		opTerm: LzSuperscriptOpName new
-		args: (aBracketOpTerm args collect: [ :each | self build: each ])
+		args: (aBracketOpTerm args collect: [ :each | self acceptNode: each ])
 ]
 
 { #category : #visiting }
@@ -160,6 +160,13 @@ LzTermBuilder >> visitTopLevelTerm: aTopLevelTerm [
 
 { #category : #visiting }
 LzTermBuilder >> visitVarTerm: aVarTerm [
+	^ signature
+		varTerm: (LzVarName for: aVarTerm opName value)
+		variables: self variables
+]
+
+{ #category : #visiting }
+LzTermBuilder >> visitVarTermWithSort: aVarTerm [
 	^ signature
 		varTerm: (LzVarName for: aVarTerm opName value)
 		variables: self variables
