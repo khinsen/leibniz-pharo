@@ -111,7 +111,6 @@ LzDeclarationBuilder >> visitSuperscriptOpTerm: aSuperscriptOpTerm [
 { #category : #visiting }
 LzDeclarationBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	| varBuilder axiom |
-	self halt.
 	varBuilder := LzVarDeclarationBuilder new.
 	varBuilder acceptNode: aTopLevelEqualityAxiom left.
 	varBuilder acceptNode: aTopLevelEqualityAxiom right.

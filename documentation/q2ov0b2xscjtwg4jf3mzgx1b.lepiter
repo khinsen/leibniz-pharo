@@ -661,7 +661,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-25T10:04:07.684986+02:00"
+												"dateAndTimeString" : "2022-05-25T16:34:39.249649+02:00"
 											}
 										},
 										"editEmail" : {
@@ -672,17 +672,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-25T11:45:35.341319+02:00"
+												"dateAndTimeString" : "2022-05-25T16:34:43.278581+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "im74QDOcDQCCRou7BA9lnw=="
+											"uidString" : "P+XJtTicDQCPF263BV65mg=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "XOR with {{lzTerm:⊥}} leaves truth values unchanged\n{{lzRule:(x_:𝔹) ⊻ ⊥ ⇒ x_}}\n{{lzRule:⊥ ⊻ (x_:𝔹) ⇒ x_}}\n\n3b. If the two arguments to XOR are equal, the result is {{lzTerm:⊥}}\n{{lzRule:(x_:𝔹) ⊻ x_ ⇒ ⊥}}\n\n4. Standardize combinations of XOR and AND\n{{lzRule:(x_:𝔹) ∧ ((y_:𝔹) ⊻ (z_:𝔹)) ⇒ (x_ ∧ y_) ⊻ (x_ ∧ z_)}}"
+										"string" : "XOR with {{lzTerm:⊥}} leaves truth values unchanged:\n\t{{lzRule:(x_:𝔹) ⊻ ⊥ ⇒ x_}}\n\t{{lzRule:⊥ ⊻ (x_:𝔹) ⇒ x_}}\n\nIf the two arguments to XOR are equal, the result is {{lzTerm:⊥}}\n\t{{lzRule:(x_:𝔹) ⊻ x_ ⇒ ⊥}}"
 									}
 								]
 							},
@@ -716,6 +716,43 @@
 								"__type" : "textStyle"
 							},
 							"string" : "Simplify XOR relations"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-05-25T10:04:07.684986+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-05-25T16:35:25.516977+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "im74QDOcDQCCRou7BA9lnw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Normalize combinations of XOR and AND:\n\t{{lzRule:(x_:𝔹) ∧ ((y_:𝔹) ⊻ (z_:𝔹)) ⇒ (x_ ∧ y_) ⊻ (x_ ∧ z_)}}"
 						}
 					]
 				},
