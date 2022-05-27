@@ -79,7 +79,7 @@ LzDeclarationBuilder >> visitPrefixOp: aPrefixOp [
 LzDeclarationBuilder >> visitPrefixOpTerm: aPrefixOpTerm [
 	^ LzASTOpTerm new
 		opName: (LzPrefixOpName for: aPrefixOpTerm opName value asSymbol);
-		args: (aPrefixOpTerm args collect: [ :each | self acceptNode: each ])
+		args: (aPrefixOpTerm args collect: [ :each | self acceptNode: each ]) asArray
 ]
 
 { #category : #visiting }
@@ -112,7 +112,8 @@ LzDeclarationBuilder >> visitSuperscriptOpTerm: aSuperscriptOpTerm [
 LzDeclarationBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	| varBuilder axiom |
 	varBuilder := LzVarDeclarationBuilder new.
-	varBuilder acceptNodes: aTopLevelEqualityAxiom vars.
+	aTopLevelEqualityAxiom vars
+		ifNotNil: [ varBuilder acceptNodes: aTopLevelEqualityAxiom vars ].
 	varBuilder acceptNode: aTopLevelEqualityAxiom left.
 	varBuilder acceptNode: aTopLevelEqualityAxiom right.
 	aTopLevelEqualityAxiom condition ifNotNil: [ :c |
@@ -127,11 +128,31 @@ LzDeclarationBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 ]
 
 { #category : #visiting }
+LzDeclarationBuilder >> visitTopLevelFunctionRule: aTopLevelFunctionRule [
+	| varBuilder rule |
+	varBuilder := LzVarDeclarationBuilder new.
+	aTopLevelFunctionRule vars
+		ifNotNil: [ varBuilder acceptNodes: aTopLevelFunctionRule vars ].
+	varBuilder acceptNode: aTopLevelFunctionRule pattern.
+	aTopLevelFunctionRule condition ifNotNil: [ :c |
+		varBuilder acceptNode: c ].
+	rule := LzASTFunctionRule new
+		variables: varBuilder vars;
+		pattern: (self acceptNode: aTopLevelFunctionRule pattern);
+		code: aTopLevelFunctionRule code value allButFirst allButLast.
+	aTopLevelFunctionRule condition ifNotNil: [ :c |
+		rule condition: (self acceptNode: c) ].
+	^ rule
+]
+
+{ #category : #visiting }
 LzDeclarationBuilder >> visitTopLevelOp: aTopLevelOp [
 	| varBuilder op |
 	varBuilder := LzVarDeclarationBuilder new.
-	varBuilder acceptNodes: aTopLevelOp vars.
-	varBuilder acceptNodes: aTopLevelOp op args.
+	aTopLevelOp vars
+		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
+	aTopLevelOp op args
+		ifNotNil: [ :args | varBuilder acceptNodes: args ].
 	op := self acceptNode: aTopLevelOp op.
 	op args: (aTopLevelOp op args collect: [ :each | self acceptNode: each ]).
 	op sort: (self acceptNode: aTopLevelOp sort).
@@ -143,7 +164,8 @@ LzDeclarationBuilder >> visitTopLevelOp: aTopLevelOp [
 LzDeclarationBuilder >> visitTopLevelRewriteRule: aTopLevelRewriteRule [
 	| varBuilder rule |
 	varBuilder := LzVarDeclarationBuilder new.
-	varBuilder acceptNodes: aTopLevelRewriteRule vars.
+	aTopLevelRewriteRule vars
+		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
 	varBuilder acceptNode: aTopLevelRewriteRule pattern.
 	varBuilder acceptNode: aTopLevelRewriteRule replacement.
 	aTopLevelRewriteRule condition ifNotNil: [ :c |
@@ -161,8 +183,10 @@ LzDeclarationBuilder >> visitTopLevelRewriteRule: aTopLevelRewriteRule [
 LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
 	| varBuilder op |
 	varBuilder := LzVarDeclarationBuilder new.
-	varBuilder acceptNodes: aTopLevelSort vars.
-	varBuilder acceptNodes: aTopLevelSort op args.
+	aTopLevelSort vars
+		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
+	aTopLevelSort op args
+		ifNotNil: [ :args | varBuilder acceptNodes: args ].
 	op := self acceptNode: aTopLevelSort op.
 	op args: (aTopLevelSort op args collect: [ :each | self acceptNode: each ]).
 	op sort: (LzASTOpTerm new
@@ -176,7 +200,8 @@ LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
 LzDeclarationBuilder >> visitTopLevelSubsortAxiom: aTopLevelSubsortAxiom [
 	| varBuilder axiom |
 	varBuilder := LzVarDeclarationBuilder new.
-	varBuilder acceptNodes: aTopLevelSubsortAxiom vars.
+	aTopLevelSubsortAxiom vars
+		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
 	varBuilder acceptNode: aTopLevelSubsortAxiom subsort.
 	varBuilder acceptNode: aTopLevelSubsortAxiom supersort.
 	axiom := LzASTSubsortAxiom new
@@ -190,7 +215,8 @@ LzDeclarationBuilder >> visitTopLevelSubsortAxiom: aTopLevelSubsortAxiom [
 LzDeclarationBuilder >> visitTopLevelTerm: aTopLevelTerm [
 	| varBuilder |
 	varBuilder := LzVarDeclarationBuilder new.
-	varBuilder acceptNodes: aTopLevelTerm vars.
+	aTopLevelTerm vars
+		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
 	varBuilder acceptNode: aTopLevelTerm term.
 	self assert: varBuilder vars size equals: 0.
 	^ self acceptNode: aTopLevelTerm term

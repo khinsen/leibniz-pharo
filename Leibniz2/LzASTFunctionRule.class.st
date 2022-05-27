@@ -2,10 +2,21 @@ Class {
 	#name : #LzASTFunctionRule,
 	#superclass : #LzASTRule,
 	#instVars : [
-		'function'
+		'function',
+		'code'
 	],
 	#category : #'Leibniz2-Parser'
 }
+
+{ #category : #accessing }
+LzASTFunctionRule >> code [
+	^ code
+]
+
+{ #category : #accessing }
+LzASTFunctionRule >> code: aString [
+	code := aString
+]
 
 { #category : #accessing }
 LzASTFunctionRule >> function [

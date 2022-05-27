@@ -10,7 +10,8 @@ Class {
 	#superclass : #LzRule,
 	#instVars : [
 		'block',
-		'function'
+		'function',
+		'code'
 	],
 	#category : #'Leibniz2-Rules'
 }
@@ -23,7 +24,36 @@ LzFunctionRule >> apply: bindings reducer: aBlock [
 { #category : #initialization }
 LzFunctionRule >> buildTermsFrom: anASTRuleNode [
 	super buildTermsFrom: anASTRuleNode.
-	self function: anASTRuleNode function
+	self flag: #todo. "Remove 'function' when obsolete."
+	anASTRuleNode function ifNotNil: [ :f | self function: f ].
+	anASTRuleNode code ifNotNil: [ :c | self code: c ].
+]
+
+{ #category : #accessing }
+LzFunctionRule >> code [
+	^ code
+]
+
+{ #category : #initialization }
+LzFunctionRule >> code: aString [
+	| fullCode |
+	code := aString.
+	fullCode := String streamContents: [ :s |
+		s << '[ :signature :args :reducer | | '.
+		self variables keysDo: [ :each |
+			s << each asSymbol allButLast.
+			s << Character space ].
+		s << '| '.
+		self variables keysDo: [ :each |
+			s << each asSymbol allButLast.
+			s << ' := (args at: (LzVarName for: '.
+			each asSymbol printOn: s.
+			s << ')). ' ].
+		s << aString.
+		s << ' ] ' ].
+	block := Smalltalk compiler class new
+				source: fullCode;
+				evaluate
 ]
 
 { #category : #printing }
@@ -34,6 +64,7 @@ LzFunctionRule >> function [
 { #category : #accessing }
 LzFunctionRule >> function: anArray [
 	| code |
+	self flag: #todo. "Remove when obsolete"
 	function := anArray.
 	code := String streamContents: [ :s |
 		s << '[ :signature :args :reducer | | '.
@@ -66,10 +97,17 @@ LzFunctionRule >> function: anArray [
 { #category : #printing }
 LzFunctionRule >> printBodyAsLeibnizSyntaxOn: aStream [
 	self pattern printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: ' → '''.
-	aStream nextPutAll: self function first.
-	aStream nextPutAll: ''':'.
-	aStream nextPutAll: self function second
+	aStream nextPutAll: ' → '.
+	self function ifNotNil: [
+		aStream nextPutAll: ''''.
+		aStream nextPutAll: self function first.
+		aStream nextPutAll: ''':'.
+		aStream nextPutAll: self function second ].
+	self code ifNotNil: [
+		aStream
+			<< '"';
+			<< self code;
+			<< '"' ]
 ]
 
 { #category : #accessing }
