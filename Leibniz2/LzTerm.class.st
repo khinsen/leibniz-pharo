@@ -128,6 +128,13 @@ LzTerm >> isRestrictionOf: aTerm [
 	^ true
 ]
 
+{ #category : #'term operations' }
+LzTerm >> isSyntacticallyEqualTo: otherTerm [
+	^ LzBooleanTerm
+		signature: self signature
+		value: (self = otherTerm)
+]
+
 { #category : #testing }
 LzTerm >> isVarTerm [
 	^ false

@@ -7,26 +7,42 @@ Class {
 	#category : #'Leibniz2-SmaCCParser'
 }
 
+{ #category : #adding }
+LzVarDeclarationBuilder >> addVar: aVar sort: aSortTerm [
+	| newVar |
+	newVar := LzASTVar new
+				name: (LzVarName for: aVar);
+				sort: aSortTerm.
+	vars at: aVar
+		ifPresent: [ :v | self assert: v equals: newVar ]
+		ifAbsentPut: newVar
+]
+
 { #category : #initializing }
 LzVarDeclarationBuilder >> initialize [
-	vars := OrderedCollection new
+	vars := Dictionary new
 ]
 
 { #category : #accessing }
 LzVarDeclarationBuilder >> vars [
-	^ vars
+	| grouped |
+	grouped := vars keys groupedBy: [ :each | each endsWith: '__' ].
+	^ ((grouped at: true ifAbsent: #()), (grouped at: false ifAbsent: #()))
+		collect: [ :each | vars at: each ]
 ]
 
 { #category : #visiting }
 LzVarDeclarationBuilder >> visitVar: aVar [
-	vars add: (LzASTVar new
-				name: (LzVarName for: aVar varName value) ;
-				sort: (LzDeclarationBuilder new acceptNode: aVar sort))
+	self acceptNode: aVar sort.
+	self
+		addVar: aVar varName value
+		sort:(LzDeclarationBuilder new acceptNode: aVar sort)
 ]
 
 { #category : #visiting }
 LzVarDeclarationBuilder >> visitVarTermWithSort: aVarTerm [
-	vars add: (LzASTVar new
-				name: (LzVarName for: aVarTerm varName value) ;
-				sort: (LzDeclarationBuilder new acceptNode: aVarTerm sort))
+	self acceptNode: aVarTerm sort.
+	self
+		addVar: aVarTerm varName value
+		sort:(LzDeclarationBuilder new acceptNode: aVarTerm sort)
 ]
