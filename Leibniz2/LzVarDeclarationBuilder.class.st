@@ -17,7 +17,14 @@ LzVarDeclarationBuilder >> vars [
 	^ vars
 ]
 
-{ #category : #accessing }
+{ #category : #visiting }
+LzVarDeclarationBuilder >> visitVar: aVar [
+	vars add: (LzASTVar new
+				name: (LzVarName for: aVar varName value) ;
+				sort: (LzDeclarationBuilder new acceptNode: aVar sort))
+]
+
+{ #category : #visiting }
 LzVarDeclarationBuilder >> visitVarTermWithSort: aVarTerm [
 	vars add: (LzASTVar new
 				name: (LzVarName for: aVarTerm varName value) ;

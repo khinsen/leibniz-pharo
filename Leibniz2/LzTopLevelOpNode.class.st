@@ -2,6 +2,8 @@ Class {
 	#name : #LzTopLevelOpNode,
 	#superclass : #LzParseTreeNode,
 	#instVars : [
+		'vars',
+		'commas',
 		'op',
 		'colon',
 		'sort'
@@ -22,6 +24,33 @@ LzTopLevelOpNode >> colon [
 { #category : #generated }
 LzTopLevelOpNode >> colon: aSmaCCToken [
 	colon := aSmaCCToken
+]
+
+{ #category : #generated }
+LzTopLevelOpNode >> commas [
+	^ commas
+]
+
+{ #category : #generated }
+LzTopLevelOpNode >> commas: anOrderedCollection [
+	commas := anOrderedCollection
+]
+
+{ #category : #generated }
+LzTopLevelOpNode >> compositeNodeVariables [
+	^ #(#vars)
+]
+
+{ #category : #generated }
+LzTopLevelOpNode >> compositeTokenVariables [
+	^ #(#commas)
+]
+
+{ #category : #'generated-initialize-release' }
+LzTopLevelOpNode >> initialize [
+	super initialize.
+	vars := OrderedCollection new: 2.
+	commas := OrderedCollection new: 2.
 ]
 
 { #category : #generated }
@@ -56,4 +85,16 @@ LzTopLevelOpNode >> sort: aLzParseTreeNode [
 { #category : #generated }
 LzTopLevelOpNode >> tokenVariables [
 	^ #(#colon)
+]
+
+{ #category : #generated }
+LzTopLevelOpNode >> vars [
+	^ vars
+]
+
+{ #category : #generated }
+LzTopLevelOpNode >> vars: anOrderedCollection [
+	self setParents: self vars to: nil.
+	vars := anOrderedCollection.
+	self setParents: self vars to: self
 ]

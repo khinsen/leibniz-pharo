@@ -2,6 +2,8 @@ Class {
 	#name : #LzTopLevelRuleNode,
 	#superclass : #LzParseTreeNode,
 	#instVars : [
+		'vars',
+		'commas',
 		'pattern',
 		'arrow',
 		'condition'
@@ -25,6 +27,26 @@ LzTopLevelRuleNode >> arrow: aSmaCCToken [
 ]
 
 { #category : #generated }
+LzTopLevelRuleNode >> commas [
+	^ commas
+]
+
+{ #category : #generated }
+LzTopLevelRuleNode >> commas: anOrderedCollection [
+	commas := anOrderedCollection
+]
+
+{ #category : #generated }
+LzTopLevelRuleNode >> compositeNodeVariables [
+	^ #(#vars)
+]
+
+{ #category : #generated }
+LzTopLevelRuleNode >> compositeTokenVariables [
+	^ #(#commas)
+]
+
+{ #category : #generated }
 LzTopLevelRuleNode >> condition [
 	^ condition
 ]
@@ -34,6 +56,13 @@ LzTopLevelRuleNode >> condition: aLzParseTreeNode [
 	self condition notNil ifTrue: [ self condition parent: nil ].
 	condition := aLzParseTreeNode.
 	self condition notNil ifTrue: [ self condition parent: self ]
+]
+
+{ #category : #'generated-initialize-release' }
+LzTopLevelRuleNode >> initialize [
+	super initialize.
+	vars := OrderedCollection new: 2.
+	commas := OrderedCollection new: 2.
 ]
 
 { #category : #generated }
@@ -56,4 +85,16 @@ LzTopLevelRuleNode >> pattern: aLzParseTreeNode [
 { #category : #generated }
 LzTopLevelRuleNode >> tokenVariables [
 	^ #(#arrow)
+]
+
+{ #category : #generated }
+LzTopLevelRuleNode >> vars [
+	^ vars
+]
+
+{ #category : #generated }
+LzTopLevelRuleNode >> vars: anOrderedCollection [
+	self setParents: self vars to: nil.
+	vars := anOrderedCollection.
+	self setParents: self vars to: self
 ]

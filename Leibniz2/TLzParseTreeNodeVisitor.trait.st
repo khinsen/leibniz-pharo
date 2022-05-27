@@ -146,6 +146,11 @@ TLzParseTreeNodeVisitor >> visitTopLevelUseContext: aTopLevelUseContext [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitVar: aVar [
+	^ self visitParseTree: aVar
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitVarTerm: aVarTerm [
 	^ self visitTerm: aVarTerm
 ]
