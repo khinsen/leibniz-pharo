@@ -197,17 +197,17 @@ LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
 ]
 
 { #category : #visiting }
-LzDeclarationBuilder >> visitTopLevelSubsortAxiom: aTopLevelSubsortAxiom [
+LzDeclarationBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 	| varBuilder axiom |
 	varBuilder := LzVarDeclarationBuilder new.
-	aTopLevelSubsortAxiom vars
+	aTopLevelSubsort vars
 		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
-	varBuilder acceptNode: aTopLevelSubsortAxiom subsort.
-	varBuilder acceptNode: aTopLevelSubsortAxiom supersort.
+	varBuilder acceptNode: aTopLevelSubsort subsort.
+	varBuilder acceptNode: aTopLevelSubsort supersort.
 	axiom := LzASTSubsortAxiom new
 		variables: varBuilder vars;
-		subsort: (self acceptNode: aTopLevelSubsortAxiom subsort);
-		supersort: (self acceptNode: aTopLevelSubsortAxiom supersort).
+		subsort: (self acceptNode: aTopLevelSubsort subsort);
+		supersort: (self acceptNode: aTopLevelSubsort supersort).
 	^ axiom
 ]
 

@@ -16,6 +16,19 @@ LzSortGraphBuilder >> clearCache [
 ]
 
 { #category : #defining }
+LzSortGraphBuilder >> deriveSortDeclarationFromSort: aSortTerm [
+	aSortTerm args ifNotEmpty: [ ^ self ].
+	self parsedSortDeclaration: 
+		(LzASTOp new
+			name: aSortTerm opName;
+			args: #();
+			sort: (LzASTOpTerm new
+						opName: (LzPrefixOpName for: LzConstants opNameSort);
+						args: #());
+			variables: #())
+]
+
+{ #category : #defining }
 LzSortGraphBuilder >> include: aSortGraph [
 	aSortGraph sortDeclarations do: [ :each |
 		self parsedSortDeclaration: each ].
@@ -44,7 +57,10 @@ LzSortGraphBuilder >> parsedSortDeclaration: anASTOp [
 { #category : #defining }
 LzSortGraphBuilder >> parsedSubsortDeclaration: anASTSubsortAxiom [
 	self clearCache.
-	subsortDeclarations add: anASTSubsortAxiom
+	subsortDeclarations add: anASTSubsortAxiom.
+	anASTSubsortAxiom variables ifEmpty: [
+		self deriveSortDeclarationFromSort: anASTSubsortAxiom subsort.
+		self deriveSortDeclarationFromSort: anASTSubsortAxiom supersort ]
 ]
 
 { #category : #defining }

@@ -96,13 +96,8 @@ TLzParseTreeNodeVisitor >> visitTerm: aTerm [
 ]
 
 { #category : #generated }
-TLzParseTreeNodeVisitor >> visitTopLevelAxiom: aTopLevelAxiom [
-	^ self visitParseTree: aTopLevelAxiom
-]
-
-{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
-	^ self visitTopLevelAxiom: aTopLevelEqualityAxiom
+	^ self visitParseTree: aTopLevelEqualityAxiom
 ]
 
 { #category : #generated }
@@ -131,8 +126,8 @@ TLzParseTreeNodeVisitor >> visitTopLevelSort: aTopLevelSort [
 ]
 
 { #category : #generated }
-TLzParseTreeNodeVisitor >> visitTopLevelSubsortAxiom: aTopLevelSubsortAxiom [
-	^ self visitTopLevelAxiom: aTopLevelSubsortAxiom
+TLzParseTreeNodeVisitor >> visitTopLevelSubsort: aTopLevelSubsort [
+	^ self visitParseTree: aTopLevelSubsort
 ]
 
 { #category : #generated }

@@ -1,7 +1,9 @@
 Class {
 	#name : #LzTopLevelEqualityAxiomNode,
-	#superclass : #LzTopLevelAxiomNode,
+	#superclass : #LzParseTreeNode,
 	#instVars : [
+		'vars',
+		'commas',
 		'left',
 		'equals',
 		'right',
@@ -13,6 +15,26 @@ Class {
 { #category : #generated }
 LzTopLevelEqualityAxiomNode >> acceptVisitor: aParseTreeVisitor [
 	^ aParseTreeVisitor visitTopLevelEqualityAxiom: self
+]
+
+{ #category : #generated }
+LzTopLevelEqualityAxiomNode >> commas [
+	^ commas
+]
+
+{ #category : #generated }
+LzTopLevelEqualityAxiomNode >> commas: anOrderedCollection [
+	commas := anOrderedCollection
+]
+
+{ #category : #generated }
+LzTopLevelEqualityAxiomNode >> compositeNodeVariables [
+	^ #(#vars)
+]
+
+{ #category : #generated }
+LzTopLevelEqualityAxiomNode >> compositeTokenVariables [
+	^ #(#commas)
 ]
 
 { #category : #generated }
@@ -35,6 +57,13 @@ LzTopLevelEqualityAxiomNode >> equals [
 { #category : #generated }
 LzTopLevelEqualityAxiomNode >> equals: aSmaCCToken [
 	equals := aSmaCCToken
+]
+
+{ #category : #'generated-initialize-release' }
+LzTopLevelEqualityAxiomNode >> initialize [
+	super initialize.
+	vars := OrderedCollection new: 2.
+	commas := OrderedCollection new: 2.
 ]
 
 { #category : #generated }
@@ -69,4 +98,16 @@ LzTopLevelEqualityAxiomNode >> right: aLzParseTreeNode [
 { #category : #generated }
 LzTopLevelEqualityAxiomNode >> tokenVariables [
 	^ #(#equals)
+]
+
+{ #category : #generated }
+LzTopLevelEqualityAxiomNode >> vars [
+	^ vars
+]
+
+{ #category : #generated }
+LzTopLevelEqualityAxiomNode >> vars: anOrderedCollection [
+	self setParents: self vars to: nil.
+	vars := anOrderedCollection.
+	self setParents: self vars to: self
 ]
