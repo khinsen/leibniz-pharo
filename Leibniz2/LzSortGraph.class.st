@@ -141,7 +141,7 @@ LzSortGraph >> graphFor: aView restrictedTo: aSet highlight: aBlock [
 				shape: [ :x | self graphNodeForSort: x highlight: (aBlock cull: x) ];
 				with: aSet.
 			view edges
-				shape: [ :x | LbGraphicsElements graphArrow ];
+				shape: [ :x | LzGraphicsElements graphArrow ];
 				fromCenterTop;
 				toCenterBottom;
 				connect: connectingAxioms values
