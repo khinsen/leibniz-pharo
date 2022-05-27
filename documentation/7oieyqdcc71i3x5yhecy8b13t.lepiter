@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-24T11:30:15.03983+02:00"
+						"dateAndTimeString" : "2022-05-27T11:18:27.872564+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "[[Logical truth]] and  [[Boolean algebra]]"
+				"string" : "[[Logical truth]],  [[Boolean algebra]], [[Term equality]]"
 			}
 		]
 	},
