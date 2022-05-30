@@ -21,6 +21,12 @@ LzDeclarationBuilder >> visitArrayTerm: anArrayTerm [
 ]
 
 { #category : #visiting }
+LzDeclarationBuilder >> visitBracketOp: aBracketOp [
+	^ LzASTOp new
+		name: LzBracketOpName new
+]
+
+{ #category : #visiting }
 LzDeclarationBuilder >> visitBracketOpTerm: aBracketOpTerm [
 	^ LzASTOpTerm new
 		opName: LzBracketOpName new;
@@ -95,10 +101,22 @@ LzDeclarationBuilder >> visitStringLiteralTerm: aStringLiteralTerm [
 ]
 
 { #category : #visiting }
+LzDeclarationBuilder >> visitSubscriptOp: aSubscriptOp [
+	^ LzASTOp new
+		name: LzSubscriptOpName new
+]
+
+{ #category : #visiting }
 LzDeclarationBuilder >> visitSubscriptOpTerm: aSubscriptOpTerm [
 	^ LzASTOpTerm new
 		opName: LzSubscriptOpName new;
 		args: (aSubscriptOpTerm args collect: [ :each | self acceptNode: each ])
+]
+
+{ #category : #visiting }
+LzDeclarationBuilder >> visitSuperscriptOp: aSuperscriptOp [
+	^ LzASTOp new
+		name: LzSuperscriptOpName new
 ]
 
 { #category : #visiting }

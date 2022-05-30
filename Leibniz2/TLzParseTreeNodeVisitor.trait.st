@@ -16,6 +16,11 @@ TLzParseTreeNodeVisitor >> visitArrayTerm: anArrayTerm [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitBracketOp: aBracketOp [
+	^ self visitOp: aBracketOp
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitBracketOpTerm: aBracketOpTerm [
 	^ self visitTerm: aBracketOpTerm
 ]
@@ -81,8 +86,18 @@ TLzParseTreeNodeVisitor >> visitStringLiteralTerm: aStringLiteralTerm [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitSubscriptOp: aSubscriptOp [
+	^ self visitOp: aSubscriptOp
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitSubscriptOpTerm: aSubscriptOpTerm [
 	^ self visitTerm: aSubscriptOpTerm
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitSuperscriptOp: aSuperscriptOp [
+	^ self visitOp: aSuperscriptOp
 ]
 
 { #category : #generated }
