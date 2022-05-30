@@ -126,6 +126,11 @@ TLzParseTreeNodeVisitor >> visitTopLevelSort: aTopLevelSort [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
+	^ self visitParseTree: aTopLevelSpecialTerms
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitTopLevelSubsort: aTopLevelSubsort [
 	^ self visitParseTree: aTopLevelSubsort
 ]

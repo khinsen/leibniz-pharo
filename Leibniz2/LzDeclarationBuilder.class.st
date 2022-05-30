@@ -197,6 +197,14 @@ LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
 ]
 
 { #category : #visiting }
+LzDeclarationBuilder >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
+	^ LzASTSpecialTerms new
+			termTypes: (aTopLevelSpecialTerms specialTerms
+							collect: [ :each |
+								each value asSymbol ])
+]
+
+{ #category : #visiting }
 LzDeclarationBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 	| varBuilder axiom |
 	varBuilder := LzVarDeclarationBuilder new.

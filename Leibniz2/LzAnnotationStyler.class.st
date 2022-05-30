@@ -174,6 +174,20 @@ LzAnnotationStyler >> visitTopLevelSort: aTopLevelSortAnnotation [
 ]
 
 { #category : #generated }
+LzAnnotationStyler >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
+	self styleAnnotation: aTopLevelSpecialTerms.
+	self styleAutoHidingAnnotation: aTopLevelSpecialTerms.
+	self styleGenericButton: aTopLevelSpecialTerms
+]
+
+{ #category : #generated }
+LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
+	self styleAnnotation: aTopLevelSubsort.
+	self styleAutoHidingAnnotation: aTopLevelSubsort.
+	self styleSortButton: aTopLevelSubsort
+]
+
+{ #category : #generated }
 LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 	self styleAnnotation: aTopLevelTermAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.

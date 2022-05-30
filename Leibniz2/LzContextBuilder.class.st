@@ -35,6 +35,8 @@ LzContextBuilder >> addDeclarationNode: aTopLevelNode [
 		ifTrue: [ declaration second
 			ifFalse: [ self addDeclarationsFromPageNamed: declaration first ]
 			ifTrue: [ self halt ] ].
+	(aTopLevelNode isKindOf: LzTopLevelSpecialTermsNode)
+		ifTrue: [ declaration termTypes do: [ :each | self builtin:  each ] ].
 ]
 
 { #category : #lepiter }
@@ -96,6 +98,17 @@ LzContextBuilder >> gtAxiomsFor: aView [
 		priority: 3;
 		object: [ self context ];
 		view: #gtAxiomsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzContextBuilder >> gtBuiltinsFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Builtins';
+		priority: 5;
+		object: [ self context ];
+		view: #gtBuiltinsFor:;
 		yourself
 ]
 
