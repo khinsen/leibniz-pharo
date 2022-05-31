@@ -8,6 +8,14 @@ Class {
 }
 
 { #category : #accessing }
+LzOpSortFamily >> gtGraphFor: aView [
+	<gtView>
+	^ self sortGraph
+		graphFor: aView
+		highlight: [ :x | x = self ]
+]
+
+{ #category : #accessing }
 LzOpSortFamily >> op [
 	^ op
 ]

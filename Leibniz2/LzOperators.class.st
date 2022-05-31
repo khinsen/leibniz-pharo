@@ -12,19 +12,11 @@ Class {
 
 { #category : #defining }
 LzOperators >> addOp: anASTOpNode [
-	| vars argSorts valueSort key op |
-	vars := self sortGraph sortContext signature
-				parsedVariables: anASTOpNode variables.
-	argSorts := LzArity new: anASTOpNode args size.
-	1 to: argSorts size do: [ :index |
-		argSorts at: index put:
-			(self sortGraph
-			parsedSort: (anASTOpNode args at: index)
-			variables: vars) ].
-	valueSort := self sortGraph
-		parsedSort: anASTOpNode sort
-		variables: vars.
-	key := { anASTOpNode name. argSorts kindArity }.
+	| opParams argSorts valueSort key op |
+	opParams := self preprocessOp: anASTOpNode.
+	argSorts := opParams second.
+	valueSort := opParams third.
+	key := { opParams first. argSorts kindArity }.
 	op := opTable at: key
 			ifAbsentPut: [ LzOperator new 
 								sortGraph: self sortGraph;
@@ -32,6 +24,13 @@ LzOperators >> addOp: anASTOpNode [
 								kindArity: key second;
 								kind: valueSort kind ].
 	op addArity: argSorts sort: valueSort
+]
+
+{ #category : #defining }
+LzOperators >> findOp: anASTOpNode [
+	| opParams |
+	opParams := self preprocessOp: anASTOpNode.
+	^ opTable at: { opParams first. opParams second kindArity }
 ]
 
 { #category : #accessing }
@@ -129,6 +128,23 @@ LzOperators >> operators: aSetOfASTOpNodes [
 { #category : #accessing }
 LzOperators >> opsOfKind: aKind [
 	^ opTable values select: [ :each | each kind = aKind ]
+]
+
+{ #category : #defining }
+LzOperators >> preprocessOp: anASTOpNode [
+	| vars argSorts valueSort key op |
+	vars := self sortGraph sortContext signature
+				parsedVariables: anASTOpNode variables.
+	argSorts := LzArity new: anASTOpNode args size.
+	1 to: argSorts size do: [ :index |
+		argSorts at: index put:
+			(self sortGraph
+			parsedSort: (anASTOpNode args at: index)
+			variables: vars) ].
+	valueSort := self sortGraph
+		parsedSort: anASTOpNode sort
+		variables: vars.
+	^ { anASTOpNode name. argSorts. valueSort }
 ]
 
 { #category : #accessing }

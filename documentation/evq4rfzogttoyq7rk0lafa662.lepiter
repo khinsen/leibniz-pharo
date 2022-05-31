@@ -193,6 +193,43 @@
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-05-31T17:00:26.929037+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-05-31T17:02:00.866853+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "x9cVxbGcDQCxMTjyDgIc+w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Leibniz is named after [Gottfried Wilhelm Leibniz](https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz), who made important contributions to science, mathematics, formal logic, and computation, topics that are all relevant to this project. He invented a widely used [notation for calculus](https://en.wikipedia.org/wiki/Leibniz%27s_notation), laid the foundation of equational logic by his[definition of equality](https://en.wikipedia.org/wiki/Equality_%28mathematics%29), and anticipated formal logic with his [\"calculus ratiocinator\"](https://en.wikipedia.org/wiki/Calculus_ratiocinator)."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
 					"items" : [
 						{
 							"__type" : "textSnippet",
@@ -219,7 +256,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2021-08-16T17:56:20.416358+02:00"
+									"dateAndTimeString" : "2022-05-31T16:56:15.509363+02:00"
 								}
 							},
 							"uid" : {
@@ -229,7 +266,44 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "[Scientific notations for the digital era](https://arxiv.org/abs/1605.02960)"
+							"string" : "[Scientific notations for the digital era](https://arxiv.org/abs/1605.02960) (*arXiv preprint*)"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-05-31T16:55:22.588601+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-05-31T16:56:11.354905+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "y+3CsrGcDQCxLgI5DgIc+w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "[Scientific communication in the digital age ](http://dx.doi.org/10.1063/PT.3.3181) (*Physics Today*)"
 						},
 						{
 							"__type" : "textSnippet",
@@ -256,7 +330,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2021-08-16T17:57:23.75799+02:00"
+									"dateAndTimeString" : "2022-05-31T16:56:39.855246+02:00"
 								}
 							},
 							"uid" : {
@@ -266,7 +340,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "[Verifiability in computer-aided research: the role of digital scientific notations at the human-computer interface](https://peerj.com/articles/cs-158/)"
+							"string" : "[Verifiability in computer-aided research: the role of digital scientific notations at the human-computer interface](https://peerj.com/articles/cs-158/) (*PeerJ Computer Science*)"
 						}
 					]
 				},

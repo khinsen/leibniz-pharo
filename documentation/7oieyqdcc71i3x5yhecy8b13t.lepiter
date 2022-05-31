@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-31T16:52:28.352455+02:00"
+						"dateAndTimeString" : "2022-05-31T16:52:33.859393+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "This chapter contains Leibniz contexts, both as examples for studying and as foundations to build on. A Leibniz context consists of a page  embedded code."
+				"string" : "This chapter contains Leibniz contexts, both as examples for studying and as foundations to build on."
 			}
 		]
 	},

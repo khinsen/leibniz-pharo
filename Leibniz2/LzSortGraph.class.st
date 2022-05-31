@@ -18,8 +18,7 @@ Class {
 		'maximalFamilies',
 		'kinds',
 		'kindOf',
-		'anySortKind',
-		'sortTermBuilder'
+		'anySortKind'
 	],
 	#category : #'Leibniz2-Sorts'
 }
@@ -124,6 +123,11 @@ LzSortGraph >> directSupersortsOf: aSortTerm [
 ]
 
 { #category : #initializing }
+LzSortGraph >> familyForParsedOp: anASTOpNode [
+	^ sortFamilies at: (sortContext signature operators findOp: anASTOpNode)
+]
+
+{ #category : #initializing }
 LzSortGraph >> familyForSortTerm: aTerm [
 	^ aTerm isVarTerm
 		ifTrue: [ anySortFamily ]
@@ -131,15 +135,16 @@ LzSortGraph >> familyForSortTerm: aTerm [
 ]
 
 { #category : #inspecting }
-LzSortGraph >> graphFor: aView restrictedTo: aSet highlight: aBlock [
+LzSortGraph >> graphFor: aView highlight: aBlock [
 	^ aView mondrian
 		title: 'Graph';
 		priority: 0;
 		painting: [ :view | 
-			| edges |
+			| families edges |
+			families := sortFamilies copyWithout: anySortFamily.
 			view nodes
 				shape: [ :x | self graphNodeForSort: x highlight: (aBlock cull: x) ];
-				with: aSet.
+				with: families.
 			view edges
 				shape: [ :x | LzGraphicsElements graphArrow ];
 				fromCenterTop;
@@ -164,7 +169,6 @@ LzSortGraph >> gtGraphFor: aView [
 	<gtView>
 	^ self
 		graphFor: aView
-		restrictedTo: (sortFamilies copyWithout: anySortFamily)
 		highlight: [ false ]
 ]
 

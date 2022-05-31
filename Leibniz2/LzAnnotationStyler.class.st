@@ -86,7 +86,9 @@ LzAnnotationStyler >> styleOpButton: aTopLevelOpAnnotation [
 
 { #category : #styling }
 LzAnnotationStyler >> styleSortButton: aTopLevelSortAnnotation [
-	self styleGenericButton: aTopLevelSortAnnotation
+	self styleButton: aTopLevelSortAnnotation spawning: [
+		self context sortGraph familyForParsedOp:
+			(LzDeclarationBuilder new acceptNode: aTopLevelSortAnnotation) ]
 ]
 
 { #category : #styling }
