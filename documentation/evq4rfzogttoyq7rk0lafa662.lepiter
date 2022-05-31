@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-16T17:54:32.207988+02:00"
+						"dateAndTimeString" : "2022-05-31T16:43:23.3181+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,128 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-17T10:27:01.211456+02:00"
+						"dateAndTimeString" : "2022-05-31T16:43:23.3181+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "4eQ49BCGDQC/1TkkD9Rc+w=="
+					"uidString" : "CIsHiLGcDQC5S/9zDA4SbQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Digital Scientific Notations are scientific notations used at the human-computer interface in computational science. They are formal languages, and thus have an unambiguous meaning for software, just like programming languages. However, they are designed specifically for expressing, analyzing, and manipulating scientific models."
+				"string" : "A scientific notation is a convention for encoding scientific information using symbols. The best known example is mathematical notation. The goal of a scientific notation is to represent scientific knowledge in a way that humans can easily comprehend and manipulate. While in principle a mathematical equation could be replaced by an equivalent statement in plain language, the more concise equation is faster to read (assuming a trained reader) and allows manipulation by formal rules (such as \"add the same term to both sides\")."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-05-31T16:44:01.399666+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-05-31T16:44:34.401543+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Xjqyg7GcDQC5RlkqDA4SbQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "A *digital* scientific notation is a scientific notation that can be processed by both humans and computers. A machine readable notation is necessarily a [formal language](https://en.wikipedia.org/wiki/Formal_language) and thus has a well-defined unambiguous syntax in addition to some useful level of well-defined semantics."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-05-31T16:45:01.86003+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-05-31T16:45:17.472404+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "eyjgjbGcDQC5TqnLDA4SbQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "There are many formal languages designed for representing scientific information. An example is the [Systems Biology Markup Language (SBML)](https://en.wikipedia.org/wiki/SBML). Most of them do not qualify as digital scientific notations, because they are designed to be used by software but not for communication between humans."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-05-31T16:45:34.887343+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-05-31T16:50:31.216251+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Pxq1g7GcDQC5SFu0DA4SbQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "There are also formal languages that are designed to be read and written by humans, in addition to computers. Programming languages are the most prominent examples. In scientific computing, programming languages are routinely used to represent scientific knowledge as program code. In particular, computational notebooks embed code written in high-level programming languages such as Python or R into a narrative, much like mathematical notation is used in traditional scientific publications. However, programming languages fill the role of scientific notations rather poorly. In particular, they cannot express anything else than complete executable algorithms that include many technical details that are irrelevant to the science behind the code."
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-16T17:58:22.637468+02:00"
+						"dateAndTimeString" : "2022-05-31T16:49:12.605469+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Leibniz is an experimental Digital Scientific Notation, at this time best described as a research prototype. Play with it, but don't rely on it!"
+				"string" : "Leibniz is an experimental digital scientific notation, and best described as a research prototype. Play with it, but don't rely on it!"
 			},
 			{
 				"__type" : "textSnippet",

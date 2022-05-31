@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-24T11:29:57.244265+02:00"
+						"dateAndTimeString" : "2022-05-31T16:50:55.698031+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,54 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-27T11:18:27.872564+02:00"
+						"dateAndTimeString" : "2022-05-31T16:52:28.352455+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "oz1BViCcDQCifb+zA/k7DA=="
+					"uidString" : "KaF9orGcDQC5UjniDA4SbQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "[[Logical truth]],  [[Boolean algebra]], [[Term equality]]"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-27T17:35:24.216758+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-27T17:35:26.902043+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "c09fymGcDQCdLouODWGYCg=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "[[Integers]]"
+				"string" : "This chapter contains Leibniz contexts, both as examples for studying and as foundations to build on. A Leibniz context consists of a page  embedded code."
 			}
 		]
 	},
