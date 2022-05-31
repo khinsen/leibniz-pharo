@@ -746,7 +746,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T08:55:12.973894+02:00"
+												"dateAndTimeString" : "2022-05-31T15:55:29.350705+02:00"
 											}
 										},
 										"uid" : {
@@ -756,7 +756,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The reason for introducing these two operators is their more precise result sort. For example, it is possible to divide by {{lzTerm:succ(n_:ℕ)}} which is of sort {{lzSort:ℕ.nz}}, but not by {{lzTerm:(n_:ℕ) + 1}}, which is of sort {{lzSort:ℕ}}."
+										"string" : "The reason for introducing these two operators is their more precise argument and result sorts. For example, {{lzTerm:pred(n_:ℕ.nz)}}  is of sort {{lzSort:ℕ.nz}}, but {{lzTerm:(n_:ℕ.nz) - 1}}  is of sort {{lzSort:ℤ}}."
 									},
 									{
 										"__type" : "textSnippet",

@@ -92,7 +92,7 @@ LzAnnotationStyler >> styleSortButton: aTopLevelSortAnnotation [
 { #category : #styling }
 LzAnnotationStyler >> styleTermButton: aTermAnnotation [
 	self styleButton: aTermAnnotation spawning: [
-		self context parsedTerm:
+		self context parsedPattern:
 			(LzDeclarationBuilder new acceptNode: aTermAnnotation) ]
 ]
 

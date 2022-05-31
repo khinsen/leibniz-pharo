@@ -244,7 +244,9 @@ LzDeclarationBuilder >> visitTopLevelTerm: aTopLevelTerm [
 	aTopLevelTerm vars
 		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
 	varBuilder acceptNode: aTopLevelTerm term.
-	^ self acceptNode: aTopLevelTerm term
+	^ LzASTPattern new
+		variables: varBuilder vars;
+		term: (self acceptNode: aTopLevelTerm term)
 ]
 
 { #category : #visiting }
