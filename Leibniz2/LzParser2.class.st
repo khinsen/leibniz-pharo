@@ -18,7 +18,7 @@ LzParser2 class >> ambiguousTransitions [
 
 { #category : #'generated-accessing' }
 LzParser2 class >> cacheId [
-	^'2022-05-30T18:08:49.884347+02:00'
+	^'2022-05-31T09:00:44.029019+02:00'
 ]
 
 { #category : #generated }
@@ -84,15 +84,15 @@ Op
 			("","" 'comma' Term 'arg')* "")"" 'rightParen')? {{PrefixOp}}
 	| NonInfixTerm 'arg' <opIdentifier> 'opName' NonInfixTerm 'arg' {{InfixOp}}
 	| SimpleTerm 'arg'
-		""["" 'leftBracket'  Term 'arg'
+		""["" 'opName'  Term 'arg'
 			("","" 'comma' Term 'arg')*
 		""]"" 'rightBracket' {{BracketOp}}
 	| SimpleTerm 'arg'
-		""^("" 'leftParen'  Term 'arg'
+		""^("" 'opName'  Term 'arg'
 			("","" 'comma' Term 'arg')*
 		"")"" 'rightParen' {{SuperscriptOp}}
 	| SimpleTerm 'arg'
-		""\("" 'leftParen'  Term 'arg'
+		""\("" 'opName'  Term 'arg'
 			("","" 'comma' Term 'arg')*
 		"")"" 'rightParen' {{SubscriptOp}}
 	;
@@ -224,65 +224,65 @@ LzParser2 class >> obsolete [
 LzParser2 class >> reduceTable [
 ^#(
 	#(37 0 #reduceActionFor_Var__var_______comma___1: 1026049 false) 
-	#(69 1 #liftFirstValue: 4144133 false) 
-	#(69 1 #liftFirstValue: 4144131 false) 
-	#(69 1 #liftFirstValue: 4144129 false) 
-	#(69 1 #liftFirstValue: 4144130 false) 
-	#(69 1 #liftFirstValue: 4144132 false) 
+	#(69 1 #liftFirstValue: 4132869 false) 
+	#(69 1 #liftFirstValue: 4132867 false) 
+	#(69 1 #liftFirstValue: 4132865 false) 
+	#(69 1 #liftFirstValue: 4132866 false) 
+	#(69 1 #liftFirstValue: 4132868 false) 
 	#(34 1 #liftFirstValue: 976897 false) 
-	#(68 0 #reduceActionFor_Var__var_______comma___1: 4093953 false) 
-	#(66 2 #reduceActionForTopLevelSpecialTerms1: 4042753 false) 
-	#(52 1 #reduceActionForPrefixOpTerm1: 3064833 false) 
-	#(53 1 #reduceActionForVarTerm2: 3193858 false) 
-	#(60 1 #reduceActionForStringLiteralTerm1: 3683329 false) 
-	#(61 1 #reduceActionForIntegerLiteralTerm1: 3729409 false) 
-	#(62 1 #reduceActionForRationalNumberLiteralTerm1: 3777537 false) 
-	#(63 1 #reduceActionForFpNumberLiteralTerm1: 3840001 false) 
+	#(68 0 #reduceActionFor_Var__var_______comma___1: 4082689 false) 
+	#(66 2 #reduceActionForTopLevelSpecialTerms1: 4031489 false) 
+	#(52 1 #reduceActionForPrefixOpTerm1: 3053569 false) 
+	#(53 1 #reduceActionForVarTerm2: 3182594 false) 
+	#(60 1 #reduceActionForStringLiteralTerm1: 3672065 false) 
+	#(61 1 #reduceActionForIntegerLiteralTerm1: 3718145 false) 
+	#(62 1 #reduceActionForRationalNumberLiteralTerm1: 3766273 false) 
+	#(63 1 #reduceActionForFpNumberLiteralTerm1: 3828737 false) 
 	#(37 2 #reduceActionFor_Var__var_______comma___2: 1026050 false) 
 	#(41 2 #reduceActionForTopLevelTerm1: 1692673 false) 
-	#(46 1 #liftFirstValue: 2386946 false) 
-	#(49 1 #liftFirstValue: 2497537 false) 
-	#(50 1 #liftFirstValue: 2896898 false) 
-	#(50 1 #liftFirstValue: 2896900 false) 
-	#(50 1 #liftFirstValue: 2896901 false) 
-	#(50 1 #liftFirstValue: 2896899 false) 
-	#(50 1 #liftFirstValue: 2896897 false) 
-	#(59 1 #liftFirstValue: 3570692 false) 
-	#(59 1 #liftFirstValue: 3570689 false) 
-	#(59 1 #liftFirstValue: 3570690 false) 
-	#(59 1 #liftFirstValue: 3570691 false) 
+	#(46 1 #liftFirstValue: 2375682 false) 
+	#(49 1 #liftFirstValue: 2486273 false) 
+	#(50 1 #liftFirstValue: 2885634 false) 
+	#(50 1 #liftFirstValue: 2885636 false) 
+	#(50 1 #liftFirstValue: 2885637 false) 
+	#(50 1 #liftFirstValue: 2885635 false) 
+	#(50 1 #liftFirstValue: 2885633 false) 
+	#(59 1 #liftFirstValue: 3559428 false) 
+	#(59 1 #liftFirstValue: 3559425 false) 
+	#(59 1 #liftFirstValue: 3559426 false) 
+	#(59 1 #liftFirstValue: 3559427 false) 
 	#(42 1 #reduceActionForOp1: 1755137 false) 
 	#(38 2 #reduceActionForTopLevelSort1: 1093633 false) 
-	#(64 2 #reduceActionForTopLevelUseContext3: 3890179 false) 
-	#(68 2 #reduceActionFor_Var__var_______comma___2: 4093954 false) 
+	#(64 2 #reduceActionForTopLevelUseContext3: 3878915 false) 
+	#(68 2 #reduceActionFor_Var__var_______comma___2: 4082690 false) 
 	#(36 2 #reduceActionFor_Var__var_______comma__1: 1026049 false) 
-	#(48 1 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___1: 2414593 false) 
-	#(46 2 #reduceActionForTerm1: 2386945 false) 
-	#(64 3 #reduceActionForTopLevelUseContext1: 3890177 false) 
-	#(67 2 #reduceActionFor_Var__var_______comma__1: 4093953 false) 
-	#(51 3 #reduceActionForParenthesizedTerm1: 2989057 false) 
-	#(58 1 #liftFirstValue: 3528705 false) 
-	#(58 1 #liftFirstValue: 3528706 false) 
-	#(57 0 #reduceActionFor_Var__var_______comma___1: 3462145 false) 
-	#(54 3 #reduceActionForArrayTerm1: 3314689 false) 
+	#(48 1 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___1: 2403329 false) 
+	#(46 2 #reduceActionForTerm1: 2375681 false) 
+	#(64 3 #reduceActionForTopLevelUseContext1: 3878913 false) 
+	#(67 2 #reduceActionFor_Var__var_______comma__1: 4082689 false) 
+	#(51 3 #reduceActionForParenthesizedTerm1: 2977793 false) 
+	#(58 1 #liftFirstValue: 3517441 false) 
+	#(58 1 #liftFirstValue: 3517442 false) 
+	#(57 0 #reduceActionFor_Var__var_______comma___1: 3450881 false) 
+	#(54 3 #reduceActionForArrayTerm1: 3303425 false) 
 	#(44 0 #reduceActionFor_Var__var_______comma___1: 1819649 false) 
-	#(45 3 #reduceActionForVar1: 2317313 false) 
-	#(53 3 #reduceActionForVarTerm1: 3193857 false) 
-	#(47 2 #reduceActionFor_Var__var_______comma__1: 2414593 false) 
-	#(48 2 #reduceActionFor_Var__var_______comma___2: 2414594 false) 
+	#(45 3 #reduceActionForVar1: 2306049 false) 
+	#(53 3 #reduceActionForVarTerm1: 3182593 false) 
+	#(47 2 #reduceActionFor_Var__var_______comma__1: 2403329 false) 
+	#(48 2 #reduceActionFor_Var__var_______comma___2: 2403330 false) 
 	#(35 4 #reduceActionForTopLevelOp1: 1011713 false) 
 	#(42 3 #reduceActionForOp3: 1755139 false) 
 	#(38 4 #reduceActionForTopLevelSort2: 1093634 false) 
 	#(39 4 #reduceActionForTopLevelAxiom1: 1261569 false) 
 	#(40 4 #reduceActionForTopLevelRule3: 1397763 false) 
 	#(40 4 #reduceActionForTopLevelRule1: 1397761 false) 
-	#(55 4 #reduceActionForArrayElements1: 3400705 false) 
-	#(57 2 #reduceActionFor_Var__var_______comma___2: 3462146 false) 
-	#(52 5 #reduceActionForPrefixOpTerm2: 3064834 false) 
+	#(55 4 #reduceActionForArrayElements1: 3389441 false) 
+	#(57 2 #reduceActionFor_Var__var_______comma___2: 3450882 false) 
+	#(52 5 #reduceActionForPrefixOpTerm2: 3053570 false) 
 	#(44 2 #reduceActionFor_Var__var_______comma___2: 1819650 false) 
-	#(49 5 #reduceActionForNonInfixTerm2: 2497538 false) 
-	#(49 5 #reduceActionForNonInfixTerm4: 2497540 false) 
-	#(49 5 #reduceActionForNonInfixTerm3: 2497539 false) 
+	#(49 5 #reduceActionForNonInfixTerm2: 2486274 false) 
+	#(49 5 #reduceActionForNonInfixTerm4: 2486276 false) 
+	#(49 5 #reduceActionForNonInfixTerm3: 2486275 false) 
 	#(42 5 #reduceActionForOp2: 1755138 false) 
 	#(42 5 #reduceActionForOp4: 1755140 false) 
 	#(42 5 #reduceActionForOp6: 1755142 false) 
@@ -291,12 +291,12 @@ LzParser2 class >> reduceTable [
 	#(40 6 #reduceActionForTopLevelRule5: 1397765 false) 
 	#(40 6 #reduceActionForTopLevelRule4: 1397764 false) 
 	#(40 6 #reduceActionForTopLevelRule2: 1397762 false) 
-	#(65 1 #liftFirstValue: 4012034 false) 
-	#(65 1 #liftFirstValue: 4012033 false) 
-	#(64 6 #reduceActionForTopLevelUseContext4: 3890180 false) 
-	#(56 2 #reduceActionFor_Var__var_______comma__1: 3462145 false) 
+	#(65 1 #liftFirstValue: 4000770 false) 
+	#(65 1 #liftFirstValue: 4000769 false) 
+	#(64 6 #reduceActionForTopLevelUseContext4: 3878916 false) 
+	#(56 2 #reduceActionFor_Var__var_______comma__1: 3450881 false) 
 	#(43 2 #reduceActionFor_Var__var_______comma__1: 1819649 false) 
-	#(64 7 #reduceActionForTopLevelUseContext2: 3890178 false) 
+	#(64 7 #reduceActionForTopLevelUseContext2: 3878914 false) 
 	#(40 8 #reduceActionForTopLevelRule6: 1397766 false)
 	).
 ]
@@ -636,7 +636,7 @@ LzParser2 >> reduceActionForOp4: nodes [
 	| result |
 	result := LzBracketOpNode new.
 	result addNode: (nodes at: 1) to: result args.
-	result leftBracket: (nodes at: 2).
+	result opName: (nodes at: 2).
 	result addNode: (nodes at: 3) to: result args.
 	result addTokens: ((nodes at: 4) at: 1) to: result commas.
 	result addNodes: ((nodes at: 4) at: 2) to: result args.
@@ -649,7 +649,7 @@ LzParser2 >> reduceActionForOp5: nodes [
 	| result |
 	result := LzSuperscriptOpNode new.
 	result addNode: (nodes at: 1) to: result args.
-	result leftParen: (nodes at: 2).
+	result opName: (nodes at: 2).
 	result addNode: (nodes at: 3) to: result args.
 	result addTokens: ((nodes at: 4) at: 1) to: result commas.
 	result addNodes: ((nodes at: 4) at: 2) to: result args.
@@ -662,7 +662,7 @@ LzParser2 >> reduceActionForOp6: nodes [
 	| result |
 	result := LzSubscriptOpNode new.
 	result addNode: (nodes at: 1) to: result args.
-	result leftParen: (nodes at: 2).
+	result opName: (nodes at: 2).
 	result addNode: (nodes at: 3) to: result args.
 	result addTokens: ((nodes at: 4) at: 1) to: result commas.
 	result addNodes: ((nodes at: 4) at: 2) to: result args.

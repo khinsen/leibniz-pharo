@@ -53,9 +53,14 @@ LzTerm >> asENodeIn: anEGraph [
 	self subclassResponsibility
 ]
 
-{ #category : #testing }
+{ #category : #rewriting }
 LzTerm >> ensureArrayTerm [
 	LzRewriteFailure signal: 'not an array term'
+]
+
+{ #category : #rewriting }
+LzTerm >> ensureNumber [
+	LzRewriteFailure signal: 'not a number term'
 ]
 
 { #category : #organizing }
@@ -128,7 +133,7 @@ LzTerm >> isRestrictionOf: aTerm [
 	^ true
 ]
 
-{ #category : #'term operations' }
+{ #category : #rewriting }
 LzTerm >> isSyntacticallyEqualTo: otherTerm [
 	^ LzBooleanTerm
 		signature: self signature

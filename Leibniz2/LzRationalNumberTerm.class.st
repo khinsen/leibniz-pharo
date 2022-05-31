@@ -17,6 +17,73 @@ LzRationalNumberTerm class >> signature: aSignature value: anObject [
 		yourself
 ]
 
+{ #category : #rewriting }
+LzRationalNumberTerm >> * otherNumberTerm [
+	^ self class
+		signature: self signature
+		value: self value * otherNumberTerm value
+]
+
+{ #category : #rewriting }
+LzRationalNumberTerm >> + otherNumberTerm [
+	^ self class
+		signature: self signature
+		value: self value + otherNumberTerm value
+]
+
+{ #category : #rewriting }
+LzRationalNumberTerm >> - otherNumberTerm [
+	^ self class
+		signature: self signature
+		value: self value - otherNumberTerm value
+]
+
+{ #category : #rewriting }
+LzRationalNumberTerm >> < otherNumberTerm [
+	^ LzBooleanTerm
+		signature: self signature
+		value: (self value < otherNumberTerm value)
+]
+
+{ #category : #rewriting }
+LzRationalNumberTerm >> <= otherNumberTerm [
+	^ LzBooleanTerm
+		signature: self signature
+		value: (self value <= otherNumberTerm value)
+]
+
+{ #category : #rewriting }
+LzRationalNumberTerm >> > otherNumberTerm [
+	^ LzBooleanTerm
+		signature: self signature
+		value: (self value > otherNumberTerm value)
+]
+
+{ #category : #rewriting }
+LzRationalNumberTerm >> >= otherNumberTerm [
+	^ LzBooleanTerm
+		signature: self signature
+		value: (self value >= otherNumberTerm value)
+]
+
+{ #category : #rewriting }
+LzRationalNumberTerm >> ensureNumber [
+]
+
+{ #category : #rewriting }
+LzRationalNumberTerm >> negated [
+	^ self class
+		signature: self signature
+		value: self value negated
+]
+
+{ #category : #rewriting }
+LzRationalNumberTerm >> raisedTo: otherNumberTerm [
+	^ self class
+		signature: self signature
+		value: (self value raisedTo: otherNumberTerm value)
+]
+
 { #category : #accessing }
 LzRationalNumberTerm >> sort [
 	| symbol |

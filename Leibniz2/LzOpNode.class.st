@@ -2,6 +2,7 @@ Class {
 	#name : #LzOpNode,
 	#superclass : #LzParseTreeNode,
 	#instVars : [
+		'opName',
 		'args'
 	],
 	#category : #'Leibniz2-SmaCCParser'
@@ -33,4 +34,19 @@ LzOpNode >> compositeNodeVariables [
 LzOpNode >> initialize [
 	super initialize.
 	args := OrderedCollection new: 2.
+]
+
+{ #category : #generated }
+LzOpNode >> opName [
+	^ opName
+]
+
+{ #category : #generated }
+LzOpNode >> opName: aSmaCCToken [
+	opName := aSmaCCToken
+]
+
+{ #category : #generated }
+LzOpNode >> tokenVariables [
+	^ #(#opName)
 ]

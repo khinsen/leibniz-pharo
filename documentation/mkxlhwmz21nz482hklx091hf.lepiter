@@ -272,6 +272,118 @@
 											"__type" : "textStyle"
 										},
 										"string" : "Addition is commutative:\n\t{{lzAxiom:x_:ℤ, y_:ℤ, x_ + y_ = y_ + x_}}\nand associative:\n\t{{lzAxiom:x_:ℤ, y_:ℤ, z_:ℤ, (x_ + y_) + z_ = x_ + (y_ + z_)}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:12:49.382989+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:12:49.382989+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "hqy5PKucDQCu8M8JBp1owg=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℤ) + (zero_:zero) ⇒ x_}}\n\t{{lzRule:(zero_:zero) + (x_:ℤ) ⇒ x_}}"
+												},
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:10:42.187016+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:13:11.670032+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "pbAINaucDQCu7iWyBp1owg=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Evaluation for number terms:\n\t{{lzRule:(x_:ℤ) + (y_:ℤ) → \"x ensureNumber. y ensureNumber. x + y\"}}"
+												}
+											]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-31T09:12:29.880764+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-31T09:12:29.880764+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "6RqQO6ucDQCu7wkeBp1owg=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Rules:"
 									}
 								]
 							},
@@ -384,6 +496,118 @@
 											"__type" : "textStyle"
 										},
 										"string" : "The negative of an integer is an integer:\n\t{{lzOp:-(ℤ) : ℤ}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:20:47.698737+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:20:47.698737+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "FC88WaucDQCf1ekNBptRAA=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℤ) - (zero_:zero) ⇒ x_}}\n\t{{lzRule:(zero_:zero) - (x_:ℤ) ⇒ -(x_)}}"
+												},
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:20:32.346199+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:21:14.066694+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "ECWkV6ucDQCf1HlVBptRAA=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Evaluation for number terms:\n\t{{lzRule:(x_:ℤ) - (y_:ℤ) → \"x ensureNumber. y ensureNumber. x - y\"}}\n\t{{lzRule:-(x_:ℤ) → \"x ensureNumber. x negated\"}}"
+												}
+											]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-31T09:20:19.458846+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-31T09:20:20.399926+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "1213V6ucDQCf03uBBptRAA=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Rules:"
 									}
 								]
 							},
@@ -522,7 +746,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:34:18.614744+02:00"
+												"dateAndTimeString" : "2022-05-31T08:55:12.973894+02:00"
 											}
 										},
 										"uid" : {
@@ -533,6 +757,43 @@
 											"__type" : "textStyle"
 										},
 										"string" : "The reason for introducing these two operators is their more precise result sort. For example, it is possible to divide by {{lzTerm:succ(n_:ℕ)}} which is of sort {{lzSort:ℕ.nz}}, but not by {{lzTerm:(n_:ℕ) + 1}}, which is of sort {{lzSort:ℕ}}."
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-31T08:55:14.736181+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-31T08:55:34.771808+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "qXo3/aqcDQCq9R8qB2tiaA=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Rules:\n\t{{lzRule:pred(x_:ℕ.nz) → \"x ensureNumber. x pred\"}}\n\t{{lzRule:succ(x_:ℕ) → \"x ensureNumber. x succ\"}}"
 									}
 								]
 							},
@@ -719,6 +980,155 @@
 											"__type" : "textStyle"
 										},
 										"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:x_:ℤ, y_:ℤ, z_:ℤ,  x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:24:06.760908+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:24:06.760908+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "VaIZZaucDQC7mvtOD9ZeZw=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℤ) × (zero_:zero) ⇒ 0}}\n\t{{lzRule:(zero_:zero) × (x_:ℤ) ⇒ 0}}"
+												},
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:24:33.639944+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:24:33.639944+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "HsyzZqucDQC7m+1zD9ZeZw=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Eliminate ones:\n\t{{lzRule:1 × (x_:ℤ) ⇒ x_}}\n\t{{lzRule:(x_:ℤ) × 1 ⇒ x_}}"
+												},
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:23:52.092987+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:24:39.670189+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "farEY6ucDQC7mfRcD9ZeZw=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℤ) × (y_:ℤ) → \"x ensureNumber. y ensureNumber. x * y\"}}"
+												}
+											]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-31T09:23:42.751004+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-31T09:23:43.940905+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "U3+JY6ucDQC7mIR0D9ZeZw=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Rules:"
 									}
 								]
 							},
@@ -831,6 +1241,155 @@
 											"__type" : "textStyle"
 										},
 										"string" : "Special case for the natural numbers:\n\t{{lzOp:ℕ div ℕ.nz : ℕ}}\n\t{{lzOp:ℕ rem ℕ.nz : ℕ}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:27:29.351518+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:27:29.351518+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "Ne0scaucDQCoch2jB0fLeQ=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Eliminate zeros:\n\t{{lzRule:(zero_:zero) div (x_:ℤ.nz) ⇒ 0}}\n\t{{lzRule:(zero_:zero) rem (x_:ℤ.nz) ⇒ 0}}"
+												},
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:27:10.637527+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:27:42.555567+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "5Y1fbqucDQCocVD1B0fLeQ=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Eliminate ones:\n\t{{lzRule:(x_:ℤ) div 1 ⇒ x_}}\n\t{{lzRule:(x_:ℤ) rem 1 ⇒ 0}}"
+												},
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:27:50.43324+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:33:12.484174+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "IQdAcqucDQCoc7oRB0fLeQ=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℤ) div (y_:ℤ.nz) → \"x ensureNumber. y ensureNumber. x div: y\"}}\n\t{{lzRule:(x_:ℤ) rem (y_:ℤ.nz) → \"x ensureNumber. y ensureNumber. x rem: y\"}}"
+												}
+											]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-31T09:26:40.657256+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-31T09:26:41.634904+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "+Ds1bqucDQCocMxqB0fLeQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Rules:"
 									}
 								]
 							},
@@ -980,6 +1539,118 @@
 											"__type" : "textStyle"
 										},
 										"string" : "Non-zero integers can also be raised to power zero:\n\t{{lzOp:ℤ.nz^(zero) : ℕ.nz}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:41:38.733722+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:41:38.733722+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "G3XNo6ucDQCod4pRB0fLeQ=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℤ.nz)^(zero_:zero) ⇒ 1}}\n\t{{lzRule:(zero_:zero)^(x_:ℕ.nz) ⇒ 0}}"
+												},
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:41:28.10133+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-05-31T09:41:45.982208+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "V+DdoaucDQCodjSmB0fLeQ=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℤ)^(y_:ℕ.nz) → \"x ensureNumber. y ensureNumber. x raisedTo: y\"}}"
+												}
+											]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-31T09:40:59.134381+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-05-31T09:41:03.453017+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "2g1goaucDQCoddWsB0fLeQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Rules:"
 									}
 								]
 							},
@@ -1088,6 +1759,43 @@
 								"__type" : "textStyle"
 							},
 							"string" : "{{lzOp:ℤ < ℤ : 𝔹}}\n{{lzOp:ℤ > ℤ : 𝔹}}\n{{lzOp:ℤ ≤ ℤ : 𝔹}}\n{{lzOp:ℤ ≥ ℤ : 𝔹}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-05-31T09:44:57.152428+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-05-31T09:46:23.184491+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "VgOLr6ucDQCoFFCLCgmj6Q=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Evaluation rules for number terms:\n\t{{lzRule:(x_:ℤ) < (y_:ℤ) → \"x ensureNumber. y ensureNumber. x < y\"}}\n\t{{lzRule:(x_:ℤ) > (y_:ℤ) → \"x ensureNumber. y ensureNumber. x > y\"}}\n\t{{lzRule:(x_:ℤ) ≤ (y_:ℤ) → \"x ensureNumber. y ensureNumber. x <= y\"}}\n\t{{lzRule:(x_:ℤ) ≥ (y_:ℤ) → \"x ensureNumber. y ensureNumber. x >= y\"}}"
 						}
 					]
 				},

@@ -2,7 +2,6 @@ Class {
 	#name : #LzSuperscriptOpNode,
 	#superclass : #LzOpNode,
 	#instVars : [
-		'leftParen',
 		'commas',
 		'rightParen'
 	],
@@ -36,16 +35,6 @@ LzSuperscriptOpNode >> initialize [
 ]
 
 { #category : #generated }
-LzSuperscriptOpNode >> leftParen [
-	^ leftParen
-]
-
-{ #category : #generated }
-LzSuperscriptOpNode >> leftParen: aSmaCCToken [
-	leftParen := aSmaCCToken
-]
-
-{ #category : #generated }
 LzSuperscriptOpNode >> rightParen [
 	^ rightParen
 ]
@@ -57,5 +46,5 @@ LzSuperscriptOpNode >> rightParen: aSmaCCToken [
 
 { #category : #generated }
 LzSuperscriptOpNode >> tokenVariables [
-	^ #(#leftParen #rightParen)
+	^ #(#rightParen #opName)
 ]

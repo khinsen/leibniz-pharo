@@ -2,7 +2,6 @@ Class {
 	#name : #LzPrefixOpNode,
 	#superclass : #LzOpNode,
 	#instVars : [
-		'opName',
 		'leftParen',
 		'commas',
 		'rightParen'
@@ -47,16 +46,6 @@ LzPrefixOpNode >> leftParen: aSmaCCToken [
 ]
 
 { #category : #generated }
-LzPrefixOpNode >> opName [
-	^ opName
-]
-
-{ #category : #generated }
-LzPrefixOpNode >> opName: aSmaCCToken [
-	opName := aSmaCCToken
-]
-
-{ #category : #generated }
 LzPrefixOpNode >> rightParen [
 	^ rightParen
 ]
@@ -68,5 +57,5 @@ LzPrefixOpNode >> rightParen: aSmaCCToken [
 
 { #category : #generated }
 LzPrefixOpNode >> tokenVariables [
-	^ #(#opName #leftParen #rightParen)
+	^ #(#leftParen #rightParen #opName)
 ]

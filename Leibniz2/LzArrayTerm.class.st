@@ -67,7 +67,7 @@ LzArrayTerm >> elements: anArray [
 	elements := anArray
 ]
 
-{ #category : #testing }
+{ #category : #rewriting }
 LzArrayTerm >> ensureArrayTerm [
 ]
 

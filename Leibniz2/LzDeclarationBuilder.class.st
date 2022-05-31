@@ -244,7 +244,6 @@ LzDeclarationBuilder >> visitTopLevelTerm: aTopLevelTerm [
 	aTopLevelTerm vars
 		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
 	varBuilder acceptNode: aTopLevelTerm term.
-	self assert: varBuilder vars size equals: 0.
 	^ self acceptNode: aTopLevelTerm term
 ]
 

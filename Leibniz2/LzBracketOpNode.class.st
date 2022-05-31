@@ -2,7 +2,6 @@ Class {
 	#name : #LzBracketOpNode,
 	#superclass : #LzOpNode,
 	#instVars : [
-		'leftBracket',
 		'commas',
 		'rightBracket'
 	],
@@ -36,16 +35,6 @@ LzBracketOpNode >> initialize [
 ]
 
 { #category : #generated }
-LzBracketOpNode >> leftBracket [
-	^ leftBracket
-]
-
-{ #category : #generated }
-LzBracketOpNode >> leftBracket: aSmaCCToken [
-	leftBracket := aSmaCCToken
-]
-
-{ #category : #generated }
 LzBracketOpNode >> rightBracket [
 	^ rightBracket
 ]
@@ -57,5 +46,5 @@ LzBracketOpNode >> rightBracket: aSmaCCToken [
 
 { #category : #generated }
 LzBracketOpNode >> tokenVariables [
-	^ #(#leftBracket #rightBracket)
+	^ #(#rightBracket #opName)
 ]
