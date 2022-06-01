@@ -6,7 +6,8 @@ Class {
 		'commas',
 		'subsort',
 		'subsetOf',
-		'supersort'
+		'supersort',
+		'options'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
@@ -28,7 +29,7 @@ LzTopLevelSubsortNode >> commas: anOrderedCollection [
 
 { #category : #generated }
 LzTopLevelSubsortNode >> compositeNodeVariables [
-	^ #(#vars)
+	^ #(#vars #options)
 ]
 
 { #category : #generated }
@@ -41,11 +42,24 @@ LzTopLevelSubsortNode >> initialize [
 	super initialize.
 	vars := OrderedCollection new: 2.
 	commas := OrderedCollection new: 2.
+	options := OrderedCollection new: 2.
 ]
 
 { #category : #generated }
 LzTopLevelSubsortNode >> nodeVariables [
 	^ #(#subsort #supersort)
+]
+
+{ #category : #generated }
+LzTopLevelSubsortNode >> options [
+	^ options
+]
+
+{ #category : #generated }
+LzTopLevelSubsortNode >> options: anOrderedCollection [
+	self setParents: self options to: nil.
+	options := anOrderedCollection.
+	self setParents: self options to: self
 ]
 
 { #category : #generated }

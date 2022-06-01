@@ -33,9 +33,16 @@ LzASTFunctionRule >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
 	self pattern printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' → '.
-	self function first printOn: aStream.
-	aStream nextPutAll: ':'.
-	aStream nextPutAll:  self function second.
+	self function ifNotNil: [ :f |
+		aStream nextPutAll: ''''.
+		aStream nextPutAll: f first.
+		aStream nextPutAll: ''':'.
+		aStream nextPutAll: f second ].
+	self code ifNotNil: [ :c |
+		aStream
+			<< '"';
+			<< c;
+			<< '"' ].
 	condition ifNotNil: [
 		aStream nextPutAll: ' | '.
 		self condition printAsLeibnizSyntaxOn: aStream ]

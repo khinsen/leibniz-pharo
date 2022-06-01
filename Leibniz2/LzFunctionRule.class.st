@@ -98,15 +98,15 @@ LzFunctionRule >> function: anArray [
 LzFunctionRule >> printBodyAsLeibnizSyntaxOn: aStream [
 	self pattern printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' → '.
-	self function ifNotNil: [
+	self function ifNotNil: [ :f |
 		aStream nextPutAll: ''''.
-		aStream nextPutAll: self function first.
+		aStream nextPutAll: f first.
 		aStream nextPutAll: ''':'.
-		aStream nextPutAll: self function second ].
-	self code ifNotNil: [
+		aStream nextPutAll: f second ].
+	self code ifNotNil: [ :c |
 		aStream
 			<< '"';
-			<< self code;
+			<< c;
 			<< '"' ]
 ]
 

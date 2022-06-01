@@ -6,7 +6,8 @@ Class {
 		'commas',
 		'op',
 		'colon',
-		'sort'
+		'sort',
+		'options'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
@@ -38,7 +39,7 @@ LzTopLevelOpNode >> commas: anOrderedCollection [
 
 { #category : #generated }
 LzTopLevelOpNode >> compositeNodeVariables [
-	^ #(#vars)
+	^ #(#vars #options)
 ]
 
 { #category : #generated }
@@ -51,6 +52,7 @@ LzTopLevelOpNode >> initialize [
 	super initialize.
 	vars := OrderedCollection new: 2.
 	commas := OrderedCollection new: 2.
+	options := OrderedCollection new: 2.
 ]
 
 { #category : #generated }
@@ -68,6 +70,18 @@ LzTopLevelOpNode >> op: aLzOpNode [
 	self op notNil ifTrue: [ self op parent: nil ].
 	op := aLzOpNode.
 	self op notNil ifTrue: [ self op parent: self ]
+]
+
+{ #category : #generated }
+LzTopLevelOpNode >> options [
+	^ options
+]
+
+{ #category : #generated }
+LzTopLevelOpNode >> options: anOrderedCollection [
+	self setParents: self options to: nil.
+	options := anOrderedCollection.
+	self setParents: self options to: self
 ]
 
 { #category : #generated }

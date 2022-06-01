@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'vars',
 		'commas',
-		'term'
+		'term',
+		'options'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
@@ -26,7 +27,7 @@ LzTopLevelTermNode >> commas: anOrderedCollection [
 
 { #category : #generated }
 LzTopLevelTermNode >> compositeNodeVariables [
-	^ #(#vars)
+	^ #(#vars #options)
 ]
 
 { #category : #generated }
@@ -39,11 +40,24 @@ LzTopLevelTermNode >> initialize [
 	super initialize.
 	vars := OrderedCollection new: 2.
 	commas := OrderedCollection new: 2.
+	options := OrderedCollection new: 2.
 ]
 
 { #category : #generated }
 LzTopLevelTermNode >> nodeVariables [
 	^ #(#term)
+]
+
+{ #category : #generated }
+LzTopLevelTermNode >> options [
+	^ options
+]
+
+{ #category : #generated }
+LzTopLevelTermNode >> options: anOrderedCollection [
+	self setParents: self options to: nil.
+	options := anOrderedCollection.
+	self setParents: self options to: self
 ]
 
 { #category : #generated }

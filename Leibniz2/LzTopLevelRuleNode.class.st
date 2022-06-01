@@ -6,6 +6,7 @@ Class {
 		'commas',
 		'pattern',
 		'arrow',
+		'options',
 		'condition'
 	],
 	#category : #'Leibniz2-SmaCCParser'
@@ -38,7 +39,7 @@ LzTopLevelRuleNode >> commas: anOrderedCollection [
 
 { #category : #generated }
 LzTopLevelRuleNode >> compositeNodeVariables [
-	^ #(#vars)
+	^ #(#vars #options)
 ]
 
 { #category : #generated }
@@ -63,11 +64,24 @@ LzTopLevelRuleNode >> initialize [
 	super initialize.
 	vars := OrderedCollection new: 2.
 	commas := OrderedCollection new: 2.
+	options := OrderedCollection new: 2.
 ]
 
 { #category : #generated }
 LzTopLevelRuleNode >> nodeVariables [
 	^ #(#pattern #condition)
+]
+
+{ #category : #generated }
+LzTopLevelRuleNode >> options [
+	^ options
+]
+
+{ #category : #generated }
+LzTopLevelRuleNode >> options: anOrderedCollection [
+	self setParents: self options to: nil.
+	options := anOrderedCollection.
+	self setParents: self options to: self
 ]
 
 { #category : #generated }

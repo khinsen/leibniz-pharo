@@ -23,9 +23,53 @@ LzAnnotationStyler >> context [
 		contextForPageNamed: self page title
 ]
 
+{ #category : #private }
+LzAnnotationStyler >> inTextButton: aString type: aSymbol [
+	| color button |
+
+	button := BrButton new.
+	button connector beVisualSource.
+
+	aSymbol = #declaration
+		ifTrue: [ color := LzColors declarationColor ].
+	aSymbol = #example
+		ifTrue: [ color := LzColors exampleColor ].
+
+	button 
+		addAptitude: (BrGlamorousButtonLabelAptitude new 
+			defaultColor: color;
+			hoveredColor: color muchDarker;
+			fontName: LzCodeFont defaultFamily);
+		padding: (BlInsets top: 2 left: 0 bottom: 0 right: 0);
+		margin: (BlInsets top: -1 left: 0 bottom: 0 right: 0);
+		icon: BrGlamorousVectorIcons inspect;
+		beSmallSize;
+		layout: BlLinearLayout horizontal;
+		constraintsDo: [ :c |
+			c horizontal fitContent.
+			c vertical fitContent. ];
+		label: aString.
+	^ button
+]
+
+{ #category : #private }
+LzAnnotationStyler >> inTextButton: aString type: aSymbol spawning: aBlock [
+	^ (self inTextButton: aString type: aSymbol)
+		action: [ :aButton |
+					aButton phlow spawnObject: aBlock value ]
+]
+
 { #category : #accessing }
 LzAnnotationStyler >> page [
 	^ self snippet page
+]
+
+{ #category : #private }
+LzAnnotationStyler >> parseOptions: aTopLevelAnnotation [
+	^ (aTopLevelAnnotation options collect: [ :each |
+		each key source
+			-> (LzDeclarationBuilder new acceptNode: each value) value ])
+		asDictionary
 ]
 
 { #category : #accessing }
@@ -52,22 +96,14 @@ LzAnnotationStyler >> styleAutoHidingAnnotation: anAnnotation [
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleButton: anLzAnnotation spawning: aBlock [
+LzAnnotationStyler >> styleButton: anLzAnnotation type: aSymbol spawning: aBlock [
 	| attribute |
 	attribute := GtButtonAttribute new
 		beAppend;
 		stencil: [
-			| button label |
-			label := anLzAnnotation source.
-			button := LeSnippetStylerVisitor textLinkButtonPadding:
-				(BlInsets top: 2) margin: BlInsets empty.
-			button aptitude fontName: LzCodeFont defaultFamily.
-			button
-				beSmallSize;
-				label: label;
-				action: [ :aButton |
-					aButton phlow spawnObject: aBlock value ].
-			button ].
+			| label |
+			label := (LzDeclarationBuilder new acceptNode: anLzAnnotation) asLeibnizSyntaxString "anLzAnnotation source".
+			self inTextButton: label type: aSymbol spawning: aBlock ].
 	self text
 		attribute: attribute
 		from: anLzAnnotation parent startPosition
@@ -75,22 +111,20 @@ LzAnnotationStyler >> styleButton: anLzAnnotation spawning: aBlock [
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleObjectButton: anLzAnnotation [
-	self styleButton: anLzAnnotation spawning: [
+LzAnnotationStyler >> styleObjectButton: anLzAnnotation type: aSymbol [
+	self styleButton: anLzAnnotation type: aSymbol spawning: [
 		LzObjectBuilder new
 			context: self context;
 			acceptNode: anLzAnnotation ].
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleUseContextButton: anAnnotation [
+LzAnnotationStyler >> styleUseContextButton: anAnnotation options: aDictionary [
 	| attribute pageReference forSortsFlag |
 	pageReference := anAnnotation pageName value allButFirst allButLast.
 	(LzBook hasPageNamed: pageReference)
 		ifFalse: [ ^ self ].
-	forSortsFlag := anAnnotation sortFlag
-		ifNil: [ false ]
-		ifNotNil: [ :f | f value = 'yes' ].
+	forSortsFlag := (aDictionary at: 'forSorts' ifAbsent: [ 'no' ]) = 'yes'.
 	attribute := GtButtonAttribute new
 		beAppend;
 		stencil: [
@@ -98,12 +132,9 @@ LzAnnotationStyler >> styleUseContextButton: anAnnotation [
 			label := forSortsFlag
 				ifTrue: [ pageReference, ' (in sorts)' ]
 				ifFalse: [ pageReference ].
-			button := LeSnippetStylerVisitor textLinkButtonPadding:
-				(BlInsets top: 2) margin: BlInsets empty.
-			button aptitude glamorousRegularFont.
+			button := self inTextButton: label
+				type: #declaration.
 			button
-				beSmallSize;
-				label: label;
 				action: [ :aButton |
 					aButton phlow spawnTool:
 						(LzBook pageNamed: pageReference)
@@ -135,53 +166,60 @@ LzAnnotationStyler >> visitSmaCCError: aSmaCCError [
 LzAnnotationStyler >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	self styleAnnotation: aTopLevelEqualityAxiom.
 	self styleAutoHidingAnnotation: aTopLevelEqualityAxiom.
-	self styleObjectButton: aTopLevelEqualityAxiom
+	self styleObjectButton: aTopLevelEqualityAxiom type: #declaration
 ]
 
 { #category : #styling }
 LzAnnotationStyler >> visitTopLevelOp: aTopLevelOpAnnotation [
 	self styleAnnotation: aTopLevelOpAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelOpAnnotation.
-	self styleObjectButton: aTopLevelOpAnnotation
+	self styleObjectButton: aTopLevelOpAnnotation type: #declaration
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelRule: aTopLevelRule [
 	self styleAnnotation: aTopLevelRule.
 	self styleAutoHidingAnnotation: aTopLevelRule.
-	self styleObjectButton: aTopLevelRule
+	self styleObjectButton: aTopLevelRule type: #declaration
 ]
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelSort: aTopLevelSortAnnotation [
+	| options type |
+	options := self parseOptions: aTopLevelSortAnnotation.
+	type := (options at: #example ifAbsent: [ 'no' ]) = 'yes'
+		ifTrue: [ #example ]
+		ifFalse: [ #declaration ].
 	self styleAnnotation: aTopLevelSortAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelSortAnnotation.
-	self styleObjectButton: aTopLevelSortAnnotation
+	self styleObjectButton: aTopLevelSortAnnotation type: type
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
 	self styleAnnotation: aTopLevelSpecialTerms.
 	self styleAutoHidingAnnotation: aTopLevelSpecialTerms.
-	self styleObjectButton: aTopLevelSpecialTerms
+	self styleObjectButton: aTopLevelSpecialTerms type: #declaration
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
 	self styleAnnotation: aTopLevelSubsort.
 	self styleAutoHidingAnnotation: aTopLevelSubsort.
-	self styleObjectButton: aTopLevelSubsort
+	self styleObjectButton: aTopLevelSubsort type: #declaration
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 	self styleAnnotation: aTopLevelTermAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.
-	self styleObjectButton: aTopLevelTermAnnotation
+	self styleObjectButton: aTopLevelTermAnnotation type: #example
 ]
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
+	| options type |
+	options := self parseOptions: aTopLevelUseContext.
 	self styleAutoHidingAnnotation: aTopLevelUseContext.
-	self styleUseContextButton: aTopLevelUseContext
+	self styleUseContextButton: aTopLevelUseContext options: options
 ]

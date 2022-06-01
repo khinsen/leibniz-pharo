@@ -7,6 +7,7 @@ Class {
 		'left',
 		'equals',
 		'right',
+		'options',
 		'condition'
 	],
 	#category : #'Leibniz2-SmaCCParser'
@@ -29,7 +30,7 @@ LzTopLevelEqualityAxiomNode >> commas: anOrderedCollection [
 
 { #category : #generated }
 LzTopLevelEqualityAxiomNode >> compositeNodeVariables [
-	^ #(#vars)
+	^ #(#vars #options)
 ]
 
 { #category : #generated }
@@ -64,6 +65,7 @@ LzTopLevelEqualityAxiomNode >> initialize [
 	super initialize.
 	vars := OrderedCollection new: 2.
 	commas := OrderedCollection new: 2.
+	options := OrderedCollection new: 2.
 ]
 
 { #category : #generated }
@@ -81,6 +83,18 @@ LzTopLevelEqualityAxiomNode >> left: aLzParseTreeNode [
 { #category : #generated }
 LzTopLevelEqualityAxiomNode >> nodeVariables [
 	^ #(#left #right #condition)
+]
+
+{ #category : #generated }
+LzTopLevelEqualityAxiomNode >> options [
+	^ options
+]
+
+{ #category : #generated }
+LzTopLevelEqualityAxiomNode >> options: anOrderedCollection [
+	self setParents: self options to: nil.
+	options := anOrderedCollection.
+	self setParents: self options to: self
 ]
 
 { #category : #generated }

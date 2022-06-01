@@ -3,7 +3,7 @@ Class {
 	#superclass : #LzParseTreeNode,
 	#instVars : [
 		'pageName',
-		'sortFlag'
+		'options'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
@@ -11,6 +11,29 @@ Class {
 { #category : #generated }
 LzTopLevelUseContextNode >> acceptVisitor: aParseTreeVisitor [
 	^ aParseTreeVisitor visitTopLevelUseContext: self
+]
+
+{ #category : #generated }
+LzTopLevelUseContextNode >> compositeNodeVariables [
+	^ #(#options)
+]
+
+{ #category : #'generated-initialize-release' }
+LzTopLevelUseContextNode >> initialize [
+	super initialize.
+	options := OrderedCollection new: 2.
+]
+
+{ #category : #generated }
+LzTopLevelUseContextNode >> options [
+	^ options
+]
+
+{ #category : #generated }
+LzTopLevelUseContextNode >> options: anOrderedCollection [
+	self setParents: self options to: nil.
+	options := anOrderedCollection.
+	self setParents: self options to: self
 ]
 
 { #category : #generated }
@@ -24,16 +47,6 @@ LzTopLevelUseContextNode >> pageName: aSmaCCToken [
 ]
 
 { #category : #generated }
-LzTopLevelUseContextNode >> sortFlag [
-	^ sortFlag
-]
-
-{ #category : #generated }
-LzTopLevelUseContextNode >> sortFlag: aSmaCCToken [
-	sortFlag := aSmaCCToken
-]
-
-{ #category : #generated }
 LzTopLevelUseContextNode >> tokenVariables [
-	^ #(#pageName #sortFlag)
+	^ #(#pageName)
 ]
