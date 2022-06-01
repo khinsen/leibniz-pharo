@@ -106,12 +106,13 @@ LzSortPair >> gtLeastCommonSupersortsFor: aView [
 { #category : #inspecting }
 LzSortPair >> gtSortGraphFor: aView [
 	<gtView>
-	^ aView forward
+	^ aView mondrian
 		title: 'Sort graph';
 		priority: 0;
-		object: [ self sortGraph ];
-		view: #gtGraphFor:;
-		yourself
+		painting: [ :view |
+			self
+				paintGraphOn: view
+				highlight: Set new ]
 ]
 
 { #category : #inspecting }

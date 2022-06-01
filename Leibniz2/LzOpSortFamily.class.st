@@ -7,7 +7,7 @@ Class {
 	#category : #'Leibniz2-Sorts'
 }
 
-{ #category : #accessing }
+{ #category : #inspecting }
 LzOpSortFamily >> gtGraphFor: aView [
 	<gtView>
 	^ self sortGraph

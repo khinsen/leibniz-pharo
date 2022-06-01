@@ -75,27 +75,11 @@ LzAnnotationStyler >> styleButton: anLzAnnotation spawning: aBlock [
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleGenericButton: anLzAnnotation [
-	self styleButton: anLzAnnotation spawning: [ anLzAnnotation ].
-]
-
-{ #category : #styling }
-LzAnnotationStyler >> styleOpButton: aTopLevelOpAnnotation [
-	self styleGenericButton: aTopLevelOpAnnotation
-]
-
-{ #category : #styling }
-LzAnnotationStyler >> styleSortButton: aTopLevelSortAnnotation [
-	self styleButton: aTopLevelSortAnnotation spawning: [
-		self context sortGraph familyForParsedOp:
-			(LzDeclarationBuilder new acceptNode: aTopLevelSortAnnotation) ]
-]
-
-{ #category : #styling }
-LzAnnotationStyler >> styleTermButton: aTermAnnotation [
-	self styleButton: aTermAnnotation spawning: [
-		self context parsedPattern:
-			(LzDeclarationBuilder new acceptNode: aTermAnnotation) ]
+LzAnnotationStyler >> styleObjectButton: anLzAnnotation [
+	self styleButton: anLzAnnotation spawning: [
+		LzObjectBuilder new
+			context: self context;
+			acceptNode: anLzAnnotation ].
 ]
 
 { #category : #styling }
@@ -151,49 +135,49 @@ LzAnnotationStyler >> visitSmaCCError: aSmaCCError [
 LzAnnotationStyler >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	self styleAnnotation: aTopLevelEqualityAxiom.
 	self styleAutoHidingAnnotation: aTopLevelEqualityAxiom.
-	self styleGenericButton: aTopLevelEqualityAxiom
+	self styleObjectButton: aTopLevelEqualityAxiom
 ]
 
 { #category : #styling }
 LzAnnotationStyler >> visitTopLevelOp: aTopLevelOpAnnotation [
 	self styleAnnotation: aTopLevelOpAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelOpAnnotation.
-	self styleOpButton: aTopLevelOpAnnotation
+	self styleObjectButton: aTopLevelOpAnnotation
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelRule: aTopLevelRule [
 	self styleAnnotation: aTopLevelRule.
 	self styleAutoHidingAnnotation: aTopLevelRule.
-	self styleGenericButton: aTopLevelRule
+	self styleObjectButton: aTopLevelRule
 ]
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelSort: aTopLevelSortAnnotation [
 	self styleAnnotation: aTopLevelSortAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelSortAnnotation.
-	self styleSortButton: aTopLevelSortAnnotation
+	self styleObjectButton: aTopLevelSortAnnotation
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
 	self styleAnnotation: aTopLevelSpecialTerms.
 	self styleAutoHidingAnnotation: aTopLevelSpecialTerms.
-	self styleGenericButton: aTopLevelSpecialTerms
+	self styleObjectButton: aTopLevelSpecialTerms
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
 	self styleAnnotation: aTopLevelSubsort.
 	self styleAutoHidingAnnotation: aTopLevelSubsort.
-	self styleSortButton: aTopLevelSubsort
+	self styleObjectButton: aTopLevelSubsort
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 	self styleAnnotation: aTopLevelTermAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.
-	self styleTermButton: aTopLevelTermAnnotation
+	self styleObjectButton: aTopLevelTermAnnotation
 ]
 
 { #category : #visiting }
