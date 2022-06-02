@@ -17,6 +17,14 @@ LzObjectBuilder >> context: aContext [
 	context := aContext
 ]
 
+{ #category : #accessing }
+LzObjectBuilder >> parseOptions: aTopLevelAnnotation [
+	^ (aTopLevelAnnotation options collect: [ :each |
+		each key source
+			-> (LzDeclarationBuilder new acceptNode: each value) value ])
+		asDictionary
+]
+
 { #category : #private }
 LzObjectBuilder >> patternFromTerm: aTerm vars: aVarList context: aContext [
 	^ (LzASTPattern new
@@ -34,8 +42,12 @@ LzObjectBuilder >> sortFromTerm: aTerm vars: aVarList [
 
 { #category : #visiting }
 LzObjectBuilder >> visitTopLevelSort: aTopLevelSort [
-	^ self context sortGraph familyForParsedOp:
-		(LzDeclarationBuilder new acceptNode: aTopLevelSort)
+	| options declaration |
+	options := self parseOptions: aTopLevelSort.
+	declaration := LzDeclarationBuilder new acceptNode: aTopLevelSort.
+	^ (options at: #example ifAbsent: [ 'no' ]) = 'yes'
+		ifTrue: [ declaration ]
+		ifFalse: [ self context sortGraph familyForParsedOp: declaration op ]
 ]
 
 { #category : #visiting }

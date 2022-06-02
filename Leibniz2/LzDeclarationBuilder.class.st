@@ -12,6 +12,14 @@ LzDeclarationBuilder >> arrayElementsFor: anArray [
 			ifFalse: [ self acceptNode: each ] ]
 ]
 
+{ #category : #private }
+LzDeclarationBuilder >> parseOptions: aTopLevelAnnotation [
+	^ (aTopLevelAnnotation options collect: [ :each |
+		each key source
+			-> (LzDeclarationBuilder new acceptNode: each value) value ])
+		asDictionary
+]
+
 { #category : #visiting }
 LzDeclarationBuilder >> visitArrayTerm: anArrayTerm [
 	| shape elements |
@@ -207,11 +215,9 @@ LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
 		ifNotNil: [ :args | varBuilder acceptNodes: args ].
 	op := self acceptNode: aTopLevelSort op.
 	op args: (aTopLevelSort op args collect: [ :each | self acceptNode: each ]).
-	op sort: (LzASTOpTerm new
-					opName: (LzPrefixOpName for: LzConstants opNameSort);
-					args: #()).
 	op variables: varBuilder vars.
-	^ op
+	^ LzASTSort new
+		op: op
 ]
 
 { #category : #visiting }
@@ -251,8 +257,10 @@ LzDeclarationBuilder >> visitTopLevelTerm: aTopLevelTerm [
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitTopLevelUseContext: aTopLevelUseContext [
+	| options |
+	options := self parseOptions: aTopLevelUseContext.
 	^ { aTopLevelUseContext pageName value allButFirst allButLast.
-		aTopLevelUseContext sortFlag ifNil: [ false ] ifNotNil: [ :f | f value = 'yes' ] }
+		(options at: #sortFlag ifAbsent: [ 'no' ]) = 'yes' }
 ]
 
 { #category : #visiting }
