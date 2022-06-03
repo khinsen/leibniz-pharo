@@ -26,7 +26,7 @@ LzSortHierarchyRoot >> initialize [
 		LzParser
 			parse: LzConstants opNameSort, ' : ', LzConstants opNameSort
 			startingAt: #opEnd
-			yielding: LzASTOp.
+			yielding: LzOpDeclaration.
 
 	sortGraph := LzSortHierarchyRootGraph new
 		sortDeclarations: { sortDeclaration };

@@ -1,35 +1,35 @@
 Class {
-	#name : #LzASTFunctionRule,
-	#superclass : #LzASTRule,
+	#name : #LzFunctionRuleDeclaration,
+	#superclass : #LzRuleDeclaration,
 	#instVars : [
 		'function',
 		'code'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #accessing }
-LzASTFunctionRule >> code [
+LzFunctionRuleDeclaration >> code [
 	^ code
 ]
 
 { #category : #accessing }
-LzASTFunctionRule >> code: aString [
+LzFunctionRuleDeclaration >> code: aString [
 	code := aString
 ]
 
 { #category : #accessing }
-LzASTFunctionRule >> function [
+LzFunctionRuleDeclaration >> function [
 	^ function
 ]
 
 { #category : #accessing }
-LzASTFunctionRule >> function: anArray [
+LzFunctionRuleDeclaration >> function: anArray [
 	function := anArray
 ]
 
 { #category : #printing }
-LzASTFunctionRule >> printAsLeibnizSyntaxOn: aStream [
+LzFunctionRuleDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
 	self pattern printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' → '.
@@ -49,6 +49,6 @@ LzASTFunctionRule >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LzASTFunctionRule >> ruleClass [
+LzFunctionRuleDeclaration >> ruleClass [
 	^ LzFunctionRule
 ]

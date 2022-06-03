@@ -24,19 +24,19 @@ LzDeclarationBuilder >> parseOptions: aTopLevelAnnotation [
 LzDeclarationBuilder >> visitArrayTerm: anArrayTerm [
 	| shape elements |
 	elements := self arrayElementsFor: anArrayTerm arrayElements elements.
-	^ LzASTArrayTerm new
+	^ LzArrayTermDeclaration new
 		elements: elements
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitBracketOp: aBracketOp [
-	^ LzASTOp new
+	^ LzOpDeclaration new
 		name: LzBracketOpName new
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitBracketOpTerm: aBracketOpTerm [
-	^ LzASTOpTerm new
+	^ LzOpTermDeclaration new
 		opName: LzBracketOpName new;
 		args: (aBracketOpTerm args collect: [ :each | self acceptNode: each ])
 ]
@@ -49,13 +49,13 @@ LzDeclarationBuilder >> visitFpNumberLiteralTerm: aFpNumberLiteralTerm [
 	value := (aFpNumberLiteralTerm text value
 				copyReplaceAll: '.e' with: '.0e')
 				asNumber asFloat.
-	^ LzASTFPLiteral new
+	^ LzFPLiteralDeclaration new
 		value: value
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitInfixOp: aInfixOp [
-	^ LzASTOp new
+	^ LzOpDeclaration new
 		name: (LzInfixOpName for: aInfixOp opName value asSymbol)
 ]
 
@@ -67,14 +67,14 @@ LzDeclarationBuilder >> visitInfixOpTerm: anInfixOpTerm [
 	args := anInfixOpTerm args collect: [ :each | self acceptNode: each ].
 	opName := LzInfixOpName for: opNames anyOne asSymbol.
 	^ args allButFirst inject: args first into: [ :total :each |
-		LzASTOpTerm new
+		LzOpTermDeclaration new
 			opName: opName;
 			args: { total. each } ]
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitIntegerLiteralTerm: anIntegerLiteralTerm [
-	^ LzASTIntegerLiteral new
+	^ LzIntegerLiteralDeclaration new
 		value: anIntegerLiteralTerm text value asNumber
 ]
 
@@ -85,51 +85,51 @@ LzDeclarationBuilder >> visitParenthesizedTerm: aParenthesizedTerm [
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitPrefixOp: aPrefixOp [
-	^ LzASTOp new
+	^ LzOpDeclaration new
 		name: (LzPrefixOpName for: aPrefixOp opName value asSymbol)
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitPrefixOpTerm: aPrefixOpTerm [
-	^ LzASTOpTerm new
+	^ LzOpTermDeclaration new
 		opName: (LzPrefixOpName for: aPrefixOpTerm opName value asSymbol);
 		args: (aPrefixOpTerm args collect: [ :each | self acceptNode: each ]) asArray
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitRationalNumberLiteralTerm: aRationalNumberLiteralTerm [
-	^ LzASTRationalLiteral new
+	^ LzRationalLiteralDeclaration new
 		value: (Fraction readFromString: aRationalNumberLiteralTerm text value)
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitStringLiteralTerm: aStringLiteralTerm [
-	^ LzASTStringLiteral new
+	^ LzStringLiteralDeclaration new
 		value: aStringLiteralTerm text value allButFirst allButLast
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitSubscriptOp: aSubscriptOp [
-	^ LzASTOp new
+	^ LzOpDeclaration new
 		name: LzSubscriptOpName new
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitSubscriptOpTerm: aSubscriptOpTerm [
-	^ LzASTOpTerm new
+	^ LzOpTermDeclaration new
 		opName: LzSubscriptOpName new;
 		args: (aSubscriptOpTerm args collect: [ :each | self acceptNode: each ])
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitSuperscriptOp: aSuperscriptOp [
-	^ LzASTOp new
+	^ LzOpDeclaration new
 		name: LzSuperscriptOpName new
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitSuperscriptOpTerm: aSuperscriptOpTerm [
-	^ LzASTOpTerm new
+	^ LzOpTermDeclaration new
 		opName: LzSuperscriptOpName new;
 		args: (aSuperscriptOpTerm args collect: [ :each | self acceptNode: each ])
 ]
@@ -144,7 +144,7 @@ LzDeclarationBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	varBuilder acceptNode: aTopLevelEqualityAxiom right.
 	aTopLevelEqualityAxiom condition ifNotNil: [ :c |
 		varBuilder acceptNode: c ].
-	axiom := LzASTEqualityAxiom new
+	axiom := LzEqualityAxiomDeclaration new
 		variables: varBuilder vars;
 		left: (self acceptNode: aTopLevelEqualityAxiom left);
 		right: (self acceptNode: aTopLevelEqualityAxiom right).
@@ -162,7 +162,7 @@ LzDeclarationBuilder >> visitTopLevelFunctionRule: aTopLevelFunctionRule [
 	varBuilder acceptNode: aTopLevelFunctionRule pattern.
 	aTopLevelFunctionRule condition ifNotNil: [ :c |
 		varBuilder acceptNode: c ].
-	rule := LzASTFunctionRule new
+	rule := LzFunctionRuleDeclaration new
 		variables: varBuilder vars;
 		pattern: (self acceptNode: aTopLevelFunctionRule pattern);
 		code: aTopLevelFunctionRule code value allButFirst allButLast.
@@ -196,7 +196,7 @@ LzDeclarationBuilder >> visitTopLevelRewriteRule: aTopLevelRewriteRule [
 	varBuilder acceptNode: aTopLevelRewriteRule replacement.
 	aTopLevelRewriteRule condition ifNotNil: [ :c |
 		varBuilder acceptNode: c ].
-	rule := LzASTRewriteRule new
+	rule := LzRewriteRuleDeclaration new
 		variables: varBuilder vars;
 		pattern: (self acceptNode: aTopLevelRewriteRule pattern);
 		replacement: (self acceptNode: aTopLevelRewriteRule replacement).
@@ -216,13 +216,13 @@ LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
 	op := self acceptNode: aTopLevelSort op.
 	op args: (aTopLevelSort op args collect: [ :each | self acceptNode: each ]).
 	op variables: varBuilder vars.
-	^ LzASTSort new
+	^ LzSortDeclaration new
 		op: op
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
-	^ LzASTSpecialTerms new
+	^ LzSpecialTermsDeclaration new
 			termTypes: (aTopLevelSpecialTerms specialTerms
 							collect: [ :each |
 								each value asSymbol ])
@@ -236,7 +236,7 @@ LzDeclarationBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
 	varBuilder acceptNode: aTopLevelSubsort subsort.
 	varBuilder acceptNode: aTopLevelSubsort supersort.
-	axiom := LzASTSubsortAxiom new
+	axiom := LzSubsortAxiomDeclaration new
 		variables: varBuilder vars;
 		subsort: (self acceptNode: aTopLevelSubsort subsort);
 		supersort: (self acceptNode: aTopLevelSubsort supersort).
@@ -250,7 +250,7 @@ LzDeclarationBuilder >> visitTopLevelTerm: aTopLevelTerm [
 	aTopLevelTerm vars
 		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
 	varBuilder acceptNode: aTopLevelTerm term.
-	^ LzASTPattern new
+	^ LzPatternDeclaration new
 		variables: varBuilder vars;
 		term: (self acceptNode: aTopLevelTerm term)
 ]
@@ -265,12 +265,12 @@ LzDeclarationBuilder >> visitTopLevelUseContext: aTopLevelUseContext [
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitVarTerm: aVarTerm [
-	^ LzASTVarTerm new
+	^ LzVarTermDeclaration new
 		name: (LzVarName for: aVarTerm varName value)
 ]
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitVarTermWithSort: aVarTerm [
-	^ LzASTVarTerm new
+	^ LzVarTermDeclaration new
 		name: (LzVarName for: aVarTerm varName value)
 ]

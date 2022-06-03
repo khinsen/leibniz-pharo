@@ -1,19 +1,19 @@
 Class {
-	#name : #LzASTAxiom,
-	#superclass : #LzASTNode,
+	#name : #LzAxiomDeclaration,
+	#superclass : #LzDeclaration,
 	#instVars : [
 		'variables'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #accessing }
-LzASTAxiom >> axiomClass [
+LzAxiomDeclaration >> axiomClass [
 	self subclassResponsibility
 ]
 
 { #category : #accessing }
-LzASTAxiom >> printVariablesAsLeibnizSyntaxOn: aStream [
+LzAxiomDeclaration >> printVariablesAsLeibnizSyntaxOn: aStream [
 	variables do:
 		[ :var |
 			aStream nextPutAll: '∀ '.
@@ -22,18 +22,18 @@ LzASTAxiom >> printVariablesAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LzASTAxiom >> terms [
+LzAxiomDeclaration >> terms [
 	self subclassResponsibility
 ]
 
 { #category : #accessing }
-LzASTAxiom >> variables [
+LzAxiomDeclaration >> variables [
 
 	^ variables
 ]
 
 { #category : #accessing }
-LzASTAxiom >> variables: anObject [
+LzAxiomDeclaration >> variables: anObject [
 
 	variables := anObject
 ]

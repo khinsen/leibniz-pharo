@@ -19,10 +19,10 @@ LzSortGraphBuilder >> clearCache [
 LzSortGraphBuilder >> deriveSortDeclarationFromSort: aSortTerm [
 	aSortTerm args ifNotEmpty: [ ^ self ].
 	self parsedSortDeclaration: 
-		(LzASTOp new
+		(LzOpDeclaration new
 			name: aSortTerm opName;
 			args: #();
-			sort: (LzASTOpTerm new
+			sort: (LzOpTermDeclaration new
 						opName: (LzPrefixOpName for: LzConstants opNameSort);
 						args: #());
 			variables: #())
@@ -69,7 +69,7 @@ LzSortGraphBuilder >> sort: aString [
 		(LzParser
 			parse: (aString, ' : ', LzConstants opNameSort)
 			startingAt: #opEnd
-			yielding: LzASTOp).
+			yielding: LzOpDeclaration).
 ]
 
 { #category : #accessing }
@@ -125,10 +125,10 @@ LzSortGraphBuilder >> sortGraph [
 LzSortGraphBuilder >> sortSortDeclaration [
 	| opName astOp |
 	opName := LzPrefixOpName for: LzConstants opNameSort.
-	astOp := LzASTOp new
+	astOp := LzOpDeclaration new
 		name: opName;
 		args: #();
-		sort:  (LzASTOpTerm new
+		sort:  (LzOpTermDeclaration new
 					opName: opName;
 					args: #());
 		variables: OrderedCollection new.
@@ -141,5 +141,5 @@ LzSortGraphBuilder >> subsort: aString [
 		(LzParser
 			parse: aString
 			startingAt: #subsortAxiomEnd
-			yielding: LzASTSubsortAxiom).
+			yielding: LzSubsortAxiomDeclaration).
 ]

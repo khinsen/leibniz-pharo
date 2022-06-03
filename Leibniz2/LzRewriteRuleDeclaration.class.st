@@ -1,14 +1,14 @@
 Class {
-	#name : #LzASTRewriteRule,
-	#superclass : #LzASTRule,
+	#name : #LzRewriteRuleDeclaration,
+	#superclass : #LzRuleDeclaration,
 	#instVars : [
 		'replacement'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #printing }
-LzASTRewriteRule >> printAsLeibnizSyntaxOn: aStream [
+LzRewriteRuleDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
 	self pattern printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' ⇒ '.
@@ -19,21 +19,21 @@ LzASTRewriteRule >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LzASTRewriteRule >> replacement [
+LzRewriteRuleDeclaration >> replacement [
 	^ replacement
 ]
 
 { #category : #accessing }
-LzASTRewriteRule >> replacement: aTermNode [
+LzRewriteRuleDeclaration >> replacement: aTermNode [
 	replacement := aTermNode
 ]
 
 { #category : #accessing }
-LzASTRewriteRule >> ruleClass [
+LzRewriteRuleDeclaration >> ruleClass [
 	^ LzRewriteRule
 ]
 
 { #category : #accessing }
-LzASTRewriteRule >> valueSlots [
+LzRewriteRuleDeclaration >> valueSlots [
 	^ super valueSlots, #(replacement)
 ]

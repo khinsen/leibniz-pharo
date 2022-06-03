@@ -59,7 +59,7 @@ LzContextBuilder >> axiom: aString [
 		(LzParser
 			parse: aString
 			startingAt: #axiomEnd
-			yielding: LzASTAxiom)
+			yielding: LzAxiomDeclaration)
 ]
 
 { #category : #accessing }

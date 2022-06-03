@@ -41,7 +41,7 @@ LzSignatureBuilder >> op: aString [
 		(LzParser
 			parse: aString
 			startingAt: #opEnd
-			yielding: LzASTOp).
+			yielding: LzOpDeclaration).
 ]
 
 { #category : #defining }
@@ -104,5 +104,5 @@ LzSignatureBuilder >> var: aString [
 		(LzParser
 			parse: aString
 			startingAt: #varEnd
-			yielding: LzASTVar).
+			yielding: LzVarDeclaration).
 ]

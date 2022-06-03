@@ -1,28 +1,28 @@
 Class {
-	#name : #LzASTSort,
-	#superclass : #LzASTNode,
+	#name : #LzSortDeclaration,
+	#superclass : #LzDeclaration,
 	#instVars : [
 		'op'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #accessing }
-LzASTSort >> op [
+LzSortDeclaration >> op [
 	^ op
 ]
 
 { #category : #accessing }
-LzASTSort >> op: anOpNode [
+LzSortDeclaration >> op: anOpNode [
 	anOpNode sort:
-		(LzASTOpTerm new
+		(LzOpTermDeclaration new
 			opName: (LzPrefixOpName for: LzConstants opNameSort);
 			args: #()).
 	op := anOpNode
 ]
 
 { #category : #printing }
-LzASTSort >> printAsLeibnizSyntaxOn: aStream [
+LzSortDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	op variables do: [ :each |
 		each printAsLeibnizSyntaxOn: aStream.
 		aStream nextPutAll: ', ' ].

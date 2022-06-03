@@ -1,19 +1,19 @@
 Class {
-	#name : #LzASTNode,
+	#name : #LzDeclaration,
 	#superclass : #Object,
 	#traits : 'TLzEquality + TLzPrintable',
 	#classTraits : 'TLzEquality classTrait + TLzPrintable classTrait',
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #converting }
-LzASTNode >> associations [
+LzDeclaration >> associations [
 	^ self valueSlots collect: [ :each |
 		each -> (self instVarNamed:  each) ]
 ]
 
 { #category : #inspecting }
-LzASTNode >> gtTreeFor: aView [
+LzDeclaration >> gtTreeFor: aView [
 	<gtView>
 	^ aView columnedTree
 		title: 'Tree';
@@ -31,11 +31,11 @@ LzASTNode >> gtTreeFor: aView [
 ]
 
 { #category : #testing }
-LzASTNode >> isLzASTNode [
+LzDeclaration >> isLzASTNode [
 	^ true
 ]
 
 { #category : #accessing }
-LzASTNode >> valueSlots [
+LzDeclaration >> valueSlots [
 	^ self class allInstVarNames
 ]

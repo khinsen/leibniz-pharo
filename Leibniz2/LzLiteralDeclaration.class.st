@@ -1,14 +1,14 @@
 Class {
-	#name : #LzASTLiteral,
-	#superclass : #LzASTTerm,
+	#name : #LzLiteralDeclaration,
+	#superclass : #LzTermDeclaration,
 	#instVars : [
 		'value'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #constructing }
-LzASTLiteral >> buildFor: aSignature variables: aDictionary [
+LzLiteralDeclaration >> buildFor: aSignature variables: aDictionary [
 	^ aSignature
 		literalTerm: self value
 		class: self termClass
@@ -16,12 +16,12 @@ LzASTLiteral >> buildFor: aSignature variables: aDictionary [
 ]
 
 { #category : #accessing }
-LzASTLiteral >> builtin [
+LzLiteralDeclaration >> builtin [
 	self subclassResponsibility
 ]
 
 { #category : #printing }
-LzASTLiteral >> printOn: aStream [
+LzLiteralDeclaration >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
 	value printOn: aStream.
@@ -29,21 +29,21 @@ LzASTLiteral >> printOn: aStream [
 ]
 
 { #category : #accessing }
-LzASTLiteral >> termClass [
+LzLiteralDeclaration >> termClass [
 	self subclassResponsibility
 ]
 
 { #category : #accessing }
-LzASTLiteral >> value [
+LzLiteralDeclaration >> value [
 	^ value
 ]
 
 { #category : #accessing }
-LzASTLiteral >> value: anObject [
+LzLiteralDeclaration >> value: anObject [
 	value := anObject
 ]
 
 { #category : #accessing }
-LzASTLiteral >> valueSlots [
+LzLiteralDeclaration >> valueSlots [
 	^ #(value)
 ]

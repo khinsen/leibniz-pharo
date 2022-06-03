@@ -10,7 +10,7 @@ Class {
 { #category : #adding }
 LzVarDeclarationBuilder >> addVar: aVar sort: aSortTerm [
 	| newVar |
-	newVar := LzASTVar new
+	newVar := LzVarDeclaration new
 				name: (LzVarName for: aVar);
 				sort: aSortTerm.
 	vars at: aVar

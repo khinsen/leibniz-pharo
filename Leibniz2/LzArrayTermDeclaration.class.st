@@ -1,15 +1,15 @@
 Class {
-	#name : #LzASTArrayTerm,
-	#superclass : #LzASTTerm,
+	#name : #LzArrayTermDeclaration,
+	#superclass : #LzTermDeclaration,
 	#instVars : [
 		'elements',
 		'shape'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #constructing }
-LzASTArrayTerm >> buildFor: aSignature variables: aDictionary [
+LzArrayTermDeclaration >> buildFor: aSignature variables: aDictionary [
 	^ aSignature
 		arrayTerm: (self elements flattened collect: [ :each |
 						each buildFor: aSignature variables: aDictionary ])
@@ -17,7 +17,7 @@ LzASTArrayTerm >> buildFor: aSignature variables: aDictionary [
 ]
 
 { #category : #asserting }
-LzASTArrayTerm >> checkDimensions: anArray [
+LzArrayTermDeclaration >> checkDimensions: anArray [
 	anArray ifNotEmpty: [
 		anArray first isSequenceable
 			ifTrue: [ self assert:
@@ -31,25 +31,25 @@ LzASTArrayTerm >> checkDimensions: anArray [
 ]
 
 { #category : #constructing }
-LzASTArrayTerm >> elements [
+LzArrayTermDeclaration >> elements [
 	^ elements
 ]
 
 { #category : #initialization }
-LzASTArrayTerm >> elements: anArray [
+LzArrayTermDeclaration >> elements: anArray [
 	elements := anArray.
 	shape := self shapeFor: anArray
 ]
 
 { #category : #printing }
-LzASTArrayTerm >> printAsLeibnizSyntaxOn: aStream [
+LzArrayTermDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	aStream << ${.
 	self printElementsOf: elements asLeibnizSyntaxOn: aStream.
 	aStream << $}
 ]
 
 { #category : #printing }
-LzASTArrayTerm >> printElementsOf: anArray asLeibnizSyntaxOn: aStream [
+LzArrayTermDeclaration >> printElementsOf: anArray asLeibnizSyntaxOn: aStream [
 	aStream << $[.
 	1 to: anArray size do: [ :eachIndex |
 		| element |
@@ -62,12 +62,12 @@ LzASTArrayTerm >> printElementsOf: anArray asLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #constructing }
-LzASTArrayTerm >> shape [
+LzArrayTermDeclaration >> shape [
 	^ shape
 ]
 
 { #category : #initialization }
-LzASTArrayTerm >> shapeFor: anArray [
+LzArrayTermDeclaration >> shapeFor: anArray [
 	| subshapes |
 	anArray ifEmpty: [ ^ #(0) ].
 	anArray first isCollection ifFalse: [

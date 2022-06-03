@@ -1,27 +1,27 @@
 Class {
-	#name : #LzASTOpTerm,
-	#superclass : #LzASTTerm,
+	#name : #LzOpTermDeclaration,
+	#superclass : #LzTermDeclaration,
 	#instVars : [
 		'opName',
 		'args'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #accessing }
-LzASTOpTerm >> args [
+LzOpTermDeclaration >> args [
 
 	^ args
 ]
 
 { #category : #accessing }
-LzASTOpTerm >> args: anObject [
+LzOpTermDeclaration >> args: anObject [
 
 	args := anObject
 ]
 
 { #category : #constructing }
-LzASTOpTerm >> buildFor: aSignature variables: aDictionary [
+LzOpTermDeclaration >> buildFor: aSignature variables: aDictionary [
 	LzDebuggingUtilities checkForInfiniteRecursion.
 	^ aSignature
 		opTerm: self opName
@@ -30,32 +30,32 @@ LzASTOpTerm >> buildFor: aSignature variables: aDictionary [
 ]
 
 { #category : #accessing }
-LzASTOpTerm >> hasInfixOpOtherThan: anOpName [
+LzOpTermDeclaration >> hasInfixOpOtherThan: anOpName [
 	^ self opName isInfixOpOtherThan: anOpName
 ]
 
 { #category : #testing }
-LzASTOpTerm >> isInfix [
+LzOpTermDeclaration >> isInfix [
 	^ self opName isInfix
 ]
 
 { #category : #accessing }
-LzASTOpTerm >> opName [
+LzOpTermDeclaration >> opName [
 
 	^ opName
 ]
 
 { #category : #acccessing }
-LzASTOpTerm >> opName: anOpName [
+LzOpTermDeclaration >> opName: anOpName [
 	opName := anOpName 
 ]
 
 { #category : #printing }
-LzASTOpTerm >> printAsLeibnizSyntaxOn: aStream [
+LzOpTermDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	opName printForArity: args on: aStream
 ]
 
 { #category : #accessing }
-LzASTOpTerm >> valueSlots [
+LzOpTermDeclaration >> valueSlots [
 	^ #(opName args)
 ]

@@ -1,41 +1,41 @@
 Class {
-	#name : #LzASTOp,
-	#superclass : #LzASTNode,
+	#name : #LzOpDeclaration,
+	#superclass : #LzDeclaration,
 	#instVars : [
 		'sort',
 		'args',
 		'name',
 		'variables'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #accessing }
-LzASTOp >> args [
+LzOpDeclaration >> args [
 
 	^ args
 ]
 
 { #category : #accessing }
-LzASTOp >> args: anObject [
+LzOpDeclaration >> args: anObject [
 
 	args := anObject
 ]
 
 { #category : #accessing }
-LzASTOp >> name [
+LzOpDeclaration >> name [
 
 	^ name
 ]
 
 { #category : #accessing }
-LzASTOp >> name: anObject [
+LzOpDeclaration >> name: anObject [
 
 	name := anObject
 ]
 
 { #category : #printing }
-LzASTOp >> printAsLeibnizSyntaxOn: aStream [
+LzOpDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	variables do: [ :each |
 		aStream nextPutAll: '∀ '.
 		each printAsLeibnizSyntaxOn: aStream.
@@ -44,43 +44,43 @@ LzASTOp >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LzASTOp >> sort [
+LzOpDeclaration >> sort [
 
 	^ sort
 ]
 
 { #category : #accessing }
-LzASTOp >> sort: anObject [
+LzOpDeclaration >> sort: anObject [
 
 	sort := anObject
 ]
 
 { #category : #accessing }
-LzASTOp >> valueSlots [
+LzOpDeclaration >> valueSlots [
 	^ #(name variables args sort)
 ]
 
 { #category : #accessing }
-LzASTOp >> varDeclarations [
+LzOpDeclaration >> varDeclarations [
 	^ args select: [ :each |
-		each class == LzASTVar ]
+		each class == LzVarDeclaration ]
 ]
 
 { #category : #accessing }
-LzASTOp >> variables [
+LzOpDeclaration >> variables [
 	^ variables
 ]
 
 { #category : #accessing }
-LzASTOp >> variables: aCollection [
+LzOpDeclaration >> variables: aCollection [
 	variables := aCollection
 ]
 
 { #category : #accessing }
-LzASTOp >> withoutVarDeclarations [
+LzOpDeclaration >> withoutVarDeclarations [
 	| plainArgs |
 	plainArgs := args collect: [ :each |
-		each class == LzASTVar
+		each class == LzVarDeclaration
 			ifTrue: [ each sort ]
 			ifFalse: [ each ] ].
 	^ self class new

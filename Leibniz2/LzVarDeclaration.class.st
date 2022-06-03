@@ -1,48 +1,48 @@
 Class {
-	#name : #LzASTVar,
-	#superclass : #LzASTNode,
+	#name : #LzVarDeclaration,
+	#superclass : #LzDeclaration,
 	#instVars : [
 		'sort',
 		'name'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #testing }
-LzASTVar >> isSortVar [
+LzVarDeclaration >> isSortVar [
 	^ name asSymbol endsWith: '__' 
 ]
 
 { #category : #accessing }
-LzASTVar >> name [
+LzVarDeclaration >> name [
 	^ name
 ]
 
 { #category : #accessing }
-LzASTVar >> name: anObject [
+LzVarDeclaration >> name: anObject [
 	name := anObject
 ]
 
 { #category : #printing }
-LzASTVar >> printAsLeibnizSyntaxOn: aStream [
+LzVarDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	name printAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: $:.
 	sort printAsLeibnizSyntaxOn: aStream.
 ]
 
 { #category : #accessing }
-LzASTVar >> sort [
+LzVarDeclaration >> sort [
 
 	^ sort
 ]
 
 { #category : #accessing }
-LzASTVar >> sort: anObject [
+LzVarDeclaration >> sort: anObject [
 
 	sort := anObject
 ]
 
 { #category : #accessing }
-LzASTVar >> valueSlots [
+LzVarDeclaration >> valueSlots [
 	^ #(name sort)
 ]

@@ -219,13 +219,13 @@ LzSignature >> parsedVariables: anArrayOfASTVarDeclarationNodes [
 { #category : #constructing }
 LzSignature >> pattern: aString [
 	^ self parsedPattern:
-		(LzParser parse: aString startingAt: #patternEnd yielding: LzASTPattern)
+		(LzParser parse: aString startingAt: #patternEnd yielding: LzPatternDeclaration)
 ]
 
 { #category : #constructing }
 LzSignature >> rule: aString [
 	^ self parsedRule:
-		(LzParser parse: aString startingAt: #ruleEnd yielding: LzASTRule)
+		(LzParser parse: aString startingAt: #ruleEnd yielding: LzRuleDeclaration)
 ]
 
 { #category : #constructing }
@@ -255,7 +255,7 @@ LzSignature >> sortGraph: aSortGraph [
 { #category : #constructing }
 LzSignature >> term: aString [
 	^ self parsedTerm:
-		(LzParser parse: aString startingAt: #termEnd yielding: LzASTTerm)
+		(LzParser parse: aString startingAt: #termEnd yielding: LzTermDeclaration)
 ]
 
 { #category : #accessing }

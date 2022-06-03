@@ -1,20 +1,20 @@
 Class {
-	#name : #LzASTSubsortAxiom,
-	#superclass : #LzASTAxiom,
+	#name : #LzSubsortAxiomDeclaration,
+	#superclass : #LzAxiomDeclaration,
 	#instVars : [
 		'supersort',
 		'subsort'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #accessing }
-LzASTSubsortAxiom >> axiomClass [
+LzSubsortAxiomDeclaration >> axiomClass [
 	^ LzSubsortAxiom
 ]
 
 { #category : #accessing }
-LzASTSubsortAxiom >> printAsLeibnizSyntaxOn: aStream [
+LzSubsortAxiomDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: Character space.
 	subsort printAsLeibnizSyntaxOn: aStream.
@@ -23,29 +23,29 @@ LzASTSubsortAxiom >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LzASTSubsortAxiom >> subsort [
+LzSubsortAxiomDeclaration >> subsort [
 
 	^ subsort
 ]
 
 { #category : #accessing }
-LzASTSubsortAxiom >> subsort: anASTTermNode [
+LzSubsortAxiomDeclaration >> subsort: anASTTermNode [
 	subsort := anASTTermNode
 ]
 
 { #category : #accessing }
-LzASTSubsortAxiom >> supersort [
+LzSubsortAxiomDeclaration >> supersort [
 
 	^ supersort
 ]
 
 { #category : #accessing }
-LzASTSubsortAxiom >> supersort: anASTTermNode [
+LzSubsortAxiomDeclaration >> supersort: anASTTermNode [
 	supersort := anASTTermNode
 ]
 
 { #category : #accessing }
-LzASTSubsortAxiom >> terms [
+LzSubsortAxiomDeclaration >> terms [
 	^ Dictionary
 		with: #subsort -> self subsort
 		with: #supersort -> self supersort

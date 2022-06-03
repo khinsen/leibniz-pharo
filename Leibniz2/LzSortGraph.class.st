@@ -339,7 +339,7 @@ LzSortGraph >> pathsConnecting: aFamily to: anotherFamily [
 { #category : #constructing }
 LzSortGraph >> sort: aString [
 	| astNode |
-	astNode := LzParser parse: aString startingAt: #patternEnd yielding: LzASTPattern.
+	astNode := LzParser parse: aString startingAt: #patternEnd yielding: LzPatternDeclaration.
 	^ self parsedSort: astNode
 ]
 

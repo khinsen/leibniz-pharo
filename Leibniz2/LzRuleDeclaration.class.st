@@ -1,36 +1,36 @@
 Class {
-	#name : #LzASTRule,
-	#superclass : #LzASTNode,
+	#name : #LzRuleDeclaration,
+	#superclass : #LzDeclaration,
 	#instVars : [
 		'variables',
 		'pattern',
 		'condition'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #accessing }
-LzASTRule >> condition [
+LzRuleDeclaration >> condition [
 	^ condition
 ]
 
 { #category : #accessing }
-LzASTRule >> condition: aTermNode [
+LzRuleDeclaration >> condition: aTermNode [
 	condition := aTermNode
 ]
 
 { #category : #accessing }
-LzASTRule >> pattern [
+LzRuleDeclaration >> pattern [
 	^ pattern
 ]
 
 { #category : #accessing }
-LzASTRule >> pattern: aTermNode [
+LzRuleDeclaration >> pattern: aTermNode [
 	pattern := aTermNode
 ]
 
 { #category : #printing }
-LzASTRule >> printVariablesAsLeibnizSyntaxOn: aStream [
+LzRuleDeclaration >> printVariablesAsLeibnizSyntaxOn: aStream [
 	variables do:
 		[ :var |
 			aStream nextPutAll: '∀ '.
@@ -39,21 +39,21 @@ LzASTRule >> printVariablesAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LzASTRule >> ruleClass [
+LzRuleDeclaration >> ruleClass [
 	self subclassResponsibility
 ]
 
 { #category : #accessing }
-LzASTRule >> valueSlots [
+LzRuleDeclaration >> valueSlots [
 	^ #(variables pattern condition)
 ]
 
 { #category : #accessing }
-LzASTRule >> variables [
+LzRuleDeclaration >> variables [
 	^ variables
 ]
 
 { #category : #accessing }
-LzASTRule >> variables: anObject [
+LzRuleDeclaration >> variables: anObject [
 	variables := anObject
 ]

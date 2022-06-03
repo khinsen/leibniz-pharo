@@ -1,22 +1,22 @@
 Class {
-	#name : #LzASTPattern,
-	#superclass : #LzASTNode,
+	#name : #LzPatternDeclaration,
+	#superclass : #LzDeclaration,
 	#instVars : [
 		'term',
 		'variables'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #constructing }
-LzASTPattern >> buildFor: aSignature [
+LzPatternDeclaration >> buildFor: aSignature [
 	^ self term
 		buildFor: aSignature
 		variables: (aSignature parsedVariables:  self variables)
 ]
 
 { #category : #printing }
-LzASTPattern >> printAsLeibnizSyntaxOn: aStream [
+LzPatternDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	variables do: [ :each |
 		aStream nextPutAll: '∀ '.
 		each printAsLeibnizSyntaxOn: aStream.
@@ -25,26 +25,26 @@ LzASTPattern >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LzASTPattern >> term [
+LzPatternDeclaration >> term [
 	^ term
 ]
 
 { #category : #accessing }
-LzASTPattern >> term: anObject [
+LzPatternDeclaration >> term: anObject [
 	term := anObject
 ]
 
 { #category : #accessing }
-LzASTPattern >> valueSlots [
+LzPatternDeclaration >> valueSlots [
 	^ #(term variables)
 ]
 
 { #category : #accessing }
-LzASTPattern >> variables [
+LzPatternDeclaration >> variables [
 	^ variables
 ]
 
 { #category : #accessing }
-LzASTPattern >> variables: anObject [
+LzPatternDeclaration >> variables: anObject [
 	variables := anObject
 ]

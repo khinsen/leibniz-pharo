@@ -39,7 +39,7 @@ LzParser >> arrayElements [
 LzParser >> arrayTerm [
 	^ super arrayTerm
 		==> [ :nodes |
-				LzASTArrayTerm new
+				LzArrayTermDeclaration new
 					elements: nodes second ].
 ]
 
@@ -64,7 +64,7 @@ LzParser >> decimalRationalNumberTerm [
 	^ super decimalRationalNumberTerm
 		==> [ :string |
 				self flag: #todo. "Round-off-free conversion"
-			  LzASTRationalLiteral new
+			  LzRationalLiteralDeclaration new
 				value: string asNumber asFloat asFraction ]
 ]
 
@@ -72,7 +72,7 @@ LzParser >> decimalRationalNumberTerm [
 LzParser >> equalityAxiom [
 	^ super equalityAxiom ==> [ :nodes |
 		| axiom |
-		axiom := LzASTEqualityAxiom new
+		axiom := LzEqualityAxiomDeclaration new
 			variables: nodes first;
 			left: nodes second;
 			right: nodes fourth.
@@ -85,7 +85,7 @@ LzParser >> equalityAxiom [
 LzParser >> fnRule [
 	^ super fnRule ==> [ :nodes |
 		| rule |
-		rule := LzASTFunctionRule new
+		rule := LzFunctionRuleDeclaration new
 			variables: nodes first;
 			pattern: nodes second;
 			function: nodes fourth.
@@ -97,7 +97,7 @@ LzParser >> fnRule [
 { #category : #signature }
 LzParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
-		LzASTVar new
+		LzVarDeclaration new
 			name: (LzVarName for: nodes second);
 			sort: nodes fourth ]
 ]
@@ -109,7 +109,7 @@ LzParser >> fpNumberTerm [
 		 	"In Pharo, a number with an exponent but without a fractional part
 		 	 is an integer, not a float.
 			  Workaround: convert the converted string explicitly to a float."
-			  LzASTFPLiteral new
+			  LzFPLiteralDeclaration new
 				value: string asNumber asFloat ]
 ]
 
@@ -123,7 +123,7 @@ LzParser >> infixOp [
 LzParser >> integerTerm [
 	^ super integerTerm
 		==> [ :string |
-			  LzASTIntegerLiteral new
+			  LzIntegerLiteralDeclaration new
 					value: string asNumber ]
 ]
 
@@ -133,7 +133,7 @@ LzParser >> nonInfixTerm [
 		nodes second
 			ifNil: [ nodes first ] "simpleTerm, no suffix"
 			ifNotNil: [ :suffixNode |
-				LzASTOpTerm new
+				LzOpTermDeclaration new
 					opName: suffixNode first;
 					args: (suffixNode second copyWithFirst: nodes first) ] ]
 ]
@@ -141,7 +141,7 @@ LzParser >> nonInfixTerm [
 { #category : #signature }
 LzParser >> op [
 	^ super op ==> [ :nodes |
-		LzASTOp new
+		LzOpDeclaration new
 			name: nodes second first;
 			args: nodes second second;
 			sort: nodes fourth;
@@ -155,11 +155,11 @@ LzParser >> pattern [
 			| variables parsedTerm |
 			variables := nodes first.
 			parsedTerm := nodes second.
-			LzASTPattern new
+			LzPatternDeclaration new
 				variables: nodes first;
 				term: nodes second ]
 		ifFalse: [
-			LzASTPattern new
+			LzPatternDeclaration new
 				variables: #();
 				term: nodes ] ]
 ]
@@ -176,7 +176,7 @@ LzParser >> prefixOp [
 { #category : #terms }
 LzParser >> prefixOpTerm [
 	^ super prefixOpTerm ==> [ :nodes |
-		LzASTOpTerm new
+		LzOpTermDeclaration new
 			opName: (LzPrefixOpName for: nodes first);
 			args: ((nodes at: 3) reject: [ :element | element = $, ]) ]
 ]
@@ -185,7 +185,7 @@ LzParser >> prefixOpTerm [
 LzParser >> rationalNumberTerm [
 	^ super rationalNumberTerm
 		==> [ :string |
-			  LzASTRationalLiteral new
+			  LzRationalLiteralDeclaration new
 				value: (Fraction readFromString: string) ]
 ]
 
@@ -193,7 +193,7 @@ LzParser >> rationalNumberTerm [
 LzParser >> rewriteRule [
 	^ super rewriteRule ==> [ :nodes |
 		| rule |
-		rule := LzASTRewriteRule new
+		rule := LzRewriteRuleDeclaration new
 			variables: nodes first;
 			pattern: nodes second;
 			replacement: nodes fourth.
@@ -214,7 +214,7 @@ LzParser >> sort [
 LzParser >> stringTerm [
 	^ super stringTerm
 		==> [ :string |
-			  LzASTStringLiteral new
+			  LzStringLiteralDeclaration new
 					value: string ]
 ]
 
@@ -234,7 +234,7 @@ LzParser >> subsortAxiom [
 		variables := nodes first.
 		subsort := nodes second.
 		supersort := nodes fourth.
-		LzASTSubsortAxiom new
+		LzSubsortAxiomDeclaration new
 			variables: nodes first;
 			subsort: nodes second;
 			supersort: nodes fourth ]
@@ -264,7 +264,7 @@ LzParser >> term [
 				(nodes allButFirst: 2)
 					inject: nodes second
 					into: [ :result :nextArg |
-						LzASTOpTerm new
+						LzOpTermDeclaration new
 							opName: name;
 							args: { result . nextArg } ] ] ]
 ]
@@ -272,7 +272,7 @@ LzParser >> term [
 { #category : #signature }
 LzParser >> var [
 	^ super var ==> [ :nodes |
-		LzASTVar new
+		LzVarDeclaration new
 			name: (LzVarName for: nodes first);
 			sort: nodes third ]
 ]
@@ -280,7 +280,7 @@ LzParser >> var [
 { #category : #signature }
 LzParser >> varArg [
 	^ super varArg ==> [ :nodes |
-		LzASTVar new
+		LzVarDeclaration new
 			name: (LzVarName for: nodes first);
 			sort: nodes third ]
 ]
@@ -288,7 +288,7 @@ LzParser >> varArg [
 { #category : #terms }
 LzParser >> varTerm [
 	^ super varTerm ==> [ :symbol |
-		LzASTVarTerm new
+		LzVarTermDeclaration new
 			name: (LzVarName for: symbol) ]
 ]
 
@@ -301,7 +301,7 @@ LzParser >> zeroArgOp [
 { #category : #terms }
 LzParser >> zeroArgTerm [
 	^ super zeroArgTerm ==> [ :symbol |
-		LzASTOpTerm new
+		LzOpTermDeclaration new
 			opName: (LzPrefixOpName for: symbol);
 			args: #() ]
 ]

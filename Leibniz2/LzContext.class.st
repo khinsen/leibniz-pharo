@@ -159,17 +159,17 @@ LzContext >> rewriteSystemWithEqualityAxioms [
 		signature: self signature;
 		include: self rewriteSystem.
 	axiomDeclarations
-		select: [ :each | each isKindOf: LzASTEqualityAxiom ]
+		select: [ :each | each isKindOf: LzEqualityAxiomDeclaration ]
 		thenDo: [ :each |
 			self flag: #todo. "Check if the constructed rules are well-formed."
 			builder parsedRule:
-				(LzASTRewriteRule new
+				(LzRewriteRuleDeclaration new
 					variables: each variables;
 					pattern: each left;
 					replacement: each right;
 					condition: each condition).
 			builder parsedRule:
-				(LzASTRewriteRule new
+				(LzRewriteRuleDeclaration new
 					variables: each variables;
 					pattern: each right;
 					replacement: each left;

@@ -27,7 +27,7 @@ LzObjectBuilder >> parseOptions: aTopLevelAnnotation [
 
 { #category : #private }
 LzObjectBuilder >> patternFromTerm: aTerm vars: aVarList context: aContext [
-	^ (LzASTPattern new
+	^ (LzPatternDeclaration new
 		variables: aVarList;
 		term: aTerm)
 		buildFor: aContext signature

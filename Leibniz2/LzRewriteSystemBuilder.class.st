@@ -41,7 +41,7 @@ LzRewriteSystemBuilder >> rule: aString [
 		(LzParser
 			parse: aString
 			startingAt: #ruleEnd
-			yielding: LzASTRule).
+			yielding: LzRuleDeclaration).
 ]
 
 { #category : #accessing }

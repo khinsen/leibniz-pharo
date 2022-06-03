@@ -1,41 +1,41 @@
 Class {
-	#name : #LzASTEqualityAxiom,
-	#superclass : #LzASTAxiom,
+	#name : #LzEqualityAxiomDeclaration,
+	#superclass : #LzAxiomDeclaration,
 	#instVars : [
 		'left',
 		'right',
 		'condition'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #accessing }
-LzASTEqualityAxiom >> axiomClass [
+LzEqualityAxiomDeclaration >> axiomClass [
 	^ LzEqualityAxiom
 ]
 
 { #category : #accessing }
-LzASTEqualityAxiom >> condition [
+LzEqualityAxiomDeclaration >> condition [
 	^ condition
 ]
 
 { #category : #accessing }
-LzASTEqualityAxiom >> condition: aTermNode [
+LzEqualityAxiomDeclaration >> condition: aTermNode [
 	condition := aTermNode
 ]
 
 { #category : #accessing }
-LzASTEqualityAxiom >> left [
+LzEqualityAxiomDeclaration >> left [
 	^ left
 ]
 
 { #category : #accessing }
-LzASTEqualityAxiom >> left: aTermNode [
+LzEqualityAxiomDeclaration >> left: aTermNode [
 	left := aTermNode
 ]
 
 { #category : #accessing }
-LzASTEqualityAxiom >> printAsLeibnizSyntaxOn: aStream [
+LzEqualityAxiomDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	self printVariablesAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: Character space.
 	left printAsLeibnizSyntaxOn: aStream.
@@ -47,17 +47,17 @@ LzASTEqualityAxiom >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
-LzASTEqualityAxiom >> right [
+LzEqualityAxiomDeclaration >> right [
 	^ right
 ]
 
 { #category : #accessing }
-LzASTEqualityAxiom >> right: aTermNode [
+LzEqualityAxiomDeclaration >> right: aTermNode [
 	right := aTermNode
 ]
 
 { #category : #accessing }
-LzASTEqualityAxiom >> terms [
+LzEqualityAxiomDeclaration >> terms [
 	^ Dictionary
 		with: #left -> self left
 		with: #right -> self right
