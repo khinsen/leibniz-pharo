@@ -27,7 +27,7 @@ LzContextBuilder >> addDeclarationNode: aTopLevelNode [
 		ifTrue: [ self sortGraphBuilder parsedSubsortDeclaration: declaration ].
 	(aTopLevelNode isKindOf: LzTopLevelOpNode)
 		ifTrue: [ self signatureBuilder parsedOps: { declaration } ].
-	(aTopLevelNode isKindOf: LzTopLevelAxiomNode)
+	(aTopLevelNode isKindOf: LzTopLevelEqualityAxiomNode)
 		ifTrue: [ self parsedAxiom: declaration ].
 	(aTopLevelNode isKindOf: LzTopLevelRuleNode)
 		ifTrue: [ self rewriteSystemBuilder parsedRule:  declaration ].
