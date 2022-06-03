@@ -51,6 +51,11 @@ LzObjectBuilder >> visitTopLevelSort: aTopLevelSort [
 ]
 
 { #category : #visiting }
+LzObjectBuilder >> visitTopLevelSpecialTerms: aTopLevelSpecialTermsNode [
+	^ LzDeclarationBuilder new acceptNode: aTopLevelSpecialTermsNode
+]
+
+{ #category : #visiting }
 LzObjectBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 	| subsortAxiom subsort supersort |
 	subsortAxiom := LzDeclarationBuilder new acceptNode: aTopLevelSubsort.

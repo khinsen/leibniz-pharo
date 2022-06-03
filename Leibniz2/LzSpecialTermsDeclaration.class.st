@@ -9,7 +9,10 @@ Class {
 
 { #category : #printing }
 LzSpecialTermsDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	termTypes printOn: aStream
+	termTypes allButLastDo: [ :each |
+		each printOn: aStream.
+		aStream << ', ' ].
+	termTypes last printOn: aStream
 ]
 
 { #category : #accessing }
