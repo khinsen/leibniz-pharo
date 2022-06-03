@@ -23,10 +23,11 @@ LzSortHierarchyRoot >> initialize [
 	sortTerm sort: sortSort.
 
 	sortDeclaration :=
-		LzParser
-			parse: LzConstants opNameSort, ' : ', LzConstants opNameSort
-			startingAt: #opEnd
-			yielding: LzOpDeclaration.
+		LzSortDeclaration new
+			op: (LzOpDeclaration new
+					name: (LzPrefixOpName for: LzConstants opNameSort);
+					variables: #();
+					args: #()).
 
 	sortGraph := LzSortHierarchyRootGraph new
 		sortDeclarations: { sortDeclaration };
@@ -49,7 +50,7 @@ LzSortHierarchyRoot >> initialize [
 			variables: Dictionary new;
 			operators: sortOperators;
 			varDeclarations: #();
-			opDeclarations: (OrderedCollection with: sortDeclaration).
+			opDeclarations: (OrderedCollection with: sortDeclaration op).
 
 	sortContext signature: sortSignature.
 	sortTerm signature: sortSignature.
@@ -64,7 +65,7 @@ LzSortHierarchyRoot >> initialize [
 			sortFamilies: (Set with: sortFamily);
 			maximalFamilies: (Set with: sortFamily).
 	sortGraph sortKind: sortKind.
-	sortOperators addOp: sortDeclaration.
+	sortOperators addOp: sortDeclaration op.
 	sortFamily op: (sortOperators opForTerm: sortTerm).
 	sortGraph initializeSortFamilies.
 	sortGraph initializeDirectSubFamilyRelations.

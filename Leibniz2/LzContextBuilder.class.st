@@ -22,7 +22,7 @@ LzContextBuilder >> addDeclarationNode: aTopLevelNode [
 	| declaration |
 	declaration := LzDeclarationBuilder new acceptNode: aTopLevelNode.
 	(aTopLevelNode isKindOf: LzTopLevelSortNode)
-		ifTrue: [ self sortGraphBuilder parsedSortDeclaration: declaration op ].
+		ifTrue: [ self sortGraphBuilder parsedSortDeclaration: declaration ].
 	(aTopLevelNode isKindOf: LzTopLevelSubsortNode)
 		ifTrue: [ self sortGraphBuilder parsedSubsortDeclaration: declaration ].
 	(aTopLevelNode isKindOf: LzTopLevelOpNode)

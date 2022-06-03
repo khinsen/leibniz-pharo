@@ -19,13 +19,11 @@ LzSortGraphBuilder >> clearCache [
 LzSortGraphBuilder >> deriveSortDeclarationFromSort: aSortTerm [
 	aSortTerm args ifNotEmpty: [ ^ self ].
 	self parsedSortDeclaration: 
-		(LzOpDeclaration new
-			name: aSortTerm opName;
-			args: #();
-			sort: (LzOpTermDeclaration new
-						opName: (LzPrefixOpName for: LzConstants opNameSort);
-						args: #());
-			variables: #())
+		(LzSortDeclaration new
+			op:(LzOpDeclaration new
+				name: aSortTerm opName;
+				args: #();
+				variables: #()))
 ]
 
 { #category : #defining }
@@ -49,9 +47,9 @@ LzSortGraphBuilder >> initialize [
 ]
 
 { #category : #defining }
-LzSortGraphBuilder >> parsedSortDeclaration: anASTOp [
+LzSortGraphBuilder >> parsedSortDeclaration: aSortDeclaration [
 	self clearCache.
-	sortDeclarations add: anASTOp.
+	sortDeclarations add: aSortDeclaration.
 ]
 
 { #category : #defining }
@@ -65,11 +63,12 @@ LzSortGraphBuilder >> parsedSubsortDeclaration: anASTSubsortAxiom [
 
 { #category : #defining }
 LzSortGraphBuilder >> sort: aString [
-	self parsedSortDeclaration: 
-		(LzParser
-			parse: (aString, ' : ', LzConstants opNameSort)
-			startingAt: #opEnd
-			yielding: LzOpDeclaration).
+	self parsedSortDeclaration:
+		(LzSortDeclaration new
+			op: (LzParser
+				parse: (aString, ' : ', LzConstants opNameSort)
+				startingAt: #opEnd
+				yielding: LzOpDeclaration))
 ]
 
 { #category : #accessing }
@@ -77,7 +76,7 @@ LzSortGraphBuilder >> sortContext [
 	^ sortContext ifNil: [
 		| uniqueSorts uniqueSubsorts |
 		uniqueSorts := (sortDeclarations collect: [ :each |
-			each withoutVarDeclarations ]) asSet.
+			each op withoutVarDeclarations ]) asSet.
 		uniqueSubsorts := subsortDeclarations asSet.
 		self flag: #todo. "Check for axioms that are equal up to variable names."
 		sortContext := (uniqueSubsorts isEmpty
@@ -123,16 +122,16 @@ LzSortGraphBuilder >> sortGraph [
 
 { #category : #accessing }
 LzSortGraphBuilder >> sortSortDeclaration [
-	| opName astOp |
+	| opName opDeclaration |
 	opName := LzPrefixOpName for: LzConstants opNameSort.
-	astOp := LzOpDeclaration new
+	opDeclaration := LzOpDeclaration new
 		name: opName;
 		args: #();
 		sort:  (LzOpTermDeclaration new
 					opName: opName;
 					args: #());
-		variables: OrderedCollection new.
-	^ Set with: astOp
+		variables: #().
+	^ Set with: opDeclaration
 ]
 
 { #category : #defining }

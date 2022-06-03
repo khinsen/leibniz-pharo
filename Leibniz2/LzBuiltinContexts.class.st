@@ -766,6 +766,7 @@ LzBuiltinContexts class >> realNumberSortsFor: builder [
 { #category : #resetting }
 LzBuiltinContexts class >> reset [
 	TruthContext := nil.
+	EqualityContext := nil.
 	IntegerContext := nil.
 	RationalNumberContext := nil.
 	RealNumberContext := nil.
