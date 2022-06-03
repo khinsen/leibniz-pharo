@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-27T17:35:31.8896+02:00"
+						"dateAndTimeString" : "2022-06-03T15:11:32.037189+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-03T15:05:35.81011+02:00"
+						"dateAndTimeString" : "2022-06-03T15:12:37.128449+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "StsYy2GcDQCdMnq7DWGYCg=="
+					"uidString" : "hbGKmOycDQCRXwpxA0W37A=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name=\"Logical truth\"}}. Requires special terms ({{lzSpecialTerms:integers}}) that cannot be implemented in Leibniz itself."
+				"string" : "Uses {{lzUseContext:name=\"Integers\"}}. Requires special terms ({{lzSpecialTerms:rationalNumbers}}) that cannot be implemented in Leibniz itself."
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-27T17:41:33.982925+02:00"
+						"dateAndTimeString" : "2022-06-03T15:26:28.108565+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +66,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-31T17:15:59.004945+02:00"
+						"dateAndTimeString" : "2022-06-03T15:26:28.108565+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "C2X+zWGcDQCdN3v3DWGYCg=="
+					"uidString" : "01yCzuycDQCRZ1tRA0W37A=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sort {{lzSort:ℕ}} describes the natural numbers. It has two subsorts: {{lzSort:zero ⊆ ℕ}} for the number 0 and {{lzSort:ℕ.nz ⊆ ℕ}} for the non-zero natural numbers."
+				"string" : "The sort {{lzSort:ℚ}} describes the rational numbers. The integers are a subsort: {{lzSort:ℤ ⊆ ℚ}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-27T17:43:44.567092+02:00"
+						"dateAndTimeString" : "2022-06-03T15:26:34.625254+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-30T09:16:50.614626+02:00"
+						"dateAndTimeString" : "2022-06-03T15:26:34.625254+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "1ZXp4GGcDQCdOl9JDWGYCg=="
+					"uidString" : "CdTlzuycDQCRadQVA0W37A=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sort {{lzSort:ℤ}} describes the integers. It also has a subsort for its non-zero elements: {{lzSort:ℤ.nz ⊆ ℤ}}."
+				"string" : "There is a subsort {{lzSort:ℚ.nz ⊆ ℚ}} for the non-zero rational numbers, with {{lzSort:ℤ.nz ⊆ ℚ.nz}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-27T17:43:51.744098+02:00"
+						"dateAndTimeString" : "2022-06-03T15:26:42.953089+02:00"
 					}
 				},
 				"editEmail" : {
@@ -140,17 +140,91 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-30T11:51:19.340667+02:00"
+						"dateAndTimeString" : "2022-06-03T15:26:42.953089+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "K9BpzGGcDQCdNHZsDWGYCg=="
+					"uidString" : "g+xkz+ycDQCRa2YdA0W37A=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Since the natural numbers are integers as well, we further have {{lzSort:ℕ ⊆ ℤ}} and {{lzSort:ℕ.nz ⊆ ℤ.nz}}."
+				"string" : "Another subsort, {{lzSort:ℚ.nn ⊆ ℚ}}, describes the non-negative rational numbers."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-03T15:26:50.739686+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-03T15:26:50.739686+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "n67bz+ycDQCRbfdrA0W37A=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The positive rational numbers, {{lzSort:ℚ.p}}, are both non-zero ({{lzSort:ℚ.p ⊆ ℚ.nz}}) and non-negative ({{lzSort:ℚ.p ⊆ ℚ.nn}})."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-03T15:13:57.399318+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-03T15:26:50.754604+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "3UXonuycDQCRYp96A0W37A=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The natural numbers are always non-negative ({{lzSort:ℕ ⊆ ℚ.nn}}), and the non-zero natural numbers are positive ({{lzSort:ℕ.nz ⊆ ℚ.p}})."
 			},
 			{
 				"__type" : "textSnippet",
@@ -176,7 +250,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:40:12.789125+02:00"
+												"dateAndTimeString" : "2022-06-03T15:43:14.585019+02:00"
 											}
 										},
 										"editEmail" : {
@@ -187,17 +261,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:40:12.789125+02:00"
+												"dateAndTimeString" : "2022-06-03T15:43:39.695552+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "SdBzNZ6cDQC4amZPDpEwnA=="
+											"uidString" : "Kik+Cu2cDQCRkDzzA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The sum of two integers is an integer:\n\t{{lzOp:ℤ + ℤ : ℤ}}"
+										"string" : "The sum of two rational numbers is a rational number:\n\t{{lzOp:ℚ + ℚ : ℚ}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -213,7 +287,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:37:24.260644+02:00"
+												"dateAndTimeString" : "2022-06-03T15:44:47.512366+02:00"
 											}
 										},
 										"editEmail" : {
@@ -224,17 +298,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:41:21.629654+02:00"
+												"dateAndTimeString" : "2022-06-03T15:44:47.512366+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "tEE3K56cDQC4ZRVZDpEwnA=="
+											"uidString" : "EHxvDO2cDQCRkxvuA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "Several special cases for subsorts deserve specific definitions:\n\t{{lzOp:ℕ + ℕ : ℕ}}\n\t{{lzOp:ℕ.nz + ℕ.nz : ℕ.nz}}\n\t{{lzOp:ℕ.nz + ℕ : ℕ.nz}}\n\t{{lzOp:ℕ + ℕ.nz : ℕ.nz}}"
+										"string" : "Important special cases are:\n\t{{lzOp:ℚ.p + ℚ.p : ℚ.p}}\n\t{{lzOp:ℚ.nn + ℚ.nn : ℚ.nn}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -250,7 +324,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:19:53.980028+02:00"
+												"dateAndTimeString" : "2022-06-03T15:55:09.063679+02:00"
 											}
 										},
 										"editEmail" : {
@@ -261,17 +335,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:21:57.975524+02:00"
+												"dateAndTimeString" : "2022-06-03T15:55:09.063679+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "iHRCw56cDQCq1XQTB2tiaA=="
+											"uidString" : "5wQtEO2cDQCRlN5iA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "Addition is commutative:\n\t{{lzAxiom:x_:ℤ, y_:ℤ, x_ + y_ = y_ + x_}}\nand associative:\n\t{{lzAxiom:x_:ℤ, y_:ℤ, z_:ℤ, (x_ + y_) + z_ = x_ + (y_ + z_)}}"
+										"string" : "Addition is commutative:\n\t{{lzAxiom:x_:ℚ, y_:ℚ, x_ + y_ = y_ + x_}}\nand associative:\n\t{{lzAxiom:x_:ℚ, y_:ℚ, z_:ℚ, (x_ + y_) + z_ = x_ + (y_ + z_)}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -292,7 +366,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:12:49.382989+02:00"
+															"dateAndTimeString" : "2022-06-03T15:56:00.384441+02:00"
 														}
 													},
 													"editEmail" : {
@@ -303,17 +377,17 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:12:49.382989+02:00"
+															"dateAndTimeString" : "2022-06-03T15:56:00.384441+02:00"
 														}
 													},
 													"uid" : {
 														"__type" : "uid",
-														"uidString" : "hqy5PKucDQCu8M8JBp1owg=="
+														"uidString" : "czc5Nu2cDQCRo22hA0W37A=="
 													},
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℤ) + (zero_:zero) ⇒ x_}}\n\t{{lzRule:(zero_:zero) + (x_:ℤ) ⇒ x_}}"
+													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℚ) + (zero_:zero) ⇒ x_}}\n\t{{lzRule:(zero_:zero) + (x_:ℚ) ⇒ x_}}"
 												},
 												{
 													"__type" : "textSnippet",
@@ -329,7 +403,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:10:42.187016+02:00"
+															"dateAndTimeString" : "2022-06-03T15:56:33.897975+02:00"
 														}
 													},
 													"editEmail" : {
@@ -340,17 +414,17 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:13:11.670032+02:00"
+															"dateAndTimeString" : "2022-06-03T15:56:33.897975+02:00"
 														}
 													},
 													"uid" : {
 														"__type" : "uid",
-														"uidString" : "pbAINaucDQCu7iWyBp1owg=="
+														"uidString" : "xDM+OO2cDQCRpHt/A0W37A=="
 													},
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Evaluation for number terms:\n\t{{lzRule:(x_:ℤ) + (y_:ℤ) → \"x ensureNumber. y ensureNumber. x + y\"}}"
+													"string" : "Evaluation for number terms:\n\t{{lzRule:(x_:ℚ) + (y_:ℚ) → \"x ensureNumber. y ensureNumber. x + y\"}}"
 												}
 											]
 										},
@@ -362,7 +436,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T09:12:29.880764+02:00"
+												"dateAndTimeString" : "2022-06-03T15:55:26.119572+02:00"
 											}
 										},
 										"editEmail" : {
@@ -373,12 +447,12 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T09:12:29.880764+02:00"
+												"dateAndTimeString" : "2022-06-03T15:55:26.929039+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "6RqQO6ucDQCu7wkeBp1owg=="
+											"uidString" : "9QwINu2cDQCRoj/TA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
@@ -395,7 +469,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-30T17:37:16.818081+02:00"
+									"dateAndTimeString" : "2022-06-03T15:32:45.98107+02:00"
 								}
 							},
 							"editEmail" : {
@@ -406,12 +480,12 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-30T17:37:19.329054+02:00"
+									"dateAndTimeString" : "2022-06-03T15:32:45.98107+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "mhSUKp6cDQC4YInpDpEwnA=="
+								"uidString" : "dJDLzOycDQCRZUYZA0W37A=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
@@ -437,7 +511,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:45:07.062315+02:00"
+												"dateAndTimeString" : "2022-06-03T15:45:07.731473+02:00"
 											}
 										},
 										"editEmail" : {
@@ -448,17 +522,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:45:33.449857+02:00"
+												"dateAndTimeString" : "2022-06-03T15:45:28.590675+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "SjJTRp6cDQC4fHmbDpEwnA=="
+											"uidString" : "TGW6EO2cDQCRlf9aA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The difference between two integers is an integer:\n\t{{lzOp:ℤ - ℤ : ℤ}}"
+										"string" : "The difference between two rational numbers is a rational number:\n\t{{lzOp:ℚ - ℚ : ℚ}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -474,7 +548,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:45:39.041142+02:00"
+												"dateAndTimeString" : "2022-06-03T15:45:32.144058+02:00"
 											}
 										},
 										"editEmail" : {
@@ -485,17 +559,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:45:52.561113+02:00"
+												"dateAndTimeString" : "2022-06-03T15:45:51.875348+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "TXl9R56cDQC4gXrrDpEwnA=="
+											"uidString" : "Iz+mEu2cDQCRlm9zA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The negative of an integer is an integer:\n\t{{lzOp:-(ℤ) : ℤ}}"
+										"string" : "The negative of a rational number is a rational number:\n\t{{lzOp:-(ℚ) : ℚ}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -516,7 +590,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:20:47.698737+02:00"
+															"dateAndTimeString" : "2022-06-03T15:57:22.482276+02:00"
 														}
 													},
 													"editEmail" : {
@@ -527,17 +601,17 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:20:47.698737+02:00"
+															"dateAndTimeString" : "2022-06-03T15:57:22.482276+02:00"
 														}
 													},
 													"uid" : {
 														"__type" : "uid",
-														"uidString" : "FC88WaucDQCf1ekNBptRAA=="
+														"uidString" : "bxf/Ou2cDQCRpolpA0W37A=="
 													},
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℤ) - (zero_:zero) ⇒ x_}}\n\t{{lzRule:(zero_:zero) - (x_:ℤ) ⇒ -(x_)}}"
+													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℚ) - (zero_:zero) ⇒ x_}}\n\t{{lzRule:(zero_:zero) - (x_:ℚ) ⇒ -(x_)}}"
 												},
 												{
 													"__type" : "textSnippet",
@@ -553,7 +627,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:20:32.346199+02:00"
+															"dateAndTimeString" : "2022-06-03T15:58:02.797912+02:00"
 														}
 													},
 													"editEmail" : {
@@ -564,17 +638,17 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:21:14.066694+02:00"
+															"dateAndTimeString" : "2022-06-03T15:58:02.797912+02:00"
 														}
 													},
 													"uid" : {
 														"__type" : "uid",
-														"uidString" : "ECWkV6ucDQCf1HlVBptRAA=="
+														"uidString" : "mgAUPe2cDQCRp32RA0W37A=="
 													},
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Evaluation for number terms:\n\t{{lzRule:(x_:ℤ) - (y_:ℤ) → \"x ensureNumber. y ensureNumber. x - y\"}}\n\t{{lzRule:-(x_:ℤ) → \"x ensureNumber. x negated\"}}"
+													"string" : "Evaluation for number terms:\n\t{{lzRule:(x_:ℚ) - (y_:ℚ) → \"x ensureNumber. y ensureNumber. x - y\"}}\n\t{{lzRule:-(x_:ℚ) → \"x ensureNumber. x negated\"}}"
 												}
 											]
 										},
@@ -586,7 +660,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T09:20:19.458846+02:00"
+												"dateAndTimeString" : "2022-06-03T15:56:46.968295+02:00"
 											}
 										},
 										"editEmail" : {
@@ -597,12 +671,12 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T09:20:20.399926+02:00"
+												"dateAndTimeString" : "2022-06-03T15:56:47.788658+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "1213V6ucDQCf03uBBptRAA=="
+											"uidString" : "XMTYOu2cDQCRpe88A0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
@@ -619,7 +693,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-30T17:44:43.7065+02:00"
+									"dateAndTimeString" : "2022-06-03T15:33:05.574854+02:00"
 								}
 							},
 							"editEmail" : {
@@ -630,12 +704,12 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-30T17:44:49.132577+02:00"
+									"dateAndTimeString" : "2022-06-03T15:33:05.574854+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "bQaRO56cDQC4bXyhDpEwnA=="
+								"uidString" : "75hx5eycDQCRciiiA0W37A=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
@@ -661,7 +735,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:26:49.530268+02:00"
+												"dateAndTimeString" : "2022-06-03T15:46:13.797087+02:00"
 											}
 										},
 										"editEmail" : {
@@ -672,17 +746,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:29:40.759833+02:00"
+												"dateAndTimeString" : "2022-06-03T15:46:39.097225+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "scBk256cDQCq3OWqB2tiaA=="
+											"uidString" : "6svNFO2cDQCRl/RjA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The successor of a natural number is\n\t{{lzOp:succ(ℕ) : ℕ.nz}}\ndefined by:\n\t{{lzAxiom:succ(n_:ℕ) = n_ + 1}}"
+										"string" : "The product of two rational numbers is a rational number:\n\t{{lzOp:ℚ × ℚ : ℚ}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -698,7 +772,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:27:04.020149+02:00"
+												"dateAndTimeString" : "2022-06-03T15:46:41.57803+02:00"
 											}
 										},
 										"editEmail" : {
@@ -709,17 +783,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:30:28.264381+02:00"
+												"dateAndTimeString" : "2022-06-03T15:47:02.429448+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "for63J6cDQCq3RyJB2tiaA=="
+											"uidString" : "gtjHFu2cDQCRmMhYA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The predecessor of a natural number is\n\t{{lzOp:pred(ℕ.nz) : ℕ}}\ndefined by:\n\t{{lzAxiom:pred(n_:ℕ.nz) = n_ - 1 }}"
+										"string" : "Important special cases are:\n\t{{lzOp:ℚ.p × ℚ.p : ℚ.p}}\n\t{{lzOp:ℚ.nn × ℚ.nn : ℚ.nn}}\n\t{{lzOp:ℚ.nz × ℚ.nz : ℚ.nz}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -735,7 +809,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:30:41.896118+02:00"
+												"dateAndTimeString" : "2022-06-03T15:58:40.535619+02:00"
 											}
 										},
 										"editEmail" : {
@@ -746,17 +820,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-06-01T18:49:05.344489+02:00"
+												"dateAndTimeString" : "2022-06-03T15:58:40.535619+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "Sq3Y6Z6cDQCq4ALwB2tiaA=="
+											"uidString" : "6ValQe2cDQCRqPk2A0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The reason for introducing these two operators is their more precise argument and result sorts. For example, {{lzTerm:pred(n_:ℕ.nz)}}  is of sort {{lzSort:ℕ, example = \"yes\"}}, but {{lzTerm:(n_:ℕ.nz) - 1}}  is of sort {{lzSort:ℤ, example = \"yes\"}}."
+										"string" : "Multiplication is commutative:\n\t{{lzAxiom:x_:ℚ, y_:ℚ, x_ × y_ = y_ × x_}}\nand associative:\n\t{{lzAxiom:x_:ℚ, y_:ℚ, z_:ℚ,  (x_ × y_) × z_ = x_ × (y_ × z_)}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -772,7 +846,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T08:55:14.736181+02:00"
+												"dateAndTimeString" : "2022-06-03T15:59:08.646351+02:00"
 											}
 										},
 										"editEmail" : {
@@ -783,203 +857,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T08:55:34.771808+02:00"
+												"dateAndTimeString" : "2022-06-03T15:59:08.646351+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "qXo3/aqcDQCq9R8qB2tiaA=="
+											"uidString" : "YK9HQ+2cDQCRqXheA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "Rules:\n\t{{lzRule:pred(x_:ℕ.nz) → \"x ensureNumber. x pred\"}}\n\t{{lzRule:succ(x_:ℕ) → \"x ensureNumber. x succ\"}}"
-									}
-								]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-30T18:26:26.644297+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-30T18:26:33.428316+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "9bzf2Z6cDQCq21W5B2tiaA=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "##### Successor and predecessor"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:57:16.096005+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:57:16.096005+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "GNBxcp6cDQC4nfPPDpEwnA=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : "The product of two integers is an integer:\n\t{{lzOp:ℤ × ℤ : ℤ}}"
-									},
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:56:37.454485+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:57:37.812921+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "Z3Iub56cDQC4muChDpEwnA=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : "Important special cases for subsorts:\n\t{{lzOp:ℕ × ℕ : ℕ}}\n\t{{lzOp:ℕ.nz × ℕ.nz : ℕ.nz}}\n\t{{lzOp:ℤ.nz × ℤ.nz : ℤ.nz}}"
-									},
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:21:00.685547+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:21:47.508383+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "t71bx56cDQCq2MwAB2tiaA=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : "Multiplication is commutative:\n\t{{lzAxiom:x_:ℤ, y_:ℤ, x_ × y_ = y_ × x_}}\nand associative:\n\t{{lzAxiom:x_:ℤ, y_:ℤ, z_:ℤ,  (x_ × y_) × z_ = x_ × (y_ × z_)}}"
-									},
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:23:30.851769+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:24:29.371037+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "dOOaz56cDQCq2S9HB2tiaA=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:x_:ℤ, y_:ℤ, z_:ℤ,  x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)}}"
+										"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:x_:ℚ, y_:ℚ, z_:ℚ,  x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -1000,7 +888,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-06-03T15:59:48.649072+02:00"
+															"dateAndTimeString" : "2022-06-03T16:00:08.294432+02:00"
 														}
 													},
 													"editEmail" : {
@@ -1011,17 +899,17 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-06-03T15:59:48.649072+02:00"
+															"dateAndTimeString" : "2022-06-03T16:00:08.294432+02:00"
 														}
 													},
 													"uid" : {
 														"__type" : "uid",
-														"uidString" : "VaIZZaucDQC7mvtOD9ZeZw=="
+														"uidString" : "u1wARO2cDQCRqzDsA0W37A=="
 													},
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℤ) × (zero_:zero) ⇒ 0}}\n\t{{lzRule:(zero_:zero) × (x_:ℤ) ⇒ 0}}"
+													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℚ) × (zero_:zero) ⇒ 0}}\n\t{{lzRule:(zero_:zero) × (x_:ℚ) ⇒ 0}}"
 												},
 												{
 													"__type" : "textSnippet",
@@ -1037,7 +925,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:24:33.639944+02:00"
+															"dateAndTimeString" : "2022-06-03T16:00:28.609261+02:00"
 														}
 													},
 													"editEmail" : {
@@ -1048,17 +936,17 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:24:33.639944+02:00"
+															"dateAndTimeString" : "2022-06-03T16:00:28.609261+02:00"
 														}
 													},
 													"uid" : {
 														"__type" : "uid",
-														"uidString" : "HsyzZqucDQC7m+1zD9ZeZw=="
+														"uidString" : "764GR+2cDQCRrNnCA0W37A=="
 													},
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Eliminate ones:\n\t{{lzRule:1 × (x_:ℤ) ⇒ x_}}\n\t{{lzRule:(x_:ℤ) × 1 ⇒ x_}}"
+													"string" : "Eliminate ones:\n\t{{lzRule:1 × (x_:ℚ) ⇒ x_}}\n\t{{lzRule:(x_:ℚ) × 1 ⇒ x_}}"
 												},
 												{
 													"__type" : "textSnippet",
@@ -1074,7 +962,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:23:52.092987+02:00"
+															"dateAndTimeString" : "2022-06-03T16:00:45.666188+02:00"
 														}
 													},
 													"editEmail" : {
@@ -1085,17 +973,17 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:24:39.670189+02:00"
+															"dateAndTimeString" : "2022-06-03T16:00:45.666188+02:00"
 														}
 													},
 													"uid" : {
 														"__type" : "uid",
-														"uidString" : "farEY6ucDQC7mfRcD9ZeZw=="
+														"uidString" : "VYI4SO2cDQCRrXiWA0W37A=="
 													},
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℤ) × (y_:ℤ) → \"x ensureNumber. y ensureNumber. x * y\"}}"
+													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℚ) × (y_:ℚ) → \"x ensureNumber. y ensureNumber. x * y\"}}"
 												}
 											]
 										},
@@ -1107,7 +995,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T09:23:42.751004+02:00"
+												"dateAndTimeString" : "2022-06-03T15:59:18.176073+02:00"
 											}
 										},
 										"editEmail" : {
@@ -1118,12 +1006,12 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T09:23:43.940905+02:00"
+												"dateAndTimeString" : "2022-06-03T15:59:18.898273+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "U3+JY6ucDQC7mIR0D9ZeZw=="
+											"uidString" : "TszeQ+2cDQCRqm35A0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
@@ -1140,7 +1028,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-03T15:33:19.708922+02:00"
+									"dateAndTimeString" : "2022-06-03T15:36:09.614014+02:00"
 								}
 							},
 							"editEmail" : {
@@ -1151,12 +1039,12 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-03T15:35:53.734469+02:00"
+									"dateAndTimeString" : "2022-06-03T15:36:09.614014+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "QHNDSp6cDQC4hQUgDpEwnA=="
+								"uidString" : "Ve1H5uycDQCRdAcVA0W37A=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
@@ -1182,7 +1070,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:00:21.007893+02:00"
+												"dateAndTimeString" : "2022-06-03T15:47:43.725995+02:00"
 											}
 										},
 										"editEmail" : {
@@ -1193,17 +1081,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:00:21.007893+02:00"
+												"dateAndTimeString" : "2022-06-03T15:48:17.80762+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "UMJ3fZ6cDQC4oZslDpEwnA=="
+											"uidString" : "uQVHGu2cDQCRmTgyA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "Integer division yields a quotient:\n\t{{lzOp:ℤ div ℤ.nz : ℤ}}\nand a remainder:\n\t{{lzOp:ℤ rem ℤ.nz : ℤ}}"
+										"string" : "The quotient of a rational number and a non-zero rational number is  a rational number:\n\t{{lzOp:ℚ ÷ ℚ.nz : ℚ}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -1219,7 +1107,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T17:59:37.826101+02:00"
+												"dateAndTimeString" : "2022-06-03T15:48:19.602583+02:00"
 											}
 										},
 										"editEmail" : {
@@ -1230,17 +1118,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:01:19.345682+02:00"
+												"dateAndTimeString" : "2022-06-03T15:48:40.697326+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "YNvkep6cDQC4oFqPDpEwnA=="
+											"uidString" : "jYqiHO2cDQCRmnJ/A0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "Special case for the natural numbers:\n\t{{lzOp:ℕ div ℕ.nz : ℕ}}\n\t{{lzOp:ℕ rem ℕ.nz : ℕ}}"
+										"string" : "Important special cases are:\n\t{{lzOp:ℚ.nz ÷ ℚ.nz : ℚ.nz}}\n\t{{lzOp:ℚ.nn ÷ ℚ.p : ℚ.nn}}\n\t{{lzOp:ℚ.p ÷ ℚ.p : ℚ.p}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -1261,7 +1149,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:27:29.351518+02:00"
+															"dateAndTimeString" : "2022-06-03T16:06:31.416529+02:00"
 														}
 													},
 													"editEmail" : {
@@ -1272,17 +1160,17 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:27:29.351518+02:00"
+															"dateAndTimeString" : "2022-06-03T16:07:02.515942+02:00"
 														}
 													},
 													"uid" : {
 														"__type" : "uid",
-														"uidString" : "Ne0scaucDQCoch2jB0fLeQ=="
+														"uidString" : "DfjBXe2cDQCRs88qA0W37A=="
 													},
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Eliminate zeros:\n\t{{lzRule:(zero_:zero) div (x_:ℤ.nz) ⇒ 0}}\n\t{{lzRule:(zero_:zero) rem (x_:ℤ.nz) ⇒ 0}}"
+													"string" : "Elimination of zeros and ones:\n\t{{lzRule:(z_:zero) ÷ (x_:ℚ.nz) ⇒ 0}}\n\t{{lzRule:(x_:ℚ) ÷ 1 ⇒ x_}}"
 												},
 												{
 													"__type" : "textSnippet",
@@ -1298,7 +1186,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:27:10.637527+02:00"
+															"dateAndTimeString" : "2022-06-03T16:07:28.290893+02:00"
 														}
 													},
 													"editEmail" : {
@@ -1309,54 +1197,17 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:27:42.555567+02:00"
+															"dateAndTimeString" : "2022-06-03T16:07:28.290893+02:00"
 														}
 													},
 													"uid" : {
 														"__type" : "uid",
-														"uidString" : "5Y1fbqucDQCocVD1B0fLeQ=="
+														"uidString" : "2igkYO2cDQCRujteA0W37A=="
 													},
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Eliminate ones:\n\t{{lzRule:(x_:ℤ) div 1 ⇒ x_}}\n\t{{lzRule:(x_:ℤ) rem 1 ⇒ 0}}"
-												},
-												{
-													"__type" : "textSnippet",
-													"children" : {
-														"__type" : "snippets",
-														"items" : [ ]
-													},
-													"createEmail" : {
-														"__type" : "email",
-														"emailString" : "<unknown>"
-													},
-													"createTime" : {
-														"__type" : "time",
-														"time" : {
-															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:27:50.43324+02:00"
-														}
-													},
-													"editEmail" : {
-														"__type" : "email",
-														"emailString" : "<unknown>"
-													},
-													"editTime" : {
-														"__type" : "time",
-														"time" : {
-															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:33:12.484174+02:00"
-														}
-													},
-													"uid" : {
-														"__type" : "uid",
-														"uidString" : "IQdAcqucDQCoc7oRB0fLeQ=="
-													},
-													"paragraphStyle" : {
-														"__type" : "textStyle"
-													},
-													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℤ) div (y_:ℤ.nz) → \"x ensureNumber. y ensureNumber. x div: y\"}}\n\t{{lzRule:(x_:ℤ) rem (y_:ℤ.nz) → \"x ensureNumber. y ensureNumber. x rem: y\"}}"
+													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℚ) ÷ (y_:ℚ.nz) → \"x ensureNumber. y ensureNumber. x / y\"}}"
 												}
 											]
 										},
@@ -1368,7 +1219,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T09:26:40.657256+02:00"
+												"dateAndTimeString" : "2022-06-03T16:03:22.550122+02:00"
 											}
 										},
 										"editEmail" : {
@@ -1379,12 +1230,12 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T09:26:41.634904+02:00"
+												"dateAndTimeString" : "2022-06-03T16:03:27.562591+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "+Ds1bqucDQCocMxqB0fLeQ=="
+											"uidString" : "gOlyUu2cDQCRrtNwA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
@@ -1401,7 +1252,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-30T17:57:59.173287+02:00"
+									"dateAndTimeString" : "2022-06-03T15:36:20.626491+02:00"
 								}
 							},
 							"editEmail" : {
@@ -1412,12 +1263,12 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-30T17:58:01.387206+02:00"
+									"dateAndTimeString" : "2022-06-03T15:36:20.626491+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "s2ikdJ6cDQC4npsWDpEwnA=="
+								"uidString" : "W9NH8eycDQCRgoVBA0W37A=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
@@ -1443,7 +1294,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:13:59.60418+02:00"
+												"dateAndTimeString" : "2022-06-03T15:49:21.673756+02:00"
 											}
 										},
 										"editEmail" : {
@@ -1454,17 +1305,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:15:18.908248+02:00"
+												"dateAndTimeString" : "2022-06-03T15:51:42.681161+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "LotCrp6cDQCq0KDgB2tiaA=="
+											"uidString" : "+sshIO2cDQCRncYHA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "Exponentiation is defined for all integers with positive integer powers:\n\t{{lzOp:ℤ^(ℕ.nz) : ℤ}}"
+										"string" : "Exponentiation is defined for non-zero rational number to any integer power:\n\t{{lzOp:ℚ.nz^(ℤ.nz) : ℚ.nz}}\n\t{{lzOp:ℚ.nz^(zero) : ℕ.nz}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -1480,7 +1331,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:14:29.144222+02:00"
+												"dateAndTimeString" : "2022-06-03T15:50:33.854386+02:00"
 											}
 										},
 										"editEmail" : {
@@ -1491,54 +1342,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:14:29.144222+02:00"
+												"dateAndTimeString" : "2022-06-03T15:50:46.04235+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "kEwFsJ6cDQCq0fWjB2tiaA=="
+											"uidString" : "bKWDIu2cDQCRnvs1A0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "Special cases for subsorts:\n\t{{lzOp:ℕ^(ℕ.nz) : ℕ}}\n\t{{lzOp:ℕ.nz^(ℕ.nz) : ℕ.nz}}\n\t{{lzOp:ℤ.nz^(ℕ.nz) : ℤ.nz}}"
-									},
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:02:39.098011+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:15:31.147832+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "U877hJ6cDQC4pcyhDpEwnA=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : "Non-zero integers can also be raised to power zero:\n\t{{lzOp:ℤ.nz^(zero) : ℕ.nz}}"
+										"string" : "An important special case is:\n\t{{lzOp:ℚ.p^(ℤ.nz) : ℚ.p}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -1559,7 +1373,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:41:38.733722+02:00"
+															"dateAndTimeString" : "2022-06-03T16:12:12.046927+02:00"
 														}
 													},
 													"editEmail" : {
@@ -1570,17 +1384,17 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:41:38.733722+02:00"
+															"dateAndTimeString" : "2022-06-03T16:12:26.728922+02:00"
 														}
 													},
 													"uid" : {
 														"__type" : "uid",
-														"uidString" : "G3XNo6ucDQCod4pRB0fLeQ=="
+														"uidString" : "qaUkce2cDQCRxh7cA0W37A=="
 													},
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℤ.nz)^(zero_:zero) ⇒ 1}}\n\t{{lzRule:(zero_:zero)^(x_:ℕ.nz) ⇒ 0}}"
+													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℚ.nz)^(z_:zero) ⇒ 1}}\n\t{{lzRule:(z_:zero)^(x_:ℕ.nz) ⇒ 0}}"
 												},
 												{
 													"__type" : "textSnippet",
@@ -1596,7 +1410,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:41:28.10133+02:00"
+															"dateAndTimeString" : "2022-06-03T16:12:40.082041+02:00"
 														}
 													},
 													"editEmail" : {
@@ -1607,17 +1421,17 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:41:45.982208+02:00"
+															"dateAndTimeString" : "2022-06-03T16:12:57.561083+02:00"
 														}
 													},
 													"uid" : {
 														"__type" : "uid",
-														"uidString" : "V+DdoaucDQCodjSmB0fLeQ=="
+														"uidString" : "RNN0c+2cDQCRxzN0A0W37A=="
 													},
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℤ)^(y_:ℕ.nz) → \"x ensureNumber. y ensureNumber. x raisedTo: y\"}}"
+													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℤ)^(y_:ℕ.nz) → \"x raisedTo: y\"}}\n\t{{lzRule:(x_:ℚ.nz)^(y_:ℤ.nz) → \"x raisedTo: y\"}}"
 												}
 											]
 										},
@@ -1629,7 +1443,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T09:40:59.134381+02:00"
+												"dateAndTimeString" : "2022-06-03T16:11:54.43292+02:00"
 											}
 										},
 										"editEmail" : {
@@ -1640,12 +1454,12 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T09:41:03.453017+02:00"
+												"dateAndTimeString" : "2022-06-03T16:11:55.798856+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "2g1goaucDQCoddWsB0fLeQ=="
+											"uidString" : "MK/6cO2cDQCRxR3LA0W37A=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
@@ -1662,7 +1476,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-30T18:02:10.017038+02:00"
+									"dateAndTimeString" : "2022-06-03T15:36:31.073165+02:00"
 								}
 							},
 							"editEmail" : {
@@ -1673,12 +1487,12 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-30T18:02:13.083586+02:00"
+									"dateAndTimeString" : "2022-06-03T15:36:31.073165+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "mt17g56cDQC4o25xDpEwnA=="
+								"uidString" : "Hdtq8uycDQCRhKsUA0W37A=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
@@ -1695,7 +1509,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-30T17:37:04.178337+02:00"
+						"dateAndTimeString" : "2022-06-03T15:27:28.10867+02:00"
 					}
 				},
 				"editEmail" : {
@@ -1706,12 +1520,12 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-30T17:37:06.819269+02:00"
+						"dateAndTimeString" : "2022-06-03T15:27:28.10867+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "i46cV5mcDQCmKvwlCOjvPQ=="
+					"uidString" : "aK+20OycDQCRb1eWA0W37A=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
@@ -1737,7 +1551,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-03T15:41:37.433902+02:00"
+									"dateAndTimeString" : "2022-06-03T15:39:24.581275+02:00"
 								}
 							},
 							"editEmail" : {
@@ -1748,17 +1562,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-03T15:41:37.433902+02:00"
+									"dateAndTimeString" : "2022-06-03T15:39:24.581275+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "hZX9UZ6cDQC4jz5MDpEwnA=="
+								"uidString" : "gfiS+uycDQCRjkgWA0W37A=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "{{lzOp:ℤ < ℤ : 𝔹}}\n{{lzOp:ℤ > ℤ : 𝔹}}\n{{lzOp:ℤ ≤ ℤ : 𝔹}}\n{{lzOp:ℤ ≥ ℤ : 𝔹}}"
+							"string" : "{{lzOp:ℚ < ℚ : 𝔹}}\n{{lzOp:ℚ > ℚ : 𝔹}}\n{{lzOp:ℚ ≤ ℚ : 𝔹}}\n{{lzOp:ℚ ≥ ℚ : 𝔹}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -1774,7 +1588,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-03T15:39:44.836297+02:00"
+									"dateAndTimeString" : "2022-06-03T15:38:41.114542+02:00"
 								}
 							},
 							"editEmail" : {
@@ -1785,17 +1599,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-03T15:39:44.836297+02:00"
+									"dateAndTimeString" : "2022-06-03T15:38:41.114542+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "VgOLr6ucDQCoFFCLCgmj6Q=="
+								"uidString" : "ZY0P+uycDQCRi4gLA0W37A=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Evaluation rules for number terms:\n\t{{lzRule:(x_:ℤ) < (y_:ℤ) → \"x ensureNumber. y ensureNumber. x < y\"}}\n\t{{lzRule:(x_:ℤ) > (y_:ℤ) → \"x ensureNumber. y ensureNumber. x > y\"}}\n\t{{lzRule:(x_:ℤ) ≤ (y_:ℤ) → \"x ensureNumber. y ensureNumber. x <= y\"}}\n\t{{lzRule:(x_:ℤ) ≥ (y_:ℤ) → \"x ensureNumber. y ensureNumber. x >= y\"}}"
+							"string" : "Evaluation rules for number terms:\n\t{{lzRule:(x_:ℚ) < (y_:ℚ) → \"x ensureNumber. y ensureNumber. x < y\"}}\n\t{{lzRule:(x_:ℚ) > (y_:ℚ) → \"x ensureNumber. y ensureNumber. x > y\"}}\n\t{{lzRule:(x_:ℚ) ≤ (y_:ℚ) → \"x ensureNumber. y ensureNumber. x <= y\"}}\n\t{{lzRule:(x_:ℚ) ≥ (y_:ℚ) → \"x ensureNumber. y ensureNumber. x >= y\"}}"
 						}
 					]
 				},
@@ -1807,7 +1621,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-30T17:48:08.05128+02:00"
+						"dateAndTimeString" : "2022-06-03T15:36:50.088164+02:00"
 					}
 				},
 				"editEmail" : {
@@ -1818,12 +1632,12 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-30T17:48:10.369558+02:00"
+						"dateAndTimeString" : "2022-06-03T15:36:50.088164+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "Vp0kUZ6cDQC4iMoRDpEwnA=="
+					"uidString" : "9dgA8+ycDQCRhi1IA0W37A=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
@@ -1840,7 +1654,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-05-27T17:35:30.339933+02:00"
+			"dateAndTimeString" : "2022-06-03T15:11:22.607564+02:00"
 		}
 	},
 	"editEmail" : {
@@ -1851,15 +1665,15 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-05-27T17:35:30.339933+02:00"
+			"dateAndTimeString" : "2022-06-03T15:11:22.607564+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Integers"
+		"title" : "Rational numbers"
 	},
 	"uid" : {
 		"__type" : "uuid",
-		"uuid" : "c3e317cb-619c-0d00-9d31-35be0d61980a"
+		"uuid" : "6e8f8998-ec9c-0d00-915e-cb0e0345b7ec"
 	}
 }

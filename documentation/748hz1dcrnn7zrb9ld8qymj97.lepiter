@@ -108,7 +108,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-31T16:41:14.403865+02:00"
+									"dateAndTimeString" : "2022-06-03T15:11:19.836424+02:00"
 								}
 							},
 							"uid" : {
@@ -118,7 +118,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "[[Integers]]"
+							"string" : "[[Integers]], [[Rational numbers]]"
 						}
 					]
 				},
