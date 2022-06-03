@@ -15,11 +15,10 @@ Class {
 LzTermsWithSharedVars >> printVariablesAsLeibnizSyntaxOn: aStream [
 	| printVars |
 	printVars := [ :var :sort |
-			aStream nextPutAll: '∀ '.
 			aStream nextPutAll: var asSymbol.
 			aStream nextPut: $:.
 			sort printAsLeibnizSyntaxOn:  aStream.
-			aStream nextPut: Character space].
+			aStream nextPutAll: ', ' ].
 	self sortVariables keysAndValuesDo: printVars.
 	self variables keysAndValuesDo: printVars
 ]

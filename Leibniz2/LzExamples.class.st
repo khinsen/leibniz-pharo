@@ -376,7 +376,7 @@ LzExamples >> simpleContextRules [
 	^ {
 		'aFoo ⇒ aFoo'.
 		'aFoo(aFoo) ⇒ aFoo'.
-		'∀ someFoo_:Foo aFoo(someFoo_) ⇒ someFoo_'.
+		'someFoo_:Foo, aFoo(someFoo_) ⇒ someFoo_'.
 	} collect: [ :each |
 		| rule |
 		rule := self simpleContext rule: each.
