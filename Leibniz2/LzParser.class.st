@@ -97,9 +97,15 @@ LzParser >> fnRule [
 { #category : #signature }
 LzParser >> forAllClause [
 	^ super forAllClause ==> [ :nodes |
-		LzVarDeclaration new
-			name: (LzVarName for: nodes second);
-			sort: nodes fourth ]
+		nodes first = $∀
+			"Old syntax"
+			ifTrue: [ LzVarDeclaration new
+						name: (LzVarName for: nodes second);
+						sort: nodes fourth ]
+			"New syntax"
+			ifFalse: [ LzVarDeclaration new
+						name: (LzVarName for: nodes first);
+						sort: nodes third ] ]
 ]
 
 { #category : #terms }

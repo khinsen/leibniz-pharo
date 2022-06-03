@@ -64,7 +64,7 @@ LzParserExamples >> opDeclarations [
 		'Foo + Bar : Baz'.
 		'boolean ∨ boolean : boolean'.
 		'bag(element_:Sort, n_:ℕ) : Sort'.
-		'∀ s_:sort ∀ n_:ℕ ∀ m_:ℕ (list(s_, n_)) ++ (list(s_, m_)) : list(s_, n_ + m_)'.
+		's_:sort, n_:ℕ, m_:ℕ, (list(s_, n_)) ++ (list(s_, m_)) : list(s_, n_ + m_)'.
 	} collect: [ :each |
 		| astNode |
 		astNode := self opParser parse: each.
@@ -118,9 +118,9 @@ LzParserExamples >> ruleStrings [
 	^ {
 		'a ⇒ b'.
 		'a ⇒ b | true'.
-		'∀ bar_:Bar foo(bar_) ⇒ fooBar'.
-		'∀ bar_:Bar foo(bar_) ⇒ fooBar | false'.
-		'∀ bar_:Bar ∀ baz_:Baz foo(bar_, baz_) ⇒ fooBar | baz_'.
+		'bar_:Bar, foo(bar_) ⇒ fooBar'.
+		'bar_:Bar, foo(bar_) ⇒ fooBar | false'.
+		'bar_:Bar, baz_:Baz, foo(bar_, baz_) ⇒ fooBar | baz_'.
 		'foo(bar_) → ''bar_'':fn'.
 	}
 ]

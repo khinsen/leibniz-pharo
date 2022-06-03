@@ -57,7 +57,7 @@ LzGrammarSignaturesAndTerms >> bracketOp [
 
 { #category : #signature }
 LzGrammarSignaturesAndTerms >> forAllClause [
-	^ (forAll trim, varIdentifier, colon, sort) / (varIdentifier, colon, sort, comma)
+	^ (forAll trim, varIdentifier, colon, sort) / (varIdentifier, colon, sort, comma trim)
 ]
 
 { #category : #signature }
