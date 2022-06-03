@@ -35,6 +35,13 @@ LzDeclaration >> isLzASTNode [
 	^ true
 ]
 
+{ #category : #printing }
+LzDeclaration >> printVariables: variables asLeibnizSyntaxOn: aStream [
+	variables do: [ :var |
+		var printAsLeibnizSyntaxOn: aStream.
+		aStream nextPutAll: ', ' ]
+]
+
 { #category : #accessing }
 LzDeclaration >> valueSlots [
 	^ self class allInstVarNames

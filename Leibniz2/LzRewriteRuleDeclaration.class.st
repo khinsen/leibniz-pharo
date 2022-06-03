@@ -9,7 +9,7 @@ Class {
 
 { #category : #printing }
 LzRewriteRuleDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	self printVariablesAsLeibnizSyntaxOn: aStream.
+	self printVariables: variables asLeibnizSyntaxOn: aStream.
 	self pattern printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' ⇒ '.
 	self replacement printAsLeibnizSyntaxOn: aStream.

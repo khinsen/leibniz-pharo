@@ -30,7 +30,7 @@ LzFunctionRuleDeclaration >> function: anArray [
 
 { #category : #printing }
 LzFunctionRuleDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	self printVariablesAsLeibnizSyntaxOn: aStream.
+	self printVariables: variables asLeibnizSyntaxOn: aStream.
 	self pattern printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' → '.
 	self function ifNotNil: [ :f |

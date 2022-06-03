@@ -15,7 +15,7 @@ LzSubsortAxiomDeclaration >> axiomClass [
 
 { #category : #accessing }
 LzSubsortAxiomDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	self printVariablesAsLeibnizSyntaxOn: aStream.
+	self printVariables: variables asLeibnizSyntaxOn: aStream.
 	aStream nextPut: Character space.
 	subsort printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' ⊆ '.

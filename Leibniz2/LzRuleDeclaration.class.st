@@ -29,15 +29,6 @@ LzRuleDeclaration >> pattern: aTermNode [
 	pattern := aTermNode
 ]
 
-{ #category : #printing }
-LzRuleDeclaration >> printVariablesAsLeibnizSyntaxOn: aStream [
-	variables do:
-		[ :var |
-			aStream nextPutAll: '∀ '.
-			var printAsLeibnizSyntaxOn: aStream.
-			aStream nextPut: Character space]
-]
-
 { #category : #accessing }
 LzRuleDeclaration >> ruleClass [
 	self subclassResponsibility

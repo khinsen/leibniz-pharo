@@ -17,10 +17,7 @@ LzPatternDeclaration >> buildFor: aSignature [
 
 { #category : #printing }
 LzPatternDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	variables do: [ :each |
-		aStream nextPutAll: '∀ '.
-		each printAsLeibnizSyntaxOn: aStream.
-		aStream nextPut: Character space ].
+	self printVariables: variables asLeibnizSyntaxOn: aStream.
 	term printAsLeibnizSyntaxOn: aStream
 ]
 

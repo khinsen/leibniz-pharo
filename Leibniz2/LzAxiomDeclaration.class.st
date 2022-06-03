@@ -13,15 +13,6 @@ LzAxiomDeclaration >> axiomClass [
 ]
 
 { #category : #accessing }
-LzAxiomDeclaration >> printVariablesAsLeibnizSyntaxOn: aStream [
-	variables do:
-		[ :var |
-			aStream nextPutAll: '∀ '.
-			var printAsLeibnizSyntaxOn: aStream.
-			aStream nextPut: Character space]
-]
-
-{ #category : #accessing }
 LzAxiomDeclaration >> terms [
 	self subclassResponsibility
 ]
