@@ -57,11 +57,15 @@ LzInfixOpName >> printForArgs: anENodeArray on: aStream parents: aNodeSet [
 { #category : #printing }
 LzInfixOpName >> printForArity: anArity on: aStream [
 	self assert: anArity size equals: 2.
-	anArity first printAsLeibnizSyntaxOn: aStream parenthesized: true.
+	anArity first
+		printAsLeibnizSyntaxOn: aStream
+		parenthesized: anArity first isInfix.
 	aStream nextPut: Character space.
 	aStream nextPutAll: internalSymbol allButFirst.
 	aStream nextPut: Character space.
-	anArity second printAsLeibnizSyntaxOn: aStream parenthesized: true.
+	anArity second
+		printAsLeibnizSyntaxOn: aStream
+		parenthesized: anArity second isInfix.
 ]
 
 { #category : #inspecting }

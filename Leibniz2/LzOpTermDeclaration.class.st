@@ -52,7 +52,7 @@ LzOpTermDeclaration >> opName: anOpName [
 
 { #category : #printing }
 LzOpTermDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	opName printForArity: args on: aStream
+	opName printForArgs: args on: aStream
 ]
 
 { #category : #accessing }
