@@ -5,7 +5,8 @@ Character >> isLzIdentifierCharacter [
 	^ self isLetter "Unicode categories Ll Lm Lo Lt Lu"
 		or: [ self isLetterNumber "Unicode category Nl"
 		or: [ ('-*/☰' includes: self)
-		or: [ self isMathSymbol "Unicode category Sm"
+		or: [ (self isMathSymbol "Unicode category Sm"
+				and: [ ('=' includes: self) not ])
 		or: [ self isCurrencySymbol "Unicode category Sc"
 		or: [ (self isModifierSymbol "Unicode category Sk"
 					and: [ ('^' includes: self) not ])
