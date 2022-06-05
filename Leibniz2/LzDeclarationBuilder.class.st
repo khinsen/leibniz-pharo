@@ -80,7 +80,8 @@ LzDeclarationBuilder >> visitIntegerLiteralTerm: anIntegerLiteralTerm [
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitParenthesizedTerm: aParenthesizedTerm [
-	^ self acceptNode: aParenthesizedTerm term
+	^ LzDeclarationParenthesisAnnotation new
+		declaration: (self acceptNode: aParenthesizedTerm term)
 ]
 
 { #category : #visiting }

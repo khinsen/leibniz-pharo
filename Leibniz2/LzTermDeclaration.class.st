@@ -9,7 +9,7 @@ LzTermDeclaration >> buildFor: aSignature variables: aDictionary [
 	self subclassResponsibility
 ]
 
-{ #category : #accessing }
+{ #category : #testing }
 LzTermDeclaration >> hasInfixOpOtherThan: aSymbol [
 	^ false
 ]

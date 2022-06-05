@@ -118,6 +118,11 @@ LzSort >> isBooleanSort [
 ]
 
 { #category : #testing }
+LzSort >> isInfix [
+	^ term isInfix
+]
+
+{ #category : #testing }
 LzSort >> isSortSort [
 	term args ifNotEmpty: [ ^ false ].
 	^ term opName
