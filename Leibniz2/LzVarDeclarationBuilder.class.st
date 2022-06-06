@@ -8,13 +8,14 @@ Class {
 }
 
 { #category : #adding }
-LzVarDeclarationBuilder >> addVar: aVar sort: aSortTerm [
+LzVarDeclarationBuilder >> addVar: aVar sort: aSortTerm derived: aBoolean [
 	| newVar |
 	newVar := LzVarDeclaration new
 				name: (LzVarName for: aVar);
 				sort: aSortTerm.
+	aBoolean ifTrue: [ newVar beDerived ].
 	vars at: aVar
-		ifPresent: [ :v | self assert: v equals: newVar ]
+		ifPresent: [ :v | self assert: v sort equals: newVar sort ]
 		ifAbsentPut: newVar
 ]
 
@@ -37,6 +38,7 @@ LzVarDeclarationBuilder >> visitVar: aVar [
 	self
 		addVar: aVar varName value
 		sort:(LzDeclarationBuilder new acceptNode: aVar sort)
+		derived: false
 ]
 
 { #category : #visiting }
@@ -45,4 +47,5 @@ LzVarDeclarationBuilder >> visitVarTermWithSort: aVarTerm [
 	self
 		addVar: aVarTerm varName value
 		sort:(LzDeclarationBuilder new acceptNode: aVarTerm sort)
+		derived: true
 ]

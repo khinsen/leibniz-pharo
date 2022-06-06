@@ -1,30 +1,30 @@
 Class {
-	#name : #LzDeclarationParenthesisAnnotation,
+	#name : #LzParenthesesAnnotation,
 	#superclass : #LzDeclarationAnnotation,
 	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #constructing }
-LzDeclarationParenthesisAnnotation >> buildFor: aSignature variables: aDictionary [
+LzParenthesesAnnotation >> buildFor: aSignature variables: aDictionary [
 	^ self declaration buildFor: aSignature variables: aDictionary
 ]
 
 { #category : #testing }
-LzDeclarationParenthesisAnnotation >> hasInfixOpOtherThan: aSymbol [
+LzParenthesesAnnotation >> hasInfixOpOtherThan: aSymbol [
 	^ false
 ]
 
 { #category : #testing }
-LzDeclarationParenthesisAnnotation >> isInfix [
+LzParenthesesAnnotation >> isInfix [
 	^ false
 ]
 
 { #category : #printing }
-LzDeclarationParenthesisAnnotation >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream [
+LzParenthesesAnnotation >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream [
 	self declaration printAsLeibnizSyntaxOn: aStream parenthesized: true
 ]
 
 { #category : #printing }
-LzDeclarationParenthesisAnnotation >> printAsLeibnizSyntaxOn: aStream [
+LzParenthesesAnnotation >> printAsLeibnizSyntaxOn: aStream [
 	self declaration printAsLeibnizSyntaxOn: aStream parenthesized: true
 ]

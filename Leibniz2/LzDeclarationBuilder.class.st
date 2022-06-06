@@ -80,7 +80,7 @@ LzDeclarationBuilder >> visitIntegerLiteralTerm: anIntegerLiteralTerm [
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitParenthesizedTerm: aParenthesizedTerm [
-	^ LzDeclarationParenthesisAnnotation new
+	^ LzParenthesesAnnotation new
 		declaration: (self acceptNode: aParenthesizedTerm term)
 ]
 
@@ -273,5 +273,6 @@ LzDeclarationBuilder >> visitVarTerm: aVarTerm [
 { #category : #visiting }
 LzDeclarationBuilder >> visitVarTermWithSort: aVarTerm [
 	^ LzVarTermDeclaration new
-		name: (LzVarName for: aVarTerm varName value)
+		name: (LzVarName for: aVarTerm varName value);
+		sort:(LzDeclarationBuilder new acceptNode: aVarTerm sort)	
 ]

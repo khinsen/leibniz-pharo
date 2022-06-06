@@ -3,10 +3,27 @@ Class {
 	#superclass : #LzDeclaration,
 	#instVars : [
 		'sort',
-		'name'
+		'name',
+		'isDerived'
 	],
 	#category : #'Leibniz2-Declarations'
 }
+
+{ #category : #accessing }
+LzVarDeclaration >> beDerived [
+	isDerived := true
+]
+
+{ #category : #initialization }
+LzVarDeclaration >> initialize [
+	super initialize.
+	isDerived := false
+]
+
+{ #category : #accessing }
+LzVarDeclaration >> isDerived [
+	^ isDerived
+]
 
 { #category : #testing }
 LzVarDeclaration >> isSortVar [

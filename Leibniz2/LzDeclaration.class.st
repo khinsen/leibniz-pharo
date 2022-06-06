@@ -38,8 +38,9 @@ LzDeclaration >> isLzASTNode [
 { #category : #printing }
 LzDeclaration >> printVariables: variables asLeibnizSyntaxOn: aStream [
 	variables do: [ :var |
-		var printAsLeibnizSyntaxOn: aStream.
-		aStream nextPutAll: ', ' ]
+		var isDerived ifFalse: [
+			var printAsLeibnizSyntaxOn: aStream.
+			aStream nextPutAll: ', ' ] ]
 ]
 
 { #category : #accessing }
