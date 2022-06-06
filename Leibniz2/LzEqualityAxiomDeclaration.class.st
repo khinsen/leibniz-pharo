@@ -37,7 +37,6 @@ LzEqualityAxiomDeclaration >> left: aTermNode [
 { #category : #accessing }
 LzEqualityAxiomDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	self printVariables: variables asLeibnizSyntaxOn: aStream.
-	aStream nextPut: Character space.
 	left printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' = '.
 	right printAsLeibnizSyntaxOn: aStream.

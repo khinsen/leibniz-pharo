@@ -10,9 +10,9 @@ Class {
 { #category : #printing }
 LzSpecialTermsDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	termTypes allButLastDo: [ :each |
-		each printOn: aStream.
+		aStream nextPutAll: each.
 		aStream << ', ' ].
-	termTypes last printOn: aStream
+	aStream nextPutAll: termTypes last
 ]
 
 { #category : #accessing }
