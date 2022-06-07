@@ -63,6 +63,11 @@ LzTerm >> ensureNumber [
 	LzRewriteFailure signal: 'not a number term'
 ]
 
+{ #category : #rewriting }
+LzTerm >> ensureString [
+	LzRewriteFailure signal: 'not a number term'
+]
+
 { #category : #organizing }
 LzTerm >> fingerprint [
 	self subclassResponsibility

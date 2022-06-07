@@ -121,3 +121,37 @@ LzLepiterExamples >> rationalNumberTerms [
 		self assert: term sort asLeibnizSyntaxString equals: each second.
 		term  ]
 ]
+
+{ #category : #accessing }
+LzLepiterExamples >> stringOperations [
+	<gtExample>
+	| context |
+	context := (LzContextBuilder fromPage: 'Character strings') context.
+	^ {
+		{ '"" + ""'. '""' }.
+		{ '"abc" + "xyz"'. '"abcxyz"'}.
+		{ '"abc" + ""'. '"abc"'}.
+	}
+	collect: [ :each |
+		| term result |
+		term := context term: each first.
+		result := context reduce: term.
+		self assert: result equals: (context term: each second).
+		{ term. result } ]
+]
+
+{ #category : #accessing }
+LzLepiterExamples >> stringTerms [
+	<gtExample>
+	| context |
+	context := (LzContextBuilder fromPage: 'Character strings') context.
+	^ {
+		{ '""'. 'string'. }.
+		{ '"abc"'. 'string' }.
+	}
+	collect: [ :each |
+		| term |
+		term := context term: each first.
+		self assert: term sort asLeibnizSyntaxString equals: each second.
+		term  ]
+]

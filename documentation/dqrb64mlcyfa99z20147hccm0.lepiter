@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-17T10:23:27.84732+02:00"
+						"dateAndTimeString" : "2022-06-07T11:47:08.240094+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,54 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-17T10:23:29.392602+02:00"
+						"dateAndTimeString" : "2022-06-07T11:47:39.342561+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "hHh3wh6GDQCw4M1mCdo5eA=="
+					"uidString" : "1L6KMTqdDQCQomrdAgkk6A=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "[[Leibniz - a Digital Scientific Notation]]"
+				"string" : "Literal character strings are special terms, not implementable in Leibniz itself: {{lzSpecialTerms:strings}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-07T11:47:52.712613+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-07T11:48:04.334168+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "c/HKNzqdDQCQpTHKAgkk6A=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The sort of character strings is {{lzSort:string}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -60,7 +97,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-31T16:41:01.033862+02:00"
+									"dateAndTimeString" : "2022-06-07T11:48:42.561389+02:00"
 								}
 							},
 							"editEmail" : {
@@ -71,17 +108,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-31T16:41:01.033862+02:00"
+									"dateAndTimeString" : "2022-06-07T11:48:51.108968+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "U9Q3f7GcDQC5PVH2DA4SbQ=="
+								"uidString" : "YVeHOjqdDQCQqZlRAgkk6A=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "[[Logical truth]],  [[Boolean algebra]], [[Term equality]]"
+							"string" : "{{lzOp:string + string : string}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -97,7 +134,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-31T16:41:14.403865+02:00"
+									"dateAndTimeString" : "2022-06-07T11:48:54.803643+02:00"
 								}
 							},
 							"editEmail" : {
@@ -108,54 +145,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-03T15:11:19.836424+02:00"
+									"dateAndTimeString" : "2022-06-07T11:51:05.340354+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "YntXgLGcDQC5QYedDA4SbQ=="
+								"uidString" : "jGGqOzqdDQCQrG8pAgkk6A=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "[[Integers]], [[Rational numbers]]"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-07T11:45:57.293981+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-07T11:46:00.242271+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "BRc1MTqdDQCQnw/mAgkk6A=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "[[Character strings]]"
+							"string" : "{{lzRule:(a_:string) + (b_:string) → \"a ensureString. b ensureString. a, b\"}}"
 						}
 					]
 				},
@@ -167,7 +167,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-17T11:29:17.755728+02:00"
+						"dateAndTimeString" : "2022-06-07T11:48:19.459897+02:00"
 					}
 				},
 				"editEmail" : {
@@ -178,17 +178,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-20T21:03:12.392463+02:00"
+						"dateAndTimeString" : "2022-06-07T11:48:32.413978+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "+ev9rx+GDQCVctvGD2GZzw=="
+					"uidString" : "HxPjODqdDQCQp0deAgkk6A=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "[[Context definitions]]"
+				"string" : "The only operation defined on character strings is concatenation:"
 			}
 		]
 	},
@@ -200,7 +200,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2021-08-17T10:22:46.94715+02:00"
+			"dateAndTimeString" : "2022-06-07T11:46:01.995392+02:00"
 		}
 	},
 	"editEmail" : {
@@ -211,15 +211,15 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2021-08-17T10:22:57.203721+02:00"
+			"dateAndTimeString" : "2022-06-07T11:46:01.995392+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Leibniz book"
+		"title" : "Character strings"
 	},
 	"uid" : {
 		"__type" : "uuid",
-		"uuid" : "fbd476c2-1e86-0d00-b0df-624109da3978"
+		"uuid" : "d8778931-3a9d-0d00-90a1-a9c7020924e8"
 	}
 }
