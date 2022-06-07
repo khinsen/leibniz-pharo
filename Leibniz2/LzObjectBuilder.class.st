@@ -51,11 +51,6 @@ LzObjectBuilder >> visitTopLevelSort: aTopLevelSort [
 ]
 
 { #category : #visiting }
-LzObjectBuilder >> visitTopLevelSpecialTerms: aTopLevelSpecialTermsNode [
-	^ LzDeclarationBuilder new acceptNode: aTopLevelSpecialTermsNode
-]
-
-{ #category : #visiting }
 LzObjectBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 	| subsortAxiom subsort supersort |
 	subsortAxiom := LzDeclarationBuilder new acceptNode: aTopLevelSubsort.
@@ -63,14 +58,18 @@ LzObjectBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 	supersort := self sortFromTerm: subsortAxiom supersort vars: subsortAxiom variables.
 	^ LzSortPair
 		sort1: subsort
-		sort2: supersort.
-	"^ LzSortFamilySubsortRelation new
-		subsort: (self context sortGraph familyForParsedOp: subsortAxiom subsort);
-		supersort: (self context sortGraph familyForParsedOp: subsortAxiom supersort)."
+		sort2: supersort
 ]
 
 { #category : #visiting }
 LzObjectBuilder >> visitTopLevelTerm: aTopLevelTerm [
-	^ self context parsedPattern:
-		(LzDeclarationBuilder new acceptNode: aTopLevelTerm)
+	| options term |
+	options := self parseOptions: aTopLevelTerm.
+	term := self context parsedPattern:
+		(LzDeclarationBuilder new acceptNode: aTopLevelTerm).
+	^ (options at: #withNormalForm ifAbsent: [ 'no' ]) = 'yes'
+		ifTrue: [ LzTermWithNormalForm
+					term: term
+					context: self context]
+		ifFalse: [ term ]
 ]

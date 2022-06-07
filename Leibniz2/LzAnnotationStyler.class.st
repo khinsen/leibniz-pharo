@@ -96,14 +96,12 @@ LzAnnotationStyler >> styleAutoHidingAnnotation: anAnnotation [
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleButton: anLzAnnotation type: aSymbol spawning: aBlock [
+LzAnnotationStyler >> styleButton: anLzAnnotation label: aString type: aSymbol spawning: aBlock [
 	| attribute |
 	attribute := GtButtonAttribute new
 		beAppend;
 		stencil: [
-			| label |
-			label := (LzDeclarationBuilder new acceptNode: anLzAnnotation) asLeibnizSyntaxString "anLzAnnotation source".
-			self inTextButton: label type: aSymbol spawning: aBlock ].
+			self inTextButton: aString type: aSymbol spawning: aBlock ].
 	self text
 		attribute: attribute
 		from: anLzAnnotation parent startPosition
@@ -111,11 +109,36 @@ LzAnnotationStyler >> styleButton: anLzAnnotation type: aSymbol spawning: aBlock
 ]
 
 { #category : #styling }
+LzAnnotationStyler >> styleButton: anLzAnnotation type: aSymbol spawning: aBlock [
+	| label |
+	label := (LzDeclarationBuilder new acceptNode: anLzAnnotation)
+				asLeibnizSyntaxString "anLzAnnotation source".
+	self styleButton: anLzAnnotation label: label type: aSymbol spawning: aBlock
+]
+
+{ #category : #styling }
+LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation type: aSymbol [
+	| declaration |
+	declaration := LzDeclarationBuilder new
+			acceptNode: anLzAnnotation.
+	self
+		styleButton: anLzAnnotation
+		label: declaration asLeibnizSyntaxString
+		type: aSymbol
+		spawning: [ declaration ].
+]
+
+{ #category : #styling }
 LzAnnotationStyler >> styleObjectButton: anLzAnnotation type: aSymbol [
-	self styleButton: anLzAnnotation type: aSymbol spawning: [
-		LzObjectBuilder new
+	| object |
+	object := LzObjectBuilder new
 			context: self context;
-			acceptNode: anLzAnnotation ].
+			acceptNode: anLzAnnotation.
+	self
+		styleButton: anLzAnnotation
+		label: object asLeibnizSyntaxString
+		type: aSymbol
+		spawning: [ object ].
 ]
 
 { #category : #styling }
@@ -166,21 +189,21 @@ LzAnnotationStyler >> visitSmaCCError: aSmaCCError [
 LzAnnotationStyler >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	self styleAnnotation: aTopLevelEqualityAxiom.
 	self styleAutoHidingAnnotation: aTopLevelEqualityAxiom.
-	self styleObjectButton: aTopLevelEqualityAxiom type: #declaration
+	self styleDeclarationButton: aTopLevelEqualityAxiom type: #declaration
 ]
 
 { #category : #styling }
 LzAnnotationStyler >> visitTopLevelOp: aTopLevelOpAnnotation [
 	self styleAnnotation: aTopLevelOpAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelOpAnnotation.
-	self styleObjectButton: aTopLevelOpAnnotation type: #declaration
+	self styleDeclarationButton: aTopLevelOpAnnotation type: #declaration
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelRule: aTopLevelRule [
 	self styleAnnotation: aTopLevelRule.
 	self styleAutoHidingAnnotation: aTopLevelRule.
-	self styleObjectButton: aTopLevelRule type: #declaration
+	self styleDeclarationButton: aTopLevelRule type: #declaration
 ]
 
 { #category : #visiting }
@@ -199,7 +222,7 @@ LzAnnotationStyler >> visitTopLevelSort: aTopLevelSortAnnotation [
 LzAnnotationStyler >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
 	self styleAnnotation: aTopLevelSpecialTerms.
 	self styleAutoHidingAnnotation: aTopLevelSpecialTerms.
-	self styleObjectButton: aTopLevelSpecialTerms type: #declaration
+	self styleDeclarationButton: aTopLevelSpecialTerms type: #declaration
 ]
 
 { #category : #generated }
@@ -211,6 +234,8 @@ LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
+	| options |
+	options := self parseOptions: aTopLevelTermAnnotation.
 	self styleAnnotation: aTopLevelTermAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.
 	self styleObjectButton: aTopLevelTermAnnotation type: #example
