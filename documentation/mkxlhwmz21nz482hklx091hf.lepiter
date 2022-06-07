@@ -746,7 +746,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-06-05T17:07:52.210502+02:00"
+												"dateAndTimeString" : "2022-06-07T17:16:35.67062+02:00"
 											}
 										},
 										"uid" : {
@@ -756,7 +756,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The reason for introducing these two operators is their more precise argument and result sorts. For example, {{lzTerm:pred(n_:ℕ.nz)}}  is of sort {{lzSort:ℕ, example=\"yes\"}}, but {{lzTerm:(n_:ℕ.nz) - 1}}  is of sort {{lzSort:ℤ, example=\"yes\"}}."
+										"string" : "The reason for introducing these two operators is their more precise argument and result sorts. For example, {{lzTerm:pred(n_:ℕ.nz)}}  is of sort {{lzSort:ℕ, example = \"yes\"}}, but {{lzTerm:(n_:ℕ.nz) - 1}}  is of sort {{lzSort:ℤ, example = \"yes\"}}."
 									},
 									{
 										"__type" : "textSnippet",

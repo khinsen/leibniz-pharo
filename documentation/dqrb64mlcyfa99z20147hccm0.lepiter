@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-07T11:47:08.240094+02:00"
+						"dateAndTimeString" : "2022-06-07T12:15:47.115374+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-07T11:47:39.342561+02:00"
+						"dateAndTimeString" : "2022-06-07T12:15:47.115374+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Literal character strings are special terms, not implementable in Leibniz itself: {{lzSpecialTerms:strings}}."
+				"string" : "Literal character strings are special terms, not implementable in Leibniz itself: {{lzSpecialTerms:strings}}. They are written as any sequence of characters enclosed in double quotes {{lzTerm:\"like this\"}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -156,6 +156,43 @@
 								"__type" : "textStyle"
 							},
 							"string" : "{{lzRule:(a_:string) + (b_:string) → \"a ensureString. b ensureString. a, b\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-07T12:15:57.999615+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-07T17:16:12.479832+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "i104nDqdDQCv+yXqB52v2g=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Example: {{lzTerm:\"abc\" + \"def\", withNormalForm = \"yes\"}}"
 						}
 					]
 				},
