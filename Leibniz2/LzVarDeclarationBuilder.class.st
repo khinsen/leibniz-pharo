@@ -12,8 +12,7 @@ LzVarDeclarationBuilder >> addVar: aVar sort: aSortTerm derived: aBoolean [
 	| newVar |
 	newVar := LzVarDeclaration new
 				name: (LzVarName for: aVar);
-				sort: aSortTerm;
-				position: vars size + 1.
+				sort: aSortTerm.
 	aBoolean ifTrue: [ newVar beDerived ].
 	vars at: aVar
 		ifPresent: [ :v | self assert: v sort equals: newVar sort ]
@@ -22,7 +21,7 @@ LzVarDeclarationBuilder >> addVar: aVar sort: aSortTerm derived: aBoolean [
 
 { #category : #initializing }
 LzVarDeclarationBuilder >> initialize [
-	vars := Dictionary new
+	vars := OrderedDictionary new
 ]
 
 { #category : #accessing }

@@ -37,14 +37,7 @@ LzDeclaration >> isLzASTNode [
 
 { #category : #printing }
 LzDeclaration >> printVariables: variables asLeibnizSyntaxOn: aStream [
-	((variables reject: #isDerived)
-		sorted: [ :a :b |
-			a position
-				ifNil: [ false ]
-				ifNotNil: [ :pa |
-					b position
-						ifNil: [ false ]
-						ifNotNil: [ : pb | pa < pb ] ] ])
+	(variables reject: #isDerived)
 		do: [ :var |
 			var printAsLeibnizSyntaxOn: aStream.
 			aStream nextPutAll: ', ' ]
