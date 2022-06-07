@@ -155,6 +155,13 @@ LzParser >> op [
 ]
 
 { #category : #terms }
+LzParser >> parenthesizedTerm [
+	^ super parenthesizedTerm ==> [ :innerTerm |
+		LzParenthesesAnnotation new
+			declaration: innerTerm ]
+]
+
+{ #category : #terms }
 LzParser >> pattern [
 	^ super pattern ==> [ :nodes |
 		nodes isCollection ifTrue: [
@@ -286,7 +293,7 @@ LzParser >> var [
 { #category : #signature }
 LzParser >> varArg [
 	^ super varArg ==> [ :nodes |
-		LzVarDeclaration new
+		LzVarTermDeclaration new
 			name: (LzVarName for: nodes first);
 			sort: nodes third ]
 ]

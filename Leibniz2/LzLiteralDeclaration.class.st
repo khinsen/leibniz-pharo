@@ -20,14 +20,6 @@ LzLiteralDeclaration >> builtin [
 	self subclassResponsibility
 ]
 
-{ #category : #printing }
-LzLiteralDeclaration >> printOn: aStream [
-	super printOn: aStream.
-	aStream nextPut: $(.
-	value printOn: aStream.
-	aStream nextPut: $)
-]
-
 { #category : #accessing }
 LzLiteralDeclaration >> termClass [
 	self subclassResponsibility

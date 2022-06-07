@@ -59,10 +59,11 @@ LzSignatureBuilder >> parsedVars: aCollection [
 { #category : #building }
 LzSignatureBuilder >> signature [
 	| uniqueVars uniqueOps variables operators |
-	uniqueOps := (opDeclarations collect: [ :each |
-		each withoutVarDeclarations ]) asSet.
-	uniqueVars := (varDeclarations,
-		(opDeclarations flatCollect: [ :each | each varDeclarations ])) asSet.
+	uniqueOps := opDeclarations asSet.
+	self flag: #todo. "Signature-level vars removed in a test phase."
+	uniqueVars := Set new.
+	"uniqueVars := (varDeclarations,
+		(opDeclarations flatCollect: [ :each | each varDeclarations ])) asSet."
 	self flag: #todo.
 	"Check for var declarations with sorts that are equal up to variable renaming."
 	variables := (uniqueVars collect: [ :each |

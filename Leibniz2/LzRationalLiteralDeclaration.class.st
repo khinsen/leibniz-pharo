@@ -11,7 +11,9 @@ LzRationalLiteralDeclaration >> builtin [
 
 { #category : #printing }
 LzRationalLiteralDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	value printOn: aStream
+	value numerator printOn: aStream.
+	aStream nextPut: $/.
+	value denominator printOn: aStream
 ]
 
 { #category : #accessing }
