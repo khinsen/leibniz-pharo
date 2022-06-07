@@ -8,7 +8,7 @@ Class {
 LzIntegerTerm >> div: otherInteger [
 	| x y |
 	x := self value.
-	y = otherInteger value.
+	y := otherInteger value.
 	(y = 0)
 		ifTrue: [ LzRewriteFailure signal: 'division by zero' ].
 	^ LzIntegerTerm
@@ -27,7 +27,7 @@ LzIntegerTerm >> pred [
 LzIntegerTerm >> rem: otherInteger [
 	| x y |
 	x := self value.
-	y = otherInteger value.
+	y := otherInteger value.
 	(y = 0)
 		ifTrue: [ LzRewriteFailure signal: 'division by zero' ].
 	^ LzIntegerTerm

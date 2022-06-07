@@ -39,6 +39,13 @@ LzRationalNumberTerm >> - otherNumberTerm [
 ]
 
 { #category : #rewriting }
+LzRationalNumberTerm >> / otherNumberTerm [
+	^ self class
+		signature: self signature
+		value: self value / otherNumberTerm value
+]
+
+{ #category : #rewriting }
 LzRationalNumberTerm >> < otherNumberTerm [
 	^ LzBooleanTerm
 		signature: self signature
