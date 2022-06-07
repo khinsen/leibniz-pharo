@@ -58,12 +58,6 @@ LzOpDeclaration >> valueSlots [
 ]
 
 { #category : #accessing }
-LzOpDeclaration >> varDeclarations [
-	^ args select: [ :each |
-		each class == LzVarDeclaration ]
-]
-
-{ #category : #accessing }
 LzOpDeclaration >> variables [
 	^ variables
 ]
@@ -71,18 +65,4 @@ LzOpDeclaration >> variables [
 { #category : #accessing }
 LzOpDeclaration >> variables: aCollection [
 	variables := aCollection
-]
-
-{ #category : #accessing }
-LzOpDeclaration >> withoutVarDeclarations [
-	| plainArgs |
-	plainArgs := args collect: [ :each |
-		each class == LzVarDeclaration
-			ifTrue: [ each sort ]
-			ifFalse: [ each ] ].
-	^ self class new
-			name: self name;
-			args: plainArgs;
-			sort: self sort;
-			variables: self variables
 ]
