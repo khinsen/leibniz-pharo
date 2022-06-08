@@ -56,7 +56,7 @@ LzObjectBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 	subsortAxiom := LzDeclarationBuilder new acceptNode: aTopLevelSubsort.
 	subsort := self sortFromTerm: subsortAxiom subsort vars: subsortAxiom variables.
 	supersort := self sortFromTerm: subsortAxiom supersort vars: subsortAxiom variables.
-	^ LzSortPair
+	^ LzSubsortRelation
 		sort1: subsort
 		sort2: supersort
 ]
