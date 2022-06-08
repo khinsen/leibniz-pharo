@@ -84,6 +84,14 @@ LzRationalNumberTerm >> negated [
 		value: self value negated
 ]
 
+{ #category : #printing }
+LzRationalNumberTerm >> printAsLeibnizSyntaxOn: aStream [
+	value numerator printOn: aStream.
+	value denominator = 1 ifFalse: [
+		aStream nextPut: $/.
+		value denominator printOn: aStream ]
+]
+
 { #category : #rewriting }
 LzRationalNumberTerm >> raisedTo: otherNumberTerm [
 	^ self class
