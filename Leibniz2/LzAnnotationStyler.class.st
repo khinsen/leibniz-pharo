@@ -129,16 +129,21 @@ LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation type: aSymbol [
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleObjectButton: anLzAnnotation type: aSymbol [
+LzAnnotationStyler >> styleObjectButton: anLzAnnotation text: aBlock type: aSymbol [
 	| object |
 	object := LzObjectBuilder new
 			context: self context;
 			acceptNode: anLzAnnotation.
 	self
 		styleButton: anLzAnnotation
-		label: object asLeibnizSyntaxString
+		label: (aBlock value: object)
 		type: aSymbol
 		spawning: [ object ].
+]
+
+{ #category : #styling }
+LzAnnotationStyler >> styleObjectButton: anLzAnnotation type: aSymbol [
+	self styleObjectButton: anLzAnnotation text: #asLeibnizSyntaxString type: aSymbol
 ]
 
 { #category : #styling }
@@ -234,11 +239,15 @@ LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
-	| options |
+	| options display |
 	options := self parseOptions: aTopLevelTermAnnotation.
+	display := (options at: 'withSort' ifAbsent: [ 'no' ]) = 'yes'
+		ifTrue: [ [ :term |
+			term asLeibnizSyntaxString , ' : ', term sort asLeibnizSyntaxString] ]
+		ifFalse: [ #asLeibnizSyntaxString ].
 	self styleAnnotation: aTopLevelTermAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.
-	self styleObjectButton: aTopLevelTermAnnotation type: #example
+	self styleObjectButton: aTopLevelTermAnnotation text: display type: #example
 ]
 
 { #category : #visiting }

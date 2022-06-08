@@ -53,6 +53,11 @@ LzTermWithNormalForm >> referenceSlots [
 ]
 
 { #category : #accessing }
+LzTermWithNormalForm >> sort [
+	^ self term sort
+]
+
+{ #category : #accessing }
 LzTermWithNormalForm >> term [
 	^ term
 ]

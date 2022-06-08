@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-03T15:12:37.128449+02:00"
+						"dateAndTimeString" : "2022-06-08T10:32:04.147393+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name=\"Integers\"}}. Requires special terms ({{lzSpecialTerms:rationalNumbers}}) that cannot be implemented in Leibniz itself."
+				"string" : "Uses {{lzUseContext:name=\"Integers\"}}. Requires special terms ({{lzSpecialTerms:rationalNumbers}}) that cannot be implemented in Leibniz itself. Rational number literals are written with a division slash, which may not be surrounded by spaces, e.g. {{lzTerm:1/3}} or {{lzTerm:-2/5}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -1241,6 +1241,43 @@
 											"__type" : "textStyle"
 										},
 										"string" : "Rules:"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-06-08T10:40:15.790356+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-06-08T18:51:23.025929+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "+FKvY02dDQCUNuFNDpqAUw=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Note that division by zero is excluded by the definition of the division operator. {{lzTerm:1 ÷ 0, withSort = \"yes\"}} has no sort, only a kind, which is an error indicator. There is no rewrite rule either that would transform this term into a valid one."
 									}
 								]
 							},
