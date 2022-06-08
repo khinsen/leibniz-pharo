@@ -243,8 +243,7 @@ LzOperator >> sortForArity: anArity [
 	ranks do: [ :each |
 		(self matchRank: each to: anArity) ifNotNil: [ :match |
 			^ match value ] ].
-	self error: self opName synopsis, ' has no rank matching arity ',
-				anArity asLeibnizSyntaxString
+	^ kind
 ]
 
 { #category : #accessing }
