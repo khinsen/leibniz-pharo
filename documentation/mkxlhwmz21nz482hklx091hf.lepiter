@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-03T15:05:35.81011+02:00"
+						"dateAndTimeString" : "2022-06-08T09:58:54.927613+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name=\"Logical truth\"}}. Requires special terms ({{lzSpecialTerms:integers}}) that cannot be implemented in Leibniz itself."
+				"string" : "Uses {{lzUseContext:name=\"Logical truth\"}}. Requires special terms ({{lzSpecialTerms:integers}}) that cannot be implemented in Leibniz itself. They are written as standard numerals, e.g. {{lzTerm:1}} or {{lzTerm:-2}}."
 			},
 			{
 				"__type" : "textSnippet",
