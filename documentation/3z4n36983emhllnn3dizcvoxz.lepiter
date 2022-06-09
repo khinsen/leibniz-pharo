@@ -1,0 +1,150 @@
+{
+	"__schema" : "4.1",
+	"__type" : "page",
+	"children" : {
+		"__type" : "snippets",
+		"items" : [
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-09T11:09:47.171093+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-09T11:13:37.0365+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "TUvX6GGdDQC8v/rjAPYnQw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Requires special terms ({{lzSpecialTerms:floatingPointNumbers}}) that cannot be implemented in Leibniz itself. Floating-point number literals must contain either a decimal point or an exponent to distinguish them from [[Integers]].  Examples of floating-point numbers: {{lzTerm:1.}}, {{lzTerm:1.0}}, {{lzTerm:-2.5}}, {{lzTerm:4.2e1}}, {{lzTerm:3e-2}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-09T11:48:53.306525+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-09T11:50:58.514732+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "4tddd2KdDQCArnHyAPYnQw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Most programming languages pretend that floating-point numbers are equivalent to real numbers, and in particular a superset of the integers. They thus convert integers to floating-point numbers automatically when useful. This is the cause of many problems because the floating-point numbers are really a subset of the rational numbers that is distinct from, but has an overlap with, the integers."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-09T11:51:05.120474+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-09T11:51:50.694925+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "n8U0f2KdDQCAsBEnAPYnQw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "In Leibniz, floating-point numbers are completely separate from the integer - rational number - real number categories. There is no automatic conversion in either direction at any time."
+			}
+		]
+	},
+	"createEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"createTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2022-06-09T11:09:00.95994+02:00"
+		}
+	},
+	"editEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"editTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2022-06-09T11:09:00.95994+02:00"
+		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Floating-point numbers"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "07e8d5e8-619d-0d00-bcbe-527e00f62743"
+	}
+}
