@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 LzUniversalSortFamily >> printAsLeibnizSyntaxOn: aStream [
-	aStream nextPut: $*
+	aStream nextPutAll: LzConstants opNameSort
 ]
 
 { #category : #accessing }
