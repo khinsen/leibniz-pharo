@@ -202,6 +202,12 @@ LzOperator >> minimalSubArityGraph [
 	^ m
 ]
 
+{ #category : #lookup }
+LzOperator >> onlyRank [
+	self assert: ranks size equals: 1.
+	^ ranks first
+]
+
 { #category : #accessing }
 LzOperator >> opName [
 	^ opName
@@ -221,11 +227,6 @@ LzOperator >> printAsLeibnizSyntaxOn: aStream [
 LzOperator >> ranksMatching: anArity [
 	^ ranks select: [ :each |
 		(self matchRank: each to: anArity) isNotNil ]
-]
-
-{ #category : #accessing }
-LzOperator >> referenceNames [
-	^ #(sortGraph)
 ]
 
 { #category : #accessing }
