@@ -130,13 +130,16 @@ LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation type: aSymbol [
 
 { #category : #styling }
 LzAnnotationStyler >> styleObjectButton: anLzAnnotation text: aBlock type: aSymbol [
-	| object |
-	object := LzObjectBuilder new
-			context: self context;
-			acceptNode: anLzAnnotation.
+	| object label |
+	object := [ LzObjectBuilder new
+					context: self context;
+					acceptNode: anLzAnnotation ]
+			on: Exception do: [ :ex | ex debug. ex return: ex ].
+	label := [ aBlock value: object ]
+			on: Exception do: [ object printString ].
 	self
 		styleButton: anLzAnnotation
-		label: (aBlock value: object)
+		label: label
 		type: aSymbol
 		spawning: [ object ].
 ]
