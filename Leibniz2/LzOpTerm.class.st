@@ -51,6 +51,11 @@ LzOpTerm >> hasInfixOpOtherThan: anOpName [
 ]
 
 { #category : #testing }
+LzOpTerm >> hasSort [
+	^ sort isKindOf: LzSort
+]
+
+{ #category : #testing }
 LzOpTerm >> hasVars [
 	^ args
 		detect: #hasVars

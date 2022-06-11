@@ -102,14 +102,13 @@ LzExamples >> equalityTerms [
 	<gtExample>
 	| context |
 	context := self listPlusIntegerContext.
-	self should: [
-		context term: '1 == ∅' ]
-		raise: Error.
+	self assert: (context term: '1 == ∅') hasSort not.
 	^ {
 		{ '1 == 1'. '⊤'}.
 		{ '1 == 2'. '⊥'}.
 		{ '(∅ ++ 1) == (∅ ++ 1)'. '⊤'}.
-		{'(∅ ++ 1) == (∅ ++ 2)'. '⊥'}
+		{ '(∅ ++ 1) == (∅ ++ 2)'. '⊥'}.
+		{ '1 == ∅'. '1 == ∅' }.
 	} collect: [ :each |
 		| term rewrittenTerm expected |
 		term := context term: each first.
