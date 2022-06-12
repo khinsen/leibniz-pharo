@@ -261,7 +261,7 @@ LzDeclarationBuilder >> visitTopLevelUseContext: aTopLevelUseContext [
 	| options |
 	options := self parseOptions: aTopLevelUseContext.
 	^ { aTopLevelUseContext pageName value allButFirst allButLast.
-		(options at: #sortFlag ifAbsent: [ 'no' ]) = 'yes' }
+		(options at: #forSorts ifAbsent: [ 'no' ]) = 'yes' }
 ]
 
 { #category : #visiting }

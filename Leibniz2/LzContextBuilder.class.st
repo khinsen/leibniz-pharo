@@ -32,9 +32,13 @@ LzContextBuilder >> addDeclarationNode: aTopLevelNode [
 	(aTopLevelNode isKindOf: LzTopLevelRuleNode)
 		ifTrue: [ self rewriteSystemBuilder parsedRule:  declaration ].
 	(aTopLevelNode isKindOf: LzTopLevelUseContextNode)
-		ifTrue: [ declaration second
-			ifFalse: [ self addDeclarationsFromPageNamed: declaration first ]
-			ifTrue: [ self halt ] ].
+		ifTrue: [
+			| context |
+			context := LzContextCache uniqueInstance
+				contextForPageNamed: declaration first.
+			declaration second
+				ifFalse: [ self include: context ]
+				ifTrue: [ self includeSortContext:  context ] ].
 	(aTopLevelNode isKindOf: LzTopLevelSpecialTermsNode)
 		ifTrue: [ declaration termTypes do: [ :each | self builtin:  each ] ].
 ]
