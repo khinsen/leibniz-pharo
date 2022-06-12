@@ -52,13 +52,12 @@ LzObjectBuilder >> visitTopLevelSort: aTopLevelSort [
 
 { #category : #visiting }
 LzObjectBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
-	| subsortAxiom subsort supersort |
-	subsortAxiom := LzDeclarationBuilder new acceptNode: aTopLevelSubsort.
-	subsort := self sortFromTerm: subsortAxiom subsort vars: subsortAxiom variables.
-	supersort := self sortFromTerm: subsortAxiom supersort vars: subsortAxiom variables.
-	^ LzSubsortRelation
-		sort1: subsort
-		sort2: supersort
+	| subsortAxiom |
+	subsortAxiom := self context signature sortGraph sortContext signature parsedAxiom:
+						(LzDeclarationBuilder new acceptNode: aTopLevelSubsort).
+	^ LzSubsortRelation new
+		sortGraph: self context signature sortGraph;
+		axiom: subsortAxiom
 ]
 
 { #category : #visiting }
