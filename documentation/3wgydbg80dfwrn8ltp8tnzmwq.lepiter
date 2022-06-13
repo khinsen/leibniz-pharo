@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-10T18:49:38.880488+02:00"
+						"dateAndTimeString" : "2022-06-13T14:49:13.419608+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Arrays are special terms ({{lzSpecialTerms:arrays}}). They use {{lzUseContext:name = \"Integers\", forSorts = \"yes\"}}."
+				"string" : "Arrays are special terms ({{lzSpecialTerms:arrays}}). They use {{lzUseContext:name = \"Integers\", forSorts = \"yes\"}}. Array literals are written in curly plus square brackets. Example: {{lzTerm:{[]}}}."
 			},
 			{
 				"__type" : "textSnippet",

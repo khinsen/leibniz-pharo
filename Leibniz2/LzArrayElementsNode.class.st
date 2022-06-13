@@ -50,8 +50,8 @@ LzArrayElementsNode >> elements: anOrderedCollection [
 { #category : #'generated-initialize-release' }
 LzArrayElementsNode >> initialize [
 	super initialize.
-	elements := OrderedCollection new: 2.
 	commas := OrderedCollection new: 2.
+	elements := OrderedCollection new: 2.
 ]
 
 { #category : #generated }
