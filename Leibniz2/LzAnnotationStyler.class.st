@@ -135,13 +135,13 @@ LzAnnotationStyler >> styleObjectButton: anLzAnnotation text: aBlock type: aSymb
 					context: self context;
 					acceptNode: anLzAnnotation ]
 			on: Exception do: [ :ex | ex debug. ex return: ex ].
-	label := [ aBlock value: object ]
-			on: Exception do: [ object printString ].
+	label := [ aBlock value: object first ]
+			on: Exception do: [ object second printString ].
 	self
 		styleButton: anLzAnnotation
 		label: label
 		type: aSymbol
-		spawning: [ object ].
+		spawning: [ object second ].
 ]
 
 { #category : #styling }
