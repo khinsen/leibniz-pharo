@@ -9,6 +9,15 @@ TLzPrintable >> asLeibnizSyntaxString [
 		self printAsLeibnizSyntaxOn: s ]
 ]
 
+{ #category : #converting }
+TLzPrintable >> asLeibnizSyntaxTextColored: aColor [
+	| text |
+	text := self asLeibnizSyntaxString asRopedText.
+	text fontName: LzCodeFont defaultFamily.
+	text attribute: (BlTextForegroundAttribute color: aColor).
+	^ text
+]
+
 { #category : #inspecting }
 TLzPrintable >> gtSyntaxFor: aView [
 	<gtView>

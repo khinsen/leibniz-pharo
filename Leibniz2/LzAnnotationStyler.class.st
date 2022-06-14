@@ -24,37 +24,28 @@ LzAnnotationStyler >> context [
 ]
 
 { #category : #private }
-LzAnnotationStyler >> inTextButton: aString type: aSymbol [
-	| color button |
+LzAnnotationStyler >> inTextButton: aText [
+	| button |
 
 	button := BrButton new.
 	button connector beVisualSource.
 
-	aSymbol = #declaration
-		ifTrue: [ color := LzColors declarationColor ].
-	aSymbol = #example
-		ifTrue: [ color := LzColors exampleColor ].
-
 	button 
-		addAptitude: (BrGlamorousButtonLabelAptitude new 
-			defaultColor: color;
-			hoveredColor: color muchDarker;
-			fontName: LzCodeFont defaultFamily);
+		addAptitude: LzButtonLabelAptitude new;
 		padding: (BlInsets top: 2 left: 0 bottom: 0 right: 0);
 		margin: (BlInsets top: -1 left: 0 bottom: 0 right: 0);
-		icon: BrGlamorousVectorIcons inspect;
 		beSmallSize;
 		layout: BlLinearLayout horizontal;
 		constraintsDo: [ :c |
 			c horizontal fitContent.
 			c vertical fitContent. ];
-		label: aString.
+		label: aText.
 	^ button
 ]
 
 { #category : #private }
-LzAnnotationStyler >> inTextButton: aString type: aSymbol spawning: aBlock [
-	^ (self inTextButton: aString type: aSymbol)
+LzAnnotationStyler >> inTextButton: aText spawning: aBlock [
+	^ (self inTextButton: aText)
 		action: [ :aButton |
 					aButton phlow spawnObject: aBlock value ]
 ]
@@ -96,12 +87,12 @@ LzAnnotationStyler >> styleAutoHidingAnnotation: anAnnotation [
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleButton: anLzAnnotation label: aString type: aSymbol spawning: aBlock [
+LzAnnotationStyler >> styleButton: anLzAnnotation label: aText spawning: aBlock [
 	| attribute |
 	attribute := GtButtonAttribute new
 		beAppend;
 		stencil: [
-			self inTextButton: aString type: aSymbol spawning: aBlock ].
+			self inTextButton: aText spawning: aBlock ].
 	self text
 		attribute: attribute
 		from: anLzAnnotation parent startPosition
@@ -109,62 +100,55 @@ LzAnnotationStyler >> styleButton: anLzAnnotation label: aString type: aSymbol s
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleButton: anLzAnnotation type: aSymbol spawning: aBlock [
-	| label |
-	label := (LzDeclarationBuilder new acceptNode: anLzAnnotation)
-				asLeibnizSyntaxString "anLzAnnotation source".
-	self styleButton: anLzAnnotation label: label type: aSymbol spawning: aBlock
-]
-
-{ #category : #styling }
-LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation type: aSymbol [
+LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation color: aColor [
 	| declaration |
 	declaration := LzDeclarationBuilder new
 			acceptNode: anLzAnnotation.
 	self
 		styleButton: anLzAnnotation
-		label: declaration asLeibnizSyntaxString
-		type: aSymbol
+		label: (declaration asLeibnizSyntaxTextColored: aColor)
 		spawning: [ declaration ].
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleObjectButton: anLzAnnotation text: aBlock type: aSymbol [
+LzAnnotationStyler >> styleObjectButton: anLzAnnotation color: aColor [
+	self
+		styleObjectButton: anLzAnnotation
+		text: [ :each | each  asLeibnizSyntaxTextColored: aColor ]
+]
+
+{ #category : #styling }
+LzAnnotationStyler >> styleObjectButton: anLzAnnotation text: aBlock [
 	| object label |
 	object := [ LzObjectBuilder new
 					context: self context;
 					acceptNode: anLzAnnotation ]
 			on: Exception do: [ :ex | ex debug. ex return: ex ].
 	label := [ aBlock value: object first ]
-			on: Exception do: [ object second printString ].
+			on: Exception do: [ object second printString asRopedText attribute: (BlTextForegroundAttribute color: Color red)].
 	self
 		styleButton: anLzAnnotation
 		label: label
-		type: aSymbol
 		spawning: [ object second ].
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleObjectButton: anLzAnnotation type: aSymbol [
-	self styleObjectButton: anLzAnnotation text: #asLeibnizSyntaxString type: aSymbol
-]
-
-{ #category : #styling }
 LzAnnotationStyler >> styleUseContextButton: anAnnotation options: aDictionary [
-	| attribute pageReference forSortsFlag |
+	| color attribute pageReference label |
 	pageReference := anAnnotation pageName value allButFirst allButLast.
 	(LzBook hasPageNamed: pageReference)
 		ifFalse: [ ^ self ].
-	forSortsFlag := (aDictionary at: 'forSorts' ifAbsent: [ 'no' ]) = 'yes'.
+
+	color := LzColors declarationColor.
+	label := pageReference asRopedText
+		attribute: (BlTextForegroundAttribute color: color).
+	(aDictionary at: 'forSorts' ifAbsent: [ 'no' ]) = 'yes'
+		ifTrue: [ label append: (' (in sorts)' asRopedText attribute: (BlTextForegroundAttribute color: color quiteWhiter)) ].
 	attribute := GtButtonAttribute new
 		beAppend;
 		stencil: [
-			| button label |
-			label := forSortsFlag
-				ifTrue: [ pageReference, ' (in sorts)' ]
-				ifFalse: [ pageReference ].
-			button := self inTextButton: label
-				type: #declaration.
+			| button |
+			button := self inTextButton: label asRopedText.
 			button
 				action: [ :aButton |
 					aButton phlow spawnTool:
@@ -189,68 +173,68 @@ LzAnnotationStyler >> visitParseTree: aParseTree [
 
 { #category : #visiting }
 LzAnnotationStyler >> visitSmaCCError: aSmaCCError [
-	self halt.
-	^ self visitSmaCCParseNode: aSmaCCError
+	self styleAnnotation: aSmaCCError.
 ]
 
 { #category : #styling }
 LzAnnotationStyler >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	self styleAnnotation: aTopLevelEqualityAxiom.
 	self styleAutoHidingAnnotation: aTopLevelEqualityAxiom.
-	self styleDeclarationButton: aTopLevelEqualityAxiom type: #declaration
+	self styleDeclarationButton: aTopLevelEqualityAxiom color: LzColors declarationColor
 ]
 
 { #category : #styling }
 LzAnnotationStyler >> visitTopLevelOp: aTopLevelOpAnnotation [
 	self styleAnnotation: aTopLevelOpAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelOpAnnotation.
-	self styleDeclarationButton: aTopLevelOpAnnotation type: #declaration
+	self styleDeclarationButton: aTopLevelOpAnnotation color: LzColors declarationColor
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelRule: aTopLevelRule [
 	self styleAnnotation: aTopLevelRule.
 	self styleAutoHidingAnnotation: aTopLevelRule.
-	self styleDeclarationButton: aTopLevelRule type: #declaration
+	self styleDeclarationButton: aTopLevelRule color: LzColors declarationColor
 ]
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelSort: aTopLevelSortAnnotation [
-	| options type |
+	| options color |
 	options := self parseOptions: aTopLevelSortAnnotation.
-	type := (options at: #example ifAbsent: [ 'no' ]) = 'yes'
-		ifTrue: [ #example ]
-		ifFalse: [ #declaration ].
+	color := (options at: #example ifAbsent: [ 'no' ]) = 'yes'
+		ifTrue: [ LzColors exampleColor ]
+		ifFalse: [ LzColors declarationColor ].
 	self styleAnnotation: aTopLevelSortAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelSortAnnotation.
-	self styleObjectButton: aTopLevelSortAnnotation type: type
+	self styleObjectButton: aTopLevelSortAnnotation color: color
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
 	self styleAnnotation: aTopLevelSpecialTerms.
 	self styleAutoHidingAnnotation: aTopLevelSpecialTerms.
-	self styleDeclarationButton: aTopLevelSpecialTerms type: #declaration
+	self styleDeclarationButton: aTopLevelSpecialTerms color: LzColors declarationColor
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
 	self styleAnnotation: aTopLevelSubsort.
 	self styleAutoHidingAnnotation: aTopLevelSubsort.
-	self styleObjectButton: aTopLevelSubsort type: #declaration
+	self styleObjectButton: aTopLevelSubsort color: LzColors declarationColor
 ]
 
 { #category : #generated }
 LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
-	| options display |
+	| options display color |
+	color := LzColors exampleColor.
 	options := self parseOptions: aTopLevelTermAnnotation.
 	display := (options at: 'withSort' ifAbsent: [ 'no' ]) = 'yes'
 		ifTrue: [ [ :term |
-			term asLeibnizSyntaxString , ' : ', term sort asLeibnizSyntaxString] ]
-		ifFalse: [ #asLeibnizSyntaxString ].
+			term asLeibnizSyntaxTextColored: color , ' : ', term sort asLeibnizSyntaxTextColored: color] ]
+		ifFalse: [ [ :term |  term asLeibnizSyntaxTextColored: color ] ].
 	self styleAnnotation: aTopLevelTermAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.
-	self styleObjectButton: aTopLevelTermAnnotation text: display type: #example
+	self styleObjectButton: aTopLevelTermAnnotation text: display
 ]
 
 { #category : #visiting }

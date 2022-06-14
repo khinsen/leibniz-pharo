@@ -16,6 +16,11 @@ LzKind >> includes: aSort [
 	^ sortFamilies includes: aSort family
 ]
 
+{ #category : #testing }
+LzKind >> isInfix [
+	^ false
+]
+
 { #category : #accessing }
 LzKind >> maximalFamilies [
 	^ maximalFamilies
