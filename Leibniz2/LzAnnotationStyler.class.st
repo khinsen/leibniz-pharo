@@ -124,7 +124,7 @@ LzAnnotationStyler >> styleObjectButton: anLzAnnotation text: aBlock [
 					context: self context;
 					acceptNode: anLzAnnotation ]
 			on: Exception do: [ :ex | ex debug. ex return: ex ].
-	label := [ aBlock value: object first ]
+	label := [ aBlock cull: object first ]
 			on: Exception do: [ object second printString asRopedText attribute: (BlTextForegroundAttribute color: Color red)].
 	self
 		styleButton: anLzAnnotation
@@ -143,7 +143,7 @@ LzAnnotationStyler >> styleUseContextButton: anAnnotation options: aDictionary [
 	label := pageReference asRopedText
 		attribute: (BlTextForegroundAttribute color: color).
 	(aDictionary at: 'forSorts' ifAbsent: [ 'no' ]) = 'yes'
-		ifTrue: [ label append: (' (in sorts)' asRopedText attribute: (BlTextForegroundAttribute color: color quiteWhiter)) ].
+		ifTrue: [ label append: (' (in sorts)' asRopedText attribute: (BlTextForegroundAttribute color: color lzDeemphasized)) ].
 	attribute := GtButtonAttribute new
 		beAppend;
 		stencil: [
@@ -176,21 +176,21 @@ LzAnnotationStyler >> visitSmaCCError: aSmaCCError [
 	self styleAnnotation: aSmaCCError.
 ]
 
-{ #category : #styling }
+{ #category : #visiting }
 LzAnnotationStyler >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	self styleAnnotation: aTopLevelEqualityAxiom.
 	self styleAutoHidingAnnotation: aTopLevelEqualityAxiom.
 	self styleDeclarationButton: aTopLevelEqualityAxiom color: LzColors declarationColor
 ]
 
-{ #category : #styling }
+{ #category : #visiting }
 LzAnnotationStyler >> visitTopLevelOp: aTopLevelOpAnnotation [
 	self styleAnnotation: aTopLevelOpAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelOpAnnotation.
 	self styleDeclarationButton: aTopLevelOpAnnotation color: LzColors declarationColor
 ]
 
-{ #category : #generated }
+{ #category : #visiting }
 LzAnnotationStyler >> visitTopLevelRule: aTopLevelRule [
 	self styleAnnotation: aTopLevelRule.
 	self styleAutoHidingAnnotation: aTopLevelRule.
@@ -209,32 +209,52 @@ LzAnnotationStyler >> visitTopLevelSort: aTopLevelSortAnnotation [
 	self styleObjectButton: aTopLevelSortAnnotation color: color
 ]
 
-{ #category : #generated }
+{ #category : #visiting }
 LzAnnotationStyler >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
 	self styleAnnotation: aTopLevelSpecialTerms.
 	self styleAutoHidingAnnotation: aTopLevelSpecialTerms.
 	self styleDeclarationButton: aTopLevelSpecialTerms color: LzColors declarationColor
 ]
 
-{ #category : #generated }
+{ #category : #visiting }
 LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
 	self styleAnnotation: aTopLevelSubsort.
 	self styleAutoHidingAnnotation: aTopLevelSubsort.
 	self styleObjectButton: aTopLevelSubsort color: LzColors declarationColor
 ]
 
-{ #category : #generated }
+{ #category : #visiting }
 LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
-	| options display color |
-	color := LzColors exampleColor.
-	options := self parseOptions: aTopLevelTermAnnotation.
-	display := (options at: 'withSort' ifAbsent: [ 'no' ]) = 'yes'
-		ifTrue: [ [ :term |
-			term asLeibnizSyntaxTextColored: color , ' : ', term sort asLeibnizSyntaxTextColored: color] ]
-		ifFalse: [ [ :term |  term asLeibnizSyntaxTextColored: color ] ].
+	| object term options text color |
 	self styleAnnotation: aTopLevelTermAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.
-	self styleObjectButton: aTopLevelTermAnnotation text: display
+
+	color := LzColors exampleColor.
+	options := self parseOptions: aTopLevelTermAnnotation.
+
+	text := [
+		object := LzObjectBuilder new
+			context: self context;
+			acceptNode: aTopLevelTermAnnotation.
+		term := object second.
+		(options at: 'withSort' ifAbsent: [ 'no' ]) = 'yes'
+			ifTrue: [
+				| value colon sort |
+				value := term asLeibnizSyntaxTextColored: color.
+				colon := ' : ' asRopedText
+					attribute: (BlTextForegroundAttribute color: color lzDeemphasized).
+				sort := term sort asLeibnizSyntaxTextColored: color lzDeemphasized.
+				value, colon, sort ]
+			ifFalse: [ term asLeibnizSyntaxTextColored: color ].
+	 ] on: Exception do: [ :ex |
+	 	ex debug.
+	 	ex return: (ex printString asRopedText
+	 		attribute: (BlTextForegroundAttribute color: Color red)) ].
+
+	self
+		styleButton: aTopLevelTermAnnotation
+		label: text
+		spawning: [ term ]
 ]
 
 { #category : #visiting }

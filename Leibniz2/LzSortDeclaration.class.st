@@ -24,5 +24,10 @@ LzSortDeclaration >> op: anOpNode [
 { #category : #printing }
 LzSortDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	self printVariables: op variables asLeibnizSyntaxOn: aStream.
+	self printBodyAsLeibnizSyntaxOn: aStream
+]
+
+{ #category : #printing }
+LzSortDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	op name printForArity: op args on: aStream
 ]

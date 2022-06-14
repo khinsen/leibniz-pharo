@@ -10,6 +10,12 @@ Class {
 }
 
 { #category : #accessing }
+LzEqualityAxiomDeclaration >> asLeibnizSyntaxTextColored: aColor [.
+	^ (self variables: variables asLeibnizSyntaxTextColored: aColor),
+		(self bodyAsLeibnizSyntaxTextColored: aColor)
+]
+
+{ #category : #accessing }
 LzEqualityAxiomDeclaration >> axiomClass [
 	^ LzEqualityAxiom
 ]
@@ -37,6 +43,11 @@ LzEqualityAxiomDeclaration >> left: aTermNode [
 { #category : #accessing }
 LzEqualityAxiomDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	self printVariables: variables asLeibnizSyntaxOn: aStream.
+	self printBodyAsLeibnizSyntaxOn: aStream
+]
+
+{ #category : #accessing }
+LzEqualityAxiomDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	left printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' = '.
 	right printAsLeibnizSyntaxOn: aStream.

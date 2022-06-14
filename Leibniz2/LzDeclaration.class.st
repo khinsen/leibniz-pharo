@@ -12,6 +12,17 @@ LzDeclaration >> associations [
 		each -> (self instVarNamed:  each) ]
 ]
 
+{ #category : #printing }
+LzDeclaration >> bodyAsLeibnizSyntaxTextColored: aColor [
+	|   text |
+	text := (String streamContents: [ :s |
+		self printBodyAsLeibnizSyntaxOn: s ])
+		asRopedText.
+	text attribute: (BlTextForegroundAttribute color: aColor).
+	text fontName: LzCodeFont defaultFamily.
+	^ text
+]
+
 { #category : #inspecting }
 LzDeclaration >> gtTreeFor: aView [
 	<gtView>
@@ -36,6 +47,11 @@ LzDeclaration >> isLzASTNode [
 ]
 
 { #category : #printing }
+LzDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
+	self subclassResponsibility
+]
+
+{ #category : #printing }
 LzDeclaration >> printVariables: variables asLeibnizSyntaxOn: aStream [
 	(variables reject: #isDerived)
 		do: [ :var |
@@ -46,4 +62,18 @@ LzDeclaration >> printVariables: variables asLeibnizSyntaxOn: aStream [
 { #category : #accessing }
 LzDeclaration >> valueSlots [
 	^ self class allInstVarNames
+]
+
+{ #category : #printing }
+LzDeclaration >> variables: listOfVariables asLeibnizSyntaxTextColored: aColor [
+	| color comma text |
+	color := aColor lzDeemphasized.
+	comma := ', ' asRopedText
+		attribute: (BlTextForegroundAttribute color: color).
+	text := '' asRopedText.
+	(listOfVariables reject: #isDerived)
+		do: [ :var |
+			text insertText: (var asLeibnizSyntaxTextColored: color) at: text size.
+			text insertText: comma at: text size ].
+	^ text
 ]

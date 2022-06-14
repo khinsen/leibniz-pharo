@@ -18,6 +18,11 @@ LzPatternDeclaration >> buildFor: aSignature [
 { #category : #printing }
 LzPatternDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	self printVariables: variables asLeibnizSyntaxOn: aStream.
+	self printBodyAsLeibnizSyntaxOn: aStream
+]
+
+{ #category : #printing }
+LzPatternDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	term printAsLeibnizSyntaxOn: aStream
 ]
 

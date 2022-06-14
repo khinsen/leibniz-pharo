@@ -37,6 +37,11 @@ LzOpDeclaration >> name: anObject [
 { #category : #printing }
 LzOpDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	self printVariables: variables asLeibnizSyntaxOn: aStream.
+	self printBodyAsLeibnizSyntaxOn: aStream
+]
+
+{ #category : #printing }
+LzOpDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	self name printForArity: args withSort: self sort on: aStream
 ]
 
