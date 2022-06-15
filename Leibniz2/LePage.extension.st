@@ -7,7 +7,7 @@ LePage >> lzContextFor: anAction [
 	^ anAction button
 		tooltip: 'Inspect the page''s context';
 		priority: 1;
-		icon: BrGlamorousIcons go;
+		icon: BrGlamorousIcons fromhere;
 		action: [ :aButton |
 			aButton phlow spawnObject:
 				(LzContextCache uniqueInstance

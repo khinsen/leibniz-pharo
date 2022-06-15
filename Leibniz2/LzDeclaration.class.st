@@ -23,6 +23,11 @@ LzDeclaration >> bodyAsLeibnizSyntaxTextColored: aColor [
 	^ text
 ]
 
+{ #category : #accessing }
+LzDeclaration >> declaration [
+	^ self
+]
+
 { #category : #inspecting }
 LzDeclaration >> gtTreeFor: aView [
 	<gtView>

@@ -3,7 +3,8 @@ Class {
 	#superclass : #LzParseTreeNode,
 	#instVars : [
 		'specialTerms',
-		'commas'
+		'commas',
+		'options'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
@@ -24,6 +25,11 @@ LzTopLevelSpecialTermsNode >> commas: anOrderedCollection [
 ]
 
 { #category : #generated }
+LzTopLevelSpecialTermsNode >> compositeNodeVariables [
+	^ #(#options)
+]
+
+{ #category : #generated }
 LzTopLevelSpecialTermsNode >> compositeTokenVariables [
 	^ #(#specialTerms #commas)
 ]
@@ -33,6 +39,19 @@ LzTopLevelSpecialTermsNode >> initialize [
 	super initialize.
 	specialTerms := OrderedCollection new: 2.
 	commas := OrderedCollection new: 2.
+	options := OrderedCollection new: 2.
+]
+
+{ #category : #generated }
+LzTopLevelSpecialTermsNode >> options [
+	^ options
+]
+
+{ #category : #generated }
+LzTopLevelSpecialTermsNode >> options: anOrderedCollection [
+	self setParents: self options to: nil.
+	options := anOrderedCollection.
+	self setParents: self options to: self
 ]
 
 { #category : #generated }

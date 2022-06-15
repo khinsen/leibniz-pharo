@@ -9,6 +9,12 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #printing }
+LzRuleDeclaration >> asLeibnizSyntaxTextColored: aColor [.
+	^ (self variables: variables asLeibnizSyntaxTextColored: aColor),
+		(self bodyAsLeibnizSyntaxTextColored: aColor)
+]
+
 { #category : #accessing }
 LzRuleDeclaration >> condition [
 	^ condition
@@ -27,6 +33,12 @@ LzRuleDeclaration >> pattern [
 { #category : #accessing }
 LzRuleDeclaration >> pattern: aTermNode [
 	pattern := aTermNode
+]
+
+{ #category : #printing }
+LzRuleDeclaration >> printAsLeibnizSyntaxOn: aStream [
+	self printVariables: variables asLeibnizSyntaxOn: aStream.
+	self printBodyAsLeibnizSyntaxOn: aStream
 ]
 
 { #category : #accessing }

@@ -19,8 +19,9 @@ LzContextBuilder class >> fromPage: aString [
 
 { #category : #lepiter }
 LzContextBuilder >> addDeclarationNode: aTopLevelNode [
-	| declaration |
-	declaration := LzDeclarationBuilder new acceptNode: aTopLevelNode.
+	| annotation declaration |
+	annotation := LzDeclarationBuilder new acceptNode: aTopLevelNode.
+	declaration := annotation declaration.
 	(aTopLevelNode isKindOf: LzTopLevelSortNode)
 		ifTrue: [ self sortGraphBuilder parsedSortDeclaration: declaration ].
 	(aTopLevelNode isKindOf: LzTopLevelSubsortNode)
@@ -35,12 +36,13 @@ LzContextBuilder >> addDeclarationNode: aTopLevelNode [
 		ifTrue: [
 			| context |
 			context := LzContextCache uniqueInstance
-				contextForPageNamed: declaration first.
-			declaration second
+				contextForPageNamed: declaration contextName.
+			(annotation optionsAt: #forSorts)
 				ifFalse: [ self include: context ]
 				ifTrue: [ self includeSortContext:  context ] ].
 	(aTopLevelNode isKindOf: LzTopLevelSpecialTermsNode)
-		ifTrue: [ declaration termTypes do: [ :each | self builtin:  each ] ].
+		ifTrue: [ declaration termTypes do: [ :each |
+					self builtin:  each ] ].
 ]
 
 { #category : #lepiter }

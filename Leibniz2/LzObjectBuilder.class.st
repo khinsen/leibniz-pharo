@@ -49,7 +49,7 @@ LzObjectBuilder >> visitTopLevelSort: aTopLevelSort [
 		ifTrue: [ { declaration.
 						declaration } ]
 		ifFalse: [ { declaration.
-						self context sortGraph familyForParsedOp: declaration op } ]
+						self context sortGraph familyForParsedOp: declaration declaration op } ]
 ]
 
 { #category : #visiting }
@@ -57,7 +57,7 @@ LzObjectBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 	| declaration subsortAxiom |
 	declaration := LzDeclarationBuilder new acceptNode: aTopLevelSubsort.
 	subsortAxiom := self context signature sortGraph sortContext signature
-						parsedAxiom: declaration.
+						parsedAxiom: declaration declaration.
 	^ { declaration.
 			LzSubsortRelation new
 				sortGraph: self context signature sortGraph;
@@ -69,7 +69,7 @@ LzObjectBuilder >> visitTopLevelTerm: aTopLevelTerm [
 	| options declaration term |
 	options := self parseOptions: aTopLevelTerm.
 	declaration := LzDeclarationBuilder new acceptNode: aTopLevelTerm.
-	term := self context parsedPattern: declaration.
+	term := self context parsedPattern: declaration declaration.
 	^ { declaration.
 		(options at: #withNormalForm ifAbsent: [ 'no' ]) = 'yes'
 			ifTrue: [ LzTermWithNormalForm

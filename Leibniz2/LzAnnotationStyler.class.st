@@ -133,28 +133,29 @@ LzAnnotationStyler >> styleObjectButton: anLzAnnotation text: aBlock [
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleUseContextButton: anAnnotation options: aDictionary [
-	| color attribute pageReference label |
-	pageReference := anAnnotation pageName value allButFirst allButLast.
+LzAnnotationStyler >> styleUseContextButton: anAnnotation [
+	| declaration pageReference color attribute label |
+	declaration := LzDeclarationBuilder new acceptNode: anAnnotation.
+	pageReference := declaration declaration contextName.
 	(LzBook hasPageNamed: pageReference)
 		ifFalse: [ ^ self ].
 
 	color := LzColors declarationColor.
 	label := pageReference asRopedText
-		attribute: (BlTextForegroundAttribute color: color).
-	(aDictionary at: 'forSorts' ifAbsent: [ 'no' ]) = 'yes'
-		ifTrue: [ label append: (' (in sorts)' asRopedText attribute: (BlTextForegroundAttribute color: color lzDeemphasized)) ].
+		foreground: color.
+	(declaration optionsAt: #forSorts)
+		ifTrue: [
+			label append:
+				(' (in sorts)' asRopedText foreground:  color lzDeemphasized) ].
 	attribute := GtButtonAttribute new
 		beAppend;
 		stencil: [
-			| button |
-			button := self inTextButton: label asRopedText.
-			button
+			(self inTextButton: label)
 				action: [ :aButton |
 					aButton phlow spawnTool:
 						(LzBook pageNamed: pageReference)
-							asPhlowTool ].
-			button ].
+							asPhlowTool ];
+				yourself ].
 	self text
 		attribute: attribute
 		from: anAnnotation parent startPosition
@@ -225,31 +226,29 @@ LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
-	| object term options text color |
+	| object term text color annotatedDeclaration |
 	self styleAnnotation: aTopLevelTermAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.
 
 	color := LzColors exampleColor.
-	options := self parseOptions: aTopLevelTermAnnotation.
 
 	text := [
 		object := LzObjectBuilder new
 			context: self context;
 			acceptNode: aTopLevelTermAnnotation.
+		annotatedDeclaration := object first.
 		term := object second.
-		(options at: 'withSort' ifAbsent: [ 'no' ]) = 'yes'
+		(annotatedDeclaration optionsAt: #withSort)
 			ifTrue: [
 				| value colon sort |
 				value := term asLeibnizSyntaxTextColored: color.
-				colon := ' : ' asRopedText
-					attribute: (BlTextForegroundAttribute color: color lzDeemphasized).
+				colon := ' : ' asRopedText foreground: color lzDeemphasized.
 				sort := term sort asLeibnizSyntaxTextColored: color lzDeemphasized.
 				value, colon, sort ]
 			ifFalse: [ term asLeibnizSyntaxTextColored: color ].
 	 ] on: Exception do: [ :ex |
 	 	ex debug.
-	 	ex return: (ex printString asRopedText
-	 		attribute: (BlTextForegroundAttribute color: Color red)) ].
+	 	ex return: (ex printString asRopedText foreground: Color red) ].
 
 	self
 		styleButton: aTopLevelTermAnnotation
@@ -259,8 +258,7 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
-	| options type |
-	options := self parseOptions: aTopLevelUseContext.
+	| type |
 	self styleAutoHidingAnnotation: aTopLevelUseContext.
-	self styleUseContextButton: aTopLevelUseContext options: options
+	self styleUseContextButton: aTopLevelUseContext
 ]

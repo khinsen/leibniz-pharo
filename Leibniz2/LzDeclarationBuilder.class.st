@@ -5,6 +5,18 @@ Class {
 }
 
 { #category : #private }
+LzDeclarationBuilder >> annotate: aDeclaration from: aTopLevelNode [
+	^ self annotate: aDeclaration from: aTopLevelNode booleanOptions: #()
+]
+
+{ #category : #private }
+LzDeclarationBuilder >> annotate: aDeclaration from: aTopLevelNode booleanOptions: aCollection [
+	^ LzTopLevelAnnotation new
+		declaration: aDeclaration;
+		options: (self parseOptions: aTopLevelNode boolean: aCollection)
+]
+
+{ #category : #private }
 LzDeclarationBuilder >> arrayElementsFor: anArray [
 	^ anArray collect: [ :each |
 		(each isKindOf: LzArrayElementsNode)
@@ -15,9 +27,24 @@ LzDeclarationBuilder >> arrayElementsFor: anArray [
 { #category : #private }
 LzDeclarationBuilder >> parseOptions: aTopLevelAnnotation [
 	^ (aTopLevelAnnotation options collect: [ :each |
-		each key source
-			-> (LzDeclarationBuilder new acceptNode: each value) value ])
+		| key value |
+		key := each key source asSymbol.
+		value := (LzDeclarationBuilder new acceptNode: each value) value.
+		key -> value ])
 		asDictionary
+]
+
+{ #category : #private }
+LzDeclarationBuilder >> parseOptions: aTopLevelAnnotation boolean: aCollection [
+	| options |
+	options := self parseOptions: aTopLevelAnnotation.
+	aCollection do: [ :each |
+		| value |
+		value := options at: each
+			ifPresent: [ :v | v = 'yes' ]
+			ifAbsent: [ false ].
+		options at: each put: value ].
+	^ options
 ]
 
 { #category : #visiting }
@@ -135,7 +162,7 @@ LzDeclarationBuilder >> visitSuperscriptOpTerm: aSuperscriptOpTerm [
 		args: (aSuperscriptOpTerm args collect: [ :each | self acceptNode: each ])
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	| varBuilder axiom |
 	varBuilder := LzVarDeclarationBuilder new.
@@ -151,10 +178,10 @@ LzDeclarationBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 		right: (self acceptNode: aTopLevelEqualityAxiom right).
 	aTopLevelEqualityAxiom condition ifNotNil: [ :c |
 		axiom condition: (self acceptNode: c) ].
-	^ axiom
+	^ self annotate: axiom from: aTopLevelEqualityAxiom booleanOptions: #(example)
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelFunctionRule: aTopLevelFunctionRule [
 	| varBuilder rule |
 	varBuilder := LzVarDeclarationBuilder new.
@@ -169,10 +196,10 @@ LzDeclarationBuilder >> visitTopLevelFunctionRule: aTopLevelFunctionRule [
 		code: aTopLevelFunctionRule code value allButFirst allButLast.
 	aTopLevelFunctionRule condition ifNotNil: [ :c |
 		rule condition: (self acceptNode: c) ].
-	^ rule
+	^ self annotate: rule from: aTopLevelFunctionRule booleanOptions: #(example)
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelOp: aTopLevelOp [
 	| varBuilder op |
 	varBuilder := LzVarDeclarationBuilder new.
@@ -184,10 +211,10 @@ LzDeclarationBuilder >> visitTopLevelOp: aTopLevelOp [
 	op args: (aTopLevelOp op args collect: [ :each | self acceptNode: each ]).
 	op sort: (self acceptNode: aTopLevelOp sort).
 	op variables: varBuilder vars.
-	^ op
+	^ self annotate: op from: aTopLevelOp booleanOptions: #(example)
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelRewriteRule: aTopLevelRewriteRule [
 	| varBuilder rule |
 	varBuilder := LzVarDeclarationBuilder new.
@@ -206,7 +233,7 @@ LzDeclarationBuilder >> visitTopLevelRewriteRule: aTopLevelRewriteRule [
 	^ rule
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
 	| varBuilder op |
 	varBuilder := LzVarDeclarationBuilder new.
@@ -217,19 +244,23 @@ LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
 	op := self acceptNode: aTopLevelSort op.
 	op args: (aTopLevelSort op args collect: [ :each | self acceptNode: each ]).
 	op variables: varBuilder vars.
-	^ LzSortDeclaration new
-		op: op
+	^ self
+		annotate: (LzSortDeclaration new op: op)
+		from: aTopLevelSort
+		booleanOptions: #(example)
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
-	^ LzSpecialTermsDeclaration new
+	| specialTerms |
+	specialTerms := LzSpecialTermsDeclaration new
 			termTypes: (aTopLevelSpecialTerms specialTerms
 							collect: [ :each |
-								each value asSymbol ])
+								each value asSymbol ]).
+	^ self annotate: specialTerms from: aTopLevelSpecialTerms
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 	| varBuilder axiom |
 	varBuilder := LzVarDeclarationBuilder new.
@@ -241,27 +272,28 @@ LzDeclarationBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 		variables: varBuilder vars;
 		subsort: (self acceptNode: aTopLevelSubsort subsort);
 		supersort: (self acceptNode: aTopLevelSubsort supersort).
-	^ axiom
+	^ self annotate: axiom from: aTopLevelSubsort booleanOptions: #(example)
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelTerm: aTopLevelTerm [
-	| varBuilder |
+	| varBuilder pattern |
 	varBuilder := LzVarDeclarationBuilder new.
 	aTopLevelTerm vars
 		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
 	varBuilder acceptNode: aTopLevelTerm term.
-	^ LzPatternDeclaration new
+	pattern := LzPatternDeclaration new
 		variables: varBuilder vars;
-		term: (self acceptNode: aTopLevelTerm term)
+		term: (self acceptNode: aTopLevelTerm term).
+	^ self annotate: pattern from: aTopLevelTerm booleanOptions: #(withSort withNormalForm)
 ]
 
-{ #category : #visiting }
+{ #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelUseContext: aTopLevelUseContext [
-	| options |
-	options := self parseOptions: aTopLevelUseContext.
-	^ { aTopLevelUseContext pageName value allButFirst allButLast.
-		(options at: #forSorts ifAbsent: [ 'no' ]) = 'yes' }
+	| useContext |
+	useContext := LzUseContextDeclaration new
+		contextName: aTopLevelUseContext pageName value allButFirst allButLast.
+	^ self annotate: useContext from: aTopLevelUseContext booleanOptions: #(forSorts)
 ]
 
 { #category : #visiting }
