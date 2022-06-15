@@ -11,52 +11,64 @@ Class {
 }
 
 { #category : #'instance creation' }
-LzContextBuilder class >> fromPage: aString [
+LzContextBuilder class >> fromPage: pageName [
+	^ self fromPage: pageName subcontext: nil
+]
+
+{ #category : #'instance creation' }
+LzContextBuilder class >> fromPage: pageName subcontext: aString [
 	^ self new
-		addDeclarationsFromPageNamed: aString;
+		addDeclarationsFromPageNamed: pageName subcontext: aString;
 		yourself
 ]
 
 { #category : #lepiter }
-LzContextBuilder >> addDeclarationNode: aTopLevelNode [
-	| annotation declaration |
-	annotation := LzDeclarationBuilder new acceptNode: aTopLevelNode.
-	declaration := annotation declaration.
-	(aTopLevelNode isKindOf: LzTopLevelSortNode)
+LzContextBuilder >> addDeclaration: anAnnotatedDeclaration [
+	| declaration |
+	declaration := anAnnotatedDeclaration declaration.
+	(declaration isKindOf: LzSortDeclaration)
 		ifTrue: [ self sortGraphBuilder parsedSortDeclaration: declaration ].
-	(aTopLevelNode isKindOf: LzTopLevelSubsortNode)
+	(declaration isKindOf: LzSubsortAxiomDeclaration)
 		ifTrue: [ self sortGraphBuilder parsedSubsortDeclaration: declaration ].
-	(aTopLevelNode isKindOf: LzTopLevelOpNode)
+	(declaration isKindOf: LzOpDeclaration)
 		ifTrue: [ self signatureBuilder parsedOps: { declaration } ].
-	(aTopLevelNode isKindOf: LzTopLevelEqualityAxiomNode)
+	(declaration isKindOf: LzEqualityAxiomDeclaration)
 		ifTrue: [ self parsedAxiom: declaration ].
-	(aTopLevelNode isKindOf: LzTopLevelRuleNode)
+	(declaration isKindOf: LzRuleDeclaration)
 		ifTrue: [ self rewriteSystemBuilder parsedRule:  declaration ].
-	(aTopLevelNode isKindOf: LzTopLevelUseContextNode)
+	(declaration isKindOf: LzUseContextDeclaration)
 		ifTrue: [
 			| context |
 			context := LzContextCache uniqueInstance
 				contextForPageNamed: declaration contextName.
-			(annotation optionsAt: #forSorts)
+			(anAnnotatedDeclaration optionsAt: #forSorts)
 				ifFalse: [ self include: context ]
 				ifTrue: [ self includeSortContext:  context ] ].
-	(aTopLevelNode isKindOf: LzTopLevelSpecialTermsNode)
+	(declaration isKindOf: LzSpecialTermsDeclaration)
 		ifTrue: [ declaration termTypes do: [ :each |
 					self builtin:  each ] ].
 ]
 
 { #category : #lepiter }
-LzContextBuilder >> addDeclarationsFrom: aLePage [
+LzContextBuilder >> addDeclarationsFrom: aLePage subcontext: aString [
 	aLePage allChildrenDepthFirstDo: [ :eachSnippet |
 		eachSnippet ast ifNotNil: [ :ast |
 			ast allNodesDo: [ :eachNode |
-				 (eachNode class name beginsWith: 'LzTopLevel')
-			 		ifTrue: [ self addDeclarationNode: eachNode ] ] ] ]
+				 (eachNode class name beginsWith: 'LzTopLevel') ifTrue: [
+				 	| annotatedDeclaration |
+				 	annotatedDeclaration := LzDeclarationBuilder new acceptNode: eachNode.
+				 	(annotatedDeclaration optionsAt: #subcontext)
+				 		ifNil: [ self addDeclaration: annotatedDeclaration ]
+				 		ifNotNil: [ :s |
+				 			s = aString ifTrue: [
+				 				self addDeclaration: annotatedDeclaration ] ] ] ] ] ]
 ]
 
 { #category : #lepiter }
-LzContextBuilder >> addDeclarationsFromPageNamed: aString [
-	self addDeclarationsFrom: (LzBook pageNamed: aString)
+LzContextBuilder >> addDeclarationsFromPageNamed: pageName subcontext: aString [
+	self
+		addDeclarationsFrom: (LzBook pageNamed: pageName)
+		subcontext: aString
 ]
 
 { #category : #defining }

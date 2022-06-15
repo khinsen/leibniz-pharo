@@ -17,12 +17,6 @@ LzAnnotationStyler class >> obsolete [
 	^ super obsolete
 ]
 
-{ #category : #accessing }
-LzAnnotationStyler >> context [
-	^ LzContextCache uniqueInstance
-		contextForPageNamed: self page title
-]
-
 { #category : #private }
 LzAnnotationStyler >> inTextButton: aText [
 	| button |
@@ -121,7 +115,7 @@ LzAnnotationStyler >> styleObjectButton: anLzAnnotation color: aColor [
 LzAnnotationStyler >> styleObjectButton: anLzAnnotation text: aBlock [
 	| object label |
 	object := [ LzObjectBuilder new
-					context: self context;
+					contextPageName: self page title;
 					acceptNode: anLzAnnotation ]
 			on: Exception do: [ :ex | ex debug. ex return: ex ].
 	label := [ aBlock cull: object first ]
@@ -234,7 +228,7 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 
 	text := [
 		object := LzObjectBuilder new
-			context: self context;
+			contextPageName: self page title;
 			acceptNode: aTopLevelTermAnnotation.
 		annotatedDeclaration := object first.
 		term := object second.

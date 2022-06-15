@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-13T14:49:13.419608+02:00"
+						"dateAndTimeString" : "2022-06-15T17:01:34.094199+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Arrays are special terms ({{lzSpecialTerms:arrays}}). They use {{lzUseContext:name = \"Integers\", forSorts = \"yes\"}}. Array literals are written in curly plus square brackets. Example: {{lzTerm:{[]}}}."
+				"string" : "Arrays are special terms ({{lzSpecialTerms:arrays}}). They use {{lzUseContext:name = \"Integers\", forSorts = \"yes\"}}. Array literals are written in curly plus square brackets. Examples: {{lzTerm:{[]}}} (an empty array), {{lzTerm:{[1, 2, 3]}, subcontext = \"integerArray\"}} (array of integers, uses {{lzUseContext:name = \"Integers\", subcontext = \"integerArray\"}}), {{lzTerm:{[\"a\", \"b\"]}}}(array of strings, uses {{lzUseContext:name = \"Character strings\"}})"
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-10T18:59:49.930519+02:00"
+						"dateAndTimeString" : "2022-06-14T11:19:54.740539+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An empty one-dimensional array has sort {{lzSort:EmptyArray1D}}. An empty array cannot have a regular array sort, because regular array sorts depend on the type of the array elements. An empty array has no elements."
+				"string" : "An empty one-dimensional array has sort {{lzSort:EmptyArray(ℕ)}}. An empty array cannot have a regular array sort, because regular array sorts depend on the type of the array elements. An empty array has no elements. The integer in the array sort is always zero. It is there for consistency with higher-dimensional arrays, which can have non-zero lengths along all but one dimensions."
 			}
 		]
 	},

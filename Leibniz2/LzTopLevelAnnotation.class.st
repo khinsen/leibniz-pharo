@@ -14,5 +14,5 @@ LzTopLevelAnnotation >> options: aDictionary [
 
 { #category : #accessing }
 LzTopLevelAnnotation >> optionsAt: aSymbol [
-	^ options at: aSymbol
+	^ options at: aSymbol ifAbsent: [ nil ]
 ]

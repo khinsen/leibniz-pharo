@@ -230,7 +230,7 @@ LzDeclarationBuilder >> visitTopLevelRewriteRule: aTopLevelRewriteRule [
 		replacement: (self acceptNode: aTopLevelRewriteRule replacement).
 	aTopLevelRewriteRule condition ifNotNil: [ :c |
 		rule condition: (self acceptNode: c) ].
-	^ rule
+	^ self annotate: rule from: aTopLevelRewriteRule booleanOptions: #(example)
 ]
 
 { #category : #'visiting - toplevel' }

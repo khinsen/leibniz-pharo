@@ -2,19 +2,19 @@ Class {
 	#name : #LzObjectBuilder,
 	#superclass : #LzParseTreeNodeVisitor,
 	#instVars : [
-		'context'
+		'contextPageName'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
 
 { #category : #accessing }
-LzObjectBuilder >> context [
-	^ context
+LzObjectBuilder >> contextPageName [
+	^ contextPageName
 ]
 
 { #category : #accessing }
-LzObjectBuilder >> context: aContext [
-	context := aContext
+LzObjectBuilder >> contextPageName: aString [
+	contextPageName := aString
 ]
 
 { #category : #accessing }
@@ -40,40 +40,51 @@ LzObjectBuilder >> sortFromTerm: aTerm vars: aVarList [
 	^ self context sortGraph sortWithTerm: sortTerm
 ]
 
+{ #category : #building }
+LzObjectBuilder >> subcontext: aString [
+	^ LzContextCache uniqueInstance
+		contextForPageNamed: self contextPageName
+		subcontext: aString
+]
+
 { #category : #visiting }
 LzObjectBuilder >> visitTopLevelSort: aTopLevelSort [
-	| options declaration |
-	options := self parseOptions: aTopLevelSort.
-	declaration := LzDeclarationBuilder new acceptNode: aTopLevelSort.
-	^ (options at: #example ifAbsent: [ 'no' ]) = 'yes'
-		ifTrue: [ { declaration.
+	| annotation declaration context |
+	annotation := LzDeclarationBuilder new acceptNode: aTopLevelSort.
+	declaration := annotation declaration.
+	context := self subcontext:(annotation optionsAt: #subcontext).
+	^ (annotation optionsAt: #example)
+		ifTrue: [ { annotation.
 						declaration } ]
-		ifFalse: [ { declaration.
-						self context sortGraph familyForParsedOp: declaration declaration op } ]
+		ifFalse: [ { annotation.
+						context sortGraph familyForParsedOp: declaration op } ]
 ]
 
 { #category : #visiting }
 LzObjectBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
-	| declaration subsortAxiom |
-	declaration := LzDeclarationBuilder new acceptNode: aTopLevelSubsort.
-	subsortAxiom := self context signature sortGraph sortContext signature
-						parsedAxiom: declaration declaration.
-	^ { declaration.
+	| annotation declaration context subsortAxiom |
+	annotation := LzDeclarationBuilder new acceptNode: aTopLevelSubsort.
+	declaration := annotation declaration.
+	context := self subcontext:(annotation optionsAt: #subcontext).
+	subsortAxiom := context signature sortGraph sortContext signature
+						parsedAxiom: declaration.
+	^ { annotation.
 			LzSubsortRelation new
-				sortGraph: self context signature sortGraph;
+				sortGraph: context signature sortGraph;
 				axiom: subsortAxiom }
 ]
 
 { #category : #visiting }
 LzObjectBuilder >> visitTopLevelTerm: aTopLevelTerm [
-	| options declaration term |
-	options := self parseOptions: aTopLevelTerm.
-	declaration := LzDeclarationBuilder new acceptNode: aTopLevelTerm.
-	term := self context parsedPattern: declaration declaration.
-	^ { declaration.
-		(options at: #withNormalForm ifAbsent: [ 'no' ]) = 'yes'
+	| annotation declaration context term |
+	annotation := LzDeclarationBuilder new acceptNode: aTopLevelTerm.
+	declaration := annotation declaration.
+	context := self subcontext:(annotation optionsAt: #subcontext).
+	term := context parsedPattern: declaration.
+	^ { annotation.
+		(annotation optionsAt: #withNormalForm)
 			ifTrue: [ LzTermWithNormalForm
 						term: term
-						context: self context]
+						context: context]
 			ifFalse: [ term ] }
 ]
