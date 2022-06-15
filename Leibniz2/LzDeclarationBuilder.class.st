@@ -5,11 +5,6 @@ Class {
 }
 
 { #category : #private }
-LzDeclarationBuilder >> annotate: aDeclaration from: aTopLevelNode [
-	^ self annotate: aDeclaration from: aTopLevelNode booleanOptions: #()
-]
-
-{ #category : #private }
 LzDeclarationBuilder >> annotate: aDeclaration from: aTopLevelNode booleanOptions: aCollection [
 	^ LzTopLevelAnnotation new
 		declaration: aDeclaration;
@@ -257,7 +252,7 @@ LzDeclarationBuilder >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
 			termTypes: (aTopLevelSpecialTerms specialTerms
 							collect: [ :each |
 								each value asSymbol ]).
-	^ self annotate: specialTerms from: aTopLevelSpecialTerms
+	^ self annotate: specialTerms from: aTopLevelSpecialTerms booleanOptions: #(example)
 ]
 
 { #category : #'visiting - toplevel' }
