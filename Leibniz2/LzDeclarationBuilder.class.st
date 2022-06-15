@@ -293,7 +293,7 @@ LzDeclarationBuilder >> visitTopLevelUseContext: aTopLevelUseContext [
 	| useContext |
 	useContext := LzUseContextDeclaration new
 		contextName: aTopLevelUseContext pageName value allButFirst allButLast.
-	^ self annotate: useContext from: aTopLevelUseContext booleanOptions: #(forSorts)
+	^ self annotate: useContext from: aTopLevelUseContext booleanOptions: #(example forSorts)
 ]
 
 { #category : #visiting }

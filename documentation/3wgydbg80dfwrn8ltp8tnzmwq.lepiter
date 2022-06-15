@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-15T17:01:34.094199+02:00"
+						"dateAndTimeString" : "2022-06-15T17:25:10.429096+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Arrays are special terms ({{lzSpecialTerms:arrays}}). They use {{lzUseContext:name = \"Integers\", forSorts = \"yes\"}}. Array literals are written in curly plus square brackets. Examples: {{lzTerm:{[]}}} (an empty array), {{lzTerm:{[1, 2, 3]}, subcontext = \"integerArray\"}} (array of integers, uses {{lzUseContext:name = \"Integers\", subcontext = \"integerArray\"}}), {{lzTerm:{[\"a\", \"b\"]}}}(array of strings, uses {{lzUseContext:name = \"Character strings\"}})"
+				"string" : "Arrays are special terms ({{lzSpecialTerms:arrays}}). They use {{lzUseContext:name = \"Integers\", forSorts = \"yes\"}}. Array literals are written in curly plus square brackets. Examples: {{lzTerm:{[]}}} (an empty array), {{lzTerm:{[1, 2, 3]}, subcontext = \"integerArray\"}} (array of integers, uses {{lzUseContext:name = \"Integers\", subcontext = \"integerArray\"}}), {{lzTerm:{[\"a\", \"b\"]}, subcontext = \"stringArray\"}} (array of strings, uses {{lzUseContext:name = \"Character strings\", subcontext = \"stringArray\"}})"
 			},
 			{
 				"__type" : "textSnippet",

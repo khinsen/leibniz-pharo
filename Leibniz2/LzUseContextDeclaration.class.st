@@ -16,3 +16,8 @@ LzUseContextDeclaration >> contextName [
 LzUseContextDeclaration >> contextName: aString [
 	contextName := aString
 ]
+
+{ #category : #printing }
+LzUseContextDeclaration >> printAsLeibnizSyntaxOn: aStream [
+	contextName printOn: aStream
+]
