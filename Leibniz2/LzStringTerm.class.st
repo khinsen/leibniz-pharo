@@ -15,6 +15,14 @@ LzStringTerm >> , otherString [
 LzStringTerm >> ensureString [
 ]
 
+{ #category : #printing }
+LzStringTerm >> printAsLeibnizSyntaxOn: aStream [
+	aStream
+		<< $";
+		<< value;
+		<< $".
+]
+
 { #category : #accessing }
 LzStringTerm >> sort [
 	^ self signature sort: #string
