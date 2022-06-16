@@ -1,6 +1,14 @@
 {
 	"__schema" : "4.1",
 	"__type" : "page",
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "b8e50c85-ef9d-0d00-b822-ba14030cdfdd"
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Overview of Leibniz"
+	},
 	"children" : {
 		"__type" : "snippets",
 		"items" : [
@@ -151,6 +159,155 @@
 					"__type" : "textStyle"
 				},
 				"string" : "An important principle is that **the order of declarations in the page does not matter**. This means that the semantics of the declarations do not impose any restrictions on the organization of the explanations. For the same reason, Leibniz allows declarations to be repeated multiple times in the page."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-16T18:50:54.599208+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-16T18:51:03.998915+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "ZPl7IfWdDQC6PZp9Ampx8w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "1. the terms that can be constructed in the context."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-16T18:51:06.916101+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-16T18:51:38.429123+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "jbUuLvWdDQC8ZRpzAmpx8w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "2. equality axioms for these terms"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-16T18:51:40.097123+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-16T18:51:47.376748+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "cCM8MPWdDQC8Z3hYAmpx8w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "3. rewrite rules applicable to these terms"
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-16T18:43:42.680658+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-16T18:50:25.861531+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "80y2DvWdDQC5PtvrAmpx8w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "All data in Leibniz is represented by [[Terms]], which are tree structures composed of [[Operators]] with optional arguments (which are terms as well). Terms are classified by [[Sorts]]. Terms cannot be modified (they are *immutable*), but other terms can be derived from them via [[Rewriting]]. A context defines"
 			}
 		]
 	},
@@ -175,13 +332,5 @@
 			"__type" : "dateAndTime",
 			"dateAndTimeString" : "2022-06-16T12:05:52.198264+02:00"
 		}
-	},
-	"pageType" : {
-		"__type" : "namedPage",
-		"title" : "Overview of Leibniz"
-	},
-	"uid" : {
-		"__type" : "uuid",
-		"uuid" : "b8e50c85-ef9d-0d00-b822-ba14030cdfdd"
 	}
 }
