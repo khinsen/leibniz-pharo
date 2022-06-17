@@ -31,6 +31,20 @@ LzContextCache >> contextForPageNamed: pageName subcontext: aString [
 	^ contexts at: fullName
 ]
 
+{ #category : #inspecting }
+LzContextCache >> gtContextsFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'Contexts';
+		priority: 0;
+		items: [ contexts associations ];
+		send: #value;
+		column: 'Name' text: #key;
+		column: 'Date/time' text: [ :each |
+			creationDates at: each key ];
+		yourself
+]
+
 { #category : #initializing }
 LzContextCache >> initialize [
 	contexts := Dictionary new.

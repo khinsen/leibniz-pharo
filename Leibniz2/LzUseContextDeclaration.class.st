@@ -20,7 +20,11 @@ LzUseContextDeclaration >> contextName: aString [
 
 { #category : #printing }
 LzUseContextDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	contextName printOn: aStream
+	aStream << contextName.
+	subcontext ifNotNil: [ :s |
+		aStream
+			<< ', ';
+			<< s ]
 ]
 
 { #category : #accessing }

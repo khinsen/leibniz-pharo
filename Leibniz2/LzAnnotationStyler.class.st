@@ -293,7 +293,7 @@ LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
 	label := pageReference asRopedText
 		foreground: color.
 	declaration subcontext ifNotNil: [ :s |
-		label append: ('/', s) asRopedText foreground:  color ].
+		label append: (('/', s) asRopedText foreground:  color) ].
 	(annotation optionsAt: #forSorts)
 		ifTrue: [
 			label append:
