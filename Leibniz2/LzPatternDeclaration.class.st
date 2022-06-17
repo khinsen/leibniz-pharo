@@ -8,6 +8,12 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #printing }
+LzPatternDeclaration >> asLeibnizSyntaxTextColored: aColor [.
+	^ (self variables: variables asLeibnizSyntaxTextColored: aColor),
+		(self bodyAsLeibnizSyntaxTextColored: aColor)
+]
+
 { #category : #constructing }
 LzPatternDeclaration >> buildFor: aSignature [
 	^ self term
