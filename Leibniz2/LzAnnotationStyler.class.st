@@ -263,11 +263,11 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 		(annotatedDeclaration optionsAt: #withSort)
 			ifTrue: [
 				| value colon sort |
-				value := term asLeibnizSyntaxTextColored: color.
+				value := annotatedDeclaration asLeibnizSyntaxTextColored: color.
 				colon := ' : ' asRopedText foreground: color lzDeemphasized.
 				sort := term sort asLeibnizSyntaxTextColored: color lzDeemphasized.
 				value, colon, sort ]
-			ifFalse: [ term asLeibnizSyntaxTextColored: color ].
+			ifFalse: [ annotatedDeclaration asLeibnizSyntaxTextColored: color ].
 	 ] on: Exception do: [ :ex |
 	 	ex debug.
 	 	ex return: (ex printString asRopedText foreground: Color red) ].

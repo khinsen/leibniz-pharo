@@ -382,6 +382,80 @@
 					"__type" : "textStyle"
 				},
 				"string" : "Given the operator definitions from {{lzUseContext:name = \"Operators/example\", subcontext = \"example\"}}, we can compose terms such as\n\t{{lzTerm:noArg, subcontext = \"example\"}}\n\t{{lzTerm:prefix(noArg, noArg), subcontext = \"example\"}}\n\t{{lzTerm:noArg infix noArg[prefix(noArg, noArg infix noArg)], subcontext = \"example\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T17:50:39.480142+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T18:00:46.403745+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "2B/AcwieDQCM71CYAsLtIw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "We can also define a term including a variable:\n\t{{lzTerm:prefix(anyS_:s, anyS_), subcontext = \"example\"}}\nNote that at least one reference to each variable must declarts its sort. Alternatively, variable sort declarations can be written before the term:\n\t{{lzTerm:anyS_:s, prefix(anyS_, anyS_), subcontext = \"example\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T17:51:56.366943+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T17:51:56.366943+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "uViIeAieDQCM8XUAAsLtIw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : ""
 			}
 		]
 	},
