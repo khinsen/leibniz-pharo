@@ -74,7 +74,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-16T18:58:54.295215+02:00"
+						"dateAndTimeString" : "2022-06-17T16:01:42.605928+02:00"
 					}
 				},
 				"uid" : {
@@ -84,7 +84,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "There are four classes of operators in Leibniz, which differ only in the way they are written, i.e. their syntax. See [[Operators]] for the details."
+				"string" : "There are four kinds of operators in Leibniz, which differ only in the way they are written, i.e. their syntax. See [[Operators]] for the details."
 			},
 			{
 				"__type" : "textSnippet",
@@ -249,6 +249,43 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T16:34:08.291938+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T16:35:09.595016+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "X4++YAeeDQCM2cfeAsLtIw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The last kind of term in Leibniz is a *variable*, which looks like an operator term with no argument except that its identifier ends with an underscore, which is not an allowed character in operator identifiers."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2022-06-16T19:03:09.294758+02:00"
 					}
 				},
@@ -260,7 +297,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T14:03:09.195458+02:00"
+						"dateAndTimeString" : "2022-06-17T16:34:03.346869+02:00"
 					}
 				},
 				"uid" : {
@@ -270,7 +307,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Every term has a sort, which is definned by its operator (execpt for special terms). Sorts define sets of terms. They are very similar to types in programming languages. See [[Sorts]] for a detailed discussion."
+				"string" : "Every term has a sort, which is defined by its operator (except for special terms and variables). Sorts define sets of terms. They are very similar to types in programming languages. See [[Sorts]] for a detailed discussion."
 			},
 			{
 				"__type" : "textSnippet",

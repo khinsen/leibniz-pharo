@@ -26,7 +26,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-16T18:59:00.459329+02:00"
+						"dateAndTimeString" : "2022-06-17T15:31:51.992129+02:00"
 					}
 				},
 				"editEmail" : {
@@ -37,17 +37,276 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-16T18:59:11.811938+02:00"
+						"dateAndTimeString" : "2022-06-17T15:32:42.244634+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "I5VPM/WdDQC8cPW7Ampx8w=="
+					"uidString" : "1EJbgQaeDQCXOpprAr8qeQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "{{gtMethod:name=Character>>#isLzIdentifierCharacter}}"
+				"string" : "Standard Leibniz operators are defined by an identifier that consists of any sequence of characters satifying the predicate {{gtMethod:name=Character>>#isLzIdentifierCharacter}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:33:23.379531+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:34:20.207928+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "mxbwhgaeDQCXY4shAr8qeQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The number of arguments of an operator is part of its definition. Two operators with the same identifier but a different number of arguments are distinct."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:34:23.674652+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:34:51.182119+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "blh/jAaeDQCXZtIRAr8qeQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "An operator without arguments is written as just its identifier."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:35:09.687949+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:35:39.83397+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Ftq6jgaeDQCXafH7Ar8qeQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Prefix operators are written like mathematical functions, i.e. the operator identifier is followed by the arguments in parentheses."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:35:40.773336+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:36:07.44586+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "bVIukQaeDQCXbCJpAr8qeQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Infix operators have exactly two arguments, with the identifier written between the arguments from which it is separated by white space."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:52:03.704763+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:54:22.707591+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "ok/AywaeDQCYRrU7Ar8qeQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "In addition to the standard operators there are three special operators that provide a syntax familiar from mathematical notation or from programming languages: the bracket operator, the superscript operator, and the subscript operator. See below for examples. Superscript and subscript will eventually be rendered typographically."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:36:34.223128+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:37:37.059056+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "ZYPckgaeDQCXbwo9Ar8qeQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Each argument of an operator has a sort (see [[Sorts]]) that is part of the operator definition. Two operators with the same identifier and the same number of arguments, but with different argument sorts, are considered distinct."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:38:21.340897+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:51:32.712382+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "LnuvmQaeDQCYGeCXAr8qeQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Each operator definition ends with a sort. This sort becomes the sort of each term that refers to the operator."
 			},
 			{
 				"__type" : "textSnippet",
@@ -153,7 +412,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-17T14:07:43.29854+02:00"
+									"dateAndTimeString" : "2022-06-17T15:59:46.070484+02:00"
 								}
 							},
 							"uid" : {
@@ -163,7 +422,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "a prefix operator {{lzOp:prefix(s, s) : s, subcontext = \"example\"}}"
+							"string" : "a prefix operator {{lzOp:prefix(s, s) : s, subcontext = \"example\"}} (any number of arguments)"
 						},
 						{
 							"__type" : "textSnippet",
@@ -190,7 +449,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-17T14:07:57.8457+02:00"
+									"dateAndTimeString" : "2022-06-17T15:59:52.900193+02:00"
 								}
 							},
 							"uid" : {
@@ -200,7 +459,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "an infix operator {{lzOp:s infix s : s, subcontext = \"example\"}}"
+							"string" : "an infix operator {{lzOp:s infix s : s, subcontext = \"example\"}} (exactly two arguments)"
 						},
 						{
 							"__type" : "textSnippet",
@@ -216,7 +475,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-17T14:08:41.296213+02:00"
+									"dateAndTimeString" : "2022-06-17T15:57:16.422754+02:00"
 								}
 							},
 							"editEmail" : {
@@ -227,17 +486,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-17T14:08:57.622866+02:00"
+									"dateAndTimeString" : "2022-06-17T15:57:58.122939+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "dj6XVwWeDQCiziRZCvVN/w=="
+								"uidString" : "Aqd03gaeDQCYTod4Ar8qeQ=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "the bracket operator {{lzOp:s[s] : s, subcontext = \"example\"}}"
+							"string" : "the bracket operators\n\t{{lzOp:s[s] : s, subcontext = \"example\"}}\n\t{{lzOp:s[s, s] : s, subcontext = \"example\"}}\netc. (any number of arguments between the brackets)"
 						},
 						{
 							"__type" : "textSnippet",
@@ -253,7 +512,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-17T14:06:52.769611+02:00"
+									"dateAndTimeString" : "2022-06-17T15:54:33.605603+02:00"
 								}
 							},
 							"editEmail" : {
@@ -264,17 +523,54 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-17T14:06:52.769611+02:00"
+									"dateAndTimeString" : "2022-06-17T15:58:34.08505+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "qc2nUwWeDQCiyI36CvVN/w=="
+								"uidString" : "+sSp1AaeDQCYSQs8Ar8qeQ=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : ""
+							"string" : "the superscript operators\n\t{{lzOp:s^(s) : s, subcontext = \"example\"}}\n\t{{lzOp:s^(s, s) : s, subcontext = \"example\"}}\netc. (any number of superscript arguments)"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-17T15:55:02.391627+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-17T15:59:14.334578+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "Jnhq1gaeDQCYS7G0Ar8qeQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "the subscript operators\n\t{{lzOp:s\\(s) : s, subcontext = \"example\"}}\n\t{{lzOp:s\\(s, s) : s, subcontext = \"example\"}} \netc. (any number of subscript arguments)"
 						}
 					]
 				},
@@ -308,6 +604,43 @@
 					"__type" : "textStyle"
 				},
 				"string" : "Given the sort {{lzSort:s, subcontext = \"example\"}}, we can define"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:39:21.734318+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-17T15:39:31.389692+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "qc2nUwWeDQCiyI36CvVN/w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "See [[Terms]] for examples of terms using these operators."
 			}
 		]
 	},
