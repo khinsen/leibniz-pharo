@@ -19,7 +19,7 @@ LzContextCache >> contextForPageNamed: pageName [
 LzContextCache >> contextForPageNamed: pageName subcontext: aString [
 	| fullName cacheValid |
 	fullName := pageName.
-	aString ifNotNil: [ fullName := fullName, '.', aString ].
+	aString ifNotNil: [ fullName := fullName, '/', aString ].
 	cacheValid := creationDates at: fullName
 		ifPresent: [ :cd | cd >= (LzBook latestEditTimeOfPageNamed: pageName) time ]
 		ifAbsent: [ false ].

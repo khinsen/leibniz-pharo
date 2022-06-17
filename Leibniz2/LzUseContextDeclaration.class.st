@@ -2,7 +2,8 @@ Class {
 	#name : #LzUseContextDeclaration,
 	#superclass : #LzDeclaration,
 	#instVars : [
-		'contextName'
+		'contextName',
+		'subcontext'
 	],
 	#category : #'Leibniz2-Declarations'
 }
@@ -20,4 +21,14 @@ LzUseContextDeclaration >> contextName: aString [
 { #category : #printing }
 LzUseContextDeclaration >> printAsLeibnizSyntaxOn: aStream [
 	contextName printOn: aStream
+]
+
+{ #category : #accessing }
+LzUseContextDeclaration >> subcontext [
+	^ subcontext
+]
+
+{ #category : #accessing }
+LzUseContextDeclaration >> subcontext: aString [
+	subcontext := aString
 ]

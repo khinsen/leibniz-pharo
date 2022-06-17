@@ -254,7 +254,6 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.
 
 	color := LzColors exampleColor.
-
 	text := [
 		object := LzObjectBuilder new
 			contextPageName: self page title;
@@ -281,7 +280,7 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
-	| annotation declaration pageReference color attribute label |
+	| annotation declaration pageReference color attribute label subcontext |
 	self styleAutoHidingAnnotation: aTopLevelUseContext.
 
 	annotation := LzDeclarationBuilder new acceptNode: aTopLevelUseContext.
@@ -293,6 +292,8 @@ LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
 	color := self colorFor: annotation.
 	label := pageReference asRopedText
 		foreground: color.
+	declaration subcontext ifNotNil: [ :s |
+		label append: ('/', s) asRopedText foreground:  color ].
 	(annotation optionsAt: #forSorts)
 		ifTrue: [
 			label append:

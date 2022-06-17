@@ -285,10 +285,19 @@ LzDeclarationBuilder >> visitTopLevelTerm: aTopLevelTerm [
 
 { #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelUseContext: aTopLevelUseContext [
-	| useContext |
+	| useContext pageName subcontext |
+	pageName := $/ split: aTopLevelUseContext pageName value allButFirst allButLast.
+	subcontext := nil.
+	pageName size = 1
+		ifFalse: [ subcontext := $/ join: pageName allButFirst. ].
+	pageName := pageName first.
 	useContext := LzUseContextDeclaration new
-		contextName: aTopLevelUseContext pageName value allButFirst allButLast.
-	^ self annotate: useContext from: aTopLevelUseContext booleanOptions: #(example forSorts)
+		contextName: pageName;
+		subcontext: subcontext.
+	^ self
+		annotate: useContext
+		from: aTopLevelUseContext
+		booleanOptions: #(example forSorts)
 ]
 
 { #category : #visiting }
