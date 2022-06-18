@@ -7,6 +7,11 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #converting }
+LzDeclarationAnnotation >> addAsRopedTextTo: aRopedText [
+	self declaration addAsRopedTextTo: aRopedText
+]
+
 { #category : #printing }
 LzDeclarationAnnotation >> asLeibnizSyntaxTextColored: aColor [
 	^ self declaration asLeibnizSyntaxTextColored: aColor

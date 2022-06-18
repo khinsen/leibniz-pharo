@@ -8,6 +8,11 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #converting }
+LzOpTermDeclaration >> addAsRopedTextTo: aRopedText [
+	opName addForArgs: args asRopedTextTo: aRopedText
+]
+
 { #category : #accessing }
 LzOpTermDeclaration >> args [
 

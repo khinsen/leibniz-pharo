@@ -1,12 +1,27 @@
 Class {
 	#name : #LzInfixOpName,
 	#superclass : #LzOpName,
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #'instance creation' }
 LzInfixOpName class >> for: aStringOrSymbol [
 	^ self new internalSymbol: '_', aStringOrSymbol
+]
+
+{ #category : #converting }
+LzInfixOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText [
+	self assert: anArrayOfTerms size equals: 2.
+	anArrayOfTerms first
+		addAsFirstArgOfInfixTermWithOpName: self
+		asRopedTextTo: aRopedText.
+	aRopedText appendString: ' '.
+	aRopedText append:
+		(internalSymbol allButFirst asRopedText attribute: LzInfixOpNameAttribute new).
+	aRopedText appendString:  ' '.
+	anArrayOfTerms second
+		addAsRopedTextTo: aRopedText
+		parenthesized: anArrayOfTerms second isInfix
 ]
 
 { #category : #testing }

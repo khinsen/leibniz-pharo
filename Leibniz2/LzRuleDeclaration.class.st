@@ -1,8 +1,7 @@
 Class {
 	#name : #LzRuleDeclaration,
-	#superclass : #LzDeclaration,
+	#superclass : #LzDeclarationWithVariables,
 	#instVars : [
-		'variables',
 		'pattern',
 		'condition'
 	],
@@ -35,12 +34,6 @@ LzRuleDeclaration >> pattern: aTermNode [
 	pattern := aTermNode
 ]
 
-{ #category : #printing }
-LzRuleDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	self printVariables: variables asLeibnizSyntaxOn: aStream.
-	self printBodyAsLeibnizSyntaxOn: aStream
-]
-
 { #category : #accessing }
 LzRuleDeclaration >> ruleClass [
 	self subclassResponsibility
@@ -49,14 +42,4 @@ LzRuleDeclaration >> ruleClass [
 { #category : #accessing }
 LzRuleDeclaration >> valueSlots [
 	^ #(variables pattern condition)
-]
-
-{ #category : #accessing }
-LzRuleDeclaration >> variables [
-	^ variables
-]
-
-{ #category : #accessing }
-LzRuleDeclaration >> variables: anObject [
-	variables := anObject
 ]

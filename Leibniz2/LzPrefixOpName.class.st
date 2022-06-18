@@ -1,12 +1,25 @@
 Class {
 	#name : #LzPrefixOpName,
 	#superclass : #LzOpName,
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #'instance creation' }
 LzPrefixOpName class >> for: aStringOrSymbol [
 	^ self new internalSymbol: aStringOrSymbol
+]
+
+{ #category : #printing }
+LzPrefixOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText [
+	aRopedText append:
+		(internalSymbol asRopedText attribute: LzPrefixOpNameAttribute new).
+	anArrayOfTerms ifNotEmpty: [
+		aRopedText append: ('(' asRopedText attribute: LzParenthesisAttribute new).
+		anArrayOfTerms allButLastDo: [ :each |
+			each addAsRopedTextTo: aRopedText.
+			aRopedText appendString: ', ' ].
+		anArrayOfTerms last addAsRopedTextTo: aRopedText.
+		aRopedText append: (')' asRopedText attribute: LzParenthesisAttribute new) ]
 ]
 
 { #category : #printing }

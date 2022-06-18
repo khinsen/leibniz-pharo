@@ -8,6 +8,20 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #converting }
+LzVarTermDeclaration >> addAsRopedTextTo: aRopedText [
+	aRopedText append:
+		(name asSymbol asRopedText attribute: LzVarNameAttribute new).
+	self includesVarDeclaration ifTrue: [
+		| size |
+		size := aRopedText size.
+		aRopedText append: ':'.
+		self sort addAsRopedTextTo: aRopedText.
+		aRopedText
+			attribute: LzVarDeclarationAttribute new
+			from: size to: aRopedText size ]
+]
+
 { #category : #constructing }
 LzVarTermDeclaration >> buildFor: aSignature variables: aDictionary [
 	^ aSignature varTerm: self name variables: aDictionary

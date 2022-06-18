@@ -4,6 +4,13 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #converting }
+LzTermDeclaration >> addAsFirstArgOfInfixTermWithOpName: anOpName asRopedTextTo: aRopedText [
+	self
+		addAsRopedTextTo: aRopedText
+		parenthesized: (self hasInfixOpOtherThan: anOpName)
+]
+
 { #category : #constructing }
 LzTermDeclaration >> buildFor: aSignature variables: aDictionary [
 	self subclassResponsibility

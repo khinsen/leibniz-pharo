@@ -1,9 +1,6 @@
 Class {
 	#name : #LzAxiomDeclaration,
-	#superclass : #LzDeclaration,
-	#instVars : [
-		'variables'
-	],
+	#superclass : #LzDeclarationWithVariables,
 	#category : #'Leibniz2-Declarations'
 }
 
@@ -12,19 +9,12 @@ LzAxiomDeclaration >> axiomClass [
 	self subclassResponsibility
 ]
 
+{ #category : #printing }
+LzAxiomDeclaration >> printAsLeibnizSyntaxOn: aStream [
+	self notYetImplemented
+]
+
 { #category : #accessing }
 LzAxiomDeclaration >> terms [
 	self subclassResponsibility
-]
-
-{ #category : #accessing }
-LzAxiomDeclaration >> variables [
-
-	^ variables
-]
-
-{ #category : #accessing }
-LzAxiomDeclaration >> variables: anObject [
-
-	variables := anObject
 ]

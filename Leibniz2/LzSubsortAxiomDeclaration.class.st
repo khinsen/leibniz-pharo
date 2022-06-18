@@ -8,15 +8,17 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
-{ #category : #accessing }
-LzSubsortAxiomDeclaration >> axiomClass [
-	^ LzSubsortAxiom
+{ #category : #converting }
+LzSubsortAxiomDeclaration >> addBodyAsRopedTextTo: aRopedText [
+	subsort addAsRopedTextTo: aRopedText.
+	aRopedText append:
+		(' ⊆ ' asRopedText attribute: LzSubsortAttribute new).
+	supersort addAsRopedTextTo: aRopedText
 ]
 
 { #category : #accessing }
-LzSubsortAxiomDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	self printVariables: variables asLeibnizSyntaxOn: aStream.
-	self printBodyAsLeibnizSyntaxOn: aStream
+LzSubsortAxiomDeclaration >> axiomClass [
+	^ LzSubsortAxiom
 ]
 
 { #category : #accessing }

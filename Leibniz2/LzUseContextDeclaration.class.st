@@ -8,6 +8,13 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #converting }
+LzUseContextDeclaration >> addAsRopedTextTo: aRopedText [
+	aRopedText append: contextName.
+	subcontext ifNotNil: [ :s |
+		aRopedText appendString: (', ', s) ]
+]
+
 { #category : #accessing }
 LzUseContextDeclaration >> contextName [
 	^ contextName

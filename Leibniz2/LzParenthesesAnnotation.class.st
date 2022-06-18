@@ -4,6 +4,11 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #printing }
+LzParenthesesAnnotation >> addAsRopedTextTo: aRopedText [
+	self declaration addAsRopedTextTo: aRopedText parenthesized: true
+]
+
 { #category : #constructing }
 LzParenthesesAnnotation >> buildFor: aSignature variables: aDictionary [
 	^ self declaration buildFor: aSignature variables: aDictionary

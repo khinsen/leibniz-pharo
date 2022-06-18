@@ -1,8 +1,22 @@
 Class {
 	#name : #LzSuperscriptOpName,
 	#superclass : #LzOpName,
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
+
+{ #category : #printing }
+LzSuperscriptOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText [
+	self assert: anArrayOfTerms size > 1.
+	anArrayOfTerms first
+		addAsRopedTextTo: aRopedText
+		parenthesized: anArrayOfTerms first isInfix.
+	aRopedText appendString: '^('.
+	anArrayOfTerms allButFirst allButLast do: [ : each |
+		each addAsRopedTextTo: aRopedText.
+		aRopedText appendString: ', ' ].
+	anArrayOfTerms last printAsLeibnizSyntaxOn: aRopedText.
+	aRopedText appendString: ')'
+]
 
 { #category : #initializing }
 LzSuperscriptOpName >> initialize [

@@ -8,6 +8,13 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #converting }
+LzArrayTermDeclaration >> addAsRopedTextTo: aRopedText [
+	aRopedText appendString: '{'.
+	self addElementsOf: elements asRopedTextTo: aRopedText.
+	aRopedText appendString: '}'
+]
+
 { #category : #constructing }
 LzArrayTermDeclaration >> buildFor: aSignature variables: aDictionary [
 	^ aSignature

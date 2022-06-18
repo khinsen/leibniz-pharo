@@ -7,6 +7,12 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #converting }
+LzLiteralDeclaration >> addAsRopedTextTo: aRopedText [
+	aRopedText append:
+		(self asLeibnizSyntaxString asRopedText attribute: LzLiteralAttribute new)
+]
+
 { #category : #constructing }
 LzLiteralDeclaration >> buildFor: aSignature variables: aDictionary [
 	^ aSignature

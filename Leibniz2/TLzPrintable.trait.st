@@ -4,6 +4,24 @@ Trait {
 }
 
 { #category : #converting }
+TLzPrintable >> addAsRopedTextTo: aRopedText [
+	self notYetImplemented
+]
+
+{ #category : #converting }
+TLzPrintable >> addAsRopedTextTo: aRopedText parenthesized: aBoolean [
+	aBoolean ifTrue: [ aRopedText append:
+		('(' asRopedText attribute: LzParenthesisAttribute new) ].
+	self addAsRopedTextTo: aRopedText.
+	aBoolean ifTrue: [ aRopedText append:
+		(')' asRopedText attribute: LzParenthesisAttribute new) ]
+]
+
+{ #category : #converting }
+TLzPrintable >> addTextTo: text [ 
+]
+
+{ #category : #converting }
 TLzPrintable >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s |
 		self printAsLeibnizSyntaxOn: s ]
@@ -15,6 +33,14 @@ TLzPrintable >> asLeibnizSyntaxTextColored: aColor [
 	text := self asLeibnizSyntaxString asRopedText.
 	text fontName: LzCodeFont defaultFamily.
 	text attribute: (BlTextForegroundAttribute color: aColor).
+	^ text
+]
+
+{ #category : #converting }
+TLzPrintable >> asRopedText [
+	| text |
+	text := '' asRopedText .
+	self addAsRopedTextTo: text.
 	^ text
 ]
 

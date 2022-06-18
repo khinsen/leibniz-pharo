@@ -1,17 +1,35 @@
 Class {
 	#name : #LzOpName,
 	#superclass : #Object,
-	#traits : 'TLzEquality + TLzPrintable',
-	#classTraits : 'TLzEquality classTrait + TLzPrintable classTrait',
+	#traits : 'TLzEquality',
+	#classTraits : 'TLzEquality classTrait',
 	#instVars : [
 		'internalSymbol'
 	],
-	#category : #'Leibniz2-Parser'
+	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #comparing }
 LzOpName >> <= opName [
 	^ self asSymbol <= opName asSymbol
+]
+
+{ #category : #converting }
+LzOpName >> addForArgs: aTermArray asRopedTextTo: aRopedText [
+	self subclassResponsibility
+]
+
+{ #category : #converting }
+LzOpName >> addForArity: anArity asRopedTextTo: aRopedText [
+	self addForArgs: anArity asRopedTextTo: aRopedText
+]
+
+{ #category : #converting }
+LzOpName >> addForArity: anArity withSort: aSort asRopedTextTo: aRopedText [
+	self addForArity: anArity asRopedTextTo: aRopedText.
+	aRopedText append:
+		(' : ' asRopedText attribute: LzColonAttribute new).
+	aSort addAsRopedTextTo: aRopedText.
 ]
 
 { #category : #modifying }
@@ -52,11 +70,6 @@ LzOpName >> isInfix [
 { #category : #testing }
 LzOpName >> isInfixOpOtherThan: anOpName [
 	^ false
-]
-
-{ #category : #printing }
-LzOpName >> printAsLeibnizSyntaxOn: aStream [
-	aStream nextPutAll: internalSymbol
 ]
 
 { #category : #printing }

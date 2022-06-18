@@ -1,12 +1,16 @@
 Class {
 	#name : #LzPatternDeclaration,
-	#superclass : #LzDeclaration,
+	#superclass : #LzDeclarationWithVariables,
 	#instVars : [
-		'term',
-		'variables'
+		'term'
 	],
 	#category : #'Leibniz2-Declarations'
 }
+
+{ #category : #converting }
+LzPatternDeclaration >> addBodyAsRopedTextTo: aRopedText [
+	term addAsRopedTextTo: aRopedText
+]
 
 { #category : #printing }
 LzPatternDeclaration >> asLeibnizSyntaxTextColored: aColor [.
@@ -19,12 +23,6 @@ LzPatternDeclaration >> buildFor: aSignature [
 	^ self term
 		buildFor: aSignature
 		variables: (aSignature parsedVariables:  self variables)
-]
-
-{ #category : #printing }
-LzPatternDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	self printVariables: variables asLeibnizSyntaxOn: aStream.
-	self printBodyAsLeibnizSyntaxOn: aStream
 ]
 
 { #category : #printing }
@@ -45,14 +43,4 @@ LzPatternDeclaration >> term: anObject [
 { #category : #accessing }
 LzPatternDeclaration >> valueSlots [
 	^ #(term variables)
-]
-
-{ #category : #accessing }
-LzPatternDeclaration >> variables [
-	^ variables
-]
-
-{ #category : #accessing }
-LzPatternDeclaration >> variables: anObject [
-	variables := anObject
 ]

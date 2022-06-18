@@ -7,6 +7,12 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #converting }
+LzSortDeclaration >> addAsRopedTextTo: aRopedText [
+	op addVariablesAsRopedTextTo: aRopedText.
+	op name addForArity: op args asRopedTextTo: aRopedText
+]
+
 { #category : #accessing }
 LzSortDeclaration >> op [
 	^ op
@@ -23,7 +29,7 @@ LzSortDeclaration >> op: anOpNode [
 
 { #category : #printing }
 LzSortDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	self printVariables: op variables asLeibnizSyntaxOn: aStream.
+	op printVariablesAsLeibnizSyntaxOn: aStream.
 	self printBodyAsLeibnizSyntaxOn: aStream
 ]
 

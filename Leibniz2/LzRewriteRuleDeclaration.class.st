@@ -7,6 +7,18 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #converting }
+LzRewriteRuleDeclaration >> addBodyAsRopedTextTo: aRopedText [
+	self pattern addAsRopedTextTo: aRopedText.
+	aRopedText append:
+		(' ⇒ ' asRopedText attribute: LzRewriteArrowAttribute new).
+	self replacement addAsRopedTextTo: aRopedText.
+	condition ifNotNil: [ :c |
+		aRopedText append:
+			(' | ' asRopedText attribute: LzConditionAttribute new).
+		c addAsRopedTextTo: aRopedText ]
+]
+
 { #category : #printing }
 LzRewriteRuleDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	self pattern printAsLeibnizSyntaxOn: aStream.

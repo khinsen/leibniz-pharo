@@ -15,6 +15,18 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #converting }
+LzVarDeclaration >> addAsRopedTextTo: aRopedText [
+	| size |
+	size := aRopedText size.
+	name addAsRopedTextTo: aRopedText.
+	aRopedText appendString: ':'.
+	sort addAsRopedTextTo: aRopedText.
+	aRopedText
+		attribute: LzVarDeclarationAttribute new
+		from: size to: aRopedText size
+]
+
 { #category : #accessing }
 LzVarDeclaration >> beDerived [
 	isDerived := true

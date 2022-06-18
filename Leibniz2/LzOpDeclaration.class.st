@@ -1,14 +1,18 @@
 Class {
 	#name : #LzOpDeclaration,
-	#superclass : #LzDeclaration,
+	#superclass : #LzDeclarationWithVariables,
 	#instVars : [
 		'sort',
 		'args',
-		'name',
-		'variables'
+		'name'
 	],
 	#category : #'Leibniz2-Declarations'
 }
+
+{ #category : #converting }
+LzOpDeclaration >> addAsRopedTextTo: aRopedText [
+	self name addForArity: args withSort: self sort asRopedTextTo: aRopedText
+]
 
 { #category : #accessing }
 LzOpDeclaration >> args [
@@ -41,12 +45,6 @@ LzOpDeclaration >> name: anObject [
 ]
 
 { #category : #printing }
-LzOpDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	self printVariables: variables asLeibnizSyntaxOn: aStream.
-	self printBodyAsLeibnizSyntaxOn: aStream
-]
-
-{ #category : #printing }
 LzOpDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	self name printForArity: args withSort: self sort on: aStream
 ]
@@ -66,14 +64,4 @@ LzOpDeclaration >> sort: anObject [
 { #category : #accessing }
 LzOpDeclaration >> valueSlots [
 	^ #(name variables args sort)
-]
-
-{ #category : #accessing }
-LzOpDeclaration >> variables [
-	^ variables
-]
-
-{ #category : #accessing }
-LzOpDeclaration >> variables: aCollection [
-	variables := aCollection
 ]
