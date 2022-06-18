@@ -6,11 +6,14 @@ Class {
 
 { #category : #rendering }
 LzTextRenderer >> render: aText baseColor: aColor [
+	aText attribute: (BlTextForegroundAttribute new paint: aColor).
 	aText attributesDo: [ :attrs :index |
 		attrs
 			select: [ :each | each isKindOf: LzSyntaxAttribute ]
 			thenDo: [ :attr |
-				aText
-					attribute: (attr visualAttributeForColor: aColor)
-					from: index to: index ] ]
+				(attr visualAttributeForColor: aColor)
+					ifNotNil: [ :visualAttr |
+						aText
+							attribute: visualAttr
+							from: index to: index ] ] ]
 ]

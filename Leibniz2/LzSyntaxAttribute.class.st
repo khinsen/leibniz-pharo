@@ -6,5 +6,5 @@ Class {
 
 { #category : #rendering }
 LzSyntaxAttribute >> visualAttributeForColor: aColor [
-	self subclassResponsibility
+	^ nil
 ]

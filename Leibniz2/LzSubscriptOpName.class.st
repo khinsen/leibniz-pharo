@@ -14,7 +14,7 @@ LzSubscriptOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText [
 	anArrayOfTerms allButFirst allButLast do: [ : each |
 		each addAsRopedTextTo: aRopedText.
 		aRopedText appendString: ', ' ].
-	anArrayOfTerms last addAsRoptedTextTo: aRopedText.
+	anArrayOfTerms last addAsRopedTextTo: aRopedText.
 	aRopedText appendString: ')'
 ]
 

@@ -15,6 +15,19 @@ LzArrayTermDeclaration >> addAsRopedTextTo: aRopedText [
 	aRopedText appendString: '}'
 ]
 
+{ #category : #converting }
+LzArrayTermDeclaration >> addElementsOf: anArray asRopedTextTo: aRopedText [
+	aRopedText appendString: '['.
+	1 to: anArray size do: [ :eachIndex |
+		| element |
+		element := anArray at: eachIndex.
+		element isCollection
+			ifTrue: [ self addElementsOf: element asRopedTextTo: aRopedText ]
+			ifFalse: [ element addAsRopedTextTo: aRopedText ].
+		eachIndex < anArray size ifTrue: [ aRopedText appendString: ', ' ] ].
+	aRopedText appendString: ']'
+]
+
 { #category : #constructing }
 LzArrayTermDeclaration >> buildFor: aSignature variables: aDictionary [
 	^ aSignature

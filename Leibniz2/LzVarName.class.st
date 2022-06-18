@@ -10,7 +10,7 @@ LzVarName class >> for: aStringOrSymbol [
 ]
 
 { #category : #converting }
-LzVarName >> addAsRopeddTextTo: aRopedText [
+LzVarName >> addAsRopedTextTo: aRopedText [
 	aRopedText append:
 		(internalSymbol asRopedText attribute: LzVarNameAttribute new)
 ]

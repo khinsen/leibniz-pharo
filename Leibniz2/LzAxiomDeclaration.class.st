@@ -9,11 +9,6 @@ LzAxiomDeclaration >> axiomClass [
 	self subclassResponsibility
 ]
 
-{ #category : #printing }
-LzAxiomDeclaration >> printAsLeibnizSyntaxOn: aStream [
-	self notYetImplemented
-]
-
 { #category : #accessing }
 LzAxiomDeclaration >> terms [
 	self subclassResponsibility

@@ -113,7 +113,7 @@ LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation [
 	color := self colorFor: annotatedDeclaration.
 	self
 		styleButton: anLzAnnotation
-		label: (declaration asLeibnizSyntaxTextColored: color)
+		label: (declaration asRopedTextColored: color)
 		spawning: [ declaration ].
 ]
 
@@ -127,7 +127,7 @@ LzAnnotationStyler >> styleObjectButton: anLzAnnotation [
 		annotatedDeclaration := object first.
 		object := object second.
 		color := self colorFor: annotatedDeclaration.
-		annotatedDeclaration asLeibnizSyntaxTextColored: color.
+		annotatedDeclaration asRopedTextColored: color.
 	] on: Exception do: [ :ex |
 		ex debug.
 		object := ex.
@@ -148,7 +148,7 @@ LzAnnotationStyler >> styleObjectButton: anLzAnnotation color: aColor [
 		annotatedDeclaration := object first.
 		object := object second.
 		color := self colorFor: annotatedDeclaration.
-		annotatedDeclaration asLeibnizSyntaxTextColored: color.
+		annotatedDeclaration asRopedTextColored: color.
 	] on: Exception do: [ :ex |
 		ex debug.
 		ex return: (ex printString asRopedText foreground: Color red) ].
@@ -263,11 +263,11 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 		(annotatedDeclaration optionsAt: #withSort)
 			ifTrue: [
 				| value colon sort |
-				value := annotatedDeclaration asLeibnizSyntaxTextColored: color.
+				value := annotatedDeclaration asRopedTextColored: color.
 				colon := ' : ' asRopedText foreground: color lzDeemphasized.
-				sort := term sort asLeibnizSyntaxTextColored: color lzDeemphasized.
+				sort := term sort asRopedTextColored: color lzDeemphasized.
 				value, colon, sort ]
-			ifFalse: [ annotatedDeclaration asLeibnizSyntaxTextColored: color ].
+			ifFalse: [ annotatedDeclaration asRopedTextColored: color ].
 	 ] on: Exception do: [ :ex |
 	 	ex debug.
 	 	ex return: (ex printString asRopedText foreground: Color red) ].

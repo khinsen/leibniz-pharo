@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #converting }
-LzSpecialTermsDeclaration >> adAsRopedTextTo: aRopedText [
+LzSpecialTermsDeclaration >> addAsRopedTextTo: aRopedText [
 	termTypes allButLastDo: [ :each |
 		aRopedText appendString: each.
 		aRopedText appendString: ', ' ].

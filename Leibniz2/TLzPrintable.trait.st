@@ -44,6 +44,17 @@ TLzPrintable >> asRopedText [
 	^ text
 ]
 
+{ #category : #converting }
+TLzPrintable >> asRopedTextColored: aColor [
+	| text |
+[
+	text := self asRopedText.
+	LzTextRenderer new
+		render: text baseColor: aColor.
+] on: Exception do: [ :ex | ex debug ].
+	^ text
+]
+
 { #category : #inspecting }
 TLzPrintable >> gtSyntaxFor: aView [
 	<gtView>

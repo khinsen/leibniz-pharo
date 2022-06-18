@@ -15,7 +15,7 @@ LzVarTermDeclaration >> addAsRopedTextTo: aRopedText [
 	self includesVarDeclaration ifTrue: [
 		| size |
 		size := aRopedText size.
-		aRopedText append: ':'.
+		aRopedText appendString: ':'.
 		self sort addAsRopedTextTo: aRopedText.
 		aRopedText
 			attribute: LzVarDeclarationAttribute new

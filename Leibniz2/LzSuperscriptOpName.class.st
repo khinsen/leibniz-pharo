@@ -14,7 +14,7 @@ LzSuperscriptOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText [
 	anArrayOfTerms allButFirst allButLast do: [ : each |
 		each addAsRopedTextTo: aRopedText.
 		aRopedText appendString: ', ' ].
-	anArrayOfTerms last printAsLeibnizSyntaxOn: aRopedText.
+	anArrayOfTerms last addAsRopedTextTo: aRopedText.
 	aRopedText appendString: ')'
 ]
 

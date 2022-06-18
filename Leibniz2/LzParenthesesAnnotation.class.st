@@ -4,7 +4,12 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
-{ #category : #printing }
+{ #category : #converting }
+LzParenthesesAnnotation >> addAsFirstArgOfInfixTermWithOpName: anOpName asRopedTextTo: aRopedText [
+	self declaration addAsRopedTextTo: aRopedText parenthesized: true
+]
+
+{ #category : #converting }
 LzParenthesesAnnotation >> addAsRopedTextTo: aRopedText [
 	self declaration addAsRopedTextTo: aRopedText parenthesized: true
 ]
