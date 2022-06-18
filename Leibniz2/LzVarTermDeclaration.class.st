@@ -10,16 +10,15 @@ Class {
 
 { #category : #converting }
 LzVarTermDeclaration >> addAsRopedTextTo: aRopedText [
-	aRopedText append:
-		(name asSymbol asRopedText attribute: LzVarNameAttribute new).
+	name addAsRopedTextTo: aRopedText.
 	self includesVarDeclaration ifTrue: [
 		| size |
 		size := aRopedText size.
-		aRopedText appendString: ':'.
+		aRopedText append: ':' asRopedText.
 		self sort addAsRopedTextTo: aRopedText.
 		aRopedText
 			attribute: LzVarDeclarationAttribute new
-			from: size to: aRopedText size ]
+			from: size + 1 to: aRopedText size + 1 ]
 ]
 
 { #category : #constructing }

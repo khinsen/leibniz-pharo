@@ -15,5 +15,5 @@ LzTextRenderer >> render: aText baseColor: aColor [
 					ifNotNil: [ :visualAttr |
 						aText
 							attribute: visualAttr
-							from: index to: index ] ] ]
+							from: index + 1 to: index + 1 ] ] ]
 ]
