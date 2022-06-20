@@ -7,6 +7,11 @@ Class {
 	#category : #'Leibniz2-Sorts'
 }
 
+{ #category : #converting }
+LzOpSortFamily >> addAsRopedTextTo: aRopedText [
+	self op opName addForArity: op onlyRank key asRopedTextTo: aRopedText
+]
+
 { #category : #inspecting }
 LzOpSortFamily >> gtGraphFor: aView [
 	<gtView>

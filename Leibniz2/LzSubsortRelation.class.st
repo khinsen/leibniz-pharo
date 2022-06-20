@@ -10,6 +10,11 @@ Class {
 	#category : #'Leibniz2-Sorts'
 }
 
+{ #category : #converting }
+LzSubsortRelation >> addAsRopedTextTo: aRopedText [
+	self axiom addAsRopedTextTo: aRopedText
+]
+
 { #category : #accessing }
 LzSubsortRelation >> axiom [
 	^ axiom

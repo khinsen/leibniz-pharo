@@ -55,6 +55,11 @@ LzOperator >> addArity: newArity sort: newSort [
 	ranks add: newArity -> newSort
 ]
 
+{ #category : #converting }
+LzOperator >> addAsRopedTextTo: aRopedText [
+	opName addForArity:  kindArity asRopedTextTo: aRopedText
+]
+
 { #category : #private }
 LzOperator >> assertMonotonicity: aBlock arity: anArity sort: aSort [
 	self
@@ -82,10 +87,9 @@ LzOperator >> graphNodeForRank: anAssociation [
 	| arity sort text |
 	arity := anAssociation key.
 	sort := anAssociation value.
-	text := (String streamContents: [ :s |
-		self opName printForArity: arity withSort: sort on: s ] )
-		asRopedText.
-	text fontName: (LbCodeFont defaultFamily).
+	text := '' asRopedText.
+	self opName addForArity: arity withSort: sort asRopedTextTo: text.
+	text fontName: LzCodeFont defaultFamily.
 	^ BlTextElement new
 		text: text;
 		padding: (BlInsets all: 3);
@@ -122,16 +126,14 @@ LzOperator >> gtRanksFor: aView [
 		title: 'Ranks';
 		priority: 0;
 		items: [ ranks ];
-		column: 'Variables' lzCode: [ :each |
-			(String streamContents: [ :s |
-				each key printVariablesAsLeibnizSyntaxOn: s ] )
-			asRopedText ];
-		column: 'Arity' lzCode: [ :each |
-			(String streamContents: [ :s |
-				self opName printForArity: each key on: s ] )
-			asRopedText ];
-		column: 'Sort' lzCode: [ :each |
-			each value asLeibnizSyntaxString asRopedText ];
+		column: 'Variables' text: [ :each |
+			LzCodeFont textFrom: [ :t |
+				each key addVariablesAsRopedTextTo: t] ];
+		column: 'Arity' text: [ :each |
+			LzCodeFont textFrom: [ :t |
+				self opName addForArity: each key asRopedTextTo: t ] ];
+		column: 'Sort' text: [ :each |
+			each value asLeibnizSyntax ];
 		yourself
 ]
 

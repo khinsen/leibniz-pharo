@@ -32,6 +32,13 @@ LzSort >> <= otherSort [
 ]
 
 { #category : #converting }
+LzSort >> addAsFirstArgOfInfixTermWithOpName: anOpName asRopedTextTo: aRopedText [
+	self 
+		addAsRopedTextTo: aRopedText
+		parenthesized: (self term hasInfixOpOtherThan: anOpName)
+]
+
+{ #category : #converting }
 LzSort >> addAsRopedTextTo: aRopedText [
 	self
 		do: [ :t | self term addAsRopedTextTo: t ]

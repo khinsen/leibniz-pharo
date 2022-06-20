@@ -122,7 +122,7 @@ LzSortPair >> gtSortsFor: aView [
 		title: 'Sorts';
 		priority: 1;
 		items: [ { sort1. sort2 } ];
-		itemLzCode: #asLeibnizSyntaxString;
+		itemText: #asLeibnizSyntax;
 		yourself
 ]
 

@@ -8,12 +8,6 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
-{ #category : #printing }
-LzRuleDeclaration >> asLeibnizSyntaxTextColored: aColor [.
-	^ (self variables: variables asLeibnizSyntaxTextColored: aColor),
-		(self bodyAsLeibnizSyntaxTextColored: aColor)
-]
-
 { #category : #accessing }
 LzRuleDeclaration >> condition [
 	^ condition

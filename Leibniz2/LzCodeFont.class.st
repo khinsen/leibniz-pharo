@@ -37,3 +37,12 @@ LzCodeFont class >> chooseDefaultFamily [
 LzCodeFont class >> defaultFamily [
 	^ DefaultFamily
 ]
+
+{ #category : #accessing }
+LzCodeFont class >> textFrom: aBlock [
+	| text |
+	text := '' asRopedText.
+	aBlock value: text.
+	text fontName: LzCodeFont defaultFamily.
+	^ text
+]

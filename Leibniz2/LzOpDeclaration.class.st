@@ -26,12 +26,6 @@ LzOpDeclaration >> args: anObject [
 	args := anObject
 ]
 
-{ #category : #printing }
-LzOpDeclaration >> asLeibnizSyntaxTextColored: aColor [.
-	^ (self variables: variables asLeibnizSyntaxTextColored: aColor),
-		(self bodyAsLeibnizSyntaxTextColored: aColor)
-]
-
 { #category : #accessing }
 LzOpDeclaration >> name [
 

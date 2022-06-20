@@ -9,6 +9,13 @@ Class {
 	#category : #'Leibniz2-Terms'
 }
 
+{ #category : #converting }
+LzTerm >> addAsFirstArgOfInfixTermWithOpName: anOpName asRopedTextTo: aRopedText [
+	self
+		addAsRopedTextTo: aRopedText
+		parenthesized: (self hasInfixOpOtherThan: anOpName)
+]
+
 { #category : #unifying }
 LzTerm >> addPrefix: aSymbol toVarsConflictingWith: anotherTerm [
 	| bindings myVars otherVars |
@@ -91,10 +98,11 @@ LzTerm >> gtTreeFor: aView [
 		title: 'Tree' translated;
 		priority: 0;
 		items: [ { self } ];
-		column: 'Term' lzCode: [ :each |
-			each synopsis ];
-		column: 'Sort' lzCode: [ :each |
-			each sort asLeibnizSyntaxString ];
+		column: 'Term' text: [ :each |
+			each synopsis asRopedText
+				fontName: LzCodeFont defaultFamily ];
+		column: 'Sort' text: [ :each |
+			each sort asLeibnizSyntax ];
 		children: #args;
 		expandAll;
 		yourself

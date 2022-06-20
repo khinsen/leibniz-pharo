@@ -12,12 +12,6 @@ LzPatternDeclaration >> addBodyAsRopedTextTo: aRopedText [
 	term addAsRopedTextTo: aRopedText
 ]
 
-{ #category : #printing }
-LzPatternDeclaration >> asLeibnizSyntaxTextColored: aColor [.
-	^ (self variables: variables asLeibnizSyntaxTextColored: aColor),
-		(self bodyAsLeibnizSyntaxTextColored: aColor)
-]
-
 { #category : #constructing }
 LzPatternDeclaration >> buildFor: aSignature [
 	^ self term

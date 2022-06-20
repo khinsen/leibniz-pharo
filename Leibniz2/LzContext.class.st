@@ -47,9 +47,9 @@ LzContext >> gtAxiomsFor: aView [
 		title: 'Axioms';
 		priority: 3;
 		items: [ axiomTree keys sorted ];
-		itemLzCode: [ :each |
-			each isSymbol ifTrue: [ each ]
-			ifFalse: [ each asLeibnizSyntaxString ] ];
+		itemText: [ :each |
+			each isSymbol ifTrue: [ each asRopedText fontName: LzCodeFont defaultFamily ]
+			ifFalse: [ each asLeibnizSyntax ] ];
 		children: [ :each |
 			each isSymbol ifTrue: [ axiomTree at: each ]
 			ifFalse: [ #() ] ];

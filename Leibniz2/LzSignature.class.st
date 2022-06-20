@@ -88,28 +88,6 @@ LzSignature >> gtSortGraphFor: aView [
 		view: #gtGraphFor:
 ]
 
-{ #category : #inspecting }
-LzSignature >> gtVariablesFor: aView [
-	<gtView>
-	variables isEmpty ifTrue: [ ^ aView empty ].
-	^ aView columnedList
-		title: 'Variables' translated;
-		priority: 1;
-		items: [ variables associations
-					sorted: [ :a :b | a key <= b key ]];
-		send: [ :each |
-			LbVariable
-				named: each key
-				sort: each value
-				in: self
-				origins: nil  ];
-		column: 'Name' lzCode: [ :each |
-			each key synopsis ];
-		column: 'Sort' lzCode: [ :each |
-			each value asLeibnizSyntaxString ];
-		yourself
-]
-
 { #category : #constructing }
 LzSignature >> literalTerm:  anObject class: aLiteralTermClass builtin: aSymbol [
 	self assertBuiltin: aSymbol.

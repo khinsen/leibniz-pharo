@@ -12,7 +12,7 @@ LzTermStreamContents >> gtTermsFor: aView [
 		title: 'Terms';
 		priority: 0;
 		items: [ retrievedItems ];
-		itemLzCode: #asLeibnizSyntaxString;
+		itemText: #asLeibnizSyntax;
 		updateWhen: LzStreamContentsMoreItemsEvent in: [ self announcer ]
 		yourself.
 	self isComplete ifFalse: [

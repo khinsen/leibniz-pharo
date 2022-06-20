@@ -123,9 +123,9 @@ LzBindingsObsolete >> gtBindingsFor: aView [
 		title: 'Bindings';
 		priority: 1;
 		items: [ bound keys ];
-		column: 'Name' lzCode: #asSymbol;
-		column: 'Sort' lzCode: [ :each | (sorts at: each) asLeibnizSyntaxString ];
-		column: 'Value' lzCode: [ :each | (bound at: each) asLeibnizSyntaxString ];
+		column: 'Name' text: #asSymbol;
+		column: 'Sort' text: [ :each | (sorts at: each) asLeibnizSyntaxString ];
+		column: 'Value' text: [ :each | (bound at: each) asLeibnizSyntaxString ];
 		yourself
 ]
 
@@ -137,9 +137,8 @@ LzBindingsObsolete >> gtFailureFor: aView [
 		title: 'Failure';
 		priority: 0;
 		items: [ { failure first.
-					failure second asLeibnizSyntaxString.
-					failure third asLeibnizSyntaxString } ];
-		itemLzCode: [ :each | each ];
+					failure second asLeibnizSyntax.
+					failure third asLeibnizSyntax } ];
 		yourself
 ]
 
@@ -151,9 +150,9 @@ LzBindingsObsolete >> gtUnboundFor: aView [
 		title: 'Unbound';
 		priority: 2;
 		items: [ unbound values asSet asArray ];
-		column: 'Names' lzCode: [ :each |
+		column: 'Names' text: [ :each |
 			' = ' join: (each collect: #asSymbol) ];
-		column: 'Sort' lzCode: [ :each |
+		column: 'Sort' text: [ :each |
 			(sorts at: each) asLeibnizSyntaxString ];
 		yourself
 ]

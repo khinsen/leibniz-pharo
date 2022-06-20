@@ -68,17 +68,3 @@ LzDeclaration >> printVariables: variables asLeibnizSyntaxOn: aStream [
 LzDeclaration >> valueSlots [
 	^ self class allInstVarNames
 ]
-
-{ #category : #printing }
-LzDeclaration >> variables: listOfVariables asLeibnizSyntaxTextColored: aColor [
-	| color comma text |
-	color := aColor lzDeemphasized.
-	comma := ', ' asRopedText
-		attribute: (BlTextForegroundAttribute color: color).
-	text := '' asRopedText.
-	(listOfVariables reject: #isDerived)
-		do: [ :var |
-			text insertText: (var asLeibnizSyntaxTextColored: color) at: text size.
-			text insertText: comma at: text size ].
-	^ text
-]

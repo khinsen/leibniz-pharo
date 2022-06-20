@@ -21,19 +21,15 @@ TLzPrintable >> addAsRopedTextTo: aRopedText parenthesized: aBoolean [
 TLzPrintable >> addTextTo: text [ 
 ]
 
+{ #category : #printing }
+TLzPrintable >> asLeibnizSyntax [
+	^ self asRopedTextColored: Color black
+]
+
 { #category : #converting }
 TLzPrintable >> asLeibnizSyntaxString [
 	^ String streamContents: [ :s |
 		self printAsLeibnizSyntaxOn: s ]
-]
-
-{ #category : #converting }
-TLzPrintable >> asLeibnizSyntaxTextColored: aColor [
-	| text |
-	text := self asLeibnizSyntaxString asRopedText.
-	text fontName: LzCodeFont defaultFamily.
-	text attribute: (BlTextForegroundAttribute color: aColor).
-	^ text
 ]
 
 { #category : #converting }
@@ -79,9 +75,8 @@ TLzPrintable >> gtSyntaxFor: aView [
 					c horizontal matchParent ];
 				editor: (BrTextEditor new
 					beReadOnlyWithSelection;
-					text: (self asLeibnizSyntaxString asRopedText
-								fontName: LzCodeFont defaultFamily;
-								glamorousRegularSize) ) ]
+					text: (self asRopedTextColored: Color black)
+								glamorousRegularSize ) ]
 ]
 
 { #category : #printing }

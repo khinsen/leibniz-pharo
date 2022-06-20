@@ -58,15 +58,16 @@ LzOperators >> gtOperatorsFor: aView [
 			each isAssociation
 				ifTrue: [ each value ]
 				ifFalse: [ #() ] ];
-		column: 'Kind arity' lzCode: [ :each |
+		column: 'Kind arity' text: [ :each |
 			each isAssociation
-				ifTrue: [ each key synopsis ]
-				ifFalse: [ each opName printStringForArity: each kindArity ] ]
+				ifTrue: [ each key synopsis asRopedText fontName: LzCodeFont defaultFamily ]
+				ifFalse: [ LzCodeFont textFrom: [ :t |
+					each opName addForArity: each kindArity asRopedTextTo: t ] ] ]
 			weight: 0.5 ;
-		column: 'Kind' lzCode: [ :each |
+		column: 'Kind' text: [ :each |
 			each isAssociation
 				ifTrue: [ '' ]
-				ifFalse: [ each kind asLeibnizSyntaxString ]]
+				ifFalse: [ each kind asLeibnizSyntax ]]
 			weight: 0.3;
 		column: 'Ranks' text: [ :each |
 			each isAssociation

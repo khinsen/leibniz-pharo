@@ -65,8 +65,8 @@ LzEClass >> gtNodesFor: aView [
 		title: 'Nodes';
 		priority: 0;
 		items: [ self nodes ];
-		column: 'Representative term' lzCode: #asLeibnizSyntaxString;
-		column: 'Sort' lzCode: [ :node | node sort asLeibnizSyntaxString ];
+		column: 'Representative term' text: #asLeibnizSyntax;
+		column: 'Sort' text: [ :node | node sort asLeibnizSyntax ];
 		yourself
 ]
 

@@ -1,6 +1,8 @@
 Class {
 	#name : #LzVarName,
 	#superclass : #LzOpName,
+	#traits : 'TLzPrintable',
+	#classTraits : 'TLzPrintable classTrait',
 	#category : #'Leibniz2-Declarations'
 }
 

@@ -21,6 +21,8 @@ LzFunctionRule >> addBodyAsRopedTextTo: aRopedText [
 	pattern addAsRopedTextTo: aRopedText.
 	aRopedText append:
 		(' ⇒ ' asRopedText attribute: LzRewriteArrowAttribute new).
+	aRopedText append:
+		('Pharo:' asRopedText attribute: LzLanguageTagAttribute new).
 	aRopedText append: '"' asRopedText.
 	aRopedText append: (code asRopedText attribute: LzPharoCodeAttribute new).
 	aRopedText append: '"' asRopedText

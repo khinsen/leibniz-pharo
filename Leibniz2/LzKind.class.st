@@ -12,6 +12,11 @@ Class {
 }
 
 { #category : #converting }
+LzKind >> addAsFirstArgOfInfixTermWithOpName: anOpName asRopedTextTo: aRopedText [
+	self addAsRopedTextTo: aRopedText
+]
+
+{ #category : #converting }
 LzKind >> addAsRopedTextTo: aRopedText [
 	self
 		do: [ :t |

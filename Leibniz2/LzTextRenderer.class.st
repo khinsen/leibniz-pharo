@@ -6,6 +6,7 @@ Class {
 
 { #category : #rendering }
 LzTextRenderer >> render: aText baseColor: aColor [
+	aText fontName: LzCodeFont defaultFamily.
 	aText attribute: (BlTextForegroundAttribute new paint: aColor).
 	aText attributesDo: [ :attrs :index |
 		attrs

@@ -26,21 +26,23 @@ LzMatchingRules >> gtRulesFor: aView [
 			each second
 				ifTrue: [ each third ]
 				ifFalse: [ '' ] ];
-		column: 'Variables' lzCode: [ :each |
-			String streamContents: [ :s |
-				each first printVariablesAsLeibnizSyntaxOn: s ] ];
-		column: 'Transformation' lzCode: [ :each |
-			String streamContents: [ :s |
-				each first printBodyAsLeibnizSyntaxOn: s ] ];
-		column: 'Result' lzCode: [ :each |
+		column: 'Variables' text: [ :each |
+			LzCodeFont textFrom: [ :t |
+				each first addVariablesAsRopedTextTo: t ] ];
+		column: 'Transformation' text: [ :each |
+			LzCodeFont textFrom: [ :t |
+				each first addBodyAsRopedTextTo: t ] ];
+		column: 'Result' text: [ :each |
 			(each second & each third)
-				ifTrue: [ each fourth asLeibnizSyntaxString ]
+				ifTrue: [ each fourth asLeibnizSyntax ]
 				ifFalse: [ '' ] ];
 		yourself.
 	self hasConditionalRule ifTrue: [
-		ruleView column: 'Condition' lzCode: [ :each |
-			String streamContents: [ :s |
-				each first printConditionAsLeibnizSyntaxOn: s ] ] ].
+		ruleView column: 'Condition' text: [ :each |
+			| t |
+			t := '' asRopedText.
+			each first addConditionAsRopedTextTo: t.
+			t ] ].
 	^ ruleView
 ]
 

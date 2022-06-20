@@ -12,11 +12,6 @@ LzDeclarationAnnotation >> addAsRopedTextTo: aRopedText [
 	self declaration addAsRopedTextTo: aRopedText
 ]
 
-{ #category : #printing }
-LzDeclarationAnnotation >> asLeibnizSyntaxTextColored: aColor [
-	^ self declaration asLeibnizSyntaxTextColored: aColor
-]
-
 { #category : #accessing }
 LzDeclarationAnnotation >> declaration [
 	^ declaration

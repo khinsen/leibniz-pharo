@@ -12,8 +12,8 @@ LzEGraphMatchStreamContents >> gtMatchesFor: aView [
 		title: 'Matches';
 		priority: 0;
 		items: [ retrievedItems ];
-		column: 'EClass' lzCode: #eClass;
-		column: 'Substitution' lzCode: [ :each |
+		column: 'EClass' text: #eClass;
+		column: 'Substitution' text: [ :each |
 			each substitution gtDisplayString ];
 		updateWhen: LzStreamContentsMoreItemsEvent in: [ self announcer ]
 		yourself.

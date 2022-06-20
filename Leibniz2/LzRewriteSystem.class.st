@@ -18,7 +18,10 @@ LzRewriteSystem >> gtRulesFor: aView [
 	topLevel := [ :object |
 		object isSymbol or: [ object isKindOf: LzOpName] ].
 	label := [ :object |
-		object isSymbol ifTrue: [ object ] ifFalse: [ object synopsis ] ].
+		(object isSymbol
+			ifTrue: [ object ]
+			ifFalse: [ object synopsis ])
+			asRopedText fontName: LzCodeFont defaultFamily ].
 	ruleView := aView columnedTree
 		title: 'Rules';
 		priority: 1;
@@ -27,23 +30,26 @@ LzRewriteSystem >> gtRulesFor: aView [
 			(topLevel value: each)
 				ifTrue: [ rules at: each ]
 				ifFalse: [ #() ] ];
-		column: 'Variables' lzCode: [ :each |
+		column: 'Variables' text: [ :each |
 			(topLevel value: each)
 				ifTrue: [ label value: each ]
-				ifFalse: [ String streamContents: [ :s |
-					each printVariablesAsLeibnizSyntaxOn: s ] ] ];
-		column: 'Transformation' lzCode: [ :each |
+				ifFalse: [
+					LzCodeFont textFrom: [ :t |
+						each addVariablesAsRopedTextTo: t ] ] ];
+		column: 'Transformation' text: [ :each |
 			(topLevel value: each)
 				ifTrue: [ '' ]
-				ifFalse: [ String streamContents: [ :s |
-					each printBodyAsLeibnizSyntaxOn: s ] ] ];
+				ifFalse: [
+					LzCodeFont textFrom: [ :t |
+						each addBodyAsRopedTextTo: t ] ] ];
 		yourself.
 	self hasConditionalRule ifTrue: [
-		ruleView column: 'Condition' lzCode: [ :each |
+		ruleView column: 'Condition' text: [ :each |
 			(topLevel value: each)
 				ifTrue: [ '' ]
-				ifFalse: [ String streamContents: [ :s |
-					each printConditionAsLeibnizSyntaxOn: s ] ] ] ].
+				ifFalse: [
+					LzCodeFont textFrom: [ :t |
+						each addConditionAsRopedTextTo: t ] ] ] ].
 	^ ruleView
 ]
 

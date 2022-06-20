@@ -21,12 +21,6 @@ LzEqualityAxiomDeclaration >> addBodyAsRopedTextTo: aRopedText [
 		c addAsRopedTextTo: aRopedText ] 
 ]
 
-{ #category : #printing }
-LzEqualityAxiomDeclaration >> asLeibnizSyntaxTextColored: aColor [.
-	^ (self variables: variables asLeibnizSyntaxTextColored: aColor),
-		(self bodyAsLeibnizSyntaxTextColored: aColor)
-]
-
 { #category : #accessing }
 LzEqualityAxiomDeclaration >> axiomClass [
 	^ LzEqualityAxiom
