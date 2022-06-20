@@ -1267,7 +1267,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-06-20T11:56:05.887851+02:00"
+												"dateAndTimeString" : "2022-06-20T12:08:40.433976+02:00"
 											}
 										},
 										"uid" : {
@@ -1277,7 +1277,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "Note that division by zero is excluded by the definition of the division operator. {{lzTerm:1 ÷ 0, withSort = \"no\"}} has no sort, only a kind, which is an error indicator. There is no rewrite rule either that would transform this term into a valid one."
+										"string" : "Note that division by zero is excluded by the definition of the division operator. {{lzTerm:1 ÷ 0, withSort = \"yes\"}} has no sort, only a kind, which is an error indicator. There is no rewrite rule either that would transform this term into a valid one."
 									}
 								]
 							},

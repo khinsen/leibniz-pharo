@@ -11,6 +11,17 @@ Class {
 	#category : #'Leibniz2-Sorts'
 }
 
+{ #category : #converting }
+LzKind >> addAsRopedTextTo: aRopedText [
+	self
+		do: [ :t |
+				t append: '[' asRopedText.
+				t append: (', ' join: (maximalFamilies collect: #asLeibnizSyntaxString)) asRopedText.
+				t append: ']' asRopedText ]
+		to: aRopedText
+		withAttribute: LzSortAttribute new
+]
+
 { #category : #testing }
 LzKind >> includes: aSort [
 	^ sortFamilies includes: aSort family

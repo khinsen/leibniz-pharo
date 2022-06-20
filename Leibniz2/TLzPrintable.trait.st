@@ -55,6 +55,16 @@ TLzPrintable >> asRopedTextColored: aColor [
 	^ text
 ]
 
+{ #category : #converting }
+TLzPrintable >> do: aBlock to: aRopedText withAttribute: aBlTextAttribute [
+	| size |
+	size := aRopedText size.
+	aBlock value: aRopedText.
+	aRopedText
+		attribute: aBlTextAttribute
+		from: size + 1 to: aRopedText size + 1
+]
+
 { #category : #inspecting }
 TLzPrintable >> gtSyntaxFor: aView [
 	<gtView>
