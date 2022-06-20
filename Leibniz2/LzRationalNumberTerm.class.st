@@ -75,15 +75,14 @@ LzRationalNumberTerm >> >= otherNumberTerm [
 
 { #category : #converting }
 LzRationalNumberTerm >> addAsRopedTextTo: aRopedText [
-	| size |
-	size := aRopedText size.
-	aRopedText append: value numerator asRopedText.
-	value denominator = 1 ifFalse: [
-		aRopedText append: '/' asRopedText.
-		aRopedText append: value denominator asRopedText ].
-	aRopedText
-		attribute: LzLiteralAttribute new
-		from: size + 1 to: aRopedText size + 1
+	self
+		do: [ :t |
+			t append: value numerator asRopedText.
+			value denominator = 1 ifFalse: [
+				t append: '/' asRopedText.
+				t append: value denominator asRopedText ] ]
+		to: aRopedText
+		withAttribute: LzLiteralAttribute new
 ]
 
 { #category : #rewriting }

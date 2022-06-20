@@ -10,22 +10,22 @@ Class {
 
 { #category : #converting }
 LzArrayTermDeclaration >> addAsRopedTextTo: aRopedText [
-	aRopedText appendString: '{'.
+	aRopedText append: '{' asRopedText.
 	self addElementsOf: elements asRopedTextTo: aRopedText.
-	aRopedText appendString: '}'
+	aRopedText append: '}' asRopedText
 ]
 
 { #category : #converting }
 LzArrayTermDeclaration >> addElementsOf: anArray asRopedTextTo: aRopedText [
-	aRopedText appendString: '['.
+	aRopedText append: '[' asRopedText.
 	1 to: anArray size do: [ :eachIndex |
 		| element |
 		element := anArray at: eachIndex.
 		element isCollection
 			ifTrue: [ self addElementsOf: element asRopedTextTo: aRopedText ]
 			ifFalse: [ element addAsRopedTextTo: aRopedText ].
-		eachIndex < anArray size ifTrue: [ aRopedText appendString: ', ' ] ].
-	aRopedText appendString: ']'
+		eachIndex < anArray size ifTrue: [ aRopedText append: ', ' asRopedText ] ].
+	aRopedText append: ']' asRopedText
 ]
 
 { #category : #constructing }

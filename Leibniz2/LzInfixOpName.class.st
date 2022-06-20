@@ -15,10 +15,10 @@ LzInfixOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText [
 	anArrayOfTerms first
 		addAsFirstArgOfInfixTermWithOpName: self
 		asRopedTextTo: aRopedText.
-	aRopedText appendString: ' '.
+	aRopedText append: ' ' asRopedText.
 	aRopedText append:
 		(internalSymbol allButFirst asRopedText attribute: LzInfixOpNameAttribute new).
-	aRopedText appendString:  ' '.
+	aRopedText append:  ' ' asRopedText.
 	anArrayOfTerms second
 		addAsRopedTextTo: aRopedText
 		parenthesized: anArrayOfTerms second isInfix

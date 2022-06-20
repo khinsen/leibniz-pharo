@@ -33,7 +33,10 @@ LzSort >> <= otherSort [
 
 { #category : #converting }
 LzSort >> addAsRopedTextTo: aRopedText [
-	self term addAsRopedTextTo: aRopedText
+	self
+		do: [ :t | self term addAsRopedTextTo: t ]
+		to: aRopedText
+		withAttribute: LzSortAttribute new
 ]
 
 { #category : #unifying }

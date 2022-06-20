@@ -12,13 +12,12 @@ Class {
 LzVarTermDeclaration >> addAsRopedTextTo: aRopedText [
 	name addAsRopedTextTo: aRopedText.
 	self includesVarDeclaration ifTrue: [
-		| size |
-		size := aRopedText size.
-		aRopedText append: ':' asRopedText.
-		self sort addAsRopedTextTo: aRopedText.
-		aRopedText
-			attribute: LzVarDeclarationAttribute new
-			from: size + 1 to: aRopedText size + 1 ]
+		self
+			do: [ :t |
+				t append: ':' asRopedText.
+				self sort addAsRopedTextTo: t ]
+			to: aRopedText
+			withAttribute: LzVarDeclarationAttribute new ]
 ]
 
 { #category : #constructing }

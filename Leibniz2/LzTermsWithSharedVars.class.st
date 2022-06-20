@@ -32,16 +32,15 @@ LzTermsWithSharedVars >> addConditionAsRopedTextTo: aRopedText [
 LzTermsWithSharedVars >> addVariablesAsRopedTextTo: aRopedText [
 	| addVars |
 	addVars := [ :var :sort |
-		| size |
-		size := aRopedText size.
-		var addAsRopedTextTo: aRopedText.
-		aRopedText append:
-			(':' asRopedText attribute: LzColonAttribute new).
-		sort addAsRopedTextTo:  aRopedText.
-		aRopedText append: ', ' asRopedText.
-		aRopedText
-			attribute: (LzVarDeclarationAttribute new)
-			from: size + 1 to: aRopedText size + 1 ].
+		self
+			do: [ :t |
+				var addAsRopedTextTo: t.
+				t append:
+					(':' asRopedText attribute: LzColonAttribute new).
+				sort addAsRopedTextTo:  t.
+				t append: ', ' asRopedText ]
+			to: aRopedText
+			withAttribute: LzVarDeclarationAttribute new ].
 	self sortVariables keysAndValuesDo: addVars.
 	self variables keysAndValuesDo: addVars
 ]

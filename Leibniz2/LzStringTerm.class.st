@@ -13,14 +13,13 @@ LzStringTerm >> , otherString [
 
 { #category : #converting }
 LzStringTerm >> addAsRopedTextTo: aRopedText [
-	| size |
-	size := aRopedText size.
-	aRopedText append: '"' asRopedText.
-	aRopedText append: value asRopedText.
-	aRopedText append: '"' asRopedText.
-	aRopedText
-		attribute: LzLiteralAttribute new
-		from: size + 1 to: aRopedText size + 1
+	self
+		do: [ :t |
+			t append: '"' asRopedText.
+			t append: value asRopedText.
+			t append: '"' asRopedText ]
+		to: aRopedText
+		withAttribute: LzLiteralAttribute new
 ]
 
 { #category : #rewriting }

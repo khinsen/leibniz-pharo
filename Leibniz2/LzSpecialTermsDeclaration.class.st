@@ -9,10 +9,10 @@ Class {
 
 { #category : #converting }
 LzSpecialTermsDeclaration >> addAsRopedTextTo: aRopedText [
-	termTypes allButLastDo: [ :each |
-		aRopedText appendString: each.
-		aRopedText appendString: ', ' ].
-	aRopedText appendString: termTypes last
+	termTypes do: [ :each |
+		aRopedText append: (each asRopedText attribute: LzSpecialTermAttribute new) ]
+	separatedBy: [
+		aRopedText append: ', ' asRopedText ]
 ]
 
 { #category : #printing }

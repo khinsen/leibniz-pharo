@@ -17,14 +17,14 @@ Class {
 
 { #category : #converting }
 LzVarDeclaration >> addAsRopedTextTo: aRopedText [
-	| size |
-	size := aRopedText size.
-	name addAsRopedTextTo: aRopedText.
-	aRopedText appendString: ':'.
-	sort addAsRopedTextTo: aRopedText.
-	aRopedText
-		attribute: LzVarDeclarationAttribute new
-		from: size to: aRopedText size
+	self
+		do: [ :t |
+			name addAsRopedTextTo: t.
+			t append:
+				(':' asRopedText attribute: LzColonAttribute new).
+			sort addAsRopedTextTo: t ]
+		to: aRopedText
+		withAttribute: LzVarDeclarationAttribute new
 ]
 
 { #category : #accessing }

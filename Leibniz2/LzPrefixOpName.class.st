@@ -17,7 +17,7 @@ LzPrefixOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText [
 		aRopedText append: ('(' asRopedText attribute: LzParenthesisAttribute new).
 		anArrayOfTerms allButLastDo: [ :each |
 			each addAsRopedTextTo: aRopedText.
-			aRopedText appendString: ', ' ].
+			aRopedText append: ', ' asRopedText].
 		anArrayOfTerms last addAsRopedTextTo: aRopedText.
 		aRopedText append: (')' asRopedText attribute: LzParenthesisAttribute new) ]
 ]

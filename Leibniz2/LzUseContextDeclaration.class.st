@@ -10,9 +10,11 @@ Class {
 
 { #category : #converting }
 LzUseContextDeclaration >> addAsRopedTextTo: aRopedText [
-	aRopedText append: contextName.
+	aRopedText append:
+		(contextName asRopedText attribute: LzContextNameAttribute new).
 	subcontext ifNotNil: [ :s |
-		aRopedText appendString: (', ', s) ]
+		aRopedText append: '/' asRopedText.
+		aRopedText append: (s asRopedText attribute: LzSubcontextNameAttribute new) ]
 ]
 
 { #category : #accessing }

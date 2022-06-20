@@ -10,12 +10,12 @@ LzSuperscriptOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText [
 	anArrayOfTerms first
 		addAsRopedTextTo: aRopedText
 		parenthesized: anArrayOfTerms first isInfix.
-	aRopedText appendString: '^('.
+	aRopedText append: '^(' asRopedText.
 	anArrayOfTerms allButFirst allButLast do: [ : each |
 		each addAsRopedTextTo: aRopedText.
-		aRopedText appendString: ', ' ].
+		aRopedText append: ', ' asRopedText ].
 	anArrayOfTerms last addAsRopedTextTo: aRopedText.
-	aRopedText appendString: ')'
+	aRopedText append: ')' asRopedText
 ]
 
 { #category : #initializing }
