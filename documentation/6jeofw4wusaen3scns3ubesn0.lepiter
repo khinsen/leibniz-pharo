@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-27T12:10:49.690999+02:00"
+						"dateAndTimeString" : "2022-06-20T11:49:21.180547+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The actual evaluation of equality can only be implemented outside of Leibniz:\n\t{{lzRule:s__:𝕊, x_:s__, y_:s__, x_ == y_ → \"x isSyntacticallyEqualTo: y\"}}"
+				"string" : "The actual evaluation of equality can only be implemented outside of Leibniz:\n\t{{lzRule:s__:𝕊, x_:s__, y_:s__, x_ == y_ ⇒ Pharo:\"x isSyntacticallyEqualTo: y\"}}"
 			},
 			{
 				"__type" : "textSnippet",

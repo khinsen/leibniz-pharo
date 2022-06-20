@@ -2,21 +2,11 @@ Class {
 	#name : #LzTopLevelFunctionRuleNode,
 	#superclass : #LzTopLevelRuleNode,
 	#instVars : [
-		'code',
-		'_class'
+		'pharo',
+		'code'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
-
-{ #category : #generated }
-LzTopLevelFunctionRuleNode >> _class [
-	^ _class
-]
-
-{ #category : #generated }
-LzTopLevelFunctionRuleNode >> _class: aSmaCCToken [
-	_class := aSmaCCToken
-]
 
 { #category : #generated }
 LzTopLevelFunctionRuleNode >> acceptVisitor: aParseTreeVisitor [
@@ -34,6 +24,16 @@ LzTopLevelFunctionRuleNode >> code: aSmaCCToken [
 ]
 
 { #category : #generated }
+LzTopLevelFunctionRuleNode >> pharo [
+	^ pharo
+]
+
+{ #category : #generated }
+LzTopLevelFunctionRuleNode >> pharo: aSmaCCToken [
+	pharo := aSmaCCToken
+]
+
+{ #category : #generated }
 LzTopLevelFunctionRuleNode >> tokenVariables [
-	^ #(#code #_class #arrow)
+	^ #(#pharo #code #arrow)
 ]

@@ -1,14 +1,6 @@
 {
 	"__schema" : "4.1",
 	"__type" : "page",
-	"uid" : {
-		"__type" : "uuid",
-		"uuid" : "cd1c9233-f59d-0d00-bc75-5c33026a71f3"
-	},
-	"pageType" : {
-		"__type" : "namedPage",
-		"title" : "Rewriting"
-	},
 	"children" : {
 		"__type" : "snippets",
 		"items" : [ ]
@@ -34,5 +26,13 @@
 			"__type" : "dateAndTime",
 			"dateAndTimeString" : "2022-06-16T18:52:35.000603+02:00"
 		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Rewriting"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "cd1c9233-f59d-0d00-bc75-5c33026a71f3"
 	}
 }

@@ -145,7 +145,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-07T11:51:05.340354+02:00"
+									"dateAndTimeString" : "2022-06-20T11:52:54.255888+02:00"
 								}
 							},
 							"uid" : {
@@ -155,7 +155,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "{{lzRule:(a_:string) + (b_:string) → \"a ensureString. b ensureString. a, b\"}}"
+							"string" : "{{lzRule:(a_:string) + (b_:string) ⇒ Pharo:\"a ensureString. b ensureString. a, b\"}}"
 						},
 						{
 							"__type" : "textSnippet",

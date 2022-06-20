@@ -414,7 +414,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-06-03T15:56:33.897975+02:00"
+															"dateAndTimeString" : "2022-06-20T11:55:02.953799+02:00"
 														}
 													},
 													"uid" : {
@@ -424,7 +424,7 @@
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Evaluation for number terms:\n\t{{lzRule:(x_:ℚ) + (y_:ℚ) → \"x ensureNumber. y ensureNumber. x + y\"}}"
+													"string" : "Evaluation for number terms:\n\t{{lzRule:(x_:ℚ) + (y_:ℚ) ⇒ Pharo:\"x ensureNumber. y ensureNumber. x + y\"}}"
 												}
 											]
 										},
@@ -638,7 +638,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-06-03T15:58:02.797912+02:00"
+															"dateAndTimeString" : "2022-06-20T11:55:16.350642+02:00"
 														}
 													},
 													"uid" : {
@@ -648,7 +648,7 @@
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Evaluation for number terms:\n\t{{lzRule:(x_:ℚ) - (y_:ℚ) → \"x ensureNumber. y ensureNumber. x - y\"}}\n\t{{lzRule:-(x_:ℚ) → \"x ensureNumber. x negated\"}}"
+													"string" : "Evaluation for number terms:\n\t{{lzRule:(x_:ℚ) - (y_:ℚ) ⇒ Pharo:\"x ensureNumber. y ensureNumber. x - y\"}}\n\t{{lzRule:-(x_:ℚ) ⇒ Pharo:\"x ensureNumber. x negated\"}}"
 												}
 											]
 										},
@@ -973,7 +973,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-06-03T16:00:45.666188+02:00"
+															"dateAndTimeString" : "2022-06-20T11:55:24.768529+02:00"
 														}
 													},
 													"uid" : {
@@ -983,7 +983,7 @@
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℚ) × (y_:ℚ) → \"x ensureNumber. y ensureNumber. x * y\"}}"
+													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℚ) × (y_:ℚ) ⇒ Pharo:\"x ensureNumber. y ensureNumber. x * y\"}}"
 												}
 											]
 										},
@@ -1197,7 +1197,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-06-03T16:07:28.290893+02:00"
+															"dateAndTimeString" : "2022-06-20T11:55:40.514387+02:00"
 														}
 													},
 													"uid" : {
@@ -1207,7 +1207,7 @@
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℚ) ÷ (y_:ℚ.nz) → \"x ensureNumber. y ensureNumber. x / y\"}}"
+													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℚ) ÷ (y_:ℚ.nz) ⇒ Pharo:\"x ensureNumber. y ensureNumber. x / y\"}}"
 												}
 											]
 										},
@@ -1267,7 +1267,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-06-08T18:51:23.025929+02:00"
+												"dateAndTimeString" : "2022-06-20T11:56:05.887851+02:00"
 											}
 										},
 										"uid" : {
@@ -1277,7 +1277,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "Note that division by zero is excluded by the definition of the division operator. {{lzTerm:1 ÷ 0, withSort = \"yes\"}} has no sort, only a kind, which is an error indicator. There is no rewrite rule either that would transform this term into a valid one."
+										"string" : "Note that division by zero is excluded by the definition of the division operator. {{lzTerm:1 ÷ 0, withSort = \"no\"}} has no sort, only a kind, which is an error indicator. There is no rewrite rule either that would transform this term into a valid one."
 									}
 								]
 							},
@@ -1458,7 +1458,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-06-03T16:12:57.561083+02:00"
+															"dateAndTimeString" : "2022-06-20T11:56:51.147577+02:00"
 														}
 													},
 													"uid" : {
@@ -1468,7 +1468,7 @@
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℤ)^(y_:ℕ.nz) → \"x raisedTo: y\"}}\n\t{{lzRule:(x_:ℚ.nz)^(y_:ℤ.nz) → \"x raisedTo: y\"}}"
+													"string" : "Evaluate for number terms:\n\t{{lzRule:(x_:ℤ)^(y_:ℕ.nz) ⇒ Pharo:\"x raisedTo: y\"}}\n\t{{lzRule:(x_:ℚ.nz)^(y_:ℤ.nz) ⇒ Pharo:\"x raisedTo: y\"}}"
 												}
 											]
 										},
@@ -1636,7 +1636,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-03T15:38:41.114542+02:00"
+									"dateAndTimeString" : "2022-06-20T11:57:16.896605+02:00"
 								}
 							},
 							"uid" : {
@@ -1646,7 +1646,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Evaluation rules for number terms:\n\t{{lzRule:(x_:ℚ) < (y_:ℚ) → \"x ensureNumber. y ensureNumber. x < y\"}}\n\t{{lzRule:(x_:ℚ) > (y_:ℚ) → \"x ensureNumber. y ensureNumber. x > y\"}}\n\t{{lzRule:(x_:ℚ) ≤ (y_:ℚ) → \"x ensureNumber. y ensureNumber. x <= y\"}}\n\t{{lzRule:(x_:ℚ) ≥ (y_:ℚ) → \"x ensureNumber. y ensureNumber. x >= y\"}}"
+							"string" : "Evaluation rules for number terms:\n\t{{lzRule:(x_:ℚ) < (y_:ℚ) ⇒ Pharo:\"x ensureNumber. y ensureNumber. x < y\"}}\n\t{{lzRule:(x_:ℚ) > (y_:ℚ) ⇒ Pharo:\"x ensureNumber. y ensureNumber. x > y\"}}\n\t{{lzRule:(x_:ℚ) ≤ (y_:ℚ) ⇒ Pharo:\"x ensureNumber. y ensureNumber. x <= y\"}}\n\t{{lzRule:(x_:ℚ) ≥ (y_:ℚ) ⇒ Pharo:\"x ensureNumber. y ensureNumber. x >= y\"}}"
 						}
 					]
 				},

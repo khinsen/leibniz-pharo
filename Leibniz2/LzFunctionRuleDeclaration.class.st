@@ -12,7 +12,9 @@ Class {
 LzFunctionRuleDeclaration >> addBodyAsRopedTextTo: aRopedText [
 	self pattern addAsRopedTextTo: aRopedText.
 	aRopedText append:
-		(' → ' asRopedText attribute: LzRewriteArrowAttribute new).
+		(' ⇒ ' asRopedText attribute: LzRewriteArrowAttribute new).
+	aRopedText append:
+		('Pharo:' asRopedText attribute: LzLanguageTagAttribute new).
 	self function ifNotNil: [ :f |
 		aRopedText appendString: ''''.
 		aRopedText appendString: f first.
