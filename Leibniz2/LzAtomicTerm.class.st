@@ -16,6 +16,12 @@ LzAtomicTerm class >> signature: aSignature value: anObject [
 		yourself
 ]
 
+{ #category : #converting }
+LzAtomicTerm >> addAsRopedTextTo: aRopedText [
+	aRopedText append:
+		(value asRopedText attribute: LzLiteralAttribute new)
+]
+
 { #category : #egraphs }
 LzAtomicTerm >> asENodeIn: anEGraph [
 	^ anEGraph add:

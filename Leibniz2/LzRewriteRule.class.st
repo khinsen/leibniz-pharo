@@ -7,6 +7,14 @@ Class {
 	#category : #'Leibniz2-Rules'
 }
 
+{ #category : #converting }
+LzRewriteRule >> addBodyAsRopedTextTo: aRopedText [
+	pattern addAsRopedTextTo: aRopedText.
+	aRopedText append:
+		(' ⇒ ' asRopedText attribute: LzRewriteArrowAttribute new).
+	replacement addAsRopedTextTo: aRopedText
+]
+
 { #category : #rewriting }
 LzRewriteRule >> apply: bindings reducer: aBlock [
 	^ replacement substitute: bindings

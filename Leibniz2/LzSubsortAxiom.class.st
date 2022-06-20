@@ -8,6 +8,18 @@ Class {
 	#category : #'Leibniz2-Axioms'
 }
 
+{ #category : #converting }
+LzSubsortAxiom >> addBodyAsRopedTextTo: aRopedText [
+	subsort addAsRopedTextTo: aRopedText.
+	aRopedText append:
+		(' ⊆ ' asRopedText attribute: LzSubsortAttribute new).
+	supersort addAsRopedTextTo: aRopedText
+]
+
+{ #category : #converting }
+LzSubsortAxiom >> addConditionAsRopedTextTo: aRopedText [
+]
+
 { #category : #initialization }
 LzSubsortAxiom >> buildTermsFrom: aDictionary [
 	self subsort: ((aDictionary at: #subsort)
@@ -25,8 +37,7 @@ LzSubsortAxiom >> checkConsistency [
 ]
 
 { #category : #printing }
-LzSubsortAxiom >> printAsLeibnizSyntaxOn: aStream [
-	self printVariablesAsLeibnizSyntaxOn: aStream.
+LzSubsortAxiom >> printBodyAsLeibnizSyntaxOn: aStream [
 	aStream nextPut: Character space.
 	subsort printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' ⊆ '.

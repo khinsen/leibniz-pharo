@@ -16,6 +16,16 @@ Class {
 	#category : #'Leibniz2-Rules'
 }
 
+{ #category : #converting }
+LzFunctionRule >> addBodyAsRopedTextTo: aRopedText [
+	pattern addAsRopedTextTo: aRopedText.
+	aRopedText append:
+		(' ⇒ ' asRopedText attribute: LzRewriteArrowAttribute new).
+	aRopedText append: '"' asRopedText.
+	aRopedText append: (code asRopedText attribute: LzPharoCodeAttribute new).
+	aRopedText append: '"' asRopedText
+]
+
 { #category : #rewriting }
 LzFunctionRule >> apply: bindings reducer: aBlock [
 	^ block value: signature value: bindings bindings value: aBlock
@@ -97,7 +107,7 @@ LzFunctionRule >> function: anArray [
 { #category : #printing }
 LzFunctionRule >> printBodyAsLeibnizSyntaxOn: aStream [
 	self pattern printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: ' → '.
+	aStream nextPutAll: ' ⇒ '.
 	self function ifNotNil: [ :f |
 		aStream nextPutAll: ''''.
 		aStream nextPutAll: f first.

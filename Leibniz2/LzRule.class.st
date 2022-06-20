@@ -8,6 +8,14 @@ Class {
 	#category : #'Leibniz2-Rules'
 }
 
+{ #category : #converting }
+LzRule >> addConditionAsRopedTextTo: aRopedText [
+	self condition ifNotNil: [ :c |
+		aRopedText append:
+			(' | ' asRopedText attribute: LzConditionAttribute new).
+		c addAsRopedTextTo: aRopedText ].
+]
+
 { #category : #rewriting }
 LzRule >> apply: bindings reducer: aBlock [
 	self subclassResponsibility

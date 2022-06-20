@@ -24,6 +24,35 @@ LzArity >> <= anArity [
 	^ true
 ]
 
+{ #category : #converting }
+LzArity >> addAsRopedTextTo: aRopedText [
+	self printVariablesAsLeibnizSyntaxOn: aRopedText.
+	aRopedText append:
+		('(' asRopedText attribute: LzParenthesisAttribute new).
+	self
+		do: [ :each | each addAsRopedTextTo: aRopedText ]
+		separatedBy: [ aRopedText append: ', ' asRopedText].
+	aRopedText append:
+		(')' asRopedText attribute: LzParenthesisAttribute new).
+]
+
+{ #category : #converting }
+LzArity >> addVariablesAsRopedTextTo: aRopedText [
+	| addVars vars sortVars |
+	addVars := [ :var :sort |
+		var addAsRopedTextTo: aRopedText.
+		aRopedText append:
+			(':' asRopedText attribute: LzColonAttribute new).
+		sort addAsRopedTextTo: aRopedText.
+		aRopedText append: ', ' asRopedText ].
+	vars := self vars.
+	sortVars := (vars values collect: [ :each | each term vars ])
+					inject: Dictionary new
+					into: [ :total :each | total union: each ].
+	sortVars keysAndValuesDo: addVars.
+	vars keysAndValuesDo: addVars
+]
+
 { #category : #constructing }
 LzArity >> kindArity [
 	| kindArity |

@@ -11,6 +11,41 @@ Class {
 	#category : #'Leibniz2-Infrastructure'
 }
 
+{ #category : #converting }
+LzTermsWithSharedVars >> addAsRopedTextTo: aRopedText [
+	self addVariablesAsRopedTextTo: aRopedText.
+	self addBodyAsRopedTextTo: aRopedText.
+	self addConditionAsRopedTextTo: aRopedText
+]
+
+{ #category : #converting }
+LzTermsWithSharedVars >> addBodyAsRopedTextTo: aRopedText [
+	self subclassResponsibility
+]
+
+{ #category : #converting }
+LzTermsWithSharedVars >> addConditionAsRopedTextTo: aRopedText [
+	self subclassResponsibility
+]
+
+{ #category : #converting }
+LzTermsWithSharedVars >> addVariablesAsRopedTextTo: aRopedText [
+	| addVars |
+	addVars := [ :var :sort |
+		| size |
+		size := aRopedText size.
+		var addAsRopedTextTo: aRopedText.
+		aRopedText append:
+			(':' asRopedText attribute: LzColonAttribute new).
+		sort addAsRopedTextTo:  aRopedText.
+		aRopedText append: ', ' asRopedText.
+		aRopedText
+			attribute: (LzVarDeclarationAttribute new)
+			from: size + 1 to: aRopedText size + 1 ].
+	self sortVariables keysAndValuesDo: addVars.
+	self variables keysAndValuesDo: addVars
+]
+
 { #category : #printing }
 LzTermsWithSharedVars >> printVariablesAsLeibnizSyntaxOn: aStream [
 	| printVars |

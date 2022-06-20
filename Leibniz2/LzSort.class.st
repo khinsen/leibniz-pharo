@@ -31,6 +31,11 @@ LzSort >> <= otherSort [
 			^ false ]
 ]
 
+{ #category : #converting }
+LzSort >> addAsRopedTextTo: aRopedText [
+	self term addAsRopedTextTo: aRopedText
+]
+
 { #category : #unifying }
 LzSort >> addPrefix: aSymbol toVarsConflictingWith: aSort [
 	^ term addPrefix: aSymbol toVarsConflictingWith: aSort term

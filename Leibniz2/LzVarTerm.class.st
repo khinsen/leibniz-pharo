@@ -8,6 +8,11 @@ Class {
 	#category : #'Leibniz2-Terms'
 }
 
+{ #category : #converting }
+LzVarTerm >> addAsRopedTextTo: aRopedText [
+	name addAsRopedTextTo: aRopedText
+]
+
 { #category : #egraphs }
 LzVarTerm >> asENodeIn: anEGraph [
 	self shouldNotImplement

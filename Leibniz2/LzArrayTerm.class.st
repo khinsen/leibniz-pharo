@@ -13,6 +13,32 @@ Class {
 LzArrayTerm class >> signature: aSignature value: anArray [
 ]
 
+{ #category : #converting }
+LzArrayTerm >> addAsRopedTextTo: aRopedText [
+	aRopedText append: '{' asRopedText.
+	self addElementsOf: self elements shape: self shape asRopedTextTo: aRopedText.
+	aRopedText append: '}' asRopedText.
+]
+
+{ #category : #converting }
+LzArrayTerm >> addElementsOf: anArray shape: shapeArray asRopedTextTo: aRopedText [
+	| elementShape elementSize index |
+	elementShape := shapeArray allButFirst.
+	elementSize := elementShape inject: 1 into: [ :product :each | product * each ].
+	index := 1.
+	aRopedText append: '[' asRopedText.
+	1 to: shapeArray first do: [ :each |
+		elementShape
+			ifEmpty: [ (anArray at: index) addAsRopedTextTo: aRopedText ]
+			ifNotEmpty: [
+				self
+					addElementsOf: (anArray copyFrom: index to: index + elementSize - 1)
+					shape: elementShape asRopedTextTo: aRopedText ].
+		index := index + elementSize.
+		index > anArray size ifFalse: [ aRopedText append: ', ' asRopedText ] ].
+	aRopedText append: ']'
+]
+
 { #category : #transforming }
 LzArrayTerm >> append: anArrayTerm [
 	| shapeFirst shapeRest |

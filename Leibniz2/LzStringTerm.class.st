@@ -11,6 +11,18 @@ LzStringTerm >> , otherString [
 		value: self value , otherString value
 ]
 
+{ #category : #converting }
+LzStringTerm >> addAsRopedTextTo: aRopedText [
+	| size |
+	size := aRopedText size.
+	aRopedText append: '"' asRopedText.
+	aRopedText append: value asRopedText.
+	aRopedText append: '"' asRopedText.
+	aRopedText
+		attribute: LzLiteralAttribute new
+		from: size + 1 to: aRopedText size + 1
+]
+
 { #category : #rewriting }
 LzStringTerm >> ensureString [
 ]

@@ -9,6 +9,22 @@ Class {
 	#category : #'Leibniz2-Axioms'
 }
 
+{ #category : #converting }
+LzEqualityAxiom >> addBodyAsRopedTextTo: aRopedText [
+	left addAsRopedTextTo: aRopedText.
+	aRopedText append:
+		(' = ' asRopedText attribute: LzEqualSignAttribute new).
+	right addAsRopedTextTo: aRopedText
+]
+
+{ #category : #converting }
+LzEqualityAxiom >> addConditionAsRopedTextTo: aRopedText [
+	self condition ifNotNil: [ :c |
+		aRopedText append:
+			(' | ' asRopedText attribute: LzConditionAttribute new).
+		c addAsRopedTextTo: aRopedText ].
+]
+
 { #category : #initialization }
 LzEqualityAxiom >> buildTermsFrom: aDictionary [
 	self left: ((aDictionary at: #left)
@@ -54,8 +70,7 @@ LzEqualityAxiom >> patterns [
 ]
 
 { #category : #printing }
-LzEqualityAxiom >> printAsLeibnizSyntaxOn: aStream [
-	self printVariablesAsLeibnizSyntaxOn: aStream.
+LzEqualityAxiom >> printBodyAsLeibnizSyntaxOn: aStream [
 	left printAsLeibnizSyntaxOn: aStream.
 	aStream nextPutAll: ' = '.
 	right printAsLeibnizSyntaxOn: aStream.

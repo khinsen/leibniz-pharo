@@ -9,6 +9,11 @@ Class {
 	#category : #'Leibniz2-Terms'
 }
 
+{ #category : #converting }
+LzOpTerm >> addAsRopedTextTo: aRopedText [
+	opName addForArgs: args asRopedTextTo: aRopedText
+]
+
 { #category : #accessing }
 LzOpTerm >> args [
 	^ args

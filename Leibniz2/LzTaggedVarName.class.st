@@ -26,6 +26,13 @@ LzTaggedVarName >> <= other [
 ]
 
 { #category : #converting }
+LzTaggedVarName >> addAsRopedTextTo: aRopedText [
+	aRopedText append: tag asRopedText.
+	aRopedText append: '.' asRopedText.
+	name addAsRopedTextTo: aRopedText
+]
+
+{ #category : #converting }
 LzTaggedVarName >> asString [
 	^ tag asString, '.', name asString
 ]

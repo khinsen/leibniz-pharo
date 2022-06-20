@@ -20,6 +20,14 @@ LzTermWithNormalForm class >> term: aTerm context: aContext [
 		yourself
 ]
 
+{ #category : #converting }
+LzTermWithNormalForm >> addAsRopedTextTo: aRopedText [
+	term addAsRopedTextTo: aRopedText.
+	aRopedText append:
+		(' ⇒ ' asRopedText attribute: LzRewriteArrowAttribute new).
+	normalForm addAsRopedTextTo: aRopedText.
+]
+
 { #category : #accessing }
 LzTermWithNormalForm >> context [
 	^ context
