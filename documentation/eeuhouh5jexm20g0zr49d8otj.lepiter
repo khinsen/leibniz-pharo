@@ -1,14 +1,6 @@
 {
 	"__schema" : "4.1",
 	"__type" : "page",
-	"uid" : {
-		"__type" : "uuid",
-		"uuid" : "a7201333-f59d-0d00-bc6c-59e8026a71f3"
-	},
-	"pageType" : {
-		"__type" : "namedPage",
-		"title" : "Terms"
-	},
 	"children" : {
 		"__type" : "snippets",
 		"items" : [
@@ -260,7 +252,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T16:35:09.595016+02:00"
+						"dateAndTimeString" : "2022-06-21T09:59:00.806883+02:00"
 					}
 				},
 				"uid" : {
@@ -270,7 +262,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The last kind of term in Leibniz is a *variable*, which looks like an operator term with no argument except that its identifier ends with an underscore, which is not an allowed character in operator identifiers."
+				"string" : "The last kind of term in Leibniz is a *variable*, which looks like an operator term with no argument except that its identifier ends with an underscore, which is not an allowed character in operator identifiers. The underscore is rendered as a low-contrast underline for better readability, e.g. {{lzTerm:var_:s, subcontext = \"example\"}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -480,5 +472,13 @@
 			"__type" : "dateAndTime",
 			"dateAndTimeString" : "2022-06-16T18:52:26.678633+02:00"
 		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Terms"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "a7201333-f59d-0d00-bc6c-59e8026a71f3"
 	}
 }

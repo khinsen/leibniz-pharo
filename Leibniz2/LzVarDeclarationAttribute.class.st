@@ -5,6 +5,7 @@ Class {
 }
 
 { #category : #rendering }
-LzVarDeclarationAttribute >> visualAttributeForColor: aColor [
-	^ BlTextForegroundAttribute new paint: aColor quiteWhiter quiteWhiter
+LzVarDeclarationAttribute >> visualAttributesForColor: aColor [
+	^ { BlTextForegroundAttribute new
+			paint: aColor quiteWhiter quiteWhiter }
 ]

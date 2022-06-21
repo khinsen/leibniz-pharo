@@ -34,20 +34,16 @@ TLzPrintable >> asLeibnizSyntaxString [
 
 { #category : #converting }
 TLzPrintable >> asRopedText [
-	| text |
-	text := '' asRopedText .
-	self addAsRopedTextTo: text.
-	^ text
+	^ LzCodeFont textFrom: [ :t |
+		self addAsRopedTextTo: t ]
 ]
 
 { #category : #converting }
 TLzPrintable >> asRopedTextColored: aColor [
 	| text |
-[
 	text := self asRopedText.
 	LzTextRenderer new
 		render: text baseColor: aColor.
-] on: Exception do: [ :ex | ex debug ].
 	^ text
 ]
 

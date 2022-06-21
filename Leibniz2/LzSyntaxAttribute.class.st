@@ -5,6 +5,6 @@ Class {
 }
 
 { #category : #rendering }
-LzSyntaxAttribute >> visualAttributeForColor: aColor [
-	^ nil
+LzSyntaxAttribute >> visualAttributesForColor: aColor [
+	^ #()
 ]

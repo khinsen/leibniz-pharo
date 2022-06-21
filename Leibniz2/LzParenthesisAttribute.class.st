@@ -5,6 +5,7 @@ Class {
 }
 
 { #category : #rendering }
-LzParenthesisAttribute >> visualAttributeForColor: aColor [
-	^ BlTextForegroundAttribute new paint: aColor darker
+LzParenthesisAttribute >> visualAttributesForColor: aColor [
+	^ { BlTextForegroundAttribute new
+			paint: aColor darker }
 ]

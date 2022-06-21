@@ -13,8 +13,13 @@ LzVarName class >> for: aStringOrSymbol [
 
 { #category : #converting }
 LzVarName >> addAsRopedTextTo: aRopedText [
-	aRopedText append:
-		(internalSymbol asRopedText attribute: LzVarNameAttribute new)
+	| text |
+	text := internalSymbol asRopedText
+		attribute: LzVarNameAttribute new.
+	text
+		attribute: LzVarNameTrailingUnderscoreAttribute new
+		from: text size to: text size + 1.
+	aRopedText append: text
 ]
 
 { #category : #converting }

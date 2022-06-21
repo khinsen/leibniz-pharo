@@ -5,6 +5,7 @@ Class {
 }
 
 { #category : #rendering }
-LzInfixOpNameAttribute >> visualAttributeForColor: aColor [
-	^ BlTextForegroundAttribute new paint: aColor darker
+LzInfixOpNameAttribute >> visualAttributesForColor: aColor [
+	^ { BlTextForegroundAttribute new
+			paint: aColor darker }
 ]

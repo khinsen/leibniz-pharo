@@ -5,6 +5,9 @@ Class {
 }
 
 { #category : #rendering }
-LzVarNameAttribute >> visualAttributeForColor: aColor [
-	^ BlFontItalicAttribute new
+LzVarNameAttribute >> visualAttributesForColor: aColor [
+	^ { "BlFontItalicAttribute new."
+		BlTextDecorationAttribute new
+			underline
+			color: aColor quiteWhiter quiteWhiter }
 ]
