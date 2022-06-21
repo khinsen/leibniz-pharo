@@ -10,16 +10,19 @@ LzPrefixOpName class >> for: aStringOrSymbol [
 ]
 
 { #category : #printing }
-LzPrefixOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText [
+LzPrefixOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText argAttributes: anArrayOfAttributes [
 	aRopedText append:
 		(internalSymbol asRopedText attribute: LzPrefixOpNameAttribute new).
 	anArrayOfTerms ifNotEmpty: [
-		aRopedText append: ('(' asRopedText attribute: LzParenthesisAttribute new).
-		anArrayOfTerms allButLastDo: [ :each |
-			each addAsRopedTextTo: aRopedText.
-			aRopedText append: ', ' asRopedText].
-		anArrayOfTerms last addAsRopedTextTo: aRopedText.
-		aRopedText append: (')' asRopedText attribute: LzParenthesisAttribute new) ]
+		aRopedText append: '(' asRopedText.
+		anArrayOfAttributes
+			do: [ :each |
+				self
+					do: [ :t | each addAsRopedTextTo: t ]
+					to: aRopedText
+					withAttributes: anArrayOfAttributes ]
+			separatedBy: [ aRopedText append: ', ' asRopedText ].
+		aRopedText append: ')' asRopedText ]
 ]
 
 { #category : #printing }

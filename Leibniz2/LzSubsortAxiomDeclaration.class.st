@@ -10,10 +10,16 @@ Class {
 
 { #category : #converting }
 LzSubsortAxiomDeclaration >> addBodyAsRopedTextTo: aRopedText [
-	subsort addAsRopedTextTo: aRopedText.
+	self
+		do: [ :t | subsort addAsRopedTextTo: t ]
+		to: aRopedText
+		withAttribute: LzSortAttribute new.
 	aRopedText append:
 		(' ⊆ ' asRopedText attribute: LzSubsortAttribute new).
-	supersort addAsRopedTextTo: aRopedText
+	self
+		do: [ :t | supersort addAsRopedTextTo: t ]
+		to: aRopedText
+		withAttribute: LzSortAttribute new
 ]
 
 { #category : #accessing }

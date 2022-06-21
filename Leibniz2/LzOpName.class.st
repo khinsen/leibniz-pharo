@@ -1,8 +1,8 @@
 Class {
 	#name : #LzOpName,
 	#superclass : #Object,
-	#traits : 'TLzEquality',
-	#classTraits : 'TLzEquality classTrait',
+	#traits : 'TLzEquality + TLzPrintable',
+	#classTraits : 'TLzEquality classTrait + TLzPrintable classTrait',
 	#instVars : [
 		'internalSymbol'
 	],
@@ -16,12 +16,23 @@ LzOpName >> <= opName [
 
 { #category : #converting }
 LzOpName >> addForArgs: aTermArray asRopedTextTo: aRopedText [
+	self
+		addForArgs: aTermArray
+		asRopedTextTo: aRopedText
+		argAttributes: #()
+]
+
+{ #category : #converting }
+LzOpName >> addForArgs: aTermArray asRopedTextTo: aRopedText argAttributes: anArray [
 	self subclassResponsibility
 ]
 
 { #category : #converting }
 LzOpName >> addForArity: anArity asRopedTextTo: aRopedText [
-	self addForArgs: anArity asRopedTextTo: aRopedText
+	self
+		addForArgs: anArity
+		asRopedTextTo: aRopedText
+		argAttributes: { LzSortAttribute new }
 ]
 
 { #category : #converting }
@@ -29,7 +40,10 @@ LzOpName >> addForArity: anArity withSort: aSort asRopedTextTo: aRopedText [
 	self addForArity: anArity asRopedTextTo: aRopedText.
 	aRopedText append:
 		(' : ' asRopedText attribute: LzColonAttribute new).
-	aSort addAsRopedTextTo: aRopedText.
+	self
+		do: [ :t |  aSort addAsRopedTextTo: t ]
+		to: aRopedText
+		withAttribute: LzSortAttribute new
 ]
 
 { #category : #modifying }

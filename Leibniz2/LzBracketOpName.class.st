@@ -5,16 +5,23 @@ Class {
 }
 
 { #category : #converting }
-LzBracketOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText [
+LzBracketOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText argAttributes: anArrayOfAttributes [
 	self assert: anArrayOfTerms size > 1.
-	anArrayOfTerms first
-		addAsRopedTextTo: aRopedText
-		parenthesized: anArrayOfTerms first isInfix.
+	self
+		do: [ :t |
+			anArrayOfTerms first
+				addAsRopedTextTo: t
+				parenthesized: anArrayOfTerms first isInfix ]
+		to: aRopedText
+		withAttributes: anArrayOfAttributes.
 	aRopedText append: '[' asRopedText.
-	anArrayOfTerms allButFirst allButLast do: [ : each |
-		each addAsRopedTextTo: aRopedText.
-		aRopedText append: ', ' asRopedText].
-	anArrayOfTerms last addAsRopedTextTo: aRopedText.
+	anArrayOfTerms allButFirst
+		do: [ : each |
+			self
+				do: [ :t | each addAsRopedTextTo: t ]
+				to: aRopedText
+				withAttributes: anArrayOfAttributes ]
+		separatedBy: [ aRopedText append: ', ' asRopedText ].
 	aRopedText append: ']' asRopedText
 ]
 

@@ -10,18 +10,26 @@ LzInfixOpName class >> for: aStringOrSymbol [
 ]
 
 { #category : #converting }
-LzInfixOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText [
+LzInfixOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText argAttributes: anArrayOfAttributes [
 	self assert: anArrayOfTerms size equals: 2.
-	anArrayOfTerms first
-		addAsFirstArgOfInfixTermWithOpName: self
-		asRopedTextTo: aRopedText.
+	self
+		do: [ :t |
+			anArrayOfTerms first
+				addAsFirstArgOfInfixTermWithOpName: self
+				asRopedTextTo: t ]
+		to: aRopedText
+		withAttributes: anArrayOfAttributes.
 	aRopedText append: ' ' asRopedText.
 	aRopedText append:
 		(internalSymbol allButFirst asRopedText attribute: LzInfixOpNameAttribute new).
 	aRopedText append:  ' ' asRopedText.
-	anArrayOfTerms second
-		addAsRopedTextTo: aRopedText
-		parenthesized: anArrayOfTerms second isInfix
+	self
+		do: [ :t |
+			anArrayOfTerms second
+				addAsRopedTextTo: t
+				parenthesized: anArrayOfTerms second isInfix ]
+		to: aRopedText
+		withAttributes: anArrayOfAttributes
 ]
 
 { #category : #testing }

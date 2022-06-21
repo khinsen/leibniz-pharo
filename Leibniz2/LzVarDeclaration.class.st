@@ -22,7 +22,10 @@ LzVarDeclaration >> addAsRopedTextTo: aRopedText [
 			name addAsRopedTextTo: t.
 			t append:
 				(':' asRopedText attribute: LzColonAttribute new).
-			sort addAsRopedTextTo: t ]
+			self
+				do: [ :tt | sort addAsRopedTextTo: tt ]
+				to: t
+				withAttribute: LzSortAttribute new ]
 		to: aRopedText
 		withAttribute: LzVarDeclarationAttribute new
 ]

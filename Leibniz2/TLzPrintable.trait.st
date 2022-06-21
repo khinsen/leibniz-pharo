@@ -49,12 +49,18 @@ TLzPrintable >> asRopedTextColored: aColor [
 
 { #category : #converting }
 TLzPrintable >> do: aBlock to: aRopedText withAttribute: aBlTextAttribute [
+	self do: aBlock to: aRopedText withAttributes: { aBlTextAttribute }
+]
+
+{ #category : #converting }
+TLzPrintable >> do: aBlock to: aRopedText withAttributes: anArrayOfAttributes [
 	| size |
 	size := aRopedText size.
 	aBlock value: aRopedText.
-	aRopedText
-		attribute: aBlTextAttribute
-		from: size + 1 to: aRopedText size + 1
+	anArrayOfAttributes ifNotEmpty: [
+		aRopedText
+			attributes: anArrayOfAttributes
+			from: size + 1 to: aRopedText size + 1 ]
 ]
 
 { #category : #inspecting }

@@ -10,7 +10,10 @@ Class {
 { #category : #converting }
 LzSortDeclaration >> addAsRopedTextTo: aRopedText [
 	op addVariablesAsRopedTextTo: aRopedText.
-	op name addForArity: op args asRopedTextTo: aRopedText
+	self
+		do: [ :t | op name addForArity: op args asRopedTextTo: t ]
+		to: aRopedText
+		withAttribute: LzSortAttribute new
 ]
 
 { #category : #accessing }

@@ -15,7 +15,10 @@ LzVarTermDeclaration >> addAsRopedTextTo: aRopedText [
 		self
 			do: [ :t |
 				t append: ':' asRopedText.
-				self sort addAsRopedTextTo: t ]
+				self
+					do: [ :tt | self sort addAsRopedTextTo: tt ]
+					to: t
+					withAttribute: LzSortAttribute new ]
 			to: aRopedText
 			withAttribute: LzVarDeclarationAttribute new ]
 ]
