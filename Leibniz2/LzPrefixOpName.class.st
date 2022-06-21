@@ -15,7 +15,7 @@ LzPrefixOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText argAttrib
 		(internalSymbol asRopedText attribute: LzPrefixOpNameAttribute new).
 	anArrayOfTerms ifNotEmpty: [
 		aRopedText append: '(' asRopedText.
-		anArrayOfAttributes
+		anArrayOfTerms
 			do: [ :each |
 				self
 					do: [ :t | each addAsRopedTextTo: t ]
