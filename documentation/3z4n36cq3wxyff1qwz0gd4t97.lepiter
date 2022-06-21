@@ -309,6 +309,43 @@
 											"__type" : "textStyle"
 										},
 										"string" : "Important special cases are:\n\t{{lzOp:ℝ.p + ℝ.p : ℝ.p}}\n\t{{lzOp:ℝ.nn + ℝ.nn : ℝ.nn}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-06-21T10:04:06.597201+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-06-21T10:04:33.233615+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "9eu9ZlKeDQCH9paFDhVFug=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Addition is commutative:\n\t{{lzAxiom:x_:ℝ, y_:ℝ, x_ + y_ = y_ + x_}}\nand associative:\n\t{{lzAxiom:x_:ℝ, y_:ℝ, z_:ℝ, (x_ + y_) + z_ = x_ + (y_ + z_)}}"
 									}
 								]
 							},
@@ -533,6 +570,80 @@
 											"__type" : "textStyle"
 										},
 										"string" : "Important special cases are:\n\t{{lzOp:ℝ.p × ℝ.p : ℝ.p}}\n\t{{lzOp:ℝ.nn × ℝ.nn : ℝ.nn}}\n\t{{lzOp:ℝ.nz × ℝ.nz : ℝ.nz}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-06-21T10:05:10.315063+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-06-21T10:05:49.826475+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "NeyRalKeDQCH9wynDhVFug=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Multiplication is commutative:\n\t{{lzAxiom:x_:ℝ, y_:ℝ, x_ × y_ = y_ × x_}}\nand associative:\n\t{{lzAxiom:x_:ℝ, y_:ℝ, z_:ℝ,  (x_ × y_) × z_ = x_ × (y_ × z_)}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-06-21T10:06:28.395236+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-06-21T10:06:39.27586+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "0Wg5b1KeDQCH+NxnDhVFug=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:x_:ℝ, y_:ℝ, z_:ℝ,  x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)}}"
 									}
 								]
 							},
