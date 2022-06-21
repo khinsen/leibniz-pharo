@@ -4,14 +4,25 @@ Class {
 	#instVars : [
 		'sort',
 		'args',
-		'name'
+		'name',
+		'argNames'
 	],
 	#category : #'Leibniz2-Declarations'
 }
 
 { #category : #converting }
-LzOpDeclaration >> addAsRopedTextTo: aRopedText [
+LzOpDeclaration >> addBodyAsRopedTextTo: aRopedText [
 	self name addForArity: args withSort: self sort asRopedTextTo: aRopedText
+]
+
+{ #category : #accessing }
+LzOpDeclaration >> argNames [
+	^ argNames
+]
+
+{ #category : #accessing }
+LzOpDeclaration >> argNames: anArray [
+	argNames := anArray
 ]
 
 { #category : #accessing }

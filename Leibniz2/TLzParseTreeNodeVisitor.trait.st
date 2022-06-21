@@ -56,6 +56,11 @@ TLzParseTreeNodeVisitor >> visitOp: anOp [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitOpArg: anOpArg [
+	^ self visitParseTree: anOpArg
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitOption: anOption [
 	^ self visitParseTree: anOption
 ]
@@ -83,6 +88,11 @@ TLzParseTreeNodeVisitor >> visitPrefixOpTerm: aPrefixOpTerm [
 { #category : #generated }
 TLzParseTreeNodeVisitor >> visitRationalNumberLiteralTerm: aRationalNumberLiteralTerm [
 	^ self visitLiteralTerm: aRationalNumberLiteralTerm
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitSimpleOpArg: aSimpleOpArg [
+	^ self visitOpArg: aSimpleOpArg
 ]
 
 { #category : #generated }

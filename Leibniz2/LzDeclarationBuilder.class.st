@@ -203,7 +203,9 @@ LzDeclarationBuilder >> visitTopLevelOp: aTopLevelOp [
 	aTopLevelOp op args
 		ifNotNil: [ :args | varBuilder acceptNodes: args ].
 	op := self acceptNode: aTopLevelOp op.
-	op args: (aTopLevelOp op args collect: [ :each | self acceptNode: each ]).
+	op args: (aTopLevelOp op args collect: [ :each | self acceptNode: each sort ]).
+	op argNames: (aTopLevelOp op args collect: [ :each |
+		each name ifNotNil: [ :n | n value asSymbol ] ]).
 	op sort: (self acceptNode: aTopLevelOp sort).
 	op variables: varBuilder vars.
 	^ self annotate: op from: aTopLevelOp booleanOptions: #(example)
@@ -237,7 +239,9 @@ LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
 	aTopLevelSort op args
 		ifNotNil: [ :args | varBuilder acceptNodes: args ].
 	op := self acceptNode: aTopLevelSort op.
-	op args: (aTopLevelSort op args collect: [ :each | self acceptNode: each ]).
+	op args: (aTopLevelSort op args collect: [ :each | self acceptNode: each sort ]).
+	op argNames: (aTopLevelSort op args collect: [ :each |
+		each name ifNotNil: [ :n | n value asSymbol ] ]).
 	op variables: varBuilder vars.
 	^ self
 		annotate: (LzSortDeclaration new op: op)
