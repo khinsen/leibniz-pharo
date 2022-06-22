@@ -20,6 +20,30 @@ LzDeclarationBuilder >> arrayElementsFor: anArray [
 ]
 
 { #category : #private }
+LzDeclarationBuilder >> opDeclarationFor: aTopLevelOpOrSort [
+	| varBuilder op |
+	varBuilder := LzVarDeclarationBuilder new.
+	aTopLevelOpOrSort vars
+		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
+	aTopLevelOpOrSort op args
+		ifNotNil: [ :args | varBuilder acceptNodes: args ].
+	op := self acceptNode: aTopLevelOpOrSort op.
+	op args: (aTopLevelOpOrSort op args collect: [ :each |
+		| sort |
+		sort := self acceptNode: each sort.
+		each name ifNotNil: [ :name |
+			sort := LzArgNameAnnotation new
+				name: name value asSymbol;
+				declaration: sort ].
+		sort ]).
+"	op args: (aTopLevelOp op args collect: [ :each | self acceptNode: each sort ]).
+	op argNames: (aTopLevelOp op args collect: [ :each |
+		each name ifNotNil: [ :n | n value asSymbol ] ])."
+	op variables: varBuilder vars.
+	^ op
+]
+
+{ #category : #private }
 LzDeclarationBuilder >> parseOptions: aTopLevelAnnotation [
 	^ (aTopLevelAnnotation options collect: [ :each |
 		| key value |
@@ -196,19 +220,13 @@ LzDeclarationBuilder >> visitTopLevelFunctionRule: aTopLevelFunctionRule [
 
 { #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelOp: aTopLevelOp [
-	| varBuilder op |
-	varBuilder := LzVarDeclarationBuilder new.
-	aTopLevelOp vars
-		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
-	aTopLevelOp op args
-		ifNotNil: [ :args | varBuilder acceptNodes: args ].
-	op := self acceptNode: aTopLevelOp op.
-	op args: (aTopLevelOp op args collect: [ :each | self acceptNode: each sort ]).
-	op argNames: (aTopLevelOp op args collect: [ :each |
-		each name ifNotNil: [ :n | n value asSymbol ] ]).
+	| op |
+	op := self opDeclarationFor: aTopLevelOp.
 	op sort: (self acceptNode: aTopLevelOp sort).
-	op variables: varBuilder vars.
-	^ self annotate: op from: aTopLevelOp booleanOptions: #(example)
+	^ self
+		annotate: op
+		from: aTopLevelOp
+		booleanOptions: #(example)
 ]
 
 { #category : #'visiting - toplevel' }
@@ -232,17 +250,8 @@ LzDeclarationBuilder >> visitTopLevelRewriteRule: aTopLevelRewriteRule [
 
 { #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelSort: aTopLevelSort [
-	| varBuilder op |
-	varBuilder := LzVarDeclarationBuilder new.
-	aTopLevelSort vars
-		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
-	aTopLevelSort op args
-		ifNotNil: [ :args | varBuilder acceptNodes: args ].
-	op := self acceptNode: aTopLevelSort op.
-	op args: (aTopLevelSort op args collect: [ :each | self acceptNode: each sort ]).
-	op argNames: (aTopLevelSort op args collect: [ :each |
-		each name ifNotNil: [ :n | n value asSymbol ] ]).
-	op variables: varBuilder vars.
+	| op |
+	op := self opDeclarationFor: aTopLevelSort.
 	^ self
 		annotate: (LzSortDeclaration new op: op)
 		from: aTopLevelSort

@@ -27,9 +27,9 @@ LzOperators >> addOp: anASTOpNode [
 ]
 
 { #category : #defining }
-LzOperators >> findOp: anASTOpNode [
+LzOperators >> findOp: anOpDeclaration [
 	| opParams |
-	opParams := self preprocessOp: anASTOpNode.
+	opParams := self preprocessOp: anOpDeclaration.
 	^ opTable at: { opParams first. opParams second kindArity }
 ]
 
@@ -132,20 +132,20 @@ LzOperators >> opsOfKind: aKind [
 ]
 
 { #category : #defining }
-LzOperators >> preprocessOp: anASTOpNode [
+LzOperators >> preprocessOp: anOpDeclaration [
 	| vars argSorts valueSort key op |
 	vars := self sortGraph sortContext signature
-				parsedVariables: anASTOpNode variables.
-	argSorts := LzArity new: anASTOpNode args size.
+				parsedVariables: anOpDeclaration variables.
+	argSorts := LzArity new: anOpDeclaration args size.
 	1 to: argSorts size do: [ :index |
 		argSorts at: index put:
 			(self sortGraph
-			parsedSort: (anASTOpNode args at: index)
+			parsedSort: (anOpDeclaration args at: index) declaration
 			variables: vars) ].
 	valueSort := self sortGraph
-		parsedSort: anASTOpNode sort
+		parsedSort: anOpDeclaration sort
 		variables: vars.
-	^ { anASTOpNode name. argSorts. valueSort }
+	^ { anOpDeclaration name. argSorts. valueSort }
 ]
 
 { #category : #accessing }

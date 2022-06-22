@@ -123,8 +123,8 @@ LzSortGraph >> directSupersortsOf: aSortTerm [
 ]
 
 { #category : #initializing }
-LzSortGraph >> familyForParsedOp: anASTOpNode [
-	^ sortFamilies at: (sortContext signature operators findOp: anASTOpNode)
+LzSortGraph >> familyForParsedOp: anOpDeclaration [
+	^ sortFamilies at: (sortContext signature operators findOp: anOpDeclaration)
 ]
 
 { #category : #initializing }
