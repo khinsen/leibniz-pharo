@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-21T18:40:00.85287+02:00"
+						"dateAndTimeString" : "2022-06-22T15:26:35.038761+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-22T15:53:47.154113+02:00"
+						"dateAndTimeString" : "2022-06-22T15:28:52.579344+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "Z+c3mlmeDQCprwtdDFxIrA=="
+					"uidString" : "bjW/BWueDQCj6CSHAMOqwA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Heron’s algorithm, described in the 1st century CE by Heron of Alexandria, computes the square root of an input number iteratively, starting from an initial estimate, until the result is correct within a given tolerance. It is a special case of Newton’s method for finding roots of algebraic equations."
+				"string" : "Uses {{lzUseContext:name = \"Real numbers\"}}, {{lzUseContext:name = \"Functions of one variable\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-21T18:46:07.713783+02:00"
+						"dateAndTimeString" : "2022-06-22T15:30:59.801093+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +66,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-22T15:50:58.566753+02:00"
+						"dateAndTimeString" : "2022-06-22T15:49:31.865431+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "e72hsVmeDQCptl9FDFxIrA=="
+					"uidString" : "ELWeFWueDQCj7/nPAMOqwA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Real numbers\"}}, {{lzUseContext:name = \"Absolute value\"}}"
+				"string" : "The absolute value of any real number is a non-negative real number:\n\t{{lzOp:abs(ℝ) : ℝ.nn}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-21T18:44:28.181235+02:00"
+						"dateAndTimeString" : "2022-06-22T15:35:27.864886+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-21T20:34:39.575962+02:00"
+						"dateAndTimeString" : "2022-06-22T15:49:34.260622+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "QG22q1meDQCpsfnkDFxIrA=="
+					"uidString" : "Tu3PIGueDQCj8kzeAMOqwA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Let {{lzOp:heron(x:ℝ.nn, ε:ℝ.p, e:ℝ.nn) : ℝ.nn}} be the result of Heron’s algorithm for computing the square root of x up to tolerance ε, starting from estimate e."
+				"string" : "Special cases for the rational numbers and the integers:\n\t{{lzOp:abs(ℚ) : ℚ.nn}}\n\t{{lzOp:abs(ℤ) : ℕ}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-21T20:36:14.362561+02:00"
+						"dateAndTimeString" : "2022-06-22T15:38:29.933749+02:00"
 					}
 				},
 				"editEmail" : {
@@ -140,17 +140,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-22T15:51:44.363929+02:00"
+						"dateAndTimeString" : "2022-06-22T15:40:35.139867+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "Bj5uO1ueDQC5M6kWDUJpkQ=="
+					"uidString" : "CX0hL2ueDQCj9AyqAMOqwA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The first step of the algorithm is to check if the current estimate is good enough, in which case it is the final result:\n\t{{lzRule:heron(x_:ℝ.nn, ε_:ℝ.p, e_:ℝ.nn) ⇒ e | abs(x_ - e_^(2)) < ε_}}"
+				"string" : "Special cases for the non-zero numbers are also useful:\n\t{{lzOp:abs(ℝ.nz): ℝ.p}}\n\t{{lzOp:abs(ℚ.nz): ℚ.p}}\n\t{{lzOp:abs(ℤ.nz) : ℕ.nz}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -166,7 +166,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-21T20:39:51.94413+02:00"
+						"dateAndTimeString" : "2022-06-22T15:43:26.226007+02:00"
 					}
 				},
 				"editEmail" : {
@@ -177,17 +177,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-21T20:40:07.190156+02:00"
+						"dateAndTimeString" : "2022-06-22T15:46:29.839848+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "5ErKRlueDQC5NcbbDUJpkQ=="
+					"uidString" : "5QILQWueDQCj+MWYAMOqwA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Note that the tolerance applies to x and not to √(x)."
+				"string" : "The absolute value of a non-negative number is the number itself. For a negative number, it is the negative:\n\t{{lzRule:abs(x_:ℝ.nn) ⇒ x_}}\n\t{{lzRule:abs(x_:ℝ) ⇒ -(x_)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -203,7 +203,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-21T20:40:16.701307+02:00"
+						"dateAndTimeString" : "2022-06-22T15:47:31.628954+02:00"
 					}
 				},
 				"editEmail" : {
@@ -214,17 +214,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-21T20:46:06.564248+02:00"
+						"dateAndTimeString" : "2022-06-22T15:48:18.445614+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "sTNvSVueDQC5N7ovDUJpkQ=="
+					"uidString" : "aJ90UGueDQCj+r9PAMOqwA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Otherwise, a new estimate is computed by taking the average of e and x ÷ e:\n\t{{lzRule:heron(x_:ℝ.nn, ε_:ℝ.p, e_:ℝ.nn) ⇒ heron(x_, ε_, 1/2 × (e + (x ÷ e)))}}"
+				"string" : "It is often useful to have a function term for the absolute value as well:\n\t{{lzOp:abs:fn(ℝ, ℝ.nn)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -240,7 +240,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-21T20:44:13.562544+02:00"
+						"dateAndTimeString" : "2022-06-22T15:41:23.581086+02:00"
 					}
 				},
 				"editEmail" : {
@@ -251,17 +251,54 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-22T15:52:53.328278+02:00"
+						"dateAndTimeString" : "2022-06-22T15:48:52.250999+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "hnoCV1ueDQC5O+k2DUJpkQ=="
+					"uidString" : "ApjIOmueDQCj9l/XAMOqwA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For convenience, we also allow no initial estimate to be supplied, using a default value of 1:\n\t{{lzOp:heron(x:ℝ.nn, ε:ℝ.p) : ℝ.nn}}\n\t{{lzRule:heron(x_:ℝ.nn, ε_:ℝ.p) ⇒ heron(x_, ε_, 1)}}\nThe algorithm will always converge starting from 1, but an explicit better estimate makes it converge faster."
+				"string" : "It is replaced by the equivalent operator:\n\t{{lzRule:abs[x_:ℝ] ⇒ abs(x_)}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-22T15:48:22.073528+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-22T15:48:22.073528+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "MRXQU2ueDQCj/MKzAMOqwA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : ""
 			}
 		]
 	},
@@ -273,7 +310,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-06-21T18:39:33.799325+02:00"
+			"dateAndTimeString" : "2022-06-22T15:26:32.250985+02:00"
 		}
 	},
 	"editEmail" : {
@@ -284,15 +321,15 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-06-21T18:39:33.799325+02:00"
+			"dateAndTimeString" : "2022-06-22T15:26:32.250985+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Heron's algorithm for computing square roots"
+		"title" : "Absolute value"
 	},
 	"uid" : {
 		"__type" : "uuid",
-		"uuid" : "e7cc369a-599e-0d00-a9ae-d97e0c5c48ac"
+		"uuid" : "91c5bd05-6b9e-0d00-a3e7-b76800c3aac0"
 	}
 }

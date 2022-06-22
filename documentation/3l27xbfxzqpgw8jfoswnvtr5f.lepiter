@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-10T18:27:35.040842+02:00"
+						"dateAndTimeString" : "2022-06-22T15:24:19.275474+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A function is defined by an operator of sort\n\t{{lzSort:fn(𝕊, 𝕊)}},\nwhere the first argument defines the domain sort and the second argument the image sort."
+				"string" : "A function is defined by an operator of sort\n\t{{lzSort:fn(domain:𝕊, image:𝕊)}}"
 			},
 			{
 				"__type" : "textSnippet",

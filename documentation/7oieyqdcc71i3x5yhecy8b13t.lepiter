@@ -171,6 +171,43 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-22T15:22:10.391247+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-22T15:22:33.639769+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "xL3M9WqeDQCj2iv6AMOqwA=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Functions:\n\t[[Functions of one variable]]"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
 									"dateAndTimeString" : "2022-06-16T16:08:35.913694+02:00"
 								}
 							},
@@ -283,7 +320,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-16T16:10:01.812853+02:00"
+									"dateAndTimeString" : "2022-06-22T15:26:18.669353+02:00"
 								}
 							},
 							"editEmail" : {
@@ -294,17 +331,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-16T16:10:09.24926+02:00"
+									"dateAndTimeString" : "2022-06-22T15:26:28.661006+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "Fzly7fKdDQC5hGa5Awzf3Q=="
+								"uidString" : "mpkrBGueDQCj5RiNAMOqwA=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Functions:\n\t[[Functions of one variable]]"
+							"string" : "Functions:\n\t[[Absolute value]]"
 						}
 					]
 				},
@@ -316,7 +353,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-16T16:09:29.177543+02:00"
+						"dateAndTimeString" : "2022-06-22T15:25:20.291253+02:00"
 					}
 				},
 				"editEmail" : {
@@ -327,17 +364,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-16T16:09:42.483787+02:00"
+						"dateAndTimeString" : "2022-06-22T15:26:04.560397+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "5+XT6/KdDQC5gbZyAwzf3Q=="
+					"uidString" : "91qpAGueDQCj5M8LAMOqwA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "### Basic mathematical concepts"
+				"string" : "### Mathematics"
 			},
 			{
 				"__type" : "textSnippet",
