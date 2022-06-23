@@ -251,7 +251,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-22T16:11:20.179618+02:00"
+						"dateAndTimeString" : "2022-06-22T18:58:32.246188+02:00"
 					}
 				},
 				"uid" : {
@@ -261,7 +261,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For convenience, we also allow no initial estimate to be supplied, using a default value of 1:\n\t{{lzOp:heron(x:ℝ.nn, ε:ℝ.p) : ℝ.nn}}\n\t{{lzRule:heron(x_:ℝ.nn, ε_:ℝ.p) ⇒ heron(x_, ε_, 1)}}\nThe algorithm will always converge starting from 1, because 1 ≤ √(x) < x. However, a better initial estimate makes it converge faster."
+				"string" : "For convenience, we also allow no initial estimate to be supplied, using a default value of 1:\n\t{{lzOp:heron(x:ℝ.nn, ε:ℝ.p) : ℝ.nn}}\n\t{{lzRule:heron(x_:ℝ.nn, ε_:ℝ.p) ⇒ heron(x_, ε_, 1)}}\nThe algorithm will always converge starting from 1, because √(x) is always in the interval [1..x] (x > 1) or [x..1] (x < 1). However, a better initial estimate makes it converge faster."
 			}
 		]
 	},

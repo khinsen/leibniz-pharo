@@ -166,7 +166,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-22T15:43:26.226007+02:00"
+						"dateAndTimeString" : "2022-06-23T10:39:42.860723+02:00"
 					}
 				},
 				"editEmail" : {
@@ -177,17 +177,128 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-22T15:46:29.839848+02:00"
+						"dateAndTimeString" : "2022-06-23T10:39:55.958633+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "5QILQWueDQCj+MWYAMOqwA=="
+					"uidString" : "jCPAIXueDQCNZLLbAHwM1w=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The absolute value of a non-negative number is the number itself. For a negative number, it is the negative:\n\t{{lzRule:abs(x_:ℝ.nn) ⇒ x_}}\n\t{{lzRule:abs(x_:ℝ) ⇒ -(x_)}}"
+				"string" : "### Simplification rules"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-23T10:35:20.802313+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-23T10:35:29.330836+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "w+ozEnueDQCNXeWZAHwM1w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The absolute value of a non-negative number is the number itself:\n\t{{lzRule:abs(x_:ℝ.nn) ⇒ x_}}\n\t{{lzRule:abs(x_:ℝ) ⇒ x_ | x_ ≥ 0}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-23T10:34:15.979177+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-23T10:38:20.841133+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "6NtWDnueDQCNWr8XAHwM1w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "For a negative number, it is the negative:\n\t{{lzRule:abs(x_:ℝ) ⇒ -(x_) | x_ < 0}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-23T10:38:33.335+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-23T10:39:02.188118+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "oyR9HXueDQCNYrkeAHwM1w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "### Absolute value as a function term "
 			},
 			{
 				"__type" : "textSnippet",
@@ -214,7 +325,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-22T15:48:18.445614+02:00"
+						"dateAndTimeString" : "2022-06-23T10:39:28.129892+02:00"
 					}
 				},
 				"uid" : {
@@ -224,7 +335,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "It is often useful to have a function term for the absolute value as well:\n\t{{lzOp:abs:fn(ℝ, ℝ.nn)}}"
+				"string" : "It is often useful to have a function term (see {{lzUseContext:name = \"Functions of one variable\"}}) for the absolute value as well:\n\t{{lzOp:abs:fn(ℝ, ℝ.nn)}}"
 			},
 			{
 				"__type" : "textSnippet",
