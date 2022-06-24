@@ -331,7 +331,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-22T15:26:28.661006+02:00"
+									"dateAndTimeString" : "2022-06-24T12:23:49.733965+02:00"
 								}
 							},
 							"uid" : {
@@ -341,7 +341,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Functions:\n\t[[Absolute value]]"
+							"string" : "Functions:\n\t[[Absolute value]], [[Absolute value function]]"
 						}
 					]
 				},
