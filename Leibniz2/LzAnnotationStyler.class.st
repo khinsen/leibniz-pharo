@@ -255,20 +255,29 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 
 	color := LzColors exampleColor.
 	text := [
+		| output |
 		object := LzObjectBuilder new
 			contextPageName: self page title;
 			acceptNode: aTopLevelTermAnnotation.
 		annotatedDeclaration := object first.
 		term := object second.
+		output := annotatedDeclaration asRopedTextColored: color.
 		(annotatedDeclaration optionsAt: #withSort)
 			ifTrue: [
 				| value colon sort |
 				value := annotatedDeclaration asRopedTextColored: color.
 				colon := ' : ' asRopedText foreground: color lzDeemphasized.
 				sort := term sort asRopedTextColored: color lzDeemphasized.
-				value, colon, sort ]
-			ifFalse: [ annotatedDeclaration asRopedTextColored: color ].
-	 ] on: Exception do: [ :ex |
+				output append: colon.
+				output append: sort ].
+		(annotatedDeclaration optionsAt: #withNormalForm)
+			ifTrue: [
+				| normalForm |
+				normalForm := term normalForm asRopedTextColored: color.
+				output append: (' ⇒ ' asRopedText foreground: color).
+				output append: normalForm ].
+		output
+	] on: Exception do: [ :ex |
 	 	ex debug.
 	 	ex return: (ex printString asRopedText foreground: Color red) ].
 
