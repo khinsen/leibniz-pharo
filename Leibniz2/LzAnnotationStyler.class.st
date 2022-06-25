@@ -129,7 +129,7 @@ LzAnnotationStyler >> styleObjectButton: anLzAnnotation [
 		color := self colorFor: annotatedDeclaration.
 		annotatedDeclaration asRopedTextColored: color.
 	] on: Exception do: [ :ex |
-		"ex debug."
+		ex freeze.
 		object := ex.
 		ex return: (ex printString asRopedText foreground: Color red) ].
 	self
@@ -281,7 +281,7 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 				output append: normalForm ].
 		output
 	] on: Exception do: [ :ex |
-	 	"ex debug."
+	 	ex freeze.
 	 	term := ex.
 	 	ex return: (ex printString asRopedText foreground: Color red) ].
 
