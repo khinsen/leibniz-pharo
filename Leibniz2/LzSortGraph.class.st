@@ -140,7 +140,7 @@ LzSortGraph >> graphFor: aView highlight: aBlock [
 		title: 'Graph';
 		priority: 0;
 		painting: [ :view | 
-			| families edges |
+			| families |
 			families := sortFamilies copyWithout: anySortFamily.
 			view nodes
 				shape: [ :x | self graphNodeForSort: x highlight: (aBlock cull: x) ];
@@ -151,8 +151,7 @@ LzSortGraph >> graphFor: aView highlight: aBlock [
 				toCenterBottom;
 				connect: connectingAxioms values
 					from: [ :each | self familyForSortTerm: each anyOne subsort ]
-					to: [ :each | self familyForSortTerm: each anyOne supersort ];
-				yourself.
+					to: [ :each | self familyForSortTerm: each anyOne supersort ].
 			view layout
 				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
 ]

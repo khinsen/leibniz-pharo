@@ -215,6 +215,10 @@ LzDeclarationBuilder >> visitTopLevelFunctionRule: aTopLevelFunctionRule [
 		code: aTopLevelFunctionRule code value allButFirst allButLast.
 	aTopLevelFunctionRule condition ifNotNil: [ :c |
 		rule condition: (self acceptNode: c) ].
+	aTopLevelFunctionRule prefix ifNotNil: [ :p |
+		rule label: p label value asSymbol.
+		p order ifNotNil: [ :o |
+			rule order: o value asInteger ] ].
 	^ self annotate: rule from: aTopLevelFunctionRule booleanOptions: #(example)
 ]
 
@@ -245,6 +249,10 @@ LzDeclarationBuilder >> visitTopLevelRewriteRule: aTopLevelRewriteRule [
 		replacement: (self acceptNode: aTopLevelRewriteRule replacement).
 	aTopLevelRewriteRule condition ifNotNil: [ :c |
 		rule condition: (self acceptNode: c) ].
+	aTopLevelRewriteRule prefix ifNotNil: [ :p |
+		rule label: p label value asSymbol.
+		p order ifNotNil: [ :o |
+			rule order: o value asInteger ] ].
 	^ self annotate: rule from: aTopLevelRewriteRule booleanOptions: #(example)
 ]
 

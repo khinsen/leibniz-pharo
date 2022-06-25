@@ -155,11 +155,13 @@ LzSignature >> parsedPattern: anASTPatternNode [
 ]
 
 { #category : #constructing }
-LzSignature >> parsedRule: anASTRuleNode [
-	^ anASTRuleNode ruleClass new
+LzSignature >> parsedRule: aRuleDeclaration [
+	^ aRuleDeclaration ruleClass new
 		signature: self;
-		variables: (self parsedVariables: anASTRuleNode variables);
-		buildTermsFrom: anASTRuleNode;
+		variables: (self parsedVariables: aRuleDeclaration variables);
+		buildTermsFrom: aRuleDeclaration;
+		label: aRuleDeclaration label;
+		order: aRuleDeclaration order;
 		checkConsistency;
 		beRecursivelyReadOnlyObject;
 		yourself

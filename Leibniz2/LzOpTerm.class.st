@@ -50,6 +50,17 @@ LzOpTerm >> fingerprint [
 	^ opName
 ]
 
+{ #category : #inspecting }
+LzOpTerm >> gtOperatorRanksFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Operator ranks';
+		priority: 7;
+		object: [ self signature operators opForTerm: self ];
+		view: #gtGraphFor:;
+		yourself
+]
+
 { #category : #accessing }
 LzOpTerm >> hasInfixOpOtherThan: anOpName [
 	^ opName isInfixOpOtherThan: anOpName

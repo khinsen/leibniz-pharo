@@ -27,6 +27,14 @@ LzKind >> addAsRopedTextTo: aRopedText [
 		withAttribute: LzSortAttribute new
 ]
 
+{ #category : #inspecting }
+LzKind >> gtGraphFor: aView [
+	<gtView>
+	^ self sortGraph
+		graphFor: aView
+		highlight: [ :x | self sortFamilies includes: x ]
+]
+
 { #category : #testing }
 LzKind >> includes: aSort [
 	^ sortFamilies includes: aSort family
@@ -35,6 +43,16 @@ LzKind >> includes: aSort [
 { #category : #testing }
 LzKind >> isInfix [
 	^ false
+]
+
+{ #category : #testing }
+LzKind >> isKind [
+	^ true
+]
+
+{ #category : #accessing }
+LzKind >> kind [
+	^ self
 ]
 
 { #category : #accessing }

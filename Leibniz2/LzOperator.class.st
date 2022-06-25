@@ -243,9 +243,10 @@ LzOperator >> size [
 
 { #category : #lookup }
 LzOperator >> sortForArity: anArity [
-	ranks do: [ :each |
-		(self matchRank: each to: anArity) ifNotNil: [ :match |
-			^ match value ] ].
+	anArity containsKind ifFalse: [
+		ranks do: [ :each |
+			(self matchRank: each to: anArity) ifNotNil: [ :match |
+				^ match value ] ] ].
 	^ kind
 ]
 

@@ -7,7 +7,8 @@ Class {
 		'pattern',
 		'arrow',
 		'options',
-		'condition'
+		'condition',
+		'prefix'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
@@ -69,7 +70,7 @@ LzTopLevelRuleNode >> initialize [
 
 { #category : #generated }
 LzTopLevelRuleNode >> nodeVariables [
-	^ #(#pattern #condition)
+	^ #(#pattern #condition #prefix)
 ]
 
 { #category : #generated }
@@ -94,6 +95,18 @@ LzTopLevelRuleNode >> pattern: aLzParseTreeNode [
 	self pattern notNil ifTrue: [ self pattern parent: nil ].
 	pattern := aLzParseTreeNode.
 	self pattern notNil ifTrue: [ self pattern parent: self ]
+]
+
+{ #category : #generated }
+LzTopLevelRuleNode >> prefix [
+	^ prefix
+]
+
+{ #category : #generated }
+LzTopLevelRuleNode >> prefix: aLzRulePrefixNode [
+	self prefix notNil ifTrue: [ self prefix parent: nil ].
+	prefix := aLzRulePrefixNode.
+	self prefix notNil ifTrue: [ self prefix parent: self ]
 ]
 
 { #category : #generated }

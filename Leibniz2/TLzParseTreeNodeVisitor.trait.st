@@ -91,6 +91,11 @@ TLzParseTreeNodeVisitor >> visitRationalNumberLiteralTerm: aRationalNumberLitera
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitRulePrefix: aRulePrefix [
+	^ self visitParseTree: aRulePrefix
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitSimpleOpArg: aSimpleOpArg [
 	^ self visitOpArg: aSimpleOpArg
 ]

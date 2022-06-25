@@ -3,10 +3,26 @@ Class {
 	#superclass : #LzTermsWithSharedVars,
 	#instVars : [
 		'condition',
-		'pattern'
+		'pattern',
+		'label',
+		'order'
 	],
 	#category : #'Leibniz2-Rules'
 }
+
+{ #category : #converting }
+LzRule >> addAsRopedTextTo: aRopedText [
+	self label ifNotNil: [ :l |
+		aRopedText append:
+			(l asRopedText attribute: LzRuleLabelAttribute new).
+		self order ifNotNil: [ :o |
+			aRopedText append: '[' asRopedText.
+			aRopedText append:
+				(o asRopedText attribute: LzRuleOrderAttribute new).
+			aRopedText append: ']' asRopedText ].
+		aRopedText append: ': ' asRopedText ].
+	super addAsRopedTextTo: aRopedText
+]
 
 { #category : #converting }
 LzRule >> addConditionAsRopedTextTo: aRopedText [
@@ -41,7 +57,7 @@ LzRule >> checkConsistency [
 	patternVars := pattern vars.
 	condition ifNotNil: [
 		self assert: condition signature == signature.
-		self assert: condition sort asLeibnizSyntaxString equals: '𝔹'.
+		self assert: ({ '𝔹'. '[𝔹]'} includes: condition sort asLeibnizSyntaxString).
 		condition vars associationsDo: [ :each |
 			self
 				assert: (patternVars includesAssociation: each)
@@ -56,6 +72,26 @@ LzRule >> condition [
 { #category : #accessing }
 LzRule >> condition: aTerm [
 	condition := aTerm
+]
+
+{ #category : #accessing }
+LzRule >> label [
+	^ label
+]
+
+{ #category : #accessing }
+LzRule >> label: aSymbol [
+	label := aSymbol
+]
+
+{ #category : #accessing }
+LzRule >> order [
+	^ order
+]
+
+{ #category : #accessing }
+LzRule >> order: aNumber [
+	order := aNumber
 ]
 
 { #category : #accessing }

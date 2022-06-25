@@ -138,6 +138,11 @@ LzSort >> isInfix [
 ]
 
 { #category : #testing }
+LzSort >> isKind [
+	^ false
+]
+
+{ #category : #testing }
 LzSort >> isSortSort [
 	term args ifNotEmpty: [ ^ false ].
 	^ term opName

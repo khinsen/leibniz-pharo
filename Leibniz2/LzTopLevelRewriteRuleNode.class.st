@@ -14,7 +14,7 @@ LzTopLevelRewriteRuleNode >> acceptVisitor: aParseTreeVisitor [
 
 { #category : #generated }
 LzTopLevelRewriteRuleNode >> nodeVariables [
-	^ #(#replacement #pattern #condition)
+	^ #(#replacement #pattern #condition #prefix)
 ]
 
 { #category : #generated }

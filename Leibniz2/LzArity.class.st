@@ -53,6 +53,11 @@ LzArity >> addVariablesAsRopedTextTo: aRopedText [
 	vars keysAndValuesDo: addVars
 ]
 
+{ #category : #testing }
+LzArity >> containsKind [
+	^ self detect: #isKind ifFound: [ true ] ifNone: [ false ]
+]
+
 { #category : #constructing }
 LzArity >> kindArity [
 	| kindArity |

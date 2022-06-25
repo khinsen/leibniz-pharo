@@ -48,6 +48,19 @@ LzObjectBuilder >> subcontext: aString [
 ]
 
 { #category : #visiting }
+LzObjectBuilder >> visitTopLevelRule: aTopLevelRule [
+	| annotation declaration context |
+	annotation := LzDeclarationBuilder new acceptNode: aTopLevelRule.
+	declaration := annotation declaration.
+	context := self subcontext:(annotation optionsAt: #subcontext).
+	^ (annotation optionsAt: #example)
+		ifTrue: [ { annotation.
+						declaration } ]
+		ifFalse: [ { annotation.
+						context signature parsedRule: declaration } ]
+]
+
+{ #category : #visiting }
 LzObjectBuilder >> visitTopLevelSort: aTopLevelSort [
 	| annotation declaration context |
 	annotation := LzDeclarationBuilder new acceptNode: aTopLevelSort.

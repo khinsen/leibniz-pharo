@@ -223,7 +223,7 @@ LzAnnotationStyler >> visitTopLevelOp: aTopLevelOpAnnotation [
 LzAnnotationStyler >> visitTopLevelRule: aTopLevelRule [
 	self styleAnnotation: aTopLevelRule.
 	self styleAutoHidingAnnotation: aTopLevelRule.
-	self styleDeclarationButton: aTopLevelRule
+	self styleObjectButton: aTopLevelRule
 ]
 
 { #category : #visiting }
