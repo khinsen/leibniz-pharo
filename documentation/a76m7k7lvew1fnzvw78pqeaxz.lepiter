@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-22T15:51:44.363929+02:00"
+						"dateAndTimeString" : "2022-06-24T17:15:18.995148+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The first step of the algorithm is to check if the current estimate is good enough, in which case it is the final result:\n\t{{lzRule:heron(x_:ℝ.nn, ε_:ℝ.p, e_:ℝ.nn) ⇒ e | abs(x_ - e_^(2)) < ε_}}"
+				"string" : "The first step of the algorithm is to check if the current estimate is good enough, in which case it is the final result:\n\t{{lzRule:heron[1]: heron(x_:ℝ.nn, ε_:ℝ.p, e_:ℝ.nn) ⇒ e_ | abs(x_ - e_^(2)) < ε_}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -214,7 +214,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-21T20:46:06.564248+02:00"
+						"dateAndTimeString" : "2022-06-24T17:15:35.853687+02:00"
 					}
 				},
 				"uid" : {
@@ -224,7 +224,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Otherwise, a new estimate is computed by taking the average of e and x ÷ e:\n\t{{lzRule:heron(x_:ℝ.nn, ε_:ℝ.p, e_:ℝ.nn) ⇒ heron(x_, ε_, 1/2 × (e + (x ÷ e)))}}"
+				"string" : "Otherwise, a new estimate is computed by taking the average of e and x ÷ e:\n\t{{lzRule:heron[2]: heron(x_:ℝ.nn, ε_:ℝ.p, e_:ℝ.nn) ⇒ heron(x_, ε_, 1/2 × (e_ + (x_ ÷ e_)))}}"
 			},
 			{
 				"__type" : "textSnippet",

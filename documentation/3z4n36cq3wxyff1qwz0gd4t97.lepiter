@@ -905,6 +905,43 @@
 											"__type" : "textStyle"
 										},
 										"string" : "Positive real numbers can be taken to any non-zero real power:\n\t{{lzOp:ℝ.p^(ℝ.nz) : ℝ.p}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-06-25T09:54:47.844587+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-06-25T09:55:30.5999+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "OKjQvKKeDQCu6JnEC+pqbA=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Non-negative real numbers can be taken to any positive real power:\n\t{{lzOp:ℝ.nn^(ℝ.p) : ℝ.nn}}"
 									}
 								]
 							},
