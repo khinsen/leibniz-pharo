@@ -202,7 +202,10 @@ LzAnnotationStyler >> visitParseTree: aParseTree [
 
 { #category : #visiting }
 LzAnnotationStyler >> visitSmaCCError: aSmaCCError [
-	self styleAnnotation: aSmaCCError.
+	(self text from: aSmaCCError parent startPosition to: aSmaCCError parent stopPosition)
+		fontName: LzCodeFont defaultFamily.
+	(self text from: aSmaCCError startPosition to: aSmaCCError stopPosition)
+		underlineColor: Color red
 ]
 
 { #category : #visiting }
