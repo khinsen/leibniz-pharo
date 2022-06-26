@@ -251,7 +251,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-22T18:58:32.246188+02:00"
+						"dateAndTimeString" : "2022-06-26T06:51:38.784567+02:00"
 					}
 				},
 				"uid" : {
@@ -261,7 +261,155 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For convenience, we also allow no initial estimate to be supplied, using a default value of 1:\n\t{{lzOp:heron(x:ℝ.nn, ε:ℝ.p) : ℝ.nn}}\n\t{{lzRule:heron(x_:ℝ.nn, ε_:ℝ.p) ⇒ heron(x_, ε_, 1)}}\nThe algorithm will always converge starting from 1, because √(x) is always in the interval [1..x] (x > 1) or [x..1] (x < 1). However, a better initial estimate makes it converge faster."
+				"string" : "For convenience, we also allow no initial estimate to be supplied, using a default value of 1:\n\t{{lzOp:heron(x:ℝ.nn, ε:ℝ.p) : ℝ.nn}}\n\t{{lzRule:heron(x_:ℝ.nn, ε_:ℝ.p) ⇒ heron(x_, ε_, 1)}}\nThe algorithm will always converge starting from 1, because √(x) is always in the interval [1..x] (for x > 1) or [x..1] (for x < 1). However, a better initial estimate makes it converge faster."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-26T06:51:47.709545+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-26T06:51:50.0292+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "RxooTLSeDQCHAv/bDBBOxg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "### Example"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-26T06:55:52.222838+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-26T06:56:20.136911+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "ggiEWbSeDQCHBkYqDBBOxg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The algorithm is straightforward to use:\n\t{{lzTerm:heron(2, 1/10), withNormalForm = \"yes\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-26T06:56:33.303669+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-26T07:00:16.323729+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "K4kiXbSeDQCHDydqDBBOxg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "To see its convergence properties, it is more useful to look at\n\t{{lzOp:heronError(x:ℝ.nn, ε:ℝ.p) : ℝ.nn, subcontext = \"convergence\"}}\ncomputed as\n\t{{lzRule:heronError(x_:ℝ.nn, ε_:ℝ.p) ⇒ abs(heron(x_, ε_)^(2) - x_), subcontext = \"convergence\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-26T07:00:44.587293+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-26T07:06:15.215899+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "GE++arSeDQCHEQoqDBBOxg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Some examples:\n\t{{lzTerm:heronError(2, 1), subcontext = \"convergence\", withNormalForm = \"yes\"}}\n\t{{lzTerm:heronError(2, 1/10), subcontext = \"convergence\", withNormalForm = \"yes\"}}\n\t{{lzTerm:heronError(2, 1/100), subcontext = \"convergence\", withNormalForm = \"yes\"}}\n\t{{lzTerm:heronError(2, 1/1000), subcontext = \"convergence\", withNormalForm = \"yes\"}}"
 			}
 		]
 	},
