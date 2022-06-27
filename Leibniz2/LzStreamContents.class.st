@@ -22,7 +22,6 @@ LzStreamContents >> isComplete [
 { #category : #accessing }
 LzStreamContents >> moreItems [
 	| counter |
-	self isComplete ifTrue: [ ^ self ].
 	streamOrSequence isStream
 		ifFalse: [ retrievedItems addAll: streamOrSequence ]
 		ifTrue: [

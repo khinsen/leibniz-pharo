@@ -15,6 +15,16 @@ LzLeafENode >> = anObject [
 	^ self leafTerm = anObject leafTerm
 ]
 
+{ #category : #converting }
+LzLeafENode >> addAsFirstArgOfInfixTermWithOpName: anOpName asRopedTextTo: aRopedText [
+	self leafTerm addAsFirstArgOfInfixTermWithOpName: anOpName asRopedTextTo: aRopedText
+]
+
+{ #category : #converting }
+LzLeafENode >> addAsRopedTextTo: aRopedText [
+	self leafTerm addAsRopedTextTo: aRopedText
+]
+
 { #category : #enumerating }
 LzLeafENode >> allTerms [
 	^ { self leafTerm }

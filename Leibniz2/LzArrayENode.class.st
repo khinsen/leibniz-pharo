@@ -16,6 +16,39 @@ LzArrayENode >> = otherObject [
 	^ self hasEqualElements: otherObject
 ]
 
+{ #category : #converting }
+LzArrayENode >> addAsRopedTextTo: aRopedText [
+	| elementENodes |
+	elementENodes := self collect: [ :each |
+		(graph classForId: each) anyNode ].
+	aRopedText append: '{' asRopedText.
+	self
+		addElementsOf: elementENodes
+		shape: self shape
+		asRopedTextTo: aRopedText.
+	aRopedText append: '}' asRopedText
+]
+
+{ #category : #printing }
+LzArrayENode >> addElementsOf: anArray shape: shapeArray asRopedTextTo: aRopedText [
+	| elementShape elementSize index |
+	elementShape := shapeArray allButFirst.
+	elementSize := elementShape inject: 1 into: [ :product :each | product * each ].
+	index := 1.
+	aRopedText append: '[' asRopedText.
+	1 to: shapeArray first do: [ :each |
+		elementShape
+			ifEmpty: [  (anArray at: index) addAsRopedTextTo: aRopedText ]
+			ifNotEmpty: [
+				self
+					addElementsOf: (anArray copyFrom: index to: index + elementSize - 1)
+					shape: elementShape
+					asRopedTextTo: aRopedText ].
+		index := index + elementSize.
+		index > anArray size ifFalse: [ aRopedText append: ', ' asRopedText ] ].
+	aRopedText append: ']' asRopedText
+]
+
 { #category : #enumerating }
 LzArrayENode >> allTerms [
 	| signature |

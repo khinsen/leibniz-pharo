@@ -16,6 +16,16 @@ LzOpENode >> = otherObject [
 	^ self hasEqualElements: otherObject
 ]
 
+{ #category : #converting }
+LzOpENode >> addAsRopedTextTo: aRopedText [
+	| argENodes |
+	argENodes := self collect: [ :each |
+		(graph classForId: each) anyNode ].
+	opName
+		addForArgs: argENodes
+		asRopedTextTo: aRopedText
+]
+
 { #category : #enumerating }
 LzOpENode >> allTerms [
 	| signature |
