@@ -29,7 +29,8 @@ LzRewriteSystem >> gtRulesFor: aView [
 		children: [ :each |
 			(topLevel value: each)
 				ifTrue: [ rules at: each ]
-				ifFalse: [ #() ] ];
+				ifFalse: [ #() ] ].
+	ruleView
 		column: 'Variables' text: [ :each |
 			(topLevel value: each)
 				ifTrue: [ label value: each ]
@@ -41,8 +42,7 @@ LzRewriteSystem >> gtRulesFor: aView [
 				ifTrue: [ '' ]
 				ifFalse: [
 					LzCodeFont textFrom: [ :t |
-						each addBodyAsRopedTextTo: t ] ] ];
-		yourself.
+						each addBodyAsRopedTextTo: t ] ] ].
 	self hasConditionalRule ifTrue: [
 		ruleView column: 'Condition' text: [ :each |
 			(topLevel value: each)
@@ -50,6 +50,13 @@ LzRewriteSystem >> gtRulesFor: aView [
 				ifFalse: [
 					LzCodeFont textFrom: [ :t |
 						each addConditionAsRopedTextTo: t ] ] ] ].
+	self hasLabeledRule ifTrue: [
+		ruleView column: 'Label' text: [ :each |
+			(topLevel value: each)
+				ifTrue: [ '' ]
+				ifFalse: [
+					LzCodeFont textFrom: [ :t |
+						each addLabelAsRopedTextTo: t ] ] ] ].
 	^ ruleView
 ]
 
@@ -63,8 +70,23 @@ LzRewriteSystem >> hasConditionalRule [
 ]
 
 { #category : #testing }
+LzRewriteSystem >> hasLabeledRule [
+	rules valuesDo: [ :eachRuleList |
+		eachRuleList
+			detect: [ :eachRule | eachRule label isNotNil ]
+			ifFound: [ ^ true ] ].
+	^ false
+]
+
+{ #category : #testing }
 LzRewriteSystem >> isEmpty [
 	^ rules isEmpty
+]
+
+{ #category : #testing }
+LzRewriteSystem >> randomizeRuleOrder [
+	"Meant for testing that rule order does not matter."
+	rules valuesDo: [ :eachRuleList | eachRuleList shuffle ]
 ]
 
 { #category : #rewriting }
@@ -126,15 +148,15 @@ LzRewriteSystem >> rules [
 	^ rules
 ]
 
-{ #category : #accessing }
-LzRewriteSystem >> rules: anOrderedCollection [
+{ #category : #initializing }
+LzRewriteSystem >> rules: aCollection [
 	"Classify rules by a pattern fingerprint, to avoid scanning the full
 	 rule list when matching terms. The fingerprint is the top-level operator
 	 name for op terms, #var for variables, and #atomic for atomic terms.
 	 Treat #var as a special case because a variable can match terms
 	 of any fingerprint."
 	rules := Dictionary with: #var -> OrderedCollection  new.
-	anOrderedCollection do: [ :each |
+	aCollection do: [ :each |
 		| fp |
 		fp := each pattern fingerprint.
 		fp = #var
@@ -144,6 +166,7 @@ LzRewriteSystem >> rules: anOrderedCollection [
 				(rules at: fp ifAbsentPut: [ (rules at: #var) copy ])
 					add: each. ] ].
 	rules removeKey: #var.
+	self sortLabeledRules.
 ]
 
 { #category : #rewriting }
@@ -167,6 +190,16 @@ LzRewriteSystem >> signature: aSignature [
 { #category : #accessing }
 LzRewriteSystem >> size [
 	^ self rules size
+]
+
+{ #category : #initializing }
+LzRewriteSystem >> sortLabeledRules [
+	rules := rules collect: [ :eachRuleList |
+		| labeledRules |
+		labeledRules := eachRuleList groupedBy: [ :each |
+			each label isNotNil and: each order isNotNil ].
+		((labeledRules at: true ifAbsent: [ #() ]) sort: [ :a :b | a sortsBefore: b ]),
+			(labeledRules at: false ifAbsent: [ #() ]) ]
 ]
 
 { #category : #accessing }

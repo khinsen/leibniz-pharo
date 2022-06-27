@@ -13,13 +13,7 @@ Class {
 { #category : #converting }
 LzRule >> addAsRopedTextTo: aRopedText [
 	self label ifNotNil: [ :l |
-		aRopedText append:
-			(l asRopedText attribute: LzRuleLabelAttribute new).
-		self order ifNotNil: [ :o |
-			aRopedText append: '[' asRopedText.
-			aRopedText append:
-				(o asRopedText attribute: LzRuleOrderAttribute new).
-			aRopedText append: ']' asRopedText ].
+		self addLabelAsRopedTextTo:  aRopedText.
 		aRopedText append: ': ' asRopedText ].
 	super addAsRopedTextTo: aRopedText
 ]
@@ -30,6 +24,18 @@ LzRule >> addConditionAsRopedTextTo: aRopedText [
 		aRopedText append:
 			(' | ' asRopedText attribute: LzConditionAttribute new).
 		c addAsRopedTextTo: aRopedText ].
+]
+
+{ #category : #converting }
+LzRule >> addLabelAsRopedTextTo: aRopedText [
+	self label ifNotNil: [ :l |
+		aRopedText append:
+			(l asRopedText attribute: LzRuleLabelAttribute new).
+		self order ifNotNil: [ :o |
+			aRopedText append: '[' asRopedText.
+			aRopedText append:
+				(o asRopedText attribute: LzRuleOrderAttribute new).
+			aRopedText append: ']' asRopedText ] ]
 ]
 
 { #category : #rewriting }
@@ -132,6 +138,16 @@ LzRule >> signature [
 { #category : #accessing }
 LzRule >> signature: aSignature [
 	signature := aSignature
+]
+
+{ #category : #comparing }
+LzRule >> sortsBefore: otherRule [
+	self label ifNil: [ ^ false ].
+	otherRule label ifNil: [ ^ false ].
+	self label = otherRule label ifFalse: [ ^ false ].
+	self order ifNil: [ ^ false ].
+	otherRule order ifNil: [ ^ false ].
+	^ self order< otherRule order
 ]
 
 { #category : #rewriting }
