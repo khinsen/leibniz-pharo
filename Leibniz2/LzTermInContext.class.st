@@ -16,10 +16,7 @@ Class {
 LzTermInContext class >> term: aTerm context: aContext [
 	^ self new
 		context: aContext;
-		term: aTerm;
-		findNormalForm;
-		constructEGraph;
-		yourself
+		term: aTerm
 ]
 
 { #category : #converting }
@@ -30,7 +27,7 @@ LzTermInContext >> addAsRopedTextTo: aRopedText [
 	normalForm addAsRopedTextTo: aRopedText.
 ]
 
-{ #category : #'instance creation' }
+{ #category : #initializing }
 LzTermInContext >> constructEGraph [
 	eGraph := LzEGraph new
 		context: context.
@@ -72,6 +69,7 @@ LzTermInContext >> gtEquivalentTermsFor: aView [
 
 { #category : #accessing }
 LzTermInContext >> normalForm [
+	normalForm ifNil: [ self findNormalForm ].
 	^ normalForm
 ]
 

@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-24T12:25:10.286493+02:00"
+						"dateAndTimeString" : "2022-06-27T18:23:05.302614+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "In rewriting, t is replaced by the equivalent operator:\n\t{{lzRule:abs[x_:ℝ] ⇒ abs(x_)}}"
+				"string" : "In rewriting, it is replaced by the equivalent operator:\n\t{{lzRule:abs[x_:ℝ] ⇒ abs(x_)}}"
 			}
 		]
 	},
