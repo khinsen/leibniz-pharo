@@ -92,6 +92,80 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-28T21:08:45.863659+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-28T21:08:55.233623+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "nQuwgOieDQCRbKaGCyNmKg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Addition and multiplication are commutative and associative:\n\t{{lzAxiom:f_:ℝ → ℝ, g_:ℝ → ℝ, f_ + g_ = g_ + f_}}\n\t{{lzAxiom:f_:ℝ → ℝ, g_:ℝ → ℝ, f_ × g_ = g_ × f_}}\n\t{{lzAxiom:f_:ℝ → ℝ, g_:ℝ → ℝ, h_:ℝ → ℝ, (f_ + g_) + h_ = f_ + (g_ + h_)}}\n\t{{lzAxiom:f_:ℝ → ℝ, g_:ℝ → ℝ, h_:ℝ → ℝ,  (f_ × g_) × h_ = f_ × (g_ × h_)}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-28T21:05:54.732307+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-28T21:08:45.900707+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "zG9oduieDQCRain9CyNmKg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:f_:ℝ → ℝ, g_:ℝ → ℝ, h_:ℝ → ℝ,  f_ × (g_ + h_) = (f_ × g_) + (f_ × h_)}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2022-06-28T15:16:39.173568+02:00"
 					}
 				},
@@ -114,6 +188,80 @@
 					"__type" : "textStyle"
 				},
 				"string" : "The sum, difference, product, and quotient of a function and a number is a function:\n\t{{lzOp:(ℝ → ℝ) + ℝ : ℝ → ℝ}}\n\t{{lzOp:ℝ + (ℝ → ℝ) : ℝ → ℝ}}\n\t{{lzOp:(ℝ → ℝ) - ℝ : ℝ → ℝ}}\n\t{{lzOp:ℝ - (ℝ → ℝ) : ℝ → ℝ}}\n\t{{lzOp:(ℝ → ℝ) × ℝ : ℝ → ℝ}}\n\t{{lzOp:ℝ × (ℝ → ℝ) : ℝ → ℝ}}\n\t{{lzOp:(ℝ → ℝ) ÷ ℝ : ℝ → ℝ}}\n\t{{lzOp:ℝ ÷ (ℝ → ℝ) : ℝ → ℝ}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-28T21:11:27.405456+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-28T21:11:27.405456+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "g708iuieDQCRbo9PCyNmKg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Addition and multiplication are commutative and associative:\n\t{{lzAxiom:f_:ℝ → ℝ, s_:ℝ, f_ + s_ = s_ + f_}}\n\t{{lzAxiom:f_:ℝ → ℝ, s_:ℝ, f_ × s_ = s_ × f_}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-28T21:12:46.266038+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-28T21:12:46.266038+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "kqvpjuieDQCRcGy2CyNmKg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:f_:ℝ → ℝ, g_:ℝ → ℝ, s_:ℝ,  s_ × (f_ + g_) = (s_ × f_) + (s_ × g_)}}"
 			},
 			{
 				"__type" : "textSnippet",
