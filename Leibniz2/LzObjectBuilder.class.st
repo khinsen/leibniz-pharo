@@ -108,9 +108,7 @@ LzObjectBuilder >> visitTopLevelTerm: aTopLevelTerm [
 	context := self subcontext:(annotation optionsAt: #subcontext).
 	term := context parsedPattern: declaration.
 	^ { annotation.
-		(annotation optionsAt: #withNormalForm)
-			ifTrue: [ LzTermInContext
-						term: term
-						context: context]
-			ifFalse: [ term ] }
+		LzTermInContext
+			term: term
+			context: context }
 ]

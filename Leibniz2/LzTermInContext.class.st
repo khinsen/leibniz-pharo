@@ -21,10 +21,7 @@ LzTermInContext class >> term: aTerm context: aContext [
 
 { #category : #converting }
 LzTermInContext >> addAsRopedTextTo: aRopedText [
-	term addAsRopedTextTo: aRopedText.
-	aRopedText append:
-		(' ⇒ ' asRopedText attribute: LzRewriteArrowAttribute new).
-	normalForm addAsRopedTextTo: aRopedText.
+	term addAsRopedTextTo: aRopedText
 ]
 
 { #category : #initializing }
@@ -75,9 +72,7 @@ LzTermInContext >> normalForm [
 
 { #category : #printing }
 LzTermInContext >> printAsLeibnizSyntaxOn: aStream [
-	term printAsLeibnizSyntaxOn: aStream.
-	aStream nextPutAll: ' ⇒ '.
-	normalForm printAsLeibnizSyntaxOn: aStream.
+	term printAsLeibnizSyntaxOn: aStream
 ]
 
 { #category : #comparing }
