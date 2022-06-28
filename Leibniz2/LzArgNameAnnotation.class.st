@@ -8,11 +8,21 @@ Class {
 }
 
 { #category : #converting }
+LzArgNameAnnotation >> addAsFirstArgOfInfixTermWithOpName: anOpName asRopedTextTo: aRopedText [
+	self declaration addAsRopedTextTo: aRopedText
+]
+
+{ #category : #converting }
 LzArgNameAnnotation >> addAsRopedTextTo: aRopedText [
 	aRopedText append:
 		(name asRopedText attribute: LzArgNameAttribute new).
 	aRopedText append: ':' asRopedText.
 	declaration addAsRopedTextTo: aRopedText
+]
+
+{ #category : #testing }
+LzArgNameAnnotation >> isInfix [
+	^ false
 ]
 
 { #category : #accessing }

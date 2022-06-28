@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-24T12:24:59.038747+02:00"
+						"dateAndTimeString" : "2022-06-28T11:54:54.50138+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "It is often useful to have a function term (see {{lzUseContext:name = \"Functions of one variable\"}}) for the absolute value:\n\t{{lzOp:abs:fn(ℝ, ℝ.nn)}}"
+				"string" : "It is often useful to have a function term (see {{lzUseContext:name = \"Functions of one variable\"}}) for the absolute value:\n\t{{lzOp:abs:(ℝ → ℝ.nn)}}"
 			},
 			{
 				"__type" : "textSnippet",

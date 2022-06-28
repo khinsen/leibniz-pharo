@@ -417,6 +417,43 @@
 								"__type" : "textStyle"
 							},
 							"string" : "[[Heron's algorithm for computing square roots]]"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-28T11:45:08.465324+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-28T11:45:14.117952+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "f2C/oOCeDQCzOx9kA/Ah6w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "[[Lotka-Volterra equations]]"
 						}
 					]
 				},

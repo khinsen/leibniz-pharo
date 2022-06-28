@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-22T15:24:19.275474+02:00"
+						"dateAndTimeString" : "2022-06-28T11:54:12.366121+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A function is defined by an operator of sort\n\t{{lzSort:fn(domain:𝕊, image:𝕊)}}"
+				"string" : "A function is defined by an operator of sort\n\t{{lzSort:(domain:𝕊) → (image:𝕊)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-10T14:50:57.117512+02:00"
+						"dateAndTimeString" : "2022-06-28T11:54:08.335979+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Function application is denoted by square brackets:\n\t{{lzOp:fn(domain_:𝕊, image_:𝕊)[domain_] : image_}}"
+				"string" : "Function application is denoted by square brackets:\n\t{{lzOp:((domain_:𝕊) → (image_:𝕊))[domain_] : image_}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -145,7 +145,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-15T18:33:22.188462+02:00"
+									"dateAndTimeString" : "2022-06-28T11:53:53.042378+02:00"
 								}
 							},
 							"uid" : {
@@ -155,7 +155,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "The function\n\t{{lzOp:square : fn(ℝ, ℝ), subcontext = \"realFunction\"}}\ncomputes the square of its argument:\n\t{{lzRule:square[x_:ℝ] ⇒ x_ × x_, subcontext = \"realFunction\"}}"
+							"string" : "The function\n\t{{lzOp:square : ℝ → ℝ, subcontext = \"realFunction\"}}\ncomputes the square of its argument:\n\t{{lzRule:square[x_:ℝ] ⇒ x_ × x_, subcontext = \"realFunction\"}}"
 						},
 						{
 							"__type" : "textSnippet",
