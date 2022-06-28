@@ -182,7 +182,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-28T15:08:18.952374+02:00"
+									"dateAndTimeString" : "2022-06-28T21:20:10.04881+02:00"
 								}
 							},
 							"uid" : {
@@ -192,7 +192,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Functions:\n\t[[Functions of one variable]], [[Real functions of one real variable]],  [[Derivatives of functions of one variable]]"
+							"string" : "Functions:\n\t[[Functions of one variable]]"
 						},
 						{
 							"__type" : "textSnippet",
@@ -320,6 +320,43 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-28T21:20:45.238246+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-28T21:21:05.356377+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "vXFvq+ieDQCXeukaBC7yCg=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Functions:\n\t[[Real functions of one real variable]],  [[Derivatives of functions of one variable]]"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
 									"dateAndTimeString" : "2022-06-22T15:26:18.669353+02:00"
 								}
 							},
@@ -331,7 +368,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-24T12:23:49.733965+02:00"
+									"dateAndTimeString" : "2022-06-28T21:21:13.590128+02:00"
 								}
 							},
 							"uid" : {
@@ -341,7 +378,44 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Functions:\n\t[[Absolute value]], [[Absolute value function]]"
+							"string" : "Specific functions:\n\t[[Absolute value]], [[Absolute value function]]"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-28T21:21:29.782776+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-28T21:21:39.488183+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "JW8iruieDQCXlZOhBC7yCg=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Differential equations:\n\t[[Euler method]]"
 						}
 					]
 				},
@@ -364,7 +438,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-22T15:26:04.560397+02:00"
+						"dateAndTimeString" : "2022-06-28T21:20:47.098606+02:00"
 					}
 				},
 				"uid" : {
