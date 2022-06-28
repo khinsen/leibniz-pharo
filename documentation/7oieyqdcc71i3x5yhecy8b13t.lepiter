@@ -182,7 +182,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-22T15:22:33.639769+02:00"
+									"dateAndTimeString" : "2022-06-28T15:08:18.952374+02:00"
 								}
 							},
 							"uid" : {
@@ -192,7 +192,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Functions:\n\t[[Functions of one variable]]"
+							"string" : "Functions:\n\t[[Functions of one variable]], [[Real functions of one real variable]],  [[Derivatives of functions of one variable]]"
 						},
 						{
 							"__type" : "textSnippet",

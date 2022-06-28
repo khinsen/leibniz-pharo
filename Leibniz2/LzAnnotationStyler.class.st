@@ -212,7 +212,7 @@ LzAnnotationStyler >> visitSmaCCError: aSmaCCError [
 LzAnnotationStyler >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	self styleAnnotation: aTopLevelEqualityAxiom.
 	self styleAutoHidingAnnotation: aTopLevelEqualityAxiom.
-	self styleDeclarationButton: aTopLevelEqualityAxiom
+	self styleObjectButton: aTopLevelEqualityAxiom
 ]
 
 { #category : #visiting }
