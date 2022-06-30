@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-24T12:24:35.667037+02:00"
+						"dateAndTimeString" : "2022-06-30T15:25:54.516739+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Functions of one variable\"}}, {{lzUseContext:name = \"Absolute value\"}}"
+				"string" : "Uses {{lzUseContext:name = \"Functions\"}}, {{lzUseContext:name = \"Absolute value\"}}"
 			},
 			{
 				"__type" : "textSnippet",

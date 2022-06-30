@@ -182,7 +182,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-28T21:20:10.04881+02:00"
+									"dateAndTimeString" : "2022-06-30T15:22:56.577044+02:00"
 								}
 							},
 							"uid" : {
@@ -192,7 +192,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Functions:\n\t[[Functions of one variable]]"
+							"string" : "Functions:\n\t[[Functions]], [[Functions of several arguments]]"
 						},
 						{
 							"__type" : "textSnippet",
@@ -245,7 +245,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-16T16:08:59.255962+02:00"
+									"dateAndTimeString" : "2022-06-30T13:33:23.491152+02:00"
 								}
 							},
 							"editEmail" : {
@@ -256,17 +256,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-16T16:09:14.38548+02:00"
+									"dateAndTimeString" : "2022-06-30T13:33:51.089971+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "iXsT6vKdDQC5fvsPAwzf3Q=="
+								"uidString" : "gHnUXwqfDQC+oDLhBHHPSQ=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Aggregate data structures:\n\t[[One-dimensional arrays]]"
+							"string" : "Aggregate data structures:\n\t[[Tuples]]\n\t[[One-dimensional arrays]]"
 						}
 					]
 				},
@@ -331,7 +331,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-28T21:21:05.356377+02:00"
+									"dateAndTimeString" : "2022-06-30T13:53:06.062692+02:00"
 								}
 							},
 							"uid" : {
@@ -341,7 +341,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Functions:\n\t[[Real functions of one real variable]],  [[Derivatives of functions of one variable]]"
+							"string" : "Functions:\n\t[[Real functions of one real variable]],  [[Derivatives of functions of one variable]]\n\t[[Real functions of two real variables]]"
 						},
 						{
 							"__type" : "textSnippet",

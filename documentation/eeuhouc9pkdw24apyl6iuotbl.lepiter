@@ -1,14 +1,6 @@
 {
 	"__schema" : "4.1",
 	"__type" : "page",
-	"uid" : {
-		"__type" : "uuid",
-		"uuid" : "71b06d33-f59d-0d00-bc72-9245026a71f3"
-	},
-	"pageType" : {
-		"__type" : "namedPage",
-		"title" : "Sorts"
-	},
 	"children" : {
 		"__type" : "snippets",
 		"items" : [ ]
@@ -34,5 +26,13 @@
 			"__type" : "dateAndTime",
 			"dateAndTimeString" : "2022-06-16T18:52:32.61368+02:00"
 		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Sorts"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "71b06d33-f59d-0d00-bc72-9245026a71f3"
 	}
 }
