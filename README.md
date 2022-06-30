@@ -2,6 +2,9 @@
 
 The second iteration of [Leibniz](http://github.com/khinsen/leibniz), implemented in [Pharo](http://www.pharo.org/) making heavy use of the [Glamorous Toolkit](https://gtoolkit.com/)
 
+![screenshot](./screenshot.png)
+
+
 ## Installation in a [pre-built GToolkit](https://gtoolkit.com/) distribution
 
 Execute the following lines in a playground:
