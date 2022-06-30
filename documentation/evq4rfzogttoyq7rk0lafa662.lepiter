@@ -315,7 +315,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2021-08-16T17:53:33.019086+02:00"
+						"dateAndTimeString" : "2022-06-30T10:12:55.982022+02:00"
 					}
 				},
 				"editEmail" : {
@@ -326,17 +326,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-31T16:49:12.605469+02:00"
+						"dateAndTimeString" : "2022-06-30T10:13:36.761742+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "XxcP6hCGDQC/00AWD9Rc+w=="
+					"uidString" : "dO5ykgefDQC+hH1HBHHPSQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Leibniz is an experimental digital scientific notation, and best described as a research prototype. Play with it, but don't rely on it!"
+				"string" : "Summarizing Leibniz in a catchy phrase, it bridges the gap between mathematical notation and programming languages."
 			},
 			{
 				"__type" : "textSnippet",
@@ -374,6 +374,80 @@
 					"__type" : "textStyle"
 				},
 				"string" : "Leibniz is named after [Gottfried Wilhelm Leibniz](https://en.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz), who made important contributions to science, mathematics, formal logic, and computation, topics that are all relevant to this project. He invented a widely used [notation for calculus](https://en.wikipedia.org/wiki/Leibniz%27s_notation), laid the foundation of equational logic by his[definition of equality](https://en.wikipedia.org/wiki/Equality_%28mathematics%29), and anticipated formal logic with his [\"calculus ratiocinator\"](https://en.wikipedia.org/wiki/Calculus_ratiocinator)."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-30T10:15:34.186278+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-30T10:15:36.841976+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "K95MnAefDQC+h98dBHHPSQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "### Current status"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-30T10:15:46.906164+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-06-30T10:21:42.845672+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "LdSWnAefDQC+iCfZBHHPSQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Leibniz is currently a research prototype. It has a solid foundation (order-sorted term algbras, rewriting, equational logic), but the use of this foundation in the design of a notation that is suitable for communication between humans is still under exploration. Moreover, the implementation is in many aspects reserved for insider use. In particular, error checking is very incomplete and focuses on detecting typos rather than on guiding users in the formulation of correct and clear code. And while personally I don't mind dropping into a Pharo debugger when something goes wrong, but I am aware that this is not an acceptable behavior for an authoring systems meant for productive use in research."
 			},
 			{
 				"__type" : "textSnippet",
