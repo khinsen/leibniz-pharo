@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:23:41.464551+02:00"
+						"dateAndTimeString" : "2022-06-29T10:19:06.869656+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The Euler method, named after [Leonhard Euler](https://en.wikipedia.org/wiki/Leonhard_Euler) who first described it in the 18th century, is a simple method for solving differential equations."
+				"string" : "The Euler method, named after [Leonhard Euler](https://en.wikipedia.org/wiki/Leonhard_Euler) who first described it in the 18th century, is a simple method for finding a numerical approximation to the solution of a first-order ordinary differential equation."
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:26:20.913312+02:00"
+						"dateAndTimeString" : "2022-06-29T10:19:13.837446+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:27:56.127493+02:00"
+						"dateAndTimeString" : "2022-06-29T10:23:42.833659+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "5qzztuieDQCXmp6qBC7yCg=="
+					"uidString" : "L3yHi/OeDQCI0kiqAeWEYA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Let\n\t{{lzOp:f : ℝ → ℝ}}\nbe an unknown function and\n\t{{lzOp:g : ℝ → ℝ}}\na known function. The unknown function {{lzTerm:f}} is defined by the differential equation\n\t{{lzAxiom:𝒟(f) = g}}"
+				"string" : "The most general form of a differential equation to which the Euler method can be applied is\n\t{{lzAxiom:𝒟(f) = g[f]}},\nwhere the function\n\t{{lzOp:f : ℝ → ℝ}}\nis the unknown to be solved for, and\n\t{{lzOp:g : (ℝ → ℝ) → ℝ}}\nis a given function that can depend on {{lzTerm:f}}, but not on its derivatives."
 			}
 		]
 	},
