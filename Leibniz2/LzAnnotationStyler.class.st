@@ -158,38 +158,6 @@ LzAnnotationStyler >> styleObjectButton: anLzAnnotation color: aColor [
 		spawning: [ object second ].
 ]
 
-{ #category : #styling }
-LzAnnotationStyler >> styleUseContextButton: aTopLevelUseContext [
-	| declaration pageReference color attribute label |
-	self styleAutoHidingAnnotation: aTopLevelUseContext.
-
-	declaration := LzDeclarationBuilder new acceptNode: aTopLevelUseContext.
-	pageReference := declaration declaration contextName.
-	(LzBook hasPageNamed: pageReference)
-		ifFalse: [ ^ self ].
-
-	color := LzColors declarationColor.
-	label := pageReference asRopedText
-		foreground: color.
-	(declaration optionsAt: #forSorts)
-		ifTrue: [
-			label append:
-				(' (in sorts)' asRopedText foreground:  color lzDeemphasized) ].
-	attribute := GtButtonAttribute new
-		beAppend;
-		stencil: [
-			(self inTextButton: label)
-				action: [ :aButton |
-					aButton phlow spawnTool:
-						(LzBook pageNamed: pageReference)
-							asPhlowTool ];
-				yourself ].
-	self text
-		attribute: attribute
-		from: aTopLevelUseContext parent startPosition
-		to: aTopLevelUseContext parent stopPosition
-]
-
 { #category : #private }
 LzAnnotationStyler >> text [
 	^ self composite text
@@ -293,14 +261,20 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
-	| annotation declaration pageReference color attribute label subcontext |
+	| annotation declaration pageReference color attribute label |
+	self styleAnnotation: aTopLevelUseContext.
 	self styleAutoHidingAnnotation: aTopLevelUseContext.
 
 	annotation := LzDeclarationBuilder new acceptNode: aTopLevelUseContext.
 	declaration := annotation declaration.
 	pageReference := declaration contextName.
 	(LzBook hasPageNamed: pageReference)
-		ifFalse: [ ^ self ].
+		ifFalse: [
+			self text
+				attribute: (BlTextForegroundAttribute paint: Color red)
+				from: aTopLevelUseContext parent startPosition
+				to: aTopLevelUseContext parent stopPosition.
+			^ self ].
 
 	color := self colorFor: annotation.
 	label := pageReference asRopedText
