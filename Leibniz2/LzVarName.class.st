@@ -17,7 +17,7 @@ LzVarName >> addAsRopedTextTo: aRopedText [
 	text := internalSymbol asRopedText
 		attribute: LzVarNameAttribute new.
 	text
-		attribute: LzVarNameTrailingUnderscoreAttribute new
+		attribute: LzDoNotRenderAttribute new
 		from: text size to: text size + 1.
 	aRopedText append: text
 ]

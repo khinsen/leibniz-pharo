@@ -6,6 +6,7 @@ Class {
 
 { #category : #converting }
 LzSubscriptOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText argAttributes: anArrayOfAttributes [
+	| size |
 	self assert: anArrayOfTerms size > 1.
 	self
 		do: [ :t |
@@ -14,7 +15,9 @@ LzSubscriptOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText argAtt
 				parenthesized: anArrayOfTerms first isInfix ]
 		to: aRopedText
 		withAttributes: anArrayOfAttributes.
-	aRopedText append: '\(' asRopedText.
+	aRopedText append:
+		('\(' asRopedText attribute: LzDoNotRenderAttribute new).
+	size := aRopedText size.
 	anArrayOfTerms allButFirst
 		do: [ : each |
 			self
@@ -22,7 +25,11 @@ LzSubscriptOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText argAtt
 				to: aRopedText
 				withAttributes: anArrayOfAttributes ]
 		separatedBy: [ aRopedText append: ', ' asRopedText ].
-	aRopedText append: ')' asRopedText
+	aRopedText
+		attribute: LzSubscriptAttribute new
+		from: size + 1 to: aRopedText size + 1.
+	aRopedText append:
+		(')' asRopedText attribute: LzDoNotRenderAttribute new)
 ]
 
 { #category : #initializing }

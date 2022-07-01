@@ -1,10 +1,10 @@
 Class {
-	#name : #LzVarNameTrailingUnderscoreAttribute,
+	#name : #LzDoNotRenderAttribute,
 	#superclass : #LzSyntaxAttribute,
 	#category : #'Leibniz2-Rendering'
 }
 
 { #category : #rendering }
-LzVarNameTrailingUnderscoreAttribute >> visualAttributesForColor: aColor [
+LzDoNotRenderAttribute >> visualAttributesForColor: aColor [
 	^ { BlFontSizeAttribute new size: 0 }
 ]
