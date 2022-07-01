@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-01T09:19:18.820414+02:00"
+						"dateAndTimeString" : "2022-07-01T15:30:34.111594+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Derivatives of functions of one variable\"}}, {{lzUseContext:name = \"Function combinators\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Derivatives of functions of one variable\"}}\n\t- {{lzUseContext:name = \"Function combinators\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-01T09:41:41.019509+02:00"
+						"dateAndTimeString" : "2022-07-01T15:03:23.148744+02:00"
 					}
 				},
 				"editEmail" : {
@@ -140,17 +140,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-01T09:50:38.312516+02:00"
+						"dateAndTimeString" : "2022-07-01T15:31:49.533105+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "DPOrMxufDQCGkrK/AjPhTw=="
+					"uidString" : "syJ4vx+fDQCbPehFADlgEw=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The Euler method computes a discrete approximation to {{lzTerm:f}}, sampling the independent variable with a step size {{lzOp:h : ℝ}}. It starts from a given initial value {{lzTerm:f[0]}}, which corresponds to the freely choosable integration constant, and constructs subsequent values as:\n\t{{lzRule:n_:ℕ.nz, f[n_ × h] ⇒ f[pred(n_) × h] + (h × g[f[pred(n_) × h], pred(n_) × h])}}"
+				"string" : "The Euler method computes a discrete series {{lzTerm:n_:ℕ, f\\(n_)}} (with {{lzOp:(ℝ → ℝ)\\(ℕ) : ℝ}}) whose elements are approximations to the values {{lzTerm:n_:ℕ, f[n_ × h]}} of the unknown function {{lzTerm:f}}, where the step size {{lzOp:h : ℝ.p}} is an input parameter to the algorithm. It starts from a given initial value {{lzTerm:f\\(0)}}, which corresponds to the freely choosable integration constant, and constructs subsequent values as:\n\t{{lzRule:n_:ℕ.nz, f\\(n_) ⇒ f\\(pred(n_)) + (h × g[f\\(pred(n_)), pred(n_) × h])}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -171,7 +171,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-07-01T09:55:45.50468+02:00"
+									"dateAndTimeString" : "2022-07-01T15:34:04.498432+02:00"
 								}
 							},
 							"editEmail" : {
@@ -182,7 +182,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-07-01T10:07:39.277658+02:00"
+									"dateAndTimeString" : "2022-07-01T15:34:04.498432+02:00"
 								}
 							},
 							"uid" : {
@@ -192,7 +192,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "With {{lzRule:t_:ℝ, ft_:ℝ, g[ft_, t_] ⇒ 1, subcontext = \"example1\"}}, {{lzRule:f[0] ⇒ 0, subcontext = \"example1\"}} and {{lzRule:h ⇒ 1/10, subcontext = \"example1\"}}, we find\n\t{{lzTerm:f[1 × h], subcontext = \"example1\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f[2 × h], subcontext = \"example1\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f[3 × h], subcontext = \"example1\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f[4 × h], subcontext = \"example1\", withNormalForm = \"yes\"}}"
+							"string" : "With {{lzRule:t_:ℝ, ft_:ℝ, g[ft_, t_] ⇒ 1, subcontext = \"example1\"}}, {{lzRule:f\\(0) ⇒ 0, subcontext = \"example1\"}} and {{lzRule:h ⇒ 1/10, subcontext = \"example1\"}}, we find\n\t{{lzTerm:f\\(1), subcontext = \"example1\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f\\(2), subcontext = \"example1\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f\\(3), subcontext = \"example1\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f\\(4), subcontext = \"example1\", withNormalForm = \"yes\"}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -208,7 +208,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-07-01T10:08:30.842377+02:00"
+									"dateAndTimeString" : "2022-07-01T15:35:03.133646+02:00"
 								}
 							},
 							"editEmail" : {
@@ -219,7 +219,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-07-01T10:08:30.842377+02:00"
+									"dateAndTimeString" : "2022-07-01T15:35:31.417115+02:00"
 								}
 							},
 							"uid" : {
@@ -229,7 +229,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "With {{lzRule:t_:ℝ, ft_:ℝ, g[ft_, t_] ⇒ ft_, subcontext = \"example2\"}}, {{lzRule:f[0] ⇒ 0, subcontext = \"example2\"}} and {{lzRule:h ⇒ 1/10, subcontext = \"example2\"}}, we find\n\t{{lzTerm:f[1 × h], subcontext = \"example2\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f[2 × h], subcontext = \"example2\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f[3 × h], subcontext = \"example2\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f[4 × h], subcontext = \"example2\", withNormalForm = \"yes\"}}"
+							"string" : "With {{lzRule:t_:ℝ, ft_:ℝ, g[ft_, t_] ⇒ ft_, subcontext = \"example2\"}}, {{lzRule:f\\(0) ⇒ 1, subcontext = \"example2\"}} and {{lzRule:h ⇒ 1/10, subcontext = \"example2\"}}, we find\n\t{{lzTerm:f\\(1), subcontext = \"example2\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f\\(2), subcontext = \"example2\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f\\(3), subcontext = \"example2\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f\\(4), subcontext = \"example2\", withNormalForm = \"yes\"}}"
 						}
 					]
 				},

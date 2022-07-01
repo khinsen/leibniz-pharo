@@ -267,6 +267,43 @@
 								"__type" : "textStyle"
 							},
 							"string" : "Aggregate data structures:\n\t[[Tuples]]\n\t[[One-dimensional arrays]]"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-07-01T15:05:01.137062+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-07-01T15:09:19.031409+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "By8OxB+fDQCbPjsrADlgEw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Syntax:\n\t[[Subscript tags]]"
 						}
 					]
 				},
