@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:25:24.362446+02:00"
+						"dateAndTimeString" : "2022-07-01T09:19:18.820414+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Derivatives of functions of one variable\"}}"
+				"string" : "Uses {{lzUseContext:name = \"Derivatives of functions of one variable\"}}, {{lzUseContext:name = \"Function combinators\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-29T10:19:06.869656+02:00"
+						"dateAndTimeString" : "2022-06-30T10:08:08.087497+02:00"
 					}
 				},
 				"uid" : {
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-29T10:23:42.833659+02:00"
+						"dateAndTimeString" : "2022-07-01T09:37:56.548768+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,156 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The most general form of a differential equation to which the Euler method can be applied is\n\t{{lzAxiom:𝒟(f) = g[f]}},\nwhere the function\n\t{{lzOp:f : ℝ → ℝ}}\nis the unknown to be solved for, and\n\t{{lzOp:g : (ℝ → ℝ) → ℝ}}\nis a given function that can depend on {{lzTerm:f}}, but not on its derivatives."
+				"string" : "The most general form of a differential equation to which the Euler method can be applied is\n\t{{lzAxiom:𝒟(f) = g ⚬ fork(f, id)}},\nwhere the function\n\t{{lzOp:f : ℝ → ℝ}}\nis the unknown to be solved for, and\n\t{{lzOp:g : Tuple(ℝ, ℝ) → ℝ}}\nis an arbitrary function of two real arguments."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-07-01T09:41:41.019509+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-07-01T09:50:38.312516+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "DPOrMxufDQCGkrK/AjPhTw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The Euler method computes a discrete approximation to {{lzTerm:f}}, sampling the independent variable with a step size {{lzOp:h : ℝ}}. It starts from a given initial value {{lzTerm:f[0]}}, which corresponds to the freely choosable integration constant, and constructs subsequent values as:\n\t{{lzRule:n_:ℕ.nz, f[n_ × h] ⇒ f[pred(n_) × h] + (h × g[f[pred(n_) × h], pred(n_) × h])}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-07-01T09:55:45.50468+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-07-01T10:07:39.277658+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "xp+rbhufDQCGl3fuAjPhTw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "With {{lzRule:t_:ℝ, ft_:ℝ, g[ft_, t_] ⇒ 1, subcontext = \"example1\"}}, {{lzRule:f[0] ⇒ 0, subcontext = \"example1\"}} and {{lzRule:h ⇒ 1/10, subcontext = \"example1\"}}, we find\n\t{{lzTerm:f[1 × h], subcontext = \"example1\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f[2 × h], subcontext = \"example1\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f[3 × h], subcontext = \"example1\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f[4 × h], subcontext = \"example1\", withNormalForm = \"yes\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-07-01T10:08:30.842377+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-07-01T10:08:30.842377+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "LR5jfhufDQCGnOzVAjPhTw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "With {{lzRule:t_:ℝ, ft_:ℝ, g[ft_, t_] ⇒ ft_, subcontext = \"example2\"}}, {{lzRule:f[0] ⇒ 0, subcontext = \"example2\"}} and {{lzRule:h ⇒ 1/10, subcontext = \"example2\"}}, we find\n\t{{lzTerm:f[1 × h], subcontext = \"example2\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f[2 × h], subcontext = \"example2\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f[3 × h], subcontext = \"example2\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f[4 × h], subcontext = \"example2\", withNormalForm = \"yes\"}}"
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-07-01T09:54:24.224393+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-07-01T10:08:51.556302+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "eMgubhufDQCGlbU7AjPhTw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "### Examples"
 			}
 		]
 	},
