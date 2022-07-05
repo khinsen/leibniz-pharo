@@ -36,7 +36,7 @@ LzArrayTerm >> addElementsOf: anArray shape: shapeArray asRopedTextTo: aRopedTex
 					shape: elementShape asRopedTextTo: aRopedText ].
 		index := index + elementSize.
 		index > anArray size ifFalse: [ aRopedText append: ', ' asRopedText ] ].
-	aRopedText append: ']'
+	aRopedText append: ']' asRopedText
 ]
 
 { #category : #transforming }
@@ -106,7 +106,7 @@ LzArrayTerm >> fingerprint [
 LzArrayTerm >> index: anInteger [
 	self assert: self shape size == 1.
 	^ elements
-		at: anInteger
+		at: anInteger value
 		ifAbsent: [ LzRewriteFailure signal: 'index ', anInteger asString, ' out of range' ]
 ]
 

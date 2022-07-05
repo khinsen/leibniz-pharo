@@ -218,6 +218,12 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 				sort := term sort asRopedTextColored: color lzDeemphasized.
 				output append: colon.
 				output append: sort ].
+		(annotatedDeclaration optionsAt: #withNormalForm)
+			ifTrue: [
+				| normalForm |
+				normalForm := term normalForm asRopedTextColored: color.
+				output append: (' ⇒ ' asRopedText foreground: color; fontName: LzCodeFont defaultFamily).
+				output append: normalForm ].
 		label := LzSyntaxLabel new
 					text: output;
 					declaration: declaration;

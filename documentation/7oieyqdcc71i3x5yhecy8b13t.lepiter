@@ -182,7 +182,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-07-01T08:43:36.055322+02:00"
+									"dateAndTimeString" : "2022-07-05T15:17:03.739854+02:00"
 								}
 							},
 							"uid" : {
@@ -256,7 +256,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-30T13:33:51.089971+02:00"
+									"dateAndTimeString" : "2022-07-05T15:22:12.882936+02:00"
 								}
 							},
 							"uid" : {
@@ -266,7 +266,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Aggregate data structures:\n\t[[Tuples]]\n\t[[One-dimensional arrays]]"
+							"string" : "Aggregate data structures:\n\t[[Tuples]]\n\t[[One-dimensional arrays]], [[One-dimensional array indexation]]"
 						},
 						{
 							"__type" : "textSnippet",
