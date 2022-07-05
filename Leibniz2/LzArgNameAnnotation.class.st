@@ -9,7 +9,7 @@ Class {
 
 { #category : #converting }
 LzArgNameAnnotation >> addAsFirstArgOfInfixTermWithOpName: anOpName asRopedTextTo: aRopedText [
-	self declaration addAsRopedTextTo: aRopedText
+	self addAsRopedTextTo: aRopedText
 ]
 
 { #category : #converting }
