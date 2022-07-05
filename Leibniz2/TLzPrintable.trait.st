@@ -69,16 +69,8 @@ TLzPrintable >> gtSyntaxFor: aView [
 	^ aView explicit
 		title: 'Syntax';
 		priority: 9;
-		stencil: [
-			BrEditorElement new
-				padding: (BlInsets all: 10);
-				constraintsDo: [ :c | 
-					c vertical matchParent. 
-					c horizontal matchParent ];
-				editor: (BrTextEditor new
-					beReadOnlyWithSelection;
-					text: (self asRopedTextColored: Color black)
-								glamorousRegularSize ) ]
+		stencil: [ (LzSyntaxLabel for: self) asElement
+					padding: (BlInsets all: 10) ]
 ]
 
 { #category : #printing }

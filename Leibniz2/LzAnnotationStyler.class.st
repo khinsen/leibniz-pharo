@@ -106,20 +106,31 @@ LzAnnotationStyler >> styleButton: anLzAnnotation label: aText spawning: aBlock 
 
 { #category : #styling }
 LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation [
-	| annotatedDeclaration declaration color |
+	| annotatedDeclaration declaration color attribute |
 	annotatedDeclaration := LzDeclarationBuilder new
 			acceptNode: anLzAnnotation.
 	declaration := annotatedDeclaration declaration.
 	color := self colorFor: annotatedDeclaration.
-	self
+"	self
 		styleButton: anLzAnnotation
 		label: (declaration asRopedTextColored: color)
-		spawning: [ declaration ].
+		spawning: [ declaration ]."
+	attribute := GtButtonAttribute new
+		beAppend;
+		stencil: [ ((LzSyntaxLabel for: declaration color: color)
+						declaration: declaration;
+						beSmallSize) asElement
+						padding: (BlInsets top: 0 left: 0 bottom: 0 right: 0);
+						margin: (BlInsets top: 0 left: 0 bottom: -2 right: 0) ].
+	self text
+		attribute: attribute
+		from: anLzAnnotation parent startPosition
+		to: anLzAnnotation parent stopPosition
 ]
 
 { #category : #styling }
 LzAnnotationStyler >> styleObjectButton: anLzAnnotation [
-	| text object annotatedDeclaration color |
+	| text object annotatedDeclaration color declaration attribute |
 	text := [
 		object :=  LzObjectBuilder new
 			contextPageName: self page title;
@@ -132,30 +143,21 @@ LzAnnotationStyler >> styleObjectButton: anLzAnnotation [
 		ex freeze.
 		object := ex.
 		ex return: (ex printString asRopedText foreground: Color red) ].
-	self
+"	self
 		styleButton: anLzAnnotation
 		label: text
-		spawning: [ object ].
-]
-
-{ #category : #styling }
-LzAnnotationStyler >> styleObjectButton: anLzAnnotation color: aColor [
-	| text object annotatedDeclaration color |
-	text := [
-		object :=  LzObjectBuilder new
-			contextPageName: self page title;
-			acceptNode: anLzAnnotation.
-		annotatedDeclaration := object first.
-		object := object second.
-		color := self colorFor: annotatedDeclaration.
-		annotatedDeclaration asRopedTextColored: color.
-	] on: Exception do: [ :ex |
-		ex debug.
-		ex return: (ex printString asRopedText foreground: Color red) ].
-	self
-		styleButton: anLzAnnotation
-		label: text
-		spawning: [ object second ].
+		spawning: [ object ]."
+	declaration := annotatedDeclaration declaration.
+	attribute := GtButtonAttribute new
+		beAppend;
+		stencil: [ (LzSyntaxLabel for: declaration color: color)
+						beSmallSize;
+						declaration: declaration ;
+						object: object ].
+	self text
+		attribute: attribute
+		from: anLzAnnotation parent startPosition
+		to: anLzAnnotation parent stopPosition
 ]
 
 { #category : #private }
