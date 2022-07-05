@@ -48,13 +48,6 @@ LzAnnotationStyler >> inTextButton: aText [
 	^ button
 ]
 
-{ #category : #private }
-LzAnnotationStyler >> inTextButton: aText spawning: aBlock [
-	^ (self inTextButton: aText)
-		action: [ :aButton |
-					aButton phlow spawnObject: aBlock value ]
-]
-
 { #category : #accessing }
 LzAnnotationStyler >> page [
 	^ self snippet page
@@ -92,36 +85,19 @@ LzAnnotationStyler >> styleAutoHidingAnnotation: anAnnotation [
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleButton: anLzAnnotation label: aText spawning: aBlock [
-	| attribute |
-	attribute := GtButtonAttribute new
-		beAppend;
-		stencil: [
-			self inTextButton: aText spawning: aBlock ].
-	self text
-		attribute: attribute
-		from: anLzAnnotation parent startPosition
-		to: anLzAnnotation parent stopPosition
-]
-
-{ #category : #styling }
 LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation [
-	| annotatedDeclaration declaration color attribute |
+	| annotatedDeclaration declaration label attribute |
 	annotatedDeclaration := LzDeclarationBuilder new
 			acceptNode: anLzAnnotation.
 	declaration := annotatedDeclaration declaration.
-	color := self colorFor: annotatedDeclaration.
-"	self
-		styleButton: anLzAnnotation
-		label: (declaration asRopedTextColored: color)
-		spawning: [ declaration ]."
+	label := (LzSyntaxLabel
+				for: declaration
+				color: (self colorFor: annotatedDeclaration))
+				declaration: declaration.
 	attribute := GtButtonAttribute new
 		beAppend;
-		stencil: [ ((LzSyntaxLabel for: declaration color: color)
-						declaration: declaration;
-						beSmallSize) asElement
-						padding: (BlInsets top: 0 left: 0 bottom: 0 right: 0);
-						margin: (BlInsets top: 0 left: 0 bottom: -2 right: 0) ].
+		stencil: [ (label beSmallSize) asElement
+					padding: (BlInsets top: 2 left: 0 bottom: 0 right: 0) ].
 	self text
 		attribute: attribute
 		from: anLzAnnotation parent startPosition
@@ -130,30 +106,28 @@ LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation [
 
 { #category : #styling }
 LzAnnotationStyler >> styleObjectButton: anLzAnnotation [
-	| text object annotatedDeclaration color declaration attribute |
-	text := [
+	| object annotatedDeclaration declaration label attribute |
+	[
 		object :=  LzObjectBuilder new
 			contextPageName: self page title;
 			acceptNode: anLzAnnotation.
 		annotatedDeclaration := object first.
+		declaration := annotatedDeclaration declaration.
 		object := object second.
-		color := self colorFor: annotatedDeclaration.
-		annotatedDeclaration asRopedTextColored: color.
+		label := (LzSyntaxLabel
+					for: declaration
+					color: (self colorFor: annotatedDeclaration))
+					declaration: declaration ;
+					object: object.
 	] on: Exception do: [ :ex |
 		ex freeze.
-		object := ex.
-		ex return: (ex printString asRopedText foreground: Color red) ].
-"	self
-		styleButton: anLzAnnotation
-		label: text
-		spawning: [ object ]."
-	declaration := annotatedDeclaration declaration.
+		label := LzSyntaxLabel new
+					text: (ex printString asRopedText foreground: Color red);
+					declaration: ex ].
 	attribute := GtButtonAttribute new
 		beAppend;
-		stencil: [ (LzSyntaxLabel for: declaration color: color)
-						beSmallSize;
-						declaration: declaration ;
-						object: object ].
+		stencil: [ (label beSmallSize) asElement
+					padding: (BlInsets top: 2 left: 0 bottom: 0 right: 0) ].
 	self text
 		attribute: attribute
 		from: anLzAnnotation parent startPosition
@@ -222,17 +196,18 @@ LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
-	| object term text color annotatedDeclaration |
+	| label attribute |
 	self styleAnnotation: aTopLevelTermAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.
 
-	color := LzColors exampleColor.
-	text := [
-		| output |
+	[
+		| color object term annotatedDeclaration declaration  output |
+		color := LzColors exampleColor.
 		object := LzObjectBuilder new
 			contextPageName: self page title;
 			acceptNode: aTopLevelTermAnnotation.
 		annotatedDeclaration := object first.
+		declaration := annotatedDeclaration declaration.
 		term := object second.
 		output := annotatedDeclaration asRopedTextColored: color.
 		(annotatedDeclaration optionsAt: #withSort)
@@ -243,29 +218,29 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 				sort := term sort asRopedTextColored: color lzDeemphasized.
 				output append: colon.
 				output append: sort ].
-		(annotatedDeclaration optionsAt: #withNormalForm)
-			ifTrue: [
-				| normalForm |
-				normalForm := term normalForm asRopedTextColored: color.
-				output append: (' ⇒ ' asRopedText foreground: color).
-				output append: normalForm ].
-		output
+		label := LzSyntaxLabel new
+					text: output;
+					declaration: declaration;
+					object: term
 	] on: Exception do: [ :ex |
 	 	ex freeze.
-	 	term := ex.
-	 	ex return: (ex printString asRopedText foreground: Color red) ].
+	 	label := LzSyntaxLabel new
+					text: (ex printString asRopedText foreground: Color red);
+					declaration: ex  ].
 
-	self
-		styleButton: aTopLevelTermAnnotation
-		label: text
-		spawning: [ term ]
+	attribute := GtButtonAttribute new
+		beAppend;
+		stencil: [ label beSmallSize ].
+	self text
+		attribute: attribute
+		from: aTopLevelTermAnnotation parent startPosition
+		to: aTopLevelTermAnnotation parent stopPosition
 ]
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
 	| annotation declaration pageReference color attribute label |
 	self styleAnnotation: aTopLevelUseContext.
-	self styleAutoHidingAnnotation: aTopLevelUseContext.
 
 	annotation := LzDeclarationBuilder new acceptNode: aTopLevelUseContext.
 	declaration := annotation declaration.
@@ -277,6 +252,8 @@ LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
 				from: aTopLevelUseContext parent startPosition
 				to: aTopLevelUseContext parent stopPosition.
 			^ self ].
+
+	self styleAutoHidingAnnotation: aTopLevelUseContext.
 
 	color := self colorFor: annotation.
 	label := pageReference asRopedText
