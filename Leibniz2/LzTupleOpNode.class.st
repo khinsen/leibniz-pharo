@@ -1,8 +1,8 @@
 Class {
-	#name : #LzSuperscriptOpNode,
+	#name : #LzTupleOpNode,
 	#superclass : #LzOpNode,
 	#instVars : [
-		'opName',
+		'leftParen',
 		'commas',
 		'rightParen'
 	],
@@ -10,52 +10,52 @@ Class {
 }
 
 { #category : #generated }
-LzSuperscriptOpNode >> acceptVisitor: aParseTreeVisitor [
-	^ aParseTreeVisitor visitSuperscriptOp: self
+LzTupleOpNode >> acceptVisitor: aParseTreeVisitor [
+	^ aParseTreeVisitor visitTupleOp: self
 ]
 
 { #category : #generated }
-LzSuperscriptOpNode >> commas [
+LzTupleOpNode >> commas [
 	^ commas
 ]
 
 { #category : #generated }
-LzSuperscriptOpNode >> commas: anOrderedCollection [
+LzTupleOpNode >> commas: anOrderedCollection [
 	commas := anOrderedCollection
 ]
 
 { #category : #generated }
-LzSuperscriptOpNode >> compositeTokenVariables [
+LzTupleOpNode >> compositeTokenVariables [
 	^ #(#commas)
 ]
 
 { #category : #'generated-initialize-release' }
-LzSuperscriptOpNode >> initialize [
+LzTupleOpNode >> initialize [
 	super initialize.
 	commas := OrderedCollection new: 2.
 ]
 
 { #category : #generated }
-LzSuperscriptOpNode >> opName [
-	^ opName
+LzTupleOpNode >> leftParen [
+	^ leftParen
 ]
 
 { #category : #generated }
-LzSuperscriptOpNode >> opName: aSmaCCToken [
-	opName := aSmaCCToken
+LzTupleOpNode >> leftParen: aSmaCCToken [
+	leftParen := aSmaCCToken
 ]
 
 { #category : #generated }
-LzSuperscriptOpNode >> rightParen [
+LzTupleOpNode >> rightParen [
 	^ rightParen
 ]
 
 { #category : #generated }
-LzSuperscriptOpNode >> rightParen: aSmaCCToken [
+LzTupleOpNode >> rightParen: aSmaCCToken [
 	rightParen := aSmaCCToken
 ]
 
 { #category : #generated }
-LzSuperscriptOpNode >> tokenVariables [
-	^ #(#opName #rightParen)
+LzTupleOpNode >> tokenVariables [
+	^ #(#leftParen #rightParen)
 ]

@@ -181,6 +181,16 @@ TLzParseTreeNodeVisitor >> visitTopLevelUseContext: aTopLevelUseContext [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitTupleOp: aTupleOp [
+	^ self visitOp: aTupleOp
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitTupleTerm: aTupleTerm [
+	^ self visitTerm: aTupleTerm
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitVar: aVar [
 	^ self visitParseTree: aVar
 ]

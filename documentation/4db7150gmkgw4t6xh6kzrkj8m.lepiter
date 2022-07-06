@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:35:23.600418+02:00"
+						"dateAndTimeString" : "2022-07-06T17:55:09.508204+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +66,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:37:39.270159+02:00"
+						"dateAndTimeString" : "2022-07-06T18:03:24.269544+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "SEh6YwqfDQC+rYqyBHHPSQ=="
+					"uidString" : "vh5buYafDQCslp/SD8/KKQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sorts for tuples are:\n\t{{lzSort:Tuple(sort:𝕊)}}\n\t{{lzSort:Tuple(sort1:𝕊,sort2:𝕊)}}\n\t{{lzSort:Tuple(sort1:𝕊, sort2:𝕊, sort3:𝕊)}}"
+				"string" : "The sorts for tuples are:\n\t{{lzSort:(sort:𝕊,)}}\n\t{{lzSort:(sort1:𝕊,sort2:𝕊)}}\n\t{{lzSort:(sort1:𝕊, sort2:𝕊, sort3:𝕊)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:38:44.593102+02:00"
+						"dateAndTimeString" : "2022-07-06T18:06:07.588394+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:41:05.310111+02:00"
+						"dateAndTimeString" : "2022-07-06T18:06:07.588394+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "ypsWcQqfDQC+s7zfBHHPSQ=="
+					"uidString" : "CWQ44oafDQC4DzhwAF+jqg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The operators for constructing tuples look very similar:\n\t{{lzOp:s_:𝕊, Tuple(s_) : Tuple(s_)}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, Tuple(s1_, s2_) : Tuple(s1_, s2_)}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, s3_:𝕊, Tuple(s1_, s2_, s3_) : Tuple(s1_, s2_, s3_)}}"
+				"string" : "The operators for constructing tuples look very similar:\n\t{{lzOp:s_:𝕊, (s_,) : (s_,)}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, (s1_, s2_) : (s1_, s2_)}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, s3_:𝕊, (s1_, s2_, s3_) : (s1_, s2_, s3_)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -182,7 +182,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-30T13:47:01.295398+02:00"
+									"dateAndTimeString" : "2022-07-06T18:06:40.548619+02:00"
 								}
 							},
 							"uid" : {
@@ -192,7 +192,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "A few tuple terms:\n\t{{lzTerm:Tuple(1, 2, 3), subcontext = \"example\", withSort = \"yes\"}}\n\t{{lzTerm:Tuple(anInteger, 1/2), subcontext = \"example\", withSort = \"yes\"}} (with  {{lzOp:anInteger:ℤ, subcontext = \"example\"}})\n\t{{lzTerm:Tuple(\"a string\", anInteger), subcontext = \"example\", withSort = \"yes\"}}"
+							"string" : "A few tuple terms:\n\t{{lzTerm:(1, 2, 3), subcontext = \"example\", withSort = \"yes\"}}\n\t{{lzTerm:(anInteger, 1/2), subcontext = \"example\", withSort = \"yes\"}} (with  {{lzOp:anInteger:ℤ, subcontext = \"example\"}})\n\t{{lzTerm:(\"a string\", anInteger), subcontext = \"example\", withSort = \"yes\"}}"
 						}
 					]
 				},

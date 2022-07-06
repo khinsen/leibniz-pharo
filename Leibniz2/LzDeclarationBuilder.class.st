@@ -322,6 +322,19 @@ LzDeclarationBuilder >> visitTopLevelUseContext: aTopLevelUseContext [
 ]
 
 { #category : #visiting }
+LzDeclarationBuilder >> visitTupleOp: aTupleOp [
+	^ LzOpDeclaration new
+		name: LzTupleOpName new
+]
+
+{ #category : #visiting }
+LzDeclarationBuilder >> visitTupleTerm: aTupleTerm [
+	^ LzOpTermDeclaration new
+		opName: LzTupleOpName new;
+		args: (aTupleTerm args collect: [ :each | self acceptNode: each ])
+]
+
+{ #category : #visiting }
 LzDeclarationBuilder >> visitVarTerm: aVarTerm [
 	^ LzVarTermDeclaration new
 		name: (LzVarName for: aVarTerm varName value)

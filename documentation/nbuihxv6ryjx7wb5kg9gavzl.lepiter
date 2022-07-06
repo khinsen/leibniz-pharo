@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-01T09:37:56.548768+02:00"
+						"dateAndTimeString" : "2022-07-06T18:09:38.929859+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The most general form of a differential equation to which the Euler method can be applied is\n\t{{lzAxiom:𝒟(f) = g ⚬ fork(f, id)}},\nwhere the function\n\t{{lzOp:f : ℝ → ℝ}}\nis the unknown to be solved for, and\n\t{{lzOp:g : Tuple(ℝ, ℝ) → ℝ}}\nis an arbitrary function of two real arguments."
+				"string" : "The most general form of a differential equation to which the Euler method can be applied is\n\t{{lzAxiom:𝒟(f) = g ⚬ fork(f, id)}},\nwhere the function\n\t{{lzOp:f : ℝ → ℝ}}\nis the unknown to be solved for, and\n\t{{lzOp:g : (ℝ, ℝ) → ℝ}}\nis an arbitrary function of two real arguments."
 			},
 			{
 				"__type" : "textSnippet",

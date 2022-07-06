@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:53:37.639894+02:00"
+						"dateAndTimeString" : "2022-07-06T18:11:31.847409+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:53:42.591591+02:00"
+						"dateAndTimeString" : "2022-07-06T18:11:31.847409+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sum, difference, product, and quotient of two functions is another function:\n\t{{lzOp:(Tuple(ℝ, ℝ) → ℝ) + (Tuple(ℝ, ℝ) → ℝ) : Tuple(ℝ, ℝ) → ℝ}}\n\t{{lzOp:(Tuple(ℝ, ℝ) → ℝ) - (Tuple(ℝ, ℝ) → ℝ) : Tuple(ℝ, ℝ) → ℝ}}\n\t{{lzOp:(Tuple(ℝ, ℝ) → ℝ) × (Tuple(ℝ, ℝ) → ℝ) : Tuple(ℝ, ℝ) → ℝ}}\n\t{{lzOp:(Tuple(ℝ, ℝ) → ℝ) ÷ (Tuple(ℝ, ℝ) → ℝ) : Tuple(ℝ, ℝ) → ℝ}}"
+				"string" : "The sum, difference, product, and quotient of two functions is another function:\n\t{{lzOp:((ℝ, ℝ) → ℝ) + ((ℝ, ℝ) → ℝ) : (ℝ, ℝ) → ℝ}}\n\t{{lzOp:((ℝ, ℝ) → ℝ) - ((ℝ, ℝ) → ℝ) : (ℝ, ℝ) → ℝ}}\n\t{{lzOp:((ℝ, ℝ) → ℝ) × ((ℝ, ℝ) → ℝ) : (ℝ, ℝ) → ℝ}}\n\t{{lzOp:((ℝ, ℝ) → ℝ) ÷ ((ℝ, ℝ) → ℝ) : (ℝ, ℝ) → ℝ}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:53:51.428117+02:00"
+						"dateAndTimeString" : "2022-07-06T18:11:55.174089+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:53:55.113901+02:00"
+						"dateAndTimeString" : "2022-07-06T18:11:55.174089+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Addition and multiplication are commutative and associative:\n\t{{lzAxiom:f_:Tuple(ℝ, ℝ) → ℝ, g_:Tuple(ℝ, ℝ) → ℝ, f_ + g_ = g_ + f_}}\n\t{{lzAxiom:f_:Tuple(ℝ, ℝ) → ℝ, g_:Tuple(ℝ, ℝ) → ℝ, f_ × g_ = g_ × f_}}\n\t{{lzAxiom:f_:Tuple(ℝ, ℝ) → ℝ, g_:Tuple(ℝ, ℝ) → ℝ, h_:Tuple(ℝ, ℝ) → ℝ, (f_ + g_) + h_ = f_ + (g_ + h_)}}\n\t{{lzAxiom:f_:Tuple(ℝ, ℝ) → ℝ, g_:Tuple(ℝ, ℝ) → ℝ, h_:Tuple(ℝ, ℝ) → ℝ,  (f_ × g_) × h_ = f_ × (g_ × h_)}}"
+				"string" : "Addition and multiplication are commutative and associative:\n\t{{lzAxiom:f_:(ℝ, ℝ) → ℝ, g_:(ℝ, ℝ) → ℝ, f_ + g_ = g_ + f_}}\n\t{{lzAxiom:f_:(ℝ, ℝ) → ℝ, g_:(ℝ, ℝ) → ℝ, f_ × g_ = g_ × f_}}\n\t{{lzAxiom:f_:(ℝ, ℝ) → ℝ, g_:(ℝ, ℝ) → ℝ, h_:(ℝ, ℝ) → ℝ, (f_ + g_) + h_ = f_ + (g_ + h_)}}\n\t{{lzAxiom:f_:(ℝ, ℝ) → ℝ, g_:(ℝ, ℝ) → ℝ, h_:(ℝ, ℝ) → ℝ,  (f_ × g_) × h_ = f_ × (g_ × h_)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:54:08.623269+02:00"
+						"dateAndTimeString" : "2022-07-06T18:12:17.456571+02:00"
 					}
 				},
 				"editEmail" : {
@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:54:11.543955+02:00"
+						"dateAndTimeString" : "2022-07-06T18:12:17.456571+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:f_:Tuple(ℝ, ℝ) → ℝ, g_:Tuple(ℝ, ℝ) → ℝ, h_:Tuple(ℝ, ℝ) → ℝ,  f_ × (g_ + h_) = (f_ × g_) + (f_ × h_)}}"
+				"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:f_:(ℝ, ℝ) → ℝ, g_:(ℝ, ℝ) → ℝ, h_:(ℝ, ℝ) → ℝ,  f_ × (g_ + h_) = (f_ × g_) + (f_ × h_)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -166,7 +166,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:54:19.974808+02:00"
+						"dateAndTimeString" : "2022-07-06T18:12:36.411214+02:00"
 					}
 				},
 				"editEmail" : {
@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:54:22.509714+02:00"
+						"dateAndTimeString" : "2022-07-06T18:12:36.411214+02:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sum, difference, product, and quotient of a function and a number is a function:\n\t{{lzOp:(Tuple(ℝ, ℝ) → ℝ) + ℝ : Tuple(ℝ, ℝ) → ℝ}}\n\t{{lzOp:ℝ + (Tuple(ℝ, ℝ) → ℝ) : Tuple(ℝ, ℝ) → ℝ}}\n\t{{lzOp:(Tuple(ℝ, ℝ) → ℝ) - ℝ : Tuple(ℝ, ℝ) → ℝ}}\n\t{{lzOp:ℝ - (Tuple(ℝ, ℝ) → ℝ) : Tuple(ℝ, ℝ) → ℝ}}\n\t{{lzOp:(Tuple(ℝ, ℝ) → ℝ) × ℝ : Tuple(ℝ, ℝ) → ℝ}}\n\t{{lzOp:ℝ × (Tuple(ℝ, ℝ) → ℝ) : Tuple(ℝ, ℝ) → ℝ}}\n\t{{lzOp:(Tuple(ℝ, ℝ) → ℝ) ÷ ℝ : Tuple(ℝ, ℝ) → ℝ}}\n\t{{lzOp:ℝ ÷ (Tuple(ℝ, ℝ) → ℝ) : Tuple(ℝ, ℝ) → ℝ}}"
+				"string" : "The sum, difference, product, and quotient of a function and a number is a function:\n\t{{lzOp:((ℝ, ℝ) → ℝ) + ℝ : (ℝ, ℝ) → ℝ}}\n\t{{lzOp:ℝ + ((ℝ, ℝ) → ℝ) : (ℝ, ℝ) → ℝ}}\n\t{{lzOp:((ℝ, ℝ) → ℝ) - ℝ : (ℝ, ℝ) → ℝ}}\n\t{{lzOp:ℝ - ((ℝ, ℝ) → ℝ) : (ℝ, ℝ) → ℝ}}\n\t{{lzOp:((ℝ, ℝ) → ℝ) × ℝ : (ℝ, ℝ) → ℝ}}\n\t{{lzOp:ℝ × ((ℝ, ℝ) → ℝ) : (ℝ, ℝ) → ℝ}}\n\t{{lzOp:((ℝ, ℝ) → ℝ) ÷ ℝ : (ℝ, ℝ) → ℝ}}\n\t{{lzOp:ℝ ÷ ((ℝ, ℝ) → ℝ) : (ℝ, ℝ) → ℝ}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -214,7 +214,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:54:27.081518+02:00"
+						"dateAndTimeString" : "2022-07-06T18:12:51.944251+02:00"
 					}
 				},
 				"uid" : {
@@ -224,7 +224,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Addition and multiplication are commutative and associative:\n\t{{lzAxiom:f_:Tuple(ℝ, ℝ) → ℝ, s_:ℝ, f_ + s_ = s_ + f_}}\n\t{{lzAxiom:f_:Tuple(ℝ, ℝ) → ℝ, s_:ℝ, f_ × s_ = s_ × f_}}"
+				"string" : "Addition and multiplication are commutative and associative:\n\t{{lzAxiom:f_:(ℝ, ℝ) → ℝ, s_:ℝ, f_ + s_ = s_ + f_}}\n\t{{lzAxiom:f_:(ℝ, ℝ) → ℝ, s_:ℝ, f_ × s_ = s_ × f_}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -251,7 +251,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:54:31.622372+02:00"
+						"dateAndTimeString" : "2022-07-06T18:13:02.807447+02:00"
 					}
 				},
 				"uid" : {
@@ -261,7 +261,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:f_:Tuple(ℝ, ℝ) → ℝ, g_:Tuple(ℝ, ℝ) → ℝ, s_:ℝ,  s_ × (f_ + g_) = (s_ × f_) + (s_ × g_)}}"
+				"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:f_:(ℝ, ℝ) → ℝ, g_:(ℝ, ℝ) → ℝ, s_:ℝ,  s_ × (f_ + g_) = (s_ × f_) + (s_ × g_)}}"
 			}
 		]
 	},

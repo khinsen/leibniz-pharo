@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-01T09:18:32.018431+02:00"
+						"dateAndTimeString" : "2022-07-06T18:08:37.181486+02:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A *fork* combines two functions of one argument into a single function of one argument whose result is the tuple combining the results of the input functions:\n\t{{lzOp:d_:𝕊, i1_:𝕊, i2_:𝕊, fork(d_ → i1_, d_ → i2_) : d_ → Tuple(i1_, i2_)}}"
+				"string" : "A *fork* combines two functions of one argument into a single function of one argument whose result is the tuple combining the results of the input functions:\n\t{{lzOp:d_:𝕊, i1_:𝕊, i2_:𝕊, fork(d_ → i1_, d_ → i2_) : d_ → (i1_, i2_)}}"
 			},
 			{
 				"__type" : "textSnippet",
