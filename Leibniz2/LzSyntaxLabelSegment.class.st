@@ -52,5 +52,6 @@ LzSyntaxLabelSegment >> text: aText [
 	aText attributesDo: [ :attrs :index |
 		attrs
 			detect: [ :each | each isKindOf: LzDoNotRenderAttribute ]
-			ifNone: [ text append: (aText copyFrom: index +1 to: index + 1)  ] ]
+			ifNone: [ text append: (aText copyFrom: index +1 to: index + 1)  ] ].
+	text fontName: LzCodeFont defaultFamily
 ]

@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:33:47.947714+02:00"
+						"dateAndTimeString" : "2022-07-06T09:28:30.01327+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Integers\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional array indexation\"}}\n\t- {{lzUseContext:name = \"Integers\"}}"
 			},
 			{
 				"__type" : "textSnippet",

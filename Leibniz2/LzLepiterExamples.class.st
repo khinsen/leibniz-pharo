@@ -7,6 +7,25 @@ Class {
 }
 
 { #category : #example }
+LzLepiterExamples >> arrayIndexing [
+	<gtExample>
+	| context |
+	context := (LzContextBuilder fromPage: 'One-dimensional array slicing') context.
+	^ {
+		{ '{[ 1, 2, 3 ]}\(2)'. '2' }.
+		{ '{[ 1, 2, 3 ]}\(2 ⋯ 3)'. '{[ 2, 3 ]}' }.
+		{ '{[ 1, 2, 3 ]}\(2 ⋯ ∎)'. '{[ 2, 3 ]}' }.
+		{ '{[ 1, 2, 3 ]}\(2 ⋯ 2)'. '{[ 2 ]}' }.
+		{ '{[ 1, 2, 3 ]}\(2 ⋯ 1)'. '{[ ]}' }.
+	} collect: [ :each |
+		| term reducedTerm |
+		term := context term: each first.
+		reducedTerm := context term: each second.
+		self assert: (context reduce: term) equals: reducedTerm.
+		{ term. reducedTerm } ]
+]
+
+{ #category : #example }
 LzLepiterExamples >> booleanUnifications [
 	<gtExample>
 	| c |
@@ -28,6 +47,31 @@ LzLepiterExamples >> booleanUnifications [
 		string := unification printString.
 		self assert: (string allButFirst: (string findString: '(') - 1) equals: each third.
 		unification ]
+]
+
+{ #category : #example }
+LzLepiterExamples >> equalityTerms [
+	<gtExample>
+	| context |
+	context := (LzContextBuilder new
+		addDeclarationsFromPageNamed: 'Term equality';
+		addDeclarationsFromPageNamed: 'One-dimensional arrays';
+		addDeclarationsFromPageNamed: 'Integers')
+		context.
+	self assert: (context term: '1 == ⊤') hasSort not.
+	^ {
+		{ '1 == 1'. '⊤'}.
+		{ '1 == 2'. '⊥'}.
+		{ '{[1]} == {[1]}'. '⊤'}.
+		{ '{[1]} == {[2]}'. '⊥'}.
+		{ '1 == ⊤'. '1 == ⊤' }.
+	} collect: [ :each |
+		| term rewrittenTerm expected |
+		term := context term: each first.
+		expected := context term: each second.
+		rewrittenTerm := context reduce: term.
+		self assert: rewrittenTerm equals: expected.
+		{ term. rewrittenTerm } ]
 ]
 
 { #category : #example }
