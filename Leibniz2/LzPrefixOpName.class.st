@@ -9,10 +9,15 @@ LzPrefixOpName class >> for: aStringOrSymbol [
 	^ self new internalSymbol: aStringOrSymbol
 ]
 
-{ #category : #printing }
-LzPrefixOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText argAttributes: anArrayOfAttributes [
+{ #category : #converting }
+LzPrefixOpName >> addAsRopedTextTo: aRopedText [
 	aRopedText append:
 		(internalSymbol asRopedText attribute: LzPrefixOpNameAttribute new).
+]
+
+{ #category : #converting }
+LzPrefixOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText argAttributes: anArrayOfAttributes [
+	self addAsRopedTextTo: aRopedText.
 	anArrayOfTerms ifNotEmpty: [
 		aRopedText append: '(' asRopedText.
 		anArrayOfTerms

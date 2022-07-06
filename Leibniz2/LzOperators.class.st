@@ -101,7 +101,7 @@ LzOperators >> opForTerm: aTerm [
 
 { #category : #lookup }
 LzOperators >> opNamed: anOpName arity: anArity [
-	| key kindArity message |
+	| key kindArity |
 	anArity ifEmpty: [
 		key := { anOpName. anArity }.
 		opTable at: key

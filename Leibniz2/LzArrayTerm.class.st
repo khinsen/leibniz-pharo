@@ -112,7 +112,6 @@ LzArrayTerm >> index: anInteger [
 
 { #category : #transforming }
 LzArrayTerm >> inject: aTerm into: aFnTerm [
-	| transformedElements |
 	^ elements inject: aTerm into: [ :total :each |
 		self signature
 			opTerm: LzBracketOpName new
@@ -121,7 +120,6 @@ LzArrayTerm >> inject: aTerm into: aFnTerm [
 
 { #category : #transforming }
 LzArrayTerm >> inject: aTerm into: aFnTerm reducer: aBlock [
-	| transformedElements |
 	^ elements inject: aTerm into: [ :total :each |
 		aBlock value:
 			(self signature
@@ -212,8 +210,8 @@ LzArrayTerm >> shapeAsArrayTerm [
 LzArrayTerm >> slice: first to: last [
 	self assert: self shape size == 1.
 	^ self signature
-		arrayTerm: (elements copyFrom: (first max: 1) to: (last min: elements size))
-		shape: { last - first + 1 }
+		arrayTerm: (elements copyFrom: (first value max: 1) to: (last value min: elements size))
+		shape: { last value - first value + 1 }
 ]
 
 { #category : #transforming }
