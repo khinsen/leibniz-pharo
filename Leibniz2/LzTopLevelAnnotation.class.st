@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #accessing }
+LzTopLevelAnnotation >> options [
+	^ options
+]
+
+{ #category : #accessing }
 LzTopLevelAnnotation >> options: aDictionary [
 	options := aDictionary
 ]

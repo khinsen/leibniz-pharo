@@ -11,14 +11,9 @@ LzBook class >> database [
 	db := logicalDB databases
 		detect: [ :each | each databaseName = self databaseName ]
 		ifNone: [
-			| newDB |
 			logicalDB properties addRegisteredDirectory: self databaseLocation.
 			logicalDB reload.
-			logicalDB databaseNamed: self databaseName
-"			newDB := LeLocalStoreLoad current loadAndMonitorFrom: self databaseLocation.
-			newDB databaseName: self databaseName.
-			logicalDB addDB: newDB.
-			newDB" ].
+			logicalDB databaseNamed: self databaseName ].
 	^ db
 ]
 
