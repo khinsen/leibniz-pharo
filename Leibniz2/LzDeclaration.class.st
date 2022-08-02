@@ -28,6 +28,11 @@ LzDeclaration >> declaration [
 	^ self
 ]
 
+{ #category : #testing }
+LzDeclaration >> definesContext [
+	^ true
+]
+
 { #category : #inspecting }
 LzDeclaration >> gtTreeFor: aView [
 	<gtView>

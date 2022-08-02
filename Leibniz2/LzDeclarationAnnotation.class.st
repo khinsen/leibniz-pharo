@@ -22,6 +22,11 @@ LzDeclarationAnnotation >> declaration: aDeclaration [
 	declaration := aDeclaration 
 ]
 
+{ #category : #testing }
+LzDeclarationAnnotation >> definesContext [
+	^ self declaration definesContext
+]
+
 { #category : #printing }
 LzDeclarationAnnotation >> printAsLeibnizSyntaxOn: aStream [
 	self declaration printAsLeibnizSyntaxOn: aStream

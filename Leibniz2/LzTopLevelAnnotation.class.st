@@ -7,6 +7,21 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #testing }
+LzTopLevelAnnotation >> definesContext [
+	^ self declaration definesContext
+		and: [ (self optionsAt: #example) not ]
+]
+
+{ #category : #testing }
+LzTopLevelAnnotation >> definesSubcontext: aSubcontextName [
+	^ self definesContext
+		and: [
+			| subcontext |
+			subcontext := (self optionsAt: #subcontext).
+			subcontext isNil or: [ subcontext = aSubcontextName ] ]
+]
+
 { #category : #accessing }
 LzTopLevelAnnotation >> options [
 	^ options

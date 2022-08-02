@@ -19,6 +19,11 @@ LzPatternDeclaration >> buildFor: aSignature [
 		variables: (aSignature parsedVariables:  self variables)
 ]
 
+{ #category : #testing }
+LzPatternDeclaration >> definesContext [
+	^ false
+]
+
 { #category : #printing }
 LzPatternDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	term printAsLeibnizSyntaxOn: aStream

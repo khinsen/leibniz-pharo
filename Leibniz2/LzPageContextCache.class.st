@@ -6,10 +6,26 @@ Class {
 	#instVars : [
 		'page',
 		'contexts',
-		'declarations'
+		'declarations',
+		'announcer'
 	],
 	#category : #'Leibniz2-Lepiter'
 }
+
+{ #category : #announcer }
+LzPageContextCache >> announcer [
+	<return: #Announcer>
+	^ announcer ifNil: [ announcer := Announcer new ]
+]
+
+{ #category : #constructing }
+LzPageContextCache >> contextBuilderFor: aSubcontextName [
+	| builder |
+	builder :=  LzContextBuilder new.
+	(self declarations declarationsFor: aSubcontextName) do: [ :each |
+		builder addDeclaration: each ].
+	^ builder
+]
 
 { #category : #accessing }
 LzPageContextCache >> declarations [
@@ -41,6 +57,13 @@ LzPageContextCache >> page [
 { #category : #accessing }
 LzPageContextCache >> page: aLePage [
 	page := aLePage
+]
+
+{ #category : #constructing }
+LzPageContextCache >> pageContextNamed: aSubcontextName [
+	contexts at: aSubcontextName ifAbsentPut: [
+		(self contextBuilderFor: aSubcontextName) context ].
+	^ contexts at: aSubcontextName
 ]
 
 { #category : #subscribing }

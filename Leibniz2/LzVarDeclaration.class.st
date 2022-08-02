@@ -35,6 +35,11 @@ LzVarDeclaration >> beDerived [
 	isDerived := true
 ]
 
+{ #category : #testing }
+LzVarDeclaration >> definesContext [
+	^ false
+]
+
 { #category : #initialization }
 LzVarDeclaration >> initialize [
 	super initialize.

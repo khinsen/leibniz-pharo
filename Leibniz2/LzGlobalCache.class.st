@@ -23,6 +23,7 @@ LzGlobalCache >> dependentsOf: aPageName [
 { #category : #initializing }
 LzGlobalCache >> initialize [
 	pageDeclarations := Dictionary new.
+	pageContexts := Dictionary new.
 	LzBook database pages do: [ :each |
 		self pageDeclarationsFor: each ]
 ]

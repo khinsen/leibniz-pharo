@@ -44,6 +44,12 @@ LzPageDeclarationCache >> declarationsByClass [
 		groupedBy: [ :each | each declaration class ]
 ]
 
+{ #category : #accessing }
+LzPageDeclarationCache >> declarationsFor: aSubcontextName [
+	^ declarations values flattened select: [ :each |
+		each definesSubcontext: aSubcontextName ]
+]
+
 { #category : #inspecting }
 LzPageDeclarationCache >> gtContextsUsedFor: aView [
 	<gtView>
@@ -54,6 +60,7 @@ LzPageDeclarationCache >> gtContextsUsedFor: aView [
 					each declaration contextName ] ];
 		send: [ :each | LzBook pageNamed: each ];
 		updateWhen: LzPageDeclarationsChanged in: self announcer;
+		actionUpdateButton;
 		yourself
 ]
 
@@ -79,6 +86,7 @@ LzPageDeclarationCache >> gtDeclarationsFor: aView [
 				', ' join:
 					(each options associations collect: #printString) ];
 		updateWhen: LzPageDeclarationsChanged in: self announcer;
+		actionUpdateButton;
 		yourself
 ]
 
@@ -90,12 +98,13 @@ LzPageDeclarationCache >> gtSubcontextsFor: aView [
 		priority: 3;
 		items: [ self subcontexts asArray ];
 		updateWhen: LzPageDeclarationsChanged in: self announcer;
+		send: [ :each | self declarationsFor: each ];
+		actionUpdateButton;
 		yourself
 ]
 
 { #category : #initializing }
 LzPageDeclarationCache >> initialize [
-	announcer := Announcer new.
 	declarations := Dictionary new.
 	self clearChangedSnippets.
 	declarationsChanged := false.
@@ -137,7 +146,7 @@ LzPageDeclarationCache >> page: aLePage [
 { #category : #parsing }
 LzPageDeclarationCache >> parseChangedSnippets [
 	page allChildrenDepthFirstDo: [ :eachSnippet | 
-		(changedSnippets includes: eachSnippet)
+		(changedSnippets includes: eachSnippet uid)
 			ifTrue: [
 				| oldDeclarations newDeclarations subcontexts |
 				oldDeclarations := declarations at: eachSnippet uid.

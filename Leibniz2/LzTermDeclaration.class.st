@@ -17,6 +17,11 @@ LzTermDeclaration >> buildFor: aSignature variables: aDictionary [
 ]
 
 { #category : #testing }
+LzTermDeclaration >> definesContext [
+	^ false
+]
+
+{ #category : #testing }
 LzTermDeclaration >> hasInfixOpOtherThan: aSymbol [
 	^ false
 ]

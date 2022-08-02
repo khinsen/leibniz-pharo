@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-02T11:45:06.488476+02:00"
+						"dateAndTimeString" : "2022-08-02T13:51:53.213448+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name=\"Integers\"}}"
+				"string" : "Use contexts {{lzUseContext:name=\"Integers\"}}, {{lzUseContext:name = \"Boolean algebra\"}}"
 			}
 		]
 	},
