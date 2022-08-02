@@ -7,10 +7,26 @@ Class {
 		'page',
 		'declarations',
 		'changedSnippets',
-		'declarationsChanged'
+		'declarationsChanged',
+		'announcer'
 	],
 	#category : #'Leibniz2-Lepiter'
 }
+
+{ #category : #announcing }
+LzPageDeclarationCache >> announceChangesFor: subcontexts [
+	subcontexts ifNotEmpty: [
+		self announce:
+			(LzPageDeclarationsChanged new
+				page: self page;
+				subcontexts: subcontexts) ]
+]
+
+{ #category : #announcer }
+LzPageDeclarationCache >> announcer [
+	<return: #Announcer>
+	^ announcer ifNil: [ announcer := Announcer new ]
+]
 
 { #category : #parsing }
 LzPageDeclarationCache >> clearChangedSnippets [
@@ -31,14 +47,13 @@ LzPageDeclarationCache >> declarationsByClass [
 { #category : #inspecting }
 LzPageDeclarationCache >> gtContextsUsedFor: aView [
 	<gtView>
-	| contextNames |
-	contextNames := self useContextDeclarations collect: [ :each |
-		each declaration contextName ].
 	^ aView list
 		title: 'Contexts used';
 		priority: 2;
-		items: [ contextNames ];
+		items: [ self useContextDeclarations collect: [ :each |
+					each declaration contextName ] ];
 		send: [ :each | LzBook pageNamed: each ];
+		updateWhen: LzPageDeclarationsChanged in: self announcer;
 		yourself
 ]
 
@@ -63,11 +78,24 @@ LzPageDeclarationCache >> gtDeclarationsFor: aView [
 			text: [ :each |
 				', ' join:
 					(each options associations collect: #printString) ];
+		updateWhen: LzPageDeclarationsChanged in: self announcer;
+		yourself
+]
+
+{ #category : #inspecting }
+LzPageDeclarationCache >> gtSubcontextsFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Subcontexts';
+		priority: 3;
+		items: [ self subcontexts asArray ];
+		updateWhen: LzPageDeclarationsChanged in: self announcer;
 		yourself
 ]
 
 { #category : #initializing }
 LzPageDeclarationCache >> initialize [
+	announcer := Announcer new.
 	declarations := Dictionary new.
 	self clearChangedSnippets.
 	declarationsChanged := false.
@@ -75,8 +103,13 @@ LzPageDeclarationCache >> initialize [
 
 { #category : #'event handling' }
 LzPageDeclarationCache >> onContentTreeRemoved: anAnnouncement [
-	| snippetUid |
+	| snippetUid subcontexts |
 	snippetUid := anAnnouncement content uid.
+	subcontexts := Set new.
+	(declarations at: snippetUid) do: [ :each |
+		(each optionsAt: #example) ifFalse: [
+			subcontexts add: (each optionsAt: #subcontext) ] ].
+	self announceChangesFor: subcontexts.
 	declarations
 		removeKey: snippetUid
 		ifAbsent: [].
@@ -87,7 +120,8 @@ LzPageDeclarationCache >> onContentTreeRemoved: anAnnouncement [
 
 { #category : #'event handling' }
 LzPageDeclarationCache >> onSnippetTextChanged: anAnnouncement [
-	changedSnippets add: anAnnouncement snippet uid
+	changedSnippets add: anAnnouncement snippet uid.
+	self parseChangedSnippets
 ]
 
 { #category : #accessing }
@@ -102,13 +136,19 @@ LzPageDeclarationCache >> page: aLePage [
 
 { #category : #parsing }
 LzPageDeclarationCache >> parseChangedSnippets [
-	page allChildrenDepthFirstDo: [ :eachSnippet |
-		(changedSnippets includes: eachSnippet) ifTrue: [
-			| oldDeclarations |
-			oldDeclarations := declarations at: eachSnippet uid.
-			self parseSnippet: eachSnippet.
-			(declarations at: eachSnippet uid) = oldDeclarations
-				ifFalse: [ declarationsChanged := true ] ] ].
+	page allChildrenDepthFirstDo: [ :eachSnippet | 
+		(changedSnippets includes: eachSnippet)
+			ifTrue: [
+				| oldDeclarations newDeclarations subcontexts |
+				oldDeclarations := declarations at: eachSnippet uid.
+				self parseSnippet: eachSnippet.
+				newDeclarations := declarations at: eachSnippet uid.
+				subcontexts := Set new.
+				newDeclarations = oldDeclarations ifFalse: [
+					(newDeclarations union: oldDeclarations) do: [ :each | 
+						(each optionsAt: #example) ifFalse: [
+							subcontexts add: (each optionsAt: #subcontext) ] ] ].
+				self announceChangesFor: subcontexts ] ].
 	self clearChangedSnippets
 ]
 
@@ -142,7 +182,19 @@ LzPageDeclarationCache >> sortOrderFor: aClass [
 		LzEqualityAxiomDeclaration -> 5.
 		LzRewriteRuleDeclaration -> 6.
 		LzFunctionRuleDeclaration -> 7.
+		LzPatternDeclaration -> 8.
 	} asDictionary at: aClass
+]
+
+{ #category : #accessing }
+LzPageDeclarationCache >> subcontexts [
+	| subcontexts |
+	subcontexts := Set new.
+	declarations valuesDo: [ :eachDeclarationList |
+		eachDeclarationList do: [ :eachDeclaration |
+			subcontexts add: (eachDeclaration optionsAt: #subcontext) ] ].
+	subcontexts remove: nil ifAbsent: [].
+	^ subcontexts
 ]
 
 { #category : #subscribing }

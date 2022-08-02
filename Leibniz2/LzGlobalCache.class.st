@@ -4,7 +4,8 @@ Class {
 	#traits : 'TSingleton',
 	#classTraits : 'TSingleton classTrait',
 	#instVars : [
-		'pageDeclarations'
+		'pageDeclarations',
+		'pageContexts'
 	],
 	#category : #'Leibniz2-Lepiter'
 }
@@ -24,6 +25,17 @@ LzGlobalCache >> initialize [
 	pageDeclarations := Dictionary new.
 	LzBook database pages do: [ :each |
 		self pageDeclarationsFor: each ]
+]
+
+{ #category : #accessing }
+LzGlobalCache >> pageContextsFor: aPage [
+	pageContexts at: aPage uid ifAbsentPut: [
+		LzPageContextCache new
+			page: aPage;
+			declarations: (self pageDeclarationsFor: aPage);
+			subscribeToDeclarationEvents;
+			yourself].
+	^ pageContexts at: aPage uid
 ]
 
 { #category : #accessing }
