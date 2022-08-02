@@ -149,7 +149,7 @@ LzPageDeclarationCache >> parseChangedSnippets [
 		(changedSnippets includes: eachSnippet uid)
 			ifTrue: [
 				| oldDeclarations newDeclarations subcontexts |
-				oldDeclarations := declarations at: eachSnippet uid.
+				oldDeclarations := declarations at: eachSnippet uid ifAbsent: [ Set new ].
 				self parseSnippet: eachSnippet.
 				newDeclarations := declarations at: eachSnippet uid.
 				subcontexts := Set new.

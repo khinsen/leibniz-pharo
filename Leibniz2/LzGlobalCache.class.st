@@ -33,7 +33,7 @@ LzGlobalCache >> pageContextsFor: aPage [
 	pageContexts at: aPage uid ifAbsentPut: [
 		LzPageContextCache new
 			page: aPage;
-			declarations: (self pageDeclarationsFor: aPage);
+			declarationCache: (self pageDeclarationsFor: aPage);
 			subscribeToDeclarationEvents;
 			yourself].
 	^ pageContexts at: aPage uid

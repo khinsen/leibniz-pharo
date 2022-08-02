@@ -64,7 +64,7 @@ LzContext >> gtBuiltinsFor: aView [
 		ifEmpty: [ ^ aView empty ].
 	^ aView forward
 		title: 'Builtins';
-		priority: 4;
+		priority: 5;
 		object: [ self signature ];
 		view: #gtBuiltinsFor:;
 		yourself
@@ -90,7 +90,7 @@ LzContext >> gtRulesFor: aView [
 	self rewriteSystem isEmpty ifTrue: [ ^ aView empty ].
 	^ aView forward
 		title: 'Rules';
-		priority: 5;
+		priority: 4;
 		object: [ self rewriteSystem ];
 		view: #gtRulesFor:
 ]
