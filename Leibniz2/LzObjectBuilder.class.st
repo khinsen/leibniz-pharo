@@ -42,9 +42,9 @@ LzObjectBuilder >> sortFromTerm: aTerm vars: aVarList [
 
 { #category : #building }
 LzObjectBuilder >> subcontext: aString [
-	^ LzContextCache uniqueInstance
-		contextForPageNamed: self contextPageName
-		subcontext: aString
+	^ (LzGlobalCache uniqueInstance
+			contextCacheFor: self contextPageName)
+		subcontextNamed: aString
 ]
 
 { #category : #visiting }

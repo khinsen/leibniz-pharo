@@ -39,9 +39,9 @@ LzContextBuilder >> addDeclaration: anAnnotatedDeclaration [
 	(declaration isKindOf: LzUseContextDeclaration)
 		ifTrue: [
 			| context |
-			context := LzContextCache uniqueInstance
-				contextForPageNamed: declaration contextName
-				subcontext: declaration subcontext.
+			context := (LzGlobalCache uniqueInstance
+							contextCacheFor: declaration contextName)
+						subcontextNamed: declaration subcontext.
 			(anAnnotatedDeclaration optionsAt: #forSorts)
 				ifFalse: [ self include: context ]
 				ifTrue: [ self includeSortContext:  context ] ].

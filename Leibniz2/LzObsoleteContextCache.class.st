@@ -1,5 +1,5 @@
 Class {
-	#name : #LzContextCache,
+	#name : #LzObsoleteContextCache,
 	#superclass : #Object,
 	#traits : 'TSingleton',
 	#classTraits : 'TSingleton classTrait',
@@ -11,12 +11,12 @@ Class {
 }
 
 { #category : #retrieving }
-LzContextCache >> contextForPageNamed: pageName [
+LzObsoleteContextCache >> contextForPageNamed: pageName [
 	^ self contextForPageNamed: pageName subcontext: nil
 ]
 
 { #category : #retrieving }
-LzContextCache >> contextForPageNamed: pageName subcontext: aString [
+LzObsoleteContextCache >> contextForPageNamed: pageName subcontext: aString [
 	| fullName cacheValid |
 	fullName := pageName.
 	aString ifNotNil: [ fullName := fullName, '/', aString ].
@@ -32,7 +32,7 @@ LzContextCache >> contextForPageNamed: pageName subcontext: aString [
 ]
 
 { #category : #inspecting }
-LzContextCache >> gtContextsFor: aView [
+LzObsoleteContextCache >> gtContextsFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'Contexts';
@@ -46,7 +46,7 @@ LzContextCache >> gtContextsFor: aView [
 ]
 
 { #category : #initializing }
-LzContextCache >> initialize [
+LzObsoleteContextCache >> initialize [
 	contexts := Dictionary new.
 	creationDates := Dictionary new.
 ]

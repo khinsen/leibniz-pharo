@@ -1,6 +1,11 @@
 Extension { #name : #LePage }
 
 { #category : #'*Leibniz2' }
+LePage >> asLzPage [
+	^ self
+]
+
+{ #category : #'*Leibniz2' }
 LePage >> gtDependentsFor: aView [
 	<gtView>
 	^ aView list
@@ -24,7 +29,7 @@ LePage >> lzContextFor: anAction [
 		action: [ :aButton |
 			aButton phlow spawnObject:
 				(LzGlobalCache uniqueInstance
-					pageContextsFor: self) ]
+					contextCacheFor: self) ]
 ]
 
 { #category : #'*Leibniz2' }
@@ -38,5 +43,5 @@ LePage >> lzDeclarationsFor: anAction [
 		action: [ :aButton |
 			aButton phlow spawnObject:
 				(LzGlobalCache uniqueInstance
-					pageDeclarationsFor:  self) ]
+					declarationCacheFor:  self) ]
 ]

@@ -10,6 +10,32 @@ Class {
 	#category : #'Leibniz2-Lepiter'
 }
 
+{ #category : #accessing }
+LzGlobalCache >> contextCacheFor: aPageOrPageName [
+	| page |
+	page := aPageOrPageName asLzPage.
+	pageContexts at: page uid ifAbsentPut: [
+		LzPageContextCache new
+			page: page;
+			declarationCache: (self declarationCacheFor: page);
+			subscribeToDeclarationEvents;
+			yourself].
+	^ pageContexts at: page uid
+]
+
+{ #category : #accessing }
+LzGlobalCache >> declarationCacheFor: aPageOrPageName [
+	| page |
+	page := aPageOrPageName asLzPage.
+	pageDeclarations at: page uid ifAbsentPut: [
+		LzPageDeclarationCache new
+			page: page;
+			parsePage;
+			subscribeToPageEvents;
+			yourself].
+	^ pageDeclarations at: page uid
+]
+
 { #category : #retrieving }
 LzGlobalCache >> dependentsOf: aPageName [
 	^ pageDeclarations associations
@@ -25,29 +51,7 @@ LzGlobalCache >> initialize [
 	pageDeclarations := Dictionary new.
 	pageContexts := Dictionary new.
 	LzBook database pages do: [ :each |
-		self pageDeclarationsFor: each ]
-]
-
-{ #category : #accessing }
-LzGlobalCache >> pageContextsFor: aPage [
-	pageContexts at: aPage uid ifAbsentPut: [
-		LzPageContextCache new
-			page: aPage;
-			declarationCache: (self pageDeclarationsFor: aPage);
-			subscribeToDeclarationEvents;
-			yourself].
-	^ pageContexts at: aPage uid
-]
-
-{ #category : #accessing }
-LzGlobalCache >> pageDeclarationsFor: aPage [
-	pageDeclarations at: aPage uid ifAbsentPut: [
-		LzPageDeclarationCache new
-			page: aPage;
-			parsePage;
-			subscribeToPageEvents;
-			yourself].
-	^ pageDeclarations at: aPage uid
+		self declarationCacheFor: each ]
 ]
 
 { #category : #accessing }
