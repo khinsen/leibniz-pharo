@@ -97,7 +97,9 @@ LzRewriteSystem >> reduce: aTerm [
 	lastValue := nil.
 	[ lastValue = newValue ] whileFalse: [
 		lastValue := newValue.
-		newValue :=  self rewriteLeftmostInnermost: lastValue ].
+		newValue :=  self
+						rewriteLeftmostInnermost: lastValue
+						reducer: [ :t | self reduce: t ]].
 	^ lastValue
 ]
 
@@ -107,30 +109,32 @@ LzRewriteSystem >> referenceSlots [
 ]
 
 { #category : #rewriting }
-LzRewriteSystem >> rewriteHeadOnce: aTerm [
+LzRewriteSystem >> rewriteHeadOnce: aTerm reducer: aBlock [
 	(rules at: aTerm fingerprint ifAbsent: [ #() ]) do: [ :aRule |
-		| reducer bindings |
+		| bindings |
 		self flag: #todo. "Use matchAllowingVars: ?"
 		"bindings := aRule pattern matchAllowingVars: aTerm."
-		reducer := [ :t | self reduce: t ].
 		bindings := LzBindings new
 						sortGraph: self signature sortGraph.
 		aRule pattern match: aTerm bindings: bindings.
 		bindings ifSuccess: [ :s |
 			[ (aRule
 				testConditionForSubstitution: s
-				reducer: reducer)
-				ifTrue: [ ^ aRule apply: s reducer: reducer ] ]
+				reducer: aBlock)
+				ifTrue: [ ^ aRule apply: s reducer: aBlock ] ]
 			on: LzRewriteFailure do: [  ] ] ].
 	"If no rule matches, return the input term"
 	^ aTerm
 ]
 
 { #category : #rewriting }
-LzRewriteSystem >> rewriteLeftmostInnermost: aTerm [
+LzRewriteSystem >> rewriteLeftmostInnermost: aTerm reducer: aBlock [
 	| transformedArgs |
-	transformedArgs := aTerm args collect: [ :each | self reduce: each ].
-	^ self rewriteHeadOnce: (aTerm withTransformedArgs: transformedArgs)
+	transformedArgs := aTerm args collect: aBlock.
+	^ self
+		rewriteHeadOnce: (aTerm withTransformedArgs: transformedArgs)
+		reducer: aBlock
+
 ]
 
 { #category : #accessing }

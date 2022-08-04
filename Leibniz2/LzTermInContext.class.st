@@ -7,17 +7,11 @@ Class {
 		'term',
 		'normalForm',
 		'context',
-		'eGraph'
+		'eGraph',
+		'rewriteCache'
 	],
 	#category : #'Leibniz2-Terms'
 }
-
-{ #category : #'instance creation' }
-LzTermInContext class >> term: aTerm context: aContext [
-	^ self new
-		context: aContext;
-		term: aTerm
-]
 
 { #category : #converting }
 LzTermInContext >> addAsRopedTextTo: aRopedText [
@@ -50,7 +44,9 @@ LzTermInContext >> eGraph [
 
 { #category : #rewriting }
 LzTermInContext >> findNormalForm [
-	normalForm := self context reduce: term
+	normalForm := self rewriteCache
+		ifNotNil: [ :c | c reduce: term ]
+		ifNil: [ self context reduce: term ]
 ]
 
 { #category : #accessing }
@@ -78,6 +74,18 @@ LzTermInContext >> printAsLeibnizSyntaxOn: aStream [
 { #category : #comparing }
 LzTermInContext >> referenceSlots [
 	^ #(context)
+]
+
+{ #category : #accessing }
+LzTermInContext >> rewriteCache [
+
+	^ rewriteCache
+]
+
+{ #category : #accessing }
+LzTermInContext >> rewriteCache: anObject [
+
+	rewriteCache := anObject
 ]
 
 { #category : #accessing }

@@ -77,8 +77,11 @@ LzLepiterExamples >> equalityTerms [
 { #category : #example }
 LzLepiterExamples >> integerArithmetic [
 	<gtExample>
-	| context |
-	context := (LzContextBuilder fromPage: 'Integers') context.	^ {
+	| context cache |
+	context := (LzContextBuilder fromPage: 'Integers') context.
+	cache := LzRewriteCache new
+				rewriteSystem: context rewriteSystem.
+	^ {
 		{ '-(2)'. '-2' }.
 		{ '2 + 2'. '4'}.
 		{ '2 - 2'. '0'}.
@@ -96,6 +99,7 @@ LzLepiterExamples >> integerArithmetic [
 		term := context term: each first.
 		result := context reduce: term.
 		self assert: result equals: (context term: each second).
+		self assert: (cache reduce: term) equals: result.
 		{ term. result } ]
 ]
 
@@ -120,8 +124,10 @@ LzLepiterExamples >> integerTerms [
 { #category : #example }
 LzLepiterExamples >> rationalArithmetic [
 	<gtExample>
-	| context |
+	| context cache |
 	context := (LzContextBuilder fromPage: 'Rational numbers') context.
+	cache := LzRewriteCache new
+				rewriteSystem: context rewriteSystem.
 	^ {
 		{ '-(2/3)'. '-2/3' }.
 		{ '1/3 + 2/3'. '1'}.
@@ -138,6 +144,7 @@ LzLepiterExamples >> rationalArithmetic [
 		term := context term: each first.
 		result := context reduce: term.
 		self assert: result equals: (context term: each second).
+		self assert: (cache reduce: term) equals: result.
 		{ term. result } ]
 ]
 
