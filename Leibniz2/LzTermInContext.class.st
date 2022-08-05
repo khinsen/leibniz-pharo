@@ -49,14 +49,36 @@ LzTermInContext >> findNormalForm [
 		ifNil: [ self context reduce: term ]
 ]
 
-{ #category : #accessing }
+{ #category : #inspecting }
 LzTermInContext >> gtEquivalentTermsFor: aView [
 	<gtView>
 	^ aView forward
 		title: 'Equivalent terms';
-		priority: 1;
+		priority: 2;
 		object: [ self eGraph classForId: (self term asENodeIn: self eGraph) ];
 		view: #gtTermsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzTermInContext >> gtSortFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Sort';
+		priority: 1;
+		object: [ self term sort ];
+		view: #gtGraphFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzTermInContext >> gtTreeFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Tree';
+		priority: 0;
+		object: [ self term ];
+		view: #gtTreeFor:;
 		yourself
 ]
 
