@@ -24,6 +24,11 @@ LzGlobalCache >> contextCacheFor: aPageOrPageName [
 ]
 
 { #category : #accessing }
+LzGlobalCache >> contextFor: aPageOrPageName [
+	^ (self contextCacheFor: aPageOrPageName) pageContext
+]
+
+{ #category : #accessing }
 LzGlobalCache >> declarationCacheFor: aPageOrPageName [
 	| page |
 	page := aPageOrPageName asLzPage.

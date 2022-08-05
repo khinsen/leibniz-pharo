@@ -101,7 +101,7 @@ LzPageContextCache >> gtSubcontextsFor: aView [
 		title: 'Subcontexts';
 		priority: 9;
 		items: [ self subcontexts asArray ];
-		send: [ :each | self subcontextNamed: each ];
+		send: [ :each | self subcontext: each ];
 		actionUpdateButton;
 		yourself
 ]
@@ -132,7 +132,7 @@ LzPageContextCache >> page: aLePage [
 
 { #category : #constructing }
 LzPageContextCache >> pageContext [
-	^ self subcontextNamed: nil
+	^ self subcontext: nil
 ]
 
 { #category : #printing }
@@ -145,16 +145,16 @@ LzPageContextCache >> printOn: aStream [
 ]
 
 { #category : #constructing }
-LzPageContextCache >> rewriteCacheAndSubcontextNamed: aSubcontextName [
+LzPageContextCache >> rewriteCacheAndSubcontext: aSubcontextName [
 	| context cache |
-	context := self subcontextNamed: aSubcontextName.
+	context := self subcontext: aSubcontextName.
 	cache := LzRewriteCache new
 				rewriteSystem: context rewriteSystem.
 	^ { cache. context }
 ]
 
 { #category : #constructing }
-LzPageContextCache >> subcontextNamed: aSubcontextName [
+LzPageContextCache >> subcontext: aSubcontextName [
 	contexts at: aSubcontextName ifAbsentPut: [
 		(self contextBuilderFor: aSubcontextName) context ].
 	^ contexts at: aSubcontextName

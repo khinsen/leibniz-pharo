@@ -19,6 +19,12 @@ LePage >> gtDependentsFor: aView [
 ]
 
 { #category : #'*Leibniz2' }
+LePage >> lzContext [
+	^ (LzGlobalCache uniqueInstance
+		contextCacheFor: self) pageContext
+]
+
+{ #category : #'*Leibniz2' }
 LePage >> lzContextFor: anAction [
 	<gtAction>
 	self database = LzBook database ifFalse: [ ^ anAction noAction ].
@@ -44,4 +50,10 @@ LePage >> lzDeclarationsFor: anAction [
 			aButton phlow spawnObject:
 				(LzGlobalCache uniqueInstance
 					declarationCacheFor:  self) ]
+]
+
+{ #category : #'*Leibniz2' }
+LePage >> lzSubcontext: aSubcontextName [
+	^ (LzGlobalCache uniqueInstance
+		contextCacheFor: self) subcontext: aSubcontextName
 ]

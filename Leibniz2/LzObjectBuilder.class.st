@@ -37,7 +37,7 @@ LzObjectBuilder >> patternFromTerm: aTerm vars: aVarList context: aContext [
 LzObjectBuilder >> rewriteCacheAndSubcontext: aString [
 	^ (LzGlobalCache uniqueInstance
 			contextCacheFor: self contextPageName)
-		rewriteCacheAndSubcontextNamed: aString
+		rewriteCacheAndSubcontext: aString
 ]
 
 { #category : #visiting }
@@ -51,7 +51,7 @@ LzObjectBuilder >> sortFromTerm: aTerm vars: aVarList [
 LzObjectBuilder >> subcontext: aString [
 	^ (LzGlobalCache uniqueInstance
 			contextCacheFor: self contextPageName)
-		subcontextNamed: aString
+		subcontext: aString
 ]
 
 { #category : #visiting }
