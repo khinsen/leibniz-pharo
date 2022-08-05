@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T14:52:52.55309+02:00"
+						"dateAndTimeString" : "2022-08-05T18:58:49.923893+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T14:53:00.497689+02:00"
+						"dateAndTimeString" : "2022-08-05T19:00:46.949139+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "aJVOa6ChDQC5CPh7BNOEow=="
+					"uidString" : "cbfLHeOhDQCw8C2iA5WdLw=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Tuples\"}}\n\t- {{lzUseContext:name = \"Real numbers\"}}"
+				"string" : "Requires special terms ({{lzSpecialTerms:classTerms}}) for defining terms in Pharo code."
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T14:53:07.983584+02:00"
+						"dateAndTimeString" : "2022-08-05T11:36:14.45111+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,20 +66,20 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T14:53:07.983584+02:00"
+						"dateAndTimeString" : "2022-08-05T11:37:09.343855+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "RJVLr9+hDQCzSrJiDTbczA=="
+					"uidString" : "o9nU7tyhDQCKt54NBaXo8g=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "Uses {{lzUseContext:name = \"Character strings\", forSorts = \"yes\"}}"
 			},
 			{
-				"__type" : "pharoSnippet",
+				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
 					"items" : [ ]
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T14:59:34.768936+02:00"
+						"dateAndTimeString" : "2022-08-05T19:01:12.94171+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,20 +103,61 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T15:05:41.199062+02:00"
+						"dateAndTimeString" : "2022-08-05T19:02:53.9817+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "mHVZxt+hDQCzUhLkDTbczA=="
+					"uidString" : "GhIiJuOhDQCw9yVhA5WdLw=="
 				},
-				"code" : "thisSnippet page lzContext"
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Terms whose sort is a subsort of {{lzSort:ClassTermSort(string)}} are created as instances of the Pharo class named by the string argument. This class must be a subclass of {{gtClass:name=LzOpTerm}}."
 			},
 			{
-				"__type" : "pharoSnippet",
+				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [ ]
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-05T11:43:24.751792+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-05T11:45:02.434304+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "CsfZB92hDQCK1EKjBaXo8g=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "{{lzOp:foo:ClassTermSort(\"LzOpTerm\"), subcontext = \"example\"}}"
+						}
+					]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -126,7 +167,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T15:11:42.545542+02:00"
+						"dateAndTimeString" : "2022-08-05T11:43:05.905736+02:00"
 					}
 				},
 				"editEmail" : {
@@ -137,14 +178,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T15:15:09.536546+02:00"
+						"dateAndTimeString" : "2022-08-05T11:43:08.396716+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "5XK68d+hDQCQqbFYDV8EAg=="
+					"uidString" : "VliYB92hDQCK0mkNBaXo8g=="
 				},
-				"code" : "node := LzParser2 parse: '{[(1, 1), (3, -1)]}' startingAt: LzParser2 startingStateForTopLevelTerm.\rdeclaration := (LzDeclarationBuilder new acceptNode: node) declaration.\rthisSnippet page lzContext parsedPattern: declaration"
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "### Example"
 			}
 		]
 	},
@@ -156,7 +200,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-08-02T11:24:24.339606+02:00"
+			"dateAndTimeString" : "2022-08-05T11:35:29.020479+02:00"
 		}
 	},
 	"editEmail" : {
@@ -167,15 +211,15 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-08-02T11:24:24.339606+02:00"
+			"dateAndTimeString" : "2022-08-05T11:35:29.020479+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Scratchpad"
+		"title" : "Class terms"
 	},
 	"uid" : {
 		"__type" : "uuid",
-		"uuid" : "4cd04d6b-a0a1-0d00-b907-48bb04d384a3"
+		"uuid" : "6e2972ec-dca1-0d00-8ab4-636505a5e8f2"
 	}
 }
