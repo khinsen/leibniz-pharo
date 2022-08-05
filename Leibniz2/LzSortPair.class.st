@@ -129,6 +129,8 @@ LzSortPair >> gtSortsFor: aView [
 { #category : #lookup }
 LzSortPair >> leastCommonSupersorts [
 	| css leastDistance |
+	sort1 <= sort2 ifTrue: [ ^ Set with: sort2 ].
+	sort2 <= sort1 ifTrue: [ ^ Set with: sort1 ].
 	css := self commonSupersorts.
 	css ifEmpty: [ ^ Set new ].
 	leastDistance := css first second.
@@ -140,6 +142,8 @@ LzSortPair >> leastCommonSupersorts [
 { #category : #lookup }
 LzSortPair >> leastUniqueCommonSupersort [
 	| css unique |
+	sort1 <= sort2 ifTrue: [ ^ sort2 ].
+	sort2 <= sort1 ifTrue: [ ^ sort1 ].
 	css := self commonSupersorts.
 	unique := (css groupedBy: #second) associations
 		select: [ :each | each value size = 1 ].
