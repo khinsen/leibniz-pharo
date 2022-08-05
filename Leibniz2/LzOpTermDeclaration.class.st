@@ -21,8 +21,7 @@ LzOpTermDeclaration >> args [
 
 { #category : #accessing }
 LzOpTermDeclaration >> args: anObject [
-
-	args := anObject
+	args := anObject asArray
 ]
 
 { #category : #constructing }

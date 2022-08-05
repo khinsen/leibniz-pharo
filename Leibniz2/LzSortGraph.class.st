@@ -94,7 +94,7 @@ LzSortGraph >> directSubsortsOf: aSortTerm [
 			ss ].
 	argDirectSubsorts cartesianProductDo: [ :args |
 		| term |
-		args = aSortTerm args asArray ifFalse: [
+		args = aSortTerm args ifFalse: [
 			term := self sortContext signature
 						opTerm: aSortTerm opName args: args.
 			subsorts add: (self sortWithTerm: term) ] ].
@@ -123,7 +123,7 @@ LzSortGraph >> directSupersortsOf: aSortTerm [
 			ss ].
 	argDirectSupersorts cartesianProductDo: [ :args |
 		| term |
-		args = aSortTerm args asArray ifFalse: [
+		args = aSortTerm args ifFalse: [
 			term := self sortContext signature
 						opTerm: aSortTerm opName args: args.
 			supersorts add: (self sortWithTerm: term) ] ].
