@@ -115,7 +115,7 @@ LzPageDeclarationCache >> onContentTreeRemoved: anAnnouncement [
 	| snippetUid subcontexts |
 	snippetUid := anAnnouncement content uid.
 	subcontexts := Set new.
-	(declarations at: snippetUid) do: [ :each |
+	(declarations at: snippetUid ifAbsent: [#()]) do: [ :each |
 		(each optionsAt: #example) ifFalse: [
 			subcontexts add: (each optionsAt: #subcontext) ] ].
 	self announceChangesFor: subcontexts.
@@ -154,8 +154,8 @@ LzPageDeclarationCache >> parseChangedSnippets [
 				newDeclarations := declarations at: eachSnippet uid.
 				subcontexts := Set new.
 				newDeclarations = oldDeclarations ifFalse: [
-					(newDeclarations union: oldDeclarations) do: [ :each | 
-						(each optionsAt: #example) ifFalse: [
+					(newDeclarations union: oldDeclarations) do: [ :each |
+						each definesContext ifTrue: [
 							subcontexts add: (each optionsAt: #subcontext) ] ] ].
 				self announceChangesFor: subcontexts ] ].
 	self clearChangedSnippets

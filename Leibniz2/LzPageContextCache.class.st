@@ -116,8 +116,8 @@ LzPageContextCache >> initialize [
 LzPageContextCache >> onDeclarationsChanged: anEvent [
 	anEvent page = self page ifTrue: [
 		anEvent subcontexts do: [ :each |
-			contexts removeKey: each.
-			termCaches removeKey: each ] ]
+			contexts removeKey: each ifAbsent: [].
+			termCaches removeKey: each ifAbsent: [] ] ]
 ]
 
 { #category : #accessing }
