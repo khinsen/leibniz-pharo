@@ -74,7 +74,7 @@ LzSortGraph >> breadthFirstTraversalFrom: aSort childNodes: childNodeBlock nodes
 
 { #category : #accessing }
 LzSortGraph >> directSubsortsOf: aSortTerm [
-	| subsorts family argDirectSubsorts |
+	| subsorts family sortArgs argDirectSubsorts |
 	subsorts := Set new.
 	family := self familyForSortTerm: aSortTerm.
 	family = anySortFamily ifTrue: [ ^ subsorts ].
@@ -84,26 +84,26 @@ LzSortGraph >> directSubsortsOf: aSortTerm [
 			(eachAxiom subsortOf: aSortTerm)
 				ifNotNil: [ :term | subsorts add: (self sortWithTerm: term) ]] ].
 	"Second step: subsorts via argument subsorts."
+	sortArgs := aSortTerm args.
 	argDirectSubsorts :=
-		aSortTerm args collect: [ :each |
-			| ss |
-			ss := Set with: each.
+		sortArgs collect: [ :each |
 			each sort isSortSort
-				ifTrue: [ ss := ss union: ((self directSubsortsOf: each)
-											collect: #term) ].
-			ss ].
-	argDirectSubsorts cartesianProductDo: [ :args |
-		| term |
-		args = aSortTerm args ifFalse: [
+				ifTrue: [ (self directSubsortsOf: each) collect: #term ]
+				ifFalse: [ Set new ] ].
+	1 to: sortArgs size do: [ :index |
+		(argDirectSubsorts at: index) do: [ :eachArgSs |
+			| ssArgs term |
+			ssArgs := sortArgs copy.
+			ssArgs at: index put: eachArgSs.
 			term := self sortContext signature
-						opTerm: aSortTerm opName args: args.
+						opTerm: aSortTerm opName args: ssArgs.
 			subsorts add: (self sortWithTerm: term) ] ].
 	^ subsorts
 ]
 
 { #category : #accessing }
 LzSortGraph >> directSupersortsOf: aSortTerm [
-	| supersorts family argDirectSupersorts |
+	| supersorts family sortArgs argDirectSupersorts |
 	supersorts := Set new.
 	family := self familyForSortTerm: aSortTerm.
 	family = anySortFamily ifTrue: [ ^ supersorts ].
@@ -113,19 +113,19 @@ LzSortGraph >> directSupersortsOf: aSortTerm [
 			(eachAxiom supersortOf: aSortTerm)
 				ifNotNil: [ :term | supersorts add: (self sortWithTerm: term) ]] ].
 	"Second step: supersorts via argument supersorts."
+	sortArgs := aSortTerm args.
 	argDirectSupersorts :=
-		aSortTerm args collect: [ :each |
-			| ss |
-			ss := Set with: each.
+		sortArgs collect: [ :each |
 			each sort isSortSort
-				ifTrue: [ ss := ss union: ((self directSupersortsOf: each)
-											collect: #term) ].
-			ss ].
-	argDirectSupersorts cartesianProductDo: [ :args |
-		| term |
-		args = aSortTerm args ifFalse: [
+				ifTrue: [ (self directSupersortsOf: each) collect: #term ]
+				ifFalse: [ Set new ] ].
+	1 to: sortArgs size do: [ :index |
+		(argDirectSupersorts at: index) do: [ :eachArgSs |
+			| ssArgs term |
+			ssArgs := sortArgs copy.
+			ssArgs at: index put: eachArgSs.
 			term := self sortContext signature
-						opTerm: aSortTerm opName args: args.
+						opTerm: aSortTerm opName args: ssArgs.
 			supersorts add: (self sortWithTerm: term) ] ].
 	^ supersorts
 ]
