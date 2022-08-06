@@ -7,23 +7,41 @@ Class {
 		'term',
 		'normalForm',
 		'context',
-		'eGraph',
 		'rewriteCache'
 	],
 	#category : #'Leibniz2-Terms'
 }
 
+{ #category : #'instance creation' }
+LzTermInContext class >> classForTerm: aTerm context: aContext [
+	| termClassSort |
+	(aContext signature builtins includes: #termClasses)
+		ifFalse: [ ^ self ].
+	termClassSort := aContext sortGraph simpleSort: #PharoTermClass.
+	aTerm sort <= termClassSort ifFalse: [ ^ self ].
+	termClassSort directSubsorts do: [ :each |
+		aTerm sort <= each ifTrue: [
+			| class |
+			self assert: each term args isEmpty.
+			class := each term opName asSymbol asClass.
+			self assert: (class inheritsFrom: self).
+			^ class ] ].
+	^ self
+]
+
+{ #category : #'instance creation' }
+LzTermInContext class >> term: aTerm context: aContext rewriteCache: aRewriteCache [
+	| class |
+	class := self classForTerm: aTerm context: aContext.
+	^ class new
+		term: aTerm;
+		context: aContext;
+		rewriteCache: aRewriteCache
+]
+
 { #category : #converting }
 LzTermInContext >> addAsRopedTextTo: aRopedText [
 	term addAsRopedTextTo: aRopedText
-]
-
-{ #category : #initializing }
-LzTermInContext >> constructEGraph [
-	eGraph := LzEGraph new
-		context: context.
-	term asENodeIn: eGraph.
-	eGraph saturateFromRewriteSystem: context rewriteSystemWithEqualityAxioms.
 ]
 
 { #category : #accessing }
@@ -36,28 +54,11 @@ LzTermInContext >> context: aContext [
 	context := aContext
 ]
 
-{ #category : #accessing }
-LzTermInContext >> eGraph [
-	eGraph ifNil: [ self constructEGraph ].
-	^ eGraph
-]
-
 { #category : #rewriting }
 LzTermInContext >> findNormalForm [
 	normalForm := self rewriteCache
 		ifNotNil: [ :c | c reduce: term ]
 		ifNil: [ self context reduce: term ]
-]
-
-{ #category : #inspecting }
-LzTermInContext >> gtEquivalentTermsFor: aView [
-	<gtView>
-	^ aView forward
-		title: 'Equivalent terms';
-		priority: 2;
-		object: [ self eGraph classForId: (self term asENodeIn: self eGraph) ];
-		view: #gtTermsFor:;
-		yourself
 ]
 
 { #category : #inspecting }

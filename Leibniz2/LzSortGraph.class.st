@@ -344,6 +344,14 @@ LzSortGraph >> pathsConnecting: aFamily to: anotherFamily [
 ]
 
 { #category : #constructing }
+LzSortGraph >> simpleSort: aSymbol [
+	| opName term |
+	opName := LzPrefixOpName for: aSymbol.
+	term := self sortContext signature opTerm: opName args: #().
+	^ self sortWithTerm: term
+]
+
+{ #category : #constructing }
 LzSortGraph >> sort: aString [
 	| astNode |
 	astNode := LzParser parse: aString startingAt: #patternEnd yielding: LzPatternDeclaration.

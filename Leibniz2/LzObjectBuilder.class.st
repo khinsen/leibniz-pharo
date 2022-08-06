@@ -115,8 +115,8 @@ LzObjectBuilder >> visitTopLevelTerm: aTopLevelTerm [
 	cacheAndContext := self rewriteCacheAndSubcontext:(annotation optionsAt: #subcontext).
 	term := cacheAndContext second parsedPattern: declaration.
 	^ { annotation.
-		LzTermInContext new
-			term: term;
-			context: cacheAndContext second;
+		LzTermInContext
+			term: term
+			context: cacheAndContext second
 			rewriteCache: cacheAndContext first }
 ]

@@ -27,7 +27,7 @@ LzParser2 class >> ambiguousTransitions [
 
 { #category : #'generated-accessing' }
 LzParser2 class >> cacheId [
-	^'2022-08-05T19:00:25.608234+02:00'
+	^'2022-08-06T16:49:56.192175+02:00'
 ]
 
 { #category : #generated }
@@ -208,7 +208,7 @@ SpecialTerm
 	| ""floatingPointNumbers""
 	| ""strings""
 	| ""arrays""
-	| ""classTerms""
+	| ""termClasses""
 	;"
 ]
 
@@ -252,11 +252,11 @@ LzParser2 class >> reduceTable [
 	#(36 0 #reduceActionFor_Var__var_______comma___1: 1152001 false) 
 	#(32 1 #liftFirstValue: 1028097 false) 
 	#(75 1 #liftFirstValue: 4992005 false) 
-	#(75 1 #liftFirstValue: 4992006 false) 
 	#(75 1 #liftFirstValue: 4992003 false) 
 	#(75 1 #liftFirstValue: 4992001 false) 
 	#(75 1 #liftFirstValue: 4992002 false) 
 	#(75 1 #liftFirstValue: 4992004 false) 
+	#(75 1 #liftFirstValue: 4992006 false) 
 	#(74 0 #reduceActionFor_Var__var_______comma___1: 4922369 false) 
 	#(67 1 #reduceActionForStringLiteralTerm1: 4568065 false) 
 	#(68 1 #reduceActionForIntegerLiteralTerm1: 4614145 false) 
@@ -296,8 +296,8 @@ LzParser2 class >> reduceTable [
 	#(64 1 #liftFirstValue: 4292610 false) 
 	#(60 3 #reduceActionForArrayTerm1: 4075521 false) 
 	#(55 0 #reduceActionFor_Var__var_______comma___1: 3329025 false) 
-	#(59 3 #reduceActionForVarTerm1: 3954689 false) 
 	#(49 3 #reduceActionForVar1: 3064833 false) 
+	#(59 3 #reduceActionForVarTerm1: 3954689 false) 
 	#(37 1 #liftFirstValue: 1211393 false) 
 	#(38 2 #reduceActionFor_Option__option___2: 1211394 false) 
 	#(51 2 #reduceActionFor_Var__var_______comma__1: 3162113 false) 
@@ -392,7 +392,7 @@ LzParser2 class >> startingStateForTopLevelUseContext [
 
 { #category : #generated }
 LzParser2 class >> symbolNames [
-	^ #('"("' '")"' '","' '":"' '"="' '"Pharo:"' '"["' '"\("' '"]"' '"^("' '"arrays"' '"classTerms"' '"floatingPointNumbers"' '"integers"' '"name"' '"name="' '"rationalNumbers"' '"strings"' '"{"' '"|"' '"}"' '"⇒"' '"⊆"' '<whitespace>' '<string>' '<integer>' '<rationalNumber>' '<fpNumber>' '<opIdentifier>' '<varIdentifier>' 'B e g i n' 'Start' 'Option' 'TopLevelOp' '(Var ''var'' "," ''comma'')' '(Var ''var'' "," ''comma'')*' '(Option ''option'')' '(Option ''option'')*' 'TopLevelSort' 'TopLevelAxiom' 'TopLevelRule' 'RulePrefix' 'TopLevelTerm' 'Op' '("," ''comma'' OpArg ''arg'')' '("," ''comma'' OpArg ''arg'')*' 'OpArg' 'SimpleOpArg' 'Var' 'Term' '(<opIdentifier> ''opName'' NonInfixTerm ''arg'')' '(<opIdentifier> ''opName'' NonInfixTerm ''arg'')+' 'NonInfixTerm' '("," ''comma'' Term ''arg'')' '("," ''comma'' Term ''arg'')*' 'SimpleTerm' 'ParenthesizedTerm' 'PrefixOpTerm' 'VarTerm' 'ArrayTerm' 'ArrayElements' '("," ''comma'' ArrayElement ''element'')' '("," ''comma'' ArrayElement ''element'')*' 'ArrayElement' 'TupleTerm' 'LiteralTerm' 'StringLiteralTerm' 'IntegerLiteralTerm' 'RationalNumberLiteralTerm' 'FpNumberLiteralTerm' 'TopLevelUseContext' 'TopLevelSpecialTerms' '("," ''comma'' SpecialTerm ''specialTerm'')' '("," ''comma'' SpecialTerm ''specialTerm'')*' 'SpecialTerm' 'E O F' 'error')
+	^ #('"("' '")"' '","' '":"' '"="' '"Pharo:"' '"["' '"\("' '"]"' '"^("' '"arrays"' '"floatingPointNumbers"' '"integers"' '"name"' '"name="' '"rationalNumbers"' '"strings"' '"termClasses"' '"{"' '"|"' '"}"' '"⇒"' '"⊆"' '<whitespace>' '<string>' '<integer>' '<rationalNumber>' '<fpNumber>' '<opIdentifier>' '<varIdentifier>' 'B e g i n' 'Start' 'Option' 'TopLevelOp' '(Var ''var'' "," ''comma'')' '(Var ''var'' "," ''comma'')*' '(Option ''option'')' '(Option ''option'')*' 'TopLevelSort' 'TopLevelAxiom' 'TopLevelRule' 'RulePrefix' 'TopLevelTerm' 'Op' '("," ''comma'' OpArg ''arg'')' '("," ''comma'' OpArg ''arg'')*' 'OpArg' 'SimpleOpArg' 'Var' 'Term' '(<opIdentifier> ''opName'' NonInfixTerm ''arg'')' '(<opIdentifier> ''opName'' NonInfixTerm ''arg'')+' 'NonInfixTerm' '("," ''comma'' Term ''arg'')' '("," ''comma'' Term ''arg'')*' 'SimpleTerm' 'ParenthesizedTerm' 'PrefixOpTerm' 'VarTerm' 'ArrayTerm' 'ArrayElements' '("," ''comma'' ArrayElement ''element'')' '("," ''comma'' ArrayElement ''element'')*' 'ArrayElement' 'TupleTerm' 'LiteralTerm' 'StringLiteralTerm' 'IntegerLiteralTerm' 'RationalNumberLiteralTerm' 'FpNumberLiteralTerm' 'TopLevelUseContext' 'TopLevelSpecialTerms' '("," ''comma'' SpecialTerm ''specialTerm'')' '("," ''comma'' SpecialTerm ''specialTerm'')*' 'SpecialTerm' 'E O F' 'error')
 ]
 
 { #category : #generated }
@@ -409,8 +409,8 @@ LzParser2 class >> transitionTable [
 #[1 0 6 0 1 0 6 0 19 0 6 0 25 0 6 0 26 0 6 0 27 0 6 0 28 0 6 0 29 0 6 0 30 0 61 0 36 0 65 0 39] 
 #[1 0 6 0 1 0 6 0 19 0 6 0 25 0 6 0 26 0 6 0 27 0 6 0 28 0 6 0 29 0 6 0 30 0 69 0 36 0 73 0 40] 
 #[1 0 6 0 1 0 6 0 19 0 6 0 25 0 6 0 26 0 6 0 27 0 6 0 28 0 7 0 29 0 6 0 30 0 81 0 36 0 85 0 41 0 89 0 42] 
-#[1 0 93 0 15 0 97 0 16 0 101 0 71] 
-#[1 0 133 0 11 0 133 0 12 0 133 0 13 0 133 0 14 0 133 0 17 0 133 0 18 0 129 0 72 0 133 0 75] 
+#[1 0 93 0 14 0 97 0 15 0 101 0 71] 
+#[1 0 133 0 11 0 133 0 12 0 133 0 13 0 133 0 16 0 133 0 17 0 133 0 18 0 129 0 72 0 133 0 75] 
 #[0 0 0 0 76] 
 #[1 0 137 0 1 0 141 0 19 0 145 0 25 0 149 0 26 0 153 0 27 0 157 0 28 0 161 0 29 0 165 0 30 0 169 0 35 0 173 0 49 0 177 0 50 0 181 0 53 0 185 0 56 0 185 0 57 0 185 0 58 0 185 0 59 0 185 0 60 0 185 0 65 0 185 0 66 0 185 0 67 0 185 0 68 0 185 0 69 0 185 0 70] 
 #[0 0 10 0 76] 
@@ -506,7 +506,7 @@ LzParser2 class >> transitionTable [
 #[0 2 57 0 22] 
 #[1 0 70 0 3 2 61 0 38 0 70 0 76] 
 #[1 1 213 0 3 1 221 0 33 1 221 0 37 0 162 0 76] 
-#[0 2 65 0 11 0 12 0 13 0 14 0 17 0 18 0 75] 
+#[0 2 65 0 11 0 12 0 13 0 16 0 17 0 18 0 75] 
 #[1 1 213 0 3 1 221 0 33 1 221 0 37 0 166 0 76] 
 #[0 0 170 0 3 0 76] 
 #[1 0 137 0 1 0 141 0 19 0 145 0 25 0 149 0 26 0 153 0 27 0 157 0 28 0 161 0 29 1 37 0 30 2 69 0 50 0 181 0 53 0 185 0 56 0 185 0 57 0 185 0 58 0 185 0 59 0 185 0 60 0 185 0 65 0 185 0 66 0 185 0 67 0 185 0 68 0 185 0 69 0 185 0 70] 
@@ -518,7 +518,7 @@ LzParser2 class >> transitionTable [
 #[1 0 134 0 3 0 134 0 9 2 93 0 63] 
 #[0 0 186 0 2 0 3 0 4 0 5 0 7 0 8 0 9 0 10 0 20 0 22 0 23 0 29 0 76] 
 #[1 0 190 0 2 0 190 0 3 2 97 0 55] 
-#[1 0 59 0 3 0 194 0 5 0 194 0 7 0 194 0 8 0 194 0 10 0 194 0 22 0 194 0 23 0 194 0 29 0 194 0 76] 
+#[1 0 59 0 3 0 198 0 5 0 198 0 7 0 198 0 8 0 198 0 10 0 198 0 22 0 198 0 23 0 198 0 29 0 198 0 76] 
 #[0 2 101 0 29] 
 #[0 0 202 0 3 0 76] 
 #[0 0 206 0 3 0 76] 
@@ -547,7 +547,7 @@ LzParser2 class >> transitionTable [
 #[1 0 137 0 1 2 185 0 6 0 141 0 19 0 145 0 25 0 149 0 26 0 153 0 27 0 157 0 28 0 161 0 29 1 37 0 30 2 189 0 50 0 181 0 53 0 185 0 56 0 185 0 57 0 185 0 58 0 185 0 59 0 185 0 60 0 185 0 65 0 185 0 66 0 185 0 67 0 185 0 68 0 185 0 69 0 185 0 70] 
 #[1 1 213 0 3 1 221 0 33 1 221 0 37 0 226 0 76] 
 #[0 0 230 0 3 0 76] 
-#[0 0 194 0 2 0 3 0 4 0 5 0 7 0 8 0 9 0 10 0 20 0 22 0 23 0 29 0 76] 
+#[0 0 198 0 2 0 3 0 4 0 5 0 7 0 8 0 9 0 10 0 20 0 22 0 23 0 29 0 76] 
 #[0 0 234 0 2 0 3 0 4 0 5 0 7 0 8 0 9 0 10 0 20 0 22 0 23 0 29 0 76] 
 #[1 0 190 0 2 0 190 0 3 2 193 0 55] 
 #[1 0 137 0 1 1 45 0 7 0 141 0 19 0 145 0 25 0 149 0 26 0 153 0 27 0 157 0 28 0 161 0 29 1 37 0 30 2 197 0 50 0 181 0 53 0 185 0 56 0 185 0 57 0 185 0 58 0 185 0 59 0 185 0 60 2 197 0 61 2 197 0 64 0 185 0 65 0 185 0 66 0 185 0 67 0 185 0 68 0 185 0 69 0 185 0 70] 

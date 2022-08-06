@@ -116,7 +116,7 @@ LzPageDeclarationCache >> onContentTreeRemoved: anAnnouncement [
 	snippetUid := anAnnouncement content uid.
 	subcontexts := Set new.
 	(declarations at: snippetUid ifAbsent: [#()]) do: [ :each |
-		(each optionsAt: #example) ifFalse: [
+		(each optionsAt: #example) = true ifFalse: [
 			subcontexts add: (each optionsAt: #subcontext) ] ].
 	self announceChangesFor: subcontexts.
 	declarations

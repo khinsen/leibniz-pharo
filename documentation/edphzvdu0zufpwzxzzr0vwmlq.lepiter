@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T18:58:49.923893+02:00"
+						"dateAndTimeString" : "2022-08-06T17:40:59.180622+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T19:00:46.949139+02:00"
+						"dateAndTimeString" : "2022-08-06T17:41:50.645346+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "cbfLHeOhDQCw8C2iA5WdLw=="
+					"uidString" : "MMtLJfahDQCXKzI3AAZkIw=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Requires special terms ({{lzSpecialTerms:classTerms}}) for defining terms in Pharo code."
+				"string" : "This context is used to build computational tools in Pharo that can operate on Leibniz terms and contexts. See [[Plotting]] for an example."
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T11:36:14.45111+02:00"
+						"dateAndTimeString" : "2022-08-06T16:49:20.824857+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +66,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T11:37:09.343855+02:00"
+						"dateAndTimeString" : "2022-08-06T17:42:09.808394+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "o9nU7tyhDQCKt54NBaXo8g=="
+					"uidString" : "f+W/bPWhDQC0QVa7DG8W4Q=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Character strings\", forSorts = \"yes\"}}"
+				"string" : "Requires special terms ({{lzSpecialTerms:termClasses}}) for defining term classes in Pharo code."
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T19:01:12.94171+02:00"
+						"dateAndTimeString" : "2022-08-06T17:42:37.078059+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,61 +103,23 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T19:02:53.9817+02:00"
+						"dateAndTimeString" : "2022-08-06T17:44:20.274534+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "GhIiJuOhDQCw9yVhA5WdLw=="
+					"uidString" : "B0zLKvahDQCXMwFiAAZkIw=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Terms whose sort is a subsort of {{lzSort:ClassTermSort(string)}} are created as instances of the Pharo class named by the string argument. This class must be a subclass of {{gtClass:name=LzOpTerm}}."
+				"string" : "Normally, terms created using an `lzTerm` annotation are represented by instances of {{gtClass:name=LzTermInContext}}, which contains references to the term and its context. The term class mechanism allows substituting another class, which must be a subclass of {{gtClass:name=LzTermInContext}}."
 			},
 			{
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-05T11:43:24.751792+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-05T11:45:02.434304+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "CsfZB92hDQCK1EKjBaXo8g=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "{{lzOp:foo:ClassTermSort(\"LzOpTerm\"), subcontext = \"example\"}}"
-						}
-					]
+					"items" : [ ]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -167,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T11:43:05.905736+02:00"
+						"dateAndTimeString" : "2022-08-06T17:45:29.176423+02:00"
 					}
 				},
 				"editEmail" : {
@@ -178,17 +140,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T11:43:08.396716+02:00"
+						"dateAndTimeString" : "2022-08-06T17:46:43.269565+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "VliYB92hDQCK0mkNBaXo8g=="
+					"uidString" : "Y0J5NfahDQCXOkDXAAZkIw=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "### Example"
+				"string" : "To use this mechanism, define a subsort of {{lzSort:PharoTermClass}} whose name is the name of your Pharo class. Terms whose sort is a subsort of this sort will then be instantiated using your class."
 			}
 		]
 	},
@@ -211,12 +173,12 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-08-05T11:35:29.020479+02:00"
+			"dateAndTimeString" : "2022-08-06T16:49:09.642857+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Class terms"
+		"title" : "Term classes"
 	},
 	"uid" : {
 		"__type" : "uuid",

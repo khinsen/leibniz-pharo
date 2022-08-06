@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T12:00:23.143409+02:00"
+						"dateAndTimeString" : "2022-08-06T16:54:34.005066+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"Class terms\"}}\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Tuples\"}}\n\t- {{lzUseContext:name = \"Real numbers\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Term classes\"}}\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Tuples\"}}\n\t- {{lzUseContext:name = \"Real numbers\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T11:50:00.19391+02:00"
+						"dateAndTimeString" : "2022-08-06T18:04:02.131502+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Plots are represented by terms of the sort {{lzSort:Plot ⊆ ClassTermSort(\"LzPlotOpTerm\")}}, which are instances of {{gtClass:name=LzPlotOpTerm}}."
+				"string" : "Plots are represented by terms of the sort {{lzSort:Plot ⊆ LzPlotTerm}}, with {{lzSort:LzPlotTerm ⊆ PharoTermClass}}. These definitions ensure that plot terms are created as instances of {{gtClass:name=LzPlotTerm}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -145,7 +145,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-05T18:44:04.274326+02:00"
+									"dateAndTimeString" : "2022-08-06T18:04:56.119807+02:00"
 								}
 							},
 							"uid" : {
@@ -156,43 +156,6 @@
 								"__type" : "textStyle"
 							},
 							"string" : "A simple line plot:\n\t{{lzTerm:linePlot({[(0, 1), (1, 2), (3, -1)]})}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-05T12:00:59.721354+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-05T12:13:23.034832+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "X+GHR92hDQC635uUCNyojA=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "test:  {{lzTerm:{[(1, 1), (3, -1)]}}}"
 						}
 					]
 				},

@@ -18,7 +18,7 @@ LzSignatureBuilder >> builtin: aSymbol [
 			floatingPointNumbers
 			strings
 			arrays
-			classTerms) includes: aSymbol).
+			termClasses) includes: aSymbol).
 	builtins add: aSymbol 
 ]
 

@@ -7,7 +7,7 @@ Class {
 { #category : #'generated-initialization' }
 LzScanner class >> initializeKeywordMap [
 	keywordMap := Dictionary new.
-	#(#(29 'arrays' 11) #(29 'classTerms' 12) #(29 'floatingPointNumbers' 13) #(29 'integers' 14) #(29 'name' 15) #(29 'name=' 16) #(29 'rationalNumbers' 17) #(29 'strings' 18))
+	#(#(29 'arrays' 11) #(29 'floatingPointNumbers' 12) #(29 'integers' 13) #(29 'name' 14) #(29 'name=' 15) #(29 'rationalNumbers' 16) #(29 'strings' 17) #(29 'termClasses' 18))
 		do: [ :each | 
 			(keywordMap at: each first ifAbsentPut: [ Dictionary new ])
 				at: (each at: 2)
