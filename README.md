@@ -25,6 +25,8 @@ TBlTextStyleable compile: 'glamorousCodeDefaultFont
     self defaultFontName: ''JuliaMono'''.
 ```
 
+After installing Leibniz, the GToolkit home screen will contain an icon labelled "Leibniz Book". Click on it to open the Leibniz documentation.
+
 ## Dependencies
 
 The following list is provided for information. All the dependencies will be installed automatically in the procedure explained above.
