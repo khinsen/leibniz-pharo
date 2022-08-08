@@ -11,6 +11,11 @@ Class {
 	#category : #'Leibniz2-Sorts'
 }
 
+{ #category : #testing }
+LzKind >> <= aSortOrKind [
+	^ self = aSortOrKind
+]
+
 { #category : #converting }
 LzKind >> addAsFirstArgOfInfixTermWithOpName: anOpName asRopedTextTo: aRopedText [
 	self addAsRopedTextTo: aRopedText

@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T14:53:07.983584+02:00"
+						"dateAndTimeString" : "2022-08-08T18:26:52.966921+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T14:53:07.983584+02:00"
+						"dateAndTimeString" : "2022-08-08T18:40:20.82905+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "This: {{lzTerm:1 + (2 ÷ 0), withNormalForm = \"yes\"}}"
 			},
 			{
 				"__type" : "pharoSnippet",

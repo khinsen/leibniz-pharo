@@ -167,6 +167,9 @@ LzSort >> matchWithSupersortsOf: aSort [
 	self flag: #todo. "Use matchAllowingVars: ?"
 	bindings := LzBindings new
 					sortGraph: self sortGraph.
+	aSort isKind ifTrue: [
+		bindings failWithNoSort: aSort.
+		^ bindings ].
 	self term match: aSort term bindings: bindings.
 	bindings ifSuccess: [ ^ bindings ].
 
