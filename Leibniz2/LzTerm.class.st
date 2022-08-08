@@ -124,6 +124,11 @@ LzTerm >> isInfix [
 ]
 
 { #category : #testing }
+LzTerm >> isLeafErrorTerm [
+	^ false
+]
+
+{ #category : #testing }
 LzTerm >> isRestrictionOf: aTerm [
 	"Compares two patterns and returns true if the set of terms matching the
 	 receiver is a subset of the terms matching the argument."

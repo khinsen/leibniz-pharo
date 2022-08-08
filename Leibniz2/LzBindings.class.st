@@ -90,6 +90,12 @@ LzBindings >> failWith: aTerm notUnifiableWith: otherTerm [
 		failure := { #nonUnifiableTerms. aTerm. otherTerm } ]
 ]
 
+{ #category : #failing }
+LzBindings >> failWithNoSort: aSort [
+	failure ifNil: [
+		failure := { #notASort. aSort. nil } ]
+]
+
 { #category : #accessing }
 LzBindings >> findRootFor: aVarName [
 	| node |

@@ -127,6 +127,15 @@ LzArrayTerm >> inject: aTerm into: aFnTerm reducer: aBlock [
 				args: { aFnTerm. total. each })]
 ]
 
+{ #category : #testing }
+LzArrayTerm >> isLeafErrorTerm [
+	self sort isKind ifFalse: [ ^ false ].
+	self elements
+		detect: [ :each | each sort isKind ]
+		ifFound: [ ^ false ]
+		ifNone: [ ^ true ]
+]
+
 { #category : #unifying }
 LzArrayTerm >> match: otherTerm bindings: bindings [
 	otherTerm matchArrayTerm: self elements: elements shape: shape bindings: bindings

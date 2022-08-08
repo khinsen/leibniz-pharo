@@ -11,7 +11,14 @@ Class {
 
 { #category : #converting }
 LzOpTerm >> addAsRopedTextTo: aRopedText [
-	opName addForArgs: args asRopedTextTo: aRopedText
+	self isLeafErrorTerm
+		ifFalse: [
+			opName addForArgs: args asRopedTextTo: aRopedText.
+			^ self ].
+	self
+		do: [ :t | opName addForArgs: args asRopedTextTo: t ]
+		to: aRopedText
+		withAttribute: LzLeafErrorAttribute new
 ]
 
 { #category : #accessing }
@@ -89,6 +96,15 @@ LzOpTerm >> isBooleanTrue [
 { #category : #testing }
 LzOpTerm >> isInfix [
 	^ opName isInfix
+]
+
+{ #category : #testing }
+LzOpTerm >> isLeafErrorTerm [
+	self sort isKind ifFalse: [ ^ false ].
+	self args
+		detect: [ :each | each sort isKind ]
+		ifFound: [ ^ false ]
+		ifNone: [ ^ true ]
 ]
 
 { #category : #unifying }
