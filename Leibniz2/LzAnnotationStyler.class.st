@@ -210,6 +210,8 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 		declaration := annotatedDeclaration declaration.
 		term := object second.
 		output := annotatedDeclaration asRopedTextColored: color.
+		term sort isKind ifTrue: [
+			output attribute: (BlTextDecorationAttribute new underline) ].
 		(annotatedDeclaration optionsAt: #withSort)
 			ifTrue: [
 				| value colon sort |
