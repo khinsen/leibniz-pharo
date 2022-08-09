@@ -66,7 +66,7 @@ LzTermInContext >> gtSortFor: aView [
 	<gtView>
 	^ aView forward
 		title: 'Sort';
-		priority: 1;
+		priority: 2;
 		object: [ self term sort ];
 		view: #gtGraphFor:;
 		yourself
@@ -77,10 +77,15 @@ LzTermInContext >> gtTreeFor: aView [
 	<gtView>
 	^ aView forward
 		title: 'Tree';
-		priority: 0;
+		priority: 1;
 		object: [ self term ];
 		view: #gtTreeFor:;
 		yourself
+]
+
+{ #category : #testing }
+LzTermInContext >> hasInlineView [
+	^ false
 ]
 
 { #category : #accessing }

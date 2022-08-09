@@ -29,6 +29,16 @@ LzAnnotationStyler >> colorFor: aDeclarationAnnotation [
 ]
 
 { #category : #private }
+LzAnnotationStyler >> elements [
+	^ self composite elements
+]
+
+{ #category : #private }
+LzAnnotationStyler >> expanded [
+	^ self composite expanded
+]
+
+{ #category : #private }
 LzAnnotationStyler >> inTextButton: aText [
 	| button |
 
@@ -102,6 +112,28 @@ LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation [
 		attribute: attribute
 		from: anLzAnnotation parent startPosition
 		to: anLzAnnotation parent stopPosition
+]
+
+{ #category : #styling }
+LzAnnotationStyler >> styleExpandingObject: aTerm in: anAnnotation [
+	| cacheKey attribute |
+	aTerm hasInlineView ifFalse: [ ^ self ].
+
+	cacheKey := anAnnotation source.
+	attribute := (GtCachedTextExpandButtonAttribute new)
+		isExpanded: (self expanded at: cacheKey ifAbsentPut: [ "anAnnotation isExpanded" true ]);
+		attributesCreatingBlock:
+				[ (GtResizablePreviewAttribute new)
+						withCache: self elements key: cacheKey;
+						result: (aTerm inlineView);
+						showSelector: #gtLiveFor:;
+						height: 300 ];
+		onCachingDo: [ :aBoolean :theAttribute | self expanded at: cacheKey put: aBoolean ].
+
+	self text
+		attribute: attribute
+		from: anAnnotation parent startPosition
+		to: anAnnotation parent stopPosition
 ]
 
 { #category : #styling }
@@ -196,12 +228,12 @@ LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
-	| label attribute |
+	| label attribute term |
 	self styleAnnotation: aTopLevelTermAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.
 
 	[
-		| color object term annotatedDeclaration declaration  output |
+		| color object annotatedDeclaration declaration  output |
 		color := LzColors exampleColor.
 		object := LzObjectBuilder new
 			contextPageName: self page title;
@@ -245,7 +277,9 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 	self text
 		attribute: attribute
 		from: aTopLevelTermAnnotation parent startPosition
-		to: aTopLevelTermAnnotation parent stopPosition
+		to: aTopLevelTermAnnotation parent stopPosition.
+
+	self styleExpandingObject: term in: aTopLevelTermAnnotation
 ]
 
 { #category : #visiting }

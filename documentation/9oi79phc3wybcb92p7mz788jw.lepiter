@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T14:52:52.55309+02:00"
+						"dateAndTimeString" : "2022-08-08T18:47:59.298795+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T14:53:00.497689+02:00"
+						"dateAndTimeString" : "2022-08-08T18:48:10.18232+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Tuples\"}}\n\t- {{lzUseContext:name = \"Real numbers\"}}"
+				"string" : "Uses {{lzUseContext:name = \"Plotting\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-08T18:26:52.966921+02:00"
+						"dateAndTimeString" : "2022-08-08T18:48:46.436739+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +66,54 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-08T18:40:20.82905+02:00"
+						"dateAndTimeString" : "2022-08-08T18:49:12.768566+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "RJVLr9+hDQCzSrJiDTbczA=="
+					"uidString" : "R5kzUx+iDQCV98l8DpLPLA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "This: {{lzTerm:1 + (2 ÷ 0), withNormalForm = \"yes\"}}"
+				"string" : "Now {{lzOp:aNumber:ℝ}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-08T18:48:30.396233+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-09T17:13:45.083997+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "qOiKUR+iDQCV8EYLDpLPLA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Test plot: {{lzTerm:linePlot({[(0, 1), (1, 1/2), (3, -1)]})}}"
 			},
 			{
 				"__type" : "pharoSnippet",
