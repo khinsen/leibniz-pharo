@@ -121,14 +121,15 @@ LzAnnotationStyler >> styleExpandingObject: aTerm in: anAnnotation [
 
 	cacheKey := anAnnotation source.
 	attribute := (GtCachedTextExpandButtonAttribute new)
-		isExpanded: (self expanded at: cacheKey ifAbsentPut: [ "anAnnotation isExpanded" true ]);
+		isExpanded: (self expanded at: cacheKey ifAbsentPut: [ true ]);
 		attributesCreatingBlock:
 				[ (GtResizablePreviewAttribute new)
 						withCache: self elements key: cacheKey;
-						result: (aTerm inlineView);
+						result: aTerm inlineView;
 						showSelector: #gtLiveFor:;
 						height: 300 ];
-		onCachingDo: [ :aBoolean :theAttribute | self expanded at: cacheKey put: aBoolean ].
+		onCachingDo: [ :aBoolean :theAttribute |
+			self expanded at: cacheKey put: aBoolean ].
 
 	self text
 		attribute: attribute
