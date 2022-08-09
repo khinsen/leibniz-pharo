@@ -40,7 +40,7 @@ LzPlotTerm >> linePlot [
 	titleX: 'x';
 	ticksX: 10;
 	valueY: #second;
-	labelFormatY: [ :each | each printShowingDecimalPlaces: 1 ] ;
+	labelFormatY: [ :each | each printShowingDecimalPlaces: 2 ] ;
 	scaleY: GtPlotterLinearScale new;
 	titleY: 'y';
 	ticksY: 10;

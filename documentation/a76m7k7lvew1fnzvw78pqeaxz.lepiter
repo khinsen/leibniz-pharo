@@ -388,7 +388,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-26T07:00:44.587293+02:00"
+						"dateAndTimeString" : "2022-08-09T17:39:32.792091+02:00"
 					}
 				},
 				"editEmail" : {
@@ -399,17 +399,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-26T07:06:15.215899+02:00"
+						"dateAndTimeString" : "2022-08-09T18:08:08.93427+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "GE++arSeDQCHEQoqDBBOxg=="
+					"uidString" : "UEiFeTKiDQCt2+g3B9UR+Q=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Some examples:\n\t{{lzTerm:heronError(2, 1), subcontext = \"convergence\", withNormalForm = \"yes\"}}\n\t{{lzTerm:heronError(2, 1/10), subcontext = \"convergence\", withNormalForm = \"yes\"}}\n\t{{lzTerm:heronError(2, 1/100), subcontext = \"convergence\", withNormalForm = \"yes\"}}\n\t{{lzTerm:heronError(2, 1/1000), subcontext = \"convergence\", withNormalForm = \"yes\"}}"
+				"string" : "A convergence plot for the square root of 2 (uses {{lzUseContext:name = \"Plotting\", subcontext = \"convergence\"}}):\n\t{{lzTerm:linePlot( {[ (1, heronError(2, 1)), (1/10, heronError(2, 1/10)), (1/100, heronError(2, 1/100)), (1/1000, heronError(2, 1/1000)) ]}), subcontext = \"convergence\"}}"
 			}
 		]
 	},
