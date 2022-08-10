@@ -107,7 +107,6 @@ LzOperator >> gtGraphFor: aView [
 		title: 'Graph';
 		priority: 1;
 		painting: [ :view | 
-			| edges |
 			view nodes
 				shape: [ :r | self graphNodeForRank: r ];
 				with: ranks.

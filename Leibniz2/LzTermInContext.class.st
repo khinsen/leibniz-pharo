@@ -62,6 +62,17 @@ LzTermInContext >> findNormalForm [
 ]
 
 { #category : #inspecting }
+LzTermInContext >> gtOperatorFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Operator';
+		priority: 5;
+		object: [ self context signature operators opForTerm: self term ];
+		view: #gtGraphFor:;
+		yourself
+]
+
+{ #category : #inspecting }
 LzTermInContext >> gtSortFor: aView [
 	<gtView>
 	^ aView forward
