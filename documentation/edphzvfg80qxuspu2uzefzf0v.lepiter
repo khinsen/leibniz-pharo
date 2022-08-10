@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-09T16:35:06.387362+02:00"
+						"dateAndTimeString" : "2022-08-10T15:20:42.359789+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"Term classes\"}}\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Tuples\"}}\n\t- {{lzUseContext:name = \"Real numbers\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Term classes\"}}\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}, {{lzUseContext:name = \"Function application to one-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Tuples\"}}\n\t- {{lzUseContext:name = \"Real numbers\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T18:43:49.870756+02:00"
+						"dateAndTimeString" : "2022-08-10T15:40:05.315638+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Line plots are defined by:\n\t{{lzOp:linePlot(Array1D((ℝ, ℝ))) : Plot}}"
+				"string" : "Line plots can be defined by an array of (x, y) pairs:\n\t{{lzOp:linePlot(Array1D((ℝ, ℝ))) : Plot}}\nor by separate arrays for x and y values:\n\t{{lzOp:linePlot(Array1D(ℝ), Array1D(ℝ)) : Plot}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-10T15:21:10.871827+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-10T15:42:41.877096+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "CQKlpUSiDQC1VXLVB/KFPg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Another possibility is providing a function plus an array of x values:\n\t{{lzOp:linePlot(ℝ → ℝ, Array1D(ℝ)) : Plot}}\nThe y values are then computed from:\n\t{{lzRule:linePlot(f_:(ℝ → ℝ), x_:Array1D(ℝ)) ⇒ linePlot(x_, f_[x_])}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -145,7 +182,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-09T17:14:27.838207+02:00"
+									"dateAndTimeString" : "2022-08-10T15:23:03.415096+02:00"
 								}
 							},
 							"uid" : {
@@ -155,7 +192,44 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "A simple line plot:\n\t{{lzTerm:linePlot({[(0, 1), (1, 2), (3, -1), (4, 1/2)]})}}"
+							"string" : "A line plot for an array of points:\n\t{{lzTerm:linePlot({[(0, 1), (1, 2), (3, -1), (4, 1/2)]})}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-10T15:24:37.226626+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-10T15:26:53.241084+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "hf0btUSiDQC1XhLFB/KFPg=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "A line plot of a function (the squaring function from {{lzUseContext:name = \"Functions/realFunction\", subcontext = \"functionExample\"}}):\n\t{{lzTerm:square[{[1, 2, 3]}], subcontext = \"functionExample\", withNormalForm = \"yes\"}}\n\t{{lzTerm:linePlot(square, {[0, 1/2, 1, 3/2, 2, 5/2, 6]}), subcontext = \"functionExample\"}}"
 						}
 					]
 				},
@@ -178,7 +252,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T11:56:06.394208+02:00"
+						"dateAndTimeString" : "2022-08-10T15:22:42.982939+02:00"
 					}
 				},
 				"uid" : {
@@ -188,7 +262,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "###Example"
+				"string" : "###Examples"
 			}
 		]
 	},

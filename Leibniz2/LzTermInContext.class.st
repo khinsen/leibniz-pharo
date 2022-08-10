@@ -62,6 +62,17 @@ LzTermInContext >> findNormalForm [
 ]
 
 { #category : #inspecting }
+LzTermInContext >> gtNormalFormTreeFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Normal form';
+		priority: 7;
+		object: [ self normalForm ];
+		view: #gtTreeFor:;
+		yourself
+]
+
+{ #category : #inspecting }
 LzTermInContext >> gtOperatorFor: aView [
 	<gtView>
 	^ aView forward

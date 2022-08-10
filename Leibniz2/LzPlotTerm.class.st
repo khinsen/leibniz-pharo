@@ -1,9 +1,6 @@
 Class {
 	#name : #LzPlotTerm,
 	#superclass : #LzTermInContext,
-	#instVars : [
-		'eGraph'
-	],
 	#category : #'Leibniz2-Plotting'
 }
 
@@ -24,29 +21,27 @@ LzPlotTerm >> hasInlineView [
 
 { #category : #viewing }
 LzPlotTerm >> inlineView [
-	^ self linePlot create
+	self assert: self normalForm opName asSymbol = #linePlot.
+	^ (LzLinePlot new
+		points: self xyValues)
+		asElement
 ]
 
-{ #category : #plotting }
-LzPlotTerm >> linePlot [
-	| data linePlot |
-	self assert: self normalForm opName asSymbol = #linePlot.
-	data := GtPlotterDataGroup new
-		values: (self xyValuesFrom: self normalForm args first).
-	linePlot := GtPlotterLineChart new
-	valueX: #first;
-	labelFormatX: [ :each | each printShowingDecimalPlaces: 1] ;
-	scaleX: GtPlotterLinearScale new;
-	titleX: 'x';
-	ticksX: 10;
-	valueY: #second;
-	labelFormatY: [ :each | each printShowingDecimalPlaces: 2 ] ;
-	scaleY: GtPlotterLinearScale new;
-	titleY: 'y';
-	ticksY: 10;
-	with: data.
+{ #category : #data }
+LzPlotTerm >> xValuesFrom: xArray yValuesFrom: yArray [
+	| x y |
+	x := xArray elements collect: #value.
+	y := yArray elements collect: #value.
+	^ x with: y collect: [ :xv :yv | { xv. yv } ]
+]
 
-	^ linePlot
+{ #category : #data }
+LzPlotTerm >> xyValues [
+	| args |
+	args := self normalForm args.
+	args size = 1 ifTrue: [ ^ self xyValuesFrom: args first ].
+	args size = 2 ifTrue: [ ^ self xValuesFrom: args first yValuesFrom: args second ].
+	self notYetImplemented
 ]
 
 { #category : #data }
