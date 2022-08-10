@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T15:22:56.063112+02:00"
+						"dateAndTimeString" : "2022-08-10T15:03:09.425533+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Array elements are written using subscript indices:\n\t{{lzOp:s_:𝕊, i_:ℕ, Array1D(s_)\\(i_) : s_}}"
+				"string" : "Array elements are written using subscript indices:\n\t{{lzOp:s_:𝕊, Array1D(s_)\\(ℕ.nz) : s_}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:13:51.402998+02:00"
+						"dateAndTimeString" : "2022-08-10T15:03:38.586302+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For array terms, indexation is implemented in Pharo:\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz, A_\\(i_) ⇒ Pharo:\"A ensureArrayTerm. A index: i\"}}"
+				"string" : "For literal array terms, indexation is implemented in Pharo:\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz, A_\\(i_) ⇒ Pharo:\"A ensureArrayTerm. A index: i\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:27:19.638993+02:00"
+						"dateAndTimeString" : "2022-08-10T15:03:20.753238+02:00"
 					}
 				},
 				"uid" : {
