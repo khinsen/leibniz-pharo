@@ -216,19 +216,27 @@ LzArrayTerm >> shapeAsArrayTerm [
 ]
 
 { #category : #transforming }
-LzArrayTerm >> slice: first to: last [
+LzArrayTerm >> slice: first to: last by: step [
+	| sliceElementSize sliceElements sliceIndex |
 	self assert: self shape size == 1.
+	self assert: step value >= 1.
+	sliceElementSize := (last value - first value) / step value + 1.
+	sliceElements := Array new: sliceElementSize.
+	sliceIndex := 1.
+	first value to: last value by: step value do: [ :arrayIndex |
+		sliceElements at: sliceIndex put: (elements at: arrayIndex).
+		sliceIndex := sliceIndex + 1 ].
 	^ self signature
-		arrayTerm: (elements copyFrom: (first value max: 1) to: (last value min: elements size))
-		shape: { last value - first value + 1 }
+		arrayTerm: sliceElements
+		shape: { sliceElementSize }
 ]
 
 { #category : #transforming }
-LzArrayTerm >> sliceToEndFrom: first [
+LzArrayTerm >> sliceToEndFrom: first by: step [
 	| last |
 	self assert: self shape size == 1.
 	last := self shape first.
-	^ self slice: first to: last
+	^ self slice: first to: last by: step
 ]
 
 { #category : #accessing }
