@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-06T09:28:30.01327+02:00"
+						"dateAndTimeString" : "2022-08-13T16:34:45.29158+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional array indexation\"}}\n\t- {{lzUseContext:name = \"Integers\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional array indexation\"}}\n\t- {{lzUseContext:name = \"Integers\"}}\n\t- {{lzUseContext:name = \"Integer intervals and grids\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:36:05.742238+02:00"
+						"dateAndTimeString" : "2022-08-13T16:35:31.572922+02:00"
 					}
 				},
 				"uid" : {
@@ -76,44 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Slicing refers to extracting a sub-array corresponding to an interval of indices."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:36:19.594371+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:47:50.469836+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "4xBjMHOfDQCXnU6PCaWTOQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "The interval, whose sort is {{lzSort:n⋯m}}, is defined with the operator\n\t{{lzOp:ℕ.nz ⋯ ℕ.nz : n⋯m}}"
+				"string" : "Slicing refers to extracting a sub-array corresponding to an interval of indices, as defined in {{lzUseContext:name = \"Integer intervals and grids\"}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -177,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:41:20.139547+02:00"
+						"dateAndTimeString" : "2022-08-13T16:36:14.630572+02:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A slice is extracted by using an interval as a subscript:\n\t{{lzOp:s_:𝕊, (Array1D(s_))\\(n⋯m) : Array1D(s_)}}"
+				"string" : "A slice is extracted by using an interval as a subscript:\n\t{{lzOp:s_:𝕊, (Array1D(s_))\\(ℕ.nz⋯ℕ.nz) : Array1D(s_)}}"
 			},
 			{
 				"__type" : "textSnippet",

@@ -1,0 +1,187 @@
+{
+	"__schema" : "4.1",
+	"__type" : "page",
+	"children" : {
+		"__type" : "snippets",
+		"items" : [
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-13T12:18:15.064838+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-13T12:18:26.715852+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "xw4KdH6iDQCbKzk0D6SFkw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Uses {{lzUseContext:name = \"Integers\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-13T12:19:08.831736+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-13T16:11:52.874597+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "oQffdH6iDQCbLSSkD6SFkw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The closed interval bracketed by two integers has sort {{lzSort:ℤ⋯ℤ}} and is defined using the operator\n\t{{lzOp:ℤ ⋯ ℤ : ℤ⋯ℤ}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-13T12:31:41.162173+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-13T16:13:13.927777+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "50kvo36iDQCbNh9jD6SFkw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "An integer interval is also the special case of an integer grid with a grid spacing of 1. Integer grids with a wider spacing have sort {{lzSort:ℤ⋯ℤ++ℕ.nz}} (with {{lzSort:ℤ⋯ℤ ⊆ ℤ⋯ℤ++ℕ.nz}}) and are defined using the operator\n\t{{lzOp:ℤ⋯ℤ ++ ℕ.nz : ℤ⋯ℤ++ℕ.nz}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-13T16:13:47.936761+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-13T16:28:52.694346+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "TBv8tH6iDQCbOLeeD6SFkw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Important special cases for intervals:\n\t- {{lzOp:ℕ ⋯ ℕ : ℕ⋯ℕ}} with {{lzSort:ℕ⋯ℕ ⊆ ℤ⋯ℤ}}\n\t- {{lzOp:ℕ.nz ⋯ ℕ.nz : ℕ.nz⋯ℕ.nz}} with {{lzSort:ℕ.nz⋯ℕ.nz ⊆ ℕ⋯ℕ}}\nand for grids:\n\t- {{lzOp:ℕ⋯ℕ ++ ℕ.nz : ℕ⋯ℕ++ℕ.nz}}\n\t\twith {{lzSort:ℕ⋯ℕ ⊆ ℕ⋯ℕ++ℕ.nz}} and {{lzSort:ℕ⋯ℕ++ℕ.nz ⊆ ℤ⋯ℤ++ℕ.nz}}\n\t- {{lzOp:ℕ.nz⋯ℕ.nz ++ ℕ.nz : ℕ.nz⋯ℕ.nz++ℕ.nz}}\n\t\twith {{lzSort:ℕ.nz⋯ℕ.nz ⊆ ℕ.nz⋯ℕ.nz++ℕ.nz}} and {{lzSort:ℕ.nz⋯ℕ.nz++ℕ.nz ⊆ ℕ⋯ℕ++ℕ.nz}}"
+			}
+		]
+	},
+	"createEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"createTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2022-08-13T12:18:13.556566+02:00"
+		}
+	},
+	"editEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"editTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2022-08-13T12:30:39.41619+02:00"
+		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Integer intervals and grids"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "97e00874-7ea2-0d00-9b2a-66f80fa48593"
+	}
+}
