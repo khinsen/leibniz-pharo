@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:39:15.160224+02:00"
+						"dateAndTimeString" : "2022-08-15T12:04:24.103166+02:00"
 					}
 				},
 				"editEmail" : {
@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-13T16:57:25.226876+02:00"
+						"dateAndTimeString" : "2022-08-15T12:04:24.103166+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A slice is extracted by using an interval or grid as a subscript:\n\t{{lzOp:s_:𝕊, (Array1D(s_))\\(ℕ.nz⋯ℕ.nz++ℕ.nz) : Array1D(s_)}}"
+				"string" : "A slice is extracted by using an interval or grid as a subscript:\n\t{{lzOp:s_:𝕊, (Array1D(s_))\\(ℕ.nz⧺ℕ.nz⧺ℕ.nz) : Array1D(s_)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -166,7 +166,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:50:35.455604+02:00"
+						"dateAndTimeString" : "2022-08-15T12:05:18.985458+02:00"
 					}
 				},
 				"editEmail" : {
@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-13T17:06:11.631853+02:00"
+						"dateAndTimeString" : "2022-08-15T12:05:18.985458+02:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For array terms, the slice is computed in Pharo code:\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz, j_:ℕ.nz, A_\\(i_ ⋯ j_) ⇒ Pharo:\"A ensureArrayTerm. i ensureNumber. j ensureNumber. A slice: i to: j by: 1\"}}\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz, j_:ℕ.nz,k_:ℕ.nz,  A_\\((i_ ⋯ j_) ++ k_) ⇒ Pharo:\"A ensureArrayTerm. i ensureNumber. j ensureNumber. k ensureNumber. A slice: i to: j by: k\"}}"
+				"string" : "For array terms, the slice is computed in Pharo code:\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz, j_:ℕ.nz, A_\\(i_ ⋯ j_) ⇒ Pharo:\"A ensureArrayTerm. i ensureNumber. j ensureNumber. A slice: i to: j by: 1\"}}\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz, j_:ℕ.nz,k_:ℕ.nz,  A_\\(i_ ⧺ k_ ⧺ j_) ⇒ Pharo:\"A ensureArrayTerm. i ensureNumber. j ensureNumber. k ensureNumber. A slice: i to: j by: k\"}}\n"
 			},
 			{
 				"__type" : "textSnippet",
@@ -203,7 +203,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:48:20.636852+02:00"
+						"dateAndTimeString" : "2022-08-15T12:06:02.040172+02:00"
 					}
 				},
 				"editEmail" : {
@@ -214,7 +214,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-13T17:07:20.531522+02:00"
+						"dateAndTimeString" : "2022-08-15T12:06:02.040172+02:00"
 					}
 				},
 				"uid" : {
@@ -224,7 +224,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For the special case of a slice to the end:\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz , A_\\(i_ ⋯ ∎) ⇒ Pharo:\"A ensureArrayTerm. i ensureNumber. A sliceToEndFrom: i by: 1\"}}\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz, k_:ℕ.nz, A_\\((i_ ⋯ ∎) ++ k_) ⇒ Pharo:\"A ensureArrayTerm. i ensureNumber. k ensureNumber. A sliceToEndFrom: i by: k\"}}"
+				"string" : "For the special case of a slice to the end:\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz , A_\\(i_ ⋯ ∎) ⇒ Pharo:\"A ensureArrayTerm. i ensureNumber. A sliceToEndFrom: i by: 1\"}}\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz, k_:ℕ.nz, A_\\(i_ ⧺ k_ ⧺ ∎) ⇒ Pharo:\"A ensureArrayTerm. i ensureNumber. k ensureNumber. A sliceToEndFrom: i by: k\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -277,7 +277,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:55:23.105689+02:00"
+						"dateAndTimeString" : "2022-08-15T12:07:38.410576+02:00"
 					}
 				},
 				"editEmail" : {
@@ -288,7 +288,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-13T17:27:36.928074+02:00"
+						"dateAndTimeString" : "2022-08-15T12:07:38.410576+02:00"
 					}
 				},
 				"uid" : {
@@ -298,7 +298,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For a literal array:\n\t{{lzTerm:{[1, 4, 9, 16, 25, 36]}\\(2 ⋯ 3), withNormalForm = \"yes\"}}\n\t{{lzTerm:{[1, 4, 9, 16, 25, 36]}\\(3 ⋯ ∎), withNormalForm = \"yes\"}}\n\t{{lzTerm:{[1, 4, 9, 16, 25, 36]}\\((1 ⋯ 5) ++ 2), withNormalForm = \"yes\"}}\n\t{{lzTerm:{[1, 4, 9, 16, 25, 36]}\\((2 ⋯ ∎) ++ 2), withNormalForm = \"yes\"}}"
+				"string" : "For a literal array:\n\t{{lzTerm:{[1, 4, 9, 16, 25, 36]}\\(2 ⋯ 3), withNormalForm = \"yes\"}}\n\t{{lzTerm:{[1, 4, 9, 16, 25, 36]}\\(3 ⋯ ∎), withNormalForm = \"yes\"}}\n\t{{lzTerm:{[1, 4, 9, 16, 25, 36]}\\(1 ⧺ 2 ⧺ 5), withNormalForm = \"yes\"}}\n\t{{lzTerm:{[1, 4, 9, 16, 25, 36]}\\(2 ⧺ 2 ⧺ ∎), withNormalForm = \"yes\"}}"
 			}
 		]
 	},

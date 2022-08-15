@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-13T12:31:41.162173+02:00"
+						"dateAndTimeString" : "2022-08-15T11:52:05.068769+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-13T16:13:13.927777+02:00"
+						"dateAndTimeString" : "2022-08-15T11:52:06.491987+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "50kvo36iDQCbNh9jD6SFkw=="
+					"uidString" : "irceUqaiDQCYqwCRCTxoog=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An integer interval is also the special case of an integer grid with a grid spacing of 1. Integer grids with a wider spacing have sort {{lzSort:ℤ⋯ℤ++ℕ.nz}} (with {{lzSort:ℤ⋯ℤ ⊆ ℤ⋯ℤ++ℕ.nz}}) and are defined using the operator\n\t{{lzOp:ℤ⋯ℤ ++ ℕ.nz : ℤ⋯ℤ++ℕ.nz}}"
+				"string" : "Integer grids have sort {{lzSort:ℤ⧺ℕ.nz⧺ℤ}} are defined using the operator\n\t{{lzOp:ℤ⧺ℕ.nz ⧺ ℤ : ℤ⧺ℕ.nz⧺ℤ}}\nThe first argument of this operator is constructed using the auxiliary operator\n\t{{lzOp:ℤ ⧺ ℕ.nz : ℤ⧺ℕ.nz}}\nof sort {{lzSort:ℤ⧺ℕ.nz}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-13T16:13:47.936761+02:00"
+						"dateAndTimeString" : "2022-08-15T11:52:12.435807+02:00"
 					}
 				},
 				"editEmail" : {
@@ -140,17 +140,91 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-13T16:28:52.694346+02:00"
+						"dateAndTimeString" : "2022-08-15T11:52:12.435807+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "TBv8tH6iDQCbOLeeD6SFkw=="
+					"uidString" : "7R9pUqaiDQCYreXQCTxoog=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Important special cases for intervals:\n\t- {{lzOp:ℕ ⋯ ℕ : ℕ⋯ℕ}} with {{lzSort:ℕ⋯ℕ ⊆ ℤ⋯ℤ}}\n\t- {{lzOp:ℕ.nz ⋯ ℕ.nz : ℕ.nz⋯ℕ.nz}} with {{lzSort:ℕ.nz⋯ℕ.nz ⊆ ℕ⋯ℕ}}\nand for grids:\n\t- {{lzOp:ℕ⋯ℕ ++ ℕ.nz : ℕ⋯ℕ++ℕ.nz}}\n\t\twith {{lzSort:ℕ⋯ℕ ⊆ ℕ⋯ℕ++ℕ.nz}} and {{lzSort:ℕ⋯ℕ++ℕ.nz ⊆ ℤ⋯ℤ++ℕ.nz}}\n\t- {{lzOp:ℕ.nz⋯ℕ.nz ++ ℕ.nz : ℕ.nz⋯ℕ.nz++ℕ.nz}}\n\t\twith {{lzSort:ℕ.nz⋯ℕ.nz ⊆ ℕ.nz⋯ℕ.nz++ℕ.nz}} and {{lzSort:ℕ.nz⋯ℕ.nz++ℕ.nz ⊆ ℕ⋯ℕ++ℕ.nz}}"
+				"string" : "An integer interval is a special case of an integer grid with a grid spacing of 1, thus: {{lzSort:ℤ⋯ℤ ⊆ ℤ⧺ℕ.nz⧺ℤ}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-15T11:59:36.97148+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-15T11:59:49.77057+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "yNIpbaaiDQCYr4a5CTxoog=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Special cases for intervals:\n\t- {{lzOp:ℕ ⋯ ℕ : ℕ⋯ℕ}} with {{lzSort:ℕ⋯ℕ ⊆ ℤ⋯ℤ}}\n\t- {{lzOp:ℕ.nz ⋯ ℕ.nz : ℕ.nz⋯ℕ.nz}} with {{lzSort:ℕ.nz⋯ℕ.nz ⊆ ℕ⋯ℕ}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-15T11:59:54.631588+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-15T12:02:05.67908+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Gg4qbqaiDQCYsXJGCTxoog=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Special cases for grids:\n\t- {{lzOp:ℕ⧺ℕ.nz ⧺ ℕ : ℕ⧺ℕ.nz⧺ℕ}}\n\t\twith {{lzOp:ℕ ⧺ ℕ.nz : ℕ⧺ℕ.nz}}, {{lzSort:ℕ⋯ℕ ⊆ ℕ⧺ℕ.nz⧺ℕ}},\n                {{lzSort:ℕ⧺ℕ.nz⧺ℕ ⊆ ℤ⧺ℕ.nz⧺ℤ}}, and {{lzSort:ℕ⧺ℕ.nz ⊆ ℤ⧺ℕ.nz}}\n\t- {{lzOp:ℕ.nz⧺ℕ.nz ⧺ ℕ.nz : ℕ.nz⧺ℕ.nz⧺ℕ.nz}}\n\t\twith {{lzOp:ℕ.nz ⧺ ℕ.nz : ℕ.nz⧺ℕ.nz}}, {{lzSort:ℕ.nz⋯ℕ.nz ⊆ ℕ.nz⧺ℕ.nz⧺ℕ.nz}},\n                {{lzSort:ℕ.nz⧺ℕ.nz⧺ℕ.nz ⊆ ℕ⧺ℕ.nz⧺ℕ}}, and {{lzSort:ℕ.nz⧺ℕ.nz ⊆ ℕ⧺ℕ.nz}}"
 			}
 		]
 	},
