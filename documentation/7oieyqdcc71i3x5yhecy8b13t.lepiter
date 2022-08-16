@@ -145,7 +145,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-13T12:30:39.421415+02:00"
+									"dateAndTimeString" : "2022-08-15T13:15:15.583464+02:00"
 								}
 							},
 							"uid" : {
@@ -155,7 +155,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Numbers:\n\t[[Integers]], [[Rational numbers]], [[Real numbers]], [[Floating-point numbers]]\n\t[[Integer intervals and grids]]"
+							"string" : "Numbers:\n\t[[Integers]], [[Rational numbers]], [[Real numbers]], [[Floating-point numbers]]\n\t[[Integer intervals]], [[Integer grids]], [[Real number grids]]"
 						},
 						{
 							"__type" : "textSnippet",

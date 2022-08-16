@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-13T12:18:15.064838+02:00"
+						"dateAndTimeString" : "2022-08-15T13:15:19.818983+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-15T13:16:21.527628+02:00"
+						"dateAndTimeString" : "2022-08-15T13:16:49.049619+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "xw4KdH6iDQCbKzk0D6SFkw=="
+					"uidString" : "QZLQe6eiDQCaUGI5CTxoog=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Integer intervals\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Real numbers\"}}\n\t- {{lzUseContext:name = \"Integer grids\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-15T11:52:05.068769+02:00"
+						"dateAndTimeString" : "2022-08-16T10:48:14.127325+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +66,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-15T13:21:56.595611+02:00"
+						"dateAndTimeString" : "2022-08-16T10:50:39.83567+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "irceUqaiDQCYqwCRCTxoog=="
+					"uidString" : "nyq6i7miDQCO4vilAfB/YA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Integer grids have sort {{lzSort:ℤ⧺ℕ.nz⧺ℤ}} and are defined using the operator\n\t{{lzOp:ℤ⧺ℕ.nz ⧺ ℤ : ℤ⧺ℕ.nz⧺ℤ}}\nThe first argument of this operator is constructed using the auxiliary operator\n\t{{lzOp:ℤ ⧺ ℕ.nz : ℤ⧺ℕ.nz}}\nof sort {{lzSort:ℤ⧺ℕ.nz}}."
+				"string" : "Real number grids have sort {{lzSort:ℝ⧺ℝ.p⧺ℝ}} and are defined using the operator\n\t{{lzOp:ℝ⧺ℝ.p ⧺ ℝ : ℝ⧺ℝ.p⧺ℝ}}\nThe first argument of this operator is constructed using the auxiliary operator\n\t{{lzOp:ℝ ⧺ ℝ.p : ℝ⧺ℝ.p}} of sort {{lzSort:ℝ⧺ℝ.p}}, with {{lzSort:ℤ⧺ℕ.nz ⊆ ℝ⧺ℝ.p}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-15T11:52:12.435807+02:00"
+						"dateAndTimeString" : "2022-08-16T10:49:41.885247+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-15T11:52:12.435807+02:00"
+						"dateAndTimeString" : "2022-08-16T10:50:50.349524+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "7R9pUqaiDQCYreXQCTxoog=="
+					"uidString" : "EveXj7miDQCO5VfbAfB/YA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An integer interval is a special case of an integer grid with a grid spacing of 1, thus: {{lzSort:ℤ⋯ℤ ⊆ ℤ⧺ℕ.nz⧺ℤ}}."
+				"string" : "Integer grids are a special case of real number grids:\n\t{{lzSort:ℤ⧺ℕ.nz⧺ℤ ⊆ ℝ⧺ℝ.p⧺ℝ}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-15T11:59:54.631588+02:00"
+						"dateAndTimeString" : "2022-08-16T10:57:12.766398+02:00"
 					}
 				},
 				"editEmail" : {
@@ -140,17 +140,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-15T12:02:05.67908+02:00"
+						"dateAndTimeString" : "2022-08-16T11:04:16.958083+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "Gg4qbqaiDQCYsXJGCTxoog=="
+					"uidString" : "xEI9lbmiDQCO6CM8AfB/YA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Special cases for grids:\n\t- {{lzOp:ℕ⧺ℕ.nz ⧺ ℕ : ℕ⧺ℕ.nz⧺ℕ}}\n\t\twith {{lzOp:ℕ ⧺ ℕ.nz : ℕ⧺ℕ.nz}}, {{lzSort:ℕ⋯ℕ ⊆ ℕ⧺ℕ.nz⧺ℕ}},\n                {{lzSort:ℕ⧺ℕ.nz⧺ℕ ⊆ ℤ⧺ℕ.nz⧺ℤ}}, and {{lzSort:ℕ⧺ℕ.nz ⊆ ℤ⧺ℕ.nz}}\n\t- {{lzOp:ℕ.nz⧺ℕ.nz ⧺ ℕ.nz : ℕ.nz⧺ℕ.nz⧺ℕ.nz}}\n\t\twith {{lzOp:ℕ.nz ⧺ ℕ.nz : ℕ.nz⧺ℕ.nz}}, {{lzSort:ℕ.nz⋯ℕ.nz ⊆ ℕ.nz⧺ℕ.nz⧺ℕ.nz}},\n                {{lzSort:ℕ.nz⧺ℕ.nz⧺ℕ.nz ⊆ ℕ⧺ℕ.nz⧺ℕ}}, and {{lzSort:ℕ.nz⧺ℕ.nz ⊆ ℕ⧺ℕ.nz}}"
+				"string" : "Another special case are rational number grids:\n\t{{lzSort:ℚ⧺ℚ.p⧺ℚ ⊆ ℝ⧺ℝ.p⧺ℝ}}\nof sort {{lzSort:ℚ⧺ℚ.p⧺ℚ}}, with {{lzSort:ℤ⧺ℕ.nz⧺ℤ ⊆ ℚ⧺ℚ.p⧺ℚ}}.\nThey are defined using the operator\n\t{{lzOp:ℚ⧺ℚ.p ⧺ ℚ : ℚ⧺ℚ.p⧺ℚ}}\nwith the auxiliary operator\n\t{{lzOp:ℚ ⧺ ℚ.p : ℚ⧺ℚ.p}}\nof sort {{lzSort:ℚ⧺ℚ.p}}, with {{lzSort:ℤ⧺ℕ.nz ⊆ ℚ⧺ℚ.p}} and {{lzSort:ℚ⧺ℚ.p ⊆ ℝ⧺ℝ.p}}."
 			}
 		]
 	},
@@ -162,7 +162,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-08-13T12:18:13.556566+02:00"
+			"dateAndTimeString" : "2022-08-15T13:15:17.67055+02:00"
 		}
 	},
 	"editEmail" : {
@@ -173,15 +173,15 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-08-15T13:11:51.46287+02:00"
+			"dateAndTimeString" : "2022-08-15T13:15:17.67055+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Integer grids"
+		"title" : "Real number grids"
 	},
 	"uid" : {
 		"__type" : "uuid",
-		"uuid" : "97e00874-7ea2-0d00-9b2a-66f80fa48593"
+		"uuid" : "e475cf7b-a7a2-0d00-9a4f-0875093c68a2"
 	}
 }

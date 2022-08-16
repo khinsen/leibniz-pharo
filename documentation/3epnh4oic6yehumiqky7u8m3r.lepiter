@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-13T16:34:45.29158+02:00"
+						"dateAndTimeString" : "2022-08-15T13:13:59.832203+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional array indexation\"}}\n\t- {{lzUseContext:name = \"Integers\"}}\n\t- {{lzUseContext:name = \"Integer intervals and grids\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional array indexation\"}}\n\t- {{lzUseContext:name = \"Integers\"}}\n\t- {{lzUseContext:name = \"Integer grids\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-13T16:35:31.572922+02:00"
+						"dateAndTimeString" : "2022-08-15T13:14:09.530391+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Slicing refers to extracting a sub-array corresponding to an interval of indices, as defined in {{lzUseContext:name = \"Integer intervals and grids\"}}."
+				"string" : "Slicing refers to extracting a sub-array corresponding to an interval of indices, as defined in {{lzUseContext:name = \"Integer grids\"}}."
 			},
 			{
 				"__type" : "textSnippet",
