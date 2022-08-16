@@ -2,9 +2,10 @@ Class {
 	#name : #LzSyntaxLabel,
 	#superclass : #Object,
 	#instVars : [
-		'element',
 		'declaration',
-		'object'
+		'object',
+		'segments',
+		'size'
 	],
 	#category : #'Leibniz2-Rendering'
 }
@@ -23,17 +24,39 @@ LzSyntaxLabel class >> for: aLzPrintable color: aColor [
 
 { #category : #converting }
 LzSyntaxLabel >> asElement [
-	^ element
+	| baselines topOffset bottomOffset element |
+    baselines := (segments collect: #baseline) asSet.
+	topOffset := (baselines includes: LzSuperscriptAttribute)
+						ifTrue: [ 5 ] ifFalse: [ 0 ].
+	bottomOffset := (baselines includes: LzSubscriptAttribute)
+						ifTrue: [ 5 ] ifFalse: [ 0 ].
+	element := BrHorizontalPane new 
+ 	   alignCenter;
+    	fitContent.
+    segments do: [ :each |
+    	element addChild: (BrLabel new
+    		text: each text;
+    		aptitude: BrGlamorousLabelAptitude;
+    		margin: (each marginsForTop: topOffset bottom: bottomOffset) ) ].
+    element when: BlClickEvent
+        do: [ :anEvent |
+        	| objectToSpawn |
+        	objectToSpawn := (self object isNil or: [ anEvent modifiers isPrimaryModifier ])
+        		ifTrue: [ self declaration ]
+        		ifFalse: [ self object ].
+        	objectToSpawn ifNotNil: [ anEvent target phlow spawnObject: objectToSpawn ] ].
+       size ifNotNil: [ element childrenDo: size ].
+      ^ element
 ]
 
 { #category : #accessing }
 LzSyntaxLabel >> beNormalSize [
-	element childrenDo: #beNormalSize
+	size := #beNormalSize
 ]
 
 { #category : #accessing }
 LzSyntaxLabel >> beSmallSize [
-	element childrenDo: #beSmallSize
+	size := #beSmallSize
 ]
 
 { #category : #accessing }
@@ -77,26 +100,5 @@ LzSyntaxLabel >> segmentsFor: aText [
 
 { #category : #accessing }
 LzSyntaxLabel >> text: aText [
-	| segments baselines topOffset bottomOffset |
-    segments := self segmentsFor: aText.
-    baselines := (segments collect: #baseline) asSet.
-	topOffset := (baselines includes: LzSuperscriptAttribute)
-						ifTrue: [ 5 ] ifFalse: [ 0 ].
-	bottomOffset := (baselines includes: LzSubscriptAttribute)
-						ifTrue: [ 5 ] ifFalse: [ 0 ].
-	element := BrHorizontalPane new 
- 	   alignCenter;
-    	fitContent.
-    segments do: [ :each |
-    	element addChild: (BrLabel new
-    		text: each text;
-    		aptitude: BrGlamorousLabelAptitude;
-    		margin: (each marginsForTop: topOffset bottom: bottomOffset) ) ].
-    element when: BlClickEvent
-        do: [ :anEvent |
-        	| objectToSpawn |
-        	objectToSpawn := (self object isNil or: [ anEvent modifiers isPrimaryModifier ])
-        		ifTrue: [ self declaration ]
-        		ifFalse: [ self object ].
-        	objectToSpawn ifNotNil: [ anEvent target phlow spawnObject: objectToSpawn ] ]
+    segments := self segmentsFor: aText
 ]
