@@ -147,21 +147,7 @@ LzSortGraph >> graphFor: aView highlight: aBlock [
 	^ aView mondrian
 		title: 'Graph';
 		priority: 0;
-		painting: [ :view | 
-			| families |
-			families := sortFamilies copyWithout: anySortFamily.
-			view nodes
-				shape: [ :x | self graphNodeForSort: x highlight: (aBlock cull: x) ];
-				with: families.
-			view edges
-				shape: [ :x | LzGraphicsElements graphArrow ];
-				fromCenterTop;
-				toCenterBottom;
-				connect: connectingAxioms values
-					from: [ :each | self familyForSortTerm: each anyOne subsort ]
-					to: [ :each | self familyForSortTerm: each anyOne supersort ].
-			view layout
-				custom: (GtGradVerticalDominanceTreeLayout new reverse: true) ]
+		initialize: (self mondrianForFamilies: sortFamilies highlight: aBlock)
 ]
 
 { #category : #inspecting }
@@ -174,9 +160,28 @@ LzSortGraph >> graphNodeForSort: aSortFamily highlight: aBoolean [
 { #category : #inspecting }
 LzSortGraph >> gtGraphFor: aView [
 	<gtView>
-	^ self
-		graphFor: aView
-		highlight: [ false ]
+	^ aView explicit
+		title: 'Graph';
+		priority: 0;
+		stencil: [
+			| pane |
+			pane := BrVerticalPane new
+				vFitContent;
+				hMatchParent.
+			kinds do: [ :each |
+				pane addChild:
+					((LzSyntaxLabel for: each) asElement
+						padding: (BlInsets all: 10);
+						when: BlClickEvent do: [ :event |
+							event target phlow spawnObject: each ]).
+				pane addChild:
+					((self
+						mondrianForFamilies: each sortFamilies
+						highlight: [ false ]) asElement
+							constraintsDo: [ :c |
+								c horizontal matchParent.
+								c vertical fitContent ]) ].
+			pane asScrollableElement ].
 ]
 
 { #category : #initializing }
@@ -311,6 +316,26 @@ LzSortGraph >> initializeSubFamiliesFor: aFamily [
 { #category : #lookup }
 LzSortGraph >> kindOf: aSortOrFamily [
 	^ kindOf at: aSortOrFamily family
+]
+
+{ #category : #inspecting }
+LzSortGraph >> mondrianForFamilies: families highlight: aBlock [
+	| displayedFamilies aMondrian |
+	displayedFamilies := families copyWithout: anySortFamily.
+	aMondrian := GtMondrian new.
+	aMondrian nodes
+		shape: [ :x | self graphNodeForSort: x highlight: (aBlock cull: x) ];
+		with: displayedFamilies.
+	aMondrian edges
+		shape: [ :x | LzGraphicsElements graphArrow ];
+		fromCenterTop;
+		toCenterBottom;
+		connect: connectingAxioms values
+			from: [ :each | self familyForSortTerm: each anyOne subsort ]
+			to: [ :each | self familyForSortTerm: each anyOne supersort ].
+	aMondrian layout
+		custom: (GtGradVerticalDominanceTreeLayout new reverse: true).
+	^ aMondrian
 ]
 
 { #category : #constructing }

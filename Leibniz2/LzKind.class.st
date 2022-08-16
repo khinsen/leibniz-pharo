@@ -35,9 +35,10 @@ LzKind >> addAsRopedTextTo: aRopedText [
 { #category : #inspecting }
 LzKind >> gtGraphFor: aView [
 	<gtView>
-	^ self sortGraph
-		graphFor: aView
-		highlight: [ :x | self sortFamilies includes: x ]
+	^ aView mondrian
+		title: 'Graph';
+		priority: 0;
+		initialize: self mondrian
 ]
 
 { #category : #testing }
@@ -68,6 +69,13 @@ LzKind >> maximalFamilies [
 { #category : #accessing }
 LzKind >> maximalFamilies: aSet [
 	maximalFamilies := aSet
+]
+
+{ #category : #inspecting }
+LzKind >> mondrian [
+	^ self sortGraph
+		mondrianForFamilies: self sortFamilies
+		highlight: [ false ]
 ]
 
 { #category : #printing }
