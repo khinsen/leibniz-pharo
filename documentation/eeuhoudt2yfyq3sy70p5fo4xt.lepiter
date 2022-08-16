@@ -1,14 +1,6 @@
 {
 	"__schema" : "4.1",
 	"__type" : "page",
-	"uid" : {
-		"__type" : "uuid",
-		"uuid" : "01624e33-f59d-0d00-bc6f-d578026a71f3"
-	},
-	"pageType" : {
-		"__type" : "namedPage",
-		"title" : "Operators"
-	},
 	"children" : {
 		"__type" : "snippets",
 		"items" : [
@@ -37,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T15:32:42.244634+02:00"
+						"dateAndTimeString" : "2022-08-16T17:08:11.488894+02:00"
 					}
 				},
 				"uid" : {
@@ -47,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Standard Leibniz operators are defined by an identifier that consists of any sequence of characters satifying the predicate {{gtMethod:name=Character>>#isLzIdentifierCharacter}}."
+				"string" : "Standard Leibniz operators are defined by a name that consists of any sequence of characters satisfying the predicate {{gtMethod:name=Character>>#isLzIdentifierCharacter}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -74,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T15:34:20.207928+02:00"
+						"dateAndTimeString" : "2022-08-16T18:48:27.853405+02:00"
 					}
 				},
 				"uid" : {
@@ -84,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The number of arguments of an operator is part of its definition. Two operators with the same identifier but a different number of arguments are distinct."
+				"string" : "The number and sorts of the arguments of an operator is part of its definition. Two operators with the same name but a different number of arguments, or arguments of different sorts, are distinct. Note that \"different sorts\" really means \"sorts belonging to different *kinds*\", see [[Sorts]] for the details."
 			},
 			{
 				"__type" : "textSnippet",
@@ -111,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T15:34:51.182119+02:00"
+						"dateAndTimeString" : "2022-08-16T17:10:49.374286+02:00"
 					}
 				},
 				"uid" : {
@@ -121,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An operator without arguments is written as just its identifier."
+				"string" : "An operator without arguments is written as just its name."
 			},
 			{
 				"__type" : "textSnippet",
@@ -148,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T15:35:39.83397+02:00"
+						"dateAndTimeString" : "2022-08-16T17:11:23.038687+02:00"
 					}
 				},
 				"uid" : {
@@ -158,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Prefix operators are written like mathematical functions, i.e. the operator identifier is followed by the arguments in parentheses."
+				"string" : "Prefix operators are written like mathematical functions, i.e. the operator name is followed by the arguments in parentheses."
 			},
 			{
 				"__type" : "textSnippet",
@@ -185,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T15:36:07.44586+02:00"
+						"dateAndTimeString" : "2022-08-16T17:17:31.923774+02:00"
 					}
 				},
 				"uid" : {
@@ -195,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Infix operators have exactly two arguments, with the identifier written between the arguments from which it is separated by white space."
+				"string" : "Infix operators have exactly two arguments, with the name written between the arguments from which it is separated by white space. Unlike most programming languages, Leibniz has no precedence rules for infix operatos (such as \"multiplication before addition\"). In a chain of multiple infix operators, parentheses must be written to indicate the order of application. The one exception is that chains of multiple instances of *a single* infix operator are permitted, and interpreted as grouped from left to right. The term `2 + 3 + 4` is thus allowed and equivalent to `(2 + 3) + 4`."
 			},
 			{
 				"__type" : "textSnippet",
@@ -222,7 +214,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T15:54:22.707591+02:00"
+						"dateAndTimeString" : "2022-08-16T17:11:56.858065+02:00"
 					}
 				},
 				"uid" : {
@@ -232,44 +224,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "In addition to the standard operators there are three special operators that provide a syntax familiar from mathematical notation or from programming languages: the bracket operator, the superscript operator, and the subscript operator. See below for examples. Superscript and subscript will eventually be rendered typographically."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T15:36:34.223128+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T15:37:37.059056+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "ZYPckgaeDQCXbwo9Ar8qeQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "Each argument of an operator has a sort (see [[Sorts]]) that is part of the operator definition. Two operators with the same identifier and the same number of arguments, but with different argument sorts, are considered distinct."
+				"string" : "In addition to the standard operators there are three special operators that provide a syntax familiar from mathematical notation or from programming languages: the bracket operator, the superscript operator, and the subscript operator. See below for examples. Superscript and subscript are rendered typographically."
 			},
 			{
 				"__type" : "textSnippet",
@@ -296,7 +251,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T15:51:32.712382+02:00"
+						"dateAndTimeString" : "2022-08-16T17:23:15.102722+02:00"
 					}
 				},
 				"uid" : {
@@ -306,7 +261,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Each operator definition ends with a sort. This sort becomes the sort of each term that refers to the operator."
+				"string" : "Each operator definition ends with a sort, which is the operator's *value sort*. This sort becomes the sort of each term that refers to the operator."
 			},
 			{
 				"__type" : "textSnippet",
@@ -609,7 +564,42 @@
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [ ]
+					"items" : [
+						{
+							"__type" : "pharoSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-16T18:49:27.116832+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-16T18:52:48.977174+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "aByxRMCiDQCdo/fCBw39BQ=="
+							},
+							"code" : "(LzGlobalCache uniqueInstance\r\tsubcontext: 'example' for: 'Operators')\r\tsignature operators"
+						}
+					]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -630,7 +620,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T15:39:31.389692+02:00"
+						"dateAndTimeString" : "2022-08-16T18:54:05.326554+02:00"
 					}
 				},
 				"uid" : {
@@ -640,7 +630,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "See [[Terms]] for examples of terms using these operators."
+				"string" : "See [[Terms]] for examples of terms using these operators. You can also look at the list of operators defined on this page by running the following code snippet:"
 			}
 		]
 	},
@@ -665,5 +655,13 @@
 			"__type" : "dateAndTime",
 			"dateAndTimeString" : "2022-06-16T18:52:30.561969+02:00"
 		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Operators"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "01624e33-f59d-0d00-bc6f-d578026a71f3"
 	}
 }

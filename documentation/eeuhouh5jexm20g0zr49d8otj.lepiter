@@ -18,6 +18,81 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-16T17:02:30.449234+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-16T17:04:29.840445+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "puUkxr6iDQCEsyKYCJZtgw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "There are three kinds of terms in Leibniz: standard terms, special terms, and variables."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-16T18:55:37.875534+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-17T16:01:42.605928+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "cnIGPfWdDQC8y/0AAmpx8w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "There are four kinds of operators in Leibniz, which differ only in the way they are written, i.e. their syntax. See [[Operators]] for the details."
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2022-06-16T18:53:46.390474+02:00"
 					}
 				},
@@ -29,7 +104,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-16T18:55:08.936538+02:00"
+						"dateAndTimeString" : "2022-08-16T17:04:43.672207+02:00"
 					}
 				},
 				"uid" : {
@@ -39,44 +114,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A term is defined recursively as consisting of an operator and zero or more argument terms."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-16T18:55:37.875534+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T16:01:42.605928+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "cnIGPfWdDQC8y/0AAmpx8w=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "There are four kinds of operators in Leibniz, which differ only in the way they are written, i.e. their syntax. See [[Operators]] for the details."
+				"string" : "A *standard term* is defined as consisting of an *operator* and zero or more *argument terms*."
 			},
 			{
 				"__type" : "textSnippet",
@@ -108,7 +146,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-16T19:01:07.524828+02:00"
+									"dateAndTimeString" : "2022-08-16T17:05:07.568775+02:00"
 								}
 							},
 							"uid" : {
@@ -118,7 +156,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "1. Number literals for [[Integers]], [[Rational numbers]], and [[Floating-point numbers]]"
+							"string" : "1. Number literals for [[Integers]], [[Rational numbers]], and [[Floating-point numbers]]. They do not have arguments."
 						},
 						{
 							"__type" : "textSnippet",
@@ -145,7 +183,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-16T19:01:25.223991+02:00"
+									"dateAndTimeString" : "2022-08-16T17:05:15.265951+02:00"
 								}
 							},
 							"uid" : {
@@ -155,7 +193,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "2. Literals for [[Character strings]]"
+							"string" : "2. Literals for [[Character strings]], which do not have arguments either."
 						},
 						{
 							"__type" : "textSnippet",
@@ -182,7 +220,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-17T14:02:08.049066+02:00"
+									"dateAndTimeString" : "2022-08-16T17:05:24.570608+02:00"
 								}
 							},
 							"uid" : {
@@ -192,7 +230,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "3. Array terms (see [[One-dimensional arrays]]"
+							"string" : "3. Array terms (see [[One-dimensional arrays]]), whose arguments are the array elements."
 						}
 					]
 				},
@@ -252,7 +290,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-21T09:59:00.806883+02:00"
+						"dateAndTimeString" : "2022-08-16T17:06:23.531422+02:00"
 					}
 				},
 				"uid" : {
@@ -262,7 +300,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The last kind of term in Leibniz is a *variable*, which looks like an operator term with no argument except that its identifier ends with an underscore, which is not an allowed character in operator identifiers. The underscore is rendered as a low-contrast underline for better readability, e.g. {{lzTerm:var_:s, subcontext = \"example\"}}."
+				"string" : "A *variable* looks like a zero-argument operator term, except that its name ends with an underscore, which is not an allowed character in operator names. The underscore is rendered as a low-contrast underline for better readability, e.g. {{lzTerm:var_:s, subcontext = \"example\"}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -289,7 +327,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-17T16:34:03.346869+02:00"
+						"dateAndTimeString" : "2022-08-16T17:06:52.92743+02:00"
 					}
 				},
 				"uid" : {
@@ -299,7 +337,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Every term has a sort, which is defined by its operator (except for special terms and variables). Sorts define sets of terms. They are very similar to types in programming languages. See [[Sorts]] for a detailed discussion."
+				"string" : "Every term has a *sort*, which is defined by its operator (except for special terms and variables). Sorts define sets of terms. They are very similar to types in programming languages. See [[Sorts]] for a detailed discussion."
 			},
 			{
 				"__type" : "textSnippet",

@@ -1,14 +1,6 @@
 {
 	"__schema" : "4.1",
 	"__type" : "page",
-	"uid" : {
-		"__type" : "uuid",
-		"uuid" : "b8e50c85-ef9d-0d00-b822-ba14030cdfdd"
-	},
-	"pageType" : {
-		"__type" : "namedPage",
-		"title" : "Overview of Leibniz"
-	},
 	"children" : {
 		"__type" : "snippets",
 		"items" : [
@@ -63,6 +55,43 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-16T18:40:03.615997+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-16T18:40:03.615997+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "zbAaI8CiDQCc1SkmBw39BQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "To get a better idea of how this works, please have a look at the [[Context definitions]] that are part of this book. Everything shown in blue in these pages is a declaration that contributes to the definition of a context. Everything shown in purple is example or explanatory code that does not contribute to the context definition."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2022-06-16T16:18:49.492313+02:00"
 					}
 				},
@@ -74,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-16T16:18:49.492313+02:00"
+						"dateAndTimeString" : "2022-08-16T18:40:33.187708+02:00"
 					}
 				},
 				"uid" : {
@@ -84,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "To get a better idea of how this works, please have a look at the [[Context definitions]] that are part of this book. Everything written in blue in these pages is a declaration that contributes to the definition of a  context. Everything written in purple is example or explanatory code that does not contribute to the context definition."
+				"string" : "A good starting point for exploration is the context [[Integers]], which shows how to express in Leibniz some basic mathematics that you are probably familiar with. Next, have a look at [[Heron's algorithm for computing square roots]], which explains a simple numerical algorithm."
 			},
 			{
 				"__type" : "textSnippet",
@@ -148,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-16T16:18:09.539969+02:00"
+						"dateAndTimeString" : "2022-08-16T18:41:53.703881+02:00"
 					}
 				},
 				"uid" : {
@@ -158,7 +187,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An important principle is that **the order of declarations in the page does not matter**. This means that the semantics of the declarations do not impose any restrictions on the organization of the explanations. For the same reason, Leibniz allows declarations to be repeated multiple times in the page."
+				"string" : "An important principle is that **the order of declarations in the page does not matter**. This means that the semantics of the declarations do not impose any restrictions on the organization of the explanations. For the same reason, Leibniz allows declarations to be repeated multiple times in the page. The code adapts to the prose."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-16T18:42:07.752102+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-16T18:42:18.95441+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "FKNkKsCiDQCdaXZqBw39BQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Leibniz' data model"
 			},
 			{
 				"__type" : "textSnippet",
@@ -190,7 +256,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-16T18:51:03.998915+02:00"
+									"dateAndTimeString" : "2022-08-16T18:55:31.425895+02:00"
 								}
 							},
 							"uid" : {
@@ -200,7 +266,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "1. the terms that can be constructed in the context."
+							"string" : "1. a *signature*, which defines which terms that can be constructed in the context."
 						},
 						{
 							"__type" : "textSnippet",
@@ -308,6 +374,80 @@
 					"__type" : "textStyle"
 				},
 				"string" : "All data in Leibniz is represented by [[Terms]], which are tree structures composed of [[Operators]] with optional arguments (which are terms as well). Terms are classified by [[Sorts]]. Terms cannot be modified (they are *immutable*), but other terms can be derived from them via [[Rewriting]]. A context defines"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-16T18:43:45.478653+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-16T18:45:38.217632+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "rw3eL8CiDQCda88MBw39BQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "A context is defined by a page in this book. References to other books will of course become possible in future versions. For a guide to the contexts in this book, see [[Context definitions]]]."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-16T18:45:43.469894+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-16T18:47:08.810501+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "51QdN8CiDQCdcQ8ZBw39BQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "In addition to its main context, a page can define *subcontexts*. They consist of all the declarations in the main context plus all declarations that define a subcontext name. Subcontexts exist mainly to allow examples to be included right in the page, but without cluttering the context with non-essential definitions."
 			}
 		]
 	},
@@ -332,5 +472,13 @@
 			"__type" : "dateAndTime",
 			"dateAndTimeString" : "2022-06-16T12:05:52.198264+02:00"
 		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Overview of Leibniz"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "b8e50c85-ef9d-0d00-b822-ba14030cdfdd"
 	}
 }

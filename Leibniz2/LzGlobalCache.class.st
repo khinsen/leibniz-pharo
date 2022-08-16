@@ -73,3 +73,8 @@ LzGlobalCache >> recursiveDependentsOf: aPageName [
 	] whileTrue.
 	^ allDependents
 ]
+
+{ #category : #accessing }
+LzGlobalCache >> subcontext: aSubcontextName for: aPageOrPageName [
+	^ (self contextCacheFor: aPageOrPageName) subcontext: aSubcontextName
+]
