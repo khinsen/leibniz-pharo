@@ -91,6 +91,11 @@ LzKind >> referenceSlots [
 ]
 
 { #category : #accessing }
+LzKind >> size [
+	^ self sortFamilies size
+]
+
+{ #category : #accessing }
 LzKind >> sortFamilies [
 	^ sortFamilies
 ]

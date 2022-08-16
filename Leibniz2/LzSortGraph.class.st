@@ -168,7 +168,7 @@ LzSortGraph >> gtGraphFor: aView [
 			pane := BrVerticalPane new
 				vFitContent;
 				hMatchParent.
-			kinds do: [ :each |
+			self kinds do: [ :each |
 				pane addChild:
 					((LzSyntaxLabel for: each) asElement
 						padding: (BlInsets all: 10);
@@ -316,6 +316,12 @@ LzSortGraph >> initializeSubFamiliesFor: aFamily [
 { #category : #lookup }
 LzSortGraph >> kindOf: aSortOrFamily [
 	^ kindOf at: aSortOrFamily family
+]
+
+{ #category : #accessing }
+LzSortGraph >> kinds [
+	^ kinds reject: [ :each |
+		each = self anySortKind and: [ each size = 1 ] ]
 ]
 
 { #category : #inspecting }
