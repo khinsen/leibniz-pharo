@@ -59,6 +59,6 @@ TBlTextStyleable compile: 'glamorousCodeDefaultFont
 
 The following list is provided for information. All the dependencies will be installed automatically in the procedure explained above.
 
-- [XMLParser](https://github.com/pharo-contributions/XML-XMLParser/) is used to read Leibniz documents.
+- [SingletonTrait](https://github.com/khinsen/singletontrait) is used for a few singleton classes.
 - [RecursiveWriteBarrier](https://github.com//khinsen/RecursiveWriteBarrier) is used to make some objects fully immutable.
 - [EqualityThroughVariablesTrait](https://github.com/khinsen/EqualityThroughVariablesTrait) is a trait that implements object equality in terms of equality of instance and indexed variables.
