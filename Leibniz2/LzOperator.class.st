@@ -89,15 +89,12 @@ LzOperator >> graphNodeForRank: anAssociation [
 	sort := anAssociation value.
 	text := '' asRopedText.
 	self opName addForArity: arity withSort: sort asRopedTextTo: text.
+	LzTextRenderer new
+		render: text baseColor: Color black.
 	^ (LzSyntaxLabel new
 		text: text) asElement
-		padding: (BlInsets all: 3);
+		padding: (BlInsets all: 5);
 		border: (BlBorder paint: Color gray).
-	"text fontName: LzCodeFont defaultFamily.
-	^ BlTextElement new
-		text: text;
-		padding: (BlInsets all: 3);
-		border: (BlBorder paint: Color gray)"
 ]
 
 { #category : #inspecting }
