@@ -297,19 +297,6 @@ LzArrayTerm >> valueSlots [
 ]
 
 { #category : #transforming }
-LzArrayTerm >> with: otherArrayTerm applyFn: aTerm [
-	| transformedElements |
-	self assert: self shape equals: otherArrayTerm shape.
-	transformedElements := elements with: otherArrayTerm elements collect: [ :arg1 :arg2 |
-		self signature
-			opTerm: LzBracketOpName new
-			args: { aTerm. arg1. arg2 } ].
-	^ self signature
-		arrayTerm: transformedElements
-		shape: self shape
-]
-
-{ #category : #transforming }
 LzArrayTerm >> with: otherArrayTerm applyFn: aTerm reducer: aBlock [
 	| transformedElements |
 	self assert: self shape equals: otherArrayTerm shape.

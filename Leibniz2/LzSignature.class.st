@@ -89,6 +89,21 @@ LzSignature >> gtSortGraphFor: aView [
 ]
 
 { #category : #constructing }
+LzSignature >> indexArrayTerm: anIntegerTerm [
+	| elements length |
+	length := anIntegerTerm value.
+	elements := Array new: length.
+	1 to: length do: [ :index |
+		| element |
+		element := self
+					literalTerm: index
+					class: LzIntegerTerm
+					builtin: #integers.
+		elements at: index put: element ].
+	^ self arrayTerm: elements shape: { length }
+]
+
+{ #category : #constructing }
 LzSignature >> literalTerm:  anObject class: aLiteralTermClass builtin: aSymbol [
 	self assertBuiltin: aSymbol.
 	^ aLiteralTermClass
