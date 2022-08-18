@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T13:36:14.127004+02:00"
+						"dateAndTimeString" : "2022-08-18T17:14:23.77781+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The generic sort of a one-dimensional array containing elements of sort {{lzSort:𝕊, example = \"yes\"}} is {{lzSort:Array1D(𝕊)}}. The sort of an array of known length is {{lzSort:Array(𝕊, ℕ)}}, with {{lzSort:s_:𝕊, i1_:ℕ, Array(s_, i1_) ⊆ Array1D(s_)}}."
+				"string" : "The generic sort of a one-dimensional array containing elements of sort {{lzSort:𝕊, example = \"yes\"}} is {{lzSort:Array1D(𝕊)}}. The sort of an array of known length is {{lzSort:Array(𝕊, ℕ.nz)}}, with {{lzSort:s_:𝕊, i1_:ℕ.nz, Array(s_, i1_) ⊆ Array1D(s_)}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-14T11:19:54.740539+02:00"
+						"dateAndTimeString" : "2022-08-18T17:15:01.644948+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An empty one-dimensional array has sort {{lzSort:EmptyArray(ℕ)}}. An empty array cannot have a regular array sort, because regular array sorts depend on the type of the array elements. An empty array has no elements. The integer in the array sort is always zero. It is there for consistency with higher-dimensional arrays, which can have non-zero lengths along all but one dimensions."
+				"string" : "An empty one-dimensional array has sort {{lzSort:EmptyArray(zero)}}. An empty array cannot have a regular array sort, because regular array sorts depend on the type of the array elements. An empty array has no elements. The integer argument in the array sort is always zero. It is there for consistency with higher-dimensional arrays, which can have non-zero lengths along all but one dimensions."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-18T17:15:34.048961+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-18T17:17:04.618128+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "LfTCL+eiDQCOnYssDdeLhg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The common supersort of all arrays is {{lzSort:Array}}:\n\t{{lzSort:s_:𝕊, Array1D(s_) ⊆ Array}}\n\t{{lzSort:EmptyArray(0) ⊆ Array}}"
 			}
 		]
 	},
