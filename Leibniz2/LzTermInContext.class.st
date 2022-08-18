@@ -45,6 +45,11 @@ LzTermInContext >> addAsRopedTextTo: aRopedText [
 ]
 
 { #category : #accessing }
+LzTermInContext >> arity [
+	^ self term arity
+]
+
+{ #category : #accessing }
 LzTermInContext >> context [
 	^ context
 ]
@@ -78,7 +83,7 @@ LzTermInContext >> gtOperatorFor: aView [
 	^ aView forward
 		title: 'Operator';
 		priority: 5;
-		object: [ self context signature operators opForTerm: self term ];
+		object: [ self operator ];
 		view: #gtGraphFor:;
 		yourself
 ]
@@ -114,6 +119,11 @@ LzTermInContext >> hasInlineView [
 LzTermInContext >> normalForm [
 	normalForm ifNil: [ self findNormalForm ].
 	^ normalForm
+]
+
+{ #category : #accessing }
+LzTermInContext >> operator [
+	^ self context signature operators opForTerm: self term
 ]
 
 { #category : #printing }
