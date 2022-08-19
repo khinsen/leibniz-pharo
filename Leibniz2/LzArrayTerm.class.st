@@ -136,6 +136,14 @@ LzArrayTerm >> isLeafErrorTerm [
 		ifNone: [ ^ true ]
 ]
 
+{ #category : #accessing }
+LzArrayTerm >> lengthAsTerm [
+	^ self signature
+		literalTerm: shape first
+		class: LzIntegerTerm
+		builtin: #integers
+]
+
 { #category : #unifying }
 LzArrayTerm >> match: otherTerm bindings: bindings [
 	otherTerm matchArrayTerm: self elements: elements shape: shape bindings: bindings

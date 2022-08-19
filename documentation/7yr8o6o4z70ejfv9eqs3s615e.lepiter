@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-18T17:17:47.232886+02:00"
+						"dateAndTimeString" : "2022-08-19T10:53:38.24374+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An index array is defined by the operator\n\t{{lzOp:IndexArray(ℕ.nz) : Array1D(ℕ.nz)}}\n\t{{lzOp:IndexArray(zero) : EmptyArray(0)}}"
+				"string" : "An index array of length `n` contains the integers from 1 to `n`. It is defined by the operator\n\t{{lzOp:IndexArray(ℕ.nz) : Array1D(ℕ.nz)}}\n\t{{lzOp:IndexArray(zero) : EmptyArray(0)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-18T17:51:10.360658+02:00"
+						"dateAndTimeString" : "2022-08-19T10:53:55.613326+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "It is constructed by Pharo code:\n\t{{lzRule:IndexArray(n_:ℕ) ⇒ Pharo:\"n ensureNumber. n signature indexArrayTerm: n\"}}"
+				"string" : "The array is constructed by Pharo code:\n\t{{lzRule:IndexArray(n_:ℕ) ⇒ Pharo:\"n ensureNumber. n signature indexArrayTerm: n\"}}"
 			},
 			{
 				"__type" : "textSnippet",

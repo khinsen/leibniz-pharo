@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-18T17:26:46.099346+02:00"
+						"dateAndTimeString" : "2022-08-19T11:07:50.246795+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For literal array terms, indexation is implemented in Pharo:\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz, A_[i_] ⇒ Pharo:\"A ensureArrayTerm. A index: i\"}}"
+				"string" : "For literal array terms, indexation is implemented in Pharo:\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz, A_[i_] ⇒ Pharo:\"A ensureArrayTerm. i ensureNumber. A index: i\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-19T11:00:25.679466+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-19T11:08:01.112466+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "mb3NEPaiDQCzZ0oRANmnAw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The length of an array can be obtained as\n\t{{lzOp:length(Array) : ℕ}}\nIt is zero for empty arrays:\n\t{{lzRule:length(A_:EmptyArray(0)) ⇒ 0}}\nFor literal array terms, it is computed in Pharo:\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), length(A_) ⇒ Pharo:\"A ensureArrayTerm. A lengthAsTerm\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -177,7 +214,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-18T17:27:05.195759+02:00"
+						"dateAndTimeString" : "2022-08-19T11:11:56.952484+02:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +224,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For an array literal:\n\t{{lzTerm:{[1, 4, 9]}[2], withNormalForm = \"yes\"}}"
+				"string" : "For an array literal:\n\t{{lzTerm:length({[1, 4, 9]}), withNormalForm = \"yes\"}}\n\t{{lzTerm:{[1, 4, 9]}[2], withNormalForm = \"yes\"}}\nIndices out of the range of valid indices are not rewritten:\n\t{{lzTerm:{[1, 4, 9]}[4], withNormalForm = \"yes\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-19T11:11:45.186559+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-19T11:12:12.414512+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "KqHrM/aiDQCzaytFANmnAw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "For an empty array:\n\t{{lzTerm:length({[]}), withNormalForm = \"yes\"}}"
 			}
 		]
 	},
