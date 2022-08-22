@@ -41,6 +41,18 @@ LzGlobalCache >> declarationCacheFor: aPageOrPageName [
 	^ pageDeclarations at: page uid
 ]
 
+{ #category : #accessing }
+LzGlobalCache >> dependenceGraphOf: aPageName [
+	| graph nodes edges |
+	graph := self recursiveClosureGraphOf: #dependenciesOf: for: aPageName.
+	nodes := graph first.
+	edges := graph second.
+	graph := self recursiveClosureGraphOf: #dependentsOf: for: aPageName.
+	nodes addAll: graph first.
+	edges addAll: (graph second collect: [ :each | { each second. each first } ]).
+	^ { nodes. edges }.
+]
+
 { #category : #retrieving }
 LzGlobalCache >> dependenciesOf: aPageName [
 	^ (self declarationCacheFor: aPageName)
@@ -69,22 +81,26 @@ LzGlobalCache >> initialize [
 { #category : #accessing }
 LzGlobalCache >> recursiveClosureGraphOf: aSelector for: aPageName [
 	| nodes edges |
-	nodes := (self perform: aSelector withArguments: { aPageName }) asSet.
+	nodes := Set with: aPageName.
+	edges := Set new.
 	[
-		| numberOfRelations |
-		numberOfRelations := nodes size.
-		nodes addAll:
-			(nodes flatCollect: [ :each |
-				self perform: aSelector withArguments: { each } ]).
-		nodes size > numberOfRelations
+		| numberOfNodes numberOfEdges newNodes newEdges |
+		numberOfNodes := nodes size.
+		numberOfEdges := edges size.
+		nodes do: [ :eachNode |
+			newNodes := self perform: aSelector withArguments: { eachNode }.
+			newEdges := newNodes collect: [ :each | { eachNode. each } ] ].
+		nodes addAll: newNodes.
+		edges addAll: newEdges.
+		nodes size > numberOfNodes or: [ edges size > numberOfEdges ]
 	] whileTrue.
-	^ nodes
+	^ { nodes. edges }
 ]
 
 { #category : #accessing }
 LzGlobalCache >> recursiveClosureOf: aSelector for: aPageName [
 	| allRelations |
-	allRelations := (self perform: aSelector withArguments: { aPageName }) asSet.
+	allRelations := Set with: aPageName.
 	[
 		| numberOfRelations |
 		numberOfRelations := allRelations size.

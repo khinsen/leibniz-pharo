@@ -10,12 +10,21 @@ LePage >> gtDependenciesFor: aView [
 	<gtView>
 	^ aView list
 		title: 'Dependencies';
-		priority: 4;
+		priority: 6;
 		items: [ (LzGlobalCache uniqueInstance
 					recursiveDependenciesOf: self title)
 					asArray ];
 		send: [ :each | LzBook pageNamed: each ];
 		yourself
+]
+
+{ #category : #'*Leibniz2' }
+LePage >> gtDependencyGraphFor: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Dependency graph';
+		priority: 4;
+		initialize: self lzDependencyMondrian
 ]
 
 { #category : #'*Leibniz2' }
@@ -66,23 +75,33 @@ LePage >> lzDeclarationsFor: anAction [
 ]
 
 { #category : #'*Leibniz2' }
-LePage >> lzMondrian [
-	| aMondrian pages |
-	pages := Set new.
-	pages add: self title.
-	pages addAll: (LzGlobalCache uniqueInstance
-					recursiveDependenciesOf: self title).
-	pages addAll: (LzGlobalCache uniqueInstance
-					recursiveDependentsOf: self title).
+LePage >> lzDependencyMondrian [
+	| aMondrian nodesAndEdges nodes edges findPage |
+	nodesAndEdges := (LzGlobalCache uniqueInstance
+							dependenceGraphOf: self title).
+	findPage := [ :title | LzBook pageNamed: title ].
+	nodes := nodesAndEdges first collect: [ :each |
+		findPage value: each ].
+	edges := nodesAndEdges second collect: [ :each |
+		{ findPage value: each first . findPage value: each second } ].
 	aMondrian := GtMondrian new.
 	aMondrian nodes
-		shape: [ :node | LzGraphicsElements
-					graphNodeLabelled: node
+		shape: [ :page | LzGraphicsElements
+					graphNodeLabelled: page title
 					highlightColor:
-						(node = self title
+						(page == self
 							ifTrue: [ Color black ]
 							ifFalse: [ nil ])];
-		with: pages.
+		with: nodes.
+	aMondrian edges
+		shape: [ :x | LzGraphicsElements graphArrow ];
+		fromCenterTop;
+		toCenterBottom;
+		connect: edges
+			from: #first
+			to: #second.
+	aMondrian layout
+		custom: (GtGradHorizontalDominanceTreeLayout new reverse: true).
 	^ aMondrian
 ]
 
