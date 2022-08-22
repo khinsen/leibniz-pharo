@@ -6,6 +6,19 @@ LePage >> asLzPage [
 ]
 
 { #category : #'*Leibniz2' }
+LePage >> gtDependenciesFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Dependencies';
+		priority: 4;
+		items: [ (LzGlobalCache uniqueInstance
+					recursiveDependenciesOf: self title)
+					asArray ];
+		send: [ :each | LzBook pageNamed: each ];
+		yourself
+]
+
+{ #category : #'*Leibniz2' }
 LePage >> gtDependentsFor: aView [
 	<gtView>
 	^ aView list

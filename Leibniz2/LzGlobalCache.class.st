@@ -42,6 +42,13 @@ LzGlobalCache >> declarationCacheFor: aPageOrPageName [
 ]
 
 { #category : #retrieving }
+LzGlobalCache >> dependenciesOf: aPageName [
+	^ (pageDeclarations at: aPageName asLzPage uid)
+		useContextDeclarations collect: [ :each |
+			each declaration contextName ]
+]
+
+{ #category : #retrieving }
 LzGlobalCache >> dependentsOf: aPageName [
 	^ pageDeclarations associations
 		select: [ :eachAssociation |
@@ -57,6 +64,21 @@ LzGlobalCache >> initialize [
 	pageContexts := Dictionary new.
 	LzBook database pages do: [ :each |
 		self declarationCacheFor: each ]
+]
+
+{ #category : #accessing }
+LzGlobalCache >> recursiveDependenciesOf: aPageName [
+	| allDependencies |
+	allDependencies := (self dependenciesOf: aPageName) asSet.
+	[
+		| numberOfDependencies |
+		numberOfDependencies := allDependencies size.
+		allDependencies addAll:
+			(allDependencies flatCollect: [ :each |
+				self dependentsOf: each ]).
+		allDependencies size > numberOfDependencies
+	] whileTrue.
+	^ allDependencies
 ]
 
 { #category : #accessing }

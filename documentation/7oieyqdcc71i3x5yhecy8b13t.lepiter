@@ -554,7 +554,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-05T11:39:39.824439+02:00"
+									"dateAndTimeString" : "2022-08-22T14:41:44.761236+02:00"
 								}
 							},
 							"uid" : {
@@ -564,7 +564,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Tools:\n\t[[Plotting]]"
+							"string" : "Tools:\n\t[[Plotting]]\n\t[[Workflows]]"
 						}
 					]
 				},
@@ -677,6 +677,43 @@
 								"__type" : "textStyle"
 							},
 							"string" : "[[Lotka-Volterra equations]]"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-22T15:40:36.636288+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-22T15:40:56.262579+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "+nesUzajDQCC+pSWAFhYmw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "[[Sunspot detection]]"
 						}
 					]
 				},
