@@ -256,7 +256,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-18T17:49:33.795562+02:00"
+									"dateAndTimeString" : "2022-08-19T11:36:14.849503+02:00"
 								}
 							},
 							"uid" : {
@@ -266,7 +266,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Aggregate data structures:\n\t[[Tuples]]\n\t[[One-dimensional arrays]],  [[One-dimensional array indexation]], [[One-dimensional array slicing]], [[Function application to one-dimensional arrays]],  [[One-dimensional index arrays]]"
+							"string" : "Aggregate data structures:\n\t[[Tuples]]\n\t[[One-dimensional arrays]],  [[One-dimensional array indexation]], [[One-dimensional array slicing]], [[Function application to one-dimensional arrays]],  [[One-dimensional index arrays]], [[Algorithmic construction of one-dimensional arrays]]"
 						},
 						{
 							"__type" : "textSnippet",
