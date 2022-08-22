@@ -66,6 +66,27 @@ LePage >> lzDeclarationsFor: anAction [
 ]
 
 { #category : #'*Leibniz2' }
+LePage >> lzMondrian [
+	| aMondrian pages |
+	pages := Set new.
+	pages add: self title.
+	pages addAll: (LzGlobalCache uniqueInstance
+					recursiveDependenciesOf: self title).
+	pages addAll: (LzGlobalCache uniqueInstance
+					recursiveDependentsOf: self title).
+	aMondrian := GtMondrian new.
+	aMondrian nodes
+		shape: [ :node | LzGraphicsElements
+					graphNodeLabelled: node
+					highlightColor:
+						(node = self title
+							ifTrue: [ Color black ]
+							ifFalse: [ nil ])];
+		with: pages.
+	^ aMondrian
+]
+
+{ #category : #'*Leibniz2' }
 LePage >> lzSubcontext: aSubcontextName [
 	^ (LzGlobalCache uniqueInstance
 		contextCacheFor: self) subcontext: aSubcontextName

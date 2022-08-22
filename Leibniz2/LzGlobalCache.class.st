@@ -43,7 +43,7 @@ LzGlobalCache >> declarationCacheFor: aPageOrPageName [
 
 { #category : #retrieving }
 LzGlobalCache >> dependenciesOf: aPageName [
-	^ (pageDeclarations at: aPageName asLzPage uid)
+	^ (self declarationCacheFor: aPageName)
 		useContextDeclarations collect: [ :each |
 			each declaration contextName ]
 ]
@@ -67,33 +67,43 @@ LzGlobalCache >> initialize [
 ]
 
 { #category : #accessing }
-LzGlobalCache >> recursiveDependenciesOf: aPageName [
-	| allDependencies |
-	allDependencies := (self dependenciesOf: aPageName) asSet.
+LzGlobalCache >> recursiveClosureGraphOf: aSelector for: aPageName [
+	| nodes edges |
+	nodes := (self perform: aSelector withArguments: { aPageName }) asSet.
 	[
-		| numberOfDependencies |
-		numberOfDependencies := allDependencies size.
-		allDependencies addAll:
-			(allDependencies flatCollect: [ :each |
-				self dependentsOf: each ]).
-		allDependencies size > numberOfDependencies
+		| numberOfRelations |
+		numberOfRelations := nodes size.
+		nodes addAll:
+			(nodes flatCollect: [ :each |
+				self perform: aSelector withArguments: { each } ]).
+		nodes size > numberOfRelations
 	] whileTrue.
-	^ allDependencies
+	^ nodes
+]
+
+{ #category : #accessing }
+LzGlobalCache >> recursiveClosureOf: aSelector for: aPageName [
+	| allRelations |
+	allRelations := (self perform: aSelector withArguments: { aPageName }) asSet.
+	[
+		| numberOfRelations |
+		numberOfRelations := allRelations size.
+		allRelations addAll:
+			(allRelations flatCollect: [ :each |
+				self perform: aSelector withArguments: { each } ]).
+		allRelations size > numberOfRelations
+	] whileTrue.
+	^ allRelations
+]
+
+{ #category : #accessing }
+LzGlobalCache >> recursiveDependenciesOf: aPageName [
+	^ self recursiveClosureOf: #dependenciesOf: for: aPageName
 ]
 
 { #category : #accessing }
 LzGlobalCache >> recursiveDependentsOf: aPageName [
-	| allDependents |
-	allDependents := (self dependentsOf: aPageName) asSet.
-	[
-		| numberOfDependents |
-		numberOfDependents := allDependents size.
-		allDependents addAll:
-			(allDependents flatCollect: [ :each |
-				self dependentsOf: each ]).
-		allDependents size > numberOfDependents
-	] whileTrue.
-	^ allDependents
+	^ self recursiveClosureOf: #dependentsOf: for: aPageName
 ]
 
 { #category : #accessing }
