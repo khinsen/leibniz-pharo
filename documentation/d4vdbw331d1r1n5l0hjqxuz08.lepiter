@@ -230,6 +230,43 @@
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-23T09:42:38.457962+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-23T09:45:01.242808+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "bIX3cUWjDQCU2ZjjAl9QmA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The main inspiration for the data model used in Leibniz is the specification language [Maude](https://maude.cs.illinois.edu/w/index.php/The_Maude_System). The introductory material on Maude is a useful guide to how Leibniz works, though the syntax is very different. A Leibniz context corresponds roughly to a [functional module](https://maude.cs.uiuc.edu/maude1/manual/maude-manual-html/maude-manual_9.html) in Maude."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
 					"items" : [
 						{
 							"__type" : "textSnippet",
@@ -256,7 +293,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-16T18:55:31.425895+02:00"
+									"dateAndTimeString" : "2022-08-23T09:39:17.273842+02:00"
 								}
 							},
 							"uid" : {
@@ -266,7 +303,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "1. a *signature*, which defines which terms that can be constructed in the context."
+							"string" : "1. a *signature*, which defines the *operators* and their *sorts* that in turn define which terms can be constructed in the context."
 						},
 						{
 							"__type" : "textSnippet",
@@ -400,7 +437,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-16T18:45:38.217632+02:00"
+						"dateAndTimeString" : "2022-08-23T09:40:19.0771+02:00"
 					}
 				},
 				"uid" : {
@@ -410,7 +447,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A context is defined by a page in this book. References to other books will of course become possible in future versions. For a guide to the contexts in this book, see [[Context definitions]]]."
+				"string" : "A context is defined by a page in this book. Multiple books of contexts will be supported in future versions. For a guide to the contexts in this book, see [[Context definitions]]."
 			},
 			{
 				"__type" : "textSnippet",
@@ -437,7 +474,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-16T18:47:08.810501+02:00"
+						"dateAndTimeString" : "2022-08-23T09:40:56.235065+02:00"
 					}
 				},
 				"uid" : {
@@ -447,7 +484,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "In addition to its main context, a page can define *subcontexts*. They consist of all the declarations in the main context plus all declarations that define a subcontext name. Subcontexts exist mainly to allow examples to be included right in the page, but without cluttering the context with non-essential definitions."
+				"string" : "In addition to its main context, a page can define *subcontexts*. They consist of all the declarations in the main context plus all declarations that include a subcontext name. Subcontexts exist mainly to allow examples to be included right in the page, but without cluttering the context with non-essential definitions. Many of the contexts in this book contain an example section that illustrates how this works in practice."
 			}
 		]
 	},
