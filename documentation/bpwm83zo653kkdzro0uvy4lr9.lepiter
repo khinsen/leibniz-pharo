@@ -1,0 +1,150 @@
+{
+	"__schema" : "4.1",
+	"__type" : "page",
+	"children" : {
+		"__type" : "snippets",
+		"items" : [
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-22T18:21:17.632547+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-22T18:21:28.610258+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "CJndkjijDQCb7lVTCVX1xQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Uses {{lzUseContext:name = \"Workflows\"}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-22T18:22:07.53039+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-22T18:22:13.625255+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "7zcDljijDQCb9J2mCVX1xQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The main data type in an image-processing workflow is an {{lzSort:imageFile ⊆ file}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-22T18:22:23.169373+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-22T18:24:11.603761+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "BNYGljijDQCb9nniCVX1xQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "There are many different image file formats. We will use\n\t- {{lzSort:fitsImageFile ⊆ imageFile}}, an image file in the [FITS](https://fits.gsfc.nasa.gov/) file format that is widely used in astronomy and astrophysics\n\t- {{lzSort:pngImageFile ⊆ imageFile}}, a file in the widely used [PNG](http://www.libpng.org/pub/png/) format"
+			}
+		]
+	},
+	"createEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"createTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2022-08-22T18:21:14.652123+02:00"
+		}
+	},
+	"editEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"editTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2022-08-22T18:21:14.652123+02:00"
+		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Image-processing workflows"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "2565dc92-38a3-0d00-9bed-930d0955f5c5"
+	}
+}
