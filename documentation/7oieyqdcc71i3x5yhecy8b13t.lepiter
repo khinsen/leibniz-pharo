@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-16T16:02:57.931814+02:00"
+						"dateAndTimeString" : "2022-08-25T11:23:02.730574+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "This boox contains various Leibniz contexts, both as examples for studying and as foundations to build on."
+				"string" : "This book contains various Leibniz contexts, both as examples for studying and as foundations to build on."
 			},
 			{
 				"__type" : "textSnippet",
