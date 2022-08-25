@@ -198,13 +198,14 @@ LzSortGraph >> initializeDirectSubFamilyRelations [
 			| subsort supersort |
 			subsort := self familyForSortTerm: each subsort.
 			supersort := self familyForSortTerm: each supersort.
-			(directSubFamilies at: supersort) add: subsort.
-			(directSuperFamilies at: subsort) add: supersort.
-			(connectingAxioms at: { subsort. supersort }
-				ifAbsentPut: [ Set new ])
-				add: each.
-			connectingPaths at: { subsort. supersort }
-				put: (Set with: (OrderedCollection with: { subsort. supersort }))] ].
+			subsort = supersort ifFalse: [
+				(directSubFamilies at: supersort) add: subsort.
+				(directSuperFamilies at: subsort) add: supersort.
+				(connectingAxioms at: { subsort. supersort }
+					ifAbsentPut: [ Set new ])
+					add: each.
+				connectingPaths at: { subsort. supersort }
+					put: (Set with: (OrderedCollection with: { subsort. supersort }))] ] ].
 ]
 
 { #category : #initializing }
