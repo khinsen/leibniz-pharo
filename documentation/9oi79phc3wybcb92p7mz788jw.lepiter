@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-08T18:48:30.396233+02:00"
+						"dateAndTimeString" : "2022-08-23T10:48:19.109963+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-09T17:13:45.083997+02:00"
+						"dateAndTimeString" : "2022-08-23T10:49:09.058686+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "qOiKUR+iDQCV8EYLDpLPLA=="
+					"uidString" : "FH6sWEajDQCWkbL9C++TnQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Test plot: {{lzTerm:linePlot({[(0, 1), (1, 1/2), (3, -1)]})}}"
+				"string" : "{{gtMethod:name=ProtoObject>>}}"
 			},
 			{
 				"__type" : "pharoSnippet",

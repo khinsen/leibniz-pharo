@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-19T11:44:40.110859+02:00"
+						"dateAndTimeString" : "2022-08-25T09:55:19.601726+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,81 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Given the number of elements and a function from index to element, an array can be constructed via\n\t{{lzOp:Array(ℕ, ℕ.nz → (elementSort_:𝕊)) : elementSort_}}\n\t{{lzRule:elementSort__:𝕊, Array(n_:ℕ.nz, fn_:ℕ.nz → elementSort__)  ⇒ fn[IndexArray(n_)]}}"
+				"string" : "Given the number of elements and a function from index to element, an array can be constructed via\n\t{{lzOp:Array(ℕ, ℕ.nz → (elementSort_:𝕊)) : elementSort_}}\n\t{{lzRule:elementSort__:𝕊, Array(n_:ℕ.nz, fn_:(ℕ.nz → elementSort__))  ⇒ fn_[IndexArray(n_)]}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-25T09:56:35.330394+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-25T09:56:36.794647+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Pf/H3m2jDQCnjxQiBX7yVA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Example"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-25T09:56:49.160129+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-25T09:59:00.698628+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "V4++322jDQCnkQ2KBX7yVA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Using the function {{lzTerm:square, subcontext = \"example\"}} from {{lzUseContext:name = \"Functions/realFunction\", subcontext = \"example\"}}:\n\t{{lzTerm:Array(5, square), withNormalForm = \"yes\", subcontext = \"example\"}}"
 			}
 		]
 	},

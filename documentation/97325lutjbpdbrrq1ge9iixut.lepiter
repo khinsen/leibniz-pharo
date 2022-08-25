@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T15:39:40.667767+02:00"
+						"dateAndTimeString" : "2022-08-25T09:38:39.974686+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Workflow tasks resemble functions (see [[Functions]]), the difference being that they process data stored in files (of sort {{lzSort:file}}) rather than represented by terms. We therefore use the same arrow notation for task sorts as for function sorts:\n\t{{lzSort:(inputs:𝕊) → (outputs:𝕊)}}"
+				"string" : "Workflow tasks are defined by a kind of function (see [[Functions]]), the difference from the usual functions being that they process data stored in files (of sort {{lzSort:file}}) rather than data represented by terms. We therefore use the same arrow notation for task function sorts as for function sorts:\n\t{{lzSort:(inputs:𝕊) → (outputs:𝕊)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T15:36:33.894834+02:00"
+						"dateAndTimeString" : "2022-08-25T09:38:50.392761+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Task composition, unlike function composition, is usually written from left to right, representing the flow of information\n{{lzOp: (inputs_:𝕊 → intermediate_:𝕊) ⧟ (intermediate_:𝕊 → outputs_:𝕊) : (inputs_:𝕊 → outputs_:𝕊)}}"
+				"string" : "Task function composition, unlike function composition, is usually written from left to right, representing the flow of information\n{{lzOp: (inputs_:𝕊 → intermediate_:𝕊) ⧟ (intermediate_:𝕊 → outputs_:𝕊) : (inputs_:𝕊 → outputs_:𝕊)}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-25T09:39:11.011369+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-25T09:39:53.436275+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "l/VsoG2jDQCnh3fUBX7yVA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "A task is created by supplying input and output filenames to a task function."
 			},
 			{
 				"__type" : "textSnippet",

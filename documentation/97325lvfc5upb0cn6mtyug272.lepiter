@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:49:37.074477+02:00"
+						"dateAndTimeString" : "2022-08-24T16:20:45.480642+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"Image-processing workflows\"}}\n\t- {{lzUseContext:name = \"Limb darkening compensation\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Image-processing workflows\"}}\n\t- {{lzUseContext:name = \"Data standardization\"}}\n\t- {{lzUseContext:name = \"Limb darkening compensation\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,6 +129,43 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-24T16:15:14.656982+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-24T16:23:05.443834+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "I7xuCl+jDQCG+17/DBU8HQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The first processing step consists of standardizing the data format. Images are available in various resolutions and contrast ranges, which needlessly complicate numerical analysis. The step  {{lzTerm:dataStandardization}} (see {{lzUseContext:name = \"Data standardization\"}}) ensures that the subsequent steps are performed on images with a resolution of 1024 x 1024 pixels and a depth of 12 bits per pixel."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2022-08-22T18:36:57.432561+02:00"
 					}
 				},
@@ -140,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:50:17.67991+02:00"
+						"dateAndTimeString" : "2022-08-24T16:23:27.875702+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The first processing step is {{lzTerm:brightnessCorrection}}. It corrects for the variable brightness across the solar disk that results from the geometry of the observation. See {{lzUseContext:name = \"Limb darkening compensation\"}} for a detailed explanation."
+				"string" : "The second processing step is {{lzTerm:brightnessCorrection}}. It corrects for the variable brightness across the solar disk that results from the geometry of the observation. See {{lzUseContext:name = \"Limb darkening compensation\"}} for a detailed explanation."
 			}
 		]
 	},
