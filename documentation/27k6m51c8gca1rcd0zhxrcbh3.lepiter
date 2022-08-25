@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-19T11:40:18.452968+02:00"
+						"dateAndTimeString" : "2022-08-25T12:05:34.42926+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional index arrays\"}}\n\t- {{lzUseContext:name = \"Functions\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional index arrays\"}}\n\t- {{lzUseContext:name = \"Function application to one-dimensional arrays\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-25T09:55:19.601726+02:00"
+						"dateAndTimeString" : "2022-08-25T12:12:01.920915+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Given the number of elements and a function from index to element, an array can be constructed via\n\t{{lzOp:Array(ℕ, ℕ.nz → (elementSort_:𝕊)) : elementSort_}}\n\t{{lzRule:elementSort__:𝕊, Array(n_:ℕ.nz, fn_:(ℕ.nz → elementSort__))  ⇒ fn_[IndexArray(n_)]}}"
+				"string" : "Given the number of elements and a function from index to element, an array can be constructed via\n\t{{lzOp:Array(ℕ, ℕ.nz → (elementSort_:𝕊)) : Array1D(elementSort_)}}\n\t{{lzRule:elementSort__:𝕊, Array(n_:ℕ.nz, fn_:(ℕ.nz → elementSort__))  ⇒ fn_[IndexArray(n_)]}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-25T09:56:49.160129+02:00"
+						"dateAndTimeString" : "2022-08-25T12:06:07.682018+02:00"
 					}
 				},
 				"editEmail" : {
@@ -140,17 +140,54 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-25T09:59:00.698628+02:00"
+						"dateAndTimeString" : "2022-08-25T12:13:01.021127+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "V4++322jDQCnkQ2KBX7yVA=="
+					"uidString" : "aKHHrm+jDQCLjAgbDogsUQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Using the function {{lzTerm:square, subcontext = \"example\"}} from {{lzUseContext:name = \"Functions/realFunction\", subcontext = \"example\"}}:\n\t{{lzTerm:Array(5, square), withNormalForm = \"yes\", subcontext = \"example\"}}"
+				"string" : "Creation of arrays from {{lzUseContext:name = \"Integer grids\", subcontext = \"example\"}}. First, define a function interface to Integer intervals:\n\t{{lzSort:ℤ⋯ℤ ⊆ ℕ.nz → ℤ, subcontext = \"example\"}}\n\t{{lzRule:(a_:ℤ ⋯ b_:ℤ)[i_:ℕ.nz] ⇒ a_ + (i_ - 1), subcontext = \"example\"}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-25T12:13:09.034048+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-25T12:16:56.0058+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "q32gx2+jDQCLki5IDogsUQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Next, construct an array using this function:\n\t{{lzTerm:Array(5, 3 ⋯ 7), withNormalForm = \"yes\", subcontext = \"example\"}}"
 			}
 		]
 	},
