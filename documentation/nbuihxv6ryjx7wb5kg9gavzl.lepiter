@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-01T15:30:34.111594+02:00"
+						"dateAndTimeString" : "2022-08-27T15:59:03.222142+02:00"
 					}
 				},
 				"uid" : {
@@ -171,6 +171,43 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-27T15:59:12.659667+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-27T16:04:07.427432+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "1+0DLJujDQCGL7rnBzJLeA=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Uses\n\t- {{lzUseContext:name = \"Algorithmic construction of one-dimensional arrays\", subcontext = \"example1\"}}\n\t- {{lzUseContext:name = \"Plotting\", subcontext = \"example1\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
 									"dateAndTimeString" : "2022-07-06T20:22:46.749483+02:00"
 								}
 							},
@@ -182,7 +219,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-07-06T20:22:46.749483+02:00"
+									"dateAndTimeString" : "2022-08-27T16:13:06.566424+02:00"
 								}
 							},
 							"uid" : {
@@ -192,7 +229,119 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "With {{lzRule:t_:ℝ, ft_:ℝ, g[ft_, t_] ⇒ 1, subcontext = \"example1\"}}, {{lzRule:f≅[0] ⇒ 0, subcontext = \"example1\"}} and {{lzRule:h ⇒ 1/10, subcontext = \"example1\"}}, we find\n\t{{lzTerm:f≅[1], subcontext = \"example1\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f≅[2], subcontext = \"example1\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f≅[3], subcontext = \"example1\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f≅[4], subcontext = \"example1\", withNormalForm = \"yes\"}}"
+							"string" : "With {{lzRule:t_:ℝ, ft_:ℝ, g[ft_, t_] ⇒ 1, subcontext = \"example1\"}}, {{lzRule:f≅[0] ⇒ 0, subcontext = \"example1\"}}, {{lzRule:h ⇒ 1/10, subcontext = \"example1\"}}, and\n\t{{lzOp:n:Array1D(ℕ), subcontext = \"example1\"}}\n\t{{lzRule:n ⇒ IndexArray(10), subcontext = \"example1\"}},\nwe find:\n\t{{lzTerm:linePlot(n, f≅[n]), subcontext = \"example1\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-27T16:07:32.586544+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-27T16:09:03.885954+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "idDNSZujDQCGNdBPBzJLeA=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : ""
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-07-01T09:54:24.224393+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-27T16:10:05.016529+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "eMgubhufDQCGlbU7AjPhTw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "### Example: a linear function"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-27T16:11:26.642141+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-27T16:11:34.920605+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "gQnHV5ujDQCGPUztBzJLeA=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Uses\n\t- {{lzUseContext:name = \"Algorithmic construction of one-dimensional arrays\", subcontext = \"example2\"}}\n\t- {{lzUseContext:name = \"Plotting\", subcontext = \"example2\"}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -219,7 +368,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-07-06T20:23:20.390341+02:00"
+									"dateAndTimeString" : "2022-08-27T16:14:01.234169+02:00"
 								}
 							},
 							"uid" : {
@@ -229,7 +378,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "With {{lzRule:t_:ℝ, ft_:ℝ, g[ft_, t_] ⇒ ft_, subcontext = \"example2\"}}, {{lzRule:f≅[0] ⇒ 1, subcontext = \"example2\"}} and {{lzRule:h ⇒ 1/10, subcontext = \"example2\"}}, we find\n\t{{lzTerm:f≅[1], subcontext = \"example2\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f≅[2], subcontext = \"example2\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f≅[3], subcontext = \"example2\", withNormalForm = \"yes\"}}\n\t{{lzTerm:f≅[4], subcontext = \"example2\", withNormalForm = \"yes\"}}"
+							"string" : "With {{lzRule:t_:ℝ, ft_:ℝ, g[ft_, t_] ⇒ ft_, subcontext = \"example2\"}}, {{lzRule:f≅[0] ⇒ 1, subcontext = \"example2\"}}, {{lzRule:h ⇒ 1/10, subcontext = \"example2\"}},  and\n\t{{lzOp:n:Array1D(ℕ), subcontext = \"example2\"}}\n\t{{lzRule:n ⇒ IndexArray(20), subcontext = \"example2\"}},\nwe find:\n\t{{lzTerm:linePlot(n, f≅[n]), subcontext = \"example2\"}}\n"
 						}
 					]
 				},
@@ -241,7 +390,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-01T09:54:24.224393+02:00"
+						"dateAndTimeString" : "2022-08-27T16:10:20.42243+02:00"
 					}
 				},
 				"editEmail" : {
@@ -252,17 +401,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-01T10:08:51.556302+02:00"
+						"dateAndTimeString" : "2022-08-27T16:10:41.219132+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "eMgubhufDQCGlbU7AjPhTw=="
+					"uidString" : "+CTGU5ujDQCGOutdBzJLeA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "### Examples"
+				"string" : "###Example: an exponential function"
 			}
 		]
 	},
