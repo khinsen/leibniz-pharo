@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-08T18:48:10.18232+02:00"
+						"dateAndTimeString" : "2022-08-27T16:24:28.04829+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Plotting\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Real numbers\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-08T18:49:12.768566+02:00"
+						"dateAndTimeString" : "2022-08-27T16:36:48.342955+02:00"
 					}
 				},
 				"uid" : {
@@ -76,44 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Now {{lzOp:aNumber:ℝ}}."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-23T10:48:19.109963+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-23T10:49:09.058686+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "FH6sWEajDQCWkbL9C++TnQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "{{gtMethod:name=ProtoObject>>}}"
+				"string" : "With {{lzOp:h:ℝ.p}}:\n\t{{lzTerm:h × n_:ℕ.nz}}"
 			},
 			{
 				"__type" : "pharoSnippet",
@@ -182,6 +145,78 @@
 					"uidString" : "5XK68d+hDQCQqbFYDV8EAg=="
 				},
 				"code" : "node := LzParser2 parse: '{[(1, 1), (3, -1)]}' startingAt: LzParser2 startingStateForTopLevelTerm.\rdeclaration := (LzDeclarationBuilder new acceptNode: node) declaration.\rthisSnippet page lzContext parsedPattern: declaration"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "pythonSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-27T16:35:01.641523+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-27T16:36:12.302191+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "f9k0rJujDQCGTV6pBzJLeA=="
+							},
+							"code" : "import sys\rsys.version"
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-27T16:34:42.207449+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-27T16:34:44.782313+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "u81ZqpujDQCGS20gBzJLeA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "A Python snippet:"
 			}
 		]
 	},

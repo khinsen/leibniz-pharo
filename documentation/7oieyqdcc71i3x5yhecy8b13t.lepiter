@@ -182,7 +182,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-07-05T15:17:03.739854+02:00"
+									"dateAndTimeString" : "2022-08-29T17:38:58.879696+02:00"
 								}
 							},
 							"uid" : {
@@ -192,7 +192,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Functions:\n\t[[Functions]], [[Functions of several arguments]], [[Function combinators]]"
+							"string" : "Functions:\n\t[[Functions]], [[Functions of several arguments]], [[Function combinators]]\n\t[[Pipeline notation for functions]]"
 						},
 						{
 							"__type" : "textSnippet",
