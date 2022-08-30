@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T15:40:45.825959+02:00"
+						"dateAndTimeString" : "2022-08-30T17:44:20.93227+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-24T16:20:45.480642+02:00"
+						"dateAndTimeString" : "2022-08-30T18:41:17.220436+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "n57XVDajDQCC/ehwAFhYmw=="
+					"uidString" : "d6Sk/dijDQCDroIBDdBh7w=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"Image-processing workflows\"}}\n\t- {{lzUseContext:name = \"Data standardization\"}}\n\t- {{lzUseContext:name = \"Limb darkening compensation\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Workflows\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:13:29.247369+02:00"
+						"dateAndTimeString" : "2022-08-30T18:58:15.62474+02:00"
 					}
 				},
 				"uid" : {
@@ -76,44 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The goal of this workflow is to count the number of sunspots in a white-light image of the sun."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:13:52.366868+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:27:18.56396+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "go6MdzijDQCboij6CVX1xQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "The input to this workflow is a {{lzSort:fitsImageFile}}. White-light images of the sun in FITS format are available from several sources. One example is the [file server](https://www.sidc.be/DATA/uset/Wlight) of the [Royal Observatory of Belgium](https://www.astro.oma.be/en/)."
+				"string" : "The goal of this workflow is to count the number of sunspots in a {{lzSort:whiteLightImage}} of the sun. See {{lzUseContext:name = \"White-light images of the sun\"}} for a detailed description of the input data. The input to this workflow is thus a {{lzSort:file(whiteLightImage)}} (uses {{lzUseContext:name = \"White-light images of the sun\", forSorts = \"yes\"}})."
 			},
 			{
 				"__type" : "textSnippet",
@@ -140,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-24T16:23:05.443834+02:00"
+						"dateAndTimeString" : "2022-08-30T18:58:41.39912+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +113,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The first processing step consists of standardizing the data format. Images are available in various resolutions and contrast ranges, which needlessly complicate numerical analysis. The step  {{lzTerm:dataStandardization}} (see {{lzUseContext:name = \"Data standardization\"}}) ensures that the subsequent steps are performed on images with a resolution of 1024 x 1024 pixels and a depth of 12 bits per pixel."
+				"string" : "The first processing step consists of reading an image file and normalizing the image data . Images are available in various resolutions and contrast ranges, which needlessly complicate numerical analyses. The step  {{lzTerm:dataNormalization}} (defined in {{lzUseContext:name = \"Data normalization\"}}) ensures that the subsequent steps are performed on images with a resolution of 1024 x 1024 pixels and a depth of 12 bits per pixel."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-30T18:10:13.042393+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-30T18:58:46.95253+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "VE4KWtmjDQCDvaOGDdBh7w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The second processing step is {{lzTerm:solarDisk}}, defined in {{lzUseContext:name = \"Locating the solar disk\"}}. "
 			},
 			{
 				"__type" : "textSnippet",
@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-24T16:23:27.875702+02:00"
+						"dateAndTimeString" : "2022-08-30T18:58:53.201947+02:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The second processing step is {{lzTerm:brightnessCorrection}}. It corrects for the variable brightness across the solar disk that results from the geometry of the observation. See {{lzUseContext:name = \"Limb darkening compensation\"}} for a detailed explanation."
+				"string" : "The third processing step is {{lzTerm:limbDarkeningCompensation}}. It corrects for the variable brightness across the solar disk that results from the geometry of the observation. See {{lzUseContext:name = \"Limb darkening compensation\"}} for a detailed explanation."
 			}
 		]
 	},

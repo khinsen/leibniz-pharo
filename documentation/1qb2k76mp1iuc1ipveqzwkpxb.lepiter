@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-24T16:20:17.636539+02:00"
+						"dateAndTimeString" : "2022-08-30T18:42:28.433433+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-24T16:20:37.238371+02:00"
+						"dateAndTimeString" : "2022-08-30T18:43:46.545338+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "Epa6HV+jDQCHBpN0DBU8HQ=="
+					"uidString" : "wLqDzdmjDQCEA0OuDdBh7w=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Image-processing workflows\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"White-light images of the sun\"}}\n\t- {{lzUseContext:name = \"Data files\"}}\n\t- {{lzUseContext:name = \"Functions\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-24T16:21:59.355638+02:00"
+						"dateAndTimeString" : "2022-08-30T17:58:21.685235+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,41 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Step {{lzOp:dataStandardization:fitsImageFile → fitsImageFile}}"
+				"string" : "Step\n\t{{lzOp:dataNormalization:file(whiteLightImage) → whiteLightImage}}\nis implemented by the following Python code:"
+			},
+			{
+				"__type" : "pythonSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-30T17:54:46.786295+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-30T17:56:26.348617+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "UH3yItmjDQCDt83IDdBh7w=="
+				},
+				"code" : "fits_image_file_name = input\r\rimport fitsio\n\nfits_image_file = fitsio.FITS(fits_image_file_name)\nfits_image_file.update_hdu_list()\nimages = [hdu for hdu in fits_image_file.hdu_list\n          if hdu.has_data() and hdu.get_info()['hdutype'] == fitsio.IMAGE_HDU]\nassert(len(images) == 1)\nraw_image = images[0].read()\n\nbits_used = np.bitwise_or.reduce(raw_image.flat)\nif np.bitwise_and(bits_used, 0x1000) != 0:\n    raw_image = np.right_shift(raw_image, 3)\n    bits_used = np.bitwise_or.reduce(raw_image.flat)\nif np.bitwise_and(bits_used, 0x1000) != 0:\n    print(\"Image \", input_file_name, \" uses more than 12 bits/pixel\")\n    raise ValueError()\n\nif raw_image.shape == (2048, 2048):\n    raw_image.shape = (1024, 2, 1024, 2)\n    raw_image = np.right_shift(raw_image.sum(1).sum(2), 2)\nif raw_image.shape != (1024, 1024):\n    print(\"Image size for \", fits_image_file_name, \": \", raw_image.shape)\n    raise ValueError()\n\routput = raw_image"
 			}
 		]
 	},
@@ -99,12 +133,12 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-08-24T16:20:13.150513+02:00"
+			"dateAndTimeString" : "2022-08-30T17:39:59.534633+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Data standardization"
+		"title" : "Data normalization"
 	},
 	"uid" : {
 		"__type" : "uuid",

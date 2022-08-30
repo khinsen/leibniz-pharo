@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:21:17.632547+02:00"
+						"dateAndTimeString" : "2022-08-30T18:38:49.378714+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:21:28.610258+02:00"
+						"dateAndTimeString" : "2022-08-30T18:39:55.373202+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "CJndkjijDQCb7lVTCVX1xQ=="
+					"uidString" : "sjZ1wNmjDQCEAIbnDdBh7w=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Workflows\"}}."
+				"string" : "White-light images of the sun are available from several sources, usually in the [FITS](https://fits.gsfc.nasa.gov/) file format. We use images from the [file server](https://www.sidc.be/DATA/uset/Wlight) of the [Royal Observatory of Belgium](https://www.astro.oma.be/en/)."
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:22:07.53039+02:00"
+						"dateAndTimeString" : "2022-08-30T18:36:58.253186+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +66,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:22:13.625255+02:00"
+						"dateAndTimeString" : "2022-08-30T18:40:26.706004+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "7zcDljijDQCb9J2mCVX1xQ=="
+					"uidString" : "u1+dudmjDQCD/BS3DdBh7w=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The main data type in an image-processing workflow is an {{lzSort:imageFile ⊆ file}}."
+				"string" : "White-light images are described by sort {{lzSort:whiteLightImage}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:22:23.169373+02:00"
+						"dateAndTimeString" : "2022-08-30T18:37:13.080178+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:24:11.603761+02:00"
+						"dateAndTimeString" : "2022-08-30T18:37:13.080178+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "BNYGljijDQCb9nniCVX1xQ=="
+					"uidString" : "0tm3utmjDQCD/jxcDdBh7w=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "There are many different image file formats. We will use\n\t- {{lzSort:fitsImageFile ⊆ imageFile}}, an image file in the [FITS](https://fits.gsfc.nasa.gov/) file format that is widely used in astronomy and astrophysics\n\t- {{lzSort:pngImageFile ⊆ imageFile}}, a file in the widely used [PNG](http://www.libpng.org/pub/png/) format"
+				"string" : ""
 			}
 		]
 	},
@@ -125,7 +125,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-08-22T18:21:14.652123+02:00"
+			"dateAndTimeString" : "2022-08-30T18:36:54.49174+02:00"
 		}
 	},
 	"editEmail" : {
@@ -136,15 +136,15 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-08-22T18:21:14.652123+02:00"
+			"dateAndTimeString" : "2022-08-30T18:36:54.49174+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Image-processing workflows"
+		"title" : "White-light images of the sun"
 	},
 	"uid" : {
 		"__type" : "uuid",
-		"uuid" : "2565dc92-38a3-0d00-9bed-930d0955f5c5"
+		"uuid" : "91359cb9-d9a3-0d00-83fb-525b0dd061ef"
 	}
 }

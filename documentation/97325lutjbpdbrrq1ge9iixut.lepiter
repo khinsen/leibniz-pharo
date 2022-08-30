@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T15:30:09.668266+02:00"
+						"dateAndTimeString" : "2022-08-30T16:57:30.878222+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,118 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"One-dimensional arrays\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Data files\"}}\n\t- {{lzUseContext:name = \"Pipeline notation for functions\"}}\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-29T19:09:06.447838+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-30T16:58:10.164162+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "axvsDsajDQCnzpp1ChZTOg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Workflows are computations that transform input data into output data, with all data stored in files (defined in {{lzUseContext:name = \"Data files\"}})."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-29T19:10:44.068928+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-30T16:58:26.868276+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "drG9FMajDQCn0m/WChZTOg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The smallest unit of computation in a workflow is a task (of sort {{lzSort:task}}), which corresponds to the execution of a program that reads some input files and produces some output files."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-29T19:02:09.942892+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-30T17:08:45.70403+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "/zUI9sWjDQCnEFoYChZTOg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Tasks are derived from steps, which are functions (see [[Functions]]) from input files to output files, by supplying concrete input and output files:\n\t{{lzOp:task : task}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T15:20:53.543499+02:00"
+						"dateAndTimeString" : "2022-08-29T19:10:44.077619+02:00"
 					}
 				},
 				"uid" : {
@@ -76,155 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Workflows are computations that transform input data into output data, with all data stored in files. The smallest unit of computation in a workflow is a task, which corresponds to the execution of a program that reads some input files and produces some output files. The workflow defines the dependencies between the tasks and the data files. A workflow manager uses this dependency information to run the tasks in the most efficient way possible, given the available computational resources."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T15:25:34.283139+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-25T09:38:39.974686+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "c0UTDTajDQCBOjerAFhYmw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "Workflow tasks are defined by a kind of function (see [[Functions]]), the difference from the usual functions being that they process data stored in files (of sort {{lzSort:file}}) rather than data represented by terms. We therefore use the same arrow notation for task function sorts as for function sorts:\n\t{{lzSort:(inputs:𝕊) → (outputs:𝕊)}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T15:34:41.842105+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-25T09:38:50.392761+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "G8gPOzajDQCCxldWAFhYmw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "Task function composition, unlike function composition, is usually written from left to right, representing the flow of information\n{{lzOp: (inputs_:𝕊 → intermediate_:𝕊) ⧟ (intermediate_:𝕊 → outputs_:𝕊) : (inputs_:𝕊 → outputs_:𝕊)}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-25T09:39:11.011369+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-25T09:39:53.436275+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "l/VsoG2jDQCnh3fUBX7yVA=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "A task is created by supplying input and output filenames to a task function."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T15:37:06.205246+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T15:37:06.205246+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "nwbZRzajDQCCy0irAFhYmw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : ""
+				"string" : "The workflow defines the dependencies between the tasks and the data files. A workflow manager uses this dependency information to run the tasks in the most efficient way possible, given the available computational resources."
 			}
 		]
 	},

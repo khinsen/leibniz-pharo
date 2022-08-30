@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:36:17.160136+02:00"
+						"dateAndTimeString" : "2022-08-30T18:09:28.621767+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:36:17.160136+02:00"
+						"dateAndTimeString" : "2022-08-30T18:45:58.125105+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "SqQTyDijDQCcAYx7CVX1xQ=="
+					"uidString" : "iSyCV9mjDQCDvBn2DdBh7w=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"Image-processing workflows\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"White-light images of the sun\"}}\n\t- {{lzUseContext:name = \"Functions\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:48:25.648358+02:00"
+						"dateAndTimeString" : "2022-08-30T18:09:52.265725+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "When a uniformly outwards radiation sphere is observed from far away, the resulting image is a disk with a brightness maximum in the center, from where it decreases radially until it reaches zero at the edge of the disk. This phenomenon is known as *limb darkening*. [Wikipedia](https://en.wikipedia.org/wiki/Limb_darkening) provides a detailed explanation."
+				"string" : "When a uniformly outwards radiation sphere is observed from far away, the resulting image is a disk with a brightness maximum in the center, from where it decreases radially until it reaches zero at the edge of the disk. This phenomenon is known as *limb darkening*. [Wikipedia](https://en.wikipedia.org/wiki/Limb_darkening) provides a detailed explanation and a technique for compensation that creates a {{lzSort:uniformBrightnessImage}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T18:39:02.136739+02:00"
+						"dateAndTimeString" : "2022-08-30T18:04:52.750973+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Step {{lzOp:brightnessCorrection:fitsImageFile → fitsImageFile}}"
+				"string" : "Step\n\t{{lzOp:limbDarkeningCompensation:whiteLightImage → uniformBrightnessImage}}\n"
 			}
 		]
 	},
