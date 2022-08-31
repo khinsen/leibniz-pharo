@@ -119,6 +119,43 @@
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-31T17:12:28.379705+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-31T17:16:14.462968+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "tDhAqeyjDQCXrgA3AE43Cg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The application of a composed function is defined by:\n\t{{lzRule:domain__:𝕊, intermediate__:𝕊, image__:𝕊, f_:(intermediate__ → image__), g_:(domain__ → intermediate__), x_:domain__, (f_ ⚬ g_)[x_] ⇒ f_[g_[x_]]}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
 					"items" : [
 						{
 							"__type" : "textSnippet",
@@ -219,7 +256,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-15T18:38:48.20403+02:00"
+									"dateAndTimeString" : "2022-08-31T17:16:46.876555+02:00"
 								}
 							},
 							"uid" : {
@@ -230,6 +267,43 @@
 								"__type" : "textStyle"
 							},
 							"string" : "Application:\n\t{{lzTerm:square[2/3], subcontext = \"realFunction\", withNormalForm = \"yes\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-31T17:16:51.099803+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-31T17:17:36.906054+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "6Fz4uOyjDQCXrzvcAE43Cg=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Application of the squaring function composed with itself:\n\t{{lzTerm:(square ⚬ square)[2/3], subcontext = \"realFunction\", withNormalForm = \"yes\"}}"
 						}
 					]
 				},

@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-30T17:08:45.70403+02:00"
+						"dateAndTimeString" : "2022-08-31T17:11:39.893854+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Tasks are derived from steps, which are functions (see [[Functions]]) from input files to output files, by supplying concrete input and output files:\n\t{{lzOp:task : task}}"
+				"string" : "Tasks are derived from steps, which are functions (see [[Functions]]) from input files to output files, by supplying concrete input and output files:\n\t{{lzOp:task(function:Array1D(file) → Array1D(file), inputs:Array1D(file), outputs:Array1D(file)) : task}}"
 			},
 			{
 				"__type" : "textSnippet",

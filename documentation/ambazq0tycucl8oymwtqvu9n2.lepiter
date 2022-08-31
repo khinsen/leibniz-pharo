@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-31T15:25:35.150077+02:00"
+						"dateAndTimeString" : "2022-08-31T15:35:35.552815+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-31T15:36:07.12996+02:00"
+						"dateAndTimeString" : "2022-08-31T15:43:58.699107+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "BlYhK+ujDQCtMLDaD7thsw=="
+					"uidString" : "hb/uTuujDQCtPk6GD7thsw=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Image processing\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Data files\"}}\n\t- {{lzUseContext:name = \"Functions\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-30T18:38:49.378714+02:00"
+						"dateAndTimeString" : "2022-08-31T15:26:29.42072+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +66,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-30T18:39:55.373202+02:00"
+						"dateAndTimeString" : "2022-08-31T15:39:54.966898+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "sjZ1wNmjDQCEAIbnDdBh7w=="
+					"uidString" : "IL4wLuujDQCtM4kED7thsw=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "White-light images of the sun are available from several sources, usually in the [FITS](https://fits.gsfc.nasa.gov/) file format. We use images from the [file server](https://www.sidc.be/DATA/uset/Wlight) of the [Royal Observatory of Belgium](https://www.astro.oma.be/en/)."
+				"string" : "The images treated in this workflow are gray-scale images represented as two-dimensional arrays of integers. They have sort {{lzSort:image}} in Leibniz code. In Python code, they are stored as two-dimensional `numpy` arrays. On disk, they are stored as [FITS](https://fits.gsfc.nasa.gov/) files containing a single image."
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-30T18:36:58.253186+02:00"
+						"dateAndTimeString" : "2022-08-31T15:38:55.240112+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,23 +103,58 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-31T15:31:20.564563+02:00"
+						"dateAndTimeString" : "2022-08-31T15:39:01.087014+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "u1+dudmjDQCD/BS3DdBh7w=="
+					"uidString" : "pfGWWuujDQCtQPJLD7thsw=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "White-light images are described by sort {{lzSort:whiteLightImage ⊆ image}}."
+				"string" : "###Visualization"
 			},
 			{
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [ ]
+					"items" : [
+						{
+							"__type" : "pythonSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-31T15:34:11.428199+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-31T15:35:03.110447+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "uoMASuujDQCtPBWPD7thsw=="
+							},
+							"code" : "image, filename = inputs\r\rimport matplotlib.pyplot as plt\n\nplt.clf()\nplt.imshow(image, cmap='gray', origin='lower')\nplt.colorbar()\nplt.savefig(filename)"
+						}
+					]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -129,7 +164,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-30T18:37:13.080178+02:00"
+						"dateAndTimeString" : "2022-08-31T15:39:15.325626+02:00"
 					}
 				},
 				"editEmail" : {
@@ -140,17 +175,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-30T18:37:13.080178+02:00"
+						"dateAndTimeString" : "2022-08-31T15:44:35.607232+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "0tm3utmjDQCD/jxcDdBh7w=="
+					"uidString" : "BlNOW+ujDQCtQShQD7thsw=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "Images are visualized for inspection via the `matplotlib` library, adding a numerical gray-scale to the image for inspection of the intensity values. The output is stored in a file in PNG format, described by sort {{lzSort:pngFile  ⊆ file}}. The workflow step for visualization is\n\t{{lzOp:showImage : image → pngFile}}\nand implemented in the following Python code:"
 			}
 		]
 	},
@@ -162,7 +197,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-08-30T18:36:54.49174+02:00"
+			"dateAndTimeString" : "2022-08-31T15:26:24.746492+02:00"
 		}
 	},
 	"editEmail" : {
@@ -173,15 +208,15 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-08-30T18:36:54.49174+02:00"
+			"dateAndTimeString" : "2022-08-31T15:26:24.746492+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "White-light images of the sun"
+		"title" : "Image processing"
 	},
 	"uid" : {
 		"__type" : "uuid",
-		"uuid" : "91359cb9-d9a3-0d00-83fb-525b0dd061ef"
+		"uuid" : "4e832f2e-eba3-0d00-ad32-ff2b0fbb61b3"
 	}
 }

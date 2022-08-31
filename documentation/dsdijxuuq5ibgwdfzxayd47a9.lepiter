@@ -251,7 +251,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-29T17:58:14.368202+02:00"
+						"dateAndTimeString" : "2022-08-31T17:20:43.269034+02:00"
 					}
 				},
 				"uid" : {
@@ -261,7 +261,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Squaring a number twice:\n\t{{lzTerm:2 → square → square, withNormalForm = \"yes\", subcontext = \"example\"}}"
+				"string" : "Squaring a number twice via two consecutive function applications:\n\t{{lzTerm:2 → square → square, withNormalForm = \"yes\", subcontext = \"example\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-31T17:18:48.241843+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-08-31T17:20:54.946866+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "0woSwOyjDQCXsAnSAE43Cg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Squaring a number twice via application of a composed function:\n\t{{lzTerm:2 → (square → square), withNormalForm = \"yes\", subcontext = \"example\"}}"
 			}
 		]
 	},
