@@ -133,7 +133,7 @@ LzOperators >> opsOfKind: aKind [
 
 { #category : #defining }
 LzOperators >> preprocessOp: anOpDeclaration [
-	| vars argSorts valueSort key op |
+	| vars argSorts valueSort |
 	vars := self sortGraph sortContext signature
 				parsedVariables: anOpDeclaration variables.
 	argSorts := LzArity new: anOpDeclaration args size.

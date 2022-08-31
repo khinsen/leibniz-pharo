@@ -196,7 +196,7 @@ LzAnnotationStyler >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 LzAnnotationStyler >> visitTopLevelOp: aTopLevelOpAnnotation [
 	self styleAnnotation: aTopLevelOpAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelOpAnnotation.
-	self styleDeclarationButton: aTopLevelOpAnnotation
+	self styleObjectButton: aTopLevelOpAnnotation
 ]
 
 { #category : #visiting }
