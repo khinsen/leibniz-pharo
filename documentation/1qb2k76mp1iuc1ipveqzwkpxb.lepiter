@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-30T18:43:46.545338+02:00"
+						"dateAndTimeString" : "2022-08-31T18:18:31.644627+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"White-light images of the sun\"}}\n\t- {{lzUseContext:name = \"Data files\"}}\n\t- {{lzUseContext:name = \"Functions\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"White-light images of the sun\"}}\n\t- {{lzUseContext:name = \"Data files\"}}\n\t- {{lzUseContext:name = \"Functions\"}}\n\t- {{lzUseContext:name = \"Python code\"}}"
 			},
 			{
 				"__type" : "textSnippet",

@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-22T15:29:17.337683+02:00"
+						"dateAndTimeString" : "2022-08-31T18:30:34.825757+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-30T16:57:30.878222+02:00"
+						"dateAndTimeString" : "2022-08-31T18:41:20.56727+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "9bK/KzajDQCCkNf7AFhYmw=="
+					"uidString" : "vRu9wO2jDQCX+Jv/AE43Cg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"Data files\"}}\n\t- {{lzUseContext:name = \"Pipeline notation for functions\"}}\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Term classes\"}}\n\t- {{lzUseContext:name = \"Character strings\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-29T19:09:06.447838+02:00"
+						"dateAndTimeString" : "2022-08-31T18:31:14.582416+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +66,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-30T16:58:10.164162+02:00"
+						"dateAndTimeString" : "2022-09-01T08:54:22.273644+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "axvsDsajDQCnzpp1ChZTOg=="
+					"uidString" : "NynQwe2jDQCX+x+9AE43Cg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Workflows are computations that transform input data into output data, with all data stored in files (defined in {{lzUseContext:name = \"Data files\"}})."
+				"string" : "Snippets are represented by terms of the sort {{lzSort:Snippet ⊆ LzSnippetTerm}}, with {{lzSort:LzSnippetTerm ⊆ PharoTermClass}}. These definitions ensure that snippet terms are created as instances of {{gtClass:name=LzSnippetTerm}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-29T19:10:44.068928+02:00"
+						"dateAndTimeString" : "2022-08-31T18:33:23.780311+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-30T16:58:26.868276+02:00"
+						"dateAndTimeString" : "2022-09-01T08:54:44.865648+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "drG9FMajDQCn0m/WChZTOg=="
+					"uidString" : "hTXqye2jDQCYBf8iAE43Cg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The smallest unit of computation in a workflow is a task (of sort {{lzSort:task}}), which corresponds to the execution of a program that reads some input files and produces some output files."
+				"string" : "The first snippet on a page whose text starts with a given string is accessible as\n\t{{lzOp:firstSnippetStartingWith(text:string, pageName:string) : Snippet}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-29T19:02:09.942892+02:00"
+						"dateAndTimeString" : "2022-08-31T18:34:23.304036+02:00"
 					}
 				},
 				"editEmail" : {
@@ -140,17 +140,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-31T17:11:39.893854+02:00"
+						"dateAndTimeString" : "2022-08-31T18:34:27.293882+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "/zUI9sWjDQCnEFoYChZTOg=="
+					"uidString" : "qFNezu2jDQCYCA/mAE43Cg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Tasks are derived from steps, which are functions (see [[Functions]]) from input files to output files, by supplying concrete input and output files:\n\t{{lzOp:task(function:Array1D(file) → Array1D(file), inputs:Array1D(file), outputs:Array1D(file)) : task}}"
+				"string" : "###Example"
 			},
 			{
 				"__type" : "textSnippet",
@@ -166,7 +166,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-31T17:24:48.499669+02:00"
+						"dateAndTimeString" : "2022-08-31T18:34:40.424312+02:00"
 					}
 				},
 				"editEmail" : {
@@ -177,17 +177,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-31T17:26:48.404817+02:00"
+						"dateAndTimeString" : "2022-09-01T15:17:27.968621+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "npVT1eyjDQCX1ivOAE43Cg=="
+					"uidString" : "+ae0zu2jDQCYCyI1AE43Cg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For convenience, a single input and output file can be specified without wrapping the files into arrays:\n\t{{lzOp:task(function:file → file, input:file, output:file) : task}}"
+				"string" : "Click on {{lzTerm:firstSnippetStartingWith(\"Click\", \"Snippets\")}} to see this snippet."
 			}
 		]
 	},
@@ -199,7 +199,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-08-22T14:41:46.506904+02:00"
+			"dateAndTimeString" : "2022-08-31T18:30:33.353306+02:00"
 		}
 	},
 	"editEmail" : {
@@ -210,15 +210,15 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-08-22T14:41:46.506904+02:00"
+			"dateAndTimeString" : "2022-08-31T18:30:33.353306+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Workflows"
+		"title" : "Snippets"
 	},
 	"uid" : {
 		"__type" : "uuid",
-		"uuid" : "e571fa81-35a3-0d00-8134-68a70058589b"
+		"uuid" : "97dfbbc0-eda3-0d00-97f7-396e004e370a"
 	}
 }
