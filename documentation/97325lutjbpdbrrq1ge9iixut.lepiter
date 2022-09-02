@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-30T16:57:30.878222+02:00"
+						"dateAndTimeString" : "2022-09-02T11:26:07.651194+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"Data files\"}}\n\t- {{lzUseContext:name = \"Pipeline notation for functions\"}}\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Data files\"}}\n\t- {{lzUseContext:name = \"Pipeline notation for functions\"}}\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Python code\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -188,6 +188,43 @@
 					"__type" : "textStyle"
 				},
 				"string" : "For convenience, a single input and output file can be specified without wrapping the files into arrays:\n\t{{lzOp:task(function:file → file, input:file, output:file) : task}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-09-02T11:26:45.933406+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-09-02T11:27:30.116892+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "hi67EBCkDQCGOUPcB262sg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Tasks are implemented as {{lzUseContext:name = \"Python code\"}}. The Python code attached to a function is accessible via:\n\t{{lzOp:domain_:𝕊, image_:𝕊, pythonCode(domain_ → image_) : String}}"
 			}
 		]
 	},

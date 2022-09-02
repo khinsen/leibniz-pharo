@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-09-01T15:31:29.82359+02:00"
+						"dateAndTimeString" : "2022-09-02T11:27:51.832567+02:00"
 					}
 				},
 				"uid" : {
@@ -39,44 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"Functions\"}}\n\t- {{lzUseContext:name = \"Character strings\"}}\n\t- {{lzUseContext:name = \"Snippets\"}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-31T17:39:40.412169+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-09-02T11:11:28.241208+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "TWlvCO2jDQCX3yl3AE43Cg=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "The Python code attached to a function is accessible via:\n\t{{lzOp:domain_:𝕊, image_:𝕊, pythonCode(domain_ → image_) : String}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Character strings\"}}\n\t- {{lzUseContext:name = \"Snippets\"}}"
 			},
 			{
 				"__type" : "textSnippet",
