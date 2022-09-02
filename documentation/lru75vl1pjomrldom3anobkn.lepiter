@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-09-01T08:54:22.273644+02:00"
+						"dateAndTimeString" : "2022-09-02T08:43:47.090073+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Snippets are represented by terms of the sort {{lzSort:Snippet ⊆ LzSnippetTerm}}, with {{lzSort:LzSnippetTerm ⊆ PharoTermClass}}. These definitions ensure that snippet terms are created as instances of {{gtClass:name=LzSnippetTerm}}."
+				"string" : "Snippets are represented by terms of the sort {{lzSort:Snippet ⊆ LzSnippetTerm}}, with {{lzSort:LzSnippetTerm ⊆ PharoTermClass}}. These definitions ensure that top-level snippet terms are created as instances of {{gtClass:name=LzSnippetTerm}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-09-02T08:44:01.557477+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-09-02T09:19:21.142709+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Nnwkyg2kDQCnS5//C3Jmmw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "A basic snippet reference stores the internal UID of the snippet:\n\t{{lzOp:snippet(string) : Snippet}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-09-01T08:54:44.865648+02:00"
+						"dateAndTimeString" : "2022-09-02T09:11:11.979521+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The first snippet on a page whose text starts with a given string is accessible as\n\t{{lzOp:firstSnippetStartingWith(text:string, pageName:string) : Snippet}}"
+				"string" : "The first snippet on a page whose text starts with a given string is accessible as\n\t{{lzOp:firstSnippetStartingWith(text:string, pageName:string) : Snippet}}\nThis term is rewritten to a basic snippet reference in Pharo code:\n\t{{lzRule:firstSnippetStartingWith(text_:string, pageName_:string) ⇒ Pharo:\"text ensureString. pageName ensureString. signature opTerm: (LzPrefixOpName for: #snippet) args: { signature stringTerm: (LzSnippetTerm firstSnippetStartingWith: text page: pageName) }\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -177,7 +214,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-09-01T15:17:27.968621+02:00"
+						"dateAndTimeString" : "2022-09-02T09:18:10.532+02:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +224,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Click on {{lzTerm:firstSnippetStartingWith(\"Click\", \"Snippets\")}} to see this snippet."
+				"string" : "Click on {{lzTerm:firstSnippetStartingWith(\"Click\", \"Snippets\"), withNormalForm = \"yes\"}} to see this snippet."
 			}
 		]
 	},

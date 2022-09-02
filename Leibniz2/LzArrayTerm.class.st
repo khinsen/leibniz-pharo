@@ -138,10 +138,7 @@ LzArrayTerm >> isLeafErrorTerm [
 
 { #category : #accessing }
 LzArrayTerm >> lengthAsTerm [
-	^ self signature
-		literalTerm: shape first
-		class: LzIntegerTerm
-		builtin: #integers
+	^ self signature integerTerm: shape first
 ]
 
 { #category : #unifying }

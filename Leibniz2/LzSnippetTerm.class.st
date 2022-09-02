@@ -5,21 +5,29 @@ Class {
 }
 
 { #category : #accessing }
-LzSnippetTerm >> ensureSnippetExists [
-	[ self snippet ]
+LzSnippetTerm class >> firstSnippetStartingWith: text page: pageName [
+	| page snippet |
+	[
+		page := pageName value asLzPage.
+		snippet := page allChildrenTextSnippets
+			detect: [ :each | each text asString beginsWith: text value ]
+	]
 	on: Error
-	do: [ LzRewriteFailure signal: 'No such snippet' ]
+	do: [ LzRewriteFailure signal: 'No such snippet' ].
+	^ snippet uid uidString.
 ]
 
 { #category : #accessing }
 LzSnippetTerm >> gtLiveFor: aView [
 	<gtView>
-	self class isAbstract
-		ifTrue: [ ^ aView empty ].
+	| snippet |
+	[ snippet :=  self snippet ]
+	on: Error
+	do: [ ^ aView empty ].
 	^ aView forward
 		title: 'Snippet';
 		priority: 0;
-		object: [ self snippet ];
+		object: [ snippet ];
 		view: #gtLiveFor:
 ]
 
@@ -40,15 +48,16 @@ LzSnippetTerm >> gtSpawnSnippetFor: anAction [
 
 { #category : #accessing }
 LzSnippetTerm >> page [
-	| name |
-	name := self term args second value.
-	^ LzBook pageNamed: name
+	^ self snippet page
 ]
 
 { #category : #accessing }
 LzSnippetTerm >> snippet [
-	| string |
-	string := self term args first value.
-	^ self page allChildrenTextSnippets
-		detect: [ :each | each text asString beginsWith: string ]
+	^ LzBook database
+		blockWithUID: (LeUID new uidString: self uidString)
+]
+
+{ #category : #accessing }
+LzSnippetTerm >> uidString [
+	^ self normalForm args first value
 ]

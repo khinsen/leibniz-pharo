@@ -95,12 +95,17 @@ LzSignature >> indexArrayTerm: anIntegerTerm [
 	elements := Array new: length.
 	1 to: length do: [ :index |
 		| element |
-		element := self
-					literalTerm: index
-					class: LzIntegerTerm
-					builtin: #integers.
+		element := self integerTerm: index.
 		elements at: index put: element ].
 	^ self arrayTerm: elements shape: { length }
+]
+
+{ #category : #constructing }
+LzSignature >> integerTerm: anInteger [
+	^ self
+		literalTerm: anInteger
+		class: LzIntegerTerm
+		builtin: #integers
 ]
 
 { #category : #constructing }
@@ -245,6 +250,14 @@ LzSignature >> sortGraph [
 { #category : #accessing }
 LzSignature >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
+]
+
+{ #category : #constructing }
+LzSignature >> stringTerm: aString [
+	^ self 
+		literalTerm:  aString
+		class: LzStringTerm
+		builtin: #strings
 ]
 
 { #category : #constructing }
