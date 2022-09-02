@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-31T17:42:34.880482+02:00"
+						"dateAndTimeString" : "2022-09-02T11:11:28.241208+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The Python code attached to a function is accessible via:\n\t{{lzOp:domain_:𝕊, image_:𝕊, pythonCode(domain_ → image_) : string}}"
+				"string" : "The Python code attached to a function is accessible via:\n\t{{lzOp:domain_:𝕊, image_:𝕊, pythonCode(domain_ → image_) : String}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-09-02T09:53:46.077316+02:00"
+						"dateAndTimeString" : "2022-09-02T11:11:45.103204+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Given a {{lzSort:Snippet}}, the combined code from all the Python snippets among its children can be retrieved via:\n\t{{lzOp:pythonCode(Snippet) : string}}\n\t{{lzRule:pythonCode(snippet(uid_:string)) ⇒ Pharo:\"signature stringTerm: (LzPythonCode fromChildrenOfSnippet: uid value)\"}}"
+				"string" : "Given a {{lzSort:Snippet}}, the combined code from all the Python snippets among its children can be retrieved via:\n\t{{lzOp:pythonCode(Snippet) : String}}\n\t{{lzRule:pythonCode(snippet(uid_:String)) ⇒ Pharo:\"signature stringTerm: (LzPythonCode fromChildrenOfSnippet: uid value)\"}}"
 			},
 			{
 				"__type" : "textSnippet",

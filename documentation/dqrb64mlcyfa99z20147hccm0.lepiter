@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-07T11:48:04.334168+02:00"
+						"dateAndTimeString" : "2022-09-02T11:13:42.450783+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sort of character strings is {{lzSort:string}}."
+				"string" : "The sort of character strings is {{lzSort:String}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -108,7 +108,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-07T11:48:51.108968+02:00"
+									"dateAndTimeString" : "2022-09-02T11:13:38.439227+02:00"
 								}
 							},
 							"uid" : {
@@ -118,7 +118,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "{{lzOp:string + string : string}}"
+							"string" : "{{lzOp:String + String : String}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -145,7 +145,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-20T11:52:54.255888+02:00"
+									"dateAndTimeString" : "2022-09-02T11:13:34.272377+02:00"
 								}
 							},
 							"uid" : {
@@ -155,7 +155,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "{{lzRule:(a_:string) + (b_:string) ⇒ Pharo:\"a ensureString. b ensureString. a, b\"}}"
+							"string" : "{{lzRule:(a_:String) + (b_:String) ⇒ Pharo:\"a ensureString. b ensureString. a, b\"}}"
 						},
 						{
 							"__type" : "textSnippet",

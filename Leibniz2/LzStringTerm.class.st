@@ -36,5 +36,5 @@ LzStringTerm >> printAsLeibnizSyntaxOn: aStream [
 
 { #category : #accessing }
 LzStringTerm >> sort [
-	^ self signature sort: #string
+	^ self signature sort: #String
 ]

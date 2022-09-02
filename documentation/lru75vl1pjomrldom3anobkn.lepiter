@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-09-02T09:19:21.142709+02:00"
+						"dateAndTimeString" : "2022-09-02T11:10:37.243101+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A basic snippet reference stores the internal UID of the snippet:\n\t{{lzOp:snippet(string) : Snippet}}"
+				"string" : "A basic snippet reference stores the internal UID of the snippet:\n\t{{lzOp:snippet(String) : Snippet}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-09-02T09:11:11.979521+02:00"
+						"dateAndTimeString" : "2022-09-02T11:11:01.553541+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The first snippet on a page whose text starts with a given string is accessible as\n\t{{lzOp:firstSnippetStartingWith(text:string, pageName:string) : Snippet}}\nThis term is rewritten to a basic snippet reference in Pharo code:\n\t{{lzRule:firstSnippetStartingWith(text_:string, pageName_:string) ⇒ Pharo:\"text ensureString. pageName ensureString. signature opTerm: (LzPrefixOpName for: #snippet) args: { signature stringTerm: (LzSnippetTerm firstSnippetStartingWith: text page: pageName) }\"}}"
+				"string" : "The first snippet on a page whose text starts with a given string is accessible as\n\t{{lzOp:firstSnippetStartingWith(text:String, pageName:String) : Snippet}}\nThis term is rewritten to a basic snippet reference in Pharo code:\n\t{{lzRule:firstSnippetStartingWith(text_:String, pageName_:String) ⇒ Pharo:\"text ensureString. pageName ensureString. signature opTerm: (LzPrefixOpName for: #snippet) args: { signature stringTerm: (LzSnippetTerm firstSnippetStartingWith: text page: pageName) }\"}}"
 			},
 			{
 				"__type" : "textSnippet",
