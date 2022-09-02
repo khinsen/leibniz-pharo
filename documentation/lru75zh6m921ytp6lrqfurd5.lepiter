@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-09-01T15:35:17.870248+02:00"
+						"dateAndTimeString" : "2022-09-02T09:53:46.077316+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Given a {{lzSort:Snippet}}, the combined code from all the Python snippets among its children can be retrieved via:\n\t{{lzOp:pythonCode(Snippet) : string}}\n\t{{lzRule:pythonCode(s_:Snippet) ⇒ Pharo:\"s ensureSnippetExists. s pythonCodeFromChildren\"}}"
+				"string" : "Given a {{lzSort:Snippet}}, the combined code from all the Python snippets among its children can be retrieved via:\n\t{{lzOp:pythonCode(Snippet) : string}}\n\t{{lzRule:pythonCode(snippet(uid_:string)) ⇒ Pharo:\"signature stringTerm: (LzPythonCode fromChildrenOfSnippet: uid value)\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -212,7 +212,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-09-01T15:42:35.516527+02:00"
+						"dateAndTimeString" : "2022-09-02T10:10:03.633346+02:00"
 					}
 				},
 				"uid" : {

@@ -18,6 +18,12 @@ LzSnippetTerm class >> firstSnippetStartingWith: text page: pageName [
 ]
 
 { #category : #accessing }
+LzSnippetTerm class >> snippetWithUID: uidString [
+	^ LzBook database
+		blockWithUID: (LeUID new uidString: uidString)
+]
+
+{ #category : #inspecting }
 LzSnippetTerm >> gtLiveFor: aView [
 	<gtView>
 	| snippet |
@@ -31,7 +37,7 @@ LzSnippetTerm >> gtLiveFor: aView [
 		view: #gtLiveFor:
 ]
 
-{ #category : #accessing }
+{ #category : #inspecting }
 LzSnippetTerm >> gtSpawnSnippetFor: anAction [
 	<gtAction>
 	| snippet |
@@ -53,8 +59,7 @@ LzSnippetTerm >> page [
 
 { #category : #accessing }
 LzSnippetTerm >> snippet [
-	^ LzBook database
-		blockWithUID: (LeUID new uidString: self uidString)
+	^ self class snippetWithUID: self uidString
 ]
 
 { #category : #accessing }
