@@ -1,6 +1,6 @@
 Class {
 	#name : #LzBlockLinksVisitor,
-	#superclass : #Object,
+	#superclass : #LzParseTreeNodeVisitor,
 	#traits : 'TSmaCCComponentVisitor + TLzParseTreeNodeVisitor',
 	#classTraits : 'TSmaCCComponentVisitor classTrait + TLzParseTreeNodeVisitor classTrait',
 	#category : #'Leibniz2-Lepiter'
