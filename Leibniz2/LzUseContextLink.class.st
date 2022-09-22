@@ -13,6 +13,21 @@ LzUseContextLink >> printOn: aStream [
 ]
 
 { #category : #accessing }
+LzUseContextLink >> renameTargetTo: aString [
+	| source newName interval pageName |
+
+	source := self origin string.
+	newName := aString.
+	pageName := node pageName.
+	interval := pageName position + 1
+					to: pageName position + pageName size - 2.
+	self origin
+		updateString:
+			(source first: interval first - 1) , newName
+				, (source copyFrom: interval last + 1 to: source size)
+]
+
+{ #category : #accessing }
 LzUseContextLink >> targetPageTitle [
 	<return: #String>
 	^ self targetReference pageTitle
