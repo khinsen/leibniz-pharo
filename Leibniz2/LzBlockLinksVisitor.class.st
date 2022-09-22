@@ -32,8 +32,10 @@ LzBlockLinksVisitor >> acceptNode: aSmaCCParseNode [
 LzBlockLinksVisitor >> visitTopLevelUseContext: aTopLevelUseContext [
 	| pageName |
 	pageName := aTopLevelUseContext pageName value.
+	pageName := pageName copyFrom: 2 to: pageName size - 1.
+	pageName := ($/ split: pageName) first.
 	self composite links
 		add: (LzUseContextLink new
 				node: aTopLevelUseContext;
-				targetPageTitle: (pageName copyFrom: 2 to: pageName size - 1))
+				targetPageTitle: pageName)
 ]
