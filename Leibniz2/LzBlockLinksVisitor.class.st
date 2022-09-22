@@ -17,6 +17,17 @@ LzBlockLinksVisitor class >> obsolete [
 	^ super obsolete
 ]
 
+{ #category : #visiting }
+LzBlockLinksVisitor >> acceptNode: aSmaCCParseNode [
+	"A copy of TSmaCCComponentVisitor>>#acceptNode: for
+	 resolving a trait conflict."
+	aSmaCCParseNode isNil
+		ifTrue: [ ^ nil ].
+	^ composite notNil
+		ifTrue: [ composite acceptNode: aSmaCCParseNode ]
+		ifFalse: [ aSmaCCParseNode acceptVisitor: self ]
+]
+
 { #category : #scanning }
 LzBlockLinksVisitor >> visitTopLevelUseContext: aTopLevelUseContext [
 	| pageName |
