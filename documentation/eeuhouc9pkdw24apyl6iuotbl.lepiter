@@ -1,6 +1,14 @@
 {
 	"__schema" : "4.1",
 	"__type" : "page",
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "71b06d33-f59d-0d00-bc72-9245026a71f3"
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Sorts"
+	},
 	"children" : {
 		"__type" : "snippets",
 		"items" : [
@@ -284,7 +292,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-16T18:35:56.385668+02:00"
+						"dateAndTimeString" : "2022-10-10T21:37:17.4616+02:00"
 					}
 				},
 				"uid" : {
@@ -294,7 +302,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sort graphs for integers and real numbers each consist of two distinct groups that are not connected via subsort relations, i.e. the graphs each have to *connected components*. The connected components of a sort graph are called *kinds*. A kind is printed as a list of sorts in square brackets, the sorts being the *maximal sorts* of the kinds, i.e. the sorts that are not subsorts of any other sort. You can click on the kind names in the sort graph to get an enlarged view of just one kind, and in that graph you can then click on each sort to learn more about it."
+				"string" : "The sort graphs for integers and real numbers each consist of two distinct groups that are not connected via subsort relations, i.e. the graphs each have two *connected components*. The connected components of a sort graph are called *kinds*. A kind is printed as a list of sorts in square brackets, the sorts being the *maximal sorts* of the kinds, i.e. the sorts that are not subsorts of any other sort. You can click on the kind names in the sort graph to get an enlarged view of just one kind, and in that graph you can then click on each sort to learn more about it."
 			},
 			{
 				"__type" : "textSnippet",
@@ -356,13 +364,5 @@
 			"__type" : "dateAndTime",
 			"dateAndTimeString" : "2022-06-16T18:52:32.61368+02:00"
 		}
-	},
-	"pageType" : {
-		"__type" : "namedPage",
-		"title" : "Sorts"
-	},
-	"uid" : {
-		"__type" : "uuid",
-		"uuid" : "71b06d33-f59d-0d00-bc72-9245026a71f3"
 	}
 }
