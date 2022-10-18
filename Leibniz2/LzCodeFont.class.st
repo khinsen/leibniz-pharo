@@ -30,7 +30,8 @@ LzCodeFont class >> chooseDefaultFamily [
 	#('JuliaMono' 'Arial Unicode MS') do: [ :family |
 		(availableFamilies includes: family)
 			ifTrue: [ DefaultFamily := family. ^ self] ].
-	self error: 'No suitable Unicode font for Leibniz code'
+	DefaultFamily := (' ' asRopedText glamorousCodeFont
+						attributesAt: 1) first name
 ]
 
 { #category : #accessing }
