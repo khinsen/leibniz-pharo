@@ -9,7 +9,7 @@ The second iteration of [Leibniz](http://github.com/khinsen/leibniz), implemente
 
 ### Install a font with all the math symbols
 
-Leibniz makes generous use of Unicode glyphs that are not contained in the default fonts used by GToolkit. The best free fonts I have found is [JuliaMono](https://juliamono.netlify.app/), another option (which I haven't used for a while) is [Arial Unicode MS](https://docs.microsoft.com/en-us/typography/font-list/arial-unicode-ms). Leibniz will automatically select one of them, if available.
+Leibniz makes generous use of Unicode glyphs that are not contained in the default fonts used by GToolkit. The best free fonts I have found is [JuliaMono](https://juliamono.netlify.app/), another option (which I haven't used for a while) is [Arial Unicode MS](https://docs.microsoft.com/en-us/typography/font-list/arial-unicode-ms). Leibniz will automatically select one of them, if available. Otherwise it will use the default code font of Glamorous Toolkit. It lacks many of the maths symbols that Leibniz uses. Some of them will be substituted from other fonts if possible, making the text readable but often ugly. Others will be replaced by a default glyph, making the code unreadable.
 
 ### Install [Glamorous Toolkit](https://gtoolkit.com/)
 
@@ -45,15 +45,7 @@ Read the first page, and move on as you like, either following links or navigati
 
 ![screenshot](./leibniz-installation-4.png)
 
-### Optional: play with the Leibniz implementation
 
-If you want to correctly display these Unicode glyphs in Pharo code (in strings and symbols used by Leibniz), you have to replace the GToolkit default fonts by [JuliaMono](https://juliamono.netlify.app/) (or another suitable monospaced font). Run the following script from a playground:
-```
-TBlTextStyleable compile: 'glamorousCodeFont
-    self fontName: ''JuliaMono'''.
-TBlTextStyleable compile: 'glamorousCodeDefaultFont
-    self defaultFontName: ''JuliaMono'''.
-```
 
 ## Dependencies
 
