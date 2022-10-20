@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-06T20:21:31.614201+02:00"
+						"dateAndTimeString" : "2022-10-20T13:24:26.653474+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The Euler method computes a discrete function {{lzOp:f≅ : (ℕ → ℝ)}} whose value {{lzTerm:n_:ℕ, f≅[n_]}} is an approximation to {{lzTerm:n_:ℕ, f[n_ × h]}}, where the step size {{lzOp:h : ℝ.p}} is an input parameter to the algorithm. The Euler method starts from a given initial value {{lzTerm:f≅[0]}}, which corresponds to the freely choosable integration constant, and constructs subsequent values as:\n\t{{lzRule:n_:ℕ.nz, f≅[n_] ⇒ f≅[pred(n_)] + (h × g[f≅[pred(n_)], pred(n_) × h])}}"
+				"string" : "The Euler method computes a discrete function {{lzOp:f≅ : (ℕ → ℝ)}} whose value {{lzTerm:n_:ℕ, f≅[n_]}} is an approximation to {{lzTerm:n_:ℕ, f[n_ × h]}}, where the step size {{lzOp:h : ℝ.p}} is an input parameter to the algorithm. The Euler method starts from a given initial value {{lzTerm:f≅[0]}}, which corresponds to the freely choosable integration constant, and constructs subsequent values as:\n\t{{lzRule:n_:ℕ.nz, f≅[n_] ⇒ f≅[pred(n_)] + (h × g[f≅[pred(n_)],  h × pred(n_)])}}"
 			},
 			{
 				"__type" : "textSnippet",

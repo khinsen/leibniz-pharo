@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:44:00.076242+02:00"
+						"dateAndTimeString" : "2022-10-20T13:11:32.898475+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The  Lotka-Volterra equations, also known as the predator-prey equations, are a model for the dynamics of two interacting species in an ecosystem that takes the form of coupled non-linear differential equations."
+				"string" : "The  [Lotka-Volterra equations](https://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equations), also known as the predator-prey equations, are a model for the dynamics of two interacting species in an ecosystem. This model takes the form of two coupled non-linear differential equations."
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:06:53.162473+02:00"
+						"dateAndTimeString" : "2022-10-20T13:12:32.65974+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The number of prey\n\t{{lzOp:x:ℝ → ℝ}}\nand the number of predators\n\t{{lzOp:y:ℝ → ℝ}}\nare functions of time. For mathematical convience they are represented by real numbers rather than integers, as this allows the use of differential equations instead of the clumsier difference equations."
+				"string" : "The number of prey\n\t{{lzOp:x:ℝ → ℝ}}\nand the number of predators\n\t{{lzOp:y:ℝ → ℝ}}\nare functions of time. For mathematical convience (the model goes back to the early 20th century, before digital computers), they are represented by real numbers rather than integers, as this allows the use of differential equations instead of the clumsier difference equations."
 			},
 			{
 				"__type" : "textSnippet",
@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:44:27.704606+02:00"
+						"dateAndTimeString" : "2022-10-20T13:14:29.356058+02:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The term {{lzTerm:α × x}} describes the exponential growth of the prey population in the absence of predators. The model assumes no other contraints (such as limited food supply or limited space) on the growth of the prey population."
+				"string" : "The term {{lzTerm:α × x}} describes the exponential growth of the prey population {{lzTerm:x}} in the absence of predators. The model assumes no other contraints (such as limited food supply or limited space) on the growth of the prey population."
 			},
 			{
 				"__type" : "textSnippet",
@@ -214,7 +214,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:46:38.60325+02:00"
+						"dateAndTimeString" : "2022-10-20T13:15:46.039473+02:00"
 					}
 				},
 				"uid" : {
@@ -224,7 +224,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The term {{lzTerm:β × x × y}} describes the decrease of the prey population due to predation, which is assumed to be proportional to the number of encounters between individuals of the two species."
+				"string" : "The term {{lzTerm:β × x × y}} describes the decrease of the prey population {{lzTerm:x}} due to predation, which is assumed to be proportional to the number of encounters between individuals of the two species, which in turn is proportional to both {{lzTerm:x}} and {{lzTerm:y}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -251,7 +251,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:48:31.253424+02:00"
+						"dateAndTimeString" : "2022-10-20T13:16:22.967466+02:00"
 					}
 				},
 				"uid" : {
@@ -261,7 +261,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The term {{lzTerm:γ × y}} describes an exponential decay of the predator population in the absence of prey, the assumption being that predators will either starve or leave the region of interest."
+				"string" : "The term {{lzTerm:γ × y}} describes an exponential decay of the predator population {{lzTerm:y}} in the absence of prey, the assumption being that predators will either starve or leave the region of interest."
 			},
 			{
 				"__type" : "textSnippet",
@@ -288,7 +288,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:49:38.951612+02:00"
+						"dateAndTimeString" : "2022-10-20T13:16:47.955432+02:00"
 					}
 				},
 				"uid" : {
@@ -298,7 +298,192 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The term {{lzTerm:δ × x × y}} describes the increase of the predator population, which is assumed to be proportional to the amount of food."
+				"string" : "The term {{lzTerm:δ × x × y}} describes the increase of the predator population, which is assumed to be proportional to the amount of food, given by the prey population {{lzTerm:x}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-20T13:27:55.307568+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-20T13:28:21.350842+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "4IpMWtenDQC/9KMUAYQyzQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "### Numerical simulation "
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-20T13:32:19.571933+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-20T13:39:23.657365+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "M5vVZ9enDQC//QeHAYQyzQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "A simple numerical simulation can be performed by applying the [[Euler method]]. It computes the values of  approximations {{lzOp:x≅ : (ℕ → ℝ)}} and {{lzOp:y≅ : (ℕ → ℝ)}} to the populations \n{{lzTerm:n_:ℕ, x[n_ × Δt]}} and {{lzTerm:n_:ℕ, y[n_ × Δt]}} on a time grid with spacing {{lzOp:Δt : ℝ.p}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-20T14:00:34.198366+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-20T14:10:38.537962+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "NK7xzdenDQCA9kVTAYQyzQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Given initial values {{lzTerm:x≅[0]}} and {{lzTerm:y≅[0]}}, values for later times are computed as\n\t{{lzRule:n_:ℕ.nz, x≅[n_] ⇒ x≅[pred(n_)] + (Δt × ((α × x≅) - (β × x≅ × y≅))[pred(n_)]) }}\n\t{{lzRule:n_:ℕ.nz, y≅[n_] ⇒ y≅[pred(n_)] + (Δt × ((δ × x≅ × y≅) - (γ × y≅))[pred(n_)]) }}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-20T14:10:44.319624+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-20T14:10:44.319624+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "2dme89enDQCA+YtZAYQyzQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : ""
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-20T14:10:39.459852+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-20T14:10:39.459852+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "erJU89enDQCA+IdbAYQyzQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : ""
 			}
 		]
 	},

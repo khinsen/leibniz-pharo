@@ -586,7 +586,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T10:21:42.845672+02:00"
+						"dateAndTimeString" : "2022-10-20T13:04:54.624131+02:00"
 					}
 				},
 				"uid" : {
@@ -596,7 +596,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Leibniz is currently a research prototype. It has a solid foundation (order-sorted term algbras, rewriting, equational logic), but the use of this foundation in the design of a notation that is suitable for communication between humans is still under exploration. Moreover, the implementation is in many aspects reserved for insider use. In particular, error checking is very incomplete and focuses on detecting typos rather than on guiding users in the formulation of correct and clear code. And while personally I don't mind dropping into a Pharo debugger when something goes wrong, but I am aware that this is not an acceptable behavior for an authoring systems meant for productive use in research."
+				"string" : "Leibniz is currently a research prototype. It has a solid foundation (order-sorted term algbras, rewriting, equational logic), but the use of this foundation in the design of a notation that is suitable for communication between humans is still under exploration. Moreover, the implementation is in many aspects reserved for insider use. In particular, error checking is very incomplete and focuses on detecting typos rather than on guiding users in the formulation of correct and clear code. And while personally I don't mind dropping into a Pharo debugger when something goes wrong, I am aware that this is not an acceptable behavior for an authoring system meant for productive use in research."
 			},
 			{
 				"__type" : "textSnippet",
