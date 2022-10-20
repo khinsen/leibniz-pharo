@@ -399,7 +399,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T14:10:38.537962+02:00"
+						"dateAndTimeString" : "2022-10-20T14:44:51.089485+02:00"
 					}
 				},
 				"uid" : {
@@ -409,7 +409,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Given initial values {{lzTerm:x≅[0]}} and {{lzTerm:y≅[0]}}, values for later times are computed as\n\t{{lzRule:n_:ℕ.nz, x≅[n_] ⇒ x≅[pred(n_)] + (Δt × ((α × x≅) - (β × x≅ × y≅))[pred(n_)]) }}\n\t{{lzRule:n_:ℕ.nz, y≅[n_] ⇒ y≅[pred(n_)] + (Δt × ((δ × x≅ × y≅) - (γ × y≅))[pred(n_)]) }}"
+				"string" : "Given initial values {{lzTerm:x≅[0]}} and {{lzTerm:y≅[0]}}, values for later times are computed as\n\t{{lzRule:n_:ℕ.nz, x≅[n_] ⇒ x≅[n_ - 1] + (Δt × ((α × x≅) - (β × x≅ × y≅))[n_ - 1]) }}\n\t{{lzRule:n_:ℕ.nz, y≅[n_] ⇒ y≅[n_ - 1] + (Δt × ((δ × x≅ × y≅) - (γ × y≅))[n_ - 1]) }}"
 			},
 			{
 				"__type" : "textSnippet",

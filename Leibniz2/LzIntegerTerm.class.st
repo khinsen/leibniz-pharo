@@ -17,13 +17,6 @@ LzIntegerTerm >> div: otherInteger [
 ]
 
 { #category : #rewriting }
-LzIntegerTerm >> pred [
-	(self value > 0)
-		ifTrue: [ ^ LzIntegerTerm signature: self signature value: self value - 1 ]
-		ifFalse: [ LzRewriteFailure signal: self value asString, ' < 1' ]
-]
-
-{ #category : #rewriting }
 LzIntegerTerm >> rem: otherInteger [
 	| x y |
 	x := self value.
@@ -41,14 +34,9 @@ LzIntegerTerm >> sort [
 	symbol := value isZero
 		ifTrue: [ #zero ]
 		ifFalse: [ value positive
-					ifTrue: [ #'ℕ.nz' ]
+					ifTrue: [ value = 1
+								ifTrue: [ #one ]
+								ifFalse: [ #'ℕ.nz' ] ]
 					ifFalse: [ #'ℤ.nz' ] ].
 	^ self signature sort: symbol
-]
-
-{ #category : #rewriting }
-LzIntegerTerm >> succ [
-	(self value >= 0)
-		ifTrue: [ ^ LzIntegerTerm signature: self signature value: self value + 1 ]
-		ifFalse: [ LzRewriteFailure signal: self value asString, ' < 0' ]
 ]

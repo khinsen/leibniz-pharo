@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-08T10:04:46.443918+02:00"
+						"dateAndTimeString" : "2022-10-20T14:37:14.494006+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sort {{lzSort:ℕ}} describes the natural numbers. It has two subsorts: {{lzSort:zero ⊆ ℕ}} for the number 0 and {{lzSort:ℕ.nz ⊆ ℕ}} for the non-zero natural numbers."
+				"string" : "The sort {{lzSort:ℕ}} describes the natural numbers. It has two subsorts: {{lzSort:zero ⊆ ℕ}} for the number 0 and {{lzSort:ℕ.nz ⊆ ℕ}} for the non-zero natural numbers. The number 1 has its own subsort as well: {{lzSort:one ⊆ ℕ.nz}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -474,6 +474,43 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-10-20T14:37:47.721328+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2022-10-20T14:39:32.720753+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "ym1OVNinDQCCfA33AYQyzQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "An important special case:\n\t{{lzOp:ℕ.nz - one : ℕ}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
 												"dateAndTimeString" : "2022-05-30T17:45:39.041142+02:00"
 											}
 										},
@@ -641,192 +678,6 @@
 								"__type" : "textStyle"
 							},
 							"string" : "##### Subtraction"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:26:49.530268+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:29:40.759833+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "scBk256cDQCq3OWqB2tiaA=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : "The successor of a natural number is\n\t{{lzOp:succ(ℕ) : ℕ.nz}}\ndefined by:\n\t{{lzAxiom:succ(n_:ℕ) = n_ + 1}}"
-									},
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:27:04.020149+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:30:28.264381+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "for63J6cDQCq3RyJB2tiaA=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : "The predecessor of a natural number is\n\t{{lzOp:pred(ℕ.nz) : ℕ}}\ndefined by:\n\t{{lzAxiom:pred(n_:ℕ.nz) = n_ - 1 }}"
-									},
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-30T18:30:41.896118+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-06-07T17:16:35.67062+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "Sq3Y6Z6cDQCq4ALwB2tiaA=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : "The reason for introducing these two operators is their more precise argument and result sorts. For example, {{lzTerm:pred(n_:ℕ.nz)}}  is of sort {{lzSort:ℕ, example = \"yes\"}}, but {{lzTerm:(n_:ℕ.nz) - 1}}  is of sort {{lzSort:ℤ, example = \"yes\"}}."
-									},
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-05-31T08:55:14.736181+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-06-20T11:53:55.504111+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "qXo3/aqcDQCq9R8qB2tiaA=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : "Rules:\n\t{{lzRule:pred(x_:ℕ.nz) ⇒ Pharo:\"x ensureNumber. x pred\"}}\n\t{{lzRule:succ(x_:ℕ) ⇒ Pharo:\"x ensureNumber. x succ\"}}"
-									}
-								]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-30T18:26:26.644297+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-05-30T18:26:33.428316+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "9bzf2Z6cDQCq21W5B2tiaA=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "##### Successor and predecessor"
 						},
 						{
 							"__type" : "textSnippet",
@@ -1048,7 +899,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:24:33.639944+02:00"
+															"dateAndTimeString" : "2022-10-20T14:47:09.371391+02:00"
 														}
 													},
 													"uid" : {
@@ -1058,7 +909,7 @@
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Eliminate ones:\n\t{{lzRule:1 × (x_:ℤ) ⇒ x_}}\n\t{{lzRule:(x_:ℤ) × 1 ⇒ x_}}"
+													"string" : "Eliminate ones:\n\t{{lzRule:(one_:one) × (x_:ℤ) ⇒ x_}}\n\t{{lzRule:(x_:ℤ) × (one_:one) ⇒ x_}}"
 												},
 												{
 													"__type" : "textSnippet",
@@ -1309,7 +1160,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-05-31T09:27:42.555567+02:00"
+															"dateAndTimeString" : "2022-10-20T14:47:50.390431+02:00"
 														}
 													},
 													"uid" : {
@@ -1319,7 +1170,7 @@
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Eliminate ones:\n\t{{lzRule:(x_:ℤ) div 1 ⇒ x_}}\n\t{{lzRule:(x_:ℤ) rem 1 ⇒ 0}}"
+													"string" : "Eliminate ones:\n\t{{lzRule:(x_:ℤ) div (one_:one) ⇒ x_}}\n\t{{lzRule:(x_:ℤ) rem (one_:one) ⇒ 0}}"
 												},
 												{
 													"__type" : "textSnippet",
@@ -1581,6 +1432,43 @@
 														"__type" : "textStyle"
 													},
 													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℤ.nz)^(zero_:zero) ⇒ 1}}\n\t{{lzRule:(zero_:zero)^(x_:ℕ.nz) ⇒ 0}}"
+												},
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-10-20T14:48:42.334329+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-10-20T14:49:34.146315+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "DbpWe9inDQCyKlKvDrFLaQ=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Eliminate ones:\n\t\t{{lzRule:(x_:ℤ.nz)^(one_:one) ⇒ x_}}"
 												},
 												{
 													"__type" : "textSnippet",

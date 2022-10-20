@@ -936,7 +936,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-06-03T16:00:28.609261+02:00"
+															"dateAndTimeString" : "2022-10-20T14:51:36.422081+02:00"
 														}
 													},
 													"uid" : {
@@ -946,7 +946,7 @@
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Eliminate ones:\n\t{{lzRule:1 × (x_:ℚ) ⇒ x_}}\n\t{{lzRule:(x_:ℚ) × 1 ⇒ x_}}"
+													"string" : "Eliminate ones:\n\t{{lzRule:(one_:one) × (x_:ℚ) ⇒ x_}}\n\t{{lzRule:(x_:ℚ) × (one_:one) ⇒ x_}}"
 												},
 												{
 													"__type" : "textSnippet",
@@ -1160,7 +1160,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2022-06-03T16:07:02.515942+02:00"
+															"dateAndTimeString" : "2022-10-20T14:51:59.423417+02:00"
 														}
 													},
 													"uid" : {
@@ -1170,7 +1170,7 @@
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "Elimination of zeros and ones:\n\t{{lzRule:(z_:zero) ÷ (x_:ℚ.nz) ⇒ 0}}\n\t{{lzRule:(x_:ℚ) ÷ 1 ⇒ x_}}"
+													"string" : "Elimination of zeros and ones:\n\t{{lzRule:(z_:zero) ÷ (x_:ℚ.nz) ⇒ 0}}\n\t{{lzRule:(x_:ℚ) ÷ (one_:one) ⇒ x_}}"
 												},
 												{
 													"__type" : "textSnippet",
@@ -1432,6 +1432,43 @@
 														"__type" : "textStyle"
 													},
 													"string" : "Eliminate zeros:\n\t{{lzRule:(x_:ℚ.nz)^(z_:zero) ⇒ 1}}\n\t{{lzRule:(z_:zero)^(x_:ℕ.nz) ⇒ 0}}"
+												},
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-10-20T14:52:19.107891+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2022-10-20T14:52:53.309263+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "y9xHiNinDQC54wWLCyQNnA=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "Eliminate ones:\n\t{{lzRule:(x_:ℚ.nz)^(one_:one) ⇒ x_}}"
 												},
 												{
 													"__type" : "textSnippet",
