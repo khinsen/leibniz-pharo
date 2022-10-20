@@ -42,6 +42,32 @@ LzRewriteRule >> checkConsistency [
 			description: 'Variable ', each key asSymbol, ' in replacement but not in pattern'  ]
 ]
 
+{ #category : #inspecting }
+LzRewriteRule >> gtTreeFor: aView [
+	<gtView>
+	| fakeTerm |
+	fakeTerm :=
+		LzOpTerm new
+			signature: self signature;
+			opName: (LzInfixOpName for: #'⇒');
+			args: { self pattern. self replacement };
+			sort: nil.
+	^ aView columnedTree
+		title: 'Tree' translated;
+		priority: 0;
+		items: [ { fakeTerm } ];
+		column: 'Term' text: [ :each |
+			each synopsis asRopedText
+				fontName: LzCodeFont defaultFamily ];
+		column: 'Sort' text: [ :each |
+			each sort
+				ifNil: [ '' ]
+				ifNotNil: [ :s | s asLeibnizSyntax ] ];
+		children: #args;
+		expandAll;
+		yourself
+]
+
 { #category : #printing }
 LzRewriteRule >> printBodyAsLeibnizSyntaxOn: aStream [
 	self pattern printAsLeibnizSyntaxOn: aStream.

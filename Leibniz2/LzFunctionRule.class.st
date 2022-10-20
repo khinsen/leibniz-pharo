@@ -106,6 +106,37 @@ LzFunctionRule >> function: anArray [
 				evaluate
 ]
 
+{ #category : #inspecting }
+LzFunctionRule >> gtTreeFor: aView [
+	<gtView>
+	| fakeTerm |
+	fakeTerm :=
+		LzOpTerm new
+			signature: self signature;
+			opName: (LzInfixOpName for: #'⇒');
+			args: { self pattern. code };
+			sort: nil.
+	^ aView columnedTree
+		title: 'Tree' translated;
+		priority: 0;
+		items: [ { fakeTerm } ];
+		column: 'Term' text: [ :each |
+			each isString
+				ifTrue: [ each asRopedText ]
+				ifFalse: [ each synopsis asRopedText
+							fontName: LzCodeFont defaultFamily ] ];
+		column: 'Sort' text: [ :each |
+			each isString
+				ifTrue: [ '' ]
+				ifFalse: [ 
+					each sort
+						ifNil: [ '' ]
+						ifNotNil: [ :s | s asLeibnizSyntax ] ] ];
+		children: [ :x | x isString ifTrue: [ #() ] ifFalse: [ x args ] ];
+		expandAll;
+		yourself
+]
+
 { #category : #printing }
 LzFunctionRule >> printBodyAsLeibnizSyntaxOn: aStream [
 	self pattern printAsLeibnizSyntaxOn: aStream.
