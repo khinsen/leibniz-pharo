@@ -70,6 +70,28 @@ LzGlobalCache >> dependentsOf: aPageName [
 		thenCollect: [ :eachAssociation | eachAssociation value page title ]
 ]
 
+{ #category : #inspecting }
+LzGlobalCache >> gtContextCachesFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Context caches';
+		priority: 1;
+		items: [ pageContexts values ];
+		itemText: [ :each | each page title ];
+		yourself
+]
+
+{ #category : #inspecting }
+LzGlobalCache >> gtDeclarationCachesFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Declaration caches';
+		priority: 2;
+		items: [ pageDeclarations values ];
+		itemText: [ :each | each page title ];
+		yourself
+]
+
 { #category : #initializing }
 LzGlobalCache >> initialize [
 	pageDeclarations := Dictionary new.

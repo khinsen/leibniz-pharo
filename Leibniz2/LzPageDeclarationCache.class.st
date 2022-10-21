@@ -180,6 +180,15 @@ LzPageDeclarationCache >> parseSnippet: aSnippet [
 	declarations at: aSnippet uid put: declarationsInSnippet
 ]
 
+{ #category : #printing }
+LzPageDeclarationCache >> printOn: aStream [
+	super printOn: aStream.
+	aStream
+		<< $(;
+		<< self page title;
+		<<$).
+]
+
 { #category : #private }
 LzPageDeclarationCache >> sortOrderFor: aClass [
 	^ {
