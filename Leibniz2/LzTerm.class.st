@@ -91,7 +91,7 @@ LzTerm >> gtSortFor: aView [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #inspecting }
 LzTerm >> gtTreeFor: aView [
 	<gtView>
 	^ aView columnedTree

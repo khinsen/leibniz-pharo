@@ -178,7 +178,8 @@ LzRewriteSystem >> rulesMatching: aTerm [
 	^LzMatchingRules new
 		rewriteSystem: self;
 		term: aTerm;
-		match
+		match;
+		sort
 ]
 
 { #category : #accessing }

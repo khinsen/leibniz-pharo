@@ -21,21 +21,26 @@ LzMatchingRules >> gtRulesFor: aView [
 		title: 'Rules';
 		priority: 1;
 		items: [ rules ];
-		column: 'Match' text: #second;
-		column: 'Condition' text: [ :each |
-			each second
-				ifTrue: [ each third ]
-				ifFalse: [ '' ] ];
-		column: 'Variables' text: [ :each |
-			LzCodeFont textFrom: [ :t |
-				each first addVariablesAsRopedTextTo: t ] ];
-		column: 'Transformation' text: [ :each |
-			LzCodeFont textFrom: [ :t |
-				each first addBodyAsRopedTextTo: t ] ];
-		column: 'Result' text: [ :each |
-			(each second & each third)
-				ifTrue: [ each fourth asLeibnizSyntax ]
-				ifFalse: [ '' ] ];
+		column: 'Match' text: #second width: 50;
+		column: 'Condition'
+			text: [ :each |
+				each second
+					ifTrue: [ each third ]
+					ifFalse: [ '' ] ]
+			width: 60;
+		column: 'Rule'
+			text: [ :each |
+				each first asLeibnizSyntax ]
+			width: 600;
+		column: 'Result'
+			text: [ :each |
+				(each second & each third)
+					ifTrue: [ each fourth
+								ifNil: [ 'error' asRopedText foreground: Color red  ]
+								ifNotNil: [ :t | t asLeibnizSyntax ] ]
+					ifFalse: [ '' ] ]
+			width: 400;
+		send: [ :each | { each first. each fourth } ];
 		yourself.
 	self hasConditionalRule ifTrue: [
 		ruleView column: 'Condition' text: [ :each |
@@ -67,9 +72,11 @@ LzMatchingRules >> match [
 					reducer := [ :t | rewriteSystem reduce: t ].
 					(aRule testConditionForSubstitution: s reducer: reducer)
 						ifFalse: [ rules add: { aRule. true. false. nil } ]
-						ifTrue: [ 
-							rules add: { aRule. true. true.
-											(aRule apply: s reducer: reducer) } ] ]
+						ifTrue: [
+							| rewritten |
+							rewritten := [ aRule apply: s reducer: reducer ]
+											on: LzRewriteFailure do: [ nil ].
+							rules add: { aRule. true. true. rewritten } ] ]
 				ifFailure: [ 
 					rules add: { aRule. false. false. nil } ] ]
 ]
@@ -82,6 +89,12 @@ LzMatchingRules >> rewriteSystem [
 { #category : #accessing }
 LzMatchingRules >> rewriteSystem: aRewriteSystem [
 	rewriteSystem := aRewriteSystem
+]
+
+{ #category : #building }
+LzMatchingRules >> sort [
+	rules sort: [ :a :b |
+		a second & (b second not) ]
 ]
 
 { #category : #accessing }

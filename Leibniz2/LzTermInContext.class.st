@@ -67,13 +67,22 @@ LzTermInContext >> findNormalForm [
 ]
 
 { #category : #inspecting }
-LzTermInContext >> gtNormalFormTreeFor: aView [
+LzTermInContext >> gtMatchingRulesFor: aView [
 	<gtView>
 	^ aView forward
+		title: 'Matching rules';
+		priority: 8;
+		object: [ self context rulesMatching: self term ];
+		view: #gtRulesFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzTermInContext >> gtNormalFormTreeFor: aView [
+	<gtView>
+	^ (self gtTreeFor: aView term: self normalForm)
 		title: 'Normal form';
 		priority: 7;
-		object: [ self normalForm ];
-		view: #gtTreeFor:;
 		yourself
 ]
 
@@ -102,11 +111,28 @@ LzTermInContext >> gtSortFor: aView [
 { #category : #inspecting }
 LzTermInContext >> gtTreeFor: aView [
 	<gtView>
-	^ aView forward
+	^ (self gtTreeFor: aView term: self term)
 		title: 'Tree';
 		priority: 1;
-		object: [ self term ];
-		view: #gtTreeFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzTermInContext >> gtTreeFor: aView term: aTerm [
+	^ aView columnedTree
+		items: [ { aTerm } ];
+		column: 'Term' text: [ :each |
+			each synopsis asRopedText
+				fontName: LzCodeFont defaultFamily ];
+		column: 'Sort' text: [ :each |
+			each sort asLeibnizSyntax ];
+		children: #args;
+		send: [ :each |
+			self class
+				term: each
+				context: context
+				rewriteCache: rewriteCache ];
+		expandAll;
 		yourself
 ]
 
