@@ -166,6 +166,43 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-21T09:05:12.115783+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-21T09:08:37.457264+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "KE04zOenDQCREpApD10dkw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Function application is defined as:\n\t{{lzRule:f_:ℝ → ℝ, g_:ℝ → ℝ, x_:ℝ, (f_ + g_)[x_]  ⇒ f_[x_] + g_[x_]}}\n\t{{lzRule:f_:ℝ → ℝ, g_:ℝ → ℝ, x_:ℝ, (f_ - g_)[x_]  ⇒ f_[x_] - g_[x_]}}\n\t{{lzRule:f_:ℝ → ℝ, g_:ℝ → ℝ, x_:ℝ, (f_ × g_)[x_]  ⇒ f_[x_] × g_[x_]}}\n\t{{lzRule:f_:ℝ → ℝ, g_:ℝ → ℝ, x_:ℝ, (f_ ÷ g_)[x_]  ⇒ f_[x_] ÷ g_[x_]}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2022-06-28T15:16:39.173568+02:00"
 					}
 				},
@@ -277,7 +314,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:17:17.382964+02:00"
+						"dateAndTimeString" : "2022-10-21T09:09:18.255875+02:00"
 					}
 				},
 				"editEmail" : {
@@ -288,7 +325,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:17:17.382964+02:00"
+						"dateAndTimeString" : "2022-10-21T09:13:33.841053+02:00"
 					}
 				},
 				"uid" : {
@@ -298,7 +335,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "Function application is defined as:\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (f_ + s_)[x_]  ⇒ f_[x_] + s_}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (s_ + f_)[x_]  ⇒ s_ + f_[x_]}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (f_ - s_)[x_]  ⇒ f_[x_] - s_}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (s_ - f_)[x_]  ⇒ s_ - f_[x_]}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (f_ × s_)[x_]  ⇒ f_[x_] × s_}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (s_ × f_)[x_]  ⇒ s_ × f_[x_]}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (f_ ÷ s_)[x_]  ⇒ f_[x_] ÷ s_}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (s_ ÷ f_)[x_]  ⇒ s_ ÷ f_[x_]}}"
 			}
 		]
 	},

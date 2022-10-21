@@ -304,7 +304,82 @@
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [ ]
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-20T13:32:19.571933+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-20T13:39:23.657365+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "M5vVZ9enDQC//QeHAYQyzQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "A simple numerical simulation can be performed by applying the [[Euler method]]. It computes the values of  approximations {{lzOp:x≅ : (ℕ → ℝ)}} and {{lzOp:y≅ : (ℕ → ℝ)}} to the populations \n{{lzTerm:n_:ℕ, x[n_ × Δt]}} and {{lzTerm:n_:ℕ, y[n_ × Δt]}} on a time grid with spacing {{lzOp:Δt : ℝ.p}}."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-20T14:00:34.198366+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-20T14:44:51.089485+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "NK7xzdenDQCA9kVTAYQyzQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Given initial values {{lzTerm:x≅[0]}} and {{lzTerm:y≅[0]}}, values for later times are computed as\n\t{{lzRule:n_:ℕ.nz, x≅[n_] ⇒ x≅[n_ - 1] + (Δt × ((α × x≅) - (β × x≅ × y≅))[n_ - 1]) }}\n\t{{lzRule:n_:ℕ.nz, y≅[n_] ⇒ y≅[n_ - 1] + (Δt × ((δ × x≅ × y≅) - (γ × y≅))[n_ - 1]) }}"
+						}
+					]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -325,7 +400,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T13:28:21.350842+02:00"
+						"dateAndTimeString" : "2022-10-20T21:31:41.416519+02:00"
 					}
 				},
 				"uid" : {
@@ -335,13 +410,88 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "### Numerical simulation "
+				"string" : "###Numerical simulation "
 			},
 			{
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [ ]
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-20T21:38:48.979542+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-20T21:39:02.434368+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "jOdmNd6nDQCQmLe9Bd6epw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Uses\n\t- {{lzUseContext:name = \"Algorithmic construction of one-dimensional arrays\", subcontext = \"example\"}}\n\t- {{lzUseContext:name = \"Plotting\", subcontext = \"example\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-20T21:31:58.762525+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-20T21:40:03.478829+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "Wf5jHd6nDQCQlArkBd6epw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Suppose there are two species of animals, a baboon (prey) and a cheetah (predator). If the initial conditions are {{lzRule:x≅[0] ⇒ 10, subcontext = \"example\"}} baboons and {{lzRule:y≅[0] ⇒ 10, subcontext = \"example\"}} cheetahs, one can plot the progression of the two species over time; given the parameters that the growth and death rates of baboon are {{lzRule:α ⇒ 11/10, subcontext = \"example\"}} and {{lzRule:β ⇒ 4/10, subcontext = \"example\"}} while that of cheetahs are {{lzRule:δ ⇒ 1/10, subcontext = \"example\"}} and {{lzRule:γ ⇒ 4/10, subcontext = \"example\"}} respectively."
+						}
+					]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -351,7 +501,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T13:32:19.571933+02:00"
+						"dateAndTimeString" : "2022-10-20T21:31:30.180206+02:00"
 					}
 				},
 				"editEmail" : {
@@ -362,17 +512,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T13:39:23.657365+02:00"
+						"dateAndTimeString" : "2022-10-20T21:31:35.351069+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "M5vVZ9enDQC//QeHAYQyzQ=="
+					"uidString" : "amrXG96nDQCQknEbBd6epw=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A simple numerical simulation can be performed by applying the [[Euler method]]. It computes the values of  approximations {{lzOp:x≅ : (ℕ → ℝ)}} and {{lzOp:y≅ : (ℕ → ℝ)}} to the populations \n{{lzTerm:n_:ℕ, x[n_ × Δt]}} and {{lzTerm:n_:ℕ, y[n_ × Δt]}} on a time grid with spacing {{lzOp:Δt : ℝ.p}}."
+				"string" : "###Example"
 			},
 			{
 				"__type" : "textSnippet",
@@ -388,7 +538,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T14:00:34.198366+02:00"
+						"dateAndTimeString" : "2022-10-20T21:41:29.765362+02:00"
 					}
 				},
 				"editEmail" : {
@@ -399,17 +549,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T14:44:51.089485+02:00"
+						"dateAndTimeString" : "2022-10-21T09:22:31.170045+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "NK7xzdenDQCA9kVTAYQyzQ=="
+					"uidString" : "4zzQHd6nDQCQlu6OBd6epw=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Given initial values {{lzTerm:x≅[0]}} and {{lzTerm:y≅[0]}}, values for later times are computed as\n\t{{lzRule:n_:ℕ.nz, x≅[n_] ⇒ x≅[n_ - 1] + (Δt × ((α × x≅) - (β × x≅ × y≅))[n_ - 1]) }}\n\t{{lzRule:n_:ℕ.nz, y≅[n_] ⇒ y≅[n_ - 1] + (Δt × ((δ × x≅ × y≅) - (γ × y≅))[n_ - 1]) }}"
+				"string" : "With  {{lzRule:Δt ⇒ 1/10, subcontext = \"example\"}} and\n\t{{lzOp:n:Array1D(ℕ), subcontext = \"example\"}}\n\t{{lzRule:n ⇒ IndexArray(10), subcontext = \"example\"}},\nwe find:\n\t{{lzTerm:linePlot(n, x≅[n]), subcontext = \"example\"}}\nand:\n\t{{lzTerm:linePlot(n, y≅[n]), subcontext = \"example\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -425,7 +575,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T14:10:44.319624+02:00"
+						"dateAndTimeString" : "2022-10-20T21:47:02.366158+02:00"
 					}
 				},
 				"editEmail" : {
@@ -436,7 +586,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T14:10:44.319624+02:00"
+						"dateAndTimeString" : "2022-10-20T21:48:03.260994+02:00"
 					}
 				},
 				"uid" : {
@@ -446,7 +596,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "{{lzTerm:x≅[n], withNormalForm = \"yes\", subcontext = \"example\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -462,7 +612,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T14:10:39.459852+02:00"
+						"dateAndTimeString" : "2022-10-21T09:22:04.10087+02:00"
 					}
 				},
 				"editEmail" : {
@@ -473,7 +623,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T14:10:39.459852+02:00"
+						"dateAndTimeString" : "2022-10-21T09:22:04.10087+02:00"
 					}
 				},
 				"uid" : {
@@ -483,7 +633,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "{{lzTerm:y≅[n], withNormalForm = \"yes\",  subcontext = \"example\"}}"
 			}
 		]
 	},
