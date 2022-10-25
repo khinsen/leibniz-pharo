@@ -11,7 +11,8 @@ Class {
 LzAxiom >> addAsRopedTextTo: aRopedText [
 	self label ifNotNil: [ :l |
 		aRopedText append:
-			(l asRopedText attribute: LzAssetLabelAttribute new) ].
+			(l asRopedText attribute: LzAssetLabelAttribute new).
+			aRopedText append: ': ' asRopedText ].
 	super addAsRopedTextTo: aRopedText
 ]
 

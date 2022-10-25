@@ -8,10 +8,16 @@ Class {
 		'axiomDeclarations',
 		'rewriteSystem',
 		'equalityAxioms',
-		'subsortAxioms'
+		'subsortAxioms',
+		'assets'
 	],
 	#category : #'Leibniz2-Contexts'
 }
+
+{ #category : #accessing }
+LzContext >> assets [
+	^ assets
+]
 
 { #category : #accessing }
 LzContext >> axiomDeclarations [
@@ -29,9 +35,45 @@ LzContext >> axioms: aCollection [
 	subsortAxioms := aCollection select: [ :each | each isKindOf: LzSubsortAxiom ].
 ]
 
+{ #category : #initializing }
+LzContext >> collectAssets [
+	self equalityAxioms do: [ :each |
+		each label ifNotNil: [ :l |
+			assets at: l put: each ] ].
+	self rewriteSystem rules values do: [ :eachRuleList |
+		eachRuleList do: [ :eachRule |
+			eachRule label ifNotNil: [ :l |
+				eachRule order
+					ifNil: [ assets at: l put: eachRule ]
+					ifNotNil: [ :o |
+						(assets at: l ifAbsentPut: [ Dictionary new ])
+							at: o put: eachRule ] ] ] ]
+]
+
 { #category : #accessing }
 LzContext >> equalityAxioms [
 	^ equalityAxioms
+]
+
+{ #category : #inspecting }
+LzContext >> gtAssetsFor: aView [ 
+	<gtView>
+	self assets isEmpty ifTrue: [ ^ aView empty ].
+	^ aView columnedTree
+		title: 'Assets';
+		priority: 5;
+		items: [ self assets associations ];
+		children: [ :each | 
+			each value isDictionary
+				ifTrue: [ each value associations ]
+				ifFalse: [ #() ] ];
+		column: 'Label' text: [ :assoc | assoc key ]
+			width: 100;
+		column: 'Value' text: [ :assoc |
+			assoc value isDictionary
+				ifTrue: [ '' ]
+				ifFalse: [ assoc value asLeibnizSyntax ] ];
+		send: [ :assoc | assoc value ]
 ]
 
 { #category : #inspecting }
@@ -117,6 +159,11 @@ LzContext >> gtVariablesFor: aView [
 		object: [ self signature ];
 		view: #gtVariablesFor:;
 		yourself
+]
+
+{ #category : #initializing }
+LzContext >> initialize [
+	assets := Dictionary new
 ]
 
 { #category : #constructing }

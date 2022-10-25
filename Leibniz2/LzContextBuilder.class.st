@@ -112,6 +112,7 @@ LzContextBuilder >> context [
 		axioms: axioms;
 		axiomDeclarations: axiomDeclarations copy;
 		rewriteSystem: rewriteSystem;
+		collectAssets;
 		beRecursivelyReadOnlyObject;
 		yourself
 ]
