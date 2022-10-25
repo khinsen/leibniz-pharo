@@ -201,6 +201,7 @@ LzPageDeclarationCache >> sortOrderFor: aClass [
 		LzRewriteRuleDeclaration -> 6.
 		LzFunctionRuleDeclaration -> 7.
 		LzPatternDeclaration -> 8.
+		LzAssetDeclaration -> 9.
 	} asDictionary at: aClass
 ]
 

@@ -3,6 +3,7 @@ Class {
 	#superclass : #LzParseTreeNode,
 	#instVars : [
 		'label',
+		'options',
 		'order'
 	],
 	#category : #'Leibniz2-SmaCCParser'
@@ -14,6 +15,17 @@ LzTopLevelAssetNode >> acceptVisitor: aParseTreeVisitor [
 ]
 
 { #category : #generated }
+LzTopLevelAssetNode >> compositeNodeVariables [
+	^ #(#options)
+]
+
+{ #category : #'generated-initialize-release' }
+LzTopLevelAssetNode >> initialize [
+	super initialize.
+	options := OrderedCollection new: 2.
+]
+
+{ #category : #generated }
 LzTopLevelAssetNode >> label [
 	^ label
 ]
@@ -21,6 +33,18 @@ LzTopLevelAssetNode >> label [
 { #category : #generated }
 LzTopLevelAssetNode >> label: aSmaCCToken [
 	label := aSmaCCToken
+]
+
+{ #category : #generated }
+LzTopLevelAssetNode >> options [
+	^ options
+]
+
+{ #category : #generated }
+LzTopLevelAssetNode >> options: anOrderedCollection [
+	self setParents: self options to: nil.
+	options := anOrderedCollection.
+	self setParents: self options to: self
 ]
 
 { #category : #generated }

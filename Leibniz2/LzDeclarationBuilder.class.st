@@ -185,7 +185,7 @@ LzDeclarationBuilder >> visitSuperscriptOpTerm: aSuperscriptOpTerm [
 LzDeclarationBuilder >> visitTopLevelAsset: aTopLevelAsset [
 	| asset |
 	asset := LzAssetDeclaration new
-		label: aTopLevelAsset prefix label value asSymbol.
+		label: aTopLevelAsset label value asSymbol.
 	^ self annotate: asset from: aTopLevelAsset booleanOptions: #()
 ]
 

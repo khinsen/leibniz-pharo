@@ -185,6 +185,13 @@ LzAnnotationStyler >> visitSmaCCError: aSmaCCError [
 		underlineColor: Color red
 ]
 
+{ #category : #generated }
+LzAnnotationStyler >> visitTopLevelAsset: aTopLevelAsset [
+	self styleAnnotation: aTopLevelAsset.
+	self styleAutoHidingAnnotation: aTopLevelAsset.
+	self styleDeclarationButton: aTopLevelAsset
+]
+
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	self styleAnnotation: aTopLevelEqualityAxiom.

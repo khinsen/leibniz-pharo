@@ -10,7 +10,9 @@ Class {
 { #category : #testing }
 LzTopLevelAnnotation >> definesContext [
 	^ self declaration definesContext
-		and: [ (self optionsAt: #example) not ]
+		and: [ (self optionsAt: #example)
+				ifNil: [ true ]
+				ifNotNil: [ :e | e not ] ]
 ]
 
 { #category : #testing }
