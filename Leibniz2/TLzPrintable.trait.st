@@ -28,8 +28,9 @@ TLzPrintable >> asLeibnizSyntax [
 
 { #category : #converting }
 TLzPrintable >> asLeibnizSyntaxString [
-	^ String streamContents: [ :s |
-		self printAsLeibnizSyntaxOn: s ]
+	^ self asLeibnizSyntax asString
+	"^ String streamContents: [ :s |
+		self printAsLeibnizSyntaxOn: s ]"
 ]
 
 { #category : #converting }
@@ -75,7 +76,7 @@ TLzPrintable >> gtSyntaxFor: aView [
 
 { #category : #printing }
 TLzPrintable >> printAsLeibnizSyntaxOn: aStream [
-	self notYetImplemented
+	aStream << self asLeibnizSyntax asString
 ]
 
 { #category : #printing }
