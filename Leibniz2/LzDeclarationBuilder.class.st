@@ -197,6 +197,8 @@ LzDeclarationBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 		right: (self acceptNode: aTopLevelEqualityAxiom right).
 	aTopLevelEqualityAxiom condition ifNotNil: [ :c |
 		axiom condition: (self acceptNode: c) ].
+	aTopLevelEqualityAxiom prefix ifNotNil: [ :p |
+		axiom label: p label value asSymbol ].
 	^ self annotate: axiom from: aTopLevelEqualityAxiom booleanOptions: #(example)
 ]
 

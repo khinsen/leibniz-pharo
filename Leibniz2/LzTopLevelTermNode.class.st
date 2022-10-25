@@ -5,7 +5,8 @@ Class {
 		'vars',
 		'commas',
 		'term',
-		'options'
+		'options',
+		'prefix'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
@@ -45,7 +46,7 @@ LzTopLevelTermNode >> initialize [
 
 { #category : #generated }
 LzTopLevelTermNode >> nodeVariables [
-	^ #(#term)
+	^ #(#term #prefix)
 ]
 
 { #category : #generated }
@@ -58,6 +59,18 @@ LzTopLevelTermNode >> options: anOrderedCollection [
 	self setParents: self options to: nil.
 	options := anOrderedCollection.
 	self setParents: self options to: self
+]
+
+{ #category : #generated }
+LzTopLevelTermNode >> prefix [
+	^ prefix
+]
+
+{ #category : #generated }
+LzTopLevelTermNode >> prefix: aLzAssetPrefixNode [
+	self prefix notNil ifTrue: [ self prefix parent: nil ].
+	prefix := aLzAssetPrefixNode.
+	self prefix notNil ifTrue: [ self prefix parent: self ]
 ]
 
 { #category : #generated }

@@ -16,6 +16,11 @@ TLzParseTreeNodeVisitor >> visitArrayTerm: anArrayTerm [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitAssetPrefix: anAssetPrefix [
+	^ self visitParseTree: anAssetPrefix
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitBracketOp: aBracketOp [
 	^ self visitOp: aBracketOp
 ]

@@ -159,11 +159,12 @@ LzSignature >> opsOfKind: aKind [
 ]
 
 { #category : #constructing }
-LzSignature >> parsedAxiom: anASTAxiomNode [
-	^ anASTAxiomNode axiomClass new
+LzSignature >> parsedAxiom: anAxiomDeclaration [
+	^ anAxiomDeclaration axiomClass new
 		signature: self;
-		variables: (self parsedVariables: anASTAxiomNode variables);
-		buildTermsFrom: anASTAxiomNode terms;
+		variables: (self parsedVariables: anAxiomDeclaration variables);
+		buildTermsFrom: anAxiomDeclaration terms;
+		label: anAxiomDeclaration label;
 		checkConsistency;
 		beRecursivelyReadOnlyObject
 ]

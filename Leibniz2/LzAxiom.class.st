@@ -1,8 +1,19 @@
 Class {
 	#name : #LzAxiom,
 	#superclass : #LzTermsWithSharedVars,
+	#instVars : [
+		'label'
+	],
 	#category : #'Leibniz2-Axioms'
 }
+
+{ #category : #converting }
+LzAxiom >> addAsRopedTextTo: aRopedText [
+	self label ifNotNil: [ :l |
+		aRopedText append:
+			(l asRopedText attribute: LzAssetLabelAttribute new) ].
+	super addAsRopedTextTo: aRopedText
+]
 
 { #category : #initialization }
 LzAxiom >> buildTermsFrom: aDictionary [
@@ -12,6 +23,18 @@ LzAxiom >> buildTermsFrom: aDictionary [
 { #category : #'instance creation' }
 LzAxiom >> checkConsistency [
 	self subclassResponsibility
+]
+
+{ #category : #accessing }
+LzAxiom >> label [
+
+	^ label
+]
+
+{ #category : #accessing }
+LzAxiom >> label: anObject [
+
+	label := anObject
 ]
 
 { #category : #printing }

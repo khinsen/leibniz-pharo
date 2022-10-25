@@ -8,7 +8,8 @@ Class {
 		'equals',
 		'right',
 		'options',
-		'condition'
+		'condition',
+		'prefix'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
@@ -82,7 +83,7 @@ LzTopLevelEqualityAxiomNode >> left: aLzParseTreeNode [
 
 { #category : #generated }
 LzTopLevelEqualityAxiomNode >> nodeVariables [
-	^ #(#left #right #condition)
+	^ #(#left #right #condition #prefix)
 ]
 
 { #category : #generated }
@@ -95,6 +96,18 @@ LzTopLevelEqualityAxiomNode >> options: anOrderedCollection [
 	self setParents: self options to: nil.
 	options := anOrderedCollection.
 	self setParents: self options to: self
+]
+
+{ #category : #generated }
+LzTopLevelEqualityAxiomNode >> prefix [
+	^ prefix
+]
+
+{ #category : #generated }
+LzTopLevelEqualityAxiomNode >> prefix: aLzAssetPrefixNode [
+	self prefix notNil ifTrue: [ self prefix parent: nil ].
+	prefix := aLzAssetPrefixNode.
+	self prefix notNil ifTrue: [ self prefix parent: self ]
 ]
 
 { #category : #generated }

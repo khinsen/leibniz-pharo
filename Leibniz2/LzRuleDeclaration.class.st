@@ -14,7 +14,7 @@ Class {
 LzRuleDeclaration >> addAsRopedTextTo: aRopedText [
 	self label ifNotNil: [ :l |
 		aRopedText append:
-			(l asRopedText attribute: LzRuleLabelAttribute new).
+			(l asRopedText attribute: LzAssetLabelAttribute new).
 		self order ifNotNil: [ :o |
 			aRopedText append: '[' asRopedText.
 			aRopedText append:

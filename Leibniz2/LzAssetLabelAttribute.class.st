@@ -1,11 +1,11 @@
 Class {
-	#name : #LzRuleLabelAttribute,
+	#name : #LzAssetLabelAttribute,
 	#superclass : #LzSyntaxAttribute,
 	#category : #'Leibniz2-Rendering'
 }
 
 { #category : #accessing }
-LzRuleLabelAttribute >> visualAttributesForColor: aColor [
+LzAssetLabelAttribute >> visualAttributesForColor: aColor [
 	^ { BlFontWeightAttribute bold.
 		BlTextForegroundAttribute new
 			paint: aColor darker }

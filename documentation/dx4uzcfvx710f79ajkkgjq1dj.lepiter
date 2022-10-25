@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:43:13.792364+02:00"
+						"dateAndTimeString" : "2022-10-25T14:41:57.68997+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The time evolution of prey and predator populations is given by\n\t{{lzAxiom:𝒟(x) = (α × x) - (β × x × y)}},\n\t{{lzAxiom:𝒟(y) = (δ × x × y) - (γ × y)}},\nwhere {{lzOp:α : ℝ.p}}, {{lzOp:β : ℝ.p}}, {{lzOp:γ : ℝ.p}}, and {{lzOp:δ : ℝ.p}} are constants describing the interactions of the two species."
+				"string" : "The time evolution of prey and predator populations is given by\n\t{{lzAxiom:lvx: 𝒟(x) = (α × x) - (β × x × y)}},\n\t{{lzAxiom:lvy: 𝒟(y) = (δ × x × y) - (γ × y)}},\nwhere {{lzOp:α : ℝ.p}}, {{lzOp:β : ℝ.p}}, {{lzOp:γ : ℝ.p}}, and {{lzOp:δ : ℝ.p}} are constants describing the interactions of the two species."
 			},
 			{
 				"__type" : "textSnippet",
@@ -367,7 +367,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-20T14:44:51.089485+02:00"
+									"dateAndTimeString" : "2022-10-25T14:19:29.065162+02:00"
 								}
 							},
 							"uid" : {
@@ -377,7 +377,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Given initial values {{lzTerm:x≅[0]}} and {{lzTerm:y≅[0]}}, values for later times are computed as\n\t{{lzRule:n_:ℕ.nz, x≅[n_] ⇒ x≅[n_ - 1] + (Δt × ((α × x≅) - (β × x≅ × y≅))[n_ - 1]) }}\n\t{{lzRule:n_:ℕ.nz, y≅[n_] ⇒ y≅[n_ - 1] + (Δt × ((δ × x≅ × y≅) - (γ × y≅))[n_ - 1]) }}"
+							"string" : "Given initial values {{lzTerm:x≅[0]}} and {{lzTerm:y≅[0]}}, values for later times are computed as\n\t{{lzRule:lv[1]: n_:ℕ.nz, x≅[n_] ⇒ x≅[n_ - 1] + (Δt × ((α × x≅) - (β × x≅ × y≅))[n_ - 1]) }}\n\t{{lzRule:lv[2]: n_:ℕ.nz, y≅[n_] ⇒ y≅[n_ - 1] + (Δt × ((δ × x≅ × y≅) - (γ × y≅))[n_ - 1]) }}"
 						}
 					]
 				},
@@ -560,80 +560,6 @@
 					"__type" : "textStyle"
 				},
 				"string" : "With  {{lzRule:Δt ⇒ 1/10, subcontext = \"example\"}} and\n\t{{lzOp:n:Array1D(ℕ), subcontext = \"example\"}}\n\t{{lzRule:n ⇒ IndexArray(10), subcontext = \"example\"}},\nwe find:\n\t{{lzTerm:linePlot(n, x≅[n]), subcontext = \"example\"}}\nand:\n\t{{lzTerm:linePlot(n, y≅[n]), subcontext = \"example\"}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T21:47:02.366158+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T21:48:03.260994+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "2dme89enDQCA+YtZAYQyzQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "{{lzTerm:x≅[n], withNormalForm = \"yes\", subcontext = \"example\"}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-21T09:22:04.10087+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-21T09:22:04.10087+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "erJU89enDQCA+IdbAYQyzQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "{{lzTerm:y≅[n], withNormalForm = \"yes\",  subcontext = \"example\"}}"
 			}
 		]
 	},
