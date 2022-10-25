@@ -136,6 +136,11 @@ TLzParseTreeNodeVisitor >> visitTerm: aTerm [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitTopLevelAsset: aTopLevelAsset [
+	^ self visitParseTree: aTopLevelAsset
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	^ self visitParseTree: aTopLevelEqualityAxiom
 ]

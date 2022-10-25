@@ -182,6 +182,14 @@ LzDeclarationBuilder >> visitSuperscriptOpTerm: aSuperscriptOpTerm [
 ]
 
 { #category : #'visiting - toplevel' }
+LzDeclarationBuilder >> visitTopLevelAsset: aTopLevelAsset [
+	| asset |
+	asset := LzAssetDeclaration new
+		label: aTopLevelAsset prefix label value asSymbol.
+	^ self annotate: asset from: aTopLevelAsset booleanOptions: #()
+]
+
+{ #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	| varBuilder axiom |
 	varBuilder := LzVarDeclarationBuilder new.
