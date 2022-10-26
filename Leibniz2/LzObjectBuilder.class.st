@@ -55,6 +55,19 @@ LzObjectBuilder >> subcontext: aString [
 ]
 
 { #category : #visiting }
+LzObjectBuilder >> visitTopLevelAsset: aTopLevelAsset [
+	| annotation declaration context |
+	annotation := LzDeclarationBuilder new acceptNode: aTopLevelAsset.
+	declaration := annotation declaration.
+	context := self subcontext:(annotation optionsAt: #subcontext).
+	^ (annotation optionsAt: #example)
+		ifTrue: [ { annotation.
+						declaration } ]
+		ifFalse: [ { annotation.
+						context asset: declaration } ]
+]
+
+{ #category : #visiting }
 LzObjectBuilder >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	| annotation declaration context |
 	annotation := LzDeclarationBuilder new acceptNode: aTopLevelEqualityAxiom.

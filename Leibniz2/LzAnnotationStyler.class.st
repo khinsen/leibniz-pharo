@@ -95,8 +95,21 @@ LzAnnotationStyler >> styleAutoHidingAnnotation: anAnnotation [
 ]
 
 { #category : #styling }
+LzAnnotationStyler >> styleButtonFor: anAnnotation label: aSyntaxLabel [
+	| attribute |
+	attribute := GtButtonAttribute new
+		beAppend;
+		stencil: [ (aSyntaxLabel beSmallSize) asElement
+					padding: (BlInsets top: 2 left: 0 bottom: 0 right: 0) ].
+	self text
+		attribute: attribute
+		from: anAnnotation parent startPosition
+		to: anAnnotation parent stopPosition
+]
+
+{ #category : #styling }
 LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation [
-	| annotatedDeclaration declaration label attribute |
+	| annotatedDeclaration declaration label |
 	annotatedDeclaration := LzDeclarationBuilder new
 			acceptNode: anLzAnnotation.
 	declaration := annotatedDeclaration declaration.
@@ -104,14 +117,7 @@ LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation [
 				for: declaration
 				color: (self colorFor: annotatedDeclaration))
 				declaration: declaration.
-	attribute := GtButtonAttribute new
-		beAppend;
-		stencil: [ (label beSmallSize) asElement
-					padding: (BlInsets top: 2 left: 0 bottom: 0 right: 0) ].
-	self text
-		attribute: attribute
-		from: anLzAnnotation parent startPosition
-		to: anLzAnnotation parent stopPosition
+	self styleButtonFor: anLzAnnotation label: label
 ]
 
 { #category : #styling }
@@ -139,7 +145,16 @@ LzAnnotationStyler >> styleExpandingObject: aTerm in: anAnnotation [
 
 { #category : #styling }
 LzAnnotationStyler >> styleObjectButton: anLzAnnotation [
-	| object annotatedDeclaration declaration label attribute |
+	self
+		styleObjectButton: anLzAnnotation
+		text: [ :annotatedDeclaration :declaration :object |
+			(declaration asRopedTextColored:
+					(self colorFor: annotatedDeclaration)) ]
+]
+
+{ #category : #styling }
+LzAnnotationStyler >> styleObjectButton: anLzAnnotation text: aBlock [
+	| object annotatedDeclaration declaration label |
 	[
 		object :=  LzObjectBuilder new
 			contextPageName: self page title;
@@ -147,9 +162,11 @@ LzAnnotationStyler >> styleObjectButton: anLzAnnotation [
 		annotatedDeclaration := object first.
 		declaration := annotatedDeclaration declaration.
 		object := object second.
-		label := (LzSyntaxLabel
-					for: declaration
-					color: (self colorFor: annotatedDeclaration))
+		label := LzSyntaxLabel new
+					text: (aBlock
+								value: annotatedDeclaration
+								value: declaration
+								value: object);
 					declaration: declaration ;
 					object: object.
 	] on: Exception do: [ :ex |
@@ -157,14 +174,7 @@ LzAnnotationStyler >> styleObjectButton: anLzAnnotation [
 		label := LzSyntaxLabel new
 					text: (ex printString asRopedText foreground: Color red);
 					declaration: ex ].
-	attribute := GtButtonAttribute new
-		beAppend;
-		stencil: [ (label beSmallSize) asElement
-					padding: (BlInsets top: 2 left: 0 bottom: 0 right: 0) ].
-	self text
-		attribute: attribute
-		from: anLzAnnotation parent startPosition
-		to: anLzAnnotation parent stopPosition
+	self styleButtonFor: anLzAnnotation label: label
 ]
 
 { #category : #private }
@@ -185,11 +195,22 @@ LzAnnotationStyler >> visitSmaCCError: aSmaCCError [
 		underlineColor: Color red
 ]
 
-{ #category : #generated }
+{ #category : #visiting }
 LzAnnotationStyler >> visitTopLevelAsset: aTopLevelAsset [
 	self styleAnnotation: aTopLevelAsset.
 	self styleAutoHidingAnnotation: aTopLevelAsset.
-	self styleDeclarationButton: aTopLevelAsset
+	self
+		styleObjectButton: aTopLevelAsset
+		text: [ :annotatedDeclaration :declaration :object |
+			| displayedObject |
+			(annotatedDeclaration optionsAt: 'withNormalForm')
+				ifTrue: [ displayedObject := object ]
+				ifFalse: [
+					(annotatedDeclaration optionsAt: 'withValue')
+						ifTrue: [ displayedObject := object ]
+						ifFalse: [ displayedObject := declaration ] ].
+			displayedObject asRopedTextColored:
+				(self colorFor: annotatedDeclaration) ]
 ]
 
 { #category : #visiting }

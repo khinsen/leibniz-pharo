@@ -15,6 +15,15 @@ Class {
 }
 
 { #category : #accessing }
+LzContext >> asset: anAssetDeclaration [
+	| asset |
+	asset := self assets at: anAssetDeclaration label.
+	anAssetDeclaration order ifNotNil: [ :o |
+		asset := asset at: o ].
+	^ asset
+]
+
+{ #category : #accessing }
 LzContext >> assets [
 	^ assets
 ]

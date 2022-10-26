@@ -186,7 +186,10 @@ LzDeclarationBuilder >> visitTopLevelAsset: aTopLevelAsset [
 	| asset |
 	asset := LzAssetDeclaration new
 		label: aTopLevelAsset label value asSymbol.
-	^ self annotate: asset from: aTopLevelAsset booleanOptions: #()
+	^ self
+		annotate: asset
+		from: aTopLevelAsset
+		booleanOptions: #(example withValue withNormalForm)
 ]
 
 { #category : #'visiting - toplevel' }
