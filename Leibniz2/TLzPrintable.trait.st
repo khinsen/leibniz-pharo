@@ -28,9 +28,9 @@ TLzPrintable >> asLeibnizSyntax [
 
 { #category : #converting }
 TLzPrintable >> asLeibnizSyntaxString [
-	^ self asLeibnizSyntax asString
-	"^ String streamContents: [ :s |
-		self printAsLeibnizSyntaxOn: s ]"
+	"^ self asLeibnizSyntax asString"
+	^ String streamContents: [ :s |
+		self printAsLeibnizSyntaxOn: s ]
 ]
 
 { #category : #converting }
