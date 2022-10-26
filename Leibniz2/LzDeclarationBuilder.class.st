@@ -186,6 +186,8 @@ LzDeclarationBuilder >> visitTopLevelAsset: aTopLevelAsset [
 	| asset |
 	asset := LzAssetDeclaration new
 		label: aTopLevelAsset label value asSymbol.
+	aTopLevelAsset order value ifNotNil: [ :o |
+		asset order: o asInteger ].
 	^ self
 		annotate: asset
 		from: aTopLevelAsset

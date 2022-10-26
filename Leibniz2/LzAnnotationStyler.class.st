@@ -177,6 +177,13 @@ LzAnnotationStyler >> styleObjectButton: anLzAnnotation text: aBlock [
 	self styleButtonFor: anLzAnnotation label: label
 ]
 
+{ #category : #accessing }
+LzAnnotationStyler >> subcontext: aString [
+	^ (LzGlobalCache uniqueInstance
+			contextCacheFor: self page title)
+		subcontext: aString
+]
+
 { #category : #private }
 LzAnnotationStyler >> text [
 	^ self composite text
@@ -204,7 +211,10 @@ LzAnnotationStyler >> visitTopLevelAsset: aTopLevelAsset [
 		text: [ :annotatedDeclaration :declaration :object |
 			| displayedObject |
 			(annotatedDeclaration optionsAt: 'withNormalForm')
-				ifTrue: [ displayedObject := object ]
+				ifTrue: [
+					| context | 
+					context := self subcontext:(annotatedDeclaration optionsAt: #subcontext).
+					displayedObject := object normalFormIn: context ]
 				ifFalse: [
 					(annotatedDeclaration optionsAt: 'withValue')
 						ifTrue: [ displayedObject := object ]

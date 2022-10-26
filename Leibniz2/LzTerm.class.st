@@ -221,6 +221,11 @@ LzTerm >> matchVar: aSymbol sort: aSort bindings: bindings [
 	bindings bindVar: aSymbol sort: aSort to: self
 ]
 
+{ #category : #rewriting }
+LzTerm >> normalFormIn: aContext [
+	^ aContext reduce: self
+]
+
 { #category : #accessing }
 LzTerm >> opName [
 	^ nil

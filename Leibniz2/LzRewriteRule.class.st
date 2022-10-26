@@ -68,6 +68,21 @@ LzRewriteRule >> gtTreeFor: aView [
 		yourself
 ]
 
+{ #category : #rewriting }
+LzRewriteRule >> normalFormIn: aContext [
+	^ self class new
+		signature: self signature;
+		variables: self variables;
+		pattern: (aContext reduce: self pattern);
+		condition: (self condition ifNotNil: [ :c | aContext reduce: c ]);
+		replacement: (aContext reduce: self replacement);
+		label: self label;
+		order: self order;
+		checkConsistency;
+		beRecursivelyReadOnlyObject;
+		yourself
+]
+
 { #category : #printing }
 LzRewriteRule >> printBodyAsLeibnizSyntaxOn: aStream [
 	self pattern printAsLeibnizSyntaxOn: aStream.

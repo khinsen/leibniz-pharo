@@ -64,6 +64,20 @@ LzEqualityAxiom >> left: aPattern [
 	left := aPattern
 ]
 
+{ #category : #rewriting }
+LzEqualityAxiom >> normalFormIn: aContext [
+	^ self class new
+		signature: self signature;
+		variables: self variables;
+		left: (aContext reduce: self left);
+		condition: (self condition ifNotNil: [ :c | aContext reduce: c ]);
+		right: (aContext reduce: self right);
+		label: self label;
+		checkConsistency;
+		beRecursivelyReadOnlyObject;
+		yourself
+]
+
 { #category : #accessing }
 LzEqualityAxiom >> patterns [
 	^ Set with: left with: right

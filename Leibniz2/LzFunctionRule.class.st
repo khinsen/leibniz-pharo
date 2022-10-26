@@ -137,6 +137,11 @@ LzFunctionRule >> gtTreeFor: aView [
 		yourself
 ]
 
+{ #category : #rewriting }
+LzFunctionRule >> normalFormIn: aContext [
+	^ self
+]
+
 { #category : #printing }
 LzFunctionRule >> printBodyAsLeibnizSyntaxOn: aStream [
 	self pattern printAsLeibnizSyntaxOn: aStream.
