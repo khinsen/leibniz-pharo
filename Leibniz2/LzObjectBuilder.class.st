@@ -64,7 +64,7 @@ LzObjectBuilder >> visitTopLevelAsset: aTopLevelAsset [
 		ifTrue: [ { annotation.
 						declaration } ]
 		ifFalse: [ { annotation.
-						context asset: declaration } ]
+						context parsedAsset: declaration } ]
 ]
 
 { #category : #visiting }

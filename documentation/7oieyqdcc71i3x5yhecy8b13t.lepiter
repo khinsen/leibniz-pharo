@@ -554,7 +554,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-30T18:48:15.323963+02:00"
+									"dateAndTimeString" : "2022-10-27T17:41:43.06479+02:00"
 								}
 							},
 							"uid" : {
@@ -564,7 +564,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Tools:\n\t[[Plotting]]\n\t[[Workflows]]"
+							"string" : "Tools:\n\t[[Plotting]]\n\t[[Solving recurrence equations]]\n\t[[Workflows]]"
 						}
 					]
 				},

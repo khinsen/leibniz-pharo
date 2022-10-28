@@ -26,6 +26,10 @@ BaselineOfLeibnizForGToolkit >> baseline: spec [
 						#('RecursiveWriteBarrier'
 							'SingletonTrait') ].
 
+		spec
+			package: 'RecurrenceEquations'
+			with: [ spec requires:
+						#('Leibniz2') ].
 ]
 ]
 

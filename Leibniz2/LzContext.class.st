@@ -15,12 +15,14 @@ Class {
 }
 
 { #category : #accessing }
-LzContext >> asset: anAssetDeclaration [
-	| asset |
-	asset := self assets at: anAssetDeclaration label.
-	anAssetDeclaration order ifNotNil: [ :o |
-		asset := asset at: o ].
-	^ asset
+LzContext >> asset: aString [
+	| node declaration |
+	node := LzParser2
+				parse: aString
+				startingAt: LzParser2 startingStateForTopLevelAsset.
+	declaration := LzDeclarationBuilder new
+		acceptNode: node.
+	^ self parsedAsset: declaration declaration
 ]
 
 { #category : #accessing }
@@ -173,6 +175,15 @@ LzContext >> gtVariablesFor: aView [
 { #category : #initializing }
 LzContext >> initialize [
 	assets := Dictionary new
+]
+
+{ #category : #accessing }
+LzContext >> parsedAsset: anAssetDeclaration [
+	| asset |
+	asset := self assets at: anAssetDeclaration label.
+	anAssetDeclaration order ifNotNil: [ :o |
+		asset := asset at: o ].
+	^ asset
 ]
 
 { #category : #constructing }
