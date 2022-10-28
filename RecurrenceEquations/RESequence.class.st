@@ -6,7 +6,8 @@ Class {
 		'rules',
 		'variables',
 		'sequence',
-		'block'
+		'block',
+		'stepSize'
 	],
 	#category : #RecurrenceEquations
 }
@@ -20,6 +21,17 @@ RESequence class >> context: aContext rules: anArrayOfAssetLabels initialValues:
 		checkRulesMatchVariables;
 		compileRules;
 		yourself
+]
+
+{ #category : #'instance creation' }
+RESequence class >> context: aContext rules: anArrayOfAssetLabels initialValues: aDictionary stepSize: aString [
+	| seq |
+	seq := self
+		context: aContext
+		rules: anArrayOfAssetLabels
+		initialValues: aDictionary.
+	seq stepSize: aString.
+	^ seq
 ]
 
 { #category : #computing }
@@ -150,11 +162,20 @@ RESequence >> gtItemsFor: aView [
 		priority: 1;
 		items: [
 			(1 to: sequence numberOfRows) collect: [ :row |
-				{ row. sequence atRow: row } ] ];
-		column: 'Index'
-			text: [ :item |
-				item first asRopedText foreground: Color gray  ]
-			width: 50.
+				{ row. sequence atRow: row } ] ].
+	stepSize
+		ifNil: [
+			view
+				column: 'Index'
+					text: [ :item |
+						item first asRopedText foreground: Color gray  ]
+					width: 50 ]
+		ifNotNil: [
+			view
+				column: 'Index'
+					text: [ :item |
+						(item first * stepSize) asRopedText foreground: Color gray  ]
+					width: 50 ].
 	variables withIndexDo: [ :var :i |
 		view
 			column: var asLeibnizSyntax
@@ -216,4 +237,12 @@ RESequence >> rules: anArrayOfAssetLabels [
 		self assert: (index isKindOf: LzVarTerm).
 		variable -> rule  ].
 	rules := rules asDictionary
+]
+
+{ #category : #accessing }
+RESequence >> stepSize: aString [
+	[
+		stepSize := aString asNumber
+	] onErrorDo: [
+		stepSize := (context reduce: aString) value ]
 ]
