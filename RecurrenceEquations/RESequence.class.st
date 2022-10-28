@@ -17,7 +17,7 @@ RESequence class >> context: aContext rules: anArrayOfAssetLabels initialValues:
 		rules: anArrayOfAssetLabels;
 		initialValues: aDictionary;
 		checkRulesMatchVariables;
-		checkRulesMatchInitialValues;
+		compileRules;
 		yourself
 ]
 
@@ -30,8 +30,11 @@ RESequence >> addSteps: anInteger [
 		self computeStep: step ]
 ]
 
-{ #category : #verifying }
-RESequence >> checkRulesMatchInitialValues [
+{ #category : #compiling }
+RESequence >> assertNumber: aTerm [
+	self
+		assert: aTerm sort kind
+		equals: (context term: '1') sort kind
 ]
 
 { #category : #initializing }
@@ -41,12 +44,89 @@ RESequence >> checkRulesMatchVariables [
 		equals: variables asSet
 ]
 
-{ #category : #computing }
+{ #category : #compiling }
+RESequence >> compileRule: aRule with: aDictionary to: aStream [
+	| sequenceTerm indexVar lookupTable |
+	sequenceTerm := aRule pattern args first.
+	indexVar := aRule pattern args second.
+	lookupTable := (aDictionary associations collect: [ :each |
+		each key -> ('sequence at: % at: ', each value asString) ])
+		asDictionary.
+	lookupTable at: indexVar put: 'n'.
+	aStream << Character tab.
+	self compileTerm: aRule pattern with: lookupTable to: aStream.
+	aStream << ' put: ('.
+	self compileTerm: aRule replacement with: lookupTable to: aStream.
+	aStream << ').'; << Character cr.
+]
+
+{ #category : #compiling }
+RESequence >> compileRules [
+	| varMap code |
+	varMap := (variables withIndexCollect: [ :v :i | v -> i ])
+				asDictionary.
+	code := String streamContents: [ :s |
+		s
+			<< 'computeStep: n'
+			<< Character cr.
+		1 to: self numberOfVariables do: [ :i |
+			| rule |
+			rule := rules at: (variables at: i).
+			self compileRule: rule with: varMap to: s.
+			s << Character cr ] ].
+	self class compile: code classified: 'generated'
+]
+
+{ #category : #compiling }
+RESequence >> compileTerm: aTerm with: lookupTable to: aStream [
+	lookupTable at: aTerm ifPresent: [ :string |
+		aStream << string.
+		^ self ].
+	self assertNumber: aTerm.
+
+	(aTerm opName = LzBracketOpName new) ifTrue: [
+		| firstArg secondArg |
+		firstArg := String streamContents: [ :s |
+			self compileTerm: aTerm args first with: lookupTable to: s ].
+		secondArg := String streamContents: [ :s |
+			s << $(.
+			self compileTerm: aTerm args second with: lookupTable to: s.
+			s << $) ].
+		(firstArg includes: $%)
+			ifTrue: [
+				aStream
+					<< (firstArg copyReplaceAll: '%' with: secondArg) ]
+			ifFalse: [
+				aStream
+					<< firstArg;
+					<< ' at: ';
+					<< secondArg ].
+		^ self ].
+
+	(aTerm opName isKindOf: LzInfixOpName) ifTrue: [
+		| pharoOperator |
+		pharoOperator := aTerm opName asLeibnizSyntaxString.
+		aStream << $(.
+		self compileTerm: aTerm args first with: lookupTable to: aStream.
+		aStream << $).
+		aStream << pharoOperator.
+		aStream << $(.
+		self compileTerm: aTerm args second with: lookupTable to: aStream.
+		aStream << $).
+		^ self ].
+
+	(aTerm isKindOf: LzAtomicTerm) ifTrue: [
+		aStream << aTerm asLeibnizSyntaxString.
+		^ self ].
+
+	self error: 'Cannot compile term ', aTerm asLeibnizSyntaxString.
+]
+
+{ #category : #generated }
 RESequence >> computeStep: n [
-	1 to: self numberOfVariables do: [ :i |
-		sequence at: n at: i
-			put: ((sequence at: n - 1 at: i)
-					+ (sequence at: n - 1 at: i)) ]
+	sequence at: (n) at: 1 put: ((sequence at: ((n)-(1)) at: 1)+(sequence at: ((n)-(2)) at: 1)).
+
+
 ]
 
 { #category : #initializing }
@@ -104,6 +184,7 @@ RESequence >> rules: anArrayOfAssetLabels [
 		rule := context asset: each.
 		self assert: (rule isKindOf: LzRule).
 		pattern := rule pattern.
+		self assert: pattern opName equals: LzBracketOpName new.
 		self assert: pattern args size equals: 2.
 		variable := pattern args first.
 		self assert: (variable isKindOf: LzOpTerm).
