@@ -142,11 +142,17 @@ RESequence >> gtItemsFor: aView [
 	view := aView columnedList 
 		title: 'Items';
 		priority: 1;
-		items: [ sequence rowsCollect: [ :row | row ] ].
+		items: [
+			(1 to: sequence numberOfRows) collect: [ :row |
+				{ row. sequence atRow: row } ] ];
+		column: 'Index'
+			text: [ :item |
+				item first asRopedText foreground: Color gray  ]
+			width: 50.
 	variables withIndexDo: [ :var :i |
 		view
 			column: var asLeibnizSyntax
-			text: [ :item | item at: i ] ].
+			text: [ :item | item second at: i ] ].
 	^ view
 ]
 
