@@ -240,9 +240,8 @@ RESequence >> rules: anArrayOfAssetLabels [
 ]
 
 { #category : #accessing }
-RESequence >> stepSize: aString [
-	[
-		stepSize := aString asNumber
-	] onErrorDo: [
-		stepSize := (context reduce: aString) value ]
+RESequence >> stepSize: aStringOrNumber [
+	aStringOrNumber isNumber
+		ifTrue: [ stepSize := aStringOrNumber ]
+		ifFalse: [ stepSize := (context reduce: aStringOrNumber) value ]
 ]

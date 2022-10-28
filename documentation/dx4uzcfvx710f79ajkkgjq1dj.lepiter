@@ -367,7 +367,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-25T14:19:29.065162+02:00"
+									"dateAndTimeString" : "2022-10-28T16:54:12.552657+02:00"
 								}
 							},
 							"uid" : {
@@ -377,7 +377,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Given initial values {{lzTerm:x≅[0]}} and {{lzTerm:y≅[0]}}, values for later times are computed as\n\t{{lzRule:lv[1]: n_:ℕ.nz, x≅[n_] ⇒ x≅[n_ - 1] + (Δt × ((α × x≅) - (β × x≅ × y≅))[n_ - 1]) }}\n\t{{lzRule:lv[2]: n_:ℕ.nz, y≅[n_] ⇒ y≅[n_ - 1] + (Δt × ((δ × x≅ × y≅) - (γ × y≅))[n_ - 1]) }}"
+							"string" : "Given initial values {{lzTerm:x≅[0]}} and {{lzTerm:y≅[0]}}, values for later times are computed as\n\t{{lzRule:lvx≅: n_:ℕ.nz, x≅[n_] ⇒ x≅[n_ - 1] + (Δt × ((α × x≅) - (β × x≅ × y≅))[n_ - 1]) }}\n\t{{lzRule:lvy≅: n_:ℕ.nz, y≅[n_] ⇒ y≅[n_ - 1] + (Δt × ((δ × x≅ × y≅) - (γ × y≅))[n_ - 1]) }}"
 						}
 					]
 				},
@@ -490,6 +490,114 @@
 								"__type" : "textStyle"
 							},
 							"string" : "Suppose there are two species of animals, a baboon (prey) and a cheetah (predator). If the initial conditions are {{lzRule:x≅[0] ⇒ 10, subcontext = \"example\"}} baboons and {{lzRule:y≅[0] ⇒ 10, subcontext = \"example\"}} cheetahs, one can plot the progression of the two species over time; given the parameters that the growth and death rates of baboon are {{lzRule:α ⇒ 11/10, subcontext = \"example\"}} and {{lzRule:β ⇒ 4/10, subcontext = \"example\"}} while that of cheetahs are {{lzRule:δ ⇒ 1/10, subcontext = \"example\"}} and {{lzRule:γ ⇒ 4/10, subcontext = \"example\"}} respectively."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-20T21:41:29.765362+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-28T16:52:57.315432+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "4zzQHd6nDQCQlu6OBd6epw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "With  {{lzRule:Δt ⇒ 1/10, subcontext = \"example\"}} and\n\t{{lzOp:n:Array1D(ℕ), subcontext = \"example\"}}\n\t{{lzRule:n ⇒ IndexArray(10), subcontext = \"example\"}},\nwe find:\n\t{{lzTerm:linPlot(n, x≅[n]), subcontext = \"example\"}}\nand:\n\t{{lzTerm:linPlot(n, y≅[n]), subcontext = \"example\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-28T16:55:15.169717+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-28T16:55:49.343154+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "ELtKKHuoDQCPjaKaCB7oqg=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "A more efficient way to compute a solution is {{gtClass:name=RESequence}}:"
+						},
+						{
+							"__type" : "pharoSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-28T16:55:57.110903+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-10-28T17:54:13.185341+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "1AozMXuoDQCPkPoWCB7oqg=="
+							},
+							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx≅' 'lvy≅')\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: #'x≅' -> #(10.0)\r\t\t\t\t\t\twith: #'y≅' -> #(10.0))\r\tstepSize: 0.1.\rsequence addSteps: 100.\rsequence"
 						}
 					]
 				},
@@ -523,43 +631,6 @@
 					"__type" : "textStyle"
 				},
 				"string" : "###Example"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T21:41:29.765362+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-21T09:22:31.170045+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "4zzQHd6nDQCQlu6OBd6epw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "With  {{lzRule:Δt ⇒ 1/10, subcontext = \"example\"}} and\n\t{{lzOp:n:Array1D(ℕ), subcontext = \"example\"}}\n\t{{lzRule:n ⇒ IndexArray(10), subcontext = \"example\"}},\nwe find:\n\t{{lzTerm:linePlot(n, x≅[n]), subcontext = \"example\"}}\nand:\n\t{{lzTerm:linePlot(n, y≅[n]), subcontext = \"example\"}}"
 			}
 		]
 	},

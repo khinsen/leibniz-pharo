@@ -18,6 +18,43 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-28T17:55:41.748464+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-28T17:56:21.6206+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "ii3cBnyoDQC4hvaIAwIFrw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "{{gtClass:name=RESequence}} is a tool external to Leibniz that uses Leibniz contexts as its user interface. It is a simple numerical tool that solves recurrence equations. It reads the equations to be solved from a Leibniz context in the form of labelled rules, which it compiles to Pharo code."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2022-10-27T17:41:56.23726+02:00"
 					}
 				},
@@ -29,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-27T18:02:40.659435+02:00"
+						"dateAndTimeString" : "2022-10-28T17:55:41.754172+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "{{gtClass:name=RESequence}} is a tool external to Leibniz that uses Leibniz contexts as its user interface. It is a simple numerical tool that solves recurrence equations. More sophisticated numerical tools, such as ODE solvers, could be interfaced with Leibniz in the same way."
+				"string" : "More sophisticated numerical tools, such as ODE solvers, could be interfaced with Leibniz in the same way. They could also generate and use code in other (more efficient) languages than Pharo."
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-27T17:48:16.508413+02:00"
+						"dateAndTimeString" : "2022-10-28T17:23:07.144222+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The inputs to a recurrence equation solver are:\n - a list of recurrence equations\n - a list of initial values for each variable\n {{gtClass:name=RESequence}} reads the equations from a Leibniz context but takes the initial values as standard Pharo arrays. This seems most convenient for this specific use case. An external tool can read any data it wants from a Leibniz context."
+				"string" : "The inputs to a recurrence equation solver are:\n - a list of recurrence equations\n - a list of initial values for each variable\n {{gtClass:name=RESequence}} reads the equations from a Leibniz context but takes the initial values as standard Pharo arrays. This is most convenient for this specific use case, because it permits the last-minute choice of floating-point vs. exact arithmetic: just write the initial values as floating-point constants or as integer/fraction constants. However, an external tool can read any data it wants from a Leibniz context, including the initial values."
 			},
 			{
 				"__type" : "textSnippet",
@@ -256,51 +293,14 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-28T14:46:21.650005+02:00"
+									"dateAndTimeString" : "2022-10-28T16:40:39.492815+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
 								"uidString" : "55R192eoDQC47bs7Dl2LIw=="
 							},
-							"code" : "sequence := RESequence\r\t\t\t\tcontext: (thisSnippet page lzSubcontext: #fibonacci)\r\t\t\t\trules: #('fibonacciRecurrence')\r\t\t\t\tinitialValues: (Dictionary with: #F -> #(1 1)).\rsequence addSteps: 10.\rsequence"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-27T17:58:05.106319+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-27T17:58:05.106319+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "5FyQ8WeoDQC45puiDl2LIw=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : ""
+							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #fibonacci)\r\trules: #('fibonacciRecurrence')\r\tinitialValues: (Dictionary with: #F -> #(1 1)).\rsequence addSteps: 10.\rsequence"
 						}
 					]
 				},
@@ -334,6 +334,80 @@
 					"__type" : "textStyle"
 				},
 				"string" : "###Example: Fibonacci numbers"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-28T16:39:47.070976+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-28T16:39:54.338513+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "5FyQ8WeoDQC45puiDl2LIw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Example: Lotka-Volterra equations"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-28T16:39:57.63575+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-10-28T16:40:05.214717+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "z+Lw93qoDQCfCgINBwLgPA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "See [[Lotka-Volterra equations]]"
 			}
 		]
 	},
