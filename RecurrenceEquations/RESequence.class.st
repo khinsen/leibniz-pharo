@@ -5,7 +5,8 @@ Class {
 		'context',
 		'rules',
 		'variables',
-		'sequence'
+		'sequence',
+		'block'
 	],
 	#category : #RecurrenceEquations
 }
@@ -27,7 +28,7 @@ RESequence >> addSteps: anInteger [
 	index := self numberOfSteps + 1.
 	sequence := sequence grownByRows: anInteger.
 	index to: self numberOfSteps do: [ :step |
-		self computeStep: step ]
+		block value: sequence value: step ]
 ]
 
 { #category : #compiling }
@@ -67,22 +68,27 @@ RESequence >> compileRules [
 				asDictionary.
 	code := String streamContents: [ :s |
 		s
-			<< 'computeStep: n'
+			<< '[ :sequence :n |'
 			<< Character cr.
 		1 to: self numberOfVariables do: [ :i |
 			| rule |
 			rule := rules at: (variables at: i).
 			self compileRule: rule with: varMap to: s.
-			s << Character cr ] ].
-	self class compile: code classified: 'generated'
+			s << Character cr ].
+		s << ']' ].
+	block := Smalltalk compiler class new
+				source: code;
+				evaluate
 ]
 
 { #category : #compiling }
 RESequence >> compileTerm: aTerm with: lookupTable to: aStream [
+	| rewritten |
+
 	lookupTable at: aTerm ifPresent: [ :string |
 		aStream << string.
 		^ self ].
-	self assertNumber: aTerm.
+	"self assertNumber: aTerm."
 
 	(aTerm opName = LzBracketOpName new) ifTrue: [
 		| firstArg secondArg |
@@ -104,12 +110,10 @@ RESequence >> compileTerm: aTerm with: lookupTable to: aStream [
 		^ self ].
 
 	(aTerm opName isKindOf: LzInfixOpName) ifTrue: [
-		| pharoOperator |
-		pharoOperator := aTerm opName asLeibnizSyntaxString.
 		aStream << $(.
 		self compileTerm: aTerm args first with: lookupTable to: aStream.
 		aStream << $).
-		aStream << pharoOperator.
+		aStream << (self pharoInfixOperatorFor: aTerm opName).
 		aStream << $(.
 		self compileTerm: aTerm args second with: lookupTable to: aStream.
 		aStream << $).
@@ -119,14 +123,16 @@ RESequence >> compileTerm: aTerm with: lookupTable to: aStream [
 		aStream << aTerm asLeibnizSyntaxString.
 		^ self ].
 
-	self error: 'Cannot compile term ', aTerm asLeibnizSyntaxString.
-]
-
-{ #category : #generated }
-RESequence >> computeStep: n [
-	sequence at: (n) at: 1 put: ((sequence at: ((n)-(1)) at: 1)+(sequence at: ((n)-(2)) at: 1)).
-
-
+	rewritten := context rewriteSystem
+					rewriteHeadOnce: aTerm
+					reducer: [ :t | context reduce: t].
+	rewritten = aTerm
+		ifFalse: [
+			^ self
+				compileTerm: rewritten
+				with: lookupTable
+				to: aStream ].
+	self error: 'Cannot compile term ', aTerm asLeibnizSyntaxString
 ]
 
 { #category : #initializing }
@@ -181,6 +187,17 @@ RESequence >> numberOfSteps [
 { #category : #accessing }
 RESequence >> numberOfVariables [
 	^ variables size
+]
+
+{ #category : #compiling }
+RESequence >> pharoInfixOperatorFor: anOpName [
+	| opTable |
+	opTable := Dictionary
+				with: '+' -> '+'
+				with: '-' -> '-'
+				with: '×' -> '*'
+				with: '÷' -> '/'.
+	^ opTable at: anOpName asLeibnizSyntaxString 
 ]
 
 { #category : #initializing }
