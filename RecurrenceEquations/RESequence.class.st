@@ -7,7 +7,8 @@ Class {
 		'variables',
 		'sequence',
 		'block',
-		'stepSize'
+		'stepSize',
+		'indexVariable'
 	],
 	#category : #RecurrenceEquations
 }
@@ -24,13 +25,15 @@ RESequence class >> context: aContext rules: anArrayOfAssetLabels initialValues:
 ]
 
 { #category : #'instance creation' }
-RESequence class >> context: aContext rules: anArrayOfAssetLabels initialValues: aDictionary stepSize: aString [
+RESequence class >> context: aContext rules: anArrayOfAssetLabels initialValues: aDictionary indexVariable: aString stepSize: aStringOrNumber [
 	| seq |
 	seq := self
 		context: aContext
 		rules: anArrayOfAssetLabels
 		initialValues: aDictionary.
-	seq stepSize: aString.
+	seq
+		indexVariable: aString;
+		stepSize: aStringOrNumber.
 	^ seq
 ]
 
@@ -153,6 +156,24 @@ RESequence >> context: aContext [
 	context := aContext
 ]
 
+{ #category : #private }
+RESequence >> decimalPlacesForIndex [
+	| last tickDelta |
+	last := self numberOfSteps * stepSize ifNil: [ 1 ].
+	tickDelta := last / 10.
+	tickDelta > 1 ifTrue: [ ^ 0 ].
+	^ (tickDelta log negated round: 0) asInteger
+]
+
+{ #category : #private }
+RESequence >> decimalPlacesForVariable: aString [
+	| values tickDelta |
+	values := self variable: aString.
+	tickDelta := (values max - values min) / 10.
+	tickDelta > 1 ifTrue: [ ^ 0 ].
+	^ (tickDelta log negated round: 0) asInteger
+]
+
 { #category : #inspecting }
 RESequence >> gtItemsFor: aView [
 	<gtView>
@@ -163,7 +184,7 @@ RESequence >> gtItemsFor: aView [
 		items: [
 			(1 to: sequence numberOfRows) collect: [ :row |
 				{ row. sequence atRow: row } ] ].
-	stepSize
+	indexVariable
 		ifNil: [
 			view
 				column: 'Index'
@@ -172,7 +193,7 @@ RESequence >> gtItemsFor: aView [
 					width: 50 ]
 		ifNotNil: [
 			view
-				column: 'Index'
+				column: indexVariable
 					text: [ :item |
 						(item first * stepSize) asRopedText foreground: Color gray  ]
 					width: 50 ].
@@ -181,6 +202,28 @@ RESequence >> gtItemsFor: aView [
 			column: var asLeibnizSyntax
 			text: [ :item | item second at: i ] ].
 	^ view
+]
+
+{ #category : #inspecting }
+RESequence >> gtViewFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Plot';
+		priority: 5;
+		object: [ self plotAll ];
+		view: #gtLiveFor:.
+]
+
+{ #category : #accessing }
+RESequence >> indexVariable [
+
+	^ indexVariable
+]
+
+{ #category : #accessing }
+RESequence >> indexVariable: anObject [
+
+	indexVariable := anObject
 ]
 
 { #category : #initializing }
@@ -198,6 +241,18 @@ RESequence >> initialValues: aDictionary [
 	aDictionary keys withIndexDo: [ :each :index |
 		sequence atColumn: index put: (aDictionary at: each) ].
 	sequence do: [ :each | self assert: each isNumber ]
+]
+
+{ #category : #plotting }
+RESequence >> lineColor: aStringOrIndex [
+	| colors |
+	colors := {
+		Color blue.
+		Color red.
+		Color green.
+		Color black.
+		}.
+	^ colors at: (self variableIndex: aStringOrIndex)
 ]
 
 { #category : #accessing }
@@ -219,6 +274,70 @@ RESequence >> pharoInfixOperatorFor: anOpName [
 				with: '×' -> '*'
 				with: '÷' -> '/'.
 	^ opTable at: anOpName asLeibnizSyntaxString 
+]
+
+{ #category : #plotting }
+RESequence >> plot: aString [
+	| data linePlot |
+	data := GtPlotterDataGroup new
+		values: (self points: aString).
+	linePlot := GtPlotterLineChart new
+		valueX: #first;
+		labelFormatX: [ :each |
+			each printShowingDecimalPlaces: self decimalPlacesForIndex] ;
+		scaleX: GtPlotterLinearScale new;
+		titleX: (indexVariable ifNil: ['Index']);
+		ticksX: 10;
+		valueY: #second;
+		labelFormatY: [ :each |
+			each printShowingDecimalPlaces:
+					(self decimalPlacesForVariable: aString) ] ;
+		scaleY: GtPlotterLinearScale new;
+		titleY: aString;
+		ticksY: 10;
+		with: data.
+	^ linePlot
+]
+
+{ #category : #plotting }
+RESequence >> plotAll [
+	| data linePlot |
+	data := self plotterDataGroup.
+	linePlot := GtPlotterLineChart new
+		valueX: #first;
+		labelFormatX: [ :each |
+			each printShowingDecimalPlaces: self decimalPlacesForIndex] ;
+		scaleX: GtPlotterLinearScale new;
+		titleX: (indexVariable ifNil: ['Index']);
+		ticksX: 10;
+		valueY: #second;
+		labelFormatY: [ :each |
+			each printShowingDecimalPlaces:
+					1 ] ;
+		scaleY: GtPlotterLinearScale new;
+		ticksY: 10;
+		with: data.
+	^ linePlot
+]
+
+{ #category : #accessing }
+RESequence >> plotterDataGroup [
+	^ GtPlotterDataGroups new
+		entities: (variables withIndexCollect: [ :each :index |
+			((GtPlotterDataGroup new
+				values: (self points: index))
+				labelled: each asLeibnizSyntaxString)
+				colored: (self lineColor: index) ])
+]
+
+{ #category : #accessing }
+RESequence >> points: aStringOrIndex [
+	^ indexVariable ifNil: [
+		(self variable: aStringOrIndex) withIndexCollect: [ :each :index |
+			{ index. each } ] ]
+		ifNotNil: [
+			(self variable: aStringOrIndex) withIndexCollect: [ :each :index |
+				{ index * stepSize. each } ] ]
 ]
 
 { #category : #initializing }
@@ -244,4 +363,19 @@ RESequence >> stepSize: aStringOrNumber [
 	aStringOrNumber isNumber
 		ifTrue: [ stepSize := aStringOrNumber ]
 		ifFalse: [ stepSize := (context reduce: aStringOrNumber) value ]
+]
+
+{ #category : #accessing }
+RESequence >> variable: aStringOrIndex [
+	| index |
+	index := self variableIndex: aStringOrIndex.
+	index = 0 ifTrue: [ self error: 'No variable ' , aStringOrIndex ].
+	^ sequence atColumn: index
+]
+
+{ #category : #accessing }
+RESequence >> variableIndex: aStringOrIndex [
+	^ aStringOrIndex isNumber
+		ifTrue: [ aStringOrIndex ]
+		ifFalse: [ variables indexOf: (context term: aStringOrIndex) ]
 ]

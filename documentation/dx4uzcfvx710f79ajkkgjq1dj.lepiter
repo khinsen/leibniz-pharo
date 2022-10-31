@@ -590,14 +590,14 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-28T17:54:13.185341+02:00"
+									"dateAndTimeString" : "2022-10-31T10:38:55.659921+01:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
 								"uidString" : "1AozMXuoDQCPkPoWCB7oqg=="
 							},
-							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx≅' 'lvy≅')\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: #'x≅' -> #(10.0)\r\t\t\t\t\t\twith: #'y≅' -> #(10.0))\r\tstepSize: 0.1.\rsequence addSteps: 100.\rsequence"
+							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx≅' 'lvy≅')\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 0.1.\rsequence addSteps: 1000.\rsequence plot: 'y≅'"
 						}
 					]
 				},
