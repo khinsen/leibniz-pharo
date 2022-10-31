@@ -516,7 +516,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-28T16:52:57.315432+02:00"
+									"dateAndTimeString" : "2022-10-31T17:00:57.734753+01:00"
 								}
 							},
 							"uid" : {
@@ -526,7 +526,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "With  {{lzRule:Δt ⇒ 1/10, subcontext = \"example\"}} and\n\t{{lzOp:n:Array1D(ℕ), subcontext = \"example\"}}\n\t{{lzRule:n ⇒ IndexArray(10), subcontext = \"example\"}},\nwe find:\n\t{{lzTerm:linPlot(n, x≅[n]), subcontext = \"example\"}}\nand:\n\t{{lzTerm:linPlot(n, y≅[n]), subcontext = \"example\"}}"
+							"string" : "With  {{lzRule:Δt ⇒ 1/100, subcontext = \"example\"}} and\n\t{{lzOp:n:Array1D(ℕ), subcontext = \"example\"}}\n\t{{lzRule:n ⇒ IndexArray(5), subcontext = \"example\"}},\nwe find:\n\t{{lzTerm:linPlot(n, x≅[n]), subcontext = \"example\"}}\nand:\n\t{{lzTerm:linPlot(n, y≅[n]), subcontext = \"example\"}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -542,7 +542,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-28T16:55:15.169717+02:00"
+									"dateAndTimeString" : "2022-10-31T16:58:38.485095+01:00"
 								}
 							},
 							"editEmail" : {
@@ -553,17 +553,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-28T16:55:49.343154+02:00"
+									"dateAndTimeString" : "2022-10-31T16:59:24.002163+01:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "ELtKKHuoDQCPjaKaCB7oqg=="
+								"uidString" : "KCfrarioDQCTSHCfDrLUNg=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "A more efficient way to compute a solution is {{gtClass:name=RESequence}}:"
+							"string" : "A more efficient way to compute a solution is to solve the recurrence\nequations {{lzAsset:lvx≅}} and {{lzAsset:lvy≅}} using Pharo, via {{gtClass:name=RESequence}}(see [[Solving recurrence equations]]):"
 						},
 						{
 							"__type" : "pharoSnippet",
@@ -590,14 +590,14 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-31T10:38:55.659921+01:00"
+									"dateAndTimeString" : "2022-10-31T17:02:57.097484+01:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
 								"uidString" : "1AozMXuoDQCPkPoWCB7oqg=="
 							},
-							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx≅' 'lvy≅')\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 0.1.\rsequence addSteps: 1000.\rsequence plot: 'y≅'"
+							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx≅' 'lvy≅')\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 0.1.\rsequence addSteps: 5000.\rsequence"
 						}
 					]
 				},
