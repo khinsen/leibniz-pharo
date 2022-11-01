@@ -60,6 +60,15 @@ LzTerm >> asENodeIn: anEGraph [
 	self subclassResponsibility
 ]
 
+{ #category : #testing }
+LzTerm >> contains: otherTerm [
+	self = otherTerm ifTrue: [ ^ true ].
+	^ self args
+		detect: [ :eachArg | eachArg contains: otherTerm ]
+		ifFound: [ true ]
+		ifNone: [ false ]
+]
+
 { #category : #rewriting }
 LzTerm >> ensureArrayTerm [
 	LzRewriteFailure signal: 'not an array term'

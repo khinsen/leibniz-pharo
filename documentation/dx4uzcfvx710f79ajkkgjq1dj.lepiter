@@ -563,40 +563,6 @@
 							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx/euler' 'lvy/euler')\r\tparameters: { 'Δt ⇒ 1/10' }\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 'Δt'.\rsequence addSteps: 500.\rsequence plotAll"
 						},
 						{
-							"__type" : "pharoSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-11-01T15:23:26.394371+01:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-11-01T15:24:20.750038+01:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "MvhKNMuoDQCL2DgtDeIrPw=="
-							},
-							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx/euler' 'lvy/euler')\r\tparameters: { 'Δt ⇒ 1/10' }\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #('x≅[0]')\r\t\t\t\t\t\twith: 'y≅' -> #('y≅[0]'))\r\tindexVariable: 't'\r\tstepSize: 'Δt'.\rsequence addSteps: 500.\rsequence plotAll"
-						},
-						{
 							"__type" : "textSnippet",
 							"children" : {
 								"__type" : "snippets",
@@ -736,6 +702,114 @@
 					"__type" : "textStyle"
 				},
 				"string" : "###Example"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-11-01T16:10:37.179359+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-11-01T16:10:41.938611+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "u0gF3cuoDQC3i3znBGyL8A=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Numerical simulation: the symplectic Euler method"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-11-01T16:28:00.307465+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-11-01T16:33:12.567784+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "5LKB3cuoDQC3kK/2BGyL8A=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : " A common strategy for stabilizing numerical solutions is to switch to an *implicit* integration scheme, in which the quantities on the right-hand side are evaluated at the *end* of the step rather than at the *beginning*. Doing this would result in the *implicit Euler method*. As explained in the blog post cited before, the best strategy for the Lotka-Volterra equations is to apply this strategy to only one of the to quantities, resulting in the *symplectic Euler method*:\n\t{{lzRule:lvx/symplectic: n_:ℕ.nz, x≅[n_] ⇒ x≅[n_ - 1] ÷ (1 - (Δt × (α +  (β × y≅[n_ - 1])))) }}\n\t{{lzRule:lvy/symplectic: n_:ℕ.nz, y≅[n_] ⇒ y≅[n_ - 1]  + (Δt × ((δ × x≅[n_] × y≅[n_ - 1]) - (γ × y≅[n_ - 1]))) }}"
+			},
+			{
+				"__type" : "pharoSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-11-01T16:33:29.149512+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-11-01T16:33:53.393864+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "cezLLsyoDQC3lBopBGyL8A=="
+				},
+				"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx/symplectic' 'lvy/symplectic')\r\tparameters: { 'Δt ⇒ 1/10' }\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 'Δt'.\rsequence addSteps: 500.\rsequence plotAll"
 			}
 		]
 	},

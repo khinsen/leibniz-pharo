@@ -26,7 +26,6 @@ RESequence class >> context: aContext rules: anArrayOfAssetLabels initialValues:
 		context: aContext;
 		rules: anArrayOfAssetLabels;
 		initialValues: aDictionary;
-		checkRulesMatchVariables;
 		yourself
 ]
 
@@ -36,7 +35,6 @@ RESequence class >> context: aContext rules: anArrayOfAssetLabels initialValues:
 		context: aContext;
 		rules: anArrayOfAssetLabels;
 		initialValues: aDictionary;
-		checkRulesMatchVariables;
 		indexVariable: aString;
 		stepSize: aStringOrNumber;
 		yourself
@@ -81,10 +79,20 @@ RESequence >> assertNumber: aTerm [
 ]
 
 { #category : #initializing }
-RESequence >> checkRulesMatchVariables [
-	self
-		assert: rules keys asSet
-		equals: variables asSet
+RESequence >> checkIsRecurrence: aRule [
+	"Check that the rule pattern is of the form var[index]."
+	| pattern variable index |
+	pattern := aRule pattern.
+	self assert: pattern opName equals: LzBracketOpName new.
+	self assert: pattern args size equals: 2.
+	variable := pattern args first.
+	self assert: (variable isKindOf: LzOpTerm).
+	self assert: (variable args isEmpty).
+	index := pattern args second.
+	self assert: (index isKindOf: LzVarTerm).
+	"Check that the replacement does not contain the pattern."
+	(aRule replacement contains: pattern)
+		ifTrue: [ self error: 'Not a valid recurrence: ', aRule asLeibnizSyntaxString ]
 ]
 
 { #category : #compiling }
@@ -106,6 +114,7 @@ RESequence >> compileRule: aRule with: aDictionary to: aStream [
 { #category : #compiling }
 RESequence >> compileRules [
 	| varMap code |
+	self sortVariables.
 	varMap := (variables withIndexCollect: [ :v :i | v -> i ])
 				asDictionary.
 	code := String streamContents: [ :s |
@@ -261,6 +270,9 @@ RESequence >> initialValues: aDictionary [
 		equals: 1.
 	variables := aDictionary keys collect: [ :each |
 		context term: each ].
+	self
+		assert: rules keys asSet
+		equals: variables asSet.
 	sequence := Array2D
 					rows: varSequenceSizes first
 					columns: variables size.
@@ -423,19 +435,36 @@ RESequence >> points: aStringOrIndex [
 { #category : #initializing }
 RESequence >> rules: anArrayOfAssetLabels [
 	rules := anArrayOfAssetLabels collect: [ :each |
-		| rule pattern variable index |
+		| rule variable |
 		rule := context asset: each.
 		self assert: (rule isKindOf: LzRule).
-		pattern := rule pattern.
-		self assert: pattern opName equals: LzBracketOpName new.
-		self assert: pattern args size equals: 2.
-		variable := pattern args first.
-		self assert: (variable isKindOf: LzOpTerm).
-		self assert: (variable args isEmpty).
-		index := pattern args second.
-		self assert: (index isKindOf: LzVarTerm).
+		self checkIsRecurrence: rule.
+		variable := rule pattern args first .
 		variable -> rule  ].
 	rules := rules asDictionary
+]
+
+{ #category : #compiling }
+RESequence >> sortVariables [
+	| dependencies varIndices sortCriterion |
+	dependencies := Dictionary new.
+	variables do: [ :eachVar |
+		dependencies at: eachVar put: OrderedCollection new.
+		rules valuesDo: [ :eachRule |
+			| index indexedVar |
+			index := eachRule pattern args second.
+			indexedVar := context signature
+							opTerm: LzBracketOpName new
+							args: { eachVar. index }.
+			(eachRule replacement contains: indexedVar)
+				ifTrue: [ (dependencies at: eachRule pattern args first) add: eachVar ] ] ].
+	sortCriterion :=  [ :a :b |
+		((dependencies at: (variables at: a))
+			includes: (variables at: b)) not ].
+	varIndices := (1 to: variables size) sorted: sortCriterion.
+	self assert: (varIndices isSortedBy: sortCriterion).
+	variables := varIndices collect: [ :eachIndex |
+		variables at: eachIndex ].
 ]
 
 { #category : #initializing }
