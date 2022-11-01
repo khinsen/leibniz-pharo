@@ -1,3 +1,9 @@
+"
+This class implements a simple computational tool that takes its main input (the equations that it solves) from a Leibniz context. It illustrates how computational tools can interface with Leibniz.
+
+The task that this computational tool accomplishes is solving [recurrence equations](https://en.wikipedia.org/wiki/Recurrence_relation). The equations are defined in a Leibniz context with a label. The labels of the equations to be solved (one per variable) are given to this tool, which compiles them to Pharo code (this happens in {{gtMethod:name=RESequence>>compileRules}}). Parameters, such as the initial values of the recurrence sequences, can also be specified as Leibniz expressions, but also as Pharo numbers. To see how parameters are extracted from Leibniz expressions, look at {{gtMethod:name=RESequence>>stepSize:}}.
+
+"
 Class {
 	#name : #RESequence,
 	#superclass : #Object,

@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T13:14:11.386662+02:00"
+						"dateAndTimeString" : "2022-11-01T11:59:13.224571+01:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "### Leibniz is more than a programming language"
+				"string" : "###Leibniz is more than a programming language"
 			},
 			{
 				"__type" : "textSnippet",
@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T13:26:26.845155+02:00"
+						"dateAndTimeString" : "2022-11-01T12:03:34.711306+01:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Leibniz lets you write mathematical equations (see [[Lotka-Volterra equations]] for a simple example), without necessarily *doing* anything with them. You can use Leibniz much like traditional mathematical notation, but with the benefit of consistency checks (in particular consistency of [[Sorts]]) and with the benefit of being machine-readable, meaning that you can feed your equations as input to a computational tool, such as a simulator or a data analysis program."
+				"string" : "Leibniz lets you write mathematical equations (see [[Lotka-Volterra equations]] for a simple example), without necessarily *doing* anything with them. You can use Leibniz much like traditional mathematical notation, but with the benefit of consistency checks (in particular consistency of [[Sorts]]) and with the benefit of being machine-readable, meaning that you can feed your equations as input to a computational tool, such as a simulator or a data analysis program. An example is the use of {{gtClass:name=RESequence}}, a computational tool written in Pharo, for solving the [[Lotka-Volterra equations]] efficiently."
 			},
 			{
 				"__type" : "textSnippet",
@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T13:26:59.077366+02:00"
+						"dateAndTimeString" : "2022-11-01T11:59:19.365816+01:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "### Leibniz is less than a programming language"
+				"string" : "###Leibniz is less than a programming language"
 			},
 			{
 				"__type" : "textSnippet",
@@ -251,7 +251,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T13:29:25.470305+02:00"
+						"dateAndTimeString" : "2022-11-01T11:59:24.716032+01:00"
 					}
 				},
 				"uid" : {
@@ -261,7 +261,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "### Leibniz is different from a programming language"
+				"string" : "###Leibniz is different from a programming language"
 			},
 			{
 				"__type" : "textSnippet",
