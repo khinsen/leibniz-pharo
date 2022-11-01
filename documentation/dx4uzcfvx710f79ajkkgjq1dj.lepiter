@@ -330,7 +330,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-20T13:39:23.657365+02:00"
+									"dateAndTimeString" : "2022-11-01T15:20:05.70931+01:00"
 								}
 							},
 							"uid" : {
@@ -367,7 +367,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-28T16:54:12.552657+02:00"
+									"dateAndTimeString" : "2022-11-01T14:09:18.023249+01:00"
 								}
 							},
 							"uid" : {
@@ -377,7 +377,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Given initial values {{lzTerm:x≅[0]}} and {{lzTerm:y≅[0]}}, values for later times are computed as\n\t{{lzRule:lvx≅: n_:ℕ.nz, x≅[n_] ⇒ x≅[n_ - 1] + (Δt × ((α × x≅) - (β × x≅ × y≅))[n_ - 1]) }}\n\t{{lzRule:lvy≅: n_:ℕ.nz, y≅[n_] ⇒ y≅[n_ - 1] + (Δt × ((δ × x≅ × y≅) - (γ × y≅))[n_ - 1]) }}"
+							"string" : "Given initial values {{lzTerm:x≅[0]}} and {{lzTerm:y≅[0]}}, values for later times are computed as\n\t{{lzRule:lvx/euler: n_:ℕ.nz, x≅[n_] ⇒ x≅[n_ - 1] + (Δt × ((α × x≅) - (β × x≅ × y≅))[n_ - 1]) }}\n\t{{lzRule:lvy/euler: n_:ℕ.nz, y≅[n_] ⇒ y≅[n_ - 1] + (Δt × ((δ × x≅ × y≅) - (γ × y≅))[n_ - 1]) }}"
 						}
 					]
 				},
@@ -400,7 +400,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T21:31:41.416519+02:00"
+						"dateAndTimeString" : "2022-11-01T14:08:20.049099+01:00"
 					}
 				},
 				"uid" : {
@@ -410,7 +410,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "###Numerical simulation "
+				"string" : "###Numerical simulation: Euler method"
 			},
 			{
 				"__type" : "textSnippet",
@@ -431,7 +431,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-20T21:38:48.979542+02:00"
+									"dateAndTimeString" : "2022-11-01T14:07:38.008354+01:00"
 								}
 							},
 							"editEmail" : {
@@ -442,17 +442,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-20T21:39:02.434368+02:00"
+									"dateAndTimeString" : "2022-11-01T14:08:09.691507+01:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "jOdmNd6nDQCQmLe9Bd6epw=="
+								"uidString" : "Mh8dJcqoDQC8kWa9D6i11A=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Uses\n\t- {{lzUseContext:name = \"Algorithmic construction of one-dimensional arrays\", subcontext = \"example\"}}\n\t- {{lzUseContext:name = \"Plotting\", subcontext = \"example\"}}"
+							"string" : "Note: this example is taken from the [Wikipedia entry](https://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equations) cited above."
 						},
 						{
 							"__type" : "textSnippet",
@@ -505,43 +505,6 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-20T21:41:29.765362+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-31T17:00:57.734753+01:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "4zzQHd6nDQCQlu6OBd6epw=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "With  {{lzRule:Δt ⇒ 1/100, subcontext = \"example\"}} and\n\t{{lzOp:n:Array1D(ℕ), subcontext = \"example\"}}\n\t{{lzRule:n ⇒ IndexArray(5), subcontext = \"example\"}},\nwe find:\n\t{{lzTerm:linPlot(n, x≅[n]), subcontext = \"example\"}}\nand:\n\t{{lzTerm:linPlot(n, y≅[n]), subcontext = \"example\"}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
 									"dateAndTimeString" : "2022-10-31T16:58:38.485095+01:00"
 								}
 							},
@@ -553,7 +516,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-31T16:59:24.002163+01:00"
+									"dateAndTimeString" : "2022-11-01T14:35:12.796674+01:00"
 								}
 							},
 							"uid" : {
@@ -563,7 +526,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "A more efficient way to compute a solution is to solve the recurrence\nequations {{lzAsset:lvx≅}} and {{lzAsset:lvy≅}} using Pharo, via {{gtClass:name=RESequence}}(see [[Solving recurrence equations]]):"
+							"string" : "The Euler method yield two recurrence equations, {{lzAsset:lvx/euler}} and {{lzAsset:lvy/euler}}. They can be solved using the solver implemented in {{gtClass:name=RESequence}}(see [[Solving recurrence equations]]):"
 						},
 						{
 							"__type" : "pharoSnippet",
@@ -590,14 +553,156 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-31T17:02:57.097484+01:00"
+									"dateAndTimeString" : "2022-11-01T14:38:11.731884+01:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
 								"uidString" : "1AozMXuoDQCPkPoWCB7oqg=="
 							},
-							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx≅' 'lvy≅')\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 0.1.\rsequence addSteps: 5000.\rsequence"
+							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx/euler' 'lvy/euler')\r\tparameters: { 'Δt ⇒ 1/10' }\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 'Δt'.\rsequence addSteps: 500.\rsequence plotAll"
+						},
+						{
+							"__type" : "pharoSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-01T15:23:26.394371+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-01T15:24:20.750038+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "MvhKNMuoDQCL2DgtDeIrPw=="
+							},
+							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx/euler' 'lvy/euler')\r\tparameters: { 'Δt ⇒ 1/10' }\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #('x≅[0]')\r\t\t\t\t\t\twith: 'y≅' -> #('y≅[0]'))\r\tindexVariable: 't'\r\tstepSize: 'Δt'.\rsequence addSteps: 500.\rsequence plotAll"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-01T14:35:53.761797+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-01T14:39:05.163703+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "RT8visqoDQCLq4yjDeIrPw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Before trying to interpret those results, let's be cautious. These curves have sharp peaks, which are always suspicious in the context of numerical solutions. Is our time step small enough? Is our discretization (the Euler method) precise enough? If the answer to one of these questions is \"no\", then we could be looking at numerical artifacts. Let's try again with a smaller step size:"
+						},
+						{
+							"__type" : "pharoSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-01T14:39:15.448079+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-01T14:41:46.375386+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "Nb1IlsqoDQCLtM1gDeIrPw=="
+							},
+							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx/euler' 'lvy/euler')\r\tparameters: { 'Δt ⇒ 1/100' }\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 'Δt'.\rsequence addSteps: 5000.\rsequence plotAll"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-01T14:42:04.400106+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-01T15:21:23.834399+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "V4w8oMqoDQCLt9WlDeIrPw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "This looks rather different! The increase of the population peaks from one cycle to the next looks like a numerical artifact. This is in fact a well-known issue with the Lotka-Volterra equations, as explained e.g. in [this blog post](https://www.johndcook.com/blog/2020/09/12/symplectic-euler/)."
 						}
 					]
 				},

@@ -265,7 +265,10 @@ RESequence >> initialValues: aDictionary [
 					rows: varSequenceSizes first
 					columns: variables size.
 	aDictionary keys withIndexDo: [ :each :index |
-		sequence atColumn: index put: (aDictionary at: each) ].
+		| values |
+		values := (aDictionary at: each) collect: [ :eachNumber |
+			self numericalValue: eachNumber ].
+		sequence atColumn: index put: values ].
 	sequence do: [ :each | self assert: each isNumber ]
 ]
 
@@ -295,6 +298,13 @@ RESequence >> numberOfSteps [
 { #category : #accessing }
 RESequence >> numberOfVariables [
 	^ variables size
+]
+
+{ #category : #compiling }
+RESequence >> numericalValue: aStringOrNumber [
+	^ aStringOrNumber isNumber
+		ifTrue: [ aStringOrNumber ]
+		ifFalse: [ (context reduce: aStringOrNumber) value ]
 ]
 
 { #category : #initializing }
@@ -430,9 +440,7 @@ RESequence >> rules: anArrayOfAssetLabels [
 
 { #category : #initializing }
 RESequence >> stepSize: aStringOrNumber [
-	aStringOrNumber isNumber
-		ifTrue: [ stepSize := aStringOrNumber ]
-		ifFalse: [ stepSize := (context reduce: aStringOrNumber) value ]
+	stepSize := self numericalValue: aStringOrNumber
 ]
 
 { #category : #accessing }
