@@ -248,9 +248,15 @@ RESequence >> lineColor: aStringOrIndex [
 	| colors |
 	colors := {
 		Color blue.
-		Color red.
+		Color orange.
 		Color green.
-		Color black.
+		Color red.
+		Color purple.
+		Color brown.
+		Color pink darker.
+		Color gray.
+		Color tan darker.
+		Color cyan darker.
 		}.
 	^ colors at: (self variableIndex: aStringOrIndex)
 ]
