@@ -14,7 +14,8 @@ Class {
 		'sequence',
 		'block',
 		'stepSize',
-		'indexVariable'
+		'indexVariable',
+		'parameters'
 	],
 	#category : #RecurrenceEquations
 }
@@ -26,26 +27,46 @@ RESequence class >> context: aContext rules: anArrayOfAssetLabels initialValues:
 		rules: anArrayOfAssetLabels;
 		initialValues: aDictionary;
 		checkRulesMatchVariables;
-		compileRules;
 		yourself
 ]
 
 { #category : #'instance creation' }
 RESequence class >> context: aContext rules: anArrayOfAssetLabels initialValues: aDictionary indexVariable: aString stepSize: aStringOrNumber [
-	| seq |
-	seq := self
-		context: aContext
-		rules: anArrayOfAssetLabels
-		initialValues: aDictionary.
-	seq
+	^ self new
+		context: aContext;
+		rules: anArrayOfAssetLabels;
+		initialValues: aDictionary;
+		checkRulesMatchVariables;
 		indexVariable: aString;
-		stepSize: aStringOrNumber.
-	^ seq
+		stepSize: aStringOrNumber;
+		yourself
+]
+
+{ #category : #'instance creation' }
+RESequence class >> context: aContext rules: anArrayOfAssetLabels parameters: anArraOfRules initialValues: initial [
+	^ self new
+		context: aContext;
+		parameters: anArraOfRules;
+		rules: anArrayOfAssetLabels;
+		initialValues: initial;
+		yourself
+]
+
+{ #category : #'instance creation' }
+RESequence class >> context: aContext rules: anArrayOfAssetLabels parameters: anArrayOfRules initialValues: initial indexVariable: aString stepSize: aStringOrNumber [
+	^ self new
+		context: aContext;
+		parameters: anArrayOfRules;
+		rules: anArrayOfAssetLabels;
+		initialValues: initial;
+		indexVariable: aString;
+		stepSize: aStringOrNumber
 ]
 
 { #category : #computing }
 RESequence >> addSteps: anInteger [
 	| index |
+	block ifNil: [ self compileRules ].
 	index := self numberOfSteps + 1.
 	sequence := sequence grownByRows: anInteger.
 	index to: self numberOfSteps do: [ :step |
@@ -226,10 +247,9 @@ RESequence >> indexVariable [
 	^ indexVariable
 ]
 
-{ #category : #accessing }
-RESequence >> indexVariable: anObject [
-
-	indexVariable := anObject
+{ #category : #initializing }
+RESequence >> indexVariable: aString [
+	indexVariable := aString
 ]
 
 { #category : #initializing }
@@ -277,6 +297,43 @@ RESequence >> numberOfVariables [
 	^ variables size
 ]
 
+{ #category : #initializing }
+RESequence >> parameters: anArrayOfRules [
+	| builder |
+	builder := LzContextBuilder new
+				include: context.
+	anArrayOfRules do: [ :each |
+		builder rule: each ].
+	context := builder context
+]
+
+{ #category : #plotting }
+RESequence >> parametricPlot: varA with: varB [
+	| data linePlot |
+	data := GtPlotterDataGroup new
+			values: ((self variable: varA)
+						with: (self variable: varB)
+						collect: [ :a :b | { a. b }]);
+			colored: (self lineColor: 1).
+	linePlot := GtPlotterLineChart new
+		valueX: #first;
+		labelFormatX: [ :each |
+			each printShowingDecimalPlaces:
+					(self decimalPlacesForVariable: varA) ] ;
+		scaleX: GtPlotterLinearScale new;
+		titleX: varA;
+		ticksX: 10;
+		valueY: #second;
+		labelFormatY: [ :each |
+			each printShowingDecimalPlaces:
+					(self decimalPlacesForVariable: varB) ] ;
+		scaleY: GtPlotterLinearScale new;
+		titleY: varB;
+		ticksY: 10;
+		with: data.
+	^ linePlot
+]
+
 { #category : #compiling }
 RESequence >> pharoInfixOperatorFor: anOpName [
 	| opTable |
@@ -292,7 +349,8 @@ RESequence >> pharoInfixOperatorFor: anOpName [
 RESequence >> plot: aString [
 	| data linePlot |
 	data := GtPlotterDataGroup new
-		values: (self points: aString).
+				values: (self points: aString);
+				colored: (self lineColor: 1).
 	linePlot := GtPlotterLineChart new
 		valueX: #first;
 		labelFormatX: [ :each |
@@ -370,7 +428,7 @@ RESequence >> rules: anArrayOfAssetLabels [
 	rules := rules asDictionary
 ]
 
-{ #category : #accessing }
+{ #category : #initializing }
 RESequence >> stepSize: aStringOrNumber [
 	aStringOrNumber isNumber
 		ifTrue: [ stepSize := aStringOrNumber ]
