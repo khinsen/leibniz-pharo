@@ -330,7 +330,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-11-01T15:20:05.70931+01:00"
+									"dateAndTimeString" : "2022-11-02T16:57:51.659038+01:00"
 								}
 							},
 							"uid" : {
@@ -340,7 +340,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "A simple numerical simulation can be performed by applying the [[Euler method]]. It computes the values of  approximations {{lzOp:x≅ : (ℕ → ℝ)}} and {{lzOp:y≅ : (ℕ → ℝ)}} to the populations \n{{lzTerm:n_:ℕ, x[n_ × Δt]}} and {{lzTerm:n_:ℕ, y[n_ × Δt]}} on a time grid with spacing {{lzOp:Δt : ℝ.p}}."
+							"string" : "A simple numerical simulation can be performed by applying the [[Euler method]]. It computes the values of  approximations {{lzOp:x≅e : (ℕ → ℝ)}} and {{lzOp:y≅e : (ℕ → ℝ)}} to the populations \n{{lzTerm:n_:ℕ, x[n_ × Δt]}} and {{lzTerm:n_:ℕ, y[n_ × Δt]}} on a time grid with spacing {{lzOp:Δt : ℝ.p}}."
 						},
 						{
 							"__type" : "textSnippet",
@@ -367,7 +367,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-11-01T14:09:18.023249+01:00"
+									"dateAndTimeString" : "2022-11-02T16:58:48.72135+01:00"
 								}
 							},
 							"uid" : {
@@ -377,7 +377,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Given initial values {{lzTerm:x≅[0]}} and {{lzTerm:y≅[0]}}, values for later times are computed as\n\t{{lzRule:lvx/euler: n_:ℕ.nz, x≅[n_] ⇒ x≅[n_ - 1] + (Δt × ((α × x≅) - (β × x≅ × y≅))[n_ - 1]) }}\n\t{{lzRule:lvy/euler: n_:ℕ.nz, y≅[n_] ⇒ y≅[n_ - 1] + (Δt × ((δ × x≅ × y≅) - (γ × y≅))[n_ - 1]) }}"
+							"string" : "Given initial values {{lzTerm:x≅e[0]}} and {{lzTerm:y≅e[0]}}, values for later times are computed as\n\t{{lzRule:lvx/euler: n_:ℕ.nz, x≅e[n_] ⇒ x≅e[n_ - 1] + (Δt × ((α × x≅e) - (β × x≅e × y≅e))[n_ - 1]) }}\n\t{{lzRule:lvy/euler: n_:ℕ.nz, y≅e[n_] ⇒ y≅e[n_ - 1] + (Δt × ((δ × x≅e × y≅e) - (γ × y≅e))[n_ - 1]) }}"
 						}
 					]
 				},
@@ -479,7 +479,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-20T21:40:03.478829+02:00"
+									"dateAndTimeString" : "2022-11-02T16:59:09.749573+01:00"
 								}
 							},
 							"uid" : {
@@ -489,7 +489,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Suppose there are two species of animals, a baboon (prey) and a cheetah (predator). If the initial conditions are {{lzRule:x≅[0] ⇒ 10, subcontext = \"example\"}} baboons and {{lzRule:y≅[0] ⇒ 10, subcontext = \"example\"}} cheetahs, one can plot the progression of the two species over time; given the parameters that the growth and death rates of baboon are {{lzRule:α ⇒ 11/10, subcontext = \"example\"}} and {{lzRule:β ⇒ 4/10, subcontext = \"example\"}} while that of cheetahs are {{lzRule:δ ⇒ 1/10, subcontext = \"example\"}} and {{lzRule:γ ⇒ 4/10, subcontext = \"example\"}} respectively."
+							"string" : "Suppose there are two species of animals, a baboon (prey) and a cheetah (predator). If the initial conditions are {{lzRule:x≅e[0] ⇒ 10, subcontext = \"example\"}} baboons and {{lzRule:y≅e[0] ⇒ 10, subcontext = \"example\"}} cheetahs, one can plot the progression of the two species over time; given the parameters that the growth and death rates of baboon are {{lzRule:α ⇒ 11/10, subcontext = \"example\"}} and {{lzRule:β ⇒ 4/10, subcontext = \"example\"}} while that of cheetahs are {{lzRule:δ ⇒ 1/10, subcontext = \"example\"}} and {{lzRule:γ ⇒ 4/10, subcontext = \"example\"}} respectively."
 						},
 						{
 							"__type" : "textSnippet",
@@ -553,14 +553,14 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-11-01T14:38:11.731884+01:00"
+									"dateAndTimeString" : "2022-11-02T17:04:29.573051+01:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
 								"uidString" : "1AozMXuoDQCPkPoWCB7oqg=="
 							},
-							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx/euler' 'lvy/euler')\r\tparameters: { 'Δt ⇒ 1/10' }\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 'Δt'.\rsequence addSteps: 500.\rsequence plotAll"
+							"code" : "sequence1 := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx/euler' 'lvy/euler')\r\tparameters: { 'Δt ⇒ 1/10' }\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅e' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅e' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 'Δt'.\rsequence1 addSteps: 500."
 						},
 						{
 							"__type" : "textSnippet",
@@ -624,14 +624,14 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-11-01T14:41:46.375386+01:00"
+									"dateAndTimeString" : "2022-11-02T17:04:35.147942+01:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
 								"uidString" : "Nb1IlsqoDQCLtM1gDeIrPw=="
 							},
-							"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx/euler' 'lvy/euler')\r\tparameters: { 'Δt ⇒ 1/100' }\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 'Δt'.\rsequence addSteps: 5000.\rsequence plotAll"
+							"code" : "sequence2 := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx/euler' 'lvy/euler')\r\tparameters: { 'Δt ⇒ 1/100' }\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅e' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅e' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 'Δt'.\rsequence2 addSteps: 5000."
 						},
 						{
 							"__type" : "textSnippet",
@@ -691,7 +691,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-20T21:31:35.351069+02:00"
+						"dateAndTimeString" : "2022-11-02T16:54:11.852491+01:00"
 					}
 				},
 				"uid" : {
@@ -754,7 +754,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-11-01T16:28:00.307465+01:00"
+						"dateAndTimeString" : "2022-11-02T16:26:42.629334+01:00"
 					}
 				},
 				"editEmail" : {
@@ -765,20 +765,20 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-11-01T16:33:12.567784+01:00"
+						"dateAndTimeString" : "2022-11-02T17:01:05.942379+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "5LKB3cuoDQC3kK/2BGyL8A=="
+					"uidString" : "DUdoNOCoDQCT1ykPA+LqcQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : " A common strategy for stabilizing numerical solutions is to switch to an *implicit* integration scheme, in which the quantities on the right-hand side are evaluated at the *end* of the step rather than at the *beginning*. Doing this would result in the *implicit Euler method*. As explained in the blog post cited before, the best strategy for the Lotka-Volterra equations is to apply this strategy to only one of the to quantities, resulting in the *symplectic Euler method*:\n\t{{lzRule:lvx/symplectic: n_:ℕ.nz, x≅[n_] ⇒ x≅[n_ - 1] ÷ (1 - (Δt × (α +  (β × y≅[n_ - 1])))) }}\n\t{{lzRule:lvy/symplectic: n_:ℕ.nz, y≅[n_] ⇒ y≅[n_ - 1]  + (Δt × ((δ × x≅[n_] × y≅[n_ - 1]) - (γ × y≅[n_ - 1]))) }}"
+				"string" : "A common strategy for stabilizing numerical solutions is to switch to an *implicit* integration scheme, in which the quantities on the right-hand side are evaluated at the *end* of the step rather than at the *beginning*. Doing this would result in the *implicit Euler method*. As explained in the blog post cited before, the best strategy for the Lotka-Volterra equations is to apply this strategy to only one of the to quantities (we choose {{lzTerm:x}}), resulting in the *symplectic Euler method*."
 			},
 			{
-				"__type" : "pharoSnippet",
+				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
 					"items" : [ ]
@@ -791,7 +791,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-11-01T16:33:29.149512+01:00"
+						"dateAndTimeString" : "2022-11-02T16:56:07.43451+01:00"
 					}
 				},
 				"editEmail" : {
@@ -802,14 +802,197 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-11-01T16:33:53.393864+01:00"
+						"dateAndTimeString" : "2022-11-02T16:56:15.038455+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "cezLLsyoDQC3lBopBGyL8A=="
+					"uidString" : "bg6ZneCoDQCAwMFJDt98fg=="
 				},
-				"code" : "sequence := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx/symplectic' 'lvy/symplectic')\r\tparameters: { 'Δt ⇒ 1/10' }\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 'Δt'.\rsequence addSteps: 500.\rsequence plotAll"
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : " We define the solutions obtained with the symplectic Euler method as {{lzOp:x≅s : (ℕ → ℝ)}} and {{lzOp:y≅s : (ℕ → ℝ)}} with the rules:\n \t{{lzRule:lvx/symplectic: n_:ℕ.nz, x≅s[n_] ⇒ x≅s[n_ - 1] ÷ (1 - (Δt × (α -  (β × y≅s[n_ - 1])))) }}\n\t{{lzRule:lvy/symplectic: n_:ℕ.nz, y≅s[n_] ⇒ y≅s[n_ - 1]  + (Δt × ((δ × x≅s[n_] × y≅s[n_ - 1]) - (γ × y≅s[n_ - 1]))) }}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-02T16:57:01.382485+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-02T16:57:21.095161+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "ijKon+CoDQCAxQB8Dt98fg=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "These equations yield the expected periodic cycles:"
+						},
+						{
+							"__type" : "pharoSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-01T16:33:29.149512+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-02T17:04:39.964719+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "cezLLsyoDQC3lBopBGyL8A=="
+							},
+							"code" : "sequence3 := RESequence\r\tcontext: (thisSnippet page lzSubcontext: #example)\r\trules: #('lvx/symplectic' 'lvy/symplectic')\r\tparameters: { 'Δt ⇒ 1/10' }\r\tinitialValues: (Dictionary\r\t\t\t\t\t\twith: 'x≅s' -> #(10.0)\r\t\t\t\t\t\twith: 'y≅s' -> #(10.0))\r\tindexVariable: 't'\r\tstepSize: 'Δt'.\rsequence3 addSteps: 500."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-02T17:01:41.087209+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-02T17:03:20.337645+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "nGhWseCoDQCAyomiDt98fg=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "It is also interesting to plot {{lzTerm:x≅s}} against {{lzTerm:y≅s}}:"
+						},
+						{
+							"__type" : "pharoSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-02T17:03:29.061293+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-11-02T17:04:41.762533+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "1sXrt+CoDQCA3UYxDt98fg=="
+							},
+							"code" : "sequence3 parametricPlot: 'x≅s' with: 'y≅s'"
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-11-02T17:02:19.259743+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2022-11-02T17:02:23.254591+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "cNams+CoDQCAzceTDt98fg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Back to the example"
 			}
 		]
 	},
