@@ -12,10 +12,10 @@ Class {
 		'rules',
 		'variables',
 		'sequence',
-		'block',
 		'stepSize',
 		'indexVariable',
-		'parameters'
+		'parameters',
+		'iterationCode'
 	],
 	#category : #RecurrenceEquations
 }
@@ -64,11 +64,11 @@ RESequence class >> context: aContext rules: anArrayOfAssetLabels parameters: an
 { #category : #computing }
 RESequence >> addSteps: anInteger [
 	| index |
-	block ifNil: [ self compileRules ].
+	iterationCode ifNil: [ self compileRules ].
 	index := self numberOfSteps + 1.
 	sequence := sequence grownByRows: anInteger.
 	index to: self numberOfSteps do: [ :step |
-		block value: sequence value: step ]
+		iterationCode value: sequence value: step ]
 ]
 
 { #category : #compiling }
@@ -127,7 +127,7 @@ RESequence >> compileRules [
 			self compileRule: rule with: varMap to: s.
 			s << Character cr ].
 		s << ']' ].
-	block := Smalltalk compiler class new
+	iterationCode := Smalltalk compiler class new
 				source: code;
 				evaluate
 ]
@@ -208,6 +208,16 @@ RESequence >> decimalPlacesForVariable: aString [
 	tickDelta := (values max - values min) / 10.
 	tickDelta > 1 ifTrue: [ ^ 0 ].
 	^ (tickDelta log negated round: 0) asInteger
+]
+
+{ #category : #inspecting }
+RESequence >> gtCodeFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Code';
+		priority: 7;
+		object: [ iterationCode ];
+		view: #gtSourceCodeFor:.
 ]
 
 { #category : #inspecting }
