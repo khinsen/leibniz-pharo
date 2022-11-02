@@ -251,6 +251,19 @@ RESequence >> gtItemsFor: aView [
 ]
 
 { #category : #inspecting }
+RESequence >> gtVariablesFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Variables';
+		priority: 6;
+		items: [ variables withIndexCollect: [ :each :index |
+			{ each. self lineColor: index } ] ];
+		itemText: [ :each |
+			each first asRopedTextColored: each second ];
+		yourself
+]
+
+{ #category : #inspecting }
 RESequence >> gtViewFor: aView [
 	<gtView>
 	^ aView forward
@@ -442,6 +455,16 @@ RESequence >> points: aStringOrIndex [
 				{ index * stepSize. each } ] ]
 ]
 
+{ #category : #printing }
+RESequence >> printOn: aStream [
+	super printOn: aStream.
+	aStream
+		<< $(;
+		<< self numberOfSteps asString;
+		<< ' steps';
+		<< $).
+]
+
 { #category : #initializing }
 RESequence >> rules: anArrayOfAssetLabels [
 	rules := anArrayOfAssetLabels collect: [ :each |
@@ -459,7 +482,8 @@ RESequence >> sortVariables [
 	| dependencies varIndices sortCriterion |
 	dependencies := Dictionary new.
 	variables do: [ :eachVar |
-		dependencies at: eachVar put: OrderedCollection new.
+		dependencies at: eachVar put: OrderedCollection new ].
+	variables do: [ :eachVar |
 		rules valuesDo: [ :eachRule |
 			| index indexedVar |
 			index := eachRule pattern args second.
