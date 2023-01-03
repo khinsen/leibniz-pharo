@@ -16,6 +16,11 @@ LzSortDeclaration >> addAsRopedTextTo: aRopedText [
 		withAttribute: LzSortAttribute new
 ]
 
+{ #category : #constructing }
+LzSortDeclaration >> objectFor: aContext [
+	^ aContext sortGraph familyForParsedOp: self op
+]
+
 { #category : #accessing }
 LzSortDeclaration >> op [
 	^ op

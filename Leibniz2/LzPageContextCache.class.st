@@ -13,6 +13,14 @@ Class {
 	#category : #'Leibniz2-Lepiter'
 }
 
+{ #category : #announcing }
+LzPageContextCache >> announceChangesFor: subcontext [
+	self announce:
+		(LzPageContextChanged new
+			page: self page;
+			subcontext: subcontext)
+]
+
 { #category : #announcer }
 LzPageContextCache >> announcer [
 	<return: #Announcer>
@@ -117,7 +125,8 @@ LzPageContextCache >> onDeclarationsChanged: anEvent [
 	anEvent page = self page ifTrue: [
 		anEvent subcontexts do: [ :each |
 			contexts removeKey: each ifAbsent: [].
-			rewriteCaches removeKey: each ifAbsent: [] ] ]
+			rewriteCaches removeKey: each ifAbsent: [].
+			self announceChangesFor: each ] ]
 ]
 
 { #category : #accessing }

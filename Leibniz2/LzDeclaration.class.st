@@ -56,6 +56,11 @@ LzDeclaration >> isLzASTNode [
 	^ true
 ]
 
+{ #category : #constructing }
+LzDeclaration >> objectFor: aContext [
+	self subclassResponsibility
+]
+
 { #category : #printing }
 LzDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	self subclassResponsibility

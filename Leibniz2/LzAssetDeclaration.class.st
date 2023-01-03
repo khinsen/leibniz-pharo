@@ -31,6 +31,11 @@ LzAssetDeclaration >> label: anObject [
 	label := anObject
 ]
 
+{ #category : #constructing }
+LzAssetDeclaration >> objectFor: aContext [
+	^ aContext parsedAsset: self
+]
+
 { #category : #accessing }
 LzAssetDeclaration >> order [
 

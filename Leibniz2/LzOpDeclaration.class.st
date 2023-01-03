@@ -38,6 +38,11 @@ LzOpDeclaration >> name: anObject [
 	name := anObject
 ]
 
+{ #category : #constructing }
+LzOpDeclaration >> objectFor: aContext [
+	^ aContext signature operators findOp: self
+]
+
 { #category : #printing }
 LzOpDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	self name printForArity: args withSort: self sort on: aStream

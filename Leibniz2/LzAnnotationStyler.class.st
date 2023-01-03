@@ -95,6 +95,27 @@ LzAnnotationStyler >> styleAutoHidingAnnotation: anAnnotation [
 ]
 
 { #category : #styling }
+LzAnnotationStyler >> styleAutoUpdatingObjectButton: anAnnotation [
+	| annotatedDeclaration declaration label attribute |
+	annotatedDeclaration := LzDeclarationBuilder new
+		acceptNode: anAnnotation.
+	declaration := annotatedDeclaration declaration.
+	label := LzAutoUpdatingSyntaxLabel new
+				page: self page;
+				subcontext: (annotatedDeclaration optionsAt: #subcontext);
+				declaration: annotatedDeclaration declaration;
+				options: annotatedDeclaration options;
+				setUp.
+	attribute := GtButtonAttribute new
+					beAppend;
+					stencil: [ label ].
+	self text
+		attribute: attribute
+		from: anAnnotation parent startPosition
+		to: anAnnotation parent stopPosition
+]
+
+{ #category : #styling }
 LzAnnotationStyler >> styleButtonFor: anAnnotation label: aSyntaxLabel [
 	| attribute |
 	attribute := GtButtonAttribute new
@@ -234,6 +255,7 @@ LzAnnotationStyler >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 LzAnnotationStyler >> visitTopLevelOp: aTopLevelOpAnnotation [
 	self styleAnnotation: aTopLevelOpAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelOpAnnotation.
+	"self styleAutoUpdatingObjectButton: aTopLevelOpAnnotation"
 	self styleObjectButton: aTopLevelOpAnnotation
 ]
 

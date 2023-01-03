@@ -44,6 +44,11 @@ LzRuleDeclaration >> label: aSymbol [
 	label := aSymbol
 ]
 
+{ #category : #constructing }
+LzRuleDeclaration >> objectFor: aContext [
+	^ aContext signature parsedRule: self
+]
+
 { #category : #accessing }
 LzRuleDeclaration >> order [
 	^ order

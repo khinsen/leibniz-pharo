@@ -46,6 +46,11 @@ LzEqualityAxiomDeclaration >> left: aTermNode [
 	left := aTermNode
 ]
 
+{ #category : #constructing }
+LzEqualityAxiomDeclaration >> objectFor: aContext [
+	^ aContext signature parsedAxiom: self
+]
+
 { #category : #printing }
 LzEqualityAxiomDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	left printAsLeibnizSyntaxOn: aStream.

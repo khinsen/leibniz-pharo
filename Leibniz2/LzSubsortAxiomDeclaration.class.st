@@ -27,6 +27,16 @@ LzSubsortAxiomDeclaration >> axiomClass [
 	^ LzSubsortAxiom
 ]
 
+{ #category : #constructing }
+LzSubsortAxiomDeclaration >> objectFor: aContext [
+	| subsortAxiom |
+	subsortAxiom := aContext signature sortGraph sortContext signature
+						parsedAxiom: self.
+	^ LzSubsortRelation new
+				sortGraph: aContext signature sortGraph;
+				axiom: subsortAxiom
+]
+
 { #category : #accessing }
 LzSubsortAxiomDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	subsort printAsLeibnizSyntaxOn: aStream.
