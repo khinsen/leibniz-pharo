@@ -7,8 +7,7 @@ Class {
 		'page',
 		'contexts',
 		'announcer',
-		'declarationCache',
-		'rewriteCaches'
+		'declarationCache'
 	],
 	#category : #'Leibniz2-Lepiter'
 }
@@ -117,7 +116,6 @@ LzPageContextCache >> gtSubcontextsFor: aView [
 { #category : #initializing }
 LzPageContextCache >> initialize [
 	contexts := Dictionary new.
-	rewriteCaches := Dictionary new.
 ]
 
 { #category : #'event handling' }
@@ -125,7 +123,6 @@ LzPageContextCache >> onDeclarationsChanged: anEvent [
 	anEvent page = self page ifTrue: [
 		anEvent subcontexts do: [ :each |
 			contexts removeKey: each ifAbsent: [].
-			rewriteCaches removeKey: each ifAbsent: [].
 			self announceChangesFor: each ] ]
 ]
 
@@ -151,17 +148,6 @@ LzPageContextCache >> printOn: aStream [
 		<< '(''';
 		<< self page title;
 		<< ''')'
-]
-
-{ #category : #constructing }
-LzPageContextCache >> rewriteCacheAndSubcontext: aSubcontextName [
-	| context cache |
-	context := self subcontext: aSubcontextName.
-	rewriteCaches at: aSubcontextName ifAbsentPut: [
-		LzRewriteCache new
-			rewriteSystem: context rewriteSystem ].
-	cache := rewriteCaches at: aSubcontextName.
-	^ { cache. context }
 ]
 
 { #category : #constructing }

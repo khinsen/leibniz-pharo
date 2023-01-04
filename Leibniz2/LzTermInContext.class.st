@@ -30,6 +30,15 @@ LzTermInContext class >> classForTerm: aTerm context: aContext [
 ]
 
 { #category : #'instance creation' }
+LzTermInContext class >> term: aTerm context: aContext [
+	| class |
+	class := self classForTerm: aTerm context: aContext.
+	^ class new
+		term: aTerm;
+		context: aContext
+]
+
+{ #category : #'instance creation' }
 LzTermInContext class >> term: aTerm context: aContext rewriteCache: aRewriteCache [
 	| class |
 	class := self classForTerm: aTerm context: aContext.
@@ -164,8 +173,9 @@ LzTermInContext >> referenceSlots [
 
 { #category : #accessing }
 LzTermInContext >> rewriteCache [
-
 	^ rewriteCache
+		ifNil: [ rewriteCache := LzGlobalCache uniqueInstance
+									rewriteCacheFor:  self context ]
 ]
 
 { #category : #accessing }

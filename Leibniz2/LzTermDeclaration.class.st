@@ -31,6 +31,13 @@ LzTermDeclaration >> isInfix [
 	^ false
 ]
 
+{ #category : #constructing }
+LzTermDeclaration >> objectFor: aContext [
+	^ LzTermInContext
+		term: (aContext parsedPattern: self)
+		context: aContext
+]
+
 { #category : #printing }
 LzTermDeclaration >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream [
 	self

@@ -5,7 +5,8 @@ Class {
 		'page',
 		'subcontext',
 		'declaration',
-		'options'
+		'options',
+		'text'
 	],
 	#category : #'Leibniz2-Lepiter'
 }
@@ -14,9 +15,9 @@ Class {
 LzAutoUpdatingSyntaxLabel >> color [
 | color |
 	color := LzColors declarationColor.
-	(self options at: #example)
+	(self options at: #example ifAbsent: [ false ])
 		ifTrue: [ color := LzColors exampleColor ].
-	(self options at: #subcontext)
+	(self options at: #subcontext ifAbsent: [ nil ])
 		ifNotNil: [ color := LzColors exampleColor ].
 	^ color
 ]
@@ -36,6 +37,12 @@ LzAutoUpdatingSyntaxLabel >> declaration [
 { #category : #accessing }
 LzAutoUpdatingSyntaxLabel >> declaration: anObject [
 	declaration := anObject
+]
+
+{ #category : #intializing }
+LzAutoUpdatingSyntaxLabel >> initialize [
+	super initialize.
+	self fitContent.
 ]
 
 { #category : #'event handling' }
@@ -89,17 +96,32 @@ LzAutoUpdatingSyntaxLabel >> subscribeToContextEvents [
 			send: #onContextChanged: to: self
 ]
 
+{ #category : #accessing }
+LzAutoUpdatingSyntaxLabel >> text [
+	^ text
+]
+
+{ #category : #accessing }
+LzAutoUpdatingSyntaxLabel >> text: anObject [
+	text := anObject
+]
+
 { #category : #updating }
 LzAutoUpdatingSyntaxLabel >> update [
 	| object label |
-	object := (self options at: #example)
-		ifTrue: [ self declaration ]
-		ifFalse: [ self declaration objectFor: self context ].
-	label := LzSyntaxLabel new
-				text: (self declaration
-							asRopedTextColored: self color);
-				declaration: self declaration ;
-				object: object.
+	[
+		object := (self options at: #example)
+			ifTrue: [ self declaration ]
+			ifFalse: [ self declaration objectFor: self context ].
+		label := LzSyntaxLabel new
+					text: (self text value: declaration value: object value: options);
+					declaration: self declaration ;
+					object: object
+	] on: Exception do: [ :ex |
+		ex freeze.
+		label := LzSyntaxLabel new
+					text: (ex printString asRopedText foreground: Color red);
+					declaration: ex ].
 	self stencil: [ (label beSmallSize) asElement
 						padding: (BlInsets top: 2 left: 0 bottom: 0 right: 0) ]
 ]

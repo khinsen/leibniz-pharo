@@ -5,7 +5,8 @@ Class {
 	#classTraits : 'TSingleton classTrait',
 	#instVars : [
 		'pageDeclarations',
-		'pageContexts'
+		'pageContexts',
+		'rewriteCaches'
 	],
 	#category : #'Leibniz2-Lepiter'
 }
@@ -96,6 +97,7 @@ LzGlobalCache >> gtDeclarationCachesFor: aView [
 LzGlobalCache >> initialize [
 	pageDeclarations := Dictionary new.
 	pageContexts := Dictionary new.
+	rewriteCaches := WeakIdentityKeyDictionary new.
 	LzBook database pages do: [ :each |
 		self declarationCacheFor: each ]
 ]
@@ -142,6 +144,15 @@ LzGlobalCache >> recursiveDependenciesOf: aPageName [
 { #category : #accessing }
 LzGlobalCache >> recursiveDependentsOf: aPageName [
 	^ self recursiveClosureOf: #dependentsOf: for: aPageName
+]
+
+{ #category : #accessing }
+LzGlobalCache >> rewriteCacheFor: aContext [
+	^ rewriteCaches at: aContext ifAbsent: [
+		rewriteCaches
+			at: aContext
+			put: (LzRewriteCache new
+					rewriteSystem: aContext rewriteSystem) ]
 ]
 
 { #category : #accessing }

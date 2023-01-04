@@ -33,13 +33,6 @@ LzObjectBuilder >> patternFromTerm: aTerm vars: aVarList context: aContext [
 		buildFor: aContext signature
 ]
 
-{ #category : #building }
-LzObjectBuilder >> rewriteCacheAndSubcontext: aString [
-	^ (LzGlobalCache uniqueInstance
-			contextCacheFor: self contextPageName)
-		rewriteCacheAndSubcontext: aString
-]
-
 { #category : #visiting }
 LzObjectBuilder >> sortFromTerm: aTerm vars: aVarList [
 	| sortTerm |
@@ -135,14 +128,12 @@ LzObjectBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 
 { #category : #visiting }
 LzObjectBuilder >> visitTopLevelTerm: aTopLevelTerm [
-	| annotation declaration cacheAndContext term |
+	| annotation declaration subcontext |
 	annotation := LzDeclarationBuilder new acceptNode: aTopLevelTerm.
 	declaration := annotation declaration.
-	cacheAndContext := self rewriteCacheAndSubcontext:(annotation optionsAt: #subcontext).
-	term := cacheAndContext second parsedPattern: declaration.
+	subcontext := self subcontext:(annotation optionsAt: #subcontext).
 	^ { annotation.
 		LzTermInContext
-			term: term
-			context: cacheAndContext second
-			rewriteCache: cacheAndContext first }
+			term: (subcontext parsedPattern: declaration)
+			context: subcontext }
 ]

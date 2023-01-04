@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-27T16:36:48.342955+02:00"
+						"dateAndTimeString" : "2023-01-04T10:20:23.913897+01:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "With {{lzOp:h:ℝ.p}}:\n\t{{lzTerm:h × n_:ℕ.nz}}"
+				"string" : "With {{lzOp:h:ℝ.nn}}:\n\t{{lzTerm:h × n_:ℕ.nz}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-04T10:19:12.417961+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-04T10:19:59.00098+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "cZ0Eas6tDQCqJs/6BYi8eQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "With {{lzOp:h:ℝ.nn}}:\n\t{{lzTerm:h × n_:ℕ.nz}}"
 			},
 			{
 				"__type" : "pharoSnippet",

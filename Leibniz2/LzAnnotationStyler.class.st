@@ -95,17 +95,34 @@ LzAnnotationStyler >> styleAutoHidingAnnotation: anAnnotation [
 ]
 
 { #category : #styling }
-LzAnnotationStyler >> styleAutoUpdatingObjectButton: anAnnotation [
+LzAnnotationStyler >> styleAutoUpdatingObjectButton: anAnnotation [ 
+	^ self
+		styleAutoUpdatingObjectButton: anAnnotation
+		text: [ :declaration :object :options |
+			| color |
+			color := LzColors declarationColor.
+			(options at: #example ifAbsent: [ false ])
+				ifFalse: [ color := LzColors exampleColor ].
+			(options at: #subcontext ifAbsent: [ nil ])
+				ifNotNil: [ color := LzColors exampleColor ].
+			declaration asRopedTextColored: color ]
+]
+
+{ #category : #styling }
+LzAnnotationStyler >> styleAutoUpdatingObjectButton: anAnnotation text: aBlock [
 	| annotatedDeclaration declaration label attribute |
 	annotatedDeclaration := LzDeclarationBuilder new
 		acceptNode: anAnnotation.
 	declaration := annotatedDeclaration declaration.
-	label := LzAutoUpdatingSyntaxLabel new
-				page: self page;
-				subcontext: (annotatedDeclaration optionsAt: #subcontext);
-				declaration: annotatedDeclaration declaration;
-				options: annotatedDeclaration options;
-				setUp.
+	[
+		label := LzAutoUpdatingSyntaxLabel new
+					page: self page;
+					subcontext: (annotatedDeclaration optionsAt: #subcontext);
+					declaration: annotatedDeclaration declaration;
+					options: annotatedDeclaration options;
+					text: aBlock;
+					setUp.
+	] on: Exception do: [ :ex | ex freeze. ex inspect ].
 	attribute := GtButtonAttribute new
 					beAppend;
 					stencil: [ label ].
@@ -228,49 +245,53 @@ LzAnnotationStyler >> visitTopLevelAsset: aTopLevelAsset [
 	self styleAnnotation: aTopLevelAsset.
 	self styleAutoHidingAnnotation: aTopLevelAsset.
 	self
-		styleObjectButton: aTopLevelAsset
-		text: [ :annotatedDeclaration :declaration :object |
-			| displayedObject |
-			(annotatedDeclaration optionsAt: 'withNormalForm')
+		styleAutoUpdatingObjectButton: aTopLevelAsset
+		text: [ :declaration :object :options |
+			| color displayedObject |
+			color := LzColors declarationColor.
+			(options at: #example ifAbsent: [ false ])
+				ifFalse: [ color := LzColors exampleColor ].
+			(options at: #subcontext ifAbsent: [ nil ])
+				ifNotNil: [ color := LzColors exampleColor ].
+			(options at: #withNormalForm ifAbsent: [ false ])
 				ifTrue: [
 					| context | 
-					context := self subcontext:(annotatedDeclaration optionsAt: #subcontext).
+					context := self subcontext:(options at: #subcontext ifAbsent: [ nil ]).
 					displayedObject := object normalFormIn: context ]
 				ifFalse: [
-					(annotatedDeclaration optionsAt: 'withValue')
+					(options at: #withValue ifAbsent: [ false ])
 						ifTrue: [ displayedObject := object ]
 						ifFalse: [ displayedObject := declaration ] ].
-			displayedObject asRopedTextColored:
-				(self colorFor: annotatedDeclaration) ]
+			displayedObject asRopedTextColored: color ]
 ]
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelEqualityAxiom: aTopLevelEqualityAxiom [
 	self styleAnnotation: aTopLevelEqualityAxiom.
 	self styleAutoHidingAnnotation: aTopLevelEqualityAxiom.
-	self styleObjectButton: aTopLevelEqualityAxiom
+	self styleAutoUpdatingObjectButton: aTopLevelEqualityAxiom
 ]
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelOp: aTopLevelOpAnnotation [
 	self styleAnnotation: aTopLevelOpAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelOpAnnotation.
-	"self styleAutoUpdatingObjectButton: aTopLevelOpAnnotation"
-	self styleObjectButton: aTopLevelOpAnnotation
+	self styleAutoUpdatingObjectButton: aTopLevelOpAnnotation
+	"self styleObjectButton: aTopLevelOpAnnotation"
 ]
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelRule: aTopLevelRule [
 	self styleAnnotation: aTopLevelRule.
 	self styleAutoHidingAnnotation: aTopLevelRule.
-	self styleObjectButton: aTopLevelRule
+	self styleAutoUpdatingObjectButton: aTopLevelRule
 ]
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelSort: aTopLevelSortAnnotation [
 	self styleAnnotation: aTopLevelSortAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelSortAnnotation.
-	self styleObjectButton: aTopLevelSortAnnotation
+	self styleAutoUpdatingObjectButton: aTopLevelSortAnnotation
 ]
 
 { #category : #visiting }
@@ -284,7 +305,7 @@ LzAnnotationStyler >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
 LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
 	self styleAnnotation: aTopLevelSubsort.
 	self styleAutoHidingAnnotation: aTopLevelSubsort.
-	self styleObjectButton: aTopLevelSubsort
+	self styleAutoUpdatingObjectButton: aTopLevelSubsort
 ]
 
 { #category : #visiting }
