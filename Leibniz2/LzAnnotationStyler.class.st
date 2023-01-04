@@ -102,7 +102,7 @@ LzAnnotationStyler >> styleAutoUpdatingObjectButton: anAnnotation [
 			| color |
 			color := LzColors declarationColor.
 			(options at: #example ifAbsent: [ false ])
-				ifFalse: [ color := LzColors exampleColor ].
+				ifTrue: [ color := LzColors exampleColor ].
 			(options at: #subcontext ifAbsent: [ nil ])
 				ifNotNil: [ color := LzColors exampleColor ].
 			declaration asRopedTextColored: color ]
@@ -179,40 +179,6 @@ LzAnnotationStyler >> styleExpandingObject: aTerm in: anAnnotation [
 		attribute: attribute
 		from: anAnnotation parent startPosition
 		to: anAnnotation parent stopPosition
-]
-
-{ #category : #styling }
-LzAnnotationStyler >> styleObjectButton: anLzAnnotation [
-	self
-		styleObjectButton: anLzAnnotation
-		text: [ :annotatedDeclaration :declaration :object |
-			(declaration asRopedTextColored:
-					(self colorFor: annotatedDeclaration)) ]
-]
-
-{ #category : #styling }
-LzAnnotationStyler >> styleObjectButton: anLzAnnotation text: aBlock [
-	| object annotatedDeclaration declaration label |
-	[
-		object :=  LzObjectBuilder new
-			contextPageName: self page title;
-			acceptNode: anLzAnnotation.
-		annotatedDeclaration := object first.
-		declaration := annotatedDeclaration declaration.
-		object := object second.
-		label := LzSyntaxLabel new
-					text: (aBlock
-								value: annotatedDeclaration
-								value: declaration
-								value: object);
-					declaration: declaration ;
-					object: object.
-	] on: Exception do: [ :ex |
-		ex freeze.
-		label := LzSyntaxLabel new
-					text: (ex printString asRopedText foreground: Color red);
-					declaration: ex ].
-	self styleButtonFor: anLzAnnotation label: label
 ]
 
 { #category : #accessing }
@@ -310,58 +276,36 @@ LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
-	| label attribute term |
 	self styleAnnotation: aTopLevelTermAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelTermAnnotation.
-
-	[
-		| color object annotatedDeclaration declaration  output |
-		color := LzColors exampleColor.
-		object := LzObjectBuilder new
-			contextPageName: self page title;
-			acceptNode: aTopLevelTermAnnotation.
-		annotatedDeclaration := object first.
-		declaration := annotatedDeclaration declaration.
-		term := object second.
-		output := annotatedDeclaration asRopedTextColored: color.
-		term sort isKind ifTrue: [
-			output attribute:
-				(BlTextDecorationAttribute new
-					underline;
-					color: Color red) ].
-		(annotatedDeclaration optionsAt: #withSort)
-			ifTrue: [
-				| value colon sort |
-				value := annotatedDeclaration asRopedTextColored: color.
-				colon := ' : ' asRopedText foreground: color lzDeemphasized.
-				sort := term sort asRopedTextColored: color lzDeemphasized.
-				output append: colon.
-				output append: sort ].
-		(annotatedDeclaration optionsAt: #withNormalForm)
-			ifTrue: [
-				| normalForm |
-				normalForm := term normalForm asRopedTextColored: color.
-				output append: (' ⇒ ' asRopedText foreground: color; fontName: LzCodeFont defaultFamily).
-				output append: normalForm ].
-		label := LzSyntaxLabel new
-					text: output;
-					declaration: declaration;
-					object: term
-	] on: Exception do: [ :ex |
-	 	ex freeze.
-	 	label := LzSyntaxLabel new
-					text: (ex printString asRopedText foreground: Color red);
-					declaration: ex  ].
-
-	attribute := GtButtonAttribute new
-		beAppend;
-		stencil: [ label beSmallSize ].
-	self text
-		attribute: attribute
-		from: aTopLevelTermAnnotation parent startPosition
-		to: aTopLevelTermAnnotation parent stopPosition.
-
-	self styleExpandingObject: term in: aTopLevelTermAnnotation
+	self
+		styleAutoUpdatingObjectButton: aTopLevelTermAnnotation
+		text: [ :declaration :object :options |
+			| color output |
+			color := LzColors exampleColor.
+			output := declaration asRopedTextColored: color.
+			object term sort isKind ifTrue: [
+				output attribute:
+					(BlTextDecorationAttribute new
+						underline;
+						color: Color red) ].
+			(options at: #withSort ifAbsent: [ false ])
+				ifTrue: [
+					| value colon sort |
+					value := declaration asRopedTextColored: color.
+					colon := ' : ' asRopedText foreground: color lzDeemphasized.
+					sort := object term sort asRopedTextColored: color lzDeemphasized.
+					output append: colon.
+					output append: sort ].
+			(options at: #withNormalForm)
+				ifTrue: [
+					| normalForm |
+					normalForm := object normalForm asRopedTextColored: color.
+					output append: (' ⇒ ' asRopedText
+										foreground: color;
+										fontName: LzCodeFont defaultFamily).
+					output append: normalForm ].
+			output ]
 ]
 
 { #category : #visiting }

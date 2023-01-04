@@ -110,7 +110,7 @@ LzAutoUpdatingSyntaxLabel >> text: anObject [
 LzAutoUpdatingSyntaxLabel >> update [
 	| object label |
 	[
-		object := (self options at: #example)
+		object := (self options at: #example ifAbsent: [ false ])
 			ifTrue: [ self declaration ]
 			ifFalse: [ self declaration objectFor: self context ].
 		label := LzSyntaxLabel new

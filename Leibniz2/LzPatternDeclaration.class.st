@@ -24,6 +24,13 @@ LzPatternDeclaration >> definesContext [
 	^ false
 ]
 
+{ #category : #constructing }
+LzPatternDeclaration >> objectFor: aContext [
+	^ LzTermInContext
+		term: (aContext parsedPattern: self)
+		context: aContext
+]
+
 { #category : #printing }
 LzPatternDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	term printAsLeibnizSyntaxOn: aStream
