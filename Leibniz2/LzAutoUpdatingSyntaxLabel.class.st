@@ -45,6 +45,26 @@ LzAutoUpdatingSyntaxLabel >> initialize [
 	self fitContent.
 ]
 
+{ #category : #updating }
+LzAutoUpdatingSyntaxLabel >> makeLabel [
+	| object label |
+	[
+		object := (self options at: #example ifAbsent: [ false ])
+			ifTrue: [ self declaration ]
+			ifFalse: [ self declaration objectFor: self context ].
+		label := LzSyntaxLabel new
+					text: (self text value: declaration value: object value: options);
+					declaration: self declaration ;
+					object: object
+	] on: Exception do: [ :ex |
+		ex freeze.
+		label := LzSyntaxLabel new
+					text: (ex printString asRopedText foreground: Color red);
+					declaration: ex ].
+	^ label beSmallSize asElement
+		padding: (BlInsets top: 2 left: 0 bottom: 0 right: 0)
+]
+
 { #category : #'event handling' }
 LzAutoUpdatingSyntaxLabel >> onContextChanged: anAnnouncement [
 	(anAnnouncement page = self page
@@ -75,6 +95,7 @@ LzAutoUpdatingSyntaxLabel >> page: anObject [
 { #category : #updating }
 LzAutoUpdatingSyntaxLabel >> setUp [
 	self subscribeToContextEvents.
+	self pendingBlock: [ :aFuture | self makeLabel].
 	self update
 ]
 
@@ -108,20 +129,5 @@ LzAutoUpdatingSyntaxLabel >> text: anObject [
 
 { #category : #updating }
 LzAutoUpdatingSyntaxLabel >> update [
-	| object label |
-	[
-		object := (self options at: #example ifAbsent: [ false ])
-			ifTrue: [ self declaration ]
-			ifFalse: [ self declaration objectFor: self context ].
-		label := LzSyntaxLabel new
-					text: (self text value: declaration value: object value: options);
-					declaration: self declaration ;
-					object: object
-	] on: Exception do: [ :ex |
-		ex freeze.
-		label := LzSyntaxLabel new
-					text: (ex printString asRopedText foreground: Color red);
-					declaration: ex ].
-	self stencil: [ (label beSmallSize) asElement
-						padding: (BlInsets top: 2 left: 0 bottom: 0 right: 0) ]
+	self stencil: [ self makeLabel  ]
 ]
