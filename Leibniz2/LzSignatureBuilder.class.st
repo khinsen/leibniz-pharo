@@ -22,6 +22,20 @@ LzSignatureBuilder >> builtin: aSymbol [
 	builtins add: aSymbol 
 ]
 
+{ #category : #inspecting }
+LzSignatureBuilder >> gtOperatorsFor: aView [
+	<gtView>
+	| operators |
+	operators := self signature operators.
+	operators isEmpty ifTrue: [ ^ aView empty ].
+	^ aView forward
+		title: 'Operators' translated;
+		priority: 1;
+		object: [ operators ] ;
+		view: #gtOperatorsFor:;
+		yourself
+]
+
 { #category : #defining }
 LzSignatureBuilder >> include: aSignature [
 	self parsedOps: aSignature opDeclarations.

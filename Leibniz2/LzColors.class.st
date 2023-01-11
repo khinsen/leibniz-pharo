@@ -13,3 +13,8 @@ LzColors class >> declarationColor [
 LzColors class >> exampleColor [
 	^ Color purple
 ]
+
+{ #category : #accessing }
+LzColors class >> subcontextColor [
+	^ Color brown
+]

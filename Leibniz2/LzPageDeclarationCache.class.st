@@ -84,7 +84,7 @@ LzPageDeclarationCache >> gtDeclarationsFor: aView [
 				| color |
 				color := LzColors declarationColor.
 				(each optionsAt: #subcontext)
-					ifNotNil: [ color := LzColors exampleColor ].
+					ifNotNil: [ color := LzColors subcontextColor ].
 				({ nil. true } includes: (each optionsAt: #example))
 					ifTrue: [ color := LzColors exampleColor ].
 				each asLeibnizSyntax foreground: color ];

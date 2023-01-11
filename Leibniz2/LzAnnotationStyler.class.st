@@ -24,7 +24,7 @@ LzAnnotationStyler >> colorFor: aDeclarationAnnotation [
 	(aDeclarationAnnotation optionsAt: #example)
 		ifTrue: [ color := LzColors exampleColor ].
 	(aDeclarationAnnotation optionsAt: #subcontext)
-		ifNotNil: [ color := LzColors exampleColor ].
+		ifNotNil: [ color := LzColors subcontextColor ].
 	^ color
 ]
 
@@ -104,7 +104,7 @@ LzAnnotationStyler >> styleAutoUpdatingObjectButton: anAnnotation [
 			(options at: #example ifAbsent: [ false ])
 				ifTrue: [ color := LzColors exampleColor ].
 			(options at: #subcontext ifAbsent: [ nil ])
-				ifNotNil: [ color := LzColors exampleColor ].
+				ifNotNil: [ color := LzColors subcontextColor ].
 			declaration asRopedTextColored: color ]
 ]
 
@@ -218,7 +218,7 @@ LzAnnotationStyler >> visitTopLevelAsset: aTopLevelAsset [
 			(options at: #example ifAbsent: [ false ])
 				ifFalse: [ color := LzColors exampleColor ].
 			(options at: #subcontext ifAbsent: [ nil ])
-				ifNotNil: [ color := LzColors exampleColor ].
+				ifNotNil: [ color := LzColors subcontextColor ].
 			(options at: #withNormalForm ifAbsent: [ false ])
 				ifTrue: [
 					| context | 

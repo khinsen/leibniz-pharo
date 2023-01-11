@@ -26,6 +26,17 @@ LzSortGraphBuilder >> deriveSortDeclarationFromSort: aSortTerm [
 				variables: #()))
 ]
 
+{ #category : #inspecting }
+LzSortGraphBuilder >> gtSortGraphFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Sort graph';
+		priority: 0;
+		object: [ self sortGraph ];
+		view: #gtGraphFor:;
+		yourself
+]
+
 { #category : #defining }
 LzSortGraphBuilder >> include: aSortGraph [
 	aSortGraph sortDeclarations do: [ :each |
