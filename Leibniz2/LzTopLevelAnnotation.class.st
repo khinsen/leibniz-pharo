@@ -7,6 +7,15 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #rendering }
+LzTopLevelAnnotation >> color [
+	({ nil. true } includes: (self optionsAt: #example))
+		ifTrue: [ ^ LzColors exampleColor ].
+	(self optionsAt: #subcontext)
+		ifNotNil: [ ^ LzColors subcontextColor ].
+	^ LzColors declarationColor
+]
+
 { #category : #testing }
 LzTopLevelAnnotation >> definesContext [
 	^ self declaration definesContext

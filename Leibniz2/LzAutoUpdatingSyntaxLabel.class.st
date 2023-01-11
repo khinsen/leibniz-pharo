@@ -12,17 +12,6 @@ Class {
 }
 
 { #category : #updating }
-LzAutoUpdatingSyntaxLabel >> color [
-| color |
-	color := LzColors declarationColor.
-	(self options at: #example ifAbsent: [ false ])
-		ifTrue: [ color := LzColors exampleColor ].
-	(self options at: #subcontext ifAbsent: [ nil ])
-		ifNotNil: [ color := LzColors exampleColor ].
-	^ color
-]
-
-{ #category : #updating }
 LzAutoUpdatingSyntaxLabel >> context [
 	^ (LzGlobalCache uniqueInstance
 		contextCacheFor: self page title)
@@ -53,7 +42,10 @@ LzAutoUpdatingSyntaxLabel >> makeLabel [
 			object := (self options at: #example ifAbsent: [ false ])
 				ifTrue: [ self declaration ]
 				ifFalse: [ self declaration objectFor: self context ].
-			text := self textBlock value: declaration value: object value: options
+			text := self textBlock
+						value: declaration
+						value: object
+						value: options
 		] on: Exception do: [ :ex |
 			ex freeze.
 			object := ex.

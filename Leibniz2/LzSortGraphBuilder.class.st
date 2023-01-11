@@ -27,13 +27,37 @@ LzSortGraphBuilder >> deriveSortDeclarationFromSort: aSortTerm [
 ]
 
 { #category : #inspecting }
+LzSortGraphBuilder >> gtSortDeclarationsFor: aView [
+	<gtView>
+	sortDeclarations ifEmpty: [ ^ aView empty ].
+	^ aView list
+		title: 'Sort declarations';
+		priority: 0;
+		items: [ sortDeclarations ];
+		itemText: #asLeibnizSyntax;
+		yourself
+]
+
+{ #category : #inspecting }
 LzSortGraphBuilder >> gtSortGraphFor: aView [
 	<gtView>
 	^ aView forward
 		title: 'Sort graph';
-		priority: 0;
+		priority: 5;
 		object: [ self sortGraph ];
 		view: #gtGraphFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzSortGraphBuilder >> gtSubsortDeclarationsFor: aView [
+	<gtView>
+	subsortDeclarations ifEmpty: [ ^ aView empty ].
+	^ aView list
+		title: 'Subsort declarations';
+		priority: 1;
+		items: [ subsortDeclarations ];
+		itemText: #asLeibnizSyntax;
 		yourself
 ]
 

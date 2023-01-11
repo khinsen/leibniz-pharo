@@ -27,15 +27,15 @@ LzContextBuilder >> addDeclaration: anAnnotatedDeclaration [
 	| declaration |
 	declaration := anAnnotatedDeclaration declaration.
 	(declaration isKindOf: LzSortDeclaration)
-		ifTrue: [ self sortGraphBuilder parsedSortDeclaration: declaration ].
+		ifTrue: [ sortGraphBuilder parsedSortDeclaration: declaration ].
 	(declaration isKindOf: LzSubsortAxiomDeclaration)
-		ifTrue: [ self sortGraphBuilder parsedSubsortDeclaration: declaration ].
+		ifTrue: [ sortGraphBuilder parsedSubsortDeclaration: declaration ].
 	(declaration isKindOf: LzOpDeclaration)
-		ifTrue: [ self signatureBuilder parsedOps: { declaration } ].
+		ifTrue: [ signatureBuilder parsedOps: { declaration } ].
 	(declaration isKindOf: LzEqualityAxiomDeclaration)
 		ifTrue: [ self parsedAxiom: declaration ].
 	(declaration isKindOf: LzRuleDeclaration)
-		ifTrue: [ self rewriteSystemBuilder parsedRule:  declaration ].
+		ifTrue: [ rewriteSystemBuilder parsedRule:  declaration ].
 	(declaration isKindOf: LzUseContextDeclaration)
 		ifTrue: [
 			| context |
@@ -90,21 +90,21 @@ LzContextBuilder >> axiom: aString [
 
 { #category : #accessing }
 LzContextBuilder >> builtin: aSymbol [
-	self signatureBuilder builtin: aSymbol
+	signatureBuilder builtin: aSymbol
 ]
 
 { #category : #building }
 LzContextBuilder >> context [
 	| sortGraph signature axioms rewriteSystem |
 	LzDebuggingUtilities checkForInfiniteRecursion.
-	sortGraph := self sortGraphBuilder
+	sortGraph := sortGraphBuilder
 		sortGraph.
-	signature := self signatureBuilder 
+	signature := signatureBuilder 
 		sortGraph: sortGraph;
 		signature.
 	axioms := axiomDeclarations collect: [ :each |
 		signature parsedAxiom: each ].
-	rewriteSystem := self rewriteSystemBuilder
+	rewriteSystem := rewriteSystemBuilder
 		signature: signature;
 		rewriteSystem.
 	^ LzContext new
@@ -154,8 +154,12 @@ LzContextBuilder >> gtContextFor: anAction [
 { #category : #inspecting }
 LzContextBuilder >> gtOperatorsFor: aView [
 	<gtView>
-	| operators |
-	operators := self context signature operators.
+	| sortGraph signature operators |
+	sortGraph := self sortGraphBuilder sortGraph.
+	signature := self signatureBuilder 
+					sortGraph: sortGraph;
+					signature.
+	operators := signature operators.
 	operators isEmpty ifTrue: [ ^ aView empty ].
 	^ aView forward
 		title: 'Operators' translated;
@@ -184,16 +188,16 @@ LzContextBuilder >> gtSortGraphFor: aView [
 	^ aView forward
 		title: 'Sort graph';
 		priority: 0;
-		object: [ self context sortGraph ];
+		object: [ self sortGraphBuilder sortGraph ];
 		view: #gtGraphFor:;
 		yourself
 ]
 
 { #category : #defining }
 LzContextBuilder >> include: aContext [
-	self sortGraphBuilder include: aContext sortGraph.
-	self signatureBuilder include: aContext signature.
-	self rewriteSystemBuilder include: aContext rewriteSystem.
+	sortGraphBuilder include: aContext sortGraph.
+	signatureBuilder include: aContext signature.
+	rewriteSystemBuilder include: aContext rewriteSystem.
 	aContext axiomDeclarations do: [ :each |
 		axiomDeclarations addIfNotPresent:  each ].
 	self includeSortContext: aContext sortGraph sortContext
@@ -201,7 +205,7 @@ LzContextBuilder >> include: aContext [
 
 { #category : #defining }
 LzContextBuilder >> includeSortContext: aContext [
-	self sortGraphBuilder includeSortContext: aContext
+	sortGraphBuilder includeSortContext: aContext
 ]
 
 { #category : #initializing }
@@ -214,7 +218,7 @@ LzContextBuilder >> initialize [
 
 { #category : #defining }
 LzContextBuilder >> op: aString [
-	self signatureBuilder op: aString
+	signatureBuilder op: aString
 ]
 
 { #category : #defining }
@@ -229,12 +233,19 @@ LzContextBuilder >> parsedAxioms: aCollection [
 
 { #category : #defining }
 LzContextBuilder >> parsedOps: aCollection [
-	self signatureBuilder parsedOps: aCollection
+	signatureBuilder parsedOps: aCollection
 ]
 
 { #category : #accessing }
 LzContextBuilder >> rewriteSystemBuilder [
+	| sortGraph  signature |
+	sortGraph := self sortGraphBuilder sortGraph.
+	signature := self signatureBuilder
+					sortGraph: sortGraph;
+					signature.
 	^ rewriteSystemBuilder
+		signature: signature;
+		yourself
 ]
 
 { #category : #defining }
@@ -242,9 +253,11 @@ LzContextBuilder >> rule: aString [
 	self rewriteSystemBuilder rule: aString
 ]
 
-{ #category : #defining }
+{ #category : #accessing }
 LzContextBuilder >> signatureBuilder [
 	^ signatureBuilder
+		sortGraph: self sortGraphBuilder sortGraph;
+		yourself
 ]
 
 { #category : #defining }
@@ -257,7 +270,7 @@ LzContextBuilder >> sortContext: aContext [
 	sortGraphBuilder sortContext: aContext
 ]
 
-{ #category : #defining }
+{ #category : #accessing }
 LzContextBuilder >> sortGraphBuilder [
 	^ sortGraphBuilder
 ]
@@ -269,5 +282,5 @@ LzContextBuilder >> subsort: aString [
 
 { #category : #defining }
 LzContextBuilder >> var: aString [
-	self signatureBuilder var: aString
+	signatureBuilder var: aString
 ]

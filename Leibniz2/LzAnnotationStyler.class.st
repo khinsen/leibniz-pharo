@@ -18,17 +18,6 @@ LzAnnotationStyler class >> obsolete [
 ]
 
 { #category : #private }
-LzAnnotationStyler >> colorFor: aDeclarationAnnotation [
-	| color |
-	color := LzColors declarationColor.
-	(aDeclarationAnnotation optionsAt: #example)
-		ifTrue: [ color := LzColors exampleColor ].
-	(aDeclarationAnnotation optionsAt: #subcontext)
-		ifNotNil: [ color := LzColors subcontextColor ].
-	^ color
-]
-
-{ #category : #private }
 LzAnnotationStyler >> elements [
 	^ self composite elements
 ]
@@ -153,7 +142,7 @@ LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation [
 	declaration := annotatedDeclaration declaration.
 	label := (LzSyntaxLabel
 				for: declaration
-				color: (self colorFor: annotatedDeclaration))
+				color: annotatedDeclaration color)
 				declaration: declaration.
 	self styleButtonFor: anLzAnnotation label: label
 ]
@@ -325,7 +314,7 @@ LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
 
 	self styleAutoHidingAnnotation: aTopLevelUseContext.
 
-	color := self colorFor: annotation.
+	color := annotation color.
 	label := pageReference asRopedText
 		foreground: color.
 	declaration subcontext ifNotNil: [ :s |

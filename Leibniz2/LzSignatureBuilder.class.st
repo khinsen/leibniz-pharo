@@ -23,6 +23,29 @@ LzSignatureBuilder >> builtin: aSymbol [
 ]
 
 { #category : #inspecting }
+LzSignatureBuilder >> gtBuiltinsFor: aView [
+	<gtView>
+	builtins ifEmpty: [ ^ aView empty ].
+	^ aView list
+		title: 'Builtins';
+		priority: 2;
+		items: [ builtins asArray sorted ] ;
+		yourself
+]
+
+{ #category : #inspecting }
+LzSignatureBuilder >> gtOperatorDeclarationsFor: aView [
+	<gtView>
+	opDeclarations ifEmpty: [ ^ aView empty ].
+	^ aView list
+		title: 'Operator declarations';
+		priority: 1;
+		items: [ opDeclarations ] ;
+		itemText: #asLeibnizSyntax;
+		yourself
+]
+
+{ #category : #inspecting }
 LzSignatureBuilder >> gtOperatorsFor: aView [
 	<gtView>
 	| operators |
@@ -30,9 +53,20 @@ LzSignatureBuilder >> gtOperatorsFor: aView [
 	operators isEmpty ifTrue: [ ^ aView empty ].
 	^ aView forward
 		title: 'Operators' translated;
-		priority: 1;
+		priority: 5;
 		object: [ operators ] ;
 		view: #gtOperatorsFor:;
+		yourself
+]
+
+{ #category : #accessing }
+LzSignatureBuilder >> gtSortGraphFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Sort graph';
+		priority: 0;
+		object: [ sortGraph ];
+		view: #gtGraphFor:;
 		yourself
 ]
 

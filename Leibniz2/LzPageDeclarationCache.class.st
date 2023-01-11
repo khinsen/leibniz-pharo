@@ -102,13 +102,7 @@ LzPageDeclarationCache >> gtDeclarationsFor: aView [
 			width: 100;
 		column: 'Declaration'
 			text: [ :each |
-				| color |
-				color := LzColors declarationColor.
-				(each optionsAt: #subcontext)
-					ifNotNil: [ color := LzColors subcontextColor ].
-				({ nil. true } includes: (each optionsAt: #example))
-					ifTrue: [ color := LzColors exampleColor ].
-				each asLeibnizSyntax foreground: color ];
+				each asLeibnizSyntax foreground: each color ];
 		column: 'Annotations'
 			text: [ :each |
 				', ' join:
