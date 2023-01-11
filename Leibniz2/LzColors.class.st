@@ -11,10 +11,10 @@ LzColors class >> declarationColor [
 
 { #category : #accessing }
 LzColors class >> exampleColor [
-	^ Color purple
+	^ Color brown
 ]
 
 { #category : #accessing }
 LzColors class >> subcontextColor [
-	^ Color brown
+	^ Color purple
 ]
