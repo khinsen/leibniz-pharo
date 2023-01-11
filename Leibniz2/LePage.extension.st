@@ -6,41 +6,6 @@ LePage >> asLzPage [
 ]
 
 { #category : #'*Leibniz2' }
-LePage >> gtDependenciesFor: aView [
-	<gtView>
-	^ aView list
-		title: 'Dependencies';
-		priority: 6;
-		items: [ (LzGlobalCache uniqueInstance
-					recursiveDependenciesOf: self title)
-					asArray ];
-		send: [ :each | LzBook pageNamed: each ];
-		yourself
-]
-
-{ #category : #'*Leibniz2' }
-LePage >> gtDependencyGraphFor: aView [
-	<gtView>
-	^ aView mondrian
-		title: 'Dependency graph';
-		priority: 4;
-		initialize: self lzDependencyMondrian
-]
-
-{ #category : #'*Leibniz2' }
-LePage >> gtDependentsFor: aView [
-	<gtView>
-	^ aView list
-		title: 'Dependents';
-		priority: 5;
-		items: [ (LzGlobalCache uniqueInstance
-					recursiveDependentsOf: self title)
-					asArray ];
-		send: [ :each | LzBook pageNamed: each ];
-		yourself
-]
-
-{ #category : #'*Leibniz2' }
 LePage >> lzContext [
 	^ (LzGlobalCache uniqueInstance
 		contextCacheFor: self) pageContext
@@ -75,6 +40,28 @@ LePage >> lzDeclarationsFor: anAction [
 ]
 
 { #category : #'*Leibniz2' }
+LePage >> lzDependenciesFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Dependencies';
+		priority: 6;
+		items: [ (LzGlobalCache uniqueInstance
+					recursiveDependenciesOf: self title)
+					asArray ];
+		send: [ :each | LzBook pageNamed: each ];
+		yourself
+]
+
+{ #category : #'*Leibniz2' }
+LePage >> lzDependencyGraphFor: aView [
+	<gtView>
+	^ aView mondrian
+		title: 'Dependency graph';
+		priority: 4;
+		initialize: self lzDependencyMondrian
+]
+
+{ #category : #'*Leibniz2' }
 LePage >> lzDependencyMondrian [
 	| aMondrian nodesAndEdges nodes edges findPage |
 	nodesAndEdges := (LzGlobalCache uniqueInstance
@@ -103,6 +90,19 @@ LePage >> lzDependencyMondrian [
 	aMondrian layout
 		custom: (GtGradHorizontalDominanceTreeLayout new reverse: true).
 	^ aMondrian
+]
+
+{ #category : #'*Leibniz2' }
+LePage >> lzDependentsFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Dependents';
+		priority: 5;
+		items: [ (LzGlobalCache uniqueInstance
+					recursiveDependentsOf: self title)
+					asArray ];
+		send: [ :each | LzBook pageNamed: each ];
+		yourself
 ]
 
 { #category : #'*Leibniz2' }

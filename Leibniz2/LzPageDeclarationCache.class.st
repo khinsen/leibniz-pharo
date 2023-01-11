@@ -33,9 +33,18 @@ LzPageDeclarationCache >> clearChangedSnippets [
 	changedSnippets := Set new
 ]
 
-{ #category : #accessing }
-LzPageDeclarationCache >> context [
-	^ self subcontext: nil
+{ #category : #constructing }
+LzPageDeclarationCache >> contextBuilder [
+	^ self contextBuilderFor: nil
+]
+
+{ #category : #constructing }
+LzPageDeclarationCache >> contextBuilderFor: aSubcontextName [
+	| builder |
+	builder :=  LzContextBuilder new.
+	(self declarationsFor: aSubcontextName) do: [ :each |
+		builder addDeclaration: each ].
+	^ builder
 ]
 
 { #category : #accessing }
@@ -48,6 +57,18 @@ LzPageDeclarationCache >> declarationsByClass [
 LzPageDeclarationCache >> declarationsFor: aSubcontextName [
 	^ declarations values flattened select: [ :each |
 		each definesSubcontext: aSubcontextName ]
+]
+
+{ #category : #inspecting }
+LzPageDeclarationCache >> gtContextBuilderFor: anAction [
+	<gtAction>
+	^ anAction button
+		tooltip: 'Inspect the page''s context builder';
+		priority: 2;
+		icon: BrGlamorousIcons debug;
+		action: [ :aButton |
+			aButton phlow spawnObject:
+				self contextBuilder ]
 ]
 
 { #category : #inspecting }

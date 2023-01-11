@@ -139,6 +139,18 @@ LzContextBuilder >> gtBuiltinsFor: aView [
 		yourself
 ]
 
+{ #category : #accessing }
+LzContextBuilder >> gtContextFor: anAction [
+	<gtAction>
+	^ anAction button
+		tooltip: 'Inspect the context';
+		priority: 2;
+		icon: BrGlamorousIcons debug;
+		action: [ :aButton |
+			aButton phlow spawnObject:
+				self context ]
+]
+
 { #category : #inspecting }
 LzContextBuilder >> gtOperatorsFor: aView [
 	<gtView>

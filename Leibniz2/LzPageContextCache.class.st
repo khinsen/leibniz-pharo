@@ -28,11 +28,7 @@ LzPageContextCache >> announcer [
 
 { #category : #constructing }
 LzPageContextCache >> contextBuilderFor: aSubcontextName [
-	| builder |
-	builder :=  LzContextBuilder new.
-	(self declarationCache declarationsFor: aSubcontextName) do: [ :each |
-		builder addDeclaration: each ].
-	^ builder
+	^ self declarationCache contextBuilderFor: aSubcontextName
 ]
 
 { #category : #accessing }
