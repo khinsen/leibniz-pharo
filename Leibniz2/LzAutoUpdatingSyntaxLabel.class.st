@@ -6,7 +6,7 @@ Class {
 		'subcontext',
 		'declaration',
 		'options',
-		'text'
+		'textBlock'
 	],
 	#category : #'Leibniz2-Lepiter'
 }
@@ -47,13 +47,20 @@ LzAutoUpdatingSyntaxLabel >> initialize [
 
 { #category : #updating }
 LzAutoUpdatingSyntaxLabel >> makeLabel [
-	| object label |
+	| object text label |
 	[
-		object := (self options at: #example ifAbsent: [ false ])
-			ifTrue: [ self declaration ]
-			ifFalse: [ self declaration objectFor: self context ].
+		[
+			object := (self options at: #example ifAbsent: [ false ])
+				ifTrue: [ self declaration ]
+				ifFalse: [ self declaration objectFor: self context ].
+			text := self textBlock value: declaration value: object value: options
+		] on: Exception do: [ :ex |
+			ex freeze.
+			object := ex.
+			text := self textBlock value: declaration value: object value: options.
+			text := text, ((' ',ex printString) asRopedText foreground: Color red) ].
 		label := LzSyntaxLabel new
-					text: (self text value: declaration value: object value: options);
+					text: text;
 					declaration: self declaration ;
 					object: object
 	] on: Exception do: [ :ex |
@@ -118,13 +125,13 @@ LzAutoUpdatingSyntaxLabel >> subscribeToContextEvents [
 ]
 
 { #category : #accessing }
-LzAutoUpdatingSyntaxLabel >> text [
-	^ text
+LzAutoUpdatingSyntaxLabel >> textBlock [
+	^ textBlock
 ]
 
 { #category : #accessing }
-LzAutoUpdatingSyntaxLabel >> text: anObject [
-	text := anObject
+LzAutoUpdatingSyntaxLabel >> textBlock: anObject [
+	textBlock := anObject
 ]
 
 { #category : #updating }

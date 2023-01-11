@@ -120,7 +120,7 @@ LzAnnotationStyler >> styleAutoUpdatingObjectButton: anAnnotation text: aBlock [
 					subcontext: (annotatedDeclaration optionsAt: #subcontext);
 					declaration: annotatedDeclaration declaration;
 					options: annotatedDeclaration options;
-					text: aBlock;
+					textBlock: aBlock;
 					setUp.
 	] on: Exception do: [ :ex | ex freeze. ex inspect ].
 	attribute := GtButtonAttribute new
@@ -243,7 +243,6 @@ LzAnnotationStyler >> visitTopLevelOp: aTopLevelOpAnnotation [
 	self styleAnnotation: aTopLevelOpAnnotation.
 	self styleAutoHidingAnnotation: aTopLevelOpAnnotation.
 	self styleAutoUpdatingObjectButton: aTopLevelOpAnnotation
-	"self styleObjectButton: aTopLevelOpAnnotation"
 ]
 
 { #category : #visiting }
