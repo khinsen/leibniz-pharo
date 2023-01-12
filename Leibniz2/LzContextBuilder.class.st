@@ -118,29 +118,18 @@ LzContextBuilder >> context [
 ]
 
 { #category : #inspecting }
-LzContextBuilder >> gtAxiomsFor: aView [
+LzContextBuilder >> gtAxiomDeclarationsFor: aView [
 	<gtView>
-	^ aView forward
-		title: 'Axioms';
-		priority: 3;
-		object: [ self context ];
-		view: #gtAxiomsFor:;
+	^ aView list
+		title: 'Axiom declarations';
+		priority: 4;
+		items: [ axiomDeclarations asArray ];
+		itemText: #asLeibnizSyntax;
 		yourself
 ]
 
 { #category : #inspecting }
-LzContextBuilder >> gtBuiltinsFor: aView [
-	<gtView>
-	^ aView forward
-		title: 'Builtins';
-		priority: 5;
-		object: [ self context ];
-		view: #gtBuiltinsFor:;
-		yourself
-]
-
-{ #category : #accessing }
-LzContextBuilder >> gtContextFor: anAction [
+LzContextBuilder >> gtBuildContextFor: anAction [
 	<gtAction>
 	^ anAction button
 		tooltip: 'Inspect the context';
@@ -152,44 +141,46 @@ LzContextBuilder >> gtContextFor: anAction [
 ]
 
 { #category : #inspecting }
-LzContextBuilder >> gtOperatorsFor: aView [
+LzContextBuilder >> gtBuiltinsFor: aView [
 	<gtView>
-	| sortGraph signature operators |
-	sortGraph := self sortGraphBuilder sortGraph.
-	signature := self signatureBuilder 
-					sortGraph: sortGraph;
-					signature.
-	operators := signature operators.
-	operators isEmpty ifTrue: [ ^ aView empty ].
 	^ aView forward
-		title: 'Operators' translated;
-		priority: 1;
-		object: [ operators ] ;
-		view: #gtOperatorsFor:;
+		title: 'Builtins';
+		priority: 2;
+		object: [ self signatureBuilder ];
+		view: #gtBuiltinsFor:;
 		yourself
 ]
 
 { #category : #inspecting }
-LzContextBuilder >> gtRulesFor: aView [ 
+LzContextBuilder >> gtOperatorDeclarationsFor: aView [
 	<gtView>
-	| rws |
-	rws := self context rewriteSystem.
-	rws isEmpty ifTrue: [ ^ aView empty ].
 	^ aView forward
-		title: 'Rules';
-		priority: 5;
-		object: [ rws ];
-		view: #gtRulesFor:
+		title: 'Operator declarations';
+		priority: 1;
+		object: [ self signatureBuilder ];
+		view: #gtOperatorDeclarationsFor:;
+		yourself
 ]
 
 { #category : #inspecting }
-LzContextBuilder >> gtSortGraphFor: aView [
+LzContextBuilder >> gtRuleDeclarationsFor: aView [
 	<gtView>
 	^ aView forward
-		title: 'Sort graph';
+		title: 'Rule declarations';
+		priority: 3;
+		object: [ self rewriteSystemBuilder ];
+		view: #gtRuleDeclarationsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzContextBuilder >> gtSortDeclarationsFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Sort declarations';
 		priority: 0;
-		object: [ self sortGraphBuilder sortGraph ];
-		view: #gtGraphFor:;
+		object: [ self sortGraphBuilder ];
+		view: #gtSortDeclarationsFor:;
 		yourself
 ]
 
@@ -238,6 +229,9 @@ LzContextBuilder >> parsedOps: aCollection [
 
 { #category : #accessing }
 LzContextBuilder >> rewriteSystemBuilder [
+	"Answer the rewrite system builder with the current
+	sortGraph and signature, for debugging the
+	rewrite system builder."
 	| sortGraph  signature |
 	sortGraph := self sortGraphBuilder sortGraph.
 	signature := self signatureBuilder
@@ -255,6 +249,8 @@ LzContextBuilder >> rule: aString [
 
 { #category : #accessing }
 LzContextBuilder >> signatureBuilder [
+	"Answer the signature builder with the current
+	sortGraph, for debugging the signature builder."
 	^ signatureBuilder
 		sortGraph: self sortGraphBuilder sortGraph;
 		yourself

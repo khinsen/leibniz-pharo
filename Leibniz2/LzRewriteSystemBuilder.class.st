@@ -8,6 +8,29 @@ Class {
 	#category : #'Leibniz2-Rules'
 }
 
+{ #category : #inspecting }
+LzRewriteSystemBuilder >> gtBuildRewriteSystemFor: anAction [
+	<gtAction>
+	^ anAction button
+		tooltip: 'Inspect the rewrite system';
+		priority: 2;
+		icon: BrGlamorousIcons debug;
+		action: [ :aButton |
+			aButton phlow spawnObject:
+				self rewriteSystem ]
+]
+
+{ #category : #inspecting }
+LzRewriteSystemBuilder >> gtRuleDeclarationsFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Rule declarations';
+		priority: 0;
+		items: [ ruleDeclarations asArray ];
+		itemText: #asLeibnizSyntax;
+		yourself
+]
+
 { #category : #defining }
 LzRewriteSystemBuilder >> include: aRewriteSystem [
 	aRewriteSystem ruleDeclarations do: [ :each |

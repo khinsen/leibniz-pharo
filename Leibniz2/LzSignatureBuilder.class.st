@@ -23,6 +23,18 @@ LzSignatureBuilder >> builtin: aSymbol [
 ]
 
 { #category : #inspecting }
+LzSignatureBuilder >> gtBuildSignatureFor: anAction [
+	<gtAction>
+	^ anAction button
+		tooltip: 'Inspect the signature';
+		priority: 2;
+		icon: BrGlamorousIcons debug;
+		action: [ :aButton |
+			aButton phlow spawnObject:
+				self signature ]
+]
+
+{ #category : #inspecting }
 LzSignatureBuilder >> gtBuiltinsFor: aView [
 	<gtView>
 	builtins ifEmpty: [ ^ aView empty ].
@@ -42,20 +54,6 @@ LzSignatureBuilder >> gtOperatorDeclarationsFor: aView [
 		priority: 1;
 		items: [ opDeclarations ] ;
 		itemText: #asLeibnizSyntax;
-		yourself
-]
-
-{ #category : #inspecting }
-LzSignatureBuilder >> gtOperatorsFor: aView [
-	<gtView>
-	| operators |
-	operators := self signature operators.
-	operators isEmpty ifTrue: [ ^ aView empty ].
-	^ aView forward
-		title: 'Operators' translated;
-		priority: 5;
-		object: [ operators ] ;
-		view: #gtOperatorsFor:;
 		yourself
 ]
 

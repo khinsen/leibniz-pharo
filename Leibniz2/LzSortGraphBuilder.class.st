@@ -27,6 +27,18 @@ LzSortGraphBuilder >> deriveSortDeclarationFromSort: aSortTerm [
 ]
 
 { #category : #inspecting }
+LzSortGraphBuilder >> gtBuildSortGraphFor: anAction [
+	<gtAction>
+	^ anAction button
+		tooltip: 'Inspect the sort graph';
+		priority: 2;
+		icon: BrGlamorousIcons debug;
+		action: [ :aButton |
+			aButton phlow spawnObject:
+				self sortGraph ]
+]
+
+{ #category : #inspecting }
 LzSortGraphBuilder >> gtSortDeclarationsFor: aView [
 	<gtView>
 	sortDeclarations ifEmpty: [ ^ aView empty ].
@@ -35,17 +47,6 @@ LzSortGraphBuilder >> gtSortDeclarationsFor: aView [
 		priority: 0;
 		items: [ sortDeclarations ];
 		itemText: #asLeibnizSyntax;
-		yourself
-]
-
-{ #category : #inspecting }
-LzSortGraphBuilder >> gtSortGraphFor: aView [
-	<gtView>
-	^ aView forward
-		title: 'Sort graph';
-		priority: 5;
-		object: [ self sortGraph ];
-		view: #gtGraphFor:;
 		yourself
 ]
 
