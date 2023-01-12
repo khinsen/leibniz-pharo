@@ -124,11 +124,11 @@ LzBuiltinContexts class >> arrayIndexingContext [
 		rule: '∀ s__:𝕊 ',
 				'∀ A_:Array1D(s__) ',
 				'∀ i_:ℕ.nz ',
-				'A_[i_ ⋯ ∎] → ''A ensureArrayTerm. A sliceToEndFrom: i'':nil';
+				'A_[i_ ⋯ ∎] → ''A ensureArrayTerm. A sliceToEndFrom: i by: 1'':nil';
 		rule: '∀ s__:𝕊 ',
 				'∀ A_:Array1D(s__) ',
 				'∀ i_:ℕ.nz ∀ j_:ℕ.nz ',
-				'A_[i_ ⋯ j_] → ''A ensureArrayTerm. A slice: i to: j'':nil';
+				'A_[i_ ⋯ j_] → ''A ensureArrayTerm. A slice: i to: j by: 1'':nil';
 		context
 ]
 
@@ -419,6 +419,8 @@ LzBuiltinContexts class >> integerSortsFor: aContextBuilder [
 		sort: 'zero';
 		subsort: 'zero ⊆ ℕ';
 		subsort: 'ℕ.nz ⊆ ℕ';
+		sort: 'one';
+		subsort: 'one ⊆ ℕ.nz';
 		"Integers"
 		sort: 'ℤ';
 		sort: 'ℤ.nz';
