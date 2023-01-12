@@ -5,7 +5,8 @@ Class {
 	#classTraits : 'TLzEquality classTrait + TLzPrintable classTrait',
 	#instVars : [
 		'sortGraph',
-		'term'
+		'term',
+		'contravariant'
 	],
 	#category : #'Leibniz2-Sorts'
 }
@@ -55,13 +56,18 @@ LzSort >> addPrefix: aSymbol toVarsConflictingWith: aSort [
 LzSort >> compareArguments: otherSort [
 	term args ifEmpty: [ ^ false ].
 	term args size = otherSort term args size ifFalse: [ ^ false ].
-	term args with: otherSort term args do: [ :term1 :term2 |
+	1 to: term args size do: [ :index |
+		| term1 term2 |
+		term1 := term args at: index.
+		term2 := otherSort term args at: index.
+		(contravariant at: index) ifTrue: [
+			| temp |
+			temp := term1. term1 := term2. term2 := temp ].
 		term1 sort isSortSort
 			ifTrue: [ (sortGraph sortWithTerm: term1) <= (sortGraph sortWithTerm: term2)
 						ifFalse: [ ^ false ] ]
-			ifFalse: [
-				(term1 isRestrictionOf: term2)
-					ifFalse: [ ^ false ] ] ].
+			ifFalse: [ (term1 isRestrictionOf: term2)
+						ifFalse: [ ^ false ] ] ].
 	^ true
 ]
 
@@ -299,7 +305,9 @@ LzSort >> term [
 
 { #category : #accessing }
 LzSort >> term: aTerm [
-	term := aTerm
+	term := aTerm.
+	contravariant := Array new: term args size.
+	contravariant atAllPut: false.
 ]
 
 { #category : #comparing }

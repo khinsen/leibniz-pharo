@@ -122,7 +122,7 @@ LzContextBuilder >> gtAxiomDeclarationsFor: aView [
 	<gtView>
 	^ aView list
 		title: 'Axiom declarations';
-		priority: 4;
+		priority: 5;
 		items: [ axiomDeclarations asArray ];
 		itemText: #asLeibnizSyntax;
 		yourself
@@ -156,7 +156,7 @@ LzContextBuilder >> gtOperatorDeclarationsFor: aView [
 	<gtView>
 	^ aView forward
 		title: 'Operator declarations';
-		priority: 1;
+		priority: 3;
 		object: [ self signatureBuilder ];
 		view: #gtOperatorDeclarationsFor:;
 		yourself
@@ -167,7 +167,7 @@ LzContextBuilder >> gtRuleDeclarationsFor: aView [
 	<gtView>
 	^ aView forward
 		title: 'Rule declarations';
-		priority: 3;
+		priority: 4;
 		object: [ self rewriteSystemBuilder ];
 		view: #gtRuleDeclarationsFor:;
 		yourself
@@ -181,6 +181,17 @@ LzContextBuilder >> gtSortDeclarationsFor: aView [
 		priority: 0;
 		object: [ self sortGraphBuilder ];
 		view: #gtSortDeclarationsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzContextBuilder >> gtSubsortDeclarationsFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Subsort declarations';
+		priority: 1;
+		object: [ self sortGraphBuilder ];
+		view: #gtSubsortDeclarationsFor:;
 		yourself
 ]
 

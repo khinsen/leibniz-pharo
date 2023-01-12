@@ -39,6 +39,18 @@ LzSortGraphBuilder >> gtBuildSortGraphFor: anAction [
 ]
 
 { #category : #inspecting }
+LzSortGraphBuilder >> gtSortContextSortGraphFor: aView [
+	<gtView>
+	sortContext ifNil: [ ^ aView empty ].
+	^ aView forward
+		title: 'Sort context sort graph';
+		priority: 5;
+		object: [ sortContext ];
+		view: #gtSortGraphFor:;
+		yourself
+]
+
+{ #category : #inspecting }
 LzSortGraphBuilder >> gtSortDeclarationsFor: aView [
 	<gtView>
 	sortDeclarations ifEmpty: [ ^ aView empty ].
