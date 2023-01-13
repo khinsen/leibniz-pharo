@@ -123,7 +123,13 @@ LzSortGraphBuilder >> sort: aString [
 LzSortGraphBuilder >> sortContext [
 	^ sortContext ifNil: [
 		| uniqueSorts uniqueSubsorts |
-		uniqueSorts := (sortDeclarations collect: #op) asSet.
+		self flag:#contravariant.
+		uniqueSorts :=
+			sortDeclarations collect: [ :each |
+				| contravarianceFlagsAndOpDeclaration |
+				contravarianceFlagsAndOpDeclaration := each op extractContravariance.
+				contravarianceFlagsAndOpDeclaration second ].
+		uniqueSorts := uniqueSorts asSet.
 		uniqueSubsorts := subsortDeclarations asSet.
 		self flag: #todo. "Check for axioms that are equal up to variable names."
 		sortContext := (uniqueSubsorts isEmpty

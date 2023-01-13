@@ -27,6 +27,30 @@ LzOpDeclaration >> args: anObject [
 ]
 
 { #category : #accessing }
+LzOpDeclaration >> extractContravariance [
+	| argDeclarations contravariant plainArgs plainOpDecl |
+	self flag: #contravariant.
+	argDeclarations:= self args collect: #declaration.
+	contravariant := argDeclarations collect: [ :each |
+		(each opName
+			= (LzPrefixOpName for: LzConstants opNameContravariant))
+			and: [ (each args size = 1)
+					and: [ each args first opName
+							= (LzPrefixOpName for: LzConstants opNameSort) ] ] ].
+	plainArgs := argDeclarations with: contravariant
+					collect: [ :decl :flag |
+						flag
+							ifTrue: [ decl args first ]
+							ifFalse: [ decl ] ].
+	plainOpDecl := LzOpDeclaration new
+					name: self name;
+					args: plainArgs;
+					sort: self sort;
+					variables: self variables.
+	^ { contravariant . plainOpDecl }
+]
+
+{ #category : #accessing }
 LzOpDeclaration >> name [
 
 	^ name

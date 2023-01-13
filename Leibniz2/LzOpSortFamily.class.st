@@ -2,7 +2,8 @@ Class {
 	#name : #LzOpSortFamily,
 	#superclass : #LzSortFamily,
 	#instVars : [
-		'op'
+		'op',
+		'contravariant'
 	],
 	#category : #'Leibniz2-Sorts'
 }
@@ -29,7 +30,12 @@ LzOpSortFamily >> op [
 LzOpSortFamily >> op: anOperator [
 	self assert: anOperator size equals: 1.
 	self flag: #todo. "Allow multiple ranks if there is a unique highest one."
-	op := anOperator
+	op := anOperator.
+	self flag: #contravariant.
+	contravariant := op kindArity collect: [ :each |
+		(each sortFamilies size = 1)
+			and: [ each sortFamilies anyOne op opName internalSymbol
+					= LzConstants opNameContravariant] ].
 ]
 
 { #category : #printing }

@@ -306,6 +306,7 @@ LzSort >> term [
 { #category : #accessing }
 LzSort >> term: aTerm [
 	term := aTerm.
+	self flag: #contravariant.
 	contravariant := Array new: term args size.
 	contravariant atAllPut: false.
 ]
