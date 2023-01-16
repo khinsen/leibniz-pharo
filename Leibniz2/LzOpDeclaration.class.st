@@ -27,30 +27,6 @@ LzOpDeclaration >> args: anObject [
 ]
 
 { #category : #accessing }
-LzOpDeclaration >> extractContravariance [
-	| argDeclarations contravariant plainArgs plainOpDecl |
-	self flag: #contravariant.
-	argDeclarations:= self args collect: #declaration.
-	contravariant := argDeclarations collect: [ :each |
-		(each opName
-			= (LzPrefixOpName for: LzConstants opNameContravariant))
-			and: [ (each args size = 1)
-					and: [ each args first opName
-							= (LzPrefixOpName for: LzConstants opNameSort) ] ] ].
-	plainArgs := argDeclarations with: contravariant
-					collect: [ :decl :flag |
-						flag
-							ifTrue: [ decl args first ]
-							ifFalse: [ decl ] ].
-	plainOpDecl := LzOpDeclaration new
-					name: self name;
-					args: plainArgs;
-					sort: self sort;
-					variables: self variables.
-	^ { contravariant . plainOpDecl }
-]
-
-{ #category : #accessing }
 LzOpDeclaration >> name [
 
 	^ name
@@ -70,6 +46,40 @@ LzOpDeclaration >> objectFor: aContext [
 { #category : #printing }
 LzOpDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 	self name printForArity: args withSort: self sort on: aStream
+]
+
+{ #category : #accessing }
+LzOpDeclaration >> rewriteContravariance [
+	| argDeclarations contravariant
+	  plainArgs contravarianceCode opSort rewrittenOpDecl |
+	self flag: #contravariant.
+	argDeclarations:= self args collect: #declaration.
+	contravariant := argDeclarations collect: [ :each |
+		(each opName
+			= (LzPrefixOpName for: LzConstants opNameContravariant))
+			and: [ (each args size = 1)
+					and: [ each args first opName
+							= (LzPrefixOpName for: LzConstants opNameSort) ] ] ].
+	plainArgs := argDeclarations with: contravariant
+					collect: [ :decl :flag |
+						flag
+							ifTrue: [ decl args first ]
+							ifFalse: [ decl ] ].
+	contravarianceCode := contravariant
+		inject: 0
+		into: [ :sum :each |
+				(2 * sum) + (each ifTrue: [ 1 ] ifFalse: [ 0 ]) ].
+	contravarianceCode = 0 ifTrue: [ ^ self ].
+	opSort := LzOpTermDeclaration new
+				opName: (LzPrefixOpName for: LzConstants opNameSort);
+				args: {LzIntegerLiteralDeclaration new
+							value: contravarianceCode }.
+	rewrittenOpDecl := LzOpDeclaration new
+					name: self name;
+					args: plainArgs;
+					sort: opSort;
+					variables: self variables.
+	^ rewrittenOpDecl
 ]
 
 { #category : #accessing }

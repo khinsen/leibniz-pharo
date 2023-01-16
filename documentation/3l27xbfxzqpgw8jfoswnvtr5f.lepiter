@@ -66,12 +66,49 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-11T16:51:12.615018+01:00"
+						"dateAndTimeString" : "2023-01-16T18:13:41.081026+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "/ZUNEXedDQCwhubjB0WOPA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "A function is defined by an operator of sort\n\t{{lzSortX:(domain:𝕊) → (image:𝕊)}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-16T18:13:00.97622+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-16T18:13:44.158675+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "DTagbsauDQCRChHvAqqfOQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
