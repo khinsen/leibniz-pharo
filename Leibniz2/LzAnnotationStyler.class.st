@@ -272,11 +272,13 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 			| color output |
 			color := LzColors exampleColor.
 			output := declaration asRopedTextColored: color.
-			object term sort isKind ifTrue: [
-				output attribute:
-					(BlTextDecorationAttribute new
-						underline;
-						color: Color red) ].
+			((object isKindOf: LzTerm)
+				and: [ object term sort isKind ])
+				ifTrue: [
+					output attribute:
+						(BlTextDecorationAttribute new
+							underline;
+							color: Color red) ].
 			(options at: #withSort ifAbsent: [ false ])
 				ifTrue: [
 					| value colon sort |
