@@ -53,6 +53,7 @@ LzOpDeclaration >> rewriteContravariance [
 	| argDeclarations contravariant
 	  plainArgs contravarianceCode opSort rewrittenOpDecl |
 	self flag: #contravariant.
+	self args ifEmpty: [ ^ self ].
 	argDeclarations:= self args collect: #declaration.
 	contravariant := argDeclarations collect: [ :each |
 		(each opName

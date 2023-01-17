@@ -18,7 +18,7 @@ LzSortDeclaration >> addAsRopedTextTo: aRopedText [
 
 { #category : #constructing }
 LzSortDeclaration >> objectFor: aContext [
-	^ aContext sortGraph familyForParsedOp: self op
+	^ aContext sortGraph familyForParsedOp: self op rewriteContravariance
 ]
 
 { #category : #accessing }
