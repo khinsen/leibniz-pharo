@@ -559,6 +559,154 @@
 					"__type" : "textStyle"
 				},
 				"string" : "The advantage of the function is that it is a term on its own that can be used without arguments. See for example the definition of the derivative in [[Derivatives of functions of one variable]]."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-17T17:22:25.418045+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-17T17:22:43.594155+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "XCIg19muDQCDlqb3DLjH6w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Contravariance of the domain sort"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-17T17:23:04.984998+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-17T17:30:57.190184+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "DVnk2NmuDQCEXN2ADLjH6w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "In the sort declaration\n\t{{lzSort:(domain:↕(𝕊)) → (image:𝕊)}},\nthe domain sort parameter is marked as *contravariant*, which means that in subsort tests, its sort hierarchy is inverted. This is best illustrated by an example, which uses {{lzUseContext:name = \"Real numbers\", subcontext = \"contravariance\"}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-17T17:25:22.073751+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-17T17:35:04.095721+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "oQpX4dmuDQCG3vYPDLjH6w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Consider an operator {{lzOp:applyToOneThird(ℚ → ℚ) : ℚ, subcontext = \"contravariance\"}}, which takes as argument a function from rational number to rational numbers and applies this function to the number {{lzTerm:1/3, subcontext = \"contravariance\"}}. The corresponding rule is:\n\t{{lzRule:applyToOneThird(f_:(ℚ → ℚ)) ⇒ f_[1/3], subcontext = \"contravariance\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-17T17:53:32.091991+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-17T17:53:50.869814+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "FfeTBdquDQCNNmGtDLjH6w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Can we apply this operator to a function from integers to integers? Let's try:\n\t{{lzOp:f1 : ℤ → ℤ, subcontext = \"contravariance\"}}\n\t{{lzTerm:applyToOneThird(f1), subcontext = \"contravariance\", withSort = \"yes\"}}"
 			}
 		]
 	},

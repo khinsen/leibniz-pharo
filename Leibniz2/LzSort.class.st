@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'sortGraph',
 		'term',
-		'contravariant'
+		'contravarianceFlags'
 	],
 	#category : #'Leibniz2-Sorts'
 }
@@ -60,7 +60,7 @@ LzSort >> compareArguments: otherSort [
 		| term1 term2 |
 		term1 := term args at: index.
 		term2 := otherSort term args at: index.
-		(contravariant at: index) ifTrue: [
+		(contravarianceFlags at: index) = $1 ifTrue: [
 			| temp |
 			temp := term1. term1 := term2. term2 := temp ].
 		term1 sort isSortSort
@@ -307,8 +307,7 @@ LzSort >> term [
 LzSort >> term: aTerm [
 	term := aTerm.
 	self flag: #contravariant.
-	contravariant := Array new: term args size.
-	contravariant atAllPut: false.
+	contravarianceFlags := self family contravarianceFlags
 ]
 
 { #category : #comparing }

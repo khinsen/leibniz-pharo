@@ -15,6 +15,12 @@ Class {
 }
 
 { #category : #accessing }
+LzSortFamily >> contravarianceFlags [
+	self flag: #contravariant.
+	^ ''
+]
+
+{ #category : #accessing }
 LzSortFamily >> family [
 	^ self
 ]
