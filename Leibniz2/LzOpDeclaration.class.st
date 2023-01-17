@@ -51,7 +51,7 @@ LzOpDeclaration >> printBodyAsLeibnizSyntaxOn: aStream [
 { #category : #accessing }
 LzOpDeclaration >> rewriteContravariance [
 	| argDeclarations contravariant
-	  plainArgs contravarianceCode opSort rewrittenOpDecl |
+	  plainArgs contravarianceFlags opSort rewrittenOpDecl |
 	self flag: #contravariant.
 	self args ifEmpty: [ ^ self ].
 	argDeclarations:= self args collect: #declaration.
@@ -66,15 +66,15 @@ LzOpDeclaration >> rewriteContravariance [
 						flag
 							ifTrue: [ decl args first ]
 							ifFalse: [ decl ] ].
-	contravarianceCode := contravariant
-		inject: 0
-		into: [ :sum :each |
-				(2 * sum) + (each ifTrue: [ 1 ] ifFalse: [ 0 ]) ].
-	contravarianceCode = 0 ifTrue: [ ^ self ].
+	contravarianceFlags :=
+		'' join:
+			(contravariant collect: [ :each |
+				each ifTrue: [ '1' ] ifFalse: [ '0' ] ]).
+	(contravarianceFlags includes: $1) ifFalse: [ ^ self ].
 	opSort := LzOpTermDeclaration new
 				opName: (LzPrefixOpName for: LzConstants opNameSort);
-				args: {LzIntegerLiteralDeclaration new
-							value: contravarianceCode }.
+				args: { LzStringLiteralDeclaration new
+							value: contravarianceFlags }.
 	rewrittenOpDecl := LzOpDeclaration new
 					name: self name;
 					args: plainArgs;

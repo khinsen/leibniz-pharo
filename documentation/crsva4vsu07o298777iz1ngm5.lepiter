@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-16T18:18:27.405212+01:00"
+						"dateAndTimeString" : "2023-01-17T15:54:13.804227+01:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Integers\", forSorts = \"yes\"}}."
+				"string" : "Uses {{lzUseContext:name = \"Character strings\", forSorts = \"yes\"}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -166,7 +166,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-16T18:18:52.723472+01:00"
+						"dateAndTimeString" : "2023-01-17T15:56:27.337411+01:00"
 					}
 				},
 				"editEmail" : {
@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-16T18:18:52.723472+01:00"
+						"dateAndTimeString" : "2023-01-17T15:56:27.337411+01:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sort of sort operators with contravariant parameters is {{lzSort:𝕊(ℕ)}}. These are subsorts of the standard sort sort {{lzSort:𝕊}}: {{lzSort:𝕊(n_:ℕ) ⊆ 𝕊}}. The integer parameter is interpreted as a bit pattern (base 2), with each bit containing the contravariance flag of one parameter."
+				"string" : "The sort of sort operators with contravariant parameters is {{lzSort:𝕊(String)}}. These are subsorts of the standard sort sort {{lzSort:𝕊}}: {{lzSort:𝕊(s_:String) ⊆ 𝕊}}. The string parameter is a bit string (containing only the characters 0 and 1), with each bit containing the contravariance flag of one parameter."
 			}
 		]
 	},

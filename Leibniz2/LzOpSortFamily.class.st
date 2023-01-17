@@ -13,6 +13,14 @@ LzOpSortFamily >> addAsRopedTextTo: aRopedText [
 	self op opName addForArity: op onlyRank key asRopedTextTo: aRopedText
 ]
 
+{ #category : #accessing }
+LzOpSortFamily >> contravarianceFlags [
+	self flag: #contravariant.
+	^ self op onlyRank value term args
+		ifEmpty: [ '' ] 
+		ifNotEmpty: [ :args | args first value ]
+]
+
 { #category : #inspecting }
 LzOpSortFamily >> gtGraphFor: aView [
 	<gtView>
@@ -32,10 +40,7 @@ LzOpSortFamily >> op: anOperator [
 	self flag: #todo. "Allow multiple ranks if there is a unique highest one."
 	op := anOperator.
 	self flag: #contravariant.
-	contravariant := op kindArity collect: [ :each |
-		(each sortFamilies size = 1)
-			and: [ each sortFamilies anyOne op opName internalSymbol
-					= LzConstants opNameContravariant] ].
+	contravariant := self contravarianceFlags
 ]
 
 { #category : #printing }

@@ -126,7 +126,7 @@ LzSortGraphBuilder >> sortContext [
 		self flag:#contravariant.
 		uniqueSorts :=
 			(sortDeclarations collect: [ :each |
-				each op rewriteContravariance])
+				each op rewriteContravariance ])
 				asSet.
 		uniqueSubsorts := subsortDeclarations asSet.
 		self flag: #todo. "Check for axioms that are equal up to variable names."
