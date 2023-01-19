@@ -58,6 +58,16 @@ LzOpTerm >> fingerprint [
 ]
 
 { #category : #inspecting }
+LzOpTerm >> gtDebugActionFor: anAction [
+	<gtAction>
+	^ anAction button
+		tooltip: 'Debug term construction';
+		priority: 2;
+		icon: BrGlamorousIcons debug;
+		action: [ self halt. self signature opTerm: self opName args: self args ]
+]
+
+{ #category : #inspecting }
 LzOpTerm >> gtOperatorRanksFor: aView [
 	<gtView>
 	^ aView forward
