@@ -222,6 +222,14 @@ LzSort >> printAsLeibnizSyntaxOn: aStream [
 ]
 
 { #category : #accessing }
+LzSort >> rawTerm: aTerm [
+	term := aTerm.
+	self flag: #contravariant.
+	self assert: aTerm args isEmpty.
+	contravarianceFlags := ''
+]
+
+{ #category : #accessing }
 LzSort >> referenceSlots [
 	^ #(sortGraph)
 ]

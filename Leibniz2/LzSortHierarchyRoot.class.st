@@ -19,7 +19,7 @@ LzSortHierarchyRoot >> initialize [
 		opName: self sortOpName;
 		args: #().
 	sortSort := LzSort new
-		term: sortTerm.
+		rawTerm: sortTerm.
 	sortTerm sort: sortSort.
 
 	sortDeclaration :=

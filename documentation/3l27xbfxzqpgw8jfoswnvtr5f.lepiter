@@ -707,6 +707,80 @@
 					"__type" : "textStyle"
 				},
 				"string" : "Can we apply this operator to a function from integers to integers? Let's try:\n\t{{lzOp:f1 : ℤ → ℤ, subcontext = \"contravariance\"}}\n\t{{lzTerm:applyToOneThird(f1), subcontext = \"contravariance\", withSort = \"yes\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-19T15:19:58.120806+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-19T15:21:42.124361+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "4ziPXACvDQCUlnkTCIHGvQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The resulting term does not have a proper sort, so something went wrong. Let's try something else: a function from real numbers to integers:\n\t{{lzOp:f2 : ℝ → ℤ, subcontext = \"contravariance\"}}\n\t{{lzTerm:applyToOneThird(f2), subcontext = \"contravariance\", withSort = \"yes\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-19T15:22:37.348596+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-19T15:24:35.343892+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "r8iTZACvDQCW4Ua4CIHGvQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "This yields a proper term with a proper sort. A function from real numbers to integers is indeed also a function from rational numbers to rational numbers: it accepts any rational number as its argument (plus more, but we don't care about this), and it produces a rational number (more precisely, an integer, but we don't care about this precision)."
 			}
 		]
 	},

@@ -84,11 +84,15 @@ LzSortGraph >> directSubsortsOf: aSortTerm [
 			(eachAxiom subsortOf: aSortTerm)
 				ifNotNil: [ :term | subsorts add: (self sortWithTerm: term) ]] ].
 	"Second step: subsorts via argument subsorts."
+	self flag: #contravariant.
 	sortArgs := aSortTerm args.
 	argDirectSubsorts :=
-		sortArgs collect: [ :each |
-			each sort isSortSort
-				ifTrue: [ (self directSubsortsOf: each) collect: #term ]
+		sortArgs with: family contravarianceFlags collect: [ :eachSort :eachFlag |
+			eachSort sort isSortSort
+				ifTrue: [ (eachFlag = $1
+							ifTrue: (self directSupersortsOf: eachSort)
+							ifFalse: (self directSubsortsOf: eachSort))
+								collect: #term ]
 				ifFalse: [ Set new ] ].
 	1 to: sortArgs size do: [ :index |
 		(argDirectSubsorts at: index) do: [ :eachArgSs |
@@ -113,11 +117,15 @@ LzSortGraph >> directSupersortsOf: aSortTerm [
 			(eachAxiom supersortOf: aSortTerm)
 				ifNotNil: [ :term | supersorts add: (self sortWithTerm: term) ]] ].
 	"Second step: supersorts via argument supersorts."
+	self flag: #contravariant.
 	sortArgs := aSortTerm args.
 	argDirectSupersorts :=
-		sortArgs collect: [ :each |
-			each sort isSortSort
-				ifTrue: [ (self directSupersortsOf: each) collect: #term ]
+		sortArgs with: family contravarianceFlags collect: [ :eachSort :eachFlag |
+			eachSort sort isSortSort
+				ifTrue: [ (eachFlag = $1
+							ifTrue: (self directSubsortsOf: eachSort)
+							ifFalse: (self directSupersortsOf: eachSort))
+								collect: #term ]
 				ifFalse: [ Set new ] ].
 	1 to: sortArgs size do: [ :index |
 		(argDirectSupersorts at: index) do: [ :eachArgSs |

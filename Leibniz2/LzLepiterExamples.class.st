@@ -50,6 +50,17 @@ LzLepiterExamples >> booleanUnifications [
 ]
 
 { #category : #example }
+LzLepiterExamples >> contravariantSortArguments [
+	<gtExample>
+	| context |
+	context := (LzContextBuilder
+				fromPage: 'Functions'
+				subcontext: 'contravariance')
+				context.
+	^ context term: 'applyToOneThird(f2)'.
+]
+
+{ #category : #example }
 LzLepiterExamples >> equalityTerms [
 	<gtExample>
 	| context |
