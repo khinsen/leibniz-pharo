@@ -150,11 +150,11 @@ LzSort >> isKind [
 
 { #category : #testing }
 LzSort >> isSortSort [
-	term args ifNotEmpty: [ ^ false ].
-	^ term opName
-		ifNil: [ false ]
+	term opName
+		ifNil: [ ^ false ]
 		ifNotNil: [ :n |
-			n asSymbol = LzConstants opNameSort ]
+			^ n asSymbol = LzConstants opNameSort ].
+	^ term args size < 2
 ]
 
 { #category : #accessing }

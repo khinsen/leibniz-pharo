@@ -11,8 +11,28 @@ LzLepiterExamples >> allContexts [
 	<gtExample>
 	| pages |
 	pages := LzBook database pages.
-	^ pages collect: [ :each |
-		LzGlobalCache uniqueInstance contextFor: each ]
+	^ pages
+		reject: [ :each |
+			(LzGlobalCache uniqueInstance declarationCacheFor:  each) isEmpty ]
+		thenCollect: [ :each |
+			each title -> (LzGlobalCache uniqueInstance contextFor: each) ]
+]
+
+{ #category : #accessing }
+LzLepiterExamples >> allSubcontexts [
+	<gtExample>
+	| pages |
+	pages := LzBook database pages collect: [ :each |
+		each title ->
+			((LzGlobalCache uniqueInstance
+				declarationCacheFor:  each) subcontexts) ].
+	^ (pages reject: [ :each | each value isEmpty ]
+		thenCollect: [ :eachPage |
+			eachPage value collect: [ :eachSubcontext |
+				(eachPage key, '/', eachSubcontext) ->
+					(LzGlobalCache uniqueInstance
+						subcontext: eachSubcontext for: eachPage key) ]])
+			flatten
 ]
 
 { #category : #example }

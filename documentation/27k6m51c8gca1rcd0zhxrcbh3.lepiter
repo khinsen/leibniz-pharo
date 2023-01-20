@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-25T12:13:01.021127+02:00"
+						"dateAndTimeString" : "2023-01-20T15:20:26.459694+01:00"
 					}
 				},
 				"uid" : {
@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-25T12:16:56.0058+02:00"
+						"dateAndTimeString" : "2023-01-20T15:20:29.99369+01:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Next, construct an array using this function:\n\t{{lzTerm:Array(5, 3 ⋯ 7), withNormalForm = \"yes\", subcontext = \"example\"}}"
+				"string" : "Next, construct an  array using this function:\n\t{{lzTerm:Array(5, 3 ⋯ 7), withNormalForm = \"yes\", subcontext = \"example\"}}"
 			}
 		]
 	},

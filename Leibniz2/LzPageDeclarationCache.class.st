@@ -132,6 +132,14 @@ LzPageDeclarationCache >> initialize [
 	declarationsChanged := false.
 ]
 
+{ #category : #testing }
+LzPageDeclarationCache >> isEmpty [
+	^ declarations
+		detect: [ :each | each value size > 0 ]
+		ifFound: [ false ]
+		ifNone: [ true ]
+]
+
 { #category : #'event handling' }
 LzPageDeclarationCache >> onContentTreeRemoved: anAnnouncement [
 	| snippetUid subcontexts |

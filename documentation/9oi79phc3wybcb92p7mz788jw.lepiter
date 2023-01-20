@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-08T18:47:59.298795+02:00"
+						"dateAndTimeString" : "2023-01-20T14:05:50.92123+01:00"
 					}
 				},
 				"editEmail" : {
@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-27T16:24:28.04829+02:00"
+						"dateAndTimeString" : "2023-01-20T14:05:50.92123+01:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"Real numbers\"}}"
+				"string" : "Uses {{lzUseContext:name = \"Derivatives of real functions of one variable\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-08T18:48:46.436739+02:00"
+						"dateAndTimeString" : "2023-01-20T14:07:57.592304+01:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +66,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-04T16:38:53.654085+01:00"
+						"dateAndTimeString" : "2023-01-20T14:07:57.592304+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "R5kzUx+iDQCV98l8DpLPLA=="
+					"uidString" : "QSydeROvDQCgNKsVDVtVRA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "With {{lzOp:h:ℝ.nn}}:\n\t{{lzTerm:h × n_:ℕ.nz, withSort = \"yes\"}}"
+				"string" : "The number of prey\n\t{{lzOp:x:ℝ → ℝ}}\nand the number of predators\n\t{{lzOp:y:ℝ → ℝ}}\nare functions of time. For mathematical convience (the model goes back to the early 20th century, before digital computers), they are represented by real numbers rather than integers, as this allows the use of differential equations instead of the clumsier difference equations."
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-04T16:05:06.719959+01:00"
+						"dateAndTimeString" : "2023-01-20T14:06:34.235578+01:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-04T16:39:12.064317+01:00"
+						"dateAndTimeString" : "2023-01-20T14:06:34.235578+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "cZ0Eas6tDQCqJs/6BYi8eQ=="
+					"uidString" : "JJKhdBOvDQCgHMsTDVtVRA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Set {{lzRule:h ⇒ 42}}"
+				"string" : "The time evolution of prey and predator populations is given by\n\t{{lzAxiom:lvx: 𝒟(x) = (α × x) - (β × x × y)}},\n\t{{lzAxiom:lvy: 𝒟(y) = (δ × x × y) - (γ × y)}},\nwhere {{lzOp:α : ℝ.p}}, {{lzOp:β : ℝ.p}}, {{lzOp:γ : ℝ.p}}, and {{lzOp:δ : ℝ.p}} are constants describing the interactions of the two species."
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-04T16:05:38.472384+01:00"
+						"dateAndTimeString" : "2023-01-20T14:08:25.472041+01:00"
 					}
 				},
 				"editEmail" : {
@@ -140,126 +140,23 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-04T16:38:36.159095+01:00"
+						"dateAndTimeString" : "2023-01-20T14:08:25.472041+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "aH++QNOtDQCtnfiNCwpsnQ=="
+					"uidString" : "k9S9ehOvDQCgUDbwDVtVRA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Then we find: {{lzTerm:2 × h, withNormalForm = \"yes\"}}"
-			},
-			{
-				"__type" : "pharoSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T14:59:34.768936+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T15:05:41.199062+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "mHVZxt+hDQCzUhLkDTbczA=="
-				},
-				"code" : "thisSnippet page lzContext"
-			},
-			{
-				"__type" : "pharoSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T15:11:42.545542+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T15:15:09.536546+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "5XK68d+hDQCQqbFYDV8EAg=="
-				},
-				"code" : "node := LzParser2 parse: '{[(1, 1), (3, -1)]}' startingAt: LzParser2 startingStateForTopLevelTerm.\rdeclaration := (LzDeclarationBuilder new acceptNode: node) declaration.\rthisSnippet page lzContext parsedPattern: declaration"
+				"string" : "The time evolution of prey and predator populations is given by\n\t{{lzAxiom:lvx: 𝒟(x) = (α × x) - (β × x × y)}},\n\t{{lzAxiom:lvy: 𝒟(y) = (δ × x × y) - (γ × y)}},\nwhere {{lzOp:α : ℝ.p}}, {{lzOp:β : ℝ.p}}, {{lzOp:γ : ℝ.p}}, and {{lzOp:δ : ℝ.p}} are constants describing the interactions of the two species."
 			},
 			{
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [
-						{
-							"__type" : "pythonSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-27T16:35:01.641523+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-27T16:36:12.302191+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "f9k0rJujDQCGTV6pBzJLeA=="
-							},
-							"code" : "import sys\rsys.version"
-						}
-					]
+					"items" : [ ]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -269,7 +166,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-27T16:34:42.207449+02:00"
+						"dateAndTimeString" : "2023-01-20T14:08:51.318182+01:00"
 					}
 				},
 				"editEmail" : {
@@ -280,17 +177,54 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-27T16:34:44.782313+02:00"
+						"dateAndTimeString" : "2023-01-20T14:08:51.318182+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "u81ZqpujDQCGS20gBzJLeA=="
+					"uidString" : "Zj7QfBOvDQCgWOLADVtVRA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A Python snippet:"
+				"string" : "A simple numerical simulation can be performed by applying the [[Euler method]]. It computes the values of  approximations {{lzOp:x≅e : (ℕ → ℝ)}} and {{lzOp:y≅e : (ℕ → ℝ)}} to the populations \n{{lzTerm:n_:ℕ, x[n_ × Δt]}} and {{lzTerm:n_:ℕ, y[n_ × Δt]}} on a time grid with spacing {{lzOp:Δt : ℝ.p}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-20T14:10:12.986651+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-01-20T14:13:01.908781+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "J91xfROvDQCgYSruDVtVRA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Test terms:\n{{lzTerm:n_:ℕ.nz, γ × y≅e}} {{lzTerm:n_:ℕ.nz, (Δt × ((δ × x≅e × y≅e) - (γ × y≅e))[n_ - 1])}}"
 			}
 		]
 	},
