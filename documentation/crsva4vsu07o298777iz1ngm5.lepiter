@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-11T16:49:47.725905+01:00"
+						"dateAndTimeString" : "2023-01-20T11:52:26.282033+01:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sort\n\t{{lzSort:↕(𝕊)}}\nis equal to its argument sort except for an inversion of its subsort relations."
+				"string" : "The sort\n\t{{lzSort:⇅(𝕊)}}\nis equal to its argument sort except for an inversion of its subsort relations."
 			},
 			{
 				"__type" : "textSnippet",

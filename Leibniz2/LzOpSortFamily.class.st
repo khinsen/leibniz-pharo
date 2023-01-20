@@ -16,7 +16,7 @@ LzOpSortFamily >> addAsRopedTextTo: aRopedText [
 LzOpSortFamily >> contravarianceFlags [
 	self flag: #contravariant.
 	^ self op onlyRank value term args
-		ifEmpty: [ '' ] 
+		ifEmpty: [ String new: self op onlyRank key size withAll: $0 ] 
 		ifNotEmpty: [ :args | args first value ]
 ]
 

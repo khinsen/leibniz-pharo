@@ -7,16 +7,26 @@ Class {
 }
 
 { #category : #example }
+LzLepiterExamples >> allContexts [
+	<gtExample>
+	| pages |
+	pages := LzBook database pages.
+	^ pages collect: [ :each |
+		LzGlobalCache uniqueInstance contextFor: each ]
+]
+
+{ #category : #example }
 LzLepiterExamples >> arrayIndexing [
 	<gtExample>
 	| context |
-	context := (LzContextBuilder fromPage: 'One-dimensional array slicing') context.
+	context := LzGlobalCache uniqueInstance
+				contextFor: 'One-dimensional array slicing'.
 	^ {
-		{ '{[ 1, 2, 3 ]}\(2)'. '2' }.
-		{ '{[ 1, 2, 3 ]}\(2 ⋯ 3)'. '{[ 2, 3 ]}' }.
-		{ '{[ 1, 2, 3 ]}\(2 ⋯ ∎)'. '{[ 2, 3 ]}' }.
-		{ '{[ 1, 2, 3 ]}\(2 ⋯ 2)'. '{[ 2 ]}' }.
-		{ '{[ 1, 2, 3 ]}\(2 ⋯ 1)'. '{[ ]}' }.
+		{ '{[ 1, 2, 3 ]}[2]'. '2' }.
+		{ '{[ 1, 2, 3 ]}[2 ⋯ 3]'. '{[ 2, 3 ]}' }.
+		{ '{[ 1, 2, 3 ]}[2 ⋯ ∎]'. '{[ 2, 3 ]}' }.
+		{ '{[ 1, 2, 3 ]}[2 ⋯ 2]'. '{[ 2 ]}' }.
+		{ '{[ 1, 2, 3 ]}[2 ⋯ 1]'. '{[ ]}' }.
 	} collect: [ :each |
 		| term reducedTerm |
 		term := context term: each first.
@@ -29,7 +39,8 @@ LzLepiterExamples >> arrayIndexing [
 LzLepiterExamples >> booleanUnifications [
 	<gtExample>
 	| c |
-	c := (LzContextBuilder fromPage: 'Boolean algebra') context.
+	c := LzGlobalCache uniqueInstance
+			contextFor: 'Boolean algebra'.
 	^ {
 		{'⊤'. '∀ X_:𝔹 X_'. '(X_=⊤)'}.
 		{'∀ X_:𝔹 ¬(X_)'. '¬(⊤)'. '(X_=⊤)'}.
@@ -53,22 +64,31 @@ LzLepiterExamples >> booleanUnifications [
 LzLepiterExamples >> contravariantSortArguments [
 	<gtExample>
 	| context |
-	context := (LzContextBuilder
-				fromPage: 'Functions'
-				subcontext: 'contravariance')
-				context.
-	^ context term: 'applyToOneThird(f2)'.
+	context := LzGlobalCache uniqueInstance
+				subcontext: 'contravariance'
+				for: 'Functions'.
+	self
+		assert: (context term: 'applyToOneThird(f1)') sort
+					asLeibnizSyntaxString
+		equals: '[ℝ]'.
+	self
+		assert: (context term: 'applyToOneThird(f2)') sort
+					asLeibnizSyntaxString
+		equals: 'ℚ'.
 ]
 
 { #category : #example }
 LzLepiterExamples >> equalityTerms [
 	<gtExample>
 	| context |
-	context := (LzContextBuilder new
-		addDeclarationsFromPageNamed: 'Term equality';
-		addDeclarationsFromPageNamed: 'One-dimensional arrays';
-		addDeclarationsFromPageNamed: 'Integers')
-		context.
+	context := LzContextBuilder new
+				include: (LzGlobalCache uniqueInstance
+							contextFor: 'Term equality');
+				include: (LzGlobalCache uniqueInstance
+							contextFor: 'One-dimensional arrays');
+				include: (LzGlobalCache uniqueInstance
+							contextFor: 'Integers');
+				context.
 	self assert: (context term: '1 == ⊤') hasSort not.
 	^ {
 		{ '1 == 1'. '⊤'}.
@@ -89,9 +109,10 @@ LzLepiterExamples >> equalityTerms [
 LzLepiterExamples >> integerArithmetic [
 	<gtExample>
 	| context cache |
-	context := (LzContextBuilder fromPage: 'Integers') context.
-	cache := LzRewriteCache new
-				rewriteSystem: context rewriteSystem.
+	context := LzGlobalCache uniqueInstance
+				contextFor: 'Integers'.
+	cache := LzGlobalCache uniqueInstance
+				rewriteCacheFor: context.
 	^ {
 		{ '-(2)'. '-2' }.
 		{ '2 + 2'. '4'}.
@@ -118,9 +139,11 @@ LzLepiterExamples >> integerArithmetic [
 LzLepiterExamples >> integerTerms [
 	<gtExample>
 	| context |
-	context := (LzContextBuilder fromPage: 'Integers') context.	^ {
+	context := LzGlobalCache uniqueInstance
+				contextFor: 'Integers'.
+^ {
 		{ '0'. 'zero'. }.
-		{ '1'. 'ℕ.nz' }.
+		{ '1'. 'one' }.
 		{ '-1'. 'ℤ.nz' }.
 		{ '-1 + 1'. 'ℤ' }.
 		{ '1 + 1'. 'ℕ.nz' }.
@@ -136,9 +159,10 @@ LzLepiterExamples >> integerTerms [
 LzLepiterExamples >> rationalArithmetic [
 	<gtExample>
 	| context cache |
-	context := (LzContextBuilder fromPage: 'Rational numbers') context.
-	cache := LzRewriteCache new
-				rewriteSystem: context rewriteSystem.
+	context := LzGlobalCache uniqueInstance
+				contextFor: 'Rational numbers'.
+	cache := LzGlobalCache uniqueInstance
+				rewriteCacheFor: context.
 	^ {
 		{ '-(2/3)'. '-2/3' }.
 		{ '1/3 + 2/3'. '1'}.
@@ -163,10 +187,11 @@ LzLepiterExamples >> rationalArithmetic [
 LzLepiterExamples >> rationalNumberTerms [
 	<gtExample>
 	| context |
-	context := (LzContextBuilder fromPage: 'Rational numbers') context.
+	context := LzGlobalCache uniqueInstance
+				contextFor: 'Rational numbers'.
 	^ {
 		{ '0'. 'zero'. }.
-		{ '1'. 'ℕ.nz' }.
+		{ '1'. 'one' }.
 		{ '-1'. 'ℤ.nz' }.
 		{ '-1 + 1'. 'ℤ' }.
 		{ '1 + 1'. 'ℕ.nz' }.
@@ -188,7 +213,8 @@ LzLepiterExamples >> rationalNumberTerms [
 LzLepiterExamples >> stringOperations [
 	<gtExample>
 	| context |
-	context := (LzContextBuilder fromPage: 'Character strings') context.
+	context := LzGlobalCache uniqueInstance
+				contextFor: 'Character strings'.
 	^ {
 		{ '"" + ""'. '""' }.
 		{ '"abc" + "xyz"'. '"abcxyz"'}.
@@ -206,10 +232,11 @@ LzLepiterExamples >> stringOperations [
 LzLepiterExamples >> stringTerms [
 	<gtExample>
 	| context |
-	context := (LzContextBuilder fromPage: 'Character strings') context.
+	context := LzGlobalCache uniqueInstance
+				contextFor: 'Character strings'.
 	^ {
-		{ '""'. 'string'. }.
-		{ '"abc"'. 'string' }.
+		{ '""'. 'String'. }.
+		{ '"abc"'. 'String' }.
 	}
 	collect: [ :each |
 		| term |

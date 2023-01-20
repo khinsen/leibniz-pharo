@@ -10,18 +10,6 @@ Class {
 	#category : #'Leibniz2-Contexts'
 }
 
-{ #category : #'instance creation' }
-LzContextBuilder class >> fromPage: pageName [
-	^ self fromPage: pageName subcontext: nil
-]
-
-{ #category : #'instance creation' }
-LzContextBuilder class >> fromPage: pageName subcontext: aString [
-	^ self new
-		addDeclarationsFromPageNamed: pageName subcontext: aString;
-		yourself
-]
-
 { #category : #lepiter }
 LzContextBuilder >> addDeclaration: anAnnotatedDeclaration [
 	| declaration |

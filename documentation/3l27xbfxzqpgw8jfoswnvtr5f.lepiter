@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-16T18:13:44.158675+01:00"
+						"dateAndTimeString" : "2023-01-20T11:52:41.466623+01:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A function is defined by an operator of sort\n\t{{lzSort:(domain:↕(𝕊)) → (image:𝕊)}}"
+				"string" : "A function is defined by an operator of sort\n\t{{lzSort:(domain:⇅(𝕊)) → (image:𝕊)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -379,7 +379,156 @@
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [ ]
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-30T15:51:35.265722+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-30T15:53:39.195198+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "/I1vTAyfDQCWMogKDteoFw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "The squaring function could have equally well be defined as an operator:\n\t{{lzOp:square(ℝ) : ℝ, subcontext = \"realFunction\"}}\n\t{{lzRule:square(x_:ℝ) ⇒ x_ × x_, subcontext = \"realFunction\", example = \"yes\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-30T15:53:53.396853+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-30T15:54:01.911363+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "ryHbVQyfDQCWNpJoDteoFw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Either choice has advantages and disadvantages."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-30T15:54:22.141477+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-30T15:56:53.90301+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "YXkbVwyfDQCWOf8YDteoFw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "The advantage of the operator is that it can be specialized for subsorts. For example, we could add\n\t{{lzOp:square(ℤ) : ℕ, subcontext = \"realFunction\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-30T15:57:36.034784+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-06-30T15:58:29.795654+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "3c+EYwyfDQCWPBqJDteoFw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "The advantage of the function is that it is a term on its own that can be used without arguments. See for example the definition of the derivative in [[Derivatives of functions of one variable]]."
+						}
+					]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -416,155 +565,193 @@
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T15:51:35.265722+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T15:53:39.195198+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "/I1vTAyfDQCWMogKDteoFw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "The squaring function could have equally well be defined as an operator:\n\t{{lzOp:square(ℝ) : ℝ, subcontext = \"realFunction\"}}\n\t{{lzRule:square(x_:ℝ) ⇒ x_ × x_, subcontext = \"realFunction\", example = \"yes\"}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T15:53:53.396853+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T15:54:01.911363+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "ryHbVQyfDQCWNpJoDteoFw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "Either choice has advantages and disadvantages."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T15:54:22.141477+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T15:56:53.90301+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "YXkbVwyfDQCWOf8YDteoFw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "The advantage of the operator is that it can be specialized for subsorts. For example, we could add\n\t{{lzOp:square(ℤ) : ℕ, subcontext = \"realFunction\"}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T15:57:36.034784+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-30T15:58:29.795654+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "3c+EYwyfDQCWPBqJDteoFw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "The advantage of the function is that it is a term on its own that can be used without arguments. See for example the definition of the derivative in [[Derivatives of functions of one variable]]."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-01-17T17:23:04.984998+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-01-20T11:53:04.073969+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "DVnk2NmuDQCEXN2ADLjH6w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "In the sort declaration\n\t{{lzSort:(domain:⇅(𝕊)) → (image:𝕊)}},\nthe domain sort parameter is marked as *contravariant*, which means that in subsort tests, its sort hierarchy is inverted. This is best illustrated by an example, which uses {{lzUseContext:name = \"Real numbers\", subcontext = \"contravariance\"}}."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-01-17T17:25:22.073751+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-01-17T17:35:04.095721+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "oQpX4dmuDQCG3vYPDLjH6w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Consider an operator {{lzOp:applyToOneThird(ℚ → ℚ) : ℚ, subcontext = \"contravariance\"}}, which takes as argument a function from rational number to rational numbers and applies this function to the number {{lzTerm:1/3, subcontext = \"contravariance\"}}. The corresponding rule is:\n\t{{lzRule:applyToOneThird(f_:(ℚ → ℚ)) ⇒ f_[1/3], subcontext = \"contravariance\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-01-20T12:03:39.437146+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-01-20T12:03:39.437146+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "ZU7/vBGvDQC7uixnBxlI/A=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Can we apply this operator to a function from integers to integers? Let's try:\n\t{{lzOp:f1 : ℤ → ℤ, subcontext = \"contravariance\"}}\n\t{{lzTerm:applyToOneThird(f1), subcontext = \"contravariance\", withSort = \"yes\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-01-20T12:05:17.888159+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-01-20T12:05:17.888159+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "WuAgvhGvDQC7w9hvBxlI/A=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "The resulting term does not have a proper sort, so something went wrong. Let's try something else: a function from real numbers to integers:\n\t{{lzOp:f2 : ℝ → ℤ, subcontext = \"contravariance\"}}\n\t{{lzTerm:applyToOneThird(f2), subcontext = \"contravariance\", withSort = \"yes\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-01-20T12:06:11.780687+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-01-20T12:06:11.780687+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "RyrwwxGvDQC8OUU8BxlI/A=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "This yields a proper term with a proper sort. A function from real numbers to integers is indeed also a function from rational numbers to rational numbers: it accepts any rational number as its argument (plus more, but we don't care about this), and it produces a rational number (more precisely, an integer, but we don't care about this precision)."
+						}
+					]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -596,191 +783,6 @@
 					"__type" : "textStyle"
 				},
 				"string" : "###Contravariance of the domain sort"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-17T17:23:04.984998+01:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-17T17:30:57.190184+01:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "DVnk2NmuDQCEXN2ADLjH6w=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "In the sort declaration\n\t{{lzSort:(domain:↕(𝕊)) → (image:𝕊)}},\nthe domain sort parameter is marked as *contravariant*, which means that in subsort tests, its sort hierarchy is inverted. This is best illustrated by an example, which uses {{lzUseContext:name = \"Real numbers\", subcontext = \"contravariance\"}}."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-17T17:25:22.073751+01:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-17T17:35:04.095721+01:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "oQpX4dmuDQCG3vYPDLjH6w=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "Consider an operator {{lzOp:applyToOneThird(ℚ → ℚ) : ℚ, subcontext = \"contravariance\"}}, which takes as argument a function from rational number to rational numbers and applies this function to the number {{lzTerm:1/3, subcontext = \"contravariance\"}}. The corresponding rule is:\n\t{{lzRule:applyToOneThird(f_:(ℚ → ℚ)) ⇒ f_[1/3], subcontext = \"contravariance\"}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-17T17:53:32.091991+01:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-17T17:53:50.869814+01:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "FfeTBdquDQCNNmGtDLjH6w=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "Can we apply this operator to a function from integers to integers? Let's try:\n\t{{lzOp:f1 : ℤ → ℤ, subcontext = \"contravariance\"}}\n\t{{lzTerm:applyToOneThird(f1), subcontext = \"contravariance\", withSort = \"yes\"}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-19T15:19:58.120806+01:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-19T15:21:42.124361+01:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "4ziPXACvDQCUlnkTCIHGvQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "The resulting term does not have a proper sort, so something went wrong. Let's try something else: a function from real numbers to integers:\n\t{{lzOp:f2 : ℝ → ℤ, subcontext = \"contravariance\"}}\n\t{{lzTerm:applyToOneThird(f2), subcontext = \"contravariance\", withSort = \"yes\"}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-19T15:22:37.348596+01:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-01-19T15:24:35.343892+01:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "r8iTZACvDQCW4Ua4CIHGvQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "This yields a proper term with a proper sort. A function from real numbers to integers is indeed also a function from rational numbers to rational numbers: it accepts any rational number as its argument (plus more, but we don't care about this), and it produces a rational number (more precisely, an integer, but we don't care about this precision)."
 			}
 		]
 	},

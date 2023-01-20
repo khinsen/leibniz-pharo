@@ -52,7 +52,7 @@ LzSignatureBuilder >> gtOperatorDeclarationsFor: aView [
 	^ aView list
 		title: 'Operator declarations';
 		priority: 1;
-		items: [ opDeclarations ] ;
+		items: [ opDeclarations asSet asArray ] ;
 		itemText: #asLeibnizSyntax;
 		yourself
 ]

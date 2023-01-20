@@ -11,7 +11,7 @@ LzConstants class >> opNameBoolean [
 
 { #category : #accessing }
 LzConstants class >> opNameContravariant [
-	^ '↕'
+	^ '⇅'
 ]
 
 { #category : #accessing }

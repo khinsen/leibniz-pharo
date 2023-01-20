@@ -272,15 +272,14 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 			| color output |
 			color := LzColors exampleColor.
 			output := declaration asRopedTextColored: color.
-			(object isKindOf: LzTerm) ifTrue: [
+			(object isKindOf: LzTermInContext) ifTrue: [
 				(object term sort isKind) ifTrue: [
 					output attribute:
 						(BlTextDecorationAttribute new
 							underline;
 							color: Color red) ].
 
-			(options at: #withSort ifAbsent: [ false ])
-				ifTrue: [
+				(options at: #withSort ifAbsent: [ false ]) ifTrue: [
 					| value colon sort |
 					value := declaration asRopedTextColored: color.
 					colon := ' : ' asRopedText foreground: color lzDeemphasized.
@@ -288,8 +287,7 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 					output append: colon.
 					output append: sort ].
 
-			(options at: #withNormalForm)
-				ifTrue: [
+				(options at: #withNormalForm) ifTrue: [
 					| normalForm |
 					normalForm := object normalForm asRopedTextColored: color.
 					output append: (' ⇒ ' asRopedText

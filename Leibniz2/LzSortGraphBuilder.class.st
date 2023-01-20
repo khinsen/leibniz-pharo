@@ -57,7 +57,7 @@ LzSortGraphBuilder >> gtSortDeclarationsFor: aView [
 	^ aView list
 		title: 'Sort declarations';
 		priority: 0;
-		items: [ sortDeclarations ];
+		items: [ sortDeclarations asSet asArray ];
 		itemText: #asLeibnizSyntax;
 		yourself
 ]
@@ -69,7 +69,7 @@ LzSortGraphBuilder >> gtSubsortDeclarationsFor: aView [
 	^ aView list
 		title: 'Subsort declarations';
 		priority: 1;
-		items: [ subsortDeclarations ];
+		items: [ subsortDeclarations asSet asArray ];
 		itemText: #asLeibnizSyntax;
 		yourself
 ]
