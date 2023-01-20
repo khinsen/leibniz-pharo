@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T14:55:41.949244+02:00"
+						"dateAndTimeString" : "2023-01-20T13:36:50.198777+01:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Derivatives of functions of one variable\"}}"
+				"string" : "Uses {{lzUseContext:name = \"Derivatives of real functions of one variable\"}}"
 			},
 			{
 				"__type" : "textSnippet",

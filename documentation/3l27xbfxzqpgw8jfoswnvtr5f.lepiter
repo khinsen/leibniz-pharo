@@ -516,7 +516,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-30T15:58:29.795654+02:00"
+									"dateAndTimeString" : "2023-01-20T13:36:50.204589+01:00"
 								}
 							},
 							"uid" : {
@@ -526,7 +526,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "The advantage of the function is that it is a term on its own that can be used without arguments. See for example the definition of the derivative in [[Derivatives of functions of one variable]]."
+							"string" : "The advantage of the function is that it is a term on its own that can be used without arguments. See for example the definition of the derivative in [[Derivatives of real functions of one variable]]."
 						}
 					]
 				},

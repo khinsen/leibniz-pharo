@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:09:52.825478+02:00"
+						"dateAndTimeString" : "2023-01-20T13:33:19.097012+01:00"
 					}
 				},
 				"editEmail" : {
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:12:33.390492+02:00"
+						"dateAndTimeString" : "2023-01-20T13:33:19.097012+01:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sum, difference, product, and quotient of two functions is another function:\n\t{{lzOp:(ℝ → ℝ) + (ℝ → ℝ) : ℝ → ℝ}}\n\t{{lzOp:(ℝ → ℝ) - (ℝ → ℝ) : ℝ → ℝ}}\n\t{{lzOp:(ℝ → ℝ) × (ℝ → ℝ) : ℝ → ℝ}}\n\t{{lzOp:(ℝ → ℝ) ÷ (ℝ → ℝ) : ℝ → ℝ}}"
+				"string" : "The sum, difference, product, and quotient of two functions is another function:\n\t{{lzOp:s_:𝕊, (s_ → ℝ) + (s_ → ℝ) : s_ → ℝ}}\n\t{{lzOp:s_:𝕊, (s_ → ℝ) - (s_ → ℝ) : s_ → ℝ}}\n\t{{lzOp:s_:𝕊, (s_ → ℝ) × (s_ → ℝ) : s_ → ℝ}}\n\t{{lzOp:s_:𝕊, (s_ → ℝ) ÷ (s_ → ℝ) : s_ → ℝ}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:08:45.863659+02:00"
+						"dateAndTimeString" : "2023-01-20T13:36:18.667804+01:00"
 					}
 				},
 				"editEmail" : {
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:08:55.233623+02:00"
+						"dateAndTimeString" : "2023-01-20T13:36:18.667804+01:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Addition and multiplication are commutative and associative:\n\t{{lzAxiom:f_:ℝ → ℝ, g_:ℝ → ℝ, f_ + g_ = g_ + f_}}\n\t{{lzAxiom:f_:ℝ → ℝ, g_:ℝ → ℝ, f_ × g_ = g_ × f_}}\n\t{{lzAxiom:f_:ℝ → ℝ, g_:ℝ → ℝ, h_:ℝ → ℝ, (f_ + g_) + h_ = f_ + (g_ + h_)}}\n\t{{lzAxiom:f_:ℝ → ℝ, g_:ℝ → ℝ, h_:ℝ → ℝ,  (f_ × g_) × h_ = f_ × (g_ × h_)}}"
+				"string" : "Addition and multiplication are commutative and associative:\n\t{{lzAxiom:s__:𝕊, f_:s__ → ℝ, g_:s__ → ℝ, f_ + g_ = g_ + f_}}\n\t{{lzAxiom:s__:𝕊, f_:s__ → ℝ, g_:s__ → ℝ, f_ × g_ = g_ × f_}}\n\t{{lzAxiom:s__:𝕊, f_:s__ → ℝ, g_:s__ → ℝ, h_:s__ → ℝ, (f_ + g_) + h_ = f_ + (g_ + h_)}}\n\t{{lzAxiom:s__:𝕊, f_:s__ → ℝ, g_:s__ → ℝ, h_:s__ → ℝ, (f_ × g_) × h_ = f_ × (g_ × h_)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:05:54.732307+02:00"
+						"dateAndTimeString" : "2023-01-20T13:37:42.799361+01:00"
 					}
 				},
 				"editEmail" : {
@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:08:45.900707+02:00"
+						"dateAndTimeString" : "2023-01-20T13:37:42.799361+01:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:f_:ℝ → ℝ, g_:ℝ → ℝ, h_:ℝ → ℝ,  f_ × (g_ + h_) = (f_ × g_) + (f_ × h_)}}"
+				"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:s__:𝕊, f_:s__ → ℝ, g_:s__ → ℝ, h_:s__ → ℝ,  f_ × (g_ + h_) = (f_ × g_) + (f_ × h_)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -166,7 +166,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-21T09:05:12.115783+02:00"
+						"dateAndTimeString" : "2023-01-20T13:39:46.137829+01:00"
 					}
 				},
 				"editEmail" : {
@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-21T09:08:37.457264+02:00"
+						"dateAndTimeString" : "2023-01-20T13:39:46.137829+01:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Function application is defined as:\n\t{{lzRule:f_:ℝ → ℝ, g_:ℝ → ℝ, x_:ℝ, (f_ + g_)[x_]  ⇒ f_[x_] + g_[x_]}}\n\t{{lzRule:f_:ℝ → ℝ, g_:ℝ → ℝ, x_:ℝ, (f_ - g_)[x_]  ⇒ f_[x_] - g_[x_]}}\n\t{{lzRule:f_:ℝ → ℝ, g_:ℝ → ℝ, x_:ℝ, (f_ × g_)[x_]  ⇒ f_[x_] × g_[x_]}}\n\t{{lzRule:f_:ℝ → ℝ, g_:ℝ → ℝ, x_:ℝ, (f_ ÷ g_)[x_]  ⇒ f_[x_] ÷ g_[x_]}}"
+				"string" : "Function application is defined as:\n\t{{lzRule:s__:𝕊, f_:s__ → ℝ, g_:s__ → ℝ, x_:s__, (f_ + g_)[x_]  ⇒ f_[x_] + g_[x_]}}\n\t{{lzRule:s__:𝕊, f_:s__ → ℝ, g_:s__ → ℝ, x_:s__, (f_ - g_)[x_]  ⇒ f_[x_] - g_[x_]}}\n\t{{lzRule:s__:𝕊, f_:s__ → ℝ, g_:s__ → ℝ, x_:s__, (f_ × g_)[x_]  ⇒ f_[x_] × g_[x_]}}\n\t{{lzRule:s__:𝕊, f_:s__ → ℝ, g_:s__ → ℝ, x_:s__, (f_ ÷ g_)[x_]  ⇒ f_[x_] ÷ g_[x_]}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -203,7 +203,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:16:39.173568+02:00"
+						"dateAndTimeString" : "2023-01-20T13:43:57.208976+01:00"
 					}
 				},
 				"editEmail" : {
@@ -214,7 +214,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:17:31.09981+02:00"
+						"dateAndTimeString" : "2023-01-20T13:43:57.208976+01:00"
 					}
 				},
 				"uid" : {
@@ -224,7 +224,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sum, difference, product, and quotient of a function and a number is a function:\n\t{{lzOp:(ℝ → ℝ) + ℝ : ℝ → ℝ}}\n\t{{lzOp:ℝ + (ℝ → ℝ) : ℝ → ℝ}}\n\t{{lzOp:(ℝ → ℝ) - ℝ : ℝ → ℝ}}\n\t{{lzOp:ℝ - (ℝ → ℝ) : ℝ → ℝ}}\n\t{{lzOp:(ℝ → ℝ) × ℝ : ℝ → ℝ}}\n\t{{lzOp:ℝ × (ℝ → ℝ) : ℝ → ℝ}}\n\t{{lzOp:(ℝ → ℝ) ÷ ℝ : ℝ → ℝ}}\n\t{{lzOp:ℝ ÷ (ℝ → ℝ) : ℝ → ℝ}}"
+				"string" : "The sum, difference, product, and quotient of a function and a number is a function:\n\t{{lzOp:s_:𝕊, (s_ → ℝ) + ℝ : s_ → ℝ}}\n\t{{lzOp:s_:𝕊, ℝ + (s_ → ℝ) : s_ → ℝ}}\n\t{{lzOp:s_:𝕊, (s_ → ℝ) - ℝ : s_ → ℝ}}\n\t{{lzOp:s_:𝕊, ℝ - (s_ → ℝ) : s_ → ℝ}}\n\t{{lzOp:s_:𝕊, (s_ → ℝ) × ℝ : s_ → ℝ}}\n\t{{lzOp:s_:𝕊, ℝ × (s_ → ℝ) : s_ → ℝ}}\n\t{{lzOp:s_:𝕊, (s_ → ℝ) ÷ ℝ : s_ → ℝ}}\n\t{{lzOp:s_:𝕊, ℝ ÷ (s_ → ℝ) : s_ → ℝ}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -240,7 +240,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:11:27.405456+02:00"
+						"dateAndTimeString" : "2023-01-20T13:45:25.589249+01:00"
 					}
 				},
 				"editEmail" : {
@@ -251,7 +251,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:11:27.405456+02:00"
+						"dateAndTimeString" : "2023-01-20T13:45:25.589249+01:00"
 					}
 				},
 				"uid" : {
@@ -261,7 +261,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Addition and multiplication are commutative and associative:\n\t{{lzAxiom:f_:ℝ → ℝ, s_:ℝ, f_ + s_ = s_ + f_}}\n\t{{lzAxiom:f_:ℝ → ℝ, s_:ℝ, f_ × s_ = s_ × f_}}"
+				"string" : "Addition and multiplication are commutative and associative:\n\t{{lzAxiom:s__:𝕊, f_:s__ → ℝ, p_:ℝ, f_ + p_ = p_ + f_}}\n\t{{lzAxiom:s__:𝕊, f_:s__ → ℝ, p_:ℝ, f_ × p_ = p_ × f_}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -277,7 +277,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:12:46.266038+02:00"
+						"dateAndTimeString" : "2023-01-20T13:46:04.250621+01:00"
 					}
 				},
 				"editEmail" : {
@@ -288,7 +288,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:12:46.266038+02:00"
+						"dateAndTimeString" : "2023-01-20T13:46:04.250621+01:00"
 					}
 				},
 				"uid" : {
@@ -298,7 +298,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:f_:ℝ → ℝ, g_:ℝ → ℝ, s_:ℝ,  s_ × (f_ + g_) = (s_ × f_) + (s_ × g_)}}"
+				"string" : "Addition is distributive over multiplication:\n\t{{lzAxiom:s__:𝕊, f_:s__ → ℝ, g_:s__ → ℝ, p_:ℝ,  p_ × (f_ + g_) = (p_ × f_) + (p_ × g_)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -314,7 +314,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-21T09:09:18.255875+02:00"
+						"dateAndTimeString" : "2023-01-20T13:59:55.229923+01:00"
 					}
 				},
 				"editEmail" : {
@@ -325,7 +325,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-10-21T09:13:33.841053+02:00"
+						"dateAndTimeString" : "2023-01-20T13:59:55.229923+01:00"
 					}
 				},
 				"uid" : {
@@ -335,7 +335,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Function application is defined as:\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (f_ + s_)[x_]  ⇒ f_[x_] + s_}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (s_ + f_)[x_]  ⇒ s_ + f_[x_]}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (f_ - s_)[x_]  ⇒ f_[x_] - s_}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (s_ - f_)[x_]  ⇒ s_ - f_[x_]}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (f_ × s_)[x_]  ⇒ f_[x_] × s_}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (s_ × f_)[x_]  ⇒ s_ × f_[x_]}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (f_ ÷ s_)[x_]  ⇒ f_[x_] ÷ s_}}\n\t{{lzRule:f_:ℝ → ℝ, s_:ℝ, x_:ℝ, (s_ ÷ f_)[x_]  ⇒ s_ ÷ f_[x_]}}"
+				"string" : "Function application is defined as:\n\t{{lzRule:s__:𝕊, f_:s__ → ℝ, p_:ℝ, x_:s__, (f_ + p_)[x_]  ⇒ f_[x_] + p_}}\n\t{{lzRule:s__:𝕊, f_:s__ → ℝ, p_:ℝ, x_:s__, (p_ + f_)[x_]  ⇒ p_ + f_[x_]}}\n\t{{lzRule:s__:𝕊, f_:s__ → ℝ, p_:ℝ, x_:s__, (f_ - p_)[x_]  ⇒ f_[x_] - p_}}\n\t{{lzRule:s__:𝕊, f_:s__ → ℝ, p_:ℝ, x_:s__, (p_ - f_)[x_]  ⇒ p_ - f_[x_]}}\n\t{{lzRule:s__:𝕊, f_:s__ → ℝ, p_:ℝ, x_:s__, (f_ × p_)[x_]  ⇒ f_[x_] × p_}}\n\t{{lzRule:s__:𝕊, f_:s__ → ℝ, p_:ℝ, x_:s__, (p_ × f_)[x_]  ⇒ p_ × f_[x_]}}\n\t{{lzRule:s__:𝕊, f_:s__ → ℝ, p_:ℝ, x_:s__, (f_ ÷ p_)[x_]  ⇒ f_[x_] ÷ p_}}\n\t{{lzRule:s__:𝕊, f_:s__ → ℝ, p_:ℝ, x_:s__, (p_ ÷ f_)[x_]  ⇒ p_ ÷ f_[x_]}}"
 			}
 		]
 	},
@@ -358,12 +358,12 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-06-28T15:08:20.849876+02:00"
+			"dateAndTimeString" : "2023-01-20T13:28:54.965827+01:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Real functions of one real variable"
+		"title" : "Real-valued functions of one variable"
 	},
 	"uid" : {
 		"__type" : "uuid",

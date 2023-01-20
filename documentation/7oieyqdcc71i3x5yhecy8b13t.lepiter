@@ -405,7 +405,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-06-30T13:53:06.062692+02:00"
+									"dateAndTimeString" : "2023-01-20T13:36:50.20582+01:00"
 								}
 							},
 							"uid" : {
@@ -415,7 +415,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Functions:\n\t[[Real functions of one real variable]],  [[Derivatives of functions of one variable]]\n\t[[Real functions of two real variables]]"
+							"string" : "Functions:\n\t[[Real-valued functions of one variable]],  [[Derivatives of real functions of one variable]]\n\t[[Real functions of two real variables]]"
 						},
 						{
 							"__type" : "textSnippet",

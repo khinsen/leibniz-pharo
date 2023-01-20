@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T15:09:14.860791+02:00"
+						"dateAndTimeString" : "2023-01-20T13:28:56.100778+01:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses {{lzUseContext:name = \"Real functions of one real variable\"}}"
+				"string" : "Uses {{lzUseContext:name = \"Real-valued functions of one variable\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -99,12 +99,12 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-06-28T14:51:19.153358+02:00"
+			"dateAndTimeString" : "2023-01-20T13:36:50.190002+01:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Derivatives of functions of one variable"
+		"title" : "Derivatives of real functions of one variable"
 	},
 	"uid" : {
 		"__type" : "uuid",
