@@ -64,7 +64,9 @@ LzOpTerm >> gtDebugActionFor: anAction [
 		tooltip: 'Debug term construction';
 		priority: 2;
 		icon: BrGlamorousIcons debug;
-		action: [ self halt. self signature opTerm: self opName args: self args ]
+		action: [
+			self halt.
+			signature opTerm: opName args: args ]
 ]
 
 { #category : #inspecting }

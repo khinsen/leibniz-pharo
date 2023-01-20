@@ -76,6 +76,22 @@ LzTermInContext >> findNormalForm [
 ]
 
 { #category : #inspecting }
+LzTermInContext >> gtDebugActionFor: anAction [
+	<gtAction>
+	^ anAction button
+		tooltip: 'Debug term construction';
+		priority: 2;
+		icon: BrGlamorousIcons debug;
+		action: [ 
+			| signature opName opArgs |
+			signature := self term signature.
+			opName := self term opName.
+			opArgs := self term args.
+			self halt.
+			signature opTerm: opName args: opArgs ]
+]
+
+{ #category : #inspecting }
 LzTermInContext >> gtMatchingRulesFor: aView [
 	<gtView>
 	^ aView forward
