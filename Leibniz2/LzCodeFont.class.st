@@ -27,7 +27,7 @@ LzCodeFont class >> brLabelFor: aString [
 LzCodeFont class >> chooseDefaultFamily [
 	| availableFamilies |
 	availableFamilies := SkiaFontManager default familyNames.
-	#('JuliaMono' 'Arial Unicode MS') do: [ :family |
+	#('JuliaMono' 'Arial Unicode MS' 'Noto Sans Math') do: [ :family |
 		(availableFamilies includes: family)
 			ifTrue: [ DefaultFamily := family. ^ self] ].
 	DefaultFamily := (' ' asRopedText glamorousCodeFont

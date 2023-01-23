@@ -9,7 +9,7 @@ The second iteration of [Leibniz](http://github.com/khinsen/leibniz), implemente
 
 ### Install a font with all the math symbols
 
-Leibniz makes generous use of Unicode glyphs that are not contained in the default fonts used by GToolkit. The best free fonts I have found is [JuliaMono](https://juliamono.netlify.app/), another option (which I haven't used for a while) is [Arial Unicode MS](https://docs.microsoft.com/en-us/typography/font-list/arial-unicode-ms). Leibniz will automatically select one of them, if available. Otherwise it will use the default code font of Glamorous Toolkit. It lacks many of the maths symbols that Leibniz uses. Some of them will be substituted from other fonts if possible, making the text readable but often ugly. Others will be replaced by a default glyph, making the code unreadable.
+Leibniz makes generous use of Unicode glyphs that are not contained in the default fonts used by GToolkit. The best free code font (monospaced) I have found is [JuliaMono](https://juliamono.netlify.app/). For standard text fonts, the options I am aware of are [Arial Unicode MS](https://docs.microsoft.com/en-us/typography/font-list/arial-unicode-ms) and [Noto Sans Math](https://github.com/google/fonts/tree/main/ofl/notosansmath). Leibniz will automatically select one of them, if available. Otherwise it will use the default code font of Glamorous Toolkit. It lacks many of the maths symbols that Leibniz uses. Some of them will be substituted from other fonts if possible, making the text readable but often ugly. Others will be replaced by a default glyph, making the code unreadable.
 
 ### Install [Glamorous Toolkit](https://gtoolkit.com/)
 
