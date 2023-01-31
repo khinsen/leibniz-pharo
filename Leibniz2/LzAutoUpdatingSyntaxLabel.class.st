@@ -61,7 +61,7 @@ LzAutoUpdatingSyntaxLabel >> makeLabel [
 					text: (ex printString asRopedText foreground: Color red);
 					declaration: ex ].
 	^ label beSmallSize asElement
-		padding: (BlInsets top: 2 left: 0 bottom: 0 right: 0)
+		padding: (BlInsets top: 0 left: 0 bottom: 2 right: 0)
 ]
 
 { #category : #'event handling' }
