@@ -55,6 +55,32 @@ LzEqualityAxiom >> condition: aPattern [
 ]
 
 { #category : #accessing }
+LzEqualityAxiom >> gtTreeFor: aView [
+	<gtView>
+	| fakeTerm |
+	fakeTerm :=
+		LzOpTerm new
+			signature: self signature;
+			opName: (LzInfixOpName for: #'=');
+			args: { self left. self right };
+			sort: nil.
+	^ aView columnedTree
+		title: 'Tree' translated;
+		priority: 0;
+		items: [ { fakeTerm } ];
+		column: 'Term' text: [ :each |
+			each synopsis asRopedText
+				fontName: LzCodeFont defaultFamily ];
+		column: 'Sort' text: [ :each |
+			each sort
+				ifNil: [ '' ]
+				ifNotNil: [ :s | s asLeibnizSyntax ] ];
+		children: #args;
+		expandAll;
+		yourself
+]
+
+{ #category : #accessing }
 LzEqualityAxiom >> left [
 	^ left
 ]
