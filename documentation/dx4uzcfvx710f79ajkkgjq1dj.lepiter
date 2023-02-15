@@ -754,7 +754,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-11-02T16:26:42.629334+01:00"
+						"dateAndTimeString" : "2023-02-15T11:18:07.975027+01:00"
 					}
 				},
 				"editEmail" : {
@@ -765,17 +765,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-11-02T17:01:05.942379+01:00"
+						"dateAndTimeString" : "2023-02-15T11:23:03.441652+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "DUdoNOCoDQCT1ykPA+LqcQ=="
+					"uidString" : "EHEvIhyxDQCjYeJ/ARvoJw=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A common strategy for stabilizing numerical solutions is to switch to an *implicit* integration scheme, in which the quantities on the right-hand side are evaluated at the *end* of the step rather than at the *beginning*. Doing this would result in the *implicit Euler method*. As explained in the blog post cited before, the best strategy for the Lotka-Volterra equations is to apply this strategy to only one of the to quantities (we choose {{lzTerm:x}}), resulting in the *symplectic Euler method*."
+				"string" : "A common strategy for stabilizing numerical solutions is to switch to an *implicit* integration scheme, in which the quantities on the right-hand side are evaluated at the *end* of the step rather than at the *beginning*. Doing this would result in the *implicit Euler method*. For the specific case of the Lotka-Volterra equations, which are a [Hamiltonian system](https://en.wikipedia.org/wiki/Hamiltonian_system), the best approach is the [semi-implicit Euler method](https://en.wikipedia.org/wiki/Semi-implicit_Euler_method), also known as the *symplectic* Euler method, which consists of treating one variable  (we choose {{lzTerm:x}}) implicly and the other one explicitly."
 			},
 			{
 				"__type" : "textSnippet",
