@@ -103,18 +103,17 @@ LzAnnotationStyler >> styleAutoUpdatingObjectButton: anAnnotation text: aBlock [
 	annotatedDeclaration := LzDeclarationBuilder new
 		acceptNode: anAnnotation.
 	declaration := annotatedDeclaration declaration.
-	[
-		label := LzAutoUpdatingSyntaxLabel new
-					page: self page;
-					subcontext: (annotatedDeclaration optionsAt: #subcontext);
-					declaration: annotatedDeclaration declaration;
-					options: annotatedDeclaration options;
-					textBlock: aBlock;
-					setUp.
-	] on: Exception do: [ :ex | ex freeze. ex inspect ].
 	attribute := GtButtonAttribute new
-					beAppend;
-					stencil: [ label ].
+		beAppend;
+		stencil: [
+			[ LzAutoUpdatingSyntaxLabel new
+				page: self page;
+				subcontext: (annotatedDeclaration optionsAt: #subcontext);
+				declaration: annotatedDeclaration declaration;
+				options: annotatedDeclaration options;
+				textBlock: aBlock;
+				setUp.
+			] on: Exception do: [ :ex | ex freeze. ex inspect ] ].
 	self text
 		attribute: attribute
 		from: anAnnotation parent startPosition
