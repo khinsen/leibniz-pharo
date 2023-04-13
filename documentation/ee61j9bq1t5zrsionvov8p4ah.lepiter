@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-06T17:49:27.951237+02:00"
+						"dateAndTimeString" : "2023-04-13T10:38:52.773064+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An {{lzSort:agent}} is an individual or a family that lives in a specific {{lzSort:place}} in a territory."
+				"string" : "An {{lzSort:agent}} represents an individual or a family that lives in a specific {{lzSort:place}} in a {{lzSort:territory}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -151,6 +151,43 @@
 					"__type" : "textStyle"
 				},
 				"string" : "There are two kinds of agents, distinguished by a {{lzSort:color}} attribute which can be {{lzOp:black:color}} or {{lzOp:white:color}}, a choice motivated by the particular case of racial segregation in the USA that Schelling wished to describe with his model."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T10:49:04.533941+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T10:51:40.158889+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "/V2liJW1DQCwmiRHB5mQOw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "An agent is thus defined by (1) a unique {{lzSort:label}}, (2) its {{lzSort:color}}:\n\t{{lzOp:agent(label, color) : agent}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -240,6 +277,43 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T10:45:10.384266+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T10:57:14.017646+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "g4ewepW1DQCsgFDPB5mQOw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "An agent is happy if at least half of the other agents in its neighborhood are of the same color:\n\t{{lzRule:a_:agent, n_:neighborhood, isHappy(a_, n_) ⇒ fraction(color(a_), n_) ≥ 1/2}}\nwith\n\t{{lzOp:color(agent) : color}},\n\t{{lzRule:l_:label, c_:color, color(agent(l_, c_)) ⇒ c_}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2023-04-06T17:42:39.400317+02:00"
 					}
 				},
@@ -251,7 +325,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-06T18:01:22.846908+02:00"
+						"dateAndTimeString" : "2023-04-13T10:36:55.481525+02:00"
 					}
 				},
 				"uid" : {
@@ -261,7 +335,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "When an agent is unhappy, it moves to the nearest place that provides happiness."
+				"string" : "When an agent is unhappy, it moves to the nearest place that provides happiness. If no such place exists, it stays where it is."
 			},
 			{
 				"__type" : "textSnippet",
