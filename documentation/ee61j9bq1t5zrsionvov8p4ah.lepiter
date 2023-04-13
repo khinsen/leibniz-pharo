@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-06T15:38:51.019707+02:00"
+						"dateAndTimeString" : "2023-04-13T15:33:44.915719+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses:\n- {{lzUseContext:name=\"Rational numbers\"}}\n- {{lzUseContext:name=\"One-dimensional arrays\"}}"
+				"string" : "Uses:\n- {{lzUseContext:name=\"Rational numbers\"}}\n- {{lzUseContext:name=\"One-dimensional arrays\"}}\n- {{lzUseContext:name = \"Term equality\"}}\n- {{lzUseContext:name = \"Boolean algebra\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -251,7 +251,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T11:42:26.156217+02:00"
+						"dateAndTimeString" : "2023-04-13T15:20:26.079691+02:00"
 					}
 				},
 				"uid" : {
@@ -261,7 +261,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The {{lzSort:occupation}} of each place is either an {{lzSort:agent ⊆ occupation}} or the special value {{lzOp:empty : occupation}}:\n\t{{lzOp:occupation(place) : occupation}}"
+				"string" : "The {{lzSort:occupation}} of each place at a  given {{lzSort:time}} is either an {{lzSort:agent ⊆ occupation}} or the special value {{lzOp:empty : occupation}}:\n\t{{lzOp:occupation(place, time) : occupation}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -362,7 +362,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T12:19:11.147331+02:00"
+						"dateAndTimeString" : "2023-04-13T15:10:41.078778+02:00"
 					}
 				},
 				"uid" : {
@@ -372,7 +372,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "There are two kinds of {{lzSort:agent}}s, distinguished by a {{lzSort:color}} attribute which can be {{lzOp:black:color}} or {{lzOp:white:color}}.  Each agent also has a unique {{lzSort:label}}:\n\t{{lzOp:agent(label, color) : agent}}"
+				"string" : "There are two kinds of {{lzSort:agent}}: {{lzOp:black : agent}} and {{lzOp:white : agent}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -436,7 +436,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T12:11:50.824269+02:00"
+						"dateAndTimeString" : "2023-04-13T15:21:58.336408+02:00"
 					}
 				},
 				"uid" : {
@@ -446,7 +446,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Happiness is binary. Agents are happy in the place where they live, or they are not:\n\t\t{{lzOp:isHappy(agent, place) : 𝔹}}"
+				"string" : "Happiness is binary. Agents are happy in a place, or they are not:\n\t\t{{lzOp:isHappy(agent, place) : 𝔹}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -473,7 +473,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T12:12:16.712329+02:00"
+						"dateAndTimeString" : "2023-04-13T15:16:42.351069+02:00"
 					}
 				},
 				"uid" : {
@@ -483,7 +483,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Happiness depends on the fraction of the population in the {{lzSort:neighborhood}} of a place that is of the same {{lzSort:color}} as the agent:\n\t{{lzOp:fraction(color, neighborhood) : ℚ.nn}}\nwith\n\t{{lzAxiom:nbh_:neighborhood, fraction(black, nbh_) + fraction(white, nbh_) = 1}}"
+				"string" : "Happiness depends on the fraction of the population in the neighborhood of a place that is of the same color as the agent:\n\t{{lzOp:fractionInNeighborhood(place, agent) : ℚ.nn}}\nwith\n\t{{lzAxiom:p_:place, fractionInNeighborhood(p_, black) + fractionInNeighborhood(p_, white) = 1}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -510,7 +510,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T11:53:20.050713+02:00"
+						"dateAndTimeString" : "2023-04-13T15:17:39.325305+02:00"
 					}
 				},
 				"uid" : {
@@ -520,7 +520,155 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An agent is happy if at least half of the other agents in its neighborhood are of the same color:\n\t{{lzRule:a_:agent, p_:place, isHappy(a_, p_) ⇒ fraction(color(a_), neighborhood(p_)) ≥ 1/2}}\nwith\n\t{{lzOp:color(agent) : color}},\n\t{{lzRule:l_:label, c_:color, color(agent(l_, c_)) ⇒ c_}}\nand\n\t{{lzOp:neighborhood(place) : neighborhood}}"
+				"string" : "An agent is happy if at least half of the other agents in its neighborhood are of the same color:\n\t{{lzRule:a_:agent, p_:place, isHappy(a_, p_) ⇒ fractionInNeighborhood(p_, a_) ≥ 1/2}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T15:24:27.454081+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T15:24:31.616696+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "fBx9YZm1DQCN9dK9BdbuMA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Moving"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T15:36:42.745129+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T15:37:24.902236+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "IMdQjZm1DQCWh5n/BdbuMA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "At each iteration of the simulation, agents can move to a new {{lzSort:place}}:\n\t\t{{lzOp:newPlace(agent, current:place) : place}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T15:37:41.433457+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T15:38:03.873445+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "YUfQkJm1DQCXFBQOBdbuMA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Happy agents stay where they are:\n\t\t{{lzRule:move[1]:a_:agent, cp_:place, newPlace(a_, cp_) ⇒ cp_ | isHappy(a_, cp_)}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T15:38:55.136018+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T15:39:14.478019+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "vOc0lZm1DQCYUOXWBdbuMA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Unhappy agents look for the nearest unoccupied place that provides happiness:\n\t {{lzOp:nearestHappiness(agent, place) : place}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -547,7 +695,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T11:52:28.138747+02:00"
+						"dateAndTimeString" : "2023-04-13T15:41:56.697913+02:00"
 					}
 				},
 				"uid" : {
@@ -557,7 +705,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "When an agent is unhappy, it moves to the nearest unoccupied place that provides happiness. If no such place exists, it stays where it is:\n\t{{lzOp:newPlace(agent, current:place) : place}}\n\t{{lzRule:move[1]:a_:agent, cp_:place, newPlace(a_, cp_) ⇒ cp_ | isHappy(a_, cp_)}}\n\t{{lzRule:move[2]:a_:agent, cp_:place, newPlace(a_, cp_) ⇒ nearestHappiness(t_, color(a_), cp_)"
+				"string" : "Such a place may not exist, its value being {{lzOp:nowhere:place}}. In that case, the agent  stays where it is:\n\t{{lzRule:move[2]:a_:agent, cp_:place, newPlace(a_, cp_) ⇒ nearestHappiness(a_, cp_) | ¬(nearestHappiness(a_, cp_) == nowhere)}}\n\t{{lzRule:move[3]:a_:agent, cp_:place, newPlace(a_, cp_) ⇒ cp_}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -573,7 +721,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T11:30:02.578211+02:00"
+						"dateAndTimeString" : "2023-04-13T15:42:09.035845+02:00"
 					}
 				},
 				"editEmail" : {
@@ -584,7 +732,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T11:30:47.608126+02:00"
+						"dateAndTimeString" : "2023-04-13T15:42:09.035845+02:00"
 					}
 				},
 				"uid" : {
@@ -594,7 +742,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The nearest {{lzOp:nearestHappiness(place, territory, color) : place"
+				"string" : ""
 			},
 			{
 				"__type" : "textSnippet",
