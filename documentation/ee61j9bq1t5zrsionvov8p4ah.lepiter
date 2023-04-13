@@ -18,6 +18,43 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T12:04:59.952341+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T17:18:37.402964+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "JoErmJa1DQCY340OB5mQOw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "In 1971, Thomas Schelling published [a paper](https://doi.org/10.1080/0022250X.1971.9989794) on racial segregation in the USA. In this paper, he explored one specific mechanism causing segregation, by simulating what is now considered to be the first [agent-based model](https://en.wikipedia.org/wiki/Agent-based_model). He performed his simulations manually, using coins he moved around on a piece of paper. The following is a formalization of his model."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2023-04-06T15:36:09.933082+02:00"
 					}
 				},
@@ -55,43 +92,6 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T12:04:59.952341+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T12:09:55.922952+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "JoErmJa1DQCY340OB5mQOw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "In 1971, Thomas Schelling published [a paper](https://doi.org/10.1080/0022250X.1971.9989794) on racial segregation in the USA that explored one mechanism causing segregation by simulating what is now considered to be the first [agent-based model](https://en.wikipedia.org/wiki/Agent-based_model). He performed his simulations manually, using coins he moved around on a piece of paper. The following is a formalization of his model."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2023-04-06T15:36:59.210663+02:00"
 					}
 				},
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T12:01:23.439084+02:00"
+						"dateAndTimeString" : "2023-04-13T17:15:14.221025+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "###Outline"
+				"string" : "###Outline of the model"
 			},
 			{
 				"__type" : "textSnippet",
@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T12:10:30.398048+02:00"
+						"dateAndTimeString" : "2023-04-13T17:15:48.87589+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An {{lzSort:agent}} represents an individual or a family that lives in a specific {{lzSort:place}} in some territory. Agents like their {{lzSort:neighborhood}} depending on how much of its population shared their own {{lzSort:color}}. If an agent is not happy in its {{lzSort:place}}, it tries to move to another one"
+				"string" : "An {{lzSort:agent}} represents an individual or a family that lives in a specific {{lzSort:place}} in some territory. Agents are characterized by their color (black or white), and they like their {{lzSort:neighborhood}} depending on which fraction of its population shares their color. If an agent is not happy in its place, it tries to move to another one."
 			},
 			{
 				"__type" : "textSnippet",
@@ -214,7 +214,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T11:37:10.470142+02:00"
+						"dateAndTimeString" : "2023-04-13T17:16:46.361629+02:00"
 					}
 				},
 				"uid" : {
@@ -224,7 +224,81 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The territory is defined by a list of {{lzSort:place}}s and a way to compute the distance between two {{lzSort:place}}s:\n\t{{lzOp:allPlaces : Array1D(place)}}\n\t{{lzOp:distance(p1:place, p2:place) : ℚ.nn}}"
+				"string" : "The territory is defined by a list of {{lzSort:place}}s and a way to compute the distance between two places:\n\t{{lzOp:allPlaces : Array1D(place)}}\n\t{{lzOp:distance(p1:place, p2:place) : ℚ.nn}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T17:35:48.517354+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T17:53:15.657342+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "HoTUNJu1DQCzsvtAAW4qrw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Schelling's paper territory corresponds to a rectangular grid of {{lzOp:N:ℕ.nz}} rows and {{lzOp:M:ℕ.nz}} columns. A place is a cell in the grid, defined by two integer coordinates:\n\t{{lzOp:cell(ℕ.nz, ℕ.nz) : place}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T17:41:15.751582+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T17:51:17.879823+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "68y9Spu1DQC6Gb1MAW4qrw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Schelling moved his coins only along the rows and columns, like a rook in chess. The distance between two cells is thus:\n\t{{lzRule:x1_:ℕ.nz, x2_:ℕ.nz, y1_:ℕ.nz, y2_:ℕ.nz, distance(cell(x1_, y1_), cell(x2_, y2_)) ⇒ abs(x1_ - x2_) + abs(y1_ - y2_)}}\nwith the absolute value {{lzOp:abs(ℤ) : ℕ}} defined by\n\t{{lzRule:n_:ℕ, abs(n_) ⇒ n_}}\n\t{{lzRule:z_:ℤ, abs(z_) ⇒ -(z_) | z_ < 0}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -251,7 +325,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T15:20:26.079691+02:00"
+						"dateAndTimeString" : "2023-04-13T17:29:40.507516+02:00"
 					}
 				},
 				"uid" : {
@@ -261,7 +335,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The {{lzSort:occupation}} of each place at a  given {{lzSort:time}} is either an {{lzSort:agent ⊆ occupation}} or the special value {{lzOp:empty : occupation}}:\n\t{{lzOp:occupation(place, time) : occupation}}"
+				"string" : "The {{lzSort:occupation}} of each place at a  given time is either an {{lzSort:agent ⊆ occupation}} or the special value {{lzOp:empty : occupation}}:\n\t{{lzOp:occupation(place, time:ℕ) : occupation}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -288,7 +362,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T12:11:17.296029+02:00"
+						"dateAndTimeString" : "2023-04-13T17:30:48.136012+02:00"
 					}
 				},
 				"uid" : {
@@ -298,7 +372,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The occupation is the dynamic state of the simulation. It is initialized at the beginning, and then updated in a sequence of iterations during which agents move to find happiness."
+				"string" : "The occupation is the dynamic state of the simulation. It is initialized at time 0, and then updated in a sequence of iterations during which agents move to find happiness."
 			},
 			{
 				"__type" : "textSnippet",
@@ -536,6 +610,80 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T17:54:41.316354+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T17:54:44.816709+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "vb7Bepu1DQCDa+4uAW4qrw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Neighborhoods"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T17:54:46.944988+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T17:58:22.569686+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "y6YXe5u1DQCDdKjNAW4qrw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The neighborhood of a cell in the bulk of the grid consists of its eight surrounding cells. The neighborhoods of cells on the edge of the territory is smaller."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2023-04-13T15:24:27.454081+02:00"
 					}
 				},
@@ -732,7 +880,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T15:42:09.035845+02:00"
+						"dateAndTimeString" : "2023-04-13T17:31:07.059321+02:00"
 					}
 				},
 				"uid" : {
@@ -742,7 +890,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "###Initialization"
 			},
 			{
 				"__type" : "textSnippet",
@@ -769,7 +917,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-06T18:00:03.026587+02:00"
+						"dateAndTimeString" : "2023-04-13T17:28:01.893454+02:00"
 					}
 				},
 				"uid" : {
@@ -779,7 +927,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "A simulation is defined by "
 			},
 			{
 				"__type" : "textSnippet",
