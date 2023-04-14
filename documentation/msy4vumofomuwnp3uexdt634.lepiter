@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T15:22:22.50093+02:00"
+						"dateAndTimeString" : "2023-04-14T14:00:37.650956+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T15:23:37.479467+02:00"
+						"dateAndTimeString" : "2023-04-14T14:00:53.521482+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "qvasenCfDQCILODTAuCLfw=="
+					"uidString" : "M9KHU6y1DQCXxr9NDR+zCg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Integers\"}}"
+				"string" : "Uses {{lzUseContext:name = \"One-dimensional array indexation\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-18T17:25:42.772957+02:00"
+						"dateAndTimeString" : "2023-04-14T14:45:45.145357+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +66,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-18T17:26:07.426414+02:00"
+						"dateAndTimeString" : "2023-04-14T14:46:14.531452+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "FCTaVOeiDQCet1AyA9oiYA=="
+					"uidString" : "k97o9Ky1DQC1LRyJAQsGyA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Array elements are indexed using brackets:\n\t{{lzOp:s_:𝕊, Array1D(s_)[ℕ.nz] : s_}}"
+				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Two-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Integers\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-18T17:26:35.63218+02:00"
+						"dateAndTimeString" : "2023-04-14T14:01:25.628837+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-19T11:07:50.246795+02:00"
+						"dateAndTimeString" : "2023-04-14T14:01:55.6303+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "/pIAWOeiDQCeumLKA9oiYA=="
+					"uidString" : "c99jVqy1DQCZLh5ADR+zCg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For literal array terms, indexation is implemented in Pharo:\n\t{{lzRule:s__:𝕊, A_:Array1D(s__), i_:ℕ.nz, A_[i_] ⇒ Pharo:\"A ensureArrayTerm. i ensureNumber. A index: i\"}}"
+				"string" : "Array elements are indexed using brackets:\n\t{{lzOp:s_:𝕊, Array2D(s_)[ℕ.nz, ℕ.nz] : s_}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:29:46.518157+02:00"
+						"dateAndTimeString" : "2023-04-14T14:02:05.519338+02:00"
 					}
 				},
 				"editEmail" : {
@@ -140,12 +140,49 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:29:51.294752+02:00"
+						"dateAndTimeString" : "2023-04-14T14:05:48.379832+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "qGLFu6y1DQCk1MuhDR+zCg=="
+					"uidString" : "WIzEWKy1DQCZZYhdDR+zCg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "For literal array terms, indexation is implemented in Pharo:\n\t{{lzRule:s__:𝕊, A_:Array2D(s__), i1_:ℕ.nz, i2_:ℕ.nz, A_[i1_, i2_] ⇒ Pharo:\"A ensureArrayTerm. i1 ensureNumber. i2 ensureNumber. A index: i1 index: i2\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-14T14:29:58.490302+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-14T14:30:01.679257+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "NhF8vKy1DQClCrsaDR+zCg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
@@ -166,7 +203,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:13:29.170619+02:00"
+						"dateAndTimeString" : "2023-04-14T14:09:13.441786+02:00"
 					}
 				},
 				"editEmail" : {
@@ -177,17 +214,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:13:30.019624+02:00"
+						"dateAndTimeString" : "2023-04-14T14:53:31.356796+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "nD6Egay1DQCceCekDR+zCg=="
+					"uidString" : "uiJGcqy1DQCbW5gYDR+zCg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The shape of an array can be obtained as\n\t{{lzOp:shape(Array) : Array1D(ℕ)}}\nFor literal array terms, it is computed in Pharo:\n\t{{lzRule:A_:Array, shape(A_) ⇒ Pharo:\"A ensureArrayTerm. A shapeAsArrayTerm\"}}"
+				"string" : "The shape of an array can be obtained as\n\t{{lzOp:shape(Array) : Array1D(ℕ)}}\nFor literal array terms, it is computed in Pharo:\n\t{{lzRule:shape(A_:Array) ⇒ Pharo:\"A ensureArrayTerm. A shapeAsArrayTerm\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -203,7 +240,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:29:34.776485+02:00"
+						"dateAndTimeString" : "2023-04-14T14:30:04.877157+02:00"
 					}
 				},
 				"editEmail" : {
@@ -214,12 +251,12 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:29:41.0776+02:00"
+						"dateAndTimeString" : "2023-04-14T14:30:07.429805+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "KzkSu6y1DQCkmFKYDR+zCg=="
+					"uidString" : "dnrdvKy1DQClNwxuDR+zCg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
@@ -240,7 +277,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-19T11:00:25.679466+02:00"
+						"dateAndTimeString" : "2023-04-14T14:23:35.455802+02:00"
 					}
 				},
 				"editEmail" : {
@@ -251,17 +288,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:27:06.608954+02:00"
+						"dateAndTimeString" : "2023-04-14T14:27:27.625191+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "mb3NEPaiDQCzZ0oRANmnAw=="
+					"uidString" : "RGynpay1DQCiC9A1DR+zCg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The length of an array is the first element of its shape. It can be obtained as\n\t{{lzOp:length(Array) : ℕ}}\nIt is zero for empty arrays:\n\t{{lzRule:length(A_:EmptyArray(0)) ⇒ 0}}\nFor literal array terms, it is computed in Pharo:\n\t{{lzRule:length(A_:Array) ⇒ Pharo:\"A ensureArrayTerm. A lengthAsTerm\"}}"
+				"string" : "The length of an array is the first element of its shape, i.e. the number of rows in a two-dimensional array. It can be obtained as\n\t{{lzOp:length(Array) : ℕ}}\nIt is zero for empty arrays with zero rows:\n\t{{lzRule:n__:ℕ, length(A_:EmptyArray(0, n__)) ⇒ 0}}\nFor literal array terms, it is computed in Pharo:\n\t{{lzRule:length(A_:Array) ⇒ Pharo:\"A ensureArrayTerm. A lengthAsTerm\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -277,7 +314,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:14:07.4826+02:00"
+						"dateAndTimeString" : "2023-04-14T14:06:45.366674+02:00"
 					}
 				},
 				"editEmail" : {
@@ -288,12 +325,12 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:06:54.210493+02:00"
+						"dateAndTimeString" : "2023-04-14T14:06:49.45587+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "spnv4HKfDQCTOZNrC48Pjw=="
+					"uidString" : "K+Aaaay1DQCaWAFlDR+zCg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
@@ -314,7 +351,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T18:16:18.377579+02:00"
+						"dateAndTimeString" : "2023-04-14T14:07:02.916525+02:00"
 					}
 				},
 				"editEmail" : {
@@ -325,17 +362,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:14:01.637724+02:00"
+						"dateAndTimeString" : "2023-04-14T14:37:36.203269+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "d2k24XKfDQCTO+iyC48Pjw=="
+					"uidString" : "lnl+aqy1DQCao53aDR+zCg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For an array literal:\n\t{{lzTerm:length({[1, 4, 9]}), withNormalForm = \"yes\"}}\n\t{{lzTerm:shape({[1, 4, 9]}), withNormalForm = \"yes\"}}\n\t{{lzTerm:{[1, 4, 9]}[2], withNormalForm = \"yes\"}}\nIndices out of the range of valid indices are not rewritten:\n\t{{lzTerm:{[1, 4, 9]}[4], withNormalForm = \"yes\"}}"
+				"string" : "For an array literal:\n\t{{lzTerm:shape({[[1, 4, 9], [16, 25, 36]]}), withNormalForm = \"yes\"}}\n\t{{lzTerm:length({[[1, 4, 9], [16, 25, 36]]}), withNormalForm = \"yes\"}}\n\t{{lzTerm:{[[1, 4, 9], [16, 25, 36]]}[2, 1], withNormalForm = \"yes\"}}\nIndices out of the range of valid indices are not rewritten:\n\t{{lzTerm:{[[1, 4, 9], [16, 25, 36]]}[1, 4], withNormalForm = \"yes\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -351,7 +388,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-19T11:11:45.186559+02:00"
+						"dateAndTimeString" : "2023-04-14T14:41:01.743452+02:00"
 					}
 				},
 				"editEmail" : {
@@ -362,17 +399,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:14:56.245141+02:00"
+						"dateAndTimeString" : "2023-04-14T14:43:15.194585+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "KqHrM/aiDQCzaytFANmnAw=="
+					"uidString" : "e38E5Ky1DQCoHeFwCCKGhQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For an empty array:\n\t{{lzTerm:length({[]}), withNormalForm = \"yes\"}}\n\t{{lzTerm:shape({[]}), withNormalForm = \"yes\"}}"
+				"string" : "For an empty array:\n\t{{lzTerm:shape({[[], []]}), withNormalForm = \"yes\"}}"
 			}
 		]
 	},
@@ -384,7 +421,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-07-05T15:22:20.507465+02:00"
+			"dateAndTimeString" : "2023-04-14T14:00:37.561908+02:00"
 		}
 	},
 	"editEmail" : {
@@ -395,15 +432,15 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2022-07-05T15:22:20.507465+02:00"
+			"dateAndTimeString" : "2023-04-14T14:00:37.561908+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "One-dimensional array indexation"
+		"title" : "Two-dimensional array indexation"
 	},
 	"uid" : {
 		"__type" : "uuid",
-		"uuid" : "bd58ac7a-709f-0d00-882b-888c02e08b7f"
+		"uuid" : "10758653-acb5-0d00-97c5-d2540d1fb30a"
 	}
 }

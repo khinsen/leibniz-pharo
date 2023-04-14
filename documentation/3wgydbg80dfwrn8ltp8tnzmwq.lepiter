@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T11:02:05.675742+02:00"
+						"dateAndTimeString" : "2023-04-14T13:47:25.504964+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An empty one-dimensional array has sort {{lzSort:EmptyArray(zero)}}. An empty array cannot have a regular array sort, because regular array sorts depend on the type of the array elements. An empty array has no elements. The integer argument in the array sort is always zero. It is there for consistency with higher-dimensional arrays, which can have non-zero lengths along all but one dimensions. For the same reason, there is a sort {{lzSort:EmptyArray1D}} with {{lzSort:i1_:zero, EmptyArray(i1_) ⊆ EmptyArray1D}}."
+				"string" : "An empty one-dimensional array has sort {{lzSort:EmptyArray1D}}. . An empty array cannot have a regular array sort, because regular array sorts depend on the type of the array elements. An empty array has no elements. For consistency with higher-dimensional arrays, there is also the sort {{lzSort:EmptyArray(zero)}}, with {{lzSort:i1_:zero, EmptyArray(i1_) ⊆ EmptyArray1D}}. Its argument is always zero, but higher-dimensional arrays can have non-zero lengths along all but one dimensions."
 			},
 			{
 				"__type" : "textSnippet",
@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T11:02:13.882427+02:00"
+						"dateAndTimeString" : "2023-04-14T13:36:58.347543+02:00"
 					}
 				},
 				"uid" : {
