@@ -3,7 +3,119 @@
 	"__type" : "page",
 	"children" : {
 		"__type" : "snippets",
-		"items" : [ ]
+		"items" : [
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-14T10:44:03.723323+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-14T10:53:17.814798+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "ZsSOlKm1DQCL3a/ODR+zCg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Uses {{lzUseContext:name = \"One-dimensional arrays\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-14T10:53:22.249769+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-14T10:55:16.638894+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "2SzZtam1DQCPWzxWDR+zCg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The generic sort of a two-dimensional array containing elements of sort {{lzSort:𝕊, example = \"yes\"}} is {{lzSort:Array2D(𝕊)}}. The sort of an array of known size is {{lzSort:Array(𝕊, ℕ.nz, ℕ.nz)}}, with {{lzSort:s_:𝕊, i1_:ℕ.nz, i2_:ℕ.nz, Array(s_, i1_, i2_) ⊆ Array2D(s_)}}."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-14T10:55:38.534058+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-14T11:00:05.795662+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "H7b4vam1DQCP9lmsDR+zCg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "An empty two-dimensional array has sort {{lzSort:EmptyArray(ℕ, ℕ)}}. An empty array cannot have a regular array sort, because regular array sorts depend on the type of the array elements. An empty array has no elements. The integer arguments in the array sort define the size of the array. At least one of them must be {{lzSort:zero, example = \"yes\"}}, otherwise the array would not be empty. An empty two-dimensional array of unknown size has sort {{lzSort:EmptyArray2D}}, with {{lzSort:i1_:ℕ.nz, i2_:ℕ.nz, EmptyArray(i1_, i2_) ⊆ EmptyArray2D}}."
+			}
+		]
 	},
 	"createEmail" : {
 		"__type" : "email",
