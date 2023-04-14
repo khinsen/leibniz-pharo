@@ -111,6 +111,19 @@ LzArrayTerm >> index: anInteger [
 ]
 
 { #category : #transforming }
+LzArrayTerm >> index: index1 index: index2 [
+	| i1 i2 |
+	self assert: self shape size == 2.
+	i1 := index1 value.
+	i2 := index2 value.
+	(i1 < 0 or: [ i1 > shape first
+		or: [ i2 < 0 or: [ i2 > shape second ] ]])
+		ifTrue: [ LzRewriteFailure signal:
+					'index ', { i1 . i2 } asString, ' out of range' ].
+	^ elements at: ((i1-1) * shape second) + i2
+]
+
+{ #category : #transforming }
 LzArrayTerm >> inject: aTerm into: aFnTerm [
 	^ elements inject: aTerm into: [ :total :each |
 		self signature
