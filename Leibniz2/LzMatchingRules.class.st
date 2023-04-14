@@ -40,7 +40,10 @@ LzMatchingRules >> gtRulesFor: aView [
 								ifNotNil: [ :t | t asLeibnizSyntax ] ]
 					ifFalse: [ '' ] ]
 			width: 400;
-		send: [ :each | { each first. each fourth } ];
+		send: [ :each |
+			LzRuleMatcher new
+				rule: each first;
+				term: self term ];
 		yourself.
 	self hasConditionalRule ifTrue: [
 		ruleView column: 'Condition' text: [ :each |
