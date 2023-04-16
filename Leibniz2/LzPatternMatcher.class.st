@@ -62,9 +62,7 @@ LzPatternMatcher >> gtReportFor: aView [
 		column: 'Term' text: [ :each | each value second gtDisplayText ];
 		column: 'Success' text: [ :each |
 			each value third ];
-		send: [ :each | LzPatternMatcher new
-							pattern: each value first;
-							term: each value second ];
+		send: [ :each | each value fourth ];
 		yourself.
 ]
 
@@ -95,7 +93,8 @@ LzPatternMatcher >> gtUnboundFor: aView [
 LzPatternMatcher >> match [
 	bindings := self pattern match: self term.
 	report := OrderedCollection
-				with: #term -> { pattern . term . bindings isSuccess }.
+		with: #term ->
+			{ pattern . term . bindings isSuccess . self }.
 	(self pattern isKindOf: LzVarTerm)
 		ifTrue: [ self matchVar: self pattern to: self term ].
 	(self pattern isKindOf: LzOpTerm)
@@ -111,7 +110,8 @@ LzPatternMatcher >> matchArrayTerm: anLzArrayTerm to: anLzTerm [
 		pargs := anLzArrayTerm args.
 		targs := anLzTerm args.
 		report add: #numberOfElements ->
-			{ pargs size . targs size . pargs size = targs size }.
+			{ pargs size . targs size . pargs size = targs size .
+				{ pargs size . targs size } }.
 		((anLzArrayTerm opName = anLzTerm opName)
 			and: [ pargs size = targs size ])
 			ifTrue: [ 1 to: pargs size do: [ :index |
@@ -119,7 +119,10 @@ LzPatternMatcher >> matchArrayTerm: anLzArrayTerm to: anLzTerm [
 				parg := pargs at: index.
 				targ := targs at: index.
 				report add: ('element', index asString) asSymbol ->
-					{ parg . targ . (parg match: targ) isSuccess } ] ] ]
+					{ parg . targ . (parg match: targ) isSuccess .
+						LzPatternMatcher new
+							pattern: parg;
+							term: targ } ] ] ]
 ]
 
 { #category : #operating }
@@ -129,9 +132,12 @@ LzPatternMatcher >> matchOpTerm: anLzOpTerm to: anLzTerm [
 		pargs := anLzOpTerm args.
 		targs := anLzTerm args.
 		report add: #opName ->
-			{ anLzOpTerm opName . anLzTerm opName . anLzOpTerm opName = anLzTerm opName}.
+			{ anLzOpTerm opName . anLzTerm opName .
+				anLzOpTerm opName = anLzTerm opName .
+				{ anLzOpTerm opName . anLzTerm opName } }.
 		report add: #numberOfArgs ->
-			{ pargs size . targs size . pargs size = targs size }.
+			{ pargs size . targs size . pargs size = targs size .
+				{ pargs size . targs size } }.
 		((anLzOpTerm opName = anLzTerm opName)
 			and: [ pargs size = targs size ])
 			ifTrue: [ 1 to: pargs size do: [ :index |
@@ -139,12 +145,20 @@ LzPatternMatcher >> matchOpTerm: anLzOpTerm to: anLzTerm [
 				parg := pargs at: index.
 				targ := targs at: index.
 				report add: ('arg', index asString) asSymbol ->
-					{ parg . targ . (parg match: targ) isSuccess } ] ] ]
+					{ parg . targ . (parg match: targ) isSuccess .
+					 	LzPatternMatcher new
+							pattern: parg;
+							term: targ } ] ] ]
 ]
 
 { #category : #operating }
 LzPatternMatcher >> matchVar: anLzVarTerm to: anLzTerm [
-	report add: #sort -> { anLzVarTerm sort . anLzTerm sort . anLzTerm sort <= anLzVarTerm sort }
+	report add: #sort ->
+		{ anLzVarTerm sort . anLzTerm sort .
+			anLzTerm sort <= anLzVarTerm sort .
+			LzSortPatternMatcher new
+				pattern: anLzVarTerm sort;
+				term: anLzTerm sort }
 ]
 
 { #category : #accessing }
