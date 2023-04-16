@@ -72,28 +72,30 @@ LzBindings >> defineVar: aVarName sort: aSort [
 ]
 
 { #category : #failing }
+LzBindings >> fail: anArray [
+	failure ifNil: [ failure := anArray ]
+]
+
+{ #category : #failing }
 LzBindings >> failUnless: aSort isSubsortOf: otherSort [
 	failure ifNil: [
 		aSort <= otherSort ifFalse: [
-			failure := { #notSubsort. aSort. otherSort } ] ]
+			self fail: { #notSubsort. aSort. otherSort } ] ]
 ]
 
 { #category : #failing }
 LzBindings >> failWith: aSort incommensurableWith: otherSort [
-	failure ifNil: [
-		failure := { #incommensurableSorts. aSort. otherSort } ]
+	self fail: { #incommensurableSorts. aSort. otherSort }
 ]
 
 { #category : #failing }
 LzBindings >> failWith: aTerm notUnifiableWith: otherTerm [
-	failure ifNil: [
-		failure := { #nonUnifiableTerms. aTerm. otherTerm } ]
+	self fail: { #nonUnifiableTerms. aTerm. otherTerm }
 ]
 
 { #category : #failing }
 LzBindings >> failWithNoSort: aSort [
-	failure ifNil: [
-		failure := { #notASort. aSort. nil } ]
+	self fail: { #notASort. aSort. nil }
 ]
 
 { #category : #accessing }
@@ -188,6 +190,16 @@ LzBindings >> ifSuccess: block1 ifFailure: block2 [
 { #category : #initializing }
 LzBindings >> initialize [
 	vars := Dictionary new.
+]
+
+{ #category : #testing }
+LzBindings >> isFailure [
+	^ failure isNotNil
+]
+
+{ #category : #testing }
+LzBindings >> isSuccess [
+	^ failure isNil
 ]
 
 { #category : #accessing }
