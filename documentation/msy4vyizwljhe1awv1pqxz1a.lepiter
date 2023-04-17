@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T11:00:05.795662+02:00"
+						"dateAndTimeString" : "2023-04-17T10:26:33.628459+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An empty two-dimensional array has sort {{lzSort:EmptyArray(ℕ, ℕ)}}. An empty array cannot have a regular array sort, because regular array sorts depend on the type of the array elements. An empty array has no elements. The integer arguments in the array sort define the size of the array. At least one of them must be {{lzSort:zero, example = \"yes\"}}, otherwise the array would not be empty. An empty two-dimensional array of unknown size has sort {{lzSort:EmptyArray2D}}, with {{lzSort:i1_:ℕ.nz, i2_:ℕ.nz, EmptyArray(i1_, i2_) ⊆ EmptyArray2D}}."
+				"string" : "An empty two-dimensional array has sort {{lzSort:EmptyArray(ℕ, ℕ)}}. An empty array cannot have a regular array sort, because regular array sorts depend on the type of the array elements. An empty array has no elements. The integer arguments in the array sort define the size of the array. At least one of them must be {{lzSort:zero, example = \"yes\"}}, otherwise the array would not be empty. An empty two-dimensional array of unknown size has sort {{lzSort:EmptyArray2D}}, with {{lzSort:i1_:ℕ, i2_:ℕ, EmptyArray(i1_, i2_) ⊆ EmptyArray2D}}."
 			},
 			{
 				"__type" : "textSnippet",

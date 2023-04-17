@@ -169,7 +169,7 @@ LzSort >> leastCommonSupersortWith: otherSort [
 
 { #category : #unifying }
 LzSort >> matchWithSupersortsOf: aSort [
-	| bindings matches matchBindings matchVariables |
+	| bindings matches matchBindings |
 	self flag: #todo. "Use matchAllowingVars: ?"
 	bindings := LzBindings new
 					sortGraph: self sortGraph.
