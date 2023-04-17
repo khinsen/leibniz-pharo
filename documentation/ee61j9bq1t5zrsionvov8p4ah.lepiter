@@ -658,7 +658,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T17:58:22.569686+02:00"
+						"dateAndTimeString" : "2023-04-17T15:46:50.871365+02:00"
 					}
 				},
 				"uid" : {
@@ -668,7 +668,118 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The neighborhood of a cell in the bulk of the grid consists of its eight surrounding cells. The neighborhoods of cells on the edge of the territory is smaller."
+				"string" : "The neighborhood of a cell in the bulk of the grid consists of its eight surrounding cells. The neighborhoods of cells on the edge of the territory are smaller."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T15:47:44.476251+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T15:52:03.038598+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "QXsfLOq1DQCiKv9KCN5FHQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "\t{{lzOp:neighborhood(place) : Array1D(place)}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T15:48:15.794849+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T15:55:37.053794+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "mWL9Leq1DQCjGYgsCN5FHQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "\t{{lzRule:x_:ℕ.nz, y_:ℕ.nz, neighborhood(cell(x_, y)) ⇒ {[ cell(x_ - 1, y_ - 1), cell(x_, y_  -1), cell(x_ + 1, y_  -1), cell(x_ - 1, y_), cell(x_ + 1, y_), cell(x_ - 1, y_ + 1), cell(x_, y_ + 1), cell(x_ + 1, y_ + 1) ]} "
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T15:53:17.559461+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T15:55:45.22777+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "CBXjPeq1DQCn0vtQCN5FHQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "\t{{lzRule:x_:ℕ.nz, y_:ℕ.nz, neighborhood(cell(x_, y_)) ⇒ {[ cell(x_ - 1, y_ - 1) ]} "
 			},
 			{
 				"__type" : "textSnippet",

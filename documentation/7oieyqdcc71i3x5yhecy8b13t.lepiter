@@ -673,7 +673,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-04-14T14:00:29.48827+02:00"
+												"dateAndTimeString" : "2023-04-17T16:46:11.496135+02:00"
 											}
 										},
 										"uid" : {
@@ -683,7 +683,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "[[Two-dimensional arrays]], [[Two-dimensional array indexation]]"
+										"string" : "[[Two-dimensional arrays]], [[Two-dimensional array indexation]] [[Two-dimensional array slicing]]"
 									}
 								]
 							},

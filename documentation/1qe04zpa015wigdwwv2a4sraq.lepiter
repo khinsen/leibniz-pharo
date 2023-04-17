@@ -1,0 +1,298 @@
+{
+	"__schema" : "4.1",
+	"__type" : "page",
+	"children" : {
+		"__type" : "snippets",
+		"items" : [
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T16:51:02.234966+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T16:51:38.230012+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "mLB8Duu1DQCtjI1XCN5FHQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Uses\n\t- {{lzUseContext:name = \"Two-dimensional array indexation\"}}\n\t- {{lzUseContext:name = \"One-dimensional array slicing\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T16:46:38.075193+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T16:50:35.816854+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Yu29/uq1DQCqWfNpCN5FHQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "A slice is extracted by using intervals or grids as subscript. If both dimensions are sliced, the result is a two-dimensional array:\n\t{{lzOp:s_:𝕊, (Array2D(s_))[ℕ.nz⧺ℕ.nz⧺ℕ.nz, ℕ.nz⧺ℕ.nz⧺ℕ.nz] : Array2D(s_)}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T16:50:38.288635+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T16:53:11.765009+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "/VAPDeu1DQCtdOXGCN5FHQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "If one dimension is slices whereas the other one is indexed with an integer, the result is a one-dimensional array:\n\t{{lzOp:s_:𝕊, (Array2D(s_))[ℕ.nz, ℕ.nz⧺ℕ.nz⧺ℕ.nz] : Array1D(s_)}}\n\t{{lzOp:s_:𝕊, (Array2D(s_))[ℕ.nz⧺ℕ.nz⧺ℕ.nz, ℕ.nz] : Array1D(s_)}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T18:15:09.998169+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T18:24:33.409192+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "7HBbO+y1DQCZmN8mCK/WbQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Interval slices are rewritten to grid slices:\n\t{{lzRule:s__:𝕊, A_:Array2D(s__), i_:ℕ.nz, j_:ℕ.nz,  slice_:ℕ.nz⧺ℕ.nz⧺ℕ.nz, A_[i_ ⋯ j_, slice_] ⇒ A_[i_ ⧺ 1 ⧺ j_, slice_]}}\n\t{{lzRule:s__:𝕊, A_:Array2D(s__), i_:ℕ.nz, j_:ℕ.nz,  index_:ℕ.nz, A_[i_ ⋯ j_, index_] ⇒ A_[i_ ⧺ 1 ⧺ j_, index_]}}\n\t{{lzRule:s__:𝕊, A_:Array2D(s__), i_:ℕ.nz, j_:ℕ.nz,  slice_:ℕ.nz⧺ℕ.nz⧺ℕ.nz, A_[slice_, i_ ⋯ j_] ⇒ A_[slice_, i_ ⧺ 1 ⧺ j_]}}\n\t{{lzRule:s__:𝕊, A_:Array2D(s__), i_:ℕ.nz, j_:ℕ.nz,  index_:ℕ.nz, A_[index_, i_ ⋯ j_] ⇒ A_[index_, i_ ⧺ 1 ⧺ j_]}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T17:49:34.950498+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T18:38:10.74173+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "53Dc3+u1DQCsyvbfBCYLdQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "For array terms and grid literals, slices are computed in Pharo code:\n\t{{lzRule:s__:𝕊, A_:Array2D(s__), i1_:ℕ.nz, j1_:ℕ.nz, k1_:ℕ.nz, i2_:ℕ.nz, j2_:ℕ.nz, k2_:ℕ.nz,  A_[i1_ ⧺ k1_ ⧺ j1_, i2_ ⧺ k2_ ⧺ j2_] ⇒ Pharo:\"A ensureArrayTerm. i1 ensureNumber. j1 ensureNumber. k1 ensureNumber. i2 ensureNumber. j2 ensureNumber. k2 ensureNumber. A slice: { i1 . j1 . k1 } slice: { i2 . j2 . k2 }\"}}\n\t{{lzRule:s__:𝕊, A_:Array2D(s__), i_:ℕ.nz, j_:ℕ.nz, k_:ℕ.nz, l_:ℕ.nz,  A_[i_ ⧺ k_ ⧺ j_, l_] ⇒ Pharo:\"A ensureArrayTerm. i ensureNumber. j ensureNumber. k ensureNumber. l ensureNumber. A slice: { i . j . k } index: l\"}}\n\t{{lzRule:s__:𝕊, A_:Array2D(s__), i_:ℕ.nz, j_:ℕ.nz, k_:ℕ.nz, l_:ℕ.nz,  A_[l_, i_ ⧺ k_ ⧺ j_] ⇒ Pharo:\"A ensureArrayTerm. i ensureNumber. j ensureNumber. k ensureNumber. l ensureNumber. A index: l slice: { i . j . k }\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T17:57:25.540547+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T17:57:28.767914+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "ERvp++u1DQCvTFHABCYLdQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Example"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T17:57:37.612674+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T18:41:13.151869+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "GsYe/Ou1DQCvg3J3BCYLdQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "For {{lzOp:a : Array2D(ℕ), subcontext = \"example\"}} with {{lzRule:a ⇒ {[[1, 4, 9], [16, 25, 36], [49, 64, 81]]}, subcontext = \"example\"}} we find:\n\t{{lzTerm:a[1 ⋯ 2, 1 ⋯ 2], withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:a[1 ⋯ 2, 2], withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:a[2, 1 ⋯ 2], withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:a[1 ⧺ 2 ⧺ 3, 1 ⧺ 2 ⧺ 3], withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:a[1 ⧺ 2 ⧺ 3, 1], withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:a[3, 1 ⧺ 2 ⧺ 3], withNormalForm = \"yes\", subcontext = \"example\"}}"
+			}
+		]
+	},
+	"createEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"createTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2023-04-17T16:46:14.990307+02:00"
+		}
+	},
+	"editEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"editTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2023-04-17T16:46:14.990307+02:00"
+		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Two-dimensional array slicing"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "32455dfd-eab5-0d00-a94b-e24208de451d"
+	}
+}

@@ -93,6 +93,38 @@ LzArrayTerm >> elements: anArray [
 	elements := anArray
 ]
 
+{ #category : #private }
+LzArrayTerm >> elementsForSlice: slice1 slice: slice2 [
+	| first1 last1 step1 first2 last2 step2
+	  size1 size2
+	  sliceElementSize sliceElements sliceIndex |
+	first1 := slice1 first value.
+	last1 := slice1 second value.
+	step1 := slice1 third value.
+	first2 := slice2 first value.
+	last2 := slice2 second value.
+	step2 := slice2 third value.
+	self assert: self shape size == 2.
+	self assert: first1 >= 1.
+	self assert: last1 <= self shape first.
+	self assert: step1 >= 1.
+	self assert: first2 >= 1.
+	self assert: last2 <= self shape second.
+	self assert: step2 >= 1.
+	size1 := (last1 - first1) // step1 + 1.
+	size2 := (last2 - first2) // step2 + 1.
+	sliceElementSize := size1 * size2.
+	sliceElements := Array new: sliceElementSize.
+	sliceIndex := 1.
+	first1 to: last1 by: step1 do: [ :index1 |
+		first2 to: last2 by: step2 do: [ :index2 |	
+			sliceElements
+				at: sliceIndex
+				put: (elements at: (index1 - 1) * self shape second + index2).
+			sliceIndex := sliceIndex + 1 ] ].
+	^ { sliceElements . size1 . size2 }
+]
+
 { #category : #rewriting }
 LzArrayTerm >> ensureArrayTerm [
 ]
@@ -121,6 +153,17 @@ LzArrayTerm >> index: index1 index: index2 [
 		ifTrue: [ LzRewriteFailure signal:
 					'index ', { i1 . i2 } asString, ' out of range' ].
 	^ elements at: ((i1-1) * shape second) + i2
+]
+
+{ #category : #transforming }
+LzArrayTerm >> index: index1 slice: slice2 [
+	| data sliceElements size2 |
+	data := self elementsForSlice: { index1 . index1 . 1 } slice: slice2.
+	sliceElements := data first.
+	size2 := data third.
+	^ self signature
+		arrayTerm: sliceElements
+		shape: { size2 }
 ]
 
 { #category : #transforming }
@@ -234,11 +277,34 @@ LzArrayTerm >> shapeAsArrayTerm [
 ]
 
 { #category : #transforming }
+LzArrayTerm >> slice: slice1 index: index2 [
+	| data sliceElements size1 |
+	data := self elementsForSlice: slice1 slice: { index2 . index2 . 1 }.
+	sliceElements := data first.
+	size1 := data second.
+	^ self signature
+		arrayTerm: sliceElements
+		shape: { size1 }
+]
+
+{ #category : #transforming }
+LzArrayTerm >> slice: slice1 slice: slice2 [
+	| data sliceElements size1 size2 |
+	data := self elementsForSlice: slice1 slice: slice2.
+	sliceElements := data first.
+	size1 := data second.
+	size2 := data third.
+	^ self signature
+		arrayTerm: sliceElements
+		shape: { size1 . size2 }
+]
+
+{ #category : #transforming }
 LzArrayTerm >> slice: first to: last by: step [
 	| sliceElementSize sliceElements sliceIndex |
 	self assert: self shape size == 1.
 	self assert: step value >= 1.
-	sliceElementSize := (last value - first value) / step value + 1.
+	sliceElementSize := (last value - first value) // step value + 1.
 	sliceElements := Array new: sliceElementSize.
 	sliceIndex := 1.
 	first value to: last value by: step value do: [ :arrayIndex |
