@@ -588,6 +588,43 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-04-17T10:32:32.353608+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-04-17T10:57:14.340858+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "v2XfxOW1DQCJnaMmCN5FHQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "[[Arrays]], [[One-dimensional arrays]], [[Array size]]"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
 												"dateAndTimeString" : "2022-06-30T13:33:23.491152+02:00"
 											}
 										},
@@ -599,7 +636,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-04-14T13:36:58.311284+02:00"
+												"dateAndTimeString" : "2023-04-17T10:58:48.315852+02:00"
 											}
 										},
 										"uid" : {
@@ -609,7 +646,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "[[One-dimensional arrays]],  [[One-dimensional array indexation]], [[One-dimensional array slicing]], [[Function application to one-dimensional arrays]],  [[One-dimensional index arrays]], [[Algorithmic construction of one-dimensional arrays]]"
+										"string" : "[[One-dimensional array indexation]], [[One-dimensional array slicing]], [[Function application to one-dimensional arrays]],  [[One-dimensional index arrays]], [[Algorithmic construction of one-dimensional arrays]]"
 									},
 									{
 										"__type" : "textSnippet",

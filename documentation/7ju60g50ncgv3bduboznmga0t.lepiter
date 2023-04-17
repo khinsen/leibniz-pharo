@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-05T15:23:37.479467+02:00"
+						"dateAndTimeString" : "2023-04-17T10:59:04.26942+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Integers\"}}"
+				"string" : "Uses {{lzUseContext:name = \"Array size\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,154 +129,6 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:29:46.518157+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:29:51.294752+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "qGLFu6y1DQCk1MuhDR+zCg=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "###Shape"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:13:29.170619+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:13:30.019624+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "nD6Egay1DQCceCekDR+zCg=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "The shape of an array can be obtained as\n\t{{lzOp:shape(Array) : Array1D(ℕ)}}\nFor literal array terms, it is computed in Pharo:\n\t{{lzRule:A_:Array, shape(A_) ⇒ Pharo:\"A ensureArrayTerm. A shapeAsArrayTerm\"}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:29:34.776485+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:29:41.0776+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "KzkSu6y1DQCkmFKYDR+zCg=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "###Length"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-19T11:00:25.679466+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:27:06.608954+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "mb3NEPaiDQCzZ0oRANmnAw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "The length of an array is the first element of its shape. It can be obtained as\n\t{{lzOp:length(Array) : ℕ}}\nIt is zero for empty arrays:\n\t{{lzRule:length(A_:EmptyArray(0)) ⇒ 0}}\nFor literal array terms, it is computed in Pharo:\n\t{{lzRule:length(A_:Array) ⇒ Pharo:\"A ensureArrayTerm. A lengthAsTerm\"}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2022-07-05T18:14:07.4826+02:00"
 					}
 				},
@@ -325,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:14:01.637724+02:00"
+						"dateAndTimeString" : "2023-04-17T11:02:35.977969+02:00"
 					}
 				},
 				"uid" : {
@@ -335,44 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For an array literal:\n\t{{lzTerm:length({[1, 4, 9]}), withNormalForm = \"yes\"}}\n\t{{lzTerm:shape({[1, 4, 9]}), withNormalForm = \"yes\"}}\n\t{{lzTerm:{[1, 4, 9]}[2], withNormalForm = \"yes\"}}\nIndices out of the range of valid indices are not rewritten:\n\t{{lzTerm:{[1, 4, 9]}[4], withNormalForm = \"yes\"}}"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-19T11:11:45.186559+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T14:14:56.245141+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "KqHrM/aiDQCzaytFANmnAw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "For an empty array:\n\t{{lzTerm:length({[]}), withNormalForm = \"yes\"}}\n\t{{lzTerm:shape({[]}), withNormalForm = \"yes\"}}"
+				"string" : "For an array literal:\n\t{{lzTerm:{[1, 4, 9]}[2], withNormalForm = \"yes\"}}\nIndices out of the range of valid indices are not rewritten:\n\t{{lzTerm:{[1, 4, 9]}[4], withNormalForm = \"yes\"}}"
 			}
 		]
 	},

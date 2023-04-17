@@ -18,6 +18,43 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T10:33:04.453321+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-17T10:50:47.126463+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "vzHJxuW1DQCJ30lwCN5FHQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Uses {{lzUseContext:name = \"Arrays\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2022-06-10T18:48:03.017876+02:00"
 					}
 				},
@@ -29,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-15T18:51:26.483708+02:00"
+						"dateAndTimeString" : "2023-04-17T10:34:21.877146+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Arrays are special terms ({{lzSpecialTerms:arrays}}). They use {{lzUseContext:name = \"Integers\", forSorts = \"yes\"}}. Array literals are written in curly plus square brackets. Examples: {{lzTerm:{[]}}} (an empty array), {{lzTerm:{[1, 2, 3]}, subcontext = \"integerArray\"}} (array of integers, uses {{lzUseContext:name = \"Integers\", subcontext = \"integerArray\"}}), {{lzTerm:{[\"a\", \"b\"]}, subcontext = \"stringArray\"}} (array of strings, uses {{lzUseContext:name = \"Character strings\", subcontext = \"stringArray\"}})"
+				"string" : "Array literals are written in curly plus square brackets. Examples: {{lzTerm:{[]}}} (an empty array), {{lzTerm:{[1, 2, 3]}, subcontext = \"integerArray\"}} (array of integers, uses {{lzUseContext:name = \"Integers\", subcontext = \"integerArray\"}}), {{lzTerm:{[\"a\", \"b\"]}, subcontext = \"stringArray\"}} (array of strings, uses {{lzUseContext:name = \"Character strings\", subcontext = \"stringArray\"}})"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-18T17:14:23.77781+02:00"
+						"dateAndTimeString" : "2023-04-17T10:45:10.520987+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The generic sort of a one-dimensional array containing elements of sort {{lzSort:𝕊, example = \"yes\"}} is {{lzSort:Array1D(𝕊)}}. The sort of an array of known length is {{lzSort:Array(𝕊, ℕ.nz)}}, with {{lzSort:s_:𝕊, i1_:ℕ.nz, Array(s_, i1_) ⊆ Array1D(s_)}}."
+				"string" : "The generic sort of a one-dimensional array containing elements of sort {{lzSort:𝕊, example = \"yes\"}} is {{lzSort:Array1D(𝕊)}}, with {{lzSort:s_:𝕊, Array1D(s_) ⊆ Array}}. The sort of an array of known length is {{lzSort:Array(𝕊, ℕ.nz)}}, with {{lzSort:s_:𝕊, i1_:ℕ.nz, Array(s_, i1_) ⊆ Array1D(s_)}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T13:47:25.504964+02:00"
+						"dateAndTimeString" : "2023-04-17T10:36:38.793297+02:00"
 					}
 				},
 				"uid" : {
@@ -113,44 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An empty one-dimensional array has sort {{lzSort:EmptyArray1D}}. . An empty array cannot have a regular array sort, because regular array sorts depend on the type of the array elements. An empty array has no elements. For consistency with higher-dimensional arrays, there is also the sort {{lzSort:EmptyArray(zero)}}, with {{lzSort:i1_:zero, EmptyArray(i1_) ⊆ EmptyArray1D}}. Its argument is always zero, but higher-dimensional arrays can have non-zero lengths along all but one dimensions."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-18T17:15:34.048961+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-14T13:36:58.347543+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "LfTCL+eiDQCOnYssDdeLhg=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "The common supersort of all arrays is {{lzSort:Array}}:\n\t{{lzSort:s_:𝕊, Array1D(s_) ⊆ Array}}\n\t{{lzSort:EmptyArray1D ⊆ Array}}"
+				"string" : "An empty one-dimensional array has sort {{lzSort:EmptyArray1D}}, with {{lzSort:EmptyArray1D ⊆ Array}}. An empty array cannot have a regular array sort, because regular array sorts depend on the type of the array elements. An empty array has no elements. For consistency with higher-dimensional arrays, there is also the sort {{lzSort:EmptyArray(zero)}}, with {{lzSort:i1_:zero, EmptyArray(i1_) ⊆ EmptyArray1D}}. Its argument is always zero, but higher-dimensional arrays can have non-zero lengths along all but one dimensions."
 			}
 		]
 	},
