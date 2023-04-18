@@ -1,0 +1,261 @@
+{
+	"__schema" : "4.1",
+	"__type" : "page",
+	"children" : {
+		"__type" : "snippets",
+		"items" : [
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T14:47:14.732608+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T14:52:41.767345+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "el2dcf21DQCBjcpXDjVr3A=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Uses\n - {{lzUseContext:name = \"One-dimensional arrays\"}}\n - {{lzUseContext:name = \"Logical truth\"}}\n - {{lzUseContext:name = \"Integers\", forSorts = \"yes\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T14:46:40.036533+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T15:07:13.792294+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "qvWLb/21DQCBhWwpDjVr3A=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Elements of a one-dimensional array can be selected by providing a boolean mask:\n\t{{lzOp:s_: 𝕊, n_:ℕ.nz, select(Array(𝔹, n_), Array(s_, n_)) : Array1D(s_)}}\n\t{{lzOp:select(EmptyArray1D, EmptyArray1D) : EmptyArray1D}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T15:08:13.592181+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T15:10:50.87213+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "dwqmvP21DQCKlFixDjVr3A=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "For literal array terms, selection is implemented in Pharo:\n\t{{lzRule:s__:𝕊, n__:ℕ.nz, M_: Array(𝔹, n__), A_:Array(s__, n__), select(M_, A_) ⇒ Pharo:\"M ensureArrayTerm. A ensureArrayTerm. A select: M\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T15:25:56.257886+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T15:25:59.741362+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "RAn9+/21DQCusmiQCj2mlQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Example"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T15:26:15.588075+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T15:26:33.490832+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "9F89/P21DQCu/Ym8Cj2mlQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Uses {{lzUseContext:name = \"Integers\", subcontext = \"example\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T15:26:35.793957+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T15:29:19.587125+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "iFNY/v21DQCwlCsQCj2mlQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "{{lzTerm:select({[⊤, ⊥, ⊤, ⊥]}, {[1, 2, 3, 4]}), withNormalForm = \"yes\", subcontext = \"example\"}}"
+			}
+		]
+	},
+	"createEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"createTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2023-04-18T14:46:03.556096+02:00"
+		}
+	},
+	"editEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"editTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2023-04-18T14:46:03.556096+02:00"
+		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Element selection from one-dimensional arrays"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "c3525f6d-fdb5-0d00-80d6-8be50e356bdc"
+	}
+}

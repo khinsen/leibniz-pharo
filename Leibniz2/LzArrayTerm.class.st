@@ -257,6 +257,18 @@ LzArrayTerm >> printElements: anArray shape: shapeArray on: aStream [
 	aStream << $]
 ]
 
+{ #category : #transforming }
+LzArrayTerm >> select: maskArray [
+	| selectedElements |
+	self assert: self shape equals: maskArray shape.
+	selectedElements := OrderedCollection new.
+	elements with: maskArray elements do: [ :anElement :aBoolean |
+		aBoolean isBooleanTrue ifTrue: [ selectedElements add: anElement ] ].
+	^ self signature
+		arrayTerm: selectedElements asArray
+		shape: { selectedElements size }
+]
+
 { #category : #accessing }
 LzArrayTerm >> shape [
 	^ shape

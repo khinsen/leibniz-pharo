@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T15:33:44.915719+02:00"
+						"dateAndTimeString" : "2023-04-18T12:07:38.143041+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses:\n- {{lzUseContext:name=\"Rational numbers\"}}\n- {{lzUseContext:name=\"One-dimensional arrays\"}}\n- {{lzUseContext:name = \"Term equality\"}}\n- {{lzUseContext:name = \"Boolean algebra\"}}"
+				"string" : "Uses:\n- {{lzUseContext:name=\"Rational numbers\"}}\n- {{lzUseContext:name=\"One-dimensional arrays\"}}\n- {{lzUseContext:name = \"Function application to one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Term equality\"}}\n- {{lzUseContext:name = \"Boolean algebra\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T17:15:48.87589+02:00"
+						"dateAndTimeString" : "2023-04-18T11:13:06.790745+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An {{lzSort:agent}} represents an individual or a family that lives in a specific {{lzSort:place}} in some territory. Agents are characterized by their color (black or white), and they like their {{lzSort:neighborhood}} depending on which fraction of its population shares their color. If an agent is not happy in its place, it tries to move to another one."
+				"string" : "An {{lzSort:agent}} represents an individual or a family that lives in a specific {{lzSort:place}} in some territory. Agents are characterized by their color (black or white), and they like their neighborhood depending on which fraction of its population shares their color. If an agent is not happy in its place, it tries to move to another one."
 			},
 			{
 				"__type" : "textSnippet",
@@ -240,7 +240,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T17:35:48.517354+02:00"
+						"dateAndTimeString" : "2023-04-18T11:59:17.199128+02:00"
 					}
 				},
 				"editEmail" : {
@@ -251,17 +251,54 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T17:53:15.657342+02:00"
+						"dateAndTimeString" : "2023-04-18T11:59:25.826339+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "HoTUNJu1DQCzsvtAAW4qrw=="
+					"uidString" : "V2jyGPu1DQC4alOwDjVr3A=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Schelling's paper territory corresponds to a rectangular grid of {{lzOp:N:ℕ.nz}} rows and {{lzOp:M:ℕ.nz}} columns. A place is a cell in the grid, defined by two integer coordinates:\n\t{{lzOp:cell(ℕ.nz, ℕ.nz) : place}}"
+				"string" : "Schelling's paper territory corresponds to a rectangular grid of cells defined by two integer coordinates:\n\t\t{{lzOp:cell(ℤ, ℤ) : place}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T12:09:34.997462+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T12:11:51.13189+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "ckjFPfu1DQC76OPZDjVr3A=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The grid is finite, consisting of {{lzOp:N:ℕ.nz}} rows and {{lzOp:M:ℕ.nz}} columns:\n\t{{lzOp:isInTerritory : place → 𝔹}}\n\t{{lzRule:x_:ℤ, y_:ℤ, isInTerritory[cell(x_, y_)] ⇒ (x_ ≥ 1) ∧ (x_ ≤ N) ∧ (y_ ≥ 1) ∧ (y_ ≤ M)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -288,7 +325,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T17:51:17.879823+02:00"
+						"dateAndTimeString" : "2023-04-18T11:05:14.953851+02:00"
 					}
 				},
 				"uid" : {
@@ -298,7 +335,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Schelling moved his coins only along the rows and columns, like a rook in chess. The distance between two cells is thus:\n\t{{lzRule:x1_:ℕ.nz, x2_:ℕ.nz, y1_:ℕ.nz, y2_:ℕ.nz, distance(cell(x1_, y1_), cell(x2_, y2_)) ⇒ abs(x1_ - x2_) + abs(y1_ - y2_)}}\nwith the absolute value {{lzOp:abs(ℤ) : ℕ}} defined by\n\t{{lzRule:n_:ℕ, abs(n_) ⇒ n_}}\n\t{{lzRule:z_:ℤ, abs(z_) ⇒ -(z_) | z_ < 0}}"
+				"string" : "Schelling moved his coins only along the rows and columns, like a rook in chess. The distance between two cells is thus:\n\t{{lzRule:x1_:ℤ, x2_:ℤ, y1_:ℤ, y2_:ℤ, distance(cell(x1_, y1_), cell(x2_, y2_)) ⇒ abs(x1_ - x2_) + abs(y1_ - y2_)}}\nwith the absolute value {{lzOp:abs(ℤ) : ℕ}} defined by\n\t{{lzRule:n_:ℕ, abs(n_) ⇒ n_}}\n\t{{lzRule:z_:ℤ, abs(z_) ⇒ -(z_) | z_ < 0}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -658,7 +695,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-17T15:46:50.871365+02:00"
+						"dateAndTimeString" : "2023-04-18T14:45:07.231657+02:00"
 					}
 				},
 				"uid" : {
@@ -668,7 +705,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The neighborhood of a cell in the bulk of the grid consists of its eight surrounding cells. The neighborhoods of cells on the edge of the territory are smaller."
+				"string" : "The neighborhood of a cell in the bulk of the grid consists of its eight surrounding cells:\n\t{{lzOp:bulkNeighborhood(place) : Array(place, 8)}}\n\t{{lzRule:x_:ℤ, y_:ℤ, bulkNeighborhood(cell(x_, y_)) ⇒ {[ cell(x_ - 1, y_ - 1), cell(x_, y_  - 1), cell(x_ + 1, y_  - 1), cell(x_ - 1, y_), cell(x_ + 1, y_), cell(x_ - 1, y_ + 1), cell(x_, y_ + 1), cell(x_ + 1, y_ + 1) ]} }}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -684,7 +721,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-17T15:47:44.476251+02:00"
+						"dateAndTimeString" : "2023-04-18T11:53:15.048576+02:00"
 					}
 				},
 				"editEmail" : {
@@ -695,17 +732,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-17T15:52:03.038598+02:00"
+						"dateAndTimeString" : "2023-04-18T11:56:10.184306+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "QXsfLOq1DQCiKv9KCN5FHQ=="
+					"uidString" : "nm5cA/u1DQC0/yH6DjVr3A=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "\t{{lzOp:neighborhood(place) : Array1D(place)}}"
+				"string" : "Cells on the edges of the territory have fewer neigbors:\n\t{{lzOp:neighborhood(place) : Array1D(place)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -721,7 +758,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-17T15:48:15.794849+02:00"
+						"dateAndTimeString" : "2023-04-18T12:12:18.419993+02:00"
 					}
 				},
 				"editEmail" : {
@@ -732,54 +769,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-17T15:55:37.053794+02:00"
+						"dateAndTimeString" : "2023-04-18T14:45:01.164035+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "mWL9Leq1DQCjGYgsCN5FHQ=="
+					"uidString" : "LeWCR/u1DQC81r+TDjVr3A=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "\t{{lzRule:x_:ℕ.nz, y_:ℕ.nz, neighborhood(cell(x_, y)) ⇒ {[ cell(x_ - 1, y_ - 1), cell(x_, y_  -1), cell(x_ + 1, y_  -1), cell(x_ - 1, y_), cell(x_ + 1, y_), cell(x_ - 1, y_ + 1), cell(x_, y_ + 1), cell(x_ + 1, y_ + 1) ]} "
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-17T15:53:17.559461+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-17T15:55:45.22777+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "CBXjPeq1DQCn0vtQCN5FHQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "\t{{lzRule:x_:ℕ.nz, y_:ℕ.nz, neighborhood(cell(x_, y_)) ⇒ {[ cell(x_ - 1, y_ - 1) ]} "
+				"string" : "{{lzTerm:isInTerritory[bulkNeighborhood(cell(1, 1))], withNormalForm = \"yes\"}}"
 			},
 			{
 				"__type" : "textSnippet",
