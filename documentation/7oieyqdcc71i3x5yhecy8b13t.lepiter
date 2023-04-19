@@ -636,7 +636,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-04-18T14:46:00.150877+02:00"
+												"dateAndTimeString" : "2023-04-18T16:08:57.545632+02:00"
 											}
 										},
 										"uid" : {
@@ -646,7 +646,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "[[One-dimensional array indexation]], [[One-dimensional array slicing]], [[Function application to one-dimensional arrays]],  [[One-dimensional index arrays]], [[Algorithmic construction of one-dimensional arrays]], [[Element selection from one-dimensional arrays]]"
+										"string" : "[[One-dimensional array indexation]], [[One-dimensional array slicing]], [[Function application to one-dimensional arrays]],  [[One-dimensional index arrays]], [[Algorithmic construction of one-dimensional arrays]], [[Element selection from one-dimensional arrays]], [[Function-based selection from one-dimensional arrays]]"
 									},
 									{
 										"__type" : "textSnippet",
@@ -1481,43 +1481,6 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-22T15:40:36.636288+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-22T15:40:56.262579+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "+nesUzajDQCC+pSWAFhYmw=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "[[Sunspot detection]]"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
 									"dateAndTimeString" : "2023-04-06T15:15:56.029795+02:00"
 								}
 							},
@@ -1540,6 +1503,43 @@
 								"__type" : "textStyle"
 							},
 							"string" : "[[Schelling's segregation model]]"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-22T15:40:36.636288+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-22T15:40:56.262579+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "+nesUzajDQCC+pSWAFhYmw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "[[Sunspot detection]]"
 						}
 					]
 				},

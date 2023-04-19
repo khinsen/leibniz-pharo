@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-18T14:52:41.767345+02:00"
+						"dateAndTimeString" : "2023-04-18T16:07:41.763097+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n - {{lzUseContext:name = \"One-dimensional arrays\"}}\n - {{lzUseContext:name = \"Logical truth\"}}\n - {{lzUseContext:name = \"Integers\", forSorts = \"yes\"}}"
+				"string" : "Uses\n - {{lzUseContext:name = \"One-dimensional arrays\"}}\n - {{lzUseContext:name = \"Logical truth\"}}"
 			},
 			{
 				"__type" : "textSnippet",
