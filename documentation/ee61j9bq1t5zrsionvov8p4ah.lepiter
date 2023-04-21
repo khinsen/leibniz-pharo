@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-18T16:15:18.56534+02:00"
+						"dateAndTimeString" : "2023-04-21T10:06:07.743751+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses:\n- {{lzUseContext:name=\"Rational numbers\"}}\n- {{lzUseContext:name=\"One-dimensional arrays\"}}\n- {{lzUseContext:name = \"Function application to one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Function-based selection from one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Term equality\"}}\n- {{lzUseContext:name = \"Boolean algebra\"}}"
+				"string" : "Uses:\n- {{lzUseContext:name=\"Rational numbers\"}}\n- {{lzUseContext:name=\"One-dimensional arrays\"}}, {{lzUseContext:name = \"Array size\"}}\n- {{lzUseContext:name = \"Function application to one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Function-based selection from one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Term equality\"}}\n- {{lzUseContext:name = \"Boolean algebra\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -304,6 +304,81 @@
 								"__type" : "textStyle"
 							},
 							"string" : "Schelling moved his coins only along the rows and columns, like a rook in chess. The distance between two cells is thus:\n\t{{lzRule:x1_:ℤ, x2_:ℤ, y1_:ℤ, y2_:ℤ, distance(cell(x1_, y1_), cell(x2_, y2_)) ⇒ abs(x1_ - x2_) + abs(y1_ - y2_)}}\nwith the absolute value {{lzOp:abs(ℤ) : ℕ}} defined by\n\t{{lzRule:n_:ℕ, abs(n_) ⇒ n_}}\n\t{{lzRule:z_:ℤ, abs(z_) ⇒ -(z_) | z_ < 0}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-04-21T09:59:24.061746+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-04-21T10:01:30.05482+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "y/m5xTW2DQCgVYrdDmzAdA=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Schelling's first example shown in the paper, in Fig. 7, has {{lzRule:N ⇒ 13, subcontext = \"example\"}} rows and {{lzRule:M ⇒ 16, subcontext = \"example\"}} columns."
+									}
+								]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-04-21T09:59:20.054341+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-04-21T09:59:23.724608+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "Y9Z8xTW2DQCgGmX8DmzAdA=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "####Example"
 						}
 					]
 				},
@@ -421,7 +496,45 @@
 							"__type" : "textSnippet",
 							"children" : {
 								"__type" : "snippets",
-								"items" : [ ]
+								"items" : [
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-04-18T12:12:18.419993+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-04-21T10:22:44.955909+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "LeWCR/u1DQC81r+TDjVr3A=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "For the example of Schelling's Fig. 7, the neighborhood of the top-left corner is\n\t{{lzTerm:neighborhood(cell(1, 1)), withNormalForm = \"yes\", subcontext = \"example\"}}\nand the neighborhood of the bottom-right corner is\n\t{{lzTerm:neighborhood(cell(N, M)), withNormalForm = \"yes\", subcontext = \"example\"}}.\nA neighborhood of a cell on an edge contains five cells:\n\t{{lzTerm:length(neighborhood(cell(1, 5))), withNormalForm = \"yes\", subcontext = \"example\"}}\nand a cell in the middle of the territory has eight neighbors:\n\t{{lzTerm:length(neighborhood(cell(5, 6))), withNormalForm = \"yes\", subcontext = \"example\"}}."
+									}
+								]
 							},
 							"createEmail" : {
 								"__type" : "email",
@@ -453,43 +566,6 @@
 								"__type" : "textStyle"
 							},
 							"string" : "####Example"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-04-18T12:12:18.419993+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-04-18T16:24:41.335727+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "LeWCR/u1DQC81r+TDjVr3A=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "For {{lzRule:N ⇒ 3, subcontext = \"example-neighborhood\"}} and {{lzRule:M ⇒ 4, subcontext = \"example-neighborhood\"}}, the neighborhood of the top-left corner is\n\t{{lzTerm:neighborhood(cell(1, 1)), withNormalForm = \"yes\", subcontext = \"example-neighborhood\"}}\nand the neighborhood of the bottom-right corner is\n\t{{lzTerm:neighborhood(cell(3, 4)), withNormalForm = \"yes\", subcontext = \"example-neighborhood\"}}"
 						}
 					]
 				},
