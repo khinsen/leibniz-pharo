@@ -76,6 +76,28 @@ LzTermInContext >> findNormalForm [
 ]
 
 { #category : #inspecting }
+LzTermInContext >> gtAxiomsFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Axioms';
+		priority: 13;
+		object: [ self context ];
+		view: #gtAxiomsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzTermInContext >> gtBuiltinsFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Builtins';
+		priority: 15;
+		object: [ self context ];
+		view: #gtBuiltinsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
 LzTermInContext >> gtDebugActionFor: anAction [
 	<gtAction>
 	^ anAction button
@@ -123,12 +145,45 @@ LzTermInContext >> gtOperatorFor: aView [
 ]
 
 { #category : #inspecting }
+LzTermInContext >> gtOperatorsFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Operators';
+		priority: 12;
+		object: [ self context ];
+		view: #gtOperatorsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzTermInContext >> gtRulesFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Rules';
+		priority: 14;
+		object: [ self context ];
+		view: #gtRulesFor:;
+		yourself
+]
+
+{ #category : #inspecting }
 LzTermInContext >> gtSortFor: aView [
 	<gtView>
 	^ aView forward
 		title: 'Sort';
 		priority: 2;
 		object: [ self term sort ];
+		view: #gtGraphFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzTermInContext >> gtSortGraphFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'Sort graph';
+		priority: 11;
+		object: [ self context ];
 		view: #gtGraphFor:;
 		yourself
 ]
