@@ -1,0 +1,484 @@
+{
+	"__schema" : "4.1",
+	"__type" : "page",
+	"children" : {
+		"__type" : "snippets",
+		"items" : [
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:21:25.333837+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:21:36.32795+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "bVsJgiy3DQC2jou5CdOMLg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Uses {{lzUseContext:name = \"Tuples\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:29:48.193794+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:41:12.41847+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "+10CoCy3DQCzEzGBA4wPQw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The first item of a tuple can be extracted as:\n\t{{lzOp:s_:𝕊, first((s_)) : s_  \"incorrectly parsed as first(s_)\"\n\t{{lzOp:s1_:𝕊, s2_:𝕊, first((s1_, s2_)) : s1_}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, s3_:𝕊, first((s1_, s2_, s3_)) : s1_}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:21:37.679538+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:40:06.042966+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "PrbFgiy3DQC3SyWnCdOMLg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The corresponding rules are:\n\t{{lzRule:s__:𝕊, first((value_:s__)) ⇒ value_\n\t{{lzRule:s1__:𝕊, s2__:𝕊, first((v1_:s1__, v2_:s2__)) ⇒ v1_}}\n\t{{lzRule:s1__:𝕊, s2__:𝕊, s3__:𝕊, first((v1_:s1__, v2_:s2__, v3_:s3__)) ⇒ v1_}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:41:23.288788+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:41:53.06561+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Q6twySy3DQC3WyLLA4wPQw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The second item of a tuple can be extracted as:\n\t{{lzOp:s1_:𝕊, s2_:𝕊, second((s1_, s2_)) : s2_}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, s3_:𝕊, second((s1_, s2_, s3_)) : s2_}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:42:04.813724+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:43:03.73814+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "XErqyyy3DQC4D1juA4wPQw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The corresponding rules are:\n\t{{lzRule:s1__:𝕊, s2__:𝕊, second((v1_:s1__, v2_:s2__)) ⇒ v2_}}\n\t{{lzRule:s1__:𝕊, s2__:𝕊, s3__:𝕊, second((v1_:s1__, v2_:s2__, v3_:s3__)) ⇒ v2_}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:42:08.994518+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:42:26.70502+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "hBUqzCy3DQC4FH9IA4wPQw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The third item of a tuple can be extracted as:\n\t{{lzOp:s1_:𝕊, s2_:𝕊, s3_:𝕊, third((s1_, s2_, s3_)) : s3_}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:43:13.000698+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:43:31.494998+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "wL36zyy3DQC5E4lyA4wPQw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The corresponding rule is:\n\t{{lzRule:s1__:𝕊, s2__:𝕊, s3__:𝕊, third((v1_:s1__, v2_:s2__, v3_:s3__)) ⇒ v3_}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-03T16:24:12.942011+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-03T16:28:14.162076+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "odUGjCy3DQC6ZycmCdOMLg=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Uses {{lzUseContext:name = \"Integers\", subcontext = \"example\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-03T16:24:32.206348+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-03T16:36:51.32884+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "PsksjSy3DQC6d5tyCdOMLg=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Extracting the first element:\n\t{{lzTerm:first((1)), subcontext = \"example\", withNormalForm = \"yes\"\n\t{{lzTerm:first((1, 2)), subcontext = \"example\", withNormalForm = \"yes\"}}\n\t{{lzTerm:first((1, 2, 3)), subcontext = \"example\", withNormalForm = \"yes\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-03T16:43:45.626248+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-03T16:44:15.371226+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "e5Hs0Sy3DQC5cpbLA4wPQw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Extracting the second element:\n\t{{lzTerm:second((1, 2)), subcontext = \"example\", withNormalForm = \"yes\"}}\n\t{{lzTerm:second((1, 2, 3)), subcontext = \"example\", withNormalForm = \"yes\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-03T16:44:24.598697+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-03T16:44:36.019595+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "vzM/1Cy3DQC56ka6A4wPQw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Extracting the third element:\n\t{{lzTerm:third((1, 2, 3)), subcontext = \"example\", withNormalForm = \"yes\"}}"
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:24:07.863621+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-03T16:24:12.386016+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "/VK5iyy3DQC6K2CNCdOMLg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Examples"
+			}
+		]
+	},
+	"createEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"createTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2023-05-03T16:21:25.251801+02:00"
+		}
+	},
+	"editEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"editTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2023-05-03T16:21:25.251801+02:00"
+		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Tuple items"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "e8180882-2cb7-0d00-b68d-0fc909d38c2e"
+	}
+}

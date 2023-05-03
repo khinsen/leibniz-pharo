@@ -82,7 +82,45 @@
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [ ]
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-04-13T11:17:16.047733+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-02T14:21:46.587079+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "hc937ZW1DQCBpiDjB5mQOw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "An agent represents an individual or a family that lives in a specific place in some territory. There are two kinds of agents, black and white. Agents like their neighborhood depending on which fraction of its population is of the same kind. If an agent is not happy in its place, it tries to move to another one."
+						}
+					]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -114,43 +152,6 @@
 					"__type" : "textStyle"
 				},
 				"string" : "###Outline of the model"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T11:17:16.047733+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-18T11:13:06.790745+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "hc937ZW1DQCBpiDjB5mQOw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "An {{lzSort:agent}} represents an individual or a family that lives in a specific {{lzSort:place}} in some territory. Agents are characterized by their color (black or white), and they like their neighborhood depending on which fraction of its population shares their color. If an agent is not happy in its place, it tries to move to another one."
 			},
 			{
 				"__type" : "textSnippet",
@@ -1141,7 +1142,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-04-06T18:00:03.026587+02:00"
+									"dateAndTimeString" : "2023-05-02T14:32:01.189525+02:00"
 								}
 							},
 							"editEmail" : {
@@ -1152,7 +1153,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-04-13T17:28:01.893454+02:00"
+									"dateAndTimeString" : "2023-05-02T14:53:13.631973+02:00"
 								}
 							},
 							"uid" : {
@@ -1162,7 +1163,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "A simulation is defined by "
+							"string" : "The initial {{lzSort:state}} of the simulation is defined by a random selection of occupations. The fraction of empty places is provided as an input. The fractions of the two kinds of agents are taken to be equal.\n\t{{lzOp:randomOccupation(emptyFraction:ℚ.nn) : state}}"
 						}
 					]
 				},
@@ -1196,6 +1197,43 @@
 					"__type" : "textStyle"
 				},
 				"string" : "###Initialization"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-02T14:26:31.15467+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-02T14:26:45.691291+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "DSBFyRa3DQC5MDkVBdRiIg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Simulation"
 			},
 			{
 				"__type" : "textSnippet",

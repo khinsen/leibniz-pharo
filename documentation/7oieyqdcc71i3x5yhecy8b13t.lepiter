@@ -562,7 +562,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-04-14T10:43:24.730335+02:00"
+												"dateAndTimeString" : "2023-05-03T16:21:22.995589+02:00"
 											}
 										},
 										"uid" : {
@@ -572,7 +572,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "[[Tuples]]"
+										"string" : "[[Tuples]], [[Tuple items]]"
 									},
 									{
 										"__type" : "textSnippet",
@@ -814,7 +814,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-16T16:06:39.943676+02:00"
+						"dateAndTimeString" : "2023-05-02T14:59:13.680517+02:00"
 					}
 				},
 				"uid" : {
@@ -824,7 +824,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "### Foundations"
+				"string" : "###Foundations"
 			},
 			{
 				"__type" : "textSnippet",
@@ -1114,7 +1114,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-28T21:20:47.098606+02:00"
+						"dateAndTimeString" : "2023-05-02T14:59:06.81066+02:00"
 					}
 				},
 				"uid" : {
@@ -1124,7 +1124,82 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "### Mathematics"
+				"string" : "###Mathematics"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-02T14:59:22.422277+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-03T14:31:58.460494+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "k0jEPhe3DQCBb6LTBdRiIg=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "[[Random integer series]]"
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-02T14:58:37.557699+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-02T14:59:03.448137+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "r7MXPBe3DQCA43b5BdRiIg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Simulation support"
 			},
 			{
 				"__type" : "textSnippet",
@@ -1376,7 +1451,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-05T11:34:03.193597+02:00"
+						"dateAndTimeString" : "2023-05-02T14:58:55.911812+02:00"
 					}
 				},
 				"uid" : {
@@ -1386,7 +1461,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "### Tools"
+				"string" : "###Tools"
 			},
 			{
 				"__type" : "textSnippet",
