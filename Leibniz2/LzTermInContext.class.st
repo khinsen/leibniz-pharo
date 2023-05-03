@@ -184,7 +184,7 @@ LzTermInContext >> gtSortGraphFor: aView [
 		title: 'Sort graph';
 		priority: 11;
 		object: [ self context ];
-		view: #gtGraphFor:;
+		view: #gtSortGraphFor:;
 		yourself
 ]
 
