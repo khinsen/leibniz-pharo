@@ -18,7 +18,7 @@ LzRandom >> integerBetween: min and: max [
 	binSize := (2 ** 64) // numberOfBins.
 	^ [ :x |
 		| result |
-		result := x // binSize.
+		result := (x // binSize) + min.
 		result > max
 			ifTrue: [ nil ]
 			ifFalse: [ result ] ]
@@ -71,6 +71,14 @@ LzRandom >> nextTransformedBy: aBlock [
 	^ result
 ]
 
+{ #category : #printing }
+LzRandom >> printOn: aStream [
+	super printOn: aStream.
+	aStream << $(.
+	self seed printOn: aStream.
+	aStream << $)
+]
+
 { #category : #private }
 LzRandom >> rotl: x by: k [
 	^ ((x << k) | (x >> (64 - k)))
@@ -82,21 +90,31 @@ LzRandom >> rotl: x by: k [
 
 { #category : #accessing }
 LzRandom >> seed [
-	^ seed
+	| integerSeed |
+	integerSeed := 0.
+	seed do: [ :each |
+		integerSeed := (integerSeed << 64) bitOr: each ].
+	^ integerSeed
 ]
 
 { #category : #accessing }
-LzRandom >> seed: anArray [
-	self assert: anArray size equals: 4.
+LzRandom >> seed: anInteger [
+	| rest |
+	seed := Array new: 4.
+	rest := anInteger.
+	seed size to: 1 by: -1 do: [ :index |
+		seed at: index put: (rest bitAnd: 16rFFFFFFFFFFFFFFFF).
+		rest := rest >> 64 ].
+	self assert: rest equals: 0.
+"	self assert: anArray size equals: 4.
 	anArray do: [ :each | self assert: each >= 0 ].
-	seed := anArray collect: [ :each | each bitAnd: 16rFFFFFFFFFFFFFFFF ]
+	seed := anArray collect: [ :each | each bitAnd: 16rFFFFFFFFFFFFFFFF ]"
 ]
 
 { #category : #accessing }
 LzRandom >> seedFromSmallInteger: anIntegerSeed [
 	"splitmix64"
 	| state |
-	self assert: anIntegerSeed > 0.
 	state := anIntegerSeed bitAnd: 16rFFFFFFFFFFFFFFFF.
 	seed := Array new: 4.
 	1 to: seed size do: [ :index |
@@ -109,7 +127,9 @@ LzRandom >> seedFromSmallInteger: anIntegerSeed [
 		z := ((z bitXor: (z >> 27)) * 16r94d049bb133111eb)
 				bitAnd: 16rFFFFFFFFFFFFFFFF.
 		seed at: index put: (z bitXor: (z >> 31)) ]
-"    uint64 state                                  /* The state can be seeded with any (upto) 64 bit integer value. */
+
+"Original C code:
+    uint64 state                                  /* The state can be seeded with any (upto) 64 bit integer value. */
 
     next_int() {
         state += 0x9e3779b97f4a7c15               /* increment the state variable */
