@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-06T18:03:24.269544+02:00"
+						"dateAndTimeString" : "2023-05-04T10:36:59.346793+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The sorts for tuples are:\n\t{{lzSort:(sort:𝕊,)}}\n\t{{lzSort:(sort1:𝕊,sort2:𝕊)}}\n\t{{lzSort:(sort1:𝕊, sort2:𝕊, sort3:𝕊)}}"
+				"string" : "The sorts for tuples are:\n\t{{lzSort:(sort1:𝕊,sort2:𝕊)}}\n\t{{lzSort:(sort1:𝕊, sort2:𝕊, sort3:𝕊)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-07-06T18:06:07.588394+02:00"
+						"dateAndTimeString" : "2023-05-04T10:36:51.612697+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The operators for constructing tuples look very similar:\n\t{{lzOp:s_:𝕊, (s_,) : (s_,)}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, (s1_, s2_) : (s1_, s2_)}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, s3_:𝕊, (s1_, s2_, s3_) : (s1_, s2_, s3_)}}"
+				"string" : "The operators for constructing tuples look very similar:\n\t{{lzOp:s1_:𝕊, s2_:𝕊, (s1_, s2_) : (s1_, s2_)}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, s3_:𝕊, (s1_, s2_, s3_) : (s1_, s2_, s3_)}}"
 			},
 			{
 				"__type" : "textSnippet",

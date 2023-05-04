@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-05-04T10:26:54.690192+02:00"
+						"dateAndTimeString" : "2023-05-04T10:36:21.459183+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The first item of a tuple can be extracted as:\n\t{{lzOp:s_:𝕊, first((s_)) : s_}}  \"incorrectly parsed as first(s_)\"\n\t{{lzOp:s1_:𝕊, s2_:𝕊, first((s1_, s2_)) : s1_}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, s3_:𝕊, first((s1_, s2_, s3_)) : s1_}}"
+				"string" : "The first item of a tuple can be extracted as:\n\t{{lzOp:s1_:𝕊, s2_:𝕊, first((s1_, s2_)) : s1_}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, s3_:𝕊, first((s1_, s2_, s3_)) : s1_}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-05-03T16:40:06.042966+02:00"
+						"dateAndTimeString" : "2023-05-04T10:36:24.703307+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The corresponding rules are:\n\t{{lzRule:s__:𝕊, first((value_:s__)) ⇒ value_\n\t{{lzRule:s1__:𝕊, s2__:𝕊, first((v1_:s1__, v2_:s2__)) ⇒ v1_}}\n\t{{lzRule:s1__:𝕊, s2__:𝕊, s3__:𝕊, first((v1_:s1__, v2_:s2__, v3_:s3__)) ⇒ v1_}}"
+				"string" : "The corresponding rules are:\n\t{{lzRule:s1__:𝕊, s2__:𝕊, first((v1_:s1__, v2_:s2__)) ⇒ v1_}}\n\t{{lzRule:s1__:𝕊, s2__:𝕊, s3__:𝕊, first((v1_:s1__, v2_:s2__, v3_:s3__)) ⇒ v1_}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -330,7 +330,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-03T16:36:51.32884+02:00"
+									"dateAndTimeString" : "2023-05-04T10:36:32.687796+02:00"
 								}
 							},
 							"uid" : {
@@ -340,7 +340,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Extracting the first element:\n\t{{lzTerm:first((1)), subcontext = \"example\", withNormalForm = \"yes\"\n\t{{lzTerm:first((1, 2)), subcontext = \"example\", withNormalForm = \"yes\"}}\n\t{{lzTerm:first((1, 2, 3)), subcontext = \"example\", withNormalForm = \"yes\"}}"
+							"string" : "Extracting the first element:\n\t{{lzTerm:first((1, 2)), subcontext = \"example\", withNormalForm = \"yes\"}}\n\t{{lzTerm:first((1, 2, 3)), subcontext = \"example\", withNormalForm = \"yes\"}}"
 						},
 						{
 							"__type" : "textSnippet",
