@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-05-03T16:41:12.41847+02:00"
+						"dateAndTimeString" : "2023-05-04T10:26:54.690192+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The first item of a tuple can be extracted as:\n\t{{lzOp:s_:𝕊, first((s_)) : s_  \"incorrectly parsed as first(s_)\"\n\t{{lzOp:s1_:𝕊, s2_:𝕊, first((s1_, s2_)) : s1_}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, s3_:𝕊, first((s1_, s2_, s3_)) : s1_}}"
+				"string" : "The first item of a tuple can be extracted as:\n\t{{lzOp:s_:𝕊, first((s_)) : s_}}  \"incorrectly parsed as first(s_)\"\n\t{{lzOp:s1_:𝕊, s2_:𝕊, first((s1_, s2_)) : s1_}}\n\t{{lzOp:s1_:𝕊, s2_:𝕊, s3_:𝕊, first((s1_, s2_, s3_)) : s1_}}"
 			},
 			{
 				"__type" : "textSnippet",
