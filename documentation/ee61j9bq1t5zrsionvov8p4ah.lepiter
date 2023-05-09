@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-21T10:06:07.743751+02:00"
+						"dateAndTimeString" : "2023-05-09T14:28:04.410003+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses:\n- {{lzUseContext:name=\"Rational numbers\"}}\n- {{lzUseContext:name=\"One-dimensional arrays\"}}, {{lzUseContext:name = \"Array size\"}}\n- {{lzUseContext:name = \"Function application to one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Function-based selection from one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Term equality\"}}\n- {{lzUseContext:name = \"Boolean algebra\"}}"
+				"string" : "Uses:\n- {{lzUseContext:name=\"Rational numbers\"}}\n- {{lzUseContext:name=\"One-dimensional arrays\"}}, {{lzUseContext:name = \"Array size\"}}\n- {{lzUseContext:name = \"Function application to one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Function-based selection from one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Two-dimensional arrays\"}}\n- {{lzUseContext:name = \"Term equality\"}}\n- {{lzUseContext:name = \"Boolean algebra\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -1202,7 +1202,267 @@
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [ ]
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-04-06T15:51:59.572272+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T16:41:04.327496+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "tNUS8wy1DQCu3qO3BdDFOg=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "A simulation starts from an initial state, which is then updated in a series of iterations. For the segregation model, the state describes the current occupation of each place in the territory. For a rectangular grid of cells, the state can be represented by a two-dimensional array:\n\t{{lzSort:Array2D(occupation) ⊆ state}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T16:38:46.751378+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T16:42:14.114335+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "Olkoc6W3DQCgBm6SDLSm+A=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "An iteration is a pass over the territory, row by row and, within each row, column by column:"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-04-06T15:35:06.35592+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T16:35:09.080139+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "zleutgy1DQCxGezpC9cf8w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "\t{{lzOp:pass : state → state}}\n\t{{lzRule:pass[s_:state] ⇒ rowPass(N, s_)}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T16:21:25.563402+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T16:33:44.583108+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "LxYZNaW3DQCaiQMADLSm+A=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "\t{{lzOp:rowPass(ℕ, state) : state}}\n\t{{lzRule:rowPass(0, s_:state) ⇒ s_}}\n\t{{lzRule:rowPass(n_:ℕ.nz, s_:state) ⇒ columnPass(n_, M, rowPass(n_ - 1, s_))}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T16:29:47.299519+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T16:35:16.831944+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "iuwAU6W3DQCdhpulDLSm+A=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "\t{{lzOp:columnPass(ℕ, ℕ, state) : state}}\n\t{{lzRule:columnPass(n_:ℕ.nz, 0, s_:state) ⇒ s_}}\n\t{{lzRule:columnPass(n_:ℕ.nz, m_:ℕ.nz, s_:state) ⇒ move(cell(n_, m_), columnPass(n_, m_ - 1, s_))}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T16:15:51.734768+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T16:47:26.565084+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "OEUzIaW3DQCYUVUhDLSm+A=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Note: Schelling's article is less precise about the order in which the cells are examined: \"Working generally from the upper left corner downward and to the right, ...\" (page 156)"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T14:48:59.014268+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T16:44:43.917724+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "jXZ/6qO3DQCWtp1sDLSm+A=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "In each move, a single cell is examined:\n\t{{lzOp:move(place, state) : state}}"
+						}
+					]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -1234,80 +1494,6 @@
 					"__type" : "textStyle"
 				},
 				"string" : "###Simulation"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-06T15:51:59.572272+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-06T15:51:59.572272+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "tNUS8wy1DQCu3qO3BdDFOg=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : ""
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-06T15:35:06.35592+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-06T15:35:06.35592+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "zleutgy1DQCxGezpC9cf8w=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : ""
 			}
 		]
 	},
