@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-05-09T14:28:04.410003+02:00"
+						"dateAndTimeString" : "2023-05-10T18:20:36.201578+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses:\n- {{lzUseContext:name=\"Rational numbers\"}}\n- {{lzUseContext:name=\"One-dimensional arrays\"}}, {{lzUseContext:name = \"Array size\"}}\n- {{lzUseContext:name = \"Function application to one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Function-based selection from one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Two-dimensional arrays\"}}\n- {{lzUseContext:name = \"Term equality\"}}\n- {{lzUseContext:name = \"Boolean algebra\"}}"
+				"string" : "Uses:\n- {{lzUseContext:name=\"Rational numbers\"}}\n- {{lzUseContext:name=\"One-dimensional arrays\"}}, {{lzUseContext:name = \"Array size\"}}\n- {{lzUseContext:name = \"Function application to one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Function-based selection from one-dimensional arrays\"}}\n- {{lzUseContext:name = \"Two-dimensional array indexation\"}}\n- {{lzUseContext:name = \"Term equality\"}}\n- {{lzUseContext:name = \"Boolean algebra\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -444,7 +444,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-04-18T14:45:07.231657+02:00"
+									"dateAndTimeString" : "2023-05-10T17:29:11.932458+02:00"
 								}
 							},
 							"uid" : {
@@ -454,7 +454,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "The neighborhood of a cell in the bulk of the grid consists of its eight surrounding cells:\n\t{{lzOp:bulkNeighborhood(place) : Array(place, 8)}}\n\t{{lzRule:x_:ℤ, y_:ℤ, bulkNeighborhood(cell(x_, y_)) ⇒ {[ cell(x_ - 1, y_ - 1), cell(x_, y_  - 1), cell(x_ + 1, y_  - 1), cell(x_ - 1, y_), cell(x_ + 1, y_), cell(x_ - 1, y_ + 1), cell(x_, y_ + 1), cell(x_ + 1, y_ + 1) ]} }}"
+							"string" : "The neighborhood of a cell in the bulk of the grid consists of its eight surrounding cells:\n\t{{lzOp:bulkNeighborhood(place) : Array(place, 8)}}\n\t{{lzRule:bulkNeighborhood(cell(x_:ℤ, y_:ℤ)) ⇒ {[ cell(x_ - 1, y_ - 1), cell(x_, y_  - 1), cell(x_ + 1, y_  - 1), cell(x_ - 1, y_), cell(x_ + 1, y_), cell(x_ - 1, y_ + 1), cell(x_, y_ + 1), cell(x_ + 1, y_ + 1) ]} }}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -620,118 +620,6 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-04-13T11:38:59.717704+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-04-13T17:29:40.507516+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "hUIsO5a1DQCH5t/aB5mQOw=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "The {{lzSort:occupation}} of each place at a  given time is either an {{lzSort:agent ⊆ occupation}} or the special value {{lzOp:empty : occupation}}:\n\t{{lzOp:occupation(place, time:ℕ) : occupation}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-04-13T12:02:29.259323+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-04-13T17:30:48.136012+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "OSYwj5a1DQCVp8ZMB5mQOw=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "The occupation is the dynamic state of the simulation. It is initialized at time 0, and then updated in a sequence of iterations during which agents move to find happiness."
-						}
-					]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-18T17:10:05.376208+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-18T17:10:08.972223+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "Nf92cP+1DQCiUHKjB2+YcA=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "###Occupation"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
 									"dateAndTimeString" : "2023-04-06T15:21:49.201312+02:00"
 								}
 							},
@@ -787,6 +675,81 @@
 					"__type" : "textStyle"
 				},
 				"string" : "###Agents"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-04-13T11:38:59.717704+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-10T18:11:35.732517+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "hUIsO5a1DQCH5t/aB5mQOw=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "The {{lzSort:occupation}} of each place is either an {{lzSort:agent ⊆ occupation}} or the special value {{lzOp:empty : occupation}}."
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T17:10:05.376208+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-18T17:10:08.972223+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "Nf92cP+1DQCiUHKjB2+YcA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Occupation"
 			},
 			{
 				"__type" : "textSnippet",
@@ -1142,81 +1105,6 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-02T14:32:01.189525+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-02T14:53:13.631973+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "nTlgnAy1DQCqh5kYC9cf8w=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "The initial {{lzSort:state}} of the simulation is defined by a random selection of occupations. The fraction of empty places is provided as an input. The fractions of the two kinds of agents are taken to be equal.\n\t{{lzOp:randomOccupation(emptyFraction:ℚ.nn) : state}}"
-						}
-					]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T15:42:09.035845+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-13T17:31:07.059321+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "2hfNGpa1DQCE7gewB5mQOw=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "###Initialization"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
 									"dateAndTimeString" : "2023-05-09T18:17:29.974471+02:00"
 								}
 							},
@@ -1265,7 +1153,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-09T18:25:27.539424+02:00"
+									"dateAndTimeString" : "2023-05-10T18:09:46.57131+02:00"
 								}
 							},
 							"uid" : {
@@ -1275,7 +1163,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "The simulation is thus a time series of states:\n\t{{lzOp:simulation[ℕ] : state}}\n\t{{lzRule:(s_:simulation)[n_:ℕ.nz] ⇒ iteration[s_[n_ - 1]]}}"
+							"string" : "The simulation is thus a series of successive states,\n\t{{lzOp:simulation[ℕ] : state}}\n\t{{lzRule:(s_:simulation)[n_:ℕ.nz] ⇒ iteration[s_[n_ - 1]]}},\nwith {{lzTerm:(s_:simulation)[0]}} being the initial state."
 						},
 						{
 							"__type" : "textSnippet",
@@ -1302,7 +1190,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-09T18:25:44.136794+02:00"
+									"dateAndTimeString" : "2023-05-10T18:23:49.341655+02:00"
 								}
 							},
 							"uid" : {
@@ -1312,7 +1200,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "For the segregation model, the state describes the current occupation of each place in the territory. For a rectangular grid of cells, this state can be represented by a two-dimensional array:\n\t{{lzSort:Array2D(occupation) ⊆ state}}"
+							"string" : "For the segregation model, the state describes the current {{lzSort:occupation}} of each place in the territory. For a rectangular grid of cells, this state can be represented by a two-dimensional array:\n\t{{lzSort:Array2D(occupation) ⊆ state}}\n\t{{lzOp:occupation(place, state) : occupation}}\n\t{{lzRule:occupation(cell(x_:ℕ.nz, y_:ℕ.nz), s_:Array2D(occupation)) ⇒ s_[x_, y_]}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -1461,81 +1349,6 @@
 								"__type" : "textStyle"
 							},
 							"string" : "Note: Schelling's article is less precise about the order in which the cells are processed: \"Working generally from the upper left corner downward and to the right, ...\" (page 156)"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-05-09T14:48:59.014268+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-05-09T16:44:43.917724+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "jXZ/6qO3DQCWtp1sDLSm+A=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : "In each move, a single cell is examined:\n\t{{lzOp:move(place, state) : state}}"
-									}
-								]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-09T18:15:31.453834+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-09T18:15:55.427889+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "3Qklzaa3DQCHGh85AhmWAQ=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "####Moves"
 						}
 					]
 				},
@@ -1569,6 +1382,230 @@
 					"__type" : "textStyle"
 				},
 				"string" : "###Simulation"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-09T14:48:59.014268+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-10T18:15:26.365012+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "jXZ/6qO3DQCWtp1sDLSm+A=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "In each move, a single place is examined:\n\t{{lzOp:move(place, state) : state}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-10T18:15:34.635359+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-10T18:28:10.848818+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "fwAt67q3DQCCG4YcBxq6HQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "What happens during a move depends most importantly on its occupation:\n\t{{lzOp:move(occupation, place, state) : state}}\n\t{{lzRule:move(p_:place, s_:state) ⇒ move(occupation(p_, s_), p_, s_)}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-10T18:28:22.752193+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-10T18:28:50.763832+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "FrWiGLu3DQCNQK+eBxq6HQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "If the place is empty, nothing changes:\n\t{{lzRule:move(empty, p_:place, s_:state) ⇒ s_}}"
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-09T18:15:31.453834+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-05-10T18:14:57.871195+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "3Qklzaa3DQCHGh85AhmWAQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Moves"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-02T14:32:01.189525+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-02T14:53:13.631973+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "nTlgnAy1DQCqh5kYC9cf8w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "The initial {{lzSort:state}} of the simulation is defined by a random selection of occupations. The fraction of empty places is provided as an input. The fractions of the two kinds of agents are taken to be equal.\n\t{{lzOp:randomOccupation(emptyFraction:ℚ.nn) : state}}"
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T15:42:09.035845+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-04-13T17:31:07.059321+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "2hfNGpa1DQCE7gewB5mQOw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Initialization"
 			}
 		]
 	},
