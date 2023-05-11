@@ -1487,7 +1487,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-10T18:28:50.763832+02:00"
+									"dateAndTimeString" : "2023-05-11T14:37:03.010226+02:00"
 								}
 							},
 							"uid" : {
@@ -1497,7 +1497,118 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "If the place is empty, nothing changes:\n\t{{lzRule:move(empty, p_:place, s_:state) ⇒ s_}}"
+							"string" : "If the place is empty, nothing changes:\n\t{{lzRule:move[1]:move(empty, p_:place, s_:state) ⇒ s_}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-11T14:37:06.669939+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-11T14:38:10.08895+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "ybS4+8u3DQCg5CgTAYDEqQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "If there is a happy agent at the place, nothing changes either:\n\t{{lzRule:move[2]:move(a_:agent, p_:place, s_:state) ⇒ s_ | isHappy(a_, p_)}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-11T14:39:25.372082+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-11T15:07:48.511758+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "jvvGA8y3DQCjtI+3AYDEqQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Otherwise, the place is occupied by an unhappy agent, who tries to move to the nearest empty place that offers happiness. The move is equivalent to an exchange of the occupations of the two places:\n{{lzRule:move[3]:move(a_:agent, p_:place, s_:state) ⇒ exchange(p_, nearestEmptyHappiness(a_, p_, s_), s_)}}\nwith\n\t{{lzOp:exchange(place, place, state) : state}}\nand\n\t{{lzOp:nearestEmptyHappiness(agent, place, state) : place}}."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-11T15:07:50.531726+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-11T15:07:50.531726+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "Jcufacy3DQCvJoXEAYDEqQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : ""
 						}
 					]
 				},
