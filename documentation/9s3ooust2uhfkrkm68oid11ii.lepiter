@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-05-15T14:28:02.256128+02:00"
+						"dateAndTimeString" : "2023-05-15T15:32:26.15576+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "For efficiency, it is implemented in Pharo:\n\t{{lzRule:s__:𝕊, f_:((s__, s__) → s__), a_:Array1D(s__), reduce(f_, a_) ⇒ Pharo:\"a ensureArrayTerm. a reduceFn: f reducer: reducer\"}}"
+				"string" : "For array literals, it is implemented in Pharo:\n\t{{lzRule:s__:𝕊, f_:((s__, s__) → s__), a_:Array1D(s__), reduce(f_, a_) ⇒ Pharo:\"a ensureArrayTerm. a reduceFn: f reducer: reducer\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -193,6 +193,80 @@
 								"__type" : "textStyle"
 							},
 							"string" : "The sum of an integer array is obtained as\n\t{{lzTerm:reduce(sum, {[1, 2, 3]}), subcontext = \"example\", withNormalForm = \"yes\"}}\nwith\n\t{{lzOp:sum:(ℤ, ℤ) → ℤ, subcontext = \"example\"}}\n\t{{lzRule:sum[a_:ℤ, b_:ℤ] ⇒ a_ + b_, subcontext = \"example\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-15T15:30:33.33672+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-15T15:31:15.543799+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "6As4Mh24DQCwREVPC2AFNQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Reduction over an array with a single element is a valid edge case:\n\t{{lzTerm:reduce(sum, {[2]}), subcontext = \"example\", withNormalForm = \"yes\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-15T15:31:22.587269+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-05-15T15:31:49.769206+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "M40nNR24DQCxog6jC2AFNQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Reduction over an empty array is not defined:\n\t{{lzTerm:reduce(sum, {[]}), subcontext = \"example\", withNormalForm = \"yes\"}}"
 						}
 					]
 				},
