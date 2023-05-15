@@ -636,7 +636,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-04-18T16:08:57.545632+02:00"
+												"dateAndTimeString" : "2023-05-15T14:22:08.801521+02:00"
 											}
 										},
 										"uid" : {
@@ -646,7 +646,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "[[One-dimensional array indexation]], [[One-dimensional array slicing]], [[Function application to one-dimensional arrays]],  [[One-dimensional index arrays]], [[Algorithmic construction of one-dimensional arrays]], [[Element selection from one-dimensional arrays]], [[Function-based selection from one-dimensional arrays]]"
+										"string" : "[[One-dimensional array indexation]], [[One-dimensional array slicing]], [[Function application to one-dimensional arrays]], [[Reduction over one-dimensional arrays]],   [[One-dimensional index arrays]], [[Algorithmic construction of one-dimensional arrays]], [[Element selection from one-dimensional arrays]], [[Function-based selection from one-dimensional arrays]]"
 									},
 									{
 										"__type" : "textSnippet",

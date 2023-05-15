@@ -258,6 +258,17 @@ LzArrayTerm >> printElements: anArray shape: shapeArray on: aStream [
 ]
 
 { #category : #transforming }
+LzArrayTerm >> reduceFn: aTerm reducer: aBlock [
+	self assert: self shape size equals: 1.
+	self assert: self shape first >= 1.
+	^ elements allButFirst inject: elements first into: [ :total :each |
+		aBlock value:
+			(self signature
+				opTerm: LzBracketOpName new
+				args: { aTerm . total . each }) ]
+]
+
+{ #category : #transforming }
 LzArrayTerm >> select: maskArray [
 	| selectedElements |
 	self assert: self shape equals: maskArray shape.
