@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-05-27T12:14:21.06207+02:00"
+						"dateAndTimeString" : "2023-05-15T16:57:58.842551+02:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Examples: {{lzTerm:⊤ == ⊤}}, {{lzTerm:⊤ == ⊥}}"
+				"string" : "Examples:\n\t{{lzTerm:⊤ == ⊤, withNormalForm = \"yes\"}}\n\t{{lzTerm:⊤ == ⊥, withNormalForm = \"yes\"}}\n\t{{lzTerm:⊥ == ⊥, withNormalForm = \"yes\"}}"
 			}
 		]
 	},
