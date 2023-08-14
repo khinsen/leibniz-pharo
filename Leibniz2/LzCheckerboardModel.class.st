@@ -15,15 +15,20 @@ Class {
 }
 
 { #category : #operating }
-LzCheckerboardModel >> agentHappyAt: aRow at: aColumn [
+LzCheckerboardModel >> agentHappyAt: aPoint [
 	| agent |
-	agent := board at: aRow at: aColumn.
-	^ (self fractionOf: agent inNeighborhoodOfCellAt: aRow at: aColumn) > (1/2)
+	agent := board at: aPoint x at: aPoint y.
+	^ (self fractionOf: agent inNeighborhoodOfCellAt: aPoint) > (1/2)
 ]
 
 { #category : #agents }
 LzCheckerboardModel >> blackAgent [
 	^ #'*'
+]
+
+{ #category : #accessing }
+LzCheckerboardModel >> cellAt: aPosition [
+	^ board at: aPosition x at: aPosition y
 ]
 
 { #category : #agents }
@@ -53,12 +58,12 @@ LzCheckerboardModel >> emptyCellPositionsSortedByDistanceFrom: aPosition [
 ]
 
 { #category : #operating }
-LzCheckerboardModel >> fractionOf: agentKind inNeighborhoodOfCellAt: aRow at: aColumn [
+LzCheckerboardModel >> fractionOf: agentKind inNeighborhoodOfCellAt: aPoint [
 	| nCells nLikeCells |
 	nCells := 0.
 	nLikeCells := 0.
-	aRow - 1 to: aRow + 1 do: [ :nbRow |
-		aColumn - 1 to: aColumn + 1 do: [ :nbColumn |
+	aPoint x - 1 to: aPoint x + 1 do: [ :nbRow |
+		aPoint y - 1 to: aPoint y + 1 do: [ :nbColumn |
 			((nbRow between: 1 and: board numberOfRows)
 				and: [ nbColumn between: 1 and: board numberOfColumns ])
 				ifTrue: [
@@ -73,25 +78,17 @@ LzCheckerboardModel >> fullPass [
 	1 to: board numberOfRows do: [ :aRow |
 	 	1 to: board numberOfColumns do: [ :aColumn |
 	 		((board at: aRow at: aColumn) = self emptyCell) ifFalse: [
-		 		self moveAgentAt: aRow at: aColumn ] ] ]
+		 		self moveAgentAt: aRow @ aColumn ] ] ]
 ]
 
 { #category : #inspecting }
 LzCheckerboardModel >> gtBoardFor: aView [
 	<gtView>
-	| view |
-	view := aView columnedList
+	^ aView explicit
 		title: 'Board';
 		priority: 1;
-		items: [ board rowsCollect: [ :row | row ] ].
-	1 to: board numberOfColumns do: [ :i |
-		view column: i asString text: [ :item | item at: i ] ].
-	view 
-		actionButtonIcon: BrGlamorousIcons fromhere 
-		tooltip: 'Full pass'
-		action: [ :aButton :aTab |
-			self fullPass.
-			aTab viewContentElement phlow update ]
+		stencil: [ LzCheckerboardElement new board: self ];
+		yourself
 ]
 
 { #category : #initializing }
@@ -103,19 +100,29 @@ LzCheckerboardModel >> initialize [
 ]
 
 { #category : #operating }
-LzCheckerboardModel >> moveAgentAt: aRow at: aColumn [
+LzCheckerboardModel >> moveAgentAt: aPoint [
 	| agent |
-	agent := board at: aRow at: aColumn.
-	(self agentHappyAt: aRow at: aColumn)
+	agent := board at: aPoint x at: aPoint y.
+	(self agentHappyAt: aPoint)
 		ifFalse: [
 			| destinations |
-			destinations := self emptyCellPositionsSortedByDistanceFrom: aRow @ aColumn.
+			destinations := self emptyCellPositionsSortedByDistanceFrom: aPoint.
 			destinations ifNotEmpty: [
 				| destination |
 				destination := destinations first.
 				board
-					swap: aRow at: aColumn
+					swap: aPoint x at: aPoint y
 					with: destination x at: destination y ] ]
+]
+
+{ #category : #accessing }
+LzCheckerboardModel >> numberOfColumns [
+	^ board numberOfColumns
+]
+
+{ #category : #accessing }
+LzCheckerboardModel >> numberOfRows [
+	^ board numberOfRows
 ]
 
 { #category : #initializing }
