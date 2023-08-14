@@ -15,20 +15,37 @@ Class {
 }
 
 { #category : #operating }
+LzCheckerboardModel >> agent: aSymbol happyAt: aPoint [
+	self assert:
+		({ self blackCell . self whiteCell } includes: aSymbol).
+	^ (self fractionOf: aSymbol inNeighborhoodOfCellAt: aPoint) > (1/2)
+]
+
+{ #category : #operating }
 LzCheckerboardModel >> agentHappyAt: aPoint [
-	| agent |
-	agent := board at: aPoint x at: aPoint y.
-	^ (self fractionOf: agent inNeighborhoodOfCellAt: aPoint) > (1/2)
+	^ self
+		agent: (board at: aPoint x at: aPoint y)
+		happyAt: aPoint
 ]
 
 { #category : #agents }
-LzCheckerboardModel >> blackAgent [
+LzCheckerboardModel >> blackCell [
 	^ #'*'
 ]
 
 { #category : #accessing }
 LzCheckerboardModel >> cellAt: aPosition [
 	^ board at: aPosition x at: aPosition y
+]
+
+{ #category : #testing }
+LzCheckerboardModel >> cellIsEmptyAt: aPoint [
+	^ (board at: aPoint x at: aPoint y) = self emptyCell
+]
+
+{ #category : #operating }
+LzCheckerboardModel >> destinationForAgent: aSymbol at: aPoint [
+	self emptyCellPositionsSortedByDistanceFrom: aPoint.
 ]
 
 { #category : #agents }
@@ -64,8 +81,10 @@ LzCheckerboardModel >> fractionOf: agentKind inNeighborhoodOfCellAt: aPoint [
 	nLikeCells := 0.
 	aPoint x - 1 to: aPoint x + 1 do: [ :nbRow |
 		aPoint y - 1 to: aPoint y + 1 do: [ :nbColumn |
-			((nbRow between: 1 and: board numberOfRows)
-				and: [ nbColumn between: 1 and: board numberOfColumns ])
+			| nbPoint |
+			nbPoint := nbRow @ nbColumn.
+			((self isValidPosition: nbPoint)
+				and: [ (self cellIsEmptyAt: nbPoint) not ])
 				ifTrue: [
 					nCells := nCells + 1.
 					(board at: nbRow at: nbColumn) = agentKind
@@ -87,7 +106,12 @@ LzCheckerboardModel >> gtBoardFor: aView [
 	^ aView explicit
 		title: 'Board';
 		priority: 1;
-		stencil: [ LzCheckerboardElement new board: self ];
+		stencil: [ LzCheckerboardElement new board: self ]; 
+		actionButtonIcon: BrGlamorousIcons fromhere 
+			tooltip: 'Full pass'
+			action: [ :aButton :aTab |
+				self fullPass.
+				aTab viewContentElement phlow update ];
 		yourself
 ]
 
@@ -97,6 +121,12 @@ LzCheckerboardModel >> initialize [
 	board := Array2D rows: 13 columns: 16.
 	randomGenerator := Random new.
 	self randomInitialOccupationsWithEmptyFraction: 1/3.
+]
+
+{ #category : #testing }
+LzCheckerboardModel >> isValidPosition: aPoint [
+	^ (aPoint x between: 1 and: board numberOfRows)
+		and: [ aPoint y between: 1 and: board numberOfColumns ]
 ]
 
 { #category : #operating }
@@ -135,12 +165,12 @@ LzCheckerboardModel >> randomInitialOccupationsWithEmptyFraction: aNumber [
 	 		cell := self emptyCell.
 	 		randomGenerator next > aNumber
 	 			ifTrue: [ randomGenerator next > 0.5
-	 						ifTrue: [ cell := self blackAgent ]
-	 						ifFalse: [ cell := self whiteAgent ] ].
+	 						ifTrue: [ cell := self blackCell ]
+	 						ifFalse: [ cell := self whiteCell ] ].
 	 		board at: aRow at: aColumn put: cell ] ]
 ]
 
 { #category : #agents }
-LzCheckerboardModel >> whiteAgent [
+LzCheckerboardModel >> whiteCell [
 	^ #'0'
 ]
