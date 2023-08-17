@@ -1,46 +1,43 @@
 Class {
-	#name : #LzCheckerboardCellElement,
+	#name : #LzSakodaSchellingCellElement,
 	#superclass : #BlElement,
 	#instVars : [
 		'cellPosition',
 		'board',
 		'position'
 	],
-	#category : #'Leibniz2-CheckerboardModel'
+	#category : #'Leibniz2-SakodaSchellingModel'
 }
 
 { #category : #accessing }
-LzCheckerboardCellElement >> board [
+LzSakodaSchellingCellElement >> board [
 	^ board
 ]
 
 { #category : #accessing }
-LzCheckerboardCellElement >> board: anObject [
+LzSakodaSchellingCellElement >> board: anObject [
 	board := anObject
 ]
 
 { #category : #accessing }
-LzCheckerboardCellElement >> cellPosition [
+LzSakodaSchellingCellElement >> cellPosition [
 	^ cellPosition
 ]
 
 { #category : #accessing }
-LzCheckerboardCellElement >> cellPosition: aPoint [
+LzSakodaSchellingCellElement >> cellPosition: aPoint [
 	| cell |
 	cellPosition := aPoint.
 	cell := board cellAt: aPoint.
-	cell = #' '
-		ifTrue: [ self background: Color gray ]
+	self background: cell color.
+	cell isEmpty
 		ifFalse: [
-			self background:  (cell = #'*'
-									ifTrue: [Color black ]
-									ifFalse: [Color white ]).
-			(board agentHappyAt: aPoint)
+			(board agentIsHappyAt: aPoint)
 				ifFalse: [ self border: (BlBorder paint: Color red) ] ]
 ]
 
 { #category : #initializing }
-LzCheckerboardCellElement >> initialize [
+LzSakodaSchellingCellElement >> initialize [
 	super initialize.
 	self layout: BlFrameLayout new.
 	self size: 20 @ 20.
