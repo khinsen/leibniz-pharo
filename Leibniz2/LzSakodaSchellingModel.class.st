@@ -12,6 +12,13 @@ Class {
 	#category : #'Leibniz2-SakodaSchellingModel'
 }
 
+{ #category : #'instance creation' }
+LzSakodaSchellingModel class >> fromRandomSeed: anInteger [
+	^ self new
+		randomGenerator: (Random new seed: anInteger);
+		yourself
+]
+
 { #category : #operating }
 LzSakodaSchellingModel >> agent: aCellOccupation isHappyAt: aPosition [
 	self assert: aCellOccupation isEmpty not.
@@ -99,7 +106,9 @@ LzSakodaSchellingModel >> fractionOf: agentKind inNeighborhoodOfCell: aPosition 
 				nCells := nCells + 1.
 				(agentKind = (self cellOccupationAt: nbPosition))
 					ifTrue: [ nLikeCells := nLikeCells + 1 ] ] ].
-	^ nLikeCells / nCells
+	^ nCells isZero
+		ifTrue: [ 1 ]
+		ifFalse: [ nLikeCells / nCells ]
 ]
 
 { #category : #operating }
@@ -137,16 +146,13 @@ LzSakodaSchellingModel >> gtBoardFor: aView [
 { #category : #initializing }
 LzSakodaSchellingModel >> initialize [
 	super initialize.
-	randomGenerator := Random new.
-	self
-		initializeBoardWithSize: 13 @ 16
-		fractionEmpty: 1/10
+	randomGenerator := Random new
 ]
 
 { #category : #initializing }
 LzSakodaSchellingModel >> initializeBoardWithSize: aPoint fractionEmpty: aNumber [
 	self assert: (aNumber between: 0 and: 1).
-	board := Array2D rows: 13 columns: 16.
+	board := Array2D rows: aPoint x columns: aPoint y.
 	self allCellsDo: [ :eachPoint |
 		| cellOccupation |
 		cellOccupation :=
@@ -230,6 +236,11 @@ LzSakodaSchellingModel >> numberOfColumns [
 { #category : #accessing }
 LzSakodaSchellingModel >> numberOfRows [
 	^ board numberOfRows
+]
+
+{ #category : #accessing }
+LzSakodaSchellingModel >> randomGenerator: anObject [
+	randomGenerator := anObject 
 ]
 
 { #category : #inspecting }

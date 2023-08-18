@@ -182,14 +182,85 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T16:46:14.452747+02:00"
+									"dateAndTimeString" : "2023-08-18T16:59:16.340274+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
 								"uidString" : "C+mONYG/DQCzwAUBB3Bb7w=="
 							},
-							"code" : "LzSakodaSchellingModel new"
+							"code" : "LzSakodaSchellingModel new\r\tinitializeBoardWithSize: 13 @ 16\r\tfractionEmpty: 1/4"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-08-18T16:59:36.570158+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-08-18T17:00:03.502523+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "7+Wfg5W/DQCcDTZEAsLe9w=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "For reproducible simulations, specify an integer random seed:"
+						},
+						{
+							"__type" : "pharoSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-08-18T17:00:08.77482+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-08-18T17:00:24.052215+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "tVWLhZW/DQCdTGllAsLe9w=="
+							},
+							"code" : "(LzSakodaSchellingModel fromRandomSeed: 42)\r\tinitializeBoardWithSize: 13 @ 16\r\tfractionEmpty: 1/4"
 						}
 					]
 				},
@@ -259,7 +330,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-18T14:31:30.119141+02:00"
+												"dateAndTimeString" : "2023-08-18T17:14:06.467801+02:00"
 											}
 										},
 										"uid" : {
@@ -269,45 +340,46 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The board is represented by an {{gtClass:Array2D}}. It is created with 13 rows and 16 columns and each cell receives randomly one of three possible states: empty, a black agent, or a white agent.\n{{gtMethod:name=LzSakodaSchellingModel>>#initializeBoardWithSize:fractionEmpty:|expanded}}\n"
-									},
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-17T13:15:54.286434+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-18T14:31:35.039497+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "j8TARX6/DQCEXns4B+UXdg=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : "The initialization of the board is part of the initialization of the model object:\n{{gtMethod:name=LzSakodaSchellingModel>>initialize|expanded}}"
-									},
+										"string" : "The board is represented by an {{gtClass:Array2D}}. Each cell receives randomly one of three possible states: empty, a black agent, or a white agent.\n{{gtMethod:name=LzSakodaSchellingModel>>#initializeBoardWithSize:fractionEmpty:|expanded}}\n"
+									}
+								]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-08-18T17:12:36.210049+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-08-18T17:12:45.972741+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "6E4YspW/DQCEydMkCrbz6g=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "####The checkerboard"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [
 									{
 										"__type" : "textSnippet",
 										"children" : {
@@ -541,7 +613,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-18T14:52:26.192748+02:00"
+									"dateAndTimeString" : "2023-08-18T17:12:48.999878+02:00"
 								}
 							},
 							"editEmail" : {
@@ -552,7 +624,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-18T14:53:02.671748+02:00"
+									"dateAndTimeString" : "2023-08-18T17:12:57.695961+02:00"
 								}
 							},
 							"uid" : {
@@ -562,7 +634,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "####Moving agents on a checkerboard"
+							"string" : "####Moving agents to happier places"
 						},
 						{
 							"__type" : "textSnippet",
@@ -631,7 +703,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-18T15:20:34.304791+02:00"
+												"dateAndTimeString" : "2023-08-18T17:22:33.167297+02:00"
 											}
 										},
 										"uid" : {
@@ -641,7 +713,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The fraction of same-kind agents is computed over all non-empty neighboring cells:\n{{gtMethod:name=LzSakodaSchellingModel>>#fractionOf:inNeighborhoodOfCell:|expanded}}"
+										"string" : "The fraction of same-kind agents is computed over all non-empty neighboring cells. If all neighboring cells are empty, the fraction is defined to be 1.\n{{gtMethod:name=LzSakodaSchellingModel>>#fractionOf:inNeighborhoodOfCell:|expanded}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -668,7 +740,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-18T15:21:50.812443+02:00"
+												"dateAndTimeString" : "2023-08-18T16:49:13.751798+02:00"
 											}
 										},
 										"uid" : {
@@ -678,7 +750,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The neighborhood of a cell consists of the cells surrounding it. There are at most nine neighbors to each cell, but fewer if the cell is on an edge of the board.\n{{gtMethod:name=LzSakodaSchellingModel>>#neighborhoodOf:do:|expanded}}"
+										"string" : "The neighborhood of a cell consists of the cells surrounding it. There are at most eight neighbors to each cell, but only five if the cell is on an edge of the board, and three if the cell is a corner.\n{{gtMethod:name=LzSakodaSchellingModel>>#neighborhoodOf:do:|expanded}}"
 									},
 									{
 										"__type" : "textSnippet",
