@@ -45,43 +45,6 @@
 								"__type" : "textStyle"
 							},
 							"string" : "*Historical note:* A very similar model was published one month earlier by James Sakoda ([\"The checkerboard model of social interaction\"](https://doi.org/10.1080/0022250X.1971.9989791)), who had already worked on (but not published) similar agent-based models for more than 20 years. Sakoda's model was computationally more sophisticated (implemented in Fortran, with several parameters to adapt to different situations), and also more general. Historian Rainer Hegselmann (see [\"Thomas C. Schelling and James M. Sakoda: The Intellectual, Technical, and Social History of a Model\"](https://doi.org/10.18564/jasss.3511)) comes to the conclusion that it was in fact too sophisticated for its time, when few social scientists had access to computers and the required programming competence, and therefore was quickly forgotten. Schelling's simpler coin-on-paper model caught on, and became famous."
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-16T14:55:19.645703+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-16T14:55:33.321021+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "pYR5i2u/DQCLFt/iDf1UcA=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "See also: [[A Pharo implementation of the Sakoda-Schelling model]]"
 						}
 					]
 				},
@@ -115,6 +78,43 @@
 					"__type" : "textStyle"
 				},
 				"string" : "In 1971, Thomas Schelling published a paper entitled [\"Dynamic models of segregation\"](https://doi.org/10.1080/0022250X.1971.9989794) He explored one specific mechanism of racial segregation, by simulating what is often considered to be the first [agent-based model](https://en.wikipedia.org/wiki/Agent-based_model). He performed his simulations manually, using coins he moved around on a piece of paper. The following is a formalization of his model."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-08-16T14:55:19.645703+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-08-16T14:55:33.321021+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "pYR5i2u/DQCLFt/iDf1UcA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "See also: [[A Pharo implementation of the Sakoda-Schelling model]]"
 			},
 			{
 				"__type" : "textSnippet",

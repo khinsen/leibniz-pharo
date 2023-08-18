@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-08-17T12:48:28.378647+02:00"
+						"dateAndTimeString" : "2023-08-18T14:11:45.327698+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The class {{gtClass:LzSakodaSchellingModel}} implements the Sakoda-Schelling model as computational models are typically implemented today: as software, in a programming language. For someone fluent in Pharo, the correspondence to  [Schelling's paper](https://doi.org/10.1080/0022250X.1971.9989794) is easy to check with the overview provided in the following."
+				"string" : "The class {{gtClass:LzSakodaSchellingModel}} implements the Sakoda-Schelling model as computational models are typically implemented today: as software, in a programming language. For someone fluent in Pharo, the correspondence to  [Schelling's paper](https://doi.org/10.1080/0022250X.1971.9989794) is easy to check with the help of the overview provided in the following."
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-08-17T12:52:25.900487+02:00"
+						"dateAndTimeString" : "2023-08-18T14:12:43.291079+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Spoiler: the answer is neither \"yes\" nor \"no\". And that is the reason we need Digital Scientific Notations."
+				"string" : "Spoiler: the answer is neither \"yes\" nor \"no\"."
 			},
 			{
 				"__type" : "textSnippet",
@@ -212,7 +212,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-08-17T16:45:41.11579+02:00"
+						"dateAndTimeString" : "2023-08-18T14:12:55.354678+02:00"
 					}
 				},
 				"uid" : {
@@ -222,7 +222,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "##Runnig a simulation"
+				"string" : "##Running a simulation"
 			},
 			{
 				"__type" : "textSnippet",
@@ -233,7 +233,305 @@
 							"__type" : "textSnippet",
 							"children" : {
 								"__type" : "snippets",
-								"items" : [ ]
+								"items" : [
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T14:31:30.119141+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T14:31:30.119141+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "mHTzcZO/DQC9exVdDWV/2g=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "The board is represented by an {{gtClass:Array2D}}. It is created with 13 rows and 16 columns and each cell receives randomly one of three possible states: empty, a black agent, or a white agent.\n{{gtMethod:name=LzSakodaSchellingModel>>#initializeBoardWithSize:fractionEmpty:|expanded}}\n"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-17T13:15:54.286434+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T14:31:35.039497+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "j8TARX6/DQCEXns4B+UXdg=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "The initialization of the board is part of the initialization of the model object:\n{{gtMethod:name=LzSakodaSchellingModel>>initialize|expanded}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-17T13:20:48.669551+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-17T13:27:07.912018+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "V7hMV36/DQCK/KP5B+UXdg=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "A full pass over the board examines each cell and moves the agent that occupies it.\n{{gtMethod:name=LzSakodaSchellingModel>>#fullPass|expanded}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-17T16:48:46.216924+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T14:44:45.703274+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "FPcEP4G/DQC4omNCB3Bb7w=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Moving an agent does nothing if the agent is happy at its current location. Otherwise, it is moved to the nearest empty cell at which it would be happy.\n{{gtMethod:name=LzSakodaSchellingModel>>#moveAgentAt:|expanded}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-17T16:50:49.234782+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T14:42:42.171243+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "xxFaRoG/DQC9f4H3B3Bb7w=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "The new location for an unhappy agent is found in three steps. First, make a list of all currently empty cells:\n{{gtMethod:name=LzSakodaSchellingModel>>#emptyCells|expanded}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-17T16:58:06.535491+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T14:43:29.667971+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "7b9qYIG/DQCGJeCUB3Bb7w=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Third, the elements of this list are checked one by one, starting from the first, until a cell is found where the agent finds happiness:\n{{gtMethod:name=LzSakodaSchellingModel>>#nearestEmptyCellProvidingHappinessTo:currentlyAt:|expanded}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2023-08-17T16:55:54.224916+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2023-08-17T16:56:54.476082+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "VtiHWIG/DQCEGdHDB3Bb7w=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "The distance is computed via horizontal and vertical steps only:\n{{gtMethod:name=Point>>#manhattanDistanceTo:|expanded}}"
+												}
+											]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-17T16:54:13.348276+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T14:42:55.641097+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "25WEUoG/DQCAzOmxB3Bb7w=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Next, compute the distance of each empty cell from the agent's current cell, and sort the cell list by this distance:\n{{gtMethod:name=LzSakodaSchellingModel>>#emptyCellPositionsSortedByDistanceFrom:|expanded}}"
+									}
+								]
 							},
 							"createEmail" : {
 								"__type" : "email",
@@ -243,7 +541,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T13:15:54.286434+02:00"
+									"dateAndTimeString" : "2023-08-18T14:52:26.192748+02:00"
 								}
 							},
 							"editEmail" : {
@@ -254,128 +552,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T13:20:07.334804+02:00"
+									"dateAndTimeString" : "2023-08-18T14:53:02.671748+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "j8TARX6/DQCEXns4B+UXdg=="
+								"uidString" : "6pzRvJO/DQC+H3JbDWV/2g=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "The board is represented by an {{gtClass:Array2D}}. In {{gtMethod:name=LzSakodaSchellingModel>>initialize|expanded}}it is created with 13 rows and 16 columns All cells receive an initial value in the call to {{gtMethod:name=LzSakodaSchellingModel>>randomInitialOccupationsWithEmptyFraction:|expanded}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T13:20:48.669551+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T13:27:07.912018+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "V7hMV36/DQCK/KP5B+UXdg=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "A full pass over the board examines each cell and moves the agent that occupies it.\n{{gtMethod:name=LzSakodaSchellingModel>>#fullPass|expanded}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T16:48:46.216924+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T16:50:45.109437+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "FPcEP4G/DQC4omNCB3Bb7w=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "Moving an agent does nothing if the agent is happy at its current location. Otherwise, it is moved to the nearest empty location at which it would be happy.\n{{gtMethod:name=LzSakodaSchellingModel>>#moveAgentAt:|expanded}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T16:50:49.234782+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T16:54:04.43419+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "xxFaRoG/DQC9f4H3B3Bb7w=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "The new location for an unhappy agent is found in three steps. First, make a list of all currently empty locations:\n{{gtMethod:name=LzSakodaSchellingModel>>#emptyCellPositions|expanded}}"
+							"string" : "####Moving agents on a checkerboard"
 						},
 						{
 							"__type" : "textSnippet",
@@ -396,7 +583,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-17T16:55:54.224916+02:00"
+												"dateAndTimeString" : "2023-08-18T14:57:21.732042+02:00"
 											}
 										},
 										"editEmail" : {
@@ -407,17 +594,128 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-17T16:56:54.476082+02:00"
+												"dateAndTimeString" : "2023-08-18T14:59:56.267245+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "VtiHWIG/DQCEGdHDB3Bb7w=="
+											"uidString" : "aTFvzpO/DQC/omw9DWV/2g=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The distance is computed via horizontal and vertical steps only:\n{{gtMethod:name=Point>>#manhattanDistanceTo:|expanded}}"
+										"string" : "An agent is happy at a position if at least half of all agents in its neighborhood are of the same kind as itself:\n{{gtMethod:name=LzSakodaSchellingModel>>#agent:isHappyAt:|expanded}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T15:15:46.413793+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T15:20:34.304791+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "yE1HEJS/DQCA+GJIDuAuqA=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "The fraction of same-kind agents is computed over all non-empty neighboring cells:\n{{gtMethod:name=LzSakodaSchellingModel>>#fractionOf:inNeighborhoodOfCell:|expanded}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T15:20:20.939461+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T15:21:50.812443+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "Nz+kIJS/DQCHEZ/QDuAuqA=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "The neighborhood of a cell consists of the cells surrounding it. There are at most nine neighbors to each cell, but fewer if the cell is on an edge of the board.\n{{gtMethod:name=LzSakodaSchellingModel>>#neighborhoodOf:do:|expanded}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T15:00:06.2263+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T15:00:06.2263+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "5CM92JO/DQCEENzVDWV/2g=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : ""
 									}
 								]
 							},
@@ -429,7 +727,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T16:54:13.348276+02:00"
+									"dateAndTimeString" : "2023-08-18T14:57:00.450364+02:00"
 								}
 							},
 							"editEmail" : {
@@ -440,54 +738,17 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T16:55:22.420964+02:00"
+									"dateAndTimeString" : "2023-08-18T14:57:07.18679+02:00"
 								}
 							},
 							"uid" : {
 								"__type" : "uid",
-								"uidString" : "25WEUoG/DQCAzOmxB3Bb7w=="
+								"uidString" : "1noqzZO/DQC/VPXFDWV/2g=="
 							},
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Next, compute the distance of each empty location from the agent's current location, and sort the location list by this distance:\n{{gtMethod:name=LzSakodaSchellingModel>>#emptyCellPositionsSortedByDistanceFrom:|expanded}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T16:58:06.535491+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-17T17:17:24.437075+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "7b9qYIG/DQCGJeCUB3Bb7w=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "Third, the elements of this list are checked one by one, starting from the first, until a cell is found where the agent can find happiness:\n{{gtMethod:name=LzSakodaSchellingModel>>#nearestEmptyCellProvidingHappinessTo:currentlyAt:|expanded}}"
+							"string" : "####Happiness"
 						}
 					]
 				},
