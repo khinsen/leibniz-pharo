@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-08-18T14:11:45.327698+02:00"
+						"dateAndTimeString" : "2023-08-21T14:44:07.060791+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The class {{gtClass:LzSakodaSchellingModel}} implements the Sakoda-Schelling model as computational models are typically implemented today: as software, in a programming language. For someone fluent in Pharo, the correspondence to  [Schelling's paper](https://doi.org/10.1080/0022250X.1971.9989794) is easy to check with the help of the overview provided in the following."
+				"string" : "The class {{gtClass:LzSakodaSchellingModel}} implements the Sakoda-Schelling model as computational models are typically implemented today: as software, in a programming language. For someone fluent in Pharo, the correspondence to  [Schelling's paper](https://doi.org/10.1080/0022250X.1971.9989794) is easy to check. The code overview below contains quotes from Schelling's paper that illustrate in particular how vague the description often is, requiring additional choices to be made in an implementation."
 			},
 			{
 				"__type" : "textSnippet",
@@ -319,6 +319,117 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:27:00.133311+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:27:23.650056+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "2uxhu8+/DQC3zC/7DhLKFQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "**Quote:** *To be specific: divide the area into squares like a checkerboard (but without any alternating colors) and distribute colored chips at random among the squares, leaving some squares blank. One chip occupies one square.*"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:32:21.537131+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:32:26.776896+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "2R+Kzs+/DQC5ROa/DhLKFQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "**Quote:** *In order that people be able to move there must be some vacant spaces; in order that they have significant choice of where to move there must be quite a few. While it is interesting to study what happens if the supply of vacant spaces is restricted, unless one is actually studying the influence of restricted supply the vacancies need to be a reasonably high proportion of the total. It turns out that 25% to 30% vacancies allows fair freedom of movement without making the board too empty.*"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:36:02.765141+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:36:07.249553+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "iM2528+/DQC6NYL/DhLKFQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "**Quote:** *As in the linear model, I make an initial distribution at random. It might make sense to distribute the blank spaces evenly, but I let them be determined at random, too. (It makes some difference.) In some cases I use equal numbers of blacks and whites, in others a ratio of two to one or larger.*"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
 												"dateAndTimeString" : "2023-08-18T14:31:30.119141+02:00"
 											}
 										},
@@ -394,7 +505,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-17T13:20:48.669551+02:00"
+												"dateAndTimeString" : "2023-08-21T14:33:00.163393+02:00"
 											}
 										},
 										"editEmail" : {
@@ -405,17 +516,17 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-17T13:27:07.912018+02:00"
+												"dateAndTimeString" : "2023-08-21T14:33:27.460995+02:00"
 											}
 										},
 										"uid" : {
 											"__type" : "uid",
-											"uidString" : "V7hMV36/DQCK/KP5B+UXdg=="
+											"uidString" : "EozX0M+/DQC5jq6/DhLKFQ=="
 										},
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "A full pass over the board examines each cell and moves the agent that occupies it.\n{{gtMethod:name=LzSakodaSchellingModel>>#fullPass|expanded}}"
+										"string" : "**Quote:** *The rule of movement, then, is that an individual discontent with his own neighborhood moves to the nearest vacant spot that surrounds him with a neighborhood that meets his demands.*"
 									},
 									{
 										"__type" : "textSnippet",
@@ -495,44 +606,44 @@
 										"__type" : "textSnippet",
 										"children" : {
 											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-17T16:58:06.535491+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-18T14:43:29.667971+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "7b9qYIG/DQCGJeCUB3Bb7w=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : "Third, the elements of this list are checked one by one, starting from the first, until a cell is found where the agent finds happiness:\n{{gtMethod:name=LzSakodaSchellingModel>>#nearestEmptyCellProvidingHappinessTo:currentlyAt:|expanded}}"
-									},
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
 											"items" : [
+												{
+													"__type" : "textSnippet",
+													"children" : {
+														"__type" : "snippets",
+														"items" : [ ]
+													},
+													"createEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"createTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2023-08-21T14:38:18.450868+02:00"
+														}
+													},
+													"editEmail" : {
+														"__type" : "email",
+														"emailString" : "<unknown>"
+													},
+													"editTime" : {
+														"__type" : "time",
+														"time" : {
+															"__type" : "dateAndTime",
+															"dateAndTimeString" : "2023-08-21T14:38:32.211174+02:00"
+														}
+													},
+													"uid" : {
+														"__type" : "uid",
+														"uidString" : "jDvQ48+/DQC6g2NQDhLKFQ=="
+													},
+													"paragraphStyle" : {
+														"__type" : "textStyle"
+													},
+													"string" : "**Quote:** *I specify the rule for moving, which is usually to move to the nearest satisfactory square, with 'nearest' measured by the number of squares one traverses horizontally and vertically.*"
+												},
 												{
 													"__type" : "textSnippet",
 													"children" : {
@@ -602,6 +713,154 @@
 											"__type" : "textStyle"
 										},
 										"string" : "Next, compute the distance of each empty cell from the agent's current cell, and sort the cell list by this distance:\n{{gtMethod:name=LzSakodaSchellingModel>>#emptyCellPositionsSortedByDistanceFrom:|expanded}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-17T16:58:06.535491+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-18T14:43:29.667971+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "7b9qYIG/DQCGJeCUB3Bb7w=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Third, the elements of this list are checked one by one, starting from the first, until a cell is found where the agent finds happiness:\n{{gtMethod:name=LzSakodaSchellingModel>>#nearestEmptyCellProvidingHappinessTo:currentlyAt:|expanded}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:39:52.026733+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:39:58.098822+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "FRpk6c+/DQC60scTDhLKFQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "**Quote:** *In some cases the order of move was determined merely by position on the board, such as working generally from left to right; it is also interesting to see what happens if all of one color completes its moves before the other color moves. It is possible, of course, to test the sensitivity of the results with respect to the order of moves. Because what is reported here has all been done by hand and eye, no exact rule for the order of moves has been adhered to strictly.*"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:40:01.624584+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:40:53.797711+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "jor26c+/DQC7HEinDhLKFQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "A full pass over the board examines all cells, row by row, from top left to bottom right:\n{{gtMethod:name=LzSakodaSchellingModel>>#fullPass|expanded}}"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:28:05.644692+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:28:05.644692+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "IopJv8+/DQC4HPe2DhLKFQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : ""
 									}
 								]
 							},
@@ -641,6 +900,43 @@
 							"children" : {
 								"__type" : "snippets",
 								"items" : [
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:34:40.290428+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:34:47.300695+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "lV7P1s+/DQC56yf4DhLKFQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "**Quote:** *Color preferences with respect to one's neighborhood can be defined either in absolute terms—the number of one's own color within the eight surrounding squares—or in relative terms—the ratio of neighbors of one's own color to opposite color among the eight surrounding squares. If all squares were occupied, every absolute number would correspond to a ratio; but because one may have anywhere from zero up to eight neighbors, there are eight denominators and therefore eight numerators to specify in describing one's neighborhood demands.*"
+									},
 									{
 										"__type" : "textSnippet",
 										"children" : {
@@ -714,6 +1010,81 @@
 											"__type" : "textStyle"
 										},
 										"string" : "The fraction of same-kind agents is computed over all non-empty neighboring cells. If all neighboring cells are empty, the fraction is defined to be 1.\n{{gtMethod:name=LzSakodaSchellingModel>>#fractionOf:inNeighborhoodOfCell:|expanded}}"
+									}
+								]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-08-21T14:28:34.258428+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-08-21T14:28:40.701518+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "Ox/+wM+/DQC4I9o9DhLKFQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "####Happiness"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:26:28.185479+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-21T14:30:59.148474+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "CG56uc+/DQC3vt87DhLKFQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "**Quote:** *A 'neighborhood' is defined by reference to the surrounding squares; each square on a checkerboard has eight immediate neighbors, so a convenient minimum-sized neighborhood for an individual is his own square plus the eight surrounding; larger 'neighborhoods' can be considered by including the 24 surrounding squares in a 5 x 5 area, etc. An actual board, in contrast to a conceptually infinite expanse, has sides and corners; but, then, so probably do most natural areas, and this may be no disadvantage. Along the edge of the board a square has only five neighboring squares, and in a corner but three.*"
 									},
 									{
 										"__type" : "textSnippet",
@@ -810,7 +1181,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-18T14:57:07.18679+02:00"
+									"dateAndTimeString" : "2023-08-21T14:28:45.576126+02:00"
 								}
 							},
 							"uid" : {
@@ -820,7 +1191,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "####Happiness"
+							"string" : "####Neighborhoods"
 						}
 					]
 				},
