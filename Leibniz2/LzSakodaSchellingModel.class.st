@@ -20,22 +20,26 @@ LzSakodaSchellingModel class >> fromRandomSeed: anInteger [
 ]
 
 { #category : #operating }
-LzSakodaSchellingModel >> agent: aCellOccupation isHappyAt: aPosition [
-	self assert: aCellOccupation isEmpty not.
-	^ (self fractionOf: aCellOccupation inNeighborhoodOfCell: aPosition) >= (1/2)
+LzSakodaSchellingModel >> agent: agentKind isHappyAt: aPosition [
+	| neighbors sameKindNeighbors allNeighbors |
+	self assert: agentKind isEmpty not.
+	neighbors := self countNeighborsOf: agentKind at: aPosition.
+	sameKindNeighbors := neighbors first.
+	allNeighbors := neighbors second.
+	^ sameKindNeighbors >= (allNeighbors / 2)
 ]
 
 { #category : #operating }
 LzSakodaSchellingModel >> agentIsHappyAt: aPoint [
 	^ self
-		agent: (board at: aPoint x at: aPoint y)
+		agent: (self cellAt: aPoint)
 		isHappyAt: aPoint
 ]
 
 { #category : #operating }
 LzSakodaSchellingModel >> allCellsDo: aBlock [
-	1 to: board numberOfRows do: [ :aRow |
-	 	1 to: board numberOfColumns do: [ :aColumn |
+	1 to: self numberOfRows do: [ :aRow |
+	 	1 to: self numberOfColumns do: [ :aColumn |
 	 		aBlock value: aRow @ aColumn ] ]
 ]
 
@@ -54,19 +58,35 @@ LzSakodaSchellingModel >> cellAt: aPosition [
 	^ board at: aPosition x at: aPosition y
 ]
 
-{ #category : #testing }
-LzSakodaSchellingModel >> cellIsEmptyAt: aPoint [
-	^ (self cellOccupationAt: aPoint) isEmpty
+{ #category : #accessing }
+LzSakodaSchellingModel >> cellAt: aPosition put: aCellOccupation [
+	board
+		at: aPosition x at: aPosition y
+		put: aCellOccupation
 ]
 
-{ #category : #accessing }
-LzSakodaSchellingModel >> cellOccupationAt: aPoint [
-	^ board at: aPoint x at: aPoint y
+{ #category : #testing }
+LzSakodaSchellingModel >> cellIsEmptyAt: aPoint [
+	^ (self cellAt: aPoint) isEmpty
 ]
 
 { #category : #operating }
-LzSakodaSchellingModel >> destinationForAgent: aSymbol at: aPoint [
-	self emptyCellPositionsSortedByDistanceFrom: aPoint.
+LzSakodaSchellingModel >> countNeighborsOf: agentKind at: aPosition [
+	| allNeighbors sameKindNeighbors |
+	allNeighbors := 0.
+	sameKindNeighbors := 0.
+	self neighborhoodOf: aPosition do: [ :nbPosition |
+		(self cellIsEmptyAt: nbPosition)
+			ifFalse: [
+				allNeighbors := allNeighbors + 1.
+				(agentKind = (self cellAt: nbPosition))
+					ifTrue: [ sameKindNeighbors := sameKindNeighbors + 1 ] ] ].
+	^ { sameKindNeighbors . allNeighbors }
+]
+
+{ #category : #operating }
+LzSakodaSchellingModel >> emptyCell [
+	^ LzSakodaSchellingEmptyCell new
 ]
 
 { #category : #operating }
@@ -93,22 +113,6 @@ LzSakodaSchellingModel >> emptyCellsSortedByDistanceFrom: aPosition [
 	^ (distancesAndPositions
 		sorted: [ :a :b | a first <= b first ])
 		collect: #second
-]
-
-{ #category : #operating }
-LzSakodaSchellingModel >> fractionOf: agentKind inNeighborhoodOfCell: aPosition [
-	| nCells nLikeCells |
-	nCells := 0.
-	nLikeCells := 0.
-	self neighborhoodOf: aPosition do: [ :nbPosition |
-		(self cellIsEmptyAt: nbPosition)
-			ifFalse: [
-				nCells := nCells + 1.
-				(agentKind = (self cellOccupationAt: nbPosition))
-					ifTrue: [ nLikeCells := nLikeCells + 1 ] ] ].
-	^ nCells isZero
-		ifTrue: [ 1 ]
-		ifFalse: [ nLikeCells / nCells ]
 ]
 
 { #category : #operating }
@@ -154,21 +158,19 @@ LzSakodaSchellingModel >> initializeBoardWithSize: aPoint fractionEmpty: aNumber
 	self assert: (aNumber between: 0 and: 1).
 	board := Array2D rows: aPoint x columns: aPoint y.
 	self allCellsDo: [ :eachPoint |
-		| cellOccupation |
-		cellOccupation :=
-			randomGenerator next > aNumber
+		self cellAt: eachPoint put:
+			(randomGenerator next > aNumber
 				ifFalse: [ LzSakodaSchellingEmptyCell new]
 				ifTrue: [
 					randomGenerator next > 0.5
-	 					ifTrue: [ LzSakodaSchellingBlackCell new ]
-	 					ifFalse: [ LzSakodaSchellingWhiteCell new ] ].
-		board at: eachPoint x at: eachPoint y put: cellOccupation ]
+						ifTrue: [ LzSakodaSchellingBlackCell new ]
+						ifFalse: [ LzSakodaSchellingWhiteCell new ] ] ) ]
 ]
 
 { #category : #testing }
 LzSakodaSchellingModel >> isValidPosition: aPoint [
-	^ (aPoint x between: 1 and: board numberOfRows)
-		and: [ aPoint y between: 1 and: board numberOfColumns ]
+	^ (aPoint x between: 1 and: self numberOfRows)
+		and: [ aPoint y between: 1 and: self numberOfColumns ]
 ]
 
 { #category : #operating }
@@ -176,15 +178,14 @@ LzSakodaSchellingModel >> moveAgentAt: aPoint [
 	"Move the agent at aPoint if it is unhappy. Return true if
 	 the agent was moved, false otherwise."
 	| agent |
-	agent := board at: aPoint x at: aPoint y.
+	agent := self cellAt: aPoint.
 	(self agent: agent isHappyAt: aPoint)
 		ifTrue: [ ^ false ].
 	(self nearestEmptyCellProvidingHappinessTo: agent currentlyAt: aPoint)
 		ifNil: [ ^ false ]
 		ifNotNil: [ :happinessPoint |
-			board
-				swap: aPoint x at: aPoint y
-				with: happinessPoint x at: happinessPoint y.
+			self cellAt: aPoint put: LzSakodaSchellingEmptyCell new.
+			self cellAt: happinessPoint put: agent.
 			^ true ]
 ]
 
@@ -205,11 +206,17 @@ LzSakodaSchellingModel >> multiplePassGenerator [
 
 { #category : #operating }
 LzSakodaSchellingModel >> nearestEmptyCellProvidingHappinessTo: agent currentlyAt: aPoint [
-	(self emptyCellPositionsSortedByDistanceFrom: aPoint)
-		detect: [ :eachPoint |
-			self agent: agent isHappyAt: eachPoint ]
-		ifFound: [ :happinessPoint | ^ happinessPoint ].
-	^ nil
+	| nearest |
+	"We must make the agent's current cell temporarily empty, because
+	 it might be in the neighborhood of the candidate destinations."
+	self cellAt: aPoint put: self emptyCell.
+	nearest :=
+		(self emptyCellPositionsSortedByDistanceFrom: aPoint)
+			detect: [ :eachPoint |
+				self agent: agent isHappyAt: eachPoint ]
+			ifNone: [ nil ].
+	self cellAt: aPoint put: agent.
+	^ nearest
 ]
 
 { #category : #operating }

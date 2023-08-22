@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-08-21T14:44:07.060791+02:00"
+						"dateAndTimeString" : "2023-08-22T17:21:46.890722+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "The class {{gtClass:LzSakodaSchellingModel}} implements the Sakoda-Schelling model as computational models are typically implemented today: as software, in a programming language. For someone fluent in Pharo, the correspondence to  [Schelling's paper](https://doi.org/10.1080/0022250X.1971.9989794) is easy to check. The code overview below contains quotes from Schelling's paper that illustrate in particular how vague the description often is, requiring additional choices to be made in an implementation."
+				"string" : "The class {{gtClass:LzSakodaSchellingModel}} implements the Sakoda-Schelling model as computational models are typically implemented today: as software, in a programming language. For someone fluent in Pharo, the correspondence to  [Schelling's paper](https://doi.org/10.1080/0022250X.1971.9989794) is easy to check. The code overview below contains quotes from Schelling's paper to make the comparison easier. The quotes also illustrate how vague the description often is, requiring additional choices to be made in an implementation."
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-08-17T12:51:31.469084+02:00"
+						"dateAndTimeString" : "2023-08-22T17:22:10.863256+02:00"
 					}
 				},
 				"uid" : {
@@ -76,44 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Imagine you are a reviewer for a (so far hypothetical) journal that publishes papers with accompanying software and actually asks the reviewers to verify that the software faithfully implements the methods described in the paper. Your job thus is to compare the code in the class {{gtClass:LzSakodaSchellingModel}} to Schelling's paper. Is is a faithful implementation?"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-08-17T12:51:32.295247+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-08-18T14:12:43.291079+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "KJCc7n2/DQCfX7Q4D0S9yg=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "Spoiler: the answer is neither \"yes\" nor \"no\"."
+				"string" : "Imagine you are a reviewer for a (so far hypothetical) journal that publishes papers with accompanying software and actually asks the reviewers to verify that the software faithfully implements the methods described in the paper. Your job is to compare the code in the class {{gtClass:LzSakodaSchellingModel}} to Schelling's paper. Does the code respect all the methodological choices made by Schelling? Are the (inevitable) implementation choices that it makes in addition reasonable?"
 			},
 			{
 				"__type" : "textSnippet",
@@ -669,7 +632,7 @@
 														"__type" : "time",
 														"time" : {
 															"__type" : "dateAndTime",
-															"dateAndTimeString" : "2023-08-17T16:56:54.476082+02:00"
+															"dateAndTimeString" : "2023-08-22T16:39:24.211119+02:00"
 														}
 													},
 													"uid" : {
@@ -679,7 +642,7 @@
 													"paragraphStyle" : {
 														"__type" : "textStyle"
 													},
-													"string" : "The distance is computed via horizontal and vertical steps only:\n{{gtMethod:name=Point>>#manhattanDistanceTo:|expanded}}"
+													"string" : "The distance is computed as the minimal number of horizontal and vertical steps on the board:\n{{gtMethod:name=Point>>#manhattanDistanceTo:|expanded}}"
 												}
 											]
 										},
@@ -999,7 +962,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-18T17:22:33.167297+02:00"
+												"dateAndTimeString" : "2023-08-22T17:24:33.290072+02:00"
 											}
 										},
 										"uid" : {
@@ -1009,7 +972,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The fraction of same-kind agents is computed over all non-empty neighboring cells. If all neighboring cells are empty, the fraction is defined to be 1.\n{{gtMethod:name=LzSakodaSchellingModel>>#fractionOf:inNeighborhoodOfCell:|expanded}}"
+										"string" : "Counting the neighbors is straightforward but a bit lengthy:\n{{gtMethod:name=LzSakodaSchellingModel>>#countNeighborsOf:at:|expanded}}"
 									}
 								]
 							},
@@ -1122,43 +1085,6 @@
 											"__type" : "textStyle"
 										},
 										"string" : "The neighborhood of a cell consists of the cells surrounding it. There are at most eight neighbors to each cell, but only five if the cell is on an edge of the board, and three if the cell is a corner.\n{{gtMethod:name=LzSakodaSchellingModel>>#neighborhoodOf:do:|expanded}}"
-									},
-									{
-										"__type" : "textSnippet",
-										"children" : {
-											"__type" : "snippets",
-											"items" : [ ]
-										},
-										"createEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"createTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-18T15:00:06.2263+02:00"
-											}
-										},
-										"editEmail" : {
-											"__type" : "email",
-											"emailString" : "<unknown>"
-										},
-										"editTime" : {
-											"__type" : "time",
-											"time" : {
-												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-08-18T15:00:06.2263+02:00"
-											}
-										},
-										"uid" : {
-											"__type" : "uid",
-											"uidString" : "5CM92JO/DQCEENzVDWV/2g=="
-										},
-										"paragraphStyle" : {
-											"__type" : "textStyle"
-										},
-										"string" : ""
 									}
 								]
 							},
@@ -1192,6 +1118,155 @@
 								"__type" : "textStyle"
 							},
 							"string" : "####Neighborhoods"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-22T17:26:56.321011+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-22T17:31:45.02952+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "VQ66XOa/DQC8vpB6CNH0zQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "The three concrete subclasses of {{gtClass:name=LzSakodaSchellingCellElement}} ( {{gtClass:name=LzSakodaSchellingEmptyCell}},  {{gtClass:name=LzSakodaSchellingBlackCell}}, {{gtClass:name=LzSakodaSchellingWhiteCell}}) define the values of the cells on the board.  They implement two methods, one for distinguishing empty from occupied cells, and one for indicating the color of each cell in a graphical display."
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-22T17:31:47.291998+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-22T17:33:34.023634+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "2+gRbua/DQCFIJ5XCNH0zQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "The class {{gtClass:name=LzSakodaSchellingElement}} defines the graphical representation of the board. It is a subclass of {{gtClass:name=BlElement}}, the basic graphics element class in Bloc. Its children are instances of {{gtClass:name=LzSakodaSchellingCellElement}}, of which there is one for each cell."
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-22T17:35:11.034207+02:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2023-08-22T17:36:37.531336+02:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "Psg2eua/DQCKLAELCNH0zQ=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "The class {{gtClass:name=LzSakodaSchellingEventListener}} defines the reaction to mouse clicks on a cell. It opens a debugger ready to step through the code that moves an agent at the clicked location."
+									}
+								]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-08-22T17:25:56.863063+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-08-22T17:26:39.026412+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "7cwuWea/DQC7+MxVCNH0zQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "####Other classes"
 						}
 					]
 				},
