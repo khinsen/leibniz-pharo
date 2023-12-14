@@ -29,6 +29,27 @@ LzBook class >> databaseName [
 	^ 'Leibniz documentation'
 ]
 
+{ #category : #accessing }
+LzBook class >> exportHtml [
+	| aLzBook aMainPage targetDirName targetDir aBookExporter |
+	aLzBook := LeDatabasesRegistry defaultLogicalDatabase
+    	    databaseNamed: 'Leibniz documentation'.
+	aMainPage := aLzBook pageNamed: 'Leibniz book'.
+	targetDirName := 'book-export'.
+	targetDir := targetDirName asFileReference.
+	targetDir ensureDeleteAll.
+	targetDir ensureCreateDirectory.
+	aBookExporter := LeHtmlBookExporter new
+	        database: aLzBook;
+	        mainPage: aMainPage;
+	        piece: LeHtmlGtBookPiece gtBook;
+	        integerSequencer;
+	        addGtBookAssets;
+	        export;
+	        saveToRootDirectory: targetDir.
+	^ targetDir
+]
+
 { #category : #testing }
 LzBook class >> hasPageNamed: aString [
 	^ self database hasPageNamed: aString
