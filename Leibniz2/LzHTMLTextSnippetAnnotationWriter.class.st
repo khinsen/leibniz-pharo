@@ -45,8 +45,5 @@ LzHTMLTextSnippetAnnotationWriter >> write [
 	context html 
 		tag: #span
 		class: 'text-snippet-annotation leibniz-annotation'
-		do: [
-			LzAnnotationHtmlBuilder new
-				context: context;
-				build ]
+		with: self annotation source.
 ]
