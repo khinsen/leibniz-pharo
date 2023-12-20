@@ -31,6 +31,12 @@ LzHTMLTextSnippetAnnotationWriter >> context: anObject [
 ]
 
 { #category : #accessing }
+LzHTMLTextSnippetAnnotationWriter >> declaration [
+	^ LzDeclarationBuilder new
+		acceptNode: self annotation.
+]
+
+{ #category : #accessing }
 LzHTMLTextSnippetAnnotationWriter >> snippet [
 	^ snippet
 ]
@@ -40,10 +46,15 @@ LzHTMLTextSnippetAnnotationWriter >> snippet: anObject [
 	snippet := anObject
 ]
 
+{ #category : #accessing }
+LzHTMLTextSnippetAnnotationWriter >> tag [
+	^ #'unknown-leibniz-annotation'
+]
+
 { #category : #'private - writing' }
 LzHTMLTextSnippetAnnotationWriter >> write [
 	context html 
-		tag: #span
-		class: 'text-snippet-annotation leibniz-annotation'
-		with: self annotation source.
+		tag: self tag
+		attributes: { 'source' . self declaration asLeibnizSyntaxString }
+		with: self declaration asLeibnizSyntaxString
 ]

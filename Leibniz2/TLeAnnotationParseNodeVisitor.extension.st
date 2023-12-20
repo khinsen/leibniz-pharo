@@ -1,6 +1,10 @@
 Extension { #name : #TLeAnnotationParseNodeVisitor }
 
 { #category : #'*Leibniz2' }
+TLeAnnotationParseNodeVisitor >> visitTopLevelAsset: aLzTopLevelAssetNode [
+]
+
+{ #category : #'*Leibniz2' }
 TLeAnnotationParseNodeVisitor >> visitTopLevelEqualityAxiom: aLzTopLevelEqualityAxiomNode [
 ]
 

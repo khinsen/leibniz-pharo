@@ -31,17 +31,17 @@ LzBook class >> databaseName [
 
 { #category : #accessing }
 LzBook class >> exportHtml [
-	| aLzBook aMainPage targetDirName targetDir aBookExporter |
-	aLzBook := LeDatabasesRegistry defaultLogicalDatabase
+	| book mainPage targetDirName targetDir aBookExporter |
+	book := LeDatabasesRegistry defaultLogicalDatabase
     	    databaseNamed: 'Leibniz documentation'.
-	aMainPage := aLzBook pageNamed: 'Leibniz book'.
-	targetDirName := 'book-export'.
+	mainPage := book pageNamed: 'Leibniz book'.
+	targetDirName := 'leibniz-book-export'.
 	targetDir := targetDirName asFileReference.
 	targetDir ensureDeleteAll.
 	targetDir ensureCreateDirectory.
 	aBookExporter := LeHtmlBookExporter new
-	        database: aLzBook;
-	        mainPage: aMainPage;
+	        database: book;
+	        mainPage: mainPage;
 	        piece: LeHtmlGtBookPiece gtBook;
 	        integerSequencer;
 	        addGtBookAssets;
@@ -53,6 +53,13 @@ LzBook class >> exportHtml [
 { #category : #testing }
 LzBook class >> hasPageNamed: aString [
 	^ self database hasPageNamed: aString
+]
+
+{ #category : #accessing }
+LzBook class >> htmlAssetLocation [
+	^ FileLocator imageDirectory
+		/ 'pharo-local' / 'iceberg'
+		/ 'khinsen' / 'leibniz-pharo' / 'html-assets'
 ]
 
 { #category : #accessing }
