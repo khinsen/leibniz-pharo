@@ -55,6 +55,7 @@ LzHTMLTextSnippetAnnotationWriter >> tag [
 LzHTMLTextSnippetAnnotationWriter >> write [
 	context html 
 		tag: self tag
-		attributes: { 'source' . self declaration asLeibnizSyntaxString }
+		attributes: { 'class' . 'leibniz' .
+						 'source' . self declaration asLeibnizSyntaxString }
 		with: self declaration asLeibnizSyntaxString
 ]
