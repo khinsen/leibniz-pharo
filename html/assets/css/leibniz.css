@@ -2,7 +2,19 @@
     font-family: JuliaMono-Regular;
     src: url("/assets/fonts/JuliaMono-Regular.woff2");
 }
-* { box-sizing:border-box;text-decoration:none;color:#000 }
+@font-face {
+    font-family: JuliaMono-RegularItalic;
+    src: url("/assets/fonts/JuliaMono-RegularItalic.woff2");
+}
+@font-face {
+    font-family: JuliaMono-Bold;
+    src: url("/assets/fonts/JuliaMono-Bold.woff2");
+}
+@font-face {
+    font-family: JuliaMono-RegularItalic;
+    src: url("/assets/fonts/JuliaMono-BoldItalic.woff2");
+}
+* { box-sizing:border-box;color:#000 }
 body { font-size:16px;font-family:sans-serif;color:white;background-color:#F7F7F7; }
 nav { position:fixed;display:inline;float:left;width:20rem;margin:0;padding:0 20px;margin-top:20px;margin-right:20px;background-color:#E0E0E0; } 
 main { display:inline;float:left;width:auto;margin:0;padding:0 20px;clear:both }
@@ -13,4 +25,8 @@ main h2 { margin-top:15px;font-size:1.2em; }
 main h3 { margin-top:10px;font-size:1.1em; }
 main a { text-decoration:underline } 
 main a:hover, nav a:hover { background-color:#000;color:#fff } 
-leibniz-equality-axiom, leibniz-op, leibniz-rule, leibniz-sort, leibniz-special-terms, leibniz-subsort, leibniz-term, leibniz-use-context {font-family:JuliaMono-Regular;color:#00f}
+
+.leibniz {font-family:JuliaMono-Regular;color:#00f}
+.leibniz i {font-family:JuliaMono-RegularItalic}
+.leibniz .whiter, .leibniz i .whiter {color:#77f}
+.leibniz .darker, .leibniz i .darker {color:#008}
