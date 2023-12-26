@@ -62,6 +62,13 @@ LzBook class >> htmlAssetLocation [
 ]
 
 { #category : #accessing }
+LzBook class >> htmlSinglePageTemplateLocation [
+	^ FileLocator imageDirectory
+		/ 'pharo-local' / 'iceberg'
+		/ 'khinsen' / 'leibniz-pharo' / 'html' / 'single-page-template.html'
+]
+
+{ #category : #accessing }
 LzBook class >> htmlTemplateLocation [
 	^ FileLocator imageDirectory
 		/ 'pharo-local' / 'iceberg'

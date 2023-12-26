@@ -53,9 +53,13 @@ LzHTMLTextSnippetAnnotationWriter >> tag [
 
 { #category : #'private - writing' }
 LzHTMLTextSnippetAnnotationWriter >> write [
+	| declaration |
+	declaration := self declaration.
 	context html 
 		tag: self tag
 		attributes: { 'class' . 'leibniz' .
-						 'source' . self declaration asLeibnizSyntaxString }
-		with: self declaration asLeibnizSyntaxString
+						 'source' . declaration asLeibnizSyntaxString }
+		with: (LzHTMLSyntaxRenderer new
+				declaration: declaration;
+				content)
 ]

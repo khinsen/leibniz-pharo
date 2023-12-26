@@ -106,6 +106,25 @@ LePage >> lzDependentsFor: aView [
 ]
 
 { #category : #'*Leibniz2' }
+LePage >> lzHTMLLocalExportActionFor: anAction [
+	<gtAction>
+	self database ifNil: [ ^ anAction noAction ].
+	self database isDatabase ifFalse: [ ^ anAction noAction ].
+
+	^ anAction button
+		label: 'LzHTML';
+		tooltip: 'Export the page into Leibniz HTML format and store locally';
+		priority: 10;
+		icon: BrGlamorousVectorIcons spawn;
+		action: [ :aButton | 
+			| tempDir output |
+			tempDir := GtTemporaryDirectory new.
+			output := LzHtmlPageExporter exportPage: self to: tempDir reference.
+			output optionAt: GtTemporaryDirectory put: tempDir.
+			aButton phlow spawnObject: output ]
+]
+
+{ #category : #'*Leibniz2' }
 LePage >> lzSubcontext: aSubcontextName [
 	^ (LzGlobalCache uniqueInstance
 		contextCacheFor: self) subcontext: aSubcontextName
