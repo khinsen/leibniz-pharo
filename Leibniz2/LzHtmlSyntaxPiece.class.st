@@ -73,21 +73,6 @@ LzHtmlSyntaxPiece >> gtTextFor: aView [
 		yourself
 ]
 
-{ #category : #accessing }
-LzHtmlSyntaxPiece >> obsoleteSyntaxAttributes [
-	^ {
-		LzAssetLabelAttribute ->{ '<b class="darker">' . '</b>' }.
-		LzSubscriptAttribute -> { '' . '' }.
-		LzSuperscriptAttribute -> { '' . '' }.
-		LzInfixOpNameAttribute -> { '<span class="darker">' . '</span>' }.
-		LzVarNameAttribute -> { '<u>' . '</u>'}.
-		LzLeafErrorAttribute -> { '' . '' }.
-		LzParenthesisAttribute -> { '<span class="darker">' . '</span>' }.
-		LzSortAttribute -> { '<i>' . '</i>' }.
-		LzVarDeclarationAttribute -> { '<span class="whiter">' . '</span>' }.
-	} asOrderedDictionary
-]
-
 { #category : #'private - writing' }
 LzHtmlSyntaxPiece >> renderActionFor: aString withAttrs: attrBlocks [
 	^ attrBlocks
@@ -103,6 +88,7 @@ LzHtmlSyntaxPiece >> renderActionFor: aString withAttrs: attrBlocks [
 { #category : #accessing }
 LzHtmlSyntaxPiece >> syntaxAttributes [
 	^ {
+		LzDoNotRenderAttribute -> nil.
 		LzAssetLabelAttribute -> [ :context :block |
 			context html tag: #b class: 'darker' do: [ block value: context ] ].
 		LzSubscriptAttribute -> [ :context :block |

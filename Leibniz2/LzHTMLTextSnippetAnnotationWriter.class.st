@@ -30,6 +30,11 @@ LzHtmlTextSnippetAnnotationWriter >> context: anObject [
 ]
 
 { #category : #accessing }
+LzHtmlTextSnippetAnnotationWriter >> cssClass [
+	^ 'leibniz'
+]
+
+{ #category : #accessing }
 LzHtmlTextSnippetAnnotationWriter >> declaration [
 	^ LzDeclarationBuilder new
 		acceptNode: self annotation.
@@ -56,7 +61,7 @@ LzHtmlTextSnippetAnnotationWriter >> write [
 	declaration := self declaration.
 	context html 
 		tag: self tag
-		attributes: { 'class' . 'leibniz' .
+		attributes: { 'class' . self cssClass .
 						 'source' . declaration asLeibnizSyntaxString }
 		do: [ LzHtmlSyntaxPiece new
 				declaration: declaration;

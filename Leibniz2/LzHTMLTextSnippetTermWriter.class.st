@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+LzHtmlTextSnippetTermWriter >> cssClass [
+	^ 'leibniz-example'
+]
+
+{ #category : #accessing }
 LzHtmlTextSnippetTermWriter >> tag [
 	^ #'leibniz-term'
 ]
