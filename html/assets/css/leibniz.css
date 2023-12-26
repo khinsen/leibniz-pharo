@@ -3,9 +3,9 @@
     src: url("/assets/fonts/JuliaMono-Regular.woff2");
 }
 * { box-sizing:border-box;text-decoration:none;color:#000 }
-body { font-size:16px;font-family:sans-serif;margin:0;padding:0;color:white;background-color:#F7F7F7;width:700px;max-width:100%;margin:auto; }
-nav { float:left;width:15rem;padding:20px; } 
-main { float:none;width:auto;margin-bottom:30px;padding:0 20px;clear:both }
+body { font-size:16px;font-family:sans-serif;color:white;background-color:#F7F7F7; }
+nav { position:fixed;display:inline;float:left;width:20rem;margin:0;padding:0 20px;margin-top:20px;margin-right:20px;background-color:#E0E0E0; } 
+main { display:inline;float:left;width:auto;margin:0;padding:0 20px;clear:both }
 main { line-height:1.5em; }
 main h1, main h2, main h3, main h4 { font-weight:normal;line-height:1.2em;margin-bottom:0.1em }
 main h1 { margin-top:20px;font-size:1.4em; }
