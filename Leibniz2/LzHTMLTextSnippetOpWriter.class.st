@@ -1,10 +1,10 @@
 Class {
-	#name : #LzHTMLTextSnippetOpWriter,
-	#superclass : #LzHTMLTextSnippetAnnotationWriter,
+	#name : #LzHtmlTextSnippetOpWriter,
+	#superclass : #LzHtmlTextSnippetAnnotationWriter,
 	#category : #'Leibniz2-HTML-Export'
 }
 
 { #category : #accessing }
-LzHTMLTextSnippetOpWriter >> tag [
+LzHtmlTextSnippetOpWriter >> tag [
 	^ #'leibniz-op'
 ]

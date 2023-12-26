@@ -1,10 +1,10 @@
 Class {
-	#name : #LzHTMLTextSnippetUseContextWriter,
-	#superclass : #LzHTMLTextSnippetAnnotationWriter,
+	#name : #LzHtmlTextSnippetUseContextWriter,
+	#superclass : #LzHtmlTextSnippetAnnotationWriter,
 	#category : #'Leibniz2-HTML-Export'
 }
 
 { #category : #accessing }
-LzHTMLTextSnippetUseContextWriter >> tag [
+LzHtmlTextSnippetUseContextWriter >> tag [
 	^ #'leibniz-use-context'
 ]

@@ -1,10 +1,10 @@
 Class {
-	#name : #LzHTMLTextSnippetSubsortWriter,
-	#superclass : #LzHTMLTextSnippetAnnotationWriter,
+	#name : #LzHtmlTextSnippetSubsortWriter,
+	#superclass : #LzHtmlTextSnippetAnnotationWriter,
 	#category : #'Leibniz2-HTML-Export'
 }
 
 { #category : #accessing }
-LzHTMLTextSnippetSubsortWriter >> tag [
+LzHtmlTextSnippetSubsortWriter >> tag [
 	^ #'leibniz-subsort'
 ]

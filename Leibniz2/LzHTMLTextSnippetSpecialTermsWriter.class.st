@@ -1,10 +1,10 @@
 Class {
-	#name : #LzHTMLTextSnippetSpecialTermsWriter,
-	#superclass : #LzHTMLTextSnippetAnnotationWriter,
+	#name : #LzHtmlTextSnippetSpecialTermsWriter,
+	#superclass : #LzHtmlTextSnippetAnnotationWriter,
 	#category : #'Leibniz2-HTML-Export'
 }
 
 { #category : #accessing }
-LzHTMLTextSnippetSpecialTermsWriter >> tag [
+LzHtmlTextSnippetSpecialTermsWriter >> tag [
 	^ #'leibniz-special-terms'
 ]

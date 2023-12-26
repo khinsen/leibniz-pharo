@@ -11,7 +11,7 @@ LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelAsset: aLzTopLevelAssetNode [
 
 { #category : #'*Leibniz2' }
 LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelEqualityAxiom: aLzTopLevelEqualityAxiomNode [
-	LzHTMLTextSnippetEqualityAxiomWriter new
+	LzHtmlTextSnippetEqualityAxiomWriter new
 		snippet: snippet;
 		context: context;
 		annotation: aLzTopLevelEqualityAxiomNode;
@@ -20,7 +20,7 @@ LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelEqualityAxiom: aLzTopLevelEqu
 
 { #category : #'*Leibniz2' }
 LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelFunctionRule: aLzTopLevelFunctionRuleNode [
-	LzHTMLTextSnippetRuleWriter new
+	LzHtlmTextSnippetRuleWriter new
 		snippet: snippet;
 		context: context;
 		annotation: aLzTopLevelFunctionRuleNode;
@@ -29,7 +29,7 @@ LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelFunctionRule: aLzTopLevelFunc
 
 { #category : #'*Leibniz2' }
 LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelOp: aLzTopLevelOpNode [
-	LzHTMLTextSnippetOpWriter new
+	LzHtmlTextSnippetOpWriter new
 		snippet: snippet;
 		context: context;
 		annotation: aLzTopLevelOpNode;
@@ -38,7 +38,7 @@ LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelOp: aLzTopLevelOpNode [
 
 { #category : #'*Leibniz2' }
 LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelRewriteRule: aLzTopLevelRewriteRuleNode [
-	LzHTMLTextSnippetRuleWriter new
+	LzHtlmTextSnippetRuleWriter new
 		snippet: snippet;
 		context: context;
 		annotation: aLzTopLevelRewriteRuleNode;
@@ -47,7 +47,7 @@ LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelRewriteRule: aLzTopLevelRewri
 
 { #category : #'*Leibniz2' }
 LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelSort: aLzTopLevelSortNode [
-	LzHTMLTextSnippetSortWriter new
+	LzHtlmTextSnippetSortWriter new
 		snippet: snippet;
 		context: context;
 		annotation: aLzTopLevelSortNode;
@@ -56,7 +56,7 @@ LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelSort: aLzTopLevelSortNode [
 
 { #category : #'*Leibniz2' }
 LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelSpecialTerms: aLzTopLevelSpecialTermsNode [
-	LzHTMLTextSnippetSpecialTermsWriter new
+	LzHtmlTextSnippetSpecialTermsWriter new
 		snippet: snippet;
 		context: context;
 		annotation: aLzTopLevelSpecialTermsNode;
@@ -65,7 +65,7 @@ LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelSpecialTerms: aLzTopLevelSpec
 
 { #category : #'*Leibniz2' }
 LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelSubsort: aLzTopLevelSubsortNode [
-	LzHTMLTextSnippetSubsortWriter new
+	LzHtmlTextSnippetSubsortWriter new
 		snippet: snippet;
 		context: context;
 		annotation: aLzTopLevelSubsortNode;
@@ -74,7 +74,7 @@ LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelSubsort: aLzTopLevelSubsortNo
 
 { #category : #'*Leibniz2' }
 LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelTerm: aLzTopLevelTermNode [
-	LzHTMLTextSnippetTermWriter new
+	LzHtmlTextSnippetTermWriter new
 		snippet: snippet;
 		context: context;
 		annotation: aLzTopLevelTermNode;
@@ -83,7 +83,7 @@ LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelTerm: aLzTopLevelTermNode [
 
 { #category : #'*Leibniz2' }
 LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelUseContext: aLzTopLevelUseContextNode [
-	LzHTMLTextSnippetUseContextWriter new
+	LzHtmlTextSnippetUseContextWriter new
 		snippet: snippet;
 		context: context;
 		annotation: aLzTopLevelUseContextNode;

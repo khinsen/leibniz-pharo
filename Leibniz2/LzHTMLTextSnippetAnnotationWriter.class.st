@@ -1,65 +1,64 @@
 Class {
-	#name : #LzHTMLTextSnippetAnnotationWriter,
+	#name : #LzHtmlTextSnippetAnnotationWriter,
 	#superclass : #Object,
 	#instVars : [
 		'context',
 		'snippet',
-		'annotation',
-		'response'
+		'annotation'
 	],
 	#category : #'Leibniz2-HTML-Export'
 }
 
 { #category : #accessing }
-LzHTMLTextSnippetAnnotationWriter >> annotation [
+LzHtmlTextSnippetAnnotationWriter >> annotation [
 	^ annotation
 ]
 
 { #category : #accessing }
-LzHTMLTextSnippetAnnotationWriter >> annotation: anObject [
+LzHtmlTextSnippetAnnotationWriter >> annotation: anObject [
 	annotation := anObject
 ]
 
 { #category : #accessing }
-LzHTMLTextSnippetAnnotationWriter >> context [
+LzHtmlTextSnippetAnnotationWriter >> context [
 	^ context
 ]
 
 { #category : #accessing }
-LzHTMLTextSnippetAnnotationWriter >> context: anObject [
+LzHtmlTextSnippetAnnotationWriter >> context: anObject [
 	context := anObject
 ]
 
 { #category : #accessing }
-LzHTMLTextSnippetAnnotationWriter >> declaration [
+LzHtmlTextSnippetAnnotationWriter >> declaration [
 	^ LzDeclarationBuilder new
 		acceptNode: self annotation.
 ]
 
 { #category : #accessing }
-LzHTMLTextSnippetAnnotationWriter >> snippet [
+LzHtmlTextSnippetAnnotationWriter >> snippet [
 	^ snippet
 ]
 
 { #category : #accessing }
-LzHTMLTextSnippetAnnotationWriter >> snippet: anObject [
+LzHtmlTextSnippetAnnotationWriter >> snippet: anObject [
 	snippet := anObject
 ]
 
 { #category : #accessing }
-LzHTMLTextSnippetAnnotationWriter >> tag [
+LzHtmlTextSnippetAnnotationWriter >> tag [
 	^ #'unknown-leibniz-annotation'
 ]
 
 { #category : #'private - writing' }
-LzHTMLTextSnippetAnnotationWriter >> write [
+LzHtmlTextSnippetAnnotationWriter >> write [
 	| declaration |
 	declaration := self declaration.
 	context html 
 		tag: self tag
 		attributes: { 'class' . 'leibniz' .
 						 'source' . declaration asLeibnizSyntaxString }
-		with: (LzHTMLSyntaxRenderer new
+		do: [ LzHtmlSyntaxPiece new
 				declaration: declaration;
-				content)
+				writeWithContext: context ]
 ]

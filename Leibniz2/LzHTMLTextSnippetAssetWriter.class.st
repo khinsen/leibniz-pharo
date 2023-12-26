@@ -1,6 +1,6 @@
 Class {
 	#name : #LzHTMLTextSnippetAssetWriter,
-	#superclass : #LzHTMLTextSnippetAnnotationWriter,
+	#superclass : #LzHtmlTextSnippetAnnotationWriter,
 	#category : #Leibniz2
 }
 

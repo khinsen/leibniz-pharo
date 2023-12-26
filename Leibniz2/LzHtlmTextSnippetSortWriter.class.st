@@ -1,10 +1,10 @@
 Class {
-	#name : #LzHtmlTextSnippetEqualityAxiomWriter,
+	#name : #LzHtlmTextSnippetSortWriter,
 	#superclass : #LzHtmlTextSnippetAnnotationWriter,
 	#category : #'Leibniz2-HTML-Export'
 }
 
 { #category : #accessing }
-LzHtmlTextSnippetEqualityAxiomWriter >> tag [
-	^ #'leibniz-equality-axiom'
+LzHtlmTextSnippetSortWriter >> tag [
+	^ #'leibniz-sort'
 ]
