@@ -35,5 +35,6 @@ BaselineOfLeibnizForGToolkit >> baseline: spec [
 
 { #category : #baseline }
 BaselineOfLeibnizForGToolkit >> postload: loader package: packageSpec [
-	LzCodeFont chooseDefaultFamily
+	LzCodeFont chooseDefaultFamily.
+	LzBook installPatchForHtmlExport.	
 ]

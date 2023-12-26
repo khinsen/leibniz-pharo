@@ -68,6 +68,26 @@ LzBook class >> htmlTemplateLocation [
 		/ 'khinsen' / 'leibniz-pharo' / 'html' / 'page-template.html'
 ]
 
+{ #category : #baseline }
+LzBook class >> installPatchForHtmlExport [
+	"Patch GT's HTML generation code to properly deal with \n and \t in Lepiter text snippets.
+	 Also submitted as a PR: https://github.com/feenkcom/lepiter/pull/6"
+	LeHtmlTextSnippetVisitor compile: 'visitText: aText
+	| aString |
+	aString := aText content.
+	aString size = 1
+		ifFalse: [ context html escape: aString ]
+		ifTrue: [
+	aString first = Character lf
+		ifTrue: [ context html nextPutAll: ''<br>'' ]
+		ifFalse: [
+	aString first = Character tab
+		ifTrue: [ context html nextPutAll: ''&emsp;'' ]
+		ifFalse: [ context html escape: aString ] ] ].
+
+	exportedNodes add: aText'
+]
+
 { #category : #accessing }
 LzBook class >> latestEditTimeOfPageNamed: aString [
 	"should be:
