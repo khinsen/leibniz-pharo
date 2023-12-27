@@ -36,3 +36,5 @@ main a:hover, nav a:hover { background-color:#000;color:#fff }
 .leibniz-example i {font-family:JuliaMono-RegularItalic;color:#993300}
 .leibniz-example .whiter, .leibniz-example i .whiter {color:#FF9900}
 .leibniz-example .darker, .leibniz-example i .darker {color:#660000}
+
+.leibniz-subcontext-name {border: 1px solid black;padding:1px;}
