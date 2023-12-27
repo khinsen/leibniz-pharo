@@ -92,9 +92,9 @@ LzHtmlSyntaxPiece >> syntaxAttributes [
 		LzAssetLabelAttribute -> [ :context :block |
 			context html tag: #b class: 'darker' do: [ block value: context ] ].
 		LzSubscriptAttribute -> [ :context :block |
-			block value: context ].
+			context html tag: #sub do: [ block value: context ] ].
 		LzSuperscriptAttribute -> [ :context :block |
-			block value: context ].
+			context html tag: #sup do: [ block value: context ] ].
 		LzInfixOpNameAttribute -> [ :context :block |
 			context html tag: #span class: 'darker' do: [ block value: context ] ].
 		LzVarNameAttribute -> [ :context :block |

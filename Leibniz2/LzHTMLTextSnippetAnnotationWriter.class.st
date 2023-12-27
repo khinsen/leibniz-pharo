@@ -44,7 +44,7 @@ LzHtmlTextSnippetAnnotationWriter >> declaration [
 	^ declaration
 ]
 
-{ #category : #testing }
+{ #category : #accessing }
 LzHtmlTextSnippetAnnotationWriter >> isExample [
 	^ self declaration options
 		at: #example ifAbsent: false
@@ -61,17 +61,34 @@ LzHtmlTextSnippetAnnotationWriter >> snippet: anObject [
 ]
 
 { #category : #accessing }
+LzHtmlTextSnippetAnnotationWriter >> subcontext [
+	^ self declaration options
+		at: #subcontext ifAbsent: nil
+]
+
+{ #category : #accessing }
 LzHtmlTextSnippetAnnotationWriter >> tag [
 	^ #'unknown-leibniz-annotation'
 ]
 
 { #category : #'private - writing' }
 LzHtmlTextSnippetAnnotationWriter >> write [
+	| attrs |
+	attrs := { 'class' . self cssClass .
+				'source' . self declaration asLeibnizSyntaxString }.
+	self isExample ifTrue: [ attrs := attrs, { 'example' . nil } ].
+	self subcontext ifNotNil: [ :sc | attrs := attrs, { 'subcontext' . sc} ].
 	context html 
 		tag: self tag
-		attributes: { 'class' . self cssClass .
-						 'source' . self declaration asLeibnizSyntaxString }
-		do: [ LzHtmlSyntaxPiece new
+		attributes: attrs
+		do: [
+			self subcontext ifNotNil: [ :sc |
+				context html
+					tag: #sub
+					class: 'leibniz-subcontext-name'
+					with: sc.
+				context html nextPutAll: '&nbsp;' ].
+			LzHtmlSyntaxPiece new
 				declaration: self declaration;
 				writeWithContext: context ]
 ]
