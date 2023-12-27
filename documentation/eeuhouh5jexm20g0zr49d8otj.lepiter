@@ -512,7 +512,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-16T17:06:23.531422+02:00"
+						"dateAndTimeString" : "2023-12-27T16:38:58.956503+01:00"
 					}
 				},
 				"uid" : {
@@ -522,7 +522,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A *variable* looks like a zero-argument operator term, except that its name ends with an underscore, which is not an allowed character in operator names. The underscore is rendered as a low-contrast underline for better readability, e.g. {{lzTerm:var_:s, subcontext = \"example\"}}."
+				"string" : "A *variable* looks like a zero-argument operator term, except that its name ends with an underscore, which is not an allowed character in operator names. The underscore is rendered as an underline for better readability, e.g. {{lzTerm:var_:s, subcontext = \"example\"}}."
 			},
 			{
 				"__type" : "textSnippet",

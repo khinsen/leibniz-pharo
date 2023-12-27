@@ -18,6 +18,43 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-12-27T16:43:07.790982+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-12-27T16:46:09.553907+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "8yZ6ZOHJDQCf/Vh0Bvo60Q=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "*Warning:* this context is a very incomplete experiment. The idea is to define a workflow in Leibniz whose execution produces an equivalent Python script. This may actually not be such a good idea, but more importantly, it definitiely doesn't work at the moment!\nThe sunspot detection example is taken from the [MOOC \"Reproducible Research II: Practices and tools for managing computations and data\"](https://lms.fun-mooc.fr/courses/course-v1:inria+41023+session01/info)"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2022-08-30T17:44:20.93227+02:00"
 					}
 				},

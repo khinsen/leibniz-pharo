@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-04-17T10:34:21.877146+02:00"
+						"dateAndTimeString" : "2023-12-27T16:27:01.529416+01:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Array literals are written in curly plus square brackets. Examples: {{lzTerm:{[]}}} (an empty array), {{lzTerm:{[1, 2, 3]}, subcontext = \"integerArray\"}} (array of integers, uses {{lzUseContext:name = \"Integers\", subcontext = \"integerArray\"}}), {{lzTerm:{[\"a\", \"b\"]}, subcontext = \"stringArray\"}} (array of strings, uses {{lzUseContext:name = \"Character strings\", subcontext = \"stringArray\"}})"
+				"string" : "Array literals are written in curly plus square brackets. Examples:\n\t{{lzTerm:{[]}}} (an empty array)\n\t{{lzTerm:{[1, 2, 3]}, subcontext = \"integerArray\"}} (array of integers, uses {{lzUseContext:name = \"Integers\", subcontext = \"integerArray\"}})\n\t{{lzTerm:{[\"a\", \"b\"]}, subcontext = \"stringArray\"}} (array of strings, uses {{lzUseContext:name = \"Character strings\", subcontext = \"stringArray\"}})"
 			},
 			{
 				"__type" : "textSnippet",

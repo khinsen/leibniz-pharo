@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-16T18:40:03.615997+02:00"
+						"dateAndTimeString" : "2023-12-27T16:34:17.704778+01:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "To get a better idea of how this works, please have a look at the [[Context definitions]] that are part of this book. Everything shown in blue in these pages is a declaration that contributes to the definition of a context. Everything shown in purple is example or explanatory code that does not contribute to the context definition."
+				"string" : "To get a better idea of how this works, please have a look at the [[Context definitions]] that are part of this book. Everything shown in blue in these pages is a declaration that contributes to the definition of a context. Everything shown in brown is example or explanatory code that does not contribute to the context definition."
 			},
 			{
 				"__type" : "textSnippet",
@@ -119,7 +119,45 @@
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [ ]
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-12-27T16:28:44.256578+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-12-27T16:30:33.323928+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "AaQBMeHJDQCYGyVFBvo60Q=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "*Note:* If you are reading this book on the Web, you are looking at a static export that has non of the interactive facilities. Install the software on your computer for the full interactive experience."
+						}
+					]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -400,7 +438,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-16T18:50:25.861531+02:00"
+						"dateAndTimeString" : "2023-12-27T16:35:43.341092+01:00"
 					}
 				},
 				"uid" : {
@@ -410,7 +448,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "All data in Leibniz is represented by [[Terms]], which are tree structures composed of [[Operators]] with optional arguments (which are terms as well). Terms are classified by [[Sorts]]. Terms cannot be modified (they are *immutable*), but other terms can be derived from them via [[Rewriting]]. A context defines"
+				"string" : "All data in Leibniz is represented by [[Terms]], which are tree structures composed of [[Operators]] with optional arguments (which are terms as well). Terms are classified by [[Sorts]]. Terms cannot be modified (they are *immutable*), but other terms can be derived from them via [[Rewriting]]. A context defines:"
 			},
 			{
 				"__type" : "textSnippet",
@@ -437,7 +475,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-23T09:40:19.0771+02:00"
+						"dateAndTimeString" : "2023-12-27T16:36:34.490107+01:00"
 					}
 				},
 				"uid" : {
@@ -447,7 +485,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A context is defined by a page in this book. Multiple books of contexts will be supported in future versions. For a guide to the contexts in this book, see [[Context definitions]]."
+				"string" : "A context is defined by a page in this book. Multiple books of contexts will be supported in future versions. For a catalog of the contexts in this book, see [[Context definitions]]."
 			},
 			{
 				"__type" : "textSnippet",
@@ -474,7 +512,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-23T09:40:56.235065+02:00"
+						"dateAndTimeString" : "2023-12-27T16:37:38.483777+01:00"
 					}
 				},
 				"uid" : {
@@ -484,7 +522,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "In addition to its main context, a page can define *subcontexts*. They consist of all the declarations in the main context plus all declarations that include a subcontext name. Subcontexts exist mainly to allow examples to be included right in the page, but without cluttering the context with non-essential definitions. Many of the contexts in this book contain an example section that illustrates how this works in practice."
+				"string" : "In addition to its main context, a page can define *subcontexts*. They consist of all the declarations in the main context plus all declarations that include a subcontext name. Subcontexts exist mainly to allow examples to be included right in the page, but without cluttering the context with non-essential definitions. Many of the contexts in this book contain an example section that illustrates how this works in practice. Subcontext definitions are shown with a purple prefix indicating the subcontext name."
 			}
 		]
 	},
