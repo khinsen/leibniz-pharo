@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'context',
 		'snippet',
-		'annotation'
+		'annotation',
+		'declaration'
 	],
 	#category : #'Leibniz2-HTML-Export'
 }
@@ -15,8 +16,10 @@ LzHtmlTextSnippetAnnotationWriter >> annotation [
 ]
 
 { #category : #accessing }
-LzHtmlTextSnippetAnnotationWriter >> annotation: anObject [
-	annotation := anObject
+LzHtmlTextSnippetAnnotationWriter >> annotation: anLzSyntaxAnnotation [
+	annotation := anLzSyntaxAnnotation.
+	declaration := LzDeclarationBuilder new
+		acceptNode: anLzSyntaxAnnotation.
 ]
 
 { #category : #accessing }
@@ -31,13 +34,20 @@ LzHtmlTextSnippetAnnotationWriter >> context: anObject [
 
 { #category : #accessing }
 LzHtmlTextSnippetAnnotationWriter >> cssClass [
-	^ 'leibniz'
+	^ self isExample
+		ifTrue: [ 'leibniz-example' ]
+		ifFalse: [ 'leibniz' ]
 ]
 
 { #category : #accessing }
 LzHtmlTextSnippetAnnotationWriter >> declaration [
-	^ LzDeclarationBuilder new
-		acceptNode: self annotation.
+	^ declaration
+]
+
+{ #category : #testing }
+LzHtmlTextSnippetAnnotationWriter >> isExample [
+	^ self declaration options
+		at: #example ifAbsent: false
 ]
 
 { #category : #accessing }
@@ -57,13 +67,11 @@ LzHtmlTextSnippetAnnotationWriter >> tag [
 
 { #category : #'private - writing' }
 LzHtmlTextSnippetAnnotationWriter >> write [
-	| declaration |
-	declaration := self declaration.
 	context html 
 		tag: self tag
 		attributes: { 'class' . self cssClass .
-						 'source' . declaration asLeibnizSyntaxString }
+						 'source' . self declaration asLeibnizSyntaxString }
 		do: [ LzHtmlSyntaxPiece new
-				declaration: declaration;
+				declaration: self declaration;
 				writeWithContext: context ]
 ]
