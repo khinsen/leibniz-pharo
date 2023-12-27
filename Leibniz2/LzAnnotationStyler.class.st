@@ -92,14 +92,13 @@ LzAnnotationStyler >> styleAutoUpdatingObjectButton: anAnnotation [
 			color := LzColors declarationColor.
 			(options at: #example ifAbsent: [ false ])
 				ifTrue: [ color := LzColors exampleColor ].
-			(options at: #subcontext ifAbsent: [ nil ])
-				ifNotNil: [ color := LzColors subcontextColor ].
-			declaration asRopedTextColored: color ]
+			(self subcontextPrefix: (options at: #subcontext ifAbsent: nil)),
+				(declaration asRopedTextColored: color) ]
 ]
 
 { #category : #styling }
 LzAnnotationStyler >> styleAutoUpdatingObjectButton: anAnnotation text: aBlock [
-	| annotatedDeclaration declaration label attribute |
+	| annotatedDeclaration declaration attribute |
 	annotatedDeclaration := LzDeclarationBuilder new
 		acceptNode: anAnnotation.
 	declaration := annotatedDeclaration declaration.
@@ -118,32 +117,6 @@ LzAnnotationStyler >> styleAutoUpdatingObjectButton: anAnnotation text: aBlock [
 		attribute: attribute
 		from: anAnnotation parent startPosition
 		to: anAnnotation parent stopPosition
-]
-
-{ #category : #styling }
-LzAnnotationStyler >> styleButtonFor: anAnnotation label: aSyntaxLabel [
-	| attribute |
-	attribute := GtButtonAttribute new
-		beAppend;
-		stencil: [ (aSyntaxLabel beSmallSize) asElement
-					padding: (BlInsets top: 2 left: 0 bottom: 0 right: 0) ].
-	self text
-		attribute: attribute
-		from: anAnnotation parent startPosition
-		to: anAnnotation parent stopPosition
-]
-
-{ #category : #styling }
-LzAnnotationStyler >> styleDeclarationButton: anLzAnnotation [
-	| annotatedDeclaration declaration label |
-	annotatedDeclaration := LzDeclarationBuilder new
-			acceptNode: anLzAnnotation.
-	declaration := annotatedDeclaration declaration.
-	label := (LzSyntaxLabel
-				for: declaration
-				color: annotatedDeclaration color)
-				declaration: declaration.
-	self styleButtonFor: anLzAnnotation label: label
 ]
 
 { #category : #styling }
@@ -177,6 +150,18 @@ LzAnnotationStyler >> subcontext: aString [
 ]
 
 { #category : #private }
+LzAnnotationStyler >> subcontextPrefix: aStringOrNil [
+	| prefix |
+	aStringOrNil ifNil: [ ^ '' asRopedText ].
+	prefix := ('[', aStringOrNil, '] ') asRopedText.
+	prefix fontSize: 8.
+	prefix attribute:
+		(BlTextForegroundAttribute new
+			paint: LzColors subcontextColor).
+	^ prefix
+]
+
+{ #category : #private }
 LzAnnotationStyler >> text [
 	^ self composite text
 ]
@@ -201,12 +186,12 @@ LzAnnotationStyler >> visitTopLevelAsset: aTopLevelAsset [
 	self
 		styleAutoUpdatingObjectButton: aTopLevelAsset
 		text: [ :declaration :object :options |
-			| color displayedObject |
+			| color prefix displayedObject |
 			color := LzColors declarationColor.
 			(options at: #example ifAbsent: [ false ])
 				ifFalse: [ color := LzColors exampleColor ].
-			(options at: #subcontext ifAbsent: [ nil ])
-				ifNotNil: [ color := LzColors subcontextColor ].
+			prefix := self subcontextPrefix:
+				(options at: #subcontext ifAbsent: nil).
 			(options at: #withNormalForm ifAbsent: [ false ])
 				ifTrue: [
 					| context | 
@@ -216,7 +201,7 @@ LzAnnotationStyler >> visitTopLevelAsset: aTopLevelAsset [
 					(options at: #withValue ifAbsent: [ false ])
 						ifTrue: [ displayedObject := object ]
 						ifFalse: [ displayedObject := declaration ] ].
-			displayedObject asRopedTextColored: color ]
+			prefix, (displayedObject asRopedTextColored: color) ]
 ]
 
 { #category : #visiting }
@@ -249,9 +234,22 @@ LzAnnotationStyler >> visitTopLevelSort: aTopLevelSortAnnotation [
 
 { #category : #visiting }
 LzAnnotationStyler >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
+	| annotation declaration prefix label attribute |
 	self styleAnnotation: aTopLevelSpecialTerms.
 	self styleAutoHidingAnnotation: aTopLevelSpecialTerms.
-	self styleDeclarationButton: aTopLevelSpecialTerms
+	annotation := LzDeclarationBuilder new
+			acceptNode: aTopLevelSpecialTerms.
+	declaration := annotation declaration.
+	prefix := self subcontextPrefix:
+				(annotation optionsAt: #subcontext).
+	label := declaration asRopedTextColored: annotation color.
+	attribute := GtButtonAttribute new
+		beAppend;
+		stencil: [ self inTextButton: prefix, label ].
+	self text
+		attribute: attribute
+		from: aTopLevelSpecialTerms parent startPosition
+		to: aTopLevelSpecialTerms parent stopPosition
 ]
 
 { #category : #visiting }
@@ -270,7 +268,9 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 		text: [ :declaration :object :options |
 			| color output |
 			color := LzColors exampleColor.
-			output := declaration asRopedTextColored: color.
+			output := self subcontextPrefix:
+				(options at: #subcontext ifAbsent: nil).
+			output := output, (declaration asRopedTextColored: color).
 			(object isKindOf: LzTermInContext) ifTrue: [
 				(object term sort isKind) ifTrue: [
 					output attribute:
@@ -300,6 +300,7 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
 	| annotation declaration pageReference color attribute label |
 	self styleAnnotation: aTopLevelUseContext.
+	self styleAutoHidingAnnotation: aTopLevelUseContext.
 
 	annotation := LzDeclarationBuilder new acceptNode: aTopLevelUseContext.
 	declaration := annotation declaration.
@@ -312,11 +313,10 @@ LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
 				to: aTopLevelUseContext parent stopPosition.
 			^ self ].
 
-	self styleAutoHidingAnnotation: aTopLevelUseContext.
-
 	color := annotation color.
-	label := pageReference asRopedText
-		foreground: color.
+	label := (self subcontextPrefix:
+				(annotation optionsAt: #subcontext)),
+				(pageReference asRopedText foreground: color).
 	declaration subcontext ifNotNil: [ :s |
 		label append: (('/', s) asRopedText foreground:  color) ].
 	(annotation optionsAt: #forSorts)

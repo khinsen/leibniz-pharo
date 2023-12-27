@@ -11,8 +11,6 @@ Class {
 LzTopLevelAnnotation >> color [
 	({ nil. true } includes: (self optionsAt: #example))
 		ifTrue: [ ^ LzColors exampleColor ].
-	(self optionsAt: #subcontext)
-		ifNotNil: [ ^ LzColors subcontextColor ].
 	^ LzColors declarationColor
 ]
 
