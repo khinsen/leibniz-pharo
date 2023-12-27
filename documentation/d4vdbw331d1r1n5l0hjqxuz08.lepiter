@@ -145,7 +145,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-12-27T16:30:33.323928+01:00"
+									"dateAndTimeString" : "2023-12-27T17:06:27.836552+01:00"
 								}
 							},
 							"uid" : {
@@ -155,7 +155,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "*Note:* If you are reading this book on the Web, you are looking at a static export that has non of the interactive facilities. Install the software on your computer for the full interactive experience."
+							"string" : "*Note:* If you are reading this book on the Web, you are looking at a static export that has none of the interactive facilities. Install the software on your computer for the full interactive experience."
 						}
 					]
 				},
