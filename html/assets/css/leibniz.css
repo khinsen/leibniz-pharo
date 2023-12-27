@@ -29,12 +29,12 @@ main a:hover, nav a:hover { background-color:#000;color:#fff }
 
 .leibniz {font-family:JuliaMono-Regular;color:#0000ff}
 .leibniz i {font-family:JuliaMono-RegularItalic;color:#0000ff}
-.leibniz .whiter, .leibniz i .whiter {color:#7777ff}
-.leibniz .darker, .leibniz i .darker {color:#0000A0}
+.leibniz .whiter, .leibniz i .whiter {color:#A3A3FF}
+.leibniz .darker, .leibniz i .darker {color:#0000EB}
 
 .leibniz-example {font-family:JuliaMono-Regular;color:#993300}
 .leibniz-example i {font-family:JuliaMono-RegularItalic;color:#993300}
-.leibniz-example .whiter, .leibniz-example i .whiter {color:#FF9900}
-.leibniz-example .darker, .leibniz-example i .darker {color:#660000}
+.leibniz-example .whiter, .leibniz-example i .whiter {color:#DBB6A3}
+.leibniz-example .darker, .leibniz-example i .darker {color:#852C00}
 
-.leibniz-subcontext-name {border: 1px solid black;padding:1px;}
+.leibniz-subcontext-name {border: 1px solid black;padding:1px;color:#660099;}
