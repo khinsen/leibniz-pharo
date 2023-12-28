@@ -78,23 +78,23 @@ LzHtmlSyntaxPiece >> syntaxAttributes [
 	^ {
 		LzDoNotRenderAttribute -> nil.
 		LzAssetLabelAttribute -> [ :context :block |
-			context html tag: #b class: 'darker' do: [ block value: context ] ].
+			context html inlineTag: #b class: 'darker' do: [ block value: context ] ].
 		LzSubscriptAttribute -> [ :context :block |
-			context html tag: #sub do: [ block value: context ] ].
+			context html inlineTag: #sub do: [ block value: context ] ].
 		LzSuperscriptAttribute -> [ :context :block |
-			context html tag: #sup do: [ block value: context ] ].
+			context html inlineTag: #sup do: [ block value: context ] ].
 		LzInfixOpNameAttribute -> [ :context :block |
-			context html tag: #span class: 'darker' do: [ block value: context ] ].
+			context html inlineTag: #span class: 'darker' do: [ block value: context ] ].
 		LzVarNameAttribute -> [ :context :block |
-			context html tag: #u do: [ block value: context ] ].
+			context html inlineTag: #u do: [ block value: context ] ].
 		LzLeafErrorAttribute -> [ :context :block |
 			block value: context ].
 		LzParenthesisAttribute -> [ :context :block |
-			context html tag: #span class: 'darker' do: [ block value: context ] ].
+			context html inlineTag: #span class: 'darker' do: [ block value: context ] ].
 		LzSortAttribute -> [ :context :block |
-			context html tag: #i do: [ block value: context ] ].
+			context html inlineTag: #i do: [ block value: context ] ].
 		LzVarDeclarationAttribute -> [ :context :block |
-			context html tag: #span class: 'whiter' do: [ block value: context ] ].
+			context html inlineTag: #span class: 'whiter' do: [ block value: context ] ].
 	} asOrderedDictionary
 ]
 
