@@ -37,12 +37,12 @@ LzHtmlTextSnippetTermWriter >> writeComputedParts [
 		| sort |
 		sort := object term sort.
 		context html
-			 tag: #span
+			 inlineTag: #span
 			 class: 'whiter'
 			 do: [
 			 	context html nextPutAll: ' : '.
 			 	context html
-			 		tag: #i
+			 		inlineTag: #i
 			 		do: [ LzHtmlSyntaxPiece new
 							text: sort asLeibnizSyntax;
 							writeWithContext: context ] ] ].
@@ -51,7 +51,7 @@ LzHtmlTextSnippetTermWriter >> writeComputedParts [
 		| normalForm |
 		normalForm := object normalForm.
 		context html
-			 tag: #span
+			 inlineTag: #span
 			 class: 'computed'
 			 do: [
 			 	context html nextPutAll: ' ⇒ '.

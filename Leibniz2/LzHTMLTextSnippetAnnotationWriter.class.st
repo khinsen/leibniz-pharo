@@ -86,7 +86,7 @@ LzHtmlTextSnippetAnnotationWriter >> tag [
 { #category : #'private - writing' }
 LzHtmlTextSnippetAnnotationWriter >> write [
 	context html 
-		tag: self tag
+		inlineTag: self tag
 		attributes: self htmlAttributes
 		do: [
 			self writeSubcontextLabel.
