@@ -103,7 +103,7 @@ LzHtmlTextSnippetAnnotationWriter >> writeDeclaration [
 LzHtmlTextSnippetAnnotationWriter >> writeSubcontextLabel [
 	self subcontext ifNotNil: [ :sc |
 		context html
-			tag: #sub
+			inlineTag: #sub
 			class: 'leibniz-subcontext-name'
 			with: sc.
 		context html nextPutAll: '&nbsp;' ]
