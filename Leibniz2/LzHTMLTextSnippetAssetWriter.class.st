@@ -1,10 +1,10 @@
 Class {
-	#name : #LzHTMLTextSnippetAssetWriter,
+	#name : #LzHtmlTextSnippetAssetWriter,
 	#superclass : #LzHtmlTextSnippetAnnotationWriter,
-	#category : #Leibniz2
+	#category : #'Leibniz2-HTML-Export'
 }
 
 { #category : #accessing }
-LzHTMLTextSnippetAssetWriter >> tag [
+LzHtmlTextSnippetAssetWriter >> tag [
 	^ #'leibniz-asset'
 ]

@@ -288,9 +288,10 @@ LzAnnotationStyler >> visitTopLevelTerm: aTopLevelTermAnnotation [
 
 				(options at: #withNormalForm) ifTrue: [
 					| normalForm |
-					normalForm := object normalForm asRopedTextColored: color.
+					normalForm := object normalForm
+									asRopedTextColored: LzColors resultColor.
 					output append: (' ⇒ ' asRopedText
-										foreground: color;
+										foreground: LzColors resultColor;
 										fontName: LzCodeFont defaultFamily).
 					output append: normalForm ] ].
 			output ]

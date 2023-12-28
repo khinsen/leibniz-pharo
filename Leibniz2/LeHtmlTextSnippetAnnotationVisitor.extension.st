@@ -2,7 +2,7 @@ Extension { #name : #LeHtmlTextSnippetAnnotationVisitor }
 
 { #category : #'*Leibniz2' }
 LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelAsset: aLzTopLevelAssetNode [
-	LzHTMLTextSnippetAssetWriter new
+	LzHtmlTextSnippetAssetWriter new
 		snippet: snippet;
 		context: context;
 		annotation: aLzTopLevelAssetNode;

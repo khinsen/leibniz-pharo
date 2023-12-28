@@ -82,13 +82,29 @@ LzHtmlTextSnippetAnnotationWriter >> write [
 		tag: self tag
 		attributes: attrs
 		do: [
-			self subcontext ifNotNil: [ :sc |
-				context html
-					tag: #sub
-					class: 'leibniz-subcontext-name'
-					with: sc.
-				context html nextPutAll: '&nbsp;' ].
-			LzHtmlSyntaxPiece new
-				declaration: self declaration;
-				writeWithContext: context ]
+			self writeSubcontextLabel.
+			self writeDeclaration.
+			self isExample
+				ifFalse: [ self writeComputedParts] ]
+]
+
+{ #category : #'private - writing' }
+LzHtmlTextSnippetAnnotationWriter >> writeComputedParts [
+]
+
+{ #category : #'private - writing' }
+LzHtmlTextSnippetAnnotationWriter >> writeDeclaration [
+	LzHtmlSyntaxPiece new
+		text: self declaration asLeibnizSyntax;
+		writeWithContext: context.
+]
+
+{ #category : #'private - writing' }
+LzHtmlTextSnippetAnnotationWriter >> writeSubcontextLabel [
+	self subcontext ifNotNil: [ :sc |
+		context html
+			tag: #sub
+			class: 'leibniz-subcontext-name'
+			with: sc.
+		context html nextPutAll: '&nbsp;' ]
 ]

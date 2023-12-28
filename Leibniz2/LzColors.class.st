@@ -15,6 +15,11 @@ LzColors class >> exampleColor [
 ]
 
 { #category : #accessing }
+LzColors class >> resultColor [
+	^ Color green muchDarker
+]
+
+{ #category : #accessing }
 LzColors class >> subcontextColor [
 	^ Color purple
 ]

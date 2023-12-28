@@ -4,28 +4,16 @@ Class {
 	#traits : 'TLeHtmlPiece',
 	#classTraits : 'TLeHtmlPiece classTrait',
 	#instVars : [
-		'declaration',
+		'text',
 		'segments',
 		'segmentAttrs'
 	],
 	#category : #'Leibniz2-HTML-Export'
 }
 
-{ #category : #accessing }
-LzHtmlSyntaxPiece >> declaration [
-	^ declaration
-]
-
-{ #category : #accessing }
-LzHtmlSyntaxPiece >> declaration: anLzDeclaration [
-	declaration := anLzDeclaration.
-	self findSegments
-]
-
 { #category : #operating }
 LzHtmlSyntaxPiece >> findSegments [
-	| text attrTable activeAttrs segment |
-	text := self declaration asLeibnizSyntax.
+	| attrTable activeAttrs segment |
 	attrTable := self syntaxAttributes.
 	segments := OrderedCollection new.
 	segmentAttrs := OrderedCollection new.
@@ -68,7 +56,7 @@ LzHtmlSyntaxPiece >> gtTextFor: aView [
 	^ aView forward
 		title: 'Text';
 		priority: 1;
-		object: [ self declaration asLeibnizSyntax ];
+		object: [ self text ];
 		view: #gtTextFor:;
 		yourself
 ]
@@ -108,6 +96,17 @@ LzHtmlSyntaxPiece >> syntaxAttributes [
 		LzVarDeclarationAttribute -> [ :context :block |
 			context html tag: #span class: 'whiter' do: [ block value: context ] ].
 	} asOrderedDictionary
+]
+
+{ #category : #accessing }
+LzHtmlSyntaxPiece >> text [
+	^ text
+]
+
+{ #category : #accessing }
+LzHtmlSyntaxPiece >> text: aRopedText [
+	text := aRopedText.
+	self findSegments
 ]
 
 { #category : #'api - writing' }
