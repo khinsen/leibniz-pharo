@@ -44,6 +44,18 @@ LzHtmlTextSnippetAnnotationWriter >> declaration [
 	^ declaration
 ]
 
+{ #category : #'private - writing' }
+LzHtmlTextSnippetAnnotationWriter >> htmlAttributes [
+	| attrs |
+	attrs := self declaration options associations
+		select: [ :each | each value ~= false ]
+		thenCollect: [ :each |
+			{ each key . each value = true ifTrue: [ nil ] ifFalse: [ each value ] } ].
+	^ { #class . self cssClass .
+		#source . self declaration asLeibnizSyntaxString },
+		attrs flattened
+]
+
 { #category : #accessing }
 LzHtmlTextSnippetAnnotationWriter >> isExample [
 	^ self declaration options
@@ -73,14 +85,9 @@ LzHtmlTextSnippetAnnotationWriter >> tag [
 
 { #category : #'private - writing' }
 LzHtmlTextSnippetAnnotationWriter >> write [
-	| attrs |
-	attrs := { 'class' . self cssClass .
-				'source' . self declaration asLeibnizSyntaxString }.
-	self isExample ifTrue: [ attrs := attrs, { 'example' . nil } ].
-	self subcontext ifNotNil: [ :sc | attrs := attrs, { 'subcontext' . sc} ].
 	context html 
 		tag: self tag
-		attributes: attrs
+		attributes: self htmlAttributes
 		do: [
 			self writeSubcontextLabel.
 			self writeDeclaration.
