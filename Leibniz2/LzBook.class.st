@@ -76,9 +76,9 @@ LzBook class >> htmlTemplateLocation [
 ]
 
 { #category : #baseline }
-LzBook class >> installPatchForHtmlExport [
+LzBook class >> installPatchesForHtmlExport [
 	"Patch GT's HTML generation code to properly deal with \n and \t in Lepiter text snippets.
-	 Also submitted as a PR: https://github.com/feenkcom/lepiter/pull/6"
+	 Submitted as a PR: https://github.com/feenkcom/lepiter/pull/6"
 	LeHtmlTextSnippetVisitor compile: 'visitText: aText
 	| aString |
 	aString := aText content.
@@ -92,7 +92,42 @@ LzBook class >> installPatchForHtmlExport [
 		ifTrue: [ context html nextPutAll: ''&emsp;'' ]
 		ifFalse: [ context html escape: aString ] ] ].
 
-	exportedNodes add: aText'
+	exportedNodes add: aText'.
+
+	"Patch GT's HTML generation code to wrap exported method source code in a <pre> tag.
+	 Submitted as a PR: https://github.com/feenkcom/lepiter/pull/7"
+	 LeHtmlTextSnippetAnnotationVisitor compile: 'visitMethodAnnotation: aMethodAnnotation
+	| methodNameArgument method methodExists |
+	methodNameArgument := aMethodAnnotation nameNode.
+	method := methodNameArgument imageObject.
+	methodExists := method isNotNil.
+
+	context html
+		inlineTag: #code
+		attributes: {#class. ''annotation annotation-label annotation-label-method annotation-label-code expandable-annotation-label {1}''
+				format: {(aMethodAnnotation isExpanded and: [ methodExists ])
+							ifTrue: [ ''annotation-sibling-is-expanded'' ]
+							ifFalse: [ ''annotation-sibling-is-collapsed'' ]}}
+		with: (aMethodAnnotation hasLabel
+				ifTrue: [ aMethodAnnotation label ]
+				ifFalse: [ methodNameArgument fullName ]).
+				
+	methodExists ifFalse: [ ^ self ].
+				
+	context html 
+		tag: #span
+		attributes: {#class. ''textual-snippet code-snippet pharo-method-snippet expandable-annotation-view {1}''
+				format: {(aMethodAnnotation isExpanded)
+							ifTrue: [ ''expanded-annotation-view'' ]
+							ifFalse: [ ''collapsed-annotation-view'' ]}}
+		do: [ 
+			context html
+				inlineTag: #pre
+				do: [
+					context html
+						inlineTag: #code
+						attributes: #(''class'' '''')
+						with: method sourceCode ] ]'.
 ]
 
 { #category : #accessing }
