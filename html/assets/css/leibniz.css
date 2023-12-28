@@ -1,18 +1,18 @@
 @font-face {
     font-family: JuliaMono-Regular;
-    src: url("/assets/fonts/JuliaMono-Regular.woff2");
+    src: url("../../assets/fonts/JuliaMono-Regular.woff2");
 }
 @font-face {
     font-family: JuliaMono-RegularItalic;
-    src: url("/assets/fonts/JuliaMono-RegularItalic.woff2");
+    src: url("../../assets/fonts/JuliaMono-RegularItalic.woff2");
 }
 @font-face {
     font-family: JuliaMono-Bold;
-    src: url("/assets/fonts/JuliaMono-Bold.woff2");
+    src: url("../../assets/fonts/JuliaMono-Bold.woff2");
 }
 @font-face {
     font-family: JuliaMono-RegularItalic;
-    src: url("/assets/fonts/JuliaMono-BoldItalic.woff2");
+    src: url("../../assets/fonts/JuliaMono-BoldItalic.woff2");
 }
 * { box-sizing:border-box }
 body { font-size:16px;font-family:sans-serif;color:black;background-color:#F7F7F7; }
@@ -38,5 +38,6 @@ main a:hover, nav a:hover { background-color:#000;color:#fff }
 .leibniz-example i {font-family:JuliaMono-RegularItalic;color:#993300}
 .leibniz-example .whiter, .leibniz-example i .whiter {color:#DBB6A3}
 .leibniz-example .darker, .leibniz-example i .darker {color:#852C00}
+.leibniz-example .computed, .leibniz-example i .computed {color:#008000}
 
 .leibniz-subcontext-name {border: 1px solid black;padding:1px;color:#660099;}
