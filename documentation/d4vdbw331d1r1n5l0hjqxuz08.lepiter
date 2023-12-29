@@ -45,7 +45,156 @@
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [ ]
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-12-29T10:07:23.160432+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-12-29T10:16:02.958561+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "ZpbeGATKDQCkMGkDA+3LBQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "1. Everything shown in *blue* is a declaration that contributes to the definition of a context: {{lzSort:a-new-sort}}, {{lzOp:a-new-operator : a-new-sort}}."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-12-29T10:07:26.797571+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-12-29T10:14:23.514207+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "QRMWGQTKDQCkPJU3A+3LBQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "2. Everything shown in *brown* is example or explanatory code that does not contribute to the context definition: {{lzSort:a-new-sort, example = \"yes\"}}, {{lzOp:a-new-operator : a-new-sort, example = \"yes\"}}."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-12-29T10:07:31.443823+01:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-12-29T10:14:27.611169+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "Nf5cGQTKDQCkUsZzA+3LBQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "3. Computed results are shown in *green*: {{lzTerm:2 + 3, withNormalForm = \"yes\"}}. To make this computation work, we have to include the {{lzUseContext:name = \"Integers\"}} context, as nothing in Leibniz is built in and always there."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2022-08-16T18:40:03.615997+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2023-12-29T10:14:39.871904+01:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "zbAaI8CiDQCc1SkmBw39BQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "4. A purple label indicates the name of a subcontext: {{lzSort:a-new-sort-in-a-subcontext, subcontext = \"a-subcontext\"}}"
+						}
+					]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -55,7 +204,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-16T18:40:03.615997+02:00"
+						"dateAndTimeString" : "2023-12-29T10:07:13.84428+01:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +215,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-12-27T16:34:17.704778+01:00"
+						"dateAndTimeString" : "2023-12-29T10:14:17.222321+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "zbAaI8CiDQCc1SkmBw39BQ=="
+					"uidString" : "rW9QGATKDQCkIOyDA+3LBQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "To get a better idea of how this works, please have a look at the [[Context definitions]] that are part of this book. Everything shown in blue in these pages is a declaration that contributes to the definition of a context. Everything shown in brown is example or explanatory code that does not contribute to the context definition."
+				"string" : "To get a better idea of how this works, please have a look at the [[Context definitions]] that are part of this book. A quick introduction to reading Leibniz code:"
 			},
 			{
 				"__type" : "textSnippet",
