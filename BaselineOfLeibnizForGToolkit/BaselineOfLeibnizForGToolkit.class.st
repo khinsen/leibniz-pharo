@@ -5,6 +5,85 @@ Class {
 }
 
 { #category : #baseline }
+BaselineOfLeibnizForGToolkit >> applyPatchForHtmlExportOfLfAndTab [
+	"Patch GT's HTML generation code to properly deal with \n and \t in Lepiter text snippets.
+	 Submitted as a PR: https://github.com/feenkcom/lepiter/pull/6"
+	LeHtmlTextSnippetVisitor compile: 'visitText: aText
+	| aString |
+	aString := aText content.
+	aString size = 1
+		ifFalse: [ context html escape: aString ]
+		ifTrue: [
+	aString first = Character lf
+		ifTrue: [ context html nextPutAll: ''<br>'' ]
+		ifFalse: [
+	aString first = Character tab
+		ifTrue: [ context html nextPutAll: ''&emsp;'' ]
+		ifFalse: [ context html escape: aString ] ] ].
+
+	exportedNodes add: aText'.
+]
+
+{ #category : #baseline }
+BaselineOfLeibnizForGToolkit >> applyPatchForHtmlExportOfMethodSourceCode [
+	"Patch GT's HTML generation code to wrap exported method source code in a <pre> tag.
+	 Submitted as a PR: https://github.com/feenkcom/lepiter/pull/7"
+	 LeHtmlTextSnippetAnnotationVisitor compile: 'visitMethodAnnotation: aMethodAnnotation
+	| methodNameArgument method methodExists |
+	methodNameArgument := aMethodAnnotation nameNode.
+	method := methodNameArgument imageObject.
+	methodExists := method isNotNil.
+
+	context html
+		inlineTag: #code
+		attributes: {#class. ''annotation annotation-label annotation-label-method annotation-label-code expandable-annotation-label {1}''
+				format: {(aMethodAnnotation isExpanded and: [ methodExists ])
+							ifTrue: [ ''annotation-sibling-is-expanded'' ]
+							ifFalse: [ ''annotation-sibling-is-collapsed'' ]}}
+		with: (aMethodAnnotation hasLabel
+				ifTrue: [ aMethodAnnotation label ]
+				ifFalse: [ methodNameArgument fullName ]).
+				
+	methodExists ifFalse: [ ^ self ].
+				
+	context html 
+		tag: #span
+		attributes: {#class. ''textual-snippet code-snippet pharo-method-snippet expandable-annotation-view {1}''
+				format: {(aMethodAnnotation isExpanded)
+							ifTrue: [ ''expanded-annotation-view'' ]
+							ifFalse: [ ''collapsed-annotation-view'' ]}}
+		do: [ 
+			context html
+				inlineTag: #pre
+				do: [
+					context html
+						inlineTag: #code
+						attributes: #(''class'' '''')
+						with: method sourceCode ] ]'.
+]
+
+{ #category : #baseline }
+BaselineOfLeibnizForGToolkit >> applyPatchForHtmlExportOfNestingLevlsForSnippets [
+	"Patch GT's HTML generation code to add a class on each <div> for a snippet that indicates
+	 its nesting level in the page. This permits proper indentation via CSS. This code
+	 relies on the extension method 'nestingLevel' on LeContent and subclasses 'LePage' and 'LeSnippet'."
+	LeHtmlVisitor compile: 'visitTextSnippet: aLeTextSnippet
+	context html
+		tag: #div
+		attributes: (self
+				classesFor: aLeTextSnippet
+				withClasses: ''snippet textual-snippet text-snippet nesting-level-'', (aLeTextSnippet nestingLevel printString))
+		do: [ | visitor |
+			visitor := LeHtmlTextSnippetVisitor new
+					context: context;
+					snippet: aLeTextSnippet.
+
+			aLeTextSnippet ast acceptVisitor: visitor ].
+
+	self visitContent: aLeTextSnippet'
+]
+
+{ #category : #baseline }
 BaselineOfLeibnizForGToolkit >> baseline: spec [
 	<baseline>
 	
@@ -36,5 +115,7 @@ BaselineOfLeibnizForGToolkit >> baseline: spec [
 { #category : #baseline }
 BaselineOfLeibnizForGToolkit >> postload: loader package: packageSpec [
 	LzCodeFont chooseDefaultFamily.
-	LzBook installPatchesForHtmlExport.	
+	self applyPatchForHtmlExportOfLfAndTab.
+	self applyPatchForHtmlExportOfMethodSourceCode.
+	self applyPatchForHtmlExportOfNestingLevlsForSnippets.
 ]

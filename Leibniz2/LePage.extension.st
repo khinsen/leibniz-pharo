@@ -129,3 +129,8 @@ LePage >> lzSubcontext: aSubcontextName [
 	^ (LzGlobalCache uniqueInstance
 		contextCacheFor: self) subcontext: aSubcontextName
 ]
+
+{ #category : #'*Leibniz2' }
+LePage >> nestingLevel [
+	^ 0
+]
