@@ -156,43 +156,6 @@
 								"__type" : "textStyle"
 							},
 							"string" : "3. Computed results are shown in *green*: {{lzTerm:2 + 3, withNormalForm = \"yes\"}}. To make this computation work, we have to include the {{lzUseContext:name = \"Integers\"}} context, as nothing in Leibniz is built in and always there."
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-08-16T18:40:03.615997+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-12-29T10:14:39.871904+01:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "zbAaI8CiDQCc1SkmBw39BQ=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "4. A purple label indicates the name of a subcontext: {{lzSort:a-new-sort-in-a-subcontext, subcontext = \"a-subcontext\"}}"
 						}
 					]
 				},
@@ -241,6 +204,43 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-12-29T14:17:16.060282+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2023-12-29T14:18:13.090489+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "XhiElgfKDQCJsuEdC+8zUQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "In addition to its main context, a page can define *subcontexts*. They consist of all the declarations in the main context plus all declarations that include a subcontext name. Subcontext names are shown as a purple label before declarations: {{lzSort:a-new-sort-in-a-subcontext, subcontext = \"a-subcontext\"}}. Subcontexts exist mainly to allow examples to be included right in the page, but without cluttering the context with non-essential definitions. Many of the contexts in this book contain an example section that illustrates how this works in practice."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2022-06-16T16:18:49.492313+02:00"
 					}
 				},
@@ -252,7 +252,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-16T18:40:33.187708+02:00"
+						"dateAndTimeString" : "2023-12-29T14:20:28.000016+01:00"
 					}
 				},
 				"uid" : {
@@ -262,7 +262,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A good starting point for exploration is the context [[Integers]], which shows how to express in Leibniz some basic mathematics that you are probably familiar with. Next, have a look at [[Heron's algorithm for computing square roots]], which explains a simple numerical algorithm."
+				"string" : "A good starting point for exploration is the context [[Integers]], which shows how to express in Leibniz some basic mathematics that you are probably familiar with. Next, have a look at [[Heron's algorithm for computing square roots]], which explains a simple numerical algorithm, and at [[Lotka-Volterra equations]], which illustrates differential equations and in particular how Leibniz code can be used by a solver for differential equations written in a traditional programming language."
 			},
 			{
 				"__type" : "textSnippet",
@@ -598,80 +598,6 @@
 					"__type" : "textStyle"
 				},
 				"string" : "All data in Leibniz is represented by [[Terms]], which are tree structures composed of [[Operators]] with optional arguments (which are terms as well). Terms are classified by [[Sorts]]. Terms cannot be modified (they are *immutable*), but other terms can be derived from them via [[Rewriting]]. A context defines:"
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-16T18:43:45.478653+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-12-27T16:36:34.490107+01:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "rw3eL8CiDQCda88MBw39BQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "A context is defined by a page in this book. Multiple books of contexts will be supported in future versions. For a catalog of the contexts in this book, see [[Context definitions]]."
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-16T18:45:43.469894+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-12-27T16:37:38.483777+01:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "51QdN8CiDQCdcQ8ZBw39BQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : "In addition to its main context, a page can define *subcontexts*. They consist of all the declarations in the main context plus all declarations that include a subcontext name. Subcontexts exist mainly to allow examples to be included right in the page, but without cluttering the context with non-essential definitions. Many of the contexts in this book contain an example section that illustrates how this works in practice. Subcontext definitions are shown with a purple prefix indicating the subcontext name."
 			}
 		]
 	},

@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-09T11:25:41.537084+02:00"
+						"dateAndTimeString" : "2023-12-29T13:54:22.407855+01:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Another subsort, {{lzSort:ℝ.nn ⊆ ℝ}}, describes the non-negative rational numbers. The non-negative rational number are a subsort: {{lzSort:ℚ.nn ⊆ ℝ.nn}}."
+				"string" : "Another subsort, {{lzSort:ℝ.nn ⊆ ℝ}}, describes the non-negative real numbers. The non-negative rational number are a subsort: {{lzSort:ℚ.nn ⊆ ℝ.nn}}."
 			},
 			{
 				"__type" : "textSnippet",
@@ -261,7 +261,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-06-09T11:29:10.721091+02:00"
+												"dateAndTimeString" : "2023-12-29T13:52:54.499945+01:00"
 											}
 										},
 										"uid" : {
@@ -271,7 +271,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The sum of two real numbers is a rational number:\n\t{{lzOp:ℝ + ℝ : ℝ}}"
+										"string" : "The sum of two real numbers is a real number:\n\t{{lzOp:ℝ + ℝ : ℝ}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -485,7 +485,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-06-09T11:29:55.555986+02:00"
+												"dateAndTimeString" : "2023-12-29T13:53:02.180899+01:00"
 											}
 										},
 										"uid" : {
@@ -495,7 +495,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The difference of two real numbers is a rational number:\n\t{{lzOp:ℝ - ℝ : ℝ}}"
+										"string" : "The difference of two real numbers is a real number:\n\t{{lzOp:ℝ - ℝ : ℝ}}"
 									},
 									{
 										"__type" : "textSnippet",
@@ -672,7 +672,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2022-06-09T11:30:34.996874+02:00"
+												"dateAndTimeString" : "2023-12-29T13:53:05.587321+01:00"
 											}
 										},
 										"uid" : {
@@ -682,7 +682,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "The product of two real numbers is a rational number:\n\t{{lzOp:ℝ × ℝ : ℝ}}"
+										"string" : "The product of two real numbers is a real number:\n\t{{lzOp:ℝ × ℝ : ℝ}}"
 									},
 									{
 										"__type" : "textSnippet",
