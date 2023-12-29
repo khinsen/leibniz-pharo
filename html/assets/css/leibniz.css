@@ -44,6 +44,9 @@ main a:hover, nav a:hover { background-color:#000;color:#fff }
 main pre {font-family:JuliaMono-Regular;font-size:0.8em}
 .collapsed-annotation-view {display:none}
 
+.nesting-level-2 {margin-left:1rem}
+.nesting-level-3 {margin-left:2rem}
+
 .leibniz {font-size:0.9em}
 .leibniz {font-family:JuliaMono-Regular;color:#0000ff}
 .leibniz i {font-family:JuliaMono-RegularItalic;color:#0000ff}
