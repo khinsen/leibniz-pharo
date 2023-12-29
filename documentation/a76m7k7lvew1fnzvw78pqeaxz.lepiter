@@ -288,7 +288,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-06-26T06:51:50.0292+02:00"
+						"dateAndTimeString" : "2023-12-29T15:52:23.038258+01:00"
 					}
 				},
 				"uid" : {
@@ -298,7 +298,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "### Example"
+				"string" : "###Example"
 			},
 			{
 				"__type" : "textSnippet",
@@ -399,7 +399,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2022-08-10T15:50:42.917804+02:00"
+						"dateAndTimeString" : "2023-12-29T16:06:53.207467+01:00"
 					}
 				},
 				"uid" : {
@@ -409,7 +409,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A convergence plot for the square root of 2 (uses {{lzUseContext:name = \"Plotting\", subcontext = \"convergence\"}}):\n\t{{lzTerm:linePlot(heronError(2), {[ 1, 1/2, 1/3, 1/5, 1/10, 1/100, 1/1000 ]}), subcontext = \"convergence\"}}"
+				"string" : "A convergence plot for the square root of 2 (uses {{lzUseContext:name = \"Plotting\", subcontext = \"convergence\"}}):\n\t{{lzTerm:linePlot(ε-values, heronError(2)[ε-values]), subcontext = \"convergence\"}}\nwith\n\t{{lzOp:ε-values : Array1D(ℝ.p), subcontext = \"convergence\"}} and\n\t{{lzRule:ε-values ⇒ {[ 1, 1/2, 1/3, 1/5, 1/10, 1/100, 1/1000 ]}, subcontext = \"convergence\"}}"
 			}
 		]
 	},
