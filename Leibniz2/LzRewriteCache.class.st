@@ -14,6 +14,19 @@ LzRewriteCache >> clearCache [
 	termCache := Dictionary new
 ]
 
+{ #category : #inspecting }
+LzRewriteCache >> gtTermsFor: aView [
+	<gtView>
+	termCache ifEmpty: [ ^ aView empty ].
+	^ aView columnedList
+		title: 'Terms';
+		priority: 5;
+		items: [ termCache associations ];
+		column: 'Term' text: [ :each | each key asLeibnizSyntax ];
+		column: 'Normal form' text: [ :each | each value asLeibnizSyntax ];
+		yourself.
+]
+
 { #category : #initializing }
 LzRewriteCache >> initialize [
 	self clearCache

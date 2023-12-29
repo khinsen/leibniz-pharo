@@ -40,12 +40,8 @@ LzTermInContext class >> term: aTerm context: aContext [
 
 { #category : #'instance creation' }
 LzTermInContext class >> term: aTerm context: aContext rewriteCache: aRewriteCache [
-	| class |
-	class := self classForTerm: aTerm context: aContext.
-	^ class new
-		term: aTerm;
-		context: aContext;
-		rewriteCache: aRewriteCache
+	^ (self term: aTerm context: aContext)
+		rewriteCache: aRewriteCache.
 ]
 
 { #category : #converting }
