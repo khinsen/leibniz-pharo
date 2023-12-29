@@ -46,6 +46,8 @@ main pre {font-family:JuliaMono-Regular;font-size:0.8em}
 
 .nesting-level-2 {margin-left:1rem}
 .nesting-level-3 {margin-left:2rem}
+.nesting-level-4 {margin-left:3rem}
+.nesting-level-5 {margin-left:4rem}
 
 .leibniz {font-size:0.9em}
 .leibniz {font-family:JuliaMono-Regular;color:#0000ff}
