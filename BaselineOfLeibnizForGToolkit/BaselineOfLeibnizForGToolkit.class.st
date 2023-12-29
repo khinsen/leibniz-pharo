@@ -63,8 +63,8 @@ BaselineOfLeibnizForGToolkit >> applyPatchForHtmlExportOfMethodSourceCode [
 ]
 
 { #category : #baseline }
-BaselineOfLeibnizForGToolkit >> applyPatchForHtmlExportOfNestingLevlsForSnippets [
-	"Patch GT's HTML generation code to add a class on each <div> for a snippet that indicates
+BaselineOfLeibnizForGToolkit >> applyPatchForHtmlExportOfNestingLevelsForSnippets [
+	"Patch GT's HTML generation code to add a class on each <div> for a text snippet that indicates
 	 its nesting level in the page. This permits proper indentation via CSS. This code
 	 relies on the extension method 'nestingLevel' on LeContent and subclasses 'LePage' and 'LeSnippet'."
 	LeHtmlVisitor compile: 'visitTextSnippet: aLeTextSnippet
@@ -80,7 +80,31 @@ BaselineOfLeibnizForGToolkit >> applyPatchForHtmlExportOfNestingLevlsForSnippets
 
 			aLeTextSnippet ast acceptVisitor: visitor ].
 
-	self visitContent: aLeTextSnippet'
+	self visitContent: aLeTextSnippet'.
+	"Same for Pharo snippets"
+	LeHtmlVisitor compile: 'visitPharoSnippet: aLePharoSnippet
+	context html
+		tag: #div
+		attributes: (self
+				classesFor: aLePharoSnippet
+				withClasses: ''snippet textual-snippet code-snippet pharo-snippet nesting-level-'', (aLePharoSnippet nestingLevel printString))
+		do: [ context html
+				tag: #pre
+				attributes: #(''class'' ''no_bottom_margin'')
+				with: aLePharoSnippet code ].
+	^ self visitContent: aLePharoSnippet'.
+	"Same for Python code snippet"
+	LeHtmlVisitor compile: 'visitPythonSnippet: aLePythonSnippet
+	context html
+		tag: #div
+		attributes: (self
+				classesFor: aLePythonSnippet
+				withClasses: ''snippet textual-snippet code-snippet python-snippet nesting-level-'', (aLePythonSnippet nestingLevel printString))
+		do: [ context html
+				tag: #pre
+				attributes: #(''class'' ''no_bottom_margin'')
+				with: aLePythonSnippet code ].
+	^ self visitContent: aLePythonSnippet'
 ]
 
 { #category : #baseline }
@@ -117,5 +141,5 @@ BaselineOfLeibnizForGToolkit >> postload: loader package: packageSpec [
 	LzCodeFont chooseDefaultFamily.
 	self applyPatchForHtmlExportOfLfAndTab.
 	self applyPatchForHtmlExportOfMethodSourceCode.
-	self applyPatchForHtmlExportOfNestingLevlsForSnippets.
+	self applyPatchForHtmlExportOfNestingLevelsForSnippets.
 ]
