@@ -126,6 +126,30 @@ LzLepiterExamples >> equalityTerms [
 ]
 
 { #category : #example }
+LzLepiterExamples >> fibonacciSeries [
+	<gtExample>
+	| context cache |
+	context := LzGlobalCache uniqueInstance
+				subcontext: 'fibonacci' for: 'Solving recurrence equations'.
+	cache := LzGlobalCache uniqueInstance
+				rewriteCacheFor: context.
+	^ {
+		{ 'F[1]' . '1' }.
+		{ 'F[2]' . '1'}.
+		{ 'F[3]' . '2'}.
+		{ 'F[4]' . '3'}.
+		{ 'F[5]' . '5'}.
+	}
+	collect: [ :each |
+		| term result |
+		term := context term: each first.
+		result := context reduce: term.
+		self assert: result equals: (context term: each second).
+		self assert: (cache reduce: term) equals: result.
+		{ term . result } ]
+]
+
+{ #category : #example }
 LzLepiterExamples >> integerArithmetic [
 	<gtExample>
 	| context cache |

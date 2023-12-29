@@ -182,7 +182,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2022-10-27T18:05:15.260787+02:00"
+									"dateAndTimeString" : "2023-12-29T15:41:17.54675+01:00"
 								}
 							},
 							"uid" : {
@@ -192,7 +192,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "The Fibonacci numbers {{lzOp:F : ℕ.nz →  ℕ.nz, subcontext = \"fibonacci\"}} are defined by the recurrence equation\n\t{{lzRule:fibonacciRecurrence: F[n_:ℕ.nz] ⇒ F[n_ - 1] + F[n_ - 2 ], subcontext = \"fibonacci\"}}\nstarting with {{lzRule: F[1] ⇒ 1, subcontext = \"fibonacci\"}} and {{lzRule: F[2] ⇒ 1, subcontext = \"fibonacci\"}}."
+							"string" : "The Fibonacci numbers {{lzOp:F : ℕ.nz →  ℕ.nz, subcontext = \"fibonacci\"}} are defined by the recurrence equation\n\t{{lzRule:fibonacciRecurrence: F[n_:ℕ.nz] ⇒ F[n_ - 1] + F[n_ - 2] | n_ > 2, subcontext = \"fibonacci\"}}\nstarting with {{lzRule: F[1] ⇒ 1, subcontext = \"fibonacci\"}} and {{lzRule: F[2] ⇒ 1, subcontext = \"fibonacci\"}}."
 						},
 						{
 							"__type" : "textSnippet",
