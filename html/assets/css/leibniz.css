@@ -20,11 +20,13 @@ body { display:grid;grid-template-columns:100%;grid-column-gap: 0;grid-column-ga
 nav { margin:0;padding:0 20px;margin-top:20px;margin-right:20px } 
 main { margin:0;padding:0 20px;clear:both }
 
-@media only screen and (min-width: 900px) {
-  body {grid-column:1;grid-template-columns: 20rem auto;grid-column-gap: 10px;grid-row-gap: 0}
+@media screen and (min-width: 900px) {
+  body {grid-template-columns: 20rem auto;grid-column-gap: 10px;grid-row-gap: 0}
   nav {grid-column:1}
   main {grid-column:2}
 }
+
+@media print {nav {display:none}}
 
 body { font-size:16px;font-family:sans-serif;color:black;background-color:#F7F7F7; }
 nav { background-color:#E0E0E0; } 
