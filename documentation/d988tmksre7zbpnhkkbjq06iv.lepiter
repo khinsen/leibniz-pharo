@@ -1,0 +1,298 @@
+{
+	"__schema" : "4.1",
+	"__type" : "page",
+	"children" : {
+		"__type" : "snippets",
+		"items" : [
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T15:56:14.056059+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T15:57:13.782373+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "vTrQb1nKDQCguWHgBnfq3w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Uses\n\t- {{lzUseContext:name = \"One-dimensional arrays\"}}\n\t- {{lzUseContext:name = \"Integers\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T15:59:36.85695+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T15:59:47.212329+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "GbPme1nKDQCjhwG4Bnfq3w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Any array can be flattened into a one-dimensional array containing all its elements:\n\t{{lzOp:flatten(Array) : Array1D(ℕ)}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T16:00:36.973817+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T16:01:44.863934+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "kQB8f1nKDQCkAWAOBnfq3w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "The order of the elements in the flattened version is the one obtained by iterating over the last index in the innermost loop."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T16:01:58.594835+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T16:04:05.657495+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "8HZZhFnKDQCmmpMJBnfq3w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "For one-dimensional arrays, flattening changes nothing:\n\t{{lzRule:s__:𝕊, flatten(a_:Array1D(s__)) ⇒ a_}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T15:56:19.027102+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T16:11:44.856025+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "RBIccFnKDQCgwpuWBnfq3w=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "For literal array terms, flattening is performed in Pharo:\n\t{{lzRule:A_:Array, flatten(A_) ⇒ Pharo:\"A ensureArrayTerm. A flattenedAsArrayTerm\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T16:10:25.284887+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T16:10:26.393059+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "ReqMolnKDQCRFyhFBoDeGQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "###Examples"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T16:10:27.640527+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-02T16:17:12.890996+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "iuKwolnKDQCRIVUcBoDeGQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "\t{{lzTerm:flatten({[]}), withNormalForm = \"yes\"}}\n\t{{lzTerm:flatten({[1, 2, 3]}), withNormalForm = \"yes\"}}\n\t{{lzTerm:flatten({[[1, 2], [3, 4]]}), withNormalForm = \"yes\", subcontext = \"2D\"}} (uses {{lzUseContext:name = \"Two-dimensional arrays\", subcontext = \"2D\"}})\n"
+			}
+		]
+	},
+	"createEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"createTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2024-01-02T15:56:13.998042+01:00"
+		}
+	},
+	"editEmail" : {
+		"__type" : "email",
+		"emailString" : "<unknown>"
+	},
+	"editTime" : {
+		"__type" : "time",
+		"time" : {
+			"__type" : "dateAndTime",
+			"dateAndTimeString" : "2024-01-02T15:56:13.998042+01:00"
+		}
+	},
+	"pageType" : {
+		"__type" : "namedPage",
+		"title" : "Array flattening"
+	},
+	"uid" : {
+		"__type" : "uuid",
+		"uuid" : "0757cf6f-59ca-0d00-a0b8-5dfc0677eadf"
+	}
+}

@@ -599,7 +599,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-04-17T10:57:14.340858+02:00"
+												"dateAndTimeString" : "2024-01-02T15:55:53.58354+01:00"
 											}
 										},
 										"uid" : {
@@ -609,7 +609,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "[[Arrays]], [[One-dimensional arrays]], [[Array size]]"
+										"string" : "[[Arrays]], [[One-dimensional arrays]], [[Array size]], [[Array flattening]]"
 									},
 									{
 										"__type" : "textSnippet",

@@ -134,6 +134,13 @@ LzArrayTerm >> fingerprint [
 	^ #array
 ]
 
+{ #category : #converting }
+LzArrayTerm >> flattenedAsArrayTerm [
+	^ self signature
+		arrayTerm: elements
+		shape: { self shape inject: 1 into: [:total :each | total * each ] }
+]
+
 { #category : #transforming }
 LzArrayTerm >> index: anInteger [
 	self assert: self shape size == 1.
