@@ -62,3 +62,5 @@ main pre {font-family:JuliaMono-Regular;font-size:0.8em}
 .leibniz-example .computed, .leibniz-example i .computed {color:#008000}
 
 .leibniz-subcontext-name {border: 1px solid black;padding:1px;color:#660099;font-size:0.7em}
+
+.leibniz-bad-sort {text-decoration:underline;text-decoration-color:red;text-decoration-style:wavy}
