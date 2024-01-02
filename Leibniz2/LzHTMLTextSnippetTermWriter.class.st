@@ -1,6 +1,9 @@
 Class {
 	#name : #LzHtmlTextSnippetTermWriter,
 	#superclass : #LzHtmlTextSnippetAnnotationWriter,
+	#instVars : [
+		'object'
+	],
 	#category : #'Leibniz2-HTML-Export'
 }
 
@@ -11,11 +14,13 @@ LzHtmlTextSnippetTermWriter >> cssClass [
 
 { #category : #'private - writing' }
 LzHtmlTextSnippetTermWriter >> object [
-	| lzContext |
-	lzContext := (LzGlobalCache uniqueInstance
-					contextCacheFor: self page title)
-					subcontext: self subcontext.
-	^ self declaration declaration objectFor: lzContext
+	object ifNil: [
+		| lzContext |
+		lzContext := (LzGlobalCache uniqueInstance
+						contextCacheFor: self page title)
+						subcontext: self subcontext.
+		object := self declaration declaration objectFor: lzContext ].
+	^ object
 ]
 
 { #category : #'private - writing' }
@@ -30,12 +35,10 @@ LzHtmlTextSnippetTermWriter >> tag [
 
 { #category : #'private - writing' }
 LzHtmlTextSnippetTermWriter >> writeComputedParts [
-	| object |
-	object := self object.
 	(self declaration options
 		at: #withSort ifAbsent: false) ifTrue: [
 		| sort |
-		sort := object term sort.
+		sort := self object term sort.
 		context html
 			 inlineTag: #span
 			 class: 'whiter'
@@ -49,7 +52,7 @@ LzHtmlTextSnippetTermWriter >> writeComputedParts [
 	(self declaration options
 		at: #withNormalForm ifAbsent: false) ifTrue: [
 		| normalForm |
-		normalForm := object normalForm.
+		normalForm := self object normalForm.
 		context html
 			 inlineTag: #span
 			 class: 'computed'
@@ -58,4 +61,15 @@ LzHtmlTextSnippetTermWriter >> writeComputedParts [
 			 	LzHtmlSyntaxPiece new
 					text: normalForm asLeibnizSyntax;
 					writeWithContext: context ] ].
+]
+
+{ #category : #'private - writing' }
+LzHtmlTextSnippetTermWriter >> writeDeclaration [
+	self object sort isKind
+		ifTrue: [
+			context html
+				inlineTag: #u
+				class: 'leibniz-bad-sort'
+				do: [ super writeDeclaration ] ]
+		ifFalse: [ super writeDeclaration ]
 ]
