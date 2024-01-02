@@ -83,19 +83,9 @@ LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelTerm: aLzTopLevelTermNode [
 
 { #category : #'*Leibniz2' }
 LeHtmlTextSnippetAnnotationVisitor >> visitTopLevelUseContext: aLzTopLevelUseContextNode [
-	| writer |
-	writer := LzHtmlTextSnippetUseContextWriter new
+	LzHtmlTextSnippetUseContextWriter new
 		snippet: snippet;
 		context: context;
-		annotation: aLzTopLevelUseContextNode.
-	context pageLinks
-		linkTitled: aLzTopLevelUseContextNode pageName
-						source allButFirst allButLast
-		ifFound: [ :aPageLink | 
-			context html
-				inlineTag: #a
-				attributes: {'href'.
-						self context hrefBuilder hrefFromPageLink: aPageLink}
-				do: [ writer write ]]
-		ifNone: [ writer write ]
+		annotation: aLzTopLevelUseContextNode;
+		write
 ]
