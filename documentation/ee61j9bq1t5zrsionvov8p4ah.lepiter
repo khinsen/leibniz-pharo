@@ -71,7 +71,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-08-16T10:43:43.50566+02:00"
+									"dateAndTimeString" : "2024-01-02T14:11:57.735212+01:00"
 								}
 							},
 							"uid" : {
@@ -81,7 +81,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "*Historical note:* A very similar model was published one month earlier by James Sakoda ([\"The checkerboard model of social interaction\"](https://doi.org/10.1080/0022250X.1971.9989791)), who had already worked on (but not published) similar agent-based models for more than 20 years. Sakoda's model was computationally more sophisticated (implemented in Fortran, with several parameters to adapt to different situations), and also more general. Historian Rainer Hegselmann (see [\"Thomas C. Schelling and James M. Sakoda: The Intellectual, Technical, and Social History of a Model\"](https://doi.org/10.18564/jasss.3511)) comes to the conclusion that it was in fact too sophisticated for its time, when few social scientists had access to computers and the required programming competence, and therefore was quickly forgotten. Schelling's simpler coin-on-paper model caught on, and became famous."
+							"string" : "*Historical note:* A very similar model was published one month earlier by James Sakoda ([\"The checkerboard model of social interaction\"](https://doi.org/10.1080/0022250X.1971.9989791)), who had already worked on (but not published) similar agent-based models for more than 20 years. Sakoda's model was computationally more sophisticated (implemented in Fortran, with several parameters to adapt to different situations), and also more general. Historian Rainer Hegselmann (see [\"Thomas C. Schelling and James M. Sakoda: The Intellectual, Technical, and Social History of a Model\"](https://doi.org/10.18564/jasss.3511)) comes to the conclusion that it was in fact too sophisticated for its time, when few social scientists had programming competence or access to computers, and therefore it was quickly forgotten. Schelling's simpler coin-on-paper model caught on and became famous."
 						}
 					]
 				},
@@ -104,7 +104,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-08-14T15:11:41.819709+02:00"
+						"dateAndTimeString" : "2024-01-02T14:10:45.067613+01:00"
 					}
 				},
 				"uid" : {
@@ -114,7 +114,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "In 1971, Thomas Schelling published a paper entitled [\"Dynamic models of segregation\"](https://doi.org/10.1080/0022250X.1971.9989794) He explored one specific mechanism of racial segregation, by simulating what is often considered to be the first [agent-based model](https://en.wikipedia.org/wiki/Agent-based_model). He performed his simulations manually, using coins he moved around on a piece of paper. The following is a formalization of his model."
+				"string" : "In 1971, Thomas Schelling published a paper entitled [\"Dynamic models of segregation\"](https://doi.org/10.1080/0022250X.1971.9989794) He explored one specific mechanism of racial segregation, by simulating what is often considered to be the first [agent-based model](https://en.wikipedia.org/wiki/Agent-based_model). He performed his simulations manually, using coins he moved around on a piece of paper, and made no effort to define unambiguous rules for them. What follows is one possible formalization of his model."
 			},
 			{
 				"__type" : "textSnippet",
@@ -220,7 +220,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-02T14:21:46.587079+02:00"
+									"dateAndTimeString" : "2024-01-02T14:14:14.896521+01:00"
 								}
 							},
 							"uid" : {
@@ -230,7 +230,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "An agent represents an individual or a family that lives in a specific place in some territory. There are two kinds of agents, black and white. Agents like their neighborhood depending on which fraction of its population is of the same kind. If an agent is not happy in its place, it tries to move to another one."
+							"string" : "An agent represents an individual or a family that lives in a specific place in some territory. There are two kinds of agents, black and white. Agents like their neighborhood depending on which fraction of its population is of the same kind. If an agent is not happy in its place, it tries to move to another one. Simulations of this model show that even a slight preference for living among one's own kind leads to segregation, with large neigborhoods populated uniformly by agents of the same kind."
 						}
 					]
 				},
@@ -295,7 +295,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-04-13T17:16:46.361629+02:00"
+									"dateAndTimeString" : "2024-01-02T15:43:27.154052+01:00"
 								}
 							},
 							"uid" : {
@@ -305,7 +305,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "The territory is defined by a list of {{lzSort:place}}s and a way to compute the distance between two places:\n\t{{lzOp:allPlaces : Array1D(place)}}\n\t{{lzOp:distance(p1:place, p2:place) : ℚ.nn}}"
+							"string" : "The territory is defined by a set of {{lzSort:place}}s and a way to compute the distance between two places:\n\t{{lzOp:distance(p1:place, p2:place) : ℚ.nn}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -406,7 +406,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-04-18T11:05:14.953851+02:00"
+									"dateAndTimeString" : "2024-01-02T14:16:11.528137+01:00"
 								}
 							},
 							"uid" : {
@@ -416,7 +416,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Schelling moved his coins only along the rows and columns, like a rook in chess. The distance between two cells is thus:\n\t{{lzRule:x1_:ℤ, x2_:ℤ, y1_:ℤ, y2_:ℤ, distance(cell(x1_, y1_), cell(x2_, y2_)) ⇒ abs(x1_ - x2_) + abs(y1_ - y2_)}}\nwith the absolute value {{lzOp:abs(ℤ) : ℕ}} defined by\n\t{{lzRule:n_:ℕ, abs(n_) ⇒ n_}}\n\t{{lzRule:z_:ℤ, abs(z_) ⇒ -(z_) | z_ < 0}}"
+							"string" : "Schelling moved his coins only along the rows and columns, like a rook in chess. The distance between two cells, defined as the minimum number of moves to get from one to the other, is thus:\n\t{{lzRule:x1_:ℤ, x2_:ℤ, y1_:ℤ, y2_:ℤ, distance(cell(x1_, y1_), cell(x2_, y2_)) ⇒ abs(x1_ - x2_) + abs(y1_ - y2_)}}\nwith the absolute value {{lzOp:abs(ℤ) : ℕ}} defined by\n\t{{lzRule:n_:ℕ, abs(n_) ⇒ n_}}\n\t{{lzRule:z_:ℤ, abs(z_) ⇒ -(z_) | z_ < 0}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -1301,7 +1301,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-15T16:37:32.112155+02:00"
+									"dateAndTimeString" : "2024-01-02T14:27:07.918868+01:00"
 								}
 							},
 							"uid" : {
@@ -1311,7 +1311,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "If there is a happy agent at the place, nothing changes either:\n\t{{lzRule:move[2]:move(a_:agent, p_:place, s_:state) ⇒ s_ | isHappy(a_, p_, s_)}}"
+							"string" : "If the place is occupied by agent that is happy there, nothing changes either:\n\t{{lzRule:move[2]:move(a_:agent, p_:place, s_:state) ⇒ s_ | isHappy(a_, p_, s_)}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -1338,7 +1338,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-11T15:07:48.511758+02:00"
+									"dateAndTimeString" : "2024-01-02T14:29:35.879354+01:00"
 								}
 							},
 							"uid" : {
@@ -1348,7 +1348,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Otherwise, the place is occupied by an unhappy agent, who tries to move to the nearest empty place that offers happiness. The move is equivalent to an exchange of the occupations of the two places:\n{{lzRule:move[3]:move(a_:agent, p_:place, s_:state) ⇒ exchange(p_, nearestEmptyHappiness(a_, p_, s_), s_)}}\nwith\n\t{{lzOp:exchange(place, place, state) : state}}\nand\n\t{{lzOp:nearestEmptyHappiness(agent, place, state) : place}}."
+							"string" : "Otherwise, the place is occupied by an unhappy agent, who tries to move to the nearest empty place that offers happiness. Such a move is equivalent to an exchange of the occupations of the two places:\n{{lzRule:move[3]:move(a_:agent, p_:place, s_:state) ⇒ exchange(p_, nearestEmptyHappyPlace(a_, p_, s_), s_)}}\nwith\n\t{{lzOp:exchange(place, place, state) : state}}\nand\n\t{{lzOp:nearestEmptyHappyPlace(agent, place, state) : place}}."
 						},
 						{
 							"__type" : "textSnippet",
@@ -1614,7 +1614,82 @@
 							"__type" : "textSnippet",
 							"children" : {
 								"__type" : "snippets",
-								"items" : [ ]
+								"items" : [
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2024-01-02T15:27:15.547405+01:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2024-01-02T15:28:49.379903+01:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "h60wCFnKDQCSd33UBnfq3w=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "Schelling writes: \"The rule of movement, then, is that an individual discontent with his own neighborhood moves to the nearest vacant spot that surrounds him with a neighborhood that meets his demands.\" (page 154/155)"
+									},
+									{
+										"__type" : "textSnippet",
+										"children" : {
+											"__type" : "snippets",
+											"items" : [ ]
+										},
+										"createEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"createTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2024-01-02T15:28:56.38498+01:00"
+											}
+										},
+										"editEmail" : {
+											"__type" : "email",
+											"emailString" : "<unknown>"
+										},
+										"editTime" : {
+											"__type" : "time",
+											"time" : {
+												"__type" : "dateAndTime",
+												"dateAndTimeString" : "2024-01-02T15:39:45.98694+01:00"
+											}
+										},
+										"uid" : {
+											"__type" : "uid",
+											"uidString" : "PFYzDlnKDQCTpZH7Bnfq3w=="
+										},
+										"paragraphStyle" : {
+											"__type" : "textStyle"
+										},
+										"string" : "This leaves two cases that need to be addressed:\n 1. There is no suitable destination at all.\n 2. There are several equally near places that satisfy the agent's criteria."
+									}
+								]
 							},
 							"createEmail" : {
 								"__type" : "email",
