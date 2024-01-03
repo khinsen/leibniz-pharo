@@ -8,7 +8,7 @@ Class {
 LzSnippetTerm class >> firstSnippetStartingWith: text page: pageName [
 	| page snippet |
 	[
-		page := pageName value asLzPage.
+		page := LzBook pageNamed: pageName value.
 		snippet := page allChildrenTextSnippets
 			detect: [ :each | each text asString beginsWith: text value ]
 	]

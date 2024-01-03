@@ -63,6 +63,11 @@ LzHtmlTextSnippetAnnotationWriter >> isExample [
 ]
 
 { #category : #accessing }
+LzHtmlTextSnippetAnnotationWriter >> page [
+	^ self snippet page
+]
+
+{ #category : #accessing }
 LzHtmlTextSnippetAnnotationWriter >> snippet [
 	^ snippet
 ]

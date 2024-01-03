@@ -246,9 +246,8 @@ LzTermInContext >> rewriteCache [
 ]
 
 { #category : #accessing }
-LzTermInContext >> rewriteCache: anObject [
-
-	rewriteCache := anObject
+LzTermInContext >> rewriteCache: anLzRewriteCache [
+	rewriteCache := anLzRewriteCache
 ]
 
 { #category : #accessing }

@@ -7,35 +7,38 @@ LePage >> asLzPage [
 
 { #category : #'*Leibniz2' }
 LePage >> lzContext [
-	^ (LzGlobalCache uniqueInstance
+	^ (self lzDBCache
 		contextCacheFor: self) pageContext
 ]
 
 { #category : #'*Leibniz2' }
 LePage >> lzContextFor: anAction [
 	<gtAction>
-	self database = LzBook database ifFalse: [ ^ anAction noAction ].
 	^ anAction button
 		tooltip: 'Inspect the page''s contexts';
 		priority: 1;
 		icon: BrGlamorousIcons fromhere;
 		action: [ :aButton |
 			aButton phlow spawnObject:
-				(LzGlobalCache uniqueInstance
+				(self lzDBCache
 					contextCacheFor: self) ]
+]
+
+{ #category : #'*Leibniz2' }
+LePage >> lzDBCache [
+	^ self database lzDBCache
 ]
 
 { #category : #'*Leibniz2' }
 LePage >> lzDeclarationsFor: anAction [
 	<gtAction>
-	self database = LzBook database ifFalse: [ ^ anAction noAction ].
 	^ anAction button
 		tooltip: 'Inspect the page''s declarations';
 		priority: 2;
 		icon: BrGlamorousIcons debug;
 		action: [ :aButton |
 			aButton phlow spawnObject:
-				(LzGlobalCache uniqueInstance
+				(self lzDBCache
 					declarationCacheFor:  self) ]
 ]
 
@@ -45,10 +48,10 @@ LePage >> lzDependenciesFor: aView [
 	^ aView list
 		title: 'Dependencies';
 		priority: 6;
-		items: [ (LzGlobalCache uniqueInstance
+		items: [ (self lzDBCache
 					recursiveDependenciesOf: self title)
 					asArray ];
-		send: [ :each | LzBook pageNamed: each ];
+		send: [ :each | self database pageNamed: each ];
 		yourself
 ]
 
@@ -64,9 +67,8 @@ LePage >> lzDependencyGraphFor: aView [
 { #category : #'*Leibniz2' }
 LePage >> lzDependencyMondrian [
 	| aMondrian nodesAndEdges nodes edges findPage |
-	nodesAndEdges := (LzGlobalCache uniqueInstance
-							dependenceGraphOf: self title).
-	findPage := [ :title | LzBook pageNamed: title ].
+	nodesAndEdges := (self lzDBCache dependenceGraphOf: self title).
+	findPage := [ :title | self database pageNamed: title ].
 	nodes := nodesAndEdges first collect: [ :each |
 		findPage value: each ].
 	edges := nodesAndEdges second collect: [ :each |
@@ -98,10 +100,10 @@ LePage >> lzDependentsFor: aView [
 	^ aView list
 		title: 'Dependents';
 		priority: 5;
-		items: [ (LzGlobalCache uniqueInstance
+		items: [ (self lzDBCache
 					recursiveDependentsOf: self title)
 					asArray ];
-		send: [ :each | LzBook pageNamed: each ];
+		send: [ :each | self database pageNamed: each ];
 		yourself
 ]
 
@@ -126,7 +128,7 @@ LePage >> lzHTMLLocalExportActionFor: anAction [
 
 { #category : #'*Leibniz2' }
 LePage >> lzSubcontext: aSubcontextName [
-	^ (LzGlobalCache uniqueInstance
+	^ (self lzDBCache
 		contextCacheFor: self) subcontext: aSubcontextName
 ]
 

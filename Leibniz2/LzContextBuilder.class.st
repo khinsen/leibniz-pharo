@@ -5,7 +5,8 @@ Class {
 		'sortGraphBuilder',
 		'signatureBuilder',
 		'axiomDeclarations',
-		'rewriteSystemBuilder'
+		'rewriteSystemBuilder',
+		'database'
 	],
 	#category : #'Leibniz2-Contexts'
 }
@@ -27,7 +28,7 @@ LzContextBuilder >> addDeclaration: anAnnotatedDeclaration [
 	(declaration isKindOf: LzUseContextDeclaration)
 		ifTrue: [
 			| context |
-			context := (LzGlobalCache uniqueInstance
+			context := (self database lzDBCache
 							contextCacheFor: declaration contextName)
 						subcontext: declaration subcontext.
 			(anAnnotatedDeclaration optionsAt: #forSorts)
@@ -63,7 +64,7 @@ LzContextBuilder >> addDeclarationsFromPageNamed: pageName [
 { #category : #lepiter }
 LzContextBuilder >> addDeclarationsFromPageNamed: pageName subcontext: aString [
 	self
-		addDeclarationsFrom: (LzBook pageNamed: pageName)
+		addDeclarationsFrom: (self database pageNamed: pageName)
 		subcontext: aString
 ]
 
@@ -103,6 +104,16 @@ LzContextBuilder >> context [
 		collectAssets;
 		beRecursivelyReadOnlyObject;
 		yourself
+]
+
+{ #category : #lepiter }
+LzContextBuilder >> database [
+	^ database
+]
+
+{ #category : #constructing }
+LzContextBuilder >> database: anLeDatabase [
+	database := anLeDatabase 
 ]
 
 { #category : #inspecting }

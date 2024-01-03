@@ -13,7 +13,7 @@ Class {
 
 { #category : #updating }
 LzAutoUpdatingSyntaxLabel >> context [
-	^ (LzGlobalCache uniqueInstance
+	^ (self page lzDBCache
 		contextCacheFor: self page title)
 		subcontext: self subcontext
 ]
@@ -110,7 +110,7 @@ LzAutoUpdatingSyntaxLabel >> subcontext: anObject [
 
 { #category : #'event handling' }
 LzAutoUpdatingSyntaxLabel >> subscribeToContextEvents [
-	(LzGlobalCache uniqueInstance
+	(self page lzDBCache
 		contextCacheFor: self page title) weak
 			when: LzPageContextChanged
 			send: #onContextChanged: to: self

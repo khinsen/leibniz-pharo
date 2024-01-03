@@ -16,7 +16,7 @@ LzHtmlTextSnippetTermWriter >> cssClass [
 LzHtmlTextSnippetTermWriter >> object [
 	object ifNil: [
 		| lzContext |
-		lzContext := (LzGlobalCache uniqueInstance
+		lzContext := (self page lzDBCache
 						contextCacheFor: self page title)
 						subcontext: self subcontext.
 		object := self declaration declaration objectFor: lzContext ].

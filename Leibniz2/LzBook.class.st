@@ -30,6 +30,11 @@ LzBook class >> databaseName [
 ]
 
 { #category : #accessing }
+LzBook class >> dbCache [
+	^ self database lzDBCache
+]
+
+{ #category : #accessing }
 LzBook class >> exportHtml [
 	| book mainPage targetDirName targetDir aBookExporter |
 	book := self database.

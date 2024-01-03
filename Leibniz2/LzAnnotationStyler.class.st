@@ -144,7 +144,7 @@ LzAnnotationStyler >> styleExpandingObject: aTerm in: anAnnotation [
 
 { #category : #accessing }
 LzAnnotationStyler >> subcontext: aString [
-	^ (LzGlobalCache uniqueInstance
+	^ (self page lzDBCache
 			contextCacheFor: self page title)
 		subcontext: aString
 ]
@@ -306,7 +306,7 @@ LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
 	annotation := LzDeclarationBuilder new acceptNode: aTopLevelUseContext.
 	declaration := annotation declaration.
 	pageReference := declaration contextName.
-	(LzBook hasPageNamed: pageReference)
+	(self page database hasPageNamed: pageReference)
 		ifFalse: [
 			self text
 				attribute: (BlTextForegroundAttribute paint: Color red)

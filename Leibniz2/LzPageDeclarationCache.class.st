@@ -41,7 +41,8 @@ LzPageDeclarationCache >> contextBuilder [
 { #category : #constructing }
 LzPageDeclarationCache >> contextBuilderFor: aSubcontextName [
 	| builder |
-	builder :=  LzContextBuilder new.
+	builder :=  LzContextBuilder new
+					database: self page database.
 	(self declarationsFor: aSubcontextName) do: [ :each |
 		builder addDeclaration: each ].
 	^ builder
@@ -79,7 +80,7 @@ LzPageDeclarationCache >> gtContextsUsedFor: aView [
 		priority: 2;
 		items: [ self useContextDeclarations collect: [ :each |
 					each declaration contextName ] ];
-		send: [ :each | LzBook pageNamed: each ];
+		send: [ :each | self page database pageNamed: each ];
 		updateWhen: LzPageDeclarationsChanged in: self announcer;
 		actionUpdateButton;
 		yourself

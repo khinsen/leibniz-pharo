@@ -13,9 +13,9 @@ LzLepiterExamples >> allContexts [
 	pages := LzBook database pages.
 	^ pages
 		reject: [ :each |
-			(LzGlobalCache uniqueInstance declarationCacheFor:  each) isEmpty ]
+			(each lzDBCache declarationCacheFor:  each) isEmpty ]
 		thenCollect: [ :each |
-			each title -> (LzGlobalCache uniqueInstance contextFor: each) ]
+			each title -> (each lzDBCache contextFor: each) ]
 ]
 
 { #category : #accessing }
@@ -24,13 +24,13 @@ LzLepiterExamples >> allSubcontexts [
 	| pages |
 	pages := LzBook database pages collect: [ :each |
 		each title ->
-			((LzGlobalCache uniqueInstance
-				declarationCacheFor:  each) subcontexts) ].
+			((each lzDBCache declarationCacheFor:  each)
+				subcontexts) ].
 	^ (pages reject: [ :each | each value isEmpty ]
 		thenCollect: [ :eachPage |
 			eachPage value collect: [ :eachSubcontext |
 				(eachPage key, '/', eachSubcontext) ->
-					(LzGlobalCache uniqueInstance
+					(eachPage lzDBCache
 						subcontext: eachSubcontext for: eachPage key) ]])
 			flatten
 ]
@@ -39,7 +39,7 @@ LzLepiterExamples >> allSubcontexts [
 LzLepiterExamples >> arrayIndexing [
 	<gtExample>
 	| context |
-	context := LzGlobalCache uniqueInstance
+	context := LzBook dbCache
 				contextFor: 'One-dimensional array slicing'.
 	^ {
 		{ '{[ 1, 2, 3 ]}[2]'. '2' }.
@@ -59,7 +59,7 @@ LzLepiterExamples >> arrayIndexing [
 LzLepiterExamples >> booleanUnifications [
 	<gtExample>
 	| c |
-	c := LzGlobalCache uniqueInstance
+	c := LzBook dbCache
 			contextFor: 'Boolean algebra'.
 	^ {
 		{'⊤'. '∀ X_:𝔹 X_'. '(X_=⊤)'}.
@@ -84,7 +84,7 @@ LzLepiterExamples >> booleanUnifications [
 LzLepiterExamples >> contravariantSortArguments [
 	<gtExample>
 	| context |
-	context := LzGlobalCache uniqueInstance
+	context := LzBook dbCache
 				subcontext: 'contravariance'
 				for: 'Functions'.
 	self
@@ -102,11 +102,12 @@ LzLepiterExamples >> equalityTerms [
 	<gtExample>
 	| context |
 	context := LzContextBuilder new
-				include: (LzGlobalCache uniqueInstance
+				database: LzBook database;
+				include: (LzBook dbCache
 							contextFor: 'Term equality');
-				include: (LzGlobalCache uniqueInstance
+				include: (LzBook dbCache
 							contextFor: 'One-dimensional arrays');
-				include: (LzGlobalCache uniqueInstance
+				include: (LzBook dbCache
 							contextFor: 'Integers');
 				context.
 	self assert: (context term: '1 == ⊤') hasSort not.
@@ -129,7 +130,7 @@ LzLepiterExamples >> equalityTerms [
 LzLepiterExamples >> fibonacciSeries [
 	<gtExample>
 	| context cache |
-	context := LzGlobalCache uniqueInstance
+	context := LzBook dbCache
 				subcontext: 'fibonacci' for: 'Solving recurrence equations'.
 	cache := LzGlobalCache uniqueInstance
 				rewriteCacheFor: context.
@@ -153,7 +154,7 @@ LzLepiterExamples >> fibonacciSeries [
 LzLepiterExamples >> integerArithmetic [
 	<gtExample>
 	| context cache |
-	context := LzGlobalCache uniqueInstance
+	context := LzBook dbCache
 				contextFor: 'Integers'.
 	cache := LzGlobalCache uniqueInstance
 				rewriteCacheFor: context.
@@ -183,7 +184,7 @@ LzLepiterExamples >> integerArithmetic [
 LzLepiterExamples >> integerTerms [
 	<gtExample>
 	| context |
-	context := LzGlobalCache uniqueInstance
+	context := LzBook dbCache
 				contextFor: 'Integers'.
 ^ {
 		{ '0'. 'zero'. }.
@@ -203,7 +204,7 @@ LzLepiterExamples >> integerTerms [
 LzLepiterExamples >> rationalArithmetic [
 	<gtExample>
 	| context cache |
-	context := LzGlobalCache uniqueInstance
+	context := LzBook dbCache
 				contextFor: 'Rational numbers'.
 	cache := LzGlobalCache uniqueInstance
 				rewriteCacheFor: context.
@@ -231,7 +232,7 @@ LzLepiterExamples >> rationalArithmetic [
 LzLepiterExamples >> rationalNumberTerms [
 	<gtExample>
 	| context |
-	context := LzGlobalCache uniqueInstance
+	context := LzBook dbCache
 				contextFor: 'Rational numbers'.
 	^ {
 		{ '0'. 'zero'. }.
@@ -257,7 +258,7 @@ LzLepiterExamples >> rationalNumberTerms [
 LzLepiterExamples >> stringOperations [
 	<gtExample>
 	| context |
-	context := LzGlobalCache uniqueInstance
+	context := LzBook dbCache
 				contextFor: 'Character strings'.
 	^ {
 		{ '"" + ""'. '""' }.
@@ -276,7 +277,7 @@ LzLepiterExamples >> stringOperations [
 LzLepiterExamples >> stringTerms [
 	<gtExample>
 	| context |
-	context := LzGlobalCache uniqueInstance
+	context := LzBook dbCache
 				contextFor: 'Character strings'.
 	^ {
 		{ '""'. 'String'. }.
