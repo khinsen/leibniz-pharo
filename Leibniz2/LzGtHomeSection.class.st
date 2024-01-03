@@ -11,6 +11,11 @@ LzGtHomeSection >> create [
 	sectionContainer addChild: (self newSectionTitle: 'Leibniz').
 	cardContainer := self newCardsContainer.
 	cardContainer addChild: self documentationCard.
+	self class methods
+		select: [ :each | each protocol beginsWith: '*' ]
+		thenDo: [ :each |
+			cardContainer
+				addChild: (self perform: each selector) ].
 	sectionContainer addChild: cardContainer.
 	^ sectionContainer
 ]
