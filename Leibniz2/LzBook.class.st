@@ -36,48 +36,16 @@ LzBook class >> dbCache [
 
 { #category : #accessing }
 LzBook class >> exportHtml [
-	| book mainPage targetDirName targetDir aBookExporter |
-	book := self database.
-	mainPage := book pageNamed: 'Leibniz book'.
-	targetDirName := 'leibniz-book-export'.
-	targetDir := targetDirName asFileReference.
-	targetDir ensureDeleteAll.
-	targetDir ensureCreateDirectory.
-	aBookExporter := LeHtmlBookExporter new
-	        database: book;
-	        mainPage: mainPage;
-	        piece: (LeHtmlGtBookPiece fromFile: self htmlTemplateLocation);
-	        integerSequencer;
-	        addAssetResourcesFrom: self htmlAssetLocation;
-	        export;
-	        saveToRootDirectory: targetDir.
-	^ targetDir
+	^ LzHtmlExporter new
+		database: self database;
+		targetDirectoryName: 'leibniz-book-export';
+		mainPage: 'Leibniz book';
+		export
 ]
 
 { #category : #testing }
 LzBook class >> hasPageNamed: aString [
 	^ self database hasPageNamed: aString
-]
-
-{ #category : #accessing }
-LzBook class >> htmlAssetLocation [
-	^ FileLocator imageDirectory
-		/ 'pharo-local' / 'iceberg'
-		/ 'khinsen' / 'leibniz-pharo' / 'html' / 'assets'
-]
-
-{ #category : #accessing }
-LzBook class >> htmlSinglePageTemplateLocation [
-	^ FileLocator imageDirectory
-		/ 'pharo-local' / 'iceberg'
-		/ 'khinsen' / 'leibniz-pharo' / 'html' / 'single-page-template.html'
-]
-
-{ #category : #accessing }
-LzBook class >> htmlTemplateLocation [
-	^ FileLocator imageDirectory
-		/ 'pharo-local' / 'iceberg'
-		/ 'khinsen' / 'leibniz-pharo' / 'html' / 'page-template.html'
 ]
 
 { #category : #accessing }
