@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'database',
-		'targetDirectoryName',
+		'targetDirectory',
 		'mainPage'
 	],
 	#category : #'Leibniz2-Lepiter'
@@ -22,7 +22,7 @@ LzHtmlExporter >> database: anObject [
 { #category : #accessing }
 LzHtmlExporter >> export [
 	| targetDir |
-	targetDir := self targetDirectoryName asFileReference.
+	targetDir := self targetDirectory.
 	targetDir ensureDeleteAll.
 	targetDir ensureCreateDirectory.
 	LeHtmlBookExporter new
@@ -68,11 +68,16 @@ LzHtmlExporter >> mainPage: anObject [
 ]
 
 { #category : #accessing }
-LzHtmlExporter >> targetDirectoryName [
-	^ targetDirectoryName
+LzHtmlExporter >> targetDirectory [
+	^ targetDirectory
+]
+
+{ #category : #accessing }
+LzHtmlExporter >> targetDirectory: anObject [
+	targetDirectory := anObject
 ]
 
 { #category : #accessing }
 LzHtmlExporter >> targetDirectoryName: aString [
-	targetDirectoryName := aString
+	self targetDirectory: aString asFileReference
 ]
