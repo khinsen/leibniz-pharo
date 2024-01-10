@@ -32,7 +32,7 @@ LzOperator >> addArity: newArity sort: newSort [
 		a = newArity ifTrue: [
 			self
 				assert: s = newSort
-				description: 'conflicting earlier operator definition with sort ', s asString.
+				description: 'conflicting earlier operator definition with sort ', s asLeibnizSyntaxString.
 			^ self ].
 
 		(newArity <= a) ifTrue: [

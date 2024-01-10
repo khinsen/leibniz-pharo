@@ -331,7 +331,7 @@ LzAnnotationStyler >> visitTopLevelUseContext: aTopLevelUseContext [
 			(self inTextButton: label)
 				action: [ :aButton |
 					aButton phlow spawnTool:
-						(LzBook pageNamed: pageReference)
+						(self page database pageNamed: pageReference)
 							asPhlowTool ];
 				yourself ].
 
