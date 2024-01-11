@@ -4,10 +4,21 @@ Class {
 	#instVars : [
 		'rules',
 		'term',
-		'rewriteSystem'
+		'rewriteSystem',
+		'context'
 	],
 	#category : #'Leibniz2-Rules'
 }
+
+{ #category : #accessing }
+LzMatchingRules >> context [
+	^ context
+]
+
+{ #category : #accessing }
+LzMatchingRules >> context: anObject [
+	context := anObject
+]
 
 { #category : #inspecting }
 LzMatchingRules >> gtRulesFor: aView [
@@ -42,6 +53,7 @@ LzMatchingRules >> gtRulesFor: aView [
 			width: 400;
 		send: [ :each |
 			LzRuleMatcher new
+				context: self context;
 				rule: each first;
 				term: self term ];
 		yourself.

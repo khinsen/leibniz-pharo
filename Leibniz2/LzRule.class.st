@@ -153,7 +153,7 @@ LzRule >> sortsBefore: otherRule [
 { #category : #rewriting }
 LzRule >> testConditionForSubstitution: bindings reducer: aBlock [
 	self condition ifNil: [ ^ true ].
-	[ ^ (aBlock value: (self condition substitute: bindings)) isBooleanTrue ]
+	[ ^ (aBlock value: (self condition substitute: bindings)) asBooleanValue = true ]
 	on: LzRewriteFailure do: [ ^ false ]
 ]
 

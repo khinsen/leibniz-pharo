@@ -31,6 +31,19 @@ LzOpTerm >> args: anArray [
 	args := anArray
 ]
 
+{ #category : #converting }
+LzOpTerm >> asBooleanValue [
+	| opSymbol |
+	self sort isBooleanSort ifFalse: [ ^ nil ].
+	self args isEmpty ifFalse: [ ^ nil ].
+	opSymbol := self opName asSymbol.
+	(opSymbol = (LzConstants opNameTrue))
+		ifTrue: [ ^ true ].
+	(opSymbol = (LzConstants opNameFalse))
+		ifTrue: [ ^ false ].
+	^ nil
+]
+
 { #category : #egraphs }
 LzOpTerm >> asENodeIn: anEGraph [
 	| nArgs node |
@@ -96,13 +109,6 @@ LzOpTerm >> hasVars [
 		detect: #hasVars
 		ifFound: [ true ]
 		ifNone: [ false ]
-]
-
-{ #category : #testing }
-LzOpTerm >> isBooleanTrue [
-	^ self sort isBooleanSort
-		and: [ self args isEmpty
-			and: [ self opName asSymbol = LzConstants opNameTrue ] ]
 ]
 
 { #category : #testing }

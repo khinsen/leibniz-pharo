@@ -127,6 +127,13 @@ LzTerm >> hasVars [
 	^ false
 ]
 
+{ #category : #converting }
+LzTerm >> inContext: anLzContext [
+	^ anLzContext
+		ifNil: [ self ]
+		ifNotNil: [ :c | LzTermInContext term: self context: c ]
+]
+
 { #category : #testing }
 LzTerm >> isInfix [
 	^ false

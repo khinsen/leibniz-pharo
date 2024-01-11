@@ -251,10 +251,13 @@ LzContext >> rule: aString [
 
 { #category : #rewriting }
 LzContext >> rulesMatching: aTermOrString [
-	^ self rewriteSystem rulesMatching:
-		(aTermOrString isString
-			ifTrue: [ self term: aTermOrString ]
-			ifFalse: [ aTermOrString ])
+	| matchingRules |
+	matchingRules := self rewriteSystem rulesMatching:
+						(aTermOrString isString
+							ifTrue: [ self term: aTermOrString ]
+							ifFalse: [ aTermOrString ]).
+	matchingRules context: self.
+	^ matchingRules
 ]
 
 { #category : #accessing }
