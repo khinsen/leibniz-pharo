@@ -281,7 +281,10 @@ LzArrayTerm >> select: maskArray [
 	self assert: self shape equals: maskArray shape.
 	selectedElements := OrderedCollection new.
 	elements with: maskArray elements do: [ :anElement :aBoolean |
-		aBoolean isBooleanTrue ifTrue: [ selectedElements add: anElement ] ].
+		| bValue |
+		bValue := aBoolean asBooleanValue.
+		bValue ifNil: [ LzRewriteFailure signal: 'mask element ', aBoolean asLeibnizSyntaxString, ' not a boolean literal' ].
+		bValue ifTrue: [ selectedElements add: anElement ] ].
 	^ self signature
 		arrayTerm: selectedElements asArray
 		shape: { selectedElements size }
