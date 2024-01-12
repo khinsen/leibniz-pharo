@@ -13,7 +13,7 @@ LzRandomTerms class >> signature: anLzSignature [
 		signature: anLzSignature
 ]
 
-{ #category : #accessing }
+{ #category : #operating }
 LzRandomTerms >> integerBetween: min and: max seed: seed [
 	| generator integer nextSeed |
 	generator := LzRandom new seed: seed value.
@@ -31,19 +31,21 @@ LzRandomTerms >> integerBetween: min and: max seed: seed [
 		args: { integer . nextSeed }
 ]
 
-{ #category : #accessing }
-LzRandomTerms >> positiveIntegers: count max: max [
-	| countV maxV values randomArray |
-	countV := count value.
-	maxV := max value.
-	values := self next: countV transformedBy: [ :each | each ].
-	randomArray := self signature
-		arrayTerm: (values collect: [ :each |
-			LzIntegerTerm signature: self signature value: each ])
-		shape: { countV }.
+{ #category : #operating }
+LzRandomTerms >> randomChoiceWithFraction: fraction seed: seed [
+	| generator boolean nextSeed |
+	generator := LzRandom new seed: seed value.
+	boolean := LzBooleanTerm
+					signature: self signature
+					value: (generator nextTransformedBy:
+								(generator
+									randomChoiceWithFraction: fraction value)).
+	nextSeed := LzIntegerTerm
+					signature: self signature
+					value: generator seed.
 	^ self signature
 		opTerm: LzTupleOpName new
-		args: { randomArray. LzIntegerTerm signature: self signature value: self seed }
+		args: { boolean . nextSeed }
 ]
 
 { #category : #accessing }

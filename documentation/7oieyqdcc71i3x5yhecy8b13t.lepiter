@@ -1156,7 +1156,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-04T16:54:17.15293+02:00"
+									"dateAndTimeString" : "2024-01-12T13:44:58.363148+01:00"
 								}
 							},
 							"uid" : {
@@ -1166,7 +1166,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "[[Pseudo-randomness]],  [[Random integers]]"
+							"string" : "[[Pseudo-randomness]],  [[Random integers]], [[Random binary choice]]"
 						}
 					]
 				},

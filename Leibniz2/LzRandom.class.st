@@ -79,6 +79,15 @@ LzRandom >> printOn: aStream [
 	aStream << $)
 ]
 
+{ #category : #operating }
+LzRandom >> randomChoiceWithFraction: aRational [
+	| threshold |
+	self assert: aRational >= 0.
+	self assert: aRational <= 1.
+	threshold := (2 ** 64) * aRational.
+	^ [ :x | x < threshold ]
+]
+
 { #category : #private }
 LzRandom >> rotl: x by: k [
 	^ ((x << k) | (x >> (64 - k)))

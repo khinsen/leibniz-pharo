@@ -26,6 +26,22 @@ LzRandomExamples >> generatorFromSmallIntegerSeed [
 ]
 
 { #category : #example }
+LzRandomExamples >> randomChoices [
+	<gtExample>
+	| generator booleans transformer trueCount |
+	generator := self generatorFromSmallIntegerSeed.
+	transformer := generator randomChoiceWithFraction: 1/3.
+	booleans := generator next: 1000 transformedBy: transformer.
+	self assert: booleans size equals: 1000.
+	booleans do: [ :each |
+		self assert: ({ true . false } includes: each) ].
+	trueCount := (booleans select: [ :each | each ]) size.
+	self assert: (trueCount < 350).
+	self assert: (trueCount > 300).
+	^ booleans
+]
+
+{ #category : #example }
 LzRandomExamples >> randomIntegers [
 	<gtExample>
 	| generator integers transformer |
