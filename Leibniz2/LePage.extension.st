@@ -6,6 +6,11 @@ LePage >> asLzPage [
 ]
 
 { #category : #'*Leibniz2' }
+LePage >> importLeibnizBookPageNamed: aString [
+	self database importLeibnizBookPageNamed: aString
+]
+
+{ #category : #'*Leibniz2' }
 LePage >> lzContext [
 	^ (self lzDBCache
 		contextCacheFor: self) pageContext
