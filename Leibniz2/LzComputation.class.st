@@ -5,7 +5,8 @@ Class {
 		'internalVars',
 		'steps',
 		'resultTerm',
-		'context'
+		'context',
+		'bindings'
 	],
 	#category : #'Leibniz2-Computations'
 }
@@ -24,6 +25,11 @@ LzComputation >> addStep: aTermString pattern: aPatternString [
 ]
 
 { #category : #accessing }
+LzComputation >> bindings [
+	^ bindings
+]
+
+{ #category : #accessing }
 LzComputation >> context [
 	^ context
 ]
@@ -31,6 +37,32 @@ LzComputation >> context [
 { #category : #accessing }
 LzComputation >> context: anObject [
 	context := anObject
+]
+
+{ #category : #inspecting }
+LzComputation >> gtBindingsFor: aView [
+	<gtView>
+	self bindings ifNil: [ ^ aView empty ].
+	self bindings bindings ifEmpty: [ ^ aView empty ].
+	^ aView forward
+		title: 'Bindings';
+		priority: 4;
+		object: [ self bindings ];
+		view: #gtBindingsFor:;
+		yourself
+]
+
+{ #category : #accessing }
+LzComputation >> gtFailureFor: aView [
+	<gtView>
+	self bindings ifNil: [ ^ aView empty ].
+	self bindings ifSuccess: [ ^ aView empty ].
+	^ aView forward
+		title: 'Failure';
+		priority: 5;
+		object: [ self bindings ];
+		view: #gtFailureFor:;
+		yourself
 ]
 
 { #category : #inspecting }
@@ -69,6 +101,22 @@ LzComputation >> parseAsTerm: aTermString [
 { #category : #accessing }
 LzComputation >> resultTerm: aTermString [
 	resultTerm := self parseAsTerm: aTermString
+]
+
+{ #category : #operating }
+LzComputation >> run [
+	bindings := LzBindings new
+					sortGraph: self signature sortGraph.
+	steps do: [ :eachStep |
+		| result |
+		result := self runStep: eachStep first.
+		eachStep second match: result bindings: bindings ].
+	^ context reduce: (resultTerm substitute: bindings)
+]
+
+{ #category : #operating }
+LzComputation >> runStep: anLzTerm [
+	self subclassResponsibility 
 ]
 
 { #category : #accessing }

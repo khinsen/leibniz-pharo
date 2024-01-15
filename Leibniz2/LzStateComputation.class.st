@@ -2,44 +2,12 @@ Class {
 	#name : #LzStateComputation,
 	#superclass : #LzComputation,
 	#instVars : [
-		'state',
-		'bindings'
+		'state'
 	],
 	#category : #'Leibniz2-Computations'
 }
 
-{ #category : #accessing }
-LzStateComputation >> bindings [
-	^ bindings
-]
-
-{ #category : #inspecting }
-LzStateComputation >> gtBindingsFor: aView [
-	<gtView>
-	self bindings ifNil: [ ^ aView empty ].
-	self bindings bindings ifEmpty: [ ^ aView empty ].
-	^ aView forward
-		title: 'Bindings';
-		priority: 4;
-		object: [ self bindings ];
-		view: #gtBindingsFor:;
-		yourself
-]
-
-{ #category : #accessing }
-LzStateComputation >> gtFailureFor: aView [
-	<gtView>
-	self bindings ifNil: [ ^ aView empty ].
-	self bindings ifSuccess: [ ^ aView empty ].
-	^ aView forward
-		title: 'Failure';
-		priority: 5;
-		object: [ self bindings ];
-		view: #gtFailureFor:;
-		yourself
-]
-
-{ #category : #accessing }
+{ #category : #operating }
 LzStateComputation >> runStep: aStepTerm [
 	 | fnTerm reduced |
 	fnTerm := self signature
@@ -53,16 +21,10 @@ LzStateComputation >> runStep: aStepTerm [
 	^ reduced args first
 ]
 
-{ #category : #accessing }
+{ #category : #operating }
 LzStateComputation >> runWithState: aString [
 	self state: (self context reduce: (self parseAsTerm: aString)).
-	bindings := LzBindings new
-					sortGraph: self signature sortGraph.
-	steps do: [ :eachStep |
-		| result |
-		result := self runStep: eachStep first.
-		eachStep second match: result bindings: bindings ].
-	^ context reduce: (resultTerm substitute: bindings)
+	^ self run
 ]
 
 { #category : #accessing }
