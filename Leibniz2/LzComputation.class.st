@@ -11,14 +11,16 @@ Class {
 }
 
 { #category : #initializing }
-LzComputation >> addStep: aTermString var: aVarString [
-	| node varBuilder vars |
-	node := LzParser2 parse: aVarString startingAt: LzParser2 startingStateForVar.
+LzComputation >> addStep: aTermString pattern: aPatternString [
+	| node varBuilder vars step pattern |
+	node := LzParser2 parse: aPatternString startingAt: LzParser2 startingStateForTerm.
 	varBuilder := LzVarDeclarationBuilder new.
 	varBuilder acceptNode: node.
 	vars := context signature parsedVariables: varBuilder vars.
 	internalVars addAll: vars.
-	steps add: { context term: aTermString . vars associations first }
+	step := self context reduce: (self parseAsTerm: aTermString).
+	pattern := self context reduce: (self parseAsTerm: aPatternString).
+	steps add: { step . pattern }
 ]
 
 { #category : #accessing }
@@ -36,13 +38,10 @@ LzComputation >> gtStepsFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'Steps';
-		priority: 5;
+		priority: 1;
 		items: [ steps ];
-		column: 'Variable' text: [ :each |
-			| association |
-			association := each second.
-			association key asLeibnizSyntax,
-				':' asRopedText, association value asLeibnizSyntax ];
+		column: 'Pattern' text:  [ :each |
+			each second asLeibnizSyntax ];
 		column: 'Term' text: [ :each |
 			each first asLeibnizSyntax ];
 		yourself
@@ -59,12 +58,17 @@ LzComputation >> internalVars [
 	^ internalVars
 ]
 
-{ #category : #accessing }
-LzComputation >> resultTerm: aTermString [
+{ #category : #private }
+LzComputation >> parseAsTerm: aTermString [
 	| node builder |
 	node := LzParser2 parse: aTermString startingAt: LzParser2 startingStateForTerm.
 	builder := LzDeclarationBuilder new.
-	resultTerm := (builder acceptNode: node)  buildFor: self signature variables: self internalVars
+	^ (builder acceptNode: node)  buildFor: self signature variables: self internalVars
+]
+
+{ #category : #accessing }
+LzComputation >> resultTerm: aTermString [
+	resultTerm := self parseAsTerm: aTermString
 ]
 
 { #category : #accessing }
