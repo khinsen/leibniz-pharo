@@ -23,15 +23,15 @@ LzLepiterExamples >> allSubcontexts [
 	<gtExample>
 	| pages |
 	pages := LzBook database pages collect: [ :each |
-		each title ->
+		each ->
 			((each lzDBCache declarationCacheFor:  each)
 				subcontexts) ].
 	^ (pages reject: [ :each | each value isEmpty ]
 		thenCollect: [ :eachPage |
 			eachPage value collect: [ :eachSubcontext |
-				(eachPage key, '/', eachSubcontext) ->
-					(eachPage lzDBCache
-						subcontext: eachSubcontext for: eachPage key) ]])
+				(eachPage key title, '/', eachSubcontext) ->
+					(eachPage key lzDBCache
+						subcontext: eachSubcontext for: eachPage key title) ]])
 			flatten
 ]
 
