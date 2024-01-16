@@ -62,6 +62,16 @@ LzOpName >> asSymbol [
 ]
 
 { #category : #accessing }
+LzOpName >> copy [
+	^ self
+]
+
+{ #category : #accessing }
+LzOpName >> deepCopy [
+	^ self
+]
+
+{ #category : #accessing }
 LzOpName >> internalSymbol [
 	^ internalSymbol
 ]

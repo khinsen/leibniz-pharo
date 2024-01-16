@@ -69,6 +69,16 @@ LzTerm >> contains: otherTerm [
 		ifNone: [ false ]
 ]
 
+{ #category : #copying }
+LzTerm >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LzTerm >> deepCopy [
+	^ self
+]
+
 { #category : #rewriting }
 LzTerm >> ensureArrayTerm [
 	LzRewriteFailure signal: 'not an array term'

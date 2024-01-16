@@ -5,8 +5,7 @@ Class {
 		'internalVars',
 		'steps',
 		'resultTerm',
-		'context',
-		'bindings'
+		'context'
 	],
 	#category : #'Leibniz2-Computations'
 }

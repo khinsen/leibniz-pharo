@@ -2,10 +2,27 @@ Class {
 	#name : #LzStateComputation,
 	#superclass : #LzComputation,
 	#instVars : [
-		'state'
+		'state',
+		'bindings'
 	],
 	#category : #'Leibniz2-Computations'
 }
+
+{ #category : #accessing }
+LzStateComputation >> bindings [
+	^ bindings
+]
+
+{ #category : #operating }
+LzStateComputation >> run [
+	bindings := LzBindings new
+					sortGraph: self signature sortGraph.
+	steps do: [ :eachStep |
+		| result |
+		result := self runStep: eachStep first.
+		eachStep second match: result bindings: bindings ].
+	^ context reduce: (resultTerm substitute: bindings)
+]
 
 { #category : #operating }
 LzStateComputation >> runStep: aStepTerm [

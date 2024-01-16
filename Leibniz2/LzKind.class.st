@@ -32,6 +32,16 @@ LzKind >> addAsRopedTextTo: aRopedText [
 		withAttribute: LzSortAttribute new
 ]
 
+{ #category : #copying }
+LzKind >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LzKind >> deepCopy [
+	^ self
+]
+
 { #category : #inspecting }
 LzKind >> gtGraphFor: aView [
 	<gtView>

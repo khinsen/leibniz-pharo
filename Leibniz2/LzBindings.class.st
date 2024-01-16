@@ -13,7 +13,6 @@ Class {
 
 { #category : #accessing }
 LzBindings >> bindToUniqueVar: aBlock [
-	| varSets |
 	self ifFailure: [ ^ self ].
 	self unboundVarSets keysAndValuesDo: [ :rootNode :names |
 		| varTerm |
@@ -23,7 +22,6 @@ LzBindings >> bindToUniqueVar: aBlock [
 
 { #category : #accessing }
 LzBindings >> bindVar: aVarName sort: aSort to: aTerm [
-	| root |
 	self ifFailure: [ ^ self ].
 	self assert: (vars at: aVarName) sort equals: aSort.
 	(self findRootFor: aVarName)
@@ -57,6 +55,21 @@ LzBindings >> combineWith: otherBindings [
 		self makeVar: each name sort: each sort equalToVar: root name sort: root sort.
 		(self findRootFor: each name)
 			unifyWithValue: root value bindings: self ]
+]
+
+{ #category : #copying }
+LzBindings >> copy [
+	| newBindings |
+	newBindings := self class new
+					sortGraph: self sortGraph.
+	self ifFailure: [ newBindings fail: failure ].
+	newBindings instVarNamed: #vars put: vars deepCopy.
+	^ newBindings
+]
+
+{ #category : #copying }
+LzBindings >> deepCopy [
+	^ self copy
 ]
 
 { #category : #binding }

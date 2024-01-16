@@ -11,6 +11,16 @@ Class {
 	#category : #'Leibniz2-Rules'
 }
 
+{ #category : #copying }
+LzRewriteSystem >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LzRewriteSystem >> deepCopy [
+	^ self
+]
+
 { #category : #inspecting }
 LzRewriteSystem >> gtRulesFor: aView [
 	<gtView>

@@ -26,6 +26,16 @@ LzAxiom >> checkConsistency [
 	self subclassResponsibility
 ]
 
+{ #category : #copying }
+LzAxiom >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LzAxiom >> deepCopy [
+	^ self
+]
+
 { #category : #accessing }
 LzAxiom >> label [
 

@@ -61,6 +61,16 @@ LzContext >> collectAssets [
 							at: o put: eachRule ] ] ] ]
 ]
 
+{ #category : #copying }
+LzContext >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LzContext >> deepCopy [
+	^ self
+]
+
 { #category : #accessing }
 LzContext >> equalityAxioms [
 	^ equalityAxioms

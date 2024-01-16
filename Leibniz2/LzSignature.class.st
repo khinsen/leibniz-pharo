@@ -55,6 +55,16 @@ LzSignature >> builtins: aSet [
 	builtins := aSet
 ]
 
+{ #category : #copying }
+LzSignature >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LzSignature >> deepCopy [
+	^ self
+]
+
 { #category : #inspecting }
 LzSignature >> gtBuiltinsFor: aView [
 	<gtView>

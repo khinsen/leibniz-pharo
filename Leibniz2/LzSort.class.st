@@ -71,6 +71,16 @@ LzSort >> compareArguments: otherSort [
 	^ true
 ]
 
+{ #category : #copying }
+LzSort >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LzSort >> deepCopy [
+	^ self
+]
+
 { #category : #lookup }
 LzSort >> directSubsorts [
 	^ sortGraph directSubsortsOf: term

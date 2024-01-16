@@ -72,6 +72,16 @@ LzSortGraph >> breadthFirstTraversalFrom: aSort childNodes: childNodeBlock nodes
 		distance := distance + 1 ]
 ]
 
+{ #category : #copying }
+LzSortGraph >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LzSortGraph >> deepCopy [
+	^ self
+]
+
 { #category : #accessing }
 LzSortGraph >> directSubsortsOf: aSortTerm [
 	| subsorts family sortArgs argDirectSubsorts |

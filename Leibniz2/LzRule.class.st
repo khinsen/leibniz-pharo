@@ -80,6 +80,16 @@ LzRule >> condition: aTerm [
 	condition := aTerm
 ]
 
+{ #category : #copying }
+LzRule >> copy [
+	^ self
+]
+
+{ #category : #copying }
+LzRule >> deepCopy [
+	^ self
+]
+
 { #category : #accessing }
 LzRule >> label [
 	^ label
