@@ -160,6 +160,40 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-16T09:12:43.796239+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-16T09:12:52.918538+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "nzWMbm3LDQCJXgVxB/7HJw=="
+				},
+				"code" : "comp := LzArrayComputation new\r\t\t\tcontext: context;\r\t\t\taddStep: '{[1, 2]}' pattern: 'a_:ℕ';\r\t\t\tresultTerm: '2 × a_'."
+			},
+			{
+				"__type" : "pharoSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2024-01-15T18:04:50.752365+01:00"
 					}
 				},

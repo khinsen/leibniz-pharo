@@ -24,11 +24,6 @@ LzComputation >> addStep: aTermString pattern: aPatternString [
 ]
 
 { #category : #accessing }
-LzComputation >> bindings [
-	^ bindings
-]
-
-{ #category : #accessing }
 LzComputation >> context [
 	^ context
 ]
@@ -100,22 +95,6 @@ LzComputation >> parseAsTerm: aTermString [
 { #category : #accessing }
 LzComputation >> resultTerm: aTermString [
 	resultTerm := self parseAsTerm: aTermString
-]
-
-{ #category : #operating }
-LzComputation >> run [
-	bindings := LzBindings new
-					sortGraph: self signature sortGraph.
-	steps do: [ :eachStep |
-		| result |
-		result := self runStep: eachStep first.
-		eachStep second match: result bindings: bindings ].
-	^ context reduce: (resultTerm substitute: bindings)
-]
-
-{ #category : #operating }
-LzComputation >> runStep: anLzTerm [
-	self subclassResponsibility 
 ]
 
 { #category : #accessing }
