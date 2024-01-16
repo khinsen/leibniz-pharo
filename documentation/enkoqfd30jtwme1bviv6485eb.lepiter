@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-01-15T18:03:48.693343+01:00"
+						"dateAndTimeString" : "2024-01-16T11:40:26.831066+01:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Use\n\t- {{lzUseContext:name = \"One-dimensional array indexation\"}}"
+				"string" : "Use\n\t- {{lzUseContext:name = \"One-dimensional array indexation\"}}\n - {{lzUseContext:name = \"Composable computations\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-16T11:41:12.663821+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-16T11:41:49.410228+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "rcoHf2/LDQCorhz0Bzv4Vg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "One-dimensional arrays are a type of computation:\n {{lzSort:s_:𝕊, Array1D(s_) ⊆ Computation(s_)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -66,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-01-15T18:03:50.626391+01:00"
+						"dateAndTimeString" : "2024-01-16T13:47:21.756217+01:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "{{lzTerm:{[1, 2, 3]}}}"
 			},
 			{
 				"__type" : "pharoSnippet",

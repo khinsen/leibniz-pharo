@@ -20,6 +20,7 @@ LzComputation >> addStep: aTermString pattern: aPatternString [
 	internalVars addAll: vars.
 	step := self context reduce: (self parseAsTerm: aTermString).
 	pattern := self context reduce: (self parseAsTerm: aPatternString).
+	self ensureComputation: step.
 	steps add: { step . pattern }
 ]
 
@@ -31,6 +32,14 @@ LzComputation >> context [
 { #category : #accessing }
 LzComputation >> context: anObject [
 	context := anObject
+]
+
+{ #category : #testing }
+LzComputation >> ensureComputation: aTerm [
+	| computation bindings |
+	computation := self parseAsPattern: 's__:𝕊, c_:Computation(s__), c_'.
+	bindings := computation match: aTerm.
+	self assert: bindings isFailure not
 ]
 
 { #category : #inspecting }
@@ -85,11 +94,20 @@ LzComputation >> internalVars [
 ]
 
 { #category : #private }
+LzComputation >> parseAsPattern: aTermString [
+	| node builder |
+	node := LzParser2 parse: aTermString startingAt: LzParser2 startingStateForTopLevelTerm.
+	self assert: node prefix isNil.
+	builder := LzDeclarationBuilder new.
+	^ (builder acceptNode: node) declaration buildFor: self signature
+]
+
+{ #category : #private }
 LzComputation >> parseAsTerm: aTermString [
 	| node builder |
 	node := LzParser2 parse: aTermString startingAt: LzParser2 startingStateForTerm.
 	builder := LzDeclarationBuilder new.
-	^ (builder acceptNode: node)  buildFor: self signature variables: self internalVars
+	^ (builder acceptNode: node) declaration buildFor: self signature variables: self internalVars
 ]
 
 { #category : #accessing }

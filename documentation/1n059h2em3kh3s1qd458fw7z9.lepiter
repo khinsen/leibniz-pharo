@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-01-15T16:11:05.865674+01:00"
+						"dateAndTimeString" : "2024-01-16T15:23:12.498878+01:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,44 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Use\n\t- {{lzUseContext:name = \"Random integers\"}}\n - {{lzUseContext:name = \"Functions\"}}"
+				"string" : "Use\n - {{lzUseContext:name = \"Random integers\"}}\n - {{lzUseContext:name = \"Functions\"}}\n - {{lzUseContext:name = \"Tuples\"}}\n - {{lzUseContext:name = \"Composable computations\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-16T11:44:50.765208+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-16T11:49:35.096775+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "xLWOjm/LDQCtwhhRBzv4Vg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "A function from a state to a value-state tuple is a computation:\n\t{{lzSort:state_:𝕊, value_:𝕊, state_ → (value_, state_) ⊆ Computation(value_)}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -77,6 +114,43 @@
 					"__type" : "textStyle"
 				},
 				"string" : "{{lzOp:randomInteger(ℕ.nz) : randomSeed → (ℕ.nz, randomSeed)}}\n{{lzRule:randomInteger(n_:ℕ.nz)[s_:randomSeed] ⇒ randomInteger(1 ⋯ n_, s_)}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-16T11:50:15.570127+01:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-01-16T11:50:25.917134+01:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "1tbqoW/LDQCxGnw4Bzv4Vg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "{{lzTerm:randomInteger(5)}}"
 			},
 			{
 				"__type" : "textSnippet",
