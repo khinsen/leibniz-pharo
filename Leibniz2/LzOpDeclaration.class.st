@@ -56,11 +56,12 @@ LzOpDeclaration >> rewriteContravariance [
 	self args ifEmpty: [ ^ self ].
 	argDeclarations:= self args collect: #declaration.
 	contravariant := argDeclarations collect: [ :each |
-		(each opName
-			= (LzPrefixOpName for: LzConstants opNameContravariant))
+		(each isKindOf: LzOpTermDeclaration)
+			and: [ each opName
+					= (LzPrefixOpName for: LzConstants opNameContravariant) 
 			and: [ (each args size = 1)
 					and: [ each args first opName
-							= (LzPrefixOpName for: LzConstants opNameSort) ] ] ].
+							= (LzPrefixOpName for: LzConstants opNameSort) ] ] ] ].
 	plainArgs := argDeclarations with: contravariant
 					collect: [ :decl :flag |
 						flag
