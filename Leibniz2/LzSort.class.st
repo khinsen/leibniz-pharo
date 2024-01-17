@@ -139,6 +139,48 @@ LzSort >> gtSortGraphFor: aView [
 		yourself
 ]
 
+{ #category : #inspecting }
+LzSort >> gtSubsortsFor: aView [
+	<gtView>
+	self family directSubFamilies ifEmpty: [ ^ aView empty ].
+	^ aView columnedTree
+		title: 'Subsorts';
+		priority: 6;
+		items: [ self family directSubFamilies asArray ];
+		children: [ :each |
+			self sortGraph axiomsConnecting: each to: self family];
+		column: 'Axiom' text: #asLeibnizSyntax;
+		column: 'Subsort' text: [ :each |
+			(each isKindOf: LzAxiom)
+				ifTrue: [ (each subsortOf: self term)
+							ifNil: [ 'none' asRopedText foreground: Color red  ]
+							ifNotNil: [ :t | t asLeibnizSyntax ] ]
+				ifFalse: [ '' ] ];
+		expandAll;
+		yourself
+]
+
+{ #category : #inspecting }
+LzSort >> gtSupersortsFor: aView [
+	<gtView>
+	self family directSuperFamilies ifEmpty: [ ^ aView empty ].
+	^ aView columnedTree
+		title: 'Supersorts';
+		priority: 5;
+		items: [ self family directSuperFamilies asArray ];
+		children: [ :each |
+			self sortGraph axiomsConnecting: self family to: each ];
+		column: 'Axiom' text: #asLeibnizSyntax;
+		column: 'Supersort' text: [ :each |
+			(each isKindOf: LzAxiom)
+				ifTrue: [ (each supersortOf: self term)
+							ifNil: [ 'none' asRopedText foreground: Color red  ]
+							ifNotNil: [ :t | t asLeibnizSyntax ] ]
+				ifFalse: [ '' ] ];
+		expandAll;
+		yourself
+]
+
 { #category : #testing }
 LzSort >> isBooleanSort [
 	term args ifNotEmpty: [ ^ false ].

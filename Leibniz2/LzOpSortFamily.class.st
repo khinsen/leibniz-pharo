@@ -23,9 +23,10 @@ LzOpSortFamily >> contravarianceFlags [
 { #category : #inspecting }
 LzOpSortFamily >> gtGraphFor: aView [
 	<gtView>
-	^ self sortGraph
+	^ (self sortGraph
 		graphFor: aView
-		highlight: [ :x | x = self ]
+		highlight: [ :x | x = self ])
+		priority: 1
 ]
 
 { #category : #accessing }

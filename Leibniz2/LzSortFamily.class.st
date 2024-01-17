@@ -21,8 +21,46 @@ LzSortFamily >> contravarianceFlags [
 ]
 
 { #category : #accessing }
+LzSortFamily >> directSubFamilies [
+	^ self sortGraph directSubFamiliesOf: self
+]
+
+{ #category : #accessing }
+LzSortFamily >> directSuperFamilies [
+	^ self sortGraph directSuperFamiliesOf: self
+]
+
+{ #category : #accessing }
 LzSortFamily >> family [
 	^ self
+]
+
+{ #category : #inspecting }
+LzSortFamily >> gtSubFamiliesFor: aView [
+	<gtView>
+	self directSubFamilies ifEmpty: [ ^ aView empty ].
+	^ aView tree
+		title: 'Subfamilies';
+		priority: 6;
+		items: [ self directSubFamilies asArray ];
+		itemText: #asLeibnizSyntax;
+		children: [ :each | self sortGraph axiomsConnecting: each to: self ];
+		expandAll;
+		yourself
+]
+
+{ #category : #inspecting }
+LzSortFamily >> gtSuperFamiliesFor: aView [
+	<gtView>
+	self directSuperFamilies ifEmpty: [ ^ aView empty ].
+	^ aView tree
+		title: 'Superfamilies';
+		priority: 5;
+		items: [ self directSuperFamilies asArray ];
+		itemText: #asLeibnizSyntax;
+		children: [ :each | self sortGraph axiomsConnecting: self to: each ];
+		expandAll;
+		yourself
 ]
 
 { #category : #accessing }

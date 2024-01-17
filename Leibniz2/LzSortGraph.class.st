@@ -83,6 +83,11 @@ LzSortGraph >> deepCopy [
 ]
 
 { #category : #accessing }
+LzSortGraph >> directSubFamiliesOf: aSortFamily [
+	^ directSubFamilies at: aSortFamily.
+]
+
+{ #category : #accessing }
 LzSortGraph >> directSubsortsOf: aSortTerm [
 	| subsorts family sortArgs argDirectSubsorts |
 	subsorts := Set new.
@@ -113,6 +118,11 @@ LzSortGraph >> directSubsortsOf: aSortTerm [
 						opTerm: aSortTerm opName args: ssArgs.
 			subsorts add: (self sortWithTerm: term) ] ].
 	^ subsorts
+]
+
+{ #category : #accessing }
+LzSortGraph >> directSuperFamiliesOf: aSortFamily [
+	^ directSuperFamilies at: aSortFamily.
 ]
 
 { #category : #accessing }
