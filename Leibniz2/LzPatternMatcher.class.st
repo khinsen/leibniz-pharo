@@ -69,8 +69,8 @@ LzPatternMatcher >> gtReportFor: aView [
 		priority: 0;
 		items: [ report ];
 		column: 'Item' text: [ :each | each key ];
-		column: 'Pattern' text: [ :each | each value first gtDisplayText ];
-		column: 'Term' text: [ :each | each value second gtDisplayText ];
+		column: 'Pattern' text: [ :each | each value first asLeibnizSyntax ];
+		column: 'Term' text: [ :each | each value second asLeibnizSyntax ];
 		column: 'Success' text: [ :each |
 			each value third ];
 		send: [ :each | each value fourth ];

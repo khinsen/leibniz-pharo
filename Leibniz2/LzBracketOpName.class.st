@@ -4,6 +4,11 @@ Class {
 	#category : #'Leibniz2-Declarations'
 }
 
+{ #category : #accessing }
+LzBracketOpName >> addAsRopedTextTo: aRopedText [
+	aRopedText append: internalSymbol asRopedText
+]
+
 { #category : #converting }
 LzBracketOpName >> addForArgs: anArrayOfTerms asRopedTextTo: aRopedText argAttributes: anArrayOfAttributes [
 	self assert: anArrayOfTerms size > 1.
