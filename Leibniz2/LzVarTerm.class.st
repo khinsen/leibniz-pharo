@@ -39,8 +39,7 @@ LzVarTerm >> match: otherTerm bindings: bindings [
 	sortBindings := self sort matchWithSupersortsOf: otherTerm sort.
 	sortBindings
 		ifSuccess: [
-			matchedSort := sort sortGraph sortWithTerm:
-					(sort term substitute: sortBindings).
+			matchedSort := sort substitute: sortBindings.
 			bindings combineWith: sortBindings ]
 		ifFailure: [ matchedSort := sort ].
 	bindings defineVar: name sort: matchedSort.

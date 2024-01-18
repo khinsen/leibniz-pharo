@@ -224,6 +224,9 @@ LzSort >> match: otherSort [
 	| bindings |
 	bindings := LzBindings new
 					sortGraph: self sortGraph.
+	otherSort isKind ifTrue: [
+		bindings failWithNoSort: otherSort.
+		^ bindings ].
 	self term match: otherSort term bindings: bindings.
 	^ bindings
 ]
@@ -232,12 +235,7 @@ LzSort >> match: otherSort [
 LzSort >> matchWithSupersortsOf: aSort [
 	| bindings matches matchBindings |
 	self flag: #todo. "Use matchAllowingVars: ?"
-	bindings := LzBindings new
-					sortGraph: self sortGraph.
-	aSort isKind ifTrue: [
-		bindings failWithNoSort: aSort.
-		^ bindings ].
-	self term match: aSort term bindings: bindings.
+	bindings := self match: aSort.
 	bindings ifSuccess: [ ^ bindings ].
 
 	matches := Set new.
@@ -342,8 +340,7 @@ LzSort >> subsortGraph [
 ]
 
 { #category : #unifying }
-LzSort >> substitute: bindings [
-	^ sortGraph sortWithTerm: (term substitute: bindings)
+LzSort >> substitute: anLzBindings [
 ]
 
 { #category : #unifying }
