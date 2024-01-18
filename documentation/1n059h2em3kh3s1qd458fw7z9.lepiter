@@ -361,40 +361,6 @@
 					"__type" : "textStyle"
 				},
 				"string" : "Playground"
-			},
-			{
-				"__type" : "pharoSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-01-17T12:59:00.784141+01:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-01-17T14:18:55.043292+01:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "D/qjtYTLDQCLjotLCrGH0w=="
-				},
-				"code" : "sort := (context term: 'randomInteger(5)') sort.\rsortGraph := sort sortGraph.\rfamily := sort family.\rsuperFamily := family directSuperFamilies anyOne.\raxiom := (sortGraph axiomsConnecting: family to: superFamily) anyOne.\raxiom supersortOf: \"sort term\" (sortGraph sortContext term: '𝔹')"
 			}
 		]
 	},

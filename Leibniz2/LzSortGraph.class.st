@@ -96,7 +96,7 @@ LzSortGraph >> directSubsortsOf: aSortTerm [
 	"First step: subsorts via the sort family graph."
 	(directSubFamilies at: family) do: [ :eachSubFamily |
 		(connectingAxioms at: { eachSubFamily. family }) do: [ :eachAxiom |
-			(eachAxiom subsortOf: aSortTerm)
+			(eachAxiom subsortOf: aSortTerm inSortGraph: self)
 				ifNotNil: [ :term | subsorts add: (self sortWithTerm: term) ]] ].
 	"Second step: subsorts via argument subsorts."
 	self flag: #contravariant.
@@ -134,7 +134,7 @@ LzSortGraph >> directSupersortsOf: aSortTerm [
 	"First step: supersorts via the sort family graph."
 	(directSuperFamilies at: family) do: [ :eachSuperFamily |
 		(connectingAxioms at: { family. eachSuperFamily }) do: [ :eachAxiom |
-			(eachAxiom supersortOf: aSortTerm)
+			(eachAxiom supersortOf: aSortTerm inSortGraph: self)
 				ifNotNil: [ :term | supersorts add: (self sortWithTerm: term) ]] ].
 	"Second step: supersorts via argument supersorts."
 	self flag: #contravariant.

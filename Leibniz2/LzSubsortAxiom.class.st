@@ -55,8 +55,8 @@ LzSubsortAxiom >> subsort: aPattern [
 ]
 
 { #category : #accessing }
-LzSubsortAxiom >> subsortOf: aTerm [
-	^ self unify: aTerm with: supersort thenSubstituteIn: subsort
+LzSubsortAxiom >> subsortOf: aTerm inSortGraph: aSortGraph [
+	^ self unify: aTerm with: supersort thenSubstituteIn: subsort sortGraph: aSortGraph
 ]
 
 { #category : #accessing }
@@ -70,18 +70,20 @@ LzSubsortAxiom >> supersort: aPattern [
 ]
 
 { #category : #accessing }
-LzSubsortAxiom >> supersortOf: aTerm [
-	^ self unify: aTerm with: subsort thenSubstituteIn: supersort
+LzSubsortAxiom >> supersortOf: aTerm inSortGraph: aSortGraph [
+	^ self unify: aTerm with: subsort thenSubstituteIn: supersort sortGraph: aSortGraph
 ]
 
 { #category : #unifying }
-LzSubsortAxiom >> unify: aTerm with: pattern1 thenSubstituteIn: pattern2 [
+LzSubsortAxiom >> unify: aTerm with: pattern1 thenSubstituteIn: pattern2 sortGraph: aSortGraph [
 	| rename preferredVarNames bindings |
 	rename := pattern1
 		addPrefix: #'temp.'
 		toVarsConflictingWith: aTerm.
 	preferredVarNames := aTerm vars keys.
-	bindings := (pattern1 substitute: rename) unify: aTerm.
+	bindings := LzBindings new
+					sortGraph:  aSortGraph.
+	(pattern1 substitute: rename) unify: aTerm bindings: bindings.
 	bindings ifFailure: [ ^ nil ].
 	bindings bindToUniqueVar: [ :varSet :sort |
 		| name |

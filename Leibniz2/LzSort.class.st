@@ -152,7 +152,7 @@ LzSort >> gtSubsortsFor: aView [
 		column: 'Axiom' text: #asLeibnizSyntax;
 		column: 'Subsort' text: [ :each |
 			(each isKindOf: LzAxiom)
-				ifTrue: [ (each subsortOf: self term)
+				ifTrue: [ (each subsortOf: self term inSortGraph: self sortGraph)
 							ifNil: [ 'none' asRopedText foreground: Color red  ]
 							ifNotNil: [ :t | t asLeibnizSyntax ] ]
 				ifFalse: [ '' ] ];
@@ -173,7 +173,7 @@ LzSort >> gtSupersortsFor: aView [
 		column: 'Axiom' text: #asLeibnizSyntax;
 		column: 'Supersort' text: [ :each |
 			(each isKindOf: LzAxiom)
-				ifTrue: [ (each supersortOf: self term)
+				ifTrue: [ (each supersortOf: self term inSortGraph: self sortGraph)
 							ifNil: [ 'none' asRopedText foreground: Color red  ]
 							ifNotNil: [ :t | t asLeibnizSyntax ] ]
 				ifFalse: [ '' ] ];
@@ -388,7 +388,7 @@ LzSort >> testPaths: aSet [
 				currentSorts flatCollect: [ :aSort |
 					(sortGraph axiomsConnecting: aSegment first to: aSegment second)
 						collect: [ :anAxiom |
-							anAxiom supersortOf: aSort ]
+							anAxiom supersortOf: aSort inSortGraph: self sortGraph ]
 						thenSelect: #isNotNil ] ].
 		currentSorts do: [ :each |
 			candidates add: (sortGraph sortWithTerm: each) ] ].
