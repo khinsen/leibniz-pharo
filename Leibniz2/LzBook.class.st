@@ -5,6 +5,16 @@ Class {
 }
 
 { #category : #accessing }
+LzBook class >> contextNamed: aString [
+	| parts |
+	parts := '/' split: aString.
+	self assert: parts size < 3.
+	^ parts size = 1
+		ifTrue: [ self dbCache contextFor: aString ]
+		ifFalse: [ self dbCache subcontext: parts second for: parts first ]
+]
+
+{ #category : #accessing }
 LzBook class >> database [
 	| logicalDB db |
 	logicalDB := LeDatabasesRegistry defaultLogicalDatabase.

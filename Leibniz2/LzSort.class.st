@@ -220,6 +220,15 @@ LzSort >> leastCommonSupersortWith: otherSort [
 ]
 
 { #category : #unifying }
+LzSort >> match: otherSort [
+	| bindings |
+	bindings := LzBindings new
+					sortGraph: self sortGraph.
+	self term match: otherSort term bindings: bindings.
+	^ bindings
+]
+
+{ #category : #unifying }
 LzSort >> matchWithSupersortsOf: aSort [
 	| bindings matches matchBindings |
 	self flag: #todo. "Use matchAllowingVars: ?"

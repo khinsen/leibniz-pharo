@@ -302,5 +302,5 @@ LzContext >> term: aString [
 
 { #category : #accessing }
 LzContext >> valueSlots [
-	^ #(signature equalityXAxioms subsortAxioms rewriteSystem)
+	^ #(signature equalityAxioms subsortAxioms rewriteSystem)
 ]

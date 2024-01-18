@@ -39,8 +39,7 @@ LzLepiterExamples >> allSubcontexts [
 LzLepiterExamples >> arrayIndexing [
 	<gtExample>
 	| context |
-	context := LzBook dbCache
-				contextFor: 'One-dimensional array slicing'.
+	context := LzBook contextNamed: 'One-dimensional array slicing'.
 	^ {
 		{ '{[ 1, 2, 3 ]}[2]'. '2' }.
 		{ '{[ 1, 2, 3 ]}[2 ⋯ 3]'. '{[ 2, 3 ]}' }.
@@ -59,8 +58,7 @@ LzLepiterExamples >> arrayIndexing [
 LzLepiterExamples >> booleanUnifications [
 	<gtExample>
 	| c |
-	c := LzBook dbCache
-			contextFor: 'Boolean algebra'.
+	c := LzBook contextNamed: 'Boolean algebra'.
 	^ {
 		{'⊤'. '∀ X_:𝔹 X_'. '(X_=⊤)'}.
 		{'∀ X_:𝔹 ¬(X_)'. '¬(⊤)'. '(X_=⊤)'}.
@@ -84,9 +82,7 @@ LzLepiterExamples >> booleanUnifications [
 LzLepiterExamples >> contravariantSortArguments [
 	<gtExample>
 	| context |
-	context := LzBook dbCache
-				subcontext: 'contravariance'
-				for: 'Functions'.
+	context := LzBook contextNamed: 'Functions/contravariance'.
 	self
 		assert: (context term: 'applyToOneThird(f1)') sort
 					asLeibnizSyntaxString
@@ -103,12 +99,9 @@ LzLepiterExamples >> equalityTerms [
 	| context |
 	context := LzContextBuilder new
 				database: LzBook database;
-				include: (LzBook dbCache
-							contextFor: 'Term equality');
-				include: (LzBook dbCache
-							contextFor: 'One-dimensional arrays');
-				include: (LzBook dbCache
-							contextFor: 'Integers');
+				include: (LzBook contextNamed: 'Term equality');
+				include: (LzBook contextNamed: 'One-dimensional arrays');
+				include: (LzBook contextNamed: 'Integers');
 				context.
 	self assert: (context term: '1 == ⊤') hasSort not.
 	^ {
@@ -130,8 +123,7 @@ LzLepiterExamples >> equalityTerms [
 LzLepiterExamples >> fibonacciSeries [
 	<gtExample>
 	| context cache |
-	context := LzBook dbCache
-				subcontext: 'fibonacci' for: 'Solving recurrence equations'.
+	context := LzBook contextNamed: 'Solving recurrence equations/fibonacci'.
 	cache := LzGlobalCache uniqueInstance
 				rewriteCacheFor: context.
 	^ {
@@ -154,8 +146,7 @@ LzLepiterExamples >> fibonacciSeries [
 LzLepiterExamples >> integerArithmetic [
 	<gtExample>
 	| context cache |
-	context := LzBook dbCache
-				contextFor: 'Integers'.
+	context := LzBook contextNamed: 'Integers'.
 	cache := LzGlobalCache uniqueInstance
 				rewriteCacheFor: context.
 	^ {
@@ -184,9 +175,8 @@ LzLepiterExamples >> integerArithmetic [
 LzLepiterExamples >> integerTerms [
 	<gtExample>
 	| context |
-	context := LzBook dbCache
-				contextFor: 'Integers'.
-^ {
+	context := LzBook contextNamed: 'Integers'.
+	^ {
 		{ '0'. 'zero'. }.
 		{ '1'. 'one' }.
 		{ '-1'. 'ℤ.nz' }.
@@ -204,8 +194,7 @@ LzLepiterExamples >> integerTerms [
 LzLepiterExamples >> rationalArithmetic [
 	<gtExample>
 	| context cache |
-	context := LzBook dbCache
-				contextFor: 'Rational numbers'.
+	context := LzBook contextNamed: 'Rational numbers'.
 	cache := LzGlobalCache uniqueInstance
 				rewriteCacheFor: context.
 	^ {
@@ -232,8 +221,7 @@ LzLepiterExamples >> rationalArithmetic [
 LzLepiterExamples >> rationalNumberTerms [
 	<gtExample>
 	| context |
-	context := LzBook dbCache
-				contextFor: 'Rational numbers'.
+	context := LzBook contextNamed: 'Rational numbers'.
 	^ {
 		{ '0'. 'zero'. }.
 		{ '1'. 'one' }.
