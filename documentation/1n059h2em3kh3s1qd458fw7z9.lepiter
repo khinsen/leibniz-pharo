@@ -248,14 +248,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-01-15T17:47:04.701518+01:00"
+						"dateAndTimeString" : "2024-01-19T16:17:52.868126+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "TnIHm17LDQCsfYDnAEmvGw=="
 				},
-				"code" : "comp := LzStateComputation new\r\t\t\tcontext: context;\r\t\t\taddStep: 'randomInteger(3)' pattern: 'a_:ℕ.nz';\r\t\t\taddStep: 'randomInteger(a_)' pattern: 'b_:ℕ.nz';\r\t\t\tresultTerm: '(2 × a_) + b_'."
+				"code" : "comp := LzStateComputation new\r\t\t\tcontext: context;\r\t\t\taddStep: 'randomInteger(3)' pattern: 'a_:ℕ.nz';\r\t\t\taddStep: 'randomInteger(a_)' pattern: 'b_:ℕ.nz';\r\t\t\tresultTerm: 'a_ > b_'."
 			},
 			{
 				"__type" : "pharoSnippet",

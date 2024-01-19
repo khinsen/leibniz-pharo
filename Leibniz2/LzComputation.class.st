@@ -5,7 +5,9 @@ Class {
 		'internalVars',
 		'steps',
 		'resultTerm',
-		'context'
+		'context',
+		'computationSubsort',
+		'resultSort'
 	],
 	#category : #'Leibniz2-Computations'
 }
@@ -20,8 +22,25 @@ LzComputation >> addStep: aTermString pattern: aPatternString [
 	internalVars addAll: vars.
 	step := self context reduce: (self parseAsTerm: aTermString).
 	pattern := self context reduce: (self parseAsTerm: aPatternString).
-	self ensureComputation: step.
+	computationSubsort
+		ifNil: [ computationSubsort := self computationSubsortFor: step ]
+		ifNotNil: [ self
+						assert: computationSubsort
+						equals: (self computationSubsortFor: step) ].
 	steps add: { step . pattern }
+]
+
+{ #category : #testing }
+LzComputation >> computationSubsortFor: aTerm [
+	| computation subsort sortBindings |
+	computation := self parseAsSortPattern: 'result_:𝕊, Computation(result_)'.
+	subsort := computation directSubsorts
+		detect: [ :each |
+					sortBindings := each matchWithSupersortsOf:  aTerm sort.
+					sortBindings isSuccess ]
+		ifNone: [ self error: 'Not a computation: ', aTerm asLeibnizSyntaxString ].
+	sortBindings unbindVar: (LzVarName for: 'result_').
+	^ subsort substitute: sortBindings
 ]
 
 { #category : #accessing }
@@ -32,14 +51,6 @@ LzComputation >> context [
 { #category : #accessing }
 LzComputation >> context: anObject [
 	context := anObject
-]
-
-{ #category : #testing }
-LzComputation >> ensureComputation: aTerm [
-	| computation bindings |
-	computation := self parseAsPattern: 's__:𝕊, c_:Computation(s__), c_'.
-	bindings := computation match: aTerm.
-	self assert: bindings isFailure not
 ]
 
 { #category : #inspecting }
@@ -86,6 +97,7 @@ LzComputation >> gtStepsFor: aView [
 LzComputation >> initialize [
 	internalVars := Dictionary new.
 	steps := OrderedCollection new.
+	computationSubsorts := OrderedCollection new.
 ]
 
 { #category : #accessing }
@@ -103,6 +115,16 @@ LzComputation >> parseAsPattern: aTermString [
 ]
 
 { #category : #private }
+LzComputation >> parseAsSortPattern: aTermString [
+	| node builder term |
+	node := LzParser2 parse: aTermString startingAt: LzParser2 startingStateForTopLevelTerm.
+	self assert: node prefix isNil.
+	builder := LzDeclarationBuilder new.
+	term := (builder acceptNode: node) declaration buildFor: self context sortGraph sortContext signature.
+	^ self context sortGraph sortWithTerm: term
+]
+
+{ #category : #private }
 LzComputation >> parseAsTerm: aTermString [
 	| node builder |
 	node := LzParser2 parse: aTermString startingAt: LzParser2 startingStateForTerm.
@@ -112,7 +134,16 @@ LzComputation >> parseAsTerm: aTermString [
 
 { #category : #accessing }
 LzComputation >> resultTerm: aTermString [
-	resultTerm := self parseAsTerm: aTermString
+	| resultBindings |
+	resultTerm := self parseAsTerm: aTermString.
+	resultBindings := LzBindings new
+							sortGraph: self context sortGraph.
+	resultBindings
+		defineVar: (LzVarName for: 'result_')
+		sort: resultTerm sort term sort.
+	resultBindings
+		bindVar: (LzVarName for: 'result_') sort: resultTerm sort term sort to: resultTerm sort term.
+	resultSort := computationSubsort substitute: resultBindings
 ]
 
 { #category : #accessing }

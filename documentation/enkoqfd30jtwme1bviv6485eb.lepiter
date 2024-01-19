@@ -174,14 +174,14 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-01-15T18:06:05.768587+01:00"
+						"dateAndTimeString" : "2024-01-19T17:36:38.70303+01:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
 					"uidString" : "mGAfvmDLDQCcHVlMDr2J9w=="
 				},
-				"code" : "comp := LzArrayComputation new\r\t\t\tcontext: context;\r\t\t\taddStep: '{[1, 2]}' pattern: 'a_:ℕ';\r\t\t\taddStep: '{[a_, 2 × a_]}' pattern: 'b_:ℕ';\r\t\t\tresultTerm: '(2 × a_) + b_'."
+				"code" : "comp := LzArrayComputation new\r\t\t\tcontext: context;\r\t\t\taddStep: '{[1, 2]}' pattern: 'a_:ℕ';\r\t\t\taddStep: '{[a_, 2 × a_]}' pattern: 'b_:ℕ';\r\t\t\tresultTerm: 'a_ > b_'."
 			},
 			{
 				"__type" : "pharoSnippet",

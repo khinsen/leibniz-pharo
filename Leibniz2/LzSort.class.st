@@ -340,7 +340,9 @@ LzSort >> subsortGraph [
 ]
 
 { #category : #unifying }
-LzSort >> substitute: anLzBindings [
+LzSort >> substitute: bindings [
+	^ sortGraph sortWithTerm:
+		(term substitute: bindings)
 ]
 
 { #category : #unifying }

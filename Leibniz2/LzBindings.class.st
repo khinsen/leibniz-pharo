@@ -11,7 +11,7 @@ Class {
 	#category : #'Leibniz2-Terms'
 }
 
-{ #category : #accessing }
+{ #category : #binding }
 LzBindings >> bindToUniqueVar: aBlock [
 	self ifFailure: [ ^ self ].
 	self unboundVarSets keysAndValuesDo: [ :rootNode :names |
@@ -20,7 +20,7 @@ LzBindings >> bindToUniqueVar: aBlock [
 		self bindVar: rootNode name sort: rootNode sort to: varTerm ]
 ]
 
-{ #category : #accessing }
+{ #category : #binding }
 LzBindings >> bindVar: aVarName sort: aSort to: aTerm [
 	self ifFailure: [ ^ self ].
 	self assert: (vars at: aVarName) sort equals: aSort.
@@ -43,7 +43,7 @@ LzBindings >> bindings [
 		asDictionary
 ]
 
-{ #category : #combining }
+{ #category : #binding }
 LzBindings >> combineWith: otherBindings [
 	self ifFailure: [ ^ self ].
 	otherBindings ifFailure: [ :f | failure := f. ^ self ].
@@ -318,6 +318,12 @@ LzBindings >> sortVars [
 		select: [ :each |
 			each value sort isSortSort ]
 		thenCollect: #key
+]
+
+{ #category : #binding }
+LzBindings >> unbindVar: aVarName [
+	self ifFailure: [ ^ self ].
+	(self findRootFor: aVarName) value: nil
 ]
 
 { #category : #private }
