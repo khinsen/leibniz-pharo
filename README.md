@@ -11,6 +11,8 @@ The second iteration of [Leibniz](http://github.com/khinsen/leibniz), implemente
 
 Leibniz makes generous use of Unicode glyphs that are not contained in the default fonts used by GToolkit. The best free code font (monospaced) I have found is [JuliaMono](https://juliamono.netlify.app/). For standard text fonts, the options I am aware of are [Arial Unicode MS](https://docs.microsoft.com/en-us/typography/font-list/arial-unicode-ms) and [Noto Sans Math](https://github.com/google/fonts/tree/main/ofl/notosansmath). Leibniz will automatically select one of them, if available. Otherwise it will use the default code font of Glamorous Toolkit. It lacks many of the maths symbols that Leibniz uses. Some of them will be substituted from other fonts if possible, making the text readable but often ugly. Others will be replaced by a default glyph, making the code unreadable.
 
+Note that you must install a suiteable font *before* installing the Leibniz package into Glamorous Toolkit. The font is chosen at installation time.
+
 ### Install [Glamorous Toolkit](https://gtoolkit.com/)
 
 The easiest option is downloading a ready-to-run binary for your system from [the download page](https://gtoolkit.com/download).
