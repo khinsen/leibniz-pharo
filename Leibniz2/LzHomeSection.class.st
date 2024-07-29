@@ -30,5 +30,5 @@ LzHomeSection >> leibnizBookCard [
 
 { #category : #accessing }
 LzHomeSection >> sectionTitle [
-	^ 'Start'
+	^ 'Leibniz'
 ]
