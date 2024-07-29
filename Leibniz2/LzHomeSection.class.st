@@ -20,11 +20,15 @@ LzHomeSection >> leibnizBookCard [
 		databaseName: LzBook databaseName;
 		readMoreToolbar;
 		details: [ :db | 
-			| snippets somePages |
-			somePages := db pages select: #shouldAppearInIndexOrDailyNotes.
-			snippets := somePages flatCollect: #allChildrenDepthFirst.
-			'The book is expressed as a knowledge base. It documents the environment in '
-				, somePages size asString , ' pages.' ]
+			| pages pagesWithDeclarations |
+			pages := db pages select: #shouldAppearInIndexOrDailyNotes.
+			pagesWithDeclarations := pages select: [ :each |
+				((each lzDBCache declarationCacheFor: each) declarationsFor: nil) isEmpty not ].
+				'The book is expressed as a knowledge base. ',
+				'It documents Leibniz in ', pages size asString ,
+				' pages, of which ',
+				pagesWithDeclarations size asString,
+				' contain context definitions.' ]
 				yourself
 ]
 
