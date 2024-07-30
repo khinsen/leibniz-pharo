@@ -1,3 +1,8 @@
+"
+A page declaration cache subscribes to events from an {{gtClass:name=LePage}} (see {{gtMethod:name=LzPageDeclarationCache>>onSnippetTextChanged:}} and {{gtMethod:name=LzPageDeclarationCache>>onContentTreeRemoved:}}) and updates its list of declarations from that page. It parses the changed snippets ({{gtMethod:name=LzPageDeclarationCache>>parseChangedSnippets}} and if they lead to a different set of declarations, it announces the change to subscribing instances of {{gtClass:name=LzPageContextCache}} (see {{gtMethod:name=LzPageDeclarationCache>>announceChangesFor:}}.
+
+
+"
 Class {
 	#name : #LzPageDeclarationCache,
 	#superclass : #Object,

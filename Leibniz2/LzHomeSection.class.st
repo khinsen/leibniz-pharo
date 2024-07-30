@@ -21,7 +21,7 @@ LzHomeSection >> leibnizBookCard [
 		readMoreToolbar;
 		details: [ :db | 
 			| pages pagesWithDeclarations |
-			pages := db pages select: #shouldAppearInIndexOrDailyNotes.
+			pages := db pages.
 			pagesWithDeclarations := pages select: [ :each |
 				((each lzDBCache declarationCacheFor: each) declarationsFor: nil) isEmpty not ].
 				'The book is expressed as a knowledge base. ',

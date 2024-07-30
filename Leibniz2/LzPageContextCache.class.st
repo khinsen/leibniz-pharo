@@ -1,3 +1,7 @@
+"
+A page context cache subscribes to events from a {{gtClass:name=LzPageDeclarationCache}} (see {{gtMethod:name=LzPageContextCache>>onDeclarationsChanged:}}). If the declarations defining a context have changed, it is deleted from the cache. The next time the context is requested, it is rebuilt from scratch (see {{gtMethod:name=LzPageContextCache>>subcontext:}}) and stored in the cache again.
+
+"
 Class {
 	#name : #LzPageContextCache,
 	#superclass : #Object,
@@ -24,6 +28,11 @@ LzPageContextCache >> announceChangesFor: subcontext [
 LzPageContextCache >> announcer [
 	<return: #Announcer>
 	^ announcer ifNil: [ announcer := Announcer new ]
+]
+
+{ #category : #accessing }
+LzPageContextCache >> cachedSubcontext: aSubcontextName [
+	^ contexts at: aSubcontextName ifAbsent: [ nil ]
 ]
 
 { #category : #constructing }
@@ -144,6 +153,19 @@ LzPageContextCache >> printOn: aStream [
 		<< '(''';
 		<< self page title;
 		<< ''')'
+]
+
+{ #category : #constructing }
+LzPageContextCache >> rebuildContexts [
+	| contextNames |
+	contextNames := self declarationCache subcontexts.
+	contextNames add: nil.
+	contextNames do: [ :each |
+		contexts at: each ifAbsent: [
+			contexts
+				at: each 
+				put: (self contextBuilderFor: each) context.
+			self announceChangesFor: each ]].
 ]
 
 { #category : #constructing }

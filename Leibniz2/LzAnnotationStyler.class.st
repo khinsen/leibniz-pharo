@@ -146,7 +146,7 @@ LzAnnotationStyler >> styleExpandingObject: aTerm in: anAnnotation [
 LzAnnotationStyler >> subcontext: aString [
 	^ (self page lzDBCache
 			contextCacheFor: self page title)
-		subcontext: aString
+		cachedSubcontext: aString
 ]
 
 { #category : #private }

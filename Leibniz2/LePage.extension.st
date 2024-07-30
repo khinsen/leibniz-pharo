@@ -132,6 +132,18 @@ LePage >> lzHTMLLocalExportActionFor: anAction [
 ]
 
 { #category : #'*Leibniz2' }
+LePage >> lzRebuildContextsFor: anAction [
+	<lePageAction>
+	^ anAction button
+		tooltip: 'Rebuild the contexts from the page''s declarations';
+		priority: 2;
+		icon: BrGlamorousVectorIcons accept;
+		action: [ :aButton |
+				(self lzDBCache contextCacheFor: self)
+					rebuildContexts ]
+]
+
+{ #category : #'*Leibniz2' }
 LePage >> lzSubcontext: aSubcontextName [
 	^ (self lzDBCache
 		contextCacheFor: self) subcontext: aSubcontextName
