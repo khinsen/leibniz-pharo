@@ -15,7 +15,7 @@ Class {
 LzAutoUpdatingSyntaxLabel >> context [
 	^ (self page lzDBCache
 		contextCacheFor: self page title)
-		subcontext: self subcontext
+		cachedSubcontext: self subcontext
 ]
 
 { #category : #accessing }
@@ -41,7 +41,9 @@ LzAutoUpdatingSyntaxLabel >> makeLabel [
 		[
 			object := (self options at: #example ifAbsent: [ false ])
 				ifTrue: [ self declaration ]
-				ifFalse: [ self declaration objectFor: self context ].
+				ifFalse: [ self context
+						ifNil: [ self declaration ]
+						ifNotNil: [ :c | self declaration objectFor: c ] ].
 			text := self textBlock
 						value: declaration
 						value: object
