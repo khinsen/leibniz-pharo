@@ -66,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-05T10:17:58.546952+02:00"
+						"dateAndTimeString" : "2024-08-05T16:57:31.503061+02:00"
 					}
 				},
 				"uid" : {
@@ -76,7 +76,118 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An algorithmic step of sort {{lzSort:Step}} is an operation that can changes state values. Steps of sort {{lzSort:Step(𝕊)}} with {{lzSort:s_:𝕊, Step(s_) ⊆ Step}} also return a result of the specified sort."
+				"string" : "An algorithmic step of sort {{lzSort:Step}} is an operation that can changes state values. Steps of sort {{lzSort:Step(𝕊)}} with {{lzSort:s_:𝕊, Step(s_) ⊆ Step}} also yield a result of the specified sort."
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-05T16:59:22.717784+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-05T17:09:59.714087+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "yLxYoVLbDQCxF5GgBleANw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "A step that yields a given value, with no other effect, is written as\n\t{{lzOp:s_:𝕊, →(s_) : Step(s_)}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-05T17:02:52.696224+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-05T17:05:45.540408+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "L/lLtVLbDQCz9BiZBleANw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "A step is executed using\n\t{{lzOp:run(Step(s_:𝕊)) : s_}}\nFor the simple value-yielding step defined above, this is handled by a rule:\n\t{{lzRule:s__:𝕊, v_:s__, run(→(v_)) ⇒ v_}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-05T17:06:23.113979+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-05T17:26:15.470787+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "QrPWwVLbDQC2liY7BleANw=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Example:\n - {{lzTerm:→(42), withSort = \"yes\", subcontext = \"example\", withNormalForm = \"yes\"}}\n - {{lzTerm:run(→(42)), withSort = \"yes\", subcontext = \"example\", withNormalForm = \"yes\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -103,7 +214,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-05T15:32:12.967404+02:00"
+						"dateAndTimeString" : "2024-08-05T17:25:41.445687+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +224,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A sequence of steps can be combined into a single step:\n\t{{lzTerm:{. 2 ⇒ a_:ℕ, 4 ⇒ b_:ℕ, a_ + b_.}, subcontext = \"example\"}}\n(uses {{lzUseContext:name = \"Integers\", subcontext = \"example\"}}).\n\nIntermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context."
+				"string" : "A sequence of steps can be combined into a single bigger step:\n\t{{lzTerm:{. →(2) ⇒ a_:ℕ, →(3) ⇒ b_:ℕ, →(a_ + b_).}, withSort = \"yes\", subcontext = \"example\"}}\n(uses {{lzUseContext:name = \"Integers\", subcontext = \"example\"}}).\n\nIntermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context."
 			},
 			{
 				"__type" : "textSnippet",

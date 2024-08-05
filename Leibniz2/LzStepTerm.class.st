@@ -22,6 +22,17 @@ LzStepTerm >> args [
 
 { #category : #initializing }
 LzStepTerm >> checkConsistency [
+	| stepSort |
+	self assert: self steps isNotEmpty.
+	stepSort := self signature sortGraph sort: 'Step'.
+	steps do: [ :each |
+		self assert: each first sort <= stepSort.
+		].
+]
+
+{ #category : #initializing }
+LzStepTerm >> computeSort [
+	sort := self steps last first sort
 ]
 
 { #category : #organizing }
@@ -47,13 +58,6 @@ LzStepTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: bind
 	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
-{ #category : #printing }
-LzStepTerm >> printAsLeibnizSyntaxOn: aStream [
-	aStream nextPut: ${.
-	self printElements: self elements shape: self shape on: aStream.
-	aStream nextPut: $}
-]
-
 { #category : #accessing }
 LzStepTerm >> sort [
 	^ sort
@@ -62,6 +66,11 @@ LzStepTerm >> sort [
 { #category : #accessing }
 LzStepTerm >> sort: aSort [
 	sort := aSort
+]
+
+{ #category : #accessing }
+LzStepTerm >> steps [
+	^ steps
 ]
 
 { #category : #accessing }

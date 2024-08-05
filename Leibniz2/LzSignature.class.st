@@ -270,6 +270,7 @@ LzSignature >> stepTerm:  steps [
 		signature: self;
 		steps: steps;
 		checkConsistency;
+		computeSort;
 		beRecursivelyReadOnlyObject.
 ]
 

@@ -265,11 +265,6 @@ LzTerm >> printAsFirstArgOfInfixTermWithOpName: anOpName on: aStream [
 ]
 
 { #category : #printing }
-LzTerm >> printAsLeibnizSyntaxOn: aStream [
-	self subclassResponsibility
-]
-
-{ #category : #printing }
 LzTerm >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
