@@ -68,7 +68,7 @@ LzDeclarationBuilder >> parseOptions: aTopLevelAnnotation boolean: aCollection [
 
 { #category : #visiting }
 LzDeclarationBuilder >> visitArrayTerm: anArrayTerm [
-	| shape elements |
+	| elements |
 	elements := self arrayElementsFor: anArrayTerm arrayElements elements.
 	^ LzArrayTermDeclaration new
 		elements: elements
@@ -147,6 +147,16 @@ LzDeclarationBuilder >> visitPrefixOpTerm: aPrefixOpTerm [
 LzDeclarationBuilder >> visitRationalNumberLiteralTerm: aRationalNumberLiteralTerm [
 	^ LzRationalLiteralDeclaration new
 		value: (Fraction readFromString: aRationalNumberLiteralTerm text value)
+]
+
+{ #category : #visiting }
+LzDeclarationBuilder >> visitStepTerm: aStepTerm [
+	^ LzStepTermDeclaration new steps:
+		(aStepTerm steps collect: [ :each |
+			| term var |
+			term := self acceptNode: each term.
+			var := each var ifNotNil: [ :v | self acceptNode: v ].
+			{ term . var } ]).
 ]
 
 { #category : #visiting }

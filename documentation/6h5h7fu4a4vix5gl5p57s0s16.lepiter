@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-02T14:19:08.787444+02:00"
+						"dateAndTimeString" : "2024-08-05T12:09:00.209713+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "{{lzTerm: 42, example = \"yes\"}}"
 			},
 			{
 				"__type" : "textSnippet",

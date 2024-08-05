@@ -77,7 +77,6 @@ TLzPrintable >> gtSyntaxFor: aView [
 { #category : #printing }
 TLzPrintable >> printAsLeibnizSyntaxOn: aStream [
 	aStream << self asLeibnizSyntax asString
-	"self notYetImplemented"
 ]
 
 { #category : #printing }

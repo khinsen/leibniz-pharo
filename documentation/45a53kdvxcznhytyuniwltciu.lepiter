@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-05T10:54:19.59184+02:00"
+						"dateAndTimeString" : "2024-08-05T12:05:42.462414+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A sequence of steps can be combined into a single step:\n{{lzTerm:{.\n  \t\t2 ⇒ a_:ℕ,\n  \t\t3 ⇒ b_:ℕ,\n  \t\ta_ + b_.}, example = \"yes\"}}\nis a step of sort Step(ℕ). Intermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context."
+				"string" : "A sequence of steps can be combined into a single step:\n{{lzTerm:{.\n  \t\t2 ⇒ a_:ℕ,\n  \t\t4 ⇒ b_,\n  \t\ta_ + b_.}, example = \"yes\"}}\nis a step of sort Step(ℕ). Intermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context."
 			},
 			{
 				"__type" : "textSnippet",
