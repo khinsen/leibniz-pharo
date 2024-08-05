@@ -326,7 +326,7 @@ LzDeclarationBuilder >> visitTopLevelTerm: aTopLevelTerm [
 	pattern := LzPatternDeclaration new
 		variables: varBuilder vars;
 		term: (self acceptNode: aTopLevelTerm term).
-	^ self annotate: pattern from: aTopLevelTerm booleanOptions: #(withSort withNormalForm)
+	^ self annotate: pattern from: aTopLevelTerm booleanOptions: #(example withSort withNormalForm)
 ]
 
 { #category : #'visiting - toplevel' }
