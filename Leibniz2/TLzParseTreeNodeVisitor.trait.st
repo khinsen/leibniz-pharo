@@ -106,6 +106,16 @@ TLzParseTreeNodeVisitor >> visitSimpleOpArg: aSimpleOpArg [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitStep: aStep [
+	^ self visitParseTree: aStep
+]
+
+{ #category : #generated }
+TLzParseTreeNodeVisitor >> visitStepTerm: aStepTerm [
+	^ self visitParseTree: aStepTerm
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitStringLiteralTerm: aStringLiteralTerm [
 	^ self visitLiteralTerm: aStringLiteralTerm
 ]

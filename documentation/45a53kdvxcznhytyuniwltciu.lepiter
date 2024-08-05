@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-05T09:35:46.78071+02:00"
+						"dateAndTimeString" : "2024-08-05T10:53:43.064046+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-05T09:47:44.957413+02:00"
+						"dateAndTimeString" : "2024-08-05T10:54:19.59184+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "Je+ickzbDQCky73BDwELRg=="
+					"uidString" : "YmETjU3bDQCpd/pVBz9vsA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A sequence of steps can be combined into a single step:\n  steps(\n  \t\t2 ⇒ a_:ℕ,\n  \t\t3 ⇒ b_:ℕ,\n  \t\ta_ + b_)\nis a step of sort Step(ℕ). Intermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context."
+				"string" : "A sequence of steps can be combined into a single step:\n{{lzTerm:{.\n  \t\t2 ⇒ a_:ℕ,\n  \t\t3 ⇒ b_:ℕ,\n  \t\ta_ + b_.}, example = \"yes\"}}\nis a step of sort Step(ℕ). Intermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context."
 			},
 			{
 				"__type" : "textSnippet",
