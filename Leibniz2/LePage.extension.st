@@ -139,8 +139,10 @@ LePage >> lzRebuildContextsFor: anAction [
 		priority: 2;
 		icon: BrGlamorousVectorIcons accept;
 		action: [ :aButton |
-				(self lzDBCache contextCacheFor: self)
-					rebuildContexts ]
+					| cache |
+					cache := self lzDBCache contextCacheFor: self.
+					cache rebuildContexts.
+					aButton phlow spawnObject: cache ]
 ]
 
 { #category : #'*Leibniz2' }
