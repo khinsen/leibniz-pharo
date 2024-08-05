@@ -1,6 +1,6 @@
 Class {
 	#name : #LzStepTermNode,
-	#superclass : #LzParseTreeNode,
+	#superclass : #LzTermNode,
 	#instVars : [
 		'leftDelimiter',
 		'steps',

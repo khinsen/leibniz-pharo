@@ -264,6 +264,16 @@ LzSignature >> sortGraph: aSortGraph [
 ]
 
 { #category : #constructing }
+LzSignature >> stepTerm:  steps [
+	self assertBuiltin: #steps.
+	^ LzStepTerm new
+		signature: self;
+		steps: steps;
+		checkConsistency;
+		beRecursivelyReadOnlyObject.
+]
+
+{ #category : #constructing }
 LzSignature >> stringTerm: aString [
 	^ self 
 		literalTerm:  aString

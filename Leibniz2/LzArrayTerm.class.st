@@ -9,10 +9,6 @@ Class {
 	#category : #'Leibniz2-Terms'
 }
 
-{ #category : #'instance creation' }
-LzArrayTerm class >> signature: aSignature value: anArray [
-]
-
 { #category : #converting }
 LzArrayTerm >> addAsRopedTextTo: aRopedText [
 	aRopedText append: '{' asRopedText.

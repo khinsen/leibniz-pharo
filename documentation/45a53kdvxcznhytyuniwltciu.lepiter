@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-05T09:40:00.745941+02:00"
+						"dateAndTimeString" : "2024-08-05T15:39:52.0545+02:00"
 					}
 				},
 				"uid" : {
@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-05T12:05:42.462414+02:00"
+						"dateAndTimeString" : "2024-08-05T15:32:12.967404+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A sequence of steps can be combined into a single step:\n{{lzTerm:{.\n  \t\t2 ⇒ a_:ℕ,\n  \t\t4 ⇒ b_,\n  \t\ta_ + b_.}, example = \"yes\"}}\nis a step of sort Step(ℕ). Intermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context."
+				"string" : "A sequence of steps can be combined into a single step:\n\t{{lzTerm:{. 2 ⇒ a_:ℕ, 4 ⇒ b_:ℕ, a_ + b_.}, subcontext = \"example\"}}\n(uses {{lzUseContext:name = \"Integers\", subcontext = \"example\"}}).\n\nIntermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context."
 			},
 			{
 				"__type" : "textSnippet",

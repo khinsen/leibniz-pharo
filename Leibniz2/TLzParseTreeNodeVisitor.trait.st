@@ -112,7 +112,7 @@ TLzParseTreeNodeVisitor >> visitStep: aStep [
 
 { #category : #generated }
 TLzParseTreeNodeVisitor >> visitStepTerm: aStepTerm [
-	^ self visitParseTree: aStepTerm
+	^ self visitTerm: aStepTerm
 ]
 
 { #category : #generated }

@@ -23,8 +23,17 @@ LzStepTermDeclaration >> addAsRopedTextTo: aRopedText [
 
 { #category : #constructing }
 LzStepTermDeclaration >> buildFor: aSignature variables: aDictionary [
-"	^ aSignature
-		stepTerm: self."
+	| vars |
+	vars := aDictionary copy.
+	^ aSignature stepTerm:
+		(self steps collect: [ :each |
+			| term sort var |
+			term := each first buildFor: aSignature variables: vars.
+			each second ifNotNil: [ :v |
+			  sort := aSignature sortForVar: v name variables: vars.
+			  vars at: v name put: sort.
+			  var := v name ].
+			{ term . var} ])
 ]
 
 { #category : #accessing }
