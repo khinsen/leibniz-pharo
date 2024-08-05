@@ -16,8 +16,22 @@ LzBook class >> contextNamed: aString [
 
 { #category : #accessing }
 LzBook class >> database [
-	^ LeDatabasesRegistry defaultLogicalDatabase databases
+	| logicalDB db |
+	logicalDB := LeDatabasesRegistry defaultLogicalDatabase.
+	db := logicalDB databases
 		detect: [ :each | each databaseName = self databaseName ]
+		ifNone: [
+			logicalDB properties addRegisteredDirectory: self databaseLocation.
+			logicalDB reload.
+			logicalDB databaseNamed: self databaseName ].
+	^ db
+]
+
+{ #category : #accessing }
+LzBook class >> databaseLocation [
+	^ FileLocator imageDirectory
+		/ 'pharo-local' / 'iceberg'
+		/ 'khinsen' / 'leibniz-pharo' / 'documentation'
 ]
 
 { #category : #accessing }

@@ -4,37 +4,6 @@ Class {
 	#category : #BaselineOfLeibnizForGToolkit
 }
 
-{ #category : #accessing }
-BaselineOfLeibnizForGToolkit class >> databaseName [
-	^ 'Leibniz documentation'
-]
-
-{ #category : #accessing }
-BaselineOfLeibnizForGToolkit class >> lepiterDatabase [
-	| logicalDB |
-	logicalDB := LeDatabasesRegistry defaultLogicalDatabase.
-	logicalDB
-		databaseNamed: self databaseName
-		ifNone: [ self loadLepiter ].
-	^ logicalDB
-		databaseNamed: self databaseName
-]
-
-{ #category : #accessing }
-BaselineOfLeibnizForGToolkit class >> loadLepiter [
-	IceRepository registry  
-		detect: [ :aRepository |
-			aRepository name = 'leibniz-pharo' ]
-		ifFound: [ :aRepository | 
-			| defaultDatabase currentProperties |
-			defaultDatabase := LeDatabasesRegistry defaultLogicalDatabase.
-			currentProperties := defaultDatabase properties.
-			currentProperties addRegisteredDirectory: aRepository repositoryDirectory / 'documentation'.
-			defaultDatabase reload ]
-		ifNone: [
-			self inform: 'Repository not found.' ]
-]
-
 { #category : #baseline }
 BaselineOfLeibnizForGToolkit >> applyPatchForHtmlExportOfLfAndTab [
 	"Patch GT's HTML generation code to properly deal with \n and \t in Lepiter text snippets.
@@ -173,7 +142,4 @@ BaselineOfLeibnizForGToolkit >> postload: loader package: packageSpec [
 	self applyPatchForHtmlExportOfLfAndTab.
 	self applyPatchForHtmlExportOfMethodSourceCode.
 	self applyPatchForHtmlExportOfNestingLevelsForSnippets.
-	self class loadLepiter.
-	GtWorld allInstances do: [ :aGtWorld |
-		aGtWorld root children first home updateWidget ]
 ]
