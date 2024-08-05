@@ -18,7 +18,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2023-12-28T10:04:50.767524+01:00"
+						"dateAndTimeString" : "2024-08-05T09:39:09.117032+02:00"
 					}
 				},
 				"editEmail" : {
@@ -29,17 +29,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-07-30T15:19:18.382397+02:00"
+						"dateAndTimeString" : "2024-08-05T09:40:00.745941+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "cDJw0tzJDQCzuhcpCR9lbQ=="
+					"uidString" : "mVhogkzbDQCpgPWUDwELRg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "{{lzUseContext:name=\"Integers\"}}"
+				"string" : "Requires special terms ({{lzSpecialTerms:steps}}) that cannot be implemented in Leibniz itself."
 			},
 			{
 				"__type" : "textSnippet",
@@ -55,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-07-31T14:06:15.843728+02:00"
+						"dateAndTimeString" : "2024-08-05T10:03:19.444124+02:00"
 					}
 				},
 				"editEmail" : {
@@ -66,17 +66,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-07-31T14:09:25.734337+02:00"
+						"dateAndTimeString" : "2024-08-05T10:17:58.546952+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "ffF3qOvaDQCJrChUDJF0mg=="
+					"uidString" : "vZ3a2EzbDQC5/3jLB9aKxA=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "{{lzOp:  a : ℕ}}"
+				"string" : "An algorithmic step of sort {{lzSort:Step}} is an operation that can changes state values. Steps of sort {{lzSort:Step(𝕊)}} with {{lzSort:s_:𝕊, Step(s_) ⊆ Step}} also return a result of the specified sort."
 			},
 			{
 				"__type" : "textSnippet",
@@ -92,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-02T14:19:08.787444+02:00"
+						"dateAndTimeString" : "2024-08-05T09:35:46.78071+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,17 +103,17 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-02T14:19:08.787444+02:00"
+						"dateAndTimeString" : "2024-08-05T09:47:44.957413+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "COE4EhTbDQC/xPI0Cch/UA=="
+					"uidString" : "Je+ickzbDQCky73BDwELRg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "A sequence of steps can be combined into a single step:\n  steps(\n  \t\t2 ⇒ a_:ℕ,\n  \t\t3 ⇒ b_:ℕ,\n  \t\ta_ + b_)\nis a step of sort Step(ℕ). Intermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context."
 			},
 			{
 				"__type" : "textSnippet",
@@ -129,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-01-02T15:43:34.216179+01:00"
+						"dateAndTimeString" : "2024-08-05T09:38:41.622568+02:00"
 					}
 				},
 				"editEmail" : {
@@ -140,17 +140,54 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-01-02T15:43:34.216179+01:00"
+						"dateAndTimeString" : "2024-08-05T09:45:05.146246+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "p+mSJVnKDQCasPulBnfq3w=="
+					"uidString" : "Rb8agEzbDQCoxxsLDwELRg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : ""
+				"string" : "A step is executed using\n\t{{lzOp:run(Step(s_:𝕊)) : s_}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-05T09:46:17.561413+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-05T09:49:25.228591+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "EePxm0zbDQCtw77ZDwELRg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "At the beginning of execution, the value of all state variables is {{lzOp:undefined:undefined}}, of sort {{lzSort:undefined}}."
 			}
 		]
 	},
@@ -162,7 +199,7 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2023-12-27T11:15:57.783079+01:00"
+			"dateAndTimeString" : "2024-08-05T09:23:50.044551+02:00"
 		}
 	},
 	"editEmail" : {
@@ -173,15 +210,15 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2023-12-27T11:15:57.783079+01:00"
+			"dateAndTimeString" : "2024-08-05T09:23:50.044551+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Scratchpad"
+		"title" : "Steps"
 	},
 	"uid" : {
 		"__type" : "uuid",
-		"uuid" : "ea35f1d1-dcc9-0d00-b3b8-9d12091f656d"
+		"uuid" : "a679a04b-4cdb-0d00-9f72-9ed00f010b46"
 	}
 }
