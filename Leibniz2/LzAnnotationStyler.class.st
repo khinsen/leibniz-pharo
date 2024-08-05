@@ -115,7 +115,7 @@ LzAnnotationStyler >> styleAutoUpdatingObjectButton: anAnnotation text: aBlock [
 			] on: Exception do: [ :ex | ex freeze. ex inspect ] ].
 	self text
 		attribute: attribute
-		from: anAnnotation parent startPosition
+		from: (anAnnotation parent stopPosition - 1)
 		to: anAnnotation parent stopPosition
 ]
 
