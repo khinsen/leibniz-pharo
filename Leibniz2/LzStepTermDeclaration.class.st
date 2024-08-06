@@ -33,7 +33,7 @@ LzStepTermDeclaration >> buildFor: aSignature variables: aDictionary [
 			  sort := aSignature sortForVar: v name variables: vars.
 			  vars at: v name put: sort.
 			  var := v name ].
-			{ term . var} ])
+			{ term . var . sort } ])
 ]
 
 { #category : #accessing }

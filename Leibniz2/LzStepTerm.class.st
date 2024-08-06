@@ -11,13 +11,29 @@ Class {
 { #category : #converting }
 LzStepTerm >> addAsRopedTextTo: aRopedText [
 	aRopedText append: '{. ' asRopedText.
-
+	1 to: steps size do: [ :eachIndex |
+		| step |
+		step := steps at: eachIndex.
+		step first addAsRopedTextTo: aRopedText.
+		step second ifNotNil: [ :v |
+			aRopedText append: ' ⇒ ' asRopedText.
+			v addAsRopedTextTo: aRopedText.
+			self
+				do: [ :t |
+					t append: ':' asRopedText.
+					self
+						do: [ :tt | step third addAsRopedTextTo: tt ]
+						to: t
+						withAttribute: LzSortAttribute new ]
+				to: aRopedText
+				withAttribute: LzVarDeclarationAttribute new ].
+		eachIndex < steps size ifTrue: [ aRopedText append: ', ' asRopedText ] ].
 	aRopedText append: ' .}' asRopedText.
 ]
 
 { #category : #accessing }
 LzStepTerm >> args [
-	^ steps
+	^ #()
 ]
 
 { #category : #initializing }
