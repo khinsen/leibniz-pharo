@@ -30,7 +30,7 @@ LzCompoundStepTermDeclaration >> buildFor: aSignature variables: aDictionary [
 			| term sort var |
 			term := each first buildFor: aSignature variables: vars.
 			each second ifNotNil: [ :v |
-			  sort := aSignature sortForVar: v name variables: vars.
+				sort := aSignature sortGraph parsedSort: v sort.
 			  vars at: v name put: sort.
 			  var := v name ].
 			{ term . var . sort } ])

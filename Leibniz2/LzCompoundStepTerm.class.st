@@ -48,7 +48,12 @@ LzCompoundStepTerm >> checkConsistency [
 
 { #category : #initializing }
 LzCompoundStepTerm >> computeSort [
-	sort := self steps last first sort
+	| lastStepSort sortTerm |
+	lastStepSort := self steps last first sort.
+	sortTerm := lastStepSort term signature
+					opTerm: (LzPrefixOpName for: #CompoundStep)
+					args: lastStepSort term args.
+	sort := lastStepSort sortGraph sortWithTerm: sortTerm.
 ]
 
 { #category : #rewriting }
@@ -76,6 +81,32 @@ LzCompoundStepTerm >> matchArrayTerm: otherTerm elements: aTermList shape: anArr
 { #category : #unifying }
 LzCompoundStepTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
+]
+
+{ #category : #accessing }
+LzCompoundStepTerm >> runWithSignature: aSignature reducer: aReducer [
+	| variables bindings result |
+	variables := Dictionary new.
+	bindings := LzBindings new
+		sortGraph: self signature sortGraph.
+	steps do: [ :eachStep |
+		| stepTerm runStepTerm var varSort varTerm |
+		stepTerm := eachStep first substitute: bindings.
+		runStepTerm := self signature
+						opTerm: (LzPrefixOpName for: #run)
+						args: { stepTerm }.
+		result := aReducer value: runStepTerm.
+
+		var := eachStep second.
+		varSort := eachStep third.
+		var ifNotNil: [
+			variables at: var put: varSort.
+			varTerm := self signature varTerm: var variables: variables.
+			varTerm match: result bindings: bindings ].
+		bindings ifFailure: [ :f |
+			LzRewriteFailure signal: f asString ] ].
+
+	^ result
 ]
 
 { #category : #accessing }

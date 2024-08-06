@@ -161,6 +161,12 @@ LzPageContextCache >> printOn: aStream [
 ]
 
 { #category : #constructing }
+LzPageContextCache >> rebuildAllContexts [
+	contexts := Dictionary new.
+	self rebuildContexts.
+]
+
+{ #category : #constructing }
 LzPageContextCache >> rebuildContexts [
 	| contextNames |
 	contextNames := self declarationCache subcontexts.

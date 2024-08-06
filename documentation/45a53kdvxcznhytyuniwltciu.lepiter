@@ -257,7 +257,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-06T14:56:12.503496+02:00"
+									"dateAndTimeString" : "2024-08-06T15:30:28.296324+02:00"
 								}
 							},
 							"uid" : {
@@ -331,7 +331,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-06T15:10:58.513664+02:00"
+									"dateAndTimeString" : "2024-08-06T16:31:43.130029+02:00"
 								}
 							},
 							"uid" : {
@@ -341,7 +341,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "The execution of compound steps is handled in Pharo code:\n\t{{lzRule:run(step_:CompoundStep)  ⇒ Pharo:\"step ensureCompoundStep. step run.\"}}"
+							"string" : "The execution of compound steps is handled in Pharo code:\n\t{{lzRule:run(step_:CompoundStep)  ⇒ Pharo:\"step ensureCompoundStep. step runWithSignature: signature reducer: reducer\"}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -368,7 +368,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-06T15:21:14.868823+02:00"
+									"dateAndTimeString" : "2024-08-06T15:31:11.645522+02:00"
 								}
 							},
 							"uid" : {

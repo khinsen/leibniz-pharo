@@ -142,7 +142,7 @@ LePage >> lzRebuildContextsFor: anAction [
 		action: [ :aButton |
 					| cache |
 					cache := self lzDBCache contextCacheFor: self.
-					cache rebuildContexts.
+					cache rebuildAllContexts.
 					aButton phlow spawnObject: cache ].
 	"action inspect."
 	^ action

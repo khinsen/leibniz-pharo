@@ -25,6 +25,11 @@ LzOpTermDeclaration >> args: anObject [
 ]
 
 { #category : #constructing }
+LzOpTermDeclaration >> buildFor: aSignature [
+	^ self buildFor: aSignature variables: Dictionary new
+]
+
+{ #category : #constructing }
 LzOpTermDeclaration >> buildFor: aSignature variables: aDictionary [
 	LzDebuggingUtilities checkForInfiniteRecursion.
 	^ aSignature
