@@ -12,6 +12,11 @@ LzTermDeclaration >> addAsFirstArgOfInfixTermWithOpName: anOpName asRopedTextTo:
 ]
 
 { #category : #constructing }
+LzTermDeclaration >> buildFor: aSignature [
+	^ self buildFor: aSignature variables: Dictionary new
+]
+
+{ #category : #constructing }
 LzTermDeclaration >> buildFor: aSignature variables: aDictionary [
 	self subclassResponsibility
 ]

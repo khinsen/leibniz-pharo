@@ -211,7 +211,7 @@ LzSignature >> parsedRule: aRuleDeclaration [
 
 { #category : #constructing }
 LzSignature >> parsedTerm: anASTTermNode [
-	^ anASTTermNode buildFor: self variables: Dictionary new
+	^ anASTTermNode buildFor: self
 ]
 
 { #category : #constructing }
