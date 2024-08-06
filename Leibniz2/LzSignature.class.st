@@ -55,6 +55,17 @@ LzSignature >> builtins: aSet [
 	builtins := aSet
 ]
 
+{ #category : #constructing }
+LzSignature >> compoundStepTerm:  steps [
+	self assertBuiltin: #steps.
+	^ LzCompoundStepTerm new
+		signature: self;
+		steps: steps;
+		checkConsistency;
+		computeSort;
+		beRecursivelyReadOnlyObject.
+]
+
 { #category : #copying }
 LzSignature >> copy [
 	^ self
@@ -261,17 +272,6 @@ LzSignature >> sortGraph [
 { #category : #accessing }
 LzSignature >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
-]
-
-{ #category : #constructing }
-LzSignature >> stepTerm:  steps [
-	self assertBuiltin: #steps.
-	^ LzStepTerm new
-		signature: self;
-		steps: steps;
-		checkConsistency;
-		computeSort;
-		beRecursivelyReadOnlyObject.
 ]
 
 { #category : #constructing }

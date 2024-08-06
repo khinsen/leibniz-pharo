@@ -31,6 +31,11 @@ TLzParseTreeNodeVisitor >> visitBracketOpTerm: aBracketOpTerm [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitCompoundStepTerm: aCompoundStepTerm [
+	^ self visitParseTree: aCompoundStepTerm
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitFpNumberLiteralTerm: aFpNumberLiteralTerm [
 	^ self visitLiteralTerm: aFpNumberLiteralTerm
 ]

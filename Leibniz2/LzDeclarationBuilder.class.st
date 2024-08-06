@@ -88,6 +88,16 @@ LzDeclarationBuilder >> visitBracketOpTerm: aBracketOpTerm [
 ]
 
 { #category : #visiting }
+LzDeclarationBuilder >> visitCompoundStepTerm: aCompoundStepTerm [
+	^ LzCompoundStepTermDeclaration new steps:
+		(aCompoundStepTerm steps collect: [ :each |
+			| term var |
+			term := self acceptNode: each term.
+			var := each var ifNotNil: [ :v | self acceptNode: v ].
+			{ term . var } ]).
+]
+
+{ #category : #visiting }
 LzDeclarationBuilder >> visitFpNumberLiteralTerm: aFpNumberLiteralTerm [
 	| value |
 	"Pharo doesn't allow a dot followed by an exponent without any fractional part.
@@ -147,16 +157,6 @@ LzDeclarationBuilder >> visitPrefixOpTerm: aPrefixOpTerm [
 LzDeclarationBuilder >> visitRationalNumberLiteralTerm: aRationalNumberLiteralTerm [
 	^ LzRationalLiteralDeclaration new
 		value: (Fraction readFromString: aRationalNumberLiteralTerm text value)
-]
-
-{ #category : #visiting }
-LzDeclarationBuilder >> visitStepTerm: aStepTerm [
-	^ LzStepTermDeclaration new steps:
-		(aStepTerm steps collect: [ :each |
-			| term var |
-			term := self acceptNode: each term.
-			var := each var ifNotNil: [ :v | self acceptNode: v ].
-			{ term . var } ]).
 ]
 
 { #category : #visiting }

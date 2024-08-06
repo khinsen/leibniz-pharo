@@ -28,7 +28,7 @@ LzParser2 class >> ambiguousTransitions [
 
 { #category : #'generated-accessing' }
 LzParser2 class >> cacheId [
-	^'2024-08-05T15:36:07.712783+02:00'
+	^'2024-08-06T15:17:48.866285+02:00'
 ]
 
 { #category : #generated }
@@ -152,12 +152,12 @@ SimpleTerm
 	: LiteralTerm
 	| ParenthesizedTerm
 	| ArrayTerm
-	| StepTerm
+	| CompoundStepTerm
 	| TupleTerm
 	| PrefixOpTerm
 	| VarTerm
 	;
-StepTerm
+CompoundStepTerm
 	: ""{."" 'leftDelimiter'
 			Step 'step' 
 			("","" 'comma' Step 'step')*
@@ -280,21 +280,21 @@ LzParser2 class >> reduceTable [
 ^#(
 	#(39 0 #reduceActionFor_Var__var_______comma___1: 1180673 false) 
 	#(35 1 #liftFirstValue: 1056769 false) 
-	#(83 1 #liftFirstValue: 5342213 false) 
-	#(83 1 #liftFirstValue: 5342211 false) 
-	#(83 1 #liftFirstValue: 5342209 false) 
-	#(83 1 #liftFirstValue: 5342210 false) 
-	#(83 1 #liftFirstValue: 5342214 false) 
-	#(83 1 #liftFirstValue: 5342212 false) 
-	#(83 1 #liftFirstValue: 5342215 false) 
-	#(82 0 #reduceActionFor_Var__var_______comma___1: 5272577 false) 
+	#(83 1 #liftFirstValue: 5358597 false) 
+	#(83 1 #liftFirstValue: 5358595 false) 
+	#(83 1 #liftFirstValue: 5358593 false) 
+	#(83 1 #liftFirstValue: 5358594 false) 
+	#(83 1 #liftFirstValue: 5358598 false) 
+	#(83 1 #liftFirstValue: 5358596 false) 
+	#(83 1 #liftFirstValue: 5358599 false) 
+	#(82 0 #reduceActionFor_Var__var_______comma___1: 5288961 false) 
 	#(41 0 #reduceActionFor_Option__option___1: 1240065 false) 
-	#(75 1 #reduceActionForStringLiteralTerm1: 4918273 false) 
-	#(76 1 #reduceActionForIntegerLiteralTerm1: 4964353 false) 
-	#(77 1 #reduceActionForRationalNumberLiteralTerm1: 5012481 false) 
-	#(78 1 #reduceActionForFpNumberLiteralTerm1: 5074945 false) 
-	#(66 1 #reduceActionForPrefixOpTerm1: 4158465 false) 
-	#(67 1 #reduceActionForVarTerm2: 4287490 false) 
+	#(75 1 #reduceActionForStringLiteralTerm1: 4934657 false) 
+	#(76 1 #reduceActionForIntegerLiteralTerm1: 4980737 false) 
+	#(77 1 #reduceActionForRationalNumberLiteralTerm1: 5028865 false) 
+	#(78 1 #reduceActionForFpNumberLiteralTerm1: 5091329 false) 
+	#(66 1 #reduceActionForPrefixOpTerm1: 4174849 false) 
+	#(67 1 #reduceActionForVarTerm2: 4303874 false) 
 	#(54 1 #liftFirstValue: 3263490 false) 
 	#(57 1 #liftFirstValue: 3374081 false) 
 	#(60 1 #liftFirstValue: 3773444 false) 
@@ -304,50 +304,50 @@ LzParser2 class >> reduceTable [
 	#(60 1 #liftFirstValue: 3773443 false) 
 	#(60 1 #liftFirstValue: 3773445 false) 
 	#(60 1 #liftFirstValue: 3773441 false) 
-	#(74 1 #liftFirstValue: 4805636 false) 
-	#(74 1 #liftFirstValue: 4805633 false) 
-	#(74 1 #liftFirstValue: 4805634 false) 
-	#(74 1 #liftFirstValue: 4805635 false) 
+	#(74 1 #liftFirstValue: 4822020 false) 
+	#(74 1 #liftFirstValue: 4822017 false) 
+	#(74 1 #liftFirstValue: 4822018 false) 
+	#(74 1 #liftFirstValue: 4822019 false) 
 	#(44 2 #reduceActionForAssetPrefix1: 1655809 false) 
 	#(39 2 #reduceActionFor_Var__var_______comma___2: 1180674 false) 
 	#(48 1 #reduceActionForOp1: 2264065 false) 
 	#(52 1 #reduceActionForSimpleOpArg2: 3040258 false) 
 	#(46 2 #reduceActionForRulePrefix1: 2076673 false) 
-	#(84 2 #reduceActionForTopLevelAsset1: 5474305 false) 
-	#(71 0 #reduceActionFor_Var__var_______comma___1: 4562945 false) 
-	#(64 1 #reduceActionForStep2: 4006914 false) 
-	#(63 0 #reduceActionFor_Var__var_______comma___1: 3944449 false) 
+	#(84 2 #reduceActionForTopLevelAsset1: 5490689 false) 
+	#(71 0 #reduceActionFor_Var__var_______comma___1: 4579329 false) 
+	#(64 1 #reduceActionForStep2: 4023298 false) 
+	#(63 0 #reduceActionFor_Var__var_______comma___1: 3960833 false) 
 	#(56 1 #reduceActionFor__opIdentifier___opName__NonInfixTerm__arg___1: 3291137 false) 
 	#(54 2 #reduceActionForTerm1: 3263489 false) 
 	#(38 2 #reduceActionFor_Var__var_______comma__1: 1180673 false) 
 	#(47 3 #reduceActionForTopLevelTerm1: 2157569 false) 
 	#(51 1 #reduceActionForOpArg2: 2945026 false) 
 	#(42 3 #reduceActionForTopLevelSort1: 1267713 false) 
-	#(79 3 #reduceActionForTopLevelUseContext2: 5125122 false) 
-	#(80 3 #reduceActionForTopLevelSpecialTerms1: 5221377 false) 
-	#(82 2 #reduceActionFor_Var__var_______comma___2: 5272578 false) 
+	#(79 3 #reduceActionForTopLevelUseContext2: 5141506 false) 
+	#(80 3 #reduceActionForTopLevelSpecialTerms1: 5237761 false) 
+	#(82 2 #reduceActionFor_Var__var_______comma___2: 5288962 false) 
 	#(40 1 #liftFirstValue: 1240065 false) 
 	#(41 2 #reduceActionFor_Option__option___2: 1240066 false) 
-	#(65 3 #reduceActionForParenthesizedTerm1: 4082689 false) 
-	#(72 1 #liftFirstValue: 4631553 false) 
-	#(72 1 #liftFirstValue: 4631554 false) 
-	#(68 3 #reduceActionForArrayTerm1: 4408321 false) 
+	#(65 3 #reduceActionForParenthesizedTerm1: 4099073 false) 
+	#(72 1 #liftFirstValue: 4647937 false) 
+	#(72 1 #liftFirstValue: 4647938 false) 
+	#(68 3 #reduceActionForArrayTerm1: 4424705 false) 
 	#(59 0 #reduceActionFor_Var__var_______comma___1: 3458049 false) 
-	#(67 3 #reduceActionForVarTerm1: 4287489 false) 
+	#(67 3 #reduceActionForVarTerm1: 4303873 false) 
 	#(55 2 #reduceActionFor_Var__var_______comma__1: 3291137 false) 
 	#(56 2 #reduceActionFor_Var__var_______comma___2: 3291138 false) 
 	#(53 3 #reduceActionForVar1: 3193857 false) 
 	#(47 4 #reduceActionForTopLevelTerm2: 2157570 false) 
 	#(50 0 #reduceActionFor_Var__var_______comma___1: 2329601 false) 
 	#(48 3 #reduceActionForOp5: 2264069 false) 
-	#(79 4 #reduceActionForTopLevelUseContext1: 5125121 false) 
-	#(81 2 #reduceActionFor_Var__var_______comma__1: 5272577 false) 
-	#(73 4 #reduceActionForTupleTerm1: 4673537 false) 
-	#(69 3 #reduceActionForArrayElements1: 4494337 false) 
-	#(71 2 #reduceActionFor_Var__var_______comma___2: 4562946 false) 
-	#(64 3 #reduceActionForStep1: 4006913 false) 
-	#(61 4 #reduceActionForStepTerm1: 3891201 false) 
-	#(63 2 #reduceActionFor_Var__var_______comma___2: 3944450 false) 
+	#(79 4 #reduceActionForTopLevelUseContext1: 5141505 false) 
+	#(81 2 #reduceActionFor_Var__var_______comma__1: 5288961 false) 
+	#(73 4 #reduceActionForTupleTerm1: 4689921 false) 
+	#(69 3 #reduceActionForArrayElements1: 4510721 false) 
+	#(71 2 #reduceActionFor_Var__var_______comma___2: 4579330 false) 
+	#(64 3 #reduceActionForStep1: 4023297 false) 
+	#(61 4 #reduceActionForCompoundStepTerm1: 3899393 false) 
+	#(63 2 #reduceActionFor_Var__var_______comma___2: 3960834 false) 
 	#(51 3 #reduceActionForOpArg1: 2945025 false) 
 	#(48 4 #reduceActionForOp3: 2264067 false) 
 	#(37 5 #reduceActionForTopLevelOp1: 1166337 false) 
@@ -355,11 +355,11 @@ LzParser2 class >> reduceTable [
 	#(43 5 #reduceActionForTopLevelAxiom1: 1474561 false) 
 	#(46 5 #reduceActionForRulePrefix2: 2076674 false) 
 	#(45 5 #reduceActionForTopLevelRule1: 1707009 false) 
-	#(84 5 #reduceActionForTopLevelAsset2: 5474306 false) 
-	#(70 2 #reduceActionFor_Var__var_______comma__1: 4562945 false) 
-	#(69 4 #reduceActionForArrayElements2: 4494338 false) 
-	#(62 2 #reduceActionFor_Var__var_______comma__1: 3944449 false) 
-	#(66 5 #reduceActionForPrefixOpTerm2: 4158466 false) 
+	#(84 5 #reduceActionForTopLevelAsset2: 5490690 false) 
+	#(70 2 #reduceActionFor_Var__var_______comma__1: 4579329 false) 
+	#(69 4 #reduceActionForArrayElements2: 4510722 false) 
+	#(62 2 #reduceActionFor_Var__var_______comma__1: 3960833 false) 
+	#(66 5 #reduceActionForPrefixOpTerm2: 4174850 false) 
 	#(59 2 #reduceActionFor_Var__var_______comma___2: 3458050 false) 
 	#(57 5 #reduceActionForNonInfixTerm2: 3374082 false) 
 	#(57 5 #reduceActionForNonInfixTerm4: 3374084 false) 
@@ -374,7 +374,7 @@ LzParser2 class >> reduceTable [
 	#(45 6 #reduceActionForTopLevelRule5: 1707013 false) 
 	#(45 6 #reduceActionForTopLevelRule3: 1707011 false) 
 	#(36 4 #reduceActionForOption1: 1083393 false) 
-	#(73 6 #reduceActionForTupleTerm2: 4673538 false) 
+	#(73 6 #reduceActionForTupleTerm2: 4689922 false) 
 	#(58 2 #reduceActionFor_Var__var_______comma__1: 3458049 false) 
 	#(48 6 #reduceActionForOp4: 2264068 false) 
 	#(49 2 #reduceActionFor_Var__var_______comma__1: 2329601 false) 
@@ -445,12 +445,12 @@ LzParser2 class >> startingStateForTopLevelUseContext [
 
 { #category : #generated }
 LzParser2 class >> symbolNames [
-	^ #('"("' '")"' '","' '".}"' '":"' '"="' '"Pharo:"' '"["' '"\("' '"]"' '"^("' '"arrays"' '"floatingPointNumbers"' '"integers"' '"name"' '"name="' '"rationalNumbers"' '"steps"' '"strings"' '"termClasses"' '"{"' '"{."' '"|"' '"}"' '"⇒"' '"⊆"' '<whitespace>' '<string>' '<integer>' '<rationalNumber>' '<fpNumber>' '<opIdentifier>' '<varIdentifier>' 'B e g i n' 'Start' 'Option' 'TopLevelOp' '(Var ''var'' "," ''comma'')' '(Var ''var'' "," ''comma'')*' '(Option ''option'')' '(Option ''option'')*' 'TopLevelSort' 'TopLevelAxiom' 'AssetPrefix' 'TopLevelRule' 'RulePrefix' 'TopLevelTerm' 'Op' '("," ''comma'' OpArg ''arg'')' '("," ''comma'' OpArg ''arg'')*' 'OpArg' 'SimpleOpArg' 'Var' 'Term' '(<opIdentifier> ''opName'' NonInfixTerm ''arg'')' '(<opIdentifier> ''opName'' NonInfixTerm ''arg'')+' 'NonInfixTerm' '("," ''comma'' Term ''arg'')' '("," ''comma'' Term ''arg'')*' 'SimpleTerm' 'StepTerm' '("," ''comma'' Step ''step'')' '("," ''comma'' Step ''step'')*' 'Step' 'ParenthesizedTerm' 'PrefixOpTerm' 'VarTerm' 'ArrayTerm' 'ArrayElements' '("," ''comma'' ArrayElement ''element'')' '("," ''comma'' ArrayElement ''element'')*' 'ArrayElement' 'TupleTerm' 'LiteralTerm' 'StringLiteralTerm' 'IntegerLiteralTerm' 'RationalNumberLiteralTerm' 'FpNumberLiteralTerm' 'TopLevelUseContext' 'TopLevelSpecialTerms' '("," ''comma'' SpecialTerm ''specialTerm'')' '("," ''comma'' SpecialTerm ''specialTerm'')*' 'SpecialTerm' 'TopLevelAsset' 'E O F' 'error')
+	^ #('"("' '")"' '","' '".}"' '":"' '"="' '"Pharo:"' '"["' '"\("' '"]"' '"^("' '"arrays"' '"floatingPointNumbers"' '"integers"' '"name"' '"name="' '"rationalNumbers"' '"steps"' '"strings"' '"termClasses"' '"{"' '"{."' '"|"' '"}"' '"⇒"' '"⊆"' '<whitespace>' '<string>' '<integer>' '<rationalNumber>' '<fpNumber>' '<opIdentifier>' '<varIdentifier>' 'B e g i n' 'Start' 'Option' 'TopLevelOp' '(Var ''var'' "," ''comma'')' '(Var ''var'' "," ''comma'')*' '(Option ''option'')' '(Option ''option'')*' 'TopLevelSort' 'TopLevelAxiom' 'AssetPrefix' 'TopLevelRule' 'RulePrefix' 'TopLevelTerm' 'Op' '("," ''comma'' OpArg ''arg'')' '("," ''comma'' OpArg ''arg'')*' 'OpArg' 'SimpleOpArg' 'Var' 'Term' '(<opIdentifier> ''opName'' NonInfixTerm ''arg'')' '(<opIdentifier> ''opName'' NonInfixTerm ''arg'')+' 'NonInfixTerm' '("," ''comma'' Term ''arg'')' '("," ''comma'' Term ''arg'')*' 'SimpleTerm' 'CompoundStepTerm' '("," ''comma'' Step ''step'')' '("," ''comma'' Step ''step'')*' 'Step' 'ParenthesizedTerm' 'PrefixOpTerm' 'VarTerm' 'ArrayTerm' 'ArrayElements' '("," ''comma'' ArrayElement ''element'')' '("," ''comma'' ArrayElement ''element'')*' 'ArrayElement' 'TupleTerm' 'LiteralTerm' 'StringLiteralTerm' 'IntegerLiteralTerm' 'RationalNumberLiteralTerm' 'FpNumberLiteralTerm' 'TopLevelUseContext' 'TopLevelSpecialTerms' '("," ''comma'' SpecialTerm ''specialTerm'')' '("," ''comma'' SpecialTerm ''specialTerm'')*' 'SpecialTerm' 'TopLevelAsset' 'E O F' 'error')
 ]
 
 { #category : #generated }
 LzParser2 class >> symbolTypes [
-	^ #(#SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #LzTopLevelTermNode #LzTopLevelTermNode #LzOptionNode #LzTopLevelOpNode #OrderedCollection #OrderedCollection #LzOptionNode #OrderedCollection #LzParseTreeNode #LzTopLevelEqualityAxiomNode #LzAssetPrefixNode #LzTopLevelRuleNode #LzRulePrefixNode #LzTopLevelTermNode #LzOpNode #OrderedCollection #OrderedCollection #LzOpArgNode #LzSimpleOpArgNode #LzVarNode #LzParseTreeNode #OrderedCollection #OrderedCollection #LzTermNode #OrderedCollection #OrderedCollection #LzTermNode #LzStepTermNode #OrderedCollection #OrderedCollection #LzStepNode #LzParenthesizedTermNode #LzPrefixOpTermNode #LzVarTermNode #LzArrayTermNode #LzArrayElementsNode #OrderedCollection #OrderedCollection #LzParseTreeNode #LzTupleTermNode #LzLiteralTermNode #LzStringLiteralTermNode #LzIntegerLiteralTermNode #LzRationalNumberLiteralTermNode #LzFpNumberLiteralTermNode #LzTopLevelUseContextNode #LzTopLevelSpecialTermsNode #OrderedCollection #OrderedCollection #SmaCCToken #LzTopLevelAssetNode #SmaCCToken #SmaCCErrorNode)
+	^ #(#SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #SmaCCToken #LzTopLevelTermNode #LzTopLevelTermNode #LzOptionNode #LzTopLevelOpNode #OrderedCollection #OrderedCollection #LzOptionNode #OrderedCollection #LzParseTreeNode #LzTopLevelEqualityAxiomNode #LzAssetPrefixNode #LzTopLevelRuleNode #LzRulePrefixNode #LzTopLevelTermNode #LzOpNode #OrderedCollection #OrderedCollection #LzOpArgNode #LzSimpleOpArgNode #LzVarNode #LzParseTreeNode #OrderedCollection #OrderedCollection #LzParseTreeNode #OrderedCollection #OrderedCollection #LzParseTreeNode #LzCompoundStepTermNode #OrderedCollection #OrderedCollection #LzStepNode #LzParenthesizedTermNode #LzPrefixOpTermNode #LzVarTermNode #LzArrayTermNode #LzArrayElementsNode #OrderedCollection #OrderedCollection #LzParseTreeNode #LzTupleTermNode #LzLiteralTermNode #LzStringLiteralTermNode #LzIntegerLiteralTermNode #LzRationalNumberLiteralTermNode #LzFpNumberLiteralTermNode #LzTopLevelUseContextNode #LzTopLevelSpecialTermsNode #OrderedCollection #OrderedCollection #SmaCCToken #LzTopLevelAssetNode #SmaCCToken #SmaCCErrorNode)
 ]
 
 { #category : #generated }
@@ -756,6 +756,18 @@ LzParser2 >> reduceActionForAssetPrefix1: nodes [
 ]
 
 { #category : #'generated-reduction actions' }
+LzParser2 >> reduceActionForCompoundStepTerm1: nodes [
+	| result |
+	result := LzCompoundStepTermNode new.
+	result leftDelimiter: (nodes at: 1).
+	result addNode: (nodes at: 2) to: result steps.
+	result addTokens: ((nodes at: 3) at: 1) to: result commas.
+	result addNodes: ((nodes at: 3) at: 2) to: result steps.
+	result rightDelimiter: (nodes at: 4).
+	^ result
+]
+
+{ #category : #'generated-reduction actions' }
 LzParser2 >> reduceActionForFpNumberLiteralTerm1: nodes [
 	| result |
 	result := LzFpNumberLiteralTermNode new.
@@ -1024,18 +1036,6 @@ LzParser2 >> reduceActionForStep2: nodes [
 	| result |
 	result := LzStepNode new.
 	result term: (nodes at: 1).
-	^ result
-]
-
-{ #category : #'generated-reduction actions' }
-LzParser2 >> reduceActionForStepTerm1: nodes [
-	| result |
-	result := LzStepTermNode new.
-	result leftDelimiter: (nodes at: 1).
-	result addNode: (nodes at: 2) to: result steps.
-	result addTokens: ((nodes at: 3) at: 1) to: result commas.
-	result addNodes: ((nodes at: 3) at: 2) to: result steps.
-	result rightDelimiter: (nodes at: 4).
 	^ result
 ]
 

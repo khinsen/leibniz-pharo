@@ -1,5 +1,5 @@
 Class {
-	#name : #LzStepTerm,
+	#name : #LzCompoundStepTerm,
 	#superclass : #LzTerm,
 	#instVars : [
 		'steps',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #converting }
-LzStepTerm >> addAsRopedTextTo: aRopedText [
+LzCompoundStepTerm >> addAsRopedTextTo: aRopedText [
 	aRopedText append: '{. ' asRopedText.
 	1 to: steps size do: [ :eachIndex |
 		| step |
@@ -32,12 +32,12 @@ LzStepTerm >> addAsRopedTextTo: aRopedText [
 ]
 
 { #category : #accessing }
-LzStepTerm >> args [
+LzCompoundStepTerm >> args [
 	^ #()
 ]
 
 { #category : #initializing }
-LzStepTerm >> checkConsistency [
+LzCompoundStepTerm >> checkConsistency [
 	| stepSort |
 	self assert: self steps isNotEmpty.
 	stepSort := self signature sortGraph sort: 'Step'.
@@ -47,17 +47,21 @@ LzStepTerm >> checkConsistency [
 ]
 
 { #category : #initializing }
-LzStepTerm >> computeSort [
+LzCompoundStepTerm >> computeSort [
 	sort := self steps last first sort
 ]
 
+{ #category : #rewriting }
+LzCompoundStepTerm >> ensureCompoundStep [
+]
+
 { #category : #organizing }
-LzStepTerm >> fingerprint [
+LzCompoundStepTerm >> fingerprint [
 	^ #steps
 ]
 
 { #category : #unifying }
-LzStepTerm >> match: otherTerm bindings: bindings [
+LzCompoundStepTerm >> match: otherTerm bindings: bindings [
 	otherTerm
 		matchStepTerm: self
 		steps: self steps
@@ -65,37 +69,37 @@ LzStepTerm >> match: otherTerm bindings: bindings [
 ]
 
 { #category : #unifying }
-LzStepTerm >> matchArrayTerm: otherTerm elements: aTermList shape: anArray bindings: bindings [
+LzCompoundStepTerm >> matchArrayTerm: otherTerm elements: aTermList shape: anArray bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : #unifying }
-LzStepTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: bindings [
+LzCompoundStepTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : #accessing }
-LzStepTerm >> sort [
+LzCompoundStepTerm >> sort [
 	^ sort
 ]
 
 { #category : #accessing }
-LzStepTerm >> sort: aSort [
+LzCompoundStepTerm >> sort: aSort [
 	sort := aSort
 ]
 
 { #category : #accessing }
-LzStepTerm >> steps [
+LzCompoundStepTerm >> steps [
 	^ steps
 ]
 
 { #category : #accessing }
-LzStepTerm >> steps: anObject [
+LzCompoundStepTerm >> steps: anObject [
 	steps := anObject
 ]
 
 { #category : #unifying }
-LzStepTerm >> substitute: bindings [
+LzCompoundStepTerm >> substitute: bindings [
 	| substitutedElements |
 	bindings hasNoBindings ifTrue: [ ^ self ].
 	self elements ifEmpty: [ ^ self ].
@@ -104,7 +108,7 @@ LzStepTerm >> substitute: bindings [
 ]
 
 { #category : #unifying }
-LzStepTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: bindings [
+LzCompoundStepTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: bindings [
 	otherTerm
 		unifyTagged: otherSymbol
 		withStepTerm: self
@@ -114,21 +118,21 @@ LzStepTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings:
 ]
 
 { #category : #unifying }
-LzStepTerm >> unifyTagged: aSymbol withArrayTerm: otherTerm tagged: otherSymbol elements: aTermList shape: anArray bindings: bindings [
+LzCompoundStepTerm >> unifyTagged: aSymbol withArrayTerm: otherTerm tagged: otherSymbol elements: aTermList shape: anArray bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : #unifying }
-LzStepTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: otherSymbol bindings: bindings [
+LzCompoundStepTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: otherSymbol bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : #unifying }
-LzStepTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: otherSymbol op: anOpName args: anArgList bindings: bindings [
+LzCompoundStepTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: otherSymbol op: anOpName args: anArgList bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : #accessing }
-LzStepTerm >> valueSlots [
+LzCompoundStepTerm >> valueSlots [
 	^ #(steps)
 ]

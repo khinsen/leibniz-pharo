@@ -134,7 +134,8 @@ LePage >> lzHTMLLocalExportActionFor: anAction [
 { #category : #'*Leibniz2' }
 LePage >> lzRebuildContextsFor: anAction [
 	<lePageAction>
-	^ anAction button
+	| action |
+	action := anAction button
 		tooltip: 'Rebuild the contexts from the page''s declarations';
 		priority: 2;
 		icon: BrGlamorousVectorIcons accept;
@@ -142,7 +143,9 @@ LePage >> lzRebuildContextsFor: anAction [
 					| cache |
 					cache := self lzDBCache contextCacheFor: self.
 					cache rebuildContexts.
-					aButton phlow spawnObject: cache ]
+					aButton phlow spawnObject: cache ].
+	"action inspect."
+	^ action
 ]
 
 { #category : #'*Leibniz2' }

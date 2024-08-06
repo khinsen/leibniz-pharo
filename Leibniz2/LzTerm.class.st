@@ -85,6 +85,11 @@ LzTerm >> ensureArrayTerm [
 ]
 
 { #category : #rewriting }
+LzTerm >> ensureCompoundStep [
+	LzRewriteFailure signal: 'not a compound step'
+]
+
+{ #category : #rewriting }
 LzTerm >> ensureNumber [
 	LzRewriteFailure signal: 'not a number term'
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #LzStepTermDeclaration,
+	#name : #LzCompoundStepTermDeclaration,
 	#superclass : #LzTermDeclaration,
 	#instVars : [
 		'steps'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #converting }
-LzStepTermDeclaration >> addAsRopedTextTo: aRopedText [
+LzCompoundStepTermDeclaration >> addAsRopedTextTo: aRopedText [
 	aRopedText append: '{. ' asRopedText.
 	1 to: steps size do: [ :eachIndex |
 		| step |
@@ -22,10 +22,10 @@ LzStepTermDeclaration >> addAsRopedTextTo: aRopedText [
 ]
 
 { #category : #constructing }
-LzStepTermDeclaration >> buildFor: aSignature variables: aDictionary [
+LzCompoundStepTermDeclaration >> buildFor: aSignature variables: aDictionary [
 	| vars |
 	vars := aDictionary copy.
-	^ aSignature stepTerm:
+	^ aSignature compoundStepTerm:
 		(self steps collect: [ :each |
 			| term sort var |
 			term := each first buildFor: aSignature variables: vars.
@@ -37,7 +37,7 @@ LzStepTermDeclaration >> buildFor: aSignature variables: aDictionary [
 ]
 
 { #category : #accessing }
-LzStepTermDeclaration >> gtStepsFor: aView [
+LzCompoundStepTermDeclaration >> gtStepsFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'Steps';
@@ -52,11 +52,11 @@ LzStepTermDeclaration >> gtStepsFor: aView [
 ]
 
 { #category : #accessing }
-LzStepTermDeclaration >> steps [
+LzCompoundStepTermDeclaration >> steps [
 	^ steps
 ]
 
 { #category : #accessing }
-LzStepTermDeclaration >> steps: anObject [
+LzCompoundStepTermDeclaration >> steps: anObject [
 	steps := anObject
 ]
