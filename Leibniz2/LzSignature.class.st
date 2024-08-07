@@ -285,7 +285,11 @@ LzSignature >> stringTerm: aString [
 { #category : #constructing }
 LzSignature >> term: aString [
 	^ self parsedTerm:
-		(LzParser parse: aString startingAt: #termEnd yielding: LzTermDeclaration)
+		(LzDeclarationBuilder new acceptNode:
+			(LzParser2
+				parse: aString
+				startingAt: LzParser2 startingStateForTopLevelTerm))
+				declaration
 ]
 
 { #category : #accessing }
