@@ -61,10 +61,11 @@ LzRewriteSystemBuilder >> rewriteSystem [
 { #category : #defining }
 LzRewriteSystemBuilder >> rule: aString [
 	self parsedRule:
-		(LzParser
-			parse: aString
-			startingAt: #ruleEnd
-			yielding: LzRuleDeclaration).
+		(LzDeclarationBuilder new acceptNode:
+			(LzParser2
+				parse: aString
+				startingAt: LzParser2 startingStateForTopLevelRule))
+				declaration
 ]
 
 { #category : #accessing }

@@ -241,13 +241,21 @@ LzSignature >> parsedVariables: anArrayOfASTVarDeclarationNodes [
 { #category : #constructing }
 LzSignature >> pattern: aString [
 	^ self parsedPattern:
-		(LzParser parse: aString startingAt: #patternEnd yielding: LzPatternDeclaration)
+		(LzDeclarationBuilder new acceptNode:
+			(LzParser2
+				parse: aString
+				startingAt: LzParser2 startingStateForTopLevelTerm))
+				declaration
 ]
 
 { #category : #constructing }
 LzSignature >> rule: aString [
 	^ self parsedRule:
-		(LzParser parse: aString startingAt: #ruleEnd yielding: LzRuleDeclaration)
+		(LzDeclarationBuilder new acceptNode:
+			(LzParser2
+				parse: aString
+				startingAt: LzParser2 startingStateForTopLevelRule))
+				declaration
 ]
 
 { #category : #constructing }

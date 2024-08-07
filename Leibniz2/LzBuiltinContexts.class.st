@@ -21,53 +21,53 @@ Class {
 LzBuiltinContexts class >> arrayAppendContext [
 	^ LzContextBuilder new
 		include: self arrayContext;
-		op: '∀ s_:𝕊 ',
+		op: 's_:𝕊, ',
 				'(Array1D(s_)) ⧟ (Array1D(s_)) : Array1D(s_)';
-		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ ',
+		op: 's_:𝕊, n_:ℕ, m_:ℕ, ',
 				'(Array(s_, n_)) ⧟ (Array(s_, m_)) : Array(s_, n_ + m_)';
-		op: '∀ s_:𝕊 ',
+		op: 's_:𝕊, ',
 				'(Array1D(s_)) ⧟ (EmptyArray1D) : Array1D(s_)';
-		rule: '∀ s__:𝕊 ',
-				'∀ A_:Array1D(s__) ∀ B_:Array1D(s__) ',
+		rule: 's__:𝕊, ',
+				'A_:Array1D(s__), B_:Array1D(s__), ',
 				'A_ ⧟ B_ → ''A ensureArrayTerm. B ensureArrayTerm. A append: B'':nil';
-		op: '∀ s_:𝕊 ',
+		op: 's_:𝕊, ',
 				'(EmptyArray1D) ⧟ (Array1D(s_)) : Array1D(s_)';
-		rule: '∀ s__:𝕊 ',
-				'∀ e_:EmptyArray1D ∀ a_:Array1D(s__) ',
+		rule: 's__:𝕊, ',
+				'e_:EmptyArray1D, a_:Array1D(s__), ',
 				'e_ ⧟ a_ ⇒ a_';
-		rule: '∀ s__:𝕊 ',
-				'∀ e_:EmptyArray1D ∀ a_:Array1D(s__) ',
+		rule: 's__:𝕊, ',
+				'e_:EmptyArray1D, a_:Array1D(s__), ',
 				'a_ ⧟ e_ ⇒ a_';
-		op: '∀ s_:𝕊 ',
+		op: 's_:𝕊, ',
 				'(EmptyArray1D) ⧟ (EmptyArray1D) : EmptyArray1D';
-		rule: '∀ s__:𝕊 ',
-				'∀ e1_:EmptyArray1D ∀ e2_:EmptyArray1D ',
+		rule: 's__:𝕊, ',
+				'e1_:EmptyArray1D, e2_:EmptyArray1D, ',
 				'e1_ ⧟ e2_ ⇒ e1_';
 
-		op: '∀ s_:𝕊 ',
+		op: 's_:𝕊, ',
 				'(Array1D(s_)) ⟜ (s_) : Array1D(s_)';
-		op: '∀ s_:𝕊 ∀ n_:ℕ ',
+		op: 's_:𝕊, n_:ℕ, ',
 				'(Array(s_, n_)) ⟜ (s_) : Array(s_, succ(n_))';
-		rule: '∀ s__:𝕊 ',
-				'∀ a_:Array1D(s__) ∀ v_:s__ ',
+		rule: 's__:𝕊, ',
+				'a_:Array1D(s__), v_:s__, ',
 				'a_ ⟜ v_ ⇒ a_ ⧟ {[ v_ ]}';
-		op: '∀ s_:𝕊 ',
+		op: 's_:𝕊, ',
 				'(EmptyArray1D) ⟜ (s_) : Array(s_, 1)';
-		rule: '∀ s__:𝕊 ',
-				'∀ e_:EmptyArray1D ∀ v_:s__ ',
+		rule: 's__:𝕊, ',
+				'e_:EmptyArray1D, v_:s__, ',
 				'e_ ⟜ v_ ⇒ {[ v_ ]}';
 
-		op: '∀ s_:𝕊 ',
+		op: 's_:𝕊, ',
 				'(s_) ⊸ (Array1D(s_)) : Array1D(s_)';
-		op: '∀ s_:𝕊 ∀ n_:ℕ ',
+		op: 's_:𝕊, n_:ℕ, ',
 				'(s_) ⊸ (Array(s_, n_)) : Array(s_, succ(n_))';
-		rule: '∀ s__:𝕊 ',
-				'∀ a_:Array1D(s__) ∀ v_:s__ ',
+		rule: 's__:𝕊, ',
+				'a_:Array1D(s__), v_:s__, ',
 				'v_ ⊸ a_ ⇒ {[ v_ ]} ⧟ a_';
-		op: '∀ s_:𝕊 ',
+		op: 's_:𝕊, ',
 				'(s_) ⊸ (EmptyArray1D) : Array(s_, 1)';
-		rule: '∀ s__:𝕊 ',
-				'∀ e_:EmptyArray1D ∀ v_:s__ ',
+		rule: 's__:𝕊, ',
+				'e_:EmptyArray1D, v_:s__, ',
 				'v_ ⊸ e_ ⇒ {[ v_ ]}';
 		context
 ]
@@ -137,37 +137,38 @@ LzBuiltinContexts class >> arrayMap2Context [
 	^ LzContextBuilder new
 		include: self arrayContext;
 		include: self functionContext;
-		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
+		op: 'from1_:𝕊, from2_:𝕊, to_:𝕊, ',
 			'(fn(from1_, from2_, to_))[Array(from1_), Array(from2_)] : Array(to_)';
-		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ',
+		op: 'from1_:𝕊, from2_:𝕊, to_:𝕊, i_:ℕ, ',
 			'(fn(from1_, from2_, to_))[Array(from1_, i_), Array(from2_, i_)] : Array(to_, i_)';
-		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ',
+		op: 'from1_:𝕊, from2_:𝕊, to_:𝕊, i_:ℕ, j_:ℕ, ',
 			'(fn(from1_, from2_, to_))[Array(from1_, i_, j_), Array(from2_, i_, j_)] : Array(to_, i_, j_)';
-		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ',
+		op: 'from1_:𝕊, from2_:𝕊, to_:𝕊, i_:ℕ, j_:ℕ, k_:ℕ, ',
 			'(fn(from1_, from2_, to_))[Array(from1_, i_, j_, k_), Array(from2_, i_, j_, k_)] : Array(to_, i_, j_, k_)';
-		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ∀ l_:ℕ ',
+		op: 'from1_:𝕊, from2_:𝕊, to_:𝕊, i_:ℕ, j_:ℕ, k_:ℕ, l_:ℕ, ',
 			'(fn(from1_, from2_, to_))[Array(from1_, i_, j_, k_, l_), Array(from2_, i_, j_, k_, l_)] : Array(to_, i_, j_, k_, l_)';
-		rule: '∀ from1__:𝕊 ∀ from2__:𝕊 ∀ to__:𝕊 ',
-				'∀ F_:fn(from1__, from2__, to__) ',
-				'∀ A_:Array(from1__) ',
-				'∀ B_:Array(from2__) ',
+		rule: 'from1__:𝕊, from2__:𝕊, to__:𝕊, ',
+				'F_:fn(from1__,, from2__, to__) ',
+				'A_:Array(from1__), ',
+				'B_:Array(from2__), ',
 				'F_[A_, B_] → ''A ensureArrayTerm. B ensureArrayTerm. A with: B applyFn: F reducer: reducer'':nil';
 
-		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
+		op: 'from1_:𝕊, from2_:𝕊, to_:𝕊, ',
 			'(fn(from1_, from2_, to_))[EmptyArray, EmptyArray] : EmptyArray';
-		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ',
+		op: 'from1_:𝕊, from2_:𝕊, to_:𝕊, i_:ℕ, ',
 			'(fn(from1_, from2_, to_))[EmptyArray(i_), EmptyArray(i_)] : EmptyArray(i_)';
-		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ',
+		op: 'from1_:𝕊, from2_:𝕊, to_:𝕊, i_:ℕ, j_:ℕ, ',
 			'(fn(from1_, from2_, to_))[EmptyArray(i_, j_), EmptyArray(i_, j_)] : EmptyArray(i_, j_)';
-		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ',
+		op: 'from1_:𝕊, from2_:𝕊, to_:𝕊, i_:ℕ, j_:ℕ, k_:ℕ, ',
 			'(fn(from1_, from2_, to_))[EmptyArray(i_, j_, k_), EmptyArray(i_, j_, k_)] : EmptyArray(i_, j_, k_)';
-		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ∀ i_:ℕ ∀ j_:ℕ ∀ k_:ℕ ∀ l_:ℕ ',
+		op: 'from1_:𝕊, from2_:𝕊, to_:𝕊, i_:ℕ, j_:ℕ, k_:ℕ, l_:ℕ, ',
 			'(fn(from1_, from2_, to_))[EmptyArray(i_, j_, k_, l_), EmptyArray(i_, j_, k_, l_)] : EmptyArray(i_, j_, k_, l_)';
-		rule: '∀ from1__:𝕊 ∀ from2__:𝕊 ∀ to__:𝕊 ',
-				'∀ f_:fn(from1__, from2__, to__) ',
-				'∀ a_:EmptyArray ',
+		rule: 'from1__:𝕊, from2__:𝕊, to__:𝕊, ',
+				'f_:fn(from1__,, from2__, to__) ',
+				'a_:EmptyArray, ',
 				'f_[a_, a_] ⇒ a_';
 		context
+
 ]
 
 { #category : #defining }
@@ -275,9 +276,9 @@ LzBuiltinContexts class >> equalityContext [
 		| builder |
 		builder := LzContextBuilder new
 			include: self truthContext;
-			op: '∀ s_:𝕊 s_ == s_ : 𝔹';
-			axiom: '∀ s__:𝕊 ∀ x_:s__ ∀ y_:s__ (x_ == y_) = (y_ == x_)';
-			rule: '∀ s__:𝕊 ∀ X_:s__ ∀ Y_:s__ X_ == Y_ → ''X = Y'':LzBooleanTerm'.
+			op: 's_:𝕊, s_ == s_ : 𝔹';
+			axiom: 's__:𝕊, x_:s__, y_:s__, (x_ == y_) = (y_ == x_)';
+			rule: 's__:𝕊, X_:s__, Y_:s__, X_ == Y_ → ''X = Y'':LzBooleanTerm'.
 		EqualityContext := builder context ].
 	^ EqualityContext
 ]
@@ -285,19 +286,19 @@ LzBuiltinContexts class >> equalityContext [
 { #category : #defining }
 LzBuiltinContexts class >> functionContext [
 	^ LzContextBuilder new
-		sort: '∀ from_:𝕊 ∀ to_:𝕊 ',
+		sort: 'from_:𝕊, to_:𝕊, ',
 				'fn(from_, to_)';
-		op: '∀ from_:𝕊 ∀ to_:𝕊 ',
+		op: 'from_:𝕊, to_:𝕊, ',
 				'(fn(from_, to_))[from_] : to_';
-		sort: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
+		sort: 'from1_:𝕊, from2_:𝕊, to_:𝕊, ',
 				'fn(from1_, from2_, to_)';
-		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
+		op: 'from1_:𝕊, from2_:𝕊, to_:𝕊, ',
 				'(fn(from1_, from2_, to_))[from1_, from2_] : to_';
-		op: '∀ from1_:𝕊 ∀ from2_:𝕊 ∀ to_:𝕊 ',
+		op: 'from1_:𝕊, from2_:𝕊, to_:𝕊, ',
 				'(fn(from1_, from2_, to_))[from1_] : fn(from2_, to_)';
-		rule: '∀ from1__:𝕊 ∀ from2__:𝕊 ∀ to__:𝕊 ',
-				'∀ f_:fn(from1__, from2__, to__) ',
-				'∀ a_:from1__ ∀ b_:from2__ ',
+		rule: 'from1__:𝕊, from2__:𝕊, to__:𝕊, ',
+				'f_:fn(from1__,, from2__, to__) ',
+				'a_:from1__, b_:from2__, ',
 				'(f_[a_])[b_] ⇒ f_[a_, b_]';
 		context
 ]
@@ -306,13 +307,13 @@ LzBuiltinContexts class >> functionContext [
 LzBuiltinContexts class >> integerAxiomsFor: aContextBuilder [
 	aContextBuilder
 		"addition axioms"
-		axiom: '∀ x_:ℤ ∀ y_:ℤ  x_ + y_ = y_ + x_';
-		axiom: '∀ x_:ℤ ∀ y_:ℤ  ∀ z_:ℤ  (x_ + y_) + z_ = x_ + (y_ + z_)';
+		axiom: 'x_:ℤ, y_:ℤ , x_ + y_ = y_ + x_';
+		axiom: 'x_:ℤ, y_:ℤ , z_:ℤ , (x_ + y_) + z_ = x_ + (y_ + z_)';
 		"multiplication axioms"
-		axiom: '∀ x_:ℤ ∀ y_:ℤ  x_ × y_ = y_ × x_';
-		axiom: '∀ x_:ℤ ∀ y_:ℤ  ∀ z_:ℤ  (x_ × y_) × z_ = x_ × (y_ × z_)';
+		axiom: 'x_:ℤ, y_:ℤ , x_ × y_ = y_ × x_';
+		axiom: 'x_:ℤ, y_:ℤ , z_:ℤ , (x_ × y_) × z_ = x_ × (y_ × z_)';
 		"distribution"
-		axiom: '∀ x_:ℤ ∀ y_:ℤ  ∀ z_:ℤ  x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)'
+		axiom: 'x_:ℤ, y_:ℤ , z_:ℤ ,e x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)'
 ]
 
 { #category : #defining }
@@ -370,44 +371,44 @@ LzBuiltinContexts class >> integerOpsFor: aContextBuilder [
 LzBuiltinContexts class >> integerRulesFor: aContextBuilder [
 	aContextBuilder
 		"predecessor/successor rules"
-		rule: '∀ x_:ℕ.nz pred(x_) → ''x - 1'':LzIntegerTerm';
-		rule: '∀ x_:ℕ succ(x_) → ''x + 1'':LzIntegerTerm';
+		rule: 'x_:ℕ.nz, pred(x_) → ''x - 1'':LzIntegerTerm';
+		rule: 'x_:ℕ, succ(x_) → ''x + 1'':LzIntegerTerm';
 		"addition rules"
-		rule: '∀ x_:ℤ ∀ zero_:zero x_ + zero_ ⇒ x_';
-		rule: '∀ x_:ℤ ∀ zero_:zero zero_ + x_ ⇒ x_';
-		rule: '∀ x_:ℤ ∀ y_:ℤ x_ + y_ → ''x + y'':LzIntegerTerm';
+		rule: 'x_:ℤ, zero_:zero, x_ + zero_ ⇒ x_';
+		rule: 'x_:ℤ, zero_:zero, zero_ + x_ ⇒ x_';
+		rule: 'x_:ℤ, y_:ℤ, x_ + y_ → ''x + y'':LzIntegerTerm';
 		"subtraction rules"
-		rule: '∀ x_:ℤ ∀ zero_:zero x_ - zero_ ⇒ x_';
-		rule: '∀ x_:ℤ ∀ zero_:zero zero_ - x_ ⇒ -(x_)';
-		rule: '∀ x_:ℤ ∀ y_:ℤ x_ - y_ → ''x - y'':LzIntegerTerm';
-		rule: '∀ zero_:zero -(zero_) ⇒ 0';
-		rule: '∀ x_:ℤ -(x_) → ''x negated'':LzIntegerTerm';
+		rule: 'x_:ℤ, zero_:zero, x_ - zero_ ⇒ x_';
+		rule: 'x_:ℤ, zero_:zero, zero_ - x_ ⇒ -(x_)';
+		rule: 'x_:ℤ, y_:ℤ, x_ - y_ → ''x - y'':LzIntegerTerm';
+		rule: 'zero_:zero, -(zero_) ⇒ 0';
+		rule: 'x_:ℤ, -(x_) → ''x negated'':LzIntegerTerm';
 		"multiplication rules"
-		rule: '∀ x_:ℤ ∀ zero_:zero x_ × zero_ ⇒ 0';
-		rule: '∀ x_:ℤ ∀ zero_:zero zero_ × x_ ⇒ 0';
-		rule: '∀ x_:ℤ 1 × x_ ⇒ x_';
-		rule: '∀ x_:ℤ x_ × 1 ⇒ x_';
-		rule: '∀ x_:ℤ ∀ y_:ℤ x_ × y_ → ''x * y'':LzIntegerTerm';
+		rule: 'x_:ℤ, zero_:zero, x_ × zero_ ⇒ 0';
+		rule: 'x_:ℤ, zero_:zero, zero_ × x_ ⇒ 0';
+		rule: 'x_:ℤ, 1 × x_ ⇒ x_';
+		rule: 'x_:ℤ, x_ × 1 ⇒ x_';
+		rule: 'x_:ℤ, y_:ℤ, x_ × y_ → ''x * y'':LzIntegerTerm';
 		"division rules"
-		rule: '∀ x_:ℤ.nz ∀ zero_:zero zero_ div x_ ⇒ 0';
-		rule: '∀ x_:ℤ x_ div 1 ⇒ x_';
-		rule: '∀ x_:ℤ ∀ y_:ℤ.nz x_ div y_ → ''(x abs // y abs) * x sign * y sign'':LzIntegerTerm';
-		rule: '∀ x_:ℤ.nz ∀ zero_:zero zero_ rem x_ ⇒ 0';
-		rule: '∀ x_:ℤ x_ rem 1 ⇒ 0';
-		rule: '∀ x_:ℤ ∀ y_:ℤ.nz x_ rem y_ → ''(x abs % y abs) * x sign * y sign'':LzIntegerTerm';
+		rule: 'x_:ℤ.nz, zero_:zero, zero_ div x_ ⇒ 0';
+		rule: 'x_:ℤ, x_ div 1 ⇒ x_';
+		rule: 'x_:ℤ, y_:ℤ.nz, x_ div y_ → ''(x abs // y abs) * x sign * y sign'':LzIntegerTerm';
+		rule: 'x_:ℤ.nz, zero_:zero, zero_ rem x_ ⇒ 0';
+		rule: 'x_:ℤ, x_ rem 1 ⇒ 0';
+		rule: 'x_:ℤ, y_:ℤ.nz, x_ rem y_ → ''(x abs % y abs) * x sign * y sign'':LzIntegerTerm';
 		"exponentiation rules"
-		rule: '∀ x_:ℤ.nz ∀ zero_:zero x_^(zero_) ⇒ 1';
-		rule: '∀ x_:ℕ.nz ∀ zero_:zero zero_^(x_) ⇒ 0';
-		rule: '∀ x_:ℤ ∀ y_:ℕ.nz x_^(y_) → ''x raisedTo: y'':LzIntegerTerm';
+		rule: 'x_:ℤ.nz, zero_:zero, x_^(zero_) ⇒ 1';
+		rule: 'x_:ℕ.nz, zero_:zero, zero_^(x_) ⇒ 0';
+		rule: 'x_:ℤ, y_:ℕ.nz, x_^(y_) → ''x raisedTo: y'':LzIntegerTerm';
 		"abs rules"
-		rule: '∀ x_:ℕ abs(x_) ⇒ x_';
-		rule: '∀ x_:ℤ abs(x_) ⇒ -(x_) | x_ < 0';
-		rule: '∀ x_:ℤ abs(x_) → ''x abs'':LzIntegerTerm';
+		rule: 'x_:ℕ, abs(x_) ⇒ x_';
+		rule: 'x_:ℤ, abs(x_) ⇒ -(x_) | x_ < 0';
+		rule: 'x_:ℤ, abs(x_) → ''x abs'':LzIntegerTerm';
 		"comparison rules"
-		rule: '∀ x_:ℤ ∀ y_:ℤ x_ < y_ → ''x < y'':LzBooleanTerm';
-		rule: '∀ x_:ℤ ∀ y_:ℤ x_ > y_ → ''x > y'':LzBooleanTerm';
-		rule: '∀ x_:ℤ ∀ y_:ℤ x_ ≤ y_ → ''x <= y'':LzBooleanTerm';
-		rule: '∀ x_:ℤ ∀ y_:ℤ x_ ≥ y_ → ''x >= y'':LzBooleanTerm'.
+		rule: 'x_:ℤ, y_:ℤ, x_ < y_ → ''x < y'':LzBooleanTerm';
+		rule: 'x_:ℤ, y_:ℤ, x_ > y_ → ''x > y'':LzBooleanTerm';
+		rule: 'x_:ℤ, y_:ℤ, x_ ≤ y_ → ''x <= y'':LzBooleanTerm';
+		rule: 'x_:ℤ, y_:ℤ, x_ ≥ y_ → ''x >= y'':LzBooleanTerm'.
 ]
 
 { #category : #private }
@@ -433,46 +434,46 @@ LzBuiltinContexts class >> integerSortsFor: aContextBuilder [
 LzBuiltinContexts class >> numberArrayOpsAndRulesForBuilder: builder sort: s [
 	builder
 		op: '+ : fn(',s,', ',s,', ',s,')';
-		rule: '∀ x_:',s,' ∀ y_:',s,' +[x_, y_] ⇒ x_ + y_';
-		op: '∀ i_:ℕ.nz (Array(',s,', i_)) + (Array(',s,', i_)) : Array(',s,', i_)';
-		rule: '∀ i__:ℕ.nz ∀ a_:Array(',s,', i__) ∀ b_:Array(',s,', i__) ',
+		rule: 'x_:',s,', y_:',s,', +[x_, y_] ⇒ x_ + y_';
+		op: 'i_:ℕ.nz, (Array(',s,', i_)) + (Array(',s,', i_)) : Array(',s,', i_)';
+		rule: 'i__:ℕ.nz, a_:Array(',s,',, i__) b_:Array(',s,',, i__) ',
 				'a_ + b_ ⇒ +[a_, b_]';
-		op: '∀ i_:zero (EmptyArray(i_)) + (EmptyArray(i_)) : EmptyArray(i_)';
-		rule: '∀ i__:ℕ ∀ a_:EmptyArray(i__) ∀ b_:EmptyArray(i__) a_ + b_ ⇒ a_';
+		op: 'i_:zero, (EmptyArray(i_)) + (EmptyArray(i_)) : EmptyArray(i_)';
+		rule: 'i__:ℕ, a_:EmptyArray(i__), b_:EmptyArray(i__), a_ + b_ ⇒ a_';
 
 		op: 'Σ(Array1D(',s,')) : ',s,'';
-		op: '∀ i_:ℕ.nz Σ(Array(',s,', i_)) : ',s,'';
-		rule: '∀ a_:Array1D(',s,')',
-				'Σ(a_) ⇒ fold(+, 0, a_)';
+		op: 'i_:ℕ.nz, Σ(Array(',s,', i_)) : ',s,'';
+		rule: 'a_:Array1D(',s,')',
+			'Σ(a_) ⇒ fold(+, 0, a_)';
 
 		op: '- : fn(',s,', ',s,', ',s,')';
-		rule: '∀ x_:',s,' ∀ y_:',s,' -[x_, y_] ⇒ x_ - y_';
-		op: '∀ i_:ℕ.nz (Array(',s,', i_)) - (Array(',s,', i_)) : Array(',s,', i_)';
-		rule: '∀ i__:ℕ.nz ∀ a_:Array(',s,', i__) ∀ b_:Array(',s,', i__) ',
+		rule: 'x_:',s,', y_:',s,', -[x_, y_] ⇒ x_ - y_';
+		op: 'i_:ℕ.nz, (Array(',s,', i_)) - (Array(',s,', i_)) : Array(',s,', i_)';
+		rule: 'i__:ℕ.nz, a_:Array(',s,',, i__) b_:Array(',s,',, i__) ',
 				'a_ - b_ ⇒ -[a_, b_]';
-		op: '∀ i_:zero (EmptyArray(i_)) - (EmptyArray(i_)) : EmptyArray(i_)';
-		rule: '∀ i__:ℕ ∀ a_:EmptyArray(i__) ∀ b_:EmptyArray(i__) a_ - b_ ⇒ a_';
+		op: 'i_:zero, (EmptyArray(i_)) - (EmptyArray(i_)) : EmptyArray(i_)';
+		rule: 'i__:ℕ, a_:EmptyArray(i__), b_:EmptyArray(i__), a_ - b_ ⇒ a_';
 
 		op: '× : fn(',s,', ',s,', ',s,')';
-		rule: '∀ x_:',s,' ∀ y_:',s,' ×[x_, y_] ⇒ x_ × y_';
-		op: '∀ i_:ℕ.nz (Array(',s,', i_)) × (Array(',s,', i_)) : Array(',s,', i_)';
-		rule: '∀ i__:ℕ.nz ∀ a_:Array(',s,', i__) ∀ b_:Array(',s,', i__) ',
+		rule: 'x_:',s,', y_:',s,', ×[x_, y_] ⇒ x_ × y_';
+		op: 'i_:ℕ.nz, (Array(',s,', i_)) × (Array(',s,', i_)) : Array(',s,', i_)';
+		rule: 'i__:ℕ.nz, a_:Array(',s,',, i__) b_:Array(',s,',, i__) ',
 				'a_ × b_ ⇒ ×[a_, b_]';
-		op: '∀ i_:zero (EmptyArray(i_)) × (EmptyArray(i_)) : EmptyArray(i_)';
-		rule: '∀ i__:ℕ ∀ a_:EmptyArray(i__) ∀ b_:EmptyArray(i__) a_ × b_ ⇒ a_';
+		op: 'i_:zero, (EmptyArray(i_)) × (EmptyArray(i_)) : EmptyArray(i_)';
+		rule: 'i__:ℕ, a_:EmptyArray(i__), b_:EmptyArray(i__), a_ × b_ ⇒ a_';
 
 		op: 'Π(Array1D(',s,')) : ',s,'';
-		op: '∀ i_:ℕ.nz Π(Array(',s,', i_)) : ',s,'';
-		rule: '∀ a_:Array1D(',s,')',
+		op: 'i_:ℕ.nz, Π(Array(',s,', i_)) : ',s,'';
+		rule: 'a_:Array1D(',s,')',
 				'Π(a_) ⇒ fold(×, 1, a_)';
 
 		op: '÷ : fn(',s,', ',s,'.nz, ',s,')';
-		rule: '∀ x_:',s,' ∀ y_:',s,'.nz ÷[x_, y_] ⇒ x_ ÷ y_';
-		op: '∀ i_:ℕ.nz (Array(',s,', i_)) ÷ (Array(',s,', i_)) : Array(',s,', i_)';
-		rule: '∀ i__:ℕ.nz ∀ a_:Array(',s,', i__) ∀ b_:Array(',s,', i__) ',
+		rule: 'x_:',s,', y_:',s,'.nz, ÷[x_, y_] ⇒ x_ ÷ y_';
+		op: 'i_:ℕ.nz, (Array(',s,', i_)) ÷ (Array(',s,', i_)) : Array(',s,', i_)';
+		rule: 'i__:ℕ.nz, a_:Array(',s,',, i__) b_:Array(',s,',, i__) ',
 				'a_ ÷ b_ ⇒ ÷[a_, b_]';
-		op: '∀ i_:zero (EmptyArray(i_)) ÷ (EmptyArray(i_)) : EmptyArray(i_)';
-		rule: '∀ i__:ℕ ∀ a_:EmptyArray(i__) ∀ b_:EmptyArray(i__) a_ ÷ b_ ⇒ a_'
+		op: 'i_:zero, (EmptyArray(i_)) ÷ (EmptyArray(i_)) : EmptyArray(i_)';
+		rule: 'i__:ℕ, a_:EmptyArray(i__), b_:EmptyArray(i__), a_ ÷ b_ ⇒ a_'
 ]
 
 { #category : #defining }

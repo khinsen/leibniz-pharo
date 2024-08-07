@@ -86,10 +86,11 @@ LzSignatureBuilder >> initialize [
 { #category : #defining }
 LzSignatureBuilder >> op: aString [
 	opDeclarations add:
-		(LzParser
+		(LzDeclarationBuilder new acceptNode:
+		(LzParser2
 			parse: aString
-			startingAt: #opEnd
-			yielding: LzOpDeclaration).
+			startingAt: LzParser2 startingStateForTopLevelOp))
+			declaration
 ]
 
 { #category : #defining }

@@ -70,11 +70,23 @@ LzContextBuilder >> addDeclarationsFromPageNamed: pageName subcontext: aString [
 
 { #category : #defining }
 LzContextBuilder >> axiom: aString [
-	self parsedAxiom:
-		(LzParser
-			parse: aString
-			startingAt: #axiomEnd
-			yielding: LzAxiomDeclaration)
+	"With the old parser, this would accept either an equality axiom or a subsort axiom.
+	 The current version is too generous in the second case, allowing also a sort
+	 declaration. The API needs to be fixed."
+	| declaration |
+	declaration :=
+		[ (LzDeclarationBuilder new acceptNode:
+			(LzParser2
+				parse: aString
+				startingAt: LzParser2 startingStateForTopLevelAxiom))
+				declaration ]
+		on: SmaCCParserError do: [
+			 (LzDeclarationBuilder new acceptNode:
+				(LzParser2
+					parse: aString
+					startingAt: LzParser2 startingStateForTopLevelSort))
+					declaration ].
+	self parsedAxiom: declaration
 ]
 
 { #category : #accessing }

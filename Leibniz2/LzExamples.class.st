@@ -14,12 +14,12 @@ LzExamples >> bagContext [
 		include: LzBuiltinContexts integerContext;
 		sort: 'collection';
 		sort: 'bag(𝕊, ℕ)';
-		subsort: '∀ s_:𝕊 ∀ n_:ℕ list(s_, n_) ⊆ bag(s_, n_)';
-		subsort: '∀ s_:𝕊 ∀ n_:ℕ bag(s_, n_) ⊆ collection';
+		subsort: 's_:𝕊, n_:ℕ, list(s_, n_) ⊆ bag(s_, n_)';
+		subsort: 's_:𝕊, n_:ℕ, bag(s_, n_) ⊆ collection';
 		subsort: '∅ ⊆ collection';
-		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ (bag(s_, n_)) ** (bag(s_, m_)) : bag(s_, n_ + m_)';
-		op: '∀ s_:𝕊 ∀ n_:ℕ (bag(s_, n_)) ** s_ : bag(s_, n_ + 1)';
-		op: '∀ s_:𝕊 ∅ ** s_ : bag(s_, 1)';
+		op: 's_:𝕊, n_:ℕ, m_:ℕ, (bag(s_, n_)) ** (bag(s_, m_)) : bag(s_, n_ + m_)';
+		op: 's_:𝕊, n_:ℕ, (bag(s_, n_)) ** s_ : bag(s_, n_ + 1)';
+		op: 's_:𝕊, ∅ ** s_ : bag(s_, 1)';
 		op: 'size(collection) : ℕ';
 		context
 ]
@@ -45,10 +45,11 @@ LzExamples >> bagSignature [
 	^ LzSignatureBuilder new
 		sortGraph: self bagSortGraph;
 		include: self listSignature;
-		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ (bag(s_, n_)) ** (bag(s_, m_)) : bag(s_, n_ + m_)';
-		op: '∀ s_:𝕊 ∀ n_:ℕ (bag(s_, n_)) ** s_ : bag(s_, n_ + 1)';
-		op: '∀ s_:𝕊 ∅ ** s_ : bag(s_, 1)';
+		op: 's_:𝕊, n_:ℕ, m_:ℕ, (bag(s_, n_)) ** (bag(s_, m_)) : bag(s_, n_ + m_)';
+		op: 's_:𝕊, n_:ℕ, (bag(s_, n_)) ** s_ : bag(s_, n_ + 1)';
+		op: 's_:𝕊, ∅ ** s_ : bag(s_, 1)';
 		signature
+
 ]
 
 { #category : #example }
@@ -59,8 +60,8 @@ LzExamples >> bagSortContext [
 		op: 'collection : 𝕊';
 		op: 'bag(𝕊, ℕ) : 𝕊';
 		op: 'ℕ : 𝕊';
-		axiom: '∀ s_:𝕊 ∀ n_:ℕ list(s_, n_) ⊆ bag(s_, n_)';
-		axiom: '∀ s_:𝕊 ∀ n_:ℕ bag(s_, n_) ⊆ collection';
+		axiom: 's_:𝕊, n_:ℕ, list(s_, n_) ⊆ bag(s_, n_)';
+		axiom: 's_:𝕊, n_:ℕ, bag(s_, n_) ⊆ collection';
 		axiom: '∅ ⊆ collection';
 		context
 ]
@@ -84,18 +85,19 @@ LzExamples >> listContext [
 		sort: 'list(𝕊, ℕ)';
 		subsort: 'element.special ⊆ element';		
 		op: '∅ : ∅';
-		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ ',
+		op: 's_:𝕊, n_:ℕ, m_:ℕ, ',
 				'(list(s_, n_)) ++ (list(s_, m_)) : list(s_, n_ + m_)';
-		op: '∀ s_:𝕊 ∀ n_:ℕ ',
+		op: 's_:𝕊, n_:ℕ, ',
 				'(list(s_, n_)) ++ s_ : list(s_, n_ + 1)';
-		op: '∀ s_:𝕊 ',
+		op: 's_:𝕊, ',
 				'∅ ++ s_ : list(s_, 1)';
-		op: '∀ s_:𝕊 ∀ n_:ℕ.nz ',
+		op: 's_:𝕊, n_:ℕ.nz, ',
 				'first(list(s_, n_)) : s_';
 		op: 'anElement : element';
 		op: 'aSpecialElement : element.special';
-		rule: '∀ s__:𝕊 ∀ e_:s__ first(∅ ++ e_) ⇒ e_';
+		rule: 's__:𝕊, e_:s__, first(∅ ++ e_) ⇒ e_';
 		context
+
 ]
 
 { #category : #example }
@@ -129,11 +131,11 @@ LzExamples >> listSignature [
 	^ LzSignatureBuilder new
 		sortGraph: self listSortGraph;
 		op: '∅ : ∅';
-		op: '∀ s_:𝕊 ∀ n_:ℕ ∀ m_:ℕ ',
+		op: 's_:𝕊, n_:ℕ, m_:ℕ, ',
 				'(list(s_, n_)) ++ (list(s_, m_)) : list(s_, n_ + m_)';
-		op: '∀ s_:𝕊 ∀ n_:ℕ ',
+		op: 's_:𝕊, n_:ℕ, ',
 				'(list(s_, n_)) ++ s_ : list(s_, n_ + 1)';
-		op: '∀ s_:𝕊 ',
+		op: 's_:𝕊, ',
 				'∅ ++ s_ : list(s_, 1)';
 		op: 'anElement : element';
 		signature
@@ -170,7 +172,7 @@ LzExamples >> listTermRewrites [
 		'first(∅ ++ 1)'.
 	}
 	collect: [ :each |
-		| term rewrittenTerm rule |
+		| term rewrittenTerm |
 		term := context term: each.
 		rewrittenTerm := context reduce: term.
 		{ term. rewrittenTerm } ]
@@ -250,11 +252,11 @@ LzExamples >> simpleContextTermMatches [
 	| context |
 	context := self simpleContext.
 	^ {
-		{ '∀ foo_:Foo foo_'. 'aFoo'.  {'foo_' -> 'aFoo'} }.
-		{ '∀ foo_:Foo foo_'. 'aFoo(aFoo)'.  {'foo_' -> 'aFoo(aFoo)'} }.
-		{ '∀ foo_:Foo aFoo(foo_)'. 'aFoo(aFoo)'. {'foo_' -> 'aFoo'} }.
-		{ '∀ foo_:Foo (foo_ + foo_)'. 'aFoo + aFoo'. {'foo_' -> 'aFoo'} }.
-		{ '∀ foo_:Foo aFoo(foo_)'. 'aFoo'. {} }
+		{ 'foo_:Foo, foo_'. 'aFoo'.  {'foo_' -> 'aFoo'} }.
+		{ 'foo_:Foo, foo_'. 'aFoo(aFoo)'.  {'foo_' -> 'aFoo(aFoo)'} }.
+		{ 'foo_:Foo, aFoo(foo_)'. 'aFoo(aFoo)'. {'foo_' -> 'aFoo'} }.
+		{ 'foo_:Foo, (foo_ + foo_)'. 'aFoo + aFoo'. {'foo_' -> 'aFoo'} }.
+		{ 'foo_:Foo, aFoo(foo_)'. 'aFoo'. {} }
 	} collect: [ :each |
 		| pattern term bindings result |
 		pattern := context pattern: each first.

@@ -112,11 +112,11 @@ LzSortGraphBuilder >> parsedSubsortDeclaration: anASTSubsortAxiom [
 { #category : #defining }
 LzSortGraphBuilder >> sort: aString [
 	self parsedSortDeclaration:
-		(LzSortDeclaration new
-			op: (LzParser
-				parse: (aString, ' : ', LzConstants opNameSort)
-				startingAt: #opEnd
-				yielding: LzOpDeclaration))
+		(LzDeclarationBuilder new acceptNode:
+			(LzParser2
+				parse: aString
+				startingAt: LzParser2 startingStateForTopLevelSort))
+				declaration
 ]
 
 { #category : #accessing }
@@ -188,8 +188,9 @@ LzSortGraphBuilder >> sortSortDeclaration [
 { #category : #defining }
 LzSortGraphBuilder >> subsort: aString [
 	self parsedSubsortDeclaration:
-		(LzParser
-			parse: aString
-			startingAt: #subsortAxiomEnd
-			yielding: LzSubsortAxiomDeclaration).
+		(LzDeclarationBuilder new acceptNode:
+			(LzParser2
+				parse: aString
+				startingAt: LzParser2 startingStateForTopLevelSort))
+				declaration
 ]

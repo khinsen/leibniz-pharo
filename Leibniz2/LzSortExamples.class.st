@@ -29,7 +29,7 @@ LzSortExamples >> arraySortPatternMatching [
 	| sortGraph integerArraySort arraySortPattern bindings varName |
 	sortGraph := self integerAndStringArraySortGraph.
 	integerArraySort := (sortGraph sort: 'Array1D(ℤ)').
-	arraySortPattern := (sortGraph sort: '∀ s_:𝕊 Array1D(s_)').
+	arraySortPattern := (sortGraph sort: 's_:𝕊, Array1D(s_)').
 	bindings := arraySortPattern match: integerArraySort.
 	self assert: bindings isFailure not.
 	varName := LzVarName for: 's_'.

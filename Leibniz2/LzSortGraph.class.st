@@ -413,9 +413,12 @@ LzSortGraph >> simpleSort: aSymbol [
 
 { #category : #constructing }
 LzSortGraph >> sort: aString [
-	| astNode |
-	astNode := LzParser parse: aString startingAt: #patternEnd yielding: LzPatternDeclaration.
-	^ self parsedSort: astNode
+	^ self parsedSort:
+		(LzDeclarationBuilder new acceptNode:
+			(LzParser2
+				parse: aString
+				startingAt: LzParser2 startingStateForTopLevelTerm))
+				declaration
 ]
 
 { #category : #accessing }
