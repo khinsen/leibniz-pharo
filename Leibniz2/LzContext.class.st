@@ -170,15 +170,15 @@ LzContext >> gtSortGraphFor: aView [
 ]
 
 { #category : #inspecting }
-LzContext >> gtVariablesFor: aView [
+LzContext >> gtStateVarsFor: aView [
 	<gtView>
-	self signature variables
+	self signature stateVars
 		isEmpty ifTrue: [ ^ aView empty ].
 	^ aView forward
-		title: 'Variables';
+		title: 'State vars';
 		priority: 3;
 		object: [ self signature ];
-		view: #gtVariablesFor:;
+		view: #gtStateVarsFor:;
 		yourself
 ]
 

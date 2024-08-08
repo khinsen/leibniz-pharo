@@ -312,7 +312,7 @@ LzDeclarationBuilder >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
 { #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelState: aTopLevelState [
 	| var |
-	var := LzVarDeclaration new
+	var := LzStateDeclaration new
 			name: (LzVarName for: aTopLevelState var varName value);
 			sort: (self acceptNode: aTopLevelState var sort).
 	^ self

@@ -233,11 +233,12 @@ LzPageDeclarationCache >> sortOrderFor: aClass [
 		LzSortDeclaration -> 2.
 		LzSubsortAxiomDeclaration -> 3.
 		LzOpDeclaration -> 4.
-		LzEqualityAxiomDeclaration -> 5.
-		LzRewriteRuleDeclaration -> 6.
-		LzFunctionRuleDeclaration -> 7.
-		LzPatternDeclaration -> 8.
-		LzAssetDeclaration -> 9.
+		LzStateDeclaration -> 5.
+		LzEqualityAxiomDeclaration -> 6.
+		LzRewriteRuleDeclaration -> 7.
+		LzFunctionRuleDeclaration -> 8.
+		LzPatternDeclaration -> 9.
+		LzAssetDeclaration -> 10.
 	} asDictionary at: aClass
 ]
 

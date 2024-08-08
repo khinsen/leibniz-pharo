@@ -21,6 +21,8 @@ LzContextBuilder >> addDeclaration: anAnnotatedDeclaration [
 		ifTrue: [ sortGraphBuilder parsedSubsortDeclaration: declaration ].
 	(declaration isKindOf: LzOpDeclaration)
 		ifTrue: [ signatureBuilder parsedOps: { declaration } ].
+	(declaration isKindOf: LzStateDeclaration)
+		ifTrue: [ signatureBuilder parsedStateVars: { declaration } ].
 	(declaration isKindOf: LzEqualityAxiomDeclaration)
 		ifTrue: [ self parsedAxiom: declaration ].
 	(declaration isKindOf: LzRuleDeclaration)
@@ -178,7 +180,7 @@ LzContextBuilder >> gtRuleDeclarationsFor: aView [
 	<gtView>
 	^ aView forward
 		title: 'Rule declarations';
-		priority: 4;
+		priority: 5;
 		object: [ self rewriteSystemBuilder ];
 		view: #gtRuleDeclarationsFor:;
 		yourself
@@ -192,6 +194,17 @@ LzContextBuilder >> gtSortDeclarationsFor: aView [
 		priority: 0;
 		object: [ self sortGraphBuilder ];
 		view: #gtSortDeclarationsFor:;
+		yourself
+]
+
+{ #category : #inspecting }
+LzContextBuilder >> gtStateVarDeclarationsFor: aView [
+	<gtView>
+	^ aView forward
+		title: 'State var declarations';
+		priority: 4;
+		object: [ self signatureBuilder ];
+		view: #gtStateVarDeclarationsFor:;
 		yourself
 ]
 

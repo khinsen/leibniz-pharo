@@ -6,8 +6,8 @@ Class {
 	#instVars : [
 		'sortGraph',
 		'operators',
-		'variables',
-		'varDeclarations',
+		'stateVars',
+		'stateVarDeclarations',
 		'opDeclarations',
 		'builtins'
 	],
@@ -107,6 +107,19 @@ LzSignature >> gtSortGraphFor: aView [
 		priority: 2;
 		object: [ self sortGraph ];
 		view: #gtGraphFor:
+]
+
+{ #category : #inspecting }
+LzSignature >> gtStateVarsFor: aView [
+	<gtView>
+	stateVars isEmpty ifTrue: [ ^ aView empty ].
+	^ aView columnedList
+		title: 'State vars';
+		priority: 1;
+		items: [ stateVars associations ] ;
+		column: 'Name' text: [ :each | each key asLeibnizSyntax ];
+		column: 'Sort' text: [ :each | each value asLeibnizSyntax ];
+		yourself
 ]
 
 { #category : #constructing }
@@ -282,6 +295,26 @@ LzSignature >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
 ]
 
+{ #category : #accessing }
+LzSignature >> stateVarDeclarations [
+	^ stateVarDeclarations
+]
+
+{ #category : #accessing }
+LzSignature >> stateVarDeclarations: anObject [
+	stateVarDeclarations := anObject
+]
+
+{ #category : #accessing }
+LzSignature >> stateVars [
+	^ stateVars
+]
+
+{ #category : #accessing }
+LzSignature >> stateVars: aDictionary [
+	stateVars := aDictionary
+]
+
 { #category : #constructing }
 LzSignature >> stringTerm: aString [
 	^ self 
@@ -305,16 +338,6 @@ LzSignature >> valueSlots [
 	^ #(sortGraph operators variables)
 ]
 
-{ #category : #accessing }
-LzSignature >> varDeclarations [
-	^ varDeclarations
-]
-
-{ #category : #accessing }
-LzSignature >> varDeclarations: aCollection [
-	varDeclarations := aCollection
-]
-
 { #category : #constructing }
 LzSignature >> varTerm: aVarName variables: aDictionary [
 	^ LzVarTerm new
@@ -323,14 +346,4 @@ LzSignature >> varTerm: aVarName variables: aDictionary [
 		sort: (self sortForVar: aVarName variables: aDictionary);
 		beRecursivelyReadOnlyObject;
 		yourself
-]
-
-{ #category : #accessing }
-LzSignature >> variables [
-	^ variables
-]
-
-{ #category : #accessing }
-LzSignature >> variables: aDictionary [
-	variables := aDictionary
 ]

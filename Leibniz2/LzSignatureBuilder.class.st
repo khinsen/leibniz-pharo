@@ -2,7 +2,7 @@ Class {
 	#name : #LzSignatureBuilder,
 	#superclass : #Object,
 	#instVars : [
-		'varDeclarations',
+		'stateVarDeclarations',
 		'opDeclarations',
 		'sortGraph',
 		'builtins'
@@ -41,7 +41,7 @@ LzSignatureBuilder >> gtBuiltinsFor: aView [
 	builtins ifEmpty: [ ^ aView empty ].
 	^ aView list
 		title: 'Builtins';
-		priority: 2;
+		priority: 3;
 		items: [ builtins asArray sorted ] ;
 		yourself
 ]
@@ -69,17 +69,29 @@ LzSignatureBuilder >> gtSortGraphFor: aView [
 		yourself
 ]
 
+{ #category : #inspecting }
+LzSignatureBuilder >> gtStateVarDeclarationsFor: aView [
+	<gtView>
+	stateVarDeclarations ifEmpty: [ ^ aView empty ].
+	^ aView list
+		title: 'State var declarations';
+		priority: 2;
+		items: [ stateVarDeclarations asSet asArray ] ;
+		itemText: #asLeibnizSyntax;
+		yourself
+]
+
 { #category : #defining }
 LzSignatureBuilder >> include: aSignature [
 	self parsedOps: aSignature opDeclarations.
-	self parsedVars: aSignature varDeclarations.
+	self parsedStateVars: aSignature stateVarDeclarations.
 	aSignature builtins do: [ :each | self builtin: each ]
 ]
 
 { #category : #accessing }
 LzSignatureBuilder >> initialize [
 	opDeclarations := OrderedCollection new.
-	varDeclarations := OrderedCollection new.
+	stateVarDeclarations := OrderedCollection new.
 	builtins := Set new
 ]
 
@@ -100,22 +112,20 @@ LzSignatureBuilder >> parsedOps: aCollection [
 ]
 
 { #category : #defining }
-LzSignatureBuilder >> parsedVars: aCollection [
+LzSignatureBuilder >> parsedStateVars: aCollection [
 	aCollection do: [ :each |
-		varDeclarations addIfNotPresent: each ]
+		stateVarDeclarations addIfNotPresent: each ]
 ]
 
 { #category : #building }
 LzSignatureBuilder >> signature [
-	| uniqueVars uniqueOps variables operators |
+	| uniqueOps uniqueVars stateVars operators |
 	uniqueOps := opDeclarations asSet.
 	self flag: #todo. "Signature-level vars removed in a test phase."
-	uniqueVars := Set new.
-	"uniqueVars := (varDeclarations,
-		(opDeclarations flatCollect: [ :each | each varDeclarations ])) asSet."
+	uniqueVars := stateVarDeclarations asSet.
 	self flag: #todo.
 	"Check for var declarations with sorts that are equal up to variable renaming."
-	variables := (uniqueVars collect: [ :each |
+	stateVars := (uniqueVars collect: [ :each |
 		each name -> (self sortGraph parsedSort: each sort) ])
 		asDictionary.
 	operators :=
@@ -126,9 +136,9 @@ LzSignatureBuilder >> signature [
 		sortGraph: self sortGraph;
 		builtins: builtins copy;
 		operators: operators;
-		variables: variables;
+		stateVars: stateVars;
 		opDeclarations: opDeclarations copy;
-		varDeclarations: varDeclarations copy;
+		stateVarDeclarations: stateVarDeclarations copy;
 		beRecursivelyReadOnlyObject;
 		yourself.
 ]
@@ -143,16 +153,12 @@ LzSignatureBuilder >> sortGraph: aSortGraph [
 	sortGraph := aSortGraph
 ]
 
-{ #category : #accessing }
-LzSignatureBuilder >> var: aString [
-	self flag: #todo.
-	"Signature-level vars are the reason why var-containing terms were not allowed
-	in the rhs of match: in the past. They do not seem very important in practice so
-	far. Current experiment: allow vars in matches, but don't allow signature-level vars."
-	self shouldNotImplement.
-	varDeclarations add:
-		(LzParser
-			parse: aString
-			startingAt: #varEnd
-			yielding: LzVarDeclaration).
+{ #category : #defining }
+LzSignatureBuilder >> stateVar: aString [
+	stateVarDeclarations add:
+		(LzDeclarationBuilder new acceptNode:
+			(LzParser2
+				parse: aString
+				startingAt: LzParser2 startingStateForTopLevelState))
+				declaration
 ]
