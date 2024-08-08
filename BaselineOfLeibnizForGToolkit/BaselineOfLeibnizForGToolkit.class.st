@@ -139,6 +139,7 @@ BaselineOfLeibnizForGToolkit >> baseline: spec [
 { #category : #baseline }
 BaselineOfLeibnizForGToolkit >> postload: loader package: packageSpec [
 	LzCodeFont chooseDefaultFamily.
+	LzBook database. "Make sure it's added to the logical database"
 	self applyPatchForHtmlExportOfLfAndTab.
 	self applyPatchForHtmlExportOfMethodSourceCode.
 	self applyPatchForHtmlExportOfNestingLevelsForSnippets.
