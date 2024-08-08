@@ -17,7 +17,7 @@ LzHomeSection >> leibnizBookCard [
 		description: 'Leibniz is a notation for embedding machine-readable computational models in human-readable document.';
 		priority: 1;
 		pageName: 'Leibniz - a Digital Scientific Notation';
-		databaseName: LzBook databaseName;
+		databaseName: LzBook database databaseName;
 		readMoreToolbar;
 		details: [ :db | 
 			| pages pagesWithDeclarations |
