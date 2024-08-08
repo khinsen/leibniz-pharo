@@ -86,6 +86,11 @@ TLzParseTreeNodeVisitor >> visitParseTree: aParseTree [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitPattern: aPattern [
+	^ self visitParseTree: aPattern
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitPrefixOp: aPrefixOp [
 	^ self visitOp: aPrefixOp
 ]

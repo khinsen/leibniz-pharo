@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'term',
 		'arrow',
-		'var'
+		'pattern'
 	],
 	#category : #'Leibniz2-SmaCCParser'
 }
@@ -26,7 +26,19 @@ LzStepNode >> arrow: aSmaCCToken [
 
 { #category : #generated }
 LzStepNode >> nodeVariables [
-	^ #(#term #var)
+	^ #(#term #pattern)
+]
+
+{ #category : #generated }
+LzStepNode >> pattern [
+	^ pattern
+]
+
+{ #category : #generated }
+LzStepNode >> pattern: aLzPatternNode [
+	self pattern notNil ifTrue: [ self pattern parent: nil ].
+	pattern := aLzPatternNode.
+	self pattern notNil ifTrue: [ self pattern parent: self ]
 ]
 
 { #category : #generated }
@@ -44,16 +56,4 @@ LzStepNode >> term: aLzParseTreeNode [
 { #category : #generated }
 LzStepNode >> tokenVariables [
 	^ #(#arrow)
-]
-
-{ #category : #generated }
-LzStepNode >> var [
-	^ var
-]
-
-{ #category : #generated }
-LzStepNode >> var: aLzVarTermNode [
-	self var notNil ifTrue: [ self var parent: nil ].
-	var := aLzVarTermNode.
-	self var notNil ifTrue: [ self var parent: self ]
 ]

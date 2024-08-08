@@ -14,9 +14,9 @@ LzCompoundStepTermDeclaration >> addAsRopedTextTo: aRopedText [
 		| step |
 		step := steps at: eachIndex.
 		step first addAsRopedTextTo: aRopedText.
-		step second ifNotNil: [ :v |
+		step second ifNotNil: [ :p |
 			aRopedText append: ' ⇒ ' asRopedText.
-			v addAsRopedTextTo: aRopedText ].
+			p addAsRopedTextTo: aRopedText ].
 		eachIndex < steps size ifTrue: [ aRopedText append: ', ' asRopedText ] ].
 	aRopedText append: ' .}' asRopedText
 ]
@@ -27,13 +27,13 @@ LzCompoundStepTermDeclaration >> buildFor: aSignature variables: aDictionary [
 	vars := aDictionary copy.
 	^ aSignature compoundStepTerm:
 		(self steps collect: [ :each |
-			| term sort var |
+			| term pattern |
 			term := each first buildFor: aSignature variables: vars.
-			each second ifNotNil: [ :v |
-				sort := aSignature sortGraph parsedSort: v sort.
-			  vars at: v name put: sort.
-			  var := v name ].
-			{ term . var . sort } ])
+			pattern := nil.
+			each second ifNotNil: [ :p |
+				pattern := p buildFor: aSignature variables: vars.
+				vars addAll: pattern vars ].
+			{ term . pattern } ])
 ]
 
 { #category : #accessing }

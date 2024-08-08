@@ -2,9 +2,7 @@ Class {
 	#name : #LzTopLevelTermNode,
 	#superclass : #LzParseTreeNode,
 	#instVars : [
-		'vars',
-		'commas',
-		'term',
+		'pattern',
 		'options',
 		'prefix'
 	],
@@ -17,36 +15,19 @@ LzTopLevelTermNode >> acceptVisitor: aParseTreeVisitor [
 ]
 
 { #category : #generated }
-LzTopLevelTermNode >> commas [
-	^ commas
-]
-
-{ #category : #generated }
-LzTopLevelTermNode >> commas: anOrderedCollection [
-	commas := anOrderedCollection
-]
-
-{ #category : #generated }
 LzTopLevelTermNode >> compositeNodeVariables [
-	^ #(#vars #options)
-]
-
-{ #category : #generated }
-LzTopLevelTermNode >> compositeTokenVariables [
-	^ #(#commas)
+	^ #(#options)
 ]
 
 { #category : #'generated-initialize-release' }
 LzTopLevelTermNode >> initialize [
 	super initialize.
-	vars := OrderedCollection new: 2.
-	commas := OrderedCollection new: 2.
 	options := OrderedCollection new: 2.
 ]
 
 { #category : #generated }
 LzTopLevelTermNode >> nodeVariables [
-	^ #(#term #prefix)
+	^ #(#pattern #prefix)
 ]
 
 { #category : #generated }
@@ -62,6 +43,18 @@ LzTopLevelTermNode >> options: anOrderedCollection [
 ]
 
 { #category : #generated }
+LzTopLevelTermNode >> pattern [
+	^ pattern
+]
+
+{ #category : #generated }
+LzTopLevelTermNode >> pattern: aLzPatternNode [
+	self pattern notNil ifTrue: [ self pattern parent: nil ].
+	pattern := aLzPatternNode.
+	self pattern notNil ifTrue: [ self pattern parent: self ]
+]
+
+{ #category : #generated }
 LzTopLevelTermNode >> prefix [
 	^ prefix
 ]
@@ -71,28 +64,4 @@ LzTopLevelTermNode >> prefix: aLzAssetPrefixNode [
 	self prefix notNil ifTrue: [ self prefix parent: nil ].
 	prefix := aLzAssetPrefixNode.
 	self prefix notNil ifTrue: [ self prefix parent: self ]
-]
-
-{ #category : #generated }
-LzTopLevelTermNode >> term [
-	^ term
-]
-
-{ #category : #generated }
-LzTopLevelTermNode >> term: aLzParseTreeNode [
-	self term notNil ifTrue: [ self term parent: nil ].
-	term := aLzParseTreeNode.
-	self term notNil ifTrue: [ self term parent: self ]
-]
-
-{ #category : #generated }
-LzTopLevelTermNode >> vars [
-	^ vars
-]
-
-{ #category : #generated }
-LzTopLevelTermNode >> vars: anOrderedCollection [
-	self setParents: self vars to: nil.
-	vars := anOrderedCollection.
-	self setParents: self vars to: self
 ]

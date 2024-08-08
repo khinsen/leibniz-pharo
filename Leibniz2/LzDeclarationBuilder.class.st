@@ -91,10 +91,18 @@ LzDeclarationBuilder >> visitBracketOpTerm: aBracketOpTerm [
 LzDeclarationBuilder >> visitCompoundStepTerm: aCompoundStepTerm [
 	^ LzCompoundStepTermDeclaration new steps:
 		(aCompoundStepTerm steps collect: [ :each |
-			| term var |
+			| term pattern |
 			term := self acceptNode: each term.
-			var := each var ifNotNil: [ :v | self acceptNode: v ].
-			{ term . var } ]).
+			pattern := nil.
+			each pattern ifNotNil: [ :p |
+				| varBuilder |
+				varBuilder := LzVarDeclarationBuilder new.
+				p vars ifNotNil: [ :v | varBuilder acceptNodes: v ].
+				varBuilder acceptNode: p term.
+				pattern := LzPatternDeclaration new
+					variables: varBuilder vars;
+					term: (self acceptNode: p term) ].
+			{ term . pattern } ]).
 ]
 
 { #category : #visiting }
@@ -320,12 +328,12 @@ LzDeclarationBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 LzDeclarationBuilder >> visitTopLevelTerm: aTopLevelTerm [
 	| varBuilder pattern |
 	varBuilder := LzVarDeclarationBuilder new.
-	aTopLevelTerm vars
+	aTopLevelTerm pattern vars
 		ifNotNil: [ :vars | varBuilder acceptNodes: vars ].
-	varBuilder acceptNode: aTopLevelTerm term.
+	varBuilder acceptNode: aTopLevelTerm pattern term.
 	pattern := LzPatternDeclaration new
 		variables: varBuilder vars;
-		term: (self acceptNode: aTopLevelTerm term).
+		term: (self acceptNode: aTopLevelTerm pattern term).
 	^ self annotate: pattern from: aTopLevelTerm booleanOptions: #(example withSort withNormalForm)
 ]
 

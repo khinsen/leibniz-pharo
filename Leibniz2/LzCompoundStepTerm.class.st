@@ -90,22 +90,18 @@ LzCompoundStepTerm >> runWithSignature: aSignature reducer: aReducer [
 	bindings := LzBindings new
 		sortGraph: self signature sortGraph.
 	steps do: [ :eachStep |
-		| stepTerm runStepTerm var varSort varTerm |
+		| stepTerm runStepTerm |
 		stepTerm := eachStep first substitute: bindings.
 		runStepTerm := self signature
 						opTerm: (LzPrefixOpName for: #run)
 						args: { stepTerm }.
 		result := aReducer value: runStepTerm.
-
-		var := eachStep second.
-		varSort := eachStep third.
-		var ifNotNil: [
-			variables at: var put: varSort.
-			varTerm := self signature varTerm: var variables: variables.
-			varTerm match: result bindings: bindings ].
+		eachStep second ifNotNil: [ :p |
+			| stepPattern |
+			stepPattern := p substitute: bindings.
+			stepPattern match: result bindings: bindings ].
 		bindings ifFailure: [ :f |
 			LzRewriteFailure signal: f asString ] ].
-
 	^ result
 ]
 

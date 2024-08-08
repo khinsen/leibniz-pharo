@@ -17,12 +17,12 @@ LzScanner class >> initializeKeywordMap [
 
 { #category : #generated }
 LzScanner >> emptySymbolTokenId [
-	^ 85
+	^ 86
 ]
 
 { #category : #generated }
 LzScanner >> errorTokenId [
-	^ 86
+	^ 87
 ]
 
 { #category : #generated }
