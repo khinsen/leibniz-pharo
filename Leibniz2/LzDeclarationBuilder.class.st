@@ -310,6 +310,18 @@ LzDeclarationBuilder >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
 ]
 
 { #category : #'visiting - toplevel' }
+LzDeclarationBuilder >> visitTopLevelState: aTopLevelState [
+	| var |
+	var := LzVarDeclaration new
+			name: (self acceptNode: aTopLevelState var varName);
+			sort: (self acceptNode: aTopLevelState var sort).
+	^ self
+		annotate: var
+		from: aTopLevelState
+		booleanOptions: #(example)
+]
+
+{ #category : #'visiting - toplevel' }
 LzDeclarationBuilder >> visitTopLevelSubsort: aTopLevelSubsort [
 	| varBuilder axiom |
 	varBuilder := LzVarDeclarationBuilder new.

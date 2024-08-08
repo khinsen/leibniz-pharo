@@ -253,6 +253,13 @@ LzAnnotationStyler >> visitTopLevelSpecialTerms: aTopLevelSpecialTerms [
 ]
 
 { #category : #visiting }
+LzAnnotationStyler >> visitTopLevelState: aTopLevelStateAnnotation [
+	self styleAnnotation: aTopLevelStateAnnotation.
+	self styleAutoHidingAnnotation: aTopLevelStateAnnotation.
+	self styleAutoUpdatingObjectButton: aTopLevelStateAnnotation
+]
+
+{ #category : #visiting }
 LzAnnotationStyler >> visitTopLevelSubsort: aTopLevelSubsort [
 	self styleAnnotation: aTopLevelSubsort.
 	self styleAutoHidingAnnotation: aTopLevelSubsort.
