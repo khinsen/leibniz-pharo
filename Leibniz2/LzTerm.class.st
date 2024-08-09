@@ -282,6 +282,23 @@ LzTerm >> referenceSlots [
 	^ #(signature)
 ]
 
+{ #category : #running }
+LzTerm >> runWithReducer: aReducer [
+	| state |
+	state := LzExecutionState new
+		stateVars: self signature stateVars keys.
+	^ self runWithReducer: aReducer state: state
+]
+
+{ #category : #running }
+LzTerm >> runWithReducer: aReducer state: state [
+	| runStepTerm |
+	runStepTerm := self signature
+						opTerm: (LzPrefixOpName for: #run)
+						args: { self }.
+	^ aReducer value: runStepTerm.
+]
+
 { #category : #accessing }
 LzTerm >> signature [
 	^ signature

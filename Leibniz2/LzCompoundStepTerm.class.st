@@ -75,25 +75,21 @@ LzCompoundStepTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindin
 	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
-{ #category : #accessing }
-LzCompoundStepTerm >> runWithReducer: aReducer [
-	| variables bindings result |
-	variables := Dictionary new.
-	bindings := LzBindings new
-		sortGraph: self signature sortGraph.
+{ #category : #running }
+LzCompoundStepTerm >> runWithReducer: aReducer state: state [
+	| result |
 	steps do: [ :eachStep |
-		| stepTerm runStepTerm |
-		stepTerm := eachStep first substitute: bindings.
-		runStepTerm := self signature
-						opTerm: (LzPrefixOpName for: #run)
-						args: { stepTerm }.
-		result := aReducer value: runStepTerm.
+		| stepTerm |
+		stepTerm := eachStep first substitute: state.
+		result := stepTerm runWithReducer: aReducer state: state.
 		eachStep second ifNotNil: [ :p |
-			| stepPattern |
-			stepPattern := p substitute: bindings.
-			stepPattern match: result bindings: bindings ].
-		bindings ifFailure: [ :f |
-			LzRewriteFailure signal: f asString ] ].
+			| bindings |
+			bindings := LzBindings new
+						sortGraph: self signature sortGraph.
+			p match: result bindings: bindings.
+			bindings ifFailure: [ :f |
+				LzRewriteFailure signal: f asString ].
+			state updateFromBindings: bindings ] ].
 	^ result
 ]
 
@@ -119,11 +115,16 @@ LzCompoundStepTerm >> steps: anObject [
 
 { #category : #unifying }
 LzCompoundStepTerm >> substitute: bindings [
-	| substitutedElements |
+	| substitutedSteps shadowedBindings |
 	bindings hasNoBindings ifTrue: [ ^ self ].
-	self elements ifEmpty: [ ^ self ].
-	substitutedElements := self elements collect: [ :each | each substitute: bindings ].
-	^ signature arrayTerm: substitutedElements shape: self shape
+	self steps ifEmpty: [ ^ self ].
+	shadowedBindings := LzShadowedBindings new
+							bindings: bindings;
+							shadowedVars: self signature stateVars keys.
+	substitutedSteps := self steps collect: [ :each |
+		{ each first substitute: bindings
+		. each second substitute: shadowedBindings } ].
+	^ signature compoundStepTerm: substitutedSteps
 ]
 
 { #category : #unifying }

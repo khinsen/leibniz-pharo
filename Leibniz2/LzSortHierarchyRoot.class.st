@@ -47,9 +47,9 @@ LzSortHierarchyRoot >> initialize [
 		LzSignature new
 			sortGraph: sortGraph;
 			builtins: Set new;
-			variables: Dictionary new;
+			stateVars: Dictionary new;
 			operators: sortOperators;
-			varDeclarations: #();
+			stateVarDeclarations: #();
 			opDeclarations: (OrderedCollection with: sortDeclaration op).
 
 	sortContext signature: sortSignature.
