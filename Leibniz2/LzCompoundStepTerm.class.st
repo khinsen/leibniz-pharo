@@ -17,17 +17,9 @@ LzCompoundStepTerm >> addAsRopedTextTo: aRopedText [
 		step first addAsRopedTextTo: aRopedText.
 		step second ifNotNil: [ :v |
 			aRopedText append: ' ⇒ ' asRopedText.
-			v addAsRopedTextTo: aRopedText.
-			self
-				do: [ :t |
-					t append: ':' asRopedText.
-					self
-						do: [ :tt | step third addAsRopedTextTo: tt ]
-						to: t
-						withAttribute: LzSortAttribute new ]
-				to: aRopedText
-				withAttribute: LzVarDeclarationAttribute new ].
-		eachIndex < steps size ifTrue: [ aRopedText append: ', ' asRopedText ] ].
+			v addAsRopedTextTo: aRopedText ].
+		eachIndex < steps size
+			ifTrue: [ aRopedText append: '; ' asRopedText ] ].
 	aRopedText append: ' .}' asRopedText.
 ]
 
@@ -84,7 +76,7 @@ LzCompoundStepTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindin
 ]
 
 { #category : #accessing }
-LzCompoundStepTerm >> runWithSignature: aSignature reducer: aReducer [
+LzCompoundStepTerm >> runWithReducer: aReducer [
 	| variables bindings result |
 	variables := Dictionary new.
 	bindings := LzBindings new

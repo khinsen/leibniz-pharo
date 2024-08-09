@@ -17,7 +17,7 @@ LzCompoundStepTermDeclaration >> addAsRopedTextTo: aRopedText [
 		step second ifNotNil: [ :p |
 			aRopedText append: ' ⇒ ' asRopedText.
 			p addAsRopedTextTo: aRopedText ].
-		eachIndex < steps size ifTrue: [ aRopedText append: ', ' asRopedText ] ].
+		eachIndex < steps size ifTrue: [ aRopedText append: '; ' asRopedText ] ].
 	aRopedText append: ' .}' asRopedText
 ]
 

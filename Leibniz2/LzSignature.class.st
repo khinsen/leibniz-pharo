@@ -280,7 +280,7 @@ LzSignature >> sort: aString [
 LzSignature >> sortForVar: aVarName variables: aDictionary [
 	^ aDictionary
 		at: aVarName
-		ifAbsent: [ self variables
+		ifAbsent: [ self stateVars
 						at: aVarName
 						ifAbsent: [ self error: 'No var named ', aVarName asSymbol ] ]
 ]

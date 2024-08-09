@@ -246,6 +246,43 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-08-09T09:56:04.852819+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-08-09T10:15:23.47114+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "WL5QNp3bDQCxoqT6BmU2kg=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "A sequence of steps can be combined into a single bigger step:\n\t{{lzTerm:{. →(2) ⇒ a_:ℕ; →(3) ⇒ b_:ℕ; →(a_ + b_).}, withSort = \"yes\", subcontext = \"example\"}}\n(uses {{lzUseContext:name = \"Integers\", subcontext = \"example\"}})."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
 									"dateAndTimeString" : "2024-08-08T17:30:26.218554+02:00"
 								}
 							},
@@ -257,7 +294,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-08T18:11:52.941025+02:00"
+									"dateAndTimeString" : "2024-08-09T10:15:36.268124+02:00"
 								}
 							},
 							"uid" : {
@@ -267,7 +304,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "A sequence of steps can be combined into a single bigger step:\n\t{{lzTerm:{. →(2) ⇒ a_:ℕ, →(3) ⇒ b_:ℕ, →(a_ + b_).}, withSort = \"yes\", subcontext = \"example\"}}\n(uses {{lzUseContext:name = \"Integers\", subcontext = \"example\"}}).\n\nIntermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context:\n\t{{lzState:n_:ℕ, subcontext = \"example\"}}"
+							"string" : "Intermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context:\n\t{{lzState:n_:ℕ, subcontext = \"example\"}}\n\t{{lzTerm:{. →(2) ⇒ n_; →(2 × n_).}, withSort = \"yes\", subcontext = \"example\"}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -368,7 +405,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-06T16:31:43.130029+02:00"
+									"dateAndTimeString" : "2024-08-09T09:49:12.32693+02:00"
 								}
 							},
 							"uid" : {
@@ -378,7 +415,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "The execution of compound steps is handled in Pharo code:\n\t{{lzRule:run(step_:CompoundStep)  ⇒ Pharo:\"step ensureCompoundStep. step runWithSignature: signature reducer: reducer\"}}"
+							"string" : "The execution of compound steps is handled in Pharo code:\n\t{{lzRule:run(step_:CompoundStep)  ⇒ Pharo:\"step ensureCompoundStep. step runWithReducer: reducer\"}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -405,7 +442,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-06T15:31:11.645522+02:00"
+									"dateAndTimeString" : "2024-08-09T10:15:59.038152+02:00"
 								}
 							},
 							"uid" : {
@@ -415,7 +452,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Example:\n\t{{lzTerm:run({. →(2) ⇒ a_:ℕ, →(3) ⇒ b_:ℕ, →(a_ + b_).}), withNormalForm = \"yes\", subcontext = \"example\"}}"
+							"string" : "Examples:\n\t{{lzTerm:run({. →(2) ⇒ a_:ℕ; →(3) ⇒ b_:ℕ; →(a_ + b_).}), withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:run({. →(2) ⇒ n_; →(2 × n_).}), withNormalForm = \"yes\", subcontext = \"example\"}}"
 						}
 					]
 				},

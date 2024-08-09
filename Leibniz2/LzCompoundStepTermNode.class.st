@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'leftDelimiter',
 		'steps',
-		'commas',
+		'semicolons',
 		'rightDelimiter'
 	],
 	#category : #'Leibniz2-SmaCCParser'
@@ -16,30 +16,20 @@ LzCompoundStepTermNode >> acceptVisitor: aParseTreeVisitor [
 ]
 
 { #category : #generated }
-LzCompoundStepTermNode >> commas [
-	^ commas
-]
-
-{ #category : #generated }
-LzCompoundStepTermNode >> commas: anOrderedCollection [
-	commas := anOrderedCollection
-]
-
-{ #category : #generated }
 LzCompoundStepTermNode >> compositeNodeVariables [
 	^ #(#steps)
 ]
 
 { #category : #generated }
 LzCompoundStepTermNode >> compositeTokenVariables [
-	^ #(#commas)
+	^ #(#semicolons)
 ]
 
 { #category : #'generated-initialize-release' }
 LzCompoundStepTermNode >> initialize [
 	super initialize.
 	steps := OrderedCollection new: 2.
-	commas := OrderedCollection new: 2.
+	semicolons := OrderedCollection new: 2.
 ]
 
 { #category : #generated }
@@ -60,6 +50,16 @@ LzCompoundStepTermNode >> rightDelimiter [
 { #category : #generated }
 LzCompoundStepTermNode >> rightDelimiter: aSmaCCToken [
 	rightDelimiter := aSmaCCToken
+]
+
+{ #category : #generated }
+LzCompoundStepTermNode >> semicolons [
+	^ semicolons
+]
+
+{ #category : #generated }
+LzCompoundStepTermNode >> semicolons: anOrderedCollection [
+	semicolons := anOrderedCollection
 ]
 
 { #category : #generated }
