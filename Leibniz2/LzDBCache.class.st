@@ -152,7 +152,7 @@ LzDBCache >> recursiveClosureOf: aSelector for: aPageName [
 				self perform: aSelector withArguments: { each } ]).
 		allRelations size > numberOfRelations
 	] whileTrue.
-	^ allRelations
+	^ allRelations copyWithout: aPageName
 ]
 
 { #category : #accessing }
