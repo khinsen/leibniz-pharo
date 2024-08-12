@@ -66,6 +66,42 @@ LzSignature >> compoundStepTerm:  steps [
 		beRecursivelyReadOnlyObject.
 ]
 
+{ #category : #constructing }
+LzSignature >> compoundStepTerm:  steps variables: vars [
+	| tempVars prefix rename |
+	tempVars := vars keys reject: [ :each |
+		self stateVars includesKey: each ].
+	tempVars ifEmpty: [ ^ self compoundStepTerm:  steps ].
+
+	tempVars do: [ :each |
+		(each asSymbol beginsWith: LzConstants tempVarPrefix)
+			ifFalse: [ self error: 'Temporary var name ',
+						each asString,
+						' does not start with ',
+						LzConstants tempVarPrefix ] ].
+
+	prefix := LzCompoundStepTerm newTempPrefix.
+	rename := self emptyBindings.
+	tempVars do: [ :each |
+		| sort |
+		sort := vars at: each.
+		rename defineVar: each sort: sort.
+		rename
+			bindVar: each
+			sort: sort
+			to: (LzVarTerm new
+					signature: self;
+					name: (each addPrefix: prefix);
+					sort: sort;
+					beRecursivelyReadOnlyObject;
+					yourself) ].
+
+	^ self compoundStepTerm:
+		(steps collect: [ :each |
+			{ each first substitute: rename
+			. each second ifNotNil: [ :p | p substitute: rename ] } ])
+]
+
 { #category : #copying }
 LzSignature >> copy [
 	^ self
@@ -74,6 +110,12 @@ LzSignature >> copy [
 { #category : #copying }
 LzSignature >> deepCopy [
 	^ self
+]
+
+{ #category : #constructing }
+LzSignature >> emptyBindings [
+	^ LzBindings new
+		sortGraph: self sortGraph
 ]
 
 { #category : #inspecting }

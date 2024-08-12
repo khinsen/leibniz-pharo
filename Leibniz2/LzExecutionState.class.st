@@ -7,9 +7,25 @@ Class {
 	#category : #'Leibniz2-Terms'
 }
 
+{ #category : #updating }
+LzExecutionState >> addStateVar: anLzVarName [
+	(values includesKey: anLzVarName)
+		ifFalse: [ values at: anLzVarName put: nil ]
+]
+
 { #category : #accessing }
 LzExecutionState >> bindingFor: aName [
 	^ values at: aName ifAbsent: [ nil ]
+]
+
+{ #category : #inspecting }
+LzExecutionState >> gtDisplayOn: aStream [
+	values keysAndValuesDo: [ :name :value |
+		aStream
+			<< name asLeibnizSyntaxString;
+			<< '=';
+			<< (value ifNil: 'nil' ifNotNil: [ :v | v asLeibnizSyntaxString ]);
+			<< ' ' ]
 ]
 
 { #category : #accessing }
@@ -36,10 +52,17 @@ LzExecutionState >> initialize [
 	values := Dictionary new
 ]
 
+{ #category : #printing }
+LzExecutionState >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	self gtDisplayOn: aStream.
+	aStream nextPut: $)
+]
+
 { #category : #initializing }
 LzExecutionState >> stateVars: aSet [
-	aSet do: [ :each |
-		values at: each put: nil ]
+	aSet do: [ :each | self addStateVar: each ]
 ]
 
 { #category : #updating }

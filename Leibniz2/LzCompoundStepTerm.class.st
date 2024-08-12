@@ -5,8 +5,17 @@ Class {
 		'steps',
 		'sort'
 	],
+	#classVars : [
+		'Counter'
+	],
 	#category : #'Leibniz2-Terms'
 }
+
+{ #category : #constructing }
+LzCompoundStepTerm class >> newTempPrefix [
+	Counter := 1 + (Counter ifNil: 0).
+	^ LzConstants tempVarPrefix, Counter asString, '.'
+]
 
 { #category : #converting }
 LzCompoundStepTerm >> addAsRopedTextTo: aRopedText [
@@ -77,19 +86,24 @@ LzCompoundStepTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindin
 
 { #category : #running }
 LzCompoundStepTerm >> runWithReducer: aReducer state: state [
-	| result |
+	| tempVarState result |
+	tempVarState := LzExecutionState new.
 	steps do: [ :eachStep |
 		| stepTerm |
-		stepTerm := eachStep first substitute: state.
+		stepTerm := (eachStep first substitute: state)
+						substitute: tempVarState.
 		result := stepTerm runWithReducer: aReducer state: state.
 		eachStep second ifNotNil: [ :p |
 			| bindings |
-			bindings := LzBindings new
-						sortGraph: self signature sortGraph.
+			bindings := self signature emptyBindings.
 			p match: result bindings: bindings.
 			bindings ifFailure: [ :f |
 				LzRewriteFailure signal: f asString ].
-			state updateFromBindings: bindings ] ].
+			state updateFromBindings: bindings.
+			bindings bindings keysDo: [ :each |
+				(each asSymbol beginsWith: LzConstants tempVarPrefix)
+					ifTrue: [ tempVarState addStateVar: each ] ].
+			tempVarState updateFromBindings: bindings ] ].
 	^ result
 ]
 

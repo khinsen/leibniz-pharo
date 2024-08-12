@@ -48,3 +48,8 @@ LzConstants class >> reservedIdentifiers [
 		subsortSymbol
 		}
 ]
+
+{ #category : #accessing }
+LzConstants class >> tempVarPrefix [
+	^ '□'
+]
