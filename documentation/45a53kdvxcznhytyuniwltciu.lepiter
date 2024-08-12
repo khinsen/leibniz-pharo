@@ -368,7 +368,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-06T15:12:57.67505+02:00"
+									"dateAndTimeString" : "2024-08-12T16:16:51.436492+02:00"
 								}
 							},
 							"uid" : {
@@ -378,7 +378,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Compound steps are of sort {{lzSort:CompoundStep ⊆ Step}} or of sort {{lzSort:CompoundStep(𝕊)}} with {{lzSort:s_:𝕊, CompoundStep(s_) ⊆ Step(s_)}} and {{lzSort:s_:𝕊, CompoundStep(s_) ⊆ CompoundStep}}."
+							"string" : "Programs are of sort {{lzSort:Program ⊆ Step}} or of sort {{lzSort:Program(𝕊)}} with {{lzSort:s_:𝕊, Program(s_) ⊆ Step(s_)}} and {{lzSort:s_:𝕊, Program(s_) ⊆ Program}}."
 						},
 						{
 							"__type" : "textSnippet",
@@ -405,7 +405,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-09T09:49:12.32693+02:00"
+									"dateAndTimeString" : "2024-08-12T16:17:03.475889+02:00"
 								}
 							},
 							"uid" : {
@@ -415,7 +415,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "The execution of compound steps is handled in Pharo code:\n\t{{lzRule:run(step_:CompoundStep)  ⇒ Pharo:\"step ensureCompoundStep. step runWithReducer: reducer\"}}"
+							"string" : "The execution of compound steps is handled in Pharo code:\n\t{{lzRule:run(step_:Program)  ⇒ Pharo:\"step ensureProgram. step runWithReducer: reducer\"}}"
 						},
 						{
 							"__type" : "textSnippet",
@@ -442,7 +442,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-12T11:54:17.3836+02:00"
+									"dateAndTimeString" : "2024-08-12T12:18:27.079866+02:00"
 								}
 							},
 							"uid" : {
@@ -452,7 +452,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Examples:\n\t{{lzTerm:run({. →(2) ⇒ □a_:ℕ; →(3) ⇒ □b_:ℕ; →(□a_ +□ b_).}), withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:run({. →(2) ⇒ n_; →(2 × n_).}), withNormalForm = \"yes\", subcontext = \"example\"}}"
+							"string" : "Examples:\n\t{{lzTerm:run({. →(2) ⇒ □a_:ℕ; →(3) ⇒ □b_:ℕ; →(□a_ + □b_).}), withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:run({. →(2) ⇒ n_; →(2 × n_).}), withNormalForm = \"yes\", subcontext = \"example\"}}"
 						}
 					]
 				},

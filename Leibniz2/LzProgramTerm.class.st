@@ -52,7 +52,7 @@ LzProgramTerm >> computeSort [
 	| lastStepSort sortTerm |
 	lastStepSort := self steps last first sort.
 	sortTerm := lastStepSort term signature
-					opTerm: (LzPrefixOpName for: #CompoundStep)
+					opTerm: (LzPrefixOpName for: #Program)
 					args: lastStepSort term args.
 	sort := lastStepSort sortGraph sortWithTerm: sortTerm.
 ]
