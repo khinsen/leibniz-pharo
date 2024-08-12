@@ -75,20 +75,17 @@ LzContextBuilder >> axiom: aString [
 	"With the old parser, this would accept either an equality axiom or a subsort axiom.
 	 The current version is too generous in the second case, allowing also a sort
 	 declaration. The API needs to be fixed."
-	| declaration |
-	declaration :=
-		[ (LzDeclarationBuilder new acceptNode:
-			(LzParser2
-				parse: aString
-				startingAt: LzParser2 startingStateForTopLevelAxiom))
-				declaration ]
-		on: SmaCCParserError do: [
-			 (LzDeclarationBuilder new acceptNode:
-				(LzParser2
-					parse: aString
-					startingAt: LzParser2 startingStateForTopLevelSort))
-					declaration ].
-	self parsedAxiom: declaration
+	| declaration parseNode |
+	parseNode :=
+		(aString includes: $⊆)
+			ifFalse: [ LzParser2
+						parse: aString
+						startingAt: LzParser2 startingStateForTopLevelAxiom ]
+			ifTrue: [ LzParser2
+						parse: aString
+						startingAt: LzParser2 startingStateForTopLevelSort ].
+	declaration := LzDeclarationBuilder new acceptNode: parseNode.
+	self parsedAxiom: declaration declaration
 ]
 
 { #category : #accessing }

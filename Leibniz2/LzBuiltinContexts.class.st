@@ -313,7 +313,7 @@ LzBuiltinContexts class >> integerAxiomsFor: aContextBuilder [
 		axiom: 'x_:ℤ, y_:ℤ , x_ × y_ = y_ × x_';
 		axiom: 'x_:ℤ, y_:ℤ , z_:ℤ , (x_ × y_) × z_ = x_ × (y_ × z_)';
 		"distribution"
-		axiom: 'x_:ℤ, y_:ℤ , z_:ℤ ,e x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)'
+		axiom: 'x_:ℤ, y_:ℤ , z_:ℤ , x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)'
 ]
 
 { #category : #defining }
