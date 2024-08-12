@@ -22,7 +22,7 @@ LzAxiom >> buildTermsFrom: aDictionary [
 ]
 
 { #category : #'instance creation' }
-LzAxiom >> checkConsistency [
+LzAxiom >> checkSteps [
 	self subclassResponsibility
 ]
 

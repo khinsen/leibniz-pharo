@@ -38,22 +38,26 @@ LzProgramTerm >> args [
 ]
 
 { #category : #initializing }
-LzProgramTerm >> checkConsistency [
-	| stepSort |
+LzProgramTerm >> checkSteps [
+	| programSort |
 	self assert: self steps isNotEmpty.
-	stepSort := self signature sortGraph sort: 'Step'.
+"	programSort := self signature sortGraph sort: 'Program'.
 	steps do: [ :each |
-		self assert: each first sort <= stepSort.
-		].
+		self assert: each first sort <= programSort.
+		]."
 ]
 
 { #category : #initializing }
 LzProgramTerm >> computeSort [
-	| lastStepSort sortTerm |
+	| programSort lastStepSort args sortTerm |
+	programSort := self signature sortGraph sort: 'Program'.
 	lastStepSort := self steps last first sort.
+	args := (lastStepSort <= programSort)
+		ifTrue: [ lastStepSort term args ]
+		ifFalse: [ { lastStepSort term } ].
 	sortTerm := lastStepSort term signature
 					opTerm: (LzPrefixOpName for: #Program)
-					args: lastStepSort term args.
+					args: args.
 	sort := lastStepSort sortGraph sortWithTerm: sortTerm.
 ]
 
@@ -86,13 +90,17 @@ LzProgramTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: b
 
 { #category : #running }
 LzProgramTerm >> runWithReducer: aReducer state: state [
-	| tempVarState result |
+	| programSort tempVarState result |
+	programSort := self signature sortGraph sort: 'Program'.
 	tempVarState := LzExecutionState new.
 	steps do: [ :eachStep |
 		| stepTerm |
 		stepTerm := (eachStep first substitute: state)
 						substitute: tempVarState.
-		result := stepTerm runWithReducer: aReducer state: state.
+		result :=
+			(stepTerm sort <= programSort)
+				ifTrue: [ stepTerm runWithReducer: aReducer state: state ]
+				ifFalse: [ aReducer value: stepTerm ].
 		eachStep second ifNotNil: [ :p |
 			| bindings |
 			bindings := self signature emptyBindings.

@@ -57,7 +57,7 @@ LzRule >> buildTermsFrom: anASTRuleNode [
 ]
 
 { #category : #'instance creation' }
-LzRule >> checkConsistency [
+LzRule >> checkSteps [
 	| patternVars |
 	self assert: pattern signature == signature.
 	patternVars := pattern vars.

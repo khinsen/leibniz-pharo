@@ -36,7 +36,7 @@ LzEqualityAxiom >> buildTermsFrom: aDictionary [
 ]
 
 { #category : #accessing }
-LzEqualityAxiom >> checkConsistency [
+LzEqualityAxiom >> checkSteps [
 	self assert: left signature == signature.
 	self assert: right signature == signature.
 	condition ifNotNil: [
@@ -99,7 +99,7 @@ LzEqualityAxiom >> normalFormIn: aContext [
 		condition: (self condition ifNotNil: [ :c | aContext reduce: c ]);
 		right: (aContext reduce: self right);
 		label: self label;
-		checkConsistency;
+		checkSteps;
 		beRecursivelyReadOnlyObject;
 		yourself
 ]

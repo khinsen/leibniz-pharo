@@ -18,43 +18,6 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-12T11:45:45.098202+02:00"
-					}
-				},
-				"editEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"editTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-12T11:45:45.098202+02:00"
-					}
-				},
-				"uid" : {
-					"__type" : "uid",
-					"uidString" : "+IMNGNvbDQC7fAM9DRjkrQ=="
-				},
-				"paragraphStyle" : {
-					"__type" : "textStyle"
-				},
-				"string" : ""
-			},
-			{
-				"__type" : "textSnippet",
-				"children" : {
-					"__type" : "snippets",
-					"items" : [ ]
-				},
-				"createEmail" : {
-					"__type" : "email",
-					"emailString" : "<unknown>"
-				},
-				"createTime" : {
-					"__type" : "time",
-					"time" : {
-						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2024-08-05T09:39:09.117032+02:00"
 					}
 				},
@@ -66,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-12T11:49:01.320794+02:00"
+						"dateAndTimeString" : "2024-08-12T16:48:58.947242+02:00"
 					}
 				},
 				"uid" : {
@@ -92,7 +55,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-05T10:03:19.444124+02:00"
+						"dateAndTimeString" : "2024-08-12T16:35:04.733997+02:00"
 					}
 				},
 				"editEmail" : {
@@ -103,135 +66,23 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-06T11:49:26.202341+02:00"
+						"dateAndTimeString" : "2024-08-12T16:46:10.848378+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "vZ3a2EzbDQC5/3jLB9aKxA=="
+					"uidString" : "I4HEIt/bDQCNerL8BBmOzg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "An algorithmic step of sort {{lzSort:Step}} is an operation that can change state values. Steps of sort {{lzSort:Step(𝕊)}} with {{lzSort:s_:𝕊, Step(s_) ⊆ Step}} also yield a result of the specified sort."
+				"string" : "A program consists of a sequence of steps. Program terms are of sort {{lzSort:Program(𝕊)}} with  {{lzSort:Program}}, {{lzSort:s_:𝕊, Program(s_) ⊆ Program}}, the argument sort indicating the sort of the result. The result of a program is the result of its last step."
 			},
 			{
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-05T16:59:22.717784+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-05T17:09:59.714087+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "yLxYoVLbDQCxF5GgBleANw=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "A step that yields a given value, with no other effect, is written as\n\t{{lzOp:s_:𝕊, →(s_) : Step(s_)}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-05T17:02:52.696224+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-06T14:45:06.052916+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "L/lLtVLbDQCz9BiZBleANw=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "A step is executed using\n\t{{lzOp:run(Step(s_:𝕊)) : s_}}\nFor the simple value-yielding step defined above, this is handled by a simple rule:\n\t{{lzRule:s__:𝕊, v_:s__, run(→(v_)) ⇒ v_}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-05T17:06:23.113979+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-05T17:26:15.470787+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "QrPWwVLbDQC2liY7BleANw=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "Example:\n - {{lzTerm:→(42), withSort = \"yes\", subcontext = \"example\", withNormalForm = \"yes\"}}\n - {{lzTerm:run(→(42)), withSort = \"yes\", subcontext = \"example\", withNormalForm = \"yes\"}}"
-						}
-					]
+					"items" : [ ]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -241,7 +92,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-06T14:56:32.095483+02:00"
+						"dateAndTimeString" : "2024-08-09T09:56:04.852819+02:00"
 					}
 				},
 				"editEmail" : {
@@ -252,209 +103,23 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-06T14:56:50.497897+02:00"
+						"dateAndTimeString" : "2024-08-12T16:47:44.670946+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "OY1MD2XbDQCayNRjBEjPYQ=="
+					"uidString" : "WL5QNp3bDQCxoqT6BmU2kg=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "###Simple value-yielding steps"
+				"string" : "Program terms are written in {. ... .}, the steps are delimited by semicolons:\n\t{{lzTerm:{. 2 ⇒ □a_:ℕ; 3 ⇒ □b_:ℕ; □a_ + □b_ .}, withSort = \"yes\", subcontext = \"example\"}}\n(uses {{lzUseContext:name = \"Integers\", subcontext = \"example\"}}). Intermediate results can be assigned to temporary variables, whose names must start with the special symbol □."
 			},
 			{
 				"__type" : "textSnippet",
 				"children" : {
 					"__type" : "snippets",
-					"items" : [
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-09T09:56:04.852819+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-12T12:01:51.530833+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "WL5QNp3bDQCxoqT6BmU2kg=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "A sequence of steps can be combined into a program:\n\t{{lzTerm:{. →(2) ⇒ □a_:ℕ; →(3) ⇒ □b_:ℕ; →(□a_ + □b_).}, withSort = \"yes\", subcontext = \"example\"}}\n(uses {{lzUseContext:name = \"Integers\", subcontext = \"example\"}})."
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-08T17:30:26.218554+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-09T10:15:36.268124+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "5NJgcY/bDQCVDr8qBvmBtQ=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "Intermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context:\n\t{{lzState:n_:ℕ, subcontext = \"example\"}}\n\t{{lzTerm:{. →(2) ⇒ n_; →(2 × n_).}, withSort = \"yes\", subcontext = \"example\"}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-06T15:05:53.797937+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-12T16:16:51.436492+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "QXLHMGXbDQCd5IWkBEjPYQ=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "Programs are of sort {{lzSort:Program ⊆ Step}} or of sort {{lzSort:Program(𝕊)}} with {{lzSort:s_:𝕊, Program(s_) ⊆ Step(s_)}} and {{lzSort:s_:𝕊, Program(s_) ⊆ Program}}."
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-06T14:56:08.900754+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-12T16:17:03.475889+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "EePxm0zbDQCtw77ZDwELRg=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "The execution of compound steps is handled in Pharo code:\n\t{{lzRule:run(step_:Program)  ⇒ Pharo:\"step ensureProgram. step runWithReducer: reducer\"}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-06T15:20:37.97924+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-12T12:18:27.079866+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "y/x6ZWXbDQCyPcavDTwaoA=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "Examples:\n\t{{lzTerm:run({. →(2) ⇒ □a_:ℕ; →(3) ⇒ □b_:ℕ; →(□a_ + □b_).}), withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:run({. →(2) ⇒ n_; →(2 × n_).}), withNormalForm = \"yes\", subcontext = \"example\"}}"
-						}
-					]
+					"items" : [ ]
 				},
 				"createEmail" : {
 					"__type" : "email",
@@ -464,7 +129,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-06T14:57:11.598693+02:00"
+						"dateAndTimeString" : "2024-08-08T17:30:26.218554+02:00"
 					}
 				},
 				"editEmail" : {
@@ -475,17 +140,91 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-06T14:57:17.475335+02:00"
+						"dateAndTimeString" : "2024-08-12T16:48:05.180325+02:00"
 					}
 				},
 				"uid" : {
 					"__type" : "uid",
-					"uidString" : "m0inEWXbDQCbjV+wBEjPYQ=="
+					"uidString" : "5NJgcY/bDQCVDr8qBvmBtQ=="
 				},
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "###Compound steps"
+				"string" : "Results can also be assigned to state variables defined in the context:\n\t{{lzState:n_:ℕ, subcontext = \"example\"}}\n\t{{lzTerm:{. 3 ⇒ n_; 2 × n_ .}, withSort = \"yes\", subcontext = \"example\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-06T14:56:08.900754+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-12T16:45:29.16927+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "EePxm0zbDQCtw77ZDwELRg=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "A program is executed using\n\t{{lzOp:run(Program(s_:𝕊)) : s_}}\n\nThe execution of programs is handled in Pharo code:\n\t{{lzRule:run(program_:Program)  ⇒ Pharo:\"program ensureProgram. program runWithReducer: reducer\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-06T15:20:37.97924+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-12T16:40:58.347155+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "y/x6ZWXbDQCyPcavDTwaoA=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "Examples:\n\t{{lzTerm:run({. 2 ⇒ □a_:ℕ; 3 ⇒ □b_:ℕ; □a_ + □b_ .}), withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:run({. 2 ⇒ n_; 2 × n_ .}), withNormalForm = \"yes\", subcontext = \"example\"}}"
 			}
 		]
 	},

@@ -30,9 +30,9 @@ LzRewriteRule >> buildTermsFrom: anASTRuleNode [
 ]
 
 { #category : #'instance creation' }
-LzRewriteRule >> checkConsistency [
+LzRewriteRule >> checkSteps [
 	| patternVars |
-	super checkConsistency.
+	super checkSteps.
 	self assert: replacement signature == signature.
 	self assert: replacement kind equals: pattern kind.
 	patternVars := pattern vars.
@@ -78,7 +78,7 @@ LzRewriteRule >> normalFormIn: aContext [
 		replacement: (aContext reduce: self replacement);
 		label: self label;
 		order: self order;
-		checkConsistency;
+		checkSteps;
 		beRecursivelyReadOnlyObject;
 		yourself
 ]

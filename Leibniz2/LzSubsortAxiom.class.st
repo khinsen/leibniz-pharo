@@ -31,7 +31,7 @@ LzSubsortAxiom >> buildTermsFrom: aDictionary [
 ]
 
 { #category : #'instance creation' }
-LzSubsortAxiom >> checkConsistency [
+LzSubsortAxiom >> checkSteps [
 	self assert: subsort sort isSortSort.
 	self assert: supersort sort isSortSort.
 ]

@@ -194,7 +194,7 @@ LzSignature >> parsedAxiom: anAxiomDeclaration [
 		variables: (self parsedVariables: anAxiomDeclaration variables);
 		buildTermsFrom: anAxiomDeclaration terms;
 		label: anAxiomDeclaration label;
-		checkConsistency;
+		checkSteps;
 		beRecursivelyReadOnlyObject
 ]
 
@@ -212,7 +212,7 @@ LzSignature >> parsedRule: aRuleDeclaration [
 		buildTermsFrom: aRuleDeclaration;
 		label: aRuleDeclaration label;
 		order: aRuleDeclaration order;
-		checkConsistency;
+		checkSteps;
 		beRecursivelyReadOnlyObject;
 		yourself
 ]
@@ -262,7 +262,7 @@ LzSignature >> programTerm:  steps [
 	^ LzProgramTerm new
 		signature: self;
 		steps: steps;
-		checkConsistency;
+		checkSteps;
 		computeSort;
 		beRecursivelyReadOnlyObject.
 ]
