@@ -84,13 +84,13 @@ LzTerm >> ensureArrayTerm [
 ]
 
 { #category : #rewriting }
-LzTerm >> ensureCompoundStep [
-	LzRewriteFailure signal: 'not a compound step'
+LzTerm >> ensureNumber [
+	LzRewriteFailure signal: 'not a number term'
 ]
 
 { #category : #rewriting }
-LzTerm >> ensureNumber [
-	LzRewriteFailure signal: 'not a number term'
+LzTerm >> ensureProgram [
+	LzRewriteFailure signal: 'not a compound step'
 ]
 
 { #category : #rewriting }

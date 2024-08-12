@@ -31,11 +31,6 @@ TLzParseTreeNodeVisitor >> visitBracketOpTerm: aBracketOpTerm [
 ]
 
 { #category : #generated }
-TLzParseTreeNodeVisitor >> visitCompoundStepTerm: aCompoundStepTerm [
-	^ self visitParseTree: aCompoundStepTerm
-]
-
-{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitFpNumberLiteralTerm: aFpNumberLiteralTerm [
 	^ self visitLiteralTerm: aFpNumberLiteralTerm
 ]
@@ -101,6 +96,11 @@ TLzParseTreeNodeVisitor >> visitPrefixOpTerm: aPrefixOpTerm [
 ]
 
 { #category : #generated }
+TLzParseTreeNodeVisitor >> visitProgramTerm: aProgramTerm [
+	^ self visitTerm: aProgramTerm
+]
+
+{ #category : #generated }
 TLzParseTreeNodeVisitor >> visitRationalNumberLiteralTerm: aRationalNumberLiteralTerm [
 	^ self visitLiteralTerm: aRationalNumberLiteralTerm
 ]
@@ -118,11 +118,6 @@ TLzParseTreeNodeVisitor >> visitSimpleOpArg: aSimpleOpArg [
 { #category : #generated }
 TLzParseTreeNodeVisitor >> visitStep: aStep [
 	^ self visitParseTree: aStep
-]
-
-{ #category : #generated }
-TLzParseTreeNodeVisitor >> visitStepTerm: aStepTerm [
-	^ self visitTerm: aStepTerm
 ]
 
 { #category : #generated }

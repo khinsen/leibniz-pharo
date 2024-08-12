@@ -18,6 +18,43 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-12T11:45:45.098202+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-12T11:45:45.098202+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "+IMNGNvbDQC7fAM9DRjkrQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : ""
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [ ]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
 						"dateAndTimeString" : "2024-08-05T09:39:09.117032+02:00"
 					}
 				},
@@ -29,7 +66,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-05T15:39:52.0545+02:00"
+						"dateAndTimeString" : "2024-08-12T11:49:01.320794+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +76,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Requires special terms ({{lzSpecialTerms:steps}}) that cannot be implemented in Leibniz itself."
+				"string" : "Requires special terms ({{lzSpecialTerms:programs}}) that cannot be implemented in Leibniz itself."
 			},
 			{
 				"__type" : "textSnippet",
@@ -257,7 +294,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-09T10:15:23.47114+02:00"
+									"dateAndTimeString" : "2024-08-12T12:01:51.530833+02:00"
 								}
 							},
 							"uid" : {
@@ -267,7 +304,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "A sequence of steps can be combined into a single bigger step:\n\t{{lzTerm:{. →(2) ⇒ a_:ℕ; →(3) ⇒ b_:ℕ; →(a_ + b_).}, withSort = \"yes\", subcontext = \"example\"}}\n(uses {{lzUseContext:name = \"Integers\", subcontext = \"example\"}})."
+							"string" : "A sequence of steps can be combined into a program:\n\t{{lzTerm:{. →(2) ⇒ □a_:ℕ; →(3) ⇒ □b_:ℕ; →(□a_ + □b_).}, withSort = \"yes\", subcontext = \"example\"}}\n(uses {{lzUseContext:name = \"Integers\", subcontext = \"example\"}})."
 						},
 						{
 							"__type" : "textSnippet",
@@ -305,43 +342,6 @@
 								"__type" : "textStyle"
 							},
 							"string" : "Intermediate results can be assigned to a temporary variable, as in this example, or to state variables defined in the context:\n\t{{lzState:n_:ℕ, subcontext = \"example\"}}\n\t{{lzTerm:{. →(2) ⇒ n_; →(2 × n_).}, withSort = \"yes\", subcontext = \"example\"}}"
-						},
-						{
-							"__type" : "textSnippet",
-							"children" : {
-								"__type" : "snippets",
-								"items" : [ ]
-							},
-							"createEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"createTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-05T10:53:43.064046+02:00"
-								}
-							},
-							"editEmail" : {
-								"__type" : "email",
-								"emailString" : "<unknown>"
-							},
-							"editTime" : {
-								"__type" : "time",
-								"time" : {
-									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-08T17:30:26.237353+02:00"
-								}
-							},
-							"uid" : {
-								"__type" : "uid",
-								"uidString" : "YmETjU3bDQCpd/pVBz9vsA=="
-							},
-							"paragraphStyle" : {
-								"__type" : "textStyle"
-							},
-							"string" : "At the beginning of execution, the value of all state variables is {{lzOp:undefined:undefined}}, of sort {{lzSort:undefined}}."
 						},
 						{
 							"__type" : "textSnippet",
@@ -442,7 +442,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2024-08-09T10:15:59.038152+02:00"
+									"dateAndTimeString" : "2024-08-12T11:54:17.3836+02:00"
 								}
 							},
 							"uid" : {
@@ -452,7 +452,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "Examples:\n\t{{lzTerm:run({. →(2) ⇒ a_:ℕ; →(3) ⇒ b_:ℕ; →(a_ + b_).}), withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:run({. →(2) ⇒ n_; →(2 × n_).}), withNormalForm = \"yes\", subcontext = \"example\"}}"
+							"string" : "Examples:\n\t{{lzTerm:run({. →(2) ⇒ □a_:ℕ; →(3) ⇒ □b_:ℕ; →(□a_ +□ b_).}), withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:run({. →(2) ⇒ n_; →(2 × n_).}), withNormalForm = \"yes\", subcontext = \"example\"}}"
 						}
 					]
 				},
@@ -508,12 +508,12 @@
 		"__type" : "time",
 		"time" : {
 			"__type" : "dateAndTime",
-			"dateAndTimeString" : "2024-08-05T09:23:50.044551+02:00"
+			"dateAndTimeString" : "2024-08-12T11:45:45.090633+02:00"
 		}
 	},
 	"pageType" : {
 		"__type" : "namedPage",
-		"title" : "Steps"
+		"title" : "Programs"
 	},
 	"uid" : {
 		"__type" : "uuid",

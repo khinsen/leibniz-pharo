@@ -88,24 +88,6 @@ LzDeclarationBuilder >> visitBracketOpTerm: aBracketOpTerm [
 ]
 
 { #category : #visiting }
-LzDeclarationBuilder >> visitCompoundStepTerm: aCompoundStepTerm [
-	^ LzCompoundStepTermDeclaration new steps:
-		(aCompoundStepTerm steps collect: [ :each |
-			| term pattern |
-			term := self acceptNode: each term.
-			pattern := nil.
-			each pattern ifNotNil: [ :p |
-				| varBuilder |
-				varBuilder := LzVarDeclarationBuilder new.
-				p vars ifNotNil: [ :v | varBuilder acceptNodes: v ].
-				varBuilder acceptNode: p term.
-				pattern := LzPatternDeclaration new
-					variables: varBuilder vars;
-					term: (self acceptNode: p term) ].
-			{ term . pattern } ]).
-]
-
-{ #category : #visiting }
 LzDeclarationBuilder >> visitFpNumberLiteralTerm: aFpNumberLiteralTerm [
 	| value |
 	"Pharo doesn't allow a dot followed by an exponent without any fractional part.
@@ -159,6 +141,24 @@ LzDeclarationBuilder >> visitPrefixOpTerm: aPrefixOpTerm [
 	^ LzOpTermDeclaration new
 		opName: (LzPrefixOpName for: aPrefixOpTerm opName value asSymbol);
 		args: (aPrefixOpTerm args collect: [ :each | self acceptNode: each ]) asArray
+]
+
+{ #category : #visiting }
+LzDeclarationBuilder >> visitProgramTerm: aProgramTerm [
+	^ LzProgramTermDeclaration new steps:
+		(aProgramTerm steps collect: [ :each |
+			| term pattern |
+			term := self acceptNode: each term.
+			pattern := nil.
+			each pattern ifNotNil: [ :p |
+				| varBuilder |
+				varBuilder := LzVarDeclarationBuilder new.
+				p vars ifNotNil: [ :v | varBuilder acceptNodes: v ].
+				varBuilder acceptNode: p term.
+				pattern := LzPatternDeclaration new
+					variables: varBuilder vars;
+					term: (self acceptNode: p term) ].
+			{ term . pattern } ]).
 ]
 
 { #category : #visiting }

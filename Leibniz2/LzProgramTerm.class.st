@@ -1,5 +1,5 @@
 Class {
-	#name : #LzCompoundStepTerm,
+	#name : #LzProgramTerm,
 	#superclass : #LzTerm,
 	#instVars : [
 		'steps',
@@ -12,13 +12,13 @@ Class {
 }
 
 { #category : #constructing }
-LzCompoundStepTerm class >> newTempPrefix [
+LzProgramTerm class >> newTempPrefix [
 	Counter := 1 + (Counter ifNil: 0).
 	^ LzConstants tempVarPrefix, Counter asString, '.'
 ]
 
 { #category : #converting }
-LzCompoundStepTerm >> addAsRopedTextTo: aRopedText [
+LzProgramTerm >> addAsRopedTextTo: aRopedText [
 	aRopedText append: '{. ' asRopedText.
 	1 to: steps size do: [ :eachIndex |
 		| step |
@@ -33,12 +33,12 @@ LzCompoundStepTerm >> addAsRopedTextTo: aRopedText [
 ]
 
 { #category : #accessing }
-LzCompoundStepTerm >> args [
+LzProgramTerm >> args [
 	^ #()
 ]
 
 { #category : #initializing }
-LzCompoundStepTerm >> checkConsistency [
+LzProgramTerm >> checkConsistency [
 	| stepSort |
 	self assert: self steps isNotEmpty.
 	stepSort := self signature sortGraph sort: 'Step'.
@@ -48,7 +48,7 @@ LzCompoundStepTerm >> checkConsistency [
 ]
 
 { #category : #initializing }
-LzCompoundStepTerm >> computeSort [
+LzProgramTerm >> computeSort [
 	| lastStepSort sortTerm |
 	lastStepSort := self steps last first sort.
 	sortTerm := lastStepSort term signature
@@ -58,16 +58,16 @@ LzCompoundStepTerm >> computeSort [
 ]
 
 { #category : #rewriting }
-LzCompoundStepTerm >> ensureCompoundStep [
+LzProgramTerm >> ensureProgram [
 ]
 
 { #category : #organizing }
-LzCompoundStepTerm >> fingerprint [
-	^ #steps
+LzProgramTerm >> fingerprint [
+	^ #program
 ]
 
 { #category : #unifying }
-LzCompoundStepTerm >> match: otherTerm bindings: bindings [
+LzProgramTerm >> match: otherTerm bindings: bindings [
 	otherTerm
 		matchStepTerm: self
 		steps: self steps
@@ -75,17 +75,17 @@ LzCompoundStepTerm >> match: otherTerm bindings: bindings [
 ]
 
 { #category : #unifying }
-LzCompoundStepTerm >> matchArrayTerm: otherTerm elements: aTermList shape: anArray bindings: bindings [
+LzProgramTerm >> matchArrayTerm: otherTerm elements: aTermList shape: anArray bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : #unifying }
-LzCompoundStepTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: bindings [
+LzProgramTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : #running }
-LzCompoundStepTerm >> runWithReducer: aReducer state: state [
+LzProgramTerm >> runWithReducer: aReducer state: state [
 	| tempVarState result |
 	tempVarState := LzExecutionState new.
 	steps do: [ :eachStep |
@@ -108,27 +108,27 @@ LzCompoundStepTerm >> runWithReducer: aReducer state: state [
 ]
 
 { #category : #accessing }
-LzCompoundStepTerm >> sort [
+LzProgramTerm >> sort [
 	^ sort
 ]
 
 { #category : #accessing }
-LzCompoundStepTerm >> sort: aSort [
+LzProgramTerm >> sort: aSort [
 	sort := aSort
 ]
 
 { #category : #accessing }
-LzCompoundStepTerm >> steps [
+LzProgramTerm >> steps [
 	^ steps
 ]
 
 { #category : #accessing }
-LzCompoundStepTerm >> steps: anObject [
+LzProgramTerm >> steps: anObject [
 	steps := anObject
 ]
 
 { #category : #unifying }
-LzCompoundStepTerm >> substitute: bindings [
+LzProgramTerm >> substitute: bindings [
 	| substitutedSteps shadowedBindings |
 	bindings hasNoBindings ifTrue: [ ^ self ].
 	self steps ifEmpty: [ ^ self ].
@@ -138,11 +138,11 @@ LzCompoundStepTerm >> substitute: bindings [
 	substitutedSteps := self steps collect: [ :each |
 		{ each first substitute: bindings
 		. each second substitute: shadowedBindings } ].
-	^ signature compoundStepTerm: substitutedSteps
+	^ signature programTerm: substitutedSteps
 ]
 
 { #category : #unifying }
-LzCompoundStepTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: bindings [
+LzProgramTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol bindings: bindings [
 	otherTerm
 		unifyTagged: otherSymbol
 		withStepTerm: self
@@ -152,21 +152,21 @@ LzCompoundStepTerm >> unifyTagged: aSymbol with: otherTerm tagged: otherSymbol b
 ]
 
 { #category : #unifying }
-LzCompoundStepTerm >> unifyTagged: aSymbol withArrayTerm: otherTerm tagged: otherSymbol elements: aTermList shape: anArray bindings: bindings [
+LzProgramTerm >> unifyTagged: aSymbol withArrayTerm: otherTerm tagged: otherSymbol elements: aTermList shape: anArray bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : #unifying }
-LzCompoundStepTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: otherSymbol bindings: bindings [
+LzProgramTerm >> unifyTagged: aSymbol withAtomicTerm: otherTerm tagged: otherSymbol bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : #unifying }
-LzCompoundStepTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: otherSymbol op: anOpName args: anArgList bindings: bindings [
+LzProgramTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: otherSymbol op: anOpName args: anArgList bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
 ]
 
 { #category : #accessing }
-LzCompoundStepTerm >> valueSlots [
+LzProgramTerm >> valueSlots [
 	^ #(steps)
 ]

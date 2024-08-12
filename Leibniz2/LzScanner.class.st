@@ -7,7 +7,7 @@ Class {
 { #category : #'generated-initialization' }
 LzScanner class >> initializeKeywordMap [
 	keywordMap := Dictionary new.
-	#(#(33 'arrays' 13) #(33 'floatingPointNumbers' 14) #(33 'integers' 15) #(33 'name' 16) #(33 'name=' 17) #(33 'rationalNumbers' 18) #(33 'steps' 19) #(33 'strings' 20) #(33 'termClasses' 21))
+	#(#(33 'arrays' 13) #(33 'floatingPointNumbers' 14) #(33 'integers' 15) #(33 'name' 16) #(33 'name=' 17) #(33 'programs' 18) #(33 'rationalNumbers' 19) #(33 'strings' 20) #(33 'termClasses' 21))
 		do: [ :each | 
 			(keywordMap at: each first ifAbsentPut: [ Dictionary new ])
 				at: (each at: 2)
@@ -17,12 +17,12 @@ LzScanner class >> initializeKeywordMap [
 
 { #category : #generated }
 LzScanner >> emptySymbolTokenId [
-	^ 88
+	^ 89
 ]
 
 { #category : #generated }
 LzScanner >> errorTokenId [
-	^ 89
+	^ 90
 ]
 
 { #category : #generated }
