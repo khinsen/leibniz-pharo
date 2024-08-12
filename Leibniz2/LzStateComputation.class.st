@@ -30,8 +30,7 @@ LzStateComputation >> runStep: aStepTerm [
 { #category : #operating }
 LzStateComputation >> runWithState: aString [
 	state := self context reduce: (self parseAsTerm: aString).
-	bindings := LzBindings new
-					sortGraph: self signature sortGraph.
+	bindings := self signature emptyBindings.
 	steps do: [ :eachStep |
 		| result |
 		result := self runStep: eachStep first.

@@ -136,8 +136,7 @@ LzComputation >> parseAsTerm: aTermString [
 LzComputation >> resultTerm: aTermString [
 	| resultBindings |
 	resultTerm := self parseAsTerm: aTermString.
-	resultBindings := LzBindings new
-							sortGraph: self context sortGraph.
+	resultBindings := self context signature emptyBindings.
 	resultBindings
 		defineVar: (LzVarName for: 'result_')
 		sort: resultTerm sort term sort.

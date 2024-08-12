@@ -21,8 +21,7 @@ LzTerm >> addPrefix: aSymbol toVarsConflictingWith: anotherTerm [
 	| bindings myVars otherVars |
 	myVars := self vars.
 	otherVars := anotherTerm vars.
-	bindings := LzBindings new
-					sortGraph: self signature sortGraph.
+	bindings := self signature emptyBindings.
 	(myVars keys intersection: otherVars keys)
 		ifNotEmpty: [ :conflicts |
 			conflicts do: [ :each |
@@ -202,8 +201,7 @@ LzTerm >> kind [
 { #category : #unifying }
 LzTerm >> match: otherTerm [
 	| bindings |
-	bindings := LzBindings new
-					sortGraph: self signature sortGraph.
+	bindings := self signature emptyBindings.
 	self match: otherTerm bindings: bindings.
 	^ bindings
 ]
@@ -333,8 +331,7 @@ LzTerm >> synopsis [
 { #category : #unifying }
 LzTerm >> unify: otherTerm [
 	| bindings |
-	bindings := LzBindings new
-					sortGraph: self signature sortGraph.
+	bindings := self signature emptyBindings.
 	self unify: otherTerm bindings: bindings.
 	^ bindings
 ]
@@ -351,8 +348,7 @@ LzTerm >> unify: otherTerm bindings: bindings [
 { #category : #unifying }
 LzTerm >> unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol [
 	| bindings |
-	bindings := LzBindings new
-					sortGraph: self signature sortGraph.
+	bindings := self signature emptyBindings.
 	self unifyTagged: aSymbol with: otherTerm tagged: anotherSymbol bindings: bindings.
 	^ bindings
 ]

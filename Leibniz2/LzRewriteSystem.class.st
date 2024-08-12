@@ -124,8 +124,7 @@ LzRewriteSystem >> rewriteHeadOnce: aTerm reducer: aBlock [
 		| bindings |
 		self flag: #todo. "Use matchAllowingVars: ?"
 		"bindings := aRule pattern matchAllowingVars: aTerm."
-		bindings := LzBindings new
-						sortGraph: self signature sortGraph.
+		bindings := self signature emptyBindings.
 		aRule pattern match: aTerm bindings: bindings.
 		bindings ifSuccess: [ :s |
 			[ (aRule

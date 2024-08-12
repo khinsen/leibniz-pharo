@@ -7,8 +7,7 @@ Class {
 { #category : #operating }
 LzArrayComputation >> run [
 	| bindings result |
-	bindings := LzBindings new
-					sortGraph: self signature sortGraph.
+	bindings := self signature emptyBindings.
 	result := self
 				runStep: steps first
 				continuation: steps allButFirst
