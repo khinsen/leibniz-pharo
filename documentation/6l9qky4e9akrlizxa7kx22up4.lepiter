@@ -29,7 +29,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-12T17:30:41.57144+02:00"
+						"dateAndTimeString" : "2024-08-13T15:03:13.412458+02:00"
 					}
 				},
 				"uid" : {
@@ -39,7 +39,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Uses\n - {{lzUseContext:name = \"Programs\"}}\n - {{lzUseContext:name = \"Pseudo-randomness\"}}\n - {{lzUseContext:name = \"Integer intervals\"}}\n - {{lzUseContext:name = \"Random integers\"}}"
+				"string" : "Uses\n - {{lzUseContext:name = \"Programs\"}}\n - {{lzUseContext:name = \"Random integers\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-12T18:09:35.966874+02:00"
+						"dateAndTimeString" : "2024-08-13T14:58:05.927365+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "A random integer can then be obtained from the program\n\t{{lzOp:randomInteger(ℤ⋯ℤ) : Program(ℤ)}}\n\t{{lzRule:randomInteger(min_:ℤ ⋯ max_:ℤ) ⇒ {. randomInteger(min_ ⋯ max_, randomSeed_) ⇒ (□v_:ℤ, randomSeed_); □v_ .}}} "
+				"string" : "A random integer can then be obtained from the program\n\t{{lzOp:randomInteger(ℤ⋯ℤ) : Program(ℤ)}}\n\t{{lzOp:randomInteger(ℕ⋯ℕ) : Program(ℕ)}}\n\t{{lzOp:randomInteger(ℕ.nz⋯ℕ.nz) : Program(ℕ.nz)}}\n\t{{lzRule:randomInteger(min_:ℤ ⋯ max_:ℤ) ⇒ {. randomInteger(min_ ⋯ max_, randomSeed_) ⇒ (□v_:ℤ, randomSeed_); □v_ .}}} "
 			},
 			{
 				"__type" : "textSnippet",

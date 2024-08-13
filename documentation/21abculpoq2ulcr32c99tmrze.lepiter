@@ -258,7 +258,7 @@
 								"__type" : "time",
 								"time" : {
 									"__type" : "dateAndTime",
-									"dateAndTimeString" : "2023-05-03T16:06:43.535224+02:00"
+									"dateAndTimeString" : "2024-08-13T15:02:40.978903+02:00"
 								}
 							},
 							"uid" : {
@@ -268,7 +268,7 @@
 							"paragraphStyle" : {
 								"__type" : "textStyle"
 							},
-							"string" : "A series of random integers is defined by:\n\t{{lzOp:randomIntegers(ℤ⋯ℤ, randomSeed) : RandomSeries(ℤ)}}"
+							"string" : "A series of random integers is defined by:\n\t{{lzOp:randomIntegers(ℤ⋯ℤ, randomSeed) : RandomSeries(ℤ)}}\n\t{{lzOp:randomIntegers(ℕ⋯ℕ, randomSeed) : RandomSeries(ℕ)}}\n\t{{lzOp:randomIntegers(ℕ.nz⋯ℕ.nz, randomSeed) : RandomSeries(ℕ.nz)}}"
 						},
 						{
 							"__type" : "textSnippet",
