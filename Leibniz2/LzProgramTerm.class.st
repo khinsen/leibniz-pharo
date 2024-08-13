@@ -72,6 +72,23 @@ LzProgramTerm >> fingerprint [
 	^ #program
 ]
 
+{ #category : #inspecting }
+LzProgramTerm >> gtTreeFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'Steps' translated;
+		priority: 0;
+		items: [ self steps ];
+		column: 'Step' text: [ :each |
+			each first asLeibnizSyntax ];
+		column: 'Sort' text: [ :each |
+			each first sort asLeibnizSyntax ];
+		column: 'Pattern' text: [ :each |
+			each second ifNil: [ '' ] ifNotNil: [ :p | p asLeibnizSyntax ] ];
+		send: #first;
+		yourself
+]
+
 { #category : #unifying }
 LzProgramTerm >> match: otherTerm bindings: bindings [
 	otherTerm
