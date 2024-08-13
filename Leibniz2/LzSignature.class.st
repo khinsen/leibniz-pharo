@@ -270,16 +270,9 @@ LzSignature >> programTerm:  steps [
 { #category : #constructing }
 LzSignature >> programTerm:  steps variables: vars [
 	| tempVars prefix rename |
-	tempVars := vars keys reject: [ :each |
-		self stateVars includesKey: each ].
+	tempVars := vars keys select: [ :each |
+		each asSymbol beginsWith: LzConstants tempVarPrefix].
 	tempVars ifEmpty: [ ^ self programTerm:  steps ].
-
-	tempVars do: [ :each |
-		(each asSymbol beginsWith: LzConstants tempVarPrefix)
-			ifFalse: [ self error: 'Temporary var name ',
-						each asString,
-						' does not start with ',
-						LzConstants tempVarPrefix ] ].
 
 	prefix := LzProgramTerm newTempPrefix.
 	rename := self emptyBindings.

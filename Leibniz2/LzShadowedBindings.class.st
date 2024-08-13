@@ -24,6 +24,11 @@ LzShadowedBindings >> bindings: anObject [
 	bindings := anObject
 ]
 
+{ #category : #testing }
+LzShadowedBindings >> hasNoBindings [
+	^ bindings hasNoBindings
+]
+
 { #category : #accessing }
 LzShadowedBindings >> shadowedVars [
 	^ shadowedVars

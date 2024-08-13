@@ -3,7 +3,8 @@ Class {
 	#superclass : #LzTerm,
 	#instVars : [
 		'steps',
-		'sort'
+		'sort',
+		'noPattern'
 	],
 	#classVars : [
 		'Counter'
@@ -34,7 +35,8 @@ LzProgramTerm >> addAsRopedTextTo: aRopedText [
 
 { #category : #accessing }
 LzProgramTerm >> args [
-	^ #()
+	^ steps flatCollect: [ :each |
+		{ each first . each second ifNil: [ self noPattern ] } ]
 ]
 
 { #category : #initializing }
@@ -86,6 +88,17 @@ LzProgramTerm >> matchArrayTerm: otherTerm elements: aTermList shape: anArray bi
 { #category : #unifying }
 LzProgramTerm >> matchOpTerm: otherTerm op: anOpName args: anArgList bindings: bindings [
 	bindings failWith: self notUnifiableWith: otherTerm
+]
+
+{ #category : #accessing }
+LzProgramTerm >> noPattern [
+	^ noPattern ifNil: [
+		self beWritableObject.
+		noPattern := self signature
+						opTerm: (LzPrefixOpName for: #noPattern)
+						args: #().
+		self beReadOnlyObject.
+		noPattern ]
 ]
 
 { #category : #running }
@@ -145,7 +158,7 @@ LzProgramTerm >> substitute: bindings [
 							shadowedVars: self signature stateVars keys.
 	substitutedSteps := self steps collect: [ :each |
 		{ each first substitute: bindings
-		. each second substitute: shadowedBindings } ].
+		. each second ifNotNil: [ :p | p substitute: shadowedBindings ] } ].
 	^ signature programTerm: substitutedSteps
 ]
 
@@ -177,4 +190,16 @@ LzProgramTerm >> unifyTagged: aSymbol withOpTerm: otherTerm tagged: otherSymbol 
 { #category : #accessing }
 LzProgramTerm >> valueSlots [
 	^ #(steps)
+]
+
+{ #category : #transforming }
+LzProgramTerm >> withTransformedArgs: anArgList [
+	| transformedSteps |
+	self assert: (anArgList size \\ 2) equals: 0.
+	transformedSteps := (anArgList groupsOf: 2) collect: [ :each |
+		{ each first
+		. (each second = self noPattern)
+			ifTrue: [ nil ]
+			ifFalse: [ each second] } ].
+	^ self signature programTerm: transformedSteps
 ]

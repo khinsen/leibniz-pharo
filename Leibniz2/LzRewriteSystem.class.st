@@ -138,12 +138,14 @@ LzRewriteSystem >> rewriteHeadOnce: aTerm reducer: aBlock [
 
 { #category : #rewriting }
 LzRewriteSystem >> rewriteLeftmostInnermost: aTerm reducer: aBlock [
-	| transformedArgs |
-	transformedArgs := aTerm args collect: aBlock.
+	| args transformedArgs |
+	args := aTerm args.
+	transformedArgs := args collect: aBlock.
 	^ self
-		rewriteHeadOnce: (aTerm withTransformedArgs: transformedArgs)
+		rewriteHeadOnce: (transformedArgs = args
+							ifTrue: [ aTerm ]
+							ifFalse: [ aTerm withTransformedArgs: transformedArgs ])
 		reducer: aBlock
-
 ]
 
 { #category : #accessing }
