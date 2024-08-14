@@ -122,7 +122,7 @@ LzOpName >> printForArity: anArity withSort: aSort on: aStream [
 LzOpName >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
-	aStream nextPutAll: internalSymbol.
+	self printAsLeibnizSyntaxOn: aStream.
 	aStream nextPut: $)
 ]
 

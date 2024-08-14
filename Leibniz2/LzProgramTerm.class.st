@@ -13,9 +13,9 @@ Class {
 }
 
 { #category : #constructing }
-LzProgramTerm class >> newTempPrefix [
+LzProgramTerm class >> newScopePrefix [
 	Counter := 1 + (Counter ifNil: 0).
-	^ LzConstants tempVarPrefix, Counter asString, '.'
+	^ LzConstants tempVarPrefix, Counter asString
 ]
 
 { #category : #converting }
@@ -123,7 +123,6 @@ LzProgramTerm >> runWithReducer: aReducer state: state [
 	| programSort tempVarState result |
 	programSort := self signature sortGraph sort: 'Program'.
 	tempVarState := LzExecutionState new.
-	self halt.
 	steps do: [ :eachStep |
 		| stepTerm |
 		stepTerm := (eachStep first substitute: state)

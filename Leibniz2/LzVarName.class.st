@@ -31,6 +31,11 @@ LzVarName >> addPrefix: aSymbol [
 	^ LzVarName for: aSymbol, internalSymbol
 ]
 
+{ #category : #modifying }
+LzVarName >> addScope: aSymbol [
+	^ LzScopedVarName for: internalSymbol scope: aSymbol
+]
+
 { #category : #printing }
 LzVarName >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPutAll: internalSymbol

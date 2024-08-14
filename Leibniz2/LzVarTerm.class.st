@@ -90,7 +90,7 @@ LzVarTerm >> name: aVarName [
 
 { #category : #printing }
 LzVarTerm >> printAsLeibnizSyntaxOn: aStream [
-	aStream nextPutAll: name asSymbol
+	name printAsLeibnizSyntaxOn: aStream
 ]
 
 { #category : #accessing }

@@ -274,7 +274,7 @@ LzSignature >> programTerm:  steps variables: vars [
 		each asSymbol beginsWith: LzConstants tempVarPrefix].
 	tempVars ifEmpty: [ ^ self programTerm:  steps ].
 
-	prefix := LzProgramTerm newTempPrefix.
+	prefix := LzProgramTerm newScopePrefix.
 	rename := self emptyBindings.
 	tempVars do: [ :each |
 		| sort |
@@ -285,7 +285,7 @@ LzSignature >> programTerm:  steps variables: vars [
 			sort: sort
 			to: (LzVarTerm new
 					signature: self;
-					name: (each addPrefix: prefix);
+					name: (each addScope: prefix);
 					sort: sort;
 					beRecursivelyReadOnlyObject;
 					yourself) ].
