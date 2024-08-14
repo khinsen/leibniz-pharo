@@ -42,9 +42,9 @@ LzScopedProgramTerm >> steps: anArray fromScope: aSymbol [
 		oldName := aSymbol
 			ifNil: [ eachName ]
 			ifNotNil: [ eachName addScope: aSymbol ].
-		rename defineVar: eachName sort: eachSort.
+		rename defineVar: oldName sort: eachSort.
 		rename
-			bindVar: eachName
+			bindVar: oldName
 			sort: eachSort
 			to: (LzVarTerm new
 					signature: self signature;
@@ -57,6 +57,27 @@ LzScopedProgramTerm >> steps: anArray fromScope: aSymbol [
 			{ each first substitute: rename
 			. each second ifNotNil: [ :p | p substitute: rename ] } ]).
 
+]
+
+{ #category : #unifying }
+LzScopedProgramTerm >> substitute: bindings [
+	| substitutedSteps shadowedBindings |
+	bindings hasNoBindings ifTrue: [ ^ self ].
+	self steps ifEmpty: [ ^ self ].
+	shadowedBindings := LzShadowedBindings new
+							bindings: bindings;
+							shadowedVars: self signature stateVars keys.
+	substitutedSteps := self steps collect: [ :each |
+		{ each first substitute: bindings
+		. each second ifNotNil: [ :p | p substitute: shadowedBindings ] } ].
+	^ LzScopedProgramTerm new
+		signature: self signature;
+		tempVars: self tempVars;
+		steps: substitutedSteps fromScope: self scope;
+		checkSteps;
+		computeSort;
+		beRecursivelyReadOnlyObject;
+		yourself
 ]
 
 { #category : #accessing }
