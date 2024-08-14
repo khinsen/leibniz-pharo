@@ -6,17 +6,8 @@ Class {
 		'sort',
 		'noPattern'
 	],
-	#classVars : [
-		'Counter'
-	],
 	#category : #'Leibniz2-Terms'
 }
-
-{ #category : #constructing }
-LzProgramTerm class >> newScopePrefix [
-	Counter := 1 + (Counter ifNil: 0).
-	^ LzConstants tempVarPrefix, Counter asString
-]
 
 { #category : #converting }
 LzProgramTerm >> addAsRopedTextTo: aRopedText [

@@ -177,7 +177,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-13T18:29:01.671855+02:00"
+						"dateAndTimeString" : "2024-08-14T16:25:59.777606+02:00"
 					}
 				},
 				"uid" : {
@@ -187,7 +187,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "{{lzTerm:fac(2), withNormalForm = \"yes\"}}"
+				"string" : "{{lzTerm:fac(1), withNormalForm = \"yes\"}}"
 			},
 			{
 				"__type" : "textSnippet",

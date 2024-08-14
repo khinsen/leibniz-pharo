@@ -269,31 +269,19 @@ LzSignature >> programTerm:  steps [
 
 { #category : #constructing }
 LzSignature >> programTerm:  steps variables: vars [
-	| tempVars prefix rename |
-	tempVars := vars keys select: [ :each |
-		each asSymbol beginsWith: LzConstants tempVarPrefix].
+	| tempVars |
+	tempVars := vars associationsSelect: [ :each |
+		each key asSymbol beginsWith: LzConstants tempVarPrefix].
 	tempVars ifEmpty: [ ^ self programTerm:  steps ].
 
-	prefix := LzProgramTerm newScopePrefix.
-	rename := self emptyBindings.
-	tempVars do: [ :each |
-		| sort |
-		sort := vars at: each.
-		rename defineVar: each sort: sort.
-		rename
-			bindVar: each
-			sort: sort
-			to: (LzVarTerm new
-					signature: self;
-					name: (each addScope: prefix);
-					sort: sort;
-					beRecursivelyReadOnlyObject;
-					yourself) ].
-
-	^ self programTerm:
-		(steps collect: [ :each |
-			{ each first substitute: rename
-			. each second ifNotNil: [ :p | p substitute: rename ] } ])
+	^ LzScopedProgramTerm new
+		signature: self;
+		tempVars: tempVars;
+		steps: steps fromScope: nil;
+		checkSteps;
+		computeSort;
+		beRecursivelyReadOnlyObject;
+		yourself
 ]
 
 { #category : #constructing }
