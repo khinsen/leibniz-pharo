@@ -1048,7 +1048,7 @@
 											"__type" : "time",
 											"time" : {
 												"__type" : "dateAndTime",
-												"dateAndTimeString" : "2023-04-14T13:36:58.327091+02:00"
+												"dateAndTimeString" : "2024-08-14T11:38:34.96027+02:00"
 											}
 										},
 										"uid" : {
@@ -1058,7 +1058,7 @@
 										"paragraphStyle" : {
 											"__type" : "textStyle"
 										},
-										"string" : "[[Absolute value]], [[Absolute value function]]"
+										"string" : "[[Absolute value]], [[Absolute value function]], [[Square root]]"
 									}
 								]
 							},

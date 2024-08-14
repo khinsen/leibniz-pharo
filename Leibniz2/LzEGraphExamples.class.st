@@ -11,7 +11,7 @@ LzEGraphExamples >> contextForEGraphWithArraysAndEqualities [
 	<gtExample>
 	^ LzContextBuilder new
 		include: self contextForEGraphWithEqualities;
-		include: LzBuiltinContexts arrayContext;
+		include: (LzBook contextNamed: 'Two-dimensional arrays');
 		context
 ]
 
@@ -40,8 +40,8 @@ LzEGraphExamples >> contextForEGraphWithEqualities [
 LzEGraphExamples >> contextForSimpleEGraph [
 	<gtExample>
 	^ LzContextBuilder new
-		include: LzBuiltinContexts integerContext;
-		include: LzBuiltinContexts equalityContext;
+		include: (LzBook contextNamed: 'Integers');
+		include: (LzBook contextNamed: 'Term equality');
 		op: 'a : ℕ';
 		op: 'b : ℕ';
 		op: 'c : ℕ';

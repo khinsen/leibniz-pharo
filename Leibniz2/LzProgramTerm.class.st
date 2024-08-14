@@ -123,6 +123,7 @@ LzProgramTerm >> runWithReducer: aReducer state: state [
 	| programSort tempVarState result |
 	programSort := self signature sortGraph sort: 'Program'.
 	tempVarState := LzExecutionState new.
+	self halt.
 	steps do: [ :eachStep |
 		| stepTerm |
 		stepTerm := (eachStep first substitute: state)

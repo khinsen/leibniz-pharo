@@ -11,7 +11,7 @@ LzExamples >> bagContext [
 	<gtExample>
 	^ LzContextBuilder new
 		include: self listContext;
-		include: LzBuiltinContexts integerContext;
+		include: (LzBook contextNamed: 'Integers');
 		sort: 'collection';
 		sort: 'bag(𝕊, ℕ)';
 		subsort: 's_:𝕊, n_:ℕ, list(s_, n_) ⊆ bag(s_, n_)';
@@ -78,7 +78,7 @@ LzExamples >> bagSortGraph [
 LzExamples >> listContext [
 	<gtExample>
 	^ LzContextBuilder new
-		includeSortContext: LzBuiltinContexts integerContext;
+		includeSortContext: (LzBook contextNamed: 'Integers');
 		sort: 'element';
 		sort: 'element.special';
 		sort: '∅';
@@ -120,8 +120,8 @@ LzExamples >> listPlusIntegerContext [
 	<gtExample>
 	^ LzContextBuilder new
 		include: self listContext;
-		include: LzBuiltinContexts integerContext;
-		include: LzBuiltinContexts equalityContext;
+		include: (LzBook contextNamed: 'Integers');
+		include: (LzBook contextNamed: 'Term equality');
 		context
 ]
 
@@ -145,8 +145,8 @@ LzExamples >> listSignature [
 LzExamples >> listSortContext [
 	<gtExample>
 	^ (LzContextBuilder new
-		include: LzBuiltinContexts sortContext;
-		include: LzBuiltinContexts integerContext;
+		include: LzSortHierarchyRoot uniqueInstance sortContext;
+		include: (LzBook contextNamed: 'Integers');
 		op: 'element : 𝕊';
 		op: 'element.special : 𝕊';
 		op: '∅ : 𝕊';

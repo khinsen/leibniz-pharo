@@ -7,25 +7,6 @@ Class {
 	#category : #'Leibniz2-Leibniz2'
 }
 
-{ #category : #defining }
-LzExampleContexts class >> booleanContext [
-	| builder |
-	builder := LzContextBuilder new
-		include: LzBuiltinContexts truthContext;
-		op: '¬(𝔹) : 𝔹';
-		op: '𝔹 ∧ 𝔹 : 𝔹';
-		op: '𝔹 ∨ 𝔹 : 𝔹';
-		op: '𝔹 ⊻ 𝔹 : 𝔹';
-		axiom: '∀ x_:𝔹 ∀ y_:𝔹 x_ ∧ y_ = y_ ∧ x_';
-		axiom: '∀ x_:𝔹 ∀ y_:𝔹 ∀ z_:𝔹 (x_ ∧ y_) ∧ z_ = x_ ∧ (y_ ∧ z_)';
-		axiom: '∀ x_:𝔹 ∀ y_:𝔹 x_ ∨ y_ = y_ ∨ x_';
-		axiom: '∀ x_:𝔹 ∀ y_:𝔹 ∀ z_:𝔹 (x_ ∨ y_) ∨ z_ = x_ ∨ (y_ ∨ z_)';
-		axiom: '∀ x_:𝔹 ∀ y_:𝔹 x_ ⊻ y_ = y_ ⊻ x_';
-		axiom: '∀ x_:𝔹 ∀ y_:𝔹 ∀ z_:𝔹 (x_ ⊻ y_) ⊻ z_ = x_ ⊻ (y_ ⊻ z_)'.
-	self booleanRulesFor: builder.
-	^ builder context
-]
-
 { #category : #private }
 LzExampleContexts class >> booleanRulesFor: builder [
 	builder
@@ -97,7 +78,7 @@ LzExampleContexts class >> collectionConstructorOpsFor: builder [
 LzExampleContexts class >> collectionContext [
 	| builder |
 	builder := LzContextBuilder new
-		includeSortContext: LzBuiltinContexts integerContext.
+		includeSortContext: (LzBook contextNamed: 'Integers').
 	self collectionSortsFor: builder. 
 	self collectionConstructorOpsFor: builder.
 	self constructionAccessorsFor: builder.
@@ -152,13 +133,13 @@ LzExampleContexts class >> geometricAlgebra3DBasisFor: builder [
 		op: 'i : Pseudoscalar';
 		rule: 'i × i ⇒ -1';
 		axiom: 'i = e1 × e2 × e3';
-		axiom: '∀ x_:Multivector i × x_ = x_ × i';
+		axiom: 'x_:Multivector, i × x_ = x_ × i';
 		axiom: 'e1 × e2 = i × e3';
 		axiom: 'e2 × e3 = i × e1';
 		axiom: 'e3 × e1 = i × e2';
 
 		op: 'v(ℝ, ℝ, ℝ) : Vector';
-		axiom: '∀ x_:ℝ ∀ y_:ℝ ∀ z_:ℝ ',
+		axiom: 'x_:ℝ, y_:ℝ, z_:ℝ, ',
 				'v(x_, y_, z_) = ((x_ × e1) + (y_ × e2) + (z_ × e3))'
 ]
 
@@ -166,7 +147,8 @@ LzExampleContexts class >> geometricAlgebra3DBasisFor: builder [
 LzExampleContexts class >> geometricAlgebra3DContext [
 	| builder |
 	builder := LzContextBuilder new
-		include: LzBuiltinContexts realNumberContext.
+		include: (LzBook contextNamed: 'Real numbers');
+		include: (LzBook contextNamed: 'Square root').
 	self geometricAlgebra3DSortsFor: builder.
 	self geometricAlgebra3DSumsFor: builder.
 	self geometricAlgebra3DProductsFor: builder.
@@ -189,13 +171,13 @@ LzExampleContexts class >> geometricAlgebra3DProductsFor: builder [
 		op: 'Pseudoscalar × Vector : Bivector';
 		op: 'Bivector × Pseudoscalar : Vector';
 		op: 'Pseudoscalar × Bivector : Vector';
-		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  (x_ × y_) × z_ = x_ × (y_ × z_)';
-		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)';
-		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  (x_ + y_) × z_ = (x_ × z_) + (y_ × z_)';
-		rule: '∀ x_:Multivector 1 × x_ ⇒ x_';
-		rule: '∀ x_:Multivector x_ × 1 ⇒ x_';
-		rule: '∀ zero_:zero ∀ x_:Multivector zero_ × x_ ⇒ 0';
-		rule: '∀ zero_:zero ∀ x_:Multivector x_ × zero_ ⇒ 0';
+		axiom: 'x_:Multivector, y_:Multivector, z_:Multivector, (x_ × y_) × z_ = x_ × (y_ × z_)';
+		axiom: 'x_:Multivector, y_:Multivector, z_:Multivector, x_ × (y_ + z_) = (x_ × y_) + (x_ × z_)';
+		axiom: 'x_:Multivector, y_:Multivector, z_:Multivector, (x_ + y_) × z_ = (x_ × z_) + (y_ × z_)';
+		rule: 'x_:Multivector, 1 × x_ ⇒ x_';
+		rule: 'x_:Multivector, x_ × 1 ⇒ x_';
+		rule: 'zero_:zero, x_:Multivector, zero_ × x_ ⇒ 0';
+		rule: 'zero_:zero, x_:Multivector, x_ × zero_ ⇒ 0';
 
 		op: 'Multivector ∧ Multivector : Multivector';
 		op: 'ℝ ∧ Vector : Vector';
@@ -203,45 +185,46 @@ LzExampleContexts class >> geometricAlgebra3DProductsFor: builder [
 		op: 'Vector ∧ Vector : Bivector';
 		op: 'Vector ∧ Bivector : Pseudoscalar';
 		op: 'Bivector ∧ Vector : Pseudoscalar';
-		axiom: '∀ x_:Multivector ∀ y_:Multivector x_ ∧ y_ = -(y_ ∧ x_)';
-		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  (x_ ∧ y_) ∧ z_ = x_ ∧ (y_ ∧ z_)';
-		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  x_ ∧ (y_ + z_) = (x_ ∧ y_) + (x_ ∧ z_)';
-		axiom: '∀ x_:Multivector ∀ y_:Multivector ∀ z_:Multivector  (x_ + y_) ∧ z_ = (x_ ∧ z_) + (y_ ∧ z_)';
-		axiom: '∀ x_:Multivector ∀ y_:Multivector x_ ∧ y_ = 1/2 × ((x_ × y_) - (y_ × x_))';
-		rule: '∀ x_:Multivector 1 ∧ x_ ⇒ x_';
-		rule: '∀ x_:Multivector x_ ∧ 1 ⇒ x_';
-		rule: '∀ zero_:zero ∀ x_:Multivector zero_ ∧ x_ ⇒ 0';
-		rule: '∀ zero_:zero ∀ x_:Multivector x_ ∧ zero_ ⇒ 0';
-		rule: '∀ x_:Vector x_ ∧ x_ ⇒ 0';
+		axiom: 'x_:Multivector, y_:Multivector, x_ ∧ y_ = -(y_ ∧ x_)';
+		axiom: 'x_:Multivector, y_:Multivector, z_:Multivector, (x_ ∧ y_) ∧ z_ = x_ ∧ (y_ ∧ z_)';
+		axiom: 'x_:Multivector, y_:Multivector, z_:Multivector, x_ ∧ (y_ + z_) = (x_ ∧ y_) + (x_ ∧ z_)';
+		axiom: 'x_:Multivector, y_:Multivector, z_:Multivector, (x_ + y_) ∧ z_ = (x_ ∧ z_) + (y_ ∧ z_)';
+		axiom: 'x_:Multivector, y_:Multivector, x_ ∧ y_ = 1/2 × ((x_ × y_) - (y_ × x_))';
+		rule: 'x_:Multivector, 1 ∧ x_ ⇒ x_';
+		rule: 'x_:Multivector, x_ ∧ 1 ⇒ x_';
+		rule: 'zero_:zero, x_:Multivector, zero_ ∧ x_ ⇒ 0';
+		rule: 'zero_:zero, x_:Multivector, x_ ∧ zero_ ⇒ 0';
+		rule: 'x_:Vector, x_ ∧ x_ ⇒ 0';
 
 		op: 'Vector ⋅ Vector: ℝ';
-		axiom: '∀ x_:Vector ∀ y_:Vector x_ ⋅ y_ = 1/2 × ((x_ × y_) + (y_ × x_))';
+		axiom: 'x_:Vector, y_:Vector, x_ ⋅ y_ = 1/2 × ((x_ × y_) + (y_ × x_))';
 
 		op: 'sq(Vector): ℝ.nn';
-		rule: '∀ x_:Vector x_ × x_ ⇒ sq(x_)';
-		rule: '∀ x_:Vector x_ ⋅ x_ ⇒ sq(x_)';
+		rule: 'x_:Vector, x_ × x_ ⇒ sq(x_)';
+		rule: 'x_:Vector, x_ ⋅ x_ ⇒ sq(x_)';
 
 		op: 'norm(Vector): ℝ.nn';
-		axiom: '∀ v_:Vector norm(v_) = √(sq(v_))'
+		axiom: 'v_:Vector, norm(v_) = √(sq(v_))'
+
 ]
 
 { #category : #defining }
 LzExampleContexts class >> geometricAlgebra3DSimplificationsFor: builder [
 	builder
-		rule: '∀ s_:ℝ ∀ v_:Vector sq(s_ × v_) ⇒ s_^(2) × sq(v_)';
-		rule: '∀ s_:ℝ ∀ x_:ℝ ∀ y_:ℝ ∀ z_:ℝ ',
+		rule: 's_:ℝ, v_:Vector, sq(s_ × v_) ⇒ s_^(2) × sq(v_)';
+		rule: 's_:ℝ, x_:ℝ, y_:ℝ, z_:ℝ, ',
 				's_ × v(x_, y_, z_) ⇒ v(s_ × x_, s_ × y_, s_ × z_)';
-		rule: '∀ x1_:ℝ ∀ y1_:ℝ ∀ z1_:ℝ ',
-				'∀ x2_:ℝ ∀ y2_:ℝ ∀ z2_:ℝ ',
+		rule: 'x1_:ℝ, y1_:ℝ, z1_:ℝ, ',
+				'x2_:ℝ, y2_:ℝ, z2_:ℝ, ',
 				'v(x1_, y1_, z1_) + v(x2_, y2_, z2_)',
 				'⇒ v(x1_ + x2_, y1_ + y2_, z1_ + z2_)';
-		rule: '∀ x1_:ℝ ∀ y1_:ℝ ∀ z1_:ℝ ',
-				'∀ x2_:ℝ ∀ y2_:ℝ ∀ z2_:ℝ ',
+		rule: 'x1_:ℝ, y1_:ℝ, z1_:ℝ, ',
+				'x2_:ℝ, y2_:ℝ, z2_:ℝ, ',
 				'v(x1_, y1_, z1_) - v(x2_, y2_, z2_)',
 				'⇒ v(x1_ - x2_, y1_ - y2_, z1_ - z2_)';
-		rule: '∀ x_:ℝ ∀ y_:ℝ ∀ z_:ℝ ',
+		rule: 'x_:ℝ, y_:ℝ, z_:ℝ, ',
 				'sq(v(x_, y_, z_)) ⇒ (x_ × x_) + (y_ × y_) + (z_ × z_)';
-		rule: '∀ x_:ℝ ∀ y_:ℝ ∀ z_:ℝ ',
+		rule: 'x_:ℝ, y_:ℝ, z_:ℝ, ',
 				'norm(v(x_, y_, z_)) ⇒ √(sq(v(x_, y_, z_)))'
 ]
 
@@ -265,8 +248,8 @@ LzExampleContexts class >> geometricAlgebra3DSumsFor: builder [
 		op: 'Vector + Vector : Vector';
 		op: 'Bivector + Bivector : Bivector';
 		op: 'Pseudoscalar + Pseudoscalar : Pseudoscalar';
-		axiom: '∀ x_:Multivector ∀ y_:Multivector  x_ + y_ = y_ + x_';
-		axiom: '∀ x_:Multivector ∀ y_:Multivector  ∀ z_:Multivector  (x_ + y_) + z_ = x_ + (y_ + z_)';
+		axiom: 'x_:Multivector, y_:Multivector,  x_ + y_ = y_ + x_';
+		axiom: 'x_:Multivector, y_:Multivector, z_:Multivector,  (x_ + y_) + z_ = x_ + (y_ + z_)';
 
 		op: 'Multivector - Multivector : Multivector';
 		op: 'Vector - Vector : Vector';

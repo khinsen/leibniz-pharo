@@ -272,15 +272,7 @@ LzBuiltinContexts class >> arraySortsFor: builder [
 
 { #category : #defining }
 LzBuiltinContexts class >> equalityContext [
-	EqualityContext ifNil: [
-		| builder |
-		builder := LzContextBuilder new
-			include: self truthContext;
-			op: 's_:𝕊, s_ == s_ : 𝔹';
-			axiom: 's__:𝕊, x_:s__, y_:s__, (x_ == y_) = (y_ == x_)';
-			rule: 's__:𝕊, X_:s__, Y_:s__, X_ == Y_ → ''X = Y'':LzBooleanTerm'.
-		EqualityContext := builder context ].
-	^ EqualityContext
+	^ LzBook contextNamed: 'Term equality'
 ]
 
 { #category : #defining }
@@ -318,17 +310,7 @@ LzBuiltinContexts class >> integerAxiomsFor: aContextBuilder [
 
 { #category : #defining }
 LzBuiltinContexts class >> integerContext [
-	IntegerContext ifNil: [
-		| builder |
-		builder := LzContextBuilder new
-			include: self truthContext;
-			builtin: #integers.
-		self integerSortsFor: builder.
-		self integerOpsFor: builder.
-		self integerAxiomsFor: builder.
-		self integerRulesFor: builder.
-		IntegerContext := builder context ].
-	^ IntegerContext
+	^ LzBook contextNamed: 'Integers'
 ]
 
 { #category : #private }

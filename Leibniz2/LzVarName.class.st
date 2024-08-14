@@ -31,11 +31,6 @@ LzVarName >> addPrefix: aSymbol [
 	^ LzVarName for: aSymbol, internalSymbol
 ]
 
-{ #category : #accessing }
-LzVarName >> name [
-	^ self
-]
-
 { #category : #printing }
 LzVarName >> printAsLeibnizSyntaxOn: aStream [
 	aStream nextPutAll: internalSymbol
