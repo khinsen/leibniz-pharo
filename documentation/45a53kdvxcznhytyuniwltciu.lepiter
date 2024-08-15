@@ -103,7 +103,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-12T16:47:44.670946+02:00"
+						"dateAndTimeString" : "2024-08-15T16:00:01.128235+02:00"
 					}
 				},
 				"uid" : {
@@ -113,7 +113,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Program terms are written in {. ... .}, the steps are delimited by semicolons:\n\t{{lzTerm:{. 2 ⇒ □a_:ℕ; 3 ⇒ □b_:ℕ; □a_ + □b_ .}, withSort = \"yes\", subcontext = \"example\"}}\n(uses {{lzUseContext:name = \"Integers\", subcontext = \"example\"}}). Intermediate results can be assigned to temporary variables, whose names must start with the special symbol □."
+				"string" : "Program terms are written in {. ... .}, the steps are delimited by semicolons:\n\t{{lzTerm:{. 2 ⇒ □a_:ℕ; 3 ⇒ □b_:ℕ; □a_ + □b_ .}, withSort = \"yes\", subcontext = \"examples\"}}\n(uses {{lzUseContext:name = \"Integers\", subcontext = \"examples\"}}). Intermediate results can be assigned to temporary variables, whose names must start with the special symbol □."
 			},
 			{
 				"__type" : "textSnippet",
@@ -140,7 +140,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-12T16:48:05.180325+02:00"
+						"dateAndTimeString" : "2024-08-15T16:00:10.241384+02:00"
 					}
 				},
 				"uid" : {
@@ -150,7 +150,7 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Results can also be assigned to state variables defined in the context:\n\t{{lzState:n_:ℕ, subcontext = \"example\"}}\n\t{{lzTerm:{. 3 ⇒ n_; 2 × n_ .}, withSort = \"yes\", subcontext = \"example\"}}"
+				"string" : "Results can also be assigned to state variables defined in the context:\n\t{{lzState:n_:ℕ, subcontext = \"examples\"}}\n\t{{lzTerm:{. 3 ⇒ n_; 2 × n_ .}, withSort = \"yes\", subcontext = \"examples\"}}"
 			},
 			{
 				"__type" : "textSnippet",
@@ -214,7 +214,7 @@
 					"__type" : "time",
 					"time" : {
 						"__type" : "dateAndTime",
-						"dateAndTimeString" : "2024-08-12T16:40:58.347155+02:00"
+						"dateAndTimeString" : "2024-08-15T16:00:22.262913+02:00"
 					}
 				},
 				"uid" : {
@@ -224,7 +224,193 @@
 				"paragraphStyle" : {
 					"__type" : "textStyle"
 				},
-				"string" : "Examples:\n\t{{lzTerm:run({. 2 ⇒ □a_:ℕ; 3 ⇒ □b_:ℕ; □a_ + □b_ .}), withNormalForm = \"yes\", subcontext = \"example\"}}\n\t{{lzTerm:run({. 2 ⇒ n_; 2 × n_ .}), withNormalForm = \"yes\", subcontext = \"example\"}}"
+				"string" : "Examples:\n\t{{lzTerm:run({. 2 ⇒ □a_:ℕ; 3 ⇒ □b_:ℕ; □a_ + □b_ .}), withNormalForm = \"yes\", subcontext = \"examples\"}}\n\t{{lzTerm:run({. 2 ⇒ n_; 2 × n_ .}), withNormalForm = \"yes\", subcontext = \"examples\"}}"
+			},
+			{
+				"__type" : "textSnippet",
+				"children" : {
+					"__type" : "snippets",
+					"items" : [
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-08-15T16:02:41.078262+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-08-15T16:04:38.57657+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "OcxwCBvcDQCTsUU4BDjiRQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Program terms can contain other program terms as steps, but cannot otherwise refer to other program terms or to themselves. This makes recursive program terms impossible. However, in combination with rewriting, it is nevertheless possible to implement recursion."
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-08-15T16:04:43.072133+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-08-15T16:11:21.239657+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "j0W2DxvcDQCan/NEBDjiRQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Example: a recursive factorial program:\n\t{{lzOp:  fac(ℕ) : Program(ℕ), subcontext = \"examples\"}}\n\t{{lzRule:fac(0) ⇒ {. 1 .}, subcontext = \"examples\"}}\n\t{{lzRule:fac(n_:ℕ.nz) ⇒ {. n_ ⇒ □f_:ℕ.nz; fac(n_ - 1) ⇒ □p_:ℕ; □f_ × □p_ .}, subcontext = \"examples\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-08-15T16:08:08.777747+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-08-15T16:09:43.614041+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "s2qJGhvcDQCdpYjNBDjiRQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "Rewriting creates nested program terms for a specific integer argument:\n\t{{lzTerm:fac(2), withNormalForm = \"yes\", subcontext = \"examples\"}}\nwhich can then be executed:\n\t{{lzTerm:run(fac(2)), withNormalForm = \"yes\", subcontext = \"examples\"}}"
+						},
+						{
+							"__type" : "textSnippet",
+							"children" : {
+								"__type" : "snippets",
+								"items" : [ ]
+							},
+							"createEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"createTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-08-15T16:12:06.174704+02:00"
+								}
+							},
+							"editEmail" : {
+								"__type" : "email",
+								"emailString" : "<unknown>"
+							},
+							"editTime" : {
+								"__type" : "time",
+								"time" : {
+									"__type" : "dateAndTime",
+									"dateAndTimeString" : "2024-08-15T16:12:48.392278+02:00"
+								}
+							},
+							"uid" : {
+								"__type" : "uid",
+								"uidString" : "j3ofKhvcDQCib2U4BDjiRQ=="
+							},
+							"paragraphStyle" : {
+								"__type" : "textStyle"
+							},
+							"string" : "This is a somewhat contrived example, because it is much simpler and clearer to compute a factorial by rewriting alone, without any program terms."
+						}
+					]
+				},
+				"createEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"createTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-15T16:02:32.89557+02:00"
+					}
+				},
+				"editEmail" : {
+					"__type" : "email",
+					"emailString" : "<unknown>"
+				},
+				"editTime" : {
+					"__type" : "time",
+					"time" : {
+						"__type" : "dateAndTime",
+						"dateAndTimeString" : "2024-08-15T16:02:39.988596+02:00"
+					}
+				},
+				"uid" : {
+					"__type" : "uid",
+					"uidString" : "ofTzBxvcDQCTVs8nBDjiRQ=="
+				},
+				"paragraphStyle" : {
+					"__type" : "textStyle"
+				},
+				"string" : "####Recursion"
 			},
 			{
 				"__type" : "textSnippet",

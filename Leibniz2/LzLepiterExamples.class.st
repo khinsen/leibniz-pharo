@@ -191,6 +191,39 @@ LzLepiterExamples >> integerTerms [
 ]
 
 { #category : #example }
+LzLepiterExamples >> programExecution [
+	<gtExample>
+	| context |
+	context := LzBook contextNamed: 'Programs/examples'.
+	^ {
+		{ 'run({. 2 ⇒ □a_:ℕ; 3 ⇒ □b_:ℕ; □a_ + □b_ .})'. '5' }.
+		{ 'run(fac(3))'. '6' }.
+	}
+	collect: [ :each |
+		| term normalForm |
+		term := context term: each first.
+		normalForm := context reduce: term.
+		self assert: normalForm equals: (context term: each second).
+		{ term . normalForm }  ]
+]
+
+{ #category : #example }
+LzLepiterExamples >> programTerms [
+	<gtExample>
+	| context |
+	context := LzBook contextNamed: 'Programs/examples'.
+	^ {
+		{ '{. 1 .}'. 'Program(one)'. }.
+		{ '{. 2 ⇒ □a_:ℕ; 3 ⇒ □b_:ℕ; □a_ + □b_ .}'. 'Program(ℕ)' }.
+	}
+	collect: [ :each |
+		| term |
+		term := context term: each first.
+		self assert: term sort asLeibnizSyntaxString equals: each second.
+		term  ]
+]
+
+{ #category : #example }
 LzLepiterExamples >> rationalArithmetic [
 	<gtExample>
 	| context cache |
