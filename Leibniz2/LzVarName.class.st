@@ -16,7 +16,7 @@ LzVarName >> addAsRopedTextTo: aRopedText [
 		attribute: LzVarNameAttribute new.
 	text
 		attribute: LzDoNotRenderAttribute new
-		from: text size to: text size + 1.
+		from: text size to: text size.
 	aRopedText append: text
 ]
 

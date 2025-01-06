@@ -61,7 +61,7 @@ TLzPrintable >> do: aBlock to: aRopedText withAttributes: anArrayOfAttributes [
 	anArrayOfAttributes ifNotEmpty: [
 		aRopedText
 			attributes: anArrayOfAttributes
-			from: size + 1 to: aRopedText size + 1 ]
+			from: size + 1 to: aRopedText size ]
 ]
 
 { #category : #inspecting }

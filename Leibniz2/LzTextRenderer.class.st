@@ -15,5 +15,5 @@ LzTextRenderer >> render: aText baseColor: aColor [
 					ifNotEmpty: [ :visualAttrs |
 						aText
 							attributes: visualAttrs
-							from: index + 1 to: index + 1 ] ] ]
+							from: (index + 1) to: ((index + 1) min: aText size) ] ] ]
 ]
